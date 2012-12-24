@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="Pipestone:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Pipestone_jar</output-path>
+    <root id="archive" name="Pipestone.jar">
+      <element id="module-output" name="Pipestone" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/annotations.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/postgresql-8.1-408.jdbc3.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

@@ -3,7 +3,7 @@ package com.obtuse.db.exceptions;
 /**
  * Thrown if we are unable to load a suitable JDBC driver.
  * <p/>
- * Copyright © 2012 Daniel Boulet.
+ * Copyright © 2012 Obtuse Systems Corporation.
  */
 
 @SuppressWarnings({"ClassWithoutToString"})

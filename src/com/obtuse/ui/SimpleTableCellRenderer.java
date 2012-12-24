@@ -1,7 +1,7 @@
 package com.obtuse.ui;
 
 /*
- * Copyright © 2012 Daniel Boulet.
+ * Copyright © 2012 Obtuse Systems Corporation.
  */
 
 import javax.swing.*;

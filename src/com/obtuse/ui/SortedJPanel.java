@@ -1,7 +1,7 @@
 package com.obtuse.ui;
 
 /*
- * Copyright © 2012 Daniel Boulet
+ * Copyright © 2012 Obtuse Systems Corporation
  */
 
 import com.obtuse.util.BasicProgramConfigInfo;
@@ -157,7 +157,7 @@ public class SortedJPanel extends JPanel {
     @SuppressWarnings("UnqualifiedStaticUsage")
     public static void main( String[] args ) {
 
-        BasicProgramConfigInfo.init( "Obtuse", "Caliper", "SortedJPanel", null );
+        BasicProgramConfigInfo.init( "Obtuse", "Pipestone", "SortedJPanel", null );
 
         JFrame topFrame = new JFrame();
 

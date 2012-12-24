@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.event.*;
 
 /*
- * Copyright © 2010 Daniel Boulet.
+ * Copyright © 2010 Obtuse Systems Corporation.
  */
 
 @SuppressWarnings({ "UnusedDeclaration" })

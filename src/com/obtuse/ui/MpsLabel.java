@@ -9,7 +9,7 @@ import java.awt.image.BufferedImage;
 import java.util.Hashtable;
 
 /*
- * Copyright © 2012 Daniel Boulet
+ * Copyright © 2012 Obtuse Systems Corporation
  */
 
 /**

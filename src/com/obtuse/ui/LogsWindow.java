@@ -16,7 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /*
- * Copyright © 2012 Daniel Boulet
+ * Copyright © 2012 Obtuse Systems Corporation
  */
 
 @SuppressWarnings( { "ClassWithoutToString" } )

@@ -7,8 +7,7 @@ import java.text.*;
 import java.util.*;
 
 /*
- * Copyright © 2005, 2006, 2007 Daniel Boulet.
- * Copyright © 2011 Daniel Boulet.
+ * Copyright © 2005, 2006, 2007, 2011-2012 Obtuse Systems Corporation.
  */
 
 /**

@@ -9,7 +9,7 @@ import javax.swing.undo.*;
 import java.util.*;
 
 /*
- * Copyright © 2012 Daniel Boulet
+ * Copyright © 2012 Obtuse Systems Corporation
  */
 
 /**

@@ -3,7 +3,7 @@ package com.obtuse.ui.testanddemo;
 import javax.swing.*;
 
 /*
- * Copyright © 2012 Daniel Boulet
+ * Copyright © 2012 Obtuse Systems Corporation
  */
 
 /**

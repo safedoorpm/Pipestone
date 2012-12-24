@@ -10,7 +10,7 @@ import java.util.*;
 /**
  * Various methods for parsing and just generally managing dates.
  * <p/>
- * Copyright © 2009 Daniel Boulet
+ * Copyright © 2009 Obtuse Systems Corporation
  */
 
 @SuppressWarnings({ "UnnecessaryLocalVariable", "StaticMethodNamingConvention", "UnusedDeclaration" })

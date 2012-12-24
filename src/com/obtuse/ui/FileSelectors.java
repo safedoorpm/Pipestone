@@ -7,7 +7,7 @@ import java.io.File;
 import java.io.FilenameFilter;
 
 /*
- * Copyright © 2012 Daniel Boulet
+ * Copyright © 2012 Obtuse Systems Corporation
  */
 
 /**

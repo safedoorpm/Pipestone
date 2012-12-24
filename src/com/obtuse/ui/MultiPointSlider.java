@@ -12,7 +12,7 @@ import java.awt.image.BufferedImage;
 import java.util.*;
 
 /*
- * Copyright © 2012 Daniel Boulet
+ * Copyright © 2012 Obtuse Systems Corporation
  */
 
 /**
@@ -1265,7 +1265,7 @@ public class MultiPointSlider extends JComponent {
         labels.put( 2, new MpsLabel( "two" ) );
         labels.put( 20, new MpsLabel( "twenty" ) );
 
-        BasicProgramConfigInfo.init( "Obtuse", "Caliper", "test MultiPointSlider", null );
+        BasicProgramConfigInfo.init( "Obtuse", "Pipestone", "test MultiPointSlider", null );
         JFrame frame = new JFrame( "Hello" );
         frame.setTitle( "Hi there" );
         JPanel bluePanel = new JPanel();

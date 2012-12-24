@@ -9,7 +9,7 @@ import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 
 /*
- * Copyright © 2012 Daniel Boulet
+ * Copyright © 2012 Obtuse Systems Corporation
  */
 
 public class TrackedWindow extends JFrame {

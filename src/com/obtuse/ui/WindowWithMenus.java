@@ -9,7 +9,7 @@ import java.util.Collection;
 import java.util.LinkedList;
 
 /*
- * Copyright © 2012 Daniel Boulet
+ * Copyright © 2012 Obtuse Systems Corporation
  */
 
 @SuppressWarnings( { "FieldCanBeLocal" } )

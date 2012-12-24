@@ -3,7 +3,7 @@ package com.obtuse.ui.alpha;
 import javax.swing.undo.*;
 
 /*
- * Copyright © 2012 Daniel Boulet
+ * Copyright © 2012 Obtuse Systems Corporation
  */
 
 /**

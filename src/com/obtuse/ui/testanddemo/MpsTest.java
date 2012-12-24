@@ -12,7 +12,7 @@ import java.util.Dictionary;
 import java.util.Hashtable;
 
 /*
- * Copyright © 2012 Daniel Boulet
+ * Copyright © 2012 Obtuse Systems Corporation
  */
 
 /**

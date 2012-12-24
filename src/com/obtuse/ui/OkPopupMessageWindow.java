@@ -10,7 +10,7 @@ import java.awt.event.*;
 /**
  * Popup a window with a message and a single button (which disposes of the window).
  * <p/>
- * Copyright © 2012 Daniel Boulet.
+ * Copyright © 2012 Obtuse Systems Corporation.
  *
  * @noinspection ClassWithoutToString, UnusedDeclaration
  */

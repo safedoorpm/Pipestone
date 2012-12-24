@@ -11,7 +11,7 @@ import java.util.Properties;
 /**
  * Base class to manage Postgres-specific aspects of JDBC connection management.
  * <p/>
- * Copyright © 2012 Daniel Boulet.
+ * Copyright © 2012 Obtuse Systems Corporation.
  */
 
 public abstract class PostgresConnection {

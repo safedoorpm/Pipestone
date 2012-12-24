@@ -1,8 +1,8 @@
-Caliper Project
+Pipestone Project
    
-    Copyright 2005-2012 Daniel Boulet
+    Copyright 2005-2012 Obtuse Systems Corporation
 
-   This product includes software developed by Daniel Boulet.
+   This product includes software developed by Obtuse Systems Corporation.
 
 NanoHTTPD
 
