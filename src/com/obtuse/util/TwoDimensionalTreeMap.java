@@ -4,26 +4,12 @@ package com.obtuse.util;
  * Copyright © 2011 Obtuse Systems Corporation
  */
 
+import java.io.Serializable;
 import java.util.*;
 
-/**
- * A sorted map with two dimensions/indices.
- * <p/>
- * The map is sorted in the sense that each dimension's keys are sorted.
- * <p/>
- * The map is actually a double layer {@link java.util.TreeMap} dressed up in fancy clothes.  This double layer map is
- * declared as follows:
- *
- * <blockquote><tt>SortedMap&lt;T1,SortedMap&lt;T2,V>> _map = new TreeMap&tl;T1,SortedMap&lt;T2,V>>();</tt></blockquote>
- *
- * @param <T1> The type of the first dimension.
- * @param <T2> The type of the second dimension.
- * @param <V>  The type of the values stored within the map.
- */
+public class TwoDimensionalTreeMap<T1,T2,V> implements Serializable, TwoDimensionalSortedMap<T1,T2,V> {
 
-public class TwoDimensionalTreeMap<T1,T2,V> implements TwoDimensionalSortedMap<T1,T2,V> {
-
-    private final SortedMap<T1,SortedMap<T2,V>> _map = new TreeMap<T1,SortedMap<T2,V>>();
+    private SortedMap<T1,SortedMap<T2,V>> _map = new TreeMap<T1,SortedMap<T2,V>>();
 
     public TwoDimensionalTreeMap() {
         super();
@@ -57,7 +43,7 @@ public class TwoDimensionalTreeMap<T1,T2,V> implements TwoDimensionalSortedMap<T
     public SortedMap<T2,V> getInnerMap( T1 key1, boolean forceCreate ) {
 
         SortedMap<T2,V> innerMap = _map.get( key1 );
-        if ( innerMap == null ) {
+        if ( innerMap == null && forceCreate ) {
 
             innerMap = new TreeMap<T2,V>();
             _map.put( key1, innerMap );
@@ -65,6 +51,12 @@ public class TwoDimensionalTreeMap<T1,T2,V> implements TwoDimensionalSortedMap<T
         }
 
         return innerMap;
+
+    }
+
+    public SortedMap<T2,V> removeInnerMap( T1 key ) {
+
+        return _map.remove( key );
 
     }
 
@@ -81,6 +73,62 @@ public class TwoDimensionalTreeMap<T1,T2,V> implements TwoDimensionalSortedMap<T
 
     }
 
+    public V remove( T1 key1, T2 key2 ) {
+
+        V rval = null;
+
+        SortedMap<T2,V> innerMap = _map.get( key1 );
+        if ( innerMap != null ) {
+
+            rval = innerMap.remove( key2 );
+
+            // Note that we cannot remove this inner map if it is now empty since someone may already have a reference
+            // to this particular inner map.
+
+        }
+
+        return rval;
+
+    }
+
+    public int size() {
+
+        int totalSize = 0;
+        for ( SortedMap<T2,V> innerMap : innerMaps() ) {
+
+            totalSize += innerMap.size();
+
+        }
+
+        return totalSize;
+
+    }
+
+    public boolean isEmpty() {
+
+        // We could just use "return size() == 0" but the short circuiting that we do below makes this approach
+        // faster if the map is not empty.
+
+        if ( _map.isEmpty() ) {
+
+            return true;
+
+        }
+
+        for ( SortedMap<T2,V> innerMap : innerMaps() ) {
+
+            if ( !innerMap.isEmpty() ) {
+
+                return false;
+
+            }
+
+        }
+
+        return true;
+
+    }
+
     public Set<T1> outerKeys() {
 
         return _map.keySet();
@@ -90,6 +138,87 @@ public class TwoDimensionalTreeMap<T1,T2,V> implements TwoDimensionalSortedMap<T
     public Collection<SortedMap<T2,V>> innerMaps() {
 
         return _map.values();
+
+    }
+
+    public Iterator<V> iterator() {
+
+        return new Iterator<V>() {
+
+            private final Iterator<T1> _outerIterator;
+            private T1 _activeOuterKey;
+            private Iterator<V> _innerIterator;
+
+            {
+
+                _outerIterator = _map.keySet().iterator();
+
+                findNextNonEmptyInnerMap();
+
+            }
+
+            private void findNextNonEmptyInnerMap() {
+
+                _innerIterator = null;
+
+                while ( _outerIterator.hasNext() ) {
+
+                    _activeOuterKey = _outerIterator.next();
+
+                    SortedMap<T2,V> innerMap = getInnerMap( _activeOuterKey, false );
+                    if ( innerMap.isEmpty() ) {
+
+                        // skip this one
+
+                    } else {
+
+                        _innerIterator = innerMap.values().iterator();
+                        break;
+
+                    }
+
+                }
+
+            }
+
+            public boolean hasNext() {
+
+                return _innerIterator != null && _innerIterator.hasNext();
+
+            }
+
+            public V next() {
+
+                if ( !hasNext() ) {
+
+                    throw new NoSuchElementException( "no more values" );
+
+                }
+
+                V next = _innerIterator.next();
+                if ( _innerIterator != null && !_innerIterator.hasNext() ) {
+
+                    findNextNonEmptyInnerMap();
+
+                }
+
+                return next;
+
+            }
+
+            public void remove() {
+
+                throw new UnsupportedOperationException( "unable to remove values via this iterator" );
+
+            }
+
+        };
+
+    }
+
+    public String toString() {
+
+        return "TwoDimensionalTreeMap( size = " + size() + " )";
 
     }
 

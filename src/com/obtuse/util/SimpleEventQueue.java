@@ -10,11 +10,14 @@ import java.util.*;
 
 public class SimpleEventQueue<T extends SimpleEvent> {
 
-    private final SortedMap<Long,LinkedList<T>> _eventQueue = new TreeMap<Long,LinkedList<T>>();
-    private long _now;
-    private long _endTime = Long.MAX_VALUE;
+    public static final FormattedImmutableDate LAST_POSSIBLE_EVENT_TIME = new FormattedImmutableDate( Long.MAX_VALUE );
+    public static final FormattedImmutableDate FIRST_POSSIBLE_EVENT_TIME = new FormattedImmutableDate( 0L );
 
-    private final boolean _traceMode = false;
+    private final SortedMap<FormattedImmutableDate,LinkedList<T>> _eventQueue = new TreeMap<FormattedImmutableDate,LinkedList<T>>();
+    private FormattedImmutableDate _now;
+    private FormattedImmutableDate _endTime = SimpleEventQueue.LAST_POSSIBLE_EVENT_TIME;
+
+    private boolean _traceMode = false;
 
     /**
      * A wrapper for a set of simultaneous clock events and the timestamp associated with all of them.
@@ -22,23 +25,23 @@ public class SimpleEventQueue<T extends SimpleEvent> {
 
     public static class TimestampedClockEventContainer<T extends SimpleEvent> {
 
-        private final long _eventTime;
+        private final FormattedImmutableDate _eventTime;
         private final List<T> _events;
 
         @SuppressWarnings({ "UnusedDeclaration" })
-        public TimestampedClockEventContainer( long eventTime, T event ) {
+        public TimestampedClockEventContainer( Date eventTime, T event ) {
             super();
 
-            _eventTime = eventTime;
+            _eventTime = new FormattedImmutableDate( eventTime );
             _events = new LinkedList<T>();
             add( event );
 
         }
 
-        public TimestampedClockEventContainer( long eventTime, Collection<T> event ) {
+        public TimestampedClockEventContainer( Date eventTime, Collection<T> event ) {
             super();
 
-            _eventTime = eventTime;
+            _eventTime = new FormattedImmutableDate( eventTime );
             _events = new LinkedList<T>();
             addAll( event );
 
@@ -62,7 +65,7 @@ public class SimpleEventQueue<T extends SimpleEvent> {
 
         }
 
-        public long getEventTime() {
+        public FormattedImmutableDate getEventTime() {
 
             return _eventTime;
 
@@ -70,7 +73,7 @@ public class SimpleEventQueue<T extends SimpleEvent> {
 
         public String toString() {
 
-            return "TimestampedClockEventContainer( " + _eventTime + ", " + SimpleEventQueue.eventsToString( _events ) + " )";
+            return "TimestampedClockEventContainer( " + DateUtils.formatYYYY_MM_DD_HH_MM_SS_SSS( _eventTime ) + ", " + SimpleEventQueue.eventsToString( _events ) + " )";
 
         }
 
@@ -82,13 +85,14 @@ public class SimpleEventQueue<T extends SimpleEvent> {
 
     public static class TimestampedClockEventInstance<T extends SimpleEvent> {
 
-        private final long _eventTime;
+        private final FormattedImmutableDate _eventTime;
         private final T _event;
 
-        public TimestampedClockEventInstance( long eventTime, T event ) {
+        public TimestampedClockEventInstance( Date eventTime, T event ) {
             super();
 
-            _eventTime = eventTime;
+            //noinspection AssignmentToDateFieldFromParameter
+            _eventTime = new FormattedImmutableDate( eventTime );
             _event = event;
 
         }
@@ -99,7 +103,7 @@ public class SimpleEventQueue<T extends SimpleEvent> {
 
         }
 
-        public long getEventTime() {
+        public FormattedImmutableDate getEventTime() {
 
             return _eventTime;
 
@@ -107,7 +111,7 @@ public class SimpleEventQueue<T extends SimpleEvent> {
 
         public String toString() {
 
-            return "TimestampedClockEventInstance( " + DateUtils.formatYYYY_MM_DD_HH_MM_SS_SSS( new Date( _eventTime ) ) + ", " + _event + " )";
+            return "TimestampedClockEventInstance( " + DateUtils.formatYYYY_MM_DD_HH_MM_SS_SSS( _eventTime ) + ", " + _event + " )";
 
         }
 
@@ -116,7 +120,7 @@ public class SimpleEventQueue<T extends SimpleEvent> {
     public SimpleEventQueue() {
         super();
 
-        _now = Long.MIN_VALUE;
+        _now = SimpleEventQueue.FIRST_POSSIBLE_EVENT_TIME;
 
     }
 
@@ -138,11 +142,10 @@ public class SimpleEventQueue<T extends SimpleEvent> {
 
     }
 
-    @SuppressWarnings("SameParameterValue")
     public void showQueue( String why, boolean hideEmpties ) {
 
         StringBuilder msg = new StringBuilder( why ).append( ":  [ " );
-        for ( long when : _eventQueue.keySet() ) {
+        for ( FormattedImmutableDate when : _eventQueue.keySet() ) {
 
             if ( !_eventQueue.get( when ).isEmpty() || !hideEmpties ) {
 
@@ -164,19 +167,19 @@ public class SimpleEventQueue<T extends SimpleEvent> {
 
     }
 
-    @SuppressWarnings("SameParameterValue")
-    public void setEndTime( long when ) {
+    public void setEndTime( Date when ) {
 
-        _endTime = when;
+        //noinspection AssignmentToDateFieldFromParameter
+        _endTime = new FormattedImmutableDate( when );
 
     }
 
-    public void qBefore( long when, T event ) {
+    public void qBefore( Date when, T event ) {
 
         queueEvent( when, event, true );
         if ( _traceMode ) {
 
-            Logger.logMsg( "event " + event + " queued before " + DateUtils.formatYYYY_MM_DD_HH_MM_SS_SSS( new Date( when ) ) );
+            Logger.logMsg( "event " + event + " queued before " + DateUtils.formatYYYY_MM_DD_HH_MM_SS_SSS( when ) );
 
         }
 
@@ -199,12 +202,12 @@ public class SimpleEventQueue<T extends SimpleEvent> {
 //
 //    }
 
-    public void qAfter( long when, T event ) {
+    public void qAfter( Date when, T event ) {
 
         queueEvent( when, event, false );
         if ( _traceMode ) {
 
-            Logger.logMsg( "event " + event + " queued after " + DateUtils.formatYYYY_MM_DD_HH_MM_SS_SSS( new Date( when ) ) );
+            Logger.logMsg( "event " + event + " queued after " + DateUtils.formatYYYY_MM_DD_HH_MM_SS_SSS( when ) );
 
         }
 
@@ -212,24 +215,25 @@ public class SimpleEventQueue<T extends SimpleEvent> {
 
     }
 
-    private void queueEvent( long when, T event, boolean before ) {
+    private void queueEvent( Date xWhen, T event, boolean before ) {
 
-        if ( when < _now || _now == Long.MAX_VALUE ) {
+        FormattedImmutableDate when = new FormattedImmutableDate( xWhen );
+        if ( when.compareTo( _now ) < 0 || _now.equals( SimpleEventQueue.LAST_POSSIBLE_EVENT_TIME ) ) {
 
             Logger.logErr(
-                    "ERROR:  attempt to queue event \"" + event + "\" at " + DateUtils.formatYYYY_MM_DD_HH_MM_SS_SSS( new Date( when ) ) +
-                    " which is before the current clock time of " + DateUtils.formatYYYY_MM_DD_HH_MM_SS_SSS( new Date( _now ) ) + " - ignored"
+                    "ERROR:  attempt to queue event \"" + event + "\" at " + DateUtils.formatYYYY_MM_DD_HH_MM_SS_SSS( when ) +
+                            " which is before the current clock time of " + DateUtils.formatYYYY_MM_DD_HH_MM_SS_SSS( _now ) + " - ignored"
             );
 
             return;
 
         }
 
-        if ( when > _endTime ) {
+        if ( when.compareTo( _endTime ) > 0 ) {
 
             Logger.logErr(
-                    "ERROR:  attempt to queue event \"" + event + "\" at " + DateUtils.formatYYYY_MM_DD_HH_MM_SS_SSS( new Date( when ) ) +
-                    " which is after the end time of " + DateUtils.formatYYYY_MM_DD_HH_MM_SS_SSS( new Date( _endTime ) ) + " - ignored"
+                    "ERROR:  attempt to queue event \"" + event + "\" at " + DateUtils.formatYYYY_MM_DD_HH_MM_SS_SSS( when ) +
+                            " which is after the end time of " + DateUtils.formatYYYY_MM_DD_HH_MM_SS_SSS( _endTime ) + " - ignored"
             );
 
             return;
@@ -250,13 +254,13 @@ public class SimpleEventQueue<T extends SimpleEvent> {
 
     }
 
-    private List<T> findQueue( long when ) {
+    private List<T> findQueue( FormattedImmutableDate when ) {
 
-        if ( when < _now ) {
+        if ( when.compareTo( _now ) < 0 ) {
 
             throw new IllegalArgumentException(
-                    "attempt to add event at " + DateUtils.formatYYYY_MM_DD_HH_MM_SS_SSS( new Date( when ) ) +
-                    " when time is already " + DateUtils.formatYYYY_MM_DD_HH_MM_SS_SSS( new Date( _now ) )
+                    "attempt to add event at " + DateUtils.formatYYYY_MM_DD_HH_MM_SS_SSS( when ) +
+                            " when time is already " + DateUtils.formatYYYY_MM_DD_HH_MM_SS_SSS( _now )
             );
 
         }
@@ -283,7 +287,7 @@ public class SimpleEventQueue<T extends SimpleEvent> {
 
             }
 
-            long peekNow = _eventQueue.firstKey().longValue();
+            FormattedImmutableDate peekNow = _eventQueue.firstKey();
 
             if ( _eventQueue.get( peekNow ).isEmpty() ) {
 
@@ -297,7 +301,7 @@ public class SimpleEventQueue<T extends SimpleEvent> {
 
                 } else {
 
-                    _now = peekNow + ( advanceNow ? 1 : 0 );
+                    _now = new FormattedImmutableDate( peekNow.getTime() + ( advanceNow ? 1 : 0 ) );
                     return new TimestampedClockEventContainer<T>( peekNow, _eventQueue.remove( peekNow ) );
 
                 }
@@ -393,7 +397,7 @@ public class SimpleEventQueue<T extends SimpleEvent> {
     }
 
     @SuppressWarnings({ "UnusedDeclaration" })
-    public long getClock() {
+    public FormattedImmutableDate getClock() {
 
         return _now;
 
@@ -407,7 +411,7 @@ public class SimpleEventQueue<T extends SimpleEvent> {
     public void endUniverse() {
 
         _eventQueue.clear();
-        _now = Long.MAX_VALUE;
+        _now = SimpleEventQueue.LAST_POSSIBLE_EVENT_TIME;
 
     }
 
@@ -419,7 +423,7 @@ public class SimpleEventQueue<T extends SimpleEvent> {
     public void clear() {
 
         _eventQueue.clear();
-        _now = Long.MIN_VALUE;
+        _now = FIRST_POSSIBLE_EVENT_TIME;
 
     }
 
@@ -495,8 +499,8 @@ public class SimpleEventQueue<T extends SimpleEvent> {
 
             if ( _traceMode ) {
 
-                    showQueue( "doing", true );
-                    Logger.logMsg( "doing eventContainer " + event.getClockEvent() + " for " + event.getEventTime() );
+                showQueue( "doing", true );
+                Logger.logMsg( "doing eventContainer " + event.getClockEvent() + " for " + event.getEventTime() );
 
             }
 
@@ -546,31 +550,30 @@ public class SimpleEventQueue<T extends SimpleEvent> {
 
     }
 
-    @SuppressWarnings("MagicNumber")
     public static void main( String[] args ) {
 
         BasicProgramConfigInfo.init( "Obtuse", "SimpleEventQueue", "Test", null );
 
         final SimpleEventQueue<SimpleEvent> eventQueue = new SimpleEventQueue<SimpleEvent>();
 
-        eventQueue.setEndTime( 7200 );
+        eventQueue.setEndTime( new FormattedImmutableDate( 7200 ) );
 
         eventQueue.qBefore(
-                3600,
+                new FormattedImmutableDate( 3600 ),
                 new SimpleEvent( "event 1" ) {
 
                     @Override
-                    public void run( long when ) {
+                    public void run( FormattedImmutableDate when ) {
 
-                        Logger.logMsg( ">> " + this + " @ " + DateUtils.formatYYYY_MM_DD_HH_MM_SS_SSS( new Date( when ) ) );
+                        Logger.logMsg( ">> " + this + " @ " + DateUtils.formatYYYY_MM_DD_HH_MM_SS_SSS( when ) );
                         eventQueue.qBefore(
-                                3600,
+                                new FormattedImmutableDate( 3600 ),
                                 new SimpleEvent( "event 2" ) {
 
                                     @Override
-                                    public void run( long when ) {
+                                    public void run( FormattedImmutableDate when ) {
 
-                                        Logger.logMsg( ">> " + this + " inner hello @ " + DateUtils.formatYYYY_MM_DD_HH_MM_SS_SSS( new Date( when ) ) );
+                                        Logger.logMsg( ">> " + this + " inner hello @ " + DateUtils.formatYYYY_MM_DD_HH_MM_SS_SSS( when ) );
 
                                     }
 
@@ -583,13 +586,13 @@ public class SimpleEventQueue<T extends SimpleEvent> {
         );
 
         eventQueue.qBefore(
-                3600,
+                new FormattedImmutableDate( 3600 ),
                 new SimpleEvent( "event 3" ) {
 
                     @Override
-                    public void run( long when ) {
+                    public void run( FormattedImmutableDate when ) {
 
-                        Logger.logMsg( ">> " + this + " before @ " + DateUtils.formatYYYY_MM_DD_HH_MM_SS_SSS( new Date( when ) ) );
+                        Logger.logMsg( ">> " + this + " before @ " + DateUtils.formatYYYY_MM_DD_HH_MM_SS_SSS( when ) );
 
                     }
 
@@ -597,13 +600,13 @@ public class SimpleEventQueue<T extends SimpleEvent> {
         );
 
         eventQueue.qAfter(
-                3600,
+                new FormattedImmutableDate( 3600 ),
                 new SimpleEvent( "event 4" ) {
 
                     @Override
-                    public void run( long when ) {
+                    public void run( FormattedImmutableDate when ) {
 
-                        Logger.logMsg( ">> " + this + " after @ " + DateUtils.formatYYYY_MM_DD_HH_MM_SS_SSS( new Date( when ) ) );
+                        Logger.logMsg( ">> " + this + " after @ " + DateUtils.formatYYYY_MM_DD_HH_MM_SS_SSS( when ) );
 
                     }
 
@@ -611,13 +614,13 @@ public class SimpleEventQueue<T extends SimpleEvent> {
         );
 
         eventQueue.qBefore(
-                0,
+                new FormattedImmutableDate( 0 ),
                 new SimpleEvent( "event 5" ) {
 
                     @Override
-                    public void run( long when ) {
+                    public void run( FormattedImmutableDate when ) {
 
-                        Logger.logMsg( ">> " + this + " @ " + DateUtils.formatYYYY_MM_DD_HH_MM_SS_SSS( new Date( when ) ) );
+                        Logger.logMsg( ">> " + this + " @ " + DateUtils.formatYYYY_MM_DD_HH_MM_SS_SSS( when ) );
 
                     }
 
@@ -625,13 +628,13 @@ public class SimpleEventQueue<T extends SimpleEvent> {
         );
 
         eventQueue.qBefore(
-                7200,
+                new FormattedImmutableDate( 7200 ),
                 new SimpleEvent( "event 6" ) {
 
                     @Override
-                    public void run( long when ) {
+                    public void run( FormattedImmutableDate when ) {
 
-                        Logger.logMsg( ">> " + this + " @ " + DateUtils.formatYYYY_MM_DD_HH_MM_SS_SSS( new Date( when ) ) );
+                        Logger.logMsg( ">> " + this + " @ " + DateUtils.formatYYYY_MM_DD_HH_MM_SS_SSS( when ) );
 
                     }
 
@@ -639,24 +642,24 @@ public class SimpleEventQueue<T extends SimpleEvent> {
         );
 
         eventQueue.qAfter(
-                7200,
+                new FormattedImmutableDate( 7200 ),
                 new SimpleEvent( "event 7" ) {
 
                     @Override
-                    public void run( long when ) {
+                    public void run( FormattedImmutableDate when ) {
 
-                        Logger.logMsg( ">> " + this + " @ " + DateUtils.formatYYYY_MM_DD_HH_MM_SS_SSS( new Date( when ) ) );
+                        Logger.logMsg( ">> " + this + " @ " + DateUtils.formatYYYY_MM_DD_HH_MM_SS_SSS( when ) );
 
                         // This will explode since we are trying to add an event prior to the current time.
 
                         eventQueue.qAfter(
-                                0,
+                                new FormattedImmutableDate( 0 ),
                                 new SimpleEvent( "event 7" ) {
 
                                     @Override
-                                    public void run( long when ) {
+                                    public void run( FormattedImmutableDate when ) {
 
-                                        Logger.logMsg( ">> " + this + " @ " + DateUtils.formatYYYY_MM_DD_HH_MM_SS_SSS( new Date( when ) ) );
+                                        Logger.logMsg( ">> " + this + " @ " + DateUtils.formatYYYY_MM_DD_HH_MM_SS_SSS( when ) );
 
                                     }
 
@@ -669,11 +672,11 @@ public class SimpleEventQueue<T extends SimpleEvent> {
         );
 
         eventQueue.qAfter(
-                7201,
+                new FormattedImmutableDate( 7201 ),
                 new SimpleEvent( "first discarded event" ) {
 
                     @Override
-                    public void run( long when ) {
+                    public void run( FormattedImmutableDate when ) {
 
                         Logger.logErr( "*** this event should have been discarded" );
 
@@ -683,11 +686,11 @@ public class SimpleEventQueue<T extends SimpleEvent> {
         );
 
         eventQueue.qBefore(
-                7201,
+                new FormattedImmutableDate( 7201 ),
                 new SimpleEvent( "second discarded event" ) {
 
                     @Override
-                    public void run( long when ) {
+                    public void run( FormattedImmutableDate when ) {
 
                         Logger.logErr( "*** this event should have been discarded" );
 

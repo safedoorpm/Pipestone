@@ -6,7 +6,8 @@ import javax.swing.*;
 import java.awt.*;
 
 /*
- * Copyright © 2012 Obtuse Systems Corporation.
+ * Copyright © 2006 Loa Corporation.
+ * Copyright © 2011 Daniel Boulet.
  */
 
 /**
@@ -137,6 +138,7 @@ public class MacCustomization extends OSLevelCustomizations {
 
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public static OSLevelCustomizations createInstance( AboutWindowHandler aboutWindowHandler, QuitCatcher quitCatcher ) {
 
         return new MacCustomization( aboutWindowHandler, quitCatcher );

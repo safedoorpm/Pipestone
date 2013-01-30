@@ -455,7 +455,7 @@ public class Trace {
         System.out.println( "file emitted" );
 
         //noinspection MagicNumber
-        ObtuseUtil5.safeSleepMillis( javax.management.timer.Timer.ONE_SECOND * 5L );
+        ObtuseUtil.safeSleepMillis( javax.management.timer.Timer.ONE_SECOND * 5L );
         return rval;
 
     }
@@ -505,7 +505,7 @@ public class Trace {
             results.add( pfx + "Exception stack traceback:" );
             results.add( pfx + sw.toString() );  // FINALLY we can put the stack trace into our results list
             pw.close();
-            ObtuseUtil5.closeQuietly( sw );
+            ObtuseUtil.closeQuietly( sw );
             results.add( pfx );
             results.add( pfx + "same stack traceback using new formatter:" );
 
@@ -567,7 +567,7 @@ public class Trace {
 
         } finally {
 
-            ObtuseUtil5.closeQuietly( writer );
+            ObtuseUtil.closeQuietly( writer );
 
         }
 
@@ -639,7 +639,7 @@ public class Trace {
                             Logger.logErr( "trace requested" );
                             Trace.emitTrace( "externally requested" );
                             Logger.logErr( "trace done" );
-                            ObtuseUtil5.closeQuietly( sock );
+                            ObtuseUtil.closeQuietly( sock );
 
                         } catch ( Throwable e ) {
 
@@ -649,7 +649,7 @@ public class Trace {
                             );
                             Trace.emitTrace( "trace port listener failed", e );
 
-                            ObtuseUtil5.closeQuietly( listenSocket );
+                            ObtuseUtil.closeQuietly( listenSocket );
 
                             return;
 

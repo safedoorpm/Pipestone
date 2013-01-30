@@ -3,20 +3,26 @@ package com.obtuse.util;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.*;
-import java.text.*;
-import java.util.*;
+import java.text.DateFormat;
+import java.text.MessageFormat;
+import java.text.SimpleDateFormat;
+import java.util.Collection;
+import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 /*
- * Copyright © 2005, 2006, 2007, 2011-2012 Obtuse Systems Corporation.
+ * Copyright © 2005, 2006, 2007 Loa Corporation.
+ * Copyright © 2011 Daniel Boulet.
  */
 
 /**
  * Manage a simple logging facility.
  * <p/>
- * Note that {@link com.obtuse.util.BasicProgramConfigInfo#init} <b><u>MUST</u></b> be called before this class is used in any way
+ * Note that {@link BasicProgramConfigInfo#init} <b><u>MUST</u></b> be called before this class is used in any way
  * which triggers
  * the invocation of this class's static initializer(s).  Experience seems to indicate that it is sufficient to call
- * {@link com.obtuse.util.BasicProgramConfigInfo#init} before invoking any method defined by this class (your mileage may vary).
+ * {@link BasicProgramConfigInfo#init} before invoking any method defined by this class (your mileage may vary).
  *
  * @noinspection ClassWithoutToString, ForLoopReplaceableByForEach, RawUseOfParameterizedType,
  * UseOfSystemOutOrSystemErr, UnusedDeclaration
@@ -238,7 +244,7 @@ public class Logger {
 
         }
 
-        Trace.event( "processing listeners" );
+//        Trace.event( "processing listeners" );
 
         for ( LoggerListener listener : tmpListeners ) {
 
@@ -246,7 +252,7 @@ public class Logger {
 
         }
 
-        Trace.event( "done processing listeners" );
+//        Trace.event( "done processing listeners" );
 
         _currentMessage = new StringBuffer();
         _messageStartTime = null;
@@ -294,9 +300,15 @@ public class Logger {
         printNewline();
 
         // The Java 1.4.2 docs are not clear as to whether System.out or System.err are
-        // opened with autoflushing enabled so we force a flush here just to be sure.
+        // opened with auto-flushing enabled so we force a flush here just to be sure.
 
         flush();
+
+    }
+
+    public synchronized void println() {
+
+        println( "" );
 
     }
 
@@ -404,9 +416,9 @@ public class Logger {
                 Logger.LOGS_DIRECTORY.mkdirs();
                 Logger.s_stdout.setMirror(
                         Logger.LOGS_DIRECTORY.getPath() + "/" +
-                        ( Logger.s_programName == null ? Logger.COMPONENT_NAME : Logger.s_programName ) +
-                        "_stdout_" + Logger.LOG_FILE_NAME_FORMATTER
-                                           .format( new Date() ), -1L
+                                ( Logger.s_programName == null ? Logger.COMPONENT_NAME : Logger.s_programName ) +
+                                "_stdout_" + Logger.LOG_FILE_NAME_FORMATTER
+                                .format( new Date() ), -1L
                 );
 
             } catch ( FileNotFoundException e ) {
@@ -440,9 +452,9 @@ public class Logger {
                 Logger.LOGS_DIRECTORY.mkdirs();
                 Logger.s_stderr.setMirror(
                         Logger.LOGS_DIRECTORY.getPath() + "/" +
-                        ( Logger.s_programName == null ? Logger.COMPONENT_NAME : Logger.s_programName ) +
-                        "_stderr_" + Logger.LOG_FILE_NAME_FORMATTER
-                                           .format( new Date() ), -1L
+                                ( Logger.s_programName == null ? Logger.COMPONENT_NAME : Logger.s_programName ) +
+                                "_stderr_" + Logger.LOG_FILE_NAME_FORMATTER
+                                .format( new Date() ), -1L
                 );
 
             } catch ( FileNotFoundException e ) {

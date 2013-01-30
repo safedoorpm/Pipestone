@@ -1,32 +1,13 @@
 package com.obtuse.util;
 
-import java.util.Collection;
-import java.util.Set;
-import java.util.SortedMap;
-import java.util.TreeMap;
+import java.io.Serializable;
+import java.util.*;
 
 /*
  * Copyright © 2011 Obtuse Systems Corporation
  */
 
-/**
- * A sorted map with three dimensions/indices.
- * <p/>
- * The map is sorted in the sense that each dimension's keys are sorted.
- * <p/>
- * The map is actually a {@link TwoDimensionalSortedMap} wrapped inside of a {@link java.util.TreeMap}.  The actual map is
- * declared as follows:
- *
- * <blockquote><tt>SortedMap&lt;T1,TwoDimensionalSortedMap&lt;T2,T3,V>> _map = new TreeMap&lt;T1,TwoDimensionalSortedMap&lt;T2,T3,V>>()</tt></blockquote>
- *
- * @param <T1> The type of the first dimension.
- * @param <T2> The type of the second dimension.
- * @param <T3> The type of the third dimension.
- * @param <V> The type of the values stored within the map.
- */
-
-@SuppressWarnings("UnusedDeclaration")
-public class ThreeDimensionalTreeMap<T1,T2,T3,V> implements ThreeDimensionalSortedMap<T1,T2,T3,V> {
+public class ThreeDimensionalTreeMap<T1,T2,T3,V> implements Serializable, ThreeDimensionalSortedMap<T1,T2,T3,V> {
 
     private SortedMap<T1,TwoDimensionalSortedMap<T2,T3,V>> _map = new TreeMap<T1,TwoDimensionalSortedMap<T2,T3,V>>();
 
@@ -35,6 +16,7 @@ public class ThreeDimensionalTreeMap<T1,T2,T3,V> implements ThreeDimensionalSort
 
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public ThreeDimensionalTreeMap( ThreeDimensionalSortedMap<T1,T2,T3,V> map ) {
         super();
 
@@ -58,7 +40,7 @@ public class ThreeDimensionalTreeMap<T1,T2,T3,V> implements ThreeDimensionalSort
     public TwoDimensionalSortedMap<T2,T3,V> getInnerMap( T1 key1, boolean forceCreate ) {
 
         TwoDimensionalSortedMap<T2,T3,V> innerMap = _map.get( key1 );
-        if ( innerMap == null ) {
+        if ( innerMap == null && forceCreate ) {
 
             innerMap = new TwoDimensionalTreeMap<T2,T3,V>();
             _map.put( key1, innerMap );
@@ -66,6 +48,12 @@ public class ThreeDimensionalTreeMap<T1,T2,T3,V> implements ThreeDimensionalSort
         }
 
         return innerMap;
+
+    }
+
+    public TwoDimensionalSortedMap<T2,T3,V> removeInnerMap( T1 key ) {
+
+        return _map.remove( key );
 
     }
 
@@ -82,6 +70,62 @@ public class ThreeDimensionalTreeMap<T1,T2,T3,V> implements ThreeDimensionalSort
 
     }
 
+    public V remove( T1 key1, T2 key2, T3 key3 ) {
+
+        V rval = null;
+
+        TwoDimensionalSortedMap<T2,T3,V> innerMap = _map.get( key1 );
+        if ( innerMap != null ) {
+
+            rval = innerMap.remove( key2, key3 );
+
+            // Note that we cannot remove this inner map if it is now empty since someone may already have a reference
+            // to this particular inner map.
+
+        }
+
+        return rval;
+
+    }
+
+    public int size() {
+
+        int totalSize = 0;
+        for ( TwoDimensionalSortedMap<T2,T3,V> innerMap : innerMaps() ) {
+
+            totalSize += innerMap.size();
+
+        }
+
+        return totalSize;
+
+    }
+
+    public boolean isEmpty() {
+
+        // We could just use "return size() == 0" but the short circuiting that we do below makes this approach
+        // faster if the map is not empty.
+
+        if ( _map.isEmpty() ) {
+
+            return true;
+
+        }
+
+        for ( TwoDimensionalSortedMap<T2,T3,V> innerMap : innerMaps() ) {
+
+            if ( !innerMap.isEmpty() ) {
+
+                return false;
+
+            }
+
+        }
+
+        return true;
+
+    }
+
     public Set<T1> outerKeys() {
 
         return _map.keySet();
@@ -91,6 +135,87 @@ public class ThreeDimensionalTreeMap<T1,T2,T3,V> implements ThreeDimensionalSort
     public Collection<TwoDimensionalSortedMap<T2,T3,V>> innerMaps() {
 
         return _map.values();
+
+    }
+
+    public Iterator<V> iterator() {
+
+        return new Iterator<V>() {
+
+            private final Iterator<T1> _outerIterator;
+            private T1 _activeOuterKey;
+            private Iterator<V> _innerIterator;
+
+            {
+
+                _outerIterator = _map.keySet().iterator();
+
+                findNextNonEmptyInnerMap();
+
+            }
+
+            private void findNextNonEmptyInnerMap() {
+
+                _innerIterator = null;
+
+                while ( _outerIterator.hasNext() ) {
+
+                    _activeOuterKey = _outerIterator.next();
+
+                    TwoDimensionalSortedMap<T2,T3,V> innerMap = getInnerMap( _activeOuterKey, false );
+                    if ( innerMap.isEmpty() ) {
+
+                        // skip this one
+
+                    } else {
+
+                        _innerIterator = innerMap.iterator();
+                        break;
+
+                    }
+
+                }
+
+            }
+
+            public boolean hasNext() {
+
+                return _innerIterator != null && _innerIterator.hasNext();
+
+            }
+
+            public V next() {
+
+                if ( !hasNext() ) {
+
+                    throw new NoSuchElementException( "no more values" );
+
+                }
+
+                V next = _innerIterator.next();
+                if ( _innerIterator != null && !_innerIterator.hasNext() ) {
+
+                    findNextNonEmptyInnerMap();
+
+                }
+
+                return next;
+
+            }
+
+            public void remove() {
+
+                throw new UnsupportedOperationException( "unable to remove values via this iterator" );
+
+            }
+
+        };
+
+    }
+
+    public String toString() {
+
+        return "ThreeDimensionalTreeMap( size = " + size() + " )";
 
     }
 

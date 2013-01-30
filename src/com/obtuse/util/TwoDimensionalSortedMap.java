@@ -1,6 +1,8 @@
 package com.obtuse.util;
 
+import java.io.Serializable;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.Set;
 import java.util.SortedMap;
 
@@ -10,7 +12,7 @@ import java.util.SortedMap;
  * Copyright © 2010 Obtuse Systems Corporation
  */
 
-public interface TwoDimensionalSortedMap<T1,T2,V> {
+public interface TwoDimensionalSortedMap<T1,T2,V> extends Serializable {
 
     void put( T1 key1, T2 key2, V value );
 
@@ -18,9 +20,18 @@ public interface TwoDimensionalSortedMap<T1,T2,V> {
 
     V get( T1 key1, T2 key2 );
 
+    SortedMap<T2,V> removeInnerMap( T1 key );
+
+    V remove( T1 key1, T2 key2 );
+
     Set<T1> outerKeys();
 
-    @SuppressWarnings("UnusedDeclaration")
     Collection<SortedMap<T2,V>> innerMaps();
+
+    Iterator<V> iterator();
+
+    int size();
+
+    boolean isEmpty();
 
 }

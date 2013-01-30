@@ -2,19 +2,22 @@ package com.obtuse.util;
 
 import com.obtuse.db.PostgresConnection;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.sql.*;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.util.*;
 import java.util.zip.ZipFile;
 
 /*
- * Copyright 2005-2012 Obtuse Systems Corporation
+ * Copyright © 2012 Obtuse Systems Corporation
  */
 
 /**
@@ -22,15 +25,14 @@ import java.util.zip.ZipFile;
  */
 
 @SuppressWarnings({ "UnusedDeclaration" })
-public class ObtuseUtil5 {
+public class ObtuseUtil {
 
-    @SuppressWarnings("UseOfObsoleteCollectionType")
-    private static class UnmodifiableHashtable<K, V> extends Hashtable<K, V> {
+    private static class UnmodifiableHashtable<K,V> extends Hashtable<K,V> {
 
         private boolean _readonly;
-        private final Hashtable<? extends K, ? extends V> _ht;
+        private final Hashtable<? extends K,? extends V> _ht;
 
-        private UnmodifiableHashtable( Hashtable<? extends K, ? extends V> ht ) {
+        private UnmodifiableHashtable( Hashtable<? extends K,? extends V> ht ) {
 
             super( ht );
             _ht = ht;
@@ -58,7 +60,7 @@ public class ObtuseUtil5 {
         }
 
         @NotNull
-        public Set<Map.Entry<K, V>> entrySet() {
+        public Set<Map.Entry<K,V>> entrySet() {
 
             if ( _readonly ) {
 
@@ -103,7 +105,7 @@ public class ObtuseUtil5 {
 
         }
 
-        public void putAll( Map<? extends K, ? extends V> t ) {
+        public void putAll( Map<? extends K,? extends V> t ) {
 
             if ( _readonly ) {
 
@@ -162,7 +164,7 @@ public class ObtuseUtil5 {
 
     }
 
-    private ObtuseUtil5() {
+    private ObtuseUtil() {
 
         super();
     }
@@ -178,18 +180,17 @@ public class ObtuseUtil5 {
     @SuppressWarnings({ "SameParameterValue" })
     public static byte[] getSerializedVersion( Serializable thing, boolean printStackTraceOnError ) {
 
+        ByteArrayOutputStream bos = null;
+        ObjectOutputStream oos = null;
+
         try {
 
-            ByteArrayOutputStream bos = new ByteArrayOutputStream();
-            ObjectOutputStream oos = new ObjectOutputStream( bos );
+            bos = new ByteArrayOutputStream();
+            oos = new ObjectOutputStream( bos );
             oos.writeObject( thing );
             oos.flush();
 
-            byte[] sv = bos.toByteArray();
-
-            ObtuseUtil5.closeQuietly( oos );
-
-            return sv;
+            return bos.toByteArray();
 
         } catch ( IOException e ) {
 
@@ -198,6 +199,131 @@ public class ObtuseUtil5 {
             if ( printStackTraceOnError ) {
 
                 //noinspection CallToPrintStackTrace
+                e.printStackTrace();
+
+            }
+
+            return null;
+
+        } finally {
+
+            ObtuseUtil.closeQuietly( oos );
+            ObtuseUtil.closeQuietly( bos );
+
+        }
+
+    }
+
+    /**
+     * Write a serializable object to a file. No muss, no fuss, no exceptions!
+     *
+     * @param thing the object which is to be serialized and written to the file.
+     * @param outputFile the file that the serialized object is to be written to.
+     * @param printStackTraceOnError true if a stack trace is to be printed if anything goes wrong.
+     * @return true if it worked; false otherwise.
+     */
+
+    @SuppressWarnings("BooleanMethodNameMustStartWithQuestion")
+    public static boolean writeSerializableObjectToFile( Serializable thing, File outputFile, boolean printStackTraceOnError ) {
+
+        try {
+
+            ObtuseUtil.writeSerializableObjectToFile( thing, outputFile );
+
+            return true;
+
+        } catch ( IOException e ) {
+
+            if ( printStackTraceOnError ) {
+
+                e.printStackTrace();
+
+            }
+
+            return false;
+
+        }
+
+    }
+
+    /**
+     * Write a serializable object to a file.
+     * <p/>
+     * If it worked then nothing is returned. If it failed then an exception is thrown.
+     *
+     * @param thing the object which is to be serialized and written to the file.
+     * @param outputFile the file that the serialized object is to be written to.
+     * @throws java.io.IOException if something goes wrong. The most likely reasons are (probably)
+     * that it was not possible to create the output file or some part of <tt>thing</tt> is not serializable.
+     */
+
+    public static void writeSerializableObjectToFile( Serializable thing, File outputFile )
+            throws IOException {
+
+        ObjectOutputStream oos = null;
+
+        try {
+
+            oos = new ObjectOutputStream( new BufferedOutputStream( new FileOutputStream( outputFile ) ) );
+            oos.writeObject( thing );
+            oos.flush();
+
+        } finally {
+
+            ObtuseUtil.closeQuietly( oos );
+
+        }
+
+    }
+
+    /**
+     * Turn the contents of a file back into a serializable thing. The first serialized object from the file is read
+     * and de-serialized.
+     *
+     * @param inputFile the file that the serialized object is to be read from.
+     * @return the de-serialized object or null if something goes wrong.
+     * @throws java.io.IOException    if an I/O error occurs opening or reading from the file or a deserialization
+     *                                error occurs (see {@link java.io.ObjectInputStream#readObject()} for details on what can
+     *                                go wrong).
+     * @throws ClassNotFoundException if the class of a serialized object in the file cannot be found.
+     */
+
+    public static Serializable recoverSerializedVersion( File inputFile )
+            throws IOException, ClassNotFoundException {
+
+        return ObtuseUtil.recoverSerializedVersion( new BufferedInputStream( new FileInputStream( inputFile ) ) );
+
+    }
+
+    /**
+     * Turn the contents of a file back into a serializable thing. The first serialized object from the file is read
+     * and de-serialized.
+     *
+     * @param inputFile the file that the serialized object is to be read from.
+     * @param printStackTraceOnError true if a stack trace is to be printed if anything goes wrong.
+     * @return the de-serialized object or null if something goes wrong.
+     */
+
+    public static Serializable recoverSerializedVersion( File inputFile, boolean printStackTraceOnError ) {
+
+        try {
+
+            return ObtuseUtil.recoverSerializedVersion( new BufferedInputStream( new FileInputStream( inputFile ) ) );
+
+        } catch ( ClassNotFoundException e ) {
+
+            if ( printStackTraceOnError ) {
+
+                e.printStackTrace();
+
+            }
+
+            return null;
+
+        } catch ( IOException e ) {
+
+            if ( printStackTraceOnError ) {
+
                 e.printStackTrace();
 
             }
@@ -217,6 +343,7 @@ public class ObtuseUtil5 {
      *                                error occurs (see {@link java.io.ObjectInputStream#readObject()} for details on what can
      *                                go wrong).
      * @throws ClassNotFoundException if the class of a serialized object in the {@link java.io.InputStream} cannot be found.
+     * @deprecated Use {@link #recoverSerializedVersion(java.io.File)} or {@link #recoverSerializedVersion(java.io.InputStream)} instead.
      */
 
     public static Serializable recoverSerializedVersion(
@@ -224,14 +351,25 @@ public class ObtuseUtil5 {
     )
             throws ClassNotFoundException, IOException {
 
-        ByteArrayInputStream bis = new ByteArrayInputStream( sv );
-        return ObtuseUtil5.recoverSerializedVersion( bis );
+        ByteArrayInputStream bis = null;
+
+        try {
+
+            bis = new ByteArrayInputStream( sv );
+
+            return ObtuseUtil.recoverSerializedVersion( bis );
+
+        } finally {
+
+            ObtuseUtil.closeQuietly( bis );
+
+        }
 
     }
 
     /**
      * Turn an {@link java.io.InputStream} back into a serializable thing. The next serialized object from the stream is read
-     * and de-serialized. The stream is left ready to have the next object read from it.
+     * and de-serialized. The stream is closed when this operation completes.
      *
      * @param is the input stream that the serialized object is to be read from.
      * @return the de-serialized object or null if something goes wrong.
@@ -248,14 +386,12 @@ public class ObtuseUtil5 {
         try {
 
             ois = new ObjectInputStream( is );
-            @SuppressWarnings({ "UnnecessaryLocalVariable" })
-            Serializable thing = (Serializable)ois.readObject();
 
-            return thing;
+            return (Serializable)ois.readObject();
 
         } finally {
 
-            ObtuseUtil5.closeQuietly( ois );
+            ObtuseUtil.closeQuietly( ois );
 
         }
 
@@ -277,11 +413,11 @@ public class ObtuseUtil5 {
         ByteArrayInputStream bis = new ByteArrayInputStream( sv );
         try {
 
-            return ObtuseUtil5.recoverSerializedVersion( bis, printStackTraceOnError );
+            return ObtuseUtil.recoverSerializedVersion( bis, printStackTraceOnError );
 
         } finally {
 
-            ObtuseUtil5.closeQuietly( bis );
+            ObtuseUtil.closeQuietly( bis );
 
         }
 
@@ -289,7 +425,7 @@ public class ObtuseUtil5 {
 
     /**
      * Turn an {@link java.io.InputStream} back into a serializable thing. The next serialized object from the stream is read
-     * and de-serialized. The stream is left ready to have the next object read from it.
+     * and de-serialized. The stream is closed when this call completes.
      *
      * @param is                     the input stream that the serialized object is to be read from.
      * @param printStackTraceOnError true if a stack trace should be printed if anything goes wrong.
@@ -298,11 +434,14 @@ public class ObtuseUtil5 {
 
     public static Serializable recoverSerializedVersion( InputStream is, boolean printStackTraceOnError ) {
 
+        ObjectInputStream ois = null;
+
         try {
 
-            ObjectInputStream ois = new ObjectInputStream( is );
+            ois = new ObjectInputStream( is );
+            @SuppressWarnings("UnnecessaryLocalVariable")
             Serializable thing = (Serializable)ois.readObject();
-            ObtuseUtil5.closeQuietly( ois );
+
             return thing;
 
         } catch ( IOException e ) {
@@ -342,6 +481,11 @@ public class ObtuseUtil5 {
 
             return null;
 
+        } finally {
+
+            ObtuseUtil.closeQuietly( ois );
+            ObtuseUtil.closeQuietly( is );
+
         }
 
     }
@@ -365,7 +509,7 @@ public class ObtuseUtil5 {
 
         }
 
-        return ObtuseUtil5.readEntireFile( new File( fname ), maxLength, printStackTraceOnError );
+        return ObtuseUtil.readEntireFile( new File( fname ), maxLength, printStackTraceOnError );
 
     }
 
@@ -394,7 +538,7 @@ public class ObtuseUtil5 {
             fs = new FileInputStream( file );
 
             //noinspection UnnecessaryLocalVariable
-            byte[] contents = ObtuseUtil5.readEntireStream( fs, maxLength, printStackTraceOnError );
+            byte[] contents = ObtuseUtil.readEntireStream( fs, maxLength, printStackTraceOnError );
 
             return contents;
 
@@ -419,7 +563,7 @@ public class ObtuseUtil5 {
 
         } finally {
 
-            ObtuseUtil5.closeQuietly( fs );
+            ObtuseUtil.closeQuietly( fs );
 
         }
 
@@ -448,44 +592,17 @@ public class ObtuseUtil5 {
         try {
 
             byte[] tmp = new byte[maxLength];
-            int totalLength = 0;
-            while ( totalLength < maxLength ) {
-
-                int chunkLength = is.read( tmp, totalLength, maxLength - totalLength );
-                if ( chunkLength <= 0 ) {
-
-                    break;
-
-                }
-
-                totalLength += chunkLength;
-
-            }
-
-            if ( totalLength == 0 ) {
+            int actualLen = is.read( tmp );
+            if ( actualLen <= 0 ) {
 
                 return new byte[0];
 
             }
-//            int actualLen = is.read( tmp );
-//            if ( actualLen <= 0 ) {
-//
-//                return new byte[0];
-//
-//            }
 
-            if ( totalLength == maxLength ) {
+            byte[] contents = new byte[actualLen];
+            System.arraycopy( tmp, 0, contents, 0, actualLen );
 
-                return tmp;
-
-            } else {
-
-                byte[] contents = new byte[totalLength];
-                System.arraycopy( tmp, 0, contents, 0, totalLength );
-
-                return contents;
-
-            }
+            return contents;
 
         } catch ( IOException e ) {
 
@@ -514,7 +631,7 @@ public class ObtuseUtil5 {
     @SuppressWarnings({ "BooleanMethodNameMustStartWithQuestion" })
     public static boolean writeBytesToFile( byte[] bytes, String fname, boolean printStackTraceOnError ) {
 
-        return ObtuseUtil5.writeBytesToFile( bytes, new File( fname ), printStackTraceOnError );
+        return ObtuseUtil.writeBytesToFile( bytes, new File( fname ), printStackTraceOnError );
 
     }
 
@@ -536,7 +653,7 @@ public class ObtuseUtil5 {
             fs = new FileOutputStream( file );
 
             //noinspection UnnecessaryLocalVariable
-            boolean rval = ObtuseUtil5.writeBytesToStream( bytes, fs, printStackTraceOnError );
+            boolean rval = ObtuseUtil.writeBytesToStream( bytes, fs, printStackTraceOnError );
 
             return rval;
 
@@ -553,7 +670,7 @@ public class ObtuseUtil5 {
 
         } finally {
 
-            ObtuseUtil5.closeQuietly( fs );
+            ObtuseUtil.closeQuietly( fs );
 
         }
 
@@ -604,7 +721,7 @@ public class ObtuseUtil5 {
 
     public static int getSerializedSize( Serializable thing ) {
 
-        byte[] sv = ObtuseUtil5.getSerializedVersion( thing, false );
+        byte[] sv = ObtuseUtil.getSerializedVersion( thing, false );
         if ( sv == null ) {
 
             return 0;
@@ -629,8 +746,8 @@ public class ObtuseUtil5 {
     @SuppressWarnings({ "RawUseOfParameterizedType", "CollectionDeclaredAsConcreteClass" })
     public static String validateArgs(
             String methodName,
-            @SuppressWarnings("UseOfObsoleteCollectionType") Vector actual,
-            Class[] expected
+            @SuppressWarnings("rawtypes") Vector actual,
+            @SuppressWarnings("rawtypes") Class[] expected
     ) {
 
         if ( actual.size() != expected.length ) {
@@ -665,9 +782,101 @@ public class ObtuseUtil5 {
 
     }
 
+    private static DecimalFormat s_readable = new DecimalFormat( "###,###,###,###,###,###,##0" );
+
+    public static String readable( long value ) {
+
+        return ObtuseUtil.s_readable.format( value );
+
+    }
+
+    private static String readable( String sValue ) {
+
+        int offset = sValue.indexOf( '.' );
+        if ( offset < 0 ) {
+
+            offset = sValue.length();
+
+        }
+
+        offset -= 3;
+        String rval = sValue;
+        int lastPlace = rval.startsWith( "-" ) ? 1 : 0;
+
+        while ( offset > lastPlace ) {
+
+            rval = rval.substring( 0, offset ) + ',' + rval.substring( offset );
+            offset -= 3;
+
+        }
+
+        return rval;
+
+    }
+
+    public static String lpadReadable( long value, int w ) {
+
+        return ObtuseUtil.lpad( ObtuseUtil.readable( value ), w );
+
+    }
+
+    public static String lpadReadable( float value, int width, int digits ) {
+
+        return ObtuseUtil.lpad( ObtuseUtil.readable( ObtuseUtil.lpad( value, 0, digits ) ), width );
+
+    }
+
+    public static String lpadReadable( double value, int width, int digits ) {
+
+        return ObtuseUtil.lpad( ObtuseUtil.readable( ObtuseUtil.lpad( value, 0, digits ) ), width );
+
+    }
+
+    public static String rpadReadable( long value, int w ) {
+
+        return ObtuseUtil.rpad( ObtuseUtil.readable( value ), w );
+
+    }
+
+    public static String rpadReadable( float value, int width, int digits ) {
+
+        return ObtuseUtil.rpad( ObtuseUtil.readable( ObtuseUtil.lpad( value, 0, digits ) ), width );
+
+    }
+
+    public static String rpadReadable( double value, int width, int digits ) {
+
+        return ObtuseUtil.rpad( ObtuseUtil.readable( ObtuseUtil.lpad( value, 0, digits ) ), width );
+
+    }
+
+    public static String lpadReadable0( float value, int width, int digits ) {
+
+        return ObtuseUtil.lpad( ObtuseUtil.readable( ObtuseUtil.lpad0( value, 0, digits ) ), width );
+
+    }
+
+    public static String lpadReadable0( double value, int width, int digits ) {
+
+        return ObtuseUtil.lpad( ObtuseUtil.readable( ObtuseUtil.lpad0( value, 0, digits ) ), width );
+
+    }
+
+    public static String rpadReadable0( float value, int width, int digits ) {
+
+        return ObtuseUtil.rpad( ObtuseUtil.readable( ObtuseUtil.lpad0( value, 0, digits ) ), width );
+
+    }
+
+    public static String rpadReadable0( double value, int width, int digits ) {
+
+        return ObtuseUtil.rpad( ObtuseUtil.readable( ObtuseUtil.lpad0( value, 0, digits ) ), width );
+
+    }
+
     public static String lpad( float value, int width, int digits ) {
 
-        return ObtuseUtil5.lpad( (double)value, width, digits );
+        return ObtuseUtil.lpad( (double) value, width, digits );
 
     }
 
@@ -675,15 +884,35 @@ public class ObtuseUtil5 {
 
     public static String lpad( double di, int w, int v ) {
 
-        if ( v >= ObtuseUtil5.s_cachedFormats.length ) {
+        if ( Double.isNaN( di ) ) {
 
-            DecimalFormat[] tmp = new DecimalFormat[v + 1];
-            System.arraycopy( ObtuseUtil5.s_cachedFormats, 0, tmp, 0, ObtuseUtil5.s_cachedFormats.length );
-            ObtuseUtil5.s_cachedFormats = tmp;
+            return ObtuseUtil.lpad( "NaN", w );
 
         }
 
-        if ( ObtuseUtil5.s_cachedFormats[v] == null ) {
+        if ( Double.isInfinite( di ) ) {
+
+            if ( di < 0 ) {
+
+                return ObtuseUtil.lpad( "-Inf", w );
+
+            } else {
+
+                return ObtuseUtil.lpad( "+Inf", w );
+
+            }
+
+        }
+
+        if ( v >= ObtuseUtil.s_cachedFormats.length ) {
+
+            DecimalFormat[] tmp = new DecimalFormat[v + 1];
+            System.arraycopy( ObtuseUtil.s_cachedFormats, 0, tmp, 0, ObtuseUtil.s_cachedFormats.length );
+            ObtuseUtil.s_cachedFormats = tmp;
+
+        }
+
+        if ( ObtuseUtil.s_cachedFormats[v] == null ) {
 
             String format = "0.";
             for ( int i = 0; i < v; i += 1 ) {
@@ -692,11 +921,11 @@ public class ObtuseUtil5 {
 
             }
 
-            ObtuseUtil5.s_cachedFormats[v] = new DecimalFormat( format );
+            ObtuseUtil.s_cachedFormats[v] = new DecimalFormat( format );
 
         }
 
-        return ObtuseUtil5.lpad( ObtuseUtil5.s_cachedFormats[v].format( di ), w );
+        return ObtuseUtil.lpad( ObtuseUtil.s_cachedFormats[ v ].format( di ), w );
 
     }
 
@@ -704,15 +933,21 @@ public class ObtuseUtil5 {
 
     public static String lpad0( double di, int w, int v ) {
 
-        if ( v >= ObtuseUtil5.s_cachedZeroFormats.length ) {
+        if ( Double.isNaN( di ) ) {
 
-            DecimalFormat[] tmp = new DecimalFormat[v + 1];
-            System.arraycopy( ObtuseUtil5.s_cachedZeroFormats, 0, tmp, 0, ObtuseUtil5.s_cachedZeroFormats.length );
-            ObtuseUtil5.s_cachedZeroFormats = tmp;
+            return ObtuseUtil.lpad( "NaN", w );
 
         }
 
-        if ( ObtuseUtil5.s_cachedZeroFormats[v] == null ) {
+        if ( v >= ObtuseUtil.s_cachedZeroFormats.length ) {
+
+            DecimalFormat[] tmp = new DecimalFormat[v + 1];
+            System.arraycopy( ObtuseUtil.s_cachedZeroFormats, 0, tmp, 0, ObtuseUtil.s_cachedZeroFormats.length );
+            ObtuseUtil.s_cachedZeroFormats = tmp;
+
+        }
+
+        if ( ObtuseUtil.s_cachedZeroFormats[v] == null ) {
 
             String format = "0.";
             for ( int i = 0; i < v; i += 1 ) {
@@ -721,11 +956,11 @@ public class ObtuseUtil5 {
 
             }
 
-            ObtuseUtil5.s_cachedZeroFormats[v] = new DecimalFormat( format );
+            ObtuseUtil.s_cachedZeroFormats[v] = new DecimalFormat( format );
 
         }
 
-        return ObtuseUtil5.lpad( ObtuseUtil5.s_cachedZeroFormats[v].format( di ), w );
+        return ObtuseUtil.lpad( ObtuseUtil.s_cachedZeroFormats[ v ].format( di ), w );
 
     }
 
@@ -777,7 +1012,7 @@ public class ObtuseUtil5 {
     public static String lpad( String s, int w, char p ) {
 
         String str = s == null ? "null" : s;
-        return ObtuseUtil5.generatePaddingString( w, p, str ) + str;
+        return ObtuseUtil.generatePaddingString( w, p, str ) + str;
 
     }
 
@@ -819,7 +1054,7 @@ public class ObtuseUtil5 {
 
     public static String lpad( String s, int w ) {
 
-        return ObtuseUtil5.lpad( s, w, ' ' );
+        return ObtuseUtil.lpad( s, w, ' ' );
 
     }
 
@@ -836,7 +1071,7 @@ public class ObtuseUtil5 {
 
     public static String lpad( long l, int w, char p ) {
 
-        return ObtuseUtil5.lpad( "" + l, w, p );
+        return ObtuseUtil.lpad( "" + l, w, p );
 
     }
 
@@ -854,7 +1089,7 @@ public class ObtuseUtil5 {
 
     public static String lpad( long l, int w ) {
 
-        return ObtuseUtil5.lpad( "" + l, w );
+        return ObtuseUtil.lpad( "" + l, w );
 
     }
 
@@ -871,7 +1106,7 @@ public class ObtuseUtil5 {
     public static String rpad( String s, int w, char p ) {
 
         String str = s == null ? "null" : s;
-        return str + ObtuseUtil5.generatePaddingString( w, p, str );
+        return str + ObtuseUtil.generatePaddingString( w, p, str );
 
 //        String rval = s == null ? "null" : s;
 //        while ( rval.length() < w ) {
@@ -897,7 +1132,7 @@ public class ObtuseUtil5 {
 
     public static String rpad( String s, int w ) {
 
-        return ObtuseUtil5.rpad( s, w, ' ' );
+        return ObtuseUtil.rpad( s, w, ' ' );
 
     }
 
@@ -915,7 +1150,7 @@ public class ObtuseUtil5 {
 
     public static String rpad( long l, int w, char p ) {
 
-        return ObtuseUtil5.rpad( "" + l, w, p );
+        return ObtuseUtil.rpad( "" + l, w, p );
 
     }
 
@@ -933,7 +1168,7 @@ public class ObtuseUtil5 {
 
     public static String rpad( long l, int w ) {
 
-        return ObtuseUtil5.rpad( "" + l, w );
+        return ObtuseUtil.rpad( "" + l, w );
 
     }
 
@@ -973,8 +1208,8 @@ public class ObtuseUtil5 {
         //noinspection UnnecessaryParentheses
 
         return ""
-               + ObtuseUtil5.hexvalue( (int)( ( v >> 32 ) & 0x00000000ffffffffL ) )
-               + ObtuseUtil5.hexvalue( (int)( v & 0x00000000ffffffffL ) );
+               + ObtuseUtil.hexvalue( (int) ( ( v >> 32 ) & 0x00000000ffffffffL ) )
+               + ObtuseUtil.hexvalue( (int) ( v & 0x00000000ffffffffL ) );
 
     }
 
@@ -990,10 +1225,10 @@ public class ObtuseUtil5 {
     public static String hexvalue( int v ) {
 
         return ""
-               + ObtuseUtil5.hexvalue( (byte)( ( v >> 24 ) & 0xff ) )
-               + ObtuseUtil5.hexvalue( (byte)( ( v >> 16 ) & 0xff ) )
-               + ObtuseUtil5.hexvalue( (byte)( ( v >> 8 ) & 0xff ) )
-               + ObtuseUtil5.hexvalue( (byte)( v & 0xff ) );
+               + ObtuseUtil.hexvalue( (byte) ( ( v >> 24 ) & 0xff ) )
+               + ObtuseUtil.hexvalue( (byte) ( ( v >> 16 ) & 0xff ) )
+               + ObtuseUtil.hexvalue( (byte) ( ( v >> 8 ) & 0xff ) )
+               + ObtuseUtil.hexvalue( (byte) ( v & 0xff ) );
 
     }
 
@@ -1040,7 +1275,7 @@ public class ObtuseUtil5 {
         StringBuilder rval = new StringBuilder();
         for ( byte b : bv ) {
 
-            rval.append( ObtuseUtil5.hexvalue( b ) );
+            rval.append( ObtuseUtil.hexvalue( b ) );
 
         }
 
@@ -1083,7 +1318,7 @@ public class ObtuseUtil5 {
 
         for ( int offset = 0; offset < data.length; offset += 16 ) {
 
-            StringBuilder rval = new StringBuilder( ObtuseUtil5.hexvalue( offset ) ).append( " " );
+            StringBuilder rval = new StringBuilder( ObtuseUtil.hexvalue( offset ) ).append( " " );
             for ( int j = 0; j < 16; j += 1 ) {
 
                 if ( j % 4 == 0 ) {
@@ -1094,7 +1329,7 @@ public class ObtuseUtil5 {
 
                 if ( offset + j < data.length ) {
 
-                    rval.append( ObtuseUtil5.hexvalue( data[offset + j] ) );
+                    rval.append( ObtuseUtil.hexvalue( data[ offset + j ] ) );
 
                 } else {
 
@@ -1189,10 +1424,10 @@ public class ObtuseUtil5 {
     /**
      * Close something while ignoring any {@link java.io.IOException}s.
      *
-     * @param thing the thing to be closed.
+     * @param thing the thing to be closed (which can be null in which case nothing is done).
      */
 
-    public static void closeQuietly( Closeable thing ) {
+    public static void closeQuietly( @Nullable Closeable thing ) {
 
         try {
 
@@ -1426,16 +1661,16 @@ public class ObtuseUtil5 {
 
     }
 
-    private static MessageDigest s_md5Algorithm = null;
+    private static       MessageDigest s_md5Algorithm = null;
     @SuppressWarnings("ConstantNamingConvention")
-    private static final Long _md5Lock = 0L;
+    private static final Long          _md5Lock       = 0L;
 
     public static String computeMD5( InputStream is )
             throws IOException {
 
-        synchronized ( ObtuseUtil5._md5Lock ) {
+        synchronized ( ObtuseUtil._md5Lock ) {
 
-            if ( ObtuseUtil5.s_md5Algorithm == null ) {
+            if ( ObtuseUtil.s_md5Algorithm == null ) {
 
                 MessageDigest alg;
                 try {
@@ -1450,7 +1685,7 @@ public class ObtuseUtil5 {
 
                 }
 
-                ObtuseUtil5.s_md5Algorithm = alg;
+                ObtuseUtil.s_md5Algorithm = alg;
 
             }
 
@@ -1458,7 +1693,7 @@ public class ObtuseUtil5 {
 
             try {
 
-                ObtuseUtil5.s_md5Algorithm.reset();
+                ObtuseUtil.s_md5Algorithm.reset();
                 fis = new BufferedInputStream( is );
 
                 //noinspection MagicNumber
@@ -1472,17 +1707,17 @@ public class ObtuseUtil5 {
 
                     }
 
-                    ObtuseUtil5.s_md5Algorithm.update( buffer, 0, rLen );
+                    ObtuseUtil.s_md5Algorithm.update( buffer, 0, rLen );
 
                 }
 
-                byte[] digest = ObtuseUtil5.s_md5Algorithm.digest();
+                byte[] digest = ObtuseUtil.s_md5Algorithm.digest();
 
-                return ObtuseUtil5.hexvalue( digest );
+                return ObtuseUtil.hexvalue( digest );
 
             } finally {
 
-                ObtuseUtil5.closeQuietly( fis );
+                ObtuseUtil.closeQuietly( fis );
 
             }
         }
@@ -1495,11 +1730,11 @@ public class ObtuseUtil5 {
         FileInputStream fis = new FileInputStream( file );
         try {
 
-            return ObtuseUtil5.computeMD5( fis );
+            return ObtuseUtil.computeMD5( fis );
 
         } finally {
 
-            ObtuseUtil5.closeQuietly( fis );
+            ObtuseUtil.closeQuietly( fis );
 
         }
 
@@ -1517,9 +1752,21 @@ public class ObtuseUtil5 {
 
     }
 
-    public static double safeDivide( double numerator, double denominator ) {
+    public static long safeDivide( long numerator, long denominator ) {
 
         return denominator == 0 ? 0 : numerator / denominator;
+
+    }
+
+    public static long safeDivide( long numerator, long denominator, long safeReturnValue ) {
+
+        return denominator == 0 ? safeReturnValue : numerator / denominator;
+
+    }
+
+    public static double safeDivide( double numerator, double denominator ) {
+
+        return denominator == 0.0 ? 0.0 : numerator / denominator;
 
     }
 
@@ -1533,7 +1780,7 @@ public class ObtuseUtil5 {
      * Add the contents of an array to a collection and return the collection.
      * <p/>Returning the collection facilitates certain constructs including:
      * <blockquote>
-     * <tt>doit( ObtuseUtil5.addAll( new LinkedList&lt;String>(), new String[] { "hello", "there", "world" } );</tt>
+     * <tt>doit( ObtuseUtil.addAll( new LinkedList&lt;String>(), new String[] { "hello", "there", "world" } );</tt>
      * </blockquote>
      *
      * @param collection  the collection to which things are to be added.
@@ -1573,24 +1820,47 @@ public class ObtuseUtil5 {
 
     /**
      * Returns an unmodifiable view of the specified hash table.
-     * This method allows modules to provide users with "read-only" access to internal hash tables (including {@link
-     * java.util.Dictionary}s).
+     * This method allows modules to provide users with "read-only" access to internal hash tables (including {@link java.util.Dictionary}s).
      * Query operations on the returned hash table "read through" to the specified hash table,
      * and attempts to modify the returned hash table, whether direct or via its collection views,
      * result in an UnsupportedOperationException.
-     *
      * @param ht the hash table for which an unmodifiable view is to be returned.
      * @return an unmodifiable view of the specified hash table.
      */
 
-    @SuppressWarnings({ "CollectionDeclaredAsConcreteClass", "UseOfObsoleteCollectionType" })
-    public static <K, V> Hashtable<K, V> unmodifiableHashtable( final Hashtable<? extends K, ? extends V> ht ) {
+    @SuppressWarnings("CollectionDeclaredAsConcreteClass")
+    public static <K,V> Hashtable<K,V> unmodifiableHashtable( final Hashtable<? extends K,? extends V> ht ) {
 
-        UnmodifiableHashtable<K, V> unmodifiableHashtable = new UnmodifiableHashtable<K, V>( ht );
+        UnmodifiableHashtable<K,V> unmodifiableHashtable = new UnmodifiableHashtable<K,V>( ht );
 
         unmodifiableHashtable.makeReadonly();
 
         return unmodifiableHashtable;
+
+    }
+
+    public static void main( String[] args ) {
+
+        BasicProgramConfigInfo.init( "Obtuse", "ObtuseUtil", "testing", null );
+
+        if ( ObtuseUtil.writeSerializableObjectToFile( "Hello world", new File( "test.ser" ), true ) ) {
+
+            String helloWorld = (String) ObtuseUtil.recoverSerializedVersion( new File( "test.ser" ), true );
+            if ( helloWorld == null ) {
+
+                Logger.logMsg( "unable to de-serialize test.ser" );
+
+            } else if ( "Hello world".equals( helloWorld ) ) {
+
+                Logger.logMsg( "serialization and de-serialization to/from files seems to work" );
+
+            }
+
+        } else {
+
+            Logger.logMsg( "unble to serialize test.ser" );
+
+        }
 
     }
 

@@ -1,9 +1,7 @@
 package com.obtuse.util;
 
 import java.io.Serializable;
-import java.util.Set;
-import java.util.SortedMap;
-import java.util.TreeMap;
+import java.util.*;
 
 /**
  * Count occurrences of things using a sorted mapping.
@@ -13,16 +11,31 @@ import java.util.TreeMap;
  * Copyright © 2009 Obtuse Systems Corporation
  */
 
-@SuppressWarnings("UnusedDeclaration")
 public class TreeCounter<K extends Comparable<K>> implements Counter<K>, Serializable {
 
-    private SortedMap<K,Integer> _counts = new TreeMap<K,Integer>();
+    private final SortedMap<K,Integer> _counts;
+
+    private int _grandTotal = 0;
 
     public TreeCounter() {
         super();
+
+        _counts = new TreeMap<K, Integer>();
+
+    }
+
+    @SuppressWarnings("UnusedDeclaration")
+    public TreeCounter( TreeCounter<K> counter ) {
+        super();
+
+        _counts = new TreeMap<K, Integer>( counter._counts );
+        _grandTotal = counter._grandTotal;
+
     }
 
     public void count( K thing ) {
+
+        _grandTotal += 1;
 
         if ( _counts.containsKey( thing ) ) {
 
@@ -36,9 +49,33 @@ public class TreeCounter<K extends Comparable<K>> implements Counter<K>, Seriali
 
     }
 
+    public int size() {
+
+        return _counts.size();
+
+    }
+
+    public boolean isEmpty() {
+
+        return _counts.isEmpty();
+
+    }
+
     public Set<K> keySet() {
 
         return _counts.keySet();
+
+    }
+
+    public K firstKey() {
+
+        return _counts.firstKey();
+
+    }
+
+    public K lastKey() {
+
+        return _counts.lastKey();
 
     }
 
@@ -60,7 +97,7 @@ public class TreeCounter<K extends Comparable<K>> implements Counter<K>, Seriali
 
         StringBuilder counts = new StringBuilder( "TreeCounter( " );
         String comma = "";
-        int count = 0;
+
         for ( K key : _counts.keySet() ) {
 
             counts.append( comma ).append( key ).append( '=' ).append( getCount( key ) );
@@ -69,6 +106,12 @@ public class TreeCounter<K extends Comparable<K>> implements Counter<K>, Seriali
         }
 
         return counts.append( " )" ).toString();
+
+    }
+
+    public int getGrandTotal() {
+
+        return _grandTotal;
 
     }
 

@@ -1,15 +1,14 @@
-package com.obtuse.ui;
-
-import com.obtuse.util.BasicProgramConfigInfo;
-import com.obtuse.util.ObtuseUtil;
+package com.obtuse.util;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 
-/*
- * Copyright © 2012 Obtuse Systems Corporation
+/**
+ * Record window location changes in the users preferences object.
+ * <p/>
+ * Copyright © 2007, 2008, 2011 Daniel Boulet.
  */
 
 public class TrackedWindow extends JFrame {

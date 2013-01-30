@@ -364,7 +364,7 @@ public class MultiPointSlider extends JComponent {
 
             for ( int y = 0; y < _knob.getImage().getHeight( null ); y += 1 ) {
 
-                Logger.logMsg( ObtuseUtil5.hexvalue( _knob.getImage().getRGB( x, y ) ) + " " );
+                Logger.logMsg( ObtuseUtil.hexvalue( _knob.getImage().getRGB( x, y ) ) + " " );
 
             }
 

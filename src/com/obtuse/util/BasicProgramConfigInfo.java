@@ -9,10 +9,11 @@ import java.util.prefs.Preferences;
 /**
  * Fundamental program configuration information and such.
  * <p/>
- * Copyright © 2012 Obtuse Systems Corporation.
+ * Copyright © 2006, 2007, 2008 Loa Corporation.
+ * Copyright © 2011 Daniel Boulet.
  */
 
-@SuppressWarnings( { "ClassNamingConvention" } )
+@SuppressWarnings({ "ClassNamingConvention", "UnusedDeclaration" })
 public class BasicProgramConfigInfo {
 
     private static boolean s_initialized = false;
@@ -104,7 +105,6 @@ public class BasicProgramConfigInfo {
 
     }
 
-    @SuppressWarnings("UnusedDeclaration")
     public static boolean isInitialized() {
 
         return BasicProgramConfigInfo.s_initialized;
@@ -120,7 +120,7 @@ public class BasicProgramConfigInfo {
 
         if ( !BasicProgramConfigInfo.s_initialized ) {
 
-            throw new IllegalArgumentException( "BasicProgramConfigInfo not yet initialized" );
+            throw new IllegalArgumentException( "BasicProgramConfigInfo.init not called yet" );
 
         }
 
@@ -128,7 +128,6 @@ public class BasicProgramConfigInfo {
 
     }
 
-    @SuppressWarnings("UnusedDeclaration")
     public static String getVendorName() {
 
         return BasicProgramConfigInfo.s_vendorName;
@@ -147,7 +146,6 @@ public class BasicProgramConfigInfo {
 
     }
 
-    @SuppressWarnings("UnusedDeclaration")
     public static Preferences getPreferences() {
 
         return BasicProgramConfigInfo.s_preferences;
@@ -160,20 +158,48 @@ public class BasicProgramConfigInfo {
 
     }
 
+    public static String getPreferenceIfEnabled( String prefsKey, String defaultValue ) {
+
+        if ( BasicProgramConfigInfo.s_preferences == null ) {
+
+            return defaultValue;
+
+        } else {
+
+            return BasicProgramConfigInfo.s_preferences.get( prefsKey, defaultValue );
+
+        }
+
+    }
+
+    public static void putPreferenceIfEnabled( String prefsKey, String value ) {
+
+        if ( BasicProgramConfigInfo.s_preferences != null ) {
+
+            BasicProgramConfigInfo.s_preferences.put( prefsKey, value );
+
+        }
+
+    }
+
+    public static boolean isPreferencesEnabled() {
+
+        return BasicProgramConfigInfo.s_preferences != null;
+
+    }
+
     public static DateFormat getDateFormat() {
 
         return BasicProgramConfigInfo.s_dateFormat;
 
     }
 
-    @SuppressWarnings("UnusedDeclaration")
     public static void setLogFileNameFormat( String logFileNameFormat ) {
 
         BasicProgramConfigInfo.s_logFileNameFormat = logFileNameFormat;
 
     }
 
-    @SuppressWarnings("UnusedDeclaration")
     public static void setDateFormat( DateFormat dateFormat ) {
 
         BasicProgramConfigInfo.s_dateFormat = dateFormat;

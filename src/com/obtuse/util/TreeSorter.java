@@ -5,7 +5,7 @@ import java.util.*;
 
 /**
  * Provide a way to sort data while automatically dealing with duplicate keys.
- * Analogous to a {@link java.util.TreeMap} except that the key-value associates are one-to-many.
+ * Analogous to a {@link TreeMap} except that the key-value associates are one-to-many.
  * For example, a single tree sorter can contain both <tt>fred</tt>-><tt>hello</tt> and <tt>fred</tt>-><tt>world</tt> associations.
  * <p/>
  * There is no <tt>get()</tt> method.  See the {@link #getValues} method for the presumably obvious analogous method.
@@ -47,7 +47,6 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
         private Collection<V> _currentList;
 
         private TreeSorterIterator() {
-
             super();
 
             _outerIterator = keySet().iterator();
@@ -95,11 +94,10 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
     /**
      * Construct a new, empty tree sorter, using the natural ordering of its keys.
      * All keys inserted in this tree sorter must implement the {@link Comparable} interface and must be
-     * <i>mutually comparable</i>({@link java.util.TreeMap#TreeMap()} for a discussion of what this means).
+     * <i>mutually comparable</i>({@link TreeMap#TreeMap()} for a discussion of what this means).
      */
 
     public TreeSorter() {
-
         super();
 
         _sortedData = new TreeMap<K, Collection<V>>();
@@ -109,13 +107,12 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
     /**
      * Construct a new, empty tree sorter ordered according to the specified comparator.
      * All keys inserted into this tree sorter must be mutually comparable by the the specified comparator
-     * ({@link java.util.TreeMap#TreeMap(java.util.Comparator)} for a discussion of what this means).
+     * ({@link TreeMap#TreeMap(java.util.Comparator)} for a discussion of what this means).
      *
      * @param comparator the comparator that will be used to order this tree sorter.
      */
 
     public TreeSorter( Comparator<? super K> comparator ) {
-
         super();
 
         _sortedData = new TreeMap<K, Collection<V>>( comparator );
@@ -125,15 +122,14 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
     /**
      * Constructs a new tree sorter containing the same mappings as the specified map.
      * The keys will be the natural sorted order of <tt>K</tt>.
-     *
      * @param map the map whose mappings are to be used to create the new tree sorter.
      */
 
-    public TreeSorter( Map<K, V> map ) {
+    public TreeSorter( Map<K,V> map ) {
 
         super();
 
-        _sortedData = new TreeMap<K, Collection<V>>();
+        _sortedData = new TreeMap<K,Collection<V>>();
         for ( K key : map.keySet() ) {
 
             add( key, map.get( key ) );
@@ -145,12 +141,10 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
     /**
      * Constructs a new tree sorter containing the same mappings as the specified sorted map.
      * The new tree sorter will use the same comparator as the specified sorted map.
-     *
      * @param map the map whose mappings are to be used to create the new tree sorter.
      */
 
     public TreeSorter( SortedMap<K, V> map ) {
-
         super();
 
         _sortedData = new TreeMap<K, Collection<V>>( map.comparator() );
@@ -164,8 +158,7 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
 
     /**
      * Construct a new tree sorter which is a copy of an existing tree sorter.
-     * <p/>This method is equivalent to constructing a new tree sorter called <tt>newSorter</tt> using the following
-     * procedure:
+     * <p/>This method is equivalent to constructing a new tree sorter called <tt>newSorter</tt> using the following procedure:
      * <pre>
      * TreeSorter&lt;K,V&gt; newSorter = new TreeSorter&lt;K,V&gt;();
      * for ( K key : sorter.keySet() ) {
@@ -174,12 +167,10 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
      *
      * }
      * </pre>
-     *
      * @param sorter the tree sorter whose key associations are to be copied into the newly created tree sorter.
      */
 
     public TreeSorter( TreeSorter<K, V> sorter ) {
-
         this();
 
         for ( K key : sorter.keySet() ) {
@@ -195,15 +186,12 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
      * <p/>This method is used internally to implement the
      * {@link #headSorter}, {@link #tailSorter} and {@link #subSorter} methods.  It is not intended to be used for any
      * other purpose and probably should not be exposed to the general public.
-     *
-     * @param map     the map which is to form the basis of this tree sorter instance.
+     * @param map the map which is to form the basis of this tree sorter instance.
      * @param ignored an extra parameter to ensure that the signature of this constructor is different than
-     *                that of one or more of the other publically available constructors.  This parameter is totally
-     *                ignored.
+     *                that of one or more of the other publically available constructors.  This parameter is totally ignored.
      */
 
     private TreeSorter( SortedMap<K, Collection<V>> map, int ignored ) {
-
         super();
 
         _sortedData = map;
@@ -213,18 +201,18 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
     /**
      * Returns a view of the portion of this tree sorter whose keys are strictly less than toKey.
      * <p/>
-     * The returned tree sorter is backed by this tree sorter, so changes in the returned tree sorter are reflected
-     * in this
-     * tree sorter, and vice-versa. The returned tree sorter will throw an <tt>IllegalArgumentException</tt> on an
-     * attempt
+     * The returned tree sorter is backed by this tree sorter, so changes in the returned tree sorter are reflected in this
+     * tree sorter, and vice-versa. The returned tree sorter will throw an <tt>IllegalArgumentException</tt> on an attempt
      * to insert a key outside its range.
      * <p/>
-     * Analogous to {@link java.util.SortedMap#headMap(Object)}.
+     * Analogous to {@link SortedMap#headMap(Object)}.
      *
      * @param toKey high endpoint (exclusive) of the headSorter.
+     *
      * @return a view of this tree sorter whose keys are strictly less than <tt>toKey</tt>.
+     *
      * @throws IllegalArgumentException if this tree sorter
-     *                                  itself has a restricted range, and <tt>toKey</tt> lies outside the bounds of the range.
+     * itself has a restricted range, and <tt>toKey</tt> lies outside the bounds of the range.
      */
 
     public TreeSorter<K, V> headSorter( K toKey ) {
@@ -236,18 +224,18 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
     /**
      * Returns a view of the portion of this tree sorter whose keys are strictly greater than or equal to fromKey.
      * <p/>
-     * The returned tree sorter is backed by this tree sorter, so changes in the returned tree sorter are reflected
-     * in this
-     * tree sorter, and vice-versa. The returned tree sorter will throw an <tt>IllegalArgumentException</tt> on an
-     * attempt
+     * The returned tree sorter is backed by this tree sorter, so changes in the returned tree sorter are reflected in this
+     * tree sorter, and vice-versa. The returned tree sorter will throw an <tt>IllegalArgumentException</tt> on an attempt
      * to insert a key outside its range.
      * <p/>
-     * Analogous to {@link java.util.SortedMap#tailMap(Object)}.
+     * Analogous to {@link SortedMap#tailMap(Object)}.
      *
      * @param fromKey low endpoint (inclusive) of the headSorter.
+     *
      * @return a view of this tree sorter whose keys are greater than or equal to <tt>fromKey</tt>.
+     *
      * @throws IllegalArgumentException this tree sorter
-     *                                  itself has a restricted range, and <tt>fromKey</tt> lies outside the bounds of the range.
+     * itself has a restricted range, and <tt>fromKey</tt> lies outside the bounds of the range.
      */
 
     public TreeSorter<K, V> tailSorter( K fromKey ) {
@@ -257,23 +245,22 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
     }
 
     /**
-     * Returns a view of this tree sorter from <tt>fromKey</tt>, inclusive, to <tt>toKey</tt>,
-     * exclusive (if <tt>fromKey</tt>
+     * Returns a view of this tree sorter from <tt>fromKey</tt>, inclusive, to <tt>toKey</tt>, exclusive (if <tt>fromKey</tt>
      * and <tt>toKey</tt> are equal then the returned tree sorter is empty).
      * <p/>
-     * The returned tree sorter is backed by this tree sorter, so changes in the returned tree sorter are reflected
-     * in this
-     * tree sorter, and vice-versa. The returned tree sorter will throw an <tt>IllegalArgumentException</tt> on an
-     * attempt
+     * The returned tree sorter is backed by this tree sorter, so changes in the returned tree sorter are reflected in this
+     * tree sorter, and vice-versa. The returned tree sorter will throw an <tt>IllegalArgumentException</tt> on an attempt
      * to insert a key outside its range.
      * <p/>
-     * Analogous to {@link java.util.SortedMap#subMap(Object, Object)}.
+     * Analogous to {@link SortedMap#subMap(Object, Object)}.
      *
      * @param fromKey low endpoint (inclusive) of the keys in the returned tree sorter.
-     * @param toKey   high endpoint (exclusive) of the keys in the returned tree sorter.
+     * @param toKey high endpoint (exclusive) of the keys in the returned tree sorter.
+     *
      * @return a view of the portion of this tree sorter specified by the keys.
+     *
      * @throws IllegalArgumentException if <tt>fromKey</tt> is greater than <tt>toKey</tt>; or if this tree sorter
-     *                                  itself has a restricted range, and <tt>fromKey</tt> or <tt>toKey</tt> lies outside the bounds of the range.
+     * itself has a restricted range, and <tt>fromKey</tt> or <tt>toKey</tt> lies outside the bounds of the range.
      */
 
     public TreeSorter<K, V> subSorter( K fromKey, K toKey ) {
@@ -284,8 +271,7 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
 
     /**
      * Determines if the specified key exists within this tree sorter.
-     * Analogous to {@link java.util.SortedMap#containsKey(Object)}.
-     *
+     * Analogous to {@link SortedMap#containsKey(Object)}.
      * @param key the specified key.
      * @return true if this tree sorter includes this key.
      */
@@ -305,6 +291,7 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
      * rather than a copy of this tree sorter's data.
      *
      * @param key the specified key.
+     *
      * @return the values associated with the specified key.
      */
 
@@ -344,9 +331,8 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
      * For example, if the key-value pair <tt>fred=hello</tt> and <tt>fred=world</tt> are added to a previously
      * empty tree sorter then the key <tt>fred</tt> will have both <tt>hello</tt> and <tt>world</tt> associated
      * with it in the tree sorter.
-     * Analogous to {@link java.util.SortedMap#put(Object, Object)}.
-     *
-     * @param key   with which the specified value is to be associated.
+     * Analogous to {@link SortedMap#put(Object, Object)}.
+     * @param key with which the specified value is to be associated.
      * @param value the value to be associated with the specified key.
      */
 
@@ -365,14 +351,13 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
     }
 
     /**
-     * Add all of the key value associations from a {@link java.util.Map} to this tree sorter.
+     * Add all of the key value associations from a {@link Map} to this tree sorter.
      * This method is exactly equivalent to
      * <pre>
      * for ( K key : map.keySet() ) {
      *     treeSorter.add( key, map.get( key ) );
      * }
      * </pre>
-     *
      * @param map the map whose contents are to be added to this tree sorter.
      */
 
@@ -394,7 +379,6 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
      *     treeSorter.addAll( key, sorter.getValues( key ) );
      * }
      * </pre>
-     *
      * @param sorter the tree sorter whose contents are to be added to this tree sorter.
      * @throws IllegalArgumentException if an attempt is made to add the contents of a tree sorter to itself.
      */
@@ -427,8 +411,7 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
      * <pre>
      *  treeSorter.addAll( key, treeSorter.getAll( key ) )
      * </pre>
-     *
-     * @param key    the key that all of the values in the specfied collection are to be associated with.
+     * @param key the key that all of the values in the specfied collection are to be associated with.
      * @param values the values which are to be associated with the specified key.
      */
 
@@ -463,10 +446,9 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
 
     /**
      * Removes all of the values associated with a specified key.
-     *
      * @param key the key for which all associated values are to be removed.
      * @return a collection of the values which were removed. The caller is free to do whatever they wish with the
-     *         returned collection as it is no longer associated with this tree sorter instance once it has been returned.
+     * returned collection as it is no longer associated with this tree sorter instance once it has been returned.
      */
 
     public Collection<V> removeKeyAndValues( K key ) {
@@ -479,7 +461,6 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
      * Get an iterator which iterates across all of the values.
      * Changes to the tree sorter while the iterator is in use could invalidate the iterator resulting in all sorts of
      * strange things happening.
-     *
      * @return an iterator which iterates across all of the values in this tree sorter.
      */
 
@@ -503,7 +484,6 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
      * }
      * return totalSize;
      * </pre>
-     *
      * @return the number of values in this tree sorter.
      */
 
@@ -523,7 +503,6 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
     /**
      * Determine if this tree sorter has any key value associations in it.
      * <p/>This method is always very fast.
-     *
      * @return true if this tree sorter is empty; false otherwise.
      */
 
@@ -542,7 +521,6 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
      * where <tt><i>n</i></tt> is the current size of this tree sorter.
      * This method calls {@link #size()} which means that it could be somewhat expensive if there are a lot of values in
      * this tree sorter.
-     *
      * @return a string which states the current size of this tree sorter.
      */
 

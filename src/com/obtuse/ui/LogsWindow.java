@@ -195,7 +195,7 @@ public class LogsWindow extends WindowWithMenus {
 
         if ( LogsWindow.s_useHTML ) {
 
-            _messagesList.addElement( "<html><tt>" + ObtuseUtil5.htmlEscape( timeStampedMessage ) + "</tt></html>" );
+            _messagesList.addElement( "<html><tt>" + ObtuseUtil.htmlEscape( timeStampedMessage ) + "</tt></html>" );
 
         } else {
 

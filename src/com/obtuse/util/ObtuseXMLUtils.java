@@ -1,18 +1,25 @@
+/*
+ * Copyright © 2012 Invidi Technologies Corporation
+ * Copyright © 2012 Obtuse Systems Corporation
+ */
+
 package com.obtuse.util;
 
 import com.obtuse.util.exceptions.ObtuseXmlNodeException;
 import com.obtuse.util.exceptions.ParsingException;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.w3c.dom.*;
+import org.w3c.dom.Document;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import java.io.PrintStream;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.util.*;
-
-/*
- * Copyright © 2012 Obtuse Systems Corporation
- */
+import java.util.Collection;
+import java.util.Date;
+import java.util.LinkedList;
 
 @SuppressWarnings("UnusedDeclaration")
 public class ObtuseXMLUtils {
@@ -61,12 +68,12 @@ public class ObtuseXMLUtils {
 
             if ( node.getTextContent().trim().isEmpty() ) {
 
-//                ps.println( ObtuseUtil5.replicate( "   ", depth ) + "node is \"" + node.getNodeName() + "\" (whitespace)" );
+//                ps.println( ObtuseUtil.replicate( "   ", depth ) + "node is \"" + node.getNodeName() + "\" (whitespace)" );
 
             } else {
 
                 ps.println(
-                        ObtuseUtil5.replicate( "   ", depth ) + "node is \"" + node.getNodeName() + "\" (text = \"" + node.getTextContent().trim() + "\")"
+                        ObtuseUtil.replicate( "   ", depth ) + "node is \"" + node.getNodeName() + "\" (text = \"" + node.getTextContent().trim() + "\")"
                 );
 
             }
@@ -79,7 +86,7 @@ public class ObtuseXMLUtils {
 
         } else {
 
-            ps.println( ObtuseUtil5.replicate( "   ", depth ) + "node is \"" + node.getNodeName() + "\"" );
+            ps.println( ObtuseUtil.replicate( "   ", depth ) + "node is \"" + node.getNodeName() + "\"" );
 
         }
 
@@ -88,9 +95,7 @@ public class ObtuseXMLUtils {
             NamedNodeMap nodeMap = node.getAttributes();
             if ( nodeMap == null ) {
 
-                Logger.logErr(
-                        "we were supposed to find attributes but got nothing in node \"" + node.getNodeName() + "\""
-                );
+                Logger.logErr( "we were supposed to find attributes but got nothing in node \"" + node.getNodeName() + "\"" );
 
             } else {
 
@@ -98,8 +103,8 @@ public class ObtuseXMLUtils {
 
                     Node item = nodeMap.item( ix );
                     ps.println(
-                            ObtuseUtil5.replicate( "   ", depth ) +
-                            item.getNodeName() + "=" + item.getNodeValue() // + " (type " + item.getNodeType() + ")"
+                            ObtuseUtil.replicate( "   ", depth ) +
+                                    item.getNodeName() + "=" + item.getNodeValue() // + " (type " + item.getNodeType() + ")"
                     );
 
                 }
@@ -143,7 +148,7 @@ public class ObtuseXMLUtils {
             if ( "item".equals( element.getNodeName() ) ) {
 
                 String elementString = element.getFirstChild().getNodeValue();
-                Logger.logMsg( "got an element \"" + elementString + "\"" );
+//                Logger.logMsg( "got an element \"" + elementString + "\"" );
                 try {
 
                     rval[elementIx] = Double.parseDouble( elementString );
@@ -152,6 +157,51 @@ public class ObtuseXMLUtils {
                 } catch ( NumberFormatException e ) {
 
                     throw new ObtuseXmlNodeException( "array element " + elementIx + " cannot be parsed as a double", elementIx, e );
+
+                }
+
+            }
+
+        }
+
+        return rval;
+
+    }
+
+    public static int[] getIntegerArray( Node parentNode, String targetNodeName )
+            throws ObtuseXmlNodeException {
+
+        Node arrayNode = ObtuseXMLUtils.findNode( parentNode, targetNodeName );
+        NodeList elements = arrayNode.getChildNodes();
+        int arrayLength = 0;
+        for ( int ix = 0; ix < elements.getLength(); ix += 1 ) {
+
+            Node element = elements.item( ix );
+            if ( "item".equals( element.getNodeName() ) ) {
+
+                arrayLength += 1;
+
+            }
+
+        }
+
+        int[] rval = new int[arrayLength];
+        int elementIx = 0;
+        for ( int ix = 0; ix < elements.getLength(); ix += 1 ) {
+
+            Node element = elements.item( ix );
+            if ( "item".equals( element.getNodeName() ) ) {
+
+                String elementString = element.getFirstChild().getNodeValue();
+//                Logger.logMsg( "got an element \"" + elementString + "\"" );
+                try {
+
+                    rval[elementIx] = Integer.parseInt( elementString );
+                    elementIx += 1;
+
+                } catch ( NumberFormatException e ) {
+
+                    throw new ObtuseXmlNodeException( "array element " + elementIx + " cannot be parsed as an integer", elementIx, e );
 
                 }
 
@@ -176,6 +226,8 @@ public class ObtuseXMLUtils {
         String attributeValue = ObtuseXMLUtils.getAttributeValue( node, attributeName, mandatory );
         if ( attributeValue == null ) {
 
+            // This can only happen if mandatory is false (otherwise getAttributeValue has already thrown an exception)
+
             return null;
 
         }
@@ -188,11 +240,121 @@ public class ObtuseXMLUtils {
 
             throw new ObtuseXmlNodeException(
                     "attribute " + attributeName + "'s value \"" + attributeValue + "\" in " +
-                    node.getNodeName() + " node cannot be parsed as a double",
+                            node.getNodeName() + " node cannot be parsed as a double",
                     e
             );
 
         }
+
+    }
+
+    public static String getMandatoryStringAttributeValue( Node node, String attributeName )
+            throws ObtuseXmlNodeException {
+
+        return ObtuseXMLUtils.getStringAttributeValue( node, attributeName, true );
+
+    }
+
+    public static String getStringAttributeValue( Node node, String attributeName, boolean mandatory )
+            throws ObtuseXmlNodeException {
+
+        String attributeValue = ObtuseXMLUtils.getAttributeValue( node, attributeName, mandatory );
+        if ( attributeValue == null ) {
+
+            // This can only happen if mandatory is false (otherwise getAttributeValue has already thrown an exception)
+
+            return null;
+
+        }
+
+        return attributeValue;
+
+    }
+
+    @SuppressWarnings("BooleanMethodNameMustStartWithQuestion")
+    public static boolean getMandatoryBooleanAttributeValue( Node node, String attributeName )
+            throws ObtuseXmlNodeException {
+
+        return ObtuseXMLUtils.getBooleanAttributeValue( node, attributeName, true ).booleanValue();
+
+    }
+
+    private static final String[] TRUE_VALUES = { "y", "yes", "t", "true", "on" };
+    private static final String[] FALSE_VALUES = { "n", "no", "f", "false", "off" };
+
+    private static final String FORMATTED_LEGIT_VALUES;
+    static {
+
+        StringBuilder sb = new StringBuilder();
+        String comma = "";
+        for ( String trueValue : ObtuseXMLUtils.TRUE_VALUES ) {
+
+            sb.append( comma ).append( '"' ).append( trueValue ).append( '"' );
+            comma = ", ";
+
+        }
+
+        for ( String falseValue : ObtuseXMLUtils.FALSE_VALUES ) {
+
+            sb.append( comma ).append( '"' ).append( falseValue ).append( '"' );
+            comma = ", ";
+
+        }
+
+        String formattedLegitValues = sb.toString();
+        int lastCommaIx = formattedLegitValues.lastIndexOf( ',' );
+        FORMATTED_LEGIT_VALUES = formattedLegitValues.substring( 0, lastCommaIx ) + " or" + formattedLegitValues.substring( lastCommaIx + 1 );
+
+    }
+
+    public static Boolean getBooleanAttributeValue( Node node, String attributeName, boolean mandatory )
+            throws ObtuseXmlNodeException {
+
+        String attributeValue = ObtuseXMLUtils.getAttributeValue( node, attributeName, mandatory );
+        if ( attributeValue == null ) {
+
+            // This can only happen if mandatory is false (otherwise getAttributeValue has already thrown an exception)
+
+            return null;
+
+        }
+
+        for ( String trueValue : ObtuseXMLUtils.TRUE_VALUES ) {
+
+            if ( trueValue.equalsIgnoreCase( attributeValue ) ) {
+
+                return true;
+
+            }
+
+        }
+
+        for ( String falseValue : ObtuseXMLUtils.FALSE_VALUES ) {
+
+            if ( falseValue.equalsIgnoreCase( attributeValue ) ) {
+
+                return false;
+
+            }
+
+        }
+
+//        if ( "true".equalsIgnoreCase( attributeValue ) || "T".equalsIgnoreCase( attributeValue ) ) {
+//
+//            return true;
+//
+//        }
+//        if ( "false".equalsIgnoreCase( attributeValue ) || "false".equalsIgnoreCase( attributeValue ) ) {
+//
+//            return false;
+//
+//        }
+
+        throw new ObtuseXmlNodeException(
+                "attribute " + attributeName + "'s value \"" + attributeValue + "\" in " +
+                        node.getNodeName() + " node cannot be parsed as a boolean (must be " +
+                        ObtuseXMLUtils.FORMATTED_LEGIT_VALUES + " in any mixture of upper or lower case)"
+        );
 
     }
 
@@ -204,10 +366,12 @@ public class ObtuseXMLUtils {
     }
 
     public static Integer getIntegerAttributeValue( Node node, String attributeName, boolean mandatory )
-        throws ObtuseXmlNodeException {
+            throws ObtuseXmlNodeException {
 
         String attributeValue = ObtuseXMLUtils.getAttributeValue( node, attributeName, mandatory );
         if ( attributeValue == null ) {
+
+            // This can only happen if mandatory is false (otherwise getAttributeValue has already thrown an exception)
 
             return null;
         }
@@ -220,11 +384,54 @@ public class ObtuseXMLUtils {
 
             throw new ObtuseXmlNodeException(
                     "attribute " + attributeName + "'s value \"" + attributeValue + "\" in " +
-                    node.getNodeName() + " node cannot be parsed as an int",
+                            node.getNodeName() + " node cannot be parsed as an int",
                     e
             );
 
         }
+
+    }
+
+    public static CalendarDate getMandatoryCalendarDateAttributeValue( Node node, String attributeName )
+            throws ObtuseXmlNodeException {
+
+        return ObtuseXMLUtils.getCalendarDateAttributeValue( node, attributeName, true );
+
+    }
+
+    public static CalendarDate getCalendarDateAttributeValue( Node node, String attributeName, boolean mandatory )
+            throws ObtuseXmlNodeException {
+
+        String attributeValue = ObtuseXMLUtils.getAttributeValue( node, attributeName, mandatory );
+        if ( attributeValue == null ) {
+
+            // This can only happen if mandatory is false (otherwise getAttributeValue has already thrown an exception)
+
+            return null;
+
+        }
+
+        try {
+
+            @SuppressWarnings("UnnecessaryLocalVariable")
+            CalendarDate rval = new CalendarDate( attributeValue );
+            return rval;
+
+        } catch ( ParsingException e ) {
+
+            throw new ObtuseXmlNodeException(
+                    "attribute \"" + attributeName + "\" in node \"" + node.getNodeName() +
+                            "\" is not a calendar date in \"yyyy-mm-dd\" format (value=\"" + attributeValue + "\")"
+            );
+
+        }
+
+    }
+
+    public static FormattedImmutableDate getMandatoryDateTimeAttributeValue( Node node, String attributeName )
+            throws ObtuseXmlNodeException {
+
+        return ObtuseXMLUtils.getDateTimeAttributeValue( node, attributeName, true );
 
     }
 
@@ -233,6 +440,8 @@ public class ObtuseXMLUtils {
 
         String attributeValue = ObtuseXMLUtils.getAttributeValue( node, attributeName, mandatory );
         if ( attributeValue == null ) {
+
+            // This can only happen if mandatory is false (otherwise getAttributeValue has already thrown an exception)
 
             return null;
 
@@ -248,7 +457,7 @@ public class ObtuseXMLUtils {
 
             throw new ObtuseXmlNodeException(
                     "attribute \"" + attributeName + "\" in node \"" + node.getNodeName() +
-                    "\" is not a date time in \"yyyy-mm-dd hh:mm\" format (value=\"" + attributeValue + "\")"
+                            "\" is not a date time in \"yyyy-mm-dd hh:mm\" format (value=\"" + attributeValue + "\")"
             );
 
         }
@@ -259,9 +468,9 @@ public class ObtuseXMLUtils {
             throws ObtuseXmlNodeException {
 
         NamedNodeMap attributes = node.getAttributes();
-        Node attribute = attributes.getNamedItem( attributeName );
+        Node attributeNode = attributes.getNamedItem( attributeName );
 
-        if ( attribute == null ) {
+        if ( attributeNode == null ) {
 
             if ( mandatory ) {
 
@@ -276,7 +485,7 @@ public class ObtuseXMLUtils {
         }
 
         @SuppressWarnings("UnnecessaryLocalVariable")
-        String attributeValue = attribute.getNodeValue();
+        String attributeValue = attributeNode.getNodeValue();
         return attributeValue;
 
     }
@@ -324,7 +533,7 @@ public class ObtuseXMLUtils {
 
     public static Collection<InstanceFromXML> getInstancesFromXML(
             MessageProxy messageProxy,
-            Node parentNode,
+            @NotNull Node parentNode,
             String targetNodeName,
             String elementNodeName,
             Class<? extends InstanceFromXML> elementClass
@@ -333,6 +542,7 @@ public class ObtuseXMLUtils {
         Collection<InstanceFromXML> rval = new LinkedList<InstanceFromXML>();
         Node arrayNode = ObtuseXMLUtils.findNode( parentNode, targetNodeName );
         NodeList elements = arrayNode.getChildNodes();
+
         int elementIx = 0;
         for ( int ix = 0; ix < elements.getLength(); ix += 1 ) {
 
@@ -375,13 +585,11 @@ public class ObtuseXMLUtils {
         Node instance = ObtuseXMLUtils.findNode( parentNode, targetNodeName );
         if ( instance == null ) {
 
-            throw new ObtuseXmlNodeException( targetNodeName + " node not found in " + parentNode.getNodeName() + " " +
-                                              "node." );
+            throw new ObtuseXmlNodeException( targetNodeName + " node not found in " + parentNode.getNodeName() + " node." );
 
         }
 
-        return ObtuseXMLUtils.loadInstanceFromXML(
-                messageProxy,
+        return ObtuseXMLUtils.loadInstanceFromXML( messageProxy,
                 parentNode,
                 instance,
                 InstanceFromXML.class.getPackage(),
@@ -509,8 +717,8 @@ public class ObtuseXMLUtils {
                 messageProxy.error(
                         "Restoration of " + targetNodeName + " yielded the wrong class of object.",
                         "Expected to get a " + expectedClass.getSimpleName() + " but got a " +
-                        configClassInstance.getClass().getSimpleName() + " instead.<br>" +
-                        "Please notify Danny (provide him with the .xml file you just tried to load).",
+                                configClassInstance.getClass().getSimpleName() + " instead.<br>" +
+                                "Please notify Danny (provide him with the .xml file you just tried to load).",
                         "I Promise To Provide Danny With A Copy Of The XML File That I Just Tried To Load"
                 );
 
@@ -528,14 +736,16 @@ public class ObtuseXMLUtils {
 
         } catch ( InvocationTargetException e ) {
 
+            Logger.logErr( "InvocationTargetException instantiating object", e );
+
             Throwable cause = e.getCause();
             if ( cause instanceof ObtuseXmlNodeException ) {
 
                 messageProxy.error(
                         "Unable to create " + targetNodeName + " instance using provided .xml file.",
                         ObtuseXMLUtils.formatCause( cause ) + "<br>" +
-                        "The .xml configuration save file is probably out-of-date or contains a syntax error.<br>" +
-                        "Please notify Danny if you conclude that something else is wrong.",
+                                "The .xml configuration save file is probably out-of-date or contains a syntax error.<br>" +
+                                "Please notify Danny if you conclude that something else is wrong.",
                         "I Promise To Provide Danny With A Copy Of The XML File If I Conclude That Something Else Is Wrong"
                 );
 
@@ -543,8 +753,8 @@ public class ObtuseXMLUtils {
 
                 messageProxy.error(
                         "Unable to create " + targetNodeName + " instance using provided .xml file.",
-                        ObtuseXMLUtils.formatCause( cause ) + "<br>" +
-                        "Please notify Danny.",
+                        ObtuseXMLUtils.formatCause(cause) + "<br>" +
+                                "Please notify Danny.",
                         "I Promise To Provide Danny With A Copy Of The XML File That I Just Tried To Load"
                 );
 
@@ -555,7 +765,7 @@ public class ObtuseXMLUtils {
             messageProxy.error(
                     "Unable to create " + targetNodeName + " instance.",
                     e.getMessage() + "<br>" +
-                    "Please notify Danny.",
+                            "Please notify Danny.",
                     "I Promise To Provide Danny With A Copy Of The XML File That I Just Tried To Load"
             );
 
@@ -564,7 +774,7 @@ public class ObtuseXMLUtils {
             messageProxy.error(
                     "Unable to create " + targetNodeName + " instance (illegal access exception).",
                     e.getMessage() + "<br>" +
-                    "Please notify Danny.",
+                            "Please notify Danny.",
                     "I Promise To Provide Danny With A Copy Of The XML File That I Just Tried To Load"
             );
 
@@ -578,8 +788,8 @@ public class ObtuseXMLUtils {
 
         return (
                 cause.getMessage() == null
-                ? "No detail message provided."
-                : "Detailed error message was:  " + cause.getMessage()
+                        ? "No detail message provided."
+                        : "Detailed error message was:  " + cause.getMessage()
         ) + "<br>";
 
     }
@@ -627,9 +837,7 @@ public class ObtuseXMLUtils {
                     public Node noteFailure()
                             throws ObtuseXmlNodeException {
 
-                        throw new ObtuseXmlNodeException(
-                                targetNodeName + " node not found in " + parentNode.getNodeName() + " node."
-                        );
+                        throw new ObtuseXmlNodeException( targetNodeName + " node not found in " + parentNode.getNodeName() + " node." );
 
                     }
 
@@ -656,7 +864,7 @@ public class ObtuseXMLUtils {
 
                         throw new ObtuseXmlNodeException(
                                 "No node found with name ending with \"" + suffix + "\" in " +
-                                parentNode.getNodeName() + " node."
+                                        parentNode.getNodeName() + " node."
                         );
 
                     }
@@ -688,6 +896,25 @@ public class ObtuseXMLUtils {
     }
 
     public static String constructAttributeAssignment( String attributeName, String attributeValue, boolean mandatory )
+            throws ObtuseXmlNodeException {
+
+        if ( attributeValue == null ) {
+
+            if ( mandatory ) {
+
+                throw new ObtuseXmlNodeException( "required attribute \"" + attributeName + "\" not provided." );
+
+            }
+
+            return null;
+
+        }
+
+        return attributeName + "=\"" + attributeValue + "\"";
+
+    }
+
+    public static String constructAttributeAssignment( String attributeName, Boolean attributeValue, boolean mandatory )
             throws ObtuseXmlNodeException {
 
         if ( attributeValue == null ) {

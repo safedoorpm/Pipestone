@@ -23,7 +23,6 @@ public class JulianDate {
     public static final int JGREG = 15 + 31 * ( 10 + 12 * 1582 );
 
     private JulianDate() {
-
         super();
 
     }
@@ -63,8 +62,8 @@ public class JulianDate {
 
         @SuppressWarnings("MagicNumber")
         double julian = Math.floor( 365.25 * julianYear ) +
-                        Math.floor( 30.6001 * julianMonth ) +
-                        day + 1720995.0;
+                Math.floor( 30.6001 * julianMonth ) +
+                day + 1720995.0;
         //noinspection MagicNumber
         if ( day + 31 * ( month + 12 * year ) >= JulianDate.JGREG ) {
 
@@ -83,13 +82,13 @@ public class JulianDate {
     /**
      * Return the Julian day number for a date encapsulated in a {@link java.util.Date} object.
      *
-     * @param d the input date.
+     * @param date the input date.
      * @return the Julian day for the specified {@link java.util.Date}.
      */
 
-    public static synchronized long toJulian( Date d ) {
+    public static synchronized long toJulian( Date date ) {
 
-        JulianDate.s_gregorianCalendar.setTime( d );
+        JulianDate.s_gregorianCalendar.setTime( date );
         int yy = JulianDate.s_gregorianCalendar.get( Calendar.YEAR );
         int mm = JulianDate.s_gregorianCalendar.get( Calendar.MONTH ) + 1;
         int dd = JulianDate.s_gregorianCalendar.get( Calendar.DAY_OF_MONTH );
@@ -153,13 +152,13 @@ public class JulianDate {
         // FIRST TEST reference point
         Logger.logMsg(
                 "Julian date for May 23, 1968 : "
-                + JulianDate.toJulian( new int[] { 1968, 5, 23 } )
+                        + JulianDate.toJulian( new int[] { 1968, 5, 23 } )
         );
         // output : 2440000
         int[] results = JulianDate.fromJulian( JulianDate.toJulian( new int[] { 1968, 5, 23 } ) );
         Logger.logMsg(
                 "... back to calendar : " + results[0] + " "
-                + results[1] + " " + results[2]
+                        + results[1] + " " + results[2]
         );
 
         // SECOND TEST today
@@ -174,7 +173,7 @@ public class JulianDate {
         results = JulianDate.fromJulian( todayJulian );
         Logger.logMsg(
                 "... back to calendar : " + results[0] + " " + results[1]
-                + " " + results[2]
+                        + " " + results[2]
         );
 
         // THIRD TEST
@@ -182,7 +181,7 @@ public class JulianDate {
         double date2 = JulianDate.toJulian( new int[] { 2005, 1, 31 } );
         Logger.logMsg(
                 "Between 2005-01-01 and 2005-01-31 : "
-                + ( date2 - date1 ) + " days"
+                        + ( date2 - date1 ) + " days"
         );
 
         /*
