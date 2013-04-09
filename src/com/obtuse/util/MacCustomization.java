@@ -23,6 +23,8 @@ public class MacCustomization extends OSLevelCustomizations {
 
     private final Application _app;
 
+    private static QuitCatcher _quitCatcher;
+
     /**
      * Perform various Mac OS X specific customizations.
      * <p/>
@@ -38,16 +40,28 @@ public class MacCustomization extends OSLevelCustomizations {
      * @param quitCatcher something to call if a quit event is received (ignored if null).
      */
 
-    public MacCustomization( final AboutWindowHandler aboutWindowHandler, final QuitCatcher quitCatcher ) {
+    public MacCustomization( final AboutWindowHandler aboutWindowHandler, QuitCatcher quitCatcher ) {
         super();
 
         Trace.event( "doing Mac-specific customizations" );
 
         System.setProperty( "apple.laf.useScreenMenuBar", "true" );
 
+        _quitCatcher = quitCatcher;
+
         String laf = "apple.laf.AquaLookAndFeel";
         // String laf = "javax.swing.plaf.metal.MetalLookAndFeel";
         // String laf = "com.sun.java.swing.plaf.windows.WindowsLookAndFeel";
+
+        if ( OSLevelCustomizations.s_forceLookAndFeel != null ) {
+
+            laf = OSLevelCustomizations.s_forceLookAndFeel;
+
+        }
+
+//        Logger.logMsg( "skipping laf" );
+
+        Logger.logMsg( "Mac laf = " + laf );
 
         try {
 
@@ -78,7 +92,7 @@ public class MacCustomization extends OSLevelCustomizations {
             @SuppressWarnings( { "RefusedBequest" } )
             public void handleQuit( ApplicationEvent e ) {
 
-                if ( quitCatcher == null || quitCatcher.quitAttempted() ) {
+                if ( _quitCatcher == null || _quitCatcher.quitAttempted() ) {
 
                     e.setHandled( true );
 
@@ -117,6 +131,18 @@ public class MacCustomization extends OSLevelCustomizations {
     public void setDockIconImage( Image icon ) {
 
         _app.setDockIconImage( icon );
+
+    }
+
+    public QuitCatcher getQuitCatcher() {
+
+        return _quitCatcher;
+
+    }
+
+    public void setQuitCatcher( QuitCatcher quitCatcher ) {
+
+        _quitCatcher = quitCatcher;
 
     }
 

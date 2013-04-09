@@ -206,4 +206,39 @@ public class BasicProgramConfigInfo {
 
     }
 
+    public static void doOsSpecificCustomizations( String programName ) {
+
+        //        s_osLevelCustomizations = OSLevelCustomizations.getCustomizer( null );
+//        if ( s_osLevelCustomizations != null ) {
+//
+//            s_osLevelCustomizations.setDockIconImage( _pickelBarrelIcon.getImage() );
+//            s_osLevelCustomizations.setDockBadge( "M" );
+//
+//        }
+
+        // Set the name of the application in case we are on a Mac (does nothing on other OSes).
+        // Must be done BEFORE any other AWT or Swing classes are loaded.
+
+        System.setProperty( "com.apple.mrj.application.apple.menu.about.name", programName );
+
+        System.setProperty( "awt.useSystemAAFontSettings", "on" );
+        System.setProperty( "swing.aatext", "true" );
+
+        Logger.logMsg( "" + System.getProperty( "sun.arch.data.model" ) + " bit JVM" );
+
+//        // Set the look and feel that's appropriate for our OS.
+//        // Must be done BEFORE any other AWT or Swing classes are loaded.
+//
+//        OSLevelCustomizations.setLookAndFeel();
+
+        // Get ourselves an OS-specific customizer.
+        // Must be done BEFORE any other AWT or Swing classes are loaded which means that the
+        // customizer class names must be given as strings rather than, for example,
+        // invoking CustomizerClass.class.getCanonicalName().
+
+        @SuppressWarnings( { "UnusedDeclaration", "UnusedAssignment" })
+        OSLevelCustomizations customizer = OSLevelCustomizations.getCustomizer( null );
+
+    }
+
 }

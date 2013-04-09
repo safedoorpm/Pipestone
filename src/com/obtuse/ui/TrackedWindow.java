@@ -14,20 +14,20 @@ import java.awt.event.ComponentListener;
 
 public class TrackedWindow extends JFrame {
 
-    private final String _appName;
+//    private final String _appName;
 
-    private final String _windowName;
+    private final String _windowPrefsName;
 
     private final String _windowGeometryPrefsKey;
 
     private boolean _inToString = false;
 
-    public TrackedWindow( String appName, String windowName ) {
+    public TrackedWindow( String windowPrefsName ) {
         super();
 
-        _appName = appName;
-        _windowName = windowName;
-        _windowGeometryPrefsKey = _windowName + ".geometry";
+//        _appName = appName;
+        _windowPrefsName = windowPrefsName;
+        _windowGeometryPrefsKey = _windowPrefsName + ".geometry";
 
         //noinspection ClassWithoutToString
         addComponentListener(
@@ -114,10 +114,15 @@ public class TrackedWindow extends JFrame {
 
     public Rectangle getSavedGeometry() {
 
-        byte[] savedLocationBytes = BasicProgramConfigInfo.getPreferences() == null ? null : BasicProgramConfigInfo.getPreferences().getByteArray(
+        byte[] savedLocationBytes = BasicProgramConfigInfo.getPreferences() == null
+                ?
+                null
+
+                : BasicProgramConfigInfo.getPreferences().getByteArray(
                 _windowGeometryPrefsKey,
                 null
         );
+
         Rectangle savedGeometry;
         if ( savedLocationBytes == null ) {
 
@@ -152,7 +157,7 @@ public class TrackedWindow extends JFrame {
     @SuppressWarnings({ "UnusedDeclaration" })
     public String getTrackedWindowName() {
 
-        return _windowName;
+        return _windowPrefsName;
 
     }
 
@@ -167,8 +172,9 @@ public class TrackedWindow extends JFrame {
     public String toString() {
 
         _inToString = true;
-        String rval = "TrackedWindow( " + _appName + ", " + _windowName + ", " + getSavedGeometry() + " )";
+        String rval = "TrackedWindow( " + _windowPrefsName + ", " + getSavedGeometry() + " )";
         _inToString = false;
+
         return rval;
 
     }

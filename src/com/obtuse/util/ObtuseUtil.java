@@ -1253,6 +1253,20 @@ public class ObtuseUtil {
     }
 
     /**
+     * Return a String containing the hex representation of a single char value. For example, <tt>hexvalue( ' ' )</tt> yields <tt>"1b"</tt>.
+     *
+     * @param v the byte value whose hex representation is to be returned.
+     * @return the hex representation of <tt>v</tt>.
+     */
+
+    @SuppressWarnings({ "UnnecessaryParentheses", "MagicNumber" })
+    public static String hexvalue( char v ) {
+
+        return hexvalue( Character.toString( v ).getBytes() );
+
+    }
+
+    /**
      * Convert a byte array to its hexadecimal representation. For example, <tt>hexvalue( new byte[] { 1, 10, 100 }
      * )</tt> yields <tt>"010a64"</tt>. Note that the returned string always contains twice as many characters as the
      * input array contains bytes.
@@ -1280,6 +1294,19 @@ public class ObtuseUtil {
         }
 
         return rval.toString();
+
+    }
+
+    /**
+     * Capitalizes the first letter of the specified string.
+     * @param str the string whose first letter is to be capitalized.
+     * @return the capitalized string.
+     * @throws IndexOutOfBoundsException if the string is empty.
+     */
+
+    public static String capitalize( @NotNull String str ) {
+
+        return str.substring( 0, 1 ).toUpperCase() + str.substring( 1 );
 
     }
 
@@ -1575,7 +1602,7 @@ public class ObtuseUtil {
      * <blockquote><tt>"""hello"" world"</tt></blockquote>
      * <li>if the string is
      * <blockquote><tt>hello ",world"</tt></blockquote>
-     * the the output is
+     * then the output is
      * <blockquote><tt>"hello "",world"""</tt></blockquote>
      * </ul>
      * Note that all the double quotes in the above examples actually appear in the strings.

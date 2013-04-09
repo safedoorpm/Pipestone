@@ -9,7 +9,7 @@ import java.text.MessageFormat;
 import java.util.Properties;
 
 /**
- * Base class to manage Postgres-specific aspects of JDBC connection management.
+ * Base class to manage  Postgres-specific aspects of JDBC connection management.
  * <p/>
  * Copyright © 2012 Obtuse Systems Corporation.
  */

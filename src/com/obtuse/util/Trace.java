@@ -25,6 +25,8 @@ public class Trace {
 
 //    public static final DateFormat YYMMDD_HHMMSS_FORMAT = new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss" );
 
+    private static String s_supportContact;
+
     private static final Map<Integer, TraceHook> s_traceHooks = new TreeMap<Integer, TraceHook>();
 
     private static final String TRACE_HOOKS_LOCK = "trace hooks lock";
@@ -41,6 +43,12 @@ public class Trace {
     public static final Map<Long, Thread> s_exceptionsInProgress = new TreeMap<Long, Thread>();
 
     public static final int MAX_FORMATTED_TRACE_DEPTH = 100;
+
+    public static void set_supportContact( String supportContact ) {
+
+        Trace.s_supportContact = supportContact;
+
+    }
 
 //    private static Tracer _tracer = null;
 //
@@ -346,7 +354,11 @@ public class Trace {
                           ( why == null ? "" : " (" + why + ")" );
 
             results.add( what );
-            results.add( "IMPORTANT:  email this to danny@savrola.com (you should find a copy in \"" + where + "\")" );
+            if ( s_supportContact != null ) {
+
+                results.add( "IMPORTANT:  email this to " + s_supportContact + " (you should find a copy in \"" + where + "\")" );
+
+            }
 
             ThreadMXBean bean = ManagementFactory.getThreadMXBean();
             long[] curThreads = bean.getAllThreadIds();
@@ -598,9 +610,9 @@ public class Trace {
 
                     }
 
-                    if ( !handled ) {
+                    if ( !handled && s_supportContact != null ) {
 
-                        Logger.logMsg( "please email \"" + traceFname + "\" to danny@loapowertools.com", null );
+                        Logger.logMsg( "please email \"" + traceFname + "\" to " + s_supportContact, null );
 
                     }
                 }

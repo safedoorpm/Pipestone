@@ -31,7 +31,7 @@ public class LogsWindow extends WindowWithMenus {
 
     private JButton _closeButton;
 
-    private final DefaultListModel _messagesList = new DefaultListModel();
+    private final DefaultListModel _messagesListModel = new DefaultListModel();
 
     private static final Long WINDOW_LOCK = 0L;
 
@@ -47,9 +47,8 @@ public class LogsWindow extends WindowWithMenus {
 //    public static final int LOGO_SIZE = 80;
 
     @SuppressWarnings("FieldCanBeLocal")
-    private JMenu _editMenu = null;
-
-    private JMenuItem _copyMenuItem = null;
+    private JMenu _editMenu;
+    private JMenuItem _copyMenuItem;
 
     @SuppressWarnings("CanBeFinal")
     private Clipboard _systemClipboard;
@@ -58,8 +57,8 @@ public class LogsWindow extends WindowWithMenus {
 
 //    private static ImageIcon _loaLogo = BasicIconLogoHandler.fetchIconImage("loa_logo.png", LOGO_SIZE);
 
-    public LogsWindow( String appName ) {
-        super( appName, LogsWindow.WINDOW_NAME, true );
+    public LogsWindow( String windowPrefsName ) {
+        super( windowPrefsName, true );
 
         _systemClipboard = getToolkit().getSystemClipboard();
 
@@ -94,7 +93,7 @@ public class LogsWindow extends WindowWithMenus {
                 }
         );
 
-        _messageWindowList.setModel( _messagesList );
+        _messageWindowList.setModel( _messagesListModel );
         _messageWindowList.setSelectionMode( ListSelectionModel.SINGLE_INTERVAL_SELECTION );
         _messageWindowList.addListSelectionListener(
                 new ListSelectionListener() {
@@ -109,9 +108,13 @@ public class LogsWindow extends WindowWithMenus {
                                 int[] selectedIndices = list.getSelectedIndices();
 
                                 if ( selectedIndices.length > 0 ) {
+
                                     _copyMenuItem.setEnabled( true );
+
                                 } else {
+
                                     _copyMenuItem.setEnabled( false );
+
                                 }
 
                             } catch ( ClassCastException e ) {
@@ -183,10 +186,10 @@ public class LogsWindow extends WindowWithMenus {
 
     private void insertMessageAtEnd( String timeStampedMessage ) {
 
-        int listSize = _messagesList.getSize();
+        int listSize = _messagesListModel.getSize();
         if ( listSize >= LogsWindow.MAX_LINES_IN_MESSAGE_WINDOW ) {
 
-            _messagesList.remove( 0 );
+            _messagesListModel.remove( 0 );
             listSize -= 1;
 
         }
@@ -195,11 +198,11 @@ public class LogsWindow extends WindowWithMenus {
 
         if ( LogsWindow.s_useHTML ) {
 
-            _messagesList.addElement( "<html><tt>" + ObtuseUtil.htmlEscape( timeStampedMessage ) + "</tt></html>" );
+            _messagesListModel.addElement( "<html><tt>" + ObtuseUtil.htmlEscape( timeStampedMessage ) + "</tt></html>" );
 
         } else {
 
-            _messagesList.addElement( timeStampedMessage );
+            _messagesListModel.addElement( timeStampedMessage );
 
         }
 
@@ -255,7 +258,7 @@ public class LogsWindow extends WindowWithMenus {
 
                 }
 
-                LogsWindow.s_logsWindow = new LogsWindow( BasicProgramConfigInfo.getApplicationName() );
+                LogsWindow.s_logsWindow = new LogsWindow( "LogsWindow" );
 
             }
 
@@ -286,7 +289,7 @@ public class LogsWindow extends WindowWithMenus {
 
                         _messageWindowList.getSelectionModel().setSelectionInterval(
                                 0,
-                                _messagesList.size() - 1
+                                _messagesListModel.size() - 1
                         );
 
                     }

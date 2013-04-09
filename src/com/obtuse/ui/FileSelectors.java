@@ -140,6 +140,12 @@ public class FileSelectors {
 
         if ( filenameFilter != null ) {
 
+            dialog.setFilenameFilter( filenameFilter );
+
+        }
+
+        if ( startingDirectory != null ) {
+
             dialog.setDirectory( startingDirectory.getAbsolutePath() );
 
         }

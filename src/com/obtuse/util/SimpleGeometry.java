@@ -45,7 +45,7 @@ public class SimpleGeometry {
      * @param x the <tt>x</tt> coordinate of the point of interest on the line.
      * @return the <tt>y</tt> coordinate of the point on the line for the specified value of <tt>x</tt>.
      * The actual formula is
-     * <blockquote>y1 + ( y2 - y1 ) * x</blockquote>
+     * <blockquote>y1 + ( y2 - y1 ) * ( x - x1 ) / ( x2 - x1 )</blockquote>
      * @throws IllegalArgumentException if <tt>x1</tt> exactly equals <tt>x2</tt>.
      */
 

@@ -47,6 +47,8 @@ public class DateUtils {
     private static final SimpleDateFormat YYYY_MM_DD              = new SimpleDateFormat( "yyyy-MM-dd" );
     private static final SimpleDateFormat YYYYMMDD                = new SimpleDateFormat( "yyyyMMdd" );
     private static final SimpleDateFormat YYMMDD                  = new SimpleDateFormat( "yyMMdd" );
+    private static final SimpleDateFormat HH_MM_SS_12_EEE_MMM_DD  = new SimpleDateFormat( "hh:mm:ss EEE MMM dd" );
+    private static final SimpleDateFormat HH_MM_SS_24_EEE_MMM_DD  = new SimpleDateFormat( "HH:mm:ss EEE MMM dd" );
 
     /**
      * Make it impossible to instantiate this class.
@@ -149,48 +151,8 @@ public class DateUtils {
 
     }
 
-//    /**
-//     * Format a time string in our local time.
-//     * This method exists primarily for symmetry with the three date and time parsing methods in this class.
-//     * By hiding the {@link java.text.SimpleDateFormat} objects, this also ensures that nobody 'accidentally'
-//     * parses a date and time string without properly taking into account the market's timezone.
-//     *
-//     * @param dateTime the date and time to be formatted.
-//     * @return the formatted time string.
-//     */
-//
-//    public static String formatHHMM( Date dateTime ) {
-//
-//        synchronized ( DateUtils.HHMM ) {
-//
-//            DateUtils.HHMM.setTimeZone( TimeZone.getDefault() );
-//            String s = DateUtils.HHMM.format( dateTime );
-//            return s;
-//
-//        }
-//
-//    }
-
-//    public static String formatDuration( long duration ) {
-//
-//        String rval = "";
-//
-//
-//        synchronized ( HHMMSSS ) {
-//
-//            HHMMSSS.setTimeZone( UTC );
-//            String s = HHMMSSS.format( dateTime );
-//            return s;
-//
-//        }
-//
-//    }
-
     /**
      * Format a date and time string in our local time.
-     * This method exists primarily for symmetry with the three date and time parsing methods in this class.
-     * By hiding the {@link java.text.SimpleDateFormat} objects, this also ensures that nobody 'accidentally'
-     * parses a date and time string without properly taking into account the market's timezone.
      *
      * @param dateTime the date and time to be formatted.
      * @return the formatted date and time string.
@@ -208,39 +170,8 @@ public class DateUtils {
 
     }
 
-//    /**
-//     * Format a date and time string in our local time.
-//     * This method exists primarily for symmetry with the three date and time parsing methods in this class.
-//     * By hiding the {@link java.text.SimpleDateFormat} objects, this also ensures that nobody 'accidentally'
-//     * parses a date and time string without properly taking into account the market's timezone.
-//     *
-//     * @param dateTime the date and time to be formatted.
-//     * @return the formatted date and time string.
-//     */
-//
-//    public static String formatYYYYMMDD_HHMM( Date dateTime ) {
-//
-//        synchronized ( YYYYMMDD_HHMM ) {
-//
-//            YYYYMMDD_HHMM.setTimeZone( TimeZone.getDefault() );
-//            String s = YYYYMMDD_HHMM.format( dateTime );
-//            return s;
-//
-//        }
-//
-//    }
-//
-//    public static String formatYYYYMMDD_HHMM( ImmutableDate dateTime ) {
-//
-//        return formatYYYYMMDD_HHMM( (Date)dateTime );
-//
-//    }
-
     /**
      * Format a date string in our local time.
-     * This method exists primarily for symmetry with the three date and time parsing methods in this class.
-     * By hiding the {@link java.text.SimpleDateFormat} objects, this also ensures that nobody 'accidentally'
-     * parses a date and time string without properly taking into account the market's timezone.
      *
      * @param dateTime the date to be formatted.
      * @return the formatted date string.
@@ -458,9 +389,6 @@ public class DateUtils {
 
     /**
      * Format a time string in our local time.
-     * This method exists primarily for symmetry with the three date and time parsing methods in this class.
-     * By hiding the {@link java.text.SimpleDateFormat} objects, this also ensures that nobody 'accidentally'
-     * parses a date and time string without properly taking into account the market's timezone.
      *
      * @param dateTime the date and time to be formatted.
      * @return the formatted time string.
@@ -480,9 +408,6 @@ public class DateUtils {
 
     /**
      * Format a time string in our local time.
-     * This method exists primarily for symmetry with the three date and time parsing methods in this class.
-     * By hiding the {@link java.text.SimpleDateFormat} objects, this also ensures that nobody 'accidentally'
-     * parses a date and time string without properly taking into account the market's timezone.
      *
      * @param dateTime the date and time to be formatted.
      * @return the formatted time string.
@@ -502,9 +427,6 @@ public class DateUtils {
 
     /**
      * Format a time string in our local time.
-     * This method exists primarily for symmetry with the three date and time parsing methods in this class.
-     * By hiding the {@link java.text.SimpleDateFormat} objects, this also ensures that nobody 'accidentally'
-     * parses a date and time string without properly taking into account the market's timezone.
      *
      * @param dateTime the date and time to be formatted.
      * @return the formatted time string.
@@ -577,9 +499,6 @@ public class DateUtils {
 
     /**
      * Format a date and time string in our local time.
-     * This method exists primarily for symmetry with the three date and time parsing methods in this class.
-     * By hiding the {@link java.text.SimpleDateFormat} objects, this also ensures that nobody 'accidentally'
-     * parses a date and time string without properly taking into account the market's timezone.
      *
      * @param dateTime the date and time to be formatted.
      * @return the formatted date and time string.
@@ -599,9 +518,6 @@ public class DateUtils {
 
     /**
      * Format a date and time string in our local time.
-     * This method exists primarily for symmetry with the three date and time parsing methods in this class.
-     * By hiding the {@link java.text.SimpleDateFormat} objects, this also ensures that nobody 'accidentally'
-     * parses a date and time string without properly taking into account the market's timezone.
      *
      * @param dateTime the date and time to be formatted.
      * @return the formatted date and time string.
@@ -622,9 +538,6 @@ public class DateUtils {
 
     /**
      * Format a date and time string in a specified timezone.
-     * This method exists primarily for symmetry with the three date and time parsing methods in this class.
-     * By hiding the {@link java.text.SimpleDateFormat} objects, this also ensures that nobody 'accidentally'
-     * parses a date and time string without properly taking into account the market's timezone.
      *
      * @param dateTime the date and time to be formatted.
      * @param timeZone the timezone for which the date is to be formatted.
@@ -645,9 +558,6 @@ public class DateUtils {
 
     /**
      * Format a date and time string in our local time.
-     * This method exists primarily for symmetry with the three date and time parsing methods in this class.
-     * By hiding the {@link java.text.SimpleDateFormat} objects, this also ensures that nobody 'accidentally'
-     * parses a date and time string without properly taking into account the market's timezone.
      *
      * @param dateTime the date and time to be formatted.
      * @return the formatted date and time string.
@@ -661,9 +571,6 @@ public class DateUtils {
 
     /**
      * Format a date and time string in a specified timezone.
-     * This method exists primarily for symmetry with the three date and time parsing methods in this class.
-     * By hiding the {@link java.text.SimpleDateFormat} objects, this also ensures that nobody 'accidentally'
-     * parses a date and time string without properly taking into account the market's timezone.
      *
      * @param dateTime the date and time to be formatted.
      * @param timeZone the timezone for which the date is to be formatted.
@@ -684,9 +591,72 @@ public class DateUtils {
 
     /**
      * Format a date and time string in our local time.
-     * This method exists primarily for symmetry with the three date and time parsing methods in this class.
-     * By hiding the {@link java.text.SimpleDateFormat} objects, this also ensures that nobody 'accidentally'
-     * parses a date and time string without properly taking into account the market's timezone.
+     *
+     * @param dateTime the date and time to be formatted.
+     * @return the formatted date and time string.
+     */
+
+    public static String formatHH_MM_SS_12_EEE_MMM_DD( Date dateTime ) {
+
+        return DateUtils.formatHH_MM_SS_12_EEE_MMM_DD( dateTime, TimeZone.getDefault() );
+
+    }
+
+    /**
+     * Format a date and time string in a specified timezone.
+     *
+     * @param dateTime the date and time to be formatted.
+     * @param timeZone the timezone for which the date is to be formatted.
+     * @return the formatted date and time string.
+     */
+
+    public static String formatHH_MM_SS_12_EEE_MMM_DD( Date dateTime, TimeZone timeZone ) {
+
+        synchronized ( DateUtils.HH_MM_SS_12_EEE_MMM_DD ) {
+
+            DateUtils.HH_MM_SS_12_EEE_MMM_DD.setTimeZone( timeZone );
+            String s = DateUtils.HH_MM_SS_12_EEE_MMM_DD.format( dateTime );
+            return s;
+
+        }
+
+    }
+
+    /**
+     * Format a date and time string in our local time.
+     *
+     * @param dateTime the date and time to be formatted.
+     * @return the formatted date and time string.
+     */
+
+    public static String formatHH_MM_SS_24_EEE_MMM_DD( Date dateTime ) {
+
+        return DateUtils.formatHH_MM_SS_24_EEE_MMM_DD( dateTime, TimeZone.getDefault() );
+
+    }
+
+    /**
+     * Format a date and time string in a specified timezone.
+     *
+     * @param dateTime the date and time to be formatted.
+     * @param timeZone the timezone for which the date is to be formatted.
+     * @return the formatted date and time string.
+     */
+
+    public static String formatHH_MM_SS_24_EEE_MMM_DD( Date dateTime, TimeZone timeZone ) {
+
+        synchronized ( DateUtils.HH_MM_SS_24_EEE_MMM_DD ) {
+
+            DateUtils.HH_MM_SS_24_EEE_MMM_DD.setTimeZone( timeZone );
+            String s = DateUtils.HH_MM_SS_24_EEE_MMM_DD.format( dateTime );
+            return s;
+
+        }
+
+    }
+
+    /**
+     * Format a date and time string in our local time.
      *
      * @param dateTime the date and time to be formatted.
      * @return the formatted date and time string.
@@ -700,9 +670,6 @@ public class DateUtils {
 
     /**
      * Format a date and time string in a specified timezone.
-     * This method exists primarily for symmetry with the three date and time parsing methods in this class.
-     * By hiding the {@link java.text.SimpleDateFormat} objects, this also ensures that nobody 'accidentally'
-     * parses a date and time string without properly taking into account the market's timezone.
      *
      * @param dateTime the date and time to be formatted.
      * @param timeZone the timezone for which the date is to be formatted.
@@ -743,9 +710,6 @@ public class DateUtils {
 
     /**
      * Format a date string in our local time.
-     * This method exists primarily for symmetry with the three date and time parsing methods in this class.
-     * By hiding the {@link java.text.SimpleDateFormat} objects, this also ensures that nobody 'accidentally'
-     * parses a date and time string without properly taking into account the market's timezone.
      *
      * @param dateTime the date to be formatted.
      * @return the formatted date string.
@@ -765,9 +729,6 @@ public class DateUtils {
 
     /**
      * Format a date string in our local time.
-     * This method exists primarily for symmetry with the three date and time parsing methods in this class.
-     * By hiding the {@link java.text.SimpleDateFormat} objects, this also ensures that nobody 'accidentally'
-     * parses a date and time string without properly taking into account the market's timezone.
      *
      * @param dateTime the date to be formatted.
      * @return the formatted date string.
@@ -793,9 +754,6 @@ public class DateUtils {
 
     /**
      * Format a date string in our local time.
-     * This method exists primarily for symmetry with the three date and time parsing methods in this class.
-     * By hiding the {@link java.text.SimpleDateFormat} objects, this also ensures that nobody 'accidentally'
-     * parses a date and time string without properly taking into account the market's timezone.
      *
      * @param dateTime the date to be formatted.
      * @return the formatted date string.
@@ -821,9 +779,6 @@ public class DateUtils {
 
     /**
      * Format a date string in our local time.
-     * This method exists primarily for symmetry with the three date and time parsing methods in this class.
-     * By hiding the {@link java.text.SimpleDateFormat} objects, this also ensures that nobody 'accidentally'
-     * parses a date and time string without properly taking into account the market's timezone.
      *
      * @param dateTime the date to be formatted.
      * @return the formatted date string.

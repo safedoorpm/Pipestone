@@ -18,9 +18,19 @@ public abstract class OSLevelCustomizations {
     private static boolean _gotOSLevelCustomizations = false;
     private static OSLevelCustomizations _osLevelCustomizations;
 
+    public static boolean s_forceWindows = false;
+
+    public static String s_forceLookAndFeel = null;
+
     public abstract void setPreferencesHandler( PreferencesHandler prefsHandler );
 
     public static boolean onMacOsX() {
+
+        if ( s_forceWindows ) {
+
+            return false;
+
+        }
 
         String lcOSName = System.getProperty( "os.name" ).toLowerCase();
         @SuppressWarnings("UnnecessaryLocalVariable")
@@ -32,12 +42,22 @@ public abstract class OSLevelCustomizations {
 
     public static boolean onWindows() {
 
+        if ( s_forceWindows ) {
+
+            return true;
+
+        }
+
         String lcOSName = System.getProperty( "os.name" ).toLowerCase();
         @SuppressWarnings("UnnecessaryLocalVariable")
         boolean onWindows = lcOSName.startsWith( "windows" );
 
         return onWindows;
     }
+
+    public abstract void setQuitCatcher( QuitCatcher quitCatcher );
+
+    public abstract QuitCatcher getQuitCatcher();
 
     public abstract void setDockBadge( String msg );
 
@@ -47,45 +67,61 @@ public abstract class OSLevelCustomizations {
 
         if ( !OSLevelCustomizations._gotOSLevelCustomizations ) {
 
+            String osSpecificCustomizerClassName;
             if ( OSLevelCustomizations.onMacOsX() ) {
 
-    //            Logger.logMsg( "we're on a mac!" );
-                String methodName = null;
+                osSpecificCustomizerClassName = "com.obtuse.util.MacCustomization";
 
-                try {
+            } else if ( OSLevelCustomizations.onWindows() ) {
 
-                    //noinspection RawUseOfParameterizedType
-                    Class macSpecificCode =
-                            OSLevelCustomizations.class.getClassLoader().loadClass( "com.obtuse.util.MacCustomization" );
-                    methodName = "createInstance";
-                    //noinspection RedundantArrayCreation
-                    Method createInstance =
-                            macSpecificCode.getDeclaredMethod( methodName, new Class[] { AboutWindowHandler.class, QuitCatcher.class } );
-                    createInstance.setAccessible( true );
-                    //noinspection RedundantArrayCreation
-                    OSLevelCustomizations._osLevelCustomizations = (OSLevelCustomizations)createInstance.invoke( null, new Object[] { aboutWindowHandler, null } );
+                osSpecificCustomizerClassName = "com.obtuse.util.WindowsCustomization";
 
-                } catch ( ClassNotFoundException e ) {
+            } else {
 
-                    Logger.logErr( "unable to find MacCustomization class - assuming customizations are not available" );
-
-                } catch ( NoSuchMethodException e ) {
-
-                    Logger.logErr( "unable to find " + methodName + " method in MacCustomization class - assuming customizations are not available" );
-
-                } catch ( IllegalAccessException e ) {
-
-                    Logger.logErr( "unable to invoke " + methodName + " method in MacCustomization class - assuming customizations are not available" );
-
-                } catch ( InvocationTargetException e ) {
-
-                    Logger.logErr(
-                            "caught an exception while invoking " + methodName + " method in MacCustomization class - assuming customizations are not available"
-                    );
-
-                }
+                return null;
 
             }
+
+            String methodName = null;
+
+            try {
+
+                //noinspection RawUseOfParameterizedType
+                Class macSpecificCode =
+                        OSLevelCustomizations.class.getClassLoader().loadClass( osSpecificCustomizerClassName );
+                methodName = "createInstance";
+                //noinspection RedundantArrayCreation
+                Method createInstance =
+                        macSpecificCode.getDeclaredMethod( methodName, new Class[] { AboutWindowHandler.class, QuitCatcher.class } );
+                createInstance.setAccessible( true );
+                //noinspection RedundantArrayCreation
+                OSLevelCustomizations._osLevelCustomizations = (OSLevelCustomizations)createInstance.invoke( null, new Object[] { aboutWindowHandler, null } );
+
+            } catch ( ClassNotFoundException e ) {
+
+                Logger.logErr( "unable to find " + osSpecificCustomizerClassName + " class - assuming customizations are not available" );
+
+            } catch ( NoSuchMethodException e ) {
+
+                Logger.logErr( "unable to find " + methodName + " method in " + osSpecificCustomizerClassName + " class - assuming customizations are not available" );
+
+            } catch ( IllegalAccessException e ) {
+
+                Logger.logErr( "unable to invoke " + methodName + " method in " + osSpecificCustomizerClassName + " class - assuming customizations are not available" );
+
+            } catch ( InvocationTargetException e ) {
+
+                Logger.logErr(
+                        "caught an exception while invoking " + methodName + " method in " + osSpecificCustomizerClassName + " class - assuming customizations are not available"
+                );
+
+            }
+
+//            } else if ( OSLevelCustomizations.onWindows() ) {
+//
+//                // We're on a Windows box!
+//
+//            }
 
             OSLevelCustomizations._gotOSLevelCustomizations = true;
 

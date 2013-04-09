@@ -17,5 +17,6 @@ public class SyntaxErrorException extends Exception {
         super( msg, e );
 
     }
+
 }
 

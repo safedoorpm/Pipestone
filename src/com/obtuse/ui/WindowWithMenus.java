@@ -27,8 +27,8 @@ public abstract class WindowWithMenus extends TrackedWindow implements Preferenc
     private static boolean s_showLogsMode;
 
     @SuppressWarnings({ "ClassWithoutToString", "SameParameterValue" })
-    protected WindowWithMenus( String appName, String windowName, boolean includeLogsMenuItem ) {
-        super( appName, windowName );
+    protected WindowWithMenus( String windowPrefsName, boolean includeLogsMenuItem ) {
+        super( windowPrefsName );
 
         _menuBar = new JMenuBar();
 
