@@ -1,9 +1,5 @@
 package com.obtuse.util;
 
-import com.apple.eawt.Application;
-import com.apple.eawt.ApplicationAdapter;
-import com.apple.eawt.ApplicationEvent;
-
 import javax.swing.*;
 import java.awt.*;
 
@@ -25,6 +21,8 @@ public class WindowsCustomization extends OSLevelCustomizations {
 
 //    private final Application _app;
 
+    private AboutWindowHandler _aboutWindowHandler;
+
     private QuitCatcher _quitCatcher;
 
     /**
@@ -37,12 +35,9 @@ public class WindowsCustomization extends OSLevelCustomizations {
      * rejected. One consequence of this rejection is that attempts to logoff or shutdown while the application is
      * running are aborted.  With this customization in place, a logoff or shutdown attempt is "approved" by the
      * application.
-     *
-     * @param aboutWindowHandler something to call to make an about window visible.
-     * @param quitCatcher something to call if a quit event is received (ignored if null).
      */
 
-    public WindowsCustomization( final AboutWindowHandler aboutWindowHandler, final QuitCatcher quitCatcher ) {
+    public WindowsCustomization() {
         super();
 
         Trace.event( "doing Windows-specific customizations" );
@@ -83,41 +78,6 @@ public class WindowsCustomization extends OSLevelCustomizations {
 
         }
 
-//        _app = Application.getApplication();
-//        //noinspection ClassWithoutToString,RefusedBequest
-//        final ApplicationAdapter basicAdapter = new ApplicationAdapter() {
-//
-//            @SuppressWarnings( { "RefusedBequest" } )
-//            public void handleQuit( ApplicationEvent e ) {
-//
-//                if ( quitCatcher == null || quitCatcher.quitAttempted() ) {
-//
-//                    e.setHandled( true );
-//
-//                }
-//
-//            }
-//
-//            public void handleAbout( ApplicationEvent e ) {
-//
-//                e.setHandled( true );
-//                if ( aboutWindowHandler != null ) {
-//
-//                    aboutWindowHandler.makeVisible();
-//
-//                }
-//
-////                System.out.println( "launch of AboutWindow suppressed as this version of ObtuseUtils does not support it" );
-////                AboutWindow.launch();
-//
-//            }
-//
-//        };
-//
-//        _app.addApplicationListener( basicAdapter );
-//
-//        _app.addAboutMenuItem();
-
     }
 
     public void setDockBadge( String msg ) {
@@ -144,28 +104,26 @@ public class WindowsCustomization extends OSLevelCustomizations {
 
     }
 
-    public void setPreferencesHandler( final PreferencesHandler prefsHandler ) {
+    public void setAboutWindowHandler( AboutWindowHandler aboutWindowHandler ) {
 
-//        //noinspection ClassWithoutToString,RefusedBequest
-//        ApplicationAdapter preferencesAdapter = new ApplicationAdapter() {
-//
-//            public void handlePreferences( ApplicationEvent e ) {
-//
-//                prefsHandler.handlePreferences();
-//
-//            }
-//
-//        };
-//
-//        _app.addApplicationListener( preferencesAdapter );
-//        _app.setEnabledPreferencesMenu( true );
+        _aboutWindowHandler = aboutWindowHandler;
+
+    }
+
+    public AboutWindowHandler getAboutWindowHandler() {
+
+        return _aboutWindowHandler;
+
+    }
+
+    public void setPreferencesHandler( final PreferencesHandler prefsHandler ) {
 
     }
 
     @SuppressWarnings("UnusedDeclaration")
-    public static OSLevelCustomizations createInstance( AboutWindowHandler aboutWindowHandler, QuitCatcher quitCatcher ) {
+    public static OSLevelCustomizations createInstance() {
 
-        return new WindowsCustomization( aboutWindowHandler, quitCatcher );
+        return new WindowsCustomization();
 
     }
 

@@ -237,7 +237,7 @@ public class BasicProgramConfigInfo {
         // invoking CustomizerClass.class.getCanonicalName().
 
         @SuppressWarnings( { "UnusedDeclaration", "UnusedAssignment" })
-        OSLevelCustomizations customizer = OSLevelCustomizations.getCustomizer( null );
+        OSLevelCustomizations customizer = OSLevelCustomizations.getCustomizer();
 
     }
 

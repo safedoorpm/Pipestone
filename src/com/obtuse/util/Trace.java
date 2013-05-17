@@ -271,6 +271,7 @@ public class Trace {
 
     public static void event( String event, @Nullable Throwable e ) {
 
+//        System.out.println( "event( \"" + event + "\", " + e + " )" );
         Long threadId = Thread.currentThread().getId();
 
         synchronized ( Trace.s_exceptionsInProgress ) {

@@ -16,7 +16,7 @@ import java.lang.reflect.Method;
 public abstract class OSLevelCustomizations {
 
     private static boolean _gotOSLevelCustomizations = false;
-    private static OSLevelCustomizations _osLevelCustomizations;
+    private static OSLevelCustomizations s_osLevelCustomizations;
 
     public static boolean s_forceWindows = false;
 
@@ -59,11 +59,15 @@ public abstract class OSLevelCustomizations {
 
     public abstract QuitCatcher getQuitCatcher();
 
+    public abstract void setAboutWindowHandler( AboutWindowHandler aboutWindowHandler );
+
+    public abstract AboutWindowHandler getAboutWindowHandler();
+
     public abstract void setDockBadge( String msg );
 
     public abstract void setDockIconImage( Image icon );
 
-    public static OSLevelCustomizations getCustomizer( AboutWindowHandler aboutWindowHandler ) {
+    public static OSLevelCustomizations getCustomizer() {
 
         if ( !OSLevelCustomizations._gotOSLevelCustomizations ) {
 
@@ -92,10 +96,10 @@ public abstract class OSLevelCustomizations {
                 methodName = "createInstance";
                 //noinspection RedundantArrayCreation
                 Method createInstance =
-                        macSpecificCode.getDeclaredMethod( methodName, new Class[] { AboutWindowHandler.class, QuitCatcher.class } );
+                        macSpecificCode.getDeclaredMethod( methodName, new Class[] {} );
                 createInstance.setAccessible( true );
                 //noinspection RedundantArrayCreation
-                OSLevelCustomizations._osLevelCustomizations = (OSLevelCustomizations)createInstance.invoke( null, new Object[] { aboutWindowHandler, null } );
+                OSLevelCustomizations.s_osLevelCustomizations = (OSLevelCustomizations)createInstance.invoke( null, new Object[] {} );
 
             } catch ( ClassNotFoundException e ) {
 
@@ -127,7 +131,7 @@ public abstract class OSLevelCustomizations {
 
         }
 
-        return OSLevelCustomizations._osLevelCustomizations;
+        return OSLevelCustomizations.s_osLevelCustomizations;
 
     }
 

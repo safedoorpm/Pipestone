@@ -13,7 +13,7 @@ import java.util.LinkedList;
  */
 
 @SuppressWarnings( { "FieldCanBeLocal" } )
-public abstract class WindowWithMenus extends TrackedWindow implements PreferencesHandler {
+public abstract class WindowWithMenus extends TrackedWindow {
 
     private final JMenuBar _menuBar;
 
@@ -22,6 +22,8 @@ public abstract class WindowWithMenus extends TrackedWindow implements Preferenc
     private final JMenuItem _preferencesMenuItem;
 
     private JCheckBoxMenuItem _showLogsMenuItem;
+
+    private static PreferencesHandler s_preferencesHandler;
 
     private static final Collection<WindowWithMenus> s_allWindowsWithLogsMenuItem = new LinkedList<WindowWithMenus>();
     private static boolean s_showLogsMode;
@@ -35,33 +37,33 @@ public abstract class WindowWithMenus extends TrackedWindow implements Preferenc
         _fileMenu = new JMenu( "File" );
 
         _preferencesMenuItem = new JMenuItem( "Preferences" );
-        OSLevelCustomizations osLevelCustomizations = OSLevelCustomizations.getCustomizer(
-                new AboutWindowHandler() {
+        OSLevelCustomizations osLevelCustomizations = OSLevelCustomizations.getCustomizer();
 
-                    public void makeVisible() {
+//                new AboutWindowHandler() {
+//
+//                    public void makeVisible() {
+//
+//                        Logger.logMsg( "about window launch request ignored" );
+//
+//                    }
+//
+//                }
+//        );
 
-                        Logger.logMsg( "about window launch request ignored" );
-
-                    }
-
-                }
-        );
-
-        if ( osLevelCustomizations == null ) {
+        if ( osLevelCustomizations == null || OSLevelCustomizations.onWindows() ) {
 
             _fileMenu.add( _preferencesMenuItem );
+            _preferencesMenuItem.setAccelerator(
+                    KeyStroke.getKeyStroke(
+                            KeyEvent.VK_COMMA, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()
+                    )
+            );
 
-        } else {
-
-            osLevelCustomizations.setPreferencesHandler( this );
+//        } else {
+//
+//            osLevelCustomizations.setPreferencesHandler( this );
 
         }
-
-        _preferencesMenuItem.setAccelerator(
-                KeyStroke.getKeyStroke(
-                        KeyEvent.VK_COMMA, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()
-                )
-        );
 
         _preferencesMenuItem.addActionListener(
                 new ActionListener() {
@@ -145,6 +147,44 @@ public abstract class WindowWithMenus extends TrackedWindow implements Preferenc
 
     }
 
+    private void handlePreferences() {
+
+        if ( s_preferencesHandler != null ) {
+
+            s_preferencesHandler.handlePreferences();
+
+        }
+
+    }
+
+    /**
+     * Set the preferences handler.
+     * @param preferencesHandler the preferences handler (null if you don't want one).
+     */
+
+    @SuppressWarnings("UnusedDeclaration")
+    public static void setPreferencesHandler( PreferencesHandler preferencesHandler ) {
+
+        s_preferencesHandler = preferencesHandler;
+
+        // This is the Mac way to set the preferences handler.
+        // The windows way was handled as best we could handle it in our constructor above.
+        //
+        // There is no straightforward way to hide/show the preferences menu item if a separate menu item
+        // exists in each and every instance of this class.  The not-straightforward way seems to require
+        // the use of weak references.  I don't think that making the preferences menu items appear/disappear
+        // is important enough to get involved with weak references.
+
+        OSLevelCustomizations customizer = OSLevelCustomizations.getCustomizer();
+
+        if ( customizer != null ) {
+
+            customizer.setPreferencesHandler( preferencesHandler );
+
+        }
+
+    }
+
     public static void setAllShowLogsModeInMenu( boolean value ) {
 
         WindowWithMenus.s_showLogsMode = value;
@@ -220,12 +260,6 @@ public abstract class WindowWithMenus extends TrackedWindow implements Preferenc
         skeletalEditMenu.add( selectAllMenuItem );
 
         return skeletalEditMenu;
-
-    }
-
-    public void handlePreferences() {
-
-        OkPopupMessageWindow.doit( "Preference menu not (yet?) implemented", "OK" );
 
     }
 

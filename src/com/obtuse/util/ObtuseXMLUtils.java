@@ -679,7 +679,7 @@ public class ObtuseXMLUtils {
             messageProxy.error(
                     "Unknown/unsupported " + name + ":  " + targetNodeName,
                     msg,
-                    "Ok"
+                    "OK"
             );
 
             return null;

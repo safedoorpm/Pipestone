@@ -25,6 +25,9 @@ public class MacCustomization extends OSLevelCustomizations {
 
     private static QuitCatcher _quitCatcher;
 
+    private AboutWindowHandler _aboutWindowHandler;
+    private PreferencesHandler _prefsHandler;
+
     /**
      * Perform various Mac OS X specific customizations.
      * <p/>
@@ -35,19 +38,14 @@ public class MacCustomization extends OSLevelCustomizations {
      * rejected. One consequence of this rejection is that attempts to logoff or shutdown while the application is
      * running are aborted.  With this customization in place, a logoff or shutdown attempt is "approved" by the
      * application.
-     *
-     * @param aboutWindowHandler something to call to make an about window visible.
-     * @param quitCatcher something to call if a quit event is received (ignored if null).
      */
 
-    public MacCustomization( final AboutWindowHandler aboutWindowHandler, QuitCatcher quitCatcher ) {
+    public MacCustomization() {
         super();
 
         Trace.event( "doing Mac-specific customizations" );
 
         System.setProperty( "apple.laf.useScreenMenuBar", "true" );
-
-        _quitCatcher = quitCatcher;
 
         String laf = "apple.laf.AquaLookAndFeel";
         // String laf = "javax.swing.plaf.metal.MetalLookAndFeel";
@@ -87,7 +85,7 @@ public class MacCustomization extends OSLevelCustomizations {
 
         _app = Application.getApplication();
         //noinspection ClassWithoutToString,RefusedBequest
-        final ApplicationAdapter basicAdapter = new ApplicationAdapter() {
+        ApplicationAdapter basicAdapter = new ApplicationAdapter() {
 
             @SuppressWarnings( { "RefusedBequest" } )
             public void handleQuit( ApplicationEvent e ) {
@@ -103,20 +101,34 @@ public class MacCustomization extends OSLevelCustomizations {
             public void handleAbout( ApplicationEvent e ) {
 
                 e.setHandled( true );
-                if ( aboutWindowHandler != null ) {
+                if ( _aboutWindowHandler != null ) {
 
-                    aboutWindowHandler.makeVisible();
+                    _aboutWindowHandler.makeVisible();
 
                 }
-
-//                System.out.println( "launch of AboutWindow suppressed as this version of ObtuseUtils does not support it" );
-//                AboutWindow.launch();
 
             }
 
         };
 
         _app.addApplicationListener( basicAdapter );
+
+        ApplicationAdapter preferencesAdapter = new ApplicationAdapter() {
+
+            public void handlePreferences( ApplicationEvent e ) {
+
+                e.setHandled( true );
+                if ( _prefsHandler != null ) {
+
+                    _prefsHandler.handlePreferences();
+
+                }
+
+            }
+
+        };
+
+        _app.addApplicationListener( preferencesAdapter );
 
         _app.addAboutMenuItem();
 
@@ -146,28 +158,30 @@ public class MacCustomization extends OSLevelCustomizations {
 
     }
 
-    public void setPreferencesHandler( final PreferencesHandler prefsHandler ) {
+    public void setPreferencesHandler( PreferencesHandler prefsHandler ) {
 
         //noinspection ClassWithoutToString,RefusedBequest
-        ApplicationAdapter preferencesAdapter = new ApplicationAdapter() {
-
-            public void handlePreferences( ApplicationEvent e ) {
-
-                prefsHandler.handlePreferences();
-
-            }
-
-        };
-
-        _app.addApplicationListener( preferencesAdapter );
-        _app.setEnabledPreferencesMenu( true );
+        _prefsHandler = prefsHandler;
+        _app.setEnabledPreferencesMenu( prefsHandler != null );
 
     }
 
     @SuppressWarnings("UnusedDeclaration")
-    public static OSLevelCustomizations createInstance( AboutWindowHandler aboutWindowHandler, QuitCatcher quitCatcher ) {
+    public static OSLevelCustomizations createInstance() {
 
-        return new MacCustomization( aboutWindowHandler, quitCatcher );
+        return new MacCustomization();
+
+    }
+
+    public void setAboutWindowHandler( AboutWindowHandler aboutWindowHandler ) {
+
+        _aboutWindowHandler = aboutWindowHandler;
+
+    }
+
+    public AboutWindowHandler getAboutWindowHandler() {
+
+        return _aboutWindowHandler;
 
     }
 
