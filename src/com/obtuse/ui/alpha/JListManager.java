@@ -1,5 +1,6 @@
 package com.obtuse.ui.alpha;
 
+import com.obtuse.ui.LogsWindow;
 import com.obtuse.util.*;
 
 import javax.swing.*;
@@ -1108,7 +1109,7 @@ public abstract class JListManager implements ButtonOwner {
 
             if ( button != null ) {
 
-                button.setEnabled( enabled );
+                LogsWindow.setLabelEnabled( button, enabled );
 
             }
 

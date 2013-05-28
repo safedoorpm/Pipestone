@@ -4,10 +4,7 @@ package com.obtuse.ui;
  * Copyright © 2013 Obtuse Systems Corporation
  */
 
-import com.obtuse.util.BasicProgramConfigInfo;
-import com.obtuse.util.Logger;
-import com.obtuse.util.ObtuseUtil;
-import com.obtuse.util.VerbsList;
+import com.obtuse.util.*;
 
 import javax.swing.*;
 import javax.swing.event.MenuKeyEvent;
@@ -18,7 +15,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * A popup menu of words with which the word list can be filtered by typing, while the menu is visible, prefixes of words to keep in the menu.
+ * A popup menu of words with which the word list can be filtered by typing, while the menu is visible,
+ * prefixes of words to keep in the menu.
  */
 
 public class AcceleratedPopupMenu1 extends JPopupMenu {
@@ -167,8 +165,8 @@ public class AcceleratedPopupMenu1 extends JPopupMenu {
 
         }
 
-        _firstMenuItem.setEnabled( false );
-        _secondMenuItem.setEnabled( false );
+        LogsWindow.setMenuEnabled( _firstMenuItem, false );
+        LogsWindow.setMenuEnabled( _secondMenuItem, false );
 
         pack();
 

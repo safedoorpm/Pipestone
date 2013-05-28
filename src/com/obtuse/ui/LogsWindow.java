@@ -109,11 +109,11 @@ public class LogsWindow extends WindowWithMenus {
 
                                 if ( selectedIndices.length > 0 ) {
 
-                                    _copyMenuItem.setEnabled( true );
+                                    setMenuEnabled( _copyMenuItem, true );
 
                                 } else {
 
-                                    _copyMenuItem.setEnabled( false );
+                                    setMenuEnabled( _copyMenuItem, false );
 
                                 }
 
@@ -181,6 +181,78 @@ public class LogsWindow extends WindowWithMenus {
             );
 
         }
+
+    }
+
+    /**
+     * Utility method to trace the setting of a menu item's enabled state.
+     * <p/>This method lives in this class instead of say the Trace class because adding this method to the
+     * Trace class would result in any program that uses the Trace class implicitly sucking in a huge chunk of Swing.
+     * Since this class already uses Swing, putting the method here does no real harm.
+     * @param menuItem the menu item in question.
+     * @param value its new state.
+     */
+
+    public static void setMenuEnabled( JMenuItem menuItem, boolean value ) {
+
+        String text = menuItem.getText();
+        if ( text == null ) {
+
+            text = "<unknown>";
+
+        }
+
+        Trace.event( "menu item \"" + text + "\" set to " + ( value ? "enabled" : "not enabled" ) );
+
+        menuItem.setEnabled( value );
+
+    }
+
+    /**
+     * Utility method to trace the setting of a button's enabled state.
+     * <p/>This method lives in this class instead of say the Trace class because adding this method to the
+     * Trace class would result in any program that uses the Trace class implicitly sucking in a huge chunk of Swing.
+     * Since this class already uses Swing, putting the method here does no real harm.
+     * @param button the menu item in question.
+     * @param value its new state.
+     */
+
+    public static void setButtonEnabled( JButton button, boolean value ) {
+
+        String text = button.getText();
+        if ( text == null ) {
+
+            text = "<unknown>";
+
+        }
+
+        Trace.event( "button \"" + text + "\" set to " + ( value ? "enabled" : "not enabled" ) );
+
+        button.setEnabled( value );
+
+    }
+
+    /**
+     * Utility method to trace the setting of a label's enabled state.
+     * <p/>This method lives in this class instead of say the Trace class because adding this method to the
+     * Trace class would result in any program that uses the Trace class implicitly sucking in a huge chunk of Swing.
+     * Since this class already uses Swing, putting the method here does no real harm.
+     * @param label the menu item in question.
+     * @param value its new state.
+     */
+
+    public static void setLabelEnabled( JLabel label, boolean value ) {
+
+        String text = label.getText();
+        if ( text == null ) {
+
+            text = "<unknown>";
+
+        }
+
+        Trace.event( "label \"" + text + "\" set to " + ( value ? "enabled" : "not enabled" ) );
+
+        label.setEnabled( value );
 
     }
 
@@ -280,7 +352,7 @@ public class LogsWindow extends WindowWithMenus {
         _editMenu = new JMenu( "Edit" );
 
         JMenuItem selectAllMenuItem = new JMenuItem( "Select All" );
-        selectAllMenuItem.setEnabled( true );
+        setMenuEnabled( selectAllMenuItem, true );
         selectAllMenuItem.addActionListener(
 
                 new ActionListener() {
@@ -314,11 +386,11 @@ public class LogsWindow extends WindowWithMenus {
                 )
         );
 
-        cutMenuItem.setEnabled( false );
+        setMenuEnabled( cutMenuItem, false );
 
         _copyMenuItem = new JMenuItem( "Copy" );
 
-        _copyMenuItem.setEnabled( false );
+        setMenuEnabled( _copyMenuItem, false );
 
         _copyMenuItem.addActionListener(
 
@@ -369,7 +441,7 @@ public class LogsWindow extends WindowWithMenus {
                 )
         );
 
-        pasteMenuItem.setEnabled( false );
+        setMenuEnabled( pasteMenuItem, false );
 
         _editMenu.add( cutMenuItem );   // never enabled (yet?)
         _editMenu.add( _copyMenuItem );

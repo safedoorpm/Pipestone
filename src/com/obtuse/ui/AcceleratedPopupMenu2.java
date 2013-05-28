@@ -102,8 +102,8 @@ public class AcceleratedPopupMenu2 extends JDialog {
 //
 //        }
 //
-//        _firstMenuItem.setEnabled( false );
-//        _secondMenuItem.setEnabled( false );
+//        RulesSpreadsheetCanvas.setMenuEnabled( _firstMenuItem, false );
+//        RulesSpreadsheetCanvas.setMenuEnabled( _secondMenuItem, false );
 
         pack();
     }

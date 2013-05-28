@@ -219,7 +219,7 @@ public abstract class WindowWithMenus extends TrackedWindow {
         JMenu skeletalEditMenu = new JMenu( "Edit" );
 
         JMenuItem selectAllMenuItem = new JMenuItem( "Select All" );
-        selectAllMenuItem.setEnabled( false );
+        LogsWindow.setMenuEnabled( selectAllMenuItem, false );
         selectAllMenuItem.setAccelerator(
 
                 KeyStroke.getKeyStroke(
@@ -229,7 +229,7 @@ public abstract class WindowWithMenus extends TrackedWindow {
         );
 
         JMenuItem cutMenuItem = new JMenuItem( "Cut" );
-        cutMenuItem.setEnabled( false );
+        LogsWindow.setMenuEnabled( cutMenuItem, false );
         cutMenuItem.setAccelerator(
                 KeyStroke.getKeyStroke(
                         KeyEvent.VK_X, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()
@@ -238,7 +238,7 @@ public abstract class WindowWithMenus extends TrackedWindow {
 
 
         JMenuItem copyMenuItem = new JMenuItem( "Copy" );
-        copyMenuItem.setEnabled( false );
+        LogsWindow.setMenuEnabled( copyMenuItem, false );
         copyMenuItem.setAccelerator(
                 KeyStroke.getKeyStroke(
                         KeyEvent.VK_C, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()
@@ -246,7 +246,7 @@ public abstract class WindowWithMenus extends TrackedWindow {
         );
 
         JMenuItem pasteMenuItem = new JMenuItem( "Paste" );
-        pasteMenuItem.setEnabled( false );
+        LogsWindow.setMenuEnabled( pasteMenuItem, false );
         pasteMenuItem.setAccelerator(
                 KeyStroke.getKeyStroke(
                         KeyEvent.VK_V, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()
