@@ -21,6 +21,7 @@
 
 package org.jdesktop.swingx;
 
+import com.obtuse.util.Logger;
 import org.jdesktop.swingx.MultiSplitLayout.Divider;
 import org.jdesktop.swingx.MultiSplitLayout.Node;
 
@@ -227,6 +228,8 @@ public class MultiSplitPane extends JPanel {
     private int dragMax = -1;
 
     private void startDrag( int mx, int my ) {
+
+        MultiSplitLayout.message( "startDrag( " + mx + ", " + my + " )" );
         requestFocusInWindow();
         MultiSplitLayout msl = getMultiSplitLayout();
         MultiSplitLayout.Divider divider = msl.dividerAt( mx, my );

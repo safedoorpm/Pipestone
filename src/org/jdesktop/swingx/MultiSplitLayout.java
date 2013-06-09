@@ -21,6 +21,8 @@
 
 package org.jdesktop.swingx;
 
+import com.obtuse.util.Logger;
+
 import javax.swing.*;
 import java.awt.*;
 import java.beans.PropertyChangeListener;
@@ -93,6 +95,10 @@ public class MultiSplitLayout implements LayoutManager {
         if ( _dividerSize == 0 ) {
             _dividerSize = 7;
         }
+    }
+
+    public static void message( String msg ) {
+
     }
 
     public void addPropertyChangeListener( PropertyChangeListener listener ) {
@@ -310,18 +316,23 @@ public class MultiSplitLayout implements LayoutManager {
     @SuppressWarnings({ "ChainOfInstanceofChecks" })
     private Dimension minimumNodeSize( Node root ) {
 
+        Dimension rval;
+        String type;
         if ( root instanceof Leaf ) {
 
+            type = "Leaf";
             Component child = childForNode( root );
-            return child != null ? child.getMinimumSize() : new Dimension( 0, 0 );
+            rval = child != null ? child.getMinimumSize() : new Dimension( 0, 0 );
 
         } else if ( root instanceof Divider ) {
 
+            type = "Divider";
             int dividerSize = getDividerSize();
-            return new Dimension( dividerSize, dividerSize );
+            rval = new Dimension( dividerSize, dividerSize );
 
         } else {
 
+            type = "Split";
             Split split = (Split)root;
             List<Node> splitChildren = split.getChildren();
             int width = 0;
@@ -348,9 +359,13 @@ public class MultiSplitLayout implements LayoutManager {
 
             }
 
-            return new Dimension( width, height );
+            rval = new Dimension( width, height );
 
         }
+
+        message( "minimumNodeSize( " + type + " " + root + " ) yields " + rval );
+
+        return rval;
 
     }
 
@@ -385,7 +400,10 @@ public class MultiSplitLayout implements LayoutManager {
     }
 
 
-    private void minimizeSplitBounds( Split split, Rectangle bounds ) {
+    private void minimizeSplitBounds( String caller, Split split, Rectangle bounds ) {
+
+        message( "minimizeSplitBounds( \"" + caller + "\", " + split + ", " + bounds + " )" );
+
         Rectangle splitBounds = new Rectangle( bounds.x, bounds.y, 0, 0 );
         List<Node> splitChildren = split.getChildren();
         Node lastChild = splitChildren.get( splitChildren.size() - 1 );
@@ -402,6 +420,8 @@ public class MultiSplitLayout implements LayoutManager {
 
 
     private void layoutShrink( Split split, Rectangle bounds ) {
+
+        message( "layoutShrink( " + split + ", " + bounds + " )" );
 
         Rectangle splitBounds = split.getBounds();
         ListIterator<Node> splitChildren = split.getChildren().listIterator();
@@ -446,7 +466,7 @@ public class MultiSplitLayout implements LayoutManager {
 
                     double newWidth = Math.max( minSplitChildWidth, bounds.getMaxX() - x );
                     Rectangle newSplitChildBounds = boundsWithXandWidth( bounds, x, newWidth );
-                    layout2( splitChild, newSplitChildBounds );
+                    layout2( "layoutShrink row 1", splitChild, newSplitChildBounds );
 
                 } else if ( availableWidth > 0.0 && splitChildWeight > 0.0 ) {
 
@@ -454,14 +474,14 @@ public class MultiSplitLayout implements LayoutManager {
                     double oldWidth = splitChildBounds.getWidth();
                     double newWidth = Math.max( minSplitChildWidth, oldWidth - allocatedWidth );
                     Rectangle newSplitChildBounds = boundsWithXandWidth( bounds, x, newWidth );
-                    layout2( splitChild, newSplitChildBounds );
+                    layout2( "layoutShrink row 2", splitChild, newSplitChildBounds );
                     availableWidth -= oldWidth - splitChild.getBounds().getWidth();
 
                 } else {
 
                     double existingWidth = splitChildBounds.getWidth();
                     Rectangle newSplitChildBounds = boundsWithXandWidth( bounds, x, existingWidth );
-                    layout2( splitChild, newSplitChildBounds );
+                    layout2( "layoutShrink row 3", splitChild, newSplitChildBounds );
 
                 }
 
@@ -508,7 +528,7 @@ public class MultiSplitLayout implements LayoutManager {
                     double oldHeight = splitChildBounds.getHeight();
                     double newHeight = Math.max( minSplitChildHeight, bounds.getMaxY() - y );
                     Rectangle newSplitChildBounds = boundsWithYandHeight( bounds, y, newHeight );
-                    layout2( splitChild, newSplitChildBounds );
+                    layout2( "layoutShrink col 1", splitChild, newSplitChildBounds );
                     availableHeight -= oldHeight - splitChild.getBounds().getHeight();
 
                 } else if ( availableHeight > 0.0 && splitChildWeight > 0.0 ) {
@@ -517,14 +537,14 @@ public class MultiSplitLayout implements LayoutManager {
                     double oldHeight = splitChildBounds.getHeight();
                     double newHeight = Math.max( minSplitChildHeight, oldHeight - allocatedHeight );
                     Rectangle newSplitChildBounds = boundsWithYandHeight( bounds, y, newHeight );
-                    layout2( splitChild, newSplitChildBounds );
+                    layout2( "layoutShrink col 2", splitChild, newSplitChildBounds );
                     availableHeight -= oldHeight - splitChild.getBounds().getHeight();
 
                 } else {
 
                     double existingHeight = splitChildBounds.getHeight();
                     Rectangle newSplitChildBounds = boundsWithYandHeight( bounds, y, existingHeight );
-                    layout2( splitChild, newSplitChildBounds );
+                    layout2( "layoutShrink col 3", splitChild, newSplitChildBounds );
 
                 }
                 y = splitChild.getBounds().getMaxY();
@@ -541,7 +561,7 @@ public class MultiSplitLayout implements LayoutManager {
        * the bounds we were asked to fit within.
        */
 
-        minimizeSplitBounds( split, bounds );
+        minimizeSplitBounds( "layoutShrink", split, bounds );
 
     }
 
@@ -573,19 +593,19 @@ public class MultiSplitLayout implements LayoutManager {
                 if ( !splitChildren.hasNext() ) {
                     double newWidth = bounds.getMaxX() - x;
                     Rectangle newSplitChildBounds = boundsWithXandWidth( bounds, x, newWidth );
-                    layout2( splitChild, newSplitChildBounds );
+                    layout2( "layoutGrow row 1", splitChild, newSplitChildBounds );
                 } else if ( availableWidth > 0.0 && splitChildWeight > 0.0 ) {
                     double allocatedWidth = splitChild.equals( lastWeightedChild )
                             ? availableWidth
                             : Math.rint( splitChildWeight * extraWidth );
                     double newWidth = splitChildBounds.getWidth() + allocatedWidth;
                     Rectangle newSplitChildBounds = boundsWithXandWidth( bounds, x, newWidth );
-                    layout2( splitChild, newSplitChildBounds );
+                    layout2( "layoutGrow row 2", splitChild, newSplitChildBounds );
                     availableWidth -= allocatedWidth;
                 } else {
                     double existingWidth = splitChildBounds.getWidth();
                     Rectangle newSplitChildBounds = boundsWithXandWidth( bounds, x, existingWidth );
-                    layout2( splitChild, newSplitChildBounds );
+                    layout2( "layoutGrow row 3", splitChild, newSplitChildBounds );
                 }
                 x = splitChild.getBounds().getMaxX();
             }
@@ -613,19 +633,19 @@ public class MultiSplitLayout implements LayoutManager {
                 if ( !splitChildren.hasNext() ) {
                     double newHeight = bounds.getMaxY() - y;
                     Rectangle newSplitChildBounds = boundsWithYandHeight( bounds, y, newHeight );
-                    layout2( splitChild, newSplitChildBounds );
+                    layout2( "layoutGrow col 1", splitChild, newSplitChildBounds );
                 } else if ( availableHeight > 0.0 && splitChildWeight > 0.0 ) {
                     double allocatedHeight = splitChild.equals( lastWeightedChild )
                             ? availableHeight
                             : Math.rint( splitChildWeight * extraHeight );
                     double newHeight = splitChildBounds.getHeight() + allocatedHeight;
                     Rectangle newSplitChildBounds = boundsWithYandHeight( bounds, y, newHeight );
-                    layout2( splitChild, newSplitChildBounds );
+                    layout2( "layoutGrow col 2", splitChild, newSplitChildBounds );
                     availableHeight -= allocatedHeight;
                 } else {
                     double existingHeight = splitChildBounds.getHeight();
                     Rectangle newSplitChildBounds = boundsWithYandHeight( bounds, y, existingHeight );
-                    layout2( splitChild, newSplitChildBounds );
+                    layout2( "layoutGrow col 3", splitChild, newSplitChildBounds );
                 }
                 y = splitChild.getBounds().getMaxY();
             }
@@ -638,10 +658,12 @@ public class MultiSplitLayout implements LayoutManager {
      */
 
     @SuppressWarnings({ "ChainOfInstanceofChecks" })
-    private void layout2( Node root, Rectangle bounds ) {
+    private void layout2( String caller, Node root, Rectangle bounds ) {
 
+        message( "layout2( " + caller + ", " + root.getClass().getSimpleName() + " " + root + ", " + bounds + " )" );
         if ( root instanceof Leaf ) {
 
+            message( "layout2( Leaf " + root + ", " + bounds + " )" );
             Component child = childForNode( root );
             if ( child != null ) {
 
@@ -653,10 +675,12 @@ public class MultiSplitLayout implements LayoutManager {
 
         } else if ( root instanceof Divider ) {
 
+            message( "layout2( Divider " + root + ", " + bounds + " )" );
             root.setBounds( bounds );
 
         } else if ( root instanceof Split ) {
 
+            message( "layout2( Split " + root + ", " + bounds + " )" );
             Split split = (Split)root;
             boolean grow = split.isRowLayout()
                     ? split.getBounds().width <= bounds.width
@@ -672,6 +696,10 @@ public class MultiSplitLayout implements LayoutManager {
                 // split.setBounds() called in layoutShrink()
 
             }
+
+        } else {
+
+            message( "layout2( " + root.getClass().getSimpleName() + " " + root + ", " + bounds + " )" );
 
         }
 
@@ -694,7 +722,9 @@ public class MultiSplitLayout implements LayoutManager {
      */
 
     @SuppressWarnings({ "ChainOfInstanceofChecks" })
-    private void layout1( Node root, Rectangle bounds ) {
+    private void layout1( String caller, Node root, Rectangle bounds ) {
+
+        message( "layout1( " + caller + ", " + root.getClass().getSimpleName() + ", " + bounds + " )" );
 
         if ( root instanceof Leaf ) {
 
@@ -746,7 +776,7 @@ public class MultiSplitLayout implements LayoutManager {
                     }
 
                     childBounds = boundsWithXandWidth( bounds, x, childWidth );
-                    layout1( splitChild, childBounds );
+                    layout1( "recursive 1", splitChild, childBounds );
 
                     if ( hasFloatingDividers() && dividerChild != null ) {
 
@@ -801,7 +831,7 @@ public class MultiSplitLayout implements LayoutManager {
                     }
 
                     childBounds = boundsWithYandHeight( bounds, y, childHeight );
-                    layout1( splitChild, childBounds );
+                    layout1( "recursive 2", splitChild, childBounds );
 
                     if ( hasFloatingDividers() && dividerChild != null ) {
 
@@ -829,7 +859,7 @@ public class MultiSplitLayout implements LayoutManager {
             * allocates extra space.
             */
 
-            minimizeSplitBounds( split, bounds );
+            minimizeSplitBounds( "layout1", split, bounds );
 
         }
 
@@ -893,14 +923,19 @@ public class MultiSplitLayout implements LayoutManager {
      * with a matching Leaf Node.
      */
     public void layoutContainer( Container parent ) {
+
+        message( "###" );
+        message( "layoutContainer" );
+        message( "###" );
+
         checkLayout( getModel() );
         Insets insets = parent.getInsets();
         Dimension size = parent.getSize();
         int width = size.width - ( insets.left + insets.right );
         int height = size.height - ( insets.top + insets.bottom );
         Rectangle bounds = new Rectangle( insets.left, insets.top, width, height );
-        layout1( getModel(), bounds );
-        layout2( getModel(), bounds );
+        layout1( "layoutContainer", getModel(), bounds );
+        layout2( "layoutContainer", getModel(), bounds );
     }
 
 
