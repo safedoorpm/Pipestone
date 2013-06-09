@@ -2,12 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/BasicProgramConfigInfo.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/BasicProgramConfigInfo.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/MacCustomization.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/MacCustomization.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/OSLevelCustomizations.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/OSLevelCustomizations.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/Trace.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/Trace.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/ui/WindowWithMenus.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/WindowWithMenus.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/WindowsCustomization.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/WindowsCustomization.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Pipestone.iws" />
@@ -19,7 +13,7 @@
     <file path="$PROJECT_DIR$/src/com/obtuse/db/raw/dbdata/Tuple.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1356305275227" ignored="false" />
     <file path="$PROJECT_DIR$/src/com/obtuse/db/raw/ti/TableInfo.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1356305275227" ignored="false" />
     <file path="/fragment.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1367387954751" ignored="false" />
-    <file path="/Dummy.txt" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1367392130877" ignored="false" />
+    <file path="/Dummy.txt" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1370817630966" ignored="false" />
     <file path="/*.regexp" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366615174668" ignored="false" />
     <file path="$PROJECT_DIR$/.idea/copyright/Obtuse.xml" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1356308355272" ignored="false" />
     <file path="$PROJECT_DIR$/../CouchDB4J-IntelliJ/src/com/fourspaces/couchdb/Session.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1356309278618" ignored="false" />
@@ -116,7 +110,7 @@
     <file path="$PROJECT_DIR$/../Safedoor Rules/src/com/safedoorpm/rules/RulesParser.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1361251011022" ignored="false" />
     <file path="/RulesParser.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1361249845998" ignored="false" />
     <file path="$PROJECT_DIR$/../Safedoor Rules/src/com/safedoorpm/rules/ListOfWorkInstructionsSheetParser.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1361252597616" ignored="false" />
-    <file path="$PROJECT_DIR$/../Safedoor Couchdb/.idea/workspace.xml" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1361250963761" ignored="false" />
+    <file path="$PROJECT_DIR$/../Safedoor Couchdb/.idea/workspace.xml" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1370817192635" ignored="false" />
     <file path="$PROJECT_DIR$/../Safedoor Rules/src/com/safedoorpm/rules/RulesFileParser.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1361246954462" ignored="false" />
     <file path="/RulesFileParser.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1361246892769" ignored="false" />
     <file path="$PROJECT_DIR$/../Safedoor Rules/src/com/safedoorpm/rules/MapFlowSheetParser.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1361238452523" ignored="false" />
@@ -722,6 +716,21 @@
         <option name="CONDITION" value="" />
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/src/org/jdesktop/swingx/MultiSplitLayout.java" line="70" class="org.jdesktop.swingx.MultiSplitLayout" package="org.jdesktop.swingx">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
     </line_breakpoints>
     <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
       <breakpoint>
@@ -772,7 +781,7 @@
       <file leaf-file-name="LogsWindow.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/LogsWindow.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="123" column="89" selection-start="4012" selection-end="4012" vertical-scroll-proportion="0.0">
+            <state line="123" column="89" selection-start="4022" selection-end="4022" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -805,15 +814,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MacCustomization.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/MacCustomization.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="35" column="0" selection-start="900" selection-end="900" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="OSLevelCustomizations.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/OSLevelCustomizations.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -826,7 +826,16 @@
       <file leaf-file-name="BasicProgramConfigInfo.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/BasicProgramConfigInfo.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="239" column="79" selection-start="7434" selection-end="7434" vertical-scroll-proportion="0.0">
+            <state line="16" column="13" selection-start="398" selection-end="398" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ObtuseUtil.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/ObtuseUtil.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="27" column="13" selection-start="632" selection-end="632" vertical-scroll-proportion="0.2689655">
               <folding />
             </state>
           </provider>
@@ -850,10 +859,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MultiSplitLayout.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="MultiSplitLayout.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/org/jdesktop/swingx/MultiSplitLayout.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="63" column="13" selection-start="2460" selection-end="2460" vertical-scroll-proportion="0.48128343">
+            <state line="79" column="38" selection-start="3023" selection-end="3023" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -870,6 +879,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitLogSettings">
+    <option name="myStructureFilterPaths" />
     <option name="myDateState">
       <MyDateState />
     </option>
@@ -897,8 +907,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-2526" />
-    <option name="y" value="49" />
+    <option name="x" value="42" />
+    <option name="y" value="22" />
     <option name="width" value="2465" />
     <option name="height" value="1457" />
   </component>
@@ -1066,6 +1076,7 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -1628,7 +1639,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1933,7 +1943,7 @@
       <AnalysisUIOptions />
     </option>
   </component>
-  <component name="SvnConfiguration" maxAnnotateRevisions="500" myUseAcceleration="nothing" myAutoUpdateAfterCommit="false" cleanupOnStartRun="false">
+  <component name="SvnConfiguration" maxAnnotateRevisions="500" myUseAcceleration="nothing" myAutoUpdateAfterCommit="false" cleanupOnStartRun="false" SSL_PROTOCOLS="sslv3">
     <option name="USER" value="" />
     <option name="PASSWORD" value="" />
     <option name="mySSHConnectionTimeout" value="30000" />
@@ -1943,7 +1953,6 @@
     <option name="MERGE_DIFF_USE_ANCESTRY" value="true" />
     <option name="UPDATE_LOCK_ON_DEMAND" value="false" />
     <option name="IGNORE_SPACES_IN_MERGE" value="false" />
-    <option name="DETECT_NESTED_COPIES" value="true" />
     <option name="CHECK_NESTED_FOR_QUICK_MERGE" value="false" />
     <option name="IGNORE_SPACES_IN_ANNOTATE" value="true" />
     <option name="SHOW_MERGE_SOURCES_IN_ANNOTATE" value="true" />
@@ -1969,10 +1978,10 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-2526" y="49" width="2465" height="1457" extended-state="0" />
+    <frame x="42" y="22" width="2465" height="1457" extended-state="0" />
     <editor active="false" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32984293" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32935026" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.118644066" sideWeight="0.67289025" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1987,7 +1996,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1914014" sideWeight="0.6731489" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1914014" sideWeight="0.67064977" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32949308" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329475" sideWeight="0.67289025" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Problems" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -2067,13 +2076,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/ObtuseUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1564" column="37" selection-start="44495" selection-end="44495" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/obtuse/db/exceptions/ObtuseJDBCDriverLoadFailedException.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="9" column="13" selection-start="216" selection-end="216" vertical-scroll-proportion="0.0">
@@ -2121,13 +2123,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/BasicProgramConfigInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="239" column="79" selection-start="7434" selection-end="7434" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/WindowsCustomization.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="120" column="0" selection-start="3213" selection-end="3213" vertical-scroll-proportion="0.0">
@@ -2158,7 +2153,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/LogsWindow.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="123" column="89" selection-start="4012" selection-end="4012" vertical-scroll-proportion="0.0">
+        <state line="123" column="89" selection-start="4022" selection-end="4022" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -2172,7 +2167,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/org/jdesktop/swingx/MultiSplitLayout.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="63" column="13" selection-start="2460" selection-end="2460" vertical-scroll-proportion="0.48128343">
+        <state line="79" column="38" selection-start="3023" selection-end="3023" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/BasicProgramConfigInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="13" selection-start="398" selection-end="398" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/ObtuseUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="13" selection-start="632" selection-end="632" vertical-scroll-proportion="0.2689655">
           <folding />
         </state>
       </provider>
