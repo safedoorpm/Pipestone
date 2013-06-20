@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" name="Default" comment="">
+    <list default="true" id="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" name="Default" comment="Changes to workspace.xml file as a result of using this project's src directories as content roots in other IntelliJ projects.">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/ValidatedJTextField.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Pipestone.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="$PROJECT_DIR$/../Caliper/.idea/workspace.xml" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1356305404831" ignored="false" />
-    <file path="/a.dummy" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1367390349447" ignored="false" />
+    <file path="/a.dummy" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1371720294902" ignored="false" />
     <file path="$PROJECT_DIR$/src/com/obtuse/db/raw/ElephantDBServices.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1356305275227" ignored="false" />
     <file path="$PROJECT_DIR$/src/com/obtuse/db/raw/dbdata/Tuple2.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1356305275227" ignored="false" />
     <file path="$PROJECT_DIR$/src/com/obtuse/db/raw/dbdata/Tuple.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1356305275227" ignored="false" />
     <file path="$PROJECT_DIR$/src/com/obtuse/db/raw/ti/TableInfo.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1356305275227" ignored="false" />
     <file path="/fragment.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1367387954751" ignored="false" />
-    <file path="/Dummy.txt" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1370817630966" ignored="false" />
+    <file path="/Dummy.txt" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1371722559993" ignored="false" />
     <file path="/*.regexp" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366615174668" ignored="false" />
     <file path="$PROJECT_DIR$/.idea/copyright/Obtuse.xml" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1356308355272" ignored="false" />
     <file path="$PROJECT_DIR$/../CouchDB4J-IntelliJ/src/com/fourspaces/couchdb/Session.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1356309278618" ignored="false" />
@@ -324,7 +325,7 @@
     <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/RuleViewCollection.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1367390590867" ignored="false" />
     <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/GroupViewCollection.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1367390381769" ignored="false" />
     <file path="/GroupViewCollection.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365485155636" ignored="false" />
-    <file path="/GroupsDrawingCanvas.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366703853431" ignored="false" />
+    <file path="/GroupsDrawingCanvas.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1371718894097" ignored="false" />
     <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/util/NounsList.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363065891772" ignored="false" />
     <file path="/GroupDependency.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365408813986" ignored="false" />
     <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/EntityPicker.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363070730893" ignored="false" />
@@ -376,7 +377,7 @@
     <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/RuleDrawingGroupView.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363534396619" ignored="false" />
     <file path="/RuleDrawingGroupView.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363501723857" ignored="false" />
     <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/GroupHierarchyDrawingDependencyView.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363442705775" ignored="false" />
-    <file path="/LaskinGroup.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366703402764" ignored="false" />
+    <file path="/LaskinGroup.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1371717177214" ignored="false" />
     <file path="/RetypePopup.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363446192231" ignored="false" />
     <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/ChangeAttributeValuePopup.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365473477848" ignored="false" />
     <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/ChangeAttributeValuePopup.form" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363445947876" ignored="false" />
@@ -530,7 +531,7 @@
     <file path="/ElementViewCollection.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365242388670" ignored="false" />
     <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/ElementDetailsWindow.form" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365320662292" ignored="false" />
     <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/ElementDetailsWindow.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1367388921234" ignored="false" />
-    <file path="/ElementDetailsWindow.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1367388752278" ignored="false" />
+    <file path="/ElementDetailsWindow.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1371717838540" ignored="false" />
     <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/GroupDependenciesTableModel.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366615926524" ignored="false" />
     <file path="/GroupDependenciesTableModel.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366614427512" ignored="false" />
     <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/GroupDependenciesTable.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1367213847364" ignored="false" />
@@ -549,7 +550,7 @@
     <file path="/AllRulesWindow.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1367216671205" ignored="false" />
     <file path="/AllGroupsWindow.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365403947245" ignored="false" />
     <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/LaskinGroupElement.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366700429667" ignored="false" />
-    <file path="/LaskinGroupElement.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366699672400" ignored="false" />
+    <file path="/LaskinGroupElement.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1371718622628" ignored="false" />
     <file path="/AbstractRuleView.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365409538849" ignored="false" />
     <file path="/GuiTermElement.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365409245946" ignored="false" />
     <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/util/TopologicalSort.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365474241708" ignored="false" />
@@ -663,7 +664,7 @@
     <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/WorkInstructionDetailsWindow.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1367388961063" ignored="false" />
     <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/WorkInstructionDetailsWindow.form" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1367383987182" ignored="false" />
     <file path="/WorkInstructionDetailsWindow.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1367388961063" ignored="false" />
-    <file path="/GroupDetailsWindow.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1367388952710" ignored="false" />
+    <file path="/GroupDetailsWindow.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1371717883902" ignored="false" />
     <file path="/SheetTable.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1367383198788" ignored="false" />
     <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/SheetManagerTable.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1367383481262" ignored="false" />
     <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/DetailsWindow.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1367388996048" ignored="false" />
@@ -671,6 +672,22 @@
     <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/AllGroupsWindow.form" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1367390184977" ignored="false" />
     <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/util/MyAbstractAction.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1367390590867" ignored="false" />
     <file path="/MyAbstractAction.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1367390475308" ignored="false" />
+    <file path="$PROJECT_DIR$/../SafedoorPM-Bookman/Bookman/src/com/safedoorpm/bookman/gui/ValidatedJTextField.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1371714588421" ignored="false" />
+    <file path="$PROJECT_DIR$/../SafedoorPM-Bookman/Bookman/src/com/safedoorpm/bookman/gui/GroupDetailsWindow.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1371719657432" ignored="false" />
+    <file path="$PROJECT_DIR$/../SafedoorPM-Bookman/Bookman/src/com/safedoorpm/bookman/gui/GroupDetailsWindow.form" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1371714768337" ignored="false" />
+    <file path="$PROJECT_DIR$/../SafedoorPM-Bookman/Bookman/src/com/safedoorpm/bookman/gui/ElementDetailsWindow.form" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1371715565645" ignored="false" />
+    <file path="$PROJECT_DIR$/../SafedoorPM-Bookman/Bookman/src/com/safedoorpm/bookman/gui/ElementDetailsWindow.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1371719726146" ignored="false" />
+    <file path="$PROJECT_DIR$/../SafedoorPM-Bookman/Bookman/src/com/safedoorpm/bookman/util/InvalidationReason.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1371716314079" ignored="false" />
+    <file path="$PROJECT_DIR$/../SafedoorPM-Bookman/Bookman/src/com/safedoorpm/bookman/util/GroupsDrawingCanvas.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1371720553070" ignored="false" />
+    <file path="$PROJECT_DIR$/../SafedoorPM-Bookman/Bookman/src/com/safedoorpm/bookman/util/RulesSpreadsheetCanvas.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1371715685945" ignored="false" />
+    <file path="$PROJECT_DIR$/../SafedoorPM-Bookman/Bookman/src/com/safedoorpm/bookman/data/LaskinGroup.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1371718549225" ignored="false" />
+    <file path="$PROJECT_DIR$/../SafedoorPM-Bookman/Bookman/src/com/safedoorpm/bookman/data/LaskinGroupElement.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1371718839926" ignored="false" />
+    <file path="$PROJECT_DIR$/../SafedoorPM-Bookman/.idea/workspace.xml" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1371722559687" ignored="false" />
+    <file path="$PROJECT_DIR$/../SafedoorPM-Bookman/Bookman/src/com/safedoorpm/bookman/data/GroupSectionView.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1371717660824" ignored="false" />
+    <file path="/GroupSectionView.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1371717637505" ignored="false" />
+    <file path="/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/ui.jar!/apple/awt/CInputMethod.class" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1371719748228" ignored="false" />
+    <file path="$PROJECT_DIR$/../SafedoorPM-Bookman/Bookman/src/com/safedoorpm/bookman/gui/DetailsWindow.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1371720182569" ignored="false" />
+    <file path="$PROJECT_DIR$/../SafedoorPM-Bookman/Bookman/src/com/safedoorpm/bookman/gui/WorkInstructionsWindow.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1371720325928" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -805,15 +822,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PreferencesHandler.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/PreferencesHandler.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="17" selection-start="322" selection-end="322" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="OSLevelCustomizations.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/OSLevelCustomizations.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -832,11 +840,26 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ObtuseUtil.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="ObtuseUtil.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/ObtuseUtil.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="27" column="13" selection-start="632" selection-end="632" vertical-scroll-proportion="0.2689655">
+            <state line="27" column="13" selection-start="632" selection-end="632" vertical-scroll-proportion="0.0">
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ValidatedJTextField.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/ValidatedJTextField.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="90" column="17" selection-start="2950" selection-end="2950" vertical-scroll-proportion="0.60368663">
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#2634#2950#0" expanded="true" />
+                <element signature="e#2930#2931#0" expanded="true" />
+                <element signature="e#3248#3476#0" expanded="true" />
+                <element signature="e#3456#3457#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -887,7 +910,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/com/obtuse/util/WindowWithMenus.java" />
         <option value="$PROJECT_DIR$/src/com/obtuse/util/TrackedWindow.java" />
         <option value="$PROJECT_DIR$/src/com/obtuse/ui/TrackedWindow.java" />
         <option value="$PROJECT_DIR$/src/com/obtuse/ui/LogsWindow.java" />
@@ -903,12 +925,13 @@
         <option value="$PROJECT_DIR$/src/com/obtuse/util/OSLevelCustomizations.java" />
         <option value="$PROJECT_DIR$/src/com/obtuse/util/BasicProgramConfigInfo.java" />
         <option value="$PROJECT_DIR$/src/com/obtuse/ui/WindowWithMenus.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/ui/ValidatedJTextField.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="42" />
-    <option name="y" value="22" />
+    <option name="x" value="-2471" />
+    <option name="y" value="65" />
     <option name="width" value="2465" />
     <option name="height" value="1457" />
   </component>
@@ -1075,7 +1098,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -1639,6 +1661,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1656,9 +1679,9 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="options.searchVisible" value="true" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="dynamic.classpath" value="false" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -1839,19 +1862,6 @@
       <option name="PORT" value="5005" />
       <method />
     </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <method />
-    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="" />
@@ -1878,6 +1888,19 @@
       <envs />
       <properties />
       <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -1974,14 +1997,18 @@
       <created>1365501573948</created>
       <updated>1365501573948</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Changes to workspace.xml file as a result of using this project's src directories as content roots in other IntelliJ projects.">
+      <created>1370818276346</created>
+      <updated>1370818276346</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="42" y="22" width="2465" height="1457" extended-state="0" />
-    <editor active="false" />
+    <frame x="-2471" y="65" width="2465" height="1457" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32935026" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32984293" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.118644066" sideWeight="0.67289025" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1992,11 +2019,12 @@
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32984293" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32834706" sideWeight="0.9753381" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1914014" sideWeight="0.67064977" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1914014" sideWeight="0.6701571" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32949308" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329475" sideWeight="0.67289025" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Problems" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -2004,7 +2032,6 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32685116" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32834706" sideWeight="0.9753381" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -2050,7 +2077,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Very early stage topological graph stuff.&#10;Lots of cleanup here and there." />
+    <option name="LAST_COMMIT_MESSAGE" value="Changes to workspace.xml file as a result of using this project's src directories as content roots in other IntelliJ projects." />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -2067,6 +2094,7 @@
     <MESSAGE value="Cleanup the copyright notices.&#10;Add a .gitignore file." />
     <MESSAGE value="Major re-sync with danny's personal toolkit." />
     <MESSAGE value="Very early stage topological graph stuff.&#10;Lots of cleanup here and there." />
+    <MESSAGE value="Changes to workspace.xml file as a result of using this project's src directories as content roots in other IntelliJ projects." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -2076,13 +2104,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/db/exceptions/ObtuseJDBCDriverLoadFailedException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="13" selection-start="216" selection-end="216" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/obtuse/db/PostgresConnection.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="66" column="43" selection-start="1910" selection-end="1910" vertical-scroll-proportion="0.0">
@@ -2181,8 +2202,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/ObtuseUtil.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="13" selection-start="632" selection-end="632" vertical-scroll-proportion="0.2689655">
+        <state line="27" column="13" selection-start="632" selection-end="632" vertical-scroll-proportion="0.0">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/ValidatedJTextField.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="90" column="17" selection-start="2950" selection-end="2950" vertical-scroll-proportion="0.60368663">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2634#2950#0" expanded="true" />
+            <element signature="e#2930#2931#0" expanded="true" />
+            <element signature="e#3248#3476#0" expanded="true" />
+            <element signature="e#3456#3457#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
