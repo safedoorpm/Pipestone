@@ -48,7 +48,7 @@ public abstract class ValidatedJTextField extends JTextField {
 
                         if ( verify( jComponent ) ) {
 
-                            storeNewValue( getText() );
+                            storeNewValue( getText(), false );
 
 //                            _displayNameIssuesField.setText( "" );
 //
@@ -82,7 +82,7 @@ public abstract class ValidatedJTextField extends JTextField {
 
                         if ( isValueValid( getText() ) ) {
 
-                            storeNewValue( getText() );
+                            storeNewValue( getText(), true );
 
                         }
 
@@ -130,8 +130,9 @@ public abstract class ValidatedJTextField extends JTextField {
      * Store a validated value into the model.
      * <p/>This method is only called and is always called immediately after a call to {@link #isValueValid}.
      * @param newValue the new value for the model.
+     * @param causedByReturnKey true if this store is being triggered by an ActionListener.actionPerformed call; false otherwise.
      */
 
-    public abstract void storeNewValue( String newValue );
+    public abstract void storeNewValue( String newValue, boolean causedByReturnKey );
 
 }
