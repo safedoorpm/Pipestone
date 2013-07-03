@@ -109,11 +109,11 @@ public class LogsWindow extends WindowWithMenus {
 
                                 if ( selectedIndices.length > 0 ) {
 
-                                    setMenuEnabled( _copyMenuItem, true );
+                                    setMenuEnabled( "LW:LW", _copyMenuItem, true );
 
                                 } else {
 
-                                    setMenuEnabled( _copyMenuItem, false );
+                                    setMenuEnabled( "LW:LW", _copyMenuItem, false );
 
                                 }
 
@@ -189,11 +189,12 @@ public class LogsWindow extends WindowWithMenus {
      * <p/>This method lives in this class instead of say the Trace class because adding this method to the
      * Trace class would result in any program that uses the Trace class implicitly sucking in a huge chunk of Swing.
      * Since this class already uses Swing, putting the method here does no real harm.
+     * @param context where this is being done.
      * @param menuItem the menu item in question.
      * @param value its new state.
      */
 
-    public static void setMenuEnabled( JMenuItem menuItem, boolean value ) {
+    public static void setMenuEnabled( String context, JMenuItem menuItem, boolean value ) {
 
         String text = menuItem.getText();
         if ( text == null ) {
@@ -202,11 +203,17 @@ public class LogsWindow extends WindowWithMenus {
 
         }
 
-        Trace.event( "menu item \"" + text + "\" set to " + ( value ? "enabled" : "not enabled" ) );
+        Trace.event( ( context == null ? "" : context + ":  " ) + "menu item \"" + text + "\" set to " + ( value ? "enabled" : "not enabled" ) );
 
         menuItem.setEnabled( value );
 
     }
+
+//    public static void setMenuEnabled( JMenuItem menuItem, boolean value ) {
+//
+//        setMenuEnabled( null, menuItem, value );
+//
+//    }
 
     /**
      * Utility method to trace the setting of a button's enabled state.
@@ -352,7 +359,7 @@ public class LogsWindow extends WindowWithMenus {
         _editMenu = new JMenu( "Edit" );
 
         JMenuItem selectAllMenuItem = new JMenuItem( "Select All" );
-        setMenuEnabled( selectAllMenuItem, true );
+        setMenuEnabled( "LW:dEM", selectAllMenuItem, true );
         selectAllMenuItem.addActionListener(
 
                 new ActionListener() {
@@ -386,11 +393,11 @@ public class LogsWindow extends WindowWithMenus {
                 )
         );
 
-        setMenuEnabled( cutMenuItem, false );
+        setMenuEnabled( "LW:dEM", cutMenuItem, false );
 
         _copyMenuItem = new JMenuItem( "Copy" );
 
-        setMenuEnabled( _copyMenuItem, false );
+        setMenuEnabled( "LW:dEM", _copyMenuItem, false );
 
         _copyMenuItem.addActionListener(
 
@@ -441,7 +448,7 @@ public class LogsWindow extends WindowWithMenus {
                 )
         );
 
-        setMenuEnabled( pasteMenuItem, false );
+        setMenuEnabled( "LW:dEM", pasteMenuItem, false );
 
         _editMenu.add( cutMenuItem );   // never enabled (yet?)
         _editMenu.add( _copyMenuItem );

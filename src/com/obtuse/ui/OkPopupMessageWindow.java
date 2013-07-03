@@ -177,7 +177,7 @@ public abstract class OkPopupMessageWindow extends JDialog {
 
     @SuppressWarnings({ "SameParameterValue" })
     public static void doit( final String line1,
-                             @org.jetbrains.annotations.Nullable
+                             @Nullable
                              final String line2,
                              final String button,
                              @Nullable

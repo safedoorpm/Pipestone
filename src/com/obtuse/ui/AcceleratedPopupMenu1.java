@@ -165,8 +165,8 @@ public class AcceleratedPopupMenu1 extends JPopupMenu {
 
         }
 
-        LogsWindow.setMenuEnabled( _firstMenuItem, false );
-        LogsWindow.setMenuEnabled( _secondMenuItem, false );
+        LogsWindow.setMenuEnabled( "APM1:sV", _firstMenuItem, false );
+        LogsWindow.setMenuEnabled( "APM1:sV", _secondMenuItem, false );
 
         pack();
 

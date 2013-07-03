@@ -44,7 +44,9 @@ public class Trace {
 
     public static final int MAX_FORMATTED_TRACE_DEPTH = 100;
 
-    public static void set_supportContact( String supportContact ) {
+    private static boolean _printEvents = false;
+
+    public static void setSupportContact( String supportContact ) {
 
         Trace.s_supportContact = supportContact;
 
@@ -176,7 +178,7 @@ public class Trace {
 
     private static final List<TraceFileManager> s_traceFileManagers = new LinkedList<TraceFileManager>();
 
-    private static final int MAX_TRACE_EVENTS = 25000;
+    private static final int MAX_TRACE_EVENTS = 50000;
 
     private Trace() {
 
@@ -270,6 +272,12 @@ public class Trace {
     }
 
     public static void event( String event, @Nullable Throwable e ) {
+
+        if ( _printEvents ) {
+
+            System.out.println( "Trace event:  " + event + ( e == null ? "" : " (throwable is " + e + ")" ) );
+
+        }
 
 //        System.out.println( "event( \"" + event + "\", " + e + " )" );
         Long threadId = Thread.currentThread().getId();
@@ -467,8 +475,9 @@ public class Trace {
         String rval = Trace.emitResults( why, results, where, true );
         System.out.println( "file emitted" );
 
-        //noinspection MagicNumber
-        ObtuseUtil.safeSleepMillis( javax.management.timer.Timer.ONE_SECOND * 5L );
+//        //noinspection MagicNumber
+//        ObtuseUtil.safeSleepMillis( javax.management.timer.Timer.ONE_SECOND * 3L );
+
         return rval;
 
     }
@@ -735,6 +744,22 @@ public class Trace {
             trace.add( "\t... " + ( stack.length - Trace.MAX_FORMATTED_TRACE_DEPTH ) + " more" );
 
         }
+
+    }
+
+    public static boolean setPrintEvents( boolean printEvents ) {
+
+        boolean oldValue = _printEvents;
+
+        _printEvents = printEvents;
+
+        return oldValue;
+
+    }
+
+    public static boolean printEvents() {
+
+        return _printEvents;
 
     }
 
