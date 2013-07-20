@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" name="Default" comment="" />
+    <list default="true" id="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    </list>
     <ignored path="Pipestone.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="$PROJECT_DIR$/../Caliper/.idea/workspace.xml" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1356305404831" ignored="false" />
-    <file path="/a.dummy" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1373532793617" ignored="false" />
+    <file path="/a.dummy" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1373649324384" ignored="false" />
     <file path="$PROJECT_DIR$/src/com/obtuse/db/raw/ElephantDBServices.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1356305275227" ignored="false" />
     <file path="$PROJECT_DIR$/src/com/obtuse/db/raw/dbdata/Tuple2.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1356305275227" ignored="false" />
     <file path="$PROJECT_DIR$/src/com/obtuse/db/raw/dbdata/Tuple.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1356305275227" ignored="false" />
     <file path="$PROJECT_DIR$/src/com/obtuse/db/raw/ti/TableInfo.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1356305275227" ignored="false" />
     <file path="/fragment.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1373523121187" ignored="false" />
-    <file path="/Dummy.txt" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1373435859261" ignored="false" />
+    <file path="/Dummy.txt" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1373648962194" ignored="false" />
     <file path="/*.regexp" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366615174668" ignored="false" />
     <file path="$PROJECT_DIR$/.idea/copyright/Obtuse.xml" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1356308355272" ignored="false" />
     <file path="$PROJECT_DIR$/../CouchDB4J-IntelliJ/src/com/fourspaces/couchdb/Session.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1356309278618" ignored="false" />
@@ -679,7 +681,7 @@
     <file path="$PROJECT_DIR$/../SafedoorPM-Bookman/Bookman/src/com/safedoorpm/bookman/util/RulesSpreadsheetCanvas.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1373441185417" ignored="false" />
     <file path="$PROJECT_DIR$/../SafedoorPM-Bookman/Bookman/src/com/safedoorpm/bookman/data/LaskinGroup.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1373535091874" ignored="false" />
     <file path="$PROJECT_DIR$/../SafedoorPM-Bookman/Bookman/src/com/safedoorpm/bookman/data/LaskinGroupElement.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1371718839926" ignored="false" />
-    <file path="$PROJECT_DIR$/../SafedoorPM-Bookman/.idea/workspace.xml" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1373648447827" ignored="false" />
+    <file path="$PROJECT_DIR$/../SafedoorPM-Bookman/.idea/workspace.xml" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1373677485299" ignored="false" />
     <file path="$PROJECT_DIR$/../SafedoorPM-Bookman/Bookman/src/com/safedoorpm/bookman/data/GroupSectionView.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1371717660824" ignored="false" />
     <file path="/GroupSectionView.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1371717637505" ignored="false" />
     <file path="/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/ui.jar!/apple/awt/CInputMethod.class" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1371719748228" ignored="false" />
@@ -705,7 +707,7 @@
     <file path="$PROJECT_DIR$/../SafedoorPM-Bookman/Bookman/src/com/safedoorpm/bookman/gui/CWCheckBoxRenderer.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1373362669655" ignored="false" />
     <file path="$PROJECT_DIR$/../SafedoorPM-Bookman/Bookman/src/com/safedoorpm/bookman/gui/Check.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1373362214662" ignored="false" />
     <file path="$PROJECT_DIR$/../SafedoorPM-Bookman/Bookman/src/com/safedoorpm/bookman/gui/WorkInstructionReferenceCellEditor.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1373431175256" ignored="false" />
-    <file path="$PROJECT_DIR$/../SafedoorPM-Bookman/Bookman/src/com/safedoorpm/bookman/gui/WorkInstructionsTableModel.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1373527635702" ignored="false" />
+    <file path="$PROJECT_DIR$/../SafedoorPM-Bookman/Bookman/src/com/safedoorpm/bookman/gui/WorkInstructionsTableModel.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1373649569251" ignored="false" />
     <file path="$PROJECT_DIR$/../SafedoorPM-Bookman/Bookman/src/com/safedoorpm/bookman/gui/WorkInstructionsTable.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1373431741726" ignored="false" />
     <file path="/CheckBoxCellEditor.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1373432923942" ignored="false" />
     <file path="$PROJECT_DIR$/../SafedoorPM-Bookman/Bookman/src/com/safedoorpm/bookman/gui/AlignedBooleanCellEditor.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1373524222854" ignored="false" />
@@ -2038,7 +2040,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="37" y="22" width="2465" height="1457" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32984293" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
