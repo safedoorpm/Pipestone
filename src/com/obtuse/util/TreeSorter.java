@@ -297,7 +297,8 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
 
     public Collection<V> getValues( K key ) {
 
-        return Collections.unmodifiableCollection( _sortedData.get( key ) );
+        Collection<V> values = _sortedData.get( key );
+        return Collections.unmodifiableCollection( values == null ? new LinkedList<V>() : values );
 
     }
 
