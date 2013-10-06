@@ -1289,7 +1289,10 @@ public class ObtuseUtil {
         StringBuilder rval = new StringBuilder();
         for ( byte b : bv ) {
 
-            rval.append( ObtuseUtil.hexvalue( b ) );
+            int high = ( b >> 4 ) & 0xf;
+            int low = (int)b & 0xf;
+
+            rval.append( "0123456789abcdef".charAt( high ) ).append( "0123456789abcdef".charAt( low ) );
 
         }
 
