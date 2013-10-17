@@ -14,6 +14,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.zip.ZipFile;
 
 /*
@@ -26,6 +28,36 @@ import java.util.zip.ZipFile;
 
 @SuppressWarnings({ "UnusedDeclaration" })
 public class ObtuseUtil {
+
+    private static final Pattern HEX_STRING_PATTERN = Pattern.compile( "([0-9a-f][0-9a-f])*" );
+
+    public static String extractKeywordValueSemiColon( String url, String keyword ) {
+
+        String wrappedURL = ";" + url;
+        String wrappedKeyword = ";" + keyword + "=";
+        int keywordOffset = wrappedURL.indexOf( wrappedKeyword );
+        if ( keywordOffset < 0 ) {
+
+            Logger.logErr( "unable to find keyword \"" + keyword + "\" in URL " + url );
+
+            return null;
+
+        }
+
+        int valueOffset = keywordOffset + wrappedKeyword.length();
+        String valueInURL = wrappedURL.substring( valueOffset );
+        int endValueOffset = valueInURL.indexOf( ";" );
+        if ( endValueOffset < 0 ) {
+
+            Logger.logErr( "unable to find end of value for keyword \"" + keyword + "\" in URL " + url );
+
+            return null;
+
+        }
+
+        return valueInURL.substring( 0, endValueOffset + 1 );
+
+    }
 
     private static class UnmodifiableHashtable<K,V> extends Hashtable<K,V> {
 
@@ -1297,6 +1329,64 @@ public class ObtuseUtil {
         }
 
         return rval.toString();
+
+    }
+
+    /**
+     * Decode a string of hex digits as a byte array.
+     */
+
+    @NotNull
+    public static byte[] decodeHexAsByteArray( @NotNull String hexString ) {
+
+        String hex = hexString.toLowerCase();
+
+        Matcher m;
+        synchronized ( HEX_STRING_PATTERN ) {
+
+            m = HEX_STRING_PATTERN.matcher( hex );
+
+        }
+
+        if ( !m.matches() ) {
+
+            throw new NumberFormatException( "not a hex string" );
+
+        }
+
+        byte[] rval = new byte[ hex.length() >> 1 ];
+        char[] hexChars = hex.toCharArray();
+        int inputIx = 0;
+        int outputIx = 0;
+        while ( inputIx < hex.length() ) {
+
+            char ch1 = hexChars[inputIx];
+            if ( !( ch1 >= '0' && ch1 <= '9' || ch1 >= 'a' && ch1 <= 'f' ) ) {
+
+                throw new NumberFormatException( "msb at offset " + inputIx + " (" + ch1 + ") is not a valid hex digit" );
+
+            }
+
+            inputIx += 1;
+
+            char ch2 = hexChars[inputIx];
+            if ( !( ch2 >= '0' && ch2 <= '9' || ch2 >= 'a' && ch2 <= 'f' ) ) {
+
+                throw new NumberFormatException( "lsb at offset " + inputIx + " (" + ch2 + ") is not a valid hex digit" );
+
+            }
+
+            inputIx += 1;
+
+            int highNibble = ( ch1 >= '0' && ch1 <= '9' ) ? ch1 - '0' : 10 + ch1 - 'a';
+            int lowNibble = ( ch2 >= '0' && ch2 <= '9' ) ? ch2 - '0' : 10 + ch2 - 'a';
+            rval[outputIx] = (byte) ( ( highNibble << 4 ) | lowNibble );
+
+            outputIx += 1;
+
+        }
+
+        return rval;
 
     }
 
