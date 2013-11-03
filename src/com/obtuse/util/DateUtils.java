@@ -49,6 +49,8 @@ public class DateUtils {
     private static final SimpleDateFormat YYMMDD                  = new SimpleDateFormat( "yyMMdd" );
     private static final SimpleDateFormat HH_MM_SS_12_EEE_MMM_DD  = new SimpleDateFormat( "hh:mm:ss EEE MMM dd" );
     private static final SimpleDateFormat HH_MM_SS_24_EEE_MMM_DD  = new SimpleDateFormat( "HH:mm:ss EEE MMM dd" );
+    private static final SimpleDateFormat STANDARD                = new SimpleDateFormat( "yyyy-MM-dd'T'HH:mm:ssZ" );
+    private static final SimpleDateFormat STANDARD_MS             = new SimpleDateFormat( "yyyy-MM-dd'T'HH:mm:ss.SSSZ" );
 
     /**
      * Make it impossible to instantiate this class.
@@ -183,6 +185,45 @@ public class DateUtils {
 
             DateUtils.MMDDYYYY.setTimeZone( TimeZone.getDefault() );
             String s = DateUtils.MMDDYYYY.format( dateTime );
+            return s;
+
+        }
+
+    }
+
+    /**
+     * Format a date string in a 'standard' format which excludes milliseconds.
+     * <p/>The 'standard' format is
+     * <blockquote><tt>yyyy-MM-dd'T'HH:mm:ssZ</tt></blockquote>
+     * or
+     * <blockquote><tt>2001-07-04T12:08:56-0700</tt></blockquote>
+     */
+
+    public static String formatStandard( Date dateTime ) {
+
+        synchronized ( DateUtils.STANDARD ) {
+
+            DateUtils.STANDARD.setTimeZone( TimeZone.getDefault() );
+            String s = DateUtils.STANDARD.format( dateTime );
+            return s;
+
+        }
+    }
+
+    /**
+     * Format a date string in a 'standard' format which includes milliseconds.
+     * <p/>The 'standard' format is
+     * <blockquote><tt>yyyy-MM-dd'T'HH:mm:ss.SSSZ</tt></blockquote>
+     * or
+     * <blockquote><tt>2001-07-04T12:08:56.235-0700</tt></blockquote>
+     */
+
+    public static String formatStandardMs( Date dateTime ) {
+
+        synchronized ( DateUtils.STANDARD_MS ) {
+
+            DateUtils.STANDARD_MS.setTimeZone( TimeZone.getDefault() );
+            String s = DateUtils.STANDARD_MS.format( dateTime );
             return s;
 
         }
