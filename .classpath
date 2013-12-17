@@ -2,9 +2,6 @@
 <classpath>
 	<classpathentry excluding="com/obtuse/util/MacCustomization.java" kind="src" path="src"/>
 	<classpathentry kind="lib" path="annotations.jar"/>
-	<classpathentry kind="lib" path="bin/annotations.jar"/>
-	<classpathentry kind="lib" path="bin/junit-4.10.jar"/>
-	<classpathentry kind="lib" path="bin/postgresql-8.1-408.jdbc3.jar"/>
 	<classpathentry kind="lib" path="junit-4.10.jar"/>
 	<classpathentry kind="lib" path="postgresql-8.1-408.jdbc3.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
