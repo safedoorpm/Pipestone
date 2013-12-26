@@ -45,7 +45,7 @@
         </javac>
     </target>
               	
-    <target depends="build" name="deploy">
+    <target depends="clean, build" name="deploy">
     	 <jar destfile="${dist}/${distname}" basedir="bin1"/>         	
     </target>
               	
