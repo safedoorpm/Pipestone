@@ -38,10 +38,11 @@
     <target name="build-subprojects"/>
     <target depends="init" name="build-project">
         <echo message="${ant.project.name}: ${ant.file}"/>
-        <javac debug="true" debuglevel="${debuglevel}" destdir="bin1" source="${source}" target="${target}">
+        <javac includeantruntime="false" debug="true" debuglevel="${debuglevel}" destdir="bin1" source="${source}" target="${target}">
             <src path="src"/>
             <exclude name="com/obtuse/util/MacCustomization.java"/>
             <classpath refid="Pipestone.classpath"/>
+            <!-- compilerarg value="-Xlint:unchecked"/ -->
         </javac>
     </target>
               	
