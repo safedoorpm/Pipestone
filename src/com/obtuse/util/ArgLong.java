@@ -15,7 +15,7 @@ public abstract class ArgLong extends Arg {
 
     }
 
-    public void process( String keyword, String arg ) {
+    public final void process( String keyword, String arg ) {
 
         try {
 
@@ -23,7 +23,7 @@ public abstract class ArgLong extends Arg {
 
         } catch ( NumberFormatException e ) {
 
-            throw new IllegalArgumentException( "invalid argument (" + arg + ") - must be a long", e );
+            throw new IllegalArgumentException( "invalid \"" + keyword + "\" argument (" + arg + ") - must be a long", e );
 
         }
 

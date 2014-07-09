@@ -2,727 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ArgYYYY_MM_DD_CalendarDate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/ArgInt.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ArgInt.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/ArgLong.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ArgLong.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/ArgYYYY_MM_DD_Date.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ArgYYYY_MM_DD_Date.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/ArgYesNo.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ArgYesNo.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/ObtuseUtil.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ObtuseUtil.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" afterPath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Pipestone.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="$PROJECT_DIR$/../Caliper/.idea/workspace.xml" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1356305404831" ignored="false" />
-    <file path="/a.dummy" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1373649324384" ignored="false" />
-    <file path="$PROJECT_DIR$/src/com/obtuse/db/raw/ElephantDBServices.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1356305275227" ignored="false" />
-    <file path="$PROJECT_DIR$/src/com/obtuse/db/raw/dbdata/Tuple2.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1356305275227" ignored="false" />
-    <file path="$PROJECT_DIR$/src/com/obtuse/db/raw/dbdata/Tuple.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1356305275227" ignored="false" />
-    <file path="$PROJECT_DIR$/src/com/obtuse/db/raw/ti/TableInfo.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1356305275227" ignored="false" />
-    <file path="/fragment.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1374331233118" ignored="false" />
-    <file path="/Dummy.txt" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1374330758672" ignored="false" />
-    <file path="/*.regexp" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366615174668" ignored="false" />
-    <file path="$PROJECT_DIR$/.idea/copyright/Obtuse.xml" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1356308355272" ignored="false" />
-    <file path="$PROJECT_DIR$/../CouchDB4J-IntelliJ/src/com/fourspaces/couchdb/Session.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1356309278618" ignored="false" />
-    <file path="$PROJECT_DIR$/../CouchDB4J-IntelliJ/src/com/fourspaces/couchdb/Database.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1356309321756" ignored="false" />
-    <file path="$PROJECT_DIR$/../Pickle Barrel/Mahler/src/com/savrola/picklebarrel/mahler/MahlerHTTPD.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1357460969764" ignored="false" />
-    <file path="/MahlerHTTPD.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1357459488279" ignored="false" />
-    <file path="$PROJECT_DIR$/../Pickle Barrel/Mahler/src/com/savrola/picklebarrel/mahler/MainMahlerWindow.form" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1357460555468" ignored="false" />
-    <file path="$PROJECT_DIR$/../Pickle Barrel/Mahler/src/com/savrola/picklebarrel/mahler/MainMahlerWindow.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1357460555468" ignored="false" />
-    <file path="$PROJECT_DIR$/../Pickle Barrel/Mahler/src/com/savrola/picklebarrel/mahler/NodesTableModel.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1357455566840" ignored="false" />
-    <file path="$PROJECT_DIR$/../Pickle Barrel/Pickle Barrel/src/com/savrola/picklebarrel/util/NodesTableModel.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1357459166977" ignored="false" />
-    <file path="$PROJECT_DIR$/../Pickle Barrel/Pickle Barrel/src/com/savrola/picklebarrel/util/NodeInfo.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1357459119440" ignored="false" />
-    <file path="/NodeInfo.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1357458439580" ignored="false" />
-    <file path="/a.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1364463033371" ignored="false" />
-    <file path="/sample.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1364462906323" ignored="false" />
-    <file path="/NodesTableModel.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1357459057746" ignored="false" />
-    <file path="$PROJECT_DIR$/../Pickle Barrel/Pickle Barrel/src/com/savrola/picklebarrel/util/ClusterNodeInfo.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1357460056790" ignored="false" />
-    <file path="/ClusterNodeInfo.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1357460053997" ignored="false" />
-    <file path="/MainMahlerWindow.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1357460540755" ignored="false" />
-    <file path="$PROJECT_DIR$/../Pickle Barrel/Mahler/src/com/savrola/picklebarrel/mahler/Mahler.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1357460424729" ignored="false" />
-    <file path="/Mahler.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1357460402031" ignored="false" />
-    <file path="$PROJECT_DIR$/../Shared/Shared/src/com/obtuse/util/ArgParser.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1359543244070" ignored="false" />
-    <file path="$PROJECT_DIR$/../Shared/Shared/src/com/obtuse/util/Arg.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1359543267071" ignored="false" />
-    <file path="$PROJECT_DIR$/../Shared/Shared/src/com/obtuse/util/ArgInt.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1359543277601" ignored="false" />
-    <file path="$PROJECT_DIR$/../Shared/Shared/src/com/obtuse/util/ArgLong.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1359543288160" ignored="false" />
-    <file path="$PROJECT_DIR$/../Shared/Shared/src/com/obtuse/util/ArgString.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1359543298274" ignored="false" />
-    <file path="$PROJECT_DIR$/../Shared/Shared/src/com/obtuse/util/ArgYesNo.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1359543309502" ignored="false" />
-    <file path="$PROJECT_DIR$/../Shared/Shared/src/com/obtuse/util/ArgYYYY_MM_DD_Date.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1359543361078" ignored="false" />
-    <file path="$PROJECT_DIR$/../Shared/Shared/src/com/obtuse/util/ArgParserExample.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1359543373463" ignored="false" />
-    <file path="$PROJECT_DIR$/../Shared/Shared/src/com/invidi/bbm/shared/data/BBMTrailerRecord.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1359581065674" ignored="false" />
-    <file path="$PROJECT_DIR$/../Shared/Shared/src/com/invidi/dataexplorer/shared/util/DataFileParser.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1359581065674" ignored="false" />
-    <file path="$PROJECT_DIR$/../Shared/Parsers/src/com/invidi/advatar/irg/util/AllPerMacLogFilesByCountyProcessor.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1359581065674" ignored="false" />
-    <file path="$PROJECT_DIR$/../Shared/Shared/src/com/obtuse/util/DateUtils.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365546079653" ignored="false" />
-    <file path="$PROJECT_DIR$/../Shared/Parsers/src/com/invidi/advatar/irg/util/DstbLogFileParser.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1359581065674" ignored="false" />
-    <file path="$PROJECT_DIR$/../Shared/Parsers/src/com/invidi/advatar/irg/util/DstbLogFileRecordParser.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1359581065674" ignored="false" />
-    <file path="$PROJECT_DIR$/../Shared/Parsers/src/com/invidi/advatar/irg/data/AdPlayedRecord.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1359581065674" ignored="false" />
-    <file path="$PROJECT_DIR$/../Shared/Shared/src/com/obtuse/util/ObtuseXMLUtils.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1359581065674" ignored="false" />
-    <file path="$PROJECT_DIR$/../Shared/Shared/src/com/invidi/bbm/shared/data/BBMDemographicRecord.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1359581065674" ignored="false" />
-    <file path="$PROJECT_DIR$/../Shared/Shared/src/com/obtuse/util/exceptions/ParsingException.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1359543438694" ignored="false" />
-    <file path="$PROJECT_DIR$/../Shared/Shared/src/com/invidi/bbm/shared/data/BBMHeaderRecord.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1359581065674" ignored="false" />
-    <file path="$PROJECT_DIR$/../Shared/Parsers/src/com/invidi/advatar/irg/data/ChannelChangeRecord.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1359581065674" ignored="false" />
-    <file path="$PROJECT_DIR$/../Shared/Parsers/src/com/invidi/advatar/irg/util/LineParser.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1359543438694" ignored="false" />
-    <file path="$PROJECT_DIR$/../Shared/Shared/src/com/invidi/bbm/shared/data/BBMLiveViewingRecord.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1359581065674" ignored="false" />
-    <file path="$PROJECT_DIR$/../Shared/Shared/src/com/invidi/shared/time/LocalTimeZone.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1359581065674" ignored="false" />
-    <file path="$PROJECT_DIR$/../Shared/Parsers/src/com/invidi/advatar/irg/util/LogFileProcessor.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1359581065674" ignored="false" />
-    <file path="$PROJECT_DIR$/../Shared/Shared/src/com/invidi/bbm/shared/data/BBMQhrAudienceRecord.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1359581065674" ignored="false" />
-    <file path="$PROJECT_DIR$/../Shared/Shared/src/com/obtuse/util/YYYY_MM_DD_DateParam.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1359543438694" ignored="false" />
-    <file path="$PROJECT_DIR$/../Shared/Shared/src/com/invidi/bbm/shared/data/BBMQhrSampleRecord.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1359543438694" ignored="false" />
-    <file path="$PROJECT_DIR$/../Shared/Shared/src/com/invidi/dataexplorer/shared/data/FixedFieldWidthRecord.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1359581065674" ignored="false" />
-    <file path="$PROJECT_DIR$/../Shared/Shared/src/com/invidi/bbm/shared/data/BBMQhrUniverseRecord.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1359543438694" ignored="false" />
-    <file path="$PROJECT_DIR$/../Shared/Shared/src/com/obtuse/util/CalendarDate.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1359543474981" ignored="false" />
-    <file path="$PROJECT_DIR$/../Shared/Parsers/src/com/invidi/advatar/irg/util/OriginalTnsLogFilesByCountyProcessor.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1359581065674" ignored="false" />
-    <file path="$PROJECT_DIR$/../Shared/Shared/src/com/invidi/bbm/shared/data/BBMQhrUniverseSampleRecord.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1359581065674" ignored="false" />
-    <file path="$PROJECT_DIR$/../Shared/RawDatabaseSupport/src/com/loanetworks/nahanni/elephant2/raw/ti/TableInfo.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1359581065674" ignored="false" />
-    <file path="$PROJECT_DIR$/../Shared/RawDatabaseSupport/src/com/loanetworks/nahanni/elephant2/raw/ElephantDBServices.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1359581065674" ignored="false" />
-    <file path="$PROJECT_DIR$/../Shared/Shared/src/com/obtuse/util/GenericCsvParser.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1359543474981" ignored="false" />
-    <file path="$PROJECT_DIR$/../Shared/Shared/src/com/obtuse/util/exceptions/HowDidWeGetHereError.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1359543474981" ignored="false" />
-    <file path="$PROJECT_DIR$/../Shared/RawDatabaseSupport/src/com/loanetworks/nahanni/elephant2/raw/dbdata/Tuple.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1359581065674" ignored="false" />
-    <file path="$PROJECT_DIR$/../Shared/Shared/src/com/obtuse/util/MacCustomization.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1359581065674" ignored="false" />
-    <file path="$PROJECT_DIR$/../Shared/Shared/src/com/obtuse/util/ImageIconUtils.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1359581065674" ignored="false" />
-    <file path="$PROJECT_DIR$/../Shared/Shared/src/com/obtuse/util/LoggingMessageProxy.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1359545500392" ignored="false" />
-    <file path="$PROJECT_DIR$/../Shared/Shared/src/com/obtuse/util/JulianDate.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1359581065674" ignored="false" />
-    <file path="$PROJECT_DIR$/../Shared/Shared/src/com/obtuse/util/Logger.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1359545900251" ignored="false" />
-    <file path="$PROJECT_DIR$/../Shared/Shared/src/com/obtuse/util/SimpleEvent.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1359546179896" ignored="false" />
-    <file path="$PROJECT_DIR$/../Shared/Shared/src/com/obtuse/util/TreeCounter.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1359581065674" ignored="false" />
-    <file path="$PROJECT_DIR$/../Shared/Shared/src/com/obtuse/util/BasicProgramConfigInfo.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1359546547961" ignored="false" />
-    <file path="$PROJECT_DIR$/../Shared/Shared/src/com/obtuse/util/ResourceUtils.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1359581065674" ignored="false" />
-    <file path="$PROJECT_DIR$/../Shared/.idea/workspace.xml" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1359935851117" ignored="false" />
-    <file path="$PROJECT_DIR$/../Cornelius/Shared/src/com/invidi/madison/util/SimpleVotingManager.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1359603358141" ignored="false" />
-    <file path="$PROJECT_DIR$/../Cornelius/Shared/src/com/invidi/cornelius/data/VotingManager.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1359581135434" ignored="false" />
-    <file path="$PROJECT_DIR$/../Cornelius/Shared/src/com/invidi/cornelius/data/BasicDstb.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1359581135434" ignored="false" />
-    <file path="$PROJECT_DIR$/../Cornelius/src/com/invidi/cornelius/framework/AdnProcessingTime.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1359581135434" ignored="false" />
-    <file path="$PROJECT_DIR$/../Cornelius/src/com/invidi/cornelius/framework/CorneliusSimulator.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1359603358141" ignored="false" />
-    <file path="$PROJECT_DIR$/../Cornelius/Shared/src/com/invidi/cornelius/data/AbstractDstb.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1359581135434" ignored="false" />
-    <file path="$PROJECT_DIR$/../Cornelius/Shared/src/com/invidi/madison/util/programbased/ProgramBasedAdBuyGenerator.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1359581135434" ignored="false" />
-    <file path="$PROJECT_DIR$/../Cornelius/Shared/src/com/invidi/madison/data/RequestVoteTimeEvent.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1359581135434" ignored="false" />
-    <file path="$PROJECT_DIR$/../Cornelius/src/com/invidi/cornelius/RunCornelius.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1359603358141" ignored="false" />
-    <file path="$PROJECT_DIR$/../Cornelius/src/com/invidi/cornelius/SliceConfigurationRow.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1359603358141" ignored="false" />
-    <file path="$PROJECT_DIR$/../Cornelius/Shared/src/com/invidi/cornelius/data/AbstractAdr.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1359603358141" ignored="false" />
-    <file path="$PROJECT_DIR$/../Cornelius/Shared/src/com/invidi/cornelius/util/AvailableDataDateInfo.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1359603358141" ignored="false" />
-    <file path="$PROJECT_DIR$/../Cornelius/src/com/invidi/cornelius/WeightedSlicesPanel.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1359603358141" ignored="false" />
-    <file path="$PROJECT_DIR$/../Cornelius/Shared/src/com/invidi/cornelius/util/CorneliusConfiguration.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1359603358141" ignored="false" />
-    <file path="$PROJECT_DIR$/../Cornelius/Madison/src/com/invidi/cornelius/madison/data/experiandata/RawRatingsChannelStatistic.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1359603358141" ignored="false" />
-    <file path="$PROJECT_DIR$/../Cornelius/Shared/src/com/invidi/madison/util/UndeliveredImpressionsBasedValueIndexManager.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1359603358141" ignored="false" />
-    <file path="$PROJECT_DIR$/../Cornelius/Shared/src/com/invidi/madison/data/AdBreakSchedule.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1359603358141" ignored="false" />
-    <file path="$PROJECT_DIR$/../Cornelius/Shared/src/com/invidi/madison/data/AdBreakDescription.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1359603358141" ignored="false" />
-    <file path="$PROJECT_DIR$/../Cornelius/Shared/src/com/invidi/madison/util/AbstractVotingManagerConfiguration.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1359603358141" ignored="false" />
-    <file path="$PROJECT_DIR$/../Cornelius/Madison/src/com/invidi/cornelius/madison/parsers/experianratings/ExperianNetworkCorrelationReporter.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1359603358141" ignored="false" />
-    <file path="$PROJECT_DIR$/../Cornelius/Madison/src/com/invidi/cornelius/madison/parsers/experianratings/ExperianRatingsGenerator.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1359603358141" ignored="false" />
-    <file path="$PROJECT_DIR$/../Cornelius/src/com/invidi/cornelius/util/BucketSorter.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1359603358141" ignored="false" />
-    <file path="$PROJECT_DIR$/../Cornelius/Shared/src/com/invidi/madison/util/AbstractMadisonAdBuyConfiguration.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1359603358141" ignored="false" />
-    <file path="$PROJECT_DIR$/../Cornelius/src/com/invidi/cornelius/MacAddressRatingsGenerator.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1359603358141" ignored="false" />
-    <file path="$PROJECT_DIR$/../Cornelius/src/com/invidi/cornelius/ParameterizedAdBuyConfigurationWizard.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1359603358141" ignored="false" />
-    <file path="$PROJECT_DIR$/../Cornelius/Madison/src/com/invidi/cornelius/madison/CreateProgramsRatingsBasedAdBuyCollection.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1359603358141" ignored="false" />
-    <file path="$PROJECT_DIR$/../Safedoor Rules/src/com/safedoorpm/rules/RulesParser.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1361251011022" ignored="false" />
-    <file path="/RulesParser.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1361249845998" ignored="false" />
-    <file path="$PROJECT_DIR$/../Safedoor Rules/src/com/safedoorpm/rules/ListOfWorkInstructionsSheetParser.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1361252597616" ignored="false" />
-    <file path="$PROJECT_DIR$/../Safedoor Couchdb/.idea/workspace.xml" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1370817192635" ignored="false" />
-    <file path="$PROJECT_DIR$/../Safedoor Rules/src/com/safedoorpm/rules/RulesFileParser.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1361246954462" ignored="false" />
-    <file path="/RulesFileParser.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1361246892769" ignored="false" />
-    <file path="$PROJECT_DIR$/../Safedoor Rules/src/com/safedoorpm/rules/MapFlowSheetParser.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1361238452523" ignored="false" />
-    <file path="$PROJECT_DIR$/../Safedoor Rules/src/com/safedoorpm/rules/RulesBaseTableSheetParser.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1361238452523" ignored="false" />
-    <file path="$PROJECT_DIR$/../Safedoor Rules/src/com/safedoorpm/rules/RulesSheetParser.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1361238857613" ignored="false" />
-    <file path="$PROJECT_DIR$/../Safedoor Rules/src/com/safedoorpm/rules/MessageEmitter.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1361239800885" ignored="false" />
-    <file path="/MessageEmitter.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1361239463079" ignored="false" />
-    <file path="/RulesSheetParser.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1361238856770" ignored="false" />
-    <file path="/ListOfWorkInstructionsSheetParser.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1361252514732" ignored="false" />
-    <file path="$PROJECT_DIR$/../Safedoor Rules/src/com/safedoorpm/rules/WorkInstruction.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1361243749816" ignored="false" />
-    <file path="/WorkInstruction.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1361243175499" ignored="false" />
-    <file path="/ListOfWorkInstructions.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1361241688386" ignored="false" />
-    <file path="$PROJECT_DIR$/../Safedoor Rules/src/com/safedoorpm/rules/ListOfWorkInstructions.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1361242302663" ignored="false" />
-    <file path="$PROJECT_DIR$/../Safedoor Rules/src/com/safedoorpm/rules/MainRulesFileParserWindow.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1361252485222" ignored="false" />
-    <file path="$PROJECT_DIR$/../Safedoor Rules/src/com/safedoorpm/rules/MainRulesFileParserWindow.form" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1361244748989" ignored="false" />
-    <file path="/MainRulesFileParserWindow.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1361249693800" ignored="false" />
-    <file path="$PROJECT_DIR$/../Weaver/src/com/invidi/weaver/util/BreakZipFile.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1361245058051" ignored="false" />
-    <file path="$PROJECT_DIR$/../Weaver/src/com/invidi/weaver/scheduleGenerator/scheduleParser/ScheduleFileRecord.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1361245102588" ignored="false" />
-    <file path="$PROJECT_DIR$/../Weaver/src/com/invidi/weaver/breakFilter/BreakFilter.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1361245118884" ignored="false" />
-    <file path="$PROJECT_DIR$/../Weaver/src/com/invidi/weaver/breakFilter/FilterConfiguratorPanel.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1361245137110" ignored="false" />
-    <file path="$PROJECT_DIR$/../Weaver/src/com/invidi/weaver/breakFilter/FilterConfiguratorPanelManager.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1361245146662" ignored="false" />
-    <file path="$PROJECT_DIR$/../Weaver/src/com/invidi/weaver/scheduleGenerator/cmdScheduleBuilder/CmdArgParser.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1361245232627" ignored="false" />
-    <file path="$PROJECT_DIR$/../Weaver/src/com/invidi/weaver/scheduleGenerator/scheduleParser/ScheduleParser.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1361245247400" ignored="false" />
-    <file path="$PROJECT_DIR$/../Weaver/src/com/invidi/weaver/util/AsynchronousBreakSetParser.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1361245257571" ignored="false" />
-    <file path="$PROJECT_DIR$/../Weaver/src/com/invidi/weaver/util/BreakFileParser.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1361245266688" ignored="false" />
-    <file path="$PROJECT_DIR$/../Safedoor Rules/src/com/safedoorpm/rules/ParsedRulesFile.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1361246954462" ignored="false" />
-    <file path="/ParsedRulesFile.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1361246821483" ignored="false" />
-    <file path="$PROJECT_DIR$/../Weaver/src/com/invidi/weaver/BreakDiagramWindow.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1361247223837" ignored="false" />
-    <file path="/FileSelectors.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1361247976058" ignored="false" />
-    <file path="$PROJECT_DIR$/../Shared/Shared/src/com/obtuse/ui/FileSelectors.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1361247980119" ignored="false" />
-    <file path="$PROJECT_DIR$/../Weaver/src/com/invidi/weaver/Weaver.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1361250117614" ignored="false" />
-    <file path="$PROJECT_DIR$/../Safedoor Rules/Rules Builder/src/com/safedoorpm/rules/peel/RenamePopup.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362730474536" ignored="false" />
-    <file path="/RenamePopup.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363946294658" ignored="false" />
-    <file path="$PROJECT_DIR$/../Safedoor Rules/Rules Builder/src/com/safedoorpm/rules/peel/PeelDataCategoryDrawingPanel.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362804415010" ignored="false" />
-    <file path="/PeelDataCategoryDrawingPanel.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362887974322" ignored="false" />
-    <file path="$PROJECT_DIR$/../Safedoor Rules/Rules Builder/src/com/safedoorpm/rules/peel/data/RulesDataCategory.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362804017391" ignored="false" />
-    <file path="/RulesDataCategory.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362985977240" ignored="false" />
-    <file path="$PROJECT_DIR$/../Safedoor Rules/Rules Builder/src/com/safedoorpm/rules/peel/data/CategoryDependency.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362803909444" ignored="false" />
-    <file path="/CategoryDependency.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362885641364" ignored="false" />
-    <file path="$PROJECT_DIR$/../Safedoor Rules/Rules Builder/src/com/safedoorpm/rules/peel/data/Referenceable.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362734221861" ignored="false" />
-    <file path="$PROJECT_DIR$/../Safedoor Rules/Rules Builder/src/com/safedoorpm/rules/peel/data/ReferenceableEntity.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362735181926" ignored="false" />
-    <file path="/ReferenceableEntity.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1373348058768" ignored="false" />
-    <file path="$PROJECT_DIR$/../Safedoor Rules/Rules Builder/src/com/safedoorpm/rules/peel/data/SType.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362734541148" ignored="false" />
-    <file path="$PROJECT_DIR$/../Safedoor Rules/Rules Builder/src/com/safedoorpm/rules/peel/data/SPoint.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362735696932" ignored="false" />
-    <file path="/SPoint.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362735638123" ignored="false" />
-    <file path="$PROJECT_DIR$/../Safedoor Rules/Rules Builder/src/com/safedoorpm/rules/peel/data/RulesVariable.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362798190071" ignored="false" />
-    <file path="/RulesVariable.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362798163105" ignored="false" />
-    <file path="$PROJECT_DIR$/../Safedoor Rules/Rules Builder/src/com/safedoorpm/rules/peel/PeelRuleDrawingPanel.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362804045744" ignored="false" />
-    <file path="/PeelRuleDrawingPanel.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362780224040" ignored="false" />
-    <file path="$PROJECT_DIR$/../Safedoor Rules/Rules Builder/src/com/safedoorpm/rules/peel/DataCategoriesWindow.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362804292758" ignored="false" />
-    <file path="/DataCategoriesWindow.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362960507065" ignored="false" />
-    <file path="$PROJECT_DIR$/../Safedoor Rules/Rules Builder/src/com/safedoorpm/rules/peel/data/RulesDataType.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362792658848" ignored="false" />
-    <file path="$PROJECT_DIR$/../Safedoor Rules/Rules Builder/src/com/safedoorpm/rules/peel/EditFormulaPopup.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362798486472" ignored="false" />
-    <file path="$PROJECT_DIR$/../Safedoor Rules/Rules Builder/src/com/safedoorpm/rules/peel/EditFormulaPopup.form" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362798316888" ignored="false" />
-    <file path="$PROJECT_DIR$/../Safedoor Rules/Rules Builder/src/com/safedoorpm/rules/peel/RenamePopup.form" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362795258259" ignored="false" />
-    <file path="/EditFormulaPopup.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363770607276" ignored="false" />
-    <file path="$PROJECT_DIR$/../Safedoor Rules/Rules Builder/src/com/safedoorpm/rules/peel/data/ChangeFormulaHandler.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362798051494" ignored="false" />
-    <file path="$PROJECT_DIR$/../Safedoor Rules/Rules Builder/src/com/safedoorpm/rules/peel/data/RenameHandler.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362795603580" ignored="false" />
-    <file path="$PROJECT_DIR$/../Safedoor Rules/Rules Builder/src/com/safedoorpm/rules/peel/data/RetypeHandler.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362795617297" ignored="false" />
-    <file path="$PROJECT_DIR$/../Safedoor Rules/Rules Builder/src/com/safedoorpm/rules/peel/data/EditFormulaHandler.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362798060542" ignored="false" />
-    <file path="/HelpWindow.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362984235773" ignored="false" />
-    <file path="$PROJECT_DIR$/../Safedoor Rules/Rules Builder/src/com/safedoorpm/rules/peel/DataCategoriesWindow.form" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362800266716" ignored="false" />
-    <file path="/NearestPoint.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362802883268" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/rules/peel/Central.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362814476066" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/savrola/laskin/data/CerealWriter.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362814476066" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/savrola/laskin/data/DataCategorySet.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363023064957" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/savrola/laskin/data/EditFormulaHandler.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362814476066" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/savrola/laskin/data/GuiTerm.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362814755303" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/savrola/laskin/data/GuiTermVariable.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362814755303" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/savrola/laskin/data/Referenceable.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362814755303" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/savrola/laskin/data/ReferenceableEntity.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362814476610" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/savrola/laskin/data/RenameHandler.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362814476066" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/savrola/laskin/data/RetypeHandler.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362814476066" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/savrola/laskin/data/CerealReader.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362814476066" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/savrola/laskin/data/RulesDataCategory.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362986057011" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/savrola/laskin/data/RulesDataType.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362814476610" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/savrola/laskin/data/RuleSet.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362814476066" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/savrola/laskin/data/RulesVariable.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362814755303" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/savrola/laskin/data/SPoint.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362814755303" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/savrola/laskin/data/STag.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362814476066" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/savrola/laskin/data/CategoryDependency.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362886852339" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/savrola/laskin/data/SType.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362814755303" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/savrola/laskin/data/Transformable.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362814476066" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/rules/peel/RetypePopup.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362814476610" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/savrola/laskin/data/Transmogrifier.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362814476066" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/rules/peel/RenamePopup.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362814476066" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/rules/peel/PeelRuleDrawingPanel.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362814476610" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/rules/peel/PeelDataCategoryDrawingPanel.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362814476066" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/rules/peel/EditFormulaPopup.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362814476066" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/savrola/laskin/data/PeelDataCategoryDrawingPanel.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362814683423" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/savrola/laskin/data/Central.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362814605985" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/savrola/laskin/data/PeelRuleDrawingPanel.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362814491826" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/rules/peel/DataCategoriesWindow.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362814593530" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/rules/peel/RulesWindow.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362814660759" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/savrola/laskin/data/DataCategoriesWindow.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362814651946" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/savrola/laskin/data/DataCategoriesWindow.form" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362814605985" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/savrola/laskin/data/EditFormulaPopup.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362814611839" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/savrola/laskin/data/EditFormulaPopup.form" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362814611839" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/savrola/laskin/data/RenamePopup.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362814618186" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/savrola/laskin/data/RenamePopup.form" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362814618186" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/savrola/laskin/Central.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362985133646" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/savrola/laskin/DataCategoriesWindow.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362814755303" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/savrola/laskin/DataCategoriesWindow.form" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362814660759" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/savrola/laskin/EditFormulaPopup.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362814755303" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/savrola/laskin/EditFormulaPopup.form" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362814666662" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/savrola/laskin/RenamePopup.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362814755303" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/savrola/laskin/RenamePopup.form" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362814672977" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/savrola/laskin/RetypePopup.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362814755303" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/savrola/laskin/RetypePopup.form" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362814683423" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/savrola/laskin/RulesWindow.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362814784906" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/savrola/laskin/RulesWindow.form" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362814688873" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/savrola/laskin/util/RenameHandler.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362814754993" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/savrola/laskin/util/RetypeHandler.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362814755303" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/savrola/laskin/util/CerealWriter.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362985133646" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/savrola/laskin/util/CerealReader.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362814755303" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/savrola/laskin/util/PeelRuleDrawingPanel.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362900834982" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/savrola/laskin/util/PeelDataCategoryDrawingPanel.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362900801838" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/savrola/laskin/util/EditFormulaHandler.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362814754993" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/savrola/laskin/gui/DataCategoriesWindow.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363023064957" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/savrola/laskin/gui/DataCategoriesWindow.form" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362962602160" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/savrola/laskin/gui/EditFormulaPopup.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362814789709" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/savrola/laskin/gui/EditFormulaPopup.form" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362814789709" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/savrola/laskin/gui/RenamePopup.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362814793780" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/savrola/laskin/gui/RenamePopup.form" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362814793780" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/savrola/laskin/gui/RetypePopup.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362985133646" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/savrola/laskin/gui/RetypePopup.form" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362814799840" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/savrola/laskin/gui/RulesWindow.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363023064957" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/savrola/laskin/gui/RulesWindow.form" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362960745449" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/savrola/laskin/Laskin.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362985133647" ignored="false" />
-    <file path="/Laskin.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365501055409" ignored="false" />
-    <file path="/OSLevelCustomizations.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365577545153" ignored="false" />
-    <file path="/BasicProgramConfigInfo.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362816527498" ignored="false" />
-    <file path="/WindowsCustomization.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365577765732" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/savrola/laskin/gui/SheetManager.form" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362962665409" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/savrola/laskin/gui/SheetManager.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362991963798" ignored="false" />
-    <file path="/SheetManager.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1373530128340" ignored="false" />
-    <file path="/DataCategorySet.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362886129016" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/savrola/laskin/gui/SheetManagerWindow.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362961181604" ignored="false" />
-    <file path="/RulesWindow.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363491654933" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/savrola/laskin/gui/WorkInstructionsWindow.form" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362992477902" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/savrola/laskin/gui/WorkInstructionsWindow.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363022809880" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/savrola/laskin/util/DataCategoriesDrawingCanvas.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362985133646" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/savrola/laskin/util/RulesDrawingCanvas.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362985133646" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/savrola/laskin/util/WorkInstructionsDrawingCanvas.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362901504970" ignored="false" />
-    <file path="/WorkInstructionsWindow.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1373535051688" ignored="false" />
-    <file path="/WorkInstructionsDrawingCanvas.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362901080165" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/savrola/laskin/util/VerbsList.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362985133646" ignored="false" />
-    <file path="/VerbsList.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362905001496" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/savrola/laskin/gui/WorkInstructionsTableModel.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1362991419289" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/savrola/laskin/old/Central.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363023078718" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/SPoint.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1364539348802" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/STag.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365473301176" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/SType.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366601018498" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/Transformable.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363058102446" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/Transmogrifier.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363682648032" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/SheetManager.form" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366525492724" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/util/CerealReader.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365487544116" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/SheetManager.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1367390590867" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/SheetManagerWindow.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366525555365" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/WorkInstructionsWindow.form" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1367381393409" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/WorkInstructionsWindow.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1367383151742" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/Laskin.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365501087779" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/CategoryDependency.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363058269428" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/util/WorkInstructionsDrawingCanvas.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363058102446" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/RulesWindow.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363534577061" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/util/VerbsList.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363058102447" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/RulesWindow.form" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363491909510" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/RetypePopup.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363445876045" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/RetypePopup.form" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363445538367" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/RenamePopup.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363946314617" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/RenamePopup.form" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363946705905" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/util/RulesDrawingCanvas.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363534516073" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/util/DataCategoriesDrawingCanvas.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363058269428" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/EditFormulaPopup.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363946314617" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/EditFormulaPopup.form" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363770542838" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/WorkInstructionsTableModel.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1367383375301" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/DataCategoriesWindow.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363058269428" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/DataCategoriesWindow.form" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363058269428" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/old/Central.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363062409396" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/util/CerealWriter.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365487562683" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/DataCategorySet.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363058269428" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/util/EditFormulaHandler.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363058102448" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/GuiTerm.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365487580827" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/GuiTermVariable.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363058518576" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/Referenceable.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365404561585" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/ReferenceableEntity.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366612079306" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/util/RenameHandler.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365633078720" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/util/RetypeHandler.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363766527855" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/RulesDataCategory.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363058236058" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/RulesDataType.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366694556897" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/RuleSet.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363058102448" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/RulesVariable.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363058529514" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/GroupDependency.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365485469813" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/RulesDataGroup.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363327327081" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/DataGroupsWindow.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365147274506" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/util/DataGroupsDrawingCanvas.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363059371431" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/META-INF/MANIFEST.MF" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363058754282" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/RulesElement.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363443445960" ignored="false" />
-    <file path="/RulesElement.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363332065124" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/util/GroupsDrawingCanvas.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1367389023109" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/VisibleGroupsSet.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363059668805" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/GroupView.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363329860671" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/GroupViewSet.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363063510749" ignored="false" />
-    <file path="/GroupView.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363281460797" ignored="false" />
-    <file path="/RulesDataGroup.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363327266175" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/GroupDirectory.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363061196413" ignored="false" />
-    <file path="/GroupViewSet.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363062828140" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/util/Central.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366782987239" ignored="false" />
-    <file path="/Central.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1373437366673" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/RulesViewSet.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363063390928" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/RuleViewCollection.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1367390590867" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/GroupViewCollection.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1367390381769" ignored="false" />
-    <file path="/GroupViewCollection.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365485155636" ignored="false" />
-    <file path="/GroupsDrawingCanvas.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1371718894097" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/util/NounsList.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363065891772" ignored="false" />
-    <file path="/GroupDependency.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365408813986" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/EntityPicker.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363070730893" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/EntityPicker.form" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363070735465" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/EntityPickerPopup.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366701672251" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/EntityPickerPopup.form" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363562473848" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/util/EntityPickerHandler.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363676830213" ignored="false" />
-    <file path="/EntityPickerHandler.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363070944549" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/util/PickableEntity.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363071393458" ignored="false" />
-    <file path="/PickableEntity.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363071034880" ignored="false" />
-    <file path="/EntityPickerPopup.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366701098245" ignored="false" />
-    <file path="/DataGroupsWindow.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365147264873" ignored="false" />
-    <file path="$PROJECT_DIR$/../Weaver/src/com/invidi/weaver/util/NullSelectionModel.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363078408785" ignored="false" />
-    <file path="/DirectedGraph.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363148322987" ignored="false" />
-    <file path="/DirectedGraphEdge.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363148406275" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/util/Registry.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1364111708891" ignored="false" />
-    <file path="/Registry.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363560483201" ignored="false" />
-    <file path="/SType.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366601009289" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/NamedReferenceableEntity.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363157712520" ignored="false" />
-    <file path="/NamedReferenceableEntity.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363157666447" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/NamedReferenceable.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1364111338598" ignored="false" />
-    <file path="/AcceleratedPopupMenu.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363241916021" ignored="false" />
-    <file path="/AcceleratedPopupMenu2.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363243243424" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/EntityWithNotes.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363282289657" ignored="false" />
-    <file path="/EntityWithNotes.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363280784461" ignored="false" />
-    <file path="/RuleViewCollection.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365485221555" ignored="false" />
-    <file path="/GuiTerm.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365485647425" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/GuiTermElement.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365485610311" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/NotesView.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363281429559" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/ReferenceableEntityWithNotes.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1364440395955" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/EditNotesPopup.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365535486647" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/EditNotesPopup.form" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363285822790" ignored="false" />
-    <file path="/EditNotesPopup.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363770616460" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/util/EditNotesHandler.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363283099517" ignored="false" />
-    <file path="/ReferenceableEntityWithNotes.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1364440394764" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/GroupConstraint.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365406662057" ignored="false" />
-    <file path="/RulesDrawingCanvas.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363500116287" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/RuleView.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363534252446" ignored="false" />
-    <file path="/RuleView.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363534183200" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/Group.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363328603292" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/Rule.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363328940787" ignored="false" />
-    <file path="/Rule.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363329181648" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/LaskinGroup.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366703443783" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/LaskinRule.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1367215128436" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/GroupHierarchyDrawingGroupView.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366702933268" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/AbstractGroupView.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365472768313" ignored="false" />
-    <file path="/AbstractGroupView.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365414450057" ignored="false" />
-    <file path="/GroupHierarchyDrawingGroupView.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366702826537" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/RuleDrawingGroupView.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363534396619" ignored="false" />
-    <file path="/RuleDrawingGroupView.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363501723857" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/GroupHierarchyDrawingDependencyView.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363442705775" ignored="false" />
-    <file path="/LaskinGroup.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1371717177214" ignored="false" />
-    <file path="/RetypePopup.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363446192231" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/ChangeAttributeValuePopup.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365473477848" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/ChangeAttributeValuePopup.form" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363445947876" ignored="false" />
-    <file path="/ObtuseUtil.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365398396247" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/.idea/workspace.xml" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1367392165523" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/AbstractElementView.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365242543571" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/LaskinElement.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366703597942" ignored="false" />
-    <file path="/AbstractElementView.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363769259027" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/RuleDrawingElementView.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363534381978" ignored="false" />
-    <file path="/RuleDrawingElementView.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363503447134" ignored="false" />
-    <file path="/LaskinElement.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366703583612" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/ElementViewCollection.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365407446531" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/AbstractRuleView.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365472776890" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/ObsoleteRuleView.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1364539515277" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/SpreadsheetElementView.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365242551363" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/SpreadsheetGroupView.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365144624028" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/SpreadsheetRuleView.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365500934335" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/util/RulesSpreadsheetCanvas.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1367390590867" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/RulesSpreadsheetWindow.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1367387117056" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/RulesSpreadsheetWindow.form" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1364454367704" ignored="false" />
-    <file path="/LaskinRule.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1367214869711" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/RuleGroupClause.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365480967878" ignored="false" />
-    <file path="/RuleGroupClause.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365480934631" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/RuleExpressionOperator.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363547882355" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/RuleExpressionBooleanOperator.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363761383295" ignored="false" />
-    <file path="/RuleExpressionBooleanOperator.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363549320638" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/AbstractRuleElementClause.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363549241348" ignored="false" />
-    <file path="/AbstractRuleElementClause.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363549673636" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/RuleElementClause.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363549527134" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/RuleElementExpressionTerm.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365484478987" ignored="false" />
-    <file path="/RulesSpreadsheetCanvas.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1373435780514" ignored="false" />
-    <file path="/SpreadsheetGroupView.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1364452451124" ignored="false" />
-    <file path="/SpreadsheetElementView.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1364462045221" ignored="false" />
-    <file path="/SpreadsheetRuleView.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365408118269" ignored="false" />
-    <file path="/RuleElementExpressionTerm.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365414061848" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/SpreadsheetRuleGroupViewInfo.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363804924947" ignored="false" />
-    <file path="/SpreadsheetRuleGroupViewInfo.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363767676632" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/GroupViewCanvas.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365402792686" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/RuleViewCanvas.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365148479795" ignored="false" />
-    <file path="/Transmogrifier.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363682648032" ignored="false" />
-    <file path="/RulesSpreadsheetWindow.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1367385219986" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/DataGroupsWindow.form" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363760701905" ignored="false" />
-    <file path="/GroupConstraint.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363762295003" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/util/ChangeAttributeValueHandler.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363766530041" ignored="false" />
-    <file path="/ChangeAttributeValuePopup.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363945389294" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/util/SelectedItem.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363798380322" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/util/SelectableItem.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363798416698" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/util/SelectableLaskinItem.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1364460787570" ignored="false" />
-    <file path="/ObsoleteRuleView.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1364539491664" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/WorkInstructionTableCellRenderer.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1364185975717" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/util/LaskinVectorSelection.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365473902879" ignored="false" />
-    <file path="/Trace.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1363942106217" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/util/SpreadsheetGroupSelection.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1364453663138" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/util/LaskinSelection.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1364461370425" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/util/SpreadsheetRuleSelection.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1364318256464" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/GenericEditor.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1364187936718" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/WorkInstructionReferenceCellEditor.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366792257496" ignored="false" />
-    <file path="/WorkInstructionReferenceCellEditor.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1373431109140" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/WorkInstructionReference.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366787558380" ignored="false" />
-    <file path="/WorkInstructionReference.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366787553621" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/TableColumnAdjuster.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1364080642705" ignored="false" />
-    <file path="/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/javax/swing/table/TableColumn.class" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1364083994314" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/LaskinWorkInstruction.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366787645127" ignored="false" />
-    <file path="/LaskinWorkInstruction.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366787643392" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/WorkInstructionCollection.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365628649523" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/BibliographicReference.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1364187561725" ignored="false" />
-    <file path="/BibliographicReference.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1364183677085" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/NamedEntity.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365632057819" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/UniquelyNamedReferenceable.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365632405304" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/util/UniquelyNamedEntitiesRegistry.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366782757767" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/util/LooselyNamedEntitiesRegistry.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1367389878955" ignored="false" />
-    <file path="/LooselyNamedEntitiesRegistry.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1373533114343" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/AbstractWorkInstructionView.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1364113029134" ignored="false" />
-    <file path="/WorkInstructionCollection.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365485935845" ignored="false" />
-    <file path="/WorkInstructionsTableModel.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1373437304089" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/BibliographicReferenceCollection.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365411825467" ignored="false" />
-    <file path="/BibliographicReferenceCollection.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365411820774" ignored="false" />
-    <file path="/LogsWindow.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1364188721811" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/util/play/ListCutPaste.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1364195417144" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/util/play/ListTransferHandler.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1364194813640" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/util/play/TransferActionHandler.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1364194857711" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/util/TransferAction.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1364196555475" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/util/play/TestAccelerators.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366525737247" ignored="false" />
-    <file path="/TestAccelerators.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1364234663089" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/RulesSpreadsheetWindow2.form" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1364236438651" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/RulesSpreadsheetWindow2.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1364236926022" ignored="false" />
-    <file path="/RulesSpreadsheetWindow2.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1364235974370" ignored="false" />
-    <file path="/SpreadsheetGroupSelection.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1364287333027" ignored="false" />
-    <file path="/LaskinSelection.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1364460870552" ignored="false" />
-    <file path="/SpreadsheetRuleSelection.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1364279342503" ignored="false" />
-    <file path="/UniquelyNamedEntitiesRegistry.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365632942266" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/LaskinGroupList.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1364283241538" ignored="false" />
-    <file path="/LaskinGroupList.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1364283077358" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/LaskinGroupTagList.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1364284852061" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/LaskinRuleTagList.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1364284366968" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/LaskinElementTagGrid.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1364322254826" ignored="false" />
-    <file path="/LaskinElementTagGrid.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1364322223838" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/LaskinRuleTagVector.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1364315174902" ignored="false" />
-    <file path="/LaskinRuleTagVector.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1364315047571" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/LaskinGroupTagVector.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365473122654" ignored="false" />
-    <file path="/LaskinGroupTagVector.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1364315129575" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/util/SerialTransferable.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1364368302153" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/RuleTypeExpressionTerm.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1364316303660" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/SelectedExpressionTerm.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1364372332266" ignored="false" />
-    <file path="/SelectedExpressionTerm.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1364333310755" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/util/SpreadsheetExpressionSelection.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365474215362" ignored="false" />
-    <file path="/SpreadsheetExpressionSelection.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1364463373132" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/GridLocation.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1364319515568" ignored="false" />
-    <file path="/GridLocation.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1364319451558" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/SelectedExpressionTermGrid.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1364367079372" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/LaskinExpressionTermGrid.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1364373080614" ignored="false" />
-    <file path="/LaskinExpressionTermGrid.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1364372230722" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/SpreadsheetGroupView2.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1364462276863" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/SpreadsheetGroupView1.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1364462276863" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/SpreadsheetGV.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1364460368036" ignored="false" />
-    <file path="/SpreadsheetGroupView2.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1364462225894" ignored="false" />
-    <file path="/SpreadsheetGroupView1.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1364462096473" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/RuleElementExpressionTermView.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1364461858546" ignored="false" />
-    <file path="/RuleElementExpressionTermView.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1364461555981" ignored="false" />
-    <file path="/CerealWriter.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365486786424" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/GroupExpressionEditorWindow.form" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1364795755449" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/GroupExpressionEditorWindow.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1364796315144" ignored="false" />
-    <file path="/GroupExpressionEditorWindow.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1364795790963" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/LaskinGroupExpression.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1364798417123" ignored="false" />
-    <file path="/LaskinGroupExpression.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1364798411179" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/GroupExpressionPanel.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365473498964" ignored="false" />
-    <file path="/GroupExpressionPanel.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1364798773261" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/GroupExpressionPanel2.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1364792425971" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/GroupExpressionPanel.form" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1364792497363" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/GroupExpressionEditorSheet.form" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1364972345745" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/GroupExpressionEditorSheet.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365230713889" ignored="false" />
-    <file path="/GroupExpressionEditorSheet.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365230712955" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/expressions/LaskinGroupExpressionClause.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365473443554" ignored="false" />
-    <file path="/LaskinGroupExpressionClause.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1364972245845" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/util/exceptions/RestoreFailedError.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365141413319" ignored="false" />
-    <file path="/RestoreFailedError.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365141336413" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/util/exceptions/RestoreFailedException.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365479817215" ignored="false" />
-    <file path="/CerealReader.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365487030156" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/util/exceptions/ShortReadException.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365142549300" ignored="false" />
-    <file path="/ShortReadException.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365142359766" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/util/LaskinRoot.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365150293549" ignored="false" />
-    <file path="/LaskinRoot.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1373525576657" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/util/InvalidationReason.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365231251952" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/ImpactedRulesDialog.form" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365236224874" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/ImpactedRulesDialog.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365238063353" ignored="false" />
-    <file path="/ImpactedRulesDialog.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365239033785" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/RulesTableModel.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1367217022060" ignored="false" />
-    <file path="/RulesTableModel.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366787733185" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/ShowRulesDialog.form" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365239065365" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/ShowRulesDialog.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1367213909470" ignored="false" />
-    <file path="/ElementViewCollection.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365242388670" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/ElementDetailsWindow.form" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365320662292" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/ElementDetailsWindow.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1367388921234" ignored="false" />
-    <file path="/ElementDetailsWindow.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1371717838540" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/GroupDependenciesTableModel.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366615926524" ignored="false" />
-    <file path="/GroupDependenciesTableModel.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366614427512" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/GroupDependenciesTable.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1367213847364" ignored="false" />
-    <file path="/GroupDependenciesTable.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365303887124" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/GroupsTable.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1367390238403" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/util/play/SaveTester.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365403197891" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/LaskinRoot.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366781764820" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/AllRulesWindowx.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365366338555" ignored="false" />
-    <file path="/GroupsTable.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1367390232199" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/RulesTable.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1367389014052" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/WorkInstructionsTable.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1367389009581" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/AllRulesWindow.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1367381555684" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/GroupsDrawingWindow.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366527844106" ignored="false" />
-    <file path="/GroupsDrawingWindow.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366527534932" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/AllGroupsWindow.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1367390184977" ignored="false" />
-    <file path="/AllRulesWindow.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1367216671205" ignored="false" />
-    <file path="/AllGroupsWindow.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365403947245" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/LaskinGroupElement.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366700429667" ignored="false" />
-    <file path="/LaskinGroupElement.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1371718622628" ignored="false" />
-    <file path="/AbstractRuleView.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365409538849" ignored="false" />
-    <file path="/GuiTermElement.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365409245946" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/util/TopologicalSort.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365474241708" ignored="false" />
-    <file path="/WorkInstructionsTable.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1373431492558" ignored="false" />
-    <file path="/RestoreFailedException.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365479814772" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/LaskinWindowData.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366525555365" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/LaskinWindowType.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365482221899" ignored="false" />
-    <file path="/LaskinWindowType.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365482081987" ignored="false" />
-    <file path="/DateUtils.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365493704559" ignored="false" />
-    <file path="/MacCustomization.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365578918264" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/util/MyActionListener.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1367390590867" ignored="false" />
-    <file path="/MyActionListener.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1367390491139" ignored="false" />
-    <file path="$PROJECT_DIR$/../Shared/Shared/src/com/obtuse/util/ObtuseUtil.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365546552766" ignored="false" />
-    <file path="$PROJECT_DIR$/../Shared/RawDatabaseSupport/src/com/loanetworks/nahanni/elephant2/raw/ElephantConnection.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365547199748" ignored="false" />
-    <file path="$PROJECT_DIR$/../Shared/Shared/src/com/obtuse/db/PostgresConnection.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365546668883" ignored="false" />
-    <file path="/ElephantConnection.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365546788387" ignored="false" />
-    <file path="$PROJECT_DIR$/../Shared/RawDatabaseSupport/src/com/loanetworks/nahanni/elephant2/raw/devutils/MetaDataParserUtils.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365547015732" ignored="false" />
-    <file path="$PROJECT_DIR$/../Shared/RawDatabaseSupport/src/com/loanetworks/nahanni/elephant2/raw/devutils/MetaDataParser.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365547005584" ignored="false" />
-    <file path="/WindowWithMenus.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365580026911" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/AboutBox.form" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365581378590" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/AboutBox.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365581680907" ignored="false" />
-    <file path="/AboutBox.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365581327648" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/PreferencesWindow.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366791970800" ignored="false" />
-    <file path="/PreferencesWindow.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1373527461894" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/PreferencesWindow.form" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366691007332" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/ManufacturerCodeTableModel.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365583659622" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/InspectionElementNamesTableModel.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365585457072" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/ManufacturerCodesTable.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365674868730" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/ManufacturerCodesTableModel.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365672494864" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/ManufacturerCodesCellEditor.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365674868730" ignored="false" />
-    <file path="/InspectionElementNamesTableModel.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365587900481" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/EntityNamesTableModel.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365673992441" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/LooselyNamedReferenceable.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365628062141" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/ErrorReportingGenericEditor.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365628270745" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/EntityNamesCellEditor.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365674853726" ignored="false" />
-    <file path="/EntityNamesCellEditor.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365631616053" ignored="false" />
-    <file path="/EntityNamesTableModel.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365673901697" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/EntityNamesTable.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365674853726" ignored="false" />
-    <file path="/EntityNamesTable.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365674077780" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/UniquelyNamedEntity.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365672860596" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/UniquelyNamedThing.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365632404503" ignored="false" />
-    <file path="/UniquelyNamedReferenceable.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365632222647" ignored="false" />
-    <file path="/UniquelyNamedEntity.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365632745029" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/InspectionElementName.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365658689636" ignored="false" />
-    <file path="/InspectionElementName.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365658790476" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/LaskinInspectionElementName.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365658931612" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/LaskinInspectionElement.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366784306342" ignored="false" />
-    <file path="/LaskinInspectionElement.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1373354360022" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/LaskinInspectionElementUser.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365675433977" ignored="false" />
-    <file path="/LaskinInspectionElementUser.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365675432748" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/LaskinSelectionChangedListener.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365663721222" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/OurSelectionStyleTableModel.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366697067513" ignored="false" />
-    <file path="/OurSelectionStyleTableModel.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366696819061" ignored="false" />
-    <file path="/ManufacturerCodesTableModel.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365665314728" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/GroupsTableModel.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366704113531" ignored="false" />
-    <file path="/GroupsTableModel.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366614393582" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/ManufacturerOldCodesTableModel.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365674868730" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/EntityCodeAndNamesTableModel.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365674778235" ignored="false" />
-    <file path="/EntityCodeAndNamesTableModel.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365674117153" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/UniquelyCodedAndNamedEntity.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365673026545" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/EntityCodeAndNamesTable.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365674615596" ignored="false" />
-    <file path="/EntityCodeAndNamesTable.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365674181226" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/util/ManufacturerCode.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365674832593" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/util/LaskinManufacturerCode.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365674863001" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/LaskinManufacturerCode.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365675734320" ignored="false" />
-    <file path="/LaskinManufacturerCode.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1365675675103" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/SheetManagerWindowTable.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366793560423" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/SheetManagerWindowTableModel.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1367383608000" ignored="false" />
-    <file path="/SheetManagerWindowTableModel.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1367383566814" ignored="false" />
-    <file path="/SheetManagerWindow.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366524427720" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/InspectionElementManufacturerUserWindow.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366618969342" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/WorkInstructionPickerPopup.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1367383642633" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/WorkInstructionPickerPopup.form" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366529585351" ignored="false" />
-    <file path="/WorkInstructionPickerPopup.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366533371320" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/util/WorkInstructionPickerHandler.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366532143795" ignored="false" />
-    <file path="/WorkInstructionPickerHandler.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366531071355" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/RulesPickerPopup.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1367218167612" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/RulesPickerPopup.form" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366532005210" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/util/WorkInstructionsPickerHandler.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366532192585" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/util/RulesPickerHandler.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366532203043" ignored="false" />
-    <file path="/RulesPickerHandler.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366532202309" ignored="false" />
-    <file path="/WorkInstructionsPickerHandler.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366532192585" ignored="false" />
-    <file path="/RulesPickerPopup.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366533394602" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/LaskinTicBoxInfo.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366652494935" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/LaskinManufacturer.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366766974883" ignored="false" />
-    <file path="/LaskinTicBoxInfo.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366652231544" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/NamedEntitiesTableModel.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366693461001" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/NamedEntitiesTable.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366792001849" ignored="false" />
-    <file path="/NamedEntitiesTableModel.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366693006202" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/CodedAndNamedEntitiesTableModel.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366615925288" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/CodedAndNamedEntitiesTable.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366791993473" ignored="false" />
-    <file path="/CodedAndNamedEntitiesTableModel.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366615019727" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/data/ParameterizedEntity.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366619270860" ignored="false" />
-    <file path="/ParameterizedEntity.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366618475343" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/Bookman.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366779368105" ignored="false" />
-    <file path="/LaskinManufacturer.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366766869259" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/NameOrCodeCellEditor.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366792458686" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/util/InspectionElementRegistry.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366787784827" ignored="false" />
-    <file path="/InspectionElementRegistry.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366787363727" ignored="false" />
-    <file path="/CodedAndNamedEntitiesTable.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366789215854" ignored="false" />
-    <file path="/NamedEntitiesTable.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366789246714" ignored="false" />
-    <file path="/NameOrCodeCellEditor.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366791771497" ignored="false" />
-    <file path="/SheetManagerWindowTable.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1366793560423" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/SheetTable.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1367383200384" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/RuleDetailsWindow.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1367389978649" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/RuleDetailsWindow.form" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1367383853877" ignored="false" />
-    <file path="/RuleDetailsWindow.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1367389948728" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/AllRulesWindow.form" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1367381379596" ignored="false" />
-    <file path="/RulesTable.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1367218324760" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/GroupDetailsWindow.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1367391062530" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/WorkInstructionDetailsWindow.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1367388961063" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/WorkInstructionDetailsWindow.form" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1367383987182" ignored="false" />
-    <file path="/WorkInstructionDetailsWindow.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1367388961063" ignored="false" />
-    <file path="/GroupDetailsWindow.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1371717883902" ignored="false" />
-    <file path="/SheetTable.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1367383198788" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/SheetManagerTable.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1367383481262" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/DetailsWindow.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1367388996048" ignored="false" />
-    <file path="/DetailsWindow.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1367388875906" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/gui/AllGroupsWindow.form" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1367390184977" ignored="false" />
-    <file path="$PROJECT_DIR$/../Laskin/Laskin/src/com/safedoorpm/laskin/util/MyAbstractAction.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1367390590867" ignored="false" />
-    <file path="/MyAbstractAction.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1367390475308" ignored="false" />
-    <file path="$PROJECT_DIR$/../SafedoorPM-Bookman/Bookman/src/com/safedoorpm/bookman/gui/ValidatedJTextField.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1371714588421" ignored="false" />
-    <file path="$PROJECT_DIR$/../SafedoorPM-Bookman/Bookman/src/com/safedoorpm/bookman/gui/GroupDetailsWindow.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1371719657432" ignored="false" />
-    <file path="$PROJECT_DIR$/../SafedoorPM-Bookman/Bookman/src/com/safedoorpm/bookman/gui/GroupDetailsWindow.form" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1371714768337" ignored="false" />
-    <file path="$PROJECT_DIR$/../SafedoorPM-Bookman/Bookman/src/com/safedoorpm/bookman/gui/ElementDetailsWindow.form" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1371715565645" ignored="false" />
-    <file path="$PROJECT_DIR$/../SafedoorPM-Bookman/Bookman/src/com/safedoorpm/bookman/gui/ElementDetailsWindow.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1371719726146" ignored="false" />
-    <file path="$PROJECT_DIR$/../SafedoorPM-Bookman/Bookman/src/com/safedoorpm/bookman/util/InvalidationReason.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1371716314079" ignored="false" />
-    <file path="$PROJECT_DIR$/../SafedoorPM-Bookman/Bookman/src/com/safedoorpm/bookman/util/GroupsDrawingCanvas.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1371720553070" ignored="false" />
-    <file path="$PROJECT_DIR$/../SafedoorPM-Bookman/Bookman/src/com/safedoorpm/bookman/util/RulesSpreadsheetCanvas.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1373441185417" ignored="false" />
-    <file path="$PROJECT_DIR$/../SafedoorPM-Bookman/Bookman/src/com/safedoorpm/bookman/data/LaskinGroup.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1373535091874" ignored="false" />
-    <file path="$PROJECT_DIR$/../SafedoorPM-Bookman/Bookman/src/com/safedoorpm/bookman/data/LaskinGroupElement.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1371718839926" ignored="false" />
-    <file path="$PROJECT_DIR$/../SafedoorPM-Bookman/.idea/workspace.xml" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1373677485299" ignored="false" />
-    <file path="$PROJECT_DIR$/../SafedoorPM-Bookman/Bookman/src/com/safedoorpm/bookman/data/GroupSectionView.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1371717660824" ignored="false" />
-    <file path="/GroupSectionView.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1371717637505" ignored="false" />
-    <file path="/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/ui.jar!/apple/awt/CInputMethod.class" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1371719748228" ignored="false" />
-    <file path="$PROJECT_DIR$/../SafedoorPM-Bookman/Bookman/src/com/safedoorpm/bookman/gui/DetailsWindow.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1373535091874" ignored="false" />
-    <file path="$PROJECT_DIR$/../SafedoorPM-Bookman/Bookman/src/com/safedoorpm/bookman/gui/WorkInstructionsWindow.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1373535096317" ignored="false" />
-    <file path="$PROJECT_DIR$/../SafedoorPM-Bookman/Bookman/src/com/safedoorpm/bookman/gui/InspectionElementUsageTableModel.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1373348652047" ignored="false" />
-    <file path="/InspectionElementUsageTableModel.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1373348198389" ignored="false" />
-    <file path="$PROJECT_DIR$/../SafedoorPM-Bookman/Bookman/src/com/safedoorpm/bookman/data/ReferenceableEntity.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1373348652047" ignored="false" />
-    <file path="$PROJECT_DIR$/../SafedoorPM-Bookman/Bookman/src/com/safedoorpm/bookman/data/LaskinInspectionElement.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1373354379264" ignored="false" />
-    <file path="$PROJECT_DIR$/../SafedoorPM-Bookman/Bookman/src/com/safedoorpm/bookman/gui/InspectionElementRelianceTableModel.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1373531364719" ignored="false" />
-    <file path="$PROJECT_DIR$/../SafedoorPM-Bookman/Bookman/src/com/safedoorpm/bookman/gui/InspectionElementRelianceTable.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1373524222854" ignored="false" />
-    <file path="/InspectionElementRelianceTable.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1373524018171" ignored="false" />
-    <file path="$PROJECT_DIR$/../SafedoorPM-Bookman/Bookman/src/com/safedoorpm/bookman/gui/SheetManager.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1373530230976" ignored="false" />
-    <file path="$PROJECT_DIR$/../SafedoorPM-Bookman/Bookman/src/com/safedoorpm/bookman/data/LaskinWindowData.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1373350639462" ignored="false" />
-    <file path="$PROJECT_DIR$/../SafedoorPM-Bookman/Bookman/src/com/safedoorpm/bookman/gui/PreferencesWindow.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1373527622896" ignored="false" />
-    <file path="$PROJECT_DIR$/../SafedoorPM-Bookman/Bookman/src/com/safedoorpm/bookman/gui/NamedEntitiesTable.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1373356418308" ignored="false" />
-    <file path="/InspectionElementRelianceTableModel.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1373531325821" ignored="false" />
-    <file path="$PROJECT_DIR$/../SafedoorPM-Bookman/Bookman/src/com/safedoorpm/bookman/gui/NamedEntitiesTableModel.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1373357987477" ignored="false" />
-    <file path="$PROJECT_DIR$/../SafedoorPM-Bookman/Bookman/src/com/safedoorpm/bookman/Bookman.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1373358651202" ignored="false" />
-    <file path="/Bookman.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1373358634262" ignored="false" />
-    <file path="$PROJECT_DIR$/../SafedoorPM-Bookman/Bookman/src/com/safedoorpm/bookman/gui/PreferencesWindow.form" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1373360801304" ignored="false" />
-    <file path="$PROJECT_DIR$/../SafedoorPM-Bookman/Bookman/src/com/safedoorpm/bookman/gui/CheckBoxCellEditor.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1373432976383" ignored="false" />
-    <file path="$PROJECT_DIR$/../SafedoorPM-Bookman/Bookman/src/com/safedoorpm/bookman/gui/CWCheckBoxRenderer.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1373362669655" ignored="false" />
-    <file path="$PROJECT_DIR$/../SafedoorPM-Bookman/Bookman/src/com/safedoorpm/bookman/gui/Check.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1373362214662" ignored="false" />
-    <file path="$PROJECT_DIR$/../SafedoorPM-Bookman/Bookman/src/com/safedoorpm/bookman/gui/WorkInstructionReferenceCellEditor.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1373431175256" ignored="false" />
-    <file path="$PROJECT_DIR$/../SafedoorPM-Bookman/Bookman/src/com/safedoorpm/bookman/gui/WorkInstructionsTableModel.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1373649569251" ignored="false" />
-    <file path="$PROJECT_DIR$/../SafedoorPM-Bookman/Bookman/src/com/safedoorpm/bookman/gui/WorkInstructionsTable.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1373431741726" ignored="false" />
-    <file path="/CheckBoxCellEditor.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1373432923942" ignored="false" />
-    <file path="$PROJECT_DIR$/../SafedoorPM-Bookman/Bookman/src/com/safedoorpm/bookman/gui/AlignedBooleanCellEditor.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1373524222854" ignored="false" />
-    <file path="/AlignedBooleanCellEditor.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1373524150949" ignored="false" />
-    <file path="$PROJECT_DIR$/../SafedoorPM-Bookman/Bookman/src/com/safedoorpm/bookman/gui/AlignedBooleanCellRenderer.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1373434231471" ignored="false" />
-    <file path="/AlignedBooleanCellRenderer.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1373434191992" ignored="false" />
-    <file path="$PROJECT_DIR$/../SafedoorPM-Bookman/Bookman/src/com/safedoorpm/bookman/util/Central.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1373535091874" ignored="false" />
-    <file path="/OkPopupMessageWindow.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1373442710451" ignored="false" />
-    <file path="$PROJECT_DIR$/../SafedoorPM-Bookman/Bookman/src/com/safedoorpm/bookman/gui/InspectionElementManufacturerUserWindow.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1373529814550" ignored="false" />
-    <file path="/InspectionElementManufacturerUserWindow.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1373529798391" ignored="false" />
-    <file path="$PROJECT_DIR$/../SafedoorPM-Bookman/Bookman/src/com/safedoorpm/bookman/data/ParameterizedEntityUser.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1373524222854" ignored="false" />
-    <file path="$PROJECT_DIR$/../SafedoorPM-Bookman/Bookman/src/com/safedoorpm/bookman/data/LaskinRoot.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1373525955788" ignored="false" />
-    <file path="$PROJECT_DIR$/../SafedoorPM-Bookman/Bookman/src/com/safedoorpm/bookman/util/LooselyNamedEntitiesRegistry.java" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1373533986783" ignored="false" />
-    <file path="$PROJECT_DIR$/../SafedoorPM-Bookman/Bookman/src/com/safedoorpm/bookman/gui/WorkInstructionsWindow.form" changelist="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" time="1373534909166" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -737,7 +28,7 @@
     <disable_hints />
   </component>
   <component name="DebuggerManager">
-    <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true">
+    <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true" converted="true">
       <breakpoint url="file://$PROJECT_DIR$/src/com/obtuse/ui/AcceleratedPopupMenu1.java" line="56" class="com.obtuse.ui.AcceleratedPopupMenu1$1" package="com.obtuse.ui">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
@@ -784,8 +75,7 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </line_breakpoints>
-    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
-    <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
+    <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true" converted="true">
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
         <option name="NOTIFY_UNCAUGHT" value="true" />
@@ -821,8 +111,8 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </breakpoint_any>
-    <breakpoint_rules />
-    <ui_properties />
+    <ui_properties converted="true" />
+    <breakpoint_rules converted="true" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FavoritesManager">
@@ -830,64 +120,51 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="LogsWindow.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/LogsWindow.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="123" column="89" selection-start="4040" selection-end="4040" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="WindowWithMenus.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/WindowWithMenus.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="26" column="0" selection-start="572" selection-end="572" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="WindowsCustomization.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/WindowsCustomization.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="120" column="0" selection-start="3213" selection-end="3213" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="OSLevelCustomizations.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/OSLevelCustomizations.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="64" selection-start="473" selection-end="473" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="BasicProgramConfigInfo.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/BasicProgramConfigInfo.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="16" column="13" selection-start="398" selection-end="398" vertical-scroll-proportion="0.0">
+            <state vertical-scroll-proportion="0.0" vertical-offset="288" max-vertical-offset="4500">
+              <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ObtuseUtil.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="ObtuseUtil.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/ObtuseUtil.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="27" column="13" selection-start="632" selection-end="632" vertical-scroll-proportion="0.0">
-              <folding />
+            <state vertical-scroll-proportion="0.66360503" vertical-offset="2284" max-vertical-offset="37422">
+              <caret line="159" column="41" selection-start-line="159" selection-start-column="41" selection-end-line="159" selection-end-column="41" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#692#734#0" expanded="true" />
+                <element signature="e#4747#4790#0" expanded="true" />
+                <element signature="e#6008#6067#0" expanded="true" />
+                <element signature="e#13357#13402#1" expanded="true" />
+                <element signature="e#19166#19229#0" expanded="true" />
+                <element signature="e#19880#19943#0" expanded="true" />
+                <element signature="e#21059#21122#0" expanded="true" />
+                <element signature="e#22301#22364#0" expanded="true" />
+                <element signature="e#23984#24071#0" expanded="true" />
+                <element signature="e#24154#24183#1" expanded="true" />
+                <element signature="e#24211#24240#1" expanded="true" />
+                <element signature="e#38310#38346#0" expanded="true" />
+                <element signature="e#38977#39039#0" expanded="true" />
+                <element signature="e#39752#39814#0" expanded="true" />
+                <element signature="e#40357#40419#0" expanded="true" />
+                <element signature="e#44385#44421#0" expanded="true" />
+                <element signature="e#51644#51689#0" expanded="true" />
+                <element signature="e#56536#56590#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ValidatedJTextField.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="ValidatedJTextField.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/ValidatedJTextField.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="22" selection-start="1063" selection-end="1063" vertical-scroll-proportion="0.5313283">
+            <state vertical-scroll-proportion="0.0" vertical-offset="378" max-vertical-offset="2412">
+              <caret line="51" column="0" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -895,20 +172,64 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FileSelectors.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/FileSelectors.java">
+      <file leaf-file-name="ArgInt.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/ArgInt.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="81" selection-start="400" selection-end="400" vertical-scroll-proportion="0.0">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="828">
+              <caret line="17" column="17" selection-start-line="17" selection-start-column="17" selection-end-line="17" selection-end-column="17" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NullSelectionModel.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/NullSelectionModel.java">
+      <file leaf-file-name="ArgLong.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/ArgLong.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="13" selection-start="350" selection-end="350" vertical-scroll-proportion="0.0">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="828">
+              <caret line="17" column="17" selection-start-line="17" selection-start-column="17" selection-end-line="17" selection-end-column="17" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ArgYesNo.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/ArgYesNo.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1044">
+              <caret line="25" column="16" selection-start-line="25" selection-start-column="16" selection-end-line="25" selection-end-column="16" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ArgYYYY_MM_DD_Date.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/ArgYYYY_MM_DD_Date.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="900">
+              <caret line="31" column="73" selection-start-line="31" selection-start-column="73" selection-end-line="31" selection-end-column="73" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DateUtils.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/DateUtils.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="6130" max-vertical-offset="17208">
+              <caret line="372" column="32" selection-start-line="372" selection-start-column="32" selection-end-line="372" selection-end-column="32" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ArgYYYY_MM_DD_CalendarDate.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/ArgYYYY_MM_DD_CalendarDate.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="918">
+              <caret line="15" column="22" selection-start-line="15" selection-start-column="22" selection-end-line="15" selection-end-column="22" />
+              <folding>
+                <element signature="e#310#352#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -916,7 +237,8 @@
       <file leaf-file-name="MultiSplitLayout.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/org/jdesktop/swingx/MultiSplitLayout.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="79" column="38" selection-start="3023" selection-end="3023" vertical-scroll-proportion="0.0">
+            <state vertical-scroll-proportion="0.0" vertical-offset="1422" max-vertical-offset="27540">
+              <caret line="79" column="38" selection-start-line="79" selection-start-column="38" selection-end-line="79" selection-end-column="38" />
               <folding />
             </state>
           </provider>
@@ -947,7 +269,6 @@
         <option value="$PROJECT_DIR$/src/com/obtuse/util/exceptions/SyntaxErrorException.java" />
         <option value="$PROJECT_DIR$/src/org/jdesktop/swingx/MultiSplitPane.java" />
         <option value="$PROJECT_DIR$/src/org/jdesktop/swingx/MultiSplitLayout.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/util/ObtuseUtil.java" />
         <option value="$PROJECT_DIR$/src/com/obtuse/util/DateUtils.java" />
         <option value="$PROJECT_DIR$/src/com/obtuse/util/Trace.java" />
         <option value="$PROJECT_DIR$/src/com/obtuse/db/PostgresConnection.java" />
@@ -957,14 +278,20 @@
         <option value="$PROJECT_DIR$/src/com/obtuse/util/BasicProgramConfigInfo.java" />
         <option value="$PROJECT_DIR$/src/com/obtuse/ui/WindowWithMenus.java" />
         <option value="$PROJECT_DIR$/src/com/obtuse/ui/ValidatedJTextField.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/util/ArgYYYY_MM_DD_CalendarDate.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/util/ArgInt.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/util/ArgLong.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/util/ArgYesNo.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/util/ArgYYYY_MM_DD_Date.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/util/ObtuseUtil.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="94" />
-    <option name="y" value="22" />
-    <option name="width" value="1294" />
-    <option name="height" value="842" />
+    <option name="x" value="461" />
+    <option name="y" value="39" />
+    <option name="width" value="1937" />
+    <option name="height" value="1464" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -1117,7 +444,7 @@
     <option name="STATE" value="0" />
   </component>
   <component name="ProjectView">
-    <navigator currentView="ProjectPane" proportions="" version="1" splitterProportion="0.5">
+    <navigator currentView="ProjectPane" proportions="" version="1">
       <flattenPackages />
       <showMembers />
       <showModules />
@@ -1137,10 +464,6 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="Pipestone" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="External Libraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -1182,6 +505,10 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="obtuse" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="util" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1207,6 +534,24 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Pipestone" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Pipestone" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="obtuse" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
     </panes>
@@ -1219,7 +564,7 @@
     <property name="recentsLimit" value="5" />
     <property name="MemberChooser.sorted" value="false" />
     <property name="options.lastSelected" value="project.propVCSSupport.Mappings" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Caliper" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
@@ -1403,6 +748,34 @@
       <option name="PORT" value="5005" />
       <method />
     </configuration>
+    <configuration default="true" type="TestNG" factoryName="TestNG">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
+      <method />
+    </configuration>
     <configuration default="true" type="Applet" factoryName="Applet">
       <module name="" />
       <option name="MAIN_CLASS_NAME" />
@@ -1479,28 +852,16 @@
       <AnalysisUIOptions />
     </option>
   </component>
-  <component name="SvnConfiguration" maxAnnotateRevisions="500" myUseAcceleration="nothing" myAutoUpdateAfterCommit="false" cleanupOnStartRun="false" SSL_PROTOCOLS="sslv3">
-    <option name="USER" value="" />
-    <option name="PASSWORD" value="" />
-    <option name="mySSHConnectionTimeout" value="30000" />
-    <option name="mySSHReadTimeout" value="30000" />
-    <option name="LAST_MERGED_REVISION" />
-    <option name="MERGE_DRY_RUN" value="false" />
-    <option name="MERGE_DIFF_USE_ANCESTRY" value="true" />
-    <option name="UPDATE_LOCK_ON_DEMAND" value="false" />
-    <option name="IGNORE_SPACES_IN_MERGE" value="false" />
-    <option name="CHECK_NESTED_FOR_QUICK_MERGE" value="false" />
-    <option name="IGNORE_SPACES_IN_ANNOTATE" value="true" />
-    <option name="SHOW_MERGE_SOURCES_IN_ANNOTATE" value="true" />
-    <option name="FORCE_UPDATE" value="false" />
-    <option name="IGNORE_EXTERNALS" value="false" />
-    <myIsUseDefaultProxy>false</myIsUseDefaultProxy>
+  <component name="SvnConfiguration" myUseAcceleration="nothing">
+    <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" name="Default" comment="" />
       <created>1357378176104</created>
       <updated>1357378176104</updated>
+      <workItem from="1400913906892" duration="614000" />
+      <workItem from="1404886310761" duration="1039000" />
     </task>
     <task id="LOCAL-00001" summary="Major re-sync with danny's personal toolkit.">
       <created>1359580956092</created>
@@ -1521,213 +882,487 @@
     <option name="localTasksCounter" value="5" />
     <servers />
   </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="1653000" />
+  </component>
   <component name="ToolWindowManager">
-    <frame x="94" y="22" width="1294" height="842" extended-state="0" />
-    <editor active="false" />
+    <frame x="461" y="39" width="1937" height="1464" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32686982" sideWeight="0.9753381" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32825485" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32798833" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.118644066" sideWeight="0.67289025" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.37740386" sideWeight="0.6731302" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.38893044" sideWeight="0.9995866" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32949308" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32984293" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24907652" sideWeight="0.6731302" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32949308" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329475" sideWeight="0.67289025" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Problems" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32685116" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32686982" sideWeight="0.9753381" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
+  </component>
+  <component name="Vcs.Log.UiProperties">
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+      <collection />
+    </option>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="true" />
-    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="true" />
-    <option name="CHECK_NEW_TODO" value="true" />
     <option name="myTodoPanelSettings">
-      <value>
-        <are-packages-shown value="false" />
-        <are-modules-shown value="false" />
-        <flatten-packages value="false" />
-        <is-autoscroll-to-source value="false" />
-      </value>
+      <TodoPanelSettings />
     </option>
-    <option name="PERFORM_UPDATE_IN_BACKGROUND" value="true" />
-    <option name="PERFORM_COMMIT_IN_BACKGROUND" value="true" />
-    <option name="PERFORM_EDIT_IN_BACKGROUND" value="true" />
-    <option name="PERFORM_CHECKOUT_IN_BACKGROUND" value="true" />
-    <option name="PERFORM_ADD_REMOVE_IN_BACKGROUND" value="true" />
-    <option name="PERFORM_ROLLBACK_IN_BACKGROUND" value="false" />
-    <option name="CHECK_LOCALLY_CHANGED_CONFLICTS_IN_BACKGROUND" value="false" />
-    <option name="CHANGED_ON_SERVER_INTERVAL" value="60" />
-    <option name="SHOW_ONLY_CHANGED_IN_SELECTION_DIFF" value="true" />
-    <option name="CHECK_COMMIT_MESSAGE_SPELLING" value="true" />
-    <option name="DEFAULT_PATCH_EXTENSION" value="patch" />
-    <option name="SHORT_DIFF_HORIZONTALLY" value="true" />
-    <option name="SHORT_DIFF_EXTRA_LINES" value="2" />
-    <option name="SOFT_WRAPS_IN_SHORT_DIFF" value="true" />
-    <option name="INCLUDE_TEXT_INTO_PATCH" value="false" />
-    <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
-    <option name="SHOW_FILE_HISTORY_DETAILS" value="true" />
-    <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
-    <option name="SHOW_DIRTY_RECURSIVELY" value="false" />
-    <option name="LIMIT_HISTORY" value="true" />
-    <option name="MAXIMUM_HISTORY_ROWS" value="1000" />
-    <option name="UPDATE_FILTER_SCOPE_NAME" />
-    <option name="USE_COMMIT_MESSAGE_MARGIN" value="false" />
-    <option name="COMMIT_MESSAGE_MARGIN_SIZE" value="72" />
-    <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
-    <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implement a ValidatedJTextField class that makes it easier to manage the validation of JTextField values." />
-    <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
-    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
-    <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
-    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="false" />
-    <option name="REFORMAT_BEFORE_FILE_COMMIT" value="false" />
-    <option name="FILE_HISTORY_DIALOG_COMMENTS_SPLITTER_PROPORTION" value="0.8" />
-    <option name="FILE_HISTORY_DIALOG_SPLITTER_PROPORTION" value="0.5" />
-    <option name="ACTIVE_VCS_NAME" />
-    <option name="UPDATE_GROUP_BY_PACKAGES" value="false" />
-    <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
-    <option name="UPDATE_FILTER_BY_SCOPE" value="false" />
-    <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
-    <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
     <MESSAGE value="Cleanup the copyright notices.&#10;Add a .gitignore file." />
     <MESSAGE value="Major re-sync with danny's personal toolkit." />
     <MESSAGE value="Very early stage topological graph stuff.&#10;Lots of cleanup here and there." />
     <MESSAGE value="Changes to workspace.xml file as a result of using this project's src directories as content roots in other IntelliJ projects." />
     <MESSAGE value="Implement a ValidatedJTextField class that makes it easier to manage the validation of JTextField values." />
+    <option name="LAST_COMMIT_MESSAGE" value="Implement a ValidatedJTextField class that makes it easier to manage the validation of JTextField values." />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/obtuse/ui/AcceleratedPopupMenu1.java</url>
+          <line>56</line>
+          <properties />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/obtuse/ui/AcceleratedPopupMenu2.java</url>
+          <line>134</line>
+          <properties />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/org/jdesktop/swingx/MultiSplitLayout.java</url>
+          <line>70</line>
+          <properties />
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="3" />
+    </breakpoint-manager>
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/db/PostgresConnection.java">
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/LogsWindow.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="66" column="43" selection-start="1910" selection-end="1910" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/db/exceptions/ObtuseJDBCgetConnectionFailedException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="53" selection-start="332" selection-end="332" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/TrackedWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="75" column="38" selection-start="1916" selection-end="1916" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/ui.jar!/com/apple/eawt/Application.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="112" column="16" selection-start="3695" selection-end="3695" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/MacCustomization.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="0" selection-start="900" selection-end="900" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/PreferencesHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="17" selection-start="322" selection-end="322" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/WindowsCustomization.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="120" column="0" selection-start="3213" selection-end="3213" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/OSLevelCustomizations.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="64" selection-start="473" selection-end="473" vertical-scroll-proportion="0.0">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="8424">
+          <caret line="123" column="89" selection-start-line="123" selection-start-column="89" selection-end-line="123" selection-end-column="89" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/WindowWithMenus.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="0" selection-start="572" selection-end="572" vertical-scroll-proportion="0.0">
+        <state vertical-scroll-proportion="0.0" vertical-offset="468" max-vertical-offset="4896">
+          <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/FileSelectors.java">
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/WindowsCustomization.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="81" selection-start="400" selection-end="400" vertical-scroll-proportion="0.0">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2160" max-vertical-offset="2430">
+          <caret line="120" column="0" selection-start-line="120" selection-start-column="0" selection-end-line="120" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/LogsWindow.java">
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/OSLevelCustomizations.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="123" column="89" selection-start="4040" selection-end="4040" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/NullSelectionModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="13" selection-start="350" selection-end="350" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/jdesktop/swingx/MultiSplitLayout.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="79" column="38" selection-start="3023" selection-end="3023" vertical-scroll-proportion="0.0">
+        <state vertical-scroll-proportion="0.0" vertical-offset="324" max-vertical-offset="2592">
+          <caret line="18" column="64" selection-start-line="18" selection-start-column="64" selection-end-line="18" selection-end-column="64" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/BasicProgramConfigInfo.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="13" selection-start="398" selection-end="398" vertical-scroll-proportion="0.0">
+        <state vertical-scroll-proportion="0.0" vertical-offset="288" max-vertical-offset="4500">
+          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/ObtuseUtil.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="13" selection-start="632" selection-end="632" vertical-scroll-proportion="0.0">
+        <state vertical-scroll-proportion="0.0" vertical-offset="486" max-vertical-offset="35874">
+          <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#692#734#0" expanded="true" />
+            <element signature="e#4747#4790#0" expanded="true" />
+            <element signature="e#6008#6067#0" expanded="true" />
+            <element signature="e#13357#13402#1" expanded="true" />
+            <element signature="e#19166#19229#0" expanded="true" />
+            <element signature="e#19880#19943#0" expanded="true" />
+            <element signature="e#21059#21122#0" expanded="true" />
+            <element signature="e#22301#22364#0" expanded="true" />
+            <element signature="e#23984#24071#0" expanded="true" />
+            <element signature="e#24154#24183#1" expanded="true" />
+            <element signature="e#24211#24240#1" expanded="true" />
+            <element signature="e#38310#38346#0" expanded="true" />
+            <element signature="e#38977#39039#0" expanded="true" />
+            <element signature="e#39752#39814#0" expanded="true" />
+            <element signature="e#40357#40419#0" expanded="true" />
+            <element signature="e#44385#44421#0" expanded="true" />
+            <element signature="e#51644#51689#0" expanded="true" />
+            <element signature="e#56536#56590#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/ValidatedJTextField.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="378" max-vertical-offset="2592">
+          <caret line="21" column="22" selection-start-line="21" selection-start-column="22" selection-end-line="21" selection-end-column="22" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/FileSelectors.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="270" max-vertical-offset="3582">
+          <caret line="15" column="81" selection-start-line="15" selection-start-column="81" selection-end-line="15" selection-end-column="81" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/NullSelectionModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="216" max-vertical-offset="702">
+          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/jdesktop/swingx/MultiSplitLayout.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1422" max-vertical-offset="27540">
+          <caret line="79" column="38" selection-start-line="79" selection-start-column="38" selection-end-line="79" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/LogsWindow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="8424">
+          <caret line="123" column="89" selection-start-line="123" selection-start-column="89" selection-end-line="123" selection-end-column="89" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/WindowWithMenus.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="468" max-vertical-offset="4896">
+          <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/WindowsCustomization.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2160" max-vertical-offset="2430">
+          <caret line="120" column="0" selection-start-line="120" selection-start-column="0" selection-end-line="120" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/OSLevelCustomizations.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="324" max-vertical-offset="2592">
+          <caret line="18" column="64" selection-start-line="18" selection-start-column="64" selection-end-line="18" selection-end-column="64" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/BasicProgramConfigInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="288" max-vertical-offset="4500">
+          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/ObtuseUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="486" max-vertical-offset="35874">
+          <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#692#734#0" expanded="true" />
+            <element signature="e#4747#4790#0" expanded="true" />
+            <element signature="e#6008#6067#0" expanded="true" />
+            <element signature="e#13357#13402#1" expanded="true" />
+            <element signature="e#19166#19229#0" expanded="true" />
+            <element signature="e#19880#19943#0" expanded="true" />
+            <element signature="e#21059#21122#0" expanded="true" />
+            <element signature="e#22301#22364#0" expanded="true" />
+            <element signature="e#23984#24071#0" expanded="true" />
+            <element signature="e#24154#24183#1" expanded="true" />
+            <element signature="e#24211#24240#1" expanded="true" />
+            <element signature="e#38310#38346#0" expanded="true" />
+            <element signature="e#38977#39039#0" expanded="true" />
+            <element signature="e#39752#39814#0" expanded="true" />
+            <element signature="e#40357#40419#0" expanded="true" />
+            <element signature="e#44385#44421#0" expanded="true" />
+            <element signature="e#51644#51689#0" expanded="true" />
+            <element signature="e#56536#56590#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/ValidatedJTextField.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="378" max-vertical-offset="2592">
+          <caret line="21" column="22" selection-start-line="21" selection-start-column="22" selection-end-line="21" selection-end-column="22" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/FileSelectors.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="270" max-vertical-offset="3582">
+          <caret line="15" column="81" selection-start-line="15" selection-start-column="81" selection-end-line="15" selection-end-column="81" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/NullSelectionModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="216" max-vertical-offset="702">
+          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/jdesktop/swingx/MultiSplitLayout.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1422" max-vertical-offset="27540">
+          <caret line="79" column="38" selection-start-line="79" selection-start-column="38" selection-end-line="79" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/db/PostgresConnection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
+          <caret line="66" column="43" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/db/exceptions/ObtuseJDBCgetConnectionFailedException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
+          <caret line="11" column="53" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/TrackedWindow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
+          <caret line="75" column="38" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/ui.jar!/com/apple/eawt/Application.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
+          <caret line="112" column="16" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/MacCustomization.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
+          <caret line="35" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/PreferencesHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
+          <caret line="12" column="17" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/WindowsCustomization.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2160" max-vertical-offset="2430">
+          <caret line="120" column="0" selection-start-line="120" selection-start-column="0" selection-end-line="120" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/OSLevelCustomizations.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="324" max-vertical-offset="2592">
+          <caret line="18" column="64" selection-start-line="18" selection-start-column="64" selection-end-line="18" selection-end-column="64" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/WindowWithMenus.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="468" max-vertical-offset="4896">
+          <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/FileSelectors.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="270" max-vertical-offset="3582">
+          <caret line="15" column="81" selection-start-line="15" selection-start-column="81" selection-end-line="15" selection-end-column="81" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/LogsWindow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2214" max-vertical-offset="8424">
+          <caret line="123" column="89" selection-start-line="123" selection-start-column="89" selection-end-line="123" selection-end-column="89" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/NullSelectionModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="216" max-vertical-offset="702">
+          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/jdesktop/swingx/MultiSplitLayout.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1422" max-vertical-offset="27540">
+          <caret line="79" column="38" selection-start-line="79" selection-start-column="38" selection-end-line="79" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/BasicProgramConfigInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="288" max-vertical-offset="4500">
+          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/ValidatedJTextField.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="22" selection-start="1063" selection-end="1063" vertical-scroll-proportion="0.5313283">
+        <state vertical-scroll-proportion="0.0" vertical-offset="378" max-vertical-offset="2412">
+          <caret line="51" column="0" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/ArgInt.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="828">
+          <caret line="17" column="17" selection-start-line="17" selection-start-column="17" selection-end-line="17" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/ArgLong.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="828">
+          <caret line="17" column="17" selection-start-line="17" selection-start-column="17" selection-end-line="17" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/ArgYesNo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1044">
+          <caret line="25" column="16" selection-start-line="25" selection-start-column="16" selection-end-line="25" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/ArgYYYY_MM_DD_CalendarDate.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="918">
+          <caret line="15" column="22" selection-start-line="15" selection-start-column="22" selection-end-line="15" selection-end-column="22" />
+          <folding>
+            <element signature="e#310#352#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/DateUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="6130" max-vertical-offset="17208">
+          <caret line="372" column="32" selection-start-line="372" selection-start-column="32" selection-end-line="372" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/ArgYYYY_MM_DD_Date.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="900">
+          <caret line="31" column="73" selection-start-line="31" selection-start-column="73" selection-end-line="31" selection-end-column="73" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/ObtuseUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.66360503" vertical-offset="2284" max-vertical-offset="37422">
+          <caret line="159" column="41" selection-start-line="159" selection-start-column="41" selection-end-line="159" selection-end-column="41" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#692#734#0" expanded="true" />
+            <element signature="e#4747#4790#0" expanded="true" />
+            <element signature="e#6008#6067#0" expanded="true" />
+            <element signature="e#13357#13402#1" expanded="true" />
+            <element signature="e#19166#19229#0" expanded="true" />
+            <element signature="e#19880#19943#0" expanded="true" />
+            <element signature="e#21059#21122#0" expanded="true" />
+            <element signature="e#22301#22364#0" expanded="true" />
+            <element signature="e#23984#24071#0" expanded="true" />
+            <element signature="e#24154#24183#1" expanded="true" />
+            <element signature="e#24211#24240#1" expanded="true" />
+            <element signature="e#38310#38346#0" expanded="true" />
+            <element signature="e#38977#39039#0" expanded="true" />
+            <element signature="e#39752#39814#0" expanded="true" />
+            <element signature="e#40357#40419#0" expanded="true" />
+            <element signature="e#44385#44421#0" expanded="true" />
+            <element signature="e#51644#51689#0" expanded="true" />
+            <element signature="e#56536#56590#0" expanded="true" />
           </folding>
         </state>
       </provider>

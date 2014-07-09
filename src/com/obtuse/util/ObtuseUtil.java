@@ -5,6 +5,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.*;
+import java.lang.reflect.InvocationTargetException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.security.MessageDigest;
@@ -153,6 +154,7 @@ public class ObtuseUtil {
 
         public void rehash() {
 
+            //noinspection StatementWithEmptyBody
             if ( _readonly ) {
 
                 // Been there, done that.
@@ -683,6 +685,47 @@ public class ObtuseUtil {
         try {
 
             fs = new FileOutputStream( file );
+
+            //noinspection UnnecessaryLocalVariable
+            boolean rval = ObtuseUtil.writeBytesToStream( bytes, fs, printStackTraceOnError );
+
+            return rval;
+
+        } catch ( IOException e ) {
+
+            if ( printStackTraceOnError ) {
+
+                //noinspection CallToPrintStackTrace
+                e.printStackTrace();
+
+            }
+
+            return false;
+
+        } finally {
+
+            ObtuseUtil.closeQuietly( fs );
+
+        }
+
+    }
+
+    /**
+     * Append the contents of a byte array into a file without needing to worry about exceptions.
+     *
+     * @param bytes                  the byte array to be written.
+     * @param file                   the file to be written.
+     * @param printStackTraceOnError specifies whether or not a stack trace is to be printed if an i/o error occurs.
+     * @return true if the operation succeeded and false otherwise.
+     */
+
+    @SuppressWarnings({ "BooleanMethodNameMustStartWithQuestion" })
+    public static boolean appendBytesToFile( byte[] bytes, File file, boolean printStackTraceOnError ) {
+
+        FileOutputStream fs = null;
+        try {
+
+            fs = new FileOutputStream( file, true );
 
             //noinspection UnnecessaryLocalVariable
             boolean rval = ObtuseUtil.writeBytesToStream( bytes, fs, printStackTraceOnError );
@@ -1294,7 +1337,7 @@ public class ObtuseUtil {
     @SuppressWarnings({ "UnnecessaryParentheses", "MagicNumber" })
     public static String hexvalue( char v ) {
 
-        return hexvalue( Character.toString( v ).getBytes() );
+        return ObtuseUtil.hexvalue( Character.toString( v ).getBytes() );
 
     }
 
@@ -1321,10 +1364,7 @@ public class ObtuseUtil {
         StringBuilder rval = new StringBuilder();
         for ( byte b : bv ) {
 
-            int high = ( b >> 4 ) & 0xf;
-            int low = (int)b & 0xf;
-
-            rval.append( "0123456789abcdef".charAt( high ) ).append( "0123456789abcdef".charAt( low ) );
+            rval.append( ObtuseUtil.hexvalue( b ) );
 
         }
 
@@ -1944,6 +1984,8 @@ public class ObtuseUtil {
      * Query operations on the returned hash table "read through" to the specified hash table,
      * and attempts to modify the returned hash table, whether direct or via its collection views,
      * result in an UnsupportedOperationException.
+     * <p/>This method is probably less than perfect in the sense that there probably are at least somewhat sneaky ways
+     * to modify the 'unmodifiable' hashtable that it returns. That said, it is far better than nothing.
      * @param ht the hash table for which an unmodifiable view is to be returned.
      * @return an unmodifiable view of the specified hash table.
      */
@@ -1981,6 +2023,50 @@ public class ObtuseUtil {
             Logger.logMsg( "unble to serialize test.ser" );
 
         }
+
+    }
+
+    /**
+     * Get our process id (not guaranteed to work on all platforms).
+     * <p/>Found at
+     * <blockquote><tt>http://stackoverflow.com/questions/35842/how-can-a-java-program-get-its-own-process-id</tt></blockquote>
+     * (last referenced 2013/09/24)
+     */
+
+    private static Integer s_pid = null;
+
+    public static int getPid() {
+
+        if ( ObtuseUtil.s_pid == null ) {
+
+            ObtuseUtil.s_pid = -1;
+            try {
+
+                java.lang.management.RuntimeMXBean runtime =
+                        java.lang.management.ManagementFactory.getRuntimeMXBean();
+                java.lang.reflect.Field jvm = runtime.getClass().getDeclaredField("jvm");
+                jvm.setAccessible(true);
+                sun.management.VMManagement mgmt =
+                        (sun.management.VMManagement) jvm.get(runtime);
+                java.lang.reflect.Method pidMethod =
+                        mgmt.getClass().getDeclaredMethod("getProcessId");
+                pidMethod.setAccessible( true );
+
+                ObtuseUtil.s_pid = (Integer) pidMethod.invoke(mgmt);
+
+            } catch ( InvocationTargetException e ) {
+                // we did our best
+            } catch ( NoSuchMethodException e ) {
+                // we did our best
+            } catch ( IllegalAccessException e ) {
+                // we did our best
+            } catch ( NoSuchFieldException e ) {
+                // we did our best
+            }
+
+        }
+
+        return ObtuseUtil.s_pid.intValue();
 
     }
 

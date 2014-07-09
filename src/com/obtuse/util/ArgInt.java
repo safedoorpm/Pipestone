@@ -15,7 +15,7 @@ public abstract class ArgInt extends Arg {
 
     }
 
-    public void process( String keyword, String arg ) {
+    public final void process( String keyword, String arg ) {
 
         try {
 
@@ -23,7 +23,7 @@ public abstract class ArgInt extends Arg {
 
         } catch ( NumberFormatException e ) {
 
-            throw new IllegalArgumentException( "invalid argument (" + arg + ") - must be an integer", e );
+            throw new IllegalArgumentException( "invalid \"" + keyword + "\" argument (" + arg + ") - must be an integer", e );
 
         }
 

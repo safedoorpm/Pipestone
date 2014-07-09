@@ -6,17 +6,16 @@ package com.obtuse.util;
 
 import com.obtuse.util.exceptions.ParsingException;
 
-import java.util.Date;
-
 /**
- * A date {@link com.obtuse.util.ArgParser} argument.
+ * A date {@link ArgParser} argument.
  * <p/>The only supported format is "yyyy-MM-dd".
- * See {@link DateUtils#parseYYYY_MM_DD} for more information.
+ * See {@link com.obtuse.util.DateUtils#parseYYYY_MM_DD} for more information.
  */
 
-public abstract class ArgYYYY_MM_DD_Date extends Arg {
+@SuppressWarnings("ClassNamingConvention")
+public abstract class ArgYYYY_MM_DD_CalendarDate extends Arg {
 
-    protected ArgYYYY_MM_DD_Date( String keyword ) {
+    protected ArgYYYY_MM_DD_CalendarDate( String keyword ) {
         super( keyword );
 
     }
@@ -25,7 +24,7 @@ public abstract class ArgYYYY_MM_DD_Date extends Arg {
 
         try {
 
-            process( keyword, DateUtils.parseYYYY_MM_DD( arg, 0 ) );
+            process( keyword, new CalendarDate( arg ) );
 
         } catch ( ParsingException e ) {
 
@@ -35,7 +34,7 @@ public abstract class ArgYYYY_MM_DD_Date extends Arg {
 
     }
 
-    public abstract void process( String keyword, Date arg );
+    public abstract void process( String keyword, CalendarDate arg );
 
     public String toString() {
 

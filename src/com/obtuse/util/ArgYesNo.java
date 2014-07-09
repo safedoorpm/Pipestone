@@ -23,7 +23,7 @@ public abstract class ArgYesNo extends Arg {
 
     }
 
-    public void process( String keyword, String arg ) {
+    public final void process( String keyword, String arg ) {
 
         if ( "yes".equalsIgnoreCase( arg ) || "y".equalsIgnoreCase( arg ) ) {
 
@@ -35,7 +35,7 @@ public abstract class ArgYesNo extends Arg {
 
         } else {
 
-            throw new IllegalArgumentException( "invalid argument (" + arg + ") - must be YES, Y, NO or N (in any mixture of upper and lower case)" );
+            throw new IllegalArgumentException( "invalid \"" + keyword + "\" argument (" + arg + ") - must be YES, Y, NO or N (in any mixture of upper and lower case)" );
 
         }
 
