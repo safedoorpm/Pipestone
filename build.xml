@@ -9,8 +9,8 @@
     <property name="SafedoorPM-Web.location" value="../SafedoorPM-Web"/>
     <property name="ECLIPSE_HOME" value="../../../../usr/lib/eclipse"/>
     <property name="debuglevel" value="source,lines,vars"/>
-    <property name="target" value="1.6"/>
-    <property name="source" value="1.6"/>
+    <property name="target" value="1.7"/>
+    <property name="source" value="1.7"/>
     <property name="dist" value="../SafedoorPM-Web/external-libs/safedoorpmapi"/>
     <property name="distname" value="pipestone.jar"/>
               	              	
