@@ -1373,6 +1373,42 @@ public class ObtuseUtil {
     }
 
     /**
+     * Convert a byte array to its hexadecimal representation. For example, <tt>hexvalue( new byte[] { 1, 10, 100 }
+     * )</tt> yields <tt>"010a64"</tt>. Note that the returned string always contains twice as many characters as the
+     * input array contains bytes.
+     * <p/>
+     * While this method uses a {@link StringBuffer} to avoid creating lots and lots of dead strings, it will still
+     * consume quite a bit of memory if the byte array is sufficiently large.
+     *
+     * @param bv the byte array to be converted.
+     * @param off offset within the array to start converting at.
+     * @param len number of bytes to convert.
+     * @return the hex representation of <tt>v</tt>.
+     */
+
+    public static String hexvalue( byte[] bv, int off, int len ) {
+
+        if ( bv == null ) {
+
+            return "null";
+
+        }
+
+        StringBuilder rval = new StringBuilder();
+        for ( int ix = off; ix < len; ix += 1 ) {
+
+            byte b = bv[ix];
+            rval.
+                    append( "0123456789abcdef".charAt( ( b >> 4 ) & 0xf ) ).
+                    append( "0123456789abcdef".charAt( b & 0xf ) );
+
+        }
+
+        return rval.toString();
+
+    }
+
+    /**
      * Decode a string of hex digits as a byte array.
      */
 
