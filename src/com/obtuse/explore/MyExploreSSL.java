@@ -13,7 +13,7 @@ import java.security.cert.*;
  * Explore what we can do with SSL sockets.
  */
 
-public class ExploreSSL {
+public class MyExploreSSL {
 
     private static final SSLContext SSL_CLIENT_CONTEXT;
 
@@ -139,11 +139,11 @@ public class ExploreSSL {
         }
         SSL_CLIENT_CONTEXT = sslContext;
 
-        s_sslClientSocketFactory = ExploreSSL.SSL_CLIENT_CONTEXT.getSocketFactory();
+        s_sslClientSocketFactory = MyExploreSSL.SSL_CLIENT_CONTEXT.getSocketFactory();
 
     }
 
-    private ExploreSSL() {
+    private MyExploreSSL() {
 
         super();
     }
@@ -161,7 +161,7 @@ public class ExploreSSL {
 
             while ( true ) {
 
-                boolean worked = ExploreSSL.trialRun( ks, "localhost" );
+                boolean worked = MyExploreSSL.trialRun( ks, "localhost" );
 
                 if ( worked ) {
 
@@ -283,8 +283,8 @@ public class ExploreSSL {
             Logger.logMsg( "encoded form is " + cert.getEncoded().length + " bytes long" );
             Logger.logMsg( "cert's class is " + cert.getClass() );
 
-            ExploreSSL.s_myIx += 1;
-            ks.setCertificateEntry( "balzac-" + ExploreSSL.s_myIx, cert );
+            MyExploreSSL.s_myIx += 1;
+            ks.setCertificateEntry( "balzac-" + MyExploreSSL.s_myIx, cert );
 
             Logger.logMsg( "added to trusted certs" );
             Logger.logMsg( "" );
