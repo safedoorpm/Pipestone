@@ -56,6 +56,7 @@ public class DirectedGraph {
 
     }
 
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     private boolean topologicalSortVisitNode(
             DirectedGraphVertex node,
             Collection<DirectedGraphVertex> temporarilyMarkedNodes,

@@ -4,6 +4,8 @@ package com.obtuse.util;
  * Copyright © 2011 Obtuse Systems Corporation
  */
 
+import org.jetbrains.annotations.NotNull;
+
 /**
  * Make it possible to apply a strict ordering to arbitrary instances of some class.
  */
@@ -62,7 +64,7 @@ public class OrderedEntity<T> implements Comparable<OrderedEntity<T>> {
 
     }
 
-    public int compareTo( OrderedEntity<T> rhs ) {
+    public int compareTo( @NotNull OrderedEntity<T> rhs ) {
 
         return _ordering.compareTo( rhs.getOrdering() );
 

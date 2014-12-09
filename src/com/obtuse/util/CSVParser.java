@@ -237,7 +237,8 @@ public class CSVParser implements Closeable {
                 //noinspection UnnecessaryParentheses
                 rval |= ( 1 << bitNumber );
 
-            } else if ( ch == (int)'0' ) {
+            } else //noinspection StatementWithEmptyBody
+                if ( ch == (int)'0' ) {
 
                 // just ignore the zero bits
 
@@ -539,6 +540,7 @@ public class CSVParser implements Closeable {
             pushback( ch );
             v.add( getInt() );
             ch = nextCh();
+            //noinspection StatementWithEmptyBody
             if ( ch == (int)',' ) {
 
                 // life is wonderful
@@ -592,6 +594,7 @@ public class CSVParser implements Closeable {
             pushback( ch );
             v.add( getDouble() );
             ch = nextCh();
+            //noinspection StatementWithEmptyBody
             if ( ch == (int)',' ) {
 
                 // life is wonderful

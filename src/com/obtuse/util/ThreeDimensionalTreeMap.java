@@ -163,6 +163,7 @@ public class ThreeDimensionalTreeMap<T1,T2,T3,V> implements Serializable, ThreeD
                     _activeOuterKey = _outerIterator.next();
 
                     TwoDimensionalSortedMap<T2,T3,V> innerMap = getInnerMap( _activeOuterKey, false );
+                    //noinspection StatementWithEmptyBody
                     if ( innerMap.isEmpty() ) {
 
                         // skip this one

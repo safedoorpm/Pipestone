@@ -19,7 +19,7 @@ public abstract class ArgInt extends Arg {
 
         try {
 
-            process( keyword, Integer.decode( arg ) );
+            process( keyword, Integer.decode( arg ).intValue() );
 
         } catch ( NumberFormatException e ) {
 

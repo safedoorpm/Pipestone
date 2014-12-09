@@ -47,7 +47,6 @@ public class AcceleratedPopupMenu1 extends JPopupMenu {
             item.addActionListener(
                     new ActionListener() {
 
-                        @Override
                         public void actionPerformed( ActionEvent actionEvent ) {
 
                             JMenuItem menuItem = (JMenuItem) actionEvent.getSource();
@@ -85,7 +84,6 @@ public class AcceleratedPopupMenu1 extends JPopupMenu {
         addMenuKeyListener(
                 new MenuKeyListener() {
 
-                    @Override
                     public void menuKeyTyped( MenuKeyEvent keyEvent ) {
 
                         char keyChar = keyEvent.getKeyChar();
@@ -108,14 +106,12 @@ public class AcceleratedPopupMenu1 extends JPopupMenu {
 
                     }
 
-                    @Override
                     public void menuKeyPressed( MenuKeyEvent keyEvent ) {
 
                         Logger.logMsg( "key pressed \"" + keyEvent.getKeyChar() + "\"" );
 
                     }
 
-                    @Override
                     public void menuKeyReleased( MenuKeyEvent keyEvent ) {
 
                         Logger.logMsg( "key released \"" + keyEvent.getKeyChar() + "\"" );
@@ -188,6 +184,7 @@ public class AcceleratedPopupMenu1 extends JPopupMenu {
         }
 
 
+        @SuppressWarnings("UnusedDeclaration")
         AcceleratedPopupMenu1 apm = new AcceleratedPopupMenu1( words );
 
     }

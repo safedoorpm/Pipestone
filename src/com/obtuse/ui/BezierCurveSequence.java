@@ -450,8 +450,6 @@ public class BezierCurveSequence extends AbstractCurveSequence {
 
         for ( int ix = 0; ix < points.length; ix += 1 ) {
 
-            float controlSlopeX;
-            float controlSlopeY;
             Point2D previousPoint, nextPoint;
             if ( ix == 0 ) {
 
@@ -539,7 +537,7 @@ public class BezierCurveSequence extends AbstractCurveSequence {
 
     public String toString() {
 
-        StringBuffer desc = new StringBuffer();
+        StringBuilder desc = new StringBuilder();
 
         desc.append( "CurvedLine( points = {" );
 

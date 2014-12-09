@@ -2,6 +2,7 @@ package com.obtuse.util;
 
 import com.obtuse.exceptions.HowDidWeGetHereError;
 import com.obtuse.util.exceptions.ParsingException;
+import org.jetbrains.annotations.NotNull;
 
 import javax.management.timer.Timer;
 import java.util.Calendar;
@@ -100,6 +101,7 @@ public class CalendarDate implements Comparable<CalendarDate> {
 
         }
 
+        @SuppressWarnings("UnnecessaryLocalVariable")
         int durationDays = 1 + (int)( durationMs / Timer.ONE_DAY );
 
 //        Logger.logMsg( "duration between " + this + " and " + rhs + " is " + computeDurationDays + " days" );
@@ -162,7 +164,7 @@ public class CalendarDate implements Comparable<CalendarDate> {
 
     }
 
-    public int compareTo( CalendarDate rhs ) {
+    public int compareTo( @NotNull CalendarDate rhs ) {
 
         return _dateString.compareTo( rhs._dateString );
 

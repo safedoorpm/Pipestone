@@ -2,10 +2,44 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/ObtuseUtil.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ObtuseUtil.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/obtuse/explore/ExploreSSL.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/obtuse/util/exceptions/PipestoneSSLException.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/obtuse/util/SSLUtilities.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/ui/AbstractCurveSequence.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/AbstractCurveSequence.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/ui/AcceleratedPopupMenu1.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/AcceleratedPopupMenu1.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/ArgInt.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ArgInt.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/BasicProgramConfigInfo.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/BasicProgramConfigInfo.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/ui/BezierCurveSequence.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/BezierCurveSequence.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/CSVParser.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/CSVParser.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/CalendarDate.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/CalendarDate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/DateUtils.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/DateUtils.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/graph/DirectedGraph.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/graph/DirectedGraph.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/exceptions/HowDidWeGetHereError.java" afterPath="$PROJECT_DIR$/src/com/obtuse/exceptions/HowDidWeGetHereError.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/LoggingMessageProxy.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/LoggingMessageProxy.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/ui/MultiPointSlider.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/MultiPointSlider.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/jdesktop/swingx/MultiSplitLayout.java" afterPath="$PROJECT_DIR$/src/org/jdesktop/swingx/MultiSplitLayout.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/jdesktop/swingx/MultiSplitPane.java" afterPath="$PROJECT_DIR$/src/org/jdesktop/swingx/MultiSplitPane.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/NounsList.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/NounsList.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/OSLevelCustomizations.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/OSLevelCustomizations.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/obsolete/ObtuseUtilObsolete.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/obsolete/ObtuseUtilObsolete.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/ObtuseXMLUtils.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ObtuseXMLUtils.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/OrderedEntity.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/OrderedEntity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/PostParameters.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/PostParameters.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/Range.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/Range.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/ui/SortableJPanel.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/SortableJPanel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/ui/SortedJPanel.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/SortedJPanel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/ThreeDimensionalTreeMap.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ThreeDimensionalTreeMap.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/ui/TrackedWindow.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/TrackedWindow.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/TreeSorter.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/TreeSorter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/TwoDimensionalTreeMap.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/TwoDimensionalTreeMap.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/VerbsList.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/VerbsList.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Pipestone.iws" />
     <ignored path=".idea/workspace.xml" />
+    <ignored path="$PROJECT_DIR$/out/" />
+    <ignored path=".idea/dataSources.local.xml" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,36 +146,59 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ObtuseUtil.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="ObtuseUtil.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/ObtuseUtil.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.97938144" vertical-offset="23751" max-vertical-offset="37764">
+            <state vertical-scroll-proportion="0.0" vertical-offset="23751" max-vertical-offset="37764">
               <caret line="1384" column="7" selection-start-line="1384" selection-start-column="7" selection-end-line="1384" selection-end-column="7" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ExploreSSL.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/obtuse/explore/ExploreSSL.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="1843" max-vertical-offset="5328">
+              <caret line="141" column="60" selection-start-line="141" selection-start-column="60" selection-end-line="141" selection-end-column="60" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SSLUtilities.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/SSLUtilities.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.1329609" vertical-offset="3661" max-vertical-offset="8226">
+              <caret line="218" column="64" selection-start-line="218" selection-start-column="64" selection-end-line="218" selection-end-column="64" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ThreeDimensionalTreeMap.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/ThreeDimensionalTreeMap.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4104">
+              <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PipestoneSSLException.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/exceptions/PipestoneSSLException.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="594">
+              <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
               <folding>
-                <element signature="e#692#734#0" expanded="true" />
-                <element signature="e#4747#4790#0" expanded="true" />
-                <element signature="e#6008#6067#0" expanded="true" />
-                <element signature="e#13357#13402#1" expanded="true" />
-                <element signature="e#19166#19229#0" expanded="true" />
-                <element signature="e#19880#19943#0" expanded="true" />
-                <element signature="e#21059#21122#0" expanded="true" />
-                <element signature="e#22301#22364#0" expanded="true" />
-                <element signature="e#23984#24071#0" expanded="true" />
-                <element signature="e#24154#24183#1" expanded="true" />
-                <element signature="e#24211#24240#1" expanded="true" />
-                <element signature="e#38310#38346#0" expanded="true" />
-                <element signature="e#38977#39039#0" expanded="true" />
-                <element signature="e#39752#39814#0" expanded="true" />
-                <element signature="e#40357#40419#0" expanded="true" />
-                <element signature="e#45579#45615#0" expanded="true" />
-                <element signature="e#52838#52883#0" expanded="true" />
-                <element signature="e#57730#57784#0" expanded="true" />
+                <element signature="e#110#157#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ArgInt.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="ArgInt.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/ArgInt.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="306" max-vertical-offset="828">
@@ -151,27 +208,27 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CalendarDate.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="CalendarDate.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/CalendarDate.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="2431" max-vertical-offset="3798">
+            <state vertical-scroll-proportion="0.0" vertical-offset="342" max-vertical-offset="3816">
               <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PostgresConnection.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="PostgresConnection.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/obtuse/db/PostgresConnection.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1017" max-vertical-offset="2340">
+            <state vertical-scroll-proportion="0.0" vertical-offset="1080" max-vertical-offset="2340">
               <caret line="66" column="43" selection-start-line="66" selection-start-column="43" selection-end-line="66" selection-end-column="43" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Arg.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="Arg.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/Arg.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="630">
@@ -181,51 +238,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ArgLong.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/ArgLong.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="306" max-vertical-offset="828">
-              <caret line="17" column="17" selection-start-line="17" selection-start-column="17" selection-end-line="17" selection-end-column="17" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ArgYesNo.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/ArgYesNo.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="450" max-vertical-offset="1044">
-              <caret line="25" column="16" selection-start-line="25" selection-start-column="16" selection-end-line="25" selection-end-column="16" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ArgYYYY_MM_DD_Date.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="ArgYYYY_MM_DD_Date.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/ArgYYYY_MM_DD_Date.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="558" max-vertical-offset="936">
+            <state vertical-scroll-proportion="0.0" vertical-offset="522" max-vertical-offset="900">
               <caret line="31" column="73" selection-start-line="31" selection-start-column="73" selection-end-line="31" selection-end-column="73" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DateUtils.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/DateUtils.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="6696" max-vertical-offset="17334">
-              <caret line="372" column="32" selection-start-line="372" selection-start-column="32" selection-end-line="372" selection-end-column="32" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ArgYYYY_MM_DD_CalendarDate.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/ArgYYYY_MM_DD_CalendarDate.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="270" max-vertical-offset="918">
-              <caret line="15" column="22" selection-start-line="15" selection-start-column="22" selection-end-line="15" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -248,35 +265,17 @@
     </option>
   </component>
   <component name="IdeDocumentHistory">
-    <option name="changedFiles">
+    <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/com/obtuse/util/TrackedWindow.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/ui/TrackedWindow.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/ui/LogsWindow.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/util/exceptions/SyntaxErrorException.java" />
-        <option value="$PROJECT_DIR$/src/org/jdesktop/swingx/MultiSplitPane.java" />
-        <option value="$PROJECT_DIR$/src/org/jdesktop/swingx/MultiSplitLayout.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/util/DateUtils.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/util/Trace.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/db/PostgresConnection.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/util/MacCustomization.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/util/WindowsCustomization.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/util/OSLevelCustomizations.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/util/BasicProgramConfigInfo.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/ui/WindowWithMenus.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/ui/ValidatedJTextField.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/util/ArgYYYY_MM_DD_CalendarDate.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/util/ArgInt.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/util/ArgLong.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/util/ArgYesNo.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/util/ArgYYYY_MM_DD_Date.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/util/ObtuseUtil.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/util/exceptions/PipestoneSSLException.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/util/SSLUtilities.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/explore/ExploreSSL.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="461" />
-    <option name="y" value="39" />
+    <option name="x" value="96" />
+    <option name="y" value="23" />
     <option name="width" value="1937" />
     <option name="height" value="1464" />
   </component>
@@ -443,8 +442,8 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -517,7 +516,55 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="util" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="exceptions" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Pipestone" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Pipestone" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="obtuse" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="ui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Pipestone" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Pipestone" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="obtuse" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="explore" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -573,7 +620,7 @@
     <property name="recentsLimit" value="5" />
     <property name="MemberChooser.sorted" value="false" />
     <property name="options.lastSelected" value="project.propVCSSupport.Mappings" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Caliper" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Nahanni" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
@@ -583,6 +630,7 @@
     <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="dynamic.classpath" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -757,6 +805,27 @@
       <option name="PORT" value="5005" />
       <method />
     </configuration>
+    <configuration default="true" type="JarApplication" factoryName="JAR Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="GradleRunConfiguration" factoryName="Gradle">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list />
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <method />
+    </configuration>
     <configuration default="true" type="Applet" factoryName="Applet">
       <module name="" />
       <option name="MAIN_CLASS_NAME" />
@@ -868,67 +937,82 @@
     <task active="true" id="Default" summary="Default task">
       <changelist id="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" name="Default" comment="" />
       <created>1357378176104</created>
+      <option name="number" value="Default" />
       <updated>1357378176104</updated>
       <workItem from="1400913906892" duration="614000" />
       <workItem from="1404886310761" duration="1204000" />
       <workItem from="1412390560482" duration="664000" />
+      <workItem from="1414280826555" duration="598000" />
+      <workItem from="1418158616189" duration="845000" />
     </task>
     <task id="LOCAL-00001" summary="Major re-sync with danny's personal toolkit.">
       <created>1359580956092</created>
+      <option name="number" value="00001" />
+      <option name="project" value="LOCAL" />
       <updated>1359580956092</updated>
     </task>
     <task id="LOCAL-00002" summary="Very early stage topological graph stuff.&#10;Lots of cleanup here and there.">
       <created>1365501573948</created>
+      <option name="number" value="00002" />
+      <option name="project" value="LOCAL" />
       <updated>1365501573948</updated>
     </task>
     <task id="LOCAL-00003" summary="Changes to workspace.xml file as a result of using this project's src directories as content roots in other IntelliJ projects.">
       <created>1370818276346</created>
+      <option name="number" value="00003" />
+      <option name="project" value="LOCAL" />
       <updated>1370818276346</updated>
     </task>
     <task id="LOCAL-00004" summary="Implement a ValidatedJTextField class that makes it easier to manage the validation of JTextField values.">
       <created>1371722617036</created>
+      <option name="number" value="00004" />
+      <option name="project" value="LOCAL" />
       <updated>1371722617036</updated>
     </task>
     <task id="LOCAL-00005" summary="Resync time.">
       <created>1404887381637</created>
+      <option name="number" value="00005" />
+      <option name="project" value="LOCAL" />
       <updated>1404887381637</updated>
     </task>
     <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2482000" />
+    <option name="totallyTimeSpent" value="3925000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="461" y="39" width="1937" height="1464" extended-state="0" />
+    <frame x="96" y="23" width="1937" height="1464" extended-state="0" />
     <editor active="false" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32798833" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.118644066" sideWeight="0.67289025" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329475" sideWeight="0.67289025" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32725948" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.118644066" sideWeight="0.67289025" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.38893044" sideWeight="0.9995866" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32984293" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3265306" sideWeight="0.9753381" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32605532" sideWeight="0.9753381" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24907652" sideWeight="0.6731302" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32949308" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329475" sideWeight="0.67289025" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Problems" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32949308" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32685116" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.38893044" sideWeight="0.9995866" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -978,44 +1062,13 @@
       </breakpoints>
       <option name="time" value="3" />
     </breakpoint-manager>
+    <watches-manager />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/CalendarDate.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2477" max-vertical-offset="3798">
-          <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/Arg.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="630">
-          <caret line="10" column="22" selection-start-line="10" selection-start-column="22" selection-end-line="10" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/ArgLong.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="306" max-vertical-offset="828">
-          <caret line="17" column="17" selection-start-line="17" selection-start-column="17" selection-end-line="17" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/ArgYesNo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="450" max-vertical-offset="1044">
-          <caret line="25" column="16" selection-start-line="25" selection-start-column="16" selection-end-line="25" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/ArgYYYY_MM_DD_Date.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="558" max-vertical-offset="936">
@@ -1044,7 +1097,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="8424">
           <caret line="123" column="89" selection-start-line="123" selection-start-column="89" selection-end-line="123" selection-end-column="89" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1052,7 +1104,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="468" max-vertical-offset="4896">
           <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1067,7 +1118,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="324" max-vertical-offset="2592">
           <caret line="18" column="64" selection-start-line="18" selection-start-column="64" selection-end-line="18" selection-end-column="64" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1082,26 +1132,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="486" max-vertical-offset="35874">
           <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
-          <folding>
-            <element signature="e#692#734#0" expanded="true" />
-            <element signature="e#4747#4790#0" expanded="true" />
-            <element signature="e#6008#6067#0" expanded="true" />
-            <element signature="e#13357#13402#1" expanded="true" />
-            <element signature="e#19166#19229#0" expanded="true" />
-            <element signature="e#19880#19943#0" expanded="true" />
-            <element signature="e#21059#21122#0" expanded="true" />
-            <element signature="e#22301#22364#0" expanded="true" />
-            <element signature="e#23984#24071#0" expanded="true" />
-            <element signature="e#24154#24183#1" expanded="true" />
-            <element signature="e#24211#24240#1" expanded="true" />
-            <element signature="e#38310#38346#0" expanded="true" />
-            <element signature="e#38977#39039#0" expanded="true" />
-            <element signature="e#39752#39814#0" expanded="true" />
-            <element signature="e#40357#40419#0" expanded="true" />
-            <element signature="e#45579#45615#0" expanded="true" />
-            <element signature="e#52838#52883#0" expanded="true" />
-            <element signature="e#57730#57784#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1109,7 +1140,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="378" max-vertical-offset="2592">
           <caret line="21" column="22" selection-start-line="21" selection-start-column="22" selection-end-line="21" selection-end-column="22" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1139,7 +1169,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="8424">
           <caret line="123" column="89" selection-start-line="123" selection-start-column="89" selection-end-line="123" selection-end-column="89" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1147,7 +1176,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="468" max-vertical-offset="4896">
           <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1162,7 +1190,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="324" max-vertical-offset="2592">
           <caret line="18" column="64" selection-start-line="18" selection-start-column="64" selection-end-line="18" selection-end-column="64" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1177,26 +1204,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="486" max-vertical-offset="35874">
           <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
-          <folding>
-            <element signature="e#692#734#0" expanded="true" />
-            <element signature="e#4747#4790#0" expanded="true" />
-            <element signature="e#6008#6067#0" expanded="true" />
-            <element signature="e#13357#13402#1" expanded="true" />
-            <element signature="e#19166#19229#0" expanded="true" />
-            <element signature="e#19880#19943#0" expanded="true" />
-            <element signature="e#21059#21122#0" expanded="true" />
-            <element signature="e#22301#22364#0" expanded="true" />
-            <element signature="e#23984#24071#0" expanded="true" />
-            <element signature="e#24154#24183#1" expanded="true" />
-            <element signature="e#24211#24240#1" expanded="true" />
-            <element signature="e#38310#38346#0" expanded="true" />
-            <element signature="e#38977#39039#0" expanded="true" />
-            <element signature="e#39752#39814#0" expanded="true" />
-            <element signature="e#40357#40419#0" expanded="true" />
-            <element signature="e#45579#45615#0" expanded="true" />
-            <element signature="e#52838#52883#0" expanded="true" />
-            <element signature="e#57730#57784#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1204,7 +1212,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="378" max-vertical-offset="2592">
           <caret line="21" column="22" selection-start-line="21" selection-start-column="22" selection-end-line="21" selection-end-column="22" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1276,7 +1283,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="324" max-vertical-offset="2592">
           <caret line="18" column="64" selection-start-line="18" selection-start-column="64" selection-end-line="18" selection-end-column="64" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1284,7 +1290,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="468" max-vertical-offset="4896">
           <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1299,7 +1304,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="2214" max-vertical-offset="8424">
           <caret line="123" column="89" selection-start-line="123" selection-start-column="89" selection-end-line="123" selection-end-column="89" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1329,7 +1333,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="378" max-vertical-offset="2412">
           <caret line="51" column="0" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1407,28 +1410,43 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/ObtuseUtil.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.97938144" vertical-offset="23751" max-vertical-offset="37764">
+        <state vertical-scroll-proportion="0.0" vertical-offset="23751" max-vertical-offset="37764">
           <caret line="1384" column="7" selection-start-line="1384" selection-start-column="7" selection-end-line="1384" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/exceptions/PipestoneSSLException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="594">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
           <folding>
-            <element signature="e#692#734#0" expanded="true" />
-            <element signature="e#4747#4790#0" expanded="true" />
-            <element signature="e#6008#6067#0" expanded="true" />
-            <element signature="e#13357#13402#1" expanded="true" />
-            <element signature="e#19166#19229#0" expanded="true" />
-            <element signature="e#19880#19943#0" expanded="true" />
-            <element signature="e#21059#21122#0" expanded="true" />
-            <element signature="e#22301#22364#0" expanded="true" />
-            <element signature="e#23984#24071#0" expanded="true" />
-            <element signature="e#24154#24183#1" expanded="true" />
-            <element signature="e#24211#24240#1" expanded="true" />
-            <element signature="e#38310#38346#0" expanded="true" />
-            <element signature="e#38977#39039#0" expanded="true" />
-            <element signature="e#39752#39814#0" expanded="true" />
-            <element signature="e#40357#40419#0" expanded="true" />
-            <element signature="e#45579#45615#0" expanded="true" />
-            <element signature="e#52838#52883#0" expanded="true" />
-            <element signature="e#57730#57784#0" expanded="true" />
+            <element signature="e#110#157#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/explore/ExploreSSL.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1843" max-vertical-offset="5328">
+          <caret line="141" column="60" selection-start-line="141" selection-start-column="60" selection-end-line="141" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/ThreeDimensionalTreeMap.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4104">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/SSLUtilities.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.1329609" vertical-offset="3661" max-vertical-offset="8226">
+          <caret line="218" column="64" selection-start-line="218" selection-start-column="64" selection-end-line="218" selection-end-column="64" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1523,4 +1541,3 @@
     </states>
   </component>
 </project>
-

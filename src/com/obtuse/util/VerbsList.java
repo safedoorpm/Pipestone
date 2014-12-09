@@ -1,5 +1,6 @@
 package com.obtuse.util;
 
+import java.util.Collections;
 import java.util.Random;
 import java.util.Vector;
 
@@ -1070,11 +1071,7 @@ public class VerbsList {
 
             s_iteration += 1;
 
-            for ( String verb : s_verbs ) {
-
-                s_available.add( verb );
-
-            }
+            Collections.addAll( s_available, s_verbs );
 
         }
 

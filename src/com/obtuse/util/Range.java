@@ -139,13 +139,7 @@ public class Range<T extends Comparable<T>> implements Serializable {
     public boolean touches( Range<? extends T> rhs )
             throws RejectRangeException {
 
-        if ( _longEndValue + 1L == rhs.getLongStartValue() ) {
-
-            return true;
-
-        }
-
-        return _longStartValue - 1L == rhs.getLongEndValue();
+        return _longEndValue + 1L == rhs.getLongStartValue() || _longStartValue - 1L == rhs.getLongEndValue();
 
     }
 

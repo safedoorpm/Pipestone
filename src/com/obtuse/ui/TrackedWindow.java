@@ -144,6 +144,7 @@ public class TrackedWindow extends JFrame {
 
         }
 
+        //noinspection StatementWithEmptyBody
         if ( !_inToString ) {
 
 //            Logger.logMsg( _windowGeometryPrefsKey + ":  fetching window geometry " + savedGeometry + "\"" );

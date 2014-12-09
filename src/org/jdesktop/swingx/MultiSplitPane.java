@@ -21,7 +21,6 @@
 
 package org.jdesktop.swingx;
 
-import com.obtuse.util.Logger;
 import org.jdesktop.swingx.MultiSplitLayout.Divider;
 import org.jdesktop.swingx.MultiSplitLayout.Node;
 

@@ -120,6 +120,7 @@ public class ObtuseUtilObsolete {
 
         public void rehash() {
 
+            //noinspection StatementWithEmptyBody
             if ( _readonly ) {
 
                 // Been there, done that.

@@ -94,7 +94,7 @@ public abstract class OSLevelCustomizations {
                 Class macSpecificCode =
                         OSLevelCustomizations.class.getClassLoader().loadClass( osSpecificCustomizerClassName );
                 methodName = "createInstance";
-                //noinspection RedundantArrayCreation
+                //noinspection RedundantArrayCreation,unchecked
                 Method createInstance =
                         macSpecificCode.getDeclaredMethod( methodName, new Class[] {} );
                 createInstance.setAccessible( true );

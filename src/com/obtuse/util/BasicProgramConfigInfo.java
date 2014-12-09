@@ -105,6 +105,7 @@ public class BasicProgramConfigInfo {
 
     }
 
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     public static boolean isInitialized() {
 
         return BasicProgramConfigInfo.s_initialized;
@@ -211,7 +212,7 @@ public class BasicProgramConfigInfo {
         //        s_osLevelCustomizations = OSLevelCustomizations.getCustomizer( null );
 //        if ( s_osLevelCustomizations != null ) {
 //
-//            s_osLevelCustomizations.setDockIconImage( _pickelBarrelIcon.getImage() );
+//            s_osLevelCustomizations.setDockIconImage( _pickleBarrelIcon.getImage() );
 //            s_osLevelCustomizations.setDockBadge( "M" );
 //
 //        }

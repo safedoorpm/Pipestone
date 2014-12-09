@@ -6,6 +6,7 @@ package com.obtuse.ui;
 
 import com.obtuse.util.BasicProgramConfigInfo;
 import com.obtuse.util.Logger;
+import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.awt.*;
@@ -116,7 +117,7 @@ public class SortedJPanel extends JPanel {
 
         }
 
-        public int compareTo( SortableJComponent rhs ) {
+        public int compareTo( @NotNull SortableJComponent rhs ) {
 
             return _label.compareTo( ((MyJPanel)rhs).getLabel() );
 

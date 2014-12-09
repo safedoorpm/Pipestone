@@ -62,7 +62,7 @@ import java.util.List;
  * @see MultiSplitPane
  */
 
-@SuppressWarnings({ "UnusedDeclaration" })
+@SuppressWarnings("ALL")
 public class MultiSplitLayout implements LayoutManager {
     private final Map<String, Component> _childMap = new HashMap<String, Component>();
     private final PropertyChangeSupport _pcs = new PropertyChangeSupport( this );

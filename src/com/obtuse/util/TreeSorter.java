@@ -37,14 +37,14 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
 
     private final SortedMap<K, Collection<V>> _sortedData;
 
-    private class TreeSorterIterator<V> implements Iterator<V> {
+    private class TreeSorterIterator<VV> implements Iterator<VV> {
 
         private Iterator<K> _outerIterator;
 
         private K _currentKey = null;
 
-        private Iterator<V> _innerIterator = null;
-        private Collection<V> _currentList;
+        private Iterator<VV> _innerIterator = null;
+        private Collection<VV> _currentList;
 
         private TreeSorterIterator() {
             super();
@@ -61,7 +61,7 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
 
                     _currentKey = _outerIterator.next();
                     //noinspection unchecked
-                    _currentList = (Collection<V>)_sortedData.get( _currentKey );
+                    _currentList = (Collection<VV>)_sortedData.get( _currentKey );
 
                     _innerIterator = _currentList.iterator();
 
@@ -77,7 +77,7 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
 
         }
 
-        public V next() {
+        public VV next() {
 
             return _innerIterator.next();
 
@@ -125,7 +125,7 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
      * @param map the map whose mappings are to be used to create the new tree sorter.
      */
 
-    public TreeSorter( Map<K,V> map ) {
+    public TreeSorter( Map<K, V> map ) {
 
         super();
 

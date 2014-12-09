@@ -263,7 +263,7 @@ public class PostParameters implements Serializable {
 
     public static String decodePercent( String str ) {
         try {
-            StringBuffer sb = new StringBuffer();
+            StringBuilder sb = new StringBuilder();
             @SuppressWarnings("TooBroadScope") int i = 0;
             //noinspection ForLoopWithMissingComponent
             for ( ; i < str.length(); i++ ) {
@@ -291,7 +291,7 @@ public class PostParameters implements Serializable {
 
     public String encode() {
 
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
         String ampersand = "";
         for ( String key : getKeys() ) {
 

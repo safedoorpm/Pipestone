@@ -4,6 +4,8 @@ package com.obtuse.ui;
  * Copyright © 2012 Obtuse Systems Corporation
  */
 
+import org.jetbrains.annotations.NotNull;
+
 import javax.swing.*;
 
 /**
@@ -31,7 +33,7 @@ public class SortableJPanel extends JPanel implements SortableJComponent {
 
     }
 
-    public int compareTo( SortableJComponent sortableJComponent ) {
+    public int compareTo( @NotNull SortableJComponent sortableJComponent ) {
 
         if ( sortableJComponent instanceof SortableJPanel ) {
 

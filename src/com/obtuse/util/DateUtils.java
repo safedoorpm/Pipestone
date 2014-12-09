@@ -916,6 +916,8 @@ public class DateUtils {
                         ( shortForm ? "s " : ( " second" + ( seconds == 1L ? "" : "s" ) ) );
 
             }
+
+            //noinspection UnusedAssignment
             millis %= Timer.ONE_SECOND;
 
         }

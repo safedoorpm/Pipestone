@@ -166,6 +166,7 @@ public class TwoDimensionalTreeMap<T1,T2,V> implements Serializable, TwoDimensio
                     _activeOuterKey = _outerIterator.next();
 
                     SortedMap<T2,V> innerMap = getInnerMap( _activeOuterKey, false );
+                    //noinspection StatementWithEmptyBody
                     if ( innerMap.isEmpty() ) {
 
                         // skip this one

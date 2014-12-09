@@ -66,6 +66,7 @@ public class ObtuseXMLUtils {
 
         if ( "#text".equals( node.getNodeName() ) ) {
 
+            //noinspection StatementWithEmptyBody
             if ( node.getTextContent().trim().isEmpty() ) {
 
 //                ps.println( ObtuseUtil.replicate( "   ", depth ) + "node is \"" + node.getNodeName() + "\" (whitespace)" );

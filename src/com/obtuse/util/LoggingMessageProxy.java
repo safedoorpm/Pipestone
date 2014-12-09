@@ -185,6 +185,7 @@ public class LoggingMessageProxy implements MessageProxy {
 
         if ( _passThroughMessageProxy == null ) {
 
+            //noinspection RedundantCast
             Logger.logMsg( "INFO:  " + msg, (String)null );
 
         } else {
@@ -201,9 +202,11 @@ public class LoggingMessageProxy implements MessageProxy {
 
         if ( _passThroughMessageProxy == null ) {
 
+            //noinspection RedundantCast
             Logger.logMsg( "INFO:  " + msg1, (String)null );
             if ( msg2 != null ) {
 
+                //noinspection RedundantCast
                 Logger.logMsg( "INFO:  " + msg2, (String)null );
 
             }

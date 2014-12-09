@@ -188,7 +188,7 @@ public abstract class AbstractCurveSequence implements GraphicsElement {
     }
 
     /**
-     * Remove the first occurence of the specified {@link java.awt.Point} from the line.
+     * Remove the first occurrence of the specified {@link java.awt.Point} from the line.
      * <p/>
      * Any registered {@link AbstractCurveSequence.AbstractCurveListener} are notified if the call actually results in a point
      * being removed (i.e. registered {@link AbstractCurveSequence.AbstractCurveListener}s are notified if and only if the call eventually returns true).
@@ -260,7 +260,7 @@ public abstract class AbstractCurveSequence implements GraphicsElement {
 
     protected String fmtPoints( Point2D[] points ) {
 
-        StringBuffer desc = new StringBuffer();
+        StringBuilder desc = new StringBuilder();
 
         desc.append( "{" );
 
@@ -289,7 +289,7 @@ public abstract class AbstractCurveSequence implements GraphicsElement {
         int ix = 0;
         for ( Point2D point : getPoints() ) {
 
-            //noinspection FloatingPointEquality
+            //noinspection FloatingPointEquality,StatementWithEmptyBody
             if ( lastPoint == null || lastPoint.getX() != point.getX() || lastPoint.getY() != point.getY() ) {
 
 //                Logger.logMsg( "keeping  p[" + ix + "] = (" + point.getX() + "," + point.getY() + ")" );

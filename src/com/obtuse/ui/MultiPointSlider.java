@@ -182,6 +182,7 @@ public class MultiPointSlider extends JComponent {
 
                     public void mouseReleased( MouseEvent mouseEvent ) {
 
+                        //noinspection StatementWithEmptyBody
                         if ( _isSelected ) {
 
 //                            Logger.logMsg( "mouse released:  adjusting" );
@@ -215,6 +216,7 @@ public class MultiPointSlider extends JComponent {
 
                     public void mouseDragged( MouseEvent mouseEvent ) {
 
+                        //noinspection StatementWithEmptyBody
                         if ( _isSelected ) {
 
 //                            Logger.logMsg( "mouse dragged:  adjusting" );
@@ -525,11 +527,11 @@ public class MultiPointSlider extends JComponent {
     @SuppressWarnings("ConstantConditions")
     public Dimension computeMinimumSize() {
 
-        if ( isInteresting() ) {
-
+//        if ( isInteresting() ) {
+//
 //            Logger.logMsg( _name + ":  call to computeMinimumSize()" );
-
-        }
+//
+//        }
 
         OrientedImage orientedImage = _knob.getOrientedImage( _knobSize, _positionOnLine, _isSelected );
 //        if ( "s3s7".contains( _name ) )

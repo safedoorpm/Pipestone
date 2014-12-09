@@ -69,7 +69,7 @@ public class HowDidWeGetHereError
     }
 
     /**
-     * Specify the opps catcher which is to be called whenever a {@link HowDidWeGetHereError} is created and, presumably, is about to be thrown.
+     * Specify the oops catcher which is to be called whenever a {@link HowDidWeGetHereError} is created and, presumably, is about to be thrown.
      * @param oopsCatcher the oops catcher which is to catch the oops.
      * @return the previously configured oops catcher (a weak but adequate way to handle multiple oops catchers if everyone cooperates).
      */
