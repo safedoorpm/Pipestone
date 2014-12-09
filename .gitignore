@@ -2,3 +2,4 @@
 # Do NOT ignore .jar files since we've got a few checked in that we depend on.
 
 *.class
+.DS_Store
