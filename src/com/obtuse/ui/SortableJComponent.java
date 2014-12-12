@@ -1,8 +1,8 @@
-package com.obtuse.ui;
-
 /*
- * Copyright © 2012 Obtuse Systems Corporation
+ * Copyright © 2014 Daniel Boulet
  */
+
+package com.obtuse.ui;
 
 /**
  * Something that can be managed by a {@link SortedJPanel}.

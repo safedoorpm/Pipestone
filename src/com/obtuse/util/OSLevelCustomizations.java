@@ -1,12 +1,12 @@
+/*
+ * Copyright © 2014 Daniel Boulet
+ */
+
 package com.obtuse.util;
 
 import java.awt.*;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-
-/*
- * Copyright © 2012 Obtuse Systems Corporation.
- */
 
 /**
  * Describe something which does OS-specific customizations.

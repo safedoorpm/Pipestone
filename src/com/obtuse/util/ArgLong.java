@@ -1,13 +1,14 @@
-package com.obtuse.util;
-
 /*
- * Copyright © 2011 Obtuse Systems Corporation
+ * Copyright © 2014 Daniel Boulet
  */
+
+package com.obtuse.util;
 
 /**
  * A long {@link ArgParser} argument.
  */
 
+@SuppressWarnings("UnusedDeclaration")
 public abstract class ArgLong extends Arg {
 
     protected ArgLong( String keyword ) {

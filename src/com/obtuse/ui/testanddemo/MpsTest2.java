@@ -1,3 +1,7 @@
+/*
+ * Copyright © 2014 Daniel Boulet
+ */
+
 package com.obtuse.ui.testanddemo;
 
 import com.obtuse.ui.MpsKnobSize;
@@ -7,10 +11,6 @@ import com.obtuse.util.BasicProgramConfigInfo;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-/*
- * Copyright © 2012 Obtuse Systems Corporation
- */
 
 /**
  * Try out MPS class again.

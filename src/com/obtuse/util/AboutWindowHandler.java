@@ -1,10 +1,8 @@
-package com.obtuse.util;
-
-/**
- * Generalize the notion of launching an "about window".
- * <p>
- * Copyright © 2011 Obtuse Systems Corporation
+/*
+ * Copyright © 2014 Daniel Boulet
  */
+
+package com.obtuse.util;
 
 public interface AboutWindowHandler {
 

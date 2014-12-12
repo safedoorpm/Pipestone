@@ -1,10 +1,8 @@
-package com.obtuse.util;
-
-/**
- * Something capable of acting like a trace facility.
- * <p/>
- * Copyright © 2012 Obtuse Systems Corporation.
+/*
+ * Copyright © 2014 Daniel Boulet
  */
+
+package com.obtuse.util;
 
 @SuppressWarnings( { "UnusedDeclaration" } )
 public interface Tracer {

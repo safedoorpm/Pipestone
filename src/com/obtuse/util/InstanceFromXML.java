@@ -1,8 +1,8 @@
-package com.obtuse.util;
-
 /*
- * Copyright © 2012 Obtuse Systems Corporation
+ * Copyright © 2014 Daniel Boulet
  */
+
+package com.obtuse.util;
 
 import com.obtuse.util.exceptions.ObtuseXmlNodeException;
 
@@ -10,6 +10,7 @@ import com.obtuse.util.exceptions.ObtuseXmlNodeException;
  * Mark something that can be serialized to XML format and deserialized from XML format.
  */
 
+@SuppressWarnings("UnusedDeclaration")
 public interface InstanceFromXML {
 
     /**

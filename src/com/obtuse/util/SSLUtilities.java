@@ -1,3 +1,7 @@
+/*
+ * Copyright © 2014 Daniel Boulet
+ */
+
 package com.obtuse.util;
 
 import com.obtuse.util.exceptions.PipestoneSSLException;
@@ -9,10 +13,6 @@ import java.security.*;
 import java.security.cert.CertificateException;
 import java.util.HashMap;
 import java.util.Map;
-
-/*
- * Copyright © 2012 Daniel Boulet
- */
 
 public class SSLUtilities {
 

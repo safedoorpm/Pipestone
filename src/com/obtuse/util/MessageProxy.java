@@ -1,6 +1,5 @@
 /*
- * Copyright © 2012 Invidi Technologies Corporation
- * Copyright © 2012 Obtuse Systems Corporation
+ * Copyright © 2014 Daniel Boulet
  */
 
 package com.obtuse.util;

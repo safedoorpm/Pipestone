@@ -1,3 +1,7 @@
+/*
+ * Copyright © 2014 Daniel Boulet
+ */
+
 package com.obtuse.util;
 
 import java.io.Serializable;
@@ -7,8 +11,6 @@ import java.util.*;
  * Count occurrences of things using a sorted mapping.
  * <p/>
  * Instances of this class are serializable if the key objects used to create the instance are serializable.
- * <p/>
- * Copyright © 2009 Obtuse Systems Corporation
  */
 
 public class TreeCounter<K extends Comparable<K>> implements Counter<K>, Serializable {

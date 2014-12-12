@@ -1,14 +1,13 @@
+/*
+ * Copyright © 2014 Daniel Boulet
+ */
+
 package com.obtuse.util;
 
 import com.apple.eawt.*;
 
 import javax.swing.*;
 import java.awt.*;
-
-/*
- * Copyright © 2006 Loa Corporation.
- * Copyright © 2011 Daniel Boulet.
- */
 
 /**
  * MacOS-specific customizations.
@@ -18,7 +17,7 @@ import java.awt.*;
  * <p/>
  */
 
-@SuppressWarnings({ "ClassWithoutToString", "deprecation" })
+@SuppressWarnings({ "ClassWithoutToString", "deprecation", "UnusedDeclaration" })
 public class MacCustomization extends OSLevelCustomizations {
 
     private final Application _app;

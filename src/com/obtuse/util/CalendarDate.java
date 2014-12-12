@@ -1,3 +1,7 @@
+/*
+ * Copyright © 2014 Daniel Boulet
+ */
+
 package com.obtuse.util;
 
 import com.obtuse.exceptions.HowDidWeGetHereError;
@@ -7,10 +11,6 @@ import org.jetbrains.annotations.NotNull;
 import javax.management.timer.Timer;
 import java.util.Calendar;
 import java.util.Date;
-
-/*
- * Copyright © 2012 Obtuse Systems Corporation
- */
 
 /**
  * Represent a calendar date.

@@ -1,15 +1,16 @@
+/*
+ * Copyright © 2014 Daniel Boulet
+ */
+
 package com.obtuse.ui.testanddemo;
 
 import javax.swing.*;
-
-/*
- * Copyright © 2012 Obtuse Systems Corporation
- */
 
 /**
  * Simple test program.
  */
 
+@SuppressWarnings("UnusedDeclaration")
 public class JSliderTest extends JFrame {
 
     private JSlider _slider1;

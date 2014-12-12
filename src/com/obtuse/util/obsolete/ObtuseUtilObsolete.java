@@ -1,3 +1,7 @@
+/*
+ * Copyright © 2014 Daniel Boulet
+ */
+
 package com.obtuse.util.obsolete;
 
 import com.obtuse.db.PostgresConnection;
@@ -13,10 +17,6 @@ import java.sql.*;
 import java.text.DecimalFormat;
 import java.util.*;
 import java.util.zip.ZipFile;
-
-/*
- * Copyright © 2012 Obtuse Systems Corporation
- */
 
 /**
  * Utility methods and such.

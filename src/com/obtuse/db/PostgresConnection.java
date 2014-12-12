@@ -1,3 +1,7 @@
+/*
+ * Copyright © 2014 Daniel Boulet
+ */
+
 package com.obtuse.db;
 
 import com.obtuse.db.exceptions.ObtuseJDBCDriverLoadFailedException;
@@ -10,10 +14,9 @@ import java.util.Properties;
 
 /**
  * Base class to manage  Postgres-specific aspects of JDBC connection management.
- * <p/>
- * Copyright © 2012 Obtuse Systems Corporation.
  */
 
+@SuppressWarnings("UnusedDeclaration")
 public abstract class PostgresConnection {
 
     private final String _urlString;

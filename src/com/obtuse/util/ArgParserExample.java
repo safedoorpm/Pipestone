@@ -1,15 +1,8 @@
-package com.obtuse.util;
-
-/**
- * Demonstrate how to use the arg parsing classes.
- * <p/>
- * One possible invocation of this program would be:
- * <blockquote>
- *     java com.obtuse.util.ArgParserExample -messageIdPrefix 123 -deployment fred -pod 3 -traceport 4324 -rmiregistryport 4535 -supportEmailAddress help@example.com -callbackHostname critter.example.com
- * </blockquote>
- * <p/>
- * Copyright © 2011 Obtuse Systems Corporation.
+/*
+ * Copyright © 2014 Daniel Boulet
  */
+
+package com.obtuse.util;
 
 public class ArgParserExample {
 

@@ -1,3 +1,7 @@
+/*
+ * Copyright © 2014 Daniel Boulet
+ */
+
 package com.obtuse.ui;
 
 import com.obtuse.util.ImageIconUtils;
@@ -7,10 +11,6 @@ import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.Hashtable;
-
-/*
- * Copyright © 2012 Obtuse Systems Corporation
- */
 
 /**
  * Describe a label on the slider line for an {@link MultiPointSlider}.

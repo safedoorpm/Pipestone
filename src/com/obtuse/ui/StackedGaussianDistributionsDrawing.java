@@ -1,3 +1,7 @@
+/*
+ * Copyright © 2014 Daniel Boulet
+ */
+
 package com.obtuse.ui;
 
 import com.obtuse.util.BasicProgramConfigInfo;
@@ -10,8 +14,6 @@ import java.util.Collection;
 
 /**
  * Draw one or more stacked proportionally weighted gaussian distributions.
- * <p/>
- * Copyright © 2012 Obtuse Systems Corporation
  */
 
 public class StackedGaussianDistributionsDrawing extends JPanel {

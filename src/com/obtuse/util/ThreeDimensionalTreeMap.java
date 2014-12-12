@@ -1,11 +1,11 @@
+/*
+ * Copyright © 2014 Daniel Boulet
+ */
+
 package com.obtuse.util;
 
 import java.io.Serializable;
 import java.util.*;
-
-/*
- * Copyright © 2011 Obtuse Systems Corporation
- */
 
 public class ThreeDimensionalTreeMap<T1,T2,T3,V> implements Serializable, ThreeDimensionalSortedMap<T1,T2,T3,V> {
 

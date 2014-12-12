@@ -1,3 +1,7 @@
+/*
+ * Copyright © 2014 Daniel Boulet
+ */
+
 package com.obtuse.util;
 
 import com.obtuse.db.PostgresConnection;
@@ -18,10 +22,6 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.zip.ZipFile;
-
-/*
- * Copyright © 2012 Obtuse Systems Corporation
- */
 
 /**
  * Utility methods and such.

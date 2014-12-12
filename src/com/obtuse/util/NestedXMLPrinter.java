@@ -1,12 +1,12 @@
+/*
+ * Copyright © 2014 Daniel Boulet
+ */
+
 package com.obtuse.util;
 
 import java.io.*;
 import java.util.Collection;
 import java.util.Stack;
-
-/*
- * Copyright © 2012 Obtuse Systems Corporation
- */
 
 @SuppressWarnings("UnusedDeclaration")
 public class NestedXMLPrinter implements Closeable {

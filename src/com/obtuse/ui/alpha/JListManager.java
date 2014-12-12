@@ -1,3 +1,7 @@
+/*
+ * Copyright © 2014 Daniel Boulet
+ */
+
 package com.obtuse.ui.alpha;
 
 import com.obtuse.ui.LogsWindow;
@@ -8,10 +12,6 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.undo.*;
 import java.util.*;
-
-/*
- * Copyright © 2012 Obtuse Systems Corporation
- */
 
 /**
  * Provide a (relatively) easy to use way to have a scrollable JList with (individually optional)

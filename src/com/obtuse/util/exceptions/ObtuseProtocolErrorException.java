@@ -1,10 +1,10 @@
+/*
+ * Copyright © 2014 Daniel Boulet
+ */
+
 package com.obtuse.util.exceptions;
 
 import com.obtuse.util.Trace;
-
-/*
- * Copyright © 2012 Obtuse Systems Corporation
- */
 
 /**
  * Thrown if a protocol error is detected.

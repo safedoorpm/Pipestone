@@ -1,3 +1,7 @@
+/*
+ * Copyright © 2014 Daniel Boulet
+ */
+
 package com.obtuse.ui;
 
 import javax.swing.*;
@@ -5,10 +9,6 @@ import javax.swing.filechooser.FileFilter;
 import java.awt.*;
 import java.io.File;
 import java.io.FilenameFilter;
-
-/*
- * Copyright © 2012 Obtuse Systems Corporation
- */
 
 /**
  * Some utility methods that make using Swing and AWT file selection dialogs a bit easier.

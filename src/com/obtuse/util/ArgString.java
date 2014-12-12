@@ -1,8 +1,8 @@
-package com.obtuse.util;
-
 /*
- * Copyright © 2011 Obtuse Systems Corporation
+ * Copyright © 2014 Daniel Boulet
  */
+
+package com.obtuse.util;
 
 /**
  * A string {@link com.obtuse.util.ArgParser} argument.

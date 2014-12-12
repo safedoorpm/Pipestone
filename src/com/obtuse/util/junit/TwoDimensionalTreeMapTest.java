@@ -1,3 +1,7 @@
+/*
+ * Copyright © 2014 Daniel Boulet
+ */
+
 package com.obtuse.util.junit;
 
 import com.obtuse.util.*;
@@ -10,10 +14,6 @@ import java.util.Iterator;
 import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.Vector;
-
-/*
- * Copyright © 2012 Obtuse Systems Corporation
- */
 
 /**
  * Unit test the {@link com.obtuse.util.TwoDimensionalTreeMap} class.

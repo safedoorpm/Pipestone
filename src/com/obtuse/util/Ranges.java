@@ -1,3 +1,7 @@
+/*
+ * Copyright © 2014 Daniel Boulet
+ */
+
 package com.obtuse.util;
 
 import com.obtuse.util.exceptions.RejectRangeException;
@@ -9,10 +13,9 @@ import java.util.*;
  * Keep track of ranges of values.
  * <p/>
  * Maintains a series of sorted ranges.  Ranges are combined when gaps between them are filled in.
- * <p/>
- * Copyright © 2009 Obtuse Systems Corporation.
  */
 
+@SuppressWarnings("UnusedDeclaration")
 public class Ranges<T extends Comparable<T>> implements Iterable<Range<T>>, Serializable {
 
     /**

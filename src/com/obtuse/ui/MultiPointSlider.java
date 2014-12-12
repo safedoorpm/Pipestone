@@ -1,3 +1,7 @@
+/*
+ * Copyright © 2014 Daniel Boulet
+ */
+
 package com.obtuse.ui;
 
 import com.obtuse.util.*;
@@ -10,10 +14,6 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.util.*;
-
-/*
- * Copyright © 2012 Obtuse Systems Corporation
- */
 
 /**
  * Along the lines of {@link javax.swing.JSlider} but capable of being configured to use

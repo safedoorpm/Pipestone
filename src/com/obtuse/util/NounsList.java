@@ -1,3 +1,7 @@
+/*
+ * Copyright © 2014 Daniel Boulet
+ */
+
 package com.obtuse.util;
 
 import java.util.Collections;
@@ -10,6 +14,7 @@ import java.util.Vector;
  * This list of verbs 'borrowed' from http://www.momswhothink.com/reading/list-of-verbs.html
  */
 
+@SuppressWarnings("UnusedDeclaration")
 public class NounsList {
 
     private static Random s_rng = new Random( System.currentTimeMillis() );

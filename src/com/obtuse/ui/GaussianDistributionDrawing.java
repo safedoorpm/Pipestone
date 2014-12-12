@@ -1,3 +1,7 @@
+/*
+ * Copyright © 2014 Daniel Boulet
+ */
+
 package com.obtuse.ui;
 
 import com.obtuse.util.GaussianDistribution;
@@ -7,6 +11,7 @@ import com.obtuse.util.WeightedGaussianDistribution;
  * Draw a single gaussian distribution.
  */
 
+@SuppressWarnings("UnusedDeclaration")
 public class GaussianDistributionDrawing extends StackedGaussianDistributionsDrawing {
 
     public GaussianDistributionDrawing() {

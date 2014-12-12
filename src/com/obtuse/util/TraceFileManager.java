@@ -1,8 +1,8 @@
-package com.obtuse.util;
-
 /*
- * Copyright © 2012 Obtuse Systems Corporation.
+ * Copyright © 2014 Daniel Boulet
  */
+
+package com.obtuse.util;
 
 /**
  * Describe something that wants to be informed when a trace file is emitted.

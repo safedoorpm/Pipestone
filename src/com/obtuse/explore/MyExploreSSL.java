@@ -1,3 +1,7 @@
+/*
+ * Copyright © 2014 Daniel Boulet
+ */
+
 package com.obtuse.explore;
 
 import com.obtuse.util.SSLUtilities;

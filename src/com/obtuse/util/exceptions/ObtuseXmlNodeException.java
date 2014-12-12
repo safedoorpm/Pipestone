@@ -1,9 +1,10 @@
-package com.obtuse.util.exceptions;
-
 /*
- * Copyright © 2012 Obtuse Systems Corporation
+ * Copyright © 2014 Daniel Boulet
  */
 
+package com.obtuse.util.exceptions;
+
+@SuppressWarnings("UnusedDeclaration")
 public class ObtuseXmlNodeException extends Exception {
 
     private Integer _elementIndex = null;

@@ -1,3 +1,7 @@
+/*
+ * Copyright © 2014 Daniel Boulet
+ */
+
 package com.obtuse.ui.testanddemo;
 
 import com.obtuse.ui.MpsLabel;
@@ -10,10 +14,6 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.util.Dictionary;
 import java.util.Hashtable;
-
-/*
- * Copyright © 2012 Obtuse Systems Corporation
- */
 
 /**
  * Take the {@link com.obtuse.ui.MultiPointSlider} class out for a test drive.

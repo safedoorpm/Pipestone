@@ -1,13 +1,13 @@
+/*
+ * Copyright © 2014 Daniel Boulet
+ */
+
 package com.obtuse.ui;
 
 import com.obtuse.util.ObtuseUtil;
 
 import javax.swing.*;
 import java.awt.event.*;
-
-/*
- * Copyright © 2010 Obtuse Systems Corporation.
- */
 
 @SuppressWarnings({ "UnusedDeclaration" })
 public abstract class YesNoPopupMessageWindow

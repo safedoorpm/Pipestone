@@ -1,8 +1,8 @@
-package com.obtuse.util;
-
 /*
- * Copyright © 2011 Obtuse Systems Corporation
+ * Copyright © 2014 Daniel Boulet
  */
+
+package com.obtuse.util;
 
 /**
  * A yes/no {@link com.obtuse.util.ArgParser} argument.
@@ -16,6 +16,7 @@ package com.obtuse.util;
  * in any mixture of upper and/or lower case.
  */
 
+@SuppressWarnings("UnusedDeclaration")
 public abstract class ArgYesNo extends Arg {
 
     protected ArgYesNo( String keyword ) {

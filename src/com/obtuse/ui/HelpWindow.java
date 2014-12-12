@@ -1,3 +1,7 @@
+/*
+ * Copyright © 2014 Daniel Boulet
+ */
+
 package com.obtuse.ui;
 
 import javax.swing.*;
@@ -8,6 +12,7 @@ import java.awt.event.*;
  * A simple help window.
  */
 
+@SuppressWarnings("UnusedDeclaration")
 public class HelpWindow extends JDialog {
 
     private JPanel _contentPane;

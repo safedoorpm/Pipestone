@@ -1,3 +1,7 @@
+/*
+ * Copyright © 2014 Daniel Boulet
+ */
+
 package com.obtuse.util.junit;
 
 import com.obtuse.util.ObtuseUtil;
@@ -8,10 +12,6 @@ import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
-
-/*
- * Copyright © 2012 Obtuse Systems Corporation
- */
 
 /**
  * %%% Something clever goes here.

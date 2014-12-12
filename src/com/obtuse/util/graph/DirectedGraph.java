@@ -1,3 +1,7 @@
+/*
+ * Copyright © 2014 Daniel Boulet
+ */
+
 package com.obtuse.util.graph;
 
 import com.obtuse.exceptions.HowDidWeGetHereError;
@@ -9,6 +13,7 @@ import java.util.*;
  * @deprecated Strictly speaking, not deprecated but untested and not ready for prime time - DO NOT USE
  */
 
+@SuppressWarnings("UnusedDeclaration")
 public class DirectedGraph {
 
 //    private List<DirectedGraphVertex> _vertices = new LinkedList<DirectedGraphVertex>();

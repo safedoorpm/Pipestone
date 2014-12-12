@@ -1,3 +1,7 @@
+/*
+ * Copyright © 2014 Daniel Boulet
+ */
+
 package com.obtuse.ui;
 
 import javax.swing.*;
@@ -10,7 +14,9 @@ import javax.swing.event.ListSelectionListener;
  * http://www.coderanch.com/t/346552/GUI/java/Disable-Selection-JTable in 2005.
  */
 
+@SuppressWarnings("UnusedDeclaration")
 public class NullSelectionModel implements ListSelectionModel {
+
     public boolean isSelectionEmpty() { return true; }
     public boolean isSelectedIndex(int index) { return false; }
     public int getMinSelectionIndex() { return -1; }
@@ -31,4 +37,5 @@ public class NullSelectionModel implements ListSelectionModel {
     public void removeListSelectionListener(ListSelectionListener lsl) { }
     public void setValueIsAdjusting(boolean valueIsAdjusting) { }
     public boolean getValueIsAdjusting() { return false; }
+
 }

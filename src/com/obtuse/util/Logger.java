@@ -1,3 +1,7 @@
+/*
+ * Copyright © 2014 Daniel Boulet
+ */
+
 package com.obtuse.util;
 
 import org.jetbrains.annotations.Nullable;
@@ -10,11 +14,6 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
-
-/*
- * Copyright © 2005, 2006, 2007 Loa Corporation.
- * Copyright © 2011 Daniel Boulet.
- */
 
 /**
  * Manage a simple logging facility.

@@ -1,13 +1,13 @@
+/*
+ * Copyright © 2014 Daniel Boulet
+ */
+
 package com.obtuse.util;
 
 import org.xml.sax.*;
 import org.xml.sax.helpers.DefaultHandler;
 
 import java.util.Stack;
-
-/*
- * Copyright © 2012 Obtuse Systems Corporation
- */
 
 @SuppressWarnings("SameParameterValue")
 public class SimpleXmlContentHandler extends DefaultHandler {

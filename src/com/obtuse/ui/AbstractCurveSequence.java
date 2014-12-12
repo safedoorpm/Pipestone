@@ -1,3 +1,7 @@
+/*
+ * Copyright © 2014 Daniel Boulet
+ */
+
 package com.obtuse.ui;
 
 import com.obtuse.util.ObtuseUtil;
@@ -10,11 +14,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Vector;
 
-/*
- * <p/>
- * Copyright © 2010 Daniel Boulet.
- */
-
+@SuppressWarnings("UnusedDeclaration")
 public abstract class AbstractCurveSequence implements GraphicsElement {
 
     private LinkedList<AbstractCurveListener> _listeners = new LinkedList<AbstractCurveListener>();

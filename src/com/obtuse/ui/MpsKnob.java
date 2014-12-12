@@ -1,3 +1,7 @@
+/*
+ * Copyright © 2014 Daniel Boulet
+ */
+
 package com.obtuse.ui;
 
 import com.obtuse.util.ImageIconUtils;
@@ -5,10 +9,6 @@ import com.obtuse.util.ImageIconUtils;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
-
-/*
- * Copyright © 2012 Obtuse Systems Corporation
- */
 
 /**
  * Manage a slider knob for an {@link MultiPointSlider}.

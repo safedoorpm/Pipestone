@@ -1,8 +1,8 @@
-package com.obtuse.util;
-
 /*
- * Copyright © 2012 Obtuse Systems Corporation
+ * Copyright © 2014 Daniel Boulet
  */
+
+package com.obtuse.util;
 
 public class ThreeDimensionalTreeCounter<K1,K2,K3> implements ThreeDimensionalCounter<K1, K2, K3> {
 

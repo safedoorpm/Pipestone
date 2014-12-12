@@ -1,11 +1,13 @@
+/*
+ * Copyright © 2014 Daniel Boulet
+ */
+
 package com.obtuse.exceptions;
 
 import org.jetbrains.annotations.Nullable;
 
 /**
  * Thrown if something truly unexpected happens.
- * <p>
- * Copyright © 2008 Obtuse Systems Corporation
  */
 
 public class HowDidWeGetHereError

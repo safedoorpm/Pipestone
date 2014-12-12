@@ -1,8 +1,8 @@
-package com.obtuse.ui;
-
 /*
- * Copyright © 2012 Obtuse Systems Corporation
+ * Copyright © 2014 Daniel Boulet
  */
+
+package com.obtuse.ui;
 
 import com.obtuse.util.BasicProgramConfigInfo;
 import com.obtuse.util.Logger;
@@ -82,10 +82,10 @@ public class SortedJPanel extends JPanel {
 
     }
 
-    public void add( Component component, Object constraints ) {
+    public void add( @NotNull Component component, Object constraints ) {
 
         throw new IllegalArgumentException(
-                "SortedJPanel.add:  attempt to use add( Component comp, Object contstraints ), must use add( Component comp )"
+                "SortedJPanel.add:  attempt to use add( Component comp, Object constraints ), must use add( Component comp )"
         );
 
     }

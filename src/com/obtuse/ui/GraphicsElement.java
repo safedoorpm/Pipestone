@@ -1,9 +1,8 @@
-package com.obtuse.ui;
-
 /*
- * <p/>
- * Copyright © 2010 Daniel Boulet.
+ * Copyright © 2014 Daniel Boulet
  */
+
+package com.obtuse.ui;
 
 /**
  * Something which can be drawn on a drawing window.
@@ -11,6 +10,7 @@ package com.obtuse.ui;
  * (curved and/or straight).
  */
 
+@SuppressWarnings("UnusedDeclaration")
 public interface GraphicsElement {
 
     /**

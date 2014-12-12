@@ -1,8 +1,8 @@
-package com.obtuse.util;
-
 /*
- * Copyright © 2011 Obtuse Systems Corporation
+ * Copyright © 2014 Daniel Boulet
  */
+
+package com.obtuse.util;
 
 import com.obtuse.util.exceptions.ParsingException;
 
@@ -12,7 +12,7 @@ import com.obtuse.util.exceptions.ParsingException;
  * See {@link com.obtuse.util.DateUtils#parseYYYY_MM_DD} for more information.
  */
 
-@SuppressWarnings("ClassNamingConvention")
+@SuppressWarnings({ "ClassNamingConvention", "UnusedDeclaration" })
 public abstract class ArgYYYY_MM_DD_CalendarDate extends Arg {
 
     protected ArgYYYY_MM_DD_CalendarDate( String keyword ) {

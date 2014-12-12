@@ -1,3 +1,7 @@
+/*
+ * Copyright © 2014 Daniel Boulet
+ */
+
 package com.obtuse.ui;
 
 import com.obtuse.util.BasicProgramConfigInfo;
@@ -7,10 +11,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
-
-/*
- * Copyright © 2012 Obtuse Systems Corporation
- */
 
 public class TrackedWindow extends JFrame {
 

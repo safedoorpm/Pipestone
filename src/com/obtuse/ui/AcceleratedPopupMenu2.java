@@ -1,3 +1,7 @@
+/*
+ * Copyright © 2014 Daniel Boulet
+ */
+
 package com.obtuse.ui;
 
 import com.obtuse.util.BasicProgramConfigInfo;
@@ -10,10 +14,7 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
-/*
- * Copyright © 2012 Obtuse Systems Corporation
- */
-
+@SuppressWarnings("UnusedDeclaration")
 public class AcceleratedPopupMenu2 extends JDialog {
 
     private JPanel contentPane;

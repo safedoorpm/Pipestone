@@ -1,3 +1,7 @@
+/*
+ * Copyright © 2014 Daniel Boulet
+ */
+
 package com.obtuse.util;
 
 import java.io.Serializable;
@@ -7,8 +11,6 @@ import java.util.Set;
 
 /**
  * Describe how a three dimensional sorted map behaves.
- * <p>
- * Copyright © 2010 Obtuse Systems Corporation
  */
 
 public interface ThreeDimensionalSortedMap<T1,T2,T3,V> extends Serializable {

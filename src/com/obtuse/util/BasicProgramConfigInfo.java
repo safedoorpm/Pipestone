@@ -1,3 +1,7 @@
+/*
+ * Copyright © 2014 Daniel Boulet
+ */
+
 package com.obtuse.util;
 
 import org.jetbrains.annotations.Nullable;
@@ -8,9 +12,6 @@ import java.util.prefs.Preferences;
 
 /**
  * Fundamental program configuration information and such.
- * <p/>
- * Copyright © 2006, 2007, 2008 Loa Corporation.
- * Copyright © 2011 Daniel Boulet.
  */
 
 @SuppressWarnings({ "ClassNamingConvention", "UnusedDeclaration" })

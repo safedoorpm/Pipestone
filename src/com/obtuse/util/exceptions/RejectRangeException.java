@@ -1,3 +1,7 @@
+/*
+ * Copyright © 2014 Daniel Boulet
+ */
+
 package com.obtuse.util.exceptions;
 
 import com.obtuse.util.Ranges;
@@ -5,10 +9,9 @@ import com.obtuse.util.Range;
 
 /**
  * Thrown by {@link Ranges} if a {@link Range} passed to add() ultimately proves to be unacceptable.
- * <p/>
- * Copyright © 2009 Obtuse Systems Corporation.
  */
 
+@SuppressWarnings("UnusedDeclaration")
 public class RejectRangeException extends Exception {
 
     public RejectRangeException() {

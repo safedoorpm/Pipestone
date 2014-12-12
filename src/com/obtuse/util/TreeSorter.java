@@ -1,3 +1,7 @@
+/*
+ * Copyright © 2014 Daniel Boulet
+ */
+
 package com.obtuse.util;
 
 import java.io.Serializable;
@@ -28,8 +32,6 @@ import java.util.*;
  * <p/>
  * Instances of this class are serializable if both the key and content objects
  * used to create the instance are serializable.
- * <p/>
- * Copyright © 2010 Obtuse Systems Corporation
  */
 
 @SuppressWarnings({ "UnusedDeclaration" })

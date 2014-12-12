@@ -1,3 +1,7 @@
+/*
+ * Copyright © 2014 Daniel Boulet
+ */
+
 package com.obtuse.util;
 
 import java.io.Serializable;
@@ -8,8 +12,6 @@ import java.util.SortedMap;
 
 /**
  * Describe how a two dimensional sorted map behaves.
- * <p>
- * Copyright © 2010 Obtuse Systems Corporation
  */
 
 public interface TwoDimensionalSortedMap<T1,T2,V> extends Serializable {

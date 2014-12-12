@@ -1,11 +1,10 @@
-package com.obtuse.util;
-
-/**
- * %%% Clever words go here!
- * <p/>
- * Copyright © 2011 Obtuse Systems Corporation
+/*
+ * Copyright © 2014 Daniel Boulet
  */
 
+package com.obtuse.util;
+
+@SuppressWarnings("UnusedDeclaration")
 public class SimpleGeometry {
 
     private SimpleGeometry() {

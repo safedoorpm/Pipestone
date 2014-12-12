@@ -1,9 +1,10 @@
-package com.obtuse.util;
-
 /*
- * Copyright © 2012 Obtuse Systems Corporation
+ * Copyright © 2014 Daniel Boulet
  */
 
+package com.obtuse.util;
+
+@SuppressWarnings("UnusedDeclaration")
 public class TwoDimensionalTreeCounter<K1,K2> implements TwoDimensionalCounter<K1, K2> {
 
     private final TwoDimensionalSortedMap<K1,K2,Integer> _counter = new TwoDimensionalTreeMap<K1,K2,Integer>();

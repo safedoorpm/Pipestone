@@ -1,8 +1,8 @@
-package com.obtuse.util;
-
 /*
- * Copyright © 2011 Obtuse Systems Corporation
+ * Copyright © 2014 Daniel Boulet
  */
+
+package com.obtuse.util;
 
 import com.obtuse.util.exceptions.ObtuseXmlNodeException;
 import org.w3c.dom.Node;
@@ -11,6 +11,7 @@ import org.w3c.dom.Node;
  * A gaussian distribution with a weighting factor.
  */
 
+@SuppressWarnings("UnusedDeclaration")
 public class WeightedGaussianDistribution extends GaussianDistribution implements InstanceFromXML {
 
     private final double _weight;

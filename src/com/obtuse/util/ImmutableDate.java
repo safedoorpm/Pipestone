@@ -1,3 +1,7 @@
+/*
+ * Copyright © 2014 Daniel Boulet
+ */
+
 package com.obtuse.util;
 
 import java.util.Date;
@@ -6,8 +10,6 @@ import java.util.Date;
  * A derivation of the {@link java.util.Date} class whose instances are immutable.
  * <p/>Attempts to call any of the various setters defined in the {@link java.util.Date} class result in an {@link UnsupportedOperationException} being thrown.
  * Also, none of the deprecated constructors in the {@link java.util.Date} class exist in this class.
- * <p>
- * Copyright © 2011 Obtuse Systems Corporation
  */
 
 @SuppressWarnings({ "deprecation", "UnusedDeclaration" })

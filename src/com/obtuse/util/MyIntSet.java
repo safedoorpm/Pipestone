@@ -1,3 +1,7 @@
+/*
+ * Copyright © 2014 Daniel Boulet
+ */
+
 package com.obtuse.util;
 
 import java.io.Serializable;
@@ -8,8 +12,6 @@ import java.util.NoSuchElementException;
  * A compact and fast set of integers.
  * Note that the implementation assumes that the integers are relatively tightly clustered together.
  * Sets with huge gaps in the member values will result in considerably more memory being consumed than one might like.
- * <p/>
- * Copyright © 2009 Obtuse Systems Corporation
  */
 
 public class MyIntSet implements Iterable<Long>, Serializable {

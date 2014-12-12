@@ -1,3 +1,7 @@
+/*
+ * Copyright © 2014 Daniel Boulet
+ */
+
 package com.obtuse.util;
 
 import com.obtuse.exceptions.HowDidWeGetHereError;
@@ -11,10 +15,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-/*
- * Copyright © 2012 Obtuse Systems Corporation
- */
-
+@SuppressWarnings("UnusedDeclaration")
 public class GenericCsvParser extends CSVParser {
 
     private final String _description;
@@ -128,7 +129,7 @@ public class GenericCsvParser extends CSVParser {
             fields.add( field );
 
             iCh = nextCh();
-            ch = (char)iCh;
+//            ch = (char)iCh;
             if ( iCh == '\n' || iCh == '\r' || iCh == -1 ) {
 
                 return fields;

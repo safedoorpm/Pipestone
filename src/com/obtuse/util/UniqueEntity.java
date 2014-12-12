@@ -1,8 +1,8 @@
-package com.obtuse.util;
-
 /*
- * Copyright © 2012 Obtuse Systems Corporation
+ * Copyright © 2014 Daniel Boulet
  */
+
+package com.obtuse.util;
 
 /**
  * An entity with an id number which is unique within some id-space.
@@ -17,6 +17,7 @@ package com.obtuse.util;
  * Of course, derivations of this class could implement hashCode and/or equals methods in ways which violate these contracts.
  */
 
+@SuppressWarnings("UnusedDeclaration")
 public class UniqueEntity {
 
     private final long _id;

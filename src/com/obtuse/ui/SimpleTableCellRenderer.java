@@ -1,8 +1,8 @@
-package com.obtuse.ui;
-
 /*
- * Copyright © 2012 Obtuse Systems Corporation.
+ * Copyright © 2014 Daniel Boulet
  */
+
+package com.obtuse.ui;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -12,6 +12,7 @@ import java.awt.*;
  * Render table cells with left, right or center alignment.
  */
 
+@SuppressWarnings("UnusedDeclaration")
 public class SimpleTableCellRenderer extends DefaultTableCellRenderer {
 
     public static enum Alignment {

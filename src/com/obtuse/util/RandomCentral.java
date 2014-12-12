@@ -1,10 +1,10 @@
+/*
+ * Copyright © 2014 Daniel Boulet
+ */
+
 package com.obtuse.util;
 
 import java.security.SecureRandom;
-
-/*
- * Copyright © 2012 Obtuse Systems Corporation.
- */
 
 /**
  * A thread-safe centralized random number generator.

@@ -1,11 +1,13 @@
+/*
+ * Copyright © 2014 Daniel Boulet
+ */
+
 package com.obtuse.util;
 
 import java.util.Set;
 
 /**
  * Count unique occurrences of things.
- * <p>
- * Copyright © 2009 Obtuse Systems Corporation
  */
 
 @SuppressWarnings("UnusedDeclaration")

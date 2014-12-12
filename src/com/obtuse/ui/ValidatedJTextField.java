@@ -1,3 +1,7 @@
+/*
+ * Copyright © 2014 Daniel Boulet
+ */
+
 package com.obtuse.ui;
 
 import javax.swing.*;
@@ -19,6 +23,7 @@ import java.util.Random;
  * In the latter two cases, implementations of this class provide a way to perform validation and to store the value should it pass validation.
  */
 
+@SuppressWarnings("UnusedDeclaration")
 public abstract class ValidatedJTextField extends JTextField {
 
     private static final Random _rng = new Random( System.currentTimeMillis() );

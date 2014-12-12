@@ -1,3 +1,7 @@
+/*
+ * Copyright © 2014 Daniel Boulet
+ */
+
 package com.obtuse.util;
 
 import com.obtuse.util.exceptions.SyntaxErrorException;
@@ -10,11 +14,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Vector;
 
-/*
- * Copyright © 2012 Obtuse Systems Corporation
- */
-
-@SuppressWarnings({ "ClassWithoutToString", "NestedAssignment", "StandardVariableNames" })
+@SuppressWarnings({ "ClassWithoutToString", "NestedAssignment", "StandardVariableNames", "UnusedDeclaration" })
 public class CSVParser implements Closeable {
 
     private BufferedReader _input;
@@ -363,7 +363,7 @@ public class CSVParser implements Closeable {
             if ( ch == (int)'\\' ) {
 
                 iCh = nextCh();
-                ch = (char)iCh;
+//                ch = (char)iCh;
 
                 switch ( iCh ) {
 

@@ -1,3 +1,7 @@
+/*
+ * Copyright © 2014 Daniel Boulet
+ */
+
 package com.obtuse.ui;
 
 import com.obtuse.util.*;
@@ -15,11 +19,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/*
- * Copyright © 2012 Obtuse Systems Corporation
- */
-
-@SuppressWarnings( { "ClassWithoutToString" } )
+@SuppressWarnings({ "ClassWithoutToString", "UnusedDeclaration" })
 public class LogsWindow extends WindowWithMenus {
 
     private JPanel _contentPane;
@@ -53,7 +53,7 @@ public class LogsWindow extends WindowWithMenus {
     @SuppressWarnings("CanBeFinal")
     private Clipboard _systemClipboard;
 
-    private static final String WINDOW_NAME = "LogsWindow";
+//    private static final String WINDOW_NAME = "LogsWindow";
 
 //    private static ImageIcon _loaLogo = BasicIconLogoHandler.fetchIconImage("loa_logo.png", LOGO_SIZE);
 

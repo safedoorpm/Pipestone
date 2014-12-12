@@ -1,3 +1,7 @@
+/*
+ * Copyright © 2014 Daniel Boulet
+ */
+
 package com.obtuse.ui;
 
 import com.obtuse.util.*;
@@ -7,10 +11,6 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.Collection;
 import java.util.LinkedList;
-
-/*
- * Copyright © 2012 Obtuse Systems Corporation
- */
 
 @SuppressWarnings( { "FieldCanBeLocal" } )
 public abstract class WindowWithMenus extends TrackedWindow {

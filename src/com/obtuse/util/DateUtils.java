@@ -1,3 +1,7 @@
+/*
+ * Copyright © 2014 Daniel Boulet
+ */
+
 package com.obtuse.util;
 
 import com.obtuse.util.exceptions.ParsingException;
@@ -11,9 +15,6 @@ import java.util.TimeZone;
 
 /**
  * Various methods for parsing and just generally managing dates.
- * <p/>
- * Copyright © 2009 Invidi Technologies Corporation
- * Copyright © 2009 Daniel Boulet
  */
 
 @SuppressWarnings({ "UnnecessaryLocalVariable", "StaticMethodNamingConvention", "UnusedDeclaration" })

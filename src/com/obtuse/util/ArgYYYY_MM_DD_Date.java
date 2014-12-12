@@ -1,8 +1,8 @@
-package com.obtuse.util;
-
 /*
- * Copyright © 2011 Obtuse Systems Corporation
+ * Copyright © 2014 Daniel Boulet
  */
+
+package com.obtuse.util;
 
 import com.obtuse.util.exceptions.ParsingException;
 
@@ -14,6 +14,7 @@ import java.util.Date;
  * See {@link DateUtils#parseYYYY_MM_DD} for more information.
  */
 
+@SuppressWarnings("UnusedDeclaration")
 public abstract class ArgYYYY_MM_DD_Date extends Arg {
 
     protected ArgYYYY_MM_DD_Date( String keyword ) {

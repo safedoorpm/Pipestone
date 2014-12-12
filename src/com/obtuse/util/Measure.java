@@ -1,3 +1,7 @@
+/*
+ * Copyright © 2014 Daniel Boulet
+ */
+
 package com.obtuse.util;
 
 import java.io.PrintStream;
@@ -5,8 +9,6 @@ import java.util.*;
 
 /**
  * Measure how long things take.
- * <p/>
- * Copyright © 2008 Obtuse Systems Corporation.
  */
 
 @SuppressWarnings("UnusedDeclaration")

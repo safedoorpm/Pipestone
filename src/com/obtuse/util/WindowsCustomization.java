@@ -1,12 +1,11 @@
+/*
+ * Copyright © 2014 Daniel Boulet
+ */
+
 package com.obtuse.util;
 
 import javax.swing.*;
 import java.awt.*;
-
-/*
- * Copyright © 2006 Loa Corporation.
- * Copyright © 2011 Daniel Boulet.
- */
 
 /**
  * Windows-specific customizations.
@@ -16,7 +15,7 @@ import java.awt.*;
  * <p/>
  */
 
-@SuppressWarnings({ "ClassWithoutToString", "deprecation" })
+@SuppressWarnings({ "ClassWithoutToString", "deprecation", "UnusedDeclaration" })
 public class WindowsCustomization extends OSLevelCustomizations {
 
 //    private final Application _app;

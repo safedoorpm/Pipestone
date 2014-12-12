@@ -1,12 +1,10 @@
-package com.obtuse.db.exceptions;
-
-/**
- * Thrown if we are unable to connect to the database server.
- * <p/>
- * Copyright © 2012 Obtuse Systems Corporation.
+/*
+ * Copyright © 2014 Daniel Boulet
  */
 
-@SuppressWarnings({"ClassWithoutToString"})
+package com.obtuse.db.exceptions;
+
+@SuppressWarnings({ "ClassWithoutToString", "UnusedDeclaration" })
 public class ObtuseJDBCgetConnectionFailedException extends Exception {
 
     public ObtuseJDBCgetConnectionFailedException() {

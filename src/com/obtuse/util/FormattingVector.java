@@ -1,3 +1,7 @@
+/*
+ * Copyright © 2014 Daniel Boulet
+ */
+
 package com.obtuse.util;
 
 import java.util.List;
@@ -6,6 +10,7 @@ import java.util.Vector;
 /**
  * An extension of the {@link java.util.Vector} which has a toString that formats the list's contents.
  */
+@SuppressWarnings("UnusedDeclaration")
 public class FormattingVector<E> extends Vector<E> {
 
     public static final int DEFAULT_MAX_ELEMENTS_TO_FORMAT = 10;

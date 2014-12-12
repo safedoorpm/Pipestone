@@ -1,3 +1,7 @@
+/*
+ * Copyright © 2014 Daniel Boulet
+ */
+
 package com.obtuse.util;
 
 import org.w3c.dom.Document;
@@ -5,10 +9,6 @@ import org.xml.sax.*;
 
 import javax.xml.parsers.*;
 import java.io.*;
-
-/*
- * Copyright © 2012 Obtuse Systems Corporation
- */
 
 public class XMLParsingExample {
 

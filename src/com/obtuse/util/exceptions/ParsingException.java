@@ -1,12 +1,10 @@
-package com.obtuse.util.exceptions;
-
-/**
- * Thrown when something goes wrong parsing.
- * <p>
- * Copyright © 2009 Obtuse Systems Corporation
+/*
+ * Copyright © 2014 Daniel Boulet
  */
 
-@SuppressWarnings("SameParameterValue")
+package com.obtuse.util.exceptions;
+
+@SuppressWarnings({ "SameParameterValue", "UnusedDeclaration" })
 public class ParsingException extends Exception {
 
     public static enum ErrorType {

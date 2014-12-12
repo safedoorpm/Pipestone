@@ -1,3 +1,7 @@
+/*
+ * Copyright © 2014 Daniel Boulet
+ */
+
 package com.obtuse.util;
 
 import java.io.Serializable;
@@ -5,11 +9,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.*;
 
-/*
- * Copyright © 2012 Obtuse Systems Corporation
- */
-
-@SuppressWarnings( { "ClassWithoutToString" } )
+@SuppressWarnings({ "ClassWithoutToString", "UnusedDeclaration" })
 public class PostParameters implements Serializable {
 
     private final Map<String, String> _parameters = new TreeMap<String, String>();

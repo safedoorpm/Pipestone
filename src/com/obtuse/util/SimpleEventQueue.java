@@ -1,11 +1,13 @@
+/*
+ * Copyright © 2014 Daniel Boulet
+ */
+
 package com.obtuse.util;
 
 import java.util.*;
 
 /**
  * Very simple event queue manager.
- * <p>
- * Copyright © 2011 Obtuse Systems Corporation
  */
 
 public class SimpleEventQueue<T extends SimpleEvent> {

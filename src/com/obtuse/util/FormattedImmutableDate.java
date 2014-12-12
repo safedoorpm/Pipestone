@@ -1,10 +1,10 @@
+/*
+ * Copyright © 2014 Daniel Boulet
+ */
+
 package com.obtuse.util;
 
 import java.util.Date;
-
-/*
- * Copyright © 2012 Obtuse Systems Corporation
- */
 
 /**
  * An immutable date which caches certain formatted versions.

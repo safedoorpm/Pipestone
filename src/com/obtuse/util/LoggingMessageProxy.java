@@ -1,11 +1,10 @@
+/*
+ * Copyright © 2014 Daniel Boulet
+ */
+
 package com.obtuse.util;
 
 import org.jetbrains.annotations.Nullable;
-
-/*
- * Copyright © 2012 Invidi Technologies Corporation
- * Copyright © 2012 Obtuse Systems Corporation
- */
 
 /**
  * A message proxy that logs messages and counts how many errors are sent its way.

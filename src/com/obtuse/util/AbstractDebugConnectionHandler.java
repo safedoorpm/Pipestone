@@ -1,3 +1,7 @@
+/*
+ * Copyright © 2014 Daniel Boulet
+ */
+
 package com.obtuse.util;
 
 import org.jetbrains.annotations.Nullable;
@@ -7,14 +11,11 @@ import java.io.File;
 import java.io.IOException;
 import java.net.*;
 
-/*
- * Copyright © 2012 Obtuse Systems Corporation
- */
-
 /**
  * Respond when something connects on a port.
  */
 
+@SuppressWarnings("UnusedDeclaration")
 public abstract class AbstractDebugConnectionHandler extends Thread {
 
     public static final String NEWLINE = System.getProperty( "line.separator" );

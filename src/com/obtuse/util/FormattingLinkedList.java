@@ -1,3 +1,7 @@
+/*
+ * Copyright © 2014 Daniel Boulet
+ */
+
 package com.obtuse.util;
 
 import java.util.LinkedList;
@@ -6,6 +10,7 @@ import java.util.List;
 /**
  * An extension of the {@link LinkedList} which has a toString that formats the list's contents.
  */
+@SuppressWarnings("UnusedDeclaration")
 public class FormattingLinkedList<E> extends LinkedList<E> {
 
     public static final int DEFAULT_MAX_ELEMENTS_TO_FORMAT = 10;

@@ -1,3 +1,7 @@
+/*
+ * Copyright © 2014 Daniel Boulet
+ */
+
 package com.obtuse.util;
 
 import org.jetbrains.annotations.Nullable;
@@ -12,10 +16,9 @@ import java.util.zip.GZIPOutputStream;
 
 /**
  * A trace facility.
- * <p/>
- * Copyright © 2012 Obtuse Systems Corporation.
  */
 
+@SuppressWarnings("UnusedDeclaration")
 public class Trace {
 
     private static final DateFormat _logFileNameFormatter =

@@ -1,3 +1,7 @@
+/*
+ * Copyright © 2014 Daniel Boulet
+ */
+
 package com.obtuse.util;
 
 import com.obtuse.util.exceptions.RejectRangeException;
@@ -7,10 +11,9 @@ import java.io.Serializable;
 /**
  * Something which describes a range.
  * See the {@link Ranges} class for an example of how these critters might be useful.
- * <p/>
- * Copyright © 2009 Obtuse Systems Corporation.
  */
 
+@SuppressWarnings("UnusedDeclaration")
 public class Range<T extends Comparable<T>> implements Serializable {
 
     private final T _startValue;

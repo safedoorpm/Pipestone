@@ -1,10 +1,10 @@
+/*
+ * Copyright © 2014 Daniel Boulet
+ */
+
 package com.obtuse.ui.alpha;
 
 import javax.swing.undo.*;
-
-/*
- * Copyright © 2012 Obtuse Systems Corporation
- */
 
 /**
  * Describe something which can be undone and/or redone.

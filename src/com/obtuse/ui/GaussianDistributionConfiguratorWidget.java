@@ -1,3 +1,7 @@
+/*
+ * Copyright © 2014 Daniel Boulet
+ */
+
 package com.obtuse.ui;
 
 import com.obtuse.util.*;
@@ -8,12 +12,6 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.util.*;
-
-/**
- * A widget for configurating a gaussian distribution.
- * <p/>
- * Copyright © 2012 Obtuse Systems Corporation
- */
 
 public class GaussianDistributionConfiguratorWidget extends JPanel {
 

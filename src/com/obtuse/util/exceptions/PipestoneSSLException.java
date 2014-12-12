@@ -1,12 +1,12 @@
+/*
+ * Copyright © 2014 Daniel Boulet
+ */
+
 package com.obtuse.util.exceptions;
 
 import com.obtuse.util.Trace;
 
-/*
- * Copyright © 2012 Daniel Boulet
- */
-
-@SuppressWarnings( { "ClassWithoutToString" } )
+@SuppressWarnings({ "ClassWithoutToString", "UnusedDeclaration" })
 public class PipestoneSSLException extends Exception {
 
     public PipestoneSSLException() {

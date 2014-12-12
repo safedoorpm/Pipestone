@@ -1,8 +1,8 @@
-package com.obtuse.ui;
-
 /*
- * Copyright © 2012 Obtuse Systems Corporation
+ * Copyright © 2014 Daniel Boulet
  */
+
+package com.obtuse.ui;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -12,6 +12,7 @@ import javax.swing.*;
  * %%% something clever goes here.
  */
 
+@SuppressWarnings("UnusedDeclaration")
 public class SortableJPanel extends JPanel implements SortableJComponent {
 
     private String _sortingKey;

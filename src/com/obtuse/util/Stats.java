@@ -1,10 +1,8 @@
-package com.obtuse.util;
-
-/**
- * Compute various statistics.
- * <p/>
- * Copyright © 2006 Obtuse Systems Corporation
+/*
+ * Copyright © 2014 Daniel Boulet
  */
+
+package com.obtuse.util;
 
 @SuppressWarnings("UnusedDeclaration")
 public class Stats {

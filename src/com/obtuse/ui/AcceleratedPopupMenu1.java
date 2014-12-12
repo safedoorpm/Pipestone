@@ -1,8 +1,8 @@
-package com.obtuse.ui;
-
 /*
- * Copyright © 2013 Obtuse Systems Corporation
+ * Copyright © 2014 Daniel Boulet
  */
+
+package com.obtuse.ui;
 
 import com.obtuse.util.*;
 

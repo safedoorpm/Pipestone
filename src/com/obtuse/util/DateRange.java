@@ -1,3 +1,7 @@
+/*
+ * Copyright © 2014 Daniel Boulet
+ */
+
 package com.obtuse.util;
 
 import java.text.SimpleDateFormat;
@@ -7,8 +11,6 @@ import java.util.Date;
  * A single date range from a starting date through to an ending date inclusive.
  * <p/>
  * Intended for use with the {@link Range} and {@link Ranges} classes.
- * <p/>
- * Copyright © 2009 Obtuse Systems Corporation.
  */
 
 @SuppressWarnings("UnusedDeclaration")

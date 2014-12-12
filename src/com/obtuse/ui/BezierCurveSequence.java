@@ -1,5 +1,5 @@
 /*
- * Copyright © 2010 Daniel Boulet.
+ * Copyright © 2014 Daniel Boulet
  */
 
 package com.obtuse.ui;

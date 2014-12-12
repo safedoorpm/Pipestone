@@ -1,3 +1,7 @@
+/*
+ * Copyright © 2014 Daniel Boulet
+ */
+
 package com.obtuse.ui;
 
 import com.obtuse.util.Logger;
@@ -9,8 +13,6 @@ import java.awt.event.*;
 
 /**
  * Popup a window with a message and a single button (which disposes of the window).
- * <p/>
- * Copyright © 2012 Obtuse Systems Corporation.
  *
  * @noinspection ClassWithoutToString, UnusedDeclaration
  */
