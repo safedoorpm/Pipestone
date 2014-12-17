@@ -1,139 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" name="Default" comment="Various cleanup.&#10;Update copyrights.">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/AboutWindowHandler.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/AboutWindowHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/ui/AbstractCurveSequence.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/AbstractCurveSequence.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/AbstractDebugConnectionHandler.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/AbstractDebugConnectionHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/ui/AcceleratedPopupMenu1.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/AcceleratedPopupMenu1.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/ui/AcceleratedPopupMenu2.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/AcceleratedPopupMenu2.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/Arg.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/Arg.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/ArgInt.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ArgInt.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/ArgLong.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ArgLong.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/ArgParser.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ArgParser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/ArgParserExample.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ArgParserExample.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/ArgString.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ArgString.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/ArgYYYY_MM_DD_CalendarDate.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ArgYYYY_MM_DD_CalendarDate.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/ArgYYYY_MM_DD_Date.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ArgYYYY_MM_DD_Date.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/ArgYesNo.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ArgYesNo.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/BasicProgramConfigInfo.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/BasicProgramConfigInfo.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/ui/BezierCurveSequence.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/BezierCurveSequence.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/ButtonInfo.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ButtonInfo.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/ButtonOwner.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ButtonOwner.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/CSVParser.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/CSVParser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/CalendarDate.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/CalendarDate.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/Counter.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/Counter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/ui/CubicBezierCurve.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/CubicBezierCurve.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/DateRange.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/DateRange.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/DateUtils.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/DateUtils.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/ui/DefaultMpsKnob.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/DefaultMpsKnob.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/graph/DirectedGraph.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/graph/DirectedGraph.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/graph/DirectedGraphEdge.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/graph/DirectedGraphEdge.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/graph/DirectedGraphVertex.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/graph/DirectedGraphVertex.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/graph/Edge.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/graph/Edge.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/ui/FileSelectors.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/FileSelectors.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/FormattedImmutableDate.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/FormattedImmutableDate.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/FormattingLinkedList.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/FormattingLinkedList.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/FormattingVector.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/FormattingVector.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/GaussianDistribution.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/GaussianDistribution.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/ui/GaussianDistributionConfiguratorWidget.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/GaussianDistributionConfiguratorWidget.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/ui/GaussianDistributionDrawing.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/GaussianDistributionDrawing.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/GenericCsvParser.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/GenericCsvParser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/ui/GraphicsElement.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/GraphicsElement.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/HaltDebugConnectionHandler.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/HaltDebugConnectionHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/ui/HelpWindow.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/HelpWindow.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/exceptions/HowDidWeGetHereError.java" afterPath="$PROJECT_DIR$/src/com/obtuse/exceptions/HowDidWeGetHereError.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/ImageIconUtils.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ImageIconUtils.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/ImmutableDate.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ImmutableDate.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/InstanceFromXML.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/InstanceFromXML.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/ui/alpha/JListManager.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/alpha/JListManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/ui/testanddemo/JSliderTest.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/testanddemo/JSliderTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/JulianDate.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/JulianDate.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/Logger.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/Logger.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/LoggerListener.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/LoggerListener.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/LoggingMessageProxy.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/LoggingMessageProxy.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/ui/LogsWindow.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/LogsWindow.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/MacCustomization.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/MacCustomization.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/Measure.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/Measure.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/MessageProxy.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/MessageProxy.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/ui/MpsKnob.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/MpsKnob.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/ui/MpsKnobSize.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/MpsKnobSize.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/ui/MpsLabel.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/MpsLabel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/ui/testanddemo/MpsTest.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/testanddemo/MpsTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/ui/testanddemo/MpsTest2.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/testanddemo/MpsTest2.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/ui/MultiPointSlider.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/MultiPointSlider.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/explore/MyExploreSSL.java" afterPath="$PROJECT_DIR$/src/com/obtuse/explore/MyExploreSSL.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/MyIntSet.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/MyIntSet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/NamedEntity.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/NamedEntity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/NestedXMLPrinter.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/NestedXMLPrinter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/NounsList.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/NounsList.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/ui/NullSelectionModel.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/NullSelectionModel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/OSLevelCustomizations.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/OSLevelCustomizations.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/db/exceptions/ObtuseJDBCDriverLoadFailedException.java" afterPath="$PROJECT_DIR$/src/com/obtuse/db/exceptions/ObtuseJDBCDriverLoadFailedException.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/db/exceptions/ObtuseJDBCgetConnectionFailedException.java" afterPath="$PROJECT_DIR$/src/com/obtuse/db/exceptions/ObtuseJDBCgetConnectionFailedException.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/exceptions/ObtuseProtocolErrorException.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/exceptions/ObtuseProtocolErrorException.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/ObtuseUtil.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ObtuseUtil.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/obsolete/ObtuseUtilObsolete.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/obsolete/ObtuseUtilObsolete.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/junit/ObtuseUtilTest.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/junit/ObtuseUtilTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/ObtuseXMLUtils.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ObtuseXMLUtils.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/exceptions/ObtuseXmlNodeException.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/exceptions/ObtuseXmlNodeException.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/ui/OkPopupMessageWindow.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/OkPopupMessageWindow.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/OrderedEntity.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/OrderedEntity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/exceptions/ParsingException.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/exceptions/ParsingException.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/exceptions/PipestoneSSLException.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/exceptions/PipestoneSSLException.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/ui/PointOnGraphicsElement.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/PointOnGraphicsElement.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/PostParameters.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/PostParameters.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/db/PostgresConnection.java" afterPath="$PROJECT_DIR$/src/com/obtuse/db/PostgresConnection.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/PreferencesHandler.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/PreferencesHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/QuitCatcher.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/QuitCatcher.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/RandomCentral.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/RandomCentral.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/Range.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/Range.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/RangeFactory.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/RangeFactory.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/Ranges.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/Ranges.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/exceptions/RejectRangeException.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/exceptions/RejectRangeException.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/ResourceUtils.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ResourceUtils.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/SSLUtilities.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/SSLUtilities.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/SimpleEvent.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/SimpleEvent.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/SimpleEventQueue.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/SimpleEventQueue.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/SimpleGeometry.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/SimpleGeometry.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/ui/SimpleTableCellRenderer.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/SimpleTableCellRenderer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/SimpleXmlContentHandler.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/SimpleXmlContentHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/ui/SortableJComponent.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/SortableJComponent.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/ui/SortableJPanel.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/SortableJPanel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/ui/SortedJPanel.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/SortedJPanel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/ui/StackedGaussianDistributionsDrawing.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/StackedGaussianDistributionsDrawing.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/Stats.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/Stats.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/exceptions/SyntaxErrorException.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/exceptions/SyntaxErrorException.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/ThreeDimensionalCounter.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ThreeDimensionalCounter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/ThreeDimensionalSortedMap.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ThreeDimensionalSortedMap.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/ThreeDimensionalTreeCounter.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ThreeDimensionalTreeCounter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/ThreeDimensionalTreeMap.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ThreeDimensionalTreeMap.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/junit/ThreeDimensionalTreeMapTest.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/junit/ThreeDimensionalTreeMapTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/Trace.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/Trace.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/TraceDebugConnectionHandler.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/TraceDebugConnectionHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/TraceFileManager.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/TraceFileManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/TraceHook.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/TraceHook.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/Tracer.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/Tracer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/ui/TrackedWindow.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/TrackedWindow.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/TreeCounter.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/TreeCounter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/TreeSorter.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/TreeSorter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/TwoDimensionalCounter.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/TwoDimensionalCounter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/TwoDimensionalSortedMap.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/TwoDimensionalSortedMap.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/TwoDimensionalTreeCounter.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/TwoDimensionalTreeCounter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/TwoDimensionalTreeMap.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/TwoDimensionalTreeMap.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/junit/TwoDimensionalTreeMapTest.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/junit/TwoDimensionalTreeMapTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/ui/alpha/UndoableBenoitEdit.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/alpha/UndoableBenoitEdit.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/UniqueEntity.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/UniqueEntity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/UniqueIdGenerator.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/UniqueIdGenerator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/UniquelyNamedEntity.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/UniquelyNamedEntity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/ui/ValidatedJTextField.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/ValidatedJTextField.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/VerbsList.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/VerbsList.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/graph/Vertex.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/graph/Vertex.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/WeightedGaussianDistribution.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/WeightedGaussianDistribution.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/ui/WindowWithMenus.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/WindowWithMenus.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/WindowsCustomization.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/WindowsCustomization.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/XMLParsingExample.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/XMLParsingExample.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/ui/YesNoPopupMessageWindow.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/YesNoPopupMessageWindow.java" />
+    <list default="true" id="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Pipestone.iws" />
@@ -253,8 +121,10 @@
             <state vertical-scroll-proportion="0.0" vertical-offset="1497" max-vertical-offset="2394">
               <caret line="113" column="18" selection-start-line="113" selection-start-column="18" selection-end-line="113" selection-end-column="18" />
               <folding>
-                <element signature="e#0#3152#0" expanded="true" />
-                <element signature="e#411#449#0" expanded="true" />
+                <element signature="imports" expanded="false" />
+                <element signature="e#899#976#0" expanded="false" />
+                <element signature="e#2973#3015#0" expanded="false" />
+                <marker date="1418425966000" expanded="true" signature="411:449" placeholder="/UnusedDeclaration/" />
               </folding>
             </state>
           </provider>
@@ -266,7 +136,12 @@
             <state vertical-scroll-proportion="0.0" vertical-offset="2815" max-vertical-offset="4392">
               <caret line="184" column="35" selection-start-line="184" selection-start-column="35" selection-end-line="184" selection-end-column="35" />
               <folding>
-                <element signature="e#382#420#0" expanded="true" />
+                <element signature="e#0#5205#0" expanded="false" />
+                <element signature="imports" expanded="false" />
+                <element signature="e#615#638#0" expanded="false" />
+                <element signature="e#2431#2439#0" expanded="false" />
+                <element signature="e#4026#4071#1" expanded="false" />
+                <marker date="1418425966000" expanded="true" signature="382:420" placeholder="/UnusedDeclaration/" />
               </folding>
             </state>
           </provider>
@@ -278,8 +153,8 @@
             <state vertical-scroll-proportion="0.0" vertical-offset="1465" max-vertical-offset="3870">
               <caret line="100" column="19" selection-start-line="100" selection-start-column="19" selection-end-line="100" selection-end-column="19" />
               <folding>
-                <element signature="e#0#6727#0" expanded="true" />
-                <element signature="e#288#326#0" expanded="true" />
+                <element signature="imports" expanded="false" />
+                <marker date="1418425966000" expanded="true" signature="288:326" placeholder="/UnusedDeclaration/" />
               </folding>
             </state>
           </provider>
@@ -291,8 +166,13 @@
             <state vertical-scroll-proportion="0.0" vertical-offset="2671" max-vertical-offset="4158">
               <caret line="170" column="19" selection-start-line="170" selection-start-column="19" selection-end-line="170" selection-end-column="19" />
               <folding>
-                <element signature="e#0#5350#0" expanded="true" />
-                <element signature="e#273#311#0" expanded="true" />
+                <element signature="imports" expanded="false" />
+                <element signature="e#1206#1244#0" expanded="false" />
+                <element signature="e#3818#3856#0" expanded="false" />
+                <element signature="e#4941#4979#0" expanded="false" />
+                <element signature="e#5059#5097#0" expanded="false" />
+                <element signature="e#5172#5210#0" expanded="false" />
+                <marker date="1418425966000" expanded="true" signature="273:311" placeholder="/UnusedDeclaration/" />
               </folding>
             </state>
           </provider>
@@ -301,7 +181,7 @@
       <file leaf-file-name="ObtuseXMLUtils.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/ObtuseXMLUtils.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.33333334" vertical-offset="12013" max-vertical-offset="17694">
+            <state vertical-scroll-proportion="0.33333334" vertical-offset="12301" max-vertical-offset="17982">
               <caret line="700" column="24" selection-start-line="700" selection-start-column="24" selection-end-line="700" selection-end-column="24" />
               <folding />
             </state>
@@ -314,7 +194,27 @@
             <state vertical-scroll-proportion="0.0" vertical-offset="3319" max-vertical-offset="7830">
               <caret line="226" column="23" selection-start-line="226" selection-start-column="23" selection-end-line="226" selection-end-column="23" />
               <folding>
-                <element signature="e#0#13737#0" expanded="true" />
+                <element signature="imports" expanded="false" />
+                <element signature="e#483#549#0" expanded="false" />
+                <element signature="e#639#683#0" expanded="false" />
+                <element signature="e#943#1012#0" expanded="false" />
+                <element signature="e#1324#1360#0" expanded="false" />
+                <element signature="e#1432#1463#0" expanded="false" />
+                <element signature="e#2007#2268#0" expanded="false" />
+                <element signature="e#2267#2268#0" expanded="false" />
+                <element signature="e#2584#2786#0" expanded="false" />
+                <element signature="e#2785#2786#0" expanded="false" />
+                <element signature="e#3020#4201#0" expanded="false" />
+                <element signature="e#4200#4201#0" expanded="false" />
+                <element signature="e#4390#4432#0" expanded="false" />
+                <element signature="e#4969#5422#0" expanded="false" />
+                <element signature="e#5421#5422#0" expanded="false" />
+                <element signature="e#9008#9050#0" expanded="false" />
+                <element signature="e#9217#9259#0" expanded="false" />
+                <element signature="e#10831#11183#0" expanded="false" />
+                <element signature="e#11182#11183#0" expanded="false" />
+                <element signature="e#11882#12954#0" expanded="false" />
+                <element signature="e#12953#12954#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -325,7 +225,23 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="11559" max-vertical-offset="12456">
               <caret line="679" column="19" selection-start-line="679" selection-start-column="19" selection-end-line="679" selection-end-column="19" />
-              <folding />
+              <folding>
+                <element signature="e#0#15611#0" expanded="false" />
+                <element signature="imports" expanded="false" />
+                <element signature="e#333#444#0" expanded="false" />
+                <element signature="e#1393#1435#0" expanded="false" />
+                <element signature="e#2562#2625#0" expanded="false" />
+                <element signature="e#4670#4712#0" expanded="false" />
+                <element signature="e#6162#6211#1" expanded="false" />
+                <element signature="e#7003#7052#1" expanded="false" />
+                <element signature="e#7633#7676#0" expanded="false" />
+                <element signature="e#9443#9485#0" expanded="false" />
+                <element signature="e#10037#10079#0" expanded="false" />
+                <element signature="e#11750#11792#0" expanded="false" />
+                <element signature="e#11908#11917#0" expanded="false" />
+                <element signature="e#13014#13056#0" expanded="false" />
+                <element signature="e#13177#13185#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -336,8 +252,12 @@
             <state vertical-scroll-proportion="0.0" vertical-offset="5907" max-vertical-offset="6804">
               <caret line="359" column="16" selection-start-line="359" selection-start-column="16" selection-end-line="359" selection-end-column="16" />
               <folding>
-                <element signature="e#0#9441#0" expanded="true" />
-                <element signature="e#308#346#0" expanded="true" />
+                <element signature="imports" expanded="false" />
+                <element signature="e#494#517#0" expanded="false" />
+                <element signature="e#574#583#0" expanded="false" />
+                <element signature="e#7013#7022#0" expanded="false" />
+                <element signature="e#8417#8455#1" expanded="false" />
+                <marker date="1418425966000" expanded="true" signature="308:346" placeholder="/UnusedDeclaration/" />
               </folding>
             </state>
           </provider>
@@ -348,7 +268,15 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="1051" max-vertical-offset="3078">
               <caret line="84" column="46" selection-start-line="84" selection-start-column="46" selection-end-line="84" selection-end-column="46" />
-              <folding />
+              <folding>
+                <element signature="e#0#4572#0" expanded="false" />
+                <element signature="imports" expanded="false" />
+                <element signature="e#432#468#0" expanded="false" />
+                <element signature="e#518#557#0" expanded="false" />
+                <element signature="e#3595#3827#0" expanded="false" />
+                <element signature="e#3826#3827#0" expanded="false" />
+                <element signature="e#3946#3989#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -903,162 +831,6 @@
               <option name="myItemId" value="ui" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="YesNoPopupMessageWindow" />
-              <option name="myItemType" value="com.intellij.uiDesigner.projectView.FormNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Pipestone" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Pipestone" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="obtuse" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ui" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="OkPopupMessageWindow" />
-              <option name="myItemType" value="com.intellij.uiDesigner.projectView.FormNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Pipestone" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Pipestone" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="obtuse" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ui" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="LogsWindow" />
-              <option name="myItemType" value="com.intellij.uiDesigner.projectView.FormNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Pipestone" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Pipestone" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="obtuse" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ui" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="HelpWindow" />
-              <option name="myItemType" value="com.intellij.uiDesigner.projectView.FormNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Pipestone" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Pipestone" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="obtuse" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ui" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GaussianDistributionConfiguratorWidget" />
-              <option name="myItemType" value="com.intellij.uiDesigner.projectView.FormNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Pipestone" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Pipestone" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="obtuse" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ui" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AcceleratedPopupMenu2" />
-              <option name="myItemType" value="com.intellij.uiDesigner.projectView.FormNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Pipestone" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Pipestone" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="obtuse" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ui" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -1084,70 +856,6 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="testanddemo" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MpsTest2" />
-              <option name="myItemType" value="com.intellij.uiDesigner.projectView.FormNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Pipestone" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Pipestone" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="obtuse" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ui" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="testanddemo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MpsTest" />
-              <option name="myItemType" value="com.intellij.uiDesigner.projectView.FormNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Pipestone" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Pipestone" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="obtuse" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ui" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="testanddemo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="JSliderTest" />
-              <option name="myItemType" value="com.intellij.uiDesigner.projectView.FormNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -1603,7 +1311,7 @@
       <workItem from="1404886310761" duration="1204000" />
       <workItem from="1412390560482" duration="664000" />
       <workItem from="1414280826555" duration="598000" />
-      <workItem from="1418158616189" duration="4031000" />
+      <workItem from="1418158616189" duration="4742000" />
     </task>
     <task id="LOCAL-00001" summary="Major re-sync with danny's personal toolkit.">
       <created>1359580956092</created>
@@ -1647,15 +1355,21 @@
       <option name="project" value="LOCAL" />
       <updated>1418160071880</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Various cleanup.&#10;Update copyrights.">
+      <created>1418426007613</created>
+      <option name="number" value="00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1418426007613</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="7111000" />
+    <option name="totallyTimeSpent" value="7822000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="96" y="23" width="1937" height="1464" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329475" sideWeight="0.67289025" order="2" side_tool="false" content_ui="tabs" />
@@ -1765,8 +1479,7 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1170">
           <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
           <folding>
-            <element signature="e#0#2580#0" expanded="true" />
-            <element signature="e#68#106#0" expanded="true" />
+            <element signature="e#0#2580#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1776,8 +1489,7 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1170">
           <caret line="11" column="11" selection-start-line="11" selection-start-column="11" selection-end-line="11" selection-end-column="11" />
           <folding>
-            <element signature="e#0#1107#0" expanded="true" />
-            <element signature="e#68#106#0" expanded="true" />
+            <element signature="e#0#1107#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1786,9 +1498,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="810">
           <caret line="13" column="14" selection-start-line="13" selection-start-column="14" selection-end-line="13" selection-end-column="14" />
-          <folding>
-            <element signature="e#115#153#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1797,8 +1507,7 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="432">
           <caret line="15" column="43" selection-start-line="15" selection-start-column="43" selection-end-line="15" selection-end-column="43" />
           <folding>
-            <element signature="e#0#355#0" expanded="true" />
-            <element signature="e#68#106#0" expanded="true" />
+            <element signature="e#0#355#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1808,8 +1517,7 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="396">
           <caret line="13" column="18" selection-start-line="13" selection-start-column="18" selection-end-line="13" selection-end-column="18" />
           <folding>
-            <element signature="e#0#302#0" expanded="true" />
-            <element signature="e#165#203#0" expanded="true" />
+            <element signature="e#0#302#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1818,9 +1526,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="57" max-vertical-offset="954">
           <caret line="24" column="16" selection-start-line="24" selection-start-column="16" selection-end-line="24" selection-end-column="16" />
-          <folding>
-            <element signature="e#176#214#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1829,8 +1535,7 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="432">
           <caret line="13" column="24" selection-start-line="13" selection-start-column="24" selection-end-line="13" selection-end-column="24" />
           <folding>
-            <element signature="e#0#296#0" expanded="true" />
-            <element signature="e#115#153#0" expanded="true" />
+            <element signature="e#0#296#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1840,8 +1545,7 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="165" max-vertical-offset="1062">
           <caret line="46" column="15" selection-start-line="46" selection-start-column="15" selection-end-line="46" selection-end-column="15" />
           <folding>
-            <element signature="e#0#936#0" expanded="true" />
-            <element signature="e#79#117#0" expanded="true" />
+            <element signature="e#0#936#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1851,8 +1555,7 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="756">
           <caret line="18" column="20" selection-start-line="18" selection-start-column="20" selection-end-line="18" selection-end-column="20" />
           <folding>
-            <element signature="e#0#603#0" expanded="true" />
-            <element signature="e#134#172#0" expanded="true" />
+            <element signature="e#0#603#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1862,11 +1565,11 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="450">
           <caret line="13" column="11" selection-start-line="13" selection-start-column="11" selection-end-line="13" selection-end-column="11" />
           <folding>
-            <element signature="e#0#485#0" expanded="true" />
-            <element signature="e#263#264#0" expanded="true" />
-            <element signature="e#286#287#0" expanded="true" />
-            <element signature="e#350#351#0" expanded="true" />
-            <element signature="e#376#377#0" expanded="true" />
+            <element signature="e#0#485#0" expanded="false" />
+            <element signature="e#263#264#0" expanded="false" />
+            <element signature="e#286#287#0" expanded="false" />
+            <element signature="e#350#351#0" expanded="false" />
+            <element signature="e#376#377#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1876,8 +1579,8 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="396">
           <caret line="9" column="11" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="11" />
           <folding>
-            <element signature="e#269#270#0" expanded="true" />
-            <element signature="e#292#293#0" expanded="true" />
+            <element signature="e#269#270#0" expanded="false" />
+            <element signature="e#292#293#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1887,7 +1590,7 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="594">
           <caret line="16" column="11" selection-start-line="16" selection-start-column="11" selection-end-line="16" selection-end-column="11" />
           <folding>
-            <element signature="e#0#555#0" expanded="true" />
+            <element signature="e#0#555#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1897,8 +1600,7 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="432">
           <caret line="13" column="12" selection-start-line="13" selection-start-column="12" selection-end-line="13" selection-end-column="12" />
           <folding>
-            <element signature="e#0#394#0" expanded="true" />
-            <element signature="e#68#106#0" expanded="true" />
+            <element signature="e#0#394#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1907,9 +1609,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="871" max-vertical-offset="2070">
           <caret line="69" column="48" selection-start-line="69" selection-start-column="48" selection-end-line="69" selection-end-column="48" />
-          <folding>
-            <element signature="e#228#266#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1918,8 +1618,8 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="5767" max-vertical-offset="7722">
           <caret line="346" column="26" selection-start-line="346" selection-start-column="26" selection-end-line="346" selection-end-column="26" />
           <folding>
-            <element signature="e#3993#3994#0" expanded="true" />
-            <element signature="e#4016#4017#0" expanded="true" />
+            <element signature="e#3993#3994#0" expanded="false" />
+            <element signature="e#4016#4017#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1928,9 +1628,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="432">
           <caret line="15" column="20" selection-start-line="15" selection-start-column="20" selection-end-line="15" selection-end-column="20" />
-          <folding>
-            <element signature="e#97#135#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1939,8 +1637,7 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="205" max-vertical-offset="2160">
           <caret line="30" column="37" selection-start-line="30" selection-start-column="37" selection-end-line="30" selection-end-column="37" />
           <folding>
-            <element signature="e#0#3382#0" expanded="true" />
-            <element signature="e#291#329#0" expanded="true" />
+            <element signature="e#0#3382#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1949,9 +1646,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="18" max-vertical-offset="1224">
           <caret line="16" column="11" selection-start-line="16" selection-start-column="11" selection-end-line="16" selection-end-column="11" />
-          <folding>
-            <element signature="e#214#252#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1960,8 +1655,7 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="774">
           <caret line="26" column="11" selection-start-line="26" selection-start-column="11" selection-end-line="26" selection-end-column="11" />
           <folding>
-            <element signature="e#0#653#0" expanded="true" />
-            <element signature="e#251#289#0" expanded="true" />
+            <element signature="e#0#653#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1970,9 +1664,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="48" max-vertical-offset="1026">
           <caret line="21" column="14" selection-start-line="21" selection-start-column="14" selection-end-line="21" selection-end-column="14" />
-          <folding>
-            <element signature="e#296#334#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1980,9 +1672,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1888" max-vertical-offset="2772">
           <caret line="146" column="23" selection-start-line="146" selection-start-column="23" selection-end-line="146" selection-end-column="23" />
-          <folding>
-            <element signature="e#167#205#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1990,9 +1680,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="882">
           <caret line="19" column="14" selection-start-line="19" selection-start-column="14" selection-end-line="19" selection-end-column="14" />
-          <folding>
-            <element signature="e#321#359#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2008,9 +1696,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="504">
           <caret line="20" column="9" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="9" />
-          <folding>
-            <element signature="e#225#263#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2018,9 +1704,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="774">
           <caret line="39" column="4" selection-start-line="39" selection-start-column="4" selection-end-line="39" selection-end-column="4" />
-          <folding>
-            <element signature="e#379#417#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2029,7 +1713,7 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="7" max-vertical-offset="2394">
           <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
           <folding>
-            <element signature="e#0#3358#0" expanded="true" />
+            <element signature="e#0#3358#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2039,7 +1723,7 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="7" max-vertical-offset="3330">
           <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
           <folding>
-            <element signature="e#0#4780#0" expanded="true" />
+            <element signature="e#0#4780#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2048,9 +1732,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="486">
           <caret line="20" column="20" selection-start-line="20" selection-start-column="20" selection-end-line="20" selection-end-column="20" />
-          <folding>
-            <element signature="e#275#313#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2059,8 +1741,7 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="673" max-vertical-offset="2196">
           <caret line="78" column="12" selection-start-line="78" selection-start-column="12" selection-end-line="78" selection-end-column="12" />
           <folding>
-            <element signature="e#0#3497#0" expanded="true" />
-            <element signature="e#308#346#0" expanded="true" />
+            <element signature="e#0#3497#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2069,9 +1750,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="79" max-vertical-offset="18720">
           <caret line="25" column="28" selection-start-line="25" selection-start-column="28" selection-end-line="25" selection-end-column="28" />
-          <folding>
-            <element signature="e#288#326#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2080,8 +1759,7 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="115" max-vertical-offset="19872">
           <caret line="25" column="28" selection-start-line="25" selection-start-column="28" selection-end-line="25" selection-end-column="28" />
           <folding>
-            <element signature="e#0#23789#0" expanded="true" />
-            <element signature="e#288#326#0" expanded="true" />
+            <element signature="e#0#23789#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2090,9 +1768,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="115" max-vertical-offset="1710">
           <caret line="26" column="11" selection-start-line="26" selection-start-column="11" selection-end-line="26" selection-end-column="11" />
-          <folding>
-            <element signature="e#228#266#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2100,9 +1776,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="115" max-vertical-offset="1710">
           <caret line="26" column="11" selection-start-line="26" selection-start-column="11" selection-end-line="26" selection-end-column="11" />
-          <folding>
-            <element signature="e#226#264#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2111,10 +1785,9 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="1735" max-vertical-offset="3492">
           <caret line="113" column="11" selection-start-line="113" selection-start-column="11" selection-end-line="113" selection-end-column="11" />
           <folding>
-            <element signature="e#0#5753#0" expanded="true" />
-            <element signature="e#697#735#0" expanded="true" />
-            <element signature="e#3391#3392#0" expanded="true" />
-            <element signature="e#3451#3452#0" expanded="true" />
+            <element signature="e#0#5753#0" expanded="false" />
+            <element signature="e#3391#3392#0" expanded="false" />
+            <element signature="e#3451#3452#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2124,8 +1797,7 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="295" max-vertical-offset="1404">
           <caret line="34" column="73" selection-start-line="34" selection-start-column="73" selection-end-line="34" selection-end-column="73" />
           <folding>
-            <element signature="e#0#1833#0" expanded="true" />
-            <element signature="e#213#251#0" expanded="true" />
+            <element signature="e#0#1833#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2135,7 +1807,7 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="273" max-vertical-offset="1170">
           <caret line="47" column="21" selection-start-line="47" selection-start-column="21" selection-end-line="47" selection-end-column="21" />
           <folding>
-            <element signature="e#0#1216#0" expanded="true" />
+            <element signature="e#0#1216#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2145,8 +1817,7 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="282" max-vertical-offset="2466">
           <caret line="34" column="11" selection-start-line="34" selection-start-column="11" selection-end-line="34" selection-end-column="11" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1083#1121#0" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2156,8 +1827,7 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="3031" max-vertical-offset="6390">
           <caret line="188" column="16" selection-start-line="188" selection-start-column="16" selection-end-line="188" selection-end-column="16" />
           <folding>
-            <element signature="e#0#8842#0" expanded="true" />
-            <element signature="e#326#364#0" expanded="true" />
+            <element signature="e#0#8842#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2167,8 +1837,7 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="13201" max-vertical-offset="14130">
           <caret line="762" column="26" selection-start-line="762" selection-start-column="26" selection-end-line="762" selection-end-column="26" />
           <folding>
-            <element signature="e#0#21728#0" expanded="true" />
-            <element signature="e#334#372#0" expanded="true" />
+            <element signature="e#0#21728#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2178,7 +1847,27 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="3319" max-vertical-offset="7830">
           <caret line="226" column="23" selection-start-line="226" selection-start-column="23" selection-end-line="226" selection-end-column="23" />
           <folding>
-            <element signature="e#0#13737#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#483#549#0" expanded="false" />
+            <element signature="e#639#683#0" expanded="false" />
+            <element signature="e#943#1012#0" expanded="false" />
+            <element signature="e#1324#1360#0" expanded="false" />
+            <element signature="e#1432#1463#0" expanded="false" />
+            <element signature="e#2007#2268#0" expanded="false" />
+            <element signature="e#2267#2268#0" expanded="false" />
+            <element signature="e#2584#2786#0" expanded="false" />
+            <element signature="e#2785#2786#0" expanded="false" />
+            <element signature="e#3020#4201#0" expanded="false" />
+            <element signature="e#4200#4201#0" expanded="false" />
+            <element signature="e#4390#4432#0" expanded="false" />
+            <element signature="e#4969#5422#0" expanded="false" />
+            <element signature="e#5421#5422#0" expanded="false" />
+            <element signature="e#9008#9050#0" expanded="false" />
+            <element signature="e#9217#9259#0" expanded="false" />
+            <element signature="e#10831#11183#0" expanded="false" />
+            <element signature="e#11182#11183#0" expanded="false" />
+            <element signature="e#11882#12954#0" expanded="false" />
+            <element signature="e#12953#12954#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2187,7 +1876,23 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="11559" max-vertical-offset="12456">
           <caret line="679" column="19" selection-start-line="679" selection-start-column="19" selection-end-line="679" selection-end-column="19" />
-          <folding />
+          <folding>
+            <element signature="e#0#15611#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#333#444#0" expanded="false" />
+            <element signature="e#1393#1435#0" expanded="false" />
+            <element signature="e#2562#2625#0" expanded="false" />
+            <element signature="e#4670#4712#0" expanded="false" />
+            <element signature="e#6162#6211#1" expanded="false" />
+            <element signature="e#7003#7052#1" expanded="false" />
+            <element signature="e#7633#7676#0" expanded="false" />
+            <element signature="e#9443#9485#0" expanded="false" />
+            <element signature="e#10037#10079#0" expanded="false" />
+            <element signature="e#11750#11792#0" expanded="false" />
+            <element signature="e#11908#11917#0" expanded="false" />
+            <element signature="e#13014#13056#0" expanded="false" />
+            <element signature="e#13177#13185#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -2207,8 +1912,12 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="5907" max-vertical-offset="6804">
           <caret line="359" column="16" selection-start-line="359" selection-start-column="16" selection-end-line="359" selection-end-column="16" />
           <folding>
-            <element signature="e#0#9441#0" expanded="true" />
-            <element signature="e#308#346#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#494#517#0" expanded="false" />
+            <element signature="e#574#583#0" expanded="false" />
+            <element signature="e#7013#7022#0" expanded="false" />
+            <element signature="e#8417#8455#1" expanded="false" />
+            <marker date="1418425966000" expanded="true" signature="308:346" placeholder="/UnusedDeclaration/" />
           </folding>
         </state>
       </provider>
@@ -2217,7 +1926,15 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1051" max-vertical-offset="3078">
           <caret line="84" column="46" selection-start-line="84" selection-start-column="46" selection-end-line="84" selection-end-column="46" />
-          <folding />
+          <folding>
+            <element signature="e#0#4572#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#432#468#0" expanded="false" />
+            <element signature="e#518#557#0" expanded="false" />
+            <element signature="e#3595#3827#0" expanded="false" />
+            <element signature="e#3826#3827#0" expanded="false" />
+            <element signature="e#3946#3989#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -2226,8 +1943,10 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="1497" max-vertical-offset="2394">
           <caret line="113" column="18" selection-start-line="113" selection-start-column="18" selection-end-line="113" selection-end-column="18" />
           <folding>
-            <element signature="e#0#3152#0" expanded="true" />
-            <element signature="e#411#449#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#899#976#0" expanded="false" />
+            <element signature="e#2973#3015#0" expanded="false" />
+            <marker date="1418425966000" expanded="true" signature="411:449" placeholder="/UnusedDeclaration/" />
           </folding>
         </state>
       </provider>
@@ -2237,7 +1956,12 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="2815" max-vertical-offset="4392">
           <caret line="184" column="35" selection-start-line="184" selection-start-column="35" selection-end-line="184" selection-end-column="35" />
           <folding>
-            <element signature="e#382#420#0" expanded="true" />
+            <element signature="e#0#5205#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#615#638#0" expanded="false" />
+            <element signature="e#2431#2439#0" expanded="false" />
+            <element signature="e#4026#4071#1" expanded="false" />
+            <marker date="1418425966000" expanded="true" signature="382:420" placeholder="/UnusedDeclaration/" />
           </folding>
         </state>
       </provider>
@@ -2247,8 +1971,8 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="1465" max-vertical-offset="3870">
           <caret line="100" column="19" selection-start-line="100" selection-start-column="19" selection-end-line="100" selection-end-column="19" />
           <folding>
-            <element signature="e#0#6727#0" expanded="true" />
-            <element signature="e#288#326#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <marker date="1418425966000" expanded="true" signature="288:326" placeholder="/UnusedDeclaration/" />
           </folding>
         </state>
       </provider>
@@ -2258,8 +1982,13 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="2671" max-vertical-offset="4158">
           <caret line="170" column="19" selection-start-line="170" selection-start-column="19" selection-end-line="170" selection-end-column="19" />
           <folding>
-            <element signature="e#0#5350#0" expanded="true" />
-            <element signature="e#273#311#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#1206#1244#0" expanded="false" />
+            <element signature="e#3818#3856#0" expanded="false" />
+            <element signature="e#4941#4979#0" expanded="false" />
+            <element signature="e#5059#5097#0" expanded="false" />
+            <element signature="e#5172#5210#0" expanded="false" />
+            <marker date="1418425966000" expanded="true" signature="273:311" placeholder="/UnusedDeclaration/" />
           </folding>
         </state>
       </provider>
