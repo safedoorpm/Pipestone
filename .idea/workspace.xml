@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" name="Default" comment="" />
     <ignored path="Pipestone.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -183,7 +181,16 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.33333334" vertical-offset="12301" max-vertical-offset="17982">
               <caret line="700" column="24" selection-start-line="700" selection-start-column="24" selection-end-line="700" selection-end-column="24" />
-              <folding />
+              <folding>
+                <element signature="e#0#30778#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#580#618#0" expanded="true" />
+                <element signature="e#8086#8145#0" expanded="true" />
+                <element signature="e#12655#12700#1" expanded="true" />
+                <element signature="e#13867#13912#1" expanded="true" />
+                <element signature="e#14950#14995#1" expanded="true" />
+                <element signature="e#16800#16817#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -1369,7 +1376,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="96" y="23" width="1937" height="1464" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329475" sideWeight="0.67289025" order="2" side_tool="false" content_ui="tabs" />
@@ -1997,7 +2004,16 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33333334" vertical-offset="12013" max-vertical-offset="17694">
           <caret line="700" column="24" selection-start-line="700" selection-start-column="24" selection-end-line="700" selection-end-column="24" />
-          <folding />
+          <folding>
+            <element signature="e#0#30778#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#580#618#0" expanded="true" />
+            <element signature="e#8086#8145#0" expanded="true" />
+            <element signature="e#12655#12700#1" expanded="true" />
+            <element signature="e#13867#13912#1" expanded="true" />
+            <element signature="e#14950#14995#1" expanded="true" />
+            <element signature="e#16800#16817#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
