@@ -152,6 +152,11 @@ public class MyExploreSSL {
         super();
     }
 
+    /**
+     * Take this critter out for a test drive.
+     * @param args
+     */
+
     public static void main( String[] args ) {
 
         try {
