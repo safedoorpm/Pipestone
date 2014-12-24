@@ -122,7 +122,7 @@ import java.io.*;
  *
  * <h3>License</h3>
  *
- * Copyright (c) 2003 by Sean Luke. <br>
+ Copyright (c) 2003 by Sean Luke. <br>
  * Portions copyright (c) 1993 by Michael Lecuyer. <br>
  * All rights reserved. <br>
  *

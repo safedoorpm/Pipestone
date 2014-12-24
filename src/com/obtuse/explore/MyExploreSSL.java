@@ -1,5 +1,5 @@
 /*
- * Copyright © 2014 Daniel Boulet
+ Copyright © 2014 Daniel Boulet
  */
 
 package com.obtuse.explore;
@@ -154,7 +154,7 @@ public class MyExploreSSL {
 
     /**
      * Take this critter out for a test drive.
-     * @param args
+     * @param args the program's args.
      */
 
     public static void main( String[] args ) {
