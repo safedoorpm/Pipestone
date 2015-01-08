@@ -27,11 +27,17 @@ public class TreeCounter<K extends Comparable<K>> implements Counter<K>, Seriali
     }
 
     @SuppressWarnings("UnusedDeclaration")
-    public TreeCounter( TreeCounter<K> counter ) {
+    public TreeCounter( Counter<K> counter ) {
         super();
 
-        _counts = new TreeMap<K, Integer>( counter._counts );
-        _grandTotal = counter._grandTotal;
+        _counts = new TreeMap<K, Integer>();
+        for ( K key : counter.keySet() ) {
+
+            _counts.put( key, counter.getCount( key ) );
+
+        }
+
+        _grandTotal = counter.getGrandTotal();
 
     }
 
