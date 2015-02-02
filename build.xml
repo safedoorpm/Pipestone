@@ -11,10 +11,7 @@
     <property name="debuglevel" value="source,lines,vars"/>
     <property name="target" value="1.7"/>
     <property name="source" value="1.7"/>
-    <property name="dist" value="../SafedoorPM-Web/external-libs/safedoorpmapi"/>
-    <property name="distname" value="pipestone.jar"/>
-              	              	
-                           	
+    <import file="pipestone-deploy.xml"/>
     <path id="Pipestone.classpath">
         <pathelement location="bin1"/>
         <pathelement location="annotations.jar"/>
@@ -38,18 +35,12 @@
     <target name="build-subprojects"/>
     <target depends="init" name="build-project">
         <echo message="${ant.project.name}: ${ant.file}"/>
-        <javac includeantruntime="false" debug="true" debuglevel="${debuglevel}" destdir="bin1" source="${source}" target="${target}">
+        <javac debug="true" debuglevel="${debuglevel}" destdir="bin1" includeantruntime="false" source="${source}" target="${target}">
             <src path="src"/>
             <exclude name="com/obtuse/util/MacCustomization.java"/>
             <classpath refid="Pipestone.classpath"/>
-            <!-- compilerarg value="-Xlint:unchecked"/ -->
         </javac>
     </target>
-              	
-    <target depends="clean, build" name="deploy">
-    	 <jar destfile="${dist}/${distname}" basedir="bin1"/>         	
-    </target>
-              	
     <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects">
         <ant antfile="build.xml" dir="${SafedoorPM-JavaAPI.location}" inheritAll="false" target="clean"/>
         <ant antfile="build.xml" dir="${SafedoorPM-JavaAPI.location}" inheritAll="false" target="build">

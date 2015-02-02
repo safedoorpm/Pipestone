@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?eclipse.ant.import?>
+<!-- Custom targets to add to the exported build file -->
+<project basedir="." default="build" name="Pipestone-deploy">
+    <property name="dist" value="../SafedoorPM-Libs/safedoorpmapi"/>
+    <property name="distname" value="pipestone.jar"/>
+
+    <target depends="clean, build" name="deploy">
+    	 <jar destfile="${dist}/${distname}" basedir="bin1"/>         	
+    </target>
+</project>
