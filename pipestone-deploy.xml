@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?eclipse.ant.import?>
-<!-- Custom targets to add to the exported build file -->
+<!--
+The manually added ant targets for building the Pipestone project. This make file is automatically imported into the generated make file
+due to the <?eclipse.ant.import?> annotation
+ -->
 <project basedir="." default="build" name="Pipestone-deploy">
     <property name="dist" value="../SafedoorPM-Libs/safedoorpmapi"/>
     <property name="distname" value="pipestone.jar"/>
