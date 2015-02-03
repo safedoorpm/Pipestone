@@ -6,6 +6,7 @@
     <property name="distname" value="pipestone.jar"/>
 
     <target depends="clean, build" name="deploy">
-    	 <jar destfile="${dist}/${distname}" basedir="bin1"/>         	
+		<mkdir dir="${dist}"/>
+		<jar destfile="${dist}/${distname}" basedir="bin1"/>         	
     </target>
 </project>
