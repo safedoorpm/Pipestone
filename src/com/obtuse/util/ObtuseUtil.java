@@ -1814,46 +1814,83 @@ public class ObtuseUtil {
 
     public static String enquoteForJavaString( String string ) {
 
-        if ( string == null ) {
+	if ( string == null ) {
 
-            return "null";
+	    return "null";
 
-        }
+	}
 
-        StringBuilder rval = new StringBuilder( "\"" );
-        for ( char c : string.toCharArray() ) {
+	StringBuilder rval = new StringBuilder( "\"" );
+	for ( char c : string.toCharArray() ) {
 
-            switch ( c ) {
+	    switch ( c ) {
 
-                case '\n':
-                    rval.append( "\\n" );
-                    break;
+		case '\n':
+		    rval.append( "\\n" );
+		    break;
 
-                case '\r':
-                    rval.append( "\\r" );
-                    break;
+		case '\r':
+		    rval.append( "\\r" );
+		    break;
 
-                case '\t':
-                    rval.append( "\\t" );
-                    break;
+		case '\t':
+		    rval.append( "\\t" );
+		    break;
 
-                case '\\':
-                    rval.append( "\\\\" );
-                    break;
+		case '\\':
+		    rval.append( "\\\\" );
+		    break;
 
-                case '"':
-                    rval.append( "\\\"" );
-                    break;
+		case '"':
+		    rval.append( "\\\"" );
+		    break;
 
-                default:
-                    rval.append( c );
+		default:
+		    rval.append( c );
 
-            }
+	    }
 
-        }
+	}
 
-        rval.append( '"' );
-        return rval.toString();
+	rval.append( '"' );
+	return rval.toString();
+
+    }
+
+    public static String enquoteForJavaCharacter( char ch ) {
+
+	StringBuilder rval = new StringBuilder( "'" );
+
+	switch ( ch ) {
+
+	    case '\n':
+		rval.append( "\\n" );
+		break;
+
+	    case '\r':
+		rval.append( "\\r" );
+		break;
+
+	    case '\t':
+		rval.append( "\\t" );
+		break;
+
+	    case '\\':
+		rval.append( "\\\\" );
+		break;
+
+	    case '\'':
+		rval.append( "\\\'" );
+		break;
+
+	    default:
+		rval.append( ch );
+
+	}
+
+	rval.append( "'" );
+
+	return rval.toString();
 
     }
 
