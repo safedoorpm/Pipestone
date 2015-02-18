@@ -4,6 +4,7 @@
 
 package com.obtuse.util;
 
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
@@ -40,26 +41,32 @@ public class BasicProgramConfigInfo {
      * Consequently, they may only contain characters allowed in file and directory names across whatever range
      * of operating systems the calling application component is likely to run on.
      * It is probably safest to restrict yourself to letters, digits, spaces, underscores and hyphens.
-     *  Using non-printable ASCII characters or either forward or backward slashes would be a VERY bad idea.
+     * Using non-printable ASCII characters or either forward or backward slashes would be a VERY bad idea.
+     * <p/>Note: spaces in the <tt>vendorName</tt>, <tt>applicationName</tt>, and <tt>componentName</tt> are turned into underscores
+     * to ensure that the generated file names do not contain spaces.
+     * <p/>Note: this method does not impose any rules on which characters may appear in the <tt>vendorName</tt>, <tt>applicationName</tt> or <tt>componentName</tt> parameters.
+     * Please keep in mind that if you ignore the above advice then either you or, more likely, your customers will suffer the consequences.
+     * As always, <i>caveat structor</i> (developer beware).
      * <p/>
      * This method MUST be called before using the {@link Logger} or the {@link Trace} facilities.
-     * @param vendorName the program's vendor's name.
-     * @param applicationName the application's name.
-     * @param componentName this component's name (within the larger application).
+     * @param vendorName the program's vendor's name (must not be null).
+     * @param applicationName the application's name (must not be null).
+     * @param componentName this component's name within the larger application (must not be null).
      * @param preferences this application's preferences object (may be null if application has no use for preferences).
      * This value may be <tt>null</tt> in which case the application name will generally be used.
+     * @throws java.lang.IllegalArgumentException if any of <tt>vendorName</tt>, <tt>applicationName</tt>, or <tt>componentName</tt> are null.
      */
 
     public static void init(
-            @SuppressWarnings("SameParameterValue") String vendorName,
-            @SuppressWarnings("SameParameterValue") String applicationName,
-            @SuppressWarnings("SameParameterValue") String componentName,
+            @SuppressWarnings("SameParameterValue") @NotNull String vendorName,
+            @SuppressWarnings("SameParameterValue") @NotNull String applicationName,
+            @SuppressWarnings("SameParameterValue") @NotNull String componentName,
             @SuppressWarnings("SameParameterValue") @Nullable Preferences preferences
     ) {
 
-        BasicProgramConfigInfo.s_vendorName = vendorName;
-        BasicProgramConfigInfo.s_applicationName = applicationName;
-        BasicProgramConfigInfo.s_componentName = componentName;
+        BasicProgramConfigInfo.s_vendorName = vendorName.replace( ' ', '_' );
+        BasicProgramConfigInfo.s_applicationName = applicationName.replace( ' ', '_' );
+        BasicProgramConfigInfo.s_componentName = componentName.replace( ' ', '_' );
         BasicProgramConfigInfo.s_preferences = preferences;
 
         if ( BasicProgramConfigInfo.s_initialized ) {
@@ -76,20 +83,13 @@ public class BasicProgramConfigInfo {
 
             if ( OSLevelCustomizations.onMacOsX() ) {
 
-                File dirLocation = new File( new File( home, "Library" ), "Application Support" );
-                if ( vendorName == null ) {
+                File dirLocation = new File( new File( new File( home, "Library" ), "Application Support" ), "ObtuseUtil" );
 
-                    BasicProgramConfigInfo.s_workingDirectory = new File( dirLocation, applicationName );
+		BasicProgramConfigInfo.s_workingDirectory = new File( new File( new File( dirLocation, getVendorName() ), getApplicationName() ), getComponentName() );
 
-                } else {
+	    } else {
 
-                    BasicProgramConfigInfo.s_workingDirectory = new File( new File( dirLocation, vendorName ), applicationName );
-
-                }
-
-            } else {
-
-                BasicProgramConfigInfo.s_workingDirectory = new File( new File( home ), "." + applicationName );
+                BasicProgramConfigInfo.s_workingDirectory = new File( new File( new File( new File( new File( home ), ".ObtuseUtil" ), getVendorName() ), getApplicationName() ), getComponentName() );
 
             }
 

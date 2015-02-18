@@ -60,6 +60,19 @@ public class ObtuseUtil {
 
     }
 
+    public static String getMinimalHexValue( long value ) {
+
+        String original = hexvalue( value );
+        int off = 0;
+        char[] originalChars = original.toCharArray();
+        while ( off < 15 && originalChars[off] == '0' ) {
+            off += 1;
+        }
+
+        return original.substring( off );
+
+    }
+
     private static class UnmodifiableHashtable<K,V> extends Hashtable<K,V> {
 
         private boolean _readonly;
