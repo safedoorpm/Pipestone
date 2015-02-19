@@ -121,7 +121,7 @@ public class MyExploreSSL {
 
     static {
 
-        BasicProgramConfigInfo.init( "Kenosee", "Garnett", "Test", null );
+        BasicProgramConfigInfo.init( "Kenosee", "McLuhan", "Test", null );
 
         SSLContext sslContext = null;
         try {

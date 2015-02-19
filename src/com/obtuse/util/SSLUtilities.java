@@ -267,7 +267,7 @@ public class SSLUtilities {
 //     * @param keystorePassword    its password.
 //     * @param keyPassword         optional key password.
 //     * @return the SSL context associated with the keystore file and password.
-//     * @throws com.obtuse.garnett.exceptions.GarnettSSLChannelCreationFailedException
+//     * @throws com.obtuse.garnett.exceptions.McLuhanSSLChannelCreationFailedException
 //     *          if the attempt fails.
 //     */
 //
@@ -278,7 +278,7 @@ public class SSLUtilities {
 //            char[] keyPassword
 //    )
 //            throws
-//            GarnettSSLChannelCreationFailedException, FileNotFoundException {
+//            McLuhanSSLChannelCreationFailedException, FileNotFoundException {
 //
 //        FileInputStream keystoreInputStream = null;
 //        try {
@@ -299,8 +299,8 @@ public class SSLUtilities {
 
         return SSLUtilities.getSSLContext(
                 true,
-                "GarnettClient.keystore",
-                ResourceUtils.openResource( "GarnettClient.keystore", "net/kenosee/garnett/resources" ),
+                "McLuhanClient.keystore",
+                ResourceUtils.openResource( "McLuhanClient.keystore", "net/kenosee/garnett/resources" ),
                 // new char[] { 'p', 'i', 'c', 'k', 'l', 'e', 's' }
                 "LondonStrumps".toCharArray(),
                 null
@@ -362,7 +362,7 @@ public class SSLUtilities {
 //            char[] keystorePassword,
 //            char[] keyPassword
 //    )
-//            throws GarnettInvalidCharacterException, GarnettSSLChannelCreationFailedException, FileNotFoundException {
+//            throws McLuhanInvalidCharacterException, McLuhanSSLChannelCreationFailedException, FileNotFoundException {
 //
 //        synchronized ( _knownSslContexts ) {
 //
