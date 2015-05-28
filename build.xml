@@ -1,71 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- WARNING: Eclipse auto-generated file.
-              Any modifications will be overwritten.
-              To include a user specific buildfile here, simply create one in the same
-              directory with the processing instruction <?eclipse.ant.import?>
-              as the first entry and export the buildfile again. --><project basedir="." default="build" name="Pipestone">
-    <property environment="env"/>
-    <property name="SafedoorPM-JavaAPI.location" value="../SafedoorPM-JavaAPI"/>
-    <property name="SafedoorPM-Web.location" value="../SafedoorPM-Web"/>
-    <property name="ECLIPSE_HOME" value="../../../../usr/lib/eclipse"/>
-    <property name="debuglevel" value="source,lines,vars"/>
-    <property name="target" value="1.7"/>
-    <property name="source" value="1.7"/>
-    <import file="pipestone-deploy.xml"/>
-    <path id="Pipestone.classpath">
-        <pathelement location="bin1"/>
-        <pathelement location="annotations.jar"/>
-        <pathelement location="junit-4.10.jar"/>
-        <pathelement location="postgresql-8.1-408.jdbc3.jar"/>
-    </path>
-    <target name="init">
-        <mkdir dir="bin1"/>
-        <copy includeemptydirs="false" todir="bin1">
-            <fileset dir="src">
-                <exclude name="**/*.java"/>
-                <exclude name="com/obtuse/util/MacCustomization.java"/>
-            </fileset>
-        </copy>
-    </target>
-    <target name="clean">
-        <delete dir="bin1"/>
-    </target>
-    <target depends="clean" name="cleanall"/>
-    <target depends="build-subprojects,build-project" name="build"/>
-    <target name="build-subprojects"/>
-    <target depends="init" name="build-project">
-        <echo message="${ant.project.name}: ${ant.file}"/>
-        <javac debug="true" debuglevel="${debuglevel}" destdir="bin1" includeantruntime="false" source="${source}" target="${target}">
-            <src path="src"/>
-            <exclude name="com/obtuse/util/MacCustomization.java"/>
-            <classpath refid="Pipestone.classpath"/>
-        </javac>
-    </target>
-    <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects">
-        <ant antfile="build.xml" dir="${SafedoorPM-JavaAPI.location}" inheritAll="false" target="clean"/>
-        <ant antfile="build.xml" dir="${SafedoorPM-JavaAPI.location}" inheritAll="false" target="build">
-            <propertyset>
-                <propertyref name="build.compiler"/>
-            </propertyset>
-        </ant>
-        <ant antfile="build.xml" dir="${SafedoorPM-Web.location}" inheritAll="false" target="clean"/>
-        <ant antfile="build.xml" dir="${SafedoorPM-Web.location}" inheritAll="false" target="build">
-            <propertyset>
-                <propertyref name="build.compiler"/>
-            </propertyset>
-        </ant>
-    </target>
-    <target description="copy Eclipse compiler jars to ant lib directory" name="init-eclipse-compiler">
-        <copy todir="${ant.library.dir}">
-            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
-        </copy>
-        <unzip dest="${ant.library.dir}">
-            <patternset includes="jdtCompilerAdapter.jar"/>
-            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
-        </unzip>
-    </target>
-    <target description="compile project with Eclipse compiler" name="build-eclipse-compiler">
-        <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
-        <antcall target="build"/>
+<!--
+The manually added ant targets for building the Pipestone project.
+ -->
+<project basedir="." default="deploy" name="Pipestone-main">
+	<import file="eclipse-build.xml"/>
+    <property name="dist" value="../SafedoorPM-Libs/safedoorpmapi"/>
+    <property name="distname" value="pipestone.jar"/>
+
+    <target name="deploy" depends="Pipestone.build">
+		<mkdir dir="${dist}"/>
+		<jar destfile="${dist}/${distname}" basedir="bin1"/>         	
     </target>
 </project>
