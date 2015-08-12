@@ -4,6 +4,8 @@
 
 package com.obtuse.util;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.Serializable;
 import java.util.*;
 
@@ -297,6 +299,7 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
      * @return the values associated with the specified key.
      */
 
+    @NotNull
     public Collection<V> getValues( K key ) {
 
         Collection<V> values = _sortedData.get( key );
@@ -315,6 +318,7 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
      * @return all the values in this tree sorter.
      */
 
+    @NotNull
     public Collection<V> getAllValues() {
 
         Collection<V> allValues = new LinkedList<V>();
@@ -456,7 +460,14 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
 
     public Collection<V> removeKeyAndValues( K key ) {
 
-        return _sortedData.remove( key );
+	Collection<V> rval = _sortedData.remove( key );
+	if ( rval == null ) {
+
+	    rval = new LinkedList<V>();
+
+	}
+
+	return rval;
 
     }
 

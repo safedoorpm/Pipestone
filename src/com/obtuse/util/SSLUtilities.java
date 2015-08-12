@@ -267,7 +267,7 @@ public class SSLUtilities {
 //     * @param keystorePassword    its password.
 //     * @param keyPassword         optional key password.
 //     * @return the SSL context associated with the keystore file and password.
-//     * @throws com.obtuse.garnett.exceptions.McLuhanSSLChannelCreationFailedException
+//     * @throws com.obtuse.mcluhan.exceptions.McLuhanSSLChannelCreationFailedException
 //     *          if the attempt fails.
 //     */
 //
@@ -300,7 +300,7 @@ public class SSLUtilities {
         return SSLUtilities.getSSLContext(
                 true,
                 "McLuhanClient.keystore",
-                ResourceUtils.openResource( "McLuhanClient.keystore", "net/kenosee/garnett/resources" ),
+                ResourceUtils.openResource( "McLuhanClient.keystore", "net/kenosee/vitruvius/resources" ),
                 // new char[] { 'p', 'i', 'c', 'k', 'l', 'e', 's' }
                 "LondonStrumps".toCharArray(),
                 null

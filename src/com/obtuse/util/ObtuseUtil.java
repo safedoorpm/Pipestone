@@ -1654,7 +1654,7 @@ public class ObtuseUtil {
 
     }
 
-    public static void closeQuietly( ServerSocket sock ) {
+    public static void closeQuietly( @Nullable ServerSocket sock ) {
 
         try {
 
@@ -1672,7 +1672,7 @@ public class ObtuseUtil {
 
     }
 
-    public static void closeQuietly( Socket sock ) {
+    public static void closeQuietly( @Nullable Socket sock ) {
 
         try {
 
@@ -1690,7 +1690,7 @@ public class ObtuseUtil {
 
     }
 
-    public static void closeQuietly( ZipFile zipFile ) {
+    public static void closeQuietly( @Nullable ZipFile zipFile ) {
 
         try {
 
@@ -1708,7 +1708,7 @@ public class ObtuseUtil {
 
     }
 
-    public static void closeQuietly( ResultSet rs ) {
+    public static void closeQuietly( @Nullable ResultSet rs ) {
 
         try {
 
@@ -1726,7 +1726,7 @@ public class ObtuseUtil {
 
     }
 
-    public static void closeQuietly( PreparedStatement rs ) {
+    public static void closeQuietly( @Nullable PreparedStatement rs ) {
 
         try {
 
@@ -1744,7 +1744,7 @@ public class ObtuseUtil {
 
     }
 
-    public static void closeQuietly( PostgresConnection postgresConnection ) {
+    public static void closeQuietly( @Nullable PostgresConnection postgresConnection ) {
 
         try {
 
