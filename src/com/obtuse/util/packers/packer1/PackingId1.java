@@ -1,4 +1,4 @@
-package com.obtuse.util.packer;
+package com.obtuse.util.packers.packer1;
 
 /*
  * Copyright © 2015 Obtuse Systems Corporation
@@ -12,7 +12,7 @@ import org.jetbrains.annotations.NotNull;
  * Instances of this class are immutable.
  */
 
-public class PackingId implements Comparable<PackingId> {
+public class PackingId1 implements Comparable<PackingId1> {
 
     private final int _hashCode;
 
@@ -24,7 +24,7 @@ public class PackingId implements Comparable<PackingId> {
     private final Long _idWithinType;
 //    private final Long _blendedId;
 
-    public PackingId( @NotNull short typeId, long idWithinType ) {
+    public PackingId1( @NotNull short typeId, long idWithinType ) {
         super();
 
 //        _packerContext = packerContext;
@@ -56,7 +56,7 @@ public class PackingId implements Comparable<PackingId> {
     }
 
     @Override
-    public int compareTo( @NotNull PackingId rhs ) {
+    public int compareTo( @NotNull PackingId1 rhs ) {
 
         if ( _typeId.shortValue() == rhs._typeId.shortValue() ) {
 
@@ -73,7 +73,7 @@ public class PackingId implements Comparable<PackingId> {
     @Override
     public boolean equals( Object rhs ) {
 
-        return rhs instanceof PackingId && compareTo( (PackingId)rhs ) == 0;
+        return rhs instanceof PackingId1 && compareTo( (PackingId1)rhs ) == 0;
 
     }
 
@@ -81,6 +81,12 @@ public class PackingId implements Comparable<PackingId> {
     public int hashCode() {
 
         return _hashCode;
+
+    }
+
+    public String toString() {
+
+	return "PackingId( " + _typeId + ", " + _idWithinType + " )";
 
     }
 

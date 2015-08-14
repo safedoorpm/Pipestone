@@ -1,4 +1,4 @@
-package com.obtuse.util.packer;
+package com.obtuse.util.packers.packer1;
 
 /*
  * Copyright © 2015 Obtuse Systems Corporation
@@ -8,6 +8,6 @@ package com.obtuse.util.packer;
  * Define how an unpacker behaves.
  */
 
-public interface UnPacker {
+public interface UnPacker1 {
 
 }

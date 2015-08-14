@@ -4,6 +4,7 @@ import com.obtuse.util.BasicProgramConfigInfo;
 import com.obtuse.util.FormattingLinkedList;
 import com.obtuse.util.Logger;
 import com.obtuse.util.ObtuseUtil;
+import com.obtuse.util.pepys.data.PepysAnchor;
 import com.obtuse.util.pepys.data.PepysEventListener;
 import com.obtuse.util.pepys.data.PepysSource;
 import org.jetbrains.annotations.NotNull;
@@ -36,7 +37,7 @@ public class Pepys {
      This class guarantees, barring any use of Java reflection to craft truly bogus events or the existence of multiple sources with the same source id, that the source id of <code>GONE</code> events is correct.
      */
 
-    public static class PepysEvent {
+    public abstract static class PepysEvent {
 
 	private final PepysEventType _eventType;
 	private final PepysSource _source;
@@ -159,6 +160,45 @@ public class Pepys {
 	public String toString() {
 
 	    return "PepysEvent( " + _eventType + ", " + _source + ", " + _sourceId + ", " + _auxSource + " )";
+
+	}
+
+    }
+
+    /**
+     A source has ceased to exist.
+     */
+
+    public static class PepysGoneEvent extends PepysEvent {
+
+	private PepysGoneEvent( long sourceId ) {
+	    super( sourceId );
+
+	}
+
+    }
+
+    /**
+     A test event in some context.
+     */
+
+    public static class PepysTestEvent extends PepysEvent {
+
+	private PepysTestEvent( @NotNull PepysEventType eventType, @NotNull PepysSource source ) {
+	    super( eventType, source );
+
+	}
+
+    }
+
+    /**
+     For lazy developers.
+     */
+
+    public static class PepysGenericEvent extends PepysEvent {
+
+	private PepysGenericEvent( @NotNull PepysEventType eventType, @NotNull PepysSource source ) {
+	    super( eventType, source );
 
 	}
 
@@ -438,7 +478,7 @@ public class Pepys {
 
 	    Logger.logMsg( "source gone " + _sourceId );
 
-	    PepysEvent goneEvent = new PepysEvent( _sourceId );
+	    PepysEvent goneEvent = new PepysGoneEvent( _sourceId );
 	    _weakSourceRef.fireEvent( goneEvent );
 
 	    // Don't need this phantom reference anymore. Drop it from our set of active phantom references.
@@ -542,9 +582,9 @@ public class Pepys {
 
 			    } else {
 
-				PepysPhantomSourceRef pepsyPhantomRef = (PepysPhantomSourceRef)phantomRef;
-				Logger.logMsg( "cleaning source id " + pepsyPhantomRef.getSourceId() );
-				pepsyPhantomRef.processSourceGone();
+				PepysPhantomSourceRef pepysPhantomRef = (PepysPhantomSourceRef)phantomRef;
+				Logger.logMsg( "cleaning source id " + pepysPhantomRef.getSourceId() );
+				pepysPhantomRef.processSourceGone();
 
 			    }
 
@@ -569,13 +609,17 @@ public class Pepys {
 
     /**
      A static method used by listeners to express an interest in receiving events from a particular source object.
-     @param source the source object of interest.
+     * @param source the source object of interest.
      @param listener the listener which is to receive events sent by the specified source object.
      */
 
-    public static void registerInterest( @NotNull PepysSource source, @NotNull PepysEventListener listener ) {
+    public static void registerInterest(
+	    @NotNull PepysSource source,
+	    @NotNull PepysAnchor anchor,
+	    @NotNull PepysEventListener listener
+    ) {
 
-	Pepys.s_pepys.xRegisterInterest( source, listener );
+	Pepys.s_pepys.xRegisterInterest( source, anchor.anchor( listener ) );
 
     }
 
@@ -810,6 +854,8 @@ public class Pepys {
 
 	};
 
+	PepysAnchor<PepysEventListener> anchor = new PepysAnchor();
+
 	PepysEventListener s1listener1 = new PepysEventListener() {
 
 	    @Override
@@ -837,7 +883,7 @@ public class Pepys {
 
 	Pepys.registerInterest(
 		s1,
-		s1listener1
+		anchor, s1listener1
 	);
 
 	PepysEventListener s1listener2 = new PepysEventListener() {
@@ -890,11 +936,11 @@ public class Pepys {
 	};
 	Pepys.registerInterest(
 		s1,
-		s1listener2
+		anchor, s1listener2
 	);
 	Pepys.registerInterest(
 		s2,
-		s2listener3
+		anchor, s2listener3
 	);
 
 //	PepysEventListener s1listener2 = new PepysEventListener() {
@@ -921,21 +967,21 @@ public class Pepys {
 //	);
 
 	Pepys.fireEvent(
-		new PepysEvent( PepysEventType.CHANGED, s1 )
+		new PepysTestEvent( PepysEventType.CHANGED, s1 )
 	);
 
 	ObtuseUtil.safeSleepMillis( 3000L );
-	s1listener2 = null;
+	s1listener2 = anchor.castOff( s1listener2 );
 	Runtime.getRuntime().gc();
 	ObtuseUtil.safeSleepMillis( 3000L );
 	Pepys.fireEvent(
-		new PepysEvent( PepysEventType.CHANGED, s1 )
+		new PepysTestEvent( PepysEventType.CHANGED, s1 )
 	);
 	Pepys.fireEvent(
-		new PepysEvent( PepysEventType.CHANGED, s2 )
+		new PepysTestEvent( PepysEventType.CHANGED, s2 )
 	);
 	s2 = null;
-	s1listener1 = null;
+	s1listener1 = anchor.castOff( s1listener1 );
 	ObtuseUtil.safeSleepMillis( 3000L );
 	s1 = null;
 	Runtime.getRuntime().gc();
