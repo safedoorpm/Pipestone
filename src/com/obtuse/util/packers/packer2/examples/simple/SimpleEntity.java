@@ -1,6 +1,7 @@
 package com.obtuse.util.packers.packer2.examples.simple;
 
 import com.obtuse.util.packers.packer2.*;
+import com.obtuse.util.packers.packer2.p2a.StringHolder2;
 import org.jetbrains.annotations.NotNull;
 
 /*
@@ -10,36 +11,44 @@ import org.jetbrains.annotations.NotNull;
 /**
  %%% Something clever goes here.
  */
-public class SimpleEntity implements Packable2 {
 
-    public static final EntityTypeName2 ENTITY_NAME = new EntityTypeName2( "com.obtuse.util.packer.examples.simple.SimpleEntity" );
+public class SimpleEntity extends AbstractPackableEntity2 {
 
-    private final PackingId2 _packingId;
+    public static final EntityTypeName2 ENTITY_NAME = new EntityTypeName2( SimpleEntity.class );
 
     private String _payload;
 
-    public SimpleEntity( PackingContext2 context, @NotNull String payload ) {
-	super();
-
-	_packingId = context.allocatePackingId( ENTITY_NAME );
+    public SimpleEntity( @NotNull String payload ) {
+	super( ENTITY_NAME );
 
 	_payload = payload;
 
     }
 
     public SimpleEntity( UnPacker2 unPacker, PackableState state ) {
-	super();
+	super( ENTITY_NAME );
 
 	throw new IllegalArgumentException( "unimplemented" );
 
     }
 
     @Override
-    public void packThyself( Packer2 packer ) {
+    @NotNull
+    public PackedEntityBundle bundleThyself( PackingId2 packingId, boolean isPackingSuper, Packer2 packer ) {
 
-	throw new IllegalArgumentException( "unimplemented" );
+//	SortedSet<Packable2ThingHolder2> rval = new TreeSet<Packable2ThingHolder2>();
+	PackedEntityBundle rval = new PackedEntityBundle(
+		ENTITY_NAME,
+		isPackingSuper ? 0L : packingId.getEntityId(),
+		super.bundleThyself( packingId, true, packer ),
+		packer.getPackingContext()
+	);
+	rval.add( new StringHolder2( new EntityName2( "_payload" ), _payload, false ) );
+
+	return rval;
 
     }
+
     @Override
     public void finishUnpacking( UnPacker2 unPacker ) {
 
@@ -47,17 +56,11 @@ public class SimpleEntity implements Packable2 {
 
     }
 
-    public PackingId2 getPackingId() {
-
-	return _packingId;
-
-    }
-
 //    public static void main( String[] args ) {
 //
 //	TypeIndex2 typeIndex = new TypeIndex2( "SimpleEntity test type index" );
 //	typeIndex.addFactory(
-//		new EntityFactory2( ENTITY_NAME ) {
+//		new EntityFactory2( ENTITY_TYPE_NAME ) {
 //
 //		    @Override
 //		    public Packable2 createEntity( @NotNull UnPacker2 unPacker, PackableState state ) {

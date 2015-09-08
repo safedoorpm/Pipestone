@@ -57,6 +57,12 @@ public abstract class EntityFactory2 implements Comparable<EntityFactory2> {
 //
 //    }
 
+    public EntityTypeName2 getTypeName() {
+
+	return _entityTypeName;
+
+    }
+
     public abstract Packable2 createEntity( @NotNull UnPacker2 unPacker, PackableState state );
 
     @NotNull

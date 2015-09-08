@@ -13,37 +13,37 @@ import org.jetbrains.annotations.NotNull;
 
 public class EntityName2 implements Comparable<EntityName2> {
 
-    private final String _typeName;
+    private final String _name;
 
-    public EntityName2( String typeName ) {
+    public EntityName2( String name ) {
 	super();
 
-	_typeName = typeName;
+	_name = name;
 
     }
 
-    public String getTypeName() {
+    public String getName() {
 
-	return _typeName;
+	return _name;
 
     }
 
     public String toString() {
 
-	return _typeName;
+	return _name;
 
     }
 
     public int length() {
 
-	return _typeName.length();
+	return _name.length();
 
     }
 
     @Override
     public int compareTo( @NotNull EntityName2 entityName2 ) {
 
-	return _typeName.compareTo( entityName2._typeName );
+	return _name.compareTo( entityName2._name );
 
     }
 
@@ -57,7 +57,7 @@ public class EntityName2 implements Comparable<EntityName2> {
     @Override
     public int hashCode() {
 
-	return _typeName.hashCode();
+	return _name.hashCode();
 
     }
 

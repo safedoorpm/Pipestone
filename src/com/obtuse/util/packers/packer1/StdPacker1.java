@@ -18,7 +18,7 @@ public class StdPacker1 implements Packer1, Closeable {
 
     public static final PackingId1 NULL_ENTITY_ID = new PackingId1( (short) 0, 0L );
 
-    private final PackingContext1 _context;
+    private final PackingContext1 _packingContext;
 
     private final File _outputFile;
 
@@ -26,14 +26,14 @@ public class StdPacker1 implements Packer1, Closeable {
 
     private PrintWriter _writer;
 
-    public StdPacker1( File outputFile, PackingContext1 context )
+    public StdPacker1( File outputFile, PackingContext1 packingContext )
 	    throws FileNotFoundException {
         super();
 
 	_outputFile = outputFile;
 	_writer = new PrintWriter( _outputFile );
 
-        _context = context;
+        _packingContext = packingContext;
 
     }
 
@@ -86,7 +86,7 @@ public class StdPacker1 implements Packer1, Closeable {
     }
     public String toString() {
 
-	return "StdPacker( " + _context + " )";
+	return "StdPacker( " + _packingContext + " )";
 
     }
 

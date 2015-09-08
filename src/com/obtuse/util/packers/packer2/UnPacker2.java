@@ -5,8 +5,9 @@ package com.obtuse.util.packers.packer2;
  */
 
 /**
- %%% Something clever goes here.
+ Top level unpacking API.
  */
+
 public interface UnPacker2 {
 
 }

@@ -16,9 +16,12 @@ import java.util.TreeMap;
 
 public class TypeIndex2 {
 
-    private final SortedMap<EntityTypeName2,EntityFactory2> _typeNameToFactoryMapping = new TreeMap<EntityTypeName2, EntityFactory2>();
+    private final SortedMap<EntityTypeName2,EntityTypeInfo2> _typeNameToTypeInfoMapping = new TreeMap<EntityTypeName2, EntityTypeInfo2>();
+//    private final SortedMap<Integer,EntityTypeInfo2> _referenceIdToTypeInfoMapping = new TreeMap<Integer, EntityTypeInfo2>();
 
     private final String _typeIndexName;
+
+    private int _nextReferenceIndex = 1;
 
     public TypeIndex2( String typeIndexName ) {
 	super();
@@ -38,7 +41,8 @@ public class TypeIndex2 {
      @throws IllegalArgumentException if the new factory's name or type id already exists in this index.
      */
 
-    public void addFactory( @NotNull EntityFactory2 newFactory ) {
+    @NotNull
+    public EntityTypeInfo2 addFactory( @NotNull EntityFactory2 newFactory ) {
 
 //	if ( !newFactory.isLockedDown() ) {
 //
@@ -46,22 +50,30 @@ public class TypeIndex2 {
 //
 //	}
 
-	EntityFactory2 existingFactory = findFactory( newFactory.getEntityTypeName() );
-	if ( existingFactory != null ) {
+	EntityTypeInfo2 typeInfo = findTypeInfo( newFactory.getEntityTypeName() );
+	if ( typeInfo != null ) {
 
-	    throw new IllegalArgumentException( "" + newFactory + ":  cannot add factory because type index already contains entry for type name \"" + existingFactory.getEntityTypeName() + "\"" );
+	    throw new IllegalArgumentException( "" + newFactory + ":  cannot add factory because type index already contains entry for type name \"" + typeInfo.getTypeName() + "\"" );
 
 	}
 
-//	existingFactory = findFactory( newFactory.getEntityTypeId() );
-//	if ( existingFactory != null ) {
+//	typeInfo = findFactory( newFactory.getEntityTypeId() );
+//	if ( typeInfo != null ) {
 //
-//	    throw new IllegalArgumentException( "" + newFactory + ":  cannot add factory because type index already contains entry for type id " + existingFactory.getEntityTypeId() + " associated with type name \"" + existingFactory.getEntityName() + "\"" );
+//	    throw new IllegalArgumentException( "" + newFactory + ":  cannot add factory because type index already contains entry for type id " + typeInfo.getEntityTypeId() + " associated with type name \"" + typeInfo.getEntityName() + "\"" );
 //
 //	}
 
-	_typeNameToFactoryMapping.put( newFactory.getEntityTypeName(), newFactory );
+	int referenceId = _nextReferenceIndex;
+	_nextReferenceIndex += 1;
+	typeInfo = new EntityTypeInfo2( referenceId, newFactory );
+	_typeNameToTypeInfoMapping.put(
+		newFactory.getEntityTypeName(),
+		typeInfo
+	);
 //	_typeIdToFactoryMapping.put( newFactory.getEntityTypeId(), newFactory );
+
+	return typeInfo;
 
     }
 
@@ -116,32 +128,32 @@ public class TypeIndex2 {
     }
 
     /**
-     Find an {@link EntityFactory2} via its type name.
+     Find info about a type via its type name.
      @param typeName the name of the type of interest.
-     @return the corresponding entity factory or <code>null</code> if no such factory exists within this type index.
+     @return the corresponding type's info or <code>null</code> if we don't have the specified type in our index.
      */
 
     @Nullable
-    EntityFactory2 findFactory( @NotNull EntityTypeName2 typeName ) {
+    public EntityTypeInfo2 findTypeInfo( @NotNull EntityTypeName2 typeName ) {
 
-	return _typeNameToFactoryMapping.get( typeName );
+	return _typeNameToTypeInfoMapping.get( typeName );
 
     }
 
     /**
-     Get an {@link EntityFactory2} via its type name when failure is not an option.
+     Get info about a type via its type name when failure is not an option.
      @param typeName the name of the type of interest.
-     @return the corresponding entity factory.
-     @throws IllegalArgumentException if no such factory exists within this type index.
+     @return the corresponding type's info.
+     @throws IllegalArgumentException if the specified type is not known to this type index.
      */
 
     @NotNull
-    EntityFactory2 getFactory( @NotNull EntityTypeName2 typeName ) {
+    public EntityTypeInfo2 getTypeInfo( @NotNull EntityTypeName2 typeName ) {
 
-	EntityFactory2 entityFactory = findFactory( typeName );
+	EntityTypeInfo2 entityFactory = findTypeInfo( typeName );
 	if ( entityFactory == null ) {
 
-	    throw new IllegalArgumentException( "no factory found for type named \"" + typeName + "\"" );
+	    throw new IllegalArgumentException( "no type info found for type named \"" + typeName + "\"" );
 
 	}
 
@@ -185,7 +197,7 @@ public class TypeIndex2 {
 
     public String toString() {
 
-	return "TypeIndex( \"" + _typeIndexName + "\", " + _typeNameToFactoryMapping.size() + " type entries )";
+	return "TypeIndex( \"" + _typeIndexName + "\", " + _typeNameToTypeInfoMapping.size() + " type entries )";
 
     }
 

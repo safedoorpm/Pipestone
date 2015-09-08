@@ -1838,6 +1838,10 @@ public class ObtuseUtil {
 
 	    switch ( c ) {
 
+		case '\b':
+		    rval.append( "\\b" );
+		    break;
+
 		case '\n':
 		    rval.append( "\\n" );
 		    break;

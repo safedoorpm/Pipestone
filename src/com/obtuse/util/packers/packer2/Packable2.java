@@ -4,16 +4,23 @@ package com.obtuse.util.packers.packer2;
  * Copyright © 2015 Obtuse Systems Corporation
  */
 
+import org.jetbrains.annotations.NotNull;
+
+import java.util.SortedSet;
+
 /**
- %%% Something clever goes here.
+ Describe something that is packable.
  */
 
 public interface Packable2 {
 
-    void packThyself( Packer2 packer );
+    InstanceId getInstanceId();
+
+    @NotNull
+    PackedEntityBundle bundleThyself( PackingId2 packingId, boolean isPackingSuper, Packer2 packer );
 
     void finishUnpacking( UnPacker2 unPacker );
 
-    PackingId2 getPackingId();
+//    PackingId2 getPackingId();
 
 }

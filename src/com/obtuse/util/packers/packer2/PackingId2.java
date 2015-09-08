@@ -8,16 +8,27 @@ import org.jetbrains.annotations.NotNull;
 
 /**
  Describe a v2 packing id.
+ <p/>A packing id identifies a particular instance of a {@link Packable2} class which is either being packed
+ or being unpacked by a packing or unpacking operation. These are used to
+ <ol>
+ <li>ensure that objects which are referenced more than once in collection of data structures being packed/saved by a packing
+ operation are only actually packed/saved once.</li>
+ <li>correctly reconnect packed objects as an unpacking operation unfolds.</li>
+ </ol>
  */
 
 public class PackingId2 implements Comparable<PackingId2> {
 
     private final EntityTypeName2 _entityTypeName;
+
+    private final int _typeReferenceId;
+
     private final Long _entityId;
 
-    public PackingId2( EntityTypeName2 entityTypeName, long entityId ) {
+    public PackingId2( @NotNull EntityTypeName2 entityTypeName, int typeReferenceId, long entityId ) {
 
 	_entityTypeName = entityTypeName;
+	_typeReferenceId = typeReferenceId;
 	_entityId = entityId;
 
     }
@@ -34,9 +45,15 @@ public class PackingId2 implements Comparable<PackingId2> {
 
     }
 
+    public int getTypeReferenceId() {
+
+	return _typeReferenceId;
+
+    }
+
     public String toString() {
 
-	return "PackingId2( \"" + _entityTypeName + "\", " + _entityId + " )";
+	return "PackingId2( \"" + _entityTypeName + "\", " + _typeReferenceId + ", " + _entityId + " )";
 
     }
 

@@ -15,6 +15,13 @@ public class EntityTypeName2 implements Comparable<EntityTypeName2> {
 
     private final String _typeName;
 
+    public EntityTypeName2( Class<? extends Packable2> className ) {
+	super();
+
+	_typeName = className.getCanonicalName();
+
+    }
+
     public EntityTypeName2( String typeName ) {
 	super();
 

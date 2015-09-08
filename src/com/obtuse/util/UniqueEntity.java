@@ -24,91 +24,10 @@ public class UniqueEntity {
 
     private final int _hashCode;
 
-    private static final UniqueIdGenerator _defaultIdGenerator = new SimpleUniqueIdGenerator();
+    private static final UniqueLongIdGenerator _defaultIdGenerator = new SimpleUniqueLongIdGenerator( UniqueEntity.class.getCanonicalName() );
 
     /**
-     * A utility class which implements a very simple {@link UniqueIdGenerator}.
-     * <p/>
-     * Each instance of this class returns values from {@link #getUniqueId}
-     * which are the next value in the sequence 0, 1, 2, 3 ...
-     */
-
-    public static class SimpleUniqueIdGenerator implements UniqueIdGenerator {
-
-        private long _nextId = 0;
-
-        /**
-         * Get the next value in the sequence 0, 1, 2, 3 ... from the perspective of this instance.
-         * <p/>
-         * For example, the following code sequence:
-         * <pre>
-         * SimpleUniqueIdGenerator outerGenerator = new SimpleUniqueIdGenerator();
-         * for ( int i = 0; i < 10; i += 1 ) {
-         *
-         *     System.out.print( outerGenerator.getUniqueId() + ": " );
-         *
-         *     SimpleUniqueIdGenerator innerGenerator = new SimpleUniqueIdGenerator();
-         *     for ( int j = 0; j < 5; j += 1 ) {
-         *
-         *         System.out.print( " " + innerGenerator.getUniqueId() );
-         *
-         *     }
-         *
-         *     System.out.println();
-         *
-         * }
-         * </pre>
-         * produces the following output:
-         * <pre>
-         *
-         * 0:  0 1 2 3 4
-         * 1:  0 1 2 3 4
-         * 2:  0 1 2 3 4
-         * 3:  0 1 2 3 4
-         * 4:  0 1 2 3 4
-         * 5:  0 1 2 3 4
-         * 6:  0 1 2 3 4
-         * 7:  0 1 2 3 4
-         * 8:  0 1 2 3 4
-         * 9:  0 1 2 3 4
-         * </pre>
-         * @return the next value in the sequence 0, 1, 2, 3 ... from the perspective of this instance.
-         */
-
-        public synchronized long getUniqueId() {
-
-            long uid = _nextId;
-            _nextId += 1;
-
-            return uid;
-
-        }
-
-        @SuppressWarnings("UseOfSystemOutOrSystemErr")
-        public static void main( String[] args ) {
-
-            SimpleUniqueIdGenerator outerGenerator = new SimpleUniqueIdGenerator();
-            for ( int ii = 0; ii < 10; ii += 1 ) {
-
-                System.out.print( outerGenerator.getUniqueId() + ": " );
-
-                SimpleUniqueIdGenerator innerGenerator = new SimpleUniqueIdGenerator();
-                for ( int i = 0; i < 5; i += 1 ) {
-
-                    System.out.print( " " + innerGenerator.getUniqueId() );
-
-                }
-
-                System.out.println();
-
-            }
-
-        }
-
-    }
-
-    /**
-     * Create an instance using the default {@link UniqueIdGenerator}.
+     * Create an instance using the default {@link UniqueLongIdGenerator}.
      */
 
     public UniqueEntity() {
@@ -116,14 +35,14 @@ public class UniqueEntity {
     }
 
     /**
-     * Create an instance using the specified {@link UniqueIdGenerator}.
-     * @param uniqueIdGenerator the unique id generator to be used to compute this newly created instance's id value.
+     * Create an instance using the specified {@link UniqueLongIdGenerator}.
+     * @param uniqueLongIdGenerator the unique id generator to be used to compute this newly created instance's id value.
      */
 
-    public UniqueEntity( UniqueIdGenerator uniqueIdGenerator ) {
+    public UniqueEntity( UniqueLongIdGenerator uniqueLongIdGenerator ) {
         super();
 
-        _id = uniqueIdGenerator.getUniqueId();
+        _id = uniqueLongIdGenerator.getUniqueId();
         _hashCode = new Long( _id ).hashCode();
 
     }
@@ -140,13 +59,13 @@ public class UniqueEntity {
     }
 
     /**
-     * Get a 'default' {@link UniqueIdGenerator} suitable for use when invoking {@link #UniqueEntity(UniqueIdGenerator)}.
+     * Get a 'default' {@link UniqueLongIdGenerator} suitable for use when invoking {@link #UniqueEntity(UniqueLongIdGenerator)}.
      * <p/>
-     * This method returns a JVM-unique instance of {@link com.obtuse.util.UniqueEntity.SimpleUniqueIdGenerator}.
-     * @return a JVM-unique instance of {@link com.obtuse.util.UniqueEntity.SimpleUniqueIdGenerator}.
+     * This method returns a JVM-unique instance of {@link SimpleUniqueLongIdGenerator}.
+     * @return a JVM-unique instance of {@link SimpleUniqueLongIdGenerator}.
      */
 
-    public static UniqueIdGenerator getDefaultIdGenerator() {
+    public static UniqueLongIdGenerator getDefaultIdGenerator() {
 
         return UniqueEntity._defaultIdGenerator;
 
