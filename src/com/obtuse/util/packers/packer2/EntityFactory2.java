@@ -1,7 +1,5 @@
 package com.obtuse.util.packers.packer2;
 
-import com.obtuse.util.packers.packer1.Packable1;
-import com.obtuse.util.packers.packer1.UnPacker1;
 import org.jetbrains.annotations.NotNull;
 
 /*
@@ -9,7 +7,7 @@ import org.jetbrains.annotations.NotNull;
  */
 
 /**
- Create an entity of some type.
+ Create a packable entity of some type.
  <p/>
  IMPORTANT:
  Things will get really ugly if the name of an entity type is changed once instances of the entity have been
@@ -21,8 +19,9 @@ import org.jetbrains.annotations.NotNull;
 
 public abstract class EntityFactory2 implements Comparable<EntityFactory2> {
 
-    private EntityTypeName2 _entityTypeName;
+    private final EntityTypeName2 _entityTypeName;
 
+    @SuppressWarnings("WeakerAccess")
     protected EntityFactory2( @NotNull EntityTypeName2 entityTypeName ) {
 	super();
 
@@ -73,7 +72,7 @@ public abstract class EntityFactory2 implements Comparable<EntityFactory2> {
 
     }
 
-    public int compareTo( EntityFactory2 rhs ) {
+    public int compareTo( @NotNull EntityFactory2 rhs ) {
 
 	return _entityTypeName.compareTo( rhs._entityTypeName );
 

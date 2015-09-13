@@ -1,4 +1,4 @@
-package com.obtuse.util.packers.packer2.p2a;
+package com.obtuse.util.packers.packer2.p2a.holders;
 
 /*
  * Copyright © 2015 Obtuse Systems Corporation
@@ -6,6 +6,7 @@ package com.obtuse.util.packers.packer2.p2a;
 
 import com.obtuse.util.packers.packer2.EntityName2;
 import com.obtuse.util.packers.packer2.Packer2;
+import com.obtuse.util.packers.packer2.p2a.Constants;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -14,7 +15,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class BooleanHolder2 extends AbstractPackableHolder2 {
 
-    public BooleanHolder2( @NotNull EntityName2 name, Boolean v, boolean mandatory ) {
+    public BooleanHolder2( @NotNull EntityName2 name, Boolean v, @SuppressWarnings("SameParameterValue") boolean mandatory ) {
 	super( name, Constants.TAG_BOOLEAN, v, mandatory );
 
     }

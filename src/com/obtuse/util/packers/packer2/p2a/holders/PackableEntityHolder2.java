@@ -1,6 +1,10 @@
-package com.obtuse.util.packers.packer2.p2a;
+package com.obtuse.util.packers.packer2.p2a.holders;
 
-import com.obtuse.util.packers.packer2.*;
+import com.obtuse.util.packers.packer2.EntityName2;
+import com.obtuse.util.packers.packer2.InstanceId;
+import com.obtuse.util.packers.packer2.Packable2;
+import com.obtuse.util.packers.packer2.Packer2;
+import com.obtuse.util.packers.packer2.p2a.Constants;
 import org.jetbrains.annotations.NotNull;
 
 /*
@@ -15,7 +19,7 @@ public class PackableEntityHolder2 extends AbstractPackableHolder2 {
 
     private final InstanceId _instanceId;
 
-    public PackableEntityHolder2( @NotNull EntityName2 name, Packable2 v, Packer2 packer, boolean mandatory ) {
+    public PackableEntityHolder2( @NotNull EntityName2 name, Packable2 v, Packer2 packer, @SuppressWarnings("SameParameterValue") boolean mandatory ) {
 	super( name, Constants.TAG_ENTITY_REFERENCE, v, mandatory );
 
 	_instanceId = packer.queuePackEntity( v );

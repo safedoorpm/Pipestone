@@ -1,7 +1,7 @@
 package com.obtuse.util.packers.packer2.examples.simple;
 
 import com.obtuse.util.packers.packer2.*;
-import com.obtuse.util.packers.packer2.p2a.StringHolder2;
+import com.obtuse.util.packers.packer2.p2a.holders.StringHolder2;
 import org.jetbrains.annotations.NotNull;
 
 /*
@@ -14,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class SimpleEntity extends AbstractPackableEntity2 {
 
-    public static final EntityTypeName2 ENTITY_NAME = new EntityTypeName2( SimpleEntity.class );
+    private static final EntityTypeName2 ENTITY_NAME = new EntityTypeName2( SimpleEntity.class );
 
     private static final int VERSION = 1;
 
@@ -27,6 +27,7 @@ public class SimpleEntity extends AbstractPackableEntity2 {
 
     }
 
+    @SuppressWarnings("WeakerAccess")
     public SimpleEntity( UnPacker2 unPacker, PackedEntityBundle bundle ) {
 	super( ENTITY_NAME );
 

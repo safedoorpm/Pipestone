@@ -10,6 +10,7 @@ import com.obtuse.util.packers.packer2.EntityName2;
 /**
  Describe the format version of a parsed file.
  */
+
 public class FormatVersion {
 
     private final int _majorVersion;
@@ -60,12 +61,14 @@ public class FormatVersion {
 
     }
 
+    @SuppressWarnings("WeakerAccess")
     public int getMajorVersion() {
 
 	return _majorVersion;
 
     }
 
+    @SuppressWarnings("WeakerAccess")
     public int getMinorVersion() {
 
 	return _minorVersion;

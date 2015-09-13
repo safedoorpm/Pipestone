@@ -205,6 +205,6 @@ public interface Packable2ThingHolder2 extends Comparable<Packable2ThingHolder2>
      @param packer2 the packer to use to get the job done.
      */
 
-    public void emitRepresentation( Packer2 packer2 );
+    void emitRepresentation( Packer2 packer2 );
 
 }

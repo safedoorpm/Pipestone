@@ -5,12 +5,15 @@ package com.obtuse.util.packers.packer2.p2a;
  */
 
 /**
- %%% Something clever goes here.
+ Configuration constants.
+ <p/>
+ Be careful as there are probably a few real "learning opportunities" in here.
  */
+
 public class Constants {
 
     /**
-     What starts a line comment (can appear anywhere except in strings).
+     What starts a line comment (can appear anywhere although it is ignored in strings).
      */
 
     static final char LINE_COMMENT_CHAR = '#';

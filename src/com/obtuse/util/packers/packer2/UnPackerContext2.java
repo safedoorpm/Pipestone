@@ -72,6 +72,7 @@ public interface UnPackerContext2 {
 
     boolean isTypeNameKnown( EntityTypeName2 typeName );
 
+    @SuppressWarnings("UnusedReturnValue")
     EntityTypeInfo2 registerFactory( EntityFactory2 factory );
 
 //    Collection<InstanceId> getSeenInstanceIds();

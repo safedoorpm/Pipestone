@@ -6,8 +6,6 @@ package com.obtuse.util.packers.packer2;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.SortedSet;
-
 /**
  Describe something that is packable.
  */

@@ -1,7 +1,8 @@
-package com.obtuse.util.packers.packer2.p2a;
+package com.obtuse.util.packers.packer2.p2a.holders;
 
 import com.obtuse.util.packers.packer2.EntityName2;
 import com.obtuse.util.packers.packer2.Packer2;
+import com.obtuse.util.packers.packer2.p2a.Constants;
 import org.jetbrains.annotations.NotNull;
 
 /*
@@ -9,13 +10,13 @@ import org.jetbrains.annotations.NotNull;
  */
 
 /**
- Pack an float value.
+ Pack a double value.
  */
 
-public class FloatHolder2 extends AbstractPackableHolder2 {
+public class DoubleHolder2 extends AbstractPackableHolder2 {
 
-    public FloatHolder2( @NotNull EntityName2 name, Float v, boolean mandatory ) {
-	super( name, Constants.TAG_FLOAT, v, mandatory );
+    public DoubleHolder2( @NotNull EntityName2 name, Double v, boolean mandatory ) {
+	super( name, Constants.TAG_DOUBLE, v, mandatory );
 
     }
 
@@ -25,7 +26,7 @@ public class FloatHolder2 extends AbstractPackableHolder2 {
 
 	if ( isMandatory() || value != null ) {
 
-	    packer2.emit( ( (Float) value ).floatValue() );
+	    packer2.emit( ( (Double) value ).doubleValue() );
 
 	} else {
 

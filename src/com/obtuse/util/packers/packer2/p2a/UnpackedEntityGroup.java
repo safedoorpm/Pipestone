@@ -5,13 +5,13 @@ package com.obtuse.util.packers.packer2.p2a;
  */
 
 import com.obtuse.util.FormattingLinkedList;
-import com.obtuse.util.packers.packer2.*;
+import com.obtuse.util.packers.packer2.EntityName2;
+import com.obtuse.util.packers.packer2.Packable2;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.List;
-
 /**
- Carry around the result of a parse..
+ Used internally by {@link StdUnPacker2a} to carry around the result of a parse.
+ <p/>Should probably be an inner class although other unpackers might find it useful.
  */
 
 public class UnpackedEntityGroup {
@@ -20,6 +20,7 @@ public class UnpackedEntityGroup {
 
     private final FormattingLinkedList<Packable2> _entities = new FormattingLinkedList<Packable2>();
 
+    @SuppressWarnings("WeakerAccess")
     protected UnpackedEntityGroup( @NotNull FormatVersion version ) {
 	super();
 
@@ -33,12 +34,14 @@ public class UnpackedEntityGroup {
 
     }
 
+    @SuppressWarnings("WeakerAccess")
     public EntityName2 getGroupName() {
 
 	return _version.getGroupName();
 
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public UnpackedEntityGroup add( Packable2 newEntity ) {
 
 	_entities.add( newEntity );

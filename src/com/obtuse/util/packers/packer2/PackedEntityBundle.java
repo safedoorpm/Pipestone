@@ -5,12 +5,10 @@ package com.obtuse.util.packers.packer2;
  */
 
 import com.obtuse.util.FormattingLinkedList;
-import com.obtuse.util.packers.packer2.p2a.LongHolder2;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.TreeMap;
-import java.util.TreeSet;
 
 /**
  Carry around the packed form of an entity.
@@ -89,6 +87,7 @@ public class PackedEntityBundle extends TreeMap<EntityName2,Packable2ThingHolder
 
     }
 
+    @SuppressWarnings("WeakerAccess")
     public EntityTypeName2 getTypeName() {
 
 	return _typeName;
@@ -108,6 +107,7 @@ public class PackedEntityBundle extends TreeMap<EntityName2,Packable2ThingHolder
 
     }
 
+    @SuppressWarnings("WeakerAccess")
     public String keysToString() {
 
 	FormattingLinkedList<EntityName2> keys = new FormattingLinkedList<EntityName2>( keySet() );

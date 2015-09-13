@@ -1,7 +1,8 @@
-package com.obtuse.util.packers.packer2.p2a;
+package com.obtuse.util.packers.packer2.p2a.holders;
 
 import com.obtuse.util.packers.packer2.EntityName2;
 import com.obtuse.util.packers.packer2.Packer2;
+import com.obtuse.util.packers.packer2.p2a.Constants;
 import org.jetbrains.annotations.NotNull;
 
 /*
@@ -14,7 +15,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class LongHolder2 extends AbstractPackableHolder2 {
 
-    public LongHolder2( @NotNull EntityName2 name, Long v, boolean mandatory ) {
+    public LongHolder2( @NotNull EntityName2 name, Long v, @SuppressWarnings("SameParameterValue") boolean mandatory ) {
 	super( name, Constants.TAG_LONG, v, mandatory );
 
     }

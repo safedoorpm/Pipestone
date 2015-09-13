@@ -4,6 +4,7 @@ import com.obtuse.util.Accumulator;
 import com.obtuse.util.Logger;
 import com.obtuse.util.TreeAccumulator;
 import com.obtuse.util.packers.packer2.p2a.*;
+import com.obtuse.util.packers.packer2.p2a.holders.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -28,48 +29,48 @@ public class StdUnPackerContext2 implements UnPackerContext2 {
 
     private int _nextTypeReferenceId = 1;
 
-    public static class PackingAssociation {
-
-	private final InstanceId _instanceId;
-
-	private final PackingId2 _packingId;
-
-	private final Packable2 _packable;
-
-	public PackingAssociation( InstanceId instanceId, PackingId2 packingId, Packable2 packable ) {
-	    super();
-
-	    _instanceId = instanceId;
-	    _packingId = packingId;
-	    _packable = packable;
-
-	}
-
-	public InstanceId getInstanceId() {
-
-	    return _instanceId;
-
-	}
-
-	public Packable2 getPackable() {
-
-	    return _packable;
-
-	}
-
-//	public PackingId2 getPackingId() {
+//    public static class PackingAssociation {
 //
-//	    return _packingId;
+//	private final InstanceId _instanceId;
+//
+//	private final PackingId2 _packingId;
+//
+//	private final Packable2 _packable;
+//
+//	public PackingAssociation( InstanceId instanceId, PackingId2 packingId, Packable2 packable ) {
+//	    super();
+//
+//	    _instanceId = instanceId;
+//	    _packingId = packingId;
+//	    _packable = packable;
 //
 //	}
-
-	public String toString() {
-
-	    return "PackingAssociation( " + _instanceId + ", " + _packingId + ", " + _packable + " )";
-
-	}
-
-    }
+//
+//	public InstanceId getInstanceId() {
+//
+//	    return _instanceId;
+//
+//	}
+//
+//	public Packable2 getPackable() {
+//
+//	    return _packable;
+//
+//	}
+//
+////	public PackingId2 getPackingId() {
+////
+////	    return _packingId;
+////
+////	}
+//
+//	public String toString() {
+//
+//	    return "PackingAssociation( " + _instanceId + ", " + _packingId + ", " + _packable + " )";
+//
+//	}
+//
+//    }
 
     private final Accumulator<EntityTypeName2> _highestPackingIdByType = new TreeAccumulator<EntityTypeName2>();
 
@@ -199,7 +200,7 @@ public class StdUnPackerContext2 implements UnPackerContext2 {
     }
 
     @Override
-    @Nullable
+    @NotNull
     public EntityTypeName2 getTypeByTypeReferenceId( int typeReferenceId ) {
 
 	EntityTypeName2 typeName = findTypeByTypeReferenceId( typeReferenceId );

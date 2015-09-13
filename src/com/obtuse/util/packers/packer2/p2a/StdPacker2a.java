@@ -11,7 +11,10 @@ import com.obtuse.util.packers.packer2.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.util.Collection;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -102,10 +105,11 @@ public class StdPacker2a implements Packer2 {
 
     private final PrintWriter _writer;
 
-    private SortedSet<InstanceId> _previouslyPackedEntities = new TreeSet<InstanceId>();
+    private final SortedSet<InstanceId> _previouslyPackedEntities = new TreeSet<InstanceId>();
 
 //    private String _currentSeparator;
 
+    @SuppressWarnings("WeakerAccess")
     public StdPacker2a( @NotNull EntityName2 groupName, @NotNull TypeIndex2 typeIndex, @NotNull File outputFile )
 	    throws FileNotFoundException {
 	this( groupName, outputFile, new PrintWriter( outputFile ), new StdPackerContext2( typeIndex ) );
@@ -212,10 +216,10 @@ public class StdPacker2a implements Packer2 {
 	Packable2 entity = _packingContext.getInstance( instanceId );
 	PackedEntityBundle bundle = entity.bundleThyself( false, this );
 
-	Collection<Integer> newTypenewTypeIds = _packingContext.getNewTypeIds();
-	if ( !newTypenewTypeIds.isEmpty() ) {
+	Collection<Integer> newTypeIds = _packingContext.getNewTypeIds();
+	if ( !newTypeIds.isEmpty() ) {
 
-	    for ( Integer newTypeId : newTypenewTypeIds ) {
+	    for ( Integer newTypeId : newTypeIds ) {
 
 //		int typeReferenceId = instanceId.getTypeId();
 
@@ -519,29 +523,29 @@ public class StdPacker2a implements Packer2 {
 //
 //    }
 
-    @NotNull
-    private String formatPackingId( PackingId2 id ) {
-
-//	int entityTypeReference = getEntityTypeReferenceId( id.getEntityTypeName() );
-//	String taggedTypeReference = formatTagged( TAG_TYPE_NAME_REFERENCE, Integer.toString( entityTypeReference ) );
-//	String rval = taggedTypeReference + ',' + formatTagged( TAG_TYPE_ID, Long.toString( id.getEntityId() ) );
+//    @NotNull
+//    private String formatPackingId( PackingId2 id ) {
 //
-//	return rval;
+////	int entityTypeReference = getEntityTypeReferenceId( id.getEntityTypeName() );
+////	String taggedTypeReference = formatTagged( TAG_TYPE_NAME_REFERENCE, Integer.toString( entityTypeReference ) );
+////	String rval = taggedTypeReference + ',' + formatTagged( TAG_TYPE_ID, Long.toString( id.getEntityId() ) );
+////
+////	return rval;
+//
+//	return "formatPackingId(not implemented)";
+//
+//    }
 
-	return "formatPackingId(not implemented)";
-
-    }
-
-    private String formatTagged( char tag, String sValue ) {
-
-	StringBuilder buf = new StringBuilder();
-	buf.append( sValue.length() );
-	buf.append( tag );
-	buf.append( sValue );
-
-	return buf.toString();
-
-    }
+//    private String formatTagged( char tag, String sValue ) {
+//
+//	StringBuilder buf = new StringBuilder();
+//	buf.append( sValue.length() );
+//	buf.append( tag );
+//	buf.append( sValue );
+//
+//	return buf.toString();
+//
+//    }
 
 //    public int getEntityTypeReferenceId( EntityTypeName2 entityTypeName ) {
 //
@@ -653,6 +657,7 @@ public class StdPacker2a implements Packer2 {
 
     }
 
+    @SuppressWarnings("WeakerAccess")
     public EntityName2 getGroupName() {
 
 	return _groupName;

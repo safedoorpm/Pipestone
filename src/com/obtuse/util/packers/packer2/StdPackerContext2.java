@@ -2,6 +2,7 @@ package com.obtuse.util.packers.packer2;
 
 import com.obtuse.util.*;
 import com.obtuse.util.packers.packer2.p2a.*;
+import com.obtuse.util.packers.packer2.p2a.holders.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -72,6 +73,7 @@ public class StdPackerContext2 implements PackerContext2 {
 
     private final Accumulator<EntityTypeName2> _highestPackingIdByType = new TreeAccumulator<EntityTypeName2>();
 
+    @SuppressWarnings("FieldCanBeLocal")
     @NotNull
     private final TypeIndex2 _typeIndex;
 
@@ -239,7 +241,7 @@ public class StdPackerContext2 implements PackerContext2 {
     public void rememberPackableEntity( Packable2 entity ) {
 
 //	int typeReferenceId = getOrAllocateTypeReferenceId( entity.getInstanceId().getTypeName() );
-	int typeReferenceId = InstanceId.allocateTypeId( entity.getInstanceId().getTypeName() );
+	@SuppressWarnings("UnusedAssignment") int typeReferenceId = InstanceId.allocateTypeId( entity.getInstanceId().getTypeName() );
 
 //	PackingId2 packingId;
 //
@@ -481,7 +483,7 @@ public class StdPackerContext2 implements PackerContext2 {
 
 	private static final int VERSION = 1;
 
-	public static EntityFactory2 FACTORY = new EntityFactory2( ENTITY_NAME ) {
+	public static final EntityFactory2 FACTORY = new EntityFactory2( ENTITY_NAME ) {
 
 	    @Override
 	    @NotNull

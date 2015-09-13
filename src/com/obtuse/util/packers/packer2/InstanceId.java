@@ -71,6 +71,7 @@ public final class InstanceId implements Comparable<InstanceId> {
 
     }
 
+    @SuppressWarnings("WeakerAccess")
     public static Integer lookupTypeId( EntityTypeName2 typeName ) {
 
 	return s_typeNamesToTypeIds.get( typeName );

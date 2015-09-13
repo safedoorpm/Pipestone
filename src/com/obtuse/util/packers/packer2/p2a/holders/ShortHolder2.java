@@ -1,7 +1,8 @@
-package com.obtuse.util.packers.packer2.p2a;
+package com.obtuse.util.packers.packer2.p2a.holders;
 
 import com.obtuse.util.packers.packer2.EntityName2;
 import com.obtuse.util.packers.packer2.Packer2;
+import com.obtuse.util.packers.packer2.p2a.Constants;
 import org.jetbrains.annotations.NotNull;
 
 /*
@@ -9,22 +10,23 @@ import org.jetbrains.annotations.NotNull;
  */
 
 /**
- Pack a String value.
+ Pack a short value.
  */
 
-public class StringHolder2 extends AbstractPackableHolder2 {
+public class ShortHolder2 extends AbstractPackableHolder2 {
 
-    public StringHolder2( @NotNull EntityName2 name, String v, boolean mandatory ) {
-	super( name, Constants.TAG_STRING, v, mandatory );
+    public ShortHolder2( @NotNull EntityName2 name, Short v, boolean mandatory ) {
+	super( name, Constants.TAG_SHORT, v, mandatory );
 
     }
 
     public void emitRepresentation( Packer2 packer2 ) {
 
 	Object value = getObjectValue();
+
 	if ( isMandatory() || value != null ) {
 
-	    packer2.emit( (String) value );
+	    packer2.emit( ( (Short) value ).shortValue() );
 
 	} else {
 

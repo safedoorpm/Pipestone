@@ -1,7 +1,9 @@
-package com.obtuse.util.packers.packer2.p2a;
+package com.obtuse.util.packers.packer2.p2a.holders;
 
 import com.obtuse.util.packers.packer2.EntityName2;
 import com.obtuse.util.packers.packer2.Packer2;
+import com.obtuse.util.packers.packer2.p2a.Constants;
+import com.obtuse.util.packers.packer2.p2a.EntityReference;
 import org.jetbrains.annotations.NotNull;
 
 /*
@@ -14,7 +16,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class EntityReferenceHolder2 extends AbstractPackableHolder2 {
 
-    public EntityReferenceHolder2( @NotNull EntityName2 name, EntityReference v, boolean mandatory ) {
+    public EntityReferenceHolder2( @NotNull EntityName2 name, EntityReference v, @SuppressWarnings("SameParameterValue") boolean mandatory ) {
 	super( name, Constants.TAG_ENTITY_REFERENCE, v, mandatory );
 
     }

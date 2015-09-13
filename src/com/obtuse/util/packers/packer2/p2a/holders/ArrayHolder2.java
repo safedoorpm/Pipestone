@@ -1,8 +1,9 @@
-package com.obtuse.util.packers.packer2.p2a;
+package com.obtuse.util.packers.packer2.p2a.holders;
 
 import com.obtuse.util.packers.packer2.EntityName2;
 import com.obtuse.util.packers.packer2.Packable2;
 import com.obtuse.util.packers.packer2.Packer2;
+import com.obtuse.util.packers.packer2.p2a.Constants;
 import org.jetbrains.annotations.NotNull;
 
 /*
@@ -10,7 +11,10 @@ import org.jetbrains.annotations.NotNull;
  */
 
 /**
- Pack a long value.
+ Pack a collection containing an arbitrary combination of zero or more {@link Packable2} instances, {@link String} instances,
+ or Java container class instances ({@link Integer}, {@link Byte}, {@link Boolean}, etc).
+ <p/>
+ Not completely implemented (yet).
  */
 
 public class ArrayHolder2 extends AbstractPackableHolder2 {

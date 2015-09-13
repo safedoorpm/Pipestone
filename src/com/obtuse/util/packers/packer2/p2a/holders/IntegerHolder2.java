@@ -1,7 +1,8 @@
-package com.obtuse.util.packers.packer2.p2a;
+package com.obtuse.util.packers.packer2.p2a.holders;
 
 import com.obtuse.util.packers.packer2.EntityName2;
 import com.obtuse.util.packers.packer2.Packer2;
+import com.obtuse.util.packers.packer2.p2a.Constants;
 import org.jetbrains.annotations.NotNull;
 
 /*
@@ -9,13 +10,13 @@ import org.jetbrains.annotations.NotNull;
  */
 
 /**
- Pack a byte value.
+ Pack an integer value.
  */
 
-public class ByteHolder2 extends AbstractPackableHolder2 {
+public class IntegerHolder2 extends AbstractPackableHolder2 {
 
-    public ByteHolder2( @NotNull EntityName2 name, Byte v, boolean mandatory ) {
-	super( name, Constants.TAG_BYTE, v, mandatory );
+    public IntegerHolder2( @NotNull EntityName2 name, Integer v, boolean mandatory ) {
+	super( name, Constants.TAG_INTEGER, v, mandatory );
 
     }
 
@@ -25,7 +26,7 @@ public class ByteHolder2 extends AbstractPackableHolder2 {
 
 	if ( isMandatory() || value != null ) {
 
-	    packer2.emit( ( (Byte) value ).byteValue() );
+	    packer2.emit( ( (Integer) value ).intValue() );
 
 	} else {
 

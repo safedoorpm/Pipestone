@@ -4,7 +4,7 @@ package com.obtuse.util.packers.packer2;
  * Copyright © 2015 Obtuse Systems Corporation
  */
 
-import com.obtuse.util.packers.packer2.p2a.StringHolder2;
+import com.obtuse.util.packers.packer2.p2a.holders.StringHolder2;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Random;
@@ -17,7 +17,8 @@ public abstract class AbstractPackableEntity2 implements Packable2 {
 
     private static final EntityTypeName2 ENTITY_TYPE_NAME = new EntityTypeName2( AbstractPackableEntity2.class );
 
-    private static int VERSION = 1;
+    @SuppressWarnings("FieldCanBeLocal")
+    private static final int VERSION = 1;
 
     private final InstanceId _instanceId;
 

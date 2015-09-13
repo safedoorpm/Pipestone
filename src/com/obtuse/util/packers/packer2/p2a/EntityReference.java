@@ -4,12 +4,11 @@ package com.obtuse.util.packers.packer2.p2a;
  * Copyright © 2015 Obtuse Systems Corporation
  */
 
-import com.obtuse.util.packers.packer2.EntityTypeName2;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
- Carry around a (type id, entity id) tuple.
+ Carry around a (type id, entity id, &lt;optional> version) tuple.
  */
 
 public class EntityReference implements Comparable<EntityReference> {

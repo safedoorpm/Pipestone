@@ -29,6 +29,7 @@ public class StdUnPacker2a implements UnPacker2 {
 
     private final UnPackerContext2 _unPackerContext;
 
+    @SuppressWarnings("WeakerAccess")
     public StdUnPacker2a( TypeIndex2 typeIndex, File inputFile )
 	    throws IOException {
 	this( inputFile, new LineNumberReader( new FileReader( inputFile ) ), new StdUnPackerContext2( typeIndex ) );
@@ -45,6 +46,7 @@ public class StdUnPacker2a implements UnPacker2 {
 
     }
 
+    @SuppressWarnings({ "WeakerAccess", "RedundantThrows" })
     public StdUnPacker2a( File inputFile, LineNumberReader reader, UnPackerContext2 unPackerContext )
 	    throws IOException {
 	super();
@@ -58,7 +60,7 @@ public class StdUnPacker2a implements UnPacker2 {
 	    throws IOException, UnPacker2ParsingException {
 
 	P2ATokenizer.P2AToken versionToken = _tokenizer.getNextToken( false, P2ATokenizer.TokenType.FORMAT_VERSION );
-	P2ATokenizer.P2AToken colon = _tokenizer.getNextToken( false, P2ATokenizer.TokenType.COLON );
+	@SuppressWarnings("UnusedAssignment") P2ATokenizer.P2AToken colon = _tokenizer.getNextToken( false, P2ATokenizer.TokenType.COLON );
 	P2ATokenizer.P2AToken groupName = _tokenizer.getNextToken( false, P2ATokenizer.TokenType.STRING );
 //	P2ATokenizer.P2AToken semiColon = _tokenizer.getNextToken( false, P2ATokenizer.TokenType.SEMI_COLON );
 
@@ -72,6 +74,7 @@ public class StdUnPacker2a implements UnPacker2 {
 
     }
 
+    @Override
     @Nullable
     public UnpackedEntityGroup unPack() {
 
@@ -80,7 +83,7 @@ public class StdUnPacker2a implements UnPacker2 {
 	    UnpackedEntityGroup group;
 
 	    FormatVersion version = parseVersion();
-	    P2ATokenizer.P2AToken semiColon = _tokenizer.getNextToken( false, P2ATokenizer.TokenType.SEMI_COLON );
+	    @SuppressWarnings("UnusedAssignment") P2ATokenizer.P2AToken semiColon = _tokenizer.getNextToken( false, P2ATokenizer.TokenType.SEMI_COLON );
 
 	    group = new UnpackedEntityGroup( version );
 
@@ -92,13 +95,14 @@ public class StdUnPacker2a implements UnPacker2 {
 
 		    _tokenizer.putBackToken( token );
 		    collectTypeAlias();
+		    //noinspection UnusedAssignment
 		    semiColon = _tokenizer.getNextToken( false, P2ATokenizer.TokenType.SEMI_COLON );
 
 		} else if ( token.type() == P2ATokenizer.TokenType.ENTITY_REFERENCE ){
 
 		    _tokenizer.putBackToken( token );
 		    PackedEntityBundle bundle = collectEntityDefinitionClause( false );
-		    P2ATokenizer.P2AToken semiColonToken = _tokenizer.getNextToken( false, P2ATokenizer.TokenType.SEMI_COLON );
+		    @SuppressWarnings("UnusedAssignment") P2ATokenizer.P2AToken semiColonToken = _tokenizer.getNextToken( false, P2ATokenizer.TokenType.SEMI_COLON );
 
 		    Packable2 entity = constructEntity( token.entityReference(), token, bundle );
 
@@ -190,7 +194,7 @@ public class StdUnPacker2a implements UnPacker2 {
 	    throws IOException, UnPacker2ParsingException {
 
 	P2ATokenizer.P2AToken typeIdToken = _tokenizer.getNextToken( false, P2ATokenizer.TokenType.LONG );
-	P2ATokenizer.P2AToken atSignToken = _tokenizer.getNextToken( false, P2ATokenizer.TokenType.AT_SIGN );
+	@SuppressWarnings("UnusedAssignment") P2ATokenizer.P2AToken atSignToken = _tokenizer.getNextToken( false, P2ATokenizer.TokenType.AT_SIGN );
 	P2ATokenizer.P2AToken typeNameToken = _tokenizer.getNextToken( false, P2ATokenizer.TokenType.STRING );
 //	P2ATokenizer.P2AToken semiColonToken = _tokenizer.getNextToken( false, P2ATokenizer.TokenType.SEMI_COLON );
 
@@ -209,8 +213,8 @@ public class StdUnPacker2a implements UnPacker2 {
 
 	}
 
-	P2ATokenizer.P2AToken equalSignToken = _tokenizer.getNextToken( false, P2ATokenizer.TokenType.EQUAL_SIGN );
-	P2ATokenizer.P2AToken leftParenToken = _tokenizer.getNextToken( false, P2ATokenizer.TokenType.LEFT_PAREN );
+	@SuppressWarnings("UnusedAssignment") P2ATokenizer.P2AToken equalSignToken = _tokenizer.getNextToken( false, P2ATokenizer.TokenType.EQUAL_SIGN );
+	@SuppressWarnings("UnusedAssignment") P2ATokenizer.P2AToken leftParenToken = _tokenizer.getNextToken( false, P2ATokenizer.TokenType.LEFT_PAREN );
 
 	EntityTypeName2 entityTypeName = _unPackerContext.findTypeByTypeReferenceId( ourEntityReferenceToken.entityReference().getTypeId() );
 	if ( entityTypeName == null ) {
@@ -231,7 +235,7 @@ public class StdUnPacker2a implements UnPacker2 {
 
 //	P2ATokenizer.P2AToken leftParen = _tokenizer.getNextToken( false, P2ATokenizer.TokenType.LEFT_PAREN );
 
-	boolean gotFieldDefinition = false;
+//	@SuppressWarnings("UnusedAssignment") boolean gotFieldDefinition = false;
 	PackedEntityBundle bundle = null;
 
 	while ( true ) {
@@ -327,7 +331,7 @@ public class StdUnPacker2a implements UnPacker2 {
 
 		    // end of this field definition, more to come
 
-		    gotFieldDefinition = true;
+//		    gotFieldDefinition = true;
 
 		    break;
 
@@ -337,61 +341,61 @@ public class StdUnPacker2a implements UnPacker2 {
 
     }
 
-    private void parseFieldValueDisplayClause()
-	    throws IOException, UnPacker2ParsingException {
-
-	throw new HowDidWeGetHereError( "unimplemented" );
-
-//	boolean gotSuper = false;
+//    private void parseFieldValueDisplayClause()
+//	    throws IOException, UnPacker2ParsingException {
 //
-//	P2ATokenizer.P2AToken leftParen = _tokenizer.getNextToken( false, P2ATokenizer.TokenType.LEFT_PAREN );
+//	throw new HowDidWeGetHereError( "unimplemented" );
 //
-//	while ( true ) {
+////	boolean gotSuper = false;
+////
+////	P2ATokenizer.P2AToken leftParen = _tokenizer.getNextToken( false, P2ATokenizer.TokenType.LEFT_PAREN );
+////
+////	while ( true ) {
+////
+////	    P2ATokenizer.P2AToken token = _tokenizer.getNextToken( true );
+////	    switch ( token.type() ) {
+////
+////		case LEFT_PAREN:
+////
+////		    // start of the 'super' clause
+////
+////		    if ( gotSuper ) {
+////
+////			throw new UnPacker2ParseError( "unexpected 'super' clause", token );
+////
+////		    }
+////
+////		    _tokenizer.putBackToken( token );
+////		    superInitializer = parseFieldValueDisplayClause();
+////
+////		    break;
+////
+////		case IDENTIFIER:
+////
+////		    // start of a field definition clause
+////		    _tokenizer.putBackToken( token );
+////		    fieldDefinitionClause = getFieldDefinitionClause();
+////
+////		    break;
+////
+////		case RIGHT_PAREN:
+////
+////		    // end of our field value display clause
+////
+////		    return fieldValueDisplayClause;
+////		    break;
+////
+////		case COMMA:
+////
+////		    // end of this field definition, more to come
+////
+////		    break;
+////
+////	    }
+////
+////	}
 //
-//	    P2ATokenizer.P2AToken token = _tokenizer.getNextToken( true );
-//	    switch ( token.type() ) {
-//
-//		case LEFT_PAREN:
-//
-//		    // start of the 'super' clause
-//
-//		    if ( gotSuper ) {
-//
-//			throw new UnPacker2ParseError( "unexpected 'super' clause", token );
-//
-//		    }
-//
-//		    _tokenizer.putBackToken( token );
-//		    superInitializer = parseFieldValueDisplayClause();
-//
-//		    break;
-//
-//		case IDENTIFIER:
-//
-//		    // start of a field definition clause
-//		    _tokenizer.putBackToken( token );
-//		    fieldDefinitionClause = getFieldDefinitionClause();
-//
-//		    break;
-//
-//		case RIGHT_PAREN:
-//
-//		    // end of our field value display clause
-//
-//		    return fieldValueDisplayClause;
-//		    break;
-//
-//		case COMMA:
-//
-//		    // end of this field definition, more to come
-//
-//		    break;
-//
-//	    }
-//
-//	}
-
-    }
+//    }
 
     private void collectFieldDefinitionClause( PackedEntityBundle bundle )
 	    throws IOException, UnPacker2ParsingException {
@@ -400,7 +404,7 @@ public class StdUnPacker2a implements UnPacker2 {
 //	valueToken = _tokenizer.getNextToken( false );
 
 	P2ATokenizer.P2AToken identifierToken = _tokenizer.getNextToken( true, P2ATokenizer.TokenType.IDENTIFIER );
-	P2ATokenizer.P2AToken equalSignToken = _tokenizer.getNextToken( false, P2ATokenizer.TokenType.EQUAL_SIGN );
+	@SuppressWarnings("UnusedAssignment") P2ATokenizer.P2AToken equalSignToken = _tokenizer.getNextToken( false, P2ATokenizer.TokenType.EQUAL_SIGN );
 	P2ATokenizer.P2AToken valueToken = _tokenizer.getNextToken( false );
 
 	if ( valueToken.type() == P2ATokenizer.TokenType.ENTITY_REFERENCE && valueToken.entityReference().getVersion() != null ) {
@@ -423,13 +427,20 @@ public class StdUnPacker2a implements UnPacker2 {
 
     }
 
+    @Override
+    public UnPackerContext2 getUnPackerContext() {
+
+	return _unPackerContext;
+
+    }
+
     public static void main( String[] args ) {
 
 	BasicProgramConfigInfo.init( "Obtuse", "Packer", "testing", null );
 
 	try {
 
-	    StdUnPacker2a unPacker = new StdUnPacker2a( new TypeIndex2( "test unpacker" ), new File( "test1.p2a" ) );
+	    UnPacker2 unPacker = new StdUnPacker2a( new TypeIndex2( "test unpacker" ), new File( "test1.p2a" ) );
 
 	    unPacker.getUnPackerContext().registerFactory( StdPackerContext2.TestPackableClass.FACTORY );
 	    unPacker.getUnPackerContext().registerFactory( StdPackerContext2.SimplePackableClass.FACTORY );
@@ -453,12 +464,6 @@ public class StdUnPacker2a implements UnPacker2 {
 	    Logger.logErr( "unable to create StdUnPacker2a instance", e );
 
 	}
-
-    }
-
-    public UnPackerContext2 getUnPackerContext() {
-
-	return _unPackerContext;
 
     }
 

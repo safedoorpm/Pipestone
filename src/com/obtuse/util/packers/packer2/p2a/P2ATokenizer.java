@@ -5,9 +5,13 @@ import com.obtuse.util.BasicProgramConfigInfo;
 import com.obtuse.util.Logger;
 import com.obtuse.util.ObtuseUtil;
 import com.obtuse.util.packers.packer2.*;
+import com.obtuse.util.packers.packer2.p2a.holders.*;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.*;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.LineNumberReader;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
@@ -41,7 +45,7 @@ public class P2ATokenizer {
 
     private int _lastCh;
 
-    private int _recursizeDepth = 0;
+    private int _recursiveDepth = 0;
 
     public enum TokenType {
 
@@ -239,7 +243,7 @@ public class P2ATokenizer {
 
 	public String getDescription() {
 
-	    StringBuilder rval = new StringBuilder();
+	    @SuppressWarnings("StringBufferReplaceableByString") StringBuilder rval = new StringBuilder();
 
 	    rval.append( cleanupTokenType( _tokenType ) );
 	    rval.append( " (" );
@@ -250,6 +254,7 @@ public class P2ATokenizer {
 
 	}
 
+	@SuppressWarnings("RedundantThrows")
 	@NotNull
 	public Packable2ThingHolder2 createHolder( EntityName2 entityName, P2AToken valueToken, UnPackerContext2 unPackerContext )
 		throws UnPacker2ParsingException {
@@ -326,7 +331,7 @@ public class P2ATokenizer {
 	_putBackChar = ' ';
 	_hasPutBackChar = false;
 	_putBackToken = null;
-	_recursizeDepth = 0;
+	_recursiveDepth = 0;
 	_lnum = 1;
 	_offset = 0;
 
@@ -334,6 +339,7 @@ public class P2ATokenizer {
 
     }
 
+    @SuppressWarnings("WeakerAccess")
     @NotNull
     public static String cleanupTokenType( TokenType tokenType ) {
 
@@ -343,7 +349,7 @@ public class P2ATokenizer {
 
     public void putBackToken( P2AToken token ) {
 
-	if ( _recursizeDepth > 0 ) {
+	if ( _recursiveDepth > 0 ) {
 
 	    throw new HowDidWeGetHereError( "attempt to put back a token while getting the next token" );
 
@@ -508,7 +514,7 @@ public class P2ATokenizer {
 
 	try {
 
-	    _recursizeDepth += 1;
+	    _recursiveDepth += 1;
 
 	    P2AToken rval = getNextToken( identifierAllowed );
 	    if ( rval.isError() ) {
@@ -537,7 +543,7 @@ public class P2ATokenizer {
 
 	} finally {
 
-	    _recursizeDepth -= 1;
+	    _recursiveDepth -= 1;
 
 	}
 
@@ -558,7 +564,7 @@ public class P2ATokenizer {
 
 	try {
 
-	    _recursizeDepth += 1;
+	    _recursiveDepth += 1;
 
 //	boolean spinAgain;
 	    int ch;
@@ -568,7 +574,7 @@ public class P2ATokenizer {
     //	    spinAgain = false;
 
 		ch = nextCh();
-		char c = Character.isDefined( ch ) ? (char) ch : '?';
+		@SuppressWarnings("UnusedAssignment") char c = Character.isDefined( ch ) ? (char) ch : '?';
 
 		TokenType singleCharacterTokenType = _singleCharacterTokens.get( (char)ch );
 		if ( singleCharacterTokenType != null ) {
@@ -939,12 +945,13 @@ public class P2ATokenizer {
 
 	} finally {
 
-	    _recursizeDepth -= 1;
+	    _recursiveDepth -= 1;
 
 	}
 
     }
 
+    @SuppressWarnings("WeakerAccess")
     @NotNull
     public P2AToken finishCollectingEntityReference( UnPackerContext2 unPackerContext, int typeId )
 	    throws IOException, UnPacker2ParsingException {
@@ -1057,9 +1064,9 @@ public class P2ATokenizer {
 
 	StringBuilder rval = new StringBuilder();
 	int ch = nextRawCh();
-	char delimeter = (char)ch;
+	char delimiter = (char)ch;
 
-	while ( Character.isDefined( ch = nextRawCh() ) && ch != delimeter ) {
+	while ( Character.isDefined( ch = nextRawCh() ) && ch != delimiter ) {
 
 	    if ( ch == '\\' ) {
 
@@ -1116,7 +1123,7 @@ public class P2ATokenizer {
 
 	}
 
-	if ( ch == delimeter ) {
+	if ( ch == delimiter ) {
 
 	    return new P2AToken( TokenType.STRING, rval.toString(), _lnum, _offset );
 
@@ -1167,7 +1174,7 @@ public class P2ATokenizer {
 
     }
 
-    private String collectNumericString( @NotNull String starter )
+    private String collectNumericString( @SuppressWarnings("SameParameterValue") @NotNull String starter )
 	    throws IOException {
 
 	StringBuilder buf = new StringBuilder( starter );
@@ -1252,6 +1259,7 @@ public class P2ATokenizer {
 
 		Logger.logMsg( "(" + token.getLnum() + "," + token.getOffset() + "):  " + token );
 
+		//noinspection RedundantIfStatement
 		if ( token.type() == TokenType.LEFT_PAREN || token.type() == TokenType.COMMA ) {
 
 		    identifierAllowed = true;

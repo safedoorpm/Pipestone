@@ -1,4 +1,4 @@
-package com.obtuse.util.packers.packer2.p2a;
+package com.obtuse.util.packers.packer2.p2a.holders;
 
 /*
  * Copyright © 2015 Obtuse Systems Corporation
@@ -8,6 +8,7 @@ import com.obtuse.util.packers.packer2.EntityName2;
 import com.obtuse.util.packers.packer2.Packable2;
 import com.obtuse.util.packers.packer2.Packable2ThingHolder2;
 import com.obtuse.util.packers.packer2.Packer2;
+import com.obtuse.util.packers.packer2.p2a.EntityReference;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -21,6 +22,7 @@ public abstract class AbstractPackableHolder2 implements Packable2ThingHolder2 {
     private final Object _objectValue;
     private final boolean _mandatory;
 
+    @SuppressWarnings("WeakerAccess")
     protected AbstractPackableHolder2( EntityName2 name, char tag, Object objectValue, boolean mandatory ) {
 	super();
 
@@ -237,6 +239,7 @@ public abstract class AbstractPackableHolder2 implements Packable2ThingHolder2 {
 
     }
 
+    @SuppressWarnings("WeakerAccess")
     public boolean isMandatory() {
 
 	return _mandatory;
