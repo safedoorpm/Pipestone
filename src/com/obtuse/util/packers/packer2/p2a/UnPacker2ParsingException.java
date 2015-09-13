@@ -10,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
  Something when wrong unpacking a packed 'lump'.
  */
 
-public class UnPacker2ParseError extends Exception {
+public class UnPacker2ParsingException extends Exception {
 
     private final P2ATokenizer.P2AToken _causeToken;
 
@@ -21,7 +21,7 @@ public class UnPacker2ParseError extends Exception {
 //
 //    }
 
-    public UnPacker2ParseError( String msg, @NotNull P2ATokenizer.P2AToken causeToken ) {
+    public UnPacker2ParsingException( String msg, @NotNull P2ATokenizer.P2AToken causeToken ) {
 	super( msg );
 
 	_causeToken = causeToken;

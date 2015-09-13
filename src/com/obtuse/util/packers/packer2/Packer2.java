@@ -14,14 +14,16 @@ import java.io.Closeable;
 
 public interface Packer2 extends Closeable {
 
-    PackingId2 queuePackEntity( Packable2 entity );
+    InstanceId queuePackEntity( Packable2 entity );
 
     @NotNull
-    PackingContext2 getPackingContext();
+    PackerContext2 getPackingContext();
 
     void emitName( EntityName2 name );
 
-    void emit( PackingId2 p );
+    void emitEntityReference( int typeId, long entityId );
+
+    void emit( InstanceId instanceId );
 
     void emit( String s );
 

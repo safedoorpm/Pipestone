@@ -7,13 +7,17 @@ package com.obtuse.util.packers.packer2;
 import com.obtuse.util.packers.packer2.p2a.StringHolder2;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Random;
+
 /**
  A reasonable base class for something that is packable.
  */
 
 public abstract class AbstractPackableEntity2 implements Packable2 {
 
-    public static final EntityTypeName2 ENTITY_TYPE_NAME = new EntityTypeName2( AbstractPackableEntity2.class );
+    private static final EntityTypeName2 ENTITY_TYPE_NAME = new EntityTypeName2( AbstractPackableEntity2.class );
+
+    private static int VERSION = 1;
 
     private final InstanceId _instanceId;
 
@@ -30,12 +34,18 @@ public abstract class AbstractPackableEntity2 implements Packable2 {
 
     }
 
+    private static Random _rng = new Random();
+
     @NotNull
-    public PackedEntityBundle bundleThyself( PackingId2 packingId, boolean isPackingSuper, Packer2 packer ) {
+    public PackedEntityBundle bundleThyself( boolean isPackingSuper, Packer2 packer ) {
 
-	PackedEntityBundle rval = new PackedEntityBundle( ENTITY_TYPE_NAME, isPackingSuper ? 0L : packingId.getEntityId(), null, packer.getPackingContext() );
+	PackedEntityBundle rval = new PackedEntityBundle( ENTITY_TYPE_NAME, VERSION, null, packer.getPackingContext() );
 
-	rval.add( new StringHolder2( new EntityName2( "_hello" ), "hello", true ) );
+	if ( _rng.nextBoolean() ) {
+
+	    rval.addHolder( new StringHolder2( new EntityName2( "_hello" ), _rng.nextBoolean() ? "hello" : "world", true ) );
+
+	}
 
 	return rval;
 

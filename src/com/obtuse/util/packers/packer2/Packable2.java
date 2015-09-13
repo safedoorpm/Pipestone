@@ -17,7 +17,7 @@ public interface Packable2 {
     InstanceId getInstanceId();
 
     @NotNull
-    PackedEntityBundle bundleThyself( PackingId2 packingId, boolean isPackingSuper, Packer2 packer );
+    PackedEntityBundle bundleThyself( boolean isPackingSuper, Packer2 packer );
 
     void finishUnpacking( UnPacker2 unPacker );
 

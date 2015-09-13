@@ -4,6 +4,7 @@ import com.obtuse.exceptions.HowDidWeGetHereError;
 import com.obtuse.util.BasicProgramConfigInfo;
 import com.obtuse.util.Logger;
 import com.obtuse.util.ObtuseUtil;
+import com.obtuse.util.packers.packer2.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.*;
@@ -19,6 +20,8 @@ import java.util.TreeMap;
  */
 
 public class P2ATokenizer {
+
+    private final UnPackerContext2 _unPackerContext;
 
     private final LineNumberReader _reader;
 
@@ -192,21 +195,39 @@ public class P2ATokenizer {
 
 	}
 
-	public int typeIdValue() {
+//	public int typeIdValue() {
+//
+//	    return ( (EntityReference) _value ).getTypeId();
+//
+//	}
+//
+//	public long entityIdValue() {
+//
+//	    return ( (EntityReference) _value ).getEntityId();
+//
+//	}
 
-	    return ( (EntityTypeReference) _value ).getTypeId();
+	public EntityReference entityReference() {
 
-	}
-
-	public long entityIdValue() {
-
-	    return ( (EntityTypeReference) _value ).getEntityId();
+	    return (EntityReference)_value;
 
 	}
 
 	public String stringValue() {
 
 	    return (String) _value;
+
+	}
+
+	public Object getObjectValue() {
+
+	    return _value;
+
+	}
+
+	public EntityName2 identifierValue() {
+
+	    return new EntityName2( (String)_value );
 
 	}
 
@@ -229,14 +250,78 @@ public class P2ATokenizer {
 
 	}
 
+	@NotNull
+	public Packable2ThingHolder2 createHolder( EntityName2 entityName, P2AToken valueToken, UnPackerContext2 unPackerContext )
+		throws UnPacker2ParsingException {
+
+	    Packable2ThingHolder2 holder;
+	    switch ( valueToken.type() ) {
+
+		case NULL:
+		    holder = new NullHolder2( entityName );
+		    break;
+
+		case BOOLEAN:
+		    holder = new BooleanHolder2( entityName, valueToken.booleanValue(), true );
+		    break;
+
+		case BYTE:
+		    holder = new ByteHolder2( entityName, valueToken.byteValue(), true );
+		    break;
+
+		case SHORT:
+		    holder = new ShortHolder2( entityName, valueToken.shortValue(), true );
+		    break;
+
+		case INTEGER:
+		    holder = new IntegerHolder2( entityName, valueToken.intValue(), true );
+		    break;
+
+		case LONG:
+		    holder = new LongHolder2( entityName, valueToken.longValue(), true );
+		    break;
+
+		case FLOAT:
+		    holder = new FloatHolder2( entityName, valueToken.floatValue(), true );
+		    break;
+
+		case DOUBLE:
+		    holder = new DoubleHolder2( entityName, valueToken.doubleValue(), true );
+		    break;
+
+		case STRING:
+		    holder = new StringHolder2( entityName, valueToken.stringValue(), true );
+		    break;
+
+		case ENTITY_REFERENCE:
+//		    EntityTypeName2 entityTypeName = unPackerContext.findTypeByTypeReferenceId( valueToken.typeIdValue() );
+//		    if ( entityTypeName == null ) {
+//
+//			throw new UnPacker2ParsingException( "unknown type id " + valueToken.typeIdValue(), valueToken );
+//
+//		    }
+
+		    holder = new EntityReferenceHolder2( entityName, valueToken.entityReference(), true );
+		    break;
+
+		default:
+		    throw new HowDidWeGetHereError( "token type " + valueToken.type() + " is not a 'value' type" );
+
+	    }
+
+	    return holder;
+
+	}
+
     }
 
 //	private final char[] _chars;
 
-    public P2ATokenizer( LineNumberReader lineNumberReader ) {
+    public P2ATokenizer( UnPackerContext2 unPackerContext, LineNumberReader lineNumberReader ) {
 
 	super();
 
+	_unPackerContext = unPackerContext;
 	_reader = lineNumberReader;
 	_putBackChar = ' ';
 	_hasPutBackChar = false;
@@ -362,6 +447,16 @@ public class P2ATokenizer {
 
     }
 
+    private int peekCh()
+	    throws IOException {
+
+	int ch = nextCh();
+	putBackChar();
+
+	return ch;
+
+    }
+
     private boolean ignoreWhitespace() {
 
 	return _ignoreWhitespace;
@@ -409,7 +504,7 @@ public class P2ATokenizer {
 
     @NotNull
     public P2AToken getNextToken( boolean identifierAllowed, @NotNull TokenType requiredType )
-	    throws IOException, UnPacker2ParseError {
+	    throws IOException, UnPacker2ParsingException {
 
 	try {
 
@@ -427,7 +522,7 @@ public class P2ATokenizer {
 	    } else {
 
 		P2AToken errorToken = new P2AToken( "expected " + cleanupTokenType( requiredType ) + " but got " + cleanupTokenType( rval.type() ) + " instead", _lnum, _offset );
-		throw new UnPacker2ParseError( errorToken.stringValue(), errorToken );
+		throw new UnPacker2ParsingException( errorToken.stringValue(), errorToken );
 
 
 	    }
@@ -450,7 +545,7 @@ public class P2ATokenizer {
 
     @NotNull
     public P2AToken getNextToken( boolean identifierAllowed )
-	    throws IOException {
+	    throws IOException, UnPacker2ParsingException {
 
 	if ( _putBackToken != null ) {
 
@@ -500,11 +595,57 @@ public class P2ATokenizer {
 
 		    return longToken;
 
-		} if ( identifierAllowed && Character.isJavaIdentifierPart( ch ) ) {
+		} else if ( identifierAllowed && Character.isJavaIdentifierPart( ch ) ) {
 
 		    putBackChar();
 
-		    return collectIdentifier();
+		    P2AToken identifierToken = collectIdentifier();
+		    if ( identifierToken.type() == TokenType.IDENTIFIER ) {
+
+			EntityName2 identifier = identifierToken.identifierValue();
+			if ( identifier.getName().charAt( 0 ) == Constants.TAG_ENTITY_REFERENCE ) {
+
+			    ch = nextCh();
+
+			    if ( ch == ':' ) {
+
+				try {
+
+				    int typeId = Integer.parseInt( identifier.getName().substring( 1 ) );
+
+				    return finishCollectingEntityReference( _unPackerContext, typeId );
+
+				} catch ( NumberFormatException e ) {
+
+				    putBackChar();
+
+				    return identifierToken;
+
+				}
+
+			    } else {
+
+				putBackChar();
+
+				return identifierToken;
+
+			    }
+
+//			    try {
+//
+//				int typeId = Integer.parseInt( identifier.getName().substring( 1 ) );
+//
+//				P2AToken maybeColonToken = getNextToken( false );
+//				if ( maybeColonToken.type() == TokenType.COLON ) {
+//
+//
+//				}
+//			    }
+			}
+
+		    }
+
+		    return identifierToken;
 
 		} else {
 
@@ -736,47 +877,12 @@ public class P2ATokenizer {
 			    ch = nextCh();
 			    if ( ch == ':' ) {
 
-				P2AToken entityIdToken = parseNumeric(
-					TokenType.LONG,
-					new NumericParser() {
+				int typeId = typeIdToken.intValue();
+				return finishCollectingEntityReference( _unPackerContext, typeId );
 
-					    @Override
-					    public Number parse( String strValue ) {
+			    } else {
 
-						return Long.parseLong( strValue );
-
-					    }
-
-					}
-				);
-
-				if ( entityIdToken.isError() ) {
-
-				    return entityIdToken;
-
-				}
-
-				try {
-
-				    return new P2AToken(
-					    TokenType.ENTITY_REFERENCE,
-					    new EntityTypeReference(
-						    typeIdToken.intValue(),
-						    entityIdToken.longValue()
-					    ),
-					    _lnum,
-					    _offset
-				    );
-
-				} catch ( IndexOutOfBoundsException e ) {
-
-				    return new P2AToken(
-					    e.getMessage(),
-					    _lnum,
-					    _offset
-				    );
-
-				}
+				return new P2AToken( "unexpected character " + cleanupChar( ch ), _lnum, _offset );
 
 			    }
 
@@ -837,6 +943,113 @@ public class P2ATokenizer {
 
 	}
 
+    }
+
+    @NotNull
+    public P2AToken finishCollectingEntityReference( UnPackerContext2 unPackerContext, int typeId )
+	    throws IOException, UnPacker2ParsingException {
+
+	P2AToken entityIdToken = parseNumeric(
+		TokenType.LONG,
+		new NumericParser() {
+
+		    @Override
+		    public Number parse( String strValue ) {
+
+			return Long.parseLong( strValue );
+
+		    }
+
+		}
+	);
+
+	if ( entityIdToken.isError() ) {
+
+	    return entityIdToken;
+
+	}
+
+	Integer version;
+	int ch = nextCh();
+	if ( ch == 'v' ) {
+
+	    P2AToken entityVersionToken = parseNumeric(
+		    TokenType.INTEGER,
+		    new NumericParser() {
+
+			@Override
+			public Number parse( String strValue ) {
+
+			    return Integer.parseInt( strValue );
+
+			}
+
+		    }
+	    );
+
+	    if ( entityVersionToken.isError() ) {
+
+		return entityVersionToken;
+
+	    }
+
+	    version = entityVersionToken.intValue();
+	    if ( version <= 0 ) {
+
+		throw new UnPacker2ParsingException( "version number is not positive (" + version + ")", entityVersionToken );
+
+	    }
+
+	} else {
+
+	    version = null;
+
+	    putBackChar();
+
+	}
+
+//	    } else {
+//
+//		throw new UnPacker2ParsingException( "no version provided in entity reference that requires one", entityIdToken );
+//
+//	    }
+//
+//	} else {
+//
+//	    int ch = peekCh();
+//	    if ( ch == 'v' ) {
+//
+//		throw new UnPacker2ParsingException( "unexpected version clause on entity reference", entityIdToken );
+//
+//	    }
+//
+//	    version = null;	// signal that there is no version expected
+//
+//	}
+
+	try {
+
+	    return new P2AToken(
+		    TokenType.ENTITY_REFERENCE,
+		    new EntityReference(
+//			    unPackerContext.findTypeByTypeReferenceId( typeId ),
+			    typeId,
+			    entityIdToken.longValue(),
+			    version
+		    ),
+		    _lnum,
+		    _offset
+	    );
+
+	} catch ( IndexOutOfBoundsException e ) {
+
+	    return new P2AToken(
+		    e.getMessage(),
+		    _lnum,
+		    _offset
+	    );
+
+	}
     }
 
     private P2AToken collectString()
@@ -1032,7 +1245,7 @@ public class P2ATokenizer {
 
 	try {
 
-	    P2ATokenizer tokenizer = new P2ATokenizer( new LineNumberReader( new FileReader( "test1.p2a" ) ) );
+	    P2ATokenizer tokenizer = new P2ATokenizer( new StdUnPackerContext2( new TypeIndex2( "test P2ATokenizer" ) ), new LineNumberReader( new FileReader( "test1.p2a" ) ) );
 	    P2AToken token;
 	    boolean identifierAllowed = false;
 	    while ( ( token = tokenizer.getNextToken( identifierAllowed ) ) != null && !token.isError() && token.type() != TokenType.EOF ) {
@@ -1058,6 +1271,10 @@ public class P2ATokenizer {
 	    e.printStackTrace();
 
 	} catch ( IOException e ) {
+
+	    e.printStackTrace();
+
+	} catch ( UnPacker2ParsingException e ) {
 
 	    e.printStackTrace();
 

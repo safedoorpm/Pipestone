@@ -19,7 +19,7 @@ public class FormatVersion {
     private final EntityName2 _groupName;
 
     public FormatVersion( P2ATokenizer.P2AToken token, EntityName2 groupName )
-	    throws UnPacker2ParseError {
+	    throws UnPacker2ParsingException {
 	super();
 
 	if ( token.isError() ) {
@@ -39,13 +39,13 @@ public class FormatVersion {
 
 	    if ( longMajorVersion <= 0 || longMajorVersion > Integer.MAX_VALUE ) {
 
-		throw new UnPacker2ParseError( "invalid version (" + longVersion + ") - major version (" + longMajorVersion + ") out of range", token );
+		throw new UnPacker2ParsingException( "invalid version (" + longVersion + ") - major version (" + longMajorVersion + ") out of range", token );
 
 	    }
 
 	    if ( longMinorVersion <= 0 || longMinorVersion > Integer.MAX_VALUE ) {
 
-		throw new UnPacker2ParseError( "invalid version (" + longVersion + ") - minor version (" + longMajorVersion + ") out of range", token );
+		throw new UnPacker2ParsingException( "invalid version (" + longVersion + ") - minor version (" + longMajorVersion + ") out of range", token );
 
 	    }
 

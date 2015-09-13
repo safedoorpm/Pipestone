@@ -1,6 +1,8 @@
 package com.obtuse.util.packers.packer2;
 
-import com.obtuse.util.*;
+import com.obtuse.util.Accumulator;
+import com.obtuse.util.Logger;
+import com.obtuse.util.TreeAccumulator;
 import com.obtuse.util.packers.packer2.p2a.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -15,14 +17,14 @@ import java.util.*;
  Provide a packing id space for entities that are packed and/or unpacked together.
  */
 
-public class StdPackingContext2 implements PackingContext2 {
+public class StdUnPackerContext2 implements UnPackerContext2 {
 
     private final SortedMap<EntityTypeName2,Integer> _seenTypeNames = new TreeMap<EntityTypeName2, Integer>();
     private final SortedMap<Integer,EntityTypeName2> _usedTypeIds = new TreeMap<Integer, EntityTypeName2>();
 
     private final List<EntityTypeName2> _newTypeNames = new LinkedList<EntityTypeName2>();
 
-    private final SortedMap<InstanceId,PackingAssociation> _seenInstanceIds = new TreeMap<InstanceId,PackingAssociation>();
+    private final SortedMap<EntityReference,Packable2> _seenInstanceIds = new TreeMap<EntityReference,Packable2>();
 
     private int _nextTypeReferenceId = 1;
 
@@ -55,11 +57,11 @@ public class StdPackingContext2 implements PackingContext2 {
 
 	}
 
-	public PackingId2 getPackingId() {
-
-	    return _packingId;
-
-	}
+//	public PackingId2 getPackingId() {
+//
+//	    return _packingId;
+//
+//	}
 
 	public String toString() {
 
@@ -74,7 +76,7 @@ public class StdPackingContext2 implements PackingContext2 {
     @NotNull
     private final TypeIndex2 _typeIndex;
 
-    public StdPackingContext2( @NotNull TypeIndex2 typeIndex ) {
+    public StdUnPackerContext2( @NotNull TypeIndex2 typeIndex ) {
 	super();
 
 	_typeIndex = typeIndex;
@@ -83,21 +85,21 @@ public class StdPackingContext2 implements PackingContext2 {
 
     @Override
     public void saveTypeAlias( P2ATokenizer.P2AToken typeIdToken, P2ATokenizer.P2AToken typeNameToken )
-	    throws UnPacker2ParseError {
+	    throws UnPacker2ParsingException {
 
 	int typeReferenceId = typeIdToken.intValue();
 	EntityTypeName2 typeName = new EntityTypeName2( typeNameToken.stringValue() );
 
 	if ( findTypeByTypeReferenceId( typeReferenceId ) != null ) {
 
-	    throw new UnPacker2ParseError( "type reference id " + typeReferenceId + " already defined in type alias definition", typeIdToken );
+	    throw new UnPacker2ParsingException( "type reference id " + typeReferenceId + " already defined in type alias definition", typeIdToken );
 
 	}
 
 	Integer existingTypeReferenceId = findTypeReferenceId( typeName );
 	if ( existingTypeReferenceId != null ) {
 
-	    throw new UnPacker2ParseError(
+	    throw new UnPacker2ParsingException(
 		    "type \"" + typeName + "\" already has type id " + existingTypeReferenceId
 		    + ", cannot associate it with type id " + typeReferenceId,
 		    typeNameToken
@@ -171,22 +173,22 @@ public class StdPackingContext2 implements PackingContext2 {
 //
 //    }
 
-    public int getOrAllocateTypeReferenceId( EntityTypeName2 typeName ) {
-
-	Integer typeReferenceId = _seenTypeNames.get( typeName );
-	if ( typeReferenceId == null ) {
-
-	    typeReferenceId = _nextTypeReferenceId;
-	    _nextTypeReferenceId += 1;
-	    _seenTypeNames.put( typeName, typeReferenceId );
-	    _newTypeNames.add( typeName );
-	    _usedTypeIds.put( typeReferenceId, typeName );
-
-	}
-
-	return typeReferenceId;
-
-    }
+//    public int getOrAllocateTypeReferenceId( EntityTypeName2 typeName ) {
+//
+//	Integer typeReferenceId = _seenTypeNames.get( typeName );
+//	if ( typeReferenceId == null ) {
+//
+//	    typeReferenceId = _nextTypeReferenceId;
+//	    _nextTypeReferenceId += 1;
+//	    _seenTypeNames.put( typeName, typeReferenceId );
+//	    _newTypeNames.add( typeName );
+//	    _usedTypeIds.put( typeReferenceId, typeName );
+//
+//	}
+//
+//	return typeReferenceId;
+//
+//    }
 
     @Override
     @Nullable
@@ -235,40 +237,70 @@ public class StdPackingContext2 implements PackingContext2 {
     }
 
     @Override
-    @NotNull
-    public PackingId2 rememberPackableEntity( Packable2 entity ) {
+    public boolean isEntityKnown( EntityReference er ) {
 
-	int typeReferenceId = getOrAllocateTypeReferenceId( entity.getInstanceId().getTypeName() );
-
-	PackingId2 packingId;
-
-	PackingAssociation pa = _seenInstanceIds.get( entity.getInstanceId() );
-	if ( pa == null ) {
-
-	    packingId = new PackingId2( entity.getInstanceId().getTypeName(), typeReferenceId, entity.getInstanceId().getId() );
-	    pa = new PackingAssociation( entity.getInstanceId(), packingId, entity );
-
-	    Logger.logMsg( "instance id " + entity.getInstanceId() + " maps to packing id " + packingId );
-
-	} else {
-
-	    packingId = pa.getPackingId();
-
-	}
-
-	_seenInstanceIds.put( entity.getInstanceId(), pa );
-
-	return packingId;
+	return _seenInstanceIds.containsKey( er );
 
     }
 
     @Override
-    @NotNull
-    public Collection<InstanceId> getSeenInstanceIds() {
+    public Packable2 recallPackableEntity( @NotNull EntityReference er ) {
 
-	return Collections.unmodifiableCollection( _seenInstanceIds.keySet() );
+	return _seenInstanceIds.get( er );
 
     }
+
+    @Override
+    public void rememberPackableEntity( P2ATokenizer.P2AToken token, EntityReference er, Packable2 entity ) {
+
+	Logger.logMsg( "remembering " + er + " = " + entity );
+
+//	int typeReferenceId = getOrAllocateTypeReferenceId( entity.getInstanceId().getTypeName() );
+//	int typeReferenceId = InstanceId.allocateTypeId( entity.getInstanceId().getTypeName() );
+
+//	PackingId2 packingId;
+//
+//	PackingAssociation pa = _seenInstanceIds.get( entity.getInstanceId() );
+//	if ( pa == null ) {
+//
+//	    packingId = new PackingId2( entity.getInstanceId().getTypeName(), typeReferenceId, entity.getInstanceId().getEntityId() );
+//	    pa = new PackingAssociation( entity.getInstanceId(), packingId, entity );
+//
+//	    Logger.logMsg( "instance id " + entity.getInstanceId() + " maps to packing id " + packingId );
+//
+//	} else {
+//
+//	    packingId = pa.getPackingId();
+//
+//	}
+
+	if ( isEntityKnown( er ) ) {
+
+	    throw new IllegalArgumentException( "Entity with er " + er + " already existing within this unpacking session" );
+
+	}
+
+	_seenInstanceIds.put( er, entity );
+
+//	return entity.getInstanceId();
+
+    }
+
+//    @Override
+//    @NotNull
+//    public Packable2 getInstance( InstanceId instanceId ) {
+//
+//	return _seenInstanceIds.get( instanceId );
+//
+//    }
+
+//    @Override
+//    @NotNull
+//    public Collection<InstanceId> getSeenInstanceIds() {
+//
+//	return Collections.unmodifiableCollection( _seenInstanceIds.keySet() );
+//
+//    }
 
     @Override
     @NotNull
@@ -281,12 +313,13 @@ public class StdPackingContext2 implements PackingContext2 {
 
     }
 
-    @Override
-    @Nullable
-    public PackingAssociation findPackingAssociation( InstanceId instanceId ) {
-
-	return _seenInstanceIds.get( instanceId );
-    }
+//    @Override
+//    @Nullable
+//    public PackingAssociation findPackingAssociation( InstanceId instanceId ) {
+//
+//	return _seenInstanceIds.get( instanceId );
+//
+//    }
 
 //    @Override
 //    public long getHighestPackingIdForType( EntityTypeName2 entityTypeName ) {
@@ -452,12 +485,15 @@ public class StdPackingContext2 implements PackingContext2 {
 
     public static class TestPackableClass extends AbstractPackableEntity2 implements Packable2 {
 
-	private static final EntityTypeName2 ENTITY_NAME = new EntityTypeName2( StdPackingContext2.TestPackableClass.class );
+	private static final EntityTypeName2 ENTITY_NAME = new EntityTypeName2( StdUnPackerContext2.TestPackableClass.class );
+
+	private static final int VERSION = 1;
 
 	public static EntityFactory2 FACTORY = new EntityFactory2( ENTITY_NAME ) {
 
 	    @Override
-	    public Packable2 createEntity( @NotNull UnPacker2 unPacker, PackableState state ) {
+	    @NotNull
+	    public Packable2 createEntity( @NotNull UnPacker2 unPacker, PackedEntityBundle bundle ) {
 
 		throw new IllegalArgumentException( "unimplemented" );
 
@@ -481,8 +517,14 @@ public class StdPackingContext2 implements PackingContext2 {
 
 	}
 
-	public TestPackableClass( UnPacker2 unPacker, PackableState state ) {
+	public TestPackableClass( UnPacker2 unPacker, PackedEntityBundle bundle ) {
 	    super( ENTITY_NAME );
+
+	    if ( bundle.getVersion() != VERSION ) {
+
+		throw new IllegalArgumentException( TestPackableClass.class.getCanonicalName() + ":  expected version " + VERSION + " but received version " + bundle.getVersion() );
+
+	    }
 
 	    throw new IllegalArgumentException( "unimplemented" );
 
@@ -490,23 +532,23 @@ public class StdPackingContext2 implements PackingContext2 {
 
 	@Override
 	@NotNull
-	public PackedEntityBundle bundleThyself( PackingId2 packingId, boolean isPackingSuper, Packer2 packer ) {
+	public PackedEntityBundle bundleThyself( boolean isPackingSuper, Packer2 packer ) {
 
 	    PackedEntityBundle rval = new PackedEntityBundle(
 		    ENTITY_NAME,
-		    isPackingSuper ? 0L : packingId.getEntityId(),
-		    super.bundleThyself( packingId, true, packer ),
+		    VERSION,
+		    super.bundleThyself( true, packer ),
 		    packer.getPackingContext()
 	    );
 
-	    rval.add( new PackableEntityHolder2( new EntityName2( "_inner" ), _inner, packer, false ) );
-	    rval.add( new StringHolder2( new EntityName2( "_payload" ), _payload, true ) );
-	    rval.add( new IntegerHolder2( new EntityName2( "_iValue" ), _iValue, false ) );
-	    rval.add( new BooleanHolder2( new EntityName2( "_booleanValue" ), true, true ) );
-	    rval.add( new DoubleHolder2( new EntityName2( "_doubleValue" ), Math.PI, false ) );
-	    rval.add( new FloatHolder2( new EntityName2( "_floatValue" ), 1.1f, true ) );
-	    rval.add( new ShortHolder2( new EntityName2( "_shortValue" ), (short)15, false ) );
-	    rval.add( new LongHolder2( new EntityName2( "_longValue" ), 123L, true ) );
+	    rval.addHolder( new PackableEntityHolder2( new EntityName2( "_inner" ), _inner, packer, false ) );
+	    rval.addHolder( new StringHolder2( new EntityName2( "_payload" ), _payload, true ) );
+	    rval.addHolder( new IntegerHolder2( new EntityName2( "_iValue" ), _iValue, false ) );
+	    rval.addHolder( new BooleanHolder2( new EntityName2( "_booleanValue" ), true, true ) );
+	    rval.addHolder( new DoubleHolder2( new EntityName2( "_doubleValue" ), Math.PI, false ) );
+	    rval.addHolder( new FloatHolder2( new EntityName2( "_floatValue" ), 1.1f, true ) );
+	    rval.addHolder( new ShortHolder2( new EntityName2( "_shortValue" ), (short) 15, false ) );
+	    rval.addHolder( new LongHolder2( new EntityName2( "_longValue" ), 123L, true ) );
 
 	    return rval;
 

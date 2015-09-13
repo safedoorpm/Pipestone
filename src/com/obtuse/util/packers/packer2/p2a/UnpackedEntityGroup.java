@@ -53,6 +53,18 @@ public class UnpackedEntityGroup {
 
     }
 
+    public int size() {
+
+	return _entities.size();
+
+    }
+
+    public boolean isEmpty() {
+
+	return _entities.isEmpty();
+
+    }
+
     public String toString() {
 
 	return "UnpackedEntityGroup( \"" + getGroupName() + "\", " + getEntities() + " )";

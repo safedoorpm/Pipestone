@@ -16,6 +16,8 @@ public class SimpleEntity extends AbstractPackableEntity2 {
 
     public static final EntityTypeName2 ENTITY_NAME = new EntityTypeName2( SimpleEntity.class );
 
+    private static final int VERSION = 1;
+
     private String _payload;
 
     public SimpleEntity( @NotNull String payload ) {
@@ -25,8 +27,14 @@ public class SimpleEntity extends AbstractPackableEntity2 {
 
     }
 
-    public SimpleEntity( UnPacker2 unPacker, PackableState state ) {
+    public SimpleEntity( UnPacker2 unPacker, PackedEntityBundle bundle ) {
 	super( ENTITY_NAME );
+
+	if ( bundle.getVersion() != VERSION ) {
+
+	    throw new IllegalArgumentException( SimpleEntity.class.getCanonicalName() + ":  expected version " + VERSION + " but received version " + bundle.getVersion() );
+
+	}
 
 	throw new IllegalArgumentException( "unimplemented" );
 
@@ -34,16 +42,16 @@ public class SimpleEntity extends AbstractPackableEntity2 {
 
     @Override
     @NotNull
-    public PackedEntityBundle bundleThyself( PackingId2 packingId, boolean isPackingSuper, Packer2 packer ) {
+    public PackedEntityBundle bundleThyself( boolean isPackingSuper, Packer2 packer ) {
 
 //	SortedSet<Packable2ThingHolder2> rval = new TreeSet<Packable2ThingHolder2>();
 	PackedEntityBundle rval = new PackedEntityBundle(
 		ENTITY_NAME,
-		isPackingSuper ? 0L : packingId.getEntityId(),
-		super.bundleThyself( packingId, true, packer ),
+		VERSION,
+		super.bundleThyself( true, packer ),
 		packer.getPackingContext()
 	);
-	rval.add( new StringHolder2( new EntityName2( "_payload" ), _payload, false ) );
+	rval.addHolder( new StringHolder2( new EntityName2( "_payload" ), _payload, false ) );
 
 	return rval;
 

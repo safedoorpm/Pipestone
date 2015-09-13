@@ -1,9 +1,6 @@
 package com.obtuse.util.packers.packer2.p2a;
 
-import com.obtuse.util.packers.packer2.EntityName2;
-import com.obtuse.util.packers.packer2.Packable2;
-import com.obtuse.util.packers.packer2.Packer2;
-import com.obtuse.util.packers.packer2.PackingId2;
+import com.obtuse.util.packers.packer2.*;
 import org.jetbrains.annotations.NotNull;
 
 /*
@@ -16,12 +13,12 @@ import org.jetbrains.annotations.NotNull;
 
 public class PackableEntityHolder2 extends AbstractPackableHolder2 {
 
-    private final PackingId2 _packingId;
+    private final InstanceId _instanceId;
 
     public PackableEntityHolder2( @NotNull EntityName2 name, Packable2 v, Packer2 packer, boolean mandatory ) {
 	super( name, Constants.TAG_ENTITY_REFERENCE, v, mandatory );
 
-	_packingId = packer.queuePackEntity( v );
+	_instanceId = packer.queuePackEntity( v );
 
     }
 
@@ -35,11 +32,11 @@ public class PackableEntityHolder2 extends AbstractPackableHolder2 {
 
 	}
 
-	packer2.emit( _packingId );
+	packer2.emit( _instanceId );
 
 //	if ( isMandatory() || value != null ) {
 //
-//	    packer2.emit( _packingId );
+//	    packer2.emit( _instanceId );
 //
 //	} else {
 //
@@ -49,9 +46,9 @@ public class PackableEntityHolder2 extends AbstractPackableHolder2 {
 
     }
 
-    public PackingId2 getPackingId() {
+    public InstanceId getInstanceId() {
 
-	return _packingId;
+	return _instanceId;
 
     }
 

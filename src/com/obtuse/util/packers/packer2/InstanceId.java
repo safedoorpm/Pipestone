@@ -4,8 +4,12 @@ package com.obtuse.util.packers.packer2;
  * Copyright © 2015 Obtuse Systems Corporation
  */
 
+import com.obtuse.util.SimpleUniqueIntegerIdGenerator;
 import com.obtuse.util.SimpleUniqueLongIdGenerator;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 /**
  A value which uniquely identifies something which implements the {@link Packable2} interface.
@@ -20,23 +24,68 @@ import org.jetbrains.annotations.NotNull;
 
 public final class InstanceId implements Comparable<InstanceId> {
 
-    private static final SimpleUniqueLongIdGenerator _idGenerator = new SimpleUniqueLongIdGenerator( InstanceId.class.getCanonicalName() );
+    private static final SimpleUniqueLongIdGenerator s_idGenerator = new SimpleUniqueLongIdGenerator( InstanceId.class.getCanonicalName() + " - entity id generator" );
+    private static final SimpleUniqueIntegerIdGenerator s_typeIdGenerator = new SimpleUniqueIntegerIdGenerator( InstanceId.class.getCanonicalName() + " - type id generator" );
 
-    private final Long _id;
+    private static final SortedMap<EntityTypeName2,Integer> s_typeNamesToTypeIds = new TreeMap<EntityTypeName2, Integer>();
+    private static final SortedMap<Integer,EntityTypeName2> s_typeIdsToTypeNames = new TreeMap<Integer, EntityTypeName2>();
+
+    private final Long _entityId;
+
+    private final int _typeId;
 
     private final EntityTypeName2 _typeName;
 
     public InstanceId( EntityTypeName2 typeName ) {
 	super();
 
+	_typeId = allocateTypeId( typeName );
+
 	_typeName = typeName;
-	_id = _idGenerator.getUniqueId();
+	_entityId = s_idGenerator.getUniqueId();
 
     }
 
-    public long getId() {
+    public static int allocateTypeId( EntityTypeName2 typeName ) {
 
-	return _id;
+	synchronized ( s_typeNamesToTypeIds ) {
+
+	    Integer typeId = lookupTypeId( typeName );
+	    if ( typeId == null ) {
+
+		typeId = s_typeIdGenerator.getUniqueId();
+		s_typeNamesToTypeIds.put( typeName, typeId );
+		s_typeIdsToTypeNames.put( typeId, typeName );
+
+	    }
+
+	    return typeId;
+
+	}
+
+    }
+
+    public static EntityTypeName2 lookupTypeName( int typeId ) {
+
+	return s_typeIdsToTypeNames.get( typeId );
+
+    }
+
+    public static Integer lookupTypeId( EntityTypeName2 typeName ) {
+
+	return s_typeNamesToTypeIds.get( typeName );
+
+    }
+
+    public long getEntityId() {
+
+	return _entityId;
+
+    }
+
+    public int getTypeId() {
+
+	return _typeId;
 
     }
 
@@ -51,7 +100,7 @@ public final class InstanceId implements Comparable<InstanceId> {
 	int rval = _typeName.compareTo( rhs._typeName );
 	if ( rval == 0 ) {
 
-	    rval = _id.compareTo( rhs._id );
+	    rval = _entityId.compareTo( rhs._entityId );
 
 	}
 
@@ -67,13 +116,13 @@ public final class InstanceId implements Comparable<InstanceId> {
 
     public int hashCode() {
 
-	return _id.hashCode();
+	return _entityId.hashCode();
 
     }
 
     public String toString() {
 
-	return "InstanceId( " + _typeName + ", " + _id + " )";
+	return "InstanceId( " + _typeName + ", " + _entityId + " )";
 
     }
 

@@ -38,6 +38,20 @@ public abstract class AbstractPackableHolder2 implements Packable2ThingHolder2 {
     }
 
     @Override
+    public boolean isNull() {
+
+	return getObjectValue() == null;
+
+    }
+
+    @Override
+    public EntityReference EntityTypeReference() {
+
+	return (EntityReference) getObjectValue();
+
+    }
+
+    @Override
     public boolean booleanValue() {
 
 	return BooleanValue().booleanValue();
@@ -48,6 +62,7 @@ public abstract class AbstractPackableHolder2 implements Packable2ThingHolder2 {
     public Boolean BooleanValue() {
 
 	return (Boolean)getObjectValue();
+
     }
 
     @Override
@@ -61,6 +76,7 @@ public abstract class AbstractPackableHolder2 implements Packable2ThingHolder2 {
     public Byte ByteValue() {
 
 	return (Byte)getObjectValue();
+
     }
 
     @Override

@@ -4,7 +4,6 @@ package com.obtuse.util.packers.packer2.p2a;
  * Copyright © 2015 Obtuse Systems Corporation
  */
 
-import com.obtuse.exceptions.HowDidWeGetHereError;
 import com.obtuse.util.BasicProgramConfigInfo;
 import com.obtuse.util.Logger;
 import com.obtuse.util.ObtuseUtil;
@@ -95,7 +94,7 @@ public class StdPacker2a implements Packer2 {
 
 //    private final TypeIndex2 _typeIndex;
 
-    private final PackingContext2 _packingContext;
+    private final PackerContext2 _packingContext;
 
     private final EntityName2 _groupName;
 
@@ -109,16 +108,16 @@ public class StdPacker2a implements Packer2 {
 
     public StdPacker2a( @NotNull EntityName2 groupName, @NotNull TypeIndex2 typeIndex, @NotNull File outputFile )
 	    throws FileNotFoundException {
-	this( groupName, outputFile, new PrintWriter( outputFile ), new StdPackingContext2( typeIndex ) );
+	this( groupName, outputFile, new PrintWriter( outputFile ), new StdPackerContext2( typeIndex ) );
 
     }
 
     public StdPacker2a( @NotNull EntityName2 groupName, @NotNull TypeIndex2 typeIndex, @NotNull File outputFile, @NotNull OutputStream outputStream ) {
-	this( groupName, outputFile, new PrintWriter( outputStream, true ), new StdPackingContext2( typeIndex ) );
+	this( groupName, outputFile, new PrintWriter( outputStream, true ), new StdPackerContext2( typeIndex ) );
 
     }
 
-    private StdPacker2a( @NotNull EntityName2 groupName, @NotNull File outputFile, @NotNull PrintWriter writer, @NotNull PackingContext2 packingContext ) {
+    private StdPacker2a( @NotNull EntityName2 groupName, @NotNull File outputFile, @NotNull PrintWriter writer, @NotNull PackerContext2 packingContext ) {
 
 //	_typeIndex = typeIndex;
 	_outputFile = outputFile;
@@ -146,14 +145,14 @@ public class StdPacker2a implements Packer2 {
     }
 
     @NotNull
-    public PackingContext2 getPackingContext() {
+    public PackerContext2 getPackingContext() {
 
 	return _packingContext;
 
     }
 
     @Override
-    public PackingId2 queuePackEntity( @Nullable Packable2 entity ) {
+    public InstanceId queuePackEntity( @Nullable Packable2 entity ) {
 
 	if ( entity == null ) {
 
@@ -161,9 +160,9 @@ public class StdPacker2a implements Packer2 {
 
 	}
 
-	PackingId2 packingId = _packingContext.rememberPackableEntity( entity );
+	_packingContext.rememberPackableEntity( entity );
 
-	return packingId;
+	return entity.getInstanceId();
 
     }
 
@@ -208,40 +207,43 @@ public class StdPacker2a implements Packer2 {
 
     }
 
-    private void actuallyPackEntity( @Nullable InstanceId instanceId ) {
+    private void actuallyPackEntity( @NotNull InstanceId instanceId ) {
 
-	Collection<EntityTypeName2> newTypeNames = _packingContext.getNewTypeNames();
-	if ( !newTypeNames.isEmpty() ) {
+	Packable2 entity = _packingContext.getInstance( instanceId );
+	PackedEntityBundle bundle = entity.bundleThyself( false, this );
 
-	    for ( EntityTypeName2 newTypeName : newTypeNames ) {
+	Collection<Integer> newTypenewTypeIds = _packingContext.getNewTypeIds();
+	if ( !newTypenewTypeIds.isEmpty() ) {
 
-		int typeReferenceId = _packingContext.getTypeReferenceId( newTypeName );
+	    for ( Integer newTypeId : newTypenewTypeIds ) {
 
-		_writer.print( typeReferenceId );
+//		int typeReferenceId = instanceId.getTypeId();
+
+		_writer.print( newTypeId );
 		_writer.print( '@' );
-		_writer.print( ObtuseUtil.enquoteForJavaString( newTypeName.getTypeName() ) );
+		_writer.print( ObtuseUtil.enquoteForJavaString( InstanceId.lookupTypeName( newTypeId ).getTypeName() ) );
 		_writer.println( ';' );
 
 	    }
 
 	}
 
-	if ( instanceId == null ) {
+//	if ( instanceId == null ) {
+//
+//	    emitNull();
+//
+//	    return;
+//
+//	}
 
-	    emitNull();
+//	StdPackingContext2.PackingAssociation pa = _packingContext.findPackingAssociation( instanceId );
+//	if ( pa == null ) {
+//
+//	    throw new HowDidWeGetHereError( "something that we know about has no packing association (instance id = " + instanceId + ")" );
+//
+//	}
 
-	    return;
-
-	}
-
-	StdPackingContext2.PackingAssociation pa = _packingContext.findPackingAssociation( instanceId );
-	if ( pa == null ) {
-
-	    throw new HowDidWeGetHereError( "something that we know about has no packing association (instance id = " + instanceId + ")" );
-
-	}
-
-	emitEntityReference( pa.getPackingId() );
+	emitEntityReference( instanceId, bundle.getVersion() );
 
 //	String reference = "" + pa.getPackingId().getTypeReferenceId() + ':' + pa.getPackingId().getEntityId();
 
@@ -249,8 +251,7 @@ public class StdPacker2a implements Packer2 {
 
 	_writer.print( " = " );
 
-	Packable2 entity = pa.getPackable();
-	PackedEntityBundle bundle = entity.bundleThyself( pa.getPackingId(), false, this );
+//	Packable2 entity = pa.getPackable();
 	actuallyPackEntityBody( bundle );
 
 	_writer.println( ";" );
@@ -295,19 +296,21 @@ public class StdPacker2a implements Packer2 {
 
 	_writer.print( "(" );
 	String comma = " ";
-	if ( bundle.hasSuper() ) {
+	PackedEntityBundle superBundle = bundle.getSuperBundle();
+	if ( superBundle != null ) {
 
 	    _writer.print( comma );
 
-	    emitEntityReference( bundle.getPackingId() );
-	    actuallyPackEntityBody( bundle.getSuperBundle() );
+	    emitEntityReference( superBundle.getTypeId(), 0, superBundle.getVersion() );
+	    _writer.print( "=" );
+	    actuallyPackEntityBody( superBundle );
 
 	    comma = ", ";
 
 	}
 
 //	_currentSeparator = " ";
-	for ( Packable2ThingHolder2 thing : bundle ) {
+	for ( Packable2ThingHolder2 thing : bundle.values() ) {
 
 	    _writer.print( comma );
 
@@ -322,7 +325,7 @@ public class StdPacker2a implements Packer2 {
 //	    _currentSeparator = ", ";
 
 	}
-	if ( !bundle.hasSuper() && bundle.isEmpty() ) {
+	if ( bundle.getSuperBundle() == null && bundle.isEmpty() ) {
 
 	    _writer.print( ")" );
 
@@ -341,30 +344,52 @@ public class StdPacker2a implements Packer2 {
 
     }
 
-    private void emitEntityReference( PackingId2 packingId ) {
+    private void emitEntityReference( InstanceId instanceId, int version ) {
 
-	_writer.print( Constants.TAG_ENTITY_REFERENCE );
-	_writer.print( packingId.getTypeReferenceId() );
-	_writer.print( ':' );
-	_writer.print( packingId.getEntityId() );
+	int typeId = instanceId.getTypeId();
+	long entityId = instanceId.getEntityId();
+	emitEntityReference( typeId, entityId, version );
 
     }
 
     @Override
-    public void emit( PackingId2 packingId ) {
+    public void emitEntityReference( int typeId, long entityId ) {
 
-	if ( packingId == null ) {
+	emitEntityReference( typeId, entityId, null );
+
+    }
+
+    private void emitEntityReference( int typeId, long entityId, Integer version ) {
+
+	_writer.print( Constants.TAG_ENTITY_REFERENCE );
+	_writer.print( typeId );
+	_writer.print( ':' );
+
+	_writer.print( entityId );
+	if ( version != null ) {
+
+	    _writer.print( 'v' );
+	    _writer.print( version );
+
+	}
+
+    }
+
+    @Override
+    public void emit( InstanceId instanceId ) {
+
+	if ( instanceId == null ) {
 
 	    emitNull();
 
 	} else {
 
-	    emitEntityReference( packingId );
+	    emitEntityReference( instanceId.getTypeId(), instanceId.getEntityId() );
 
 //	    _writer.print( Constants.TAG_ENTITY_REFERENCE );
-//	    _writer.print( packingId.getTypeReferenceId() );
+//	    _writer.print( instanceId.getTypeReferenceId() );
 //	    _writer.print( ':' );
-//	    _writer.print( packingId.getEntityId() );
+//	    _writer.print( instanceId.getEntityId() );
 
 	}
 
@@ -576,11 +601,11 @@ public class StdPacker2a implements Packer2 {
 //	    pInt = new StringHolder2( new EntityName2( "stringValue" ), "Hello \"world\"", true );
 //	    pInt.pack( p2a, ", " );
 
-	    StdPackingContext2.TestPackableClass test = new StdPackingContext2.TestPackableClass( "hello world", new StdPackingContext2.TestPackableClass( "inner reference", null ) );
+	    StdPackerContext2.TestPackableClass test = new StdPackerContext2.TestPackableClass( "hello world", new StdPackerContext2.TestPackableClass( "inner reference", null, null ), null );
 	    p2a.queuePackEntity( test );
 //	    p2a.actuallyPackEntity( test.getInstanceId() );
 
-	    test = new StdPackingContext2.TestPackableClass( "howdy doody", null );
+	    test = new StdPackerContext2.TestPackableClass( "howdy doody", null, new StdPackerContext2.SimplePackableClass( "grump!" ) );
 	    p2a.queuePackEntity( test );
 
 	    p2a.actuallyPackEntities();
