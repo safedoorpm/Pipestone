@@ -1,10 +1,10 @@
 package com.obtuse.util.packers.packer2;
 
+import com.obtuse.exceptions.HowDidWeGetHereError;
 import com.obtuse.util.Accumulator;
 import com.obtuse.util.Logger;
 import com.obtuse.util.TreeAccumulator;
 import com.obtuse.util.packers.packer2.p2a.*;
-import com.obtuse.util.packers.packer2.p2a.holders.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -26,6 +26,8 @@ public class StdUnPackerContext2 implements UnPackerContext2 {
     private final List<EntityTypeName2> _newTypeNames = new LinkedList<EntityTypeName2>();
 
     private final SortedMap<EntityReference,Packable2> _seenInstanceIds = new TreeMap<EntityReference,Packable2>();
+
+    private final SortedSet<EntityReference> _unFinishedEntities = new TreeSet<EntityReference>();
 
     private int _nextTypeReferenceId = 1;
 
@@ -192,6 +194,54 @@ public class StdUnPackerContext2 implements UnPackerContext2 {
 //    }
 
     @Override
+    public void clearUnFinishedEntities() {
+
+	_unFinishedEntities.clear();
+
+    }
+
+    @Override
+    public Collection<EntityReference> getUnfinishedEntities() {
+
+	return new TreeSet<EntityReference>( _unFinishedEntities );
+
+    }
+
+    @Override
+    public void markEntitiesUnfinished( Collection<EntityReference> unFinishedEntities ) {
+
+	_unFinishedEntities.addAll( unFinishedEntities );
+
+    }
+
+    @Override
+    public boolean isEntityFinished( EntityReference er ) {
+
+	return !_unFinishedEntities.contains( er );
+
+    }
+
+    @Override
+    public void markEntityFinished( EntityReference er ) {
+
+	if ( isEntityFinished( er ) ) {
+
+	    throw new HowDidWeGetHereError( "a previously finished entity " + er + " being marked as finished again" );
+
+	}
+
+	_unFinishedEntities.remove( er );
+
+    }
+
+    @Override
+    public void addUnfinishedEntities( Collection<EntityReference> collection ) {
+
+	collection.addAll( _unFinishedEntities );
+
+    }
+
+    @Override
     @Nullable
     public EntityTypeName2 findTypeByTypeReferenceId( int typeReferenceId ) {
 
@@ -247,7 +297,17 @@ public class StdUnPackerContext2 implements UnPackerContext2 {
     @Override
     public Packable2 recallPackableEntity( @NotNull EntityReference er ) {
 
-	return _seenInstanceIds.get( er );
+	Packable2 packable2 = _seenInstanceIds.get( er );
+	Logger.logMsg( "recalling " + er + " as " + packable2 );
+
+	return packable2;
+
+    }
+
+    @Override
+    public Collection<EntityReference> getSeenEntityReferences() {
+
+	return new LinkedList<EntityReference>( _seenInstanceIds.keySet() );
 
     }
 
@@ -484,91 +544,91 @@ public class StdUnPackerContext2 implements UnPackerContext2 {
 //
 //    }
 
-    public static class TestPackableClass extends AbstractPackableEntity2 implements Packable2 {
-
-	private static final EntityTypeName2 ENTITY_NAME = new EntityTypeName2( StdUnPackerContext2.TestPackableClass.class );
-
-	private static final int VERSION = 1;
-
-	public static EntityFactory2 FACTORY = new EntityFactory2( ENTITY_NAME ) {
-
-	    @Override
-	    @NotNull
-	    public Packable2 createEntity( @NotNull UnPacker2 unPacker, PackedEntityBundle bundle ) {
-
-		throw new IllegalArgumentException( "unimplemented" );
-
-	    }
-
-	};
-	private final String _payload;
-
-	private final int _iValue;
-
-	private final TestPackableClass _inner;
-
-	public TestPackableClass( @NotNull String payload, @Nullable TestPackableClass inner ) {
-	    super( ENTITY_NAME );
-
-//	    context.registerFactory( FACTORY );
-
-	    _inner = inner;
-	    _payload = payload;
-	    _iValue = 42;
-
-	}
-
-	public TestPackableClass( UnPacker2 unPacker, PackedEntityBundle bundle ) {
-	    super( ENTITY_NAME );
-
-	    if ( bundle.getVersion() != VERSION ) {
-
-		throw new IllegalArgumentException( TestPackableClass.class.getCanonicalName() + ":  expected version " + VERSION + " but received version " + bundle.getVersion() );
-
-	    }
-
-	    throw new IllegalArgumentException( "unimplemented" );
-
-	}
-
-	@Override
-	@NotNull
-	public PackedEntityBundle bundleThyself( boolean isPackingSuper, Packer2 packer ) {
-
-	    PackedEntityBundle rval = new PackedEntityBundle(
-		    ENTITY_NAME,
-		    VERSION,
-		    super.bundleThyself( true, packer ),
-		    packer.getPackingContext()
-	    );
-
-	    rval.addHolder( new PackableEntityHolder2( new EntityName2( "_inner" ), _inner, packer, false ) );
-	    rval.addHolder( new StringHolder2( new EntityName2( "_payload" ), _payload, true ) );
-	    rval.addHolder( new IntegerHolder2( new EntityName2( "_iValue" ), _iValue, false ) );
-	    rval.addHolder( new BooleanHolder2( new EntityName2( "_booleanValue" ), true, true ) );
-	    rval.addHolder( new DoubleHolder2( new EntityName2( "_doubleValue" ), Math.PI, false ) );
-	    rval.addHolder( new FloatHolder2( new EntityName2( "_floatValue" ), 1.1f, true ) );
-	    rval.addHolder( new ShortHolder2( new EntityName2( "_shortValue" ), (short) 15, false ) );
-	    rval.addHolder( new LongHolder2( new EntityName2( "_longValue" ), 123L, true ) );
-
-	    return rval;
-
-	}
-
-	@Override
-	public void finishUnpacking( UnPacker2 unPacker ) {
-
-	    throw new IllegalArgumentException( "unimplemented" );
-
-	}
-
-	public String toString() {
-
-	    return "StdPackingContext2.TestPackableClass( \"" + _payload + "\", " + _iValue + " )";
-
-	}
-
-    }
+//    public static class TestPackableClass extends AbstractPackableEntity2 implements Packable2 {
+//
+//	private static final EntityTypeName2 ENTITY_NAME = new EntityTypeName2( StdUnPackerContext2.TestPackableClass.class );
+//
+//	private static final int VERSION = 1;
+//
+//	public static EntityFactory2 FACTORY = new EntityFactory2( ENTITY_NAME ) {
+//
+//	    @Override
+//	    @NotNull
+//	    public Packable2 createEntity( @NotNull UnPacker2 unPacker, PackedEntityBundle bundle ) {
+//
+//		throw new IllegalArgumentException( "unimplemented" );
+//
+//	    }
+//
+//	};
+//	private final String _payload;
+//
+//	private final int _iValue;
+//
+//	private final TestPackableClass _inner;
+//
+//	public TestPackableClass( @NotNull String payload, @Nullable TestPackableClass inner ) {
+//	    super( ENTITY_NAME );
+//
+////	    context.registerFactory( FACTORY );
+//
+//	    _inner = inner;
+//	    _payload = payload;
+//	    _iValue = 42;
+//
+//	}
+//
+//	public TestPackableClass( UnPacker2 unPacker, PackedEntityBundle bundle ) {
+//	    super( ENTITY_NAME );
+//
+//	    if ( bundle.getVersion() != VERSION ) {
+//
+//		throw new IllegalArgumentException( TestPackableClass.class.getCanonicalName() + ":  expected version " + VERSION + " but received version " + bundle.getVersion() );
+//
+//	    }
+//
+//	    throw new IllegalArgumentException( "unimplemented" );
+//
+//	}
+//
+//	@Override
+//	@NotNull
+//	public PackedEntityBundle bundleThyself( boolean isPackingSuper, Packer2 packer ) {
+//
+//	    PackedEntityBundle rval = new PackedEntityBundle(
+//		    ENTITY_NAME,
+//		    VERSION,
+//		    super.bundleThyself( true, packer ),
+//		    packer.getPackingContext()
+//	    );
+//
+//	    rval.addHolder( new PackableEntityHolder2( new EntityName2( "_inner" ), _inner, packer, false ) );
+//	    rval.addHolder( new StringHolder2( new EntityName2( "_payload" ), _payload, true ) );
+//	    rval.addHolder( new IntegerHolder2( new EntityName2( "_iValue" ), _iValue, false ) );
+//	    rval.addHolder( new BooleanHolder2( new EntityName2( "_booleanValue" ), true, true ) );
+//	    rval.addHolder( new DoubleHolder2( new EntityName2( "_doubleValue" ), Math.PI, false ) );
+//	    rval.addHolder( new FloatHolder2( new EntityName2( "_floatValue" ), 1.1f, true ) );
+//	    rval.addHolder( new ShortHolder2( new EntityName2( "_shortValue" ), (short) 15, false ) );
+//	    rval.addHolder( new LongHolder2( new EntityName2( "_longValue" ), 123L, true ) );
+//
+//	    return rval;
+//
+//	}
+//
+//	@Override
+//	public void finishUnpacking( UnPacker2 unPacker ) {
+//
+//	    throw new IllegalArgumentException( "unimplemented" );
+//
+//	}
+//
+//	public String toString() {
+//
+//	    return "StdPackingContext2.TestPackableClass( \"" + _payload + "\", " + _iValue + " )";
+//
+//	}
+//
+//    }
 
 //    public static void main( String[] args ) {
 //

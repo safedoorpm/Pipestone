@@ -7,6 +7,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
+import java.util.SortedSet;
 
 /*
  * Copyright © 2015 Obtuse Systems Corporation
@@ -38,6 +39,8 @@ public interface UnPackerContext2 {
 
     Packable2 recallPackableEntity( @NotNull EntityReference er );
 
+    Collection<EntityReference> getSeenEntityReferences();
+
     void rememberPackableEntity( P2ATokenizer.P2AToken token, EntityReference etr, Packable2 entity );
 
 //    @NotNull
@@ -51,6 +54,18 @@ public interface UnPackerContext2 {
 
     @NotNull
     TypeIndex2 getTypeIndex();
+
+    void clearUnFinishedEntities();
+
+    Collection<EntityReference> getUnfinishedEntities();
+
+    void markEntitiesUnfinished( Collection<EntityReference> unFinishedEntities );
+
+    boolean isEntityFinished( EntityReference er );
+
+    void markEntityFinished( EntityReference er );
+
+    void addUnfinishedEntities( Collection<EntityReference> collection );
 
     @Nullable
     EntityTypeName2 findTypeByTypeReferenceId( int typeReferenceId );

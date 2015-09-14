@@ -5,10 +5,13 @@ import com.obtuse.util.BasicProgramConfigInfo;
 import com.obtuse.util.Logger;
 import com.obtuse.util.ObtuseUtil;
 import com.obtuse.util.packers.packer2.*;
+import com.obtuse.util.packers.packer2.p2a.util.Packable2Collection;
+import com.obtuse.util.packers.packer2.p2a.util.Packable2Mapping;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.*;
+import java.util.Collection;
 
 /*
  * Copyright © 2015 Obtuse Systems Corporation
@@ -53,6 +56,12 @@ public class StdUnPacker2a implements UnPacker2 {
 
 	_unPackerContext = unPackerContext;
 	_tokenizer = new P2ATokenizer( unPackerContext, reader );
+
+	getUnPackerContext().registerFactory( Packable2Mapping.FACTORY );
+	getUnPackerContext().registerFactory( Packable2KeyValuePair.FACTORY );
+	getUnPackerContext().registerFactory( Packable2Collection.FACTORY );
+	getUnPackerContext().registerFactory( EntityName2.getFactory() );
+	getUnPackerContext().registerFactory( EntityTypeName2.getFactory() );
 
     }
 
@@ -127,10 +136,49 @@ public class StdUnPacker2a implements UnPacker2 {
 
 	    Logger.logMsg( "finishing " + group.getEntities().size() + " entities" );
 
-	    for ( Packable2 entity : group.getEntities() ) {
+	    _unPackerContext.clearUnFinishedEntities();
+	    _unPackerContext.markEntitiesUnfinished( _unPackerContext.getSeenEntityReferences() );
 
-		entity.finishUnpacking( this );
+	    while ( true ) {
 
+		Collection<EntityReference> unFinishedEntities = _unPackerContext.getUnfinishedEntities();
+		if ( unFinishedEntities.isEmpty() ) {
+
+		    Logger.logMsg( "done finishing" );
+		    break;
+
+		}
+
+		Logger.logMsg( "starting finishing pass" );
+
+		boolean finishedSomething = false;
+		for ( EntityReference er : unFinishedEntities ) {
+
+		    if ( !_unPackerContext.isEntityFinished( er ) ) {
+
+			Packable2 entity = resolveReference( er );
+			if ( entity.finishUnpacking( this ) ) {
+
+			    _unPackerContext.markEntityFinished( er );
+			    finishedSomething = true;
+			    Logger.logMsg( "finished " + er );
+
+			}
+
+		    }
+
+		}
+
+		if ( !finishedSomething ) {
+
+		    throw new HowDidWeGetHereError( "nothing left that can be finished (" + unFinishedEntities.size() + " unfinished entit" + ( unFinishedEntities.size() == 1 ? "y" : "ies" ) + " still unfinished)" );
+
+		}
+//		for ( Packable2 entity : group.getEntities() ) {
+//
+//		    entity.finishUnpacking( this );
+//
+//		}
 	    }
 
 	    return group;
@@ -160,16 +208,23 @@ public class StdUnPacker2a implements UnPacker2 {
 
 	}
 
-	EntityTypeInfo2 typeInfo = _unPackerContext.findTypeInfo( er.getTypeId() );
+	EntityTypeName2 typeName = _unPackerContext.findTypeByTypeReferenceId( er.getTypeId() );
+	if ( typeName == null ) {
+
+	    throw new UnPacker2ParsingException( "type id " + er.getTypeId() + " not previously defined in data stream", token );
+
+	}
+
+	EntityTypeInfo2 typeInfo = _unPackerContext.findTypeInfo( typeName );
 	if ( typeInfo == null ) {
 
-	    throw new UnPacker2ParsingException( "unknown type id " + er.getTypeId() + " (" + _unPackerContext.findTypeByTypeReferenceId( er.getTypeId() ) + ")", token );
+	    throw new UnPacker2ParsingException( "no factory for type id " + er.getTypeId() + " (" + _unPackerContext.findTypeByTypeReferenceId( er.getTypeId() ) + ")", token );
 
 	}
 
 	EntityFactory2 factory = typeInfo.getFactory();
 
-	Packable2 entity = factory.createEntity( this, bundle );
+	Packable2 entity = factory.createEntity( this, bundle, er );
 
 	_unPackerContext.rememberPackableEntity( token, er, entity );
 
@@ -187,6 +242,12 @@ public class StdUnPacker2a implements UnPacker2 {
 	}
 
 	return _unPackerContext.recallPackableEntity( er );
+
+    }
+
+    public boolean isEntityFinished( EntityReference er ) {
+
+	return _unPackerContext.isEntityFinished( er );
 
     }
 
@@ -444,6 +505,7 @@ public class StdUnPacker2a implements UnPacker2 {
 
 	    unPacker.getUnPackerContext().registerFactory( StdPackerContext2.TestPackableClass.FACTORY );
 	    unPacker.getUnPackerContext().registerFactory( StdPackerContext2.SimplePackableClass.FACTORY );
+	    unPacker.getUnPackerContext().registerFactory( StdPacker2a.SortedSetExample.FACTORY );
 
 	    UnpackedEntityGroup result = unPacker.unPack();
 

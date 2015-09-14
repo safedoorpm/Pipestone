@@ -101,7 +101,9 @@ public class EntityReference implements Comparable<EntityReference> {
 
     public String toString() {
 
-	return "EntityTypeReference( typeId=" + _typeId + ", entityId=" + _entityId + ", version=" + _version + " )";
+//	return "EntityTypeReference( typeId=" + _typeId + ", entityId=" + _entityId + ", version=" + _version + " )";
+
+	return "ER( r" + _typeId + ":" + _entityId + ( _version == null ? "" : "v" + _version ) + " )";
 
     }
 

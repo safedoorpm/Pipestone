@@ -22,10 +22,10 @@ public abstract class AbstractPackableEntity2 implements Packable2 {
 
     private final InstanceId _instanceId;
 
-    protected AbstractPackableEntity2( EntityTypeName2 typeName ) {
+    protected AbstractPackableEntity2() {
 	super();
 
-	_instanceId = new InstanceId( typeName );
+	_instanceId = new InstanceId( new EntityTypeName2( getClass().getCanonicalName() ) );
 
     }
 

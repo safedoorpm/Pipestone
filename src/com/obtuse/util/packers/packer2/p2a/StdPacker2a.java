@@ -8,6 +8,9 @@ import com.obtuse.util.BasicProgramConfigInfo;
 import com.obtuse.util.Logger;
 import com.obtuse.util.ObtuseUtil;
 import com.obtuse.util.packers.packer2.*;
+import com.obtuse.util.packers.packer2.p2a.holders.PackableEntityHolder2;
+import com.obtuse.util.packers.packer2.p2a.util.Packable2Collection;
+import com.obtuse.util.packers.packer2.p2a.util.Packable2Mapping;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -15,9 +18,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.util.Collection;
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.util.*;
 
 /**
  Pack entities using a purely text-based format (no binary data) and explicitly named fields.
@@ -223,9 +224,10 @@ public class StdPacker2a implements Packer2 {
 
 //		int typeReferenceId = instanceId.getTypeId();
 
+		Logger.logMsg( "recording class " + InstanceId.lookupTypeName( newTypeId ) );
 		_writer.print( newTypeId );
 		_writer.print( '@' );
-		_writer.print( ObtuseUtil.enquoteForJavaString( InstanceId.lookupTypeName( newTypeId ).getTypeName() ) );
+		_writer.print( ObtuseUtil.enquoteForJavaString( InstanceId.lookupTypeName( newTypeId ) ) );
 		_writer.println( ';' );
 
 	    }
@@ -575,6 +577,104 @@ public class StdPacker2a implements Packer2 {
 
     }
 
+    public static class SortedSetExample extends AbstractPackableEntity2 implements Packable2 {
+
+	private static final EntityTypeName2 ENTITY_TYPE_NAME = new EntityTypeName2( SortedSetExample.class.getCanonicalName() );
+	private static final int VERSION = 1;
+
+	private SortedSet<String> _myCollection = new TreeSet<String>();
+
+	private List<EntityReference> _erList = null;
+
+	private EntityReference _xxxReference = null;
+
+	public static EntityFactory2 FACTORY = new EntityFactory2( ENTITY_TYPE_NAME ) {
+
+	    @Override
+	    public int getOldestSupportedVersion() {
+
+		return VERSION;
+
+	    }
+
+	    @Override
+	    public int getNewestSupportedVersion() {
+
+		return VERSION;
+
+	    }
+
+	    @Override
+	    @NotNull
+	    public Packable2 createEntity( @NotNull UnPacker2 unPacker, PackedEntityBundle bundle, EntityReference er ) {
+
+		return new SortedSetExample( unPacker, bundle );
+
+	    }
+
+	};
+
+	public SortedSetExample( String[] contents ) {
+	    super();
+
+	    Collections.addAll( _myCollection, contents );
+
+	}
+
+	public String[] getStrings() {
+
+	    return _myCollection.toArray( new String[_myCollection.size()] );
+
+	}
+
+	public SortedSetExample( UnPacker2 unPacker, PackedEntityBundle bundle ) {
+	    super();
+
+	    _xxxReference = bundle.getNullableField( new EntityName2( "_xxx" ) ).EntityTypeReference();
+
+	}
+
+	@NotNull
+	@Override
+	public PackedEntityBundle bundleThyself( boolean isPackingSuper, Packer2 packer ) {
+
+	    PackedEntityBundle rval = new PackedEntityBundle(
+		    ENTITY_TYPE_NAME,
+		    VERSION,
+		    null,
+		    packer.getPackingContext()
+	    );
+
+	    Packable2Collection<String> p2c = new Packable2Collection<String>( _myCollection );
+	    rval.addHolder( new PackableEntityHolder2( new EntityName2( "_xxx" ), p2c, packer, true ) );
+
+	    return rval;
+
+	}
+
+	@Override
+	public boolean finishUnpacking( UnPacker2 unPacker ) {
+
+	    if ( !unPacker.isEntityFinished( _xxxReference ) ) {
+
+		return false;
+
+	    }
+
+	    Packable2Collection<String> xxx = (Packable2Collection<String>) unPacker.resolveReference( _xxxReference );
+
+	    for ( String str : xxx ) {
+
+		_myCollection.add( str );
+
+	    }
+
+	    return true;
+
+	}
+
+    }
+
     public static void main( String[] args ) {
 
 	BasicProgramConfigInfo.init( "Obtuse", "Packer2", "test", null );
@@ -611,6 +711,23 @@ public class StdPacker2a implements Packer2 {
 
 	    test = new StdPackerContext2.TestPackableClass( "howdy doody", null, new StdPackerContext2.SimplePackableClass( "grump!" ) );
 	    p2a.queuePackEntity( test );
+
+	    Map<String,EntityName2> testMap = new TreeMap<String, EntityName2>();
+	    testMap.put( "hello", new EntityName2( "HELLO" ) );
+	    testMap.put( "there", new EntityName2( "THERE" ) );
+	    testMap.put( "world", new EntityName2( "WORLD" ) );
+	    Packable2Mapping testMapMapping = new Packable2Mapping<String,EntityName2>( testMap );
+	    p2a.queuePackEntity( testMapMapping );
+
+	    Packable2Collection p2Collection = new Packable2Collection<String>();
+	    p2Collection.add( "Hello" );
+	    p2Collection.add( "There" );
+	    Packable2Collection<String> p2C2 = new Packable2Collection<String>();
+	    p2C2.addAll( Arrays.asList( new String[]{ "Mercury", "Venus", "Mars", "Jupiter" } ) );
+	    p2Collection.add( p2C2 );
+	    p2a.queuePackEntity( p2Collection );
+	    SortedSetExample sse = new SortedSetExample( new String[] { "alpha", "beta", "gamma" } );
+	    p2a.queuePackEntity( sse );
 
 	    p2a.actuallyPackEntities();
 

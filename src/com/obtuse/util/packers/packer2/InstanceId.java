@@ -27,16 +27,21 @@ public final class InstanceId implements Comparable<InstanceId> {
     private static final SimpleUniqueLongIdGenerator s_idGenerator = new SimpleUniqueLongIdGenerator( InstanceId.class.getCanonicalName() + " - entity id generator" );
     private static final SimpleUniqueIntegerIdGenerator s_typeIdGenerator = new SimpleUniqueIntegerIdGenerator( InstanceId.class.getCanonicalName() + " - type id generator" );
 
-    private static final SortedMap<EntityTypeName2,Integer> s_typeNamesToTypeIds = new TreeMap<EntityTypeName2, Integer>();
-    private static final SortedMap<Integer,EntityTypeName2> s_typeIdsToTypeNames = new TreeMap<Integer, EntityTypeName2>();
+    private static final SortedMap<String,Integer> s_typeNamesToTypeIds = new TreeMap<String,Integer>();
+    private static final SortedMap<Integer,String> s_typeIdsToTypeNames = new TreeMap<Integer,String>();
 
     private final Long _entityId;
 
     private final int _typeId;
 
-    private final EntityTypeName2 _typeName;
+    private final String _typeName;
 
     public InstanceId( EntityTypeName2 typeName ) {
+	this( typeName.getTypeName() );
+
+    }
+
+    public InstanceId( String typeName ) {
 	super();
 
 	_typeId = allocateTypeId( typeName );
@@ -46,7 +51,7 @@ public final class InstanceId implements Comparable<InstanceId> {
 
     }
 
-    public static int allocateTypeId( EntityTypeName2 typeName ) {
+    public static int allocateTypeId( String typeName ) {
 
 	synchronized ( s_typeNamesToTypeIds ) {
 
@@ -65,14 +70,14 @@ public final class InstanceId implements Comparable<InstanceId> {
 
     }
 
-    public static EntityTypeName2 lookupTypeName( int typeId ) {
+    public static String lookupTypeName( int typeId ) {
 
 	return s_typeIdsToTypeNames.get( typeId );
 
     }
 
     @SuppressWarnings("WeakerAccess")
-    public static Integer lookupTypeId( EntityTypeName2 typeName ) {
+    public static Integer lookupTypeId( String typeName ) {
 
 	return s_typeNamesToTypeIds.get( typeName );
 
@@ -90,7 +95,7 @@ public final class InstanceId implements Comparable<InstanceId> {
 
     }
 
-    public EntityTypeName2 getTypeName() {
+    public String getTypeName() {
 
 	return _typeName;
 

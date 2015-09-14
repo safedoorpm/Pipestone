@@ -17,7 +17,7 @@ public interface Packable2 {
     @NotNull
     PackedEntityBundle bundleThyself( boolean isPackingSuper, Packer2 packer );
 
-    void finishUnpacking( UnPacker2 unPacker );
+    boolean finishUnpacking( UnPacker2 unPacker );
 
 //    PackingId2 getPackingId();
 

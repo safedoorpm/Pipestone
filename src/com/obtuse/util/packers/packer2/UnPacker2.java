@@ -20,4 +20,7 @@ public interface UnPacker2 {
     Packable2 resolveReference( EntityReference er );
 
     UnPackerContext2 getUnPackerContext();
+
+    boolean isEntityFinished( EntityReference entityReference );
+
 }

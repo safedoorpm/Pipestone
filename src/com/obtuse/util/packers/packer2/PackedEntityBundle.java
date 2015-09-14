@@ -5,6 +5,7 @@ package com.obtuse.util.packers.packer2;
  */
 
 import com.obtuse.util.FormattingLinkedList;
+import com.obtuse.util.packers.packer2.p2a.EntityReference;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

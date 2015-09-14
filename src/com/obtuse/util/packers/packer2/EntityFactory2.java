@@ -1,5 +1,6 @@
 package com.obtuse.util.packers.packer2;
 
+import com.obtuse.util.packers.packer2.p2a.EntityReference;
 import org.jetbrains.annotations.NotNull;
 
 /*
@@ -62,8 +63,11 @@ public abstract class EntityFactory2 implements Comparable<EntityFactory2> {
 
     }
 
+    public abstract int getOldestSupportedVersion();
+    public abstract int getNewestSupportedVersion();
+
     @NotNull
-    public abstract Packable2 createEntity( @NotNull UnPacker2 unPacker, PackedEntityBundle bundle );
+    public abstract Packable2 createEntity( @NotNull UnPacker2 unPacker, PackedEntityBundle bundle, EntityReference er );
 
     @NotNull
     public EntityTypeName2 getEntityTypeName() {

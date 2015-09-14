@@ -241,7 +241,16 @@ public class StdPackerContext2 implements PackerContext2 {
     public void rememberPackableEntity( Packable2 entity ) {
 
 //	int typeReferenceId = getOrAllocateTypeReferenceId( entity.getInstanceId().getTypeName() );
-	@SuppressWarnings("UnusedAssignment") int typeReferenceId = InstanceId.allocateTypeId( entity.getInstanceId().getTypeName() );
+//	try {
+
+	    @SuppressWarnings("UnusedAssignment") int typeReferenceId = InstanceId.allocateTypeId( entity.getInstanceId().getTypeName() );
+
+//	} catch ( Throwable e ) {
+//
+//	    e.printStackTrace();
+//	    ObtuseUtil.doNothing();
+//
+//	}
 
 //	PackingId2 packingId;
 //
@@ -275,7 +284,7 @@ public class StdPackerContext2 implements PackerContext2 {
 
     public int rememberTypeName( EntityTypeName2 typeName ) {
 
-	int typeId = InstanceId.allocateTypeId( typeName );
+	int typeId = InstanceId.allocateTypeId( typeName.getTypeName() );
 
 	if ( !_seenTypeIds.contains( typeId ) ) {
 
@@ -479,17 +488,31 @@ public class StdPackerContext2 implements PackerContext2 {
 
     public static class TestPackableClass extends AbstractPackableEntity2 implements Packable2 {
 
-	private static final EntityTypeName2 ENTITY_NAME = new EntityTypeName2( StdPackerContext2.TestPackableClass.class );
+	private static final EntityTypeName2 ENTITY_TYPE_NAME = new EntityTypeName2( StdPackerContext2.TestPackableClass.class );
 
 	private static final int VERSION = 1;
 
-	public static final EntityFactory2 FACTORY = new EntityFactory2( ENTITY_NAME ) {
+	public static final EntityFactory2 FACTORY = new EntityFactory2( ENTITY_TYPE_NAME ) {
+
+	    @Override
+	    public int getOldestSupportedVersion() {
+
+		return VERSION;
+
+	    }
+
+	    @Override
+	    public int getNewestSupportedVersion() {
+
+		return VERSION;
+
+	    }
 
 	    @Override
 	    @NotNull
-	    public Packable2 createEntity( @NotNull UnPacker2 unPacker, PackedEntityBundle bundle ) {
+	    public Packable2 createEntity( @NotNull UnPacker2 unPacker, PackedEntityBundle bundle, EntityReference er ) {
 
-		return new TestPackableClass( unPacker, bundle );
+		return new TestPackableClass( unPacker, bundle, er );
 
 	    }
 
@@ -504,7 +527,7 @@ public class StdPackerContext2 implements PackerContext2 {
 	private EntityReference _innerReference;
 
 	public TestPackableClass( @NotNull String payload, @Nullable TestPackableClass inner, @Nullable SimplePackableClass simple ) {
-	    super( ENTITY_NAME );
+	    super();
 
 //	    context.registerFactory( FACTORY );
 
@@ -515,8 +538,8 @@ public class StdPackerContext2 implements PackerContext2 {
 
 	}
 
-	public TestPackableClass( UnPacker2 unPacker, PackedEntityBundle bundle ) {
-	    super( ENTITY_NAME );
+	public TestPackableClass( UnPacker2 unPacker, PackedEntityBundle bundle, EntityReference er ) {
+	    super();
 
 	    if ( bundle.getVersion() != VERSION ) {
 
@@ -541,7 +564,7 @@ public class StdPackerContext2 implements PackerContext2 {
 	public PackedEntityBundle bundleThyself( boolean isPackingSuper, Packer2 packer ) {
 
 	    PackedEntityBundle rval = new PackedEntityBundle(
-		    ENTITY_NAME,
+		    ENTITY_TYPE_NAME,
 		    VERSION,
 		    super.bundleThyself( true, packer ),
 		    packer.getPackingContext()
@@ -562,10 +585,12 @@ public class StdPackerContext2 implements PackerContext2 {
 	}
 
 	@Override
-	public void finishUnpacking( UnPacker2 unPacker ) {
+	public boolean finishUnpacking( UnPacker2 unPacker ) {
 
 	    _simple = (SimplePackableClass)unPacker.resolveReference( _simpleReference );
 	    _inner = (TestPackableClass)unPacker.resolveReference( _innerReference );
+
+	    return true;
 
 	}
 
@@ -579,25 +604,40 @@ public class StdPackerContext2 implements PackerContext2 {
 
     public static class SimplePackableClass extends AbstractPackableEntity2 implements Packable2 {
 
-	private static final EntityTypeName2 ENTITY_NAME = new EntityTypeName2( StdPackerContext2.SimplePackableClass.class );
+	private static final EntityTypeName2 ENTITY_TYPE_NAME = new EntityTypeName2( StdPackerContext2.SimplePackableClass.class );
 
 	private static final int VERSION = 42;
 
-	public static EntityFactory2 FACTORY = new EntityFactory2( ENTITY_NAME ) {
+	public static EntityFactory2 FACTORY = new EntityFactory2( ENTITY_TYPE_NAME ) {
+
+	    @Override
+	    public int getOldestSupportedVersion() {
+
+		return VERSION;
+
+	    }
+
+	    @Override
+	    public int getNewestSupportedVersion() {
+
+		return VERSION;
+
+	    }
 
 	    @Override
 	    @NotNull
-	    public Packable2 createEntity( @NotNull UnPacker2 unPacker, PackedEntityBundle bundle ) {
+	    public Packable2 createEntity( @NotNull UnPacker2 unPacker, PackedEntityBundle bundle, EntityReference er ) {
 
-		return new SimplePackableClass( unPacker, bundle );
+		return new SimplePackableClass( unPacker, bundle, er );
 
 	    }
 
 	};
+
 	private final String _payload;
 
 	public SimplePackableClass( @NotNull String payload ) {
-	    super( ENTITY_NAME );
+	    super();
 
 //	    context.registerFactory( FACTORY );
 
@@ -605,8 +645,8 @@ public class StdPackerContext2 implements PackerContext2 {
 
 	}
 
-	public SimplePackableClass( UnPacker2 unPacker, PackedEntityBundle bundle ) {
-	    super( ENTITY_NAME );
+	public SimplePackableClass( UnPacker2 unPacker, PackedEntityBundle bundle, EntityReference er ) {
+	    super();
 
 	    if ( bundle.getVersion() != VERSION ) {
 
@@ -624,7 +664,7 @@ public class StdPackerContext2 implements PackerContext2 {
 	public PackedEntityBundle bundleThyself( boolean isPackingSuper, Packer2 packer ) {
 
 	    PackedEntityBundle rval = new PackedEntityBundle(
-		    ENTITY_NAME,
+		    ENTITY_TYPE_NAME,
 		    VERSION, super.bundleThyself( true, packer ),
 		    packer.getPackingContext()
 	    );
@@ -636,9 +676,11 @@ public class StdPackerContext2 implements PackerContext2 {
 	}
 
 	@Override
-	public void finishUnpacking( UnPacker2 unPacker ) {
+	public boolean finishUnpacking( UnPacker2 unPacker ) {
 
 	    // Nothing to be done here.
+
+	    return true;
 
 	}
 
