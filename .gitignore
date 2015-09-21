@@ -4,4 +4,4 @@
 *.class
 
 # Eclipse is making this directory for output files
-bin1
+/bin1
