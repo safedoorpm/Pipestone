@@ -15,7 +15,6 @@
         <pathelement location="bin1"/>
         <pathelement location="annotations.jar"/>
         <pathelement location="junit-4.10.jar"/>
-        <pathelement location="postgresql-8.1-408.jdbc3.jar"/>
     </path>
     <target name="init">
         <mkdir dir="bin1"/>

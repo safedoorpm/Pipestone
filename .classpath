@@ -7,7 +7,6 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="annotations.jar"/>
 	<classpathentry kind="lib" path="junit-4.10.jar"/>
-	<classpathentry kind="lib" path="postgresql-8.1-408.jdbc3.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin1"/>
 </classpath>
