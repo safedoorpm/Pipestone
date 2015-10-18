@@ -82,7 +82,7 @@ public class Pepys {
 
 	    _eventType = eventType;
 	    _source = source;
-	    _sourceId = source.getId();
+	    _sourceId = source.getPepysId();
 	    _auxSource = auxSource;
 
 	}
@@ -271,7 +271,7 @@ public class Pepys {
 	private PepysWeakSourceRef( @NotNull PepysSource source ) {
 	    super( source );
 
-	    _sourceId = source.getId();
+	    _sourceId = source.getPepysId();
 
 	}
 
@@ -434,7 +434,7 @@ public class Pepys {
 	    super( source, phantomReferenceQueue );
 
 	    _weakSourceRef = new PepysWeakSourceRef( source );
-	    _sourceId = source.getId();
+	    _sourceId = source.getPepysId();
 
 	    // Make sure that we always have strong references to the phantom references to PepysSource objects to ensure that the
 	    // the phantom references still exist to be enqueued onto our reference queue when the corresponding PepysSource
@@ -656,7 +656,7 @@ public class Pepys {
 
 	}
 
-	Logger.logMsg( "remembering listener for " + source.getClass().getSimpleName() + " source id " + source.getId() );
+	Logger.logMsg( "remembering listener for " + source.getClass().getSimpleName() + " source id " + source.getPepysId() );
 	listeners.registerEventListener( listener );
 
     }
@@ -818,7 +818,7 @@ public class Pepys {
 	PepysSource s1 = new PepysSource() {
 
 	    @Override
-	    public long getId() {
+	    public long getPepysId() {
 
 		return 1L;
 
@@ -831,7 +831,7 @@ public class Pepys {
 	PepysSource s2 = new PepysSource() {
 
 	    @Override
-	    public long getId() {
+	    public long getPepysId() {
 
 		return 2L;
 
@@ -844,7 +844,7 @@ public class Pepys {
 	PepysSource s3 = new PepysSource() {
 
 	    @Override
-	    public long getId() {
+	    public long getPepysId() {
 
 		return 3L;
 

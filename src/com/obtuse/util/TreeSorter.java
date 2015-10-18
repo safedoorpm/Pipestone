@@ -287,6 +287,32 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
     }
 
     /**
+     * Get the first key.
+     * <p/>Based on {@link SortedMap#firstKey()}.
+     * @return the lowest key in this sorter.
+     * @throws NoSuchElementException if the sorter is empty.
+     */
+
+    public K firstKey() {
+
+	return _sortedData.firstKey();
+
+    }
+
+    /**
+     * Get the last key.
+     * <p/>Based on {@link SortedMap#lastKey()}.
+     * @return the highest key in this sorter.
+     * @throws NoSuchElementException if the sorter is empty.
+     */
+
+    public K lastKey() {
+
+	return _sortedData.lastKey();
+
+    }
+
+    /**
      * Return the values associated with a specified key.
      * The values in the returned collection appear in the order that they were added to this tree sorter.
      * The returned collection of values is immutable although the contents of the collection could change if

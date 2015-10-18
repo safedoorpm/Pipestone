@@ -24,7 +24,7 @@ public abstract class ArgYYYY_MM_DD_CalendarDate extends Arg {
 
         try {
 
-            process( keyword, new CalendarDate( arg ) );
+            process( keyword, new ObtuseCalendarDate( arg ) );
 
         } catch ( ParsingException e ) {
 
@@ -34,7 +34,7 @@ public abstract class ArgYYYY_MM_DD_CalendarDate extends Arg {
 
     }
 
-    public abstract void process( String keyword, CalendarDate arg );
+    public abstract void process( String keyword, ObtuseCalendarDate arg );
 
     public String toString() {
 

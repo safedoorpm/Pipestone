@@ -392,14 +392,14 @@ public class ObtuseXMLUtils {
 
     }
 
-    public static CalendarDate getMandatoryCalendarDateAttributeValue( Node node, String attributeName )
+    public static ObtuseCalendarDate getMandatoryCalendarDateAttributeValue( Node node, String attributeName )
             throws ObtuseXmlNodeException {
 
         return ObtuseXMLUtils.getCalendarDateAttributeValue( node, attributeName, true );
 
     }
 
-    public static CalendarDate getCalendarDateAttributeValue( Node node, String attributeName, boolean mandatory )
+    public static ObtuseCalendarDate getCalendarDateAttributeValue( Node node, String attributeName, boolean mandatory )
             throws ObtuseXmlNodeException {
 
         String attributeValue = ObtuseXMLUtils.getAttributeValue( node, attributeName, mandatory );
@@ -414,7 +414,7 @@ public class ObtuseXMLUtils {
         try {
 
             @SuppressWarnings("UnnecessaryLocalVariable")
-            CalendarDate rval = new CalendarDate( attributeValue );
+	    ObtuseCalendarDate rval = new ObtuseCalendarDate( attributeValue );
             return rval;
 
         } catch ( ParsingException e ) {

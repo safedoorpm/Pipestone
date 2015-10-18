@@ -4,10 +4,11 @@
 
 package com.obtuse.util;
 
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * A message proxy that logs messages and counts how many errors are sent its way.
+ * A message proxy that logs messages and counts how many error and informational messages are sent its way.
  */
 
 @SuppressWarnings("UnusedDeclaration")
@@ -17,6 +18,10 @@ public class LoggingMessageProxy implements MessageProxy {
     private int _infoCount = 0;
     private final MessageProxy _passThroughMessageProxy;
 
+    /**
+     Create an instance which logs all messages via the Obtuse {@link Logger} facility.
+     */
+
     public LoggingMessageProxy() {
         super();
 
@@ -24,12 +29,21 @@ public class LoggingMessageProxy implements MessageProxy {
 
     }
 
-    public LoggingMessageProxy( MessageProxy messageProxy ) {
+    /**
+     Create an instance which logs all messages via a specified facility.
+     @param messageProxy the specified facility (if <code>null</code> then messages are logged via the Obtuse {@link Logger} facility).
+     */
+
+    public LoggingMessageProxy( @Nullable MessageProxy messageProxy ) {
         super();
 
         _passThroughMessageProxy = messageProxy;
 
     }
+
+    /**
+     Count an error message.
+     */
 
     private void countError() {
 
@@ -37,13 +51,18 @@ public class LoggingMessageProxy implements MessageProxy {
 
     }
 
+    /**
+     Count an informational message.
+     */
+
     private void countInfo() {
 
         _infoCount += 1;
 
     }
 
-    public void fatal( String msg ) {
+    @Override
+    public void fatal( @NotNull String msg ) {
 
         if ( _passThroughMessageProxy == null ) {
 
@@ -58,14 +77,15 @@ public class LoggingMessageProxy implements MessageProxy {
 
     }
 
-    public void fatal( String msg1, @Nullable String msg2 ) {
+    @Override
+    public void fatal( @NotNull String msg, @Nullable String appendix ) {
 
         if ( _passThroughMessageProxy == null ) {
 
-            Logger.logErr( "FATAL:  " + msg1, (String)null );
-            if ( msg2 != null ) {
+            Logger.logErr( "FATAL:  " + msg, (String)null );
+            if ( appendix != null ) {
 
-                Logger.logErr( "FATAL:  " + msg2, (String)null );
+                Logger.logErr( "FATAL:  " + appendix, (String)null );
 
             }
 
@@ -73,13 +93,14 @@ public class LoggingMessageProxy implements MessageProxy {
 
         } else {
 
-            _passThroughMessageProxy.fatal( msg1, msg2 );
+            _passThroughMessageProxy.fatal( msg, appendix );
 
         }
 
     }
 
-    public void fatal( String msg, Throwable e ) {
+    @Override
+    public void fatal( @NotNull String msg, @Nullable Throwable e ) {
 
         if ( _passThroughMessageProxy == null ) {
 
@@ -95,23 +116,25 @@ public class LoggingMessageProxy implements MessageProxy {
 
     }
 
-    public void fatal( String msg1, @Nullable String msg2, String buttonContents ) {
+    @Override
+    public void fatal( @NotNull String msg, @Nullable String appendix, @Nullable String contextName ) {
 
         if ( _passThroughMessageProxy == null ) {
 
-            fatal( msg1, msg2 );
+            fatal( msg, appendix );
 
             System.exit( 1 );
 
         } else {
 
-            _passThroughMessageProxy.fatal( msg1, msg2, buttonContents );
+            _passThroughMessageProxy.fatal( msg, appendix, contextName );
 
         }
 
     }
 
-    public void error( String msg ) {
+    @Override
+    public void error( @NotNull String msg ) {
 
         if ( _passThroughMessageProxy == null ) {
 
@@ -127,20 +150,21 @@ public class LoggingMessageProxy implements MessageProxy {
 
     }
 
-    public void error( String msg1, @Nullable String msg2 ) {
+    @Override
+    public void error( @NotNull String msg, @Nullable String appendix ) {
 
         if ( _passThroughMessageProxy == null ) {
 
-            Logger.logErr( "ERROR:  " + msg1, (String)null );
-            if ( msg2 != null ) {
+            Logger.logErr( "ERROR:  " + msg, (String)null );
+            if ( appendix != null ) {
 
-                Logger.logErr( "ERROR:  " + msg2, (String)null );
+                Logger.logErr( "ERROR:  " + appendix, (String)null );
 
             }
 
         } else {
 
-            _passThroughMessageProxy.error( msg1, msg2 );
+            _passThroughMessageProxy.error( msg, appendix );
 
         }
 
@@ -148,7 +172,8 @@ public class LoggingMessageProxy implements MessageProxy {
 
     }
 
-    public void error( String msg, Throwable e ) {
+    @Override
+    public void error( @NotNull String msg, @Nullable Throwable e ) {
 
         if ( _passThroughMessageProxy == null ) {
 
@@ -164,15 +189,16 @@ public class LoggingMessageProxy implements MessageProxy {
 
     }
 
-    public void error( String msg1, @Nullable String msg2, String buttonContents ) {
+    @Override
+    public void error( @NotNull String msg, @Nullable String appendix, @Nullable String contextName ) {
 
         if ( _passThroughMessageProxy == null ) {
 
-            error( msg1, msg2 );
+            error( msg, appendix );
 
         } else {
 
-            _passThroughMessageProxy.error( msg1, msg2, buttonContents );
+            _passThroughMessageProxy.error( msg, appendix, contextName );
 
         }
 
@@ -180,7 +206,8 @@ public class LoggingMessageProxy implements MessageProxy {
 
     }
 
-    public void info( String msg ) {
+    @Override
+    public void info( @NotNull String msg ) {
 
         if ( _passThroughMessageProxy == null ) {
 
@@ -197,22 +224,23 @@ public class LoggingMessageProxy implements MessageProxy {
 
     }
 
-    public void info( String msg1, String msg2 ) {
+    @Override
+    public void info( @NotNull String msg, @Nullable String appendix ) {
 
         if ( _passThroughMessageProxy == null ) {
 
             //noinspection RedundantCast
-            Logger.logMsg( "INFO:  " + msg1, (String)null );
-            if ( msg2 != null ) {
+            Logger.logMsg( "INFO:  " + msg, (String)null );
+            if ( appendix != null ) {
 
                 //noinspection RedundantCast
-                Logger.logMsg( "INFO:  " + msg2, (String)null );
+                Logger.logMsg( "INFO:  " + appendix, (String)null );
 
             }
 
         } else {
 
-            _passThroughMessageProxy.info( msg1, msg2 );
+            _passThroughMessageProxy.info( msg, appendix );
 
         }
 
@@ -220,26 +248,27 @@ public class LoggingMessageProxy implements MessageProxy {
 
     }
 
-    public void info(
-            String msg1,
-            @Nullable
-            String msg2,
-            String buttonContents
-    ) {
+    @Override
+    public void info( @NotNull String msg, @Nullable String appendix, @Nullable String contextName ) {
 
         if ( _passThroughMessageProxy == null ) {
 
-            info( msg1, msg2 );
+            info( msg, appendix );
 
         } else {
 
-            _passThroughMessageProxy.info( msg1, msg2, buttonContents );
+            _passThroughMessageProxy.info( msg, appendix, contextName );
 
         }
 
         countInfo();
 
     }
+
+    /**
+     Retrieve the count of error messages sent to any of this class's error() methods.
+     @return the number of error messages sent to any of this class's error() methods.
+     */
 
     public int getErrorCount() {
 
@@ -247,17 +276,32 @@ public class LoggingMessageProxy implements MessageProxy {
 
     }
 
+    /**
+     Determine if any error messages have been sent to any of this class's error() methods.
+     @return <code>true</code> if one or more of this class's error() methods have ever been called within this JVM; <code>false</code> otherwise.
+     */
+
     public boolean hasLoggedErrors() {
 
         return _errorCount > 0;
 
     }
 
+    /**
+     Retrieve the count of informational messages sent to any of this class's info() methods.
+     @return the number of informational messages sent to any of this class's info() methods.
+     */
+
     public int getInfoCount() {
 
         return _infoCount;
 
     }
+
+    /**
+     Determine if any informational messages have been sent to any of this class's info() methods.
+     @return <code>true</code> if one or more of this class's info() methods have ever been called within this JVM; <code>false</code> otherwise.
+     */
 
     public boolean hasLoggedInfos() {
 

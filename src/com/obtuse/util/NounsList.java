@@ -23,9 +23,9 @@ public class NounsList {
 
     private static int s_iteration = -1;
 
-    private static String[] s_testVerbs = { "jump", "dance", "sing" };
+//    private static String[] s_testVerbs = { "jump", "dance", "sing" };
 
-    private static String[] s_verbs = {
+    private static String[] s_nouns = {
             "account",
             "achiever",
             "acoustics",
@@ -1014,7 +1014,7 @@ public class NounsList {
 
             s_iteration += 1;
 
-            Collections.addAll( s_available, s_verbs );
+            Collections.addAll( s_available, s_nouns );
 
         }
 
@@ -1026,7 +1026,7 @@ public class NounsList {
 
     public static void main( String[] args ) {
 
-//        s_verbs = s_testVerbs;
+//        s_nouns = s_testVerbs;
         for ( int i = 0; i < 20; i += 1 ) {
 
             System.out.println( pickNoun() );

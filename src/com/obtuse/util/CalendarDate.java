@@ -1,211 +1,75 @@
-/*
- Copyright © 2014 Daniel Boulet
- */
-
 package com.obtuse.util;
+
+/*
+ * Copyright © 2015 Obtuse Systems Corporation
+ */
 
 import com.obtuse.exceptions.HowDidWeGetHereError;
 import com.obtuse.util.exceptions.ParsingException;
-import org.jetbrains.annotations.NotNull;
 
-import javax.management.timer.Timer;
-import java.util.Calendar;
 import java.util.Date;
 
 /**
- * Represent a calendar date.
- * <p/>
- * This class represents dates as actual calendar dates.
- * This avoids the alternative of using a Java Date object
- * with the time-within-the-date part of the object's value
- * set to something which is always a compromise of some sort.
- * <p/>
- * Instances of this class are immutable.
+ Equivalent to the old com.obtuse.util.CalendarDate class but uses the new com.obtuse.util.ObtuseCalendarDate class to do the work.
+ <p/>Any software that uses the old CalendarDate class should switch to using the new ObtuseCalendarDate class (all the constructors
+ and methods have the same signature).
  */
 
-@SuppressWarnings("UnusedDeclaration")
-public class CalendarDate implements Comparable<CalendarDate> {
-
-    private final String _dateString;
-    private final long _dateStartTimeMs;
-    private final long _dateEndTimeMs;
-    private final long _midnightUtcMs;
+@Deprecated
+public class CalendarDate extends ObtuseCalendarDate {
 
     public CalendarDate( String dateString )
-            throws ParsingException {
-        super();
-
-        _dateString = dateString;
-
-        if ( dateString.length() != "2012-10-05".length() ) {
-
-            throw new ParsingException(
-                    "date \"" + dateString + "\" is wrong length (must be _exactly_ " + "2012-10-05".length() + " characters)",
-                    0,
-                    0,
-                    ParsingException.ErrorType.DATE_FORMAT_ERROR
-            );
-
-        }
-
-        _midnightUtcMs = DateUtils.parseYYYY_MM_DD_utc( dateString, 0 ).getTime();
-
-        Calendar cal = Calendar.getInstance();
-        cal.setTime( DateUtils.parseYYYY_MM_DD( dateString, 0 ) );
-        cal.set( Calendar.HOUR_OF_DAY, 0 );
-        cal.set( Calendar.MINUTE, 0 );
-        cal.set( Calendar.SECOND, 0 );
-        _dateStartTimeMs = cal.getTimeInMillis();
-        cal.add( Calendar.DAY_OF_YEAR, 1 );
-        _dateEndTimeMs = cal.getTimeInMillis() - 1;
-
+	    throws ParsingException {
+	super( dateString );
     }
 
     public CalendarDate( Date date ) {
-        super();
+	super( date );
 
-        _dateString = DateUtils.formatYYYY_MM_DD( date );
-        try {
+    }
 
-            _midnightUtcMs = DateUtils.parseYYYY_MM_DD_utc( _dateString, 0 ).getTime();
-
-        } catch ( ParsingException e ) {
-
-            throw new HowDidWeGetHereError( "unable to parse date \"" + _dateString + "\" which we formatted", e );
-
-        }
-
-        Calendar cal = Calendar.getInstance();
-        cal.setTime( date );
-        cal.set( Calendar.HOUR_OF_DAY, 0 );
-        cal.set( Calendar.MINUTE, 0 );
-        cal.set( Calendar.SECOND, 0 );
-        _dateStartTimeMs = cal.getTimeInMillis();
-        cal.add( Calendar.DAY_OF_YEAR, 1 );
-        _dateEndTimeMs = cal.getTimeInMillis() - 1;
-
+    public CalendarDate( ObtuseCalendarDate obtuseCalendarDate ) {
+	super( obtuseCalendarDate );
     }
 
     public static int computeDurationDays( CalendarDate from, CalendarDate to ) {
 
-        if ( from.compareTo( to ) > 0 ) {
-
-            throw new HowDidWeGetHereError( "probable bug:  from (" + from + ") > to (" + to + ")" );
-
-        }
-
-        long durationMs = to._midnightUtcMs - from._midnightUtcMs;
-        if ( durationMs % Timer.ONE_DAY != 0L ) {
-
-            throw new HowDidWeGetHereError( "days are not 24 hours long" );
-
-        }
-
-        @SuppressWarnings("UnnecessaryLocalVariable")
-        int durationDays = 1 + (int)( durationMs / Timer.ONE_DAY );
-
-//        Logger.logMsg( "duration between " + this + " and " + rhs + " is " + computeDurationDays + " days" );
-
-        return durationDays;
+	return ObtuseCalendarDate.computeDurationDays( from, to );
 
     }
 
     public static CalendarDate addDays( CalendarDate date, int days ) {
 
-        Calendar cal = Calendar.getInstance();
-        cal.setTimeInMillis( date._dateStartTimeMs );
-        cal.add( Calendar.DAY_OF_YEAR, days );
+	CalendarDate newDate = new CalendarDate( ObtuseCalendarDate.addDays( date, days ) );
 
-        return new CalendarDate( cal.getTime() );
-
-    }
-
-    public String getDateString() {
-
-        return _dateString;
-
-    }
-
-    public long getDateStartTimeMs() {
-
-        return _dateStartTimeMs;
-
-    }
-
-    public long getDateEndTimeMs() {
-
-        return _dateEndTimeMs;
-
-    }
-
-    public boolean equals( Object rhs ) {
-
-        //noinspection ChainOfInstanceofChecks
-        if ( rhs instanceof CalendarDate ) {
-
-            return _dateString.equals( ((CalendarDate) rhs).getDateString() );
-
-        } else if ( rhs instanceof Date ) {
-
-            Date rhsDate = (Date)rhs;
-            return _dateStartTimeMs <= rhsDate.getTime() && rhsDate.getTime() <= _dateEndTimeMs;
-
-        } else {
-
-            return false;
-
-        }
-
-    }
-
-    public int hashCode() {
-
-        return _dateString.hashCode();
-
-    }
-
-    public int compareTo( @NotNull CalendarDate rhs ) {
-
-        return _dateString.compareTo( rhs._dateString );
-
-    }
-
-    public boolean containsDate( Date rhs ) {
-
-        return _dateStartTimeMs <= rhs.getTime() && rhs.getTime() <= _dateEndTimeMs;
-
-    }
-
-    public String toString() {
-
-        return _dateString;
+	return newDate;
 
     }
 
     public static void main( String[] args ) {
 
-        BasicProgramConfigInfo.init( "Obtuse", "Shared", "CalendarDate", null );
+	BasicProgramConfigInfo.init( "Obtuse", "Shared", "ObtuseCalendarDate", null );
 
-        try {
+	try {
 
-            CalendarDate start = new CalendarDate( "2009-02-28" );
-            for ( int i = 0; i < 20; i += 1 ) {
+	    CalendarDate start = new CalendarDate( "2009-02-28" );
+	    for ( int i = 0; i < 20; i += 1 ) {
 
-                CalendarDate end = CalendarDate.addDays( start, i );
+		CalendarDate end = CalendarDate.addDays( start, i );
 
-                Logger.logMsg( "from " + start + " to " + end + " is " + CalendarDate.computeDurationDays( start, end ) + " days" );
+		Logger.logMsg( "from " + start + " to " + end + " is " + ObtuseCalendarDate.computeDurationDays( start, end ) + " days" );
 
-            }
+	    }
 
-        } catch ( ParsingException e ) {
+	} catch ( ParsingException e ) {
 
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+	    e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
 
-        } catch ( HowDidWeGetHereError e ) {
+	} catch ( HowDidWeGetHereError e ) {
 
-            e.printStackTrace();
+	    e.printStackTrace();
 
-        }
+	}
 
     }
 

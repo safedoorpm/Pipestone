@@ -9,8 +9,9 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**
- * A compact and fast set of integers.
- * Note that the implementation assumes that the integers are relatively tightly clustered together.
+ * A compact and fast set of longs.
+ * Note that instances of this class are backed by a dynamically sized bitmap array of <code>long</code>.
+ * This implementation assumes that the integers are relatively tightly clustered together.
  * Sets with huge gaps in the member values will result in considerably more memory being consumed than one might like.
  */
 
@@ -20,10 +21,19 @@ public class MyIntSet implements Iterable<Long>, Serializable {
     private long   _startValue = 0L;
 
     public MyIntSet() {
-
         super();
 
     }
+
+    /**
+     Add an int to this set.
+     <p/>A call to this method could cause the underlying array of <code>long</code> values to grow such that it is
+     long enough to describe all int values from the smallest long value ever added to this set through to the largest long value ever
+     added to this set.
+     <p/>Note that while the array may grow as a result of a call to any of this class's <code>add*()</code> methods, the array never
+     shrinks.
+     @param value the long to be added.
+     */
 
     public void add( long value ) {
 
@@ -47,7 +57,7 @@ public class MyIntSet implements Iterable<Long>, Serializable {
 
             long newStartValue = _startValue - ( ( _startValue - value ) / Long.SIZE + 10 ) * Long.SIZE;
             long lastValue = _startValue + Long.SIZE * _valueBits.length - 1;
-            long[] newArray = new long[( (int)( lastValue + 1 - newStartValue ) / Long.SIZE )];
+            long[] newArray = new long[(int)( ( lastValue + 1 - newStartValue ) / Long.SIZE )];
             System.arraycopy(
                     _valueBits,
                     0,
@@ -64,7 +74,7 @@ public class MyIntSet implements Iterable<Long>, Serializable {
 
             long lastValue = _startValue + Long.SIZE * _valueBits.length - 1;
             long newLastValue = lastValue + ( ( value - lastValue ) / Long.SIZE + 10 ) * Long.SIZE;
-            long[] newArray = new long[( (int)( newLastValue + 1 - _startValue ) / Long.SIZE )];
+            long[] newArray = new long[(int)( ( newLastValue + 1 - _startValue ) / Long.SIZE )];
             System.arraycopy( _valueBits, 0, newArray, 0, _valueBits.length );
 
             _valueBits = newArray;
@@ -76,6 +86,56 @@ public class MyIntSet implements Iterable<Long>, Serializable {
         _valueBits[( (int)( value - _startValue ) / Long.SIZE )] |= 1L << ( ( value - _startValue ) & ( Long.SIZE - 1 ) );
 
 //        Logger.logMsg( "after adding " + value + ":  " + this );
+
+    }
+
+    public boolean contains( long value ) {
+
+	if ( _valueBits == null ) {
+
+	    return false;
+
+	}
+
+	if ( value < _startValue ) {
+
+	    return false;
+
+	} else if ( value >= _startValue + _valueBits.length * Long.SIZE ) {
+
+	    return false;
+
+	}
+
+	return ( _valueBits[(int)( ( value - _startValue ) / Long.SIZE )] & ( 1L << ( ( value - _startValue ) & ( Long.SIZE - 1 ) ) ) ) != 0;
+
+    }
+
+    public boolean remove( long value ) {
+
+	if ( _valueBits == null ) {
+
+	    return false;
+
+	}
+
+	if ( value < _startValue ) {
+
+	    return false;
+
+	} else if ( value >= _startValue + _valueBits.length * Long.SIZE ) {
+
+	    return false;
+
+	}
+
+	int ix = (int) ( ( value - _startValue ) / Long.SIZE );
+	long element = _valueBits[ ix ];
+	long mask = ( 1L << ( ( value - _startValue ) & ( Long.SIZE - 1 ) ) );
+	boolean rval = ( element & mask ) != 0;
+	_valueBits[ ix ] &= ~mask;
+
+	return rval;
 
     }
 
@@ -235,19 +295,71 @@ public class MyIntSet implements Iterable<Long>, Serializable {
     @SuppressWarnings("MagicNumber")
     public static void main( String[] args ) {
 
+	BasicProgramConfigInfo.init( "Obtuse", "Pipestone", "MyIntSet", null );
+	LoggingMessageProxy mp = new LoggingMessageProxy();
+
         MyIntSet set = new MyIntSet();
 
-        for ( int i = 0; i < 1000; i += 25 ) {
+        for ( int i = 0; i < 1000; i += 29 ) {
 
-            set.add( i );
+//	    Logger.logMsg( "adding " + i );
+
+	    if ( set.contains( i ) ) {
+
+		mp.error( "#1 i=" + i + " found in set when it should not be present" );
+
+	    }
+
+	    set.add( i );
+	    if ( !set.contains( i ) ) {
+
+		mp.error( "#2 i=" + i + " not successfully added to the set" );
+
+	    }
+
+	    if ( set.contains( i + 1 ) ) {
+
+		mp.error( "#3 i=" + ( i + 1 ) + " found in set when it should not be present" );
+
+	    }
 
         }
 
-        for ( int i = 0; i > -1000; i -= 25 ) {
+        for ( int i = -23; i > -1000; i -= 23 ) {
 
-            set.add( i );
+	    if ( set.contains( i ) ) {
+
+		mp.error( "#4 i=" + i + " found in set when it should not be present" );
+
+	    }
+
+	    set.add( i );
+	    if ( !set.contains( i ) ) {
+
+		mp.error( "#5 i=" + i + " not successfully added to the set" );
+
+	    }
+
+	    if ( set.contains( i + 1 ) ) {
+
+		mp.error( "#6 i=" + ( i + 1 ) + " found in set when it should not be present" );
+
+	    }
 
         }
+
+	if ( mp.hasLoggedErrors() || mp.hasLoggedInfos() ) {
+
+	    Logger.logErr( "### " + mp.getErrorCount() + " error and " + mp.getInfoCount() + " messages" );
+	    System.exit( 1 );
+
+	} else {
+
+	    Logger.logMsg( "MyIntSet test passed" );
+
+	}
+
+	System.exit( 0 );
 
     }
 

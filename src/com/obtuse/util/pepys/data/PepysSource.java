@@ -6,6 +6,6 @@ package com.obtuse.util.pepys.data;
 
 public interface PepysSource {
 
-    long getId();
+    long getPepysId();
 
 }
