@@ -28,7 +28,7 @@ public class GowingPackable2Mapping<K,V> implements GowingPackable2 {
     @SuppressWarnings("FieldCanBeLocal")
     private static final int VERSION = 1;
 
-    private GowingInstanceId _instanceId;
+    private final GowingInstanceId _instanceId = new GowingInstanceId( getClass() );
 
     private final List<GowingPackable2KeyValuePair<K,V>> _keyValuePairs;
 
@@ -61,8 +61,6 @@ public class GowingPackable2Mapping<K,V> implements GowingPackable2 {
     public GowingPackable2Mapping() {
 	super();
 
-	_instanceId = new GowingInstanceId( ENTITY_TYPE_NAME );
-
 	_keyValuePairs = new FormattingLinkedList<GowingPackable2KeyValuePair<K,V>>();
 
     }
@@ -70,26 +68,34 @@ public class GowingPackable2Mapping<K,V> implements GowingPackable2 {
     public GowingPackable2Mapping( Map<? extends K, ? extends V> map ) {
 	super();
 
-	_instanceId = new GowingInstanceId( ENTITY_TYPE_NAME );
-
 	_keyValuePairs = new FormattingLinkedList<GowingPackable2KeyValuePair<K,V>>();
 
 	for ( K key : map.keySet() ) {
 
 	    V value = map.get( key );
 
-	    GowingPackable2KeyValuePair<K,V> kvp = new GowingPackable2KeyValuePair<K, V>( key, value );
-
-	    _keyValuePairs.add( kvp );
+	    addMapping( key, value );
 
 	}
 
     }
 
+    public void addMapping( K key, V value ) {
+
+	GowingPackable2KeyValuePair<K,V> kvp = new GowingPackable2KeyValuePair<K, V>( key, value );
+
+	addMapping( kvp );
+
+    }
+
+    public void addMapping( GowingPackable2KeyValuePair<K, V> kvp ) {
+
+	_keyValuePairs.add( kvp );
+
+    }
+
     public GowingPackable2Mapping( GowingUnPacker2 unPacker, GowingPackedEntityBundle bundle, GowingEntityReference er ) {
 	super();
-
-	_instanceId = new GowingInstanceId( ENTITY_TYPE_NAME );
 
 	if ( bundle.getVersion() != VERSION ) {
 
@@ -136,9 +142,12 @@ public class GowingPackable2Mapping<K,V> implements GowingPackable2 {
 
 	for ( GowingEntityReference er : _kvpReferences ) {
 
+	    // The _kvpReferences list only contains GowingPackable2KeyValuePair<K,V> instances so the following cast is actually quite safe.
+
+	    @SuppressWarnings("unchecked")
 	    GowingPackable2KeyValuePair<K, V> kvp = (GowingPackable2KeyValuePair<K, V>) unPacker.resolveReference( er );
 	    Logger.logMsg( "kvp = " + kvp );
-	    _keyValuePairs.add( kvp );
+	    addMapping( kvp );
 
 	}
 
@@ -159,12 +168,6 @@ public class GowingPackable2Mapping<K,V> implements GowingPackable2 {
     public final GowingInstanceId getInstanceId() {
 
 	return _instanceId;
-
-    }
-
-    public final void setInstanceId( GowingInstanceId instanceId ) {
-
-	_instanceId = instanceId;
 
     }
 

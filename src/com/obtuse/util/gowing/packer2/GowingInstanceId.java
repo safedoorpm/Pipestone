@@ -51,6 +51,11 @@ public final class GowingInstanceId implements Comparable<GowingInstanceId> {
 
     }
 
+    public GowingInstanceId( Class<? extends GowingPackable2> classObject ) {
+	this( classObject.getCanonicalName() );
+
+    }
+
     public static int allocateTypeId( String typeName ) {
 
 	synchronized ( s_typeNamesToTypeIds ) {

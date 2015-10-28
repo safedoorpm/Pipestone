@@ -3,7 +3,6 @@ package com.obtuse.util.gowing.packer2;
 import com.obtuse.util.gowing.packer2.p2a.GowingEntityReference;
 import com.obtuse.util.gowing.packer2.p2a.holders.GowingStringHolder2;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /*
  * Copyright © 2015 Obtuse Systems Corporation
@@ -16,50 +15,18 @@ import org.jetbrains.annotations.Nullable;
 
 public class EntityName2 implements GowingPackable2, Comparable<EntityName2> {
 
-    private static EntityTypeName2 ENTITY_NAME;
+    private static EntityTypeName2 ENTITY_TYPE_NAME;
 
     private static final int VERSION = 1;
-
-//    public static final EntityFactory2 FACTORY = new EntityFactory2( ENTITY_NAME ) {
-//
-//	@Override
-//	public int getOldestSupportedVersion() {
-//
-//	    return VERSION;
-//	}
-//
-//	@Override
-//	public int getNewestSupportedVersion() {
-//
-//	    return VERSION;
-//	}
-//
-//	@Override
-//	@NotNull
-//	public Packable2 createEntity( @NotNull UnPacker2 unPacker, PackedEntityBundle bundle ) {
-//
-//	    return new EntityName2( unPacker, bundle );
-//
-//	}
-//
-//    };
 
     public static final EntityName2 N_NAME = new EntityName2( "_n" );
 
     private final String _name;
 
-    private GowingInstanceId _instanceId; // = new InstanceId( ENTITY_NAME );
+    private final GowingInstanceId _instanceId = new GowingInstanceId( getClass() );
 
     public EntityName2( @NotNull String name ) {
 	super();
-
-//	if ( !EntityTypeName2.class.getCanonicalName().equals( name ) && !EntityName2.class.getCanonicalName().equals( name ) ) {
-//
-//	    _instanceId = new InstanceId( new EntityTypeName2( EntityTypeName2.class.getCanonicalName() ) );
-//
-//	}
-
-	setInstanceId( new GowingInstanceId( EntityName2.class.getCanonicalName() ) );
 
 	_name = name.trim();
 
@@ -148,19 +115,7 @@ public class EntityName2 implements GowingPackable2, Comparable<EntityName2> {
     @NotNull
     public final GowingInstanceId getInstanceId() {
 
-//	if ( _instanceId == null ) {
-//
-//	    _instanceId = new InstanceId( new EntityTypeName2( _name ) );
-//
-//	}
-
 	return _instanceId;
-
-    }
-
-    protected final void setInstanceId( GowingInstanceId instanceId ) {
-
-	_instanceId = instanceId;
 
     }
 
@@ -168,14 +123,14 @@ public class EntityName2 implements GowingPackable2, Comparable<EntityName2> {
     @Override
     public GowingPackedEntityBundle bundleThyself( boolean isPackingSuper, GowingPacker2 packer ) {
 
-	if ( ENTITY_NAME == null ) {
+	if ( ENTITY_TYPE_NAME == null ) {
 
-	    ENTITY_NAME = new EntityTypeName2( EntityName2.class );
+	    ENTITY_TYPE_NAME = new EntityTypeName2( EntityName2.class );
 
 	}
 
 	GowingPackedEntityBundle rval = new GowingPackedEntityBundle(
-		ENTITY_NAME,
+		ENTITY_TYPE_NAME,
 		VERSION,
 		null,
 		packer.getPackingContext()

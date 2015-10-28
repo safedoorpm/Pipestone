@@ -38,6 +38,7 @@ import java.util.*;
 
 @SuppressWarnings({ "UnusedDeclaration" })
 public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<V>, Serializable {
+//public class TreeSorter<K, V> implements Iterable<V>, Serializable {
 
     private final SortedMap<K, Collection<V>> _sortedData;
 
@@ -566,7 +567,9 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
 
     public String toString() {
 
-        return "size = " + size();
+//        return "size = " + size();
+
+	return "TreeSorter( " + _sortedData + " )";
 
     }
 

@@ -12,14 +12,11 @@ import org.jetbrains.annotations.NotNull;
 
 public class EntityTypeInfo2 {
 
-//    private final EntityTypeName2 _typeName;
     private final int _referenceId;
     private final GowingEntityFactory2 _factory;
 
-    public EntityTypeInfo2( /*EntityTypeName2 typeName,*/ int referenceId, @NotNull GowingEntityFactory2 factory ) {
+    public EntityTypeInfo2( int referenceId, @NotNull GowingEntityFactory2 factory ) {
 	super();
-
-//	_typeName = typeName;
 
 	_referenceId = referenceId;
 

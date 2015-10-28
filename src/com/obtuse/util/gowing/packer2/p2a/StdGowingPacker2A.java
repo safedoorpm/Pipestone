@@ -24,6 +24,8 @@ import java.util.*;
 /**
  Pack entities using a purely text-based format (no binary data) and explicitly named fields.
  <p/>
+ %%% this is seriously out of date %%%
+ <p/>
  An example entity:
  <blockquote><pre>
  public class Thing {

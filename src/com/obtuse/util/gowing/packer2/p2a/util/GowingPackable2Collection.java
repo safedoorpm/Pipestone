@@ -64,7 +64,7 @@ public class GowingPackable2Collection<E> extends LinkedList<E> implements Gowin
     @SuppressWarnings("FieldCanBeLocal")
     private static final int VERSION = 1;
 
-    private GowingInstanceId _instanceId;
+    private final GowingInstanceId _instanceId = new GowingInstanceId( getClass() );
 
     private List _things;
 
@@ -97,16 +97,12 @@ public class GowingPackable2Collection<E> extends LinkedList<E> implements Gowin
 
 	_things = null;
 
-	setInstanceId( new GowingInstanceId( ENTITY_TYPE_NAME ) );
-
     }
 
     public GowingPackable2Collection( Collection<? extends E> collection ) {
 	super( collection );
 
 	_things = null;
-
-	setInstanceId( new GowingInstanceId( ENTITY_TYPE_NAME ) );
 
     }
 
@@ -175,12 +171,6 @@ public class GowingPackable2Collection<E> extends LinkedList<E> implements Gowin
     public final GowingInstanceId getInstanceId() {
 
 	return _instanceId;
-
-    }
-
-    protected final void setInstanceId( GowingInstanceId instanceId ) {
-
-	_instanceId = instanceId;
 
     }
 
