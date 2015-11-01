@@ -5,11 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ObtuseApproximateCalendarDate.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/packer2/GowingEntityFactory2.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/packer2/GowingEntityFactory2.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/packer2/p2a/GowingUnPacker2ParsingException.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/packer2/p2a/GowingUnPacker2ParsingException.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/exceptions/ParsingException.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/exceptions/ParsingException.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/packer2/p2a/StdGowingUnPacker2A.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/packer2/p2a/StdGowingUnPacker2A.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Pipestone.iws" />
@@ -1491,7 +1486,7 @@
       <workItem from="1442567755840" duration="20787000" />
       <workItem from="1443736819109" duration="20206000" />
       <workItem from="1445643141890" duration="3555000" />
-      <workItem from="1445755653599" duration="13337000" />
+      <workItem from="1445755653599" duration="13404000" />
     </task>
     <task id="LOCAL-00001" summary="Major re-sync with danny's personal toolkit.">
       <created>1359580956092</created>
@@ -1607,11 +1602,17 @@
       <option name="project" value="LOCAL" />
       <updated>1446020494935</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Checkpoint commit prior to doing some experimenting on Niepce.">
+      <created>1446354712072</created>
+      <option name="number" value="00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1446354712072</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="289497000" />
+    <option name="totallyTimeSpent" value="289564000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="17" y="23" width="2099" height="1450" extended-state="0" />
@@ -1682,7 +1683,8 @@
     <MESSAGE value="Rename the new packing facility as the Gowing packing facility.&#10;&#10;Also a checkpoint commit before trying out idea of generating Gowing instance ids on an on-demand basis." />
     <MESSAGE value="Simplify and make the allocation of Gowing instance ids much more robust by using&#10;&#10;private final GowingInstanceId _instanceId = new GowingInstanceId( getClass() );&#10;&#10;to allocate all instance ids based on the actual final implementation class of the instance that they describe." />
     <MESSAGE value="Cleaned up Gowing facility (better Javadocs, old commented out removed, etc).&#10;Marginal but useful cleanup on TreeSorter.java class.&#10;New first cut at generalizing the handling of messages (heading towards generalizing the logging window stuff)." />
-    <option name="LAST_COMMIT_MESSAGE" value="Cleaned up Gowing facility (better Javadocs, old commented out removed, etc).&#10;Marginal but useful cleanup on TreeSorter.java class.&#10;New first cut at generalizing the handling of messages (heading towards generalizing the logging window stuff)." />
+    <MESSAGE value="Checkpoint commit prior to doing some experimenting on Niepce." />
+    <option name="LAST_COMMIT_MESSAGE" value="Checkpoint commit prior to doing some experimenting on Niepce." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
