@@ -1,6 +1,7 @@
 package com.obtuse.util.gowing.packer2;
 
 import com.obtuse.util.gowing.packer2.p2a.GowingEntityReference;
+import com.obtuse.util.gowing.packer2.p2a.GowingUnPacker2ParsingException;
 import org.jetbrains.annotations.NotNull;
 
 /*
@@ -40,7 +41,7 @@ public abstract class GowingEntityFactory2 implements Comparable<GowingEntityFac
     public abstract int getNewestSupportedVersion();
 
     @NotNull
-    public abstract GowingPackable2 createEntity( @NotNull GowingUnPacker2 unPacker, GowingPackedEntityBundle bundle, GowingEntityReference er );
+    public abstract GowingPackable2 createEntity( @NotNull GowingUnPacker2 unPacker, GowingPackedEntityBundle bundle, GowingEntityReference er ) throws GowingUnPacker2ParsingException;
 
     @NotNull
     public EntityTypeName2 getEntityTypeName() {

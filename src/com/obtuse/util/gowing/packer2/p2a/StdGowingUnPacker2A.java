@@ -224,7 +224,28 @@ public class StdGowingUnPacker2A implements GowingUnPacker2 {
 
 	GowingEntityFactory2 factory = typeInfo.getFactory();
 
-	GowingPackable2 entity = factory.createEntity( this, bundle, er );
+	/*
+	Create the entity.
+	If something goes wrong, augment the GowingUnPacker2ParsingException with the current token unless the exception already specifies a token.
+	In either case, rethrow the exception.
+	 */
+
+	GowingPackable2 entity;
+	try {
+
+	    entity = factory.createEntity( this, bundle, er );
+
+	} catch ( GowingUnPacker2ParsingException e ) {
+
+	    if ( e.getCauseToken() == null ) {
+
+		e.setCauseToken( token );
+
+	    }
+
+	    throw e;
+
+	}
 
 	_unPackerContext.rememberPackableEntity( token, er, entity );
 

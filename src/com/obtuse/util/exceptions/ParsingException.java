@@ -54,6 +54,7 @@ public class ParsingException extends Exception {
     public String toString() {
 
         return "(line " + _lineNumber + ", offset " + _offset + ", error type " + _errorType + ") " + super.toString();
+
     }
 
 }
