@@ -60,8 +60,8 @@ public class StdGowingUnPacker2A implements GowingUnPacker2 {
 	getUnPackerContext().registerFactory( GowingPackable2Mapping.FACTORY );
 	getUnPackerContext().registerFactory( GowingPackable2KeyValuePair.FACTORY );
 	getUnPackerContext().registerFactory( GowingPackable2Collection.FACTORY );
-	getUnPackerContext().registerFactory( EntityName2.getFactory() );
-	getUnPackerContext().registerFactory( EntityTypeName2.getFactory() );
+//	getUnPackerContext().registerFactory( EntityName2.getFactory() );
+//	getUnPackerContext().registerFactory( EntityTypeName2.getFactory() );
 
     }
 
@@ -185,7 +185,7 @@ public class StdGowingUnPacker2A implements GowingUnPacker2 {
 
 	} catch ( GowingUnPacker2ParsingException e ) {
 
-	    Logger.logErr( "error parsing packed entity - " + e.getMessage() + " (" + e.getCauseToken() + ")" );
+	    Logger.logErr( "error parsing packed entity - " + e.getMessage() + " (" + e.getCauseToken() + ")", e );
 
 	    return null;
 

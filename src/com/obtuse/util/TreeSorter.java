@@ -5,6 +5,7 @@
 package com.obtuse.util;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.Serializable;
 import java.util.*;
@@ -485,7 +486,7 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
      * returned collection as it is no longer associated with this tree sorter instance once it has been returned.
      */
 
-    public Collection<V> removeKeyAndValues( K key ) {
+    public Collection<V> removeKeyAndValues( @NotNull K key ) {
 
 	Collection<V> rval = _sortedData.remove( key );
 	if ( rval == null ) {
@@ -495,6 +496,60 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
 	}
 
 	return rval;
+
+    }
+
+    @NotNull
+    public Collection<V> removeValue( @NotNull K key, @Nullable V value ) {
+
+	return removeValue( key, value, new FormattingLinkedList<V>() );
+
+    }
+
+    @NotNull
+    public Collection<V> removeValue( @Nullable V value ) {
+
+	Collection<V> deletedValues = new FormattingLinkedList<V>();
+
+	for ( Iterator<K> iterator = _sortedData.keySet().iterator(); iterator.hasNext(); ) {
+
+	    K key = iterator.next();
+
+	    removeValue( key, value, deletedValues );
+	    if ( _sortedData.get( key ).isEmpty() ) {
+
+		iterator.remove();
+
+	    }
+
+	}
+
+	return deletedValues;
+
+    }
+
+    @NotNull
+    public Collection<V> removeValue( @NotNull K key, @Nullable V value, @NotNull Collection<V> deletedValues ) {
+
+	Collection<V> valuesAtKey = _sortedData.get( key );
+	if ( valuesAtKey != null ) {
+
+	    for ( Iterator<V> iterator = valuesAtKey.iterator(); iterator.hasNext(); ) {
+
+		V aValue = iterator.next();
+
+		if ( aValue == value ) {
+
+		    deletedValues.add( aValue );
+		    iterator.remove();
+
+		}
+
+	    }
+
+	}
+
+	return deletedValues;
 
     }
 

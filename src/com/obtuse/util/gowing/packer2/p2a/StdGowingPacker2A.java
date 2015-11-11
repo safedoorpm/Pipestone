@@ -251,6 +251,7 @@ public class StdGowingPacker2A implements GowingPacker2 {
 
     private void actuallyPackEntity( @NotNull GowingInstanceId instanceId ) {
 
+	Logger.logMsg( "@@@ actually packing " + instanceId );
 	EntityNames entityNames = _packingContext.getEntityNames( instanceId );
 	GowingPackedEntityBundle bundle = entityNames.getEntity().bundleThyself( false, this );
 
@@ -261,10 +262,17 @@ public class StdGowingPacker2A implements GowingPacker2 {
 
 //		int typeReferenceId = instanceId.getTypeId();
 
-		Logger.logMsg( "recording class " + GowingInstanceId.lookupTypeName( newTypeId ) );
+		String typeName = GowingInstanceId.lookupTypeName( newTypeId );
+//		if ( typeName.endsWith( "BurkeAttributeName" ) ) {
+//
+//		    Logger.logErr( "packing first BurkeAttributeName", new IllegalArgumentException(  ) );
+//
+//		}
+
+		Logger.logMsg( "recording class " + typeName );
 		_writer.print( newTypeId );
 		_writer.print( '@' );
-		_writer.print( ObtuseUtil.enquoteForJavaString( GowingInstanceId.lookupTypeName( newTypeId ) ) );
+		_writer.print( ObtuseUtil.enquoteForJavaString( typeName ) );
 		_writer.println( ';' );
 
 	    }

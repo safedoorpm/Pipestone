@@ -8,6 +8,7 @@ import com.obtuse.db.PostgresConnection;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.awt.*;
 import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 import java.net.ServerSocket;
@@ -2157,6 +2158,28 @@ public class ObtuseUtil {
         }
 
         return ObtuseUtil.s_pid.intValue();
+
+    }
+
+    @NotNull
+    public static String fDim( String name, Dimension d ) {
+
+	return name + "=" + ObtuseUtil.fDim( d );
+
+    }
+
+    @NotNull
+    public static String fDim( Dimension d ) {
+
+	return ObtuseUtil.fDim( d.width, d.height );
+
+
+    }
+
+    @NotNull
+    public static String fDim( int width, int height ) {
+
+	return "(" + width + "," + height + ")";
 
     }
 
