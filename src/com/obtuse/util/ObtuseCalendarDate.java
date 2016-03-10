@@ -115,6 +115,25 @@ public class ObtuseCalendarDate implements Comparable<ObtuseCalendarDate> {
     }
 
     /**
+     Construct an instance without forcing the user to bother with catching the parsing exception.
+     We'll turn it into an {@link IllegalArgumentException} if something goes wrong.
+     */
+
+    public static ObtuseCalendarDate parse( String date ) {
+
+	try {
+
+	    return new ObtuseCalendarDate( date );
+
+	} catch ( ParsingException e ) {
+
+	    throw new IllegalArgumentException( "unable to parse \"" + date + "\"", e );
+
+	}
+
+    }
+
+    /**
      Compute the number of days between two dates.
      <p/>The distance between two dates includes the endpoints.
      In other words, if <code>today</code> contains today's date and <code>tomorrow</code> contains tomorrow's date then

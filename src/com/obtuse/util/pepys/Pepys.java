@@ -801,7 +801,7 @@ public class Pepys {
 
     public static void main( String[] args ) {
 
-	BasicProgramConfigInfo.init( "Obtuse", "Burke", "testing", null );
+	BasicProgramConfigInfo.init( "Obtuse", "Pepys", "testing", null );
 
 	Pepys.doit();
 

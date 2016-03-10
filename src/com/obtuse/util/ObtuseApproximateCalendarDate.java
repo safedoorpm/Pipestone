@@ -5,10 +5,10 @@ package com.obtuse.util;
  */
 
 import com.obtuse.util.exceptions.ParsingException;
-import com.obtuse.util.gowing.packer2.*;
-import com.obtuse.util.gowing.packer2.p2a.GowingEntityReference;
-import com.obtuse.util.gowing.packer2.p2a.GowingUnPacker2ParsingException;
-import com.obtuse.util.gowing.packer2.p2a.holders.GowingStringHolder2;
+import com.obtuse.util.gowing.*;
+import com.obtuse.util.gowing.p2a.GowingEntityReference;
+import com.obtuse.util.gowing.p2a.GowingUnPackerParsingException;
+import com.obtuse.util.gowing.p2a.holders.GowingStringHolder;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Random;
@@ -16,20 +16,22 @@ import java.util.Random;
 /**
  Represent an approximate calendar date.
  <p/>
- Instances of this class are immutable and implement {@link GowingPackable2}.
+ Instances of this class are immutable and implement {@link GowingPackable}.
+ <p/>
+ Instances of this class are sortable by their approximate calendar date.
  */
 
-public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity2 implements Comparable<ObtuseApproximateCalendarDate> {
+public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity implements Comparable<ObtuseApproximateCalendarDate> {
 
-    private static final EntityTypeName2 ENTITY_TYPE_NAME = new EntityTypeName2( ObtuseApproximateCalendarDate.class );
+    private static final EntityTypeName ENTITY_TYPE_NAME = new EntityTypeName( ObtuseApproximateCalendarDate.class );
 
     private static final int VERSION = 1;
 
-    private static final EntityName2 DS_NAME = new EntityName2( "_ds" );
+    private static final EntityName DS_NAME = new EntityName( "_ds" );
 
-    private static final EntityName2 PRECISION_NAME = new EntityName2( "_pr" );
+    private static final EntityName PRECISION_NAME = new EntityName( "_pr" );
 
-    public static GowingEntityFactory2 FACTORY = new GowingEntityFactory2( ENTITY_TYPE_NAME ) {
+    public static GowingEntityFactory FACTORY = new GowingEntityFactory( ENTITY_TYPE_NAME ) {
 
 	@Override
 	public int getOldestSupportedVersion() {
@@ -45,8 +47,8 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity2
 
 	@NotNull
 	@Override
-	public GowingPackable2 createEntity( @NotNull GowingUnPacker2 unPacker, GowingPackedEntityBundle bundle, GowingEntityReference er )
-		throws GowingUnPacker2ParsingException {
+	public GowingPackable createEntity( @NotNull GowingUnPacker unPacker, GowingPackedEntityBundle bundle, GowingEntityReference er )
+		throws GowingUnPackerParsingException {
 
 	    return new ObtuseApproximateCalendarDate( unPacker, bundle, er );
 
@@ -62,26 +64,30 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity2
 	DECADE
     }
 
-    private final ObtuseCalendarDate _calendarDate;
+    private final ObtuseCalendarDate _nominalCalendarDate;
 
     private final DatePrecision _precision;
 
-    public ObtuseApproximateCalendarDate( ObtuseCalendarDate calendarDate, @NotNull DatePrecision precision ) {
+    public ObtuseApproximateCalendarDate( ObtuseCalendarDate nominalCalendarDate, @NotNull DatePrecision precision ) {
 	super();
 
-	_calendarDate = calendarDate;
+	_nominalCalendarDate = nominalCalendarDate;
 
 	_precision = precision;
 
     }
 
-    public ObtuseApproximateCalendarDate( GowingUnPacker2 unPacker, GowingPackedEntityBundle bundle, GowingEntityReference er ) throws GowingUnPacker2ParsingException {
+    public ObtuseApproximateCalendarDate(
+	    GowingUnPacker unPacker,
+	    GowingPackedEntityBundle bundle,
+	    GowingEntityReference er
+    ) throws GowingUnPackerParsingException {
 	this( ObtuseApproximateCalendarDate.makeCalendarDate( bundle ),
 	      ObtuseApproximateCalendarDate.makePrecision( bundle ) );
 
     }
 
-    private static ObtuseCalendarDate makeCalendarDate( GowingPackedEntityBundle bundle ) throws GowingUnPacker2ParsingException {
+    private static ObtuseCalendarDate makeCalendarDate( GowingPackedEntityBundle bundle ) throws GowingUnPackerParsingException {
 
 	try {
 
@@ -89,13 +95,13 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity2
 
 	} catch ( ParsingException e ) {
 
-	    throw new GowingUnPacker2ParsingException( e + " recovering date string" );
+	    throw new GowingUnPackerParsingException( e + " recovering date string" );
 
 	}
 
     }
 
-    private static DatePrecision makePrecision( GowingPackedEntityBundle bundle ) throws GowingUnPacker2ParsingException {
+    private static DatePrecision makePrecision( GowingPackedEntityBundle bundle ) throws GowingUnPackerParsingException {
 
 	try {
 
@@ -103,7 +109,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity2
 
 	} catch ( IllegalArgumentException e ) {
 
-	    throw new GowingUnPacker2ParsingException( e + " recovering precision" );
+	    throw new GowingUnPackerParsingException( e + " recovering precision" );
 
 	}
 
@@ -112,7 +118,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity2
     @NotNull
     @Override
     public GowingPackedEntityBundle bundleThyself(
-	    boolean isPackingSuper, GowingPacker2 packer
+	    boolean isPackingSuper, GowingPacker packer
     ) {
 
 	GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
@@ -122,30 +128,30 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity2
 		packer.getPackingContext()
 	);
 
-	bundle.addHolder( new GowingStringHolder2( ObtuseApproximateCalendarDate.DS_NAME, getCalendarDate().getDateString(), true ) );
-	bundle.addHolder( new GowingStringHolder2( ObtuseApproximateCalendarDate.PRECISION_NAME, getPrecision().name(), true ) );
+	bundle.addHolder( new GowingStringHolder( ObtuseApproximateCalendarDate.DS_NAME, getNominalCalendarDate().getDateString(), true ) );
+	bundle.addHolder( new GowingStringHolder( ObtuseApproximateCalendarDate.PRECISION_NAME, getPrecision().name(), true ) );
 
 	return bundle;
 
     }
 
     @Override
-    public boolean finishUnpacking( GowingUnPacker2 unPacker ) {
+    public boolean finishUnpacking( GowingUnPacker unPacker ) {
 
 	return true;
 
     }
 
-    //    public ObtuseApproximateCalendarDate( GowingUnPacker2 unPacker, GowingPackedEntityBundle bundle, GowingEntityReference er ) throws GowingUnPacker2ParsingException {
+    //    public ObtuseApproximateCalendarDate( GowingUnPacker unPacker, GowingPackedEntityBundle bundle, GowingEntityReference er ) throws GowingUnPackerParsingException {
 //	super();
 //
 //	try {
 //
-//	    _calendarDate = new ObtuseCalendarDate( bundle.getNotNullField( ObtuseApproximateCalendarDate.DS_NAME ).StringValue() );
+//	    _nominalCalendarDate = new ObtuseCalendarDate( bundle.getNotNullField( ObtuseApproximateCalendarDate.DS_NAME ).StringValue() );
 //
 //	} catch ( ParsingException e ) {
 //
-//	    throw new GowingUnPacker2ParsingException( e + " recovering date string" );
+//	    throw new GowingUnPackerParsingException( e + " recovering date string" );
 //
 //	}
 //
@@ -155,15 +161,15 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity2
 //
 //	} catch ( IllegalArgumentException e ) {
 //
-//	    throw new GowingUnPacker2ParsingException( e + " recovering precision" );
+//	    throw new GowingUnPackerParsingException( e + " recovering precision" );
 //
 //	}
 //
 //    }
 
-    public ObtuseCalendarDate getCalendarDate() {
+    public ObtuseCalendarDate getNominalCalendarDate() {
 
-	return _calendarDate;
+	return _nominalCalendarDate;
 
     }
 
@@ -176,7 +182,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity2
 //    @NotNull
 //    @Override
 //    public GowingPackedEntityBundle bundleThyself(
-//	    boolean isPackingSuper, GowingPacker2 packer
+//	    boolean isPackingSuper, GowingPacker packer
 //    ) {
 //
 //	GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
@@ -186,15 +192,15 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity2
 //		packer.getPackingContext()
 //	);
 //
-//	bundle.addHolder( new GowingStringHolder2( ObtuseApproximateCalendarDate.DS_NAME, _calendarDate.getDateString(), true ) );
-//	bundle.addHolder( new GowingStringHolder2( ObtuseApproximateCalendarDate.PRECISION_NAME, _precision.name(), true ) );
+//	bundle.addHolder( new GowingStringHolder( ObtuseApproximateCalendarDate.DS_NAME, _nominalCalendarDate.getDateString(), true ) );
+//	bundle.addHolder( new GowingStringHolder( ObtuseApproximateCalendarDate.PRECISION_NAME, _precision.name(), true ) );
 //
 //	return bundle;
 //
 //    }
 //
 //    @Override
-//    public boolean finishUnpacking( GowingUnPacker2 unPacker ) {
+//    public boolean finishUnpacking( GowingUnPacker unPacker ) {
 //
 //	return true;
 //
@@ -216,13 +222,13 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity2
 
 	switch ( _precision ) {
 
-	    case DATE: return getCalendarDate().getDateString();
+	    case DATE: return getNominalCalendarDate().getDateString();
 
-	    case MONTH: return getCalendarDate().getDateString().substring( 0, 7 );
+	    case MONTH: return getNominalCalendarDate().getDateString().substring( 0, 7 );
 
-	    case YEAR: return getCalendarDate().getDateString().substring( 0, 4 );
+	    case YEAR: return getNominalCalendarDate().getDateString().substring( 0, 4 );
 
-	    case DECADE: return getCalendarDate().getDateString().substring( 0, 3 ) + '0';
+	    case DECADE: return getNominalCalendarDate().getDateString().substring( 0, 3 ) + '0';
 
 //		/*
 //		Round to the nearest decade where years ending in 8 and 9 round up and all other years round down.
@@ -244,7 +250,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity2
 //		}
 
 	    default:
-		return getCalendarDate().getDateString();
+		return getNominalCalendarDate().getDateString();
 
 	}
 
@@ -272,7 +278,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity2
 
     public int compareTo( @NotNull ObtuseApproximateCalendarDate rhs ) {
 
-	int rval = getCalendarDate().compareTo( rhs.getCalendarDate() );
+	int rval = getNominalCalendarDate().compareTo( rhs.getNominalCalendarDate() );
 	if ( rval == 0 ) {
 
 	    return getPrecision().ordinal() - rhs.getPrecision().ordinal();
@@ -299,7 +305,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity2
 
     public String toString() {
 
-	return "BurkeApproximateCalendarDate( " + format() + " )";
+	return "ObtuseApproximateCalendarDate( " + format() + " )";
 
     }
 

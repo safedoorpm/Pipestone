@@ -506,10 +506,17 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
 
     }
 
-    @NotNull
-    public Collection<V> removeValue( @Nullable V value ) {
+    /**
+     Remove all occurrences of a value from this tree sorter.
+     @param value t the value to be removed.
+     @param deletedValues a collection into which any deleted values are placed.
+     The specified value is added to this collection once each time it is found and removed from the sorter.
+     @return The collection specified by the <code>deletedValues</code> parameter.
+     @throws IllegalArgumentException if <code>deletedValues</code> is null.
+     */
 
-	Collection<V> deletedValues = new FormattingLinkedList<V>();
+    @NotNull
+    public Collection<V> removeValue( @Nullable V value, @NotNull Collection<V> deletedValues ) {
 
 	for ( Iterator<K> iterator = _sortedData.keySet().iterator(); iterator.hasNext(); ) {
 
@@ -527,6 +534,16 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
 	return deletedValues;
 
     }
+
+    /**
+     Remove all occurrences of a value which is referenced by a specified key.
+     @param key the key that references the values to be removed.
+     @param value t the value to be removed. Only values which are in the 'row' that is referenced by the specified key are removed.
+     @param deletedValues a collection into which any deleted values are placed.
+                          The specified value is added to this collection once each time it is found and removed from the sorter at the specified key.
+     @return The collection specified by the <code>deletedValues</code> parameter.
+     @throws IllegalArgumentException if <code>deletedValues</code> is null.
+     */
 
     @NotNull
     public Collection<V> removeValue( @NotNull K key, @Nullable V value, @NotNull Collection<V> deletedValues ) {
@@ -597,6 +614,16 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
     }
 
     /**
+     Empty this tree sorter.
+     */
+
+    public void clear() {
+
+	_sortedData.clear();
+
+    }
+
+    /**
      * Determine if this tree sorter has any key value associations in it.
      * <p/>This method is always very fast.
      * @return true if this tree sorter is empty; false otherwise.
@@ -608,23 +635,23 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
 
     }
 
-    /**
-     * Returns a string which states the current size of this tree sorter.
-     * <p/>The returned string is of the form
-     * <pre>
-     * size = <i>n</i>
-     * </pre>
-     * where <tt><i>n</i></tt> is the current size of this tree sorter.
-     * This method calls {@link #size()} which means that it could be somewhat expensive if there are a lot of values in
-     * this tree sorter.
-     * @return a string which states the current size of this tree sorter.
-     */
+//    /**
+//     * Returns a string which states the current size of this tree sorter.
+//     * <p/>The returned string is of the form
+//     * <pre>
+//     * size = <i>n</i>
+//     * </pre>
+//     * where <tt><i>n</i></tt> is the current size of this tree sorter.
+//     * This method calls {@link #size()} which means that it could be somewhat expensive if there are a lot of values in
+//     * this tree sorter.
+//     * @return a string which states the current size of this tree sorter.
+//     */
 
     public String toString() {
 
 //        return "size = " + size();
 
-	return "TreeSorter( " + _sortedData + " )";
+	return "TreeSorter( size = " + size() + ", contents = " + _sortedData + " )";
 
     }
 
