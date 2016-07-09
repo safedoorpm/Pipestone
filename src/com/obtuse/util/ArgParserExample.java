@@ -6,8 +6,6 @@ package com.obtuse.util;
 
 public class ArgParserExample {
 
-    private static String s_supportEmailAddress = null;
-
     @SuppressWarnings({ "ClassWithoutToString", "AssignmentToStaticFieldFromInstanceMethod" })
     private static class ExampleArgParser extends ArgParser {
 
@@ -25,7 +23,9 @@ public class ArgParserExample {
 
         private static String s_callbackHostname = null;
 
-        private ExampleArgParser() {
+	private static String s_supportEmailAddress = null;
+
+	private ExampleArgParser() {
             //noinspection ClassWithoutToString
             super(
                     new Arg[] {
@@ -84,7 +84,7 @@ public class ArgParserExample {
 
                                 public void process( String keyword, String arg ) {
 
-                                    ArgParserExample.s_supportEmailAddress = arg;
+                                    s_supportEmailAddress = arg;
 
                                 }
 
@@ -124,7 +124,7 @@ public class ArgParserExample {
 
         }
 
-        if ( ArgParserExample.s_supportEmailAddress == null ) {
+        if ( ExampleArgParser.s_supportEmailAddress == null ) {
 
             Logger.logErr( "ArgParserExample:  -supportEmailAddress must be specified" );
 
