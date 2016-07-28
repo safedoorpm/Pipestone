@@ -97,6 +97,12 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
 
     }
 
+    public interface ValueMatcher<V> {
+
+        boolean doesValueMatch( V target );
+
+    }
+
     /**
      * Construct a new, empty tree sorter, using the natural ordering of its keys.
      * All keys inserted in this tree sorter must implement the {@link Comparable} interface and must be
@@ -335,12 +341,31 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
 
     }
 
+
+    /**
+     Return the number of values associated with a specified key.
+     If a particular value is associated more than once with the specified key then each occurrence is counted separately.
+     For example, if this tree sorter has the same value associated twice with the same key and has no other values associated with the key then the return value of calling this method for that key will be <tt>2</tt>.
+     <p/>
+     This method is equivalent to but faster than
+     <blockquote><tt>getValues( key ).size()</tt></blockquote>
+     @param key the key of interest.
+     @return the number of values associated with the specified key (0 if the key does not exist within this tree sorter).
+     */
+
+    public int countValues( K key ) {
+
+	Collection<V> values = _sortedData.get( key );
+	return values == null ? 0 : values.size();
+
+    }
+
     /**
      * Return all the values in this tree sorter in key order.
      * Values with unequal keys are returned in key-sorted order.
      * Values with equal keys are returned in the order that they were added to this tree sorter.
      * <p/>Every call to this method returns a distinct collection of values.  The caller is free to do
-     * whatever they like to the returned collection.
+     * whatever they like to the returned collection (nothing that they do to the returned collection will change the state of this tree sorter instance).
      * <p/>This is potentially a rather expensive operation depending upon how much data is in this tree sorter instance.
      *
      * @return all the values in this tree sorter.
@@ -361,17 +386,284 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
     }
 
     /**
-     * Add a new key-value pair to this tree sorter.
-     * Each tree sorter instance is capable of maintaining an arbitrary number of one to many key to value associations.
-     * For example, if the key-value pair <tt>fred=hello</tt> and <tt>fred=world</tt> are added to a previously
-     * empty tree sorter then the key <tt>fred</tt> will have both <tt>hello</tt> and <tt>world</tt> associated
-     * with it in the tree sorter.
-     * Analogous to {@link SortedMap#put(Object, Object)}.
-     * @param key with which the specified value is to be associated.
-     * @param value the value to be associated with the specified key.
+     * Get the index of the first occurrence of a specific target value within this tree sorter.
+     * The value returned by this method the final value of <tt>count</tt> yielded by the following:
+     * <blockquote>
+     *     <pre>
+     *         int index = 0;
+     *         for ( V v : treeSorter ) {
+     *             if ( v == targetValue ) {   // Note the use of reference equality rather than {@link Object#equals}.
+     *                 return index;
+     *             }
+     *             index += 1;
+     *         }
+     *         return -1;
+     *     </pre>
+     * </blockquote>
+     * Note that this method returns <tt>-1</tt> if the target value does not exist within this tree sorter.
+     * <p/>
+     * The following code snippet is one way to determine if a tree sorter contains any <tt>null</tt> values:
+     * <blockquote>
+     *     <pre>
+     *         if ( treeSorter.getValueIndex( null ) == -1 ) {
+     *             System.out.println( "tree sorter does not contain null values" );
+     *         } else {
+     *             System.out.println( "tree sorter contains at least one null value" );
+     *         }
+     * </pre>
+     * </blockquote>
+     * <p/>
+     * While this method is probably faster than the about snippet might suggest, it is not exactly a speed demon.
+     * @param targetValue the value of interest.
+     * @return the index of the first occurrence of <tt>targetValue</tt> in this tree sorter or -1 if the value does not exist within this tree sorter.
+     * Note that the presence of target value is detected via a reference comparison (i.e. using == rather than a call to {@link Object#equals}).
      */
 
-    public final void add( K key, V value ) {
+    public int getFullValueIndex( V targetValue ) {
+
+	int index = 0;
+	for ( V value : this ) {
+
+	    if ( value == targetValue ) {
+
+		return index;
+
+	    }
+
+	    index += 1;
+
+	}
+
+	return -1;
+
+    }
+
+    /**
+     * Get the indices of every occurrence of a specific target value within this tree sorter.
+     * <p/>
+     * This method is equivalent to {@link #getFullValueIndex(V)} with the difference that this method returns the index of each occurrence of the specified target value.
+     * This method returns an empty list of indices if the target value does not exist within this tree sorter.
+     * <p/>
+     * While this method is probably faster than the about snippet might suggest, it is not exactly a speed demon.
+     * @param targetValue the value of interest or -1 if the target value does not exist within this tree sorter.
+     *                    Note that the target value is detected via a reference comparison (i.e. using == rather than a call to {@link Object#equals}).
+     */
+
+    public List<Integer> getAllFullValueIndices( V targetValue ) {
+
+        List<Integer> indices = new FormattingLinkedList<Integer>();
+	int index = 0;
+	for ( V value : this ) {
+
+	    if ( value == targetValue ) {
+
+		indices.add( index );
+
+	    }
+
+	    index += 1;
+
+	}
+
+	return indices;
+
+    }
+
+    /**
+     * Get the index of the first occurrence of a specific target value referenced by a specific key within this tree sorter.
+     * <p/>
+     * This method is equivalent to
+     * <blockquote>
+     *     <pre>
+     *         List&lt;Integer> indices = getAllValueIndices( targetKey, targetValue );
+     *         rval = indices.isEmpty() ? -1 : indices.get( 0 );
+     * </pre>
+     * </blockquote>
+     * This method returns -1 if the target value does not exist for the specified key within this tree sorter.
+     * <p/>
+     * While this method is probably faster than the about snippet might suggest, it is not exactly a speed demon.
+     * @param targetKey the key of interest (must not be <tt>null</tt>).
+     * @param targetValue the value of interest or -1 if the target value does not exist within this tree sorter.
+     *                    Note that the target value is detected via a reference comparison (i.e. using == rather than a call to {@link Object#equals}).
+     * @return the index of the first value of interest. <tt>-1</tt> if no values of interest exist for the specified key.
+     */
+
+    public int getFullValueIndex( @NotNull K targetKey, V targetValue ) {
+
+        return getFullValueIndex(
+		targetKey,
+		target -> targetValue == target
+	);
+
+    }
+
+    /**
+     * Get the index of the first occurrence of a target value of interest referenced by a specific key within this tree sorter.
+     * <p/>
+     * A variation on {@link #getFullValueIndex(Comparable, Object)} that uses a matcher function to identify values of interest.
+     * @param targetKey the key of interest (must not be <tt>null</tt>).
+     * @param matcher identifies values of interest (see {@link ValueMatcher} for more info).
+     * @return the index of the first value of interest. <tt>-1</tt> if no values of interest exist for the specified key.
+     */
+
+    public int getFullValueIndex( @NotNull K targetKey, ValueMatcher<V> matcher ) {
+
+	int index = 0;
+	for ( K key : keySet() ) {
+
+	    int comparison = key.compareTo( targetKey );
+	    if ( comparison >= 0 ) {
+
+		if ( comparison == 0 ) {
+
+		    for ( V value : getValues( targetKey ) ) {
+
+			if ( matcher.doesValueMatch( value ) ) {
+
+			    return index;
+
+			}
+
+			index += 1;
+
+		    }
+
+		}
+
+		return -1;
+
+	    } else {
+
+		index += _sortedData.get( key ).size();
+
+	    }
+
+	}
+
+	return -1;
+
+    }
+
+    /**
+     * Get the indices of every occurrence of a specific target value referenced by a specific key within this tree sorter.
+     * <p/>
+     * This method is equivalent to {@link #getFullValueIndex(V)} with the difference that this method returns the index of each occurrence of the specified target value.
+     * This method returns an empty list of indices if the target value does not exist within this tree sorter.
+     * <p/>
+     * While this method is probably faster than the about snippet might suggest, it is not exactly a speed demon.
+     * @param targetKey the key of interest (must not be <tt>null</tt>).
+     * @param targetValue the value of interest or -1 if the target value does not exist within this tree sorter.
+     *                    Note that the target value is detected via a reference comparison (i.e. using == rather than a call to {@link Object#equals}).
+     */
+
+    public List<Integer> getAllFullValueIndices( @NotNull K targetKey, V targetValue ) {
+
+	List<Integer> indices = new FormattingLinkedList<Integer>();
+	int currentIndex = 0;
+	for ( K key : keySet() ) {
+
+	    int comparison = key.compareTo( targetKey );
+	    if ( comparison >= 0 ) {
+
+	        if ( comparison == 0 ) {
+
+	            for ( V value : getValues( targetKey ) ) {
+
+	                if ( value == targetValue ) {
+
+	                    indices.add( currentIndex );
+
+			}
+
+			currentIndex += 1;
+
+		    }
+
+		}
+
+		return indices;
+
+	    } else {
+
+		currentIndex += _sortedData.get( key ).size();
+
+	    }
+
+	}
+
+//	for ( V value : this ) {
+//
+//	    if ( value == targetValue ) {
+//
+//		indices.add( index );
+//
+//	    }
+//
+//	    index += 1;
+//
+//	}
+
+	return indices;
+
+    }
+
+    /**
+     Return a count of the number of values in this tree sorter which are associated with keys which are less than the specified key.
+     <p/>
+     This value also:
+     <ul>
+     <li>the index of the first/oldest value associated with the specified key assuming that the specified key has associated values</li>
+     <li>a faster way of obtaining the value returned by <tt>{@link #headSorter}( key ).size()</tt></li>
+     </ul>
+     See also: {@link #headSorter}
+     <p/>
+     The value of <tt>countValuesBeforeKey( key ) + getValues( key ).size()</tt> is the index at which an about to be added value for this key would first appear.
+     @param targetKey the key of interest.
+     @return the number of values in this tree sorter which are associated with keys which are less than <tt>targetKey</tt>.
+     */
+
+    public int countValuesBeforeKey( K targetKey ) {
+
+	int currentIndex = 0;
+	for ( K key : keySet() ) {
+
+	    int comparison = key.compareTo( targetKey );
+	    if ( comparison >= 0 ) {
+
+	        // If the key exists then index is the index of its first/oldest value.
+		// If the key doesn't exist then index is the value of what its first/oldest value would be if the key did exist.
+
+		return currentIndex;
+
+	    } else {
+
+		currentIndex += _sortedData.get( key ).size();
+
+	    }
+
+	}
+
+	return currentIndex;
+
+    }
+
+    /**
+     * Add a new key-value pair to this tree sorter.
+     * Each tree sorter instance is capable of maintaining an arbitrary number of one to many key to value associations.
+     * For example, if the key-value pair <tt>fred->hello</tt> and <tt>fred->world</tt> are added to a previously
+     * empty tree sorter then the key <tt>fred</tt> will have both <tt>hello</tt> and <tt>world</tt> associated
+     * with it in the tree sorter.
+     * <p/>
+     * Newly added values are always placed after all the specified key's existing values (assuming that it has any).
+     * <p/>
+     * Note that this method explicitly allows <tt>null</tt> values to be added into a tree sorter.
+     * <p/>
+     * Analogous to {@link SortedMap#put(Object, Object)}.
+     * @param key with which the specified value is to be associated.
+     * @param value the (possibly null) value to be associated with the specified key.
+     */
+
+    public final void add( K key, @Nullable V value ) {
 
         Collection<V> values = _sortedData.get( key );
         if ( values == null ) {
@@ -466,9 +758,9 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
      * The map is backed by this TreeSorter instance, so changes to
      * this map are reflected in the Set, and vice-versa. The Set
      * supports element removal, which removes the corresponding
-     * mapping from the map, via the <tt>Iterator.remove</tt>, <tt>Set.remove</tt>,
-     * <tt>Set.removeAll</tt>, <tt>Set.retainAll</tt>, and <tt>Set.clear</tt> operations
-     * It does not support the <tt>Set.add</tt> or <tt>Set.addAll</tt> operations.
+     * mapping from the map, via the {@link Iterator#remove}, {@link Set#remove},
+     * {@link Set#removeAll}, {@link Set#retainAll}, and {@link Set#clear} operations.
+     * It does not support the {@link Set#add} or {@link Set#addAll} operations.
      *
      * @return a set view of the keys in this TreeSorter.
      */
@@ -476,6 +768,50 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
     public Set<K> keySet() {
 
         return _sortedData.keySet();
+
+    }
+
+    /**
+     Cleanup dead keys.
+     Gets rid of any keys which no longer have any values.
+     <p/>There's got to be a way to do this safely on the fly but this will have to do for now.
+     @return the number of dead keys removed from the tree sorter.
+     */
+
+    public int cleanupDeadKeys() {
+
+        int count = 0;
+	for ( Iterator<K> iterator = keySet().iterator(); iterator.hasNext(); ) {
+
+	    K key = iterator.next();
+
+	    if ( _sortedData.containsKey( key ) ) {
+
+		Collection<V> values = _sortedData.get( key );
+		if ( values == null ) {
+
+		    Logger.logMsg( "cleaning up key \"" + key + "\" which has NO list" );
+		    Logger.logMsg( "is this even possible?" );
+
+		    iterator.remove();
+
+		    count += 1;
+
+		} else if ( values.isEmpty() ) {
+
+		    Logger.logMsg( "cleaning up key \"" + key + "\" which has an empty list" );
+
+		    iterator.remove();
+
+		    count += 1;
+
+		}
+
+	    }
+
+	}
+
+	return count;
 
     }
 
@@ -502,13 +838,13 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
     @NotNull
     public Collection<V> removeValue( @NotNull K key, @Nullable V value ) {
 
-	return removeValue( key, value, new FormattingLinkedList<V>() );
+	return removeValue( key, target->value == target, new FormattingLinkedList<V>() );
 
     }
 
     /**
      Remove all occurrences of a value from this tree sorter.
-     @param value t the value to be removed.
+     @param  matcher identifies the value t the values to be removed.
      @param deletedValues a collection into which any deleted values are placed.
      The specified value is added to this collection once each time it is found and removed from the sorter.
      @return The collection specified by the <code>deletedValues</code> parameter.
@@ -516,13 +852,13 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
      */
 
     @NotNull
-    public Collection<V> removeValue( @Nullable V value, @NotNull Collection<V> deletedValues ) {
+    public Collection<V> removeValue( @NotNull ValueMatcher<V> matcher, @NotNull Collection<V> deletedValues ) {
 
 	for ( Iterator<K> iterator = _sortedData.keySet().iterator(); iterator.hasNext(); ) {
 
 	    K key = iterator.next();
 
-	    removeValue( key, value, deletedValues );
+	    removeValueCarefully( key, matcher, deletedValues, false );
 	    if ( _sortedData.get( key ).isEmpty() ) {
 
 		iterator.remove();
@@ -535,10 +871,17 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
 
     }
 
+    @NotNull
+    public Collection<V> removeValue( @NotNull K key, @NotNull ValueMatcher<V> matcher ) {
+
+        return removeValueCarefully( key, matcher, new FormattingLinkedList<V>(), true );
+
+    }
+
     /**
-     Remove all occurrences of a value which is referenced by a specified key.
+     Remove all occurrences of a value which is (are?) associated with a specified key.
      @param key the key that references the values to be removed.
-     @param value t the value to be removed. Only values which are in the 'row' that is referenced by the specified key are removed.
+     @param matcher identifies the values of interest. Only values which are in the 'row' that is referenced by the specified key are removed.
      @param deletedValues a collection into which any deleted values are placed.
                           The specified value is added to this collection once each time it is found and removed from the sorter at the specified key.
      @return The collection specified by the <code>deletedValues</code> parameter.
@@ -546,7 +889,13 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
      */
 
     @NotNull
-    public Collection<V> removeValue( @NotNull K key, @Nullable V value, @NotNull Collection<V> deletedValues ) {
+    public Collection<V> removeValue( @NotNull K key, @NotNull ValueMatcher<V> matcher, @NotNull Collection<V> deletedValues ) {
+
+	return removeValueCarefully( key, matcher, deletedValues, true );
+
+    }
+
+    Collection<V> removeValueCarefully( @NotNull K key, @NotNull ValueMatcher<V> matcher, @NotNull Collection<V> deletedValues, boolean removeKeys ) {
 
 	Collection<V> valuesAtKey = _sortedData.get( key );
 	if ( valuesAtKey != null ) {
@@ -555,12 +904,18 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
 
 		V aValue = iterator.next();
 
-		if ( aValue == value ) {
+		if ( matcher.doesValueMatch( aValue ) ) {
 
 		    deletedValues.add( aValue );
 		    iterator.remove();
 
 		}
+
+	    }
+
+	    if ( removeKeys && _sortedData.get( key ).isEmpty() ) {
+
+	        _sortedData.remove( key );
 
 	    }
 
@@ -661,8 +1016,21 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
 
         sorter.add( 1, "one" );
         sorter.add( 2, "two" );
-        sorter.add( 3, "three" );
+        sorter.add( 4, "four" );
+	sorter.add( 1, "one" );
         sorter.add( 1, "I" );
+	sorter.add( 1, "one" );
+
+	for ( int key : sorter.keySet() ) {
+
+	    for ( String v : sorter.getValues( key ) ) {
+
+	        System.out.println( "" + key + " -> " + v );
+
+	    }
+
+	}
+	System.out.println();
 
         for ( String v : sorter ) {
 
@@ -670,6 +1038,38 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
             System.out.println( v );
 
         }
+        System.out.println();
+
+        String[] targetValues = { "one", "two", "I", "missing", null };
+        for ( String targetValue : targetValues ) {
+
+            int ix = sorter.getFullValueIndex( targetValue );
+	    if ( ix < 0 ) {
+
+	        System.out.println( "\"" + targetValue + "\" not found within sorter" );
+
+	    } else {
+
+	        System.out.println( "\"" + targetValue + "\" found at index " + ix );
+
+	    }
+
+	}
+	System.out.println();
+
+	for ( int i = sorter.firstKey() - 1; i <= sorter.lastKey() + 1; i += 1 ) {
+
+	    System.out.println( "count of values before key " + i + " is " + sorter.countValuesBeforeKey( i ) );
+
+	}
+	System.out.println();
+
+	for ( String targetValue : targetValues ) {
+
+	    List<Integer> indices = sorter.getAllFullValueIndices( targetValue );
+	    System.out.println( "\"" + targetValue + "\" found at " + indices );
+
+	}
 
     }
 
