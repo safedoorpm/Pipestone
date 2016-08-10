@@ -389,21 +389,51 @@ public class DateUtils {
      *
      * @param token      the date string.
      * @param lineNumber where the date was found.
+     *                   @param lenientParsing should parsing be lenient or not (see {@link java.text.DateFormat#setLenient} for more info).
+     * @return the result in UTC.
+     * @throws ParsingException if the token does not contain a valid date string.
+     */
+
+    public static ImmutableDate parseYYYY_MM_DD_utc( String token, int lineNumber, boolean lenientParsing )
+            throws ParsingException {
+
+        synchronized ( DateUtils.YYYY_MM_DD ) {
+
+	    ImmutableDate date;
+	    boolean oldLenientParsing = DateUtils.YYYY_MM_DD.isLenient();
+	    try {
+
+		DateUtils.YYYY_MM_DD.setLenient( lenientParsing );
+		DateUtils.YYYY_MM_DD.setTimeZone( DateUtils.UTC );
+		date = DateUtils.dateParse( DateUtils.YYYY_MM_DD, token, lineNumber );
+
+	    } finally {
+
+	        DateUtils.YYYY_MM_DD.setLenient( oldLenientParsing );
+
+	    }
+
+	    return date;
+
+        }
+
+    }
+
+    /**
+     * Parse a "yyyy-MM-dd" format date string and return an ImmutableDate value that is midnight UTC at the start of the specified date.
+     * <p/>Equivalent to a call to <tt>DateUtils.parseYYYY_MM_DD_utc( token, lineNumber, true )</tt>.
+     * See {@link #parseYYYY_MM_DD_utc(String, int, boolean)} for more info.
+     *
+     * @param token      the date string.
+     * @param lineNumber where the date was found.
      * @return the result in UTC.
      * @throws ParsingException if the token does not contain a valid date string.
      */
 
     public static ImmutableDate parseYYYY_MM_DD_utc( String token, int lineNumber )
-            throws ParsingException {
+	    throws ParsingException {
 
-        synchronized ( DateUtils.YYYY_MM_DD ) {
-
-            DateUtils.YYYY_MM_DD.setTimeZone( DateUtils.UTC );
-            ImmutableDate date = DateUtils.dateParse( DateUtils.YYYY_MM_DD, token, lineNumber );
-
-            return date;
-
-        }
+        return parseYYYY_MM_DD_utc( token, lineNumber, true );
 
     }
 

@@ -5,7 +5,6 @@ package com.obtuse.ui.entitySorter;
  */
 
 import com.obtuse.exceptions.HowDidWeGetHereError;
-import com.obtuse.util.Logger;
 import com.obtuse.util.ObtuseUtil;
 import com.obtuse.util.Trace;
 import com.obtuse.util.TreeSorter;
@@ -25,26 +24,35 @@ public class SortedPanelModel<K extends Comparable<K>, E extends SortableEntity>
 
     private final String _name;
 
-    private SortedPanel<K, E> _owner = null;
+    final SortableKeySpace _keySpace;
+
+    private SortedPanel<E> _owner = null;
 
     /**
      Create a sorted panel model with an initial set of entities.
+     @param keySpace the key space that this panel model operates within.
      @param name the name of the model (required although only used in diagnostic messages and thrown exceptions).
      @param initialEntities a mapping of keys to entities which is to be used to initially populate this model (required although allowed to be empty).
-                            The contents of the provided model are copied into the newly created model
-                            (i.e. there is no connection between this model and the provided mapping once the model exists).
+			The contents of the provided model are copied into the newly created model
+			(i.e. there is no connection between this model and the provided mapping once the model exists).
      */
 
-    public SortedPanelModel( @NotNull String name, @NotNull TreeSorter<K, E> initialEntities ) {
+    public SortedPanelModel(
+	    @NotNull SortableKeySpace keySpace,
+	    @NotNull String name,
+	    @NotNull TreeSorter<K, E> initialEntities
+    ) {
         super();
 
 	_name = name;
+
+	_keySpace = keySpace;
 
 	for ( K key : initialEntities.keySet() ) {
 
 	    for ( E value : initialEntities.getValues( key ) ) {
 
-	        _treeSorter.add( key, new SortableEntityReference<>( key, value ) );
+	        _treeSorter.add( key, new SortableEntityReference<>( this, key, value ) );
 
 	    }
 
@@ -54,11 +62,19 @@ public class SortedPanelModel<K extends Comparable<K>, E extends SortableEntity>
 
     /**
      Create an empty sorted panel model.
+     @param keySpace the key space that this model operates within.
      @param name the name of the model (required although only used in diagnostic messages and thrown exceptions).
      */
 
-    public SortedPanelModel( @NotNull String name ) {
-        this( name, new TreeSorter<>() );
+    public SortedPanelModel( @NotNull SortableKeySpace keySpace, @NotNull String name ) {
+        this( keySpace, name, new TreeSorter<>() );
+
+    }
+
+    public SortableKeySpace getKeySpace() {
+
+        return _keySpace;
+
     }
 
     public int size() {
@@ -85,7 +101,7 @@ public class SortedPanelModel<K extends Comparable<K>, E extends SortableEntity>
 
     public int reAddEntity( @NotNull K key, @NotNull E entity, @Nullable SortableEntityView<K, E> view ) {
 
-	return reAddEntity( new SortableEntityReference<>( key, entity ), view );
+	return reAddEntity( new SortableEntityReference<>( this, key, entity ), view );
 
     }
 
@@ -147,7 +163,7 @@ public class SortedPanelModel<K extends Comparable<K>, E extends SortableEntity>
 
     public int addEntity( @NotNull K key, @NotNull E entity ) {
 
-        return addEntity( new SortableEntityReference<K, E>( key, entity ) );
+        return addEntity( new SortableEntityReference<K, E>( this, key, entity ) );
 
     }
 
@@ -313,7 +329,7 @@ public class SortedPanelModel<K extends Comparable<K>, E extends SortableEntity>
 	String what = "changeSortingKey( " + oldKey + ", " + newKey + ", " + myEntity + " )";
 	verifyConsistency( "start of " + what );
 
-	SortableEntityReference<K, E> myEntityReference = new SortableEntityReference<>( oldKey, myEntity );
+	SortableEntityReference<K, E> myEntityReference = new SortableEntityReference<>( this, oldKey, myEntity );
 	int oldIndex = _treeSorter.getFullValueIndex( oldKey, target -> target.getValue() == myEntity );
 	if ( oldIndex < 0 ) {
 

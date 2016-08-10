@@ -78,7 +78,7 @@ public class BasicProgramConfigInfo {
         String home = System.getProperty( "user.home" );
         if ( home != null ) {
 
-            // The Mac OS has a convention as to where these sorts of things go.
+            // Mac OS has a convention as to where these sorts of things go.
             // Follow the convention if we are running on the Mac OS.
 
             if ( OSLevelCustomizations.onMacOsX() ) {

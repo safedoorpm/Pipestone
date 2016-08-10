@@ -10,6 +10,6 @@ package com.obtuse.ui.entitySorter;
 
 public interface SortableEntity {
 
-    <K extends Comparable<K>, E extends SortableEntity> SortableEntityView<K,E> createEntityView( K key );
+    <K extends Comparable<K>, E extends SortableEntity> SortableEntityView<K,E> createEntityView( SortedPanelModel<K, E> panelModel, K key );
 
 }

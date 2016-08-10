@@ -6,20 +6,22 @@ package com.obtuse.ui.entitySorter;
 
 import org.jetbrains.annotations.NotNull;
 
-import javax.swing.*;
-
 /**
  Something which can be sorted and managed by a {@link SortedPanelModel}.
  */
 
 public class SortableEntityReference<K extends Comparable<K>,E extends SortableEntity> {
 
-    private K _key;
+    private final K _key;
 
     private final E _value;
 
-    public SortableEntityReference( K key, E value ) {
+    private final SortedPanelModel<K,E> _panelModel;
+
+    public SortableEntityReference( @NotNull SortedPanelModel<K,E> panelModel, @NotNull K key, @NotNull E value ) {
         super();
+
+	_panelModel = panelModel;
 
 	_key = key;
 
@@ -33,10 +35,16 @@ public class SortableEntityReference<K extends Comparable<K>,E extends SortableE
 
     }
 
+    public SortedPanelModel<K, E> getPanelModel() {
+
+        return _panelModel;
+
+    }
+
     @NotNull
     public SortableEntityView<K,E> createEntityView() {
 
-	SortableEntityView<K, E> entityView = _value.createEntityView( _key );
+	SortableEntityView<K, E> entityView = _value.createEntityView( _panelModel, _key );
 	if ( entityView == null ) {
 
 	    throw new IllegalArgumentException( "null entity view returned for value {" + _value + "} with key \"" + _key + "\"" );

@@ -92,7 +92,8 @@ public class EventUtils {
 
 	if ( _logEvents ) {
 
-		    Logger.logMsg( "msg:  " + msg );
+	    Logger.logMsg( "msg:  " + msg );
+
 	} else {
 
 	    Trace.event( msg );

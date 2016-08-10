@@ -18,24 +18,49 @@ import java.util.Random;
  A {@link JPanel} that works with a {@link SortedPanelModel}.
  */
 
-public class SortedPanel<K extends Comparable<K>,E> extends Box {
+public class SortedPanel<E> extends JPanel {
 
-    private final String _name;
+//    private String _name;
 
     private SortedPanelModel _model;
 
-    public SortedPanel( String name, int axis ) {
-        super( axis );
-
-	_name = name;
-    }
-
-    @Override
-    public String getName() {
-
-	return _name;
+    public SortedPanel() {
+        super();
 
     }
+
+    public SortedPanel( String name ) {
+        super();
+
+	setName( name );
+//	_name = name;
+
+    }
+
+    public void describe( String who ) {
+
+	Logger.logMsg( "describing SortedPanel \"" + who + "\"" );
+
+	int ix = 0;
+	Component c = this;
+	while ( c != null ) {
+
+	    Logger.logMsg( "ix=" + ix + ":  " + c.getClass().getCanonicalName() );
+
+	    c = c.getParent();
+
+	    ix += 1;
+
+	}
+
+    }
+
+//    @Override
+//    public String getName() {
+//
+//	return _name;
+//
+//    }
 
     public void setModel( @Nullable SortedPanelModel model ) {
 
@@ -106,22 +131,22 @@ public class SortedPanel<K extends Comparable<K>,E> extends Box {
 
     }
 
-    public SortableEntityView<K,E> getEntityView( int ix ) {
+    public SortableEntityView getEntityView( int ix ) {
 
 	//noinspection unchecked
-	return (SortableEntityView<K, E>)getComponent( ix );
+	return (SortableEntityView)getComponent( ix );
 
     }
 
-    public SortableEntityView<K,E>[] getEntityViews() {
+    public SortableEntityView[] getEntityViews() {
 
 	Component[] rval = getComponents();
 	@SuppressWarnings("unchecked")
-	SortableEntityView<K,E>[] castRval = new SortableEntityView[rval.length];
+	SortableEntityView[] castRval = new SortableEntityView[rval.length];
 	for ( int i = 0; i < rval.length; i += 1 ) {
 
 	    //noinspection unchecked
-	    castRval[i] = (SortableEntityView<K, E>)rval[i];
+	    castRval[i] = (SortableEntityView)rval[i];
 
 	}
 
@@ -191,11 +216,14 @@ public class SortedPanel<K extends Comparable<K>,E> extends Box {
 
 	BasicProgramConfigInfo.init( "Obtuse", "Pipestone", "entitySorter", null );
 
-        SortedPanel p1 = new SortedPanel( "p1", BoxLayout.Y_AXIS );
+	SortableKeySpace sks = SortableKeySpace.getKey( "sks" );
+
+        SortedPanel p1 = new SortedPanel( "p1" );
+	p1.setLayout( new BoxLayout( p1, BoxLayout.Y_AXIS ) );
 
 	Trace.event( "p1=" + p1 );
 
-	testSetModel( "a1", p1, new SortedPanelModel( "p1model" ) );
+	testSetModel( "a1", p1, new SortedPanelModel( sks, "p1model" ) );
 
 //	Trace.event( "p1 with model=" + p1 );
 
@@ -203,7 +231,7 @@ public class SortedPanel<K extends Comparable<K>,E> extends Box {
 
 //	Trace.event( "p1 with model removed=" + p1 );
 
-	testSetModel( "a3", p1, new SortedPanelModel( "p2model" ) );
+	testSetModel( "a3", p1, new SortedPanelModel( sks, "p2model" ) );
 
 //	Trace.event( "p1 with a new model=" + p1 );
 
@@ -211,13 +239,13 @@ public class SortedPanel<K extends Comparable<K>,E> extends Box {
 
 //	Trace.event( "p1 with the same model after it was reassigned=" + p1 );
 
-	testSetModel( "a5", p1, new SortedPanelModel( "p3model" ) );
+	testSetModel( "a5", p1, new SortedPanelModel( sks, "p3model" ) );
 
 //	Trace.event( "p1 with another new model=" + p1 );
 
 	Trace.event( "preparing to test SortedPanelModel.adoptSortedPanel" );
 
-	SortedPanelModel m1 = new SortedPanelModel( "m1" );
+	SortedPanelModel m1 = new SortedPanelModel( sks, "m1" );
 
 	testAdoptSortedPanel( "x1", p1.getModel(), null );
 	testAdoptSortedPanel( "x2", m1, null );
@@ -228,20 +256,23 @@ public class SortedPanel<K extends Comparable<K>,E> extends Box {
 	testAdoptSortedPanel( "x5", m1, p1 );
 	testAdoptSortedPanel( "x6", m1, p1 );
 	testAdoptSortedPanel( "x7", m1, null );
-	testAdoptSortedPanel( "x8", m1, new SortedPanel( "p2", BoxLayout.Y_AXIS ) );
+	SortedPanel p2 = new SortedPanel( "p2" );
+	p2.setLayout( new BoxLayout( p2, BoxLayout.Y_AXIS ) );
+	testAdoptSortedPanel( "x8", m1, p2 );
 
-	testPanel();
+	testPanel( sks );
 
     }
 
-    public static void testPanel() {
+    public static void testPanel( SortableKeySpace sks ) {
 
         final Random rng = new Random();
 
 	JFrame frame = new JFrame( "Testing one two three" );
 	Box topPanel = new Box( BoxLayout.Y_AXIS );
-	final SortedPanel<String,MyButtonEntity> panel = new SortedPanel<String, MyButtonEntity>( "panel", BoxLayout.Y_AXIS );
-	final SortedPanelModel<String,MyButtonEntity> model = new SortedPanelModel<String, MyButtonEntity>( "model" );
+	final SortedPanel<MyButtonEntity> panel = new SortedPanel<>( "panel" );
+	panel.setLayout( new BoxLayout( panel, BoxLayout.X_AXIS ) );
+	final SortedPanelModel<String,MyButtonEntity> model = new SortedPanelModel<String, MyButtonEntity>( sks, "model" );
 	panel.setModel( model );
 
 	JButton addButton = new JButton( "add a new button" );
@@ -265,7 +296,7 @@ public class SortedPanel<K extends Comparable<K>,E> extends Box {
 				newKey,
 				new MyButtonEntity( model, newKey.startsWith( "DUP" ) ? NounsList.pickNoun() : newKey )
 			);
-			scrollPane.validate();
+			scrollPane.revalidate();
 
 		    }
 		}
@@ -320,7 +351,7 @@ public class SortedPanel<K extends Comparable<K>,E> extends Box {
 
     }
 
-    public void verifyConsistency( @NotNull TreeSorter<K,?> treeSorter ) {
+    public <K extends Comparable<K>> void verifyConsistency( @NotNull TreeSorter<K,?> treeSorter ) {
 
         if ( treeSorter.size() == getComponentCount() ) {
 
