@@ -5,6 +5,7 @@ import com.obtuse.util.gowing.p2a.GowingEntityReference;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Optional;
 import java.util.TreeMap;
 
 /*
@@ -75,10 +76,10 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName,GowingPackableT
 //
 //    }
 
-    @Nullable
-    public GowingPackedEntityBundle getSuperBundle() {
+    @NotNull
+    public Optional<GowingPackedEntityBundle> getSuperBundle() {
 
-	return _superBundle;
+	return Optional.ofNullable( _superBundle );
 
     }
 

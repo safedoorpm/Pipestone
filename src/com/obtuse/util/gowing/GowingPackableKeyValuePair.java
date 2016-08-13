@@ -170,7 +170,7 @@ public class GowingPackableKeyValuePair<K,V> extends GowingAbstractPackableEntit
     }
 
     /**
-     If an object is an {@link GowingEntityReference} then use {@link GowingUnPacker#resolveReference(GowingEntityReference)} to get the entity; otherwise, return the object.
+     If an object is a {@link GowingEntityReference} then use {@link GowingUnPacker#resolveReference(GowingEntityReference)} to get the entity; otherwise, return the object.
      <p/>This may seem like a rather specialized operation but the use case actually comes up fairly often.
      @param unPacker the unpacker that can resolve {@link GowingEntityReference}s.
      @param value the object in question.
@@ -312,11 +312,29 @@ public class GowingPackableKeyValuePair<K,V> extends GowingAbstractPackableEntit
 		}
 	);
 
+	_factories.put(
+		EntityName.class.getCanonicalName(),
+		new HolderFactory() {
+
+		    @Override
+		    public GowingAbstractPackableHolder constructHolder( EntityName name, Object obj, GowingPacker packer ) {
+
+			return new GowingEntityNameHolder( name, (EntityName)obj, true );
+
+		    }
+
+		}
+	);
+
     }
 
     public static boolean isObjectsClassSupported( @Nullable Object obj ) {
 
 	if ( obj == null || obj instanceof GowingPackable ) {
+
+	    return true;
+
+	} else if ( obj instanceof EntityName ) {
 
 	    return true;
 
@@ -330,7 +348,8 @@ public class GowingPackableKeyValuePair<K,V> extends GowingAbstractPackableEntit
 
     public static boolean isClassSupported( @NotNull Class entityClass ) {
 
-	return _factories.containsKey( entityClass.getCanonicalName() );
+	boolean rval = _factories.containsKey( entityClass.getCanonicalName() );
+	return rval;
 
     }
 

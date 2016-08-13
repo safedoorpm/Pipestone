@@ -37,6 +37,12 @@ public class GowingConstants {
     public static final char TAG_ARRAY = 'a';
 
     /**
+     An {@link com.obtuse.util.gowing.EntityName} value.
+     */
+
+    public static final char TAG_ENTITY_NAME = 'e';
+
+    /**
      A boolean value.
      */
 

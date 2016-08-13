@@ -159,11 +159,14 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
     public enum DatePrecision {
 
-	DATE,
-	MONTH,
-	YEAR,
-	DECADE,
-	RANGE
+	DATE { public String title() { return "Date"; } },
+	MONTH { public String title() { return "Month"; } },
+	YEAR { public String title() { return "Year"; } },
+	DECADE { public String title() { return "Decade"; } },
+	RANGE { public String title() { return "Range"; } };
+
+	public abstract String title();
+
     }
 
     private static boolean s_verboseTesting = false;

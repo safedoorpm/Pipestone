@@ -48,17 +48,17 @@ public class StdGowingUnPackerContext implements GowingUnPackerContext {
 	int typeReferenceId = typeIdToken.intValue();
 	EntityTypeName typeName = new EntityTypeName( typeNameToken.stringValue() );
 
-	if ( findTypeByTypeReferenceId( typeReferenceId ) != null ) {
+	if ( findTypeByTypeReferenceId( typeReferenceId ).isPresent() ) {
 
 	    throw new GowingUnPackerParsingException( "type reference id " + typeReferenceId + " already defined in type alias definition", typeIdToken );
 
 	}
 
-	Integer existingTypeReferenceId = findTypeReferenceId( typeName );
-	if ( existingTypeReferenceId != null ) {
+	Optional<Integer> maybeExistingTypeReferenceId = findTypeReferenceId( typeName );
+	if ( maybeExistingTypeReferenceId.isPresent() ) {
 
 	    throw new GowingUnPackerParsingException(
-		    "type \"" + typeName + "\" already has type id " + existingTypeReferenceId
+		    "type \"" + typeName + "\" already has type id " + maybeExistingTypeReferenceId.get()
 		    + ", cannot associate it with type id " + typeReferenceId,
 		    typeNameToken
 	    );
@@ -121,10 +121,10 @@ public class StdGowingUnPackerContext implements GowingUnPackerContext {
     }
 
     @Override
-    @Nullable
-    public EntityTypeName findTypeByTypeReferenceId( int typeReferenceId ) {
+    @NotNull
+    public Optional<EntityTypeName> findTypeByTypeReferenceId( int typeReferenceId ) {
 
-	return _usedTypeIds.get( typeReferenceId );
+        return Optional.ofNullable( _usedTypeIds.get( typeReferenceId ) );
 
     }
 
@@ -132,22 +132,16 @@ public class StdGowingUnPackerContext implements GowingUnPackerContext {
     @NotNull
     public EntityTypeName getTypeByTypeReferenceId( int typeReferenceId ) {
 
-	EntityTypeName typeName = findTypeByTypeReferenceId( typeReferenceId );
-	if ( typeName == null ) {
-
-	    throw new IllegalArgumentException( "unknown type reference id " + typeReferenceId );
-
-	}
-
-	return typeName;
+	Optional<EntityTypeName> maybeTypeName = findTypeByTypeReferenceId( typeReferenceId );
+	return maybeTypeName.orElseThrow( ()->new IllegalArgumentException( "unknown type reference id " + typeReferenceId ) );
 
     }
 
     @Override
-    @Nullable
-    public Integer findTypeReferenceId( EntityTypeName typeName ) {
+    @NotNull
+    public Optional<Integer> findTypeReferenceId( EntityTypeName typeName ) {
 
-	return _seenTypeNames.get( typeName );
+	return Optional.ofNullable( _seenTypeNames.get( typeName ) );
 
     }
 
@@ -186,7 +180,7 @@ public class StdGowingUnPackerContext implements GowingUnPackerContext {
     @Override
     public Collection<GowingEntityReference> getSeenEntityReferences() {
 
-	return new LinkedList<GowingEntityReference>( _seenInstanceIds.keySet() );
+	return new LinkedList<>( _seenInstanceIds.keySet() );
 
     }
 
@@ -209,7 +203,7 @@ public class StdGowingUnPackerContext implements GowingUnPackerContext {
     @NotNull
     public Collection<EntityTypeName> getNewTypeNames() {
 
-	LinkedList<EntityTypeName> rval = new LinkedList<EntityTypeName>( _newTypeNames );
+	LinkedList<EntityTypeName> rval = new LinkedList<>( _newTypeNames );
 	_newTypeNames.clear();
 
 	return rval;
@@ -231,8 +225,8 @@ public class StdGowingUnPackerContext implements GowingUnPackerContext {
      */
 
     @Override
-    @Nullable
-    public EntityTypeInfo findTypeInfo( @NotNull EntityTypeName typeName ) {
+    @NotNull
+    public Optional<EntityTypeInfo> findTypeInfo( @NotNull EntityTypeName typeName ) {
 
 	return _typeIndex.findTypeInfo( typeName );
 
@@ -249,14 +243,8 @@ public class StdGowingUnPackerContext implements GowingUnPackerContext {
     @NotNull
     public EntityTypeInfo getTypeInfo( @NotNull EntityTypeName typeName ) {
 
-	EntityTypeInfo rval = findTypeInfo( typeName );
-	if ( rval == null ) {
-
-	    throw new IllegalArgumentException( "unknown type \"" + typeName + "\"" );
-
-	}
-
-	return rval;
+	Optional<EntityTypeInfo> maybeRval = findTypeInfo( typeName );
+	return maybeRval.orElseThrow( ()->new IllegalArgumentException( "unknown type \"" + typeName + "\"" ) );
 
     }
 
@@ -267,17 +255,38 @@ public class StdGowingUnPackerContext implements GowingUnPackerContext {
      */
 
     @Override
-    @Nullable
-    public EntityTypeInfo findTypeInfo( int typeReferenceId ) {
+    @NotNull
+    public Optional<EntityTypeInfo> findTypeInfo( int typeReferenceId ) {
 
-	EntityTypeName typeName = findTypeByTypeReferenceId( typeReferenceId );
-	if ( typeName == null ) {
+	Optional<EntityTypeName> maybeTypeName = findTypeByTypeReferenceId( typeReferenceId );
+	if ( maybeTypeName.isPresent() ) {
 
-	    return null;
+	    // Can this actually fail?
+
+	    Optional<EntityTypeInfo> rval = _typeIndex.findTypeInfo( maybeTypeName.get() );
+	    if ( rval.isPresent() ) {
+
+		return rval;
+
+	    } else {
+
+	        throw new HowDidWeGetHereError( "I don't see why this should ever fail to return a non-null value if the id exists (id = " + typeReferenceId + ")" );
+
+	    }
+
+	} else {
+
+	    return Optional.empty();
 
 	}
-
-	return _typeIndex.findTypeInfo( typeName );
+//	return maybeTypeName.
+//	if ( typeName == null ) {
+//
+//	    return null;
+//
+//	}
+//
+//	return _typeIndex.findTypeInfo( typeName );
 
     }
 
@@ -292,32 +301,27 @@ public class StdGowingUnPackerContext implements GowingUnPackerContext {
     @NotNull
     public EntityTypeInfo getTypeInfo( int typeReferenceId ) {
 
-	EntityTypeInfo rval = findTypeInfo( typeReferenceId );
-	if ( rval == null ) {
-
-	    throw new IllegalArgumentException( "unknown type reference id " + typeReferenceId );
-
-	}
-
-	return rval;
+	Optional<EntityTypeInfo> maybeRval = findTypeInfo( typeReferenceId );
+	return maybeRval.orElseThrow( ()->new IllegalArgumentException( "unknown type reference id " + typeReferenceId ) );
 
     }
 
     public EntityTypeInfo registerFactory( GowingEntityFactory factory ) {
 
-	EntityTypeInfo rval = _typeIndex.findTypeInfo( factory.getTypeName() );
-	if ( rval == null ) {
+	Optional<EntityTypeInfo> rval = _typeIndex.findTypeInfo( factory.getTypeName() );
+	return rval.orElseGet( ()->_typeIndex.addFactory( factory ) );
 
-	    return _typeIndex.addFactory( factory );
+//	if ( rval == null ) {
+//
+//	    return _typeIndex.addFactory( factory );
+//
+//	} else {
+//
+//	    return rval;
+//
+//	}
 
-	} else {
-
-	    return rval;
-
-	}
     }
-
-//    }
 
     @Override
     public boolean isTypeNameKnown( EntityTypeName typeName ) {

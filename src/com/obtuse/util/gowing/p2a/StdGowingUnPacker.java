@@ -12,6 +12,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.io.*;
 import java.util.Collection;
+import java.util.Optional;
 
 /*
  * Copyright © 2015 Obtuse Systems Corporation
@@ -84,8 +85,8 @@ public class StdGowingUnPacker implements GowingUnPacker {
     }
 
     @Override
-    @Nullable
-    public GowingDePackedEntityGroup unPack() {
+    @NotNull
+    public Optional<GowingDePackedEntityGroup> unPack() {
 
 	try {
 
@@ -181,24 +182,25 @@ public class StdGowingUnPacker implements GowingUnPacker {
 //		}
 	    }
 
-	    return group;
+	    return Optional.of( group );
 
 	} catch ( GowingUnPackerParsingException e ) {
 
 	    Logger.logErr( "error parsing packed entity - " + e.getMessage() + " (" + e.getCauseToken() + ")", e );
 
-	    return null;
+	    return Optional.empty();
 
 	} catch ( IOException e ) {
 
 	    Logger.logErr( "I/O error parsing packed entity", e );
 
-	    return null;
+	    return Optional.empty();
 
 	}
 
     }
 
+    @NotNull
     private GowingPackable constructEntity( GowingEntityReference er, StdGowingTokenizer.GowingToken2 token, GowingPackedEntityBundle bundle )
 	    throws GowingUnPackerParsingException {
 
@@ -208,48 +210,93 @@ public class StdGowingUnPacker implements GowingUnPacker {
 
 	}
 
-	EntityTypeName typeName = _unPackerContext.findTypeByTypeReferenceId( er.getTypeId() );
-	if ( typeName == null ) {
+	Optional<EntityTypeName> maybeTypeName = _unPackerContext.findTypeByTypeReferenceId( er.getTypeId() );
+	if ( maybeTypeName.isPresent() ) {
+
+	    EntityTypeName typeName = maybeTypeName.get();
+
+	    Optional<EntityTypeInfo> maybeTypeInfo = _unPackerContext.findTypeInfo( typeName );
+	    if ( maybeTypeInfo.isPresent() ) {
+
+	        EntityTypeInfo typeInfo = maybeTypeInfo.get();
+		GowingEntityFactory factory = typeInfo.getFactory();
+
+		/*
+		Create the entity.
+		If something goes wrong, augment the GowingUnPackerParsingException with the current token unless the exception already specifies a token.
+		In either case, rethrow the exception.
+		 */
+
+		GowingPackable entity;
+		try {
+
+		    entity = factory.createEntity( this, bundle, er );
+
+//		    return entity;
+
+		} catch ( GowingUnPackerParsingException e ) {
+
+		    if ( e.getCauseToken() == null ) {
+
+			e.setCauseToken( token );
+
+		    }
+
+		    throw e;
+
+		}
+
+		_unPackerContext.rememberPackableEntity( token, er, entity );
+
+		return entity;
+
+	    } else {
+
+		throw new GowingUnPackerParsingException( "no factory for type id " + er.getTypeId() + " (" + _unPackerContext.findTypeByTypeReferenceId( er.getTypeId() ) + ")", token );
+
+	    }
+
+	} else {
 
 	    throw new GowingUnPackerParsingException( "type id " + er.getTypeId() + " not previously defined in data stream", token );
 
 	}
 
-	EntityTypeInfo typeInfo = _unPackerContext.findTypeInfo( typeName );
-	if ( typeInfo == null ) {
-
-	    throw new GowingUnPackerParsingException( "no factory for type id " + er.getTypeId() + " (" + _unPackerContext.findTypeByTypeReferenceId( er.getTypeId() ) + ")", token );
-
-	}
-
-	GowingEntityFactory factory = typeInfo.getFactory();
-
-	/*
-	Create the entity.
-	If something goes wrong, augment the GowingUnPackerParsingException with the current token unless the exception already specifies a token.
-	In either case, rethrow the exception.
-	 */
-
-	GowingPackable entity;
-	try {
-
-	    entity = factory.createEntity( this, bundle, er );
-
-	} catch ( GowingUnPackerParsingException e ) {
-
-	    if ( e.getCauseToken() == null ) {
-
-		e.setCauseToken( token );
-
-	    }
-
-	    throw e;
-
-	}
-
-	_unPackerContext.rememberPackableEntity( token, er, entity );
-
-	return entity;
+//	EntityTypeInfo typeInfo = _unPackerContext.findTypeInfo( typeName );
+//	if ( typeInfo == null ) {
+//
+//	    throw new GowingUnPackerParsingException( "no factory for type id " + er.getTypeId() + " (" + _unPackerContext.findTypeByTypeReferenceId( er.getTypeId() ) + ")", token );
+//
+//	}
+//
+//	GowingEntityFactory factory = typeInfo.getFactory();
+//
+//	/*
+//	Create the entity.
+//	If something goes wrong, augment the GowingUnPackerParsingException with the current token unless the exception already specifies a token.
+//	In either case, rethrow the exception.
+//	 */
+//
+//	GowingPackable entity;
+//	try {
+//
+//	    entity = factory.createEntity( this, bundle, er );
+//
+//	} catch ( GowingUnPackerParsingException e ) {
+//
+//	    if ( e.getCauseToken() == null ) {
+//
+//		e.setCauseToken( token );
+//
+//	    }
+//
+//	    throw e;
+//
+//	}
+//
+//	_unPackerContext.rememberPackableEntity( token, er, entity );
+//
+//	return entity;
 
     }
 
@@ -298,39 +345,40 @@ public class StdGowingUnPacker implements GowingUnPacker {
 	@SuppressWarnings("UnusedAssignment") StdGowingTokenizer.GowingToken2 equalSignToken = _tokenizer.getNextToken( false, StdGowingTokenizer.TokenType.EQUAL_SIGN );
 	@SuppressWarnings("UnusedAssignment") StdGowingTokenizer.GowingToken2 leftParenToken = _tokenizer.getNextToken( false, StdGowingTokenizer.TokenType.LEFT_PAREN );
 
-	EntityTypeName entityTypeName = _unPackerContext.findTypeByTypeReferenceId( ourEntityReferenceToken.entityReference().getTypeId() );
-	if ( entityTypeName == null ) {
+	Optional<EntityTypeName> maybeEntityTypeName = _unPackerContext.findTypeByTypeReferenceId( ourEntityReferenceToken.entityReference().getTypeId() );
+	if ( maybeEntityTypeName.isPresent() ) {
 
-	    throw new GowingUnPackerParsingException( "unknown type id " + ourEntityReferenceToken.entityReference().getTypeId() + " in LHS of entity definition clause", ourEntityReferenceToken );
+	    EntityTypeName entityTypeName = maybeEntityTypeName.get();
 
-	}
+	    if ( !parsingSuperClause && ourEntityReferenceToken.entityReference().getEntityId() == 0 ) {
 
-	if ( !parsingSuperClause && ourEntityReferenceToken.entityReference().getEntityId() == 0 ) {
+		throw new GowingUnPackerParsingException( "entity id may only be zero in super clauses", ourEntityReferenceToken );
 
-	    throw new GowingUnPackerParsingException( "entity id may only be zero in super clauses", ourEntityReferenceToken );
+	    } else if ( parsingSuperClause && ourEntityReferenceToken.entityReference().getEntityId() != 0 ) {
 
-	} else if ( parsingSuperClause && ourEntityReferenceToken.entityReference().getEntityId() != 0 ) {
+		throw new GowingUnPackerParsingException( "entity id must be zero in super clauses", ourEntityReferenceToken );
 
-	    throw new GowingUnPackerParsingException( "entity id must be zero in super clauses", ourEntityReferenceToken );
-
-	}
+	    }
 
 //	P2ATokenizer.GowingToken2 leftParen = _tokenizer.getNextToken( false, P2ATokenizer.TokenType.LEFT_PAREN );
 
 //	@SuppressWarnings("UnusedAssignment") boolean gotFieldDefinition = false;
-	GowingPackedEntityBundle bundle = null;
+	    GowingPackedEntityBundle bundle = null;
 
-	while ( true ) {
+	    while ( true ) {
 
-	    StdGowingTokenizer.GowingToken2 token = _tokenizer.getNextToken( true );
-	    switch ( token.type() ) {
+		StdGowingTokenizer.GowingToken2 token = _tokenizer.getNextToken( true );
+		switch ( token.type() ) {
 
-		case ENTITY_REFERENCE:
+		    case ENTITY_REFERENCE:
 
 		    {
 			if ( bundle != null ) {
 
-			    throw new GowingUnPackerParsingException( "super clause must be the first clause in an entity definition clause", token );
+			    throw new GowingUnPackerParsingException(
+				    "super clause must be the first clause in an entity definition clause",
+				    token
+			    );
 
 			}
 
@@ -342,7 +390,8 @@ public class StdGowingUnPacker implements GowingUnPacker {
 			Integer version = ourEntityReferenceToken.entityReference().getVersion();
 			if ( version == null ) {
 
-			    throw new HowDidWeGetHereError( "parsing super clause - should be impossible to get here with a null version number" );
+			    throw new HowDidWeGetHereError(
+				    "parsing super clause - should be impossible to get here with a null version number" );
 
 			}
 
@@ -358,66 +407,73 @@ public class StdGowingUnPacker implements GowingUnPacker {
 
 		    break;
 
-		case IDENTIFIER:
+		    case IDENTIFIER:
 
-		    // start of a field definition clause
+			// start of a field definition clause
 
-		    _tokenizer.putBackToken( token );
+			_tokenizer.putBackToken( token );
 
-		    // If this is the first clause then create our PEB.
+			// If this is the first clause then create our PEB.
 
-		    if ( bundle == null ) {
+			if ( bundle == null ) {
 
-			Integer version = ourEntityReferenceToken.entityReference().getVersion();
-			if ( version == null ) {
+			    Integer version = ourEntityReferenceToken.entityReference().getVersion();
+			    if ( version == null ) {
 
-			    throw new HowDidWeGetHereError( "first field definition clause - should be impossible to get here with a null version number" );
+				throw new HowDidWeGetHereError(
+					"first field definition clause - should be impossible to get here with a null version number" );
+
+			    }
+
+			    bundle = new GowingPackedEntityBundle(
+				    entityTypeName,
+				    ourEntityReferenceToken.entityReference().getTypeId(),
+				    null,
+				    version,
+				    _unPackerContext
+			    );
 
 			}
 
-			bundle = new GowingPackedEntityBundle(
-				entityTypeName,
-				ourEntityReferenceToken.entityReference().getTypeId(),
-				null,
-				version,
-				_unPackerContext
-			);
+			// Collect the field definition and add it to our PEB.
 
-		    }
+			collectFieldDefinitionClause( bundle );
 
-		    // Collect the field definition and add it to our PEB.
+			break;
 
-		    collectFieldDefinitionClause( bundle );
+		    case RIGHT_PAREN:
 
-		    break;
+			// end of our field value display clause
 
-		case RIGHT_PAREN:
+			if ( bundle == null ) {
 
-		    // end of our field value display clause
+			    bundle = new GowingPackedEntityBundle(
+				    entityTypeName,
+				    ourEntityReferenceToken.entityReference().getTypeId(),
+				    null,
+				    -1,
+				    _unPackerContext
+			    );
 
-		    if ( bundle == null ) {
+			}
 
-			bundle = new GowingPackedEntityBundle(
-				entityTypeName,
-				ourEntityReferenceToken.entityReference().getTypeId(),
-				null,
-				-1,
-				_unPackerContext
-			);
+			return bundle;
 
-		    }
+		    case COMMA:
 
-		    return bundle;
-
-		case COMMA:
-
-		    // end of this field definition, more to come
+			// end of this field definition, more to come
 
 //		    gotFieldDefinition = true;
 
-		    break;
+			break;
+
+		}
 
 	    }
+
+	} else {
+
+	    throw new GowingUnPackerParsingException( "unknown type id " + ourEntityReferenceToken.entityReference().getTypeId() + " in LHS of entity definition clause", ourEntityReferenceToken );
 
 	}
 
@@ -497,7 +553,14 @@ public class StdGowingUnPacker implements GowingUnPacker {
 
 	GowingPackableThingHolder holder = valueToken.createHolder( identifierToken.identifierValue(), valueToken );
 
-	Logger.logMsg( "got field definition:  " + identifierToken.identifierValue() + " = " + valueToken.getObjectValue() );
+	Logger.logMsg( "got field definition:  " +
+		       identifierToken.identifierValue() +
+		       " = " +
+		       valueToken.getObjectValue() +
+		       " (" +
+		       ( valueToken.getObjectValue() == null ? "null" : valueToken.getObjectValue().getClass().getCanonicalName() ) +
+		       ")"
+	);
 
 	if ( bundle.containsKey( holder.getName() ) ) {
 
@@ -528,9 +591,11 @@ public class StdGowingUnPacker implements GowingUnPacker {
 	    unPacker.getUnPackerContext().registerFactory( StdGowingPackerContext.SimplePackableClass.FACTORY );
 	    unPacker.getUnPackerContext().registerFactory( StdGowingPacker.SortedSetExample.FACTORY );
 
-	    GowingDePackedEntityGroup result = unPacker.unPack();
+	    Optional<GowingDePackedEntityGroup> maybeResult = unPacker.unPack();
 
-	    if ( result != null ) {
+	    if ( maybeResult.isPresent() ) {
+
+		GowingDePackedEntityGroup result = maybeResult.get();
 
 		for ( GowingPackable entity : result.getAllEntities() ) {
 

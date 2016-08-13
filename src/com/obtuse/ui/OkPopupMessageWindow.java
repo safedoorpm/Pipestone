@@ -179,11 +179,9 @@ public abstract class OkPopupMessageWindow extends JDialog {
 
     @SuppressWarnings({ "SameParameterValue" })
     public static void doit( final String line1,
-                             @Nullable
-                             final String line2,
+                             @Nullable final String line2,
                              final String button,
-                             @Nullable
-                             final Runnable runnable
+                             @Nullable final Runnable runnable
     ) {
 
         SwingUtilities.invokeLater(

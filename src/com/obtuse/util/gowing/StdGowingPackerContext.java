@@ -594,6 +594,7 @@ public class StdGowingPackerContext implements GowingPackerContext {
 	    rval.addHolder( new GowingFloatHolder( new EntityName( "_floatValue" ), 1.1f, true ) );
 	    rval.addHolder( new GowingShortHolder( new EntityName( "_shortValue" ), (short) 15, false ) );
 	    rval.addHolder( new GowingLongHolder( new EntityName( "_longValue" ), 123L, true ) );
+	    rval.addHolder( new GowingEntityNameHolder( new EntityName( "_entityName" ), new EntityName( "froz botnick"), true ) );
 
 	    return rval;
 

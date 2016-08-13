@@ -601,11 +601,9 @@ public class ObtuseXMLUtils {
 
     public static InstanceFromXML loadInstanceFromXML(
             MessageProxy messageProxy,
-            @Nullable
-            Node parent,
+            @Nullable Node parent,
             Node targetNode,
-            @Nullable
-            Package optionalExpectedPackage,
+            @Nullable Package optionalExpectedPackage,
             Class<? extends InstanceFromXML> expectedClass,
             String name
     ) {
@@ -622,11 +620,9 @@ public class ObtuseXMLUtils {
     }
     public static InstanceFromXML loadInstanceFromXML(
             MessageProxy messageProxy,
-            @Nullable
-            Node parent,
+            @Nullable Node parent,
             Node targetNode,
-            @Nullable
-            Package[] optionalExpectedPackages,
+            @Nullable Package[] optionalExpectedPackages,
             Class<? extends InstanceFromXML> expectedClass,
             String name
     ) {

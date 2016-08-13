@@ -347,9 +347,10 @@ public class StdGowingPacker implements GowingPacker {
 
 	_writer.print( "(" );
 	String comma = " ";
-	GowingPackedEntityBundle superBundle = bundle.getSuperBundle();
-	if ( superBundle != null ) {
+	Optional<GowingPackedEntityBundle> maybeSuperBundle = bundle.getSuperBundle();
+	if ( maybeSuperBundle.isPresent() ) {
 
+	    GowingPackedEntityBundle superBundle = maybeSuperBundle.get();
 	    _writer.print( comma );
 
 	    emitEntityReference( superBundle.getTypeId(), 0, superBundle.getVersion(), null );
@@ -376,7 +377,8 @@ public class StdGowingPacker implements GowingPacker {
 //	    _currentSeparator = ", ";
 
 	}
-	if ( bundle.getSuperBundle() == null && bundle.isEmpty() ) {
+
+	if ( !maybeSuperBundle.isPresent() && bundle.isEmpty()  /* bundle.getSuperBundle() == null && bundle.isEmpty() */ ) {
 
 	    _writer.print( ")" );
 

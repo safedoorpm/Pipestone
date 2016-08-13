@@ -2,7 +2,9 @@ package com.obtuse.util.gowing;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import sun.security.krb5.internal.ETypeInfo;
 
+import java.util.Optional;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
@@ -50,10 +52,10 @@ public class GowingTypeIndex {
 //
 //	}
 
-	EntityTypeInfo typeInfo = findTypeInfo( newFactory.getEntityTypeName() );
-	if ( typeInfo != null ) {
+	Optional<EntityTypeInfo> maybeTypeInfo = findTypeInfo( newFactory.getEntityTypeName() );
+	if ( maybeTypeInfo.isPresent() ) {
 
-	    throw new IllegalArgumentException( "" + newFactory + ":  cannot add factory because type index already contains entry for type name \"" + typeInfo.getTypeName() + "\"" );
+	    throw new IllegalArgumentException( "" + newFactory + ":  cannot add factory because type index already contains entry for type name \"" + maybeTypeInfo.get().getTypeName() + "\"" );
 
 	}
 
@@ -66,7 +68,7 @@ public class GowingTypeIndex {
 
 	int referenceId = _nextReferenceIndex;
 	_nextReferenceIndex += 1;
-	typeInfo = new EntityTypeInfo( referenceId, newFactory );
+	EntityTypeInfo typeInfo = new EntityTypeInfo( referenceId, newFactory );
 	_typeNameToTypeInfoMapping.put(
 		newFactory.getEntityTypeName(),
 		typeInfo
@@ -133,10 +135,23 @@ public class GowingTypeIndex {
      @return the corresponding type's info or <code>null</code> if we don't have the specified type in our index.
      */
 
-    @Nullable
-    public EntityTypeInfo findTypeInfo( @NotNull EntityTypeName typeName ) {
+//    @Nullable
+    @NotNull
+    public Optional<EntityTypeInfo> findTypeInfo( @NotNull EntityTypeName typeName ) {
 
-	return _typeNameToTypeInfoMapping.get( typeName );
+	return Optional.ofNullable( _typeNameToTypeInfoMapping.get( typeName ) );
+
+    }
+
+    /**
+     Determine if there type info available for a specified type name.
+     @param typeName the name of the type of interest.
+     @return <tt>true</tt> if we have type info for the specified type; <tt>false</tt> otherwise.
+     */
+
+    public boolean hasTypeInfo( @NotNull EntityTypeName typeName ) {
+
+        return _typeNameToTypeInfoMapping.containsKey( typeName );
 
     }
 
@@ -150,14 +165,18 @@ public class GowingTypeIndex {
     @NotNull
     public EntityTypeInfo getTypeInfo( @NotNull EntityTypeName typeName ) {
 
-	EntityTypeInfo entityFactory = findTypeInfo( typeName );
-	if ( entityFactory == null ) {
+        Optional<EntityTypeInfo> maybeEntityFactory = findTypeInfo( typeName );
+	return maybeEntityFactory.orElseThrow( ()->new IllegalArgumentException( "no type info found for type named \"" + typeName + "\"" ) );
 
-	    throw new IllegalArgumentException( "no type info found for type named \"" + typeName + "\"" );
-
-	}
-
-	return entityFactory;
+//	if ( hasTypeInfo( typeName ) ) {
+//
+//	    return maybeEntityFactory.get();
+//
+//	} else {
+//
+//	    throw new IllegalArgumentException( "no type info found for type named \"" + typeName + "\"" );
+//
+//	}
 
     }
 

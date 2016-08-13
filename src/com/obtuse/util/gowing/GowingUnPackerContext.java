@@ -7,6 +7,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
+import java.util.Optional;
 
 /*
  * Copyright © 2015 Obtuse Systems Corporation
@@ -29,8 +30,8 @@ public interface GowingUnPackerContext {
 
 //    int getOrAllocateTypeReferenceId( EntityTypeName typeName );
 
-    @Nullable
-    Integer findTypeReferenceId( EntityTypeName typeName );
+    @NotNull
+    Optional<Integer> findTypeReferenceId( EntityTypeName typeName );
 
     int getTypeReferenceId( EntityTypeName typeName );
 
@@ -66,20 +67,20 @@ public interface GowingUnPackerContext {
 
     void addUnfinishedEntities( Collection<GowingEntityReference> collection );
 
-    @Nullable
-    EntityTypeName findTypeByTypeReferenceId( int typeReferenceId );
+    @NotNull
+    Optional<EntityTypeName> findTypeByTypeReferenceId( int typeReferenceId );
 
     @NotNull
     EntityTypeName getTypeByTypeReferenceId( int typeReferenceId );
 
-    @Nullable
-    EntityTypeInfo findTypeInfo( int typeReferenceId );
+    @NotNull
+    Optional<EntityTypeInfo> findTypeInfo( int typeReferenceId );
 
     @NotNull
     EntityTypeInfo getTypeInfo( int typeReferenceId );
 
-    @Nullable
-    EntityTypeInfo findTypeInfo( @NotNull EntityTypeName typeName );
+    @NotNull
+    Optional<EntityTypeInfo> findTypeInfo( @NotNull EntityTypeName typeName );
 
     @NotNull
     EntityTypeInfo getTypeInfo( @NotNull EntityTypeName typeName );

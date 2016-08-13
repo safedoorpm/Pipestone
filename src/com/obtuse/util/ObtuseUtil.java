@@ -25,7 +25,7 @@ import java.util.regex.Pattern;
 import java.util.zip.ZipFile;
 
 /**
- * Utility methods and such.
+ * A sometimes motley collectino of utility methods which I have found useful.
  */
 
 @SuppressWarnings({ "UnusedDeclaration" })
@@ -33,6 +33,7 @@ public class ObtuseUtil {
 
     private static final Pattern HEX_STRING_PATTERN = Pattern.compile( "([0-9a-f][0-9a-f])*" );
 
+    @Nullable
     public static String extractKeywordValueSemiColon( String url, String keyword ) {
 
         String wrappedURL = ";" + url;
@@ -61,6 +62,14 @@ public class ObtuseUtil {
 
     }
 
+    /**
+     Generate a hexadecimal string representing a specified long value and then strip off the unnecessary leading zeros.
+     If the specified long value was equal to zero then the return string will contain the single character <tt>0</tt>.
+     @param value the long value to be converted to a minimal hex string.
+     @return the converted long value.
+     */
+
+    @NotNull
     public static String getMinimalHexValue( long value ) {
 
         String original = hexvalue( value );
@@ -73,6 +82,15 @@ public class ObtuseUtil {
         return original.substring( off );
 
     }
+
+    /**
+     A derivative of the {@link Hashtable} which whose instances start out mutable but can be made immutable upon request (there is no
+     mechanism provided to make an immutable instance mutable again).
+     <p/>I am not certain that class doesn't have any 'holes' in it which allow a clever user to modify an instance which has been marked
+     immutable. I believe that I have accomplished the desired goal but a nagging doubt remains.
+     @param <K> The type of the keys for the hash table.
+     @param <V> The type of the values in the hash table.
+     */
 
     private static class UnmodifiableHashtable<K,V> extends Hashtable<K,V> {
 
@@ -212,6 +230,10 @@ public class ObtuseUtil {
 
     }
 
+    /**
+     This is a class of utility methods - no point letting anyone instantiate instances.
+     */
+
     private ObtuseUtil() {
 
         super();
@@ -226,6 +248,7 @@ public class ObtuseUtil {
      */
 
     @SuppressWarnings({ "SameParameterValue" })
+    @Nullable
     public static byte[] getSerializedVersion( Serializable thing, boolean printStackTraceOnError ) {
 
         ByteArrayOutputStream bos = null;
@@ -329,13 +352,14 @@ public class ObtuseUtil {
      * and de-serialized.
      *
      * @param inputFile the file that the serialized object is to be read from.
-     * @return the de-serialized object or null if something goes wrong.
+     * @return the de-serialized object or <tt>null</tt> if something goes wrong.
      * @throws java.io.IOException    if an I/O error occurs opening or reading from the file or a deserialization
      *                                error occurs (see {@link java.io.ObjectInputStream#readObject()} for details on what can
      *                                go wrong).
      * @throws ClassNotFoundException if the class of a serialized object in the file cannot be found.
      */
 
+    @Nullable
     public static Serializable recoverSerializedVersion( File inputFile )
             throws IOException, ClassNotFoundException {
 
@@ -349,7 +373,9 @@ public class ObtuseUtil {
      *
      * @param inputFile the file that the serialized object is to be read from.
      * @param printStackTraceOnError true if a stack trace is to be printed if anything goes wrong.
-     * @return the de-serialized object or null if something goes wrong.
+     * @return the de-serialized object. If something goes wrong then <tt>null</tt> is returned. Note that it is possible to
+     * serialize a null pointer which means that de-serializing can legitimately yield a null pointer.
+     * Use {@link #recoverSerializedVersion(File)} if this is a concern as it will throw an exception of the de-serialization fails.
      */
 
     public static Serializable recoverSerializedVersion( File inputFile, boolean printStackTraceOnError ) {
@@ -448,9 +474,11 @@ public class ObtuseUtil {
     /**
      * Turn a byte array back into a serializable thing. Prints a stack trace and returns null if something goes wrong.
      *
-     * @param sv                     the serialized form of the object.
+     * @param sv the serialized form of the object.
      * @param printStackTraceOnError true if a stack trace should be printed if anything goes wrong.
-     * @return the de-serialized object or null if de-serialization fails.
+     * @return the de-serialized object. If something goes wrong then <tt>null</tt> is returned. Note that it is possible to
+     * serialize a null pointer which means that de-serializing can legitimately yield a null pointer.
+     * Use {@link #recoverSerializedVersion(byte[])} if this is a concern as it will throw an exception of the de-serialization fails.
      */
 
     public static Serializable recoverSerializedVersion(
@@ -475,9 +503,11 @@ public class ObtuseUtil {
      * Turn an {@link java.io.InputStream} back into a serializable thing. The next serialized object from the stream is read
      * and de-serialized. The stream is closed when this call completes.
      *
-     * @param is                     the input stream that the serialized object is to be read from.
+     * @param is the input stream that the serialized object is to be read from.
      * @param printStackTraceOnError true if a stack trace should be printed if anything goes wrong.
-     * @return the de-serialized object or null if something goes wrong.
+     * @return the de-serialized object. If something goes wrong then <tt>null</tt> is returned. Note that it is possible to
+     * serialize a null pointer which means that de-serializing can legitimately yield a null pointer.
+     * Use {@link #recoverSerializedVersion(InputStream)} if this is a concern as it will throw an exception of the de-serialization fails.
      */
 
     public static Serializable recoverSerializedVersion( InputStream is, boolean printStackTraceOnError ) {
@@ -1916,6 +1946,7 @@ public class ObtuseUtil {
     @SuppressWarnings("ConstantNamingConvention")
     private static final Long          _md5Lock       = 0L;
 
+    @NotNull
     public static String computeMD5( InputStream is )
             throws IOException {
 
@@ -1971,10 +2002,12 @@ public class ObtuseUtil {
                 ObtuseUtil.closeQuietly( fis );
 
             }
+
         }
 
     }
 
+    @NotNull
     public static String computeMD5( File file )
             throws IOException {
 
@@ -2096,24 +2129,49 @@ public class ObtuseUtil {
 
         BasicProgramConfigInfo.init( "Obtuse", "ObtuseUtil", "testing", null );
 
-        if ( ObtuseUtil.writeSerializableObjectToFile( "Hello world", new File( "test.ser" ), true ) ) {
+	for ( String value : new String[]{ "hello world", "", null } ) {
 
-            String helloWorld = (String) ObtuseUtil.recoverSerializedVersion( new File( "test.ser" ), true );
-            if ( helloWorld == null ) {
+	    if ( ObtuseUtil.writeSerializableObjectToFile( value, new File( "test.ser" ), true ) ) {
 
-                Logger.logMsg( "unable to de-serialize test.ser" );
+		try {
 
-            } else if ( "Hello world".equals( helloWorld ) ) {
+		    String recoveredVersion = (String) ObtuseUtil.recoverSerializedVersion( new File( "test.ser" ) );
+		    if ( recoveredVersion == null ) {
 
-                Logger.logMsg( "serialization and de-serialization to/from files seems to work" );
+			if ( value == null ) {
 
-            }
+			    Logger.logMsg( "null made the round trip alive" );
 
-        } else {
+			} else {
 
-            Logger.logMsg( "unble to serialize test.ser" );
+			    Logger.logMsg( "got null back from serialized version of \"" + enquoteForJavaString( value ) + "\"" );
 
-        }
+			}
+
+		    } else if ( "Hello world".equals( recoveredVersion ) ) {
+
+			Logger.logMsg( "serialization and de-serialization to/from files seems to work" );
+
+		    }
+
+		    doNothing();
+
+		} catch ( IOException e ) {
+
+		    Logger.logErr( "IOException trying to recover serialized version of \"" + enquoteForJavaString( value ) + "\"", e );
+
+		} catch ( ClassNotFoundException e ) {
+
+		    Logger.logErr( "ClassNotFoundException trying to recover serialized version of \"" + enquoteForJavaString( value ) + "\"", e );
+
+		}
+
+	    } else {
+
+		Logger.logMsg( "unable to serialize test.ser" );
+
+	    }
+	}
 
     }
 

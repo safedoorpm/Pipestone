@@ -2,7 +2,10 @@ package com.obtuse.util.gowing;
 
 import com.obtuse.util.gowing.p2a.GowingDePackedEntityGroup;
 import com.obtuse.util.gowing.p2a.GowingEntityReference;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Optional;
 
 /*
  * Copyright © 2015 Obtuse Systems Corporation
@@ -14,8 +17,8 @@ import org.jetbrains.annotations.Nullable;
 
 public interface GowingUnPacker {
 
-    @Nullable
-    GowingDePackedEntityGroup unPack();
+    @NotNull
+    Optional<GowingDePackedEntityGroup> unPack();
 
     GowingPackable resolveReference( GowingEntityReference er );
 
