@@ -17,7 +17,8 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.*;
+import java.util.List;
 
 @SuppressWarnings({ "ClassWithoutToString", "UnusedDeclaration" })
 public class LogsWindow extends WindowWithMenus {
@@ -408,19 +409,20 @@ public class LogsWindow extends WindowWithMenus {
                         StringWriter lines = new StringWriter();
                         PrintWriter writer = new PrintWriter( lines );
                         int[] selectedIndices = _messageWindowList.getSelectedIndices();
-                        Object[] selectedValues = _messageWindowList.getSelectedValues();
+			List selectedValues = _messageWindowList.getSelectedValuesList();
 
-                        for ( int ix = 0; ix < selectedIndices.length; ix += 1 ) {
+//                        for ( int ix = 0; ix < selectedIndices.length; ix += 1 ) {
+			int ix = 0;
+			for ( Object sv : selectedValues ) {
 
-                            if ( ix < selectedIndices.length - 1 ) {
+			    writer.print( sv );
+			    if ( ix < selectedIndices.length - 1 ) {
 
-                                writer.println( selectedValues[ix] );
+				writer.println();
 
-                            } else {
+			    }
 
-                                writer.print( selectedValues[ix] );
-
-                            }
+                            ix += 1;
 
                         }
 

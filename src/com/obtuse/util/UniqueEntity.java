@@ -18,7 +18,7 @@ package com.obtuse.util;
  */
 
 @SuppressWarnings("UnusedDeclaration")
-public class UniqueEntity {
+public class UniqueEntity implements UniqueWithId {
 
     private final long _id;
 
@@ -52,7 +52,7 @@ public class UniqueEntity {
      * @return this instance's id value.
      */
 
-    public long getId() {
+    public final long getId() {
 
         return _id;
 
@@ -101,6 +101,12 @@ public class UniqueEntity {
     public boolean equals( Object rhs ) {
 
         return rhs instanceof UniqueEntity && ((UniqueEntity)rhs).getId() == getId();
+
+    }
+
+    public String toString() {
+
+        return "UniqueEntity( id=" + getId() + " )";
 
     }
 

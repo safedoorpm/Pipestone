@@ -262,7 +262,7 @@ public class SortedPanelModel<K extends Comparable<K>, E extends SortableEntity>
 
 	Trace.event( "                                                                                                                            " + this + ".adoptSortedPanel( " + owner + " )" );
 
-	// Just pass on null operations.
+	// Just ignore on null operations.
 	// This has the side effect of eliminating any chance of infinite mutual recursion between us and {@link SortedPanel.setModel}.
 
 	if ( owner == _owner ) {

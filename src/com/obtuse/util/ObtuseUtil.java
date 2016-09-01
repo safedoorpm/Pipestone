@@ -2203,17 +2203,11 @@ public class ObtuseUtil {
 
                 ObtuseUtil.s_pid = (Integer) pidMethod.invoke(mgmt);
 
-            } catch ( InvocationTargetException e ) {
-                // we did our best
-            } catch ( NoSuchMethodException e ) {
-                // we did our best
-            } catch ( IllegalAccessException e ) {
-                // we did our best
-            } catch ( NoSuchFieldException e ) {
+            } catch ( InvocationTargetException | NoSuchMethodException | NoSuchFieldException | IllegalAccessException e ) {
                 // we did our best
             }
 
-        }
+	}
 
         return ObtuseUtil.s_pid.intValue();
 
@@ -2222,14 +2216,14 @@ public class ObtuseUtil {
     @NotNull
     public static String fDim( String name, Dimension d ) {
 
-	return name + "=" + ObtuseUtil.fDim( d );
+	return name + "=" + ( d == null ? "null" : ObtuseUtil.fDim( d ) );
 
     }
 
     @NotNull
     public static String fDim( Dimension d ) {
 
-	return ObtuseUtil.fDim( d.width, d.height );
+	return d == null ? "null" : ObtuseUtil.fDim( d.width, d.height );
 
 
     }
@@ -2238,6 +2232,28 @@ public class ObtuseUtil {
     public static String fDim( int width, int height ) {
 
 	return "(" + width + "," + height + ")";
+
+    }
+
+    @NotNull
+    public static String fBounds( String name, Rectangle r ) {
+
+	return name + "=" + ( r == null ? "null" : ObtuseUtil.fBounds( r ) );
+
+    }
+
+    @NotNull
+    public static String fBounds( Rectangle r ) {
+
+	return r == null ? "null" : ObtuseUtil.fBounds( r.x, r.y, r.width, r.height );
+
+
+    }
+
+    @NotNull
+    public static String fBounds( int x, int y, int width, int height ) {
+
+	return "@(" + x + "," + y + ") [" + width + "," + height + "]";
 
     }
 
