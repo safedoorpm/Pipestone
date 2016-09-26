@@ -33,6 +33,23 @@ public class ObtuseUtil {
 
     private static final Pattern HEX_STRING_PATTERN = Pattern.compile( "([0-9a-f][0-9a-f])*" );
 
+    /**
+     Detect if we are running within the Java debugger.
+     <p/>Be very very careful! Code that behaves differently in a debugger is, obviously, difficult to debug!!!
+     <p/>This trick found at {@code http://www.rgagnon.com/javadetails/java-detect-if-running-in-debug-mode.html}
+     @return {@code true} if the current JVM is under the control of the Java debugger; {@code false} otherwise.
+     */
+
+    public static boolean inJavaDebugger() {
+
+	boolean isDebug =
+		java.lang.management.ManagementFactory.getRuntimeMXBean().
+			getInputArguments().toString().indexOf("-agentlib:jdwp") > 0;
+
+	return isDebug;
+
+    }
+
     @Nullable
     public static String extractKeywordValueSemiColon( String url, String keyword ) {
 
@@ -1161,6 +1178,66 @@ public class ObtuseUtil {
     }
 
     /**
+     * Pad a string on the left and on the right to a specified width using blanks as the padding character.
+     * <p/>What happens conceptually is that while the string is narrower than the requested width,
+     * a single space character is added on an alternating basis on the left of the string or on the right of the string.
+     * For example, if the input string is two characters long and the requested width is five characters then the resulting
+     * string will start with two space characters followed by the two characters of the input string followed by one space character.
+     * <p/>
+     * Note that a call to this method using <tt>center( s, w )</tt> is equivalent to a call to {@link #center(String, int, char)}
+     * using <tt>center( s, w, '&nbsp;' )</tt>.
+     *
+     * @param s the string to be centered by appropriate padding on the left and the right.
+     * @param w the width (i.e. length) of the centered string (if the string is already longer than this then the string
+     *          itself is returned as-is).
+     * @return the centered string or the original string if it is already at least as wide as <tt>w</tt>.
+     */
+
+    public static String center( String s, int w ) {
+
+	return center( s, w, ' ' );
+
+    }
+
+    /**
+     * Pad a string on the left and on the right to a specified width using a specified padding character.
+     * <p/>What happens conceptually is that while the string is narrower than the requested width,
+     * a padding character is added on an alternating basis on the left of the string or on the right of the string.
+     * For example, if the input string is two characters long and the requested width is five characters then the resulting
+     * string will start with two padding characters followed by the two characters of the input string followed by one padding character.
+     * <p/>A call to this method using <tt>center( null, w )</tt> is treated as thought it was a call to this method using <tt>center( "null", w )</tt>.
+     *
+     * @param s the string to be centered by appropriate padding on the left and the right (if <tt>s</tt> is <tt>null</tt> then the result
+     *          is as though <tt>s</tt> were the six character string <tt>"null"</tt>).
+     * @param w the width (i.e. length) of the centered string (if the string is already longer than this then the string
+     *          itself is returned as-is).
+     * @param ch the padding character.
+     * @return the centered string or the original string if it is already at least as wide as <tt>w</tt>.
+     */
+
+    public static String center( String s, int w, char ch ) {
+
+	if ( s == null ) {
+
+	    return center( "null", w, ch );
+
+	}
+
+	int actualLength = s.length();
+	if ( actualLength >= w ) {
+
+	    return s;
+
+	}
+
+	int leftPadding = ( w - actualLength + 1 ) >> 1;
+	int rightPadding = ( w - actualLength ) >> 1;
+
+	return generatePaddingString( leftPadding, ch, "" ) + s + generatePaddingString( rightPadding, ch, "" );
+
+    }
+
+    /**
      * Pad a string on the left to a specified width using blanks as the padding character. Note that a call to this
      * method using <tt>lpad( s, w )</tt> is equivalent to a call to {@link #lpad(String, int, char)} using <tt>lpad( s,
      * w, '&nbsp;' )</tt>.
@@ -2129,6 +2206,14 @@ public class ObtuseUtil {
 
         BasicProgramConfigInfo.init( "Obtuse", "ObtuseUtil", "testing", null );
 
+	String s = "hello";
+
+	for ( int w = s.length() - 1; w <= s.length() + 4; w += 1 ) {
+
+	    Logger.logMsg( "center( \"" + s + "\", " + w + " ) yields \"" + center( s, w ) + '"' );
+
+	}
+
 	for ( String value : new String[]{ "hello world", "", null } ) {
 
 	    if ( ObtuseUtil.writeSerializableObjectToFile( value, new File( "test.ser" ), true ) ) {
@@ -2253,7 +2338,7 @@ public class ObtuseUtil {
     @NotNull
     public static String fBounds( int x, int y, int width, int height ) {
 
-	return "@(" + x + "," + y + ") [" + width + "," + height + "]";
+	return "@( " + x + ", " + y + ", " + width + "x" + height + " )";
 
     }
 

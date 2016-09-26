@@ -4,16 +4,15 @@
 
 package com.obtuse.util;
 
+import com.obtuse.exceptions.HowDidWeGetHereError;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.*;
 import java.text.DateFormat;
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
-import java.util.Collection;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Manage a simple logging facility.
@@ -57,6 +56,15 @@ public class Logger {
 
     private static final DateFormat LOG_FILE_NAME_FORMATTER;
     private static String s_programName = null;
+
+    public static final String NESTING_INDENT = ".   ";
+
+//    private static int _nestingLevel = 0;
+    private static Stack<String> _nestingLevelNames = new Stack<>();
+    private static String _nestingString = "";
+
+    @SuppressWarnings("UnnecessaryBoxing")
+    private static final Long _nestingLevelLock = new Long( 0L );
 
     static {
 
@@ -111,6 +119,73 @@ public class Logger {
 
         _outputFileName = outputFileName;
         _outputStream = outputStream;
+
+    }
+
+    public static int pushNesting( @NotNull String levelName ) {
+
+	Logger.logMsg( "{" );
+
+	synchronized ( _nestingLevelLock ) {
+
+	    _nestingLevelNames.push( levelName );
+
+	}
+
+	return _nestingLevelNames.size();
+
+    }
+
+    public static String getTopNestingLevelName() {
+
+	synchronized ( _nestingLevelLock ) {
+
+	    return _nestingLevelNames.peek();
+
+	}
+
+    }
+
+    public static int popNestingLevel( @NotNull String levelName ) {
+
+	synchronized ( _nestingLevelLock ) {
+
+	    if ( levelName.equals( _nestingLevelNames.peek() ) ) {
+
+		_nestingLevelNames.pop();
+
+	    } else {
+
+		throw new HowDidWeGetHereError(
+			"Logger:  attempt to pop nesting level \"" + levelName + "\" when top level is \"" + _nestingLevelNames.peek() +
+			"\"" );
+
+	    }
+
+	    Logger.logMsg( "}" );
+
+	    return _nestingLevelNames.size();
+
+	}
+
+    }
+
+    public static String getNestingString() {
+
+	synchronized ( _nestingLevelLock ) {
+
+	    int nestingLevel = _nestingLevelNames.size();
+	    int requiredLength = nestingLevel * NESTING_INDENT.length();
+
+	    if ( _nestingString.length() < requiredLength ) {
+
+		_nestingString = ObtuseUtil.replicate( NESTING_INDENT, nestingLevel );
+
+	    }
+
+	    return _nestingString.substring( 0, requiredLength );
+
+	}
 
     }
 
@@ -510,7 +585,7 @@ public class Logger {
 
     public static void logFriendly( String msg ) {
 
-        Logger.getFriendly().println( Logger.getPrefix() + msg );
+        Logger.getFriendly().println( Logger.getPrefix() + getNestingString() + msg );
 
     }
 
@@ -523,7 +598,7 @@ public class Logger {
     public static void logMsg( String msg ) {
 
         Trace.event( msg );
-        Logger.getStdout().println( Logger.getPrefix() + msg );
+        Logger.getStdout().println( Logger.getPrefix() + getNestingString() + msg );
 
     }
 
@@ -556,7 +631,7 @@ public class Logger {
     public void msg( String msg ) {
 
         Trace.event( msg );
-        println( Logger.getPrefix() + msg );
+        println( Logger.getPrefix() + getNestingString() + msg );
 
     }
 
@@ -570,7 +645,7 @@ public class Logger {
     public void msg( String msg, Throwable e ) {
 
         Trace.event( msg, e );
-        println( Logger.getPrefix() + msg );
+        println( Logger.getPrefix() + getNestingString() + msg );
         if ( e != null ) {
 
             log( e );
@@ -581,7 +656,7 @@ public class Logger {
 
     private static String getPrefix() {
 
-        return "{" + Thread.currentThread().getId() + "} ";
+        return ObtuseUtil.center( "{" + Thread.currentThread().getId() + "}", 5 ) + ' ';
 
     }
 
@@ -594,21 +669,12 @@ public class Logger {
 
     public static void logMsg( String friendly, @Nullable String geek ) {
 
-        Logger.getFriendly().println( friendly );
+	String prefixedMessage = Logger.getPrefix() + getNestingString() + ( geek == null ? friendly : geek );
 
-//        if ( geek == null ) {
+	Logger.getFriendly().println( prefixedMessage );
 
-        String prefixedMessage = Logger.getPrefix() + ( geek == null ? friendly : geek );
         Trace.event( prefixedMessage );
         Logger.getStdout().println( prefixedMessage );
-
-//        } else {
-//
-//            String prefixedMessage = getPrefix() + geek;
-//            Trace.event( prefixedMessage );
-//            getStdout().println( prefixedMessage );
-//
-//        }
 
     }
 
@@ -620,7 +686,7 @@ public class Logger {
 
     public static void logErr( String msg ) {
 
-        String prefixedMessage = Logger.getPrefix() + msg;
+        String prefixedMessage = Logger.getPrefix() + getNestingString() + msg;
         Trace.event( prefixedMessage );
         Logger.getStderr().println( prefixedMessage );
 
@@ -637,15 +703,7 @@ public class Logger {
 
         Logger.getFriendly().println( friendly );
 
-        if ( geek == null ) {
-
-            Logger.logErr( friendly );
-
-        } else {
-
-            Logger.logErr( geek );
-
-        }
+	Logger.logErr( geek == null ? friendly : geek );
 
     }
 
@@ -681,15 +739,8 @@ public class Logger {
     public static void logErr( String friendly, @Nullable String geek, Throwable e ) {
 
         Logger.getFriendly().println( friendly );
-        if ( geek == null ) {
 
-            Logger.logErr( friendly, e );
-
-        } else {
-
-            Logger.logErr( geek, e );
-
-        }
+	Logger.logErr( geek == null ? friendly : geek, e );
 
     }
 
