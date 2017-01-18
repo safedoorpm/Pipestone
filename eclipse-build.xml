@@ -20,6 +20,7 @@
         <mkdir dir="bin1"/>
         <copy includeemptydirs="false" todir="bin1">
             <fileset dir="src">
+                <exclude name="**/*.launch"/>
                 <exclude name="**/*.java"/>
                 <exclude name="com/obtuse/util/MacCustomization.java"/>
             </fileset>
