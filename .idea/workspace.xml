@@ -5,10 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackableAttribute.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackableName.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackableType.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/Logger.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/Logger.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/ObtuseUtil.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ObtuseUtil.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/UniquelyNamedEntity.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/UniquelyNamedEntity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/EntityName.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/EntityName.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/EntityTypeName.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/EntityTypeName.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingPacker.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingPacker.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/obsolete/ObtuseUtilObsolete.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/obsolete/ObtuseUtilObsolete.java" />
     </list>
     <ignored path="Pipestone.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -122,270 +128,105 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="SortedPanelModel.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/entitySorter/SortedPanelModel.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6102">
-              <caret line="347" column="33" selection-start-line="347" selection-start-column="33" selection-end-line="347" selection-end-column="33" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UniquelyNamedEntity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/UniquelyNamedEntity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="144">
-              <caret line="10" column="99" selection-start-line="10" selection-start-column="99" selection-end-line="10" selection-end-column="99" />
-              <folding>
-                <element signature="e#0#646#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Logger.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/Logger.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="328">
-              <caret line="163" column="0" selection-start-line="163" selection-start-column="0" selection-end-line="163" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="ObtuseUtil.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/ObtuseUtil.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="378">
-              <caret line="41" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
+            <state relative-caret-position="530">
+              <caret line="284" column="0" lean-forward="false" selection-start-line="284" selection-start-column="0" selection-end-line="284" selection-end-column="0" />
               <folding>
-                <element signature="e#6829#6872#0" expanded="false" />
+                <element signature="e#6875#6918#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="HaltDebugConnectionHandler.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/HaltDebugConnectionHandler.java">
+      <file leaf-file-name="GowingPackableType.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackableType.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="20" column="15" selection-start-line="20" selection-start-column="15" selection-end-line="20" selection-end-column="15" />
+            <state relative-caret-position="252">
+              <caret line="21" column="30" lean-forward="false" selection-start-line="21" selection-start-column="12" selection-end-line="21" selection-end-column="30" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SortableEntityReference.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/entitySorter/SortableEntityReference.java">
+      <file leaf-file-name="EntityTypeName.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/EntityTypeName.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+            <state relative-caret-position="306">
+              <caret line="17" column="12" lean-forward="false" selection-start-line="17" selection-start-column="12" selection-end-line="17" selection-end-column="12" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Container.java" pinned="false" current-in-tab="false">
-        <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_77.jdk/Contents/Home/src.zip!/java/awt/Container.java">
+      <file leaf-file-name="GowingPackableAttribute.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackableAttribute.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="7074">
-              <caret line="465" column="21" selection-start-line="465" selection-start-column="21" selection-end-line="465" selection-end-column="21" />
-              <folding>
-                <element signature="e#0#193321#0" expanded="false" />
-                <element signature="imports" expanded="false" />
-                <element signature="e#9097#9098#0" expanded="false" />
-                <element signature="e#9159#9160#0" expanded="false" />
-                <element signature="e#9932#9933#0" expanded="false" />
-                <element signature="e#9979#9980#0" expanded="false" />
-                <element signature="e#10317#10318#0" expanded="false" />
-                <element signature="e#10357#10358#0" expanded="false" />
-                <element signature="e#12401#12402#0" expanded="false" />
-                <element signature="e#12454#12455#0" expanded="false" />
-                <element signature="e#13097#13098#0" expanded="false" />
-                <element signature="e#13128#13129#0" expanded="false" />
-                <element signature="e#37566#37567#0" expanded="false" />
-                <element signature="e#37612#37613#0" expanded="false" />
-                <element signature="e#38925#38926#0" expanded="false" />
-                <element signature="e#38973#38974#0" expanded="false" />
-                <element signature="e#57240#57241#0" expanded="false" />
-                <element signature="e#57272#57273#0" expanded="false" />
-                <element signature="e#58032#58033#0" expanded="false" />
-                <element signature="e#58056#58057#0" expanded="false" />
-                <element signature="e#59867#59868#0" expanded="false" />
-                <element signature="e#59895#59896#0" expanded="false" />
-                <element signature="e#68128#68129#0" expanded="false" />
-                <element signature="e#68166#68167#0" expanded="false" />
-                <element signature="e#70048#70049#0" expanded="false" />
-                <element signature="e#70084#70085#0" expanded="false" />
-                <element signature="e#81680#81681#0" expanded="false" />
-                <element signature="e#81740#81741#0" expanded="false" />
-                <element signature="e#87768#87769#0" expanded="false" />
-                <element signature="e#87810#87811#0" expanded="false" />
-                <element signature="e#97160#97161#0" expanded="false" />
-                <element signature="e#97195#97196#0" expanded="false" />
-                <element signature="e#98619#98620#0" expanded="false" />
-                <element signature="e#98666#98667#0" expanded="false" />
-                <element signature="e#100065#100246#0" expanded="false" />
-                <element signature="e#100245#100246#0" expanded="false" />
-                <element signature="e#100629#100630#0" expanded="false" />
-                <element signature="e#100703#100704#0" expanded="false" />
-                <element signature="e#101852#101853#0" expanded="false" />
-                <element signature="e#101902#101903#0" expanded="false" />
-                <element signature="e#105678#105679#0" expanded="false" />
-                <element signature="e#105726#105727#0" expanded="false" />
-                <element signature="e#111921#112439#0" expanded="false" />
-                <element signature="e#112167#112397#0" expanded="false" />
-                <element signature="e#112396#112397#0" expanded="false" />
-                <element signature="e#112438#112439#0" expanded="false" />
-                <element signature="e#132453#132454#0" expanded="false" />
-                <element signature="e#132506#132507#0" expanded="false" />
-                <element signature="e#134941#134942#0" expanded="false" />
-                <element signature="e#134978#134979#0" expanded="false" />
-                <element signature="e#136737#136738#0" expanded="false" />
-                <element signature="e#136788#136789#0" expanded="false" />
-                <element signature="e#138127#138128#0" expanded="false" />
-                <element signature="e#138154#138155#0" expanded="false" />
-                <element signature="e#140833#140834#0" expanded="false" />
-                <element signature="e#140890#140891#0" expanded="false" />
-                <element signature="e#149781#149782#0" expanded="false" />
-                <element signature="e#149855#149856#0" expanded="false" />
-                <element signature="e#150134#150135#0" expanded="false" />
-                <element signature="e#150201#150202#0" expanded="false" />
-                <element signature="e#150722#150723#0" expanded="false" />
-                <element signature="e#150786#150787#0" expanded="false" />
-                <element signature="e#161989#161990#0" expanded="false" />
-                <element signature="e#162090#162091#0" expanded="false" />
-                <element signature="e#162151#162152#0" expanded="false" />
-                <element signature="e#162236#162237#0" expanded="false" />
-                <element signature="e#171795#171796#0" expanded="false" />
-                <element signature="e#171830#171831#0" expanded="false" />
-                <element signature="e#182033#182415#0" expanded="false" />
-                <element signature="e#182414#182415#0" expanded="false" />
-                <element signature="e#182606#182856#0" expanded="false" />
-                <element signature="e#182855#182856#0" expanded="false" />
-                <element signature="e#185399#186291#0" expanded="false" />
-                <element signature="e#186290#186291#0" expanded="false" />
-              </folding>
+            <state relative-caret-position="858">
+              <caret line="227" column="0" lean-forward="false" selection-start-line="227" selection-start-column="0" selection-end-line="227" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SortedPanel.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/entitySorter/SortedPanel.java">
+      <file leaf-file-name="ObtuseUtilObsolete.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/obsolete/ObtuseUtilObsolete.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5976">
-              <caret line="353" column="98" selection-start-line="353" selection-start-column="4" selection-end-line="353" selection-end-column="98" />
-              <folding>
-                <element signature="imports" expanded="false" />
-                <element signature="e#7183#7640#0" expanded="false" />
-                <element signature="e#7639#7640#0" expanded="false" />
-                <element signature="e#7688#8065#0" expanded="false" />
-                <element signature="e#8064#8065#0" expanded="false" />
-                <element signature="e#8107#8355#0" expanded="false" />
-                <element signature="e#8354#8355#0" expanded="false" />
-              </folding>
+            <state relative-caret-position="144">
+              <caret line="22" column="98" lean-forward="false" selection-start-line="22" selection-start-column="98" selection-end-line="22" selection-end-column="98" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="WeakHashMap.java" pinned="false" current-in-tab="false">
-        <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_77.jdk/Contents/Home/src.zip!/java/util/WeakHashMap.java">
+      <file leaf-file-name="PostgresConnection.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/obtuse/db/PostgresConnection.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3726">
-              <caret line="239" column="11" selection-start-line="239" selection-start-column="11" selection-end-line="239" selection-end-column="11" />
-              <folding>
-                <element signature="e#0#46882#0" expanded="false" />
-                <element signature="imports" expanded="false" />
-                <element signature="e#7755#7756#0" expanded="false" />
-                <element signature="e#7810#7811#0" expanded="false" />
-                <element signature="e#9341#9342#0" expanded="false" />
-                <element signature="e#9399#9400#0" expanded="false" />
-                <element signature="e#9565#9566#0" expanded="false" />
-                <element signature="e#9632#9633#0" expanded="false" />
-                <element signature="e#10562#10563#0" expanded="false" />
-                <element signature="e#10615#10616#0" expanded="false" />
-                <element signature="e#10750#10751#0" expanded="false" />
-                <element signature="e#10803#10804#0" expanded="false" />
-                <element signature="e#10983#10984#0" expanded="false" />
-                <element signature="e#11027#11028#0" expanded="false" />
-                <element signature="e#11837#11838#0" expanded="false" />
-                <element signature="e#11874#11875#0" expanded="false" />
-                <element signature="e#13805#13806#0" expanded="false" />
-                <element signature="e#13839#13840#0" expanded="false" />
-                <element signature="e#15363#15364#0" expanded="false" />
-                <element signature="e#15407#15408#0" expanded="false" />
-                <element signature="e#25783#25784#0" expanded="false" />
-                <element signature="e#25847#25848#0" expanded="false" />
-                <element signature="e#25878#25879#0" expanded="false" />
-                <element signature="e#25914#25915#0" expanded="false" />
-                <element signature="e#26770#26771#0" expanded="false" />
-                <element signature="e#26828#26829#0" expanded="false" />
-                <element signature="e#27419#27420#0" expanded="false" />
-                <element signature="e#27479#27480#0" expanded="false" />
-                <element signature="e#29090#29091#0" expanded="false" />
-                <element signature="e#29138#29139#0" expanded="false" />
-                <element signature="e#29227#29228#0" expanded="false" />
-                <element signature="e#29278#29279#0" expanded="false" />
-                <element signature="e#29395#29396#0" expanded="false" />
-                <element signature="e#29437#29438#0" expanded="false" />
-                <element signature="e#30436#30437#0" expanded="false" />
-                <element signature="e#30484#30485#0" expanded="false" />
-                <element signature="e#30513#30514#0" expanded="false" />
-                <element signature="e#30567#30568#0" expanded="false" />
-                <element signature="e#30612#30613#0" expanded="false" />
-                <element signature="e#30657#30658#0" expanded="false" />
-                <element signature="e#30909#30910#0" expanded="false" />
-                <element signature="e#30957#30958#0" expanded="false" />
-                <element signature="e#31004#31005#0" expanded="false" />
-                <element signature="e#31086#31087#0" expanded="false" />
-                <element signature="e#32082#32083#0" expanded="false" />
-                <element signature="e#32132#32133#0" expanded="false" />
-                <element signature="e#32161#32162#0" expanded="false" />
-                <element signature="e#32215#32216#0" expanded="false" />
-                <element signature="e#32260#32261#0" expanded="false" />
-                <element signature="e#32307#32308#0" expanded="false" />
-                <element signature="e#32338#32339#0" expanded="false" />
-                <element signature="e#32386#32387#0" expanded="false" />
-                <element signature="e#32433#32434#0" expanded="false" />
-                <element signature="e#32517#32518#0" expanded="false" />
-                <element signature="e#33602#33603#0" expanded="false" />
-                <element signature="e#33652#33653#0" expanded="false" />
-                <element signature="e#33991#33992#0" expanded="false" />
-                <element signature="e#34038#34039#0" expanded="false" />
-                <element signature="e#34067#34068#0" expanded="false" />
-                <element signature="e#34121#34122#0" expanded="false" />
-                <element signature="e#34152#34153#0" expanded="false" />
-                <element signature="e#34200#34201#0" expanded="false" />
-                <element signature="e#34490#34491#0" expanded="false" />
-                <element signature="e#34541#34542#0" expanded="false" />
-                <element signature="e#34582#34583#0" expanded="false" />
-                <element signature="e#34634#34635#0" expanded="false" />
-                <element signature="e#34694#34695#0" expanded="false" />
-                <element signature="e#34778#34779#0" expanded="false" />
-                <element signature="e#40558#40559#0" expanded="false" />
-                <element signature="e#40609#40610#0" expanded="false" />
-                <element signature="e#43458#43459#0" expanded="false" />
-                <element signature="e#43490#43491#0" expanded="false" />
-                <element signature="e#46820#46821#0" expanded="false" />
-                <element signature="e#46871#46872#0" expanded="false" />
-              </folding>
+            <state relative-caret-position="1692">
+              <caret line="102" column="0" lean-forward="false" selection-start-line="102" selection-start-column="0" selection-end-line="102" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EventListenerList.java" pinned="false" current-in-tab="false">
-        <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_77.jdk/Contents/Home/src.zip!/javax/swing/event/EventListenerList.java">
+      <file leaf-file-name="StdGowingPackerContext.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/StdGowingPackerContext.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1332">
-              <caret line="100" column="13" selection-start-line="100" selection-start-column="13" selection-end-line="100" selection-end-column="13" />
+            <state relative-caret-position="12132">
+              <caret line="681" column="48" lean-forward="false" selection-start-line="681" selection-start-column="48" selection-end-line="681" selection-end-column="48" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="StdGowingPacker.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingPacker.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="12330">
+              <caret line="700" column="48" lean-forward="false" selection-start-line="700" selection-start-column="48" selection-end-line="700" selection-end-column="48" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ImmutableDate.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/ImmutableDate.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1044">
+              <caret line="66" column="46" lean-forward="false" selection-start-line="66" selection-start-column="46" selection-end-line="66" selection-end-column="46" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ObtuseApproximateCalendarDate.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/ObtuseApproximateCalendarDate.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2448">
+              <caret line="150" column="30" lean-forward="false" selection-start-line="150" selection-start-column="30" selection-end-line="150" selection-end-column="30" />
               <folding>
-                <element signature="e#0#9879#0" expanded="false" />
                 <element signature="imports" expanded="false" />
-                <element signature="e#4191#4192#0" expanded="false" />
-                <element signature="e#4226#4227#0" expanded="false" />
-                <element signature="e#5026#5027#0" expanded="false" />
-                <element signature="e#5070#5071#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -401,6 +242,14 @@
         <option value="Class" />
       </list>
     </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>deprecated</find>
+      <find>immut</find>
+      <find>modifiable</find>
+      <find>unmodifiable</find>
+    </findStrings>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -425,22 +274,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/com/obtuse/ui/ObtuseSortingJComponentView.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/ui/sortable/ObtuseSortingJComponentView.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/ui/sortable/ObtuseSortableJComponent.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/ui/sortable/ObtuseSortableEntityAbstractModel.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/ui/sortable/ObtuseSortableJPanelModel.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/ui/sortable/ObtuseSortingJPanelModel.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/ui/sortable/ObtuseSortingPanelView.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/ui/sortable/ObtuseSortableJPanel.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/ui/sortable/ObtuseSortableEntityView.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/ui/sortable/ObtuseSortingJPanelDefaultModel.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/ui/sortable/ObtuseSortableEntityModel.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/ui/sortable/ObtuseSortableEntity.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/ui/sortable/ObtuseSortingPanelModel.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/ui/sortable/ObtuseSortingJPanel.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/ui/entitySorter/SortedJPanel.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/ui/entitySorter/MyButtonView.java" />
         <option value="$PROJECT_DIR$/src/com/obtuse/ui/entitySorter/MyButtonEntity.java" />
         <option value="$PROJECT_DIR$/src/com/obtuse/ui/entitySorter/SortableEntityView.java" />
         <option value="$PROJECT_DIR$/src/com/obtuse/util/TreeSorter.java" />
@@ -458,7 +291,6 @@
         <option value="$PROJECT_DIR$/src/com/obtuse/ui/OkPopupMessageWindow.java" />
         <option value="$PROJECT_DIR$/src/com/obtuse/util/ObtuseXMLUtils.java" />
         <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackedEntityBundle.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingPacker.java" />
         <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingTypeIndex.java" />
         <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingUnPacker.java" />
         <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingUnPackerContext.java" />
@@ -474,8 +306,25 @@
         <option value="$PROJECT_DIR$/src/com/obtuse/ui/entitySorter/SortedPanelActionListener.java" />
         <option value="$PROJECT_DIR$/src/com/obtuse/ui/entitySorter/SortedPanelModel.java" />
         <option value="$PROJECT_DIR$/src/com/obtuse/util/UniquelyNamedEntity.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/util/ObtuseUtil.java" />
         <option value="$PROJECT_DIR$/src/com/obtuse/util/Logger.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/BurkeAttributeType.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/BurkeAttributeName.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackableKeyValuePairV2.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackableKeyValuePairV2Type.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackableKey.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/BurkeAttribute.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingPacker.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackableKey2.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/EntityName.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackableType2.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackableType.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackableAttribute2.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackableName.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackableAttribute.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/db/PostgresConnection.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/util/obsolete/ObtuseUtilObsolete.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/util/ObtuseUtil.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/EntityTypeName.java" />
       </list>
     </option>
   </component>
@@ -490,8 +339,9 @@
     <treeState />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-2531" />
-    <option name="width" value="2531" />
+    <option name="x" value="198" />
+    <option name="y" value="23" />
+    <option name="width" value="2202" />
     <option name="height" value="1483" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
@@ -537,16 +387,7 @@
       </profile-state>
     </entry>
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
-    <OptionsSetting value="true" id="Add" />
-    <OptionsSetting value="true" id="Remove" />
-    <OptionsSetting value="true" id="Checkout" />
-    <OptionsSetting value="true" id="Update" />
-    <OptionsSetting value="true" id="Status" />
-    <OptionsSetting value="true" id="Edit" />
-    <ConfirmationsSetting value="0" id="Add" />
-    <ConfirmationsSetting value="0" id="Remove" />
-  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectReloadState">
     <option name="STATE" value="0" />
   </component>
@@ -565,6 +406,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -641,33 +485,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ui" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Pipestone" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Pipestone" />
+              <option name="myItemId" value="util" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="obtuse" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ui" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="entitySorter" />
+              <option name="myItemId" value="gowing" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -691,11 +513,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scratches">
-        <subPane />
-      </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -720,19 +537,12 @@
     <property name="LayoutCode.rearrangeEntriesJava" value="false" />
     <property name="FullScreen" value="false" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
-    <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="extract.method.default.visibility" value="public" />
   </component>
   <component name="RecentsManager">
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="com.obtuse.util" />
-      <recent name="com.obtuse.ui.entitySorter" />
-      <recent name="com.obtuse.ui.sortable" />
-      <recent name="com.obtuse.util.gowing.p2a" />
-      <recent name="com.obtuse.util.packers.packer2" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/com/obtuse/ui/testanddemo" />
+    <key name="IntroduceConstantDialog.RECENTS_KEY">
+      <recent name="com.obtuse.util.ObtuseCalendarDate" />
+      <recent name="com.obtuse.ui.PopupJTableEditor.PopupDialog" />
     </key>
     <key name="MoveMembersDialog.RECENTS_KEY">
       <recent name="com.obtuse.ui.EventUtils" />
@@ -740,6 +550,9 @@
       <recent name="com.obtuse.util.packers.packer2.StdPackingContext2" />
       <recent name="com.obtuse.util.packers.packer2.p2a.StdPacker2a" />
       <recent name="com.obtuse.util.pepys.Pepys" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/com/obtuse/ui/testanddemo" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.obtuse.ui.sortable" />
@@ -754,15 +567,18 @@
       <recent name="$PROJECT_DIR$/src" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.obtuse.util.gowing" />
       <recent name="com.obtuse.util.gowing.p2a.holders" />
       <recent name="com.obtuse.ui.sortable" />
       <recent name="com.obtuse.util.gowing.packer2.p2a.util" />
       <recent name="com.obtuse.util.packers.packer2.p2a.util" />
-      <recent name="com.obtuse.util.packers.packer2.p2a" />
     </key>
-    <key name="IntroduceConstantDialog.RECENTS_KEY">
-      <recent name="com.obtuse.util.ObtuseCalendarDate" />
-      <recent name="com.obtuse.ui.PopupJTableEditor.PopupDialog" />
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.obtuse.util" />
+      <recent name="com.obtuse.ui.entitySorter" />
+      <recent name="com.obtuse.ui.sortable" />
+      <recent name="com.obtuse.util.gowing.p2a" />
+      <recent name="com.obtuse.util.packers.packer2" />
     </key>
   </component>
   <component name="RunManager" selected="Application.ObtuseUtil">
@@ -927,27 +743,6 @@
       <patterns />
       <method />
     </configuration>
-    <configuration default="true" type="JUnitTestDiscovery" factoryName="JUnit Test Discovery" changeList="All">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-      <method />
-    </configuration>
     <configuration default="true" type="JarApplication" factoryName="JAR Application">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <envs />
@@ -1022,34 +817,6 @@
       <option name="PASS_PARENT_ENVS" value="true" />
       <option name="TEST_SEARCH_SCOPE">
         <value defaultName="moduleWithDependencies" />
-      </option>
-      <option name="USE_DEFAULT_REPORTERS" value="false" />
-      <option name="PROPERTIES_FILE" />
-      <envs />
-      <properties />
-      <listeners />
-      <method />
-    </configuration>
-    <configuration default="true" type="TestNGTestDiscovery" factoryName="TestNG Test Discovery" changeList="All">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="SUITE_NAME" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="GROUP_NAME" />
-      <option name="TEST_OBJECT" value="CLASS" />
-      <option name="VM_PARAMETERS" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
-      <option name="OUTPUT_DIRECTORY" />
-      <option name="ANNOTATION_TYPE" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
       </option>
       <option name="USE_DEFAULT_REPORTERS" value="false" />
       <option name="PROPERTIES_FILE" />
@@ -1174,7 +941,13 @@
       <workItem from="1473360306725" duration="44000" />
       <workItem from="1473360374682" duration="942000" />
       <workItem from="1474396925044" duration="2931000" />
-      <workItem from="1474416564038" duration="8460000" />
+      <workItem from="1474416564038" duration="23499000" />
+      <workItem from="1477837702123" duration="8016000" />
+      <workItem from="1480727665700" duration="494000" />
+      <workItem from="1481823841914" duration="2168000" />
+      <workItem from="1483164690904" duration="684000" />
+      <workItem from="1483687625848" duration="3004000" />
+      <workItem from="1485671755567" duration="973000" />
     </task>
     <task id="LOCAL-00001" summary="Major re-sync with danny's personal toolkit.">
       <created>1359580956092</created>
@@ -1386,14 +1159,21 @@
       <option name="project" value="LOCAL" />
       <updated>1472750128242</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="Implement auto-indenting of logging messages in com.util.Logger.&#10;Add a method to ObtuseUtil to detect if the running JVM is under the control of the Java debugger.&#10;Add a couple of methods to ObtuseUtil to do centering of text (much like lpad and rpad but they add spaces on both sides to 'center' the text).&#10;Clarify who is responsible for what in class-level Javadoc comment in the UniquelyNamedEntity class.">
+      <created>1474901855535</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1474901855535</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="534289000" />
+    <option name="totallyTimeSpent" value="564667000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-2531" y="0" width="2531" height="1483" extended-state="0" />
+    <frame x="198" y="23" width="2202" height="1483" extended-state="0" />
     <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.118644066" sideWeight="0.67289025" order="5" side_tool="false" content_ui="tabs" />
@@ -1403,30 +1183,30 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32997844" sideWeight="0.5014062" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32960624" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3271028" sideWeight="0.4985938" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32916054" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32956952" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17557251" sideWeight="0.5269953" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Memory View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19405384" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20972222" sideWeight="0.5269953" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Memory View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22361112" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32997844" sideWeight="0.4985938" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17557251" sideWeight="0.43055555" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329475" sideWeight="0.67289025" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17571372" sideWeight="0.4730047" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.38749102" sideWeight="0.9995866" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2498858" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.38749102" sideWeight="0.9995866" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32457292" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39985272" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32916054" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32960624" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Problems" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32997844" sideWeight="0.4985938" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -1459,7 +1239,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Implement a ValidatedJTextField class that makes it easier to manage the validation of JTextField values." />
     <MESSAGE value="Resync time." />
     <MESSAGE value="Preserve ExploreSSL as MyExploreSSL" />
     <MESSAGE value="Various cleanup.&#10;Update copyrights." />
@@ -1484,7 +1263,8 @@
     <MESSAGE value="Reasonably robust sorted panels.&#10;Considerable cleanup, testing and even some bug fixing of ObtuseCalendarDate and ObtuseApproximateCalendarDate." />
     <MESSAGE value="Experimenting with Java 8's Optional mechanism and incorporating into a few places (most notably, the Gowing facility)." />
     <MESSAGE value="Various cleanup and adding a few new methods to ObtuseUtil." />
-    <option name="LAST_COMMIT_MESSAGE" value="Various cleanup and adding a few new methods to ObtuseUtil." />
+    <MESSAGE value="Implement auto-indenting of logging messages in com.util.Logger.&#10;Add a method to ObtuseUtil to detect if the running JVM is under the control of the Java debugger.&#10;Add a couple of methods to ObtuseUtil to do centering of text (much like lpad and rpad but they add spaces on both sides to 'center' the text).&#10;Clarify who is responsible for what in class-level Javadoc comment in the UniquelyNamedEntity class." />
+    <option name="LAST_COMMIT_MESSAGE" value="Implement auto-indenting of logging messages in com.util.Logger.&#10;Add a method to ObtuseUtil to detect if the running JVM is under the control of the Java debugger.&#10;Add a couple of methods to ObtuseUtil to do centering of text (much like lpad and rpad but they add spaces on both sides to 'center' the text).&#10;Clarify who is responsible for what in class-level Javadoc comment in the UniquelyNamedEntity class." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1883,7 +1663,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/obtuse/util/ObtuseUtil.java</url>
-          <line>2241</line>
+          <line>2209</line>
           <properties />
           <option name="timeStamp" value="289" />
         </line-breakpoint>
@@ -1967,7 +1747,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/obtuse/util/ObtuseUtil.java</url>
-          <line>2216</line>
+          <line>2184</line>
           <properties />
           <option name="timeStamp" value="309" />
         </line-breakpoint>
@@ -1981,674 +1761,66 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_77.jdk/Contents/Home/src.zip!/java/util/Arrays.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="301">
-          <caret line="4526" column="25" selection-start-line="4526" selection-start-column="25" selection-end-line="4526" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/OkPopupMessageWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="292">
-          <caret line="183" column="29" selection-start-line="183" selection-start-column="29" selection-end-line="183" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/ObtuseXMLUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="292">
-          <caret line="624" column="12" selection-start-line="624" selection-start-column="12" selection-end-line="624" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingUnPacker.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="19" column="12" selection-start-line="19" selection-start-column="12" selection-end-line="19" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingTypeIndex.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="283">
-          <caret line="46" column="26" selection-start-line="46" selection-start-column="26" selection-end-line="46" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_77.jdk/Contents/Home/src.zip!/java/util/function/Supplier.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="47" column="6" selection-start-line="47" selection-start-column="6" selection-end-line="47" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_77.jdk/Contents/Home/src.zip!/java/util/Optional.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="295">
-          <caret line="285" column="35" selection-start-line="285" selection-start-column="35" selection-end-line="285" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/geometry2d/Circle.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="287">
-          <caret line="142" column="8" selection-start-line="142" selection-start-column="8" selection-end-line="142" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingEntityReference.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="355">
-          <caret line="87" column="4" selection-start-line="87" selection-start-column="4" selection-end-line="87" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingUnPackerParsingException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="301">
-          <caret line="41" column="43" selection-start-line="41" selection-start-column="43" selection-end-line="41" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/junit/ObtuseUtilTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="292">
-          <caret line="358" column="75" selection-start-line="358" selection-start-column="75" selection-end-line="358" selection-end-column="75" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_77.jdk/Contents/Home/src.zip!/java/io/ObjectInputStream.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="284">
-          <caret line="114" column="28" selection-start-line="114" selection-start-column="16" selection-end-line="114" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_77.jdk/Contents/Home/src.zip!/java/io/ObjectOutputStream.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="554">
-          <caret line="341" column="22" selection-start-line="341" selection-start-column="22" selection-end-line="341" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingAbstractPackableEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="12" column="22" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/EntityTypeName.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="558">
-          <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingEntityFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="522">
-          <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPacker.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="554">
-          <caret line="47" column="9" selection-start-line="47" selection-start-column="9" selection-end-line="47" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingBooleanHolder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="28" column="22" selection-start-line="28" selection-start-column="22" selection-end-line="28" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingConstants.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="18" column="43" selection-start-line="18" selection-start-column="43" selection-end-line="18" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/EntityName.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="283">
-          <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_77.jdk/Contents/Home/src.zip!/java/lang/Math.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="274">
-          <caret line="104" column="19" selection-start-line="104" selection-start-column="19" selection-end-line="104" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackedEntityBundle.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="301">
-          <caret line="120" column="16" selection-start-line="120" selection-start-column="16" selection-end-line="120" selection-end-column="16" />
-          <folding>
-            <element signature="e#2538#2550#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingEntityNameHolder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="17" column="11" selection-start-line="17" selection-start-column="11" selection-end-line="17" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/StdGowingPackerContext.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="295">
-          <caret line="596" column="131" selection-start-line="596" selection-start-column="131" selection-end-line="596" selection-end-column="131" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingPacker.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="13158">
-          <caret line="746" column="0" selection-start-line="746" selection-start-column="0" selection-end-line="746" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingUnPackerContext.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="41" column="38" selection-start-line="41" selection-start-column="38" selection-end-line="41" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/StdGowingUnPackerContext.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2952">
-          <caret line="172" column="0" selection-start-line="172" selection-start-column="0" selection-end-line="172" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackableKeyValuePair.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2106">
-          <caret line="125" column="0" selection-start-line="125" selection-start-column="0" selection-end-line="125" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingPackableCollection.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2646">
-          <caret line="155" column="0" selection-start-line="155" selection-start-column="0" selection-end-line="155" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingPackableMapping.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2592">
-          <caret line="153" column="0" selection-start-line="153" selection-start-column="0" selection-end-line="153" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingUnPacker.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="10638">
-          <caret line="603" column="0" selection-start-line="603" selection-start-column="0" selection-end-line="603" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/UniqueWithId.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="7" column="1" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/pepys/Pepys.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="6354">
-          <caret line="368" column="83" selection-start-line="368" selection-start-column="83" selection-end-line="368" selection-end-column="83" />
+          <caret line="368" column="83" lean-forward="false" selection-start-line="368" selection-start-column="83" selection-end-line="368" selection-end-column="83" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/UniqueEntity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="324">
-          <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
+          <caret line="20" column="13" lean-forward="false" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/ObtuseCalendarDate.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="7470">
-          <caret line="424" column="0" selection-start-line="424" selection-start-column="0" selection-end-line="424" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/ObtuseApproximateCalendarDate.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="1331" column="0" selection-start-line="1331" selection-start-column="0" selection-end-line="1331" selection-end-column="0" />
-          <folding />
+          <caret line="424" column="0" lean-forward="false" selection-start-line="424" selection-start-column="0" selection-end-line="424" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/LogsWindow.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="7308">
-          <caret line="422" column="29" selection-start-line="422" selection-start-column="29" selection-end-line="422" selection-end-column="29" />
+          <caret line="422" column="29" lean-forward="false" selection-start-line="422" selection-start-column="29" selection-end-line="422" selection-end-column="29" />
         </state>
       </provider>
     </entry>
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_77.jdk/Contents/Home/src.zip!/javax/swing/JButton.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="540">
-          <caret line="78" column="34" selection-start-line="78" selection-start-column="34" selection-end-line="78" selection-end-column="34" />
+          <caret line="78" column="34" lean-forward="false" selection-start-line="78" selection-start-column="34" selection-end-line="78" selection-end-column="34" />
         </state>
       </provider>
     </entry>
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_77.jdk/Contents/Home/src.zip!/javax/swing/AbstractButton.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="594">
-          <caret line="74" column="51" selection-start-line="74" selection-start-column="51" selection-end-line="74" selection-end-column="51" />
-          <folding>
-            <element signature="e#0#111030#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-            <element signature="e#9995#9996#0" expanded="false" />
-            <element signature="e#10032#10033#0" expanded="false" />
-            <element signature="e#10166#10167#0" expanded="false" />
-            <element signature="e#10193#10194#0" expanded="false" />
-            <element signature="e#11258#11259#0" expanded="false" />
-            <element signature="e#11299#11300#0" expanded="false" />
-            <element signature="e#12221#12222#0" expanded="false" />
-            <element signature="e#12248#12249#0" expanded="false" />
-            <element signature="e#14664#14665#0" expanded="false" />
-            <element signature="e#14736#14737#0" expanded="false" />
-            <element signature="e#14880#14881#0" expanded="false" />
-            <element signature="e#14914#14915#0" expanded="false" />
-            <element signature="e#16617#16618#0" expanded="false" />
-            <element signature="e#16651#16652#0" expanded="false" />
-            <element signature="e#17687#17688#0" expanded="false" />
-            <element signature="e#17722#17723#0" expanded="false" />
-            <element signature="e#19179#19180#0" expanded="false" />
-            <element signature="e#19214#19215#0" expanded="false" />
-            <element signature="e#20391#20392#0" expanded="false" />
-            <element signature="e#20434#20435#0" expanded="false" />
-            <element signature="e#26036#26037#0" expanded="false" />
-            <element signature="e#26076#26077#0" expanded="false" />
-            <element signature="e#27748#27749#0" expanded="false" />
-            <element signature="e#27790#27791#0" expanded="false" />
-            <element signature="e#29687#29688#0" expanded="false" />
-            <element signature="e#29730#29731#0" expanded="false" />
-            <element signature="e#31224#31225#0" expanded="false" />
-            <element signature="e#31269#31270#0" expanded="false" />
-            <element signature="e#33029#33030#0" expanded="false" />
-            <element signature="e#33063#33064#0" expanded="false" />
-            <element signature="e#36388#36389#0" expanded="false" />
-            <element signature="e#36446#36447#0" expanded="false" />
-            <element signature="e#40368#40369#0" expanded="false" />
-            <element signature="e#40397#40398#0" expanded="false" />
-            <element signature="e#42031#42032#0" expanded="false" />
-            <element signature="e#42059#42060#0" expanded="false" />
-            <element signature="e#45826#45827#0" expanded="false" />
-            <element signature="e#45862#45863#0" expanded="false" />
-            <element signature="e#47704#47705#0" expanded="false" />
-            <element signature="e#47765#47766#0" expanded="false" />
-            <element signature="e#47842#47843#0" expanded="false" />
-            <element signature="e#47912#47913#0" expanded="false" />
-            <element signature="e#48150#48151#0" expanded="false" />
-            <element signature="e#48185#48186#0" expanded="false" />
-            <element signature="e#48840#48841#0" expanded="false" />
-            <element signature="e#48874#48875#0" expanded="false" />
-            <element signature="e#50443#50444#0" expanded="false" />
-            <element signature="e#50476#50477#0" expanded="false" />
-            <element signature="e#51568#51569#0" expanded="false" />
-            <element signature="e#51608#51609#0" expanded="false" />
-            <element signature="e#53193#53194#0" expanded="false" />
-            <element signature="e#53231#53232#0" expanded="false" />
-            <element signature="e#54315#54316#0" expanded="false" />
-            <element signature="e#54346#54347#0" expanded="false" />
-            <element signature="e#58957#58958#0" expanded="false" />
-            <element signature="e#58993#58994#0" expanded="false" />
-            <element signature="e#61731#61732#0" expanded="false" />
-            <element signature="e#61774#61775#0" expanded="false" />
-            <element signature="e#61950#61951#0" expanded="false" />
-            <element signature="e#61978#61979#0" expanded="false" />
-            <element signature="e#63730#63731#0" expanded="false" />
-            <element signature="e#63766#63767#0" expanded="false" />
-            <element signature="e#66497#66498#0" expanded="false" />
-            <element signature="e#66554#66555#0" expanded="false" />
-            <element signature="e#66720#66721#0" expanded="false" />
-            <element signature="e#66780#66781#0" expanded="false" />
-            <element signature="e#67125#67126#0" expanded="false" />
-            <element signature="e#67195#67196#0" expanded="false" />
-            <element signature="e#68197#68198#0" expanded="false" />
-            <element signature="e#68254#68255#0" expanded="false" />
-            <element signature="e#69107#69108#0" expanded="false" />
-            <element signature="e#69177#69178#0" expanded="false" />
-            <element signature="e#69476#69477#0" expanded="false" />
-            <element signature="e#69511#69512#0" expanded="false" />
-            <element signature="e#70380#70381#0" expanded="false" />
-            <element signature="e#70432#70433#0" expanded="false" />
-            <element signature="e#73943#73944#0" expanded="false" />
-            <element signature="e#73978#73979#0" expanded="false" />
-            <element signature="e#74030#74031#0" expanded="false" />
-            <element signature="e#74065#74066#0" expanded="false" />
-            <element signature="e#74647#74648#0" expanded="false" />
-            <element signature="e#74679#74680#0" expanded="false" />
-            <element signature="e#75000#75001#0" expanded="false" />
-            <element signature="e#75030#75031#0" expanded="false" />
-            <element signature="e#75227#75228#0" expanded="false" />
-            <element signature="e#75282#75283#0" expanded="false" />
-            <element signature="e#75473#75474#0" expanded="false" />
-            <element signature="e#75531#75532#0" expanded="false" />
-            <element signature="e#75866#75867#0" expanded="false" />
-            <element signature="e#75934#75935#0" expanded="false" />
-            <element signature="e#83435#83436#0" expanded="false" />
-            <element signature="e#83485#83486#0" expanded="false" />
-            <element signature="e#89488#89489#0" expanded="false" />
-            <element signature="e#89523#89524#0" expanded="false" />
-            <element signature="e#89919#89920#0" expanded="false" />
-            <element signature="e#89954#89955#0" expanded="false" />
-            <element signature="e#90263#90264#0" expanded="false" />
-            <element signature="e#90295#90296#0" expanded="false" />
-            <element signature="e#92244#92245#0" expanded="false" />
-            <element signature="e#92293#92294#0" expanded="false" />
-            <element signature="e#92478#92479#0" expanded="false" />
-            <element signature="e#92527#92528#0" expanded="false" />
-            <element signature="e#107793#107794#0" expanded="false" />
-            <element signature="e#107828#107829#0" expanded="false" />
-            <element signature="e#108058#108059#0" expanded="false" />
-            <element signature="e#108125#108126#0" expanded="false" />
-            <element signature="e#108370#108371#0" expanded="false" />
-            <element signature="e#108428#108429#0" expanded="false" />
-            <element signature="e#109077#109078#0" expanded="false" />
-            <element signature="e#109133#109134#0" expanded="false" />
-            <element signature="e#109380#109381#0" expanded="false" />
-            <element signature="e#109420#109421#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_77.jdk/Contents/Home/src.zip!/javax/swing/JComponent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3258">
-          <caret line="245" column="21" selection-start-line="245" selection-start-column="21" selection-end-line="245" selection-end-column="21" />
-          <folding>
-            <element signature="e#0#210622#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-            <element signature="e#6981#7020#0" expanded="false" />
-            <element signature="e#13720#13731#0" expanded="false" />
-            <element signature="e#14577#14578#0" expanded="false" />
-            <element signature="e#14647#14648#0" expanded="false" />
-            <element signature="e#18657#18658#0" expanded="false" />
-            <element signature="e#18708#18709#0" expanded="false" />
-            <element signature="e#26196#26197#0" expanded="false" />
-            <element signature="e#26228#26229#0" expanded="false" />
-            <element signature="e#36313#36314#0" expanded="false" />
-            <element signature="e#36337#36338#0" expanded="false" />
-            <element signature="e#45507#45508#0" expanded="false" />
-            <element signature="e#45540#45541#0" expanded="false" />
-            <element signature="e#45921#45922#0" expanded="false" />
-            <element signature="e#45953#45954#0" expanded="false" />
-            <element signature="e#46330#46331#0" expanded="false" />
-            <element signature="e#46360#46361#0" expanded="false" />
-            <element signature="e#46851#46852#0" expanded="false" />
-            <element signature="e#46899#46900#0" expanded="false" />
-            <element signature="e#48355#48356#0" expanded="false" />
-            <element signature="e#48398#48399#0" expanded="false" />
-            <element signature="e#49282#49283#0" expanded="false" />
-            <element signature="e#49310#49311#0" expanded="false" />
-            <element signature="e#49363#49364#0" expanded="false" />
-            <element signature="e#49438#49439#0" expanded="false" />
-            <element signature="e#53033#53034#0" expanded="false" />
-            <element signature="e#53096#53097#0" expanded="false" />
-            <element signature="e#54422#54423#0" expanded="false" />
-            <element signature="e#54491#54492#0" expanded="false" />
-            <element signature="e#55213#55214#0" expanded="false" />
-            <element signature="e#55268#55269#0" expanded="false" />
-            <element signature="e#56110#56111#0" expanded="false" />
-            <element signature="e#56146#56147#0" expanded="false" />
-            <element signature="e#57264#57265#0" expanded="false" />
-            <element signature="e#57316#57317#0" expanded="false" />
-            <element signature="e#58129#58130#0" expanded="false" />
-            <element signature="e#58180#58181#0" expanded="false" />
-            <element signature="e#59103#59104#0" expanded="false" />
-            <element signature="e#59163#59164#0" expanded="false" />
-            <element signature="e#59683#59684#0" expanded="false" />
-            <element signature="e#59713#59714#0" expanded="false" />
-            <element signature="e#61485#61486#0" expanded="false" />
-            <element signature="e#61534#61535#0" expanded="false" />
-            <element signature="e#61910#61911#0" expanded="false" />
-            <element signature="e#61975#61976#0" expanded="false" />
-            <element signature="e#62338#62339#0" expanded="false" />
-            <element signature="e#62391#62392#0" expanded="false" />
-            <element signature="e#63792#63793#0" expanded="false" />
-            <element signature="e#63841#63842#0" expanded="false" />
-            <element signature="e#65158#65159#0" expanded="false" />
-            <element signature="e#65207#65208#0" expanded="false" />
-            <element signature="e#66280#66281#0" expanded="false" />
-            <element signature="e#66364#66365#0" expanded="false" />
-            <element signature="e#68454#68455#0" expanded="false" />
-            <element signature="e#68483#68484#0" expanded="false" />
-            <element signature="e#72731#72732#0" expanded="false" />
-            <element signature="e#72813#72814#0" expanded="false" />
-            <element signature="e#74725#74726#0" expanded="false" />
-            <element signature="e#74790#74791#0" expanded="false" />
-            <element signature="e#75524#75525#0" expanded="false" />
-            <element signature="e#75582#75583#0" expanded="false" />
-            <element signature="e#75747#75748#0" expanded="false" />
-            <element signature="e#75810#75811#0" expanded="false" />
-            <element signature="e#91813#91814#0" expanded="false" />
-            <element signature="e#91864#91865#0" expanded="false" />
-            <element signature="e#92192#92193#0" expanded="false" />
-            <element signature="e#92246#92247#0" expanded="false" />
-            <element signature="e#93143#93144#0" expanded="false" />
-            <element signature="e#93184#93185#0" expanded="false" />
-            <element signature="e#106006#106007#0" expanded="false" />
-            <element signature="e#106068#106069#0" expanded="false" />
-            <element signature="e#114346#114347#0" expanded="false" />
-            <element signature="e#114413#114414#0" expanded="false" />
-            <element signature="e#114788#114789#0" expanded="false" />
-            <element signature="e#114827#114828#0" expanded="false" />
-            <element signature="e#115291#115292#0" expanded="false" />
-            <element signature="e#115318#115319#0" expanded="false" />
-            <element signature="e#115953#115954#0" expanded="false" />
-            <element signature="e#115980#115981#0" expanded="false" />
-            <element signature="e#120330#120331#0" expanded="false" />
-            <element signature="e#120364#120365#0" expanded="false" />
-            <element signature="e#122970#122971#0" expanded="false" />
-            <element signature="e#123056#123057#0" expanded="false" />
-            <element signature="e#123636#123637#0" expanded="false" />
-            <element signature="e#123663#123664#0" expanded="false" />
-            <element signature="e#127379#127380#0" expanded="false" />
-            <element signature="e#127427#127428#0" expanded="false" />
-            <element signature="e#127711#127712#0" expanded="false" />
-            <element signature="e#127767#127768#0" expanded="false" />
-            <element signature="e#128025#128026#0" expanded="false" />
-            <element signature="e#128078#128079#0" expanded="false" />
-            <element signature="e#130768#130769#0" expanded="false" />
-            <element signature="e#130804#130805#0" expanded="false" />
-            <element signature="e#130840#130841#0" expanded="false" />
-            <element signature="e#130883#130884#0" expanded="false" />
-            <element signature="e#131321#131322#0" expanded="false" />
-            <element signature="e#131365#131366#0" expanded="false" />
-            <element signature="e#134270#136657#0" expanded="false" />
-            <element signature="e#136656#136657#0" expanded="false" />
-            <element signature="e#138707#138708#0" expanded="false" />
-            <element signature="e#138738#138739#0" expanded="false" />
-            <element signature="e#141448#141449#0" expanded="false" />
-            <element signature="e#141513#141514#0" expanded="false" />
-            <element signature="e#141870#141871#0" expanded="false" />
-            <element signature="e#141938#141939#0" expanded="false" />
-            <element signature="e#147549#147550#0" expanded="false" />
-            <element signature="e#147610#147611#0" expanded="false" />
-            <element signature="e#148486#148487#0" expanded="false" />
-            <element signature="e#148551#148552#0" expanded="false" />
-            <element signature="e#148804#148805#0" expanded="false" />
-            <element signature="e#148862#148863#0" expanded="false" />
-            <element signature="e#149117#149118#0" expanded="false" />
-            <element signature="e#149152#149153#0" expanded="false" />
-            <element signature="e#149382#149383#0" expanded="false" />
-            <element signature="e#149445#149446#0" expanded="false" />
-            <element signature="e#158808#158809#0" expanded="false" />
-            <element signature="e#158869#158870#0" expanded="false" />
-            <element signature="e#159313#159314#0" expanded="false" />
-            <element signature="e#159354#159355#0" expanded="false" />
-            <element signature="e#163960#163961#0" expanded="false" />
-            <element signature="e#164001#164002#0" expanded="false" />
-            <element signature="e#168546#168547#0" expanded="false" />
-            <element signature="e#168599#168600#0" expanded="false" />
-            <element signature="e#181529#181530#0" expanded="false" />
-            <element signature="e#181580#181581#0" expanded="false" />
-            <element signature="e#184486#184487#0" expanded="false" />
-            <element signature="e#184514#184515#0" expanded="false" />
-            <element signature="e#185007#185008#0" expanded="false" />
-            <element signature="e#185034#185035#0" expanded="false" />
-            <element signature="e#185851#185852#0" expanded="false" />
-            <element signature="e#185879#185880#0" expanded="false" />
-            <element signature="e#188029#188030#0" expanded="false" />
-            <element signature="e#188087#188088#0" expanded="false" />
-            <element signature="e#188490#188491#0" expanded="false" />
-            <element signature="e#188518#188519#0" expanded="false" />
-            <element signature="e#188572#188573#0" expanded="false" />
-            <element signature="e#188622#188623#0" expanded="false" />
-            <element signature="e#189357#189368#0" expanded="false" />
-            <element signature="e#200027#200028#0" expanded="false" />
-            <element signature="e#200054#200055#0" expanded="false" />
-            <element signature="e#200835#200836#0" expanded="false" />
-            <element signature="e#200912#200913#0" expanded="false" />
-            <element signature="e#201467#201468#0" expanded="false" />
-            <element signature="e#201516#201517#0" expanded="false" />
-            <element signature="e#201722#201723#0" expanded="false" />
-            <element signature="e#201772#201773#0" expanded="false" />
-            <element signature="e#202051#202052#0" expanded="false" />
-            <element signature="e#202106#202107#0" expanded="false" />
-            <element signature="e#204061#204073#0" expanded="false" />
-          </folding>
+          <caret line="74" column="51" lean-forward="false" selection-start-line="74" selection-start-column="51" selection-end-line="74" selection-end-column="51" />
         </state>
       </provider>
     </entry>
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_77.jdk/Contents/Home/src.zip!/javax/swing/event/EventListenerList.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1332">
-          <caret line="100" column="13" selection-start-line="100" selection-start-column="13" selection-end-line="100" selection-end-column="13" />
-          <folding>
-            <element signature="e#0#9879#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-            <element signature="e#4191#4192#0" expanded="false" />
-            <element signature="e#4226#4227#0" expanded="false" />
-            <element signature="e#5026#5027#0" expanded="false" />
-            <element signature="e#5070#5071#0" expanded="false" />
-          </folding>
+          <caret line="100" column="13" lean-forward="false" selection-start-line="100" selection-start-column="13" selection-end-line="100" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_77.jdk/Contents/Home/src.zip!/java/util/WeakHashMap.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3726">
-          <caret line="239" column="11" selection-start-line="239" selection-start-column="11" selection-end-line="239" selection-end-column="11" />
-          <folding>
-            <element signature="e#0#46882#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-            <element signature="e#7755#7756#0" expanded="false" />
-            <element signature="e#7810#7811#0" expanded="false" />
-            <element signature="e#9341#9342#0" expanded="false" />
-            <element signature="e#9399#9400#0" expanded="false" />
-            <element signature="e#9565#9566#0" expanded="false" />
-            <element signature="e#9632#9633#0" expanded="false" />
-            <element signature="e#10562#10563#0" expanded="false" />
-            <element signature="e#10615#10616#0" expanded="false" />
-            <element signature="e#10750#10751#0" expanded="false" />
-            <element signature="e#10803#10804#0" expanded="false" />
-            <element signature="e#10983#10984#0" expanded="false" />
-            <element signature="e#11027#11028#0" expanded="false" />
-            <element signature="e#11837#11838#0" expanded="false" />
-            <element signature="e#11874#11875#0" expanded="false" />
-            <element signature="e#13805#13806#0" expanded="false" />
-            <element signature="e#13839#13840#0" expanded="false" />
-            <element signature="e#15363#15364#0" expanded="false" />
-            <element signature="e#15407#15408#0" expanded="false" />
-            <element signature="e#25783#25784#0" expanded="false" />
-            <element signature="e#25847#25848#0" expanded="false" />
-            <element signature="e#25878#25879#0" expanded="false" />
-            <element signature="e#25914#25915#0" expanded="false" />
-            <element signature="e#26770#26771#0" expanded="false" />
-            <element signature="e#26828#26829#0" expanded="false" />
-            <element signature="e#27419#27420#0" expanded="false" />
-            <element signature="e#27479#27480#0" expanded="false" />
-            <element signature="e#29090#29091#0" expanded="false" />
-            <element signature="e#29138#29139#0" expanded="false" />
-            <element signature="e#29227#29228#0" expanded="false" />
-            <element signature="e#29278#29279#0" expanded="false" />
-            <element signature="e#29395#29396#0" expanded="false" />
-            <element signature="e#29437#29438#0" expanded="false" />
-            <element signature="e#30436#30437#0" expanded="false" />
-            <element signature="e#30484#30485#0" expanded="false" />
-            <element signature="e#30513#30514#0" expanded="false" />
-            <element signature="e#30567#30568#0" expanded="false" />
-            <element signature="e#30612#30613#0" expanded="false" />
-            <element signature="e#30657#30658#0" expanded="false" />
-            <element signature="e#30909#30910#0" expanded="false" />
-            <element signature="e#30957#30958#0" expanded="false" />
-            <element signature="e#31004#31005#0" expanded="false" />
-            <element signature="e#31086#31087#0" expanded="false" />
-            <element signature="e#32082#32083#0" expanded="false" />
-            <element signature="e#32132#32133#0" expanded="false" />
-            <element signature="e#32161#32162#0" expanded="false" />
-            <element signature="e#32215#32216#0" expanded="false" />
-            <element signature="e#32260#32261#0" expanded="false" />
-            <element signature="e#32307#32308#0" expanded="false" />
-            <element signature="e#32338#32339#0" expanded="false" />
-            <element signature="e#32386#32387#0" expanded="false" />
-            <element signature="e#32433#32434#0" expanded="false" />
-            <element signature="e#32517#32518#0" expanded="false" />
-            <element signature="e#33602#33603#0" expanded="false" />
-            <element signature="e#33652#33653#0" expanded="false" />
-            <element signature="e#33991#33992#0" expanded="false" />
-            <element signature="e#34038#34039#0" expanded="false" />
-            <element signature="e#34067#34068#0" expanded="false" />
-            <element signature="e#34121#34122#0" expanded="false" />
-            <element signature="e#34152#34153#0" expanded="false" />
-            <element signature="e#34200#34201#0" expanded="false" />
-            <element signature="e#34490#34491#0" expanded="false" />
-            <element signature="e#34541#34542#0" expanded="false" />
-            <element signature="e#34582#34583#0" expanded="false" />
-            <element signature="e#34634#34635#0" expanded="false" />
-            <element signature="e#34694#34695#0" expanded="false" />
-            <element signature="e#34778#34779#0" expanded="false" />
-            <element signature="e#40558#40559#0" expanded="false" />
-            <element signature="e#40609#40610#0" expanded="false" />
-            <element signature="e#43458#43459#0" expanded="false" />
-            <element signature="e#43490#43491#0" expanded="false" />
-            <element signature="e#46820#46821#0" expanded="false" />
-            <element signature="e#46871#46872#0" expanded="false" />
-          </folding>
+          <caret line="239" column="11" lean-forward="false" selection-start-line="239" selection-start-column="11" selection-end-line="239" selection-end-column="11" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/entitySorter/SortedPanel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="5976">
-          <caret line="353" column="98" selection-start-line="353" selection-start-column="4" selection-end-line="353" selection-end-column="98" />
+          <caret line="353" column="98" lean-forward="false" selection-start-line="353" selection-start-column="4" selection-end-line="353" selection-end-column="98" />
           <folding>
             <element signature="imports" expanded="false" />
             <element signature="e#7183#7640#0" expanded="false" />
@@ -2664,83 +1836,7 @@
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_77.jdk/Contents/Home/src.zip!/java/awt/Container.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="7074">
-          <caret line="465" column="21" selection-start-line="465" selection-start-column="21" selection-end-line="465" selection-end-column="21" />
-          <folding>
-            <element signature="e#0#193321#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-            <element signature="e#9097#9098#0" expanded="false" />
-            <element signature="e#9159#9160#0" expanded="false" />
-            <element signature="e#9932#9933#0" expanded="false" />
-            <element signature="e#9979#9980#0" expanded="false" />
-            <element signature="e#10317#10318#0" expanded="false" />
-            <element signature="e#10357#10358#0" expanded="false" />
-            <element signature="e#12401#12402#0" expanded="false" />
-            <element signature="e#12454#12455#0" expanded="false" />
-            <element signature="e#13097#13098#0" expanded="false" />
-            <element signature="e#13128#13129#0" expanded="false" />
-            <element signature="e#37566#37567#0" expanded="false" />
-            <element signature="e#37612#37613#0" expanded="false" />
-            <element signature="e#38925#38926#0" expanded="false" />
-            <element signature="e#38973#38974#0" expanded="false" />
-            <element signature="e#57240#57241#0" expanded="false" />
-            <element signature="e#57272#57273#0" expanded="false" />
-            <element signature="e#58032#58033#0" expanded="false" />
-            <element signature="e#58056#58057#0" expanded="false" />
-            <element signature="e#59867#59868#0" expanded="false" />
-            <element signature="e#59895#59896#0" expanded="false" />
-            <element signature="e#68128#68129#0" expanded="false" />
-            <element signature="e#68166#68167#0" expanded="false" />
-            <element signature="e#70048#70049#0" expanded="false" />
-            <element signature="e#70084#70085#0" expanded="false" />
-            <element signature="e#81680#81681#0" expanded="false" />
-            <element signature="e#81740#81741#0" expanded="false" />
-            <element signature="e#87768#87769#0" expanded="false" />
-            <element signature="e#87810#87811#0" expanded="false" />
-            <element signature="e#97160#97161#0" expanded="false" />
-            <element signature="e#97195#97196#0" expanded="false" />
-            <element signature="e#98619#98620#0" expanded="false" />
-            <element signature="e#98666#98667#0" expanded="false" />
-            <element signature="e#100065#100246#0" expanded="false" />
-            <element signature="e#100245#100246#0" expanded="false" />
-            <element signature="e#100629#100630#0" expanded="false" />
-            <element signature="e#100703#100704#0" expanded="false" />
-            <element signature="e#101852#101853#0" expanded="false" />
-            <element signature="e#101902#101903#0" expanded="false" />
-            <element signature="e#105678#105679#0" expanded="false" />
-            <element signature="e#105726#105727#0" expanded="false" />
-            <element signature="e#111921#112439#0" expanded="false" />
-            <element signature="e#112167#112397#0" expanded="false" />
-            <element signature="e#112396#112397#0" expanded="false" />
-            <element signature="e#112438#112439#0" expanded="false" />
-            <element signature="e#132453#132454#0" expanded="false" />
-            <element signature="e#132506#132507#0" expanded="false" />
-            <element signature="e#134941#134942#0" expanded="false" />
-            <element signature="e#134978#134979#0" expanded="false" />
-            <element signature="e#136737#136738#0" expanded="false" />
-            <element signature="e#136788#136789#0" expanded="false" />
-            <element signature="e#138127#138128#0" expanded="false" />
-            <element signature="e#138154#138155#0" expanded="false" />
-            <element signature="e#140833#140834#0" expanded="false" />
-            <element signature="e#140890#140891#0" expanded="false" />
-            <element signature="e#149781#149782#0" expanded="false" />
-            <element signature="e#149855#149856#0" expanded="false" />
-            <element signature="e#150134#150135#0" expanded="false" />
-            <element signature="e#150201#150202#0" expanded="false" />
-            <element signature="e#150722#150723#0" expanded="false" />
-            <element signature="e#150786#150787#0" expanded="false" />
-            <element signature="e#161989#161990#0" expanded="false" />
-            <element signature="e#162090#162091#0" expanded="false" />
-            <element signature="e#162151#162152#0" expanded="false" />
-            <element signature="e#162236#162237#0" expanded="false" />
-            <element signature="e#171795#171796#0" expanded="false" />
-            <element signature="e#171830#171831#0" expanded="false" />
-            <element signature="e#182033#182415#0" expanded="false" />
-            <element signature="e#182414#182415#0" expanded="false" />
-            <element signature="e#182606#182856#0" expanded="false" />
-            <element signature="e#182855#182856#0" expanded="false" />
-            <element signature="e#185399#186291#0" expanded="false" />
-            <element signature="e#186290#186291#0" expanded="false" />
-          </folding>
+          <caret line="465" column="21" lean-forward="false" selection-start-line="465" selection-start-column="21" selection-end-line="465" selection-end-column="21" />
         </state>
       </provider>
     </entry>
@@ -2748,7 +1844,7 @@
     <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/entitySorter/SortedPanelModel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="6102">
-          <caret line="347" column="33" selection-start-line="347" selection-start-column="33" selection-end-line="347" selection-end-column="33" />
+          <caret line="347" column="33" lean-forward="false" selection-start-line="347" selection-start-column="33" selection-end-line="347" selection-end-column="33" />
           <folding />
         </state>
       </provider>
@@ -2756,17 +1852,14 @@
     <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/UniquelyNamedEntity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
-          <caret line="10" column="99" selection-start-line="10" selection-start-column="99" selection-end-line="10" selection-end-column="99" />
-          <folding>
-            <element signature="e#0#646#0" expanded="false" />
-          </folding>
+          <caret line="10" column="99" lean-forward="false" selection-start-line="10" selection-start-column="99" selection-end-line="10" selection-end-column="99" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/entitySorter/SortableEntityReference.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
-          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+          <caret line="12" column="13" lean-forward="false" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
           <folding />
         </state>
       </provider>
@@ -2774,25 +1867,284 @@
     <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/HaltDebugConnectionHandler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
-          <caret line="20" column="15" selection-start-line="20" selection-start-column="15" selection-end-line="20" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/ObtuseUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="41" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
-          <folding>
-            <element signature="e#6829#6872#0" expanded="false" />
-          </folding>
+          <caret line="20" column="15" lean-forward="false" selection-start-line="20" selection-start-column="15" selection-end-line="20" selection-end-column="15" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/Logger.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="328">
-          <caret line="163" column="0" selection-start-line="163" selection-start-column="0" selection-end-line="163" selection-end-column="0" />
+          <caret line="163" column="0" lean-forward="false" selection-start-line="163" selection-start-column="0" selection-end-line="163" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_77.jdk/Contents/Home/src.zip!/javax/swing/JLayeredPane.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2268">
+          <caret line="157" column="38" lean-forward="false" selection-start-line="157" selection-start-column="38" selection-end-line="157" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_77.jdk/Contents/Home/src.zip!/javax/swing/border/Border.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="666">
+          <caret line="63" column="17" lean-forward="false" selection-start-line="63" selection-start-column="17" selection-end-line="63" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_77.jdk/Contents/Home/src.zip!/javax/swing/JComponent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3402">
+          <caret line="253" column="14" lean-forward="false" selection-start-line="253" selection-start-column="14" selection-end-line="253" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_77.jdk/Contents/Home/src.zip!/javax/swing/border/AbstractBorder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="49" column="22" lean-forward="false" selection-start-line="49" selection-start-column="22" selection-end-line="49" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_77.jdk/Contents/Home/src.zip!/javax/swing/plaf/BorderUIResource.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2196">
+          <caret line="173" column="24" lean-forward="false" selection-start-line="173" selection-start-column="24" selection-end-line="173" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_77.jdk/Contents/Home/src.zip!/javax/swing/border/EtchedBorder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="810">
+          <caret line="75" column="35" lean-forward="false" selection-start-line="75" selection-start-column="35" selection-end-line="75" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_77.jdk/Contents/Home/src.zip!/javax/swing/border/LineBorder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2052">
+          <caret line="150" column="0" lean-forward="false" selection-start-line="150" selection-start-column="0" selection-end-line="150" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_77.jdk/Contents/Home/src.zip!/javax/swing/SizeRequirements.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="7686">
+          <caret line="453" column="7" lean-forward="false" selection-start-line="453" selection-start-column="7" selection-end-line="453" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_77.jdk/Contents/Home/src.zip!/javax/swing/BoxLayout.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1323">
+          <caret line="508" column="70" lean-forward="false" selection-start-line="508" selection-start-column="70" selection-end-line="508" selection-end-column="70" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingConstants.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="18" column="43" lean-forward="false" selection-start-line="18" selection-start-column="43" selection-end-line="18" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackableType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6096">
+          <caret line="360" column="91" lean-forward="false" selection-start-line="360" selection-start-column="91" selection-end-line="360" selection-end-column="91" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackableThingHolder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="12" column="17" lean-forward="false" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingUnPackerParsingException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="12" column="13" lean-forward="false" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingEntityReference.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="355">
+          <caret line="87" column="4" lean-forward="false" selection-start-line="87" selection-start-column="4" selection-end-line="87" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/EntityName.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackedEntityBundle.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="292">
+          <caret line="30" column="11" lean-forward="false" selection-start-line="30" selection-start-column="11" selection-end-line="30" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingPackableMapping.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="382">
+          <caret line="175" column="44" lean-forward="false" selection-start-line="175" selection-start-column="44" selection-end-line="175" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingPackableCollection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="359">
+          <caret line="179" column="44" lean-forward="false" selection-start-line="179" selection-start-column="44" selection-end-line="179" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="792">
+          <caret line="44" column="35" lean-forward="false" selection-start-line="44" selection-start-column="35" selection-end-line="44" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/FormattedImmutableDate.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="91" column="68" lean-forward="false" selection-start-line="91" selection-start-column="68" selection-end-line="91" selection-end-column="68" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackableKeyValuePair.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2016">
+          <caret line="120" column="5" lean-forward="false" selection-start-line="120" selection-start-column="5" selection-end-line="120" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackableName.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1188">
+          <caret line="72" column="0" lean-forward="false" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingEntityFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="738">
+          <caret line="43" column="35" lean-forward="false" selection-start-line="43" selection-start-column="35" selection-end-line="43" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/StdGowingPackerContext.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="12132">
+          <caret line="681" column="48" lean-forward="false" selection-start-line="681" selection-start-column="48" selection-end-line="681" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingPacker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="12330">
+          <caret line="700" column="48" lean-forward="false" selection-start-line="700" selection-start-column="48" selection-end-line="700" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/ImmutableDate.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1044">
+          <caret line="66" column="46" lean-forward="false" selection-start-line="66" selection-start-column="46" selection-end-line="66" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/ObtuseApproximateCalendarDate.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2448">
+          <caret line="150" column="30" lean-forward="false" selection-start-line="150" selection-start-column="30" selection-end-line="150" selection-end-column="30" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/db/PostgresConnection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1692">
+          <caret line="102" column="0" lean-forward="false" selection-start-line="102" selection-start-column="0" selection-end-line="102" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/obsolete/ObtuseUtilObsolete.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="22" column="98" lean-forward="false" selection-start-line="22" selection-start-column="98" selection-end-line="22" selection-end-column="98" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_77.jdk/Contents/Home/src.zip!/java/util/Collections.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="463">
+          <caret line="1936" column="42" lean-forward="false" selection-start-line="1936" selection-start-column="42" selection-end-line="1936" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_77.jdk/Contents/Home/src.zip!/java/util/Collection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/ObtuseUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="530">
+          <caret line="284" column="0" lean-forward="false" selection-start-line="284" selection-start-column="0" selection-end-line="284" selection-end-column="0" />
+          <folding>
+            <element signature="e#6875#6918#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackableType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="21" column="30" lean-forward="false" selection-start-line="21" selection-start-column="12" selection-end-line="21" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/EntityTypeName.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="17" column="12" lean-forward="false" selection-start-line="17" selection-start-column="12" selection-end-line="17" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackableAttribute.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="858">
+          <caret line="227" column="0" lean-forward="false" selection-start-line="227" selection-start-column="0" selection-end-line="227" selection-end-column="0" />
           <folding />
         </state>
       </provider>

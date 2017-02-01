@@ -9,9 +9,13 @@ import org.jetbrains.annotations.NotNull;
 /**
  Carry around the type name of an entity.
  This primarily exists to allow type-checking of parameters that are supposed to be entity type names.
+ <p/>
+ Don't be tempted to make this class {@link GowingPackable}. Life is simpler if instances of this class are packed and unpacked as strings.
+ The reason is a bit complicated but it boils down to the fact that instances of this class appear in a few places which, if this class is packable, it creates really ugly chicken-and-egg problems.
+ Use {@link GowingPackableName} if you want a name that can pack and unpack itself.
  */
 
-public class EntityTypeName implements /*GowingPackable,*/ Comparable<EntityTypeName> {
+public final class EntityTypeName implements Comparable<EntityTypeName> {
 
 //    private static EntityTypeName ENTITY_TYPE_NAME;
 //

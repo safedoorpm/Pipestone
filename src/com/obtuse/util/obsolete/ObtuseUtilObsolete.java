@@ -20,10 +20,11 @@ import java.util.zip.ZipFile;
 
 /**
  * Utility methods and such.
+ * <p/>This is old to the point of being antique. I have made it package-private. Danny 2017-01-07
  */
 
 @SuppressWarnings({ "UnusedDeclaration" })
-public class ObtuseUtilObsolete {
+class ObtuseUtilObsolete {
 
     @SuppressWarnings("UseOfObsoleteCollectionType")
     private static class UnmodifiableHashtable<K, V> extends Hashtable<K, V> {

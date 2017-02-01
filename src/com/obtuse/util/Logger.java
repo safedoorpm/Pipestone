@@ -124,7 +124,7 @@ public class Logger {
 
     public static int pushNesting( @NotNull String levelName ) {
 
-	Logger.logMsg( "{" );
+	Logger.logMsg( "{ " + levelName );
 
 	synchronized ( _nestingLevelLock ) {
 
@@ -162,7 +162,7 @@ public class Logger {
 
 	    }
 
-	    Logger.logMsg( "}" );
+	    Logger.logMsg( "} " + levelName );
 
 	    return _nestingLevelNames.size();
 

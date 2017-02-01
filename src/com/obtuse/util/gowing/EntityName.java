@@ -9,19 +9,15 @@ import org.jetbrains.annotations.NotNull;
 /**
  Carry around the name of an entity.
  This primarily exists to allow type-checking of parameters that are supposed to be entity names.
+ <p/>
+ Don't be tempted to make this class {@link GowingPackable}. Life is simpler if instances of this class are packed and unpacked as strings.
+ The reason is a bit complicated but it boils down to the fact that instances of this class appear in a few places which, if this class is packable, create really ugly chicken-and-egg problems.
+ Use {@link GowingPackableName} if you want a name that can pack and unpack itself.
  */
 
-public class EntityName implements /*GowingPackable,*/ Comparable<EntityName> {
-
-//    private static EntityTypeName ENTITY_TYPE_NAME;
-//
-//    private static final int VERSION = 1;
-//
-//    public static final EntityName N_NAME = new EntityName( "_n" );
+public final class EntityName implements Comparable<EntityName> {
 
     private final String _name;
-
-//    private final GowingInstanceId _instanceId = new GowingInstanceId( getClass() );
 
     public EntityName( @NotNull String name ) {
 	super();
@@ -29,39 +25,6 @@ public class EntityName implements /*GowingPackable,*/ Comparable<EntityName> {
 	_name = name.trim();
 
     }
-
-//    public EntityName( GowingUnPacker unPacker, GowingPackedEntityBundle bundle, GowingEntityReference er ) {
-//	this( bundle.getNotNullField( N_NAME ).StringValue() );
-//
-//    }
-
-//    public static GowingEntityFactory getFactory() {
-//
-//	return new GowingEntityFactory( new EntityTypeName( EntityName.class ) ) {
-//
-//	    @Override
-//	    public int getOldestSupportedVersion() {
-//
-//		return VERSION;
-//	    }
-//
-//	    @Override
-//	    public int getNewestSupportedVersion() {
-//
-//		return VERSION;
-//	    }
-//
-//	    @Override
-//	    @NotNull
-//	    public GowingPackable createEntity( @NotNull GowingUnPacker unPacker, GowingPackedEntityBundle bundle, GowingEntityReference er ) {
-//
-//		return new EntityName( unPacker, bundle, er );
-//
-//	    }
-//
-//	};
-//
-//    }
 
     @NotNull
     public String getName() {
@@ -108,42 +71,5 @@ public class EntityName implements /*GowingPackable,*/ Comparable<EntityName> {
 	return _name.hashCode();
 
     }
-
-//    @Override
-//    @NotNull
-//    public final GowingInstanceId getInstanceId() {
-//
-//	return _instanceId;
-//
-//    }
-//
-//    @NotNull
-//    @Override
-//    public GowingPackedEntityBundle bundleThyself( boolean isPackingSuper, GowingPacker packer ) {
-//
-//	if ( ENTITY_TYPE_NAME == null ) {
-//
-//	    ENTITY_TYPE_NAME = new EntityTypeName( EntityName.class );
-//
-//	}
-//
-//	GowingPackedEntityBundle rval = new GowingPackedEntityBundle(
-//		ENTITY_TYPE_NAME,
-//		VERSION,
-//		null,
-//		packer.getPackingContext()
-//	);
-//
-//	rval.addHolder( new GowingStringHolder( N_NAME, _name, true ) );
-//
-//	return rval;
-//    }
-//
-//    @Override
-//    public boolean finishUnpacking( GowingUnPacker unPacker ) {
-//
-//	return true;
-//
-//    }
 
 }

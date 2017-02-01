@@ -263,9 +263,9 @@ public class StdGowingPacker implements GowingPacker {
 //		int typeReferenceId = instanceId.getTypeId();
 
 		String typeName = GowingInstanceId.lookupTypeName( newTypeId );
-//		if ( typeName.endsWith( "BurkeAttributeName" ) ) {
+//		if ( typeName.endsWith( "GowingPackableName" ) ) {
 //
-//		    Logger.logErr( "packing first BurkeAttributeName", new IllegalArgumentException(  ) );
+//		    Logger.logErr( "packing first GowingPackableName", new IllegalArgumentException(  ) );
 //
 //		}
 

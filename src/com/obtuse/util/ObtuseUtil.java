@@ -28,7 +28,7 @@ import java.util.zip.ZipFile;
  * A sometimes motley collectino of utility methods which I have found useful.
  */
 
-@SuppressWarnings({ "UnusedDeclaration" })
+@SuppressWarnings({ "UnusedDeclaration", "SameParameterValue" })
 public class ObtuseUtil {
 
     private static final Pattern HEX_STRING_PATTERN = Pattern.compile( "([0-9a-f][0-9a-f])*" );
@@ -103,8 +103,8 @@ public class ObtuseUtil {
     /**
      A derivative of the {@link Hashtable} which whose instances start out mutable but can be made immutable upon request (there is no
      mechanism provided to make an immutable instance mutable again).
-     <p/>I am not certain that class doesn't have any 'holes' in it which allow a clever user to modify an instance which has been marked
-     immutable. I believe that I have accomplished the desired goal but a nagging doubt remains.
+     <p/>This class is probably not perfectly immutable as it is a fair bit simpler than the unmodifiable ones implemented in
+     {@link java.util.Collections}. It is, I (Danny) believe, better than not having an immutable hashtable class at all. 2017-01-07
      @param <K> The type of the keys for the hash table.
      @param <V> The type of the values in the hash table.
      */
@@ -282,8 +282,6 @@ public class ObtuseUtil {
 
         } catch ( IOException e ) {
 
-            // %%% should probably be a fatal error.
-
             if ( printStackTraceOnError ) {
 
                 //noinspection CallToPrintStackTrace
@@ -401,17 +399,7 @@ public class ObtuseUtil {
 
             return ObtuseUtil.recoverSerializedVersion( new BufferedInputStream( new FileInputStream( inputFile ) ) );
 
-        } catch ( ClassNotFoundException e ) {
-
-            if ( printStackTraceOnError ) {
-
-                e.printStackTrace();
-
-            }
-
-            return null;
-
-        } catch ( IOException e ) {
+        } catch ( ClassNotFoundException | IOException e ) {
 
             if ( printStackTraceOnError ) {
 
@@ -434,12 +422,13 @@ public class ObtuseUtil {
      *                                error occurs (see {@link java.io.ObjectInputStream#readObject()} for details on what can
      *                                go wrong).
      * @throws ClassNotFoundException if the class of a serialized object in the {@link java.io.InputStream} cannot be found.
-     * @deprecated Use {@link #recoverSerializedVersion(java.io.File)} or {@link #recoverSerializedVersion(java.io.InputStream)} instead.
+     * <p/>
+     * This method was marked as deprecated. I don't know why so I have disabled the deprecation marking.
+     * Danny 2017-01-07
+     * at-deprecated Use {@link #recoverSerializedVersion(java.io.File)} or {@link #recoverSerializedVersion(java.io.InputStream)} instead.
      */
 
-    public static Serializable recoverSerializedVersion(
-            byte[] sv
-    )
+    public static Serializable recoverSerializedVersion( byte[] sv )
             throws ClassNotFoundException, IOException {
 
         ByteArrayInputStream bis = null;
@@ -538,32 +527,6 @@ public class ObtuseUtil {
             Serializable thing = (Serializable)ois.readObject();
 
             return thing;
-
-        } catch ( IOException e ) {
-
-            // This must NOT be a fatal error - let the caller deal with it
-
-            if ( printStackTraceOnError ) {
-
-                //noinspection CallToPrintStackTrace
-                e.printStackTrace();
-
-            }
-
-            return null;
-
-        } catch ( ClassNotFoundException e ) {
-
-            // This must NOT be a fatal error - let the caller deal with it
-
-            if ( printStackTraceOnError ) {
-
-                //noinspection CallToPrintStackTrace
-                e.printStackTrace();
-
-            }
-
-            return null;
 
         } catch ( Exception e ) {
 
@@ -1856,9 +1819,13 @@ public class ObtuseUtil {
 
         try {
 
-            postgresConnection.close();
+	    if ( postgresConnection != null ) {
 
-        } catch ( SQLException e ) {
+		postgresConnection.close();
+
+	    }
+
+	} catch ( SQLException e ) {
 
             Logger.logErr( "close of PostgresConnection failed", e );
 
@@ -2149,6 +2116,7 @@ public class ObtuseUtil {
      * @return the collection after the elements have been added.
      */
 
+    @SafeVarargs
     public static <T> Collection<T> addAll(
             Collection<T> collection,
             T... newElements
@@ -2194,7 +2162,7 @@ public class ObtuseUtil {
     @SuppressWarnings("CollectionDeclaredAsConcreteClass")
     public static <K,V> Hashtable<K,V> unmodifiableHashtable( final Hashtable<? extends K,? extends V> ht ) {
 
-        UnmodifiableHashtable<K,V> unmodifiableHashtable = new UnmodifiableHashtable<K,V>( ht );
+        UnmodifiableHashtable<K,V> unmodifiableHashtable = new UnmodifiableHashtable<>( ht );
 
         unmodifiableHashtable.makeReadonly();
 
@@ -2299,9 +2267,9 @@ public class ObtuseUtil {
     }
 
     @NotNull
-    public static String fDim( String name, Dimension d ) {
+    public static String fDim( @NotNull String name, Dimension d ) {
 
-	return name + "=" + ( d == null ? "null" : ObtuseUtil.fDim( d ) );
+	return name + "=" + ObtuseUtil.fDim( d );
 
     }
 
@@ -2339,6 +2307,35 @@ public class ObtuseUtil {
     public static String fBounds( int x, int y, int width, int height ) {
 
 	return "@( " + x + ", " + y + ", " + width + "x" + height + " )";
+
+    }
+
+    @NotNull
+    public static String fInsets( Insets in ) {
+
+	return "i( l=" + in.left + ", r=" + in.right + ", t=" + in.top + ", b=" + in.bottom + " )";
+
+    }
+
+    /**
+     Always returns true (avoids having to fool Java compiler when you want an always {@code true} value).
+     @return {@code true}
+     */
+
+    public static boolean always() {
+
+	return true;
+
+    }
+
+    /**
+     Never returns true (avoids having to fool Java compiler when you want an always {@code false} value).
+     @return {@code true}
+     */
+
+    public static boolean never() {
+
+	return false;
 
     }
 
