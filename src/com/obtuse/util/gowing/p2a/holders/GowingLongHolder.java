@@ -20,13 +20,38 @@ public class GowingLongHolder extends GowingAbstractPackableHolder {
 
     }
 
+    public GowingLongHolder( @NotNull EntityName name, long[] v, @SuppressWarnings("SameParameterValue") boolean mandatory ) {
+	super( name, GowingConstants.TAG_LONG, v, mandatory, true );
+
+    }
+
+    public GowingLongHolder( @NotNull EntityName name, Long[] v, @SuppressWarnings("SameParameterValue") boolean mandatory ) {
+	super( name, GowingConstants.TAG_LONG, v, mandatory, false );
+
+    }
+
     public void emitRepresentation( GowingPacker packer2 ) {
 
 	Object value = getObjectValue();
 
 	if ( isMandatory() || value != null ) {
 
-	    packer2.emit( ( (Long) value ).longValue() );
+	    switch ( getKind() ) {
+
+		case SCALAR:
+		    packer2.emit( ( (Long) value ).longValue() );
+		    break;
+
+		case PRIMITIVE_ARRAY:
+		    packer2.emit( ( (long[]) value ) );
+		    break;
+
+		case CONTAINER_ARRAY:
+		    packer2.emit( ( (Long[]) value ) );
+		    break;
+
+	    }
+//	    packer2.emit( ( (Long) value ).longValue() );
 
 	} else {
 

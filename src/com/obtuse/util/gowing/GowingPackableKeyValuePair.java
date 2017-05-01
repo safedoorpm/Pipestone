@@ -56,7 +56,7 @@ public class GowingPackableKeyValuePair<K,V> extends GowingAbstractPackableEntit
     };
 
     public GowingPackableKeyValuePair( K key, V value ) {
-	super();
+	super( new GowingNameMarkerThing() );
 
 	_key = key;
 	_value = value;
@@ -75,7 +75,7 @@ public class GowingPackableKeyValuePair<K,V> extends GowingAbstractPackableEntit
     }
 
     public GowingPackableKeyValuePair( GowingUnPacker unPacker, GowingPackedEntityBundle bundle, GowingEntityReference er ) {
-	super();
+	super( unPacker, bundle.getSuperBundle() );
 
 	Logger.logMsg( "reconstructing KVP " + er );
 
@@ -109,7 +109,7 @@ public class GowingPackableKeyValuePair<K,V> extends GowingAbstractPackableEntit
 		ENTITY_TYPE_NAME,
 		VERSION,
 		// super.bundleThyself( true, packer ),
-		null,
+		super.bundleRoot( packer ),
 		packer.getPackingContext()
 	);
 

@@ -35,21 +35,51 @@ public interface GowingPacker extends Closeable {
 
     void emit( long l );
 
+    void emit( long[] lv );
+
+    void emit( Long[] v );
+
     void emit( double d );
+
+    void emit( double[] v );
+
+    void emit( Double[] v );
 
     void emit( float f );
 
+    void emit( float[] v );
+
+    void emit( Float[] v );
+
     void emit( int i );
+
+    void emit( int[] v );
+
+    void emit( Integer[] v );
 
     void emit( short s );
 
+    void emit( short[] v );
+
+    void emit( Short[] v );
+
     void emit( byte b );
 
+    void emit( byte[] v );
+
+    void emit( Byte[] v );
+
     void emit( boolean b );
+
+    void emit( boolean[] v );
+
+    void emit( Boolean[] v );
 
     void emitNull();
 
     void emit( EntityTypeName typeName );
+
+
 
 //    void actuallyPackEntities();
 

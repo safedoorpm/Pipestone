@@ -20,13 +20,37 @@ public class GowingByteHolder extends GowingAbstractPackableHolder {
 
     }
 
+    public GowingByteHolder( @NotNull EntityName name, byte[] v, @SuppressWarnings("SameParameterValue") boolean mandatory ) {
+	super( name, GowingConstants.TAG_BYTE, v, mandatory, true );
+
+    }
+
+    public GowingByteHolder( @NotNull EntityName name, Byte[] v, @SuppressWarnings("SameParameterValue") boolean mandatory ) {
+	super( name, GowingConstants.TAG_BYTE, v, mandatory, false );
+
+    }
+
     public void emitRepresentation( GowingPacker packer2 ) {
 
 	Object value = getObjectValue();
 
 	if ( isMandatory() || value != null ) {
 
-	    packer2.emit( ( (Byte) value ).byteValue() );
+	    switch ( getKind() ) {
+
+	        case SCALAR:
+		    packer2.emit( ( (Byte) value ).byteValue() );
+		    break;
+
+		case PRIMITIVE_ARRAY:
+		    packer2.emit( ( (byte[]) value ) );
+		    break;
+
+		case CONTAINER_ARRAY:
+		    packer2.emit( ( (Byte[]) value ) );
+		    break;
+
+	    }
 
 	} else {
 

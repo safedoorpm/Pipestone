@@ -17,12 +17,38 @@ import org.jetbrains.annotations.NotNull;
  Not completely implemented (yet).
  */
 
-public class GowingArrayHolder extends GowingAbstractPackableHolder {
+public class GowingArrayHolderObsolete extends GowingAbstractPackableHolder {
 
+    GowingArrayHolderObsolete( String notImplemented ) {
+        super( new EntityName( "not implemented" ), GowingConstants.TAG_CONTAINER_ARRAY, null, false );
+    }
+
+    @Override
+    public void emitRepresentation( GowingPacker packer2 ) {
+
+    }
+
+/*
     private final char _elementTypeTag;
     private final boolean _areElementsMandatory;
 
-    public GowingArrayHolder( @NotNull EntityName name, int[] v, boolean mandatory ) {
+    public GowingArrayHolderObsolete( @NotNull EntityName name, byte[] v, boolean mandatory ) {
+	super( name, GowingConstants.TAG_ARRAY, v, mandatory );
+
+	_elementTypeTag = GowingConstants.TAG_BYTE;
+	_areElementsMandatory = true;
+
+    }
+
+    public GowingArrayHolderObsolete( @NotNull EntityName name, Byte[] v, boolean mandatory ) {
+	super( name, GowingConstants.TAG_ARRAY, v, mandatory );
+
+	_elementTypeTag = GowingConstants.TAG_BYTE;
+	_areElementsMandatory = false;
+
+    }
+
+    public GowingArrayHolderObsolete( @NotNull EntityName name, int[] v, boolean mandatory ) {
 	super( name, GowingConstants.TAG_ARRAY, v, mandatory );
 
 	_elementTypeTag = GowingConstants.TAG_INTEGER;
@@ -30,7 +56,7 @@ public class GowingArrayHolder extends GowingAbstractPackableHolder {
 
     }
 
-    public GowingArrayHolder( @NotNull EntityName name, Integer[] v, boolean mandatory ) {
+    public GowingArrayHolderObsolete( @NotNull EntityName name, Integer[] v, boolean mandatory ) {
 	super( name, GowingConstants.TAG_ARRAY, v, mandatory );
 
 	_elementTypeTag = GowingConstants.TAG_INTEGER;
@@ -38,7 +64,7 @@ public class GowingArrayHolder extends GowingAbstractPackableHolder {
 
     }
 
-    public GowingArrayHolder( @NotNull EntityName name, long[] v, boolean mandatory ) {
+    public GowingArrayHolderObsolete( @NotNull EntityName name, long[] v, boolean mandatory ) {
 	super( name, GowingConstants.TAG_ARRAY, v, mandatory );
 
 	_elementTypeTag = GowingConstants.TAG_LONG;
@@ -46,7 +72,7 @@ public class GowingArrayHolder extends GowingAbstractPackableHolder {
 
     }
 
-    public GowingArrayHolder( @NotNull EntityName name, Long[] v, boolean mandatory ) {
+    public GowingArrayHolderObsolete( @NotNull EntityName name, Long[] v, boolean mandatory ) {
 	super( name, GowingConstants.TAG_ARRAY, v, mandatory );
 
 	_elementTypeTag = GowingConstants.TAG_LONG;
@@ -54,7 +80,7 @@ public class GowingArrayHolder extends GowingAbstractPackableHolder {
 
     }
 
-    public GowingArrayHolder( @NotNull EntityName name, String[] v, boolean mandatory, boolean areElementsMandatory ) {
+    public GowingArrayHolderObsolete( @NotNull EntityName name, String[] v, boolean mandatory, boolean areElementsMandatory ) {
 	super( name, GowingConstants.TAG_ARRAY, v, mandatory );
 
 	_elementTypeTag = GowingConstants.TAG_STRING;
@@ -62,7 +88,7 @@ public class GowingArrayHolder extends GowingAbstractPackableHolder {
 
     }
 
-    public GowingArrayHolder( @NotNull EntityName name, GowingPackable[] v, boolean mandatory, boolean areElementsMandatory ) {
+    public GowingArrayHolderObsolete( @NotNull EntityName name, GowingPackable[] v, boolean mandatory, boolean areElementsMandatory ) {
 	super( name, GowingConstants.TAG_ARRAY, v, mandatory );
 
 	_elementTypeTag = GowingConstants.TAG_ENTITY_REFERENCE;
@@ -91,5 +117,6 @@ public class GowingArrayHolder extends GowingAbstractPackableHolder {
 //	}
 
     }
+*/
 
 }

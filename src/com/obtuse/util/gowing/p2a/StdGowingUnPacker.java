@@ -5,12 +5,14 @@ import com.obtuse.util.BasicProgramConfigInfo;
 import com.obtuse.util.Logger;
 import com.obtuse.util.ObtuseUtil;
 import com.obtuse.util.gowing.*;
+import com.obtuse.util.gowing.p2a.examples.SortedSetExample;
 import com.obtuse.util.gowing.p2a.holders.GowingPackableCollection;
 import com.obtuse.util.gowing.p2a.holders.GowingPackableMapping;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.*;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Optional;
 
@@ -33,7 +35,6 @@ public class StdGowingUnPacker implements GowingUnPacker {
 
     private final GowingUnPackerContext _unPackerContext;
 
-    @SuppressWarnings("WeakerAccess")
     public StdGowingUnPacker( GowingTypeIndex typeIndex, File inputFile )
 	    throws IOException {
 	this( inputFile, new LineNumberReader( new FileReader( inputFile ) ), new StdGowingUnPackerContext( typeIndex ) );
@@ -51,11 +52,13 @@ public class StdGowingUnPacker implements GowingUnPacker {
     }
 
     @SuppressWarnings({ "WeakerAccess", "RedundantThrows" })
-    public StdGowingUnPacker( File inputFile, LineNumberReader reader, GowingUnPackerContext unPackerContext )
+    public StdGowingUnPacker( File inputFile, LineNumberReader reader, @NotNull GowingUnPackerContext unPackerContext )
 	    throws IOException {
 	super();
 
 	_unPackerContext = unPackerContext;
+	_unPackerContext.setInputFile( inputFile );
+
 	_tokenizer = new StdGowingTokenizer( unPackerContext, reader );
 
 	getUnPackerContext().registerFactory( GowingPackableMapping.FACTORY );
@@ -63,6 +66,13 @@ public class StdGowingUnPacker implements GowingUnPacker {
 	getUnPackerContext().registerFactory( GowingPackableCollection.FACTORY );
 //	getUnPackerContext().registerFactory( EntityName.getFactory() );
 //	getUnPackerContext().registerFactory( EntityTypeName.getFactory() );
+
+    }
+
+    public void close()
+	    throws IOException {
+
+        _tokenizer.close();
 
     }
 
@@ -556,9 +566,15 @@ public class StdGowingUnPacker implements GowingUnPacker {
 	Logger.logMsg( "got field definition:  " +
 		       identifierToken.identifierValue() +
 		       " = " +
-		       valueToken.getObjectValue() +
+		       valueToken.valueToString() +
 		       " (" +
-		       ( valueToken.getObjectValue() == null ? "null" : valueToken.getObjectValue().getClass().getCanonicalName() ) +
+		       (
+		       	valueToken.getObjectValue() == null
+				?
+				"<<unknown type>>"
+				:
+				describeType( valueToken )
+		       ) +
 		       ")"
 	);
 
@@ -569,6 +585,28 @@ public class StdGowingUnPacker implements GowingUnPacker {
 	}
 
 	bundle.put( holder.getName(), holder );
+
+    }
+
+    private String describeType( StdGowingTokenizer.GowingToken2 valueToken ) {
+
+	if ( valueToken.type() == StdGowingTokenizer.TokenType.PRIMITIVE_ARRAY ) {
+
+	    return valueToken.elementType().name().toLowerCase() + "[]";
+
+	} else if ( valueToken.type() == StdGowingTokenizer.TokenType.CONTAINER_ARRAY ) {
+
+	    String elementTypeName = valueToken.elementType().name();
+
+	    return elementTypeName.charAt( 0 ) +
+		   elementTypeName.substring( 1 ).toLowerCase() +
+		   "[]";
+
+	} else {
+
+	    return valueToken.getObjectValue().getClass().getCanonicalName();
+
+	}
 
     }
 
@@ -589,7 +627,7 @@ public class StdGowingUnPacker implements GowingUnPacker {
 
 	    unPacker.getUnPackerContext().registerFactory( StdGowingPackerContext.TestPackableClass.FACTORY );
 	    unPacker.getUnPackerContext().registerFactory( StdGowingPackerContext.SimplePackableClass.FACTORY );
-	    unPacker.getUnPackerContext().registerFactory( StdGowingPacker.SortedSetExample.FACTORY );
+	    unPacker.getUnPackerContext().registerFactory( SortedSetExample.FACTORY );
 
 	    Optional<GowingDePackedEntityGroup> maybeResult = unPacker.unPack();
 

@@ -13,6 +13,7 @@ import com.obtuse.util.gowing.p2a.holders.GowingStringHolder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Date;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -179,7 +180,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
     private ObtuseCalendarDate _latestPossibleDate = null;
 
     public ObtuseApproximateCalendarDate( @NotNull ObtuseCalendarDate nominalCalendarDate, @NotNull DatePrecision precision ) {
-	super();
+	super( new GowingNameMarkerThing() );
 
 	_nominalCalendarDate = nominalCalendarDate;
 
@@ -196,8 +197,13 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
     }
 
+    public ObtuseApproximateCalendarDate() {
+        this( new ObtuseCalendarDate( new Date() ), DatePrecision.DATE );
+
+    }
+
     public ObtuseApproximateCalendarDate( @Nullable ObtuseCalendarDate xEarliestPossibleDate, @Nullable ObtuseCalendarDate xLatestPossibleDate ) {
-	super();
+	super( new GowingNameMarkerThing() );
 
 	ObtuseCalendarDate earliestPossibleDate = xEarliestPossibleDate == null ? ObtuseCalendarDate.getEarliestSupportedDate() : xEarliestPossibleDate;
 	ObtuseCalendarDate latestPossibleDate = xLatestPossibleDate == null ? ObtuseCalendarDate.getLatestSupportedDate() : xLatestPossibleDate;
@@ -225,7 +231,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 	    GowingPackedEntityBundle bundle,
 	    GowingEntityReference er
     ) throws GowingUnPackerParsingException {
-	super();
+	super( unPacker, bundle.getSuperBundle() );
 
 	_precision = ObtuseApproximateCalendarDate.makePrecision( bundle );
 
@@ -280,7 +286,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 	GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
 		ObtuseApproximateCalendarDate.ENTITY_TYPE_NAME,
 		ObtuseApproximateCalendarDate.VERSION,
-		null,
+		super.bundleRoot( packer ),
 		packer.getPackingContext()
 	);
 

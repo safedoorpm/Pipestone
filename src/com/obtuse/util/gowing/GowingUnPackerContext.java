@@ -6,6 +6,7 @@ import com.obtuse.util.gowing.p2a.GowingUnPackerParsingException;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.File;
 import java.util.Collection;
 import java.util.Optional;
 
@@ -94,5 +95,13 @@ public interface GowingUnPackerContext {
 
     void saveTypeAlias( StdGowingTokenizer.GowingToken2 typeIdToken, StdGowingTokenizer.GowingToken2 typeNameToken )
 	    throws GowingUnPackerParsingException;
+
+    void setInputFile( File inputFile );
+
+    File getInputFile();
+
+    void setRequestorContext( GowingRequestorContext requestorContext );
+
+    GowingRequestorContext getRequestorContext();
 
 }

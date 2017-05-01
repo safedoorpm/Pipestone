@@ -20,13 +20,37 @@ public class GowingBooleanHolder extends GowingAbstractPackableHolder {
 
     }
 
+    public GowingBooleanHolder( @NotNull EntityName name, boolean[] v, @SuppressWarnings("SameParameterValue") boolean mandatory ) {
+	super( name, GowingConstants.TAG_BOOLEAN, v, mandatory, true );
+
+    }
+
+    public GowingBooleanHolder( @NotNull EntityName name, Boolean[] v, @SuppressWarnings("SameParameterValue") boolean mandatory ) {
+	super( name, GowingConstants.TAG_BOOLEAN, v, mandatory, false );
+
+    }
+
     public void emitRepresentation( GowingPacker packer2 ) {
 
 	Object value = getObjectValue();
 
 	if ( isMandatory() || value != null ) {
 
-	    packer2.emit( ( (Boolean) value ).booleanValue() );
+	    switch ( getKind() ) {
+
+		case SCALAR:
+		    packer2.emit( ( (Boolean) value ).booleanValue() );
+		    break;
+
+		case PRIMITIVE_ARRAY:
+		    packer2.emit( ( (boolean[]) value ) );
+		    break;
+
+		case CONTAINER_ARRAY:
+		    packer2.emit( ( (Boolean[]) value ) );
+		    break;
+
+	    }
 
 	} else {
 

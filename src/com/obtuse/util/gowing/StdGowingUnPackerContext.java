@@ -3,11 +3,13 @@ package com.obtuse.util.gowing;
 import com.obtuse.exceptions.HowDidWeGetHereError;
 import com.obtuse.util.Logger;
 import com.obtuse.util.gowing.p2a.GowingEntityReference;
+import com.obtuse.util.gowing.p2a.GowingUtil;
 import com.obtuse.util.gowing.p2a.StdGowingTokenizer;
 import com.obtuse.util.gowing.p2a.GowingUnPackerParsingException;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.File;
 import java.util.*;
 
 /*
@@ -33,6 +35,10 @@ public class StdGowingUnPackerContext implements GowingUnPackerContext {
 
     @NotNull
     private final GowingTypeIndex _typeIndex;
+
+    private File _inputFile;
+
+    private GowingRequestorContext _requestorContext;
 
     public StdGowingUnPackerContext( @NotNull GowingTypeIndex typeIndex ) {
 	super();
@@ -69,6 +75,40 @@ public class StdGowingUnPackerContext implements GowingUnPackerContext {
 	_newTypeNames.add( typeName );
 	_usedTypeIds.put( typeReferenceId, typeName );
 	_nextTypeReferenceId = Math.max( typeReferenceId + 1, _nextTypeReferenceId );
+
+    }
+
+    @Override
+    public void setInputFile( File inputFile ) {
+
+        _inputFile = inputFile;
+
+    }
+
+    @Override
+    public File getInputFile() {
+
+        return _inputFile;
+
+    }
+
+    @Override
+    public void setRequestorContext( GowingRequestorContext requestorContext ) {
+
+	if ( _requestorContext != null ) {
+
+	    throw new IllegalArgumentException( "a unpacker's requestor's context may only be set once" );
+
+	}
+
+	_requestorContext = requestorContext;
+
+    }
+
+    @Override
+    public GowingRequestorContext getRequestorContext() {
+
+        return _requestorContext;
 
     }
 
@@ -171,7 +211,7 @@ public class StdGowingUnPackerContext implements GowingUnPackerContext {
     public GowingPackable recallPackableEntity( @NotNull GowingEntityReference er ) {
 
 	GowingPackable packable2 = _seenInstanceIds.get( er );
-	Logger.logMsg( "recalling " + er + " as " + packable2 );
+	Logger.logMsg( "recalling " + er + " as " + GowingUtil.describeGowingEntitySafely( packable2 ) );
 
 	return packable2;
 
@@ -187,7 +227,7 @@ public class StdGowingUnPackerContext implements GowingUnPackerContext {
     @Override
     public void rememberPackableEntity( StdGowingTokenizer.GowingToken2 token, GowingEntityReference er, GowingPackable entity ) {
 
-	Logger.logMsg( "remembering " + er + " = " + entity );
+	Logger.logMsg( "remembering " + er + " = " + GowingUtil.describeGowingEntitySafely( entity ) );
 
 	if ( isEntityKnown( er ) ) {
 

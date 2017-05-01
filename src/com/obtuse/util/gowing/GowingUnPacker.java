@@ -5,6 +5,7 @@ import com.obtuse.util.gowing.p2a.GowingEntityReference;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.Closeable;
 import java.util.Optional;
 
 /*
@@ -15,7 +16,7 @@ import java.util.Optional;
  Top level unpacking API.
  */
 
-public interface GowingUnPacker {
+public interface GowingUnPacker extends Closeable {
 
     @NotNull
     Optional<GowingDePackedEntityGroup> unPack();

@@ -31,10 +31,18 @@ public class GowingConstants {
     public static final char NULL_VALUE = 'ø';
 
     /**
-     A zero-origin array value.
+     A zero-origin primitive array value.
+     <p/>Always followed by the array's length and a tag indicating the array's element type.
      */
 
-    public static final char TAG_ARRAY = 'a';
+    public static final char TAG_PRIMITIVE_ARRAY = 'a';
+
+    /**
+     A zero-origin container array value.
+     <p/>Always followed by the array's length and a tag indicating the array's element type.
+     */
+
+    public static final char TAG_CONTAINER_ARRAY = 'A';
 
     /**
      An {@link com.obtuse.util.gowing.EntityName} value.

@@ -20,13 +20,38 @@ public class GowingIntegerHolder extends GowingAbstractPackableHolder {
 
     }
 
+    public GowingIntegerHolder( @NotNull EntityName name, int[] v, @SuppressWarnings("SameParameterValue") boolean mandatory ) {
+	super( name, GowingConstants.TAG_INTEGER, v, mandatory, true );
+
+    }
+
+    public GowingIntegerHolder( @NotNull EntityName name, Integer[] v, @SuppressWarnings("SameParameterValue") boolean mandatory ) {
+	super( name, GowingConstants.TAG_INTEGER, v, mandatory, false );
+
+    }
+
     public void emitRepresentation( GowingPacker packer2 ) {
 
 	Object value = getObjectValue();
 
 	if ( isMandatory() || value != null ) {
 
-	    packer2.emit( ( (Integer) value ).intValue() );
+	    switch ( getKind() ) {
+
+		case SCALAR:
+		    packer2.emit( ( (Integer) value ).intValue() );
+		    break;
+
+		case PRIMITIVE_ARRAY:
+		    packer2.emit( ( (int[]) value ) );
+		    break;
+
+		case CONTAINER_ARRAY:
+		    packer2.emit( ( (Integer[]) value ) );
+		    break;
+
+	    }
+//		packer2.emit( ( (Integer) value ).intValue() );
 
 	} else {
 

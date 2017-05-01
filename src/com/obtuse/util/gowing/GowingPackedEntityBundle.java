@@ -1,10 +1,17 @@
 package com.obtuse.util.gowing;
 
+import com.obtuse.exceptions.HowDidWeGetHereError;
 import com.obtuse.util.FormattingLinkedList;
+import com.obtuse.util.ObtuseUtil;
 import com.obtuse.util.gowing.p2a.GowingEntityReference;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.Optional;
 import java.util.TreeMap;
 
@@ -76,10 +83,10 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName,GowingPackableT
 //
 //    }
 
-    @NotNull
-    public Optional<GowingPackedEntityBundle> getSuperBundle() {
+    @Nullable
+    public GowingPackedEntityBundle getSuperBundle() {
 
-	return Optional.ofNullable( _superBundle );
+	return _superBundle;
 
     }
 
@@ -207,6 +214,73 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName,GowingPackableT
 	}
 
 	return holder;
+
+    }
+
+    public URI recoverURI( EntityName tag ) {
+
+	String s = getNullableField( tag ).StringValue();
+	if ( s == null ) {
+
+	    return null;
+
+	} else {
+
+	    try {
+
+		return new URI( s );
+
+	    } catch ( URISyntaxException e ) {
+
+		throw new HowDidWeGetHereError( "syntax error parsing URI " + ObtuseUtil.enquoteForJavaString( s ), e );
+
+	    }
+
+	}
+
+    }
+
+    public URL recoverURL( EntityName tag ) {
+
+	String s = getNullableField( tag ).StringValue();
+	if ( s == null ) {
+
+	    return null;
+
+	} else {
+
+	    try {
+
+		return new URL( s );
+
+	    } catch ( MalformedURLException e ) {
+
+		throw new HowDidWeGetHereError( "syntax error parsing URL " + ObtuseUtil.enquoteForJavaString( s ), e );
+
+	    }
+
+	}
+
+    }
+
+    public File recoverFile( EntityName tag ) {
+
+	String s = getNullableField( tag ).StringValue();
+	if ( s == null ) {
+
+	    return null;
+
+	} else {
+
+	    return new File( s );
+
+	}
+
+    }
+
+    public String recoverString( EntityName gtag ) {
+
+	return getNullableField( gtag ).StringValue();
 
     }
 

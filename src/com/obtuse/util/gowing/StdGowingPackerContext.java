@@ -76,14 +76,36 @@ public class StdGowingPackerContext implements GowingPackerContext {
 
     private final Accumulator<EntityTypeName> _highestPackingIdByType = new TreeAccumulator<EntityTypeName>();
 
-    @SuppressWarnings("FieldCanBeLocal")
-    @NotNull
-    private final GowingTypeIndex _typeIndex;
+    private GowingRequestorContext _requestorContext;
 
-    public StdGowingPackerContext( @NotNull GowingTypeIndex typeIndex ) {
+//    @SuppressWarnings("FieldCanBeLocal")
+//    @NotNull
+//    private final GowingTypeIndex _typeIndex;
+
+    public StdGowingPackerContext() {
 	super();
 
-	_typeIndex = typeIndex;
+//	_typeIndex = typeIndex;
+
+    }
+
+    @Override
+    public void setRequestorContext( GowingRequestorContext requestorContext ) {
+
+        if ( _requestorContext != null ) {
+
+            throw new IllegalArgumentException( "a packer's requestor's context may only be set once" );
+
+	}
+
+	_requestorContext = requestorContext;
+
+    }
+
+    @Override
+    public GowingRequestorContext getRequestorContext() {
+
+	return _requestorContext;
 
     }
 
@@ -541,7 +563,7 @@ public class StdGowingPackerContext implements GowingPackerContext {
 	private GowingEntityReference _innerReference;
 
 	public TestPackableClass( @NotNull String payload, @Nullable TestPackableClass inner, @Nullable SimplePackableClass simple ) {
-	    super();
+	    super( new GowingNameMarkerThing() );
 
 //	    context.registerFactory( FACTORY );
 
@@ -553,7 +575,7 @@ public class StdGowingPackerContext implements GowingPackerContext {
 	}
 
 	public TestPackableClass( GowingUnPacker unPacker, GowingPackedEntityBundle bundle, GowingEntityReference er ) {
-	    super();
+	    super( unPacker, bundle.getSuperBundle() );
 
 	    if ( bundle.getVersion() != VERSION ) {
 
@@ -580,8 +602,8 @@ public class StdGowingPackerContext implements GowingPackerContext {
 	    GowingPackedEntityBundle rval = new GowingPackedEntityBundle(
 		    ENTITY_TYPE_NAME,
 		    VERSION,
-//		    super.bundleThyself( true, packer ),
-		    null,
+		    super.bundleRoot( packer ),
+//		    null,
 		    packer.getPackingContext()
 	    );
 
@@ -653,7 +675,7 @@ public class StdGowingPackerContext implements GowingPackerContext {
 	private final String _payload;
 
 	public SimplePackableClass( @NotNull String payload ) {
-	    super();
+	    super( new GowingNameMarkerThing() );
 
 //	    context.registerFactory( FACTORY );
 
@@ -662,7 +684,7 @@ public class StdGowingPackerContext implements GowingPackerContext {
 	}
 
 	public SimplePackableClass( GowingUnPacker unPacker, GowingPackedEntityBundle bundle, GowingEntityReference er ) {
-	    super();
+	    super( new GowingNameMarkerThing() );
 
 	    if ( bundle.getVersion() != VERSION ) {
 

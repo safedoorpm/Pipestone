@@ -70,6 +70,10 @@ public interface GowingPackerContext {
 
     int rememberTypeName( EntityTypeName typeName );
 
+    void setRequestorContext( GowingRequestorContext requestorContext );
+
+    GowingRequestorContext getRequestorContext();
+
 //    void saveTypeAlias( P2ATokenizer.P2AToken typeIdToken, P2ATokenizer.P2AToken typeNameToken )
 //	    throws UnPacker2ParseError;
 

@@ -18,11 +18,13 @@ import org.jetbrains.annotations.NotNull;
  A single unit of information associated with a specified {@link GowingPackableName}.
  */
 
-public class GowingPackableAttribute<NAME extends GowingPackableName> extends GowingAbstractPackableEntity {
+public class GowingPackableAttribute<NAME extends GowingPackableName> implements GowingPackable {
 
     private static final EntityTypeName ENTITY_TYPE_NAME = new EntityTypeName( GowingPackableAttribute.class );
 
     private static final int VERSION = 1;
+
+    private final GowingInstanceId _instanceId = new GowingInstanceId( getClass() );
 
     public static final GowingEntityFactory FACTORY = new GowingEntityFactory( GowingPackableAttribute.ENTITY_TYPE_NAME ) {
 
@@ -113,8 +115,12 @@ public class GowingPackableAttribute<NAME extends GowingPackableName> extends Go
     @Override
     public GowingPackedEntityBundle bundleThyself( boolean isPackingSuper, GowingPacker packer ) {
 
-	GowingPackedEntityBundle rval = new GowingPackedEntityBundle( GowingPackableAttribute.ENTITY_TYPE_NAME,
-								      GowingPackableAttribute.VERSION, null, packer.getPackingContext() );
+	GowingPackedEntityBundle rval = new GowingPackedEntityBundle(
+		GowingPackableAttribute.ENTITY_TYPE_NAME,
+		GowingPackableAttribute.VERSION,
+		null,
+		packer.getPackingContext()
+	);
 
 	rval.addHolder( new GowingStringHolder( GowingPackableAttribute.N_NAME, _name.getName(), true ) );
 	rval.addHolder( new GowingStringHolder( GowingPackableAttribute.ATTRIBUTE_TYPE_NAME, _attributeType.name(), true ) );
@@ -122,6 +128,13 @@ public class GowingPackableAttribute<NAME extends GowingPackableName> extends Go
 	GowingPackableKeyValuePair.packObj( rval, GowingPackableAttribute.VALUE_NAME, _value, packer );
 
 	return rval;
+
+    }
+
+    @NotNull
+    public final GowingInstanceId getInstanceId() {
+
+        return _instanceId;
 
     }
 

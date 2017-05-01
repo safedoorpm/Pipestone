@@ -20,13 +20,38 @@ public class GowingDoubleHolder extends GowingAbstractPackableHolder {
 
     }
 
+    public GowingDoubleHolder( @NotNull EntityName name, double[] v, @SuppressWarnings("SameParameterValue") boolean mandatory ) {
+	super( name, GowingConstants.TAG_DOUBLE, v, mandatory, true );
+
+    }
+
+    public GowingDoubleHolder( @NotNull EntityName name, Double[] v, @SuppressWarnings("SameParameterValue") boolean mandatory ) {
+	super( name, GowingConstants.TAG_DOUBLE, v, mandatory, false );
+
+    }
+
     public void emitRepresentation( GowingPacker packer2 ) {
 
 	Object value = getObjectValue();
 
 	if ( isMandatory() || value != null ) {
 
-	    packer2.emit( ( (Double) value ).doubleValue() );
+	    switch ( getKind() ) {
+
+		case SCALAR:
+		    packer2.emit( ( (Double) value ).doubleValue() );
+		    break;
+
+		case PRIMITIVE_ARRAY:
+		    packer2.emit( ( (double[]) value ) );
+		    break;
+
+		case CONTAINER_ARRAY:
+		    packer2.emit( ( (Double[]) value ) );
+		    break;
+
+	    }
+//	    packer2.emit( ( (Double) value ).doubleValue() );
 
 	} else {
 

@@ -17,10 +17,17 @@ import org.jetbrains.annotations.NotNull;
 
 public abstract class GowingAbstractPackableHolder implements GowingPackableThingHolder {
 
+    public enum Kind {
+        SCALAR,
+	PRIMITIVE_ARRAY,
+	CONTAINER_ARRAY
+    }
+
     private final EntityName _name;
     private final char _tag;
     private final Object _objectValue;
     private final boolean _mandatory;
+    private final Kind _arrayKind;
 
     @SuppressWarnings("WeakerAccess")
     protected GowingAbstractPackableHolder( EntityName name, char tag, Object objectValue, boolean mandatory ) {
@@ -30,12 +37,38 @@ public abstract class GowingAbstractPackableHolder implements GowingPackableThin
 	_name = name;
 	_objectValue = objectValue;
 	_mandatory = mandatory;
+	_arrayKind = Kind.SCALAR;
 
 	if ( _mandatory && _objectValue == null ) {
 
 	    throw new IllegalArgumentException( "mandatory " + name + " value is null" );
 
 	}
+
+    }
+
+    @SuppressWarnings("WeakerAccess")
+    protected GowingAbstractPackableHolder( EntityName name, char tag, Object objectValue, boolean mandatory, boolean primitiveArray ) {
+	super();
+
+	_tag = tag;
+	_name = name;
+	_objectValue = objectValue;
+	_mandatory = mandatory;
+	_arrayKind = primitiveArray ? Kind.PRIMITIVE_ARRAY : Kind.CONTAINER_ARRAY;
+
+	if ( _mandatory && _objectValue == null ) {
+
+	    throw new IllegalArgumentException( "mandatory " + name + " value is null" );
+
+	}
+
+    }
+
+    @NotNull
+    Kind getKind() {
+
+        return _arrayKind;
 
     }
 
@@ -176,6 +209,20 @@ public abstract class GowingAbstractPackableHolder implements GowingPackableThin
     public String StringValue() {
 
 	return (String)getObjectValue();
+
+    }
+
+    @Override
+    public byte[] PrimitiveByteArrayValue() {
+
+	return (byte[])getObjectValue();
+
+    }
+
+    @Override
+    public Byte[] ContainerByteArrayValue() {
+
+	return (Byte[])getObjectValue();
 
     }
 
