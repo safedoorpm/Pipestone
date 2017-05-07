@@ -9,7 +9,6 @@ import java.awt.*;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.dnd.DnDConstants;
-import java.awt.dnd.DropTargetDragEvent;
 import java.util.Arrays;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -19,35 +18,14 @@ import java.util.TreeSet;
  */
 
 /**
- %%% Something clever goes here.
+ A relatively easy to use JPanel that can be a DnD target.
  */
 
 public class DraggableJPanel extends JPanel {
 
     private Image _backgroundImage;
 
-    public abstract static class AbstractDataFlavorHandler {
-
-        private final DataFlavor _supportedFlavor;
-
-        public AbstractDataFlavorHandler( DataFlavor supportedFlavor ) {
-            super();
-
-            _supportedFlavor = supportedFlavor;
-
-	}
-
-	public abstract boolean handleTransfer( TransferHandler.TransferSupport ts );
-
-        public DataFlavor getSupportedDataFlavor() {
-
-            return _supportedFlavor;
-
-	}
-
-    }
-
-//    private OurTransferHandler _transferHandler;
+    //    private OurTransferHandler _transferHandler;
 //    private Image _backgroundImage;
 
 //    public enum OperationType {

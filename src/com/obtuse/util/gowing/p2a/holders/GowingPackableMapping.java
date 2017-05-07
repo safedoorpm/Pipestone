@@ -48,7 +48,7 @@ public class GowingPackableMapping<K,V> implements GowingPackable {
 
 	@Override
 	@NotNull
-	public GowingPackable createEntity( @NotNull GowingUnPacker unPacker, GowingPackedEntityBundle bundle, GowingEntityReference er ) {
+	public GowingPackable createEntity( @NotNull GowingUnPacker unPacker, @NotNull GowingPackedEntityBundle bundle, GowingEntityReference er ) {
 
 	    return new GowingPackableMapping( unPacker, bundle, er );
 

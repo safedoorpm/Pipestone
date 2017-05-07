@@ -4,6 +4,7 @@ import com.obtuse.util.gowing.p2a.holders.GowingPackableCollection;
 import com.obtuse.util.gowing.p2a.holders.GowingPackableEntityHolder;
 import com.obtuse.util.gowing.p2a.holders.GowingStringHolder;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /*
  * Copyright © 2015 Obtuse Systems Corporation
@@ -68,7 +69,7 @@ public abstract class GowingAbstractPackableEntity implements GowingPackable {
      @param bundle the bundle created earlier.
      */
 
-    protected GowingAbstractPackableEntity( GowingUnPacker unPacker, GowingPackedEntityBundle bundle ) {
+    protected GowingAbstractPackableEntity( GowingUnPacker unPacker, @NotNull GowingPackedEntityBundle bundle ) {
 	super();
 
 	_gowingThing = new GowingNameMarkerThing( bundle.getNotNullField( GOWING_NAME ).StringValue() );

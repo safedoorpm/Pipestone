@@ -43,7 +43,7 @@ public abstract class GowingEntityFactory implements Comparable<GowingEntityFact
     @NotNull
     public abstract GowingPackable createEntity(
 	    @NotNull GowingUnPacker unPacker,
-	    GowingPackedEntityBundle bundle,
+	    @NotNull GowingPackedEntityBundle bundle,
 	    GowingEntityReference er
     ) throws GowingUnPackerParsingException;
 

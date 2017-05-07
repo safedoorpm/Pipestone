@@ -39,7 +39,7 @@ public class FormattedImmutableDate extends ImmutableDate implements GowingPacka
 
 	@NotNull
 	@Override
-	public GowingPackable createEntity( @NotNull GowingUnPacker unPacker, GowingPackedEntityBundle bundle, GowingEntityReference er )
+	public GowingPackable createEntity( @NotNull GowingUnPacker unPacker, @NotNull GowingPackedEntityBundle bundle, GowingEntityReference er )
 		throws GowingUnPackerParsingException {
 
 	    return new FormattedImmutableDate( unPacker, bundle, er );

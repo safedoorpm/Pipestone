@@ -83,7 +83,7 @@ public class GowingPackableCollection<E> extends LinkedList<E> implements Gowing
 
 	@Override
 	@NotNull
-	public GowingPackable createEntity( @NotNull GowingUnPacker unPacker, GowingPackedEntityBundle bundle, GowingEntityReference er ) {
+	public GowingPackable createEntity( @NotNull GowingUnPacker unPacker, @NotNull GowingPackedEntityBundle bundle, GowingEntityReference er ) {
 
 	    return new GowingPackableCollection( unPacker, bundle );
 

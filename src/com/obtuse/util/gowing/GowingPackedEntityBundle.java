@@ -12,7 +12,6 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.Optional;
 import java.util.TreeMap;
 
 /*
@@ -83,10 +82,16 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName,GowingPackableT
 //
 //    }
 
-    @Nullable
+    @NotNull
     public GowingPackedEntityBundle getSuperBundle() {
 
 	return _superBundle;
+
+    }
+
+    public boolean hasSuperBundle() {
+
+        return _superBundle != null;
 
     }
 
@@ -217,6 +222,19 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName,GowingPackableT
 
     }
 
+    /**
+     Determine if a field exists.
+     <p/>Makes it possible to have totally optional fields.
+     @param tag the name of the optional field.
+     @return {@code true} if a field by that name exists; {@code false} otherwise.
+     */
+
+    public boolean doesFieldExist( EntityName tag ) {
+
+        return containsKey( tag );
+
+    }
+
     public URI recoverURI( EntityName tag ) {
 
 	String s = getNullableField( tag ).StringValue();
@@ -278,9 +296,219 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName,GowingPackableT
 
     }
 
-    public String recoverString( EntityName gtag ) {
+    public String StringValue( EntityName gtag ) {
 
 	return getNullableField( gtag ).StringValue();
+
+    }
+
+    public String[] StringArrayValue( EntityName gtag ) {
+
+        return getNullableField( gtag ).StringArrayValue();
+
+    }
+
+    public byte byteValue( EntityName gtag ) {
+
+	return getNotNullField( gtag ).byteValue();
+
+    }
+
+    public byte[] byteArrayValue( EntityName gtag ) {
+
+	return getNullableField( gtag ).PrimitiveByteArrayValue();
+
+    }
+
+    public Byte ByteValue( EntityName gtag ) {
+
+	return getNullableField( gtag ).ByteValue();
+
+    }
+
+    public Byte[] ByteArrayValue( EntityName gtag ) {
+
+	return getNullableField( gtag ).ContainerByteArrayValue();
+
+    }
+
+    public short shortValue( EntityName gtag ) {
+
+	return getNotNullField( gtag ).shortValue();
+
+    }
+
+    public short[] shortArrayValue( EntityName gtag ) {
+
+	return getNullableField( gtag ).PrimitiveShortArrayValue();
+
+    }
+
+    public Short ShortValue( EntityName gtag ) {
+
+	return getNullableField( gtag ).ShortValue();
+
+    }
+
+    public Short[] ShortArrayValue( EntityName gtag ) {
+
+	return getNullableField( gtag ).ContainerShortArrayValue();
+
+    }
+
+    public int intValue( EntityName gtag ) {
+
+	return getNotNullField( gtag ).intValue();
+
+    }
+
+    public int[] intArrayValue( EntityName gtag ) {
+
+	return getNullableField( gtag ).PrimitiveIntArrayValue();
+
+    }
+
+    public Integer IntegerValue( EntityName gtag ) {
+
+	return getNullableField( gtag ).IntegerValue();
+
+    }
+
+    public Integer[] IntegerArrayValue( EntityName gtag ) {
+
+	return getNullableField( gtag ).ContainerIntegerArrayValue();
+
+    }
+
+    public long longValue( EntityName gtag ) {
+
+	return getNotNullField( gtag ).longValue();
+
+    }
+
+    public long[] longArrayValue( EntityName gtag ) {
+
+	return getNullableField( gtag ).PrimitiveLongArrayValue();
+
+    }
+
+    public Long LongValue( EntityName gtag ) {
+
+	return getNullableField( gtag ).LongValue();
+
+    }
+
+    public Long[] LongArrayValue( EntityName gtag ) {
+
+	return getNullableField( gtag ).ContainerLongArrayValue();
+
+    }
+
+    public float floatValue( EntityName gtag ) {
+
+	return getNotNullField( gtag ).floatValue();
+
+    }
+
+    public float[] floatArrayValue( EntityName gtag ) {
+
+	return getNullableField( gtag ).PrimitiveFloatArrayValue();
+
+    }
+
+    public Float FloatValue( EntityName gtag ) {
+
+	return getNullableField( gtag ).FloatValue();
+
+    }
+
+    public Float[] FloatArrayValue( EntityName gtag ) {
+
+	return getNullableField( gtag ).ContainerFloatArrayValue();
+
+    }
+
+    public double doubleValue( EntityName gtag ) {
+
+	return getNotNullField( gtag ).doubleValue();
+
+    }
+
+    public double[] doubleArrayValue( EntityName gtag ) {
+
+	return getNullableField( gtag ).PrimitiveDoubleArrayValue();
+
+    }
+
+    public Double DoubleValue( EntityName gtag ) {
+
+	return getNullableField( gtag ).DoubleValue();
+
+    }
+
+    public Double[] DoubleArrayValue( EntityName gtag ) {
+
+	return getNullableField( gtag ).ContainerDoubleArrayValue();
+
+    }
+
+    public char charValue( EntityName gtag ) {
+
+	return getNotNullField( gtag ).charValue();
+
+    }
+
+    public char[] charArrayValue( EntityName gtag ) {
+
+	return getNullableField( gtag ).PrimitiveCharArrayValue();
+
+    }
+
+    public Character CharacterValue( EntityName gtag ) {
+
+	return getNullableField( gtag ).CharacterValue();
+
+    }
+
+    public Character[] CharacterArrayValue( EntityName gtag ) {
+
+	return getNullableField( gtag ).ContainerCharacterArrayValue();
+
+    }
+
+    public boolean booleanValue( EntityName gtag ) {
+
+	return getNotNullField( gtag ).booleanValue();
+
+    }
+
+    public boolean[] booleanArrayValue( EntityName gtag ) {
+
+	return getNullableField( gtag ).PrimitiveBooleanArrayValue();
+
+    }
+
+    public Boolean BooleanValue( EntityName gtag ) {
+
+	return getNullableField( gtag ).BooleanValue();
+
+    }
+
+    public Boolean[] BooleanArrayValue( EntityName gtag ) {
+
+	return getNullableField( gtag ).ContainerBooleanArrayValue();
+
+    }
+
+    public Number NumberValue( EntityName gtag ) {
+
+	return getNullableField( gtag ).NumberValue();
+
+    }
+
+    public Number[] NumberArrayValue( EntityName gtag ) {
+
+	return getNullableField( gtag ).NumberArrayValue();
 
     }
 

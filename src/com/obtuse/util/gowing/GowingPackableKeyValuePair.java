@@ -47,7 +47,7 @@ public class GowingPackableKeyValuePair<K,V> extends GowingAbstractPackableEntit
 
 	@Override
 	@NotNull
-	public GowingPackable createEntity( @NotNull GowingUnPacker unPacker, GowingPackedEntityBundle bundle, GowingEntityReference er ) {
+	public GowingPackable createEntity( @NotNull GowingUnPacker unPacker, @NotNull GowingPackedEntityBundle bundle, GowingEntityReference er ) {
 
 	    return new GowingPackableKeyValuePair( unPacker, bundle, er );
 
@@ -74,7 +74,7 @@ public class GowingPackableKeyValuePair<K,V> extends GowingAbstractPackableEntit
 
     }
 
-    public GowingPackableKeyValuePair( GowingUnPacker unPacker, GowingPackedEntityBundle bundle, GowingEntityReference er ) {
+    public GowingPackableKeyValuePair( GowingUnPacker unPacker, @NotNull GowingPackedEntityBundle bundle, GowingEntityReference er ) {
 	super( unPacker, bundle.getSuperBundle() );
 
 	Logger.logMsg( "reconstructing KVP " + er );

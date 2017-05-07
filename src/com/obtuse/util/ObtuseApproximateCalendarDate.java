@@ -149,7 +149,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
 	@NotNull
 	@Override
-	public GowingPackable createEntity( @NotNull GowingUnPacker unPacker, GowingPackedEntityBundle bundle, GowingEntityReference er )
+	public GowingPackable createEntity( @NotNull GowingUnPacker unPacker, @NotNull GowingPackedEntityBundle bundle, GowingEntityReference er )
 		throws GowingUnPackerParsingException {
 
 	    return new ObtuseApproximateCalendarDate( unPacker, bundle, er );

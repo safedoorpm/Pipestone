@@ -101,6 +101,20 @@ public abstract class GowingAbstractPackableHolder implements GowingPackableThin
     }
 
     @Override
+    public boolean[] PrimitiveBooleanArrayValue() {
+
+	return (boolean[])getObjectValue();
+
+    }
+
+    @Override
+    public Boolean[] ContainerBooleanArrayValue() {
+
+	return (Boolean[])getObjectValue();
+
+    }
+
+    @Override
     public byte byteValue() {
 
 	return ByteValue().byteValue();
@@ -125,6 +139,20 @@ public abstract class GowingAbstractPackableHolder implements GowingPackableThin
     public Short ShortValue() {
 
 	return (Short)getObjectValue();
+
+    }
+
+    @Override
+    public short[] PrimitiveShortArrayValue() {
+
+	return (short[])getObjectValue();
+
+    }
+
+    @Override
+    public Short[] ContainerShortArrayValue() {
+
+	return (Short[])getObjectValue();
 
     }
 
@@ -192,6 +220,14 @@ public abstract class GowingAbstractPackableHolder implements GowingPackableThin
     }
 
     @Override
+    public Number[] NumberArrayValue() {
+
+        // unimplemented
+	return (Number[])getObjectValue();
+
+    }
+
+    @Override
     public char charValue() {
 
 	return CharacterValue().charValue();
@@ -202,6 +238,20 @@ public abstract class GowingAbstractPackableHolder implements GowingPackableThin
     public Character CharacterValue() {
 
 	return (Character)getObjectValue();
+
+    }
+
+    @Override
+    public char[] PrimitiveCharArrayValue() {
+
+	return (char[])getObjectValue();
+
+    }
+
+    @Override
+    public Character[] ContainerCharacterArrayValue() {
+
+	return (Character[])getObjectValue();
 
     }
 
@@ -227,7 +277,7 @@ public abstract class GowingAbstractPackableHolder implements GowingPackableThin
     }
 
     @Override
-    public int[] PrimitiveIntegerArrayValue() {
+    public int[] PrimitiveIntArrayValue() {
 
 	return (int[])getObjectValue();
 
@@ -251,6 +301,34 @@ public abstract class GowingAbstractPackableHolder implements GowingPackableThin
     public Long[] ContainerLongArrayValue() {
 
 	return (Long[])getObjectValue();
+
+    }
+
+    @Override
+    public float[] PrimitiveFloatArrayValue() {
+
+	return (float[])getObjectValue();
+
+    }
+
+    @Override
+    public Float[] ContainerFloatArrayValue() {
+
+	return (Float[])getObjectValue();
+
+    }
+
+    @Override
+    public double[] PrimitiveDoubleArrayValue() {
+
+	return (double[])getObjectValue();
+
+    }
+
+    @Override
+    public Double[] ContainerDoubleArrayValue() {
+
+	return (Double[])getObjectValue();
 
     }
 

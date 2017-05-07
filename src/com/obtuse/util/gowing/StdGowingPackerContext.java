@@ -546,7 +546,7 @@ public class StdGowingPackerContext implements GowingPackerContext {
 
 	    @Override
 	    @NotNull
-	    public GowingPackable createEntity( @NotNull GowingUnPacker unPacker, GowingPackedEntityBundle bundle, GowingEntityReference er ) {
+	    public GowingPackable createEntity( @NotNull GowingUnPacker unPacker, @NotNull GowingPackedEntityBundle bundle, GowingEntityReference er ) {
 
 		return new TestPackableClass( unPacker, bundle, er );
 
@@ -574,7 +574,7 @@ public class StdGowingPackerContext implements GowingPackerContext {
 
 	}
 
-	public TestPackableClass( GowingUnPacker unPacker, GowingPackedEntityBundle bundle, GowingEntityReference er ) {
+	public TestPackableClass( GowingUnPacker unPacker, @NotNull GowingPackedEntityBundle bundle, GowingEntityReference er ) {
 	    super( unPacker, bundle.getSuperBundle() );
 
 	    if ( bundle.getVersion() != VERSION ) {
@@ -664,7 +664,7 @@ public class StdGowingPackerContext implements GowingPackerContext {
 
 	    @Override
 	    @NotNull
-	    public GowingPackable createEntity( @NotNull GowingUnPacker unPacker, GowingPackedEntityBundle bundle, GowingEntityReference er ) {
+	    public GowingPackable createEntity( @NotNull GowingUnPacker unPacker, @NotNull GowingPackedEntityBundle bundle, GowingEntityReference er ) {
 
 		return new SimplePackableClass( unPacker, bundle, er );
 

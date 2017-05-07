@@ -44,7 +44,7 @@ public class GowingPackableAttribute<NAME extends GowingPackableName> implements
 
 	@NotNull
 	@Override
-	public GowingPackable createEntity( @NotNull GowingUnPacker unPacker, GowingPackedEntityBundle bundle, GowingEntityReference er ) {
+	public GowingPackable createEntity( @NotNull GowingUnPacker unPacker, @NotNull GowingPackedEntityBundle bundle, GowingEntityReference er ) {
 
 	    return new GowingPackableAttribute( unPacker, bundle, er );
 

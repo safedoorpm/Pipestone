@@ -101,6 +101,42 @@ public class ObtuseUtil {
     }
 
     /**
+     * Decodes the percent encoding scheme. <br/> For example: "an+example%20string" -> "an example string"
+     *
+     * @param str the string to be decoded.
+     *
+     * @return the decoded string.
+     */
+
+    public static String decodePercent( String str ) {
+        try {
+            StringBuilder sb = new StringBuilder();
+            @SuppressWarnings("TooBroadScope") int i = 0;
+            //noinspection ForLoopWithMissingComponent
+            for ( ; i < str.length(); i++ ) {
+                char c = str.charAt( i );
+                switch ( c ) {
+                    case '+':
+                        sb.append( ' ' );
+                        break;
+                    case '%':
+                        //noinspection MagicNumber
+                        sb.append( (char)Integer.parseInt( str.substring( i + 1, i + 3 ), 16 ) );
+                        i += 2;
+                        break;
+                    default:
+                        sb.append( c );
+                        break;
+                }
+            }
+            return new String( sb.toString().getBytes() );
+        }
+        catch ( Exception e ) {
+            throw new IllegalArgumentException( "ERROR: Bad percent-encoding.", e );
+        }
+    }
+
+    /**
      A derivative of the {@link Hashtable} which whose instances start out mutable but can be made immutable upon request (there is no
      mechanism provided to make an immutable instance mutable again).
      <p/>This class is probably not perfectly immutable as it is a fair bit simpler than the unmodifiable ones implemented in

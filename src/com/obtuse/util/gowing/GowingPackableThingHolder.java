@@ -14,12 +14,23 @@ public interface GowingPackableThingHolder extends Comparable<GowingPackableThin
 
     boolean pack( GowingPacker packer2 );
 
+    char[] PrimitiveCharArrayValue();
+    Character[] ContainerCharacterArrayValue();
+    boolean[] PrimitiveBooleanArrayValue();
+    Boolean[] ContainerBooleanArrayValue();
     byte[] PrimitiveByteArrayValue();
     Byte[] ContainerByteArrayValue();
-    int[] PrimitiveIntegerArrayValue();
+    short[] PrimitiveShortArrayValue();
+    Short[] ContainerShortArrayValue();
+    int[] PrimitiveIntArrayValue();
     Integer[] ContainerIntegerArrayValue();
     long[] PrimitiveLongArrayValue();
     Long[] ContainerLongArrayValue();
+    float[] PrimitiveFloatArrayValue();
+    Float[] ContainerFloatArrayValue();
+    double[] PrimitiveDoubleArrayValue();
+    Double[] ContainerDoubleArrayValue();
+    Number[] NumberArrayValue();
     String[] StringArrayValue();
     GowingPackable[] PackableArrayValue();
 

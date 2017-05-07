@@ -13,6 +13,9 @@ import java.text.DateFormat;
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Supplier;
 
 /**
  * Manage a simple logging facility.
@@ -56,6 +59,8 @@ public class Logger {
 
     private static final DateFormat LOG_FILE_NAME_FORMATTER;
     private static String s_programName = null;
+
+    private static boolean s_loggingEnabled = true;
 
     public static final String NESTING_INDENT = ".   ";
 
@@ -119,6 +124,44 @@ public class Logger {
 
         _outputFileName = outputFileName;
         _outputStream = outputStream;
+
+    }
+
+    public static boolean setLoggingEnabled( boolean enabled ) {
+
+	boolean wasEnabled = s_loggingEnabled;
+
+	s_loggingEnabled = enabled;
+
+	return wasEnabled;
+
+    }
+
+    public static boolean isLoggingEnabled() {
+
+	return Logger.s_loggingEnabled;
+
+    }
+
+    public static void maybeLogMsg( @NotNull Supplier<String> composeLoggingMsg ) {
+
+	if ( Logger.s_loggingEnabled ) {
+
+	    String loggingMessage = composeLoggingMsg.get();
+	    Logger.logMsg( loggingMessage );
+
+	}
+
+    }
+
+    public static void maybeLogErr( @NotNull Supplier<String> composeLoggingMsg ) {
+
+	if ( Logger.s_loggingEnabled ) {
+
+	    String loggingMessage = composeLoggingMsg.get();
+	    Logger.logErr( loggingMessage );
+
+	}
 
     }
 

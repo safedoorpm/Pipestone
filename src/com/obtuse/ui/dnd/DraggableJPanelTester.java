@@ -7,10 +7,7 @@ import com.obtuse.util.ObtuseUtil;
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
 import java.awt.*;
-import java.awt.datatransfer.DataFlavor;
-import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.File;
-import java.io.IOException;
 import java.util.Arrays;
 
 /*
@@ -44,80 +41,45 @@ public class DraggableJPanelTester extends JFrame {
 
 	_javaPanel = _draggableJPanel;
         _draggableJPanel.setDataFlavorHandlers(
-		new DraggableJPanel.AbstractDataFlavorHandler[] {
+		new AbstractDataFlavorHandler[] {
 
-			new DraggableJPanel.AbstractDataFlavorHandler( DataFlavor.imageFlavor ) {
+			new BasicFlavorHandlers.SimpleImageDataFlavorHandler() {
 
 			    @Override
-			    public boolean handleTransfer( TransferHandler.TransferSupport ts ) {
+			    protected void handleImage(
+				    TransferHandler.TransferSupport transferSupport,
+				    Image transferImage
+			    ) {
 
-				Logger.logMsg( "handling an image" );
-
-				try {
-
-				    Object transferData = ts.getTransferable().getTransferData( DataFlavor.imageFlavor );
-				    Logger.logMsg( "transferData is " + ( transferData == null ? "<<null>>" : transferData.toString() ) );
-				    _draggableJPanel.setBackgroundImage( (Image)transferData );
-//				    Logger.logMsg( "handling a file list:  " + Arrays.toString( files ) );
-
-				} catch ( UnsupportedFlavorException | IOException e ) {
-
-				    Logger.logErr( "unable to import data", e );
-
-				    return false;
-
-				}
-
-				return true;
+				_draggableJPanel.setBackgroundImage( transferImage );
 
 			    }
 
 			},
 
-			new DraggableJPanel.AbstractDataFlavorHandler( DataFlavor.javaFileListFlavor ) {
+			new BasicFlavorHandlers.SimpleFilesDataFlavorHandler() {
 
 			    @Override
-			    public boolean handleTransfer( TransferHandler.TransferSupport ts ) {
+			    public void handleFilesList(
+			    	TransferHandler.TransferSupport transferSupport,
+				    File[] transferFiles
+			    ) {
 
-				try {
-
-				    Object transferData = ts.getTransferable().getTransferData( DataFlavor.javaFileListFlavor );
-				    File[] files = (File[])((java.util.List)transferData).toArray();
-				    Logger.logMsg( "files array is " + files.getClass() );
-				    Logger.logMsg( "handling a file list:  " + Arrays.toString( files ) );
-
-				} catch ( UnsupportedFlavorException | IOException e ) {
-
-				    Logger.logErr( "unable to import data", e );
-
-				    return false;
-
-				}
-
-				return true;
+				Logger.logMsg( "handling a file list:  " + Arrays.toString( transferFiles ) );
 
 			    }
 
 			},
 
-			new DraggableJPanel.AbstractDataFlavorHandler( DataFlavor.stringFlavor ) {
+			new BasicFlavorHandlers.SimpleStringDataFlavorHandler() {
 
 			    @Override
-			    public boolean handleTransfer( TransferHandler.TransferSupport ts ) {
+			    protected void handleString(
+				    TransferHandler.TransferSupport transferSupport,
+				    String transferString
+			    ) {
 
-				try {
-
-				    Logger.logMsg( "handling a string:  " + ObtuseUtil.enquoteForJavaString( (String)ts.getTransferable().getTransferData( DataFlavor.stringFlavor ) ) );
-
-				} catch ( UnsupportedFlavorException | IOException e ) {
-
-				    Logger.logErr( "unable to import data", e );
-
-				    return false;
-
-				}
-
-				return true;
+				Logger.logMsg( "handling a string:  " + ObtuseUtil.enquoteForJavaString( transferString ) );
 
 			    }
 

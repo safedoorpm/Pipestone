@@ -15,6 +15,7 @@ import java.io.*;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Optional;
+import java.util.function.Supplier;
 
 /*
  * Copyright © 2015 Obtuse Systems Corporation
@@ -211,7 +212,7 @@ public class StdGowingUnPacker implements GowingUnPacker {
     }
 
     @NotNull
-    private GowingPackable constructEntity( GowingEntityReference er, StdGowingTokenizer.GowingToken2 token, GowingPackedEntityBundle bundle )
+    private GowingPackable constructEntity( GowingEntityReference er, StdGowingTokenizer.GowingToken2 token, @NotNull GowingPackedEntityBundle bundle )
 	    throws GowingUnPackerParsingException {
 
 	if ( _unPackerContext.isEntityKnown( er ) ) {
@@ -563,17 +564,18 @@ public class StdGowingUnPacker implements GowingUnPacker {
 
 	GowingPackableThingHolder holder = valueToken.createHolder( identifierToken.identifierValue(), valueToken );
 
-	Logger.logMsg( "got field definition:  " +
+	Logger.maybeLogMsg(
+		() -> "got field definition:  " +
 		       identifierToken.identifierValue() +
 		       " = " +
 		       valueToken.valueToString() +
 		       " (" +
 		       (
-		       	valueToken.getObjectValue() == null
-				?
-				"<<unknown type>>"
-				:
-				describeType( valueToken )
+			       valueToken.getObjectValue() == null
+				       ?
+				       "<<unknown type>>"
+				       :
+				       describeType( valueToken )
 		       ) +
 		       ")"
 	);

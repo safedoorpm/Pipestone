@@ -243,50 +243,14 @@ public class PostParameters implements Serializable {
             if ( sep >= 0 ) {
 
                 p.setParameter(
-                        PostParameters.decodePercent( e.substring( 0, sep ) ).trim(),
-                        PostParameters.decodePercent( e.substring( sep + 1 ) )
+			ObtuseUtil.decodePercent( e.substring( 0, sep ) ).trim(),
+			ObtuseUtil.decodePercent( e.substring( sep + 1 ) )
                 );
 
             }
 
         }
 
-    }
-
-    /**
-     * Decodes the percent encoding scheme. <br/> For example: "an+example%20string" -> "an example string"
-     *
-     * @param str the string to be decoded.
-     *
-     * @return the decoded string.
-     */
-
-    public static String decodePercent( String str ) {
-        try {
-            StringBuilder sb = new StringBuilder();
-            @SuppressWarnings("TooBroadScope") int i = 0;
-            //noinspection ForLoopWithMissingComponent
-            for ( ; i < str.length(); i++ ) {
-                char c = str.charAt( i );
-                switch ( c ) {
-                    case '+':
-                        sb.append( ' ' );
-                        break;
-                    case '%':
-                        //noinspection MagicNumber
-                        sb.append( (char)Integer.parseInt( str.substring( i + 1, i + 3 ), 16 ) );
-                        i += 2;
-                        break;
-                    default:
-                        sb.append( c );
-                        break;
-                }
-            }
-            return new String( sb.toString().getBytes() );
-        }
-        catch ( Exception e ) {
-            throw new IllegalArgumentException( "ERROR: Bad percent-encoding.", e );
-        }
     }
 
     public String encode() {

@@ -60,7 +60,7 @@ public class SortedSetExample extends GowingAbstractPackableEntity implements Go
 	@NotNull
 	public GowingPackable createEntity(
 		@NotNull GowingUnPacker unPacker,
-		GowingPackedEntityBundle bundle,
+		@NotNull GowingPackedEntityBundle bundle,
 		GowingEntityReference er
 	) {
 

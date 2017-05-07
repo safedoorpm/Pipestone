@@ -342,11 +342,12 @@ public class StdGowingPacker implements GowingPacker {
 
     }
 
-    private void actuallyPackEntityBody( GowingPackedEntityBundle bundle ) {
+    private void actuallyPackEntityBody( @NotNull GowingPackedEntityBundle bundle ) {
 
 	_writer.print( "(" );
 	String comma = " ";
-	GowingPackedEntityBundle superBundle = bundle.getSuperBundle();
+
+	GowingPackedEntityBundle superBundle = bundle.hasSuperBundle() ? bundle.getSuperBundle() : null;
 	if ( superBundle != null ) {
 
 //	    GowingPackedEntityBundle superBundle = maybeSuperBundle.get();
