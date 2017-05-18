@@ -112,7 +112,7 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
     public TreeSorter() {
         super();
 
-        _sortedData = new TreeMap<K, Collection<V>>();
+        _sortedData = new TreeMap<>();
 
     }
 
@@ -127,7 +127,7 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
     public TreeSorter( Comparator<? super K> comparator ) {
         super();
 
-        _sortedData = new TreeMap<K, Collection<V>>( comparator );
+        _sortedData = new TreeMap<>( comparator );
 
     }
 
@@ -142,7 +142,7 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
 
         super();
 
-        _sortedData = new TreeMap<K,Collection<V>>();
+        _sortedData = new TreeMap<>();
         for ( K key : map.keySet() ) {
 
             add( key, map.get( key ) );
@@ -161,7 +161,7 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
     public TreeSorter( SortedMap<K, V> map ) {
         super();
 
-        _sortedData = new TreeMap<K, Collection<V>>( map.comparator() );
+        _sortedData = new TreeMap<>( map.comparator() );
         for ( K key : map.keySet() ) {
 
             add( key, map.get( key ) );
@@ -232,7 +232,7 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
 
     public TreeSorter<K, V> headSorter( K toKey ) {
 
-        return new TreeSorter<K, V>( _sortedData.headMap( toKey ), 0 );
+        return new TreeSorter<>( _sortedData.headMap( toKey ), 0 );
 
     }
 
@@ -255,7 +255,7 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
 
     public TreeSorter<K, V> tailSorter( K fromKey ) {
 
-        return new TreeSorter<K, V>( _sortedData.tailMap( fromKey ), 0 );
+        return new TreeSorter<>( _sortedData.tailMap( fromKey ), 0 );
 
     }
 
@@ -286,7 +286,7 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
 
     public TreeSorter<K, V> subSorter( K fromKey, K toKey ) {
 
-        return new TreeSorter<K, V>( _sortedData.subMap( fromKey, toKey ), 0 );
+        return new TreeSorter<>( _sortedData.subMap( fromKey, toKey ), 0 );
 
     }
 
@@ -353,7 +353,7 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
 
         Collection<V> values = _sortedData.get( key );
 
-        return Collections.unmodifiableCollection( values == null ? new LinkedList<V>() : values );
+        return Collections.unmodifiableCollection( values == null ? new LinkedList<>() : values );
 
     }
 
@@ -390,7 +390,7 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
     @NotNull
     public Collection<V> getAllValues() {
 
-        Collection<V> allValues = new LinkedList<V>();
+        Collection<V> allValues = new LinkedList<>();
         for ( K key : _sortedData.keySet() ) {
 
             allValues.addAll( getValues( key ) );
@@ -467,7 +467,7 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
 
     public List<Integer> getAllFullValueIndices( V targetValue ) {
 
-        List<Integer> indices = new FormattingLinkedList<Integer>();
+        List<Integer> indices = new FormattingLinkedList<>();
 	int index = 0;
 	for ( V value : this ) {
 
@@ -574,7 +574,7 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
 
     public List<Integer> getAllFullValueIndices( @NotNull K targetKey, V targetValue ) {
 
-	List<Integer> indices = new FormattingLinkedList<Integer>();
+	List<Integer> indices = new FormattingLinkedList<>();
 	int currentIndex = 0;
 	for ( K key : keySet() ) {
 
@@ -682,15 +682,9 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
 
     public final void add( @NotNull K key, @Nullable V value ) {
 
-        Collection<V> values = _sortedData.get( key );
-        if ( values == null ) {
-
-            values = new LinkedList<V>();
-            _sortedData.put( key, values );
-
-        }
-
-        values.add( value );
+	Collection<V> values;
+	//noinspection UnusedAssignment
+	( values = _sortedData.computeIfAbsent( key, k -> new LinkedList<>() ) ).add( value );
 
     }
 
@@ -850,7 +844,7 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
 	Collection<V> rval = _sortedData.remove( key );
 	if ( rval == null ) {
 
-	    rval = new LinkedList<V>();
+	    rval = new LinkedList<>();
 
 	}
 
@@ -861,13 +855,13 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
     @NotNull
     public Collection<V> removeValue( @NotNull K key, @Nullable V value ) {
 
-	return removeValue( key, target->value == target, new FormattingLinkedList<V>() );
+	return removeValue( key, target->value == target, new FormattingLinkedList<>() );
 
     }
 
     /**
      Remove all occurrences of a value from this tree sorter.
-     @param  matcher identifies the value t the values to be removed.
+     @param  matcher identifies the values to be removed.
      @param deletedValues a collection into which any deleted values are placed.
      The specified value is added to this collection once each time it is found and removed from the sorter.
      @return The collection specified by the <code>deletedValues</code> parameter.
@@ -897,7 +891,7 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
     @NotNull
     public Collection<V> removeValue( @NotNull K key, @NotNull ValueMatcher<V> matcher ) {
 
-        return removeValueCarefully( key, matcher, new FormattingLinkedList<V>(), true );
+        return removeValueCarefully( key, matcher, new FormattingLinkedList<>(), true );
 
     }
 
@@ -959,7 +953,7 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
     public Iterator<V> iterator() {
 
         @SuppressWarnings({ "UnnecessaryLocalVariable" })
-        Iterator<V> iter = new TreeSorterIterator<V>();
+        Iterator<V> iter = new TreeSorterIterator<>();
 
         return iter;
 
@@ -1036,7 +1030,7 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
 
     public static void main( String[] args ) {
 
-        TreeSorter<Integer, String> sorter = new TreeSorter<Integer, String>();
+        TreeSorter<Integer, String> sorter = new TreeSorter<>();
 
         sorter.add( 1, "one" );
         sorter.add( 2, "two" );

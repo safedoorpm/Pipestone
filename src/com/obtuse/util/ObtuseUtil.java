@@ -5,10 +5,12 @@
 package com.obtuse.util;
 
 import com.obtuse.db.PostgresConnection;
+import com.obtuse.exceptions.HowDidWeGetHereError;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
+import java.awt.event.InputEvent;
 import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 import java.net.ServerSocket;
@@ -1049,14 +1051,15 @@ public class ObtuseUtil {
 
         if ( ObtuseUtil.s_cachedFormats[v] == null ) {
 
-            String format = "0.";
+            StringBuilder formatBuilder = new StringBuilder( "0." );
             for ( int i = 0; i < v; i += 1 ) {
 
-                format += "#";
+                formatBuilder.append( '#' );
 
             }
 
-            ObtuseUtil.s_cachedFormats[v] = new DecimalFormat( format );
+	    String format = formatBuilder.toString();
+	    ObtuseUtil.s_cachedFormats[v] = new DecimalFormat( format );
 
         }
 
@@ -1084,14 +1087,15 @@ public class ObtuseUtil {
 
         if ( ObtuseUtil.s_cachedZeroFormats[v] == null ) {
 
-            String format = "0.";
+            StringBuilder formatBuilder = new StringBuilder( "0." );
             for ( int i = 0; i < v; i += 1 ) {
 
-                format += "0";
+                formatBuilder.append( "0" );
 
             }
 
-            ObtuseUtil.s_cachedZeroFormats[v] = new DecimalFormat( format );
+	    String format = formatBuilder.toString();
+	    ObtuseUtil.s_cachedZeroFormats[v] = new DecimalFormat( format );
 
         }
 
@@ -1688,9 +1692,10 @@ public class ObtuseUtil {
 
     public static String htmlEscape( String str ) {
 
-        String rval = "";
+        String rval;
         String s = str;
-        while ( true ) {
+	StringBuilder rvalBuilder = new StringBuilder();
+	while ( true ) {
 
             int ix1 = s.indexOf( (int)'&' );
             int ix2 = s.indexOf( (int)'<' );
@@ -1715,23 +1720,24 @@ public class ObtuseUtil {
 
             }
 
-            rval += s.substring( 0, ix );
+            rvalBuilder.append( s.substring( 0, ix ) );
             s = s.substring( ix );
             if ( s.startsWith( "&" ) ) {
 
-                rval += "&amp;";
+                rvalBuilder.append( "&amp;" );
 
             } else {
 
-                rval += "&lt;";
+                rvalBuilder.append( "&lt;" );
 
             }
 
             s = s.substring( 1 );
 
         }
+	rval = rvalBuilder.toString();
 
-        rval += s;
+	rval += s;
 
         return rval;
 
@@ -2372,6 +2378,88 @@ public class ObtuseUtil {
     public static boolean never() {
 
 	return false;
+
+    }
+
+    private static String[] s_maskExBits = new String[32];
+    static {
+
+	rememberBitName( InputEvent.SHIFT_MASK, "Shift" );
+	rememberBitName( InputEvent.CTRL_MASK, "Ctrl" );
+	rememberBitName( InputEvent.META_MASK, "Meta" );
+	rememberBitName( InputEvent.ALT_MASK, "Alt" );
+	rememberBitName( InputEvent.ALT_GRAPH_MASK, "AltGraph" );
+	rememberBitName( InputEvent.BUTTON1_MASK, "Button_1" );
+	rememberBitName( InputEvent.BUTTON2_MASK, "Button_2" );
+	rememberBitName( InputEvent.BUTTON3_MASK, "Button_3" );
+	rememberBitName( InputEvent.SHIFT_DOWN_MASK, "ShiftDown" );
+	rememberBitName( InputEvent.CTRL_DOWN_MASK, "CtrlDown" );
+	rememberBitName( InputEvent.META_DOWN_MASK, "MetaDown" );
+	rememberBitName( InputEvent.ALT_DOWN_MASK, "AltDown" );
+	rememberBitName( InputEvent.BUTTON1_DOWN_MASK, "Button_1_Down" );
+	rememberBitName( InputEvent.BUTTON2_DOWN_MASK, "Button_2_Down" );
+	rememberBitName( InputEvent.BUTTON3_DOWN_MASK, "Button_3_Down" );
+	rememberBitName( InputEvent.ALT_GRAPH_DOWN_MASK, "AltGraphDown" );
+
+	ObtuseUtil.doNothing();
+
+    }
+
+    public static String getBitMaskName( int mask ) {
+
+	int numberOfTrailingZeros = Integer.numberOfTrailingZeros( mask );
+	int lowestOneBit = Integer.lowestOneBit( mask );
+	int highestOneBit = Integer.highestOneBit( mask );
+	try {
+
+	    if ( mask < 0 || highestOneBit != lowestOneBit || numberOfTrailingZeros >= 32 ) {
+
+		return "<mask " + Integer.toBinaryString( mask ) + ">";
+
+	    } else {
+
+		return "<" + s_maskExBits[ numberOfTrailingZeros ] + ">";
+
+	    }
+
+	} catch ( Exception e ) {
+
+	    throw new HowDidWeGetHereError( "mask=" + mask + "= " + Integer.toBinaryString( mask ) + " lowestOneBit=" + lowestOneBit + ", highestOneBit=" + highestOneBit );
+
+	}
+
+    }
+
+    private static void rememberBitName( int maskValue, String name ) {
+
+	if ( maskValue == 0 ) {
+
+	    Logger.logMsg( "rememberBitName:  mask named \"" + name + "\" has value 0 - ignored" );
+
+	} else {
+
+	    if ( Integer.highestOneBit( maskValue ) == Integer.lowestOneBit( maskValue ) ) {
+
+		int bitIx = Integer.numberOfTrailingZeros( maskValue );
+
+		if ( s_maskExBits[bitIx] == null ) {
+
+		    Logger.logMsg( "rememberBitName:  1 << " + bitIx + " is named \"" + name + "\"" );
+		    s_maskExBits[bitIx] = name;
+
+		} else {
+
+		    Logger.logMsg( "rememberBitName:  1 << " + bitIx + " is already called \"" + s_maskExBits[bitIx] + "\" when attempting to assign new name \"" + name + "\" - new name ignored" );
+
+		}
+
+	    } else {
+
+		Logger.logMsg( "rememberBitName:  bit mask " + Integer.toBinaryString( maskValue ) + " called \"" + name + "\" has more than one bit set - ignored" );
+
+	    }
+
+	}
 
     }
 

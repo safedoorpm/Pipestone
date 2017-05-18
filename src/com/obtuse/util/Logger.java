@@ -13,7 +13,6 @@ import java.text.DateFormat;
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -31,7 +30,7 @@ import java.util.function.Supplier;
 
 public class Logger {
 
-    private List<LoggerListener> _listeners = new LinkedList<LoggerListener>();
+    private List<LoggerListener> _listeners = new LinkedList<>();
 
     private StringBuffer _currentMessage = new StringBuffer();
 
@@ -63,6 +62,8 @@ public class Logger {
     private static boolean s_loggingEnabled = true;
 
     public static final String NESTING_INDENT = ".   ";
+
+    private static final TreeSorter<String,Function<String,Boolean>> s_interestingStuff = new TreeSorter<>();
 
 //    private static int _nestingLevel = 0;
     private static Stack<String> _nestingLevelNames = new Stack<>();
@@ -106,6 +107,8 @@ public class Logger {
         LOGS_DIRECTORY = new File( BasicProgramConfigInfo.getWorkingDirectory(), "logs" );
 
     }
+
+    private static int s_globalVetoCount = 0;
 
     public Logger( File outputFile, boolean append )
             throws
@@ -357,7 +360,7 @@ public class Logger {
 
         synchronized ( this ) {
 
-            tmpListeners = new LinkedList<LoggerListener>( _listeners );
+            tmpListeners = new Vector<>( _listeners );
 
         }
 
@@ -411,15 +414,133 @@ public class Logger {
 
     }
 
-    public synchronized void println( String s ) {
+    public synchronized void println( String logLine ) {
 
-        print( s );
-        printNewline();
+	int vetoCount = 0;
 
-        // The Java 1.4.2 docs are not clear as to whether System.out or System.err are
+	synchronized ( s_interestingStuff ) {
+
+	    for ( String interesting : s_interestingStuff.keySet() ) {
+
+		if ( logLine.contains( interesting ) ) {
+
+		    for ( Function<String,Boolean> func : s_interestingStuff.getValues( interesting ) ) {
+
+			if ( func.apply( logLine ) ) {
+
+			    vetoCount += 1;
+
+			}
+
+		    }
+
+		}
+
+	    }
+
+	    if ( vetoCount != 0 ) {
+
+		synchronized ( s_interestingStuff ) {
+
+		    s_globalVetoCount += 1;
+
+		    return;
+
+		}
+
+	    }
+
+	}
+
+	print( logLine );
+	printNewline();
+
+	// The Java 1.4.2 docs are not clear as to whether System.out or System.err are
         // opened with auto-flushing enabled so we force a flush here just to be sure.
 
         flush();
+
+    }
+
+    /**
+     Determine how many log lines have actually been vetoed.
+     @return the number of log lines which have actually been vetoed.
+     */
+
+    public static int getGlobalVetoCount() {
+
+        return s_globalVetoCount;
+
+    }
+
+    /**
+     Provide a mechanism for suppressing/vetoing log lines which contain a specified target string.
+     <p/>
+     Every future log line which contains the specified target string is passed to the specified {@link Function}{@code <String,Boolean>} instance's {@code Boolean apply( String targetString )} method.
+     If that method returns {@code false} then the logging of the matching log line is suppressed (BE VERY VERY CAREFUL TO AVOID ACCIDENTALLY VETOING IMPORTANT LOG LINES).
+     <p/>Attempts to add the same target string and {@code vetoer} instance more than once are silently ignored (i.e. only one occurrence of the {@code vetoer} instance will be added for any
+     given target string).
+     <p/>IMPORTANT: the log line is vetoed/suppressed if the specified {@code vetoer}'s {@code Boolean apply( String logLine )} method returns {@code false}; it is allowed through if the method returns {@link false}.
+
+     @param targetString the specified target string.
+     @param vetoer the {@link Function}{@code <String,Boolean>} instance's {@code Boolean apply( String targetString )} method to call if a log line contains the specified target string.
+     <p/>Expect bad things to happen if from within a call to the {@link Function}{@code <String,Boolean>} instance's {@code Boolean apply( String targetString )} method, you try to log something which is matched by your vetoer or attempt to add or remove a vetoer.
+     */
+
+    public synchronized void addLogLineVetoer( @NotNull String targetString, @NotNull Function<String,Boolean> vetoer ) {
+
+        synchronized ( s_interestingStuff ) {
+
+            // Remove any existing instances of the specified matcher for the specified key.
+
+	    cancelLineFilter( targetString, vetoer );
+
+	    // Put exactly one back.
+
+            s_interestingStuff.add( targetString, vetoer );
+
+	}
+
+    }
+
+    /**
+     Remove a specified vetoer for a specified target string.
+     <p/>Requests to remove vetoers which are not actually associated with the specified target string are silently ignored.
+
+     @param targetString the specified target string.
+     @param vetoer the {@link Function}{@code <String,Boolean>} instance previously added for the specified target string.
+     */
+
+    public synchronized void cancelLineFilter( @NotNull String targetString, @NotNull Function<String,Boolean> vetoer ) {
+
+	// Get rid of any existing instances of the specified matcher for the specified key.
+
+	Collection<Function<String, Boolean>> removedVetoers = s_interestingStuff.removeValue( targetString, vetoer );
+
+	// There should have been zero or one matcher removed.
+
+	if ( removedVetoers.size() > 1 ) {
+
+	    throw new HowDidWeGetHereError( "Logger.cancelLineFilter:  more than one identical matcher for targetString=" + ObtuseUtil.enquoteForJavaString( targetString ) + " and matcher " + vetoer );
+
+	}
+
+    }
+
+    /**
+     Remove all usages of a specified vetoer irrespective of the target string.
+     <p/>Requests to remove vetoers which are not actually associated with any specified target string are silently ignored.
+
+     @param vetoer a {@link Function}{@code <String,Boolean>} to be used to identify vetoers which are to be deleted.
+     */
+
+    public synchronized void cancelLineFilters( @NotNull Function<String,Boolean> vetoer ) {
+
+	// Get rid of any existing instances of the specified matcher for the specified key.
+
+	Collection<Function<String, Boolean>> vetoers = s_interestingStuff.removeValue( target -> target == vetoer, new Vector<>() );
+
+	// It doesn't matter how many vetoers were deleted.
 
     }
 
