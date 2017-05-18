@@ -18,7 +18,7 @@ import java.util.TreeMap;
 
 public class GowingTypeIndex {
 
-    private final SortedMap<EntityTypeName,EntityTypeInfo> _typeNameToTypeInfoMapping = new TreeMap<EntityTypeName, EntityTypeInfo>();
+    private final SortedMap<EntityTypeName,EntityTypeInfo> _typeNameToTypeInfoMapping = new TreeMap<>();
 //    private final SortedMap<Integer,EntityTypeInfo> _referenceIdToTypeInfoMapping = new TreeMap<Integer, EntityTypeInfo>();
 
     private final String _typeIndexName;
@@ -53,6 +53,7 @@ public class GowingTypeIndex {
 //	}
 
 	Optional<EntityTypeInfo> maybeTypeInfo = findTypeInfo( newFactory.getEntityTypeName() );
+	//noinspection OptionalIsPresent
 	if ( maybeTypeInfo.isPresent() ) {
 
 	    throw new IllegalArgumentException( "" + newFactory + ":  cannot add factory because type index already contains entry for type name \"" + maybeTypeInfo.get().getTypeName() + "\"" );

@@ -6,7 +6,7 @@ package com.obtuse.util;
 
 public class ThreeDimensionalTreeCounter<K1,K2,K3> implements ThreeDimensionalCounter<K1, K2, K3> {
 
-    private final ThreeDimensionalSortedMap<K1,K2,K3,Integer> _counter = new ThreeDimensionalTreeMap<K1,K2,K3,Integer>();
+    private final ThreeDimensionalSortedMap<K1,K2,K3,Integer> _counter = new ThreeDimensionalTreeMap<>();
 
     public ThreeDimensionalTreeCounter() {
         super();
@@ -59,7 +59,7 @@ public class ThreeDimensionalTreeCounter<K1,K2,K3> implements ThreeDimensionalCo
 
         BasicProgramConfigInfo.init( "Obtuse", "Shared", "3Dcounter", null );
 
-        ThreeDimensionalTreeCounter<Integer,String,Boolean> counter = new ThreeDimensionalTreeCounter<Integer,String,Boolean>();
+        ThreeDimensionalTreeCounter<Integer,String,Boolean> counter = new ThreeDimensionalTreeCounter<>();
         counter.count( 1, "x", true );
         counter.count( 1, "x", true );
         counter.count( 1, "x", false );

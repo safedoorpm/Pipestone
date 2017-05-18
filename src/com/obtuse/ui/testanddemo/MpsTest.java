@@ -67,7 +67,7 @@ public class MpsTest extends JFrame {
 
     @SuppressWarnings({ "MagicNumber", "UseOfObsoleteCollectionType" })
     private void createUIComponents() {
-        Dictionary<Integer,MpsLabel> labels = new Hashtable<Integer, MpsLabel>();
+        Dictionary<Integer,MpsLabel> labels = new Hashtable<>();
         labels.put( 2, new MpsLabel( "two" ) );
         labels.put( 20, new MpsLabel( "twenty" ) );
         labels.put( 10, new MpsLabel( "<<< ten >>>" ) );

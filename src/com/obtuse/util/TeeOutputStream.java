@@ -18,10 +18,12 @@ import java.util.Date;
 
 public class TeeOutputStream extends OutputStream {
 
+    @SuppressWarnings("FieldCanBeLocal")
     private final File _teeFile;
 
     private final OutputStream _outputStream;
 
+    @SuppressWarnings({ "FieldCanBeLocal", "unused" })
     private final boolean _buffered;
 
     private final OutputStream _teeOutputStream;

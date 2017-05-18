@@ -22,7 +22,7 @@ public class TreeCounter<K extends Comparable<K>> implements Counter<K>, Seriali
     public TreeCounter() {
         super();
 
-        _counts = new TreeMap<K, Integer>();
+        _counts = new TreeMap<>();
 
     }
 
@@ -30,7 +30,7 @@ public class TreeCounter<K extends Comparable<K>> implements Counter<K>, Seriali
     public TreeCounter( Counter<K> counter ) {
         super();
 
-        _counts = new TreeMap<K, Integer>();
+        _counts = new TreeMap<>();
         for ( K key : counter.keySet() ) {
 
             _counts.put( key, counter.getCount( key ) );

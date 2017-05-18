@@ -20,7 +20,8 @@ public interface Accumulator<K> {
 
     Set<K> keySet();
 
-    public long getGrandTotal();
+    @SuppressWarnings("unused")
+    long getGrandTotal();
 
     K firstKey();
 

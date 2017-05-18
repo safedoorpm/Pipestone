@@ -19,7 +19,7 @@ import java.util.List;
 public class GenericCsvParser extends CSVParser {
 
     private final String _description;
-    private final TwoDimensionalSortedMap<Integer,String,String> _parsedData = new TwoDimensionalTreeMap<Integer,String,String>();
+    private final TwoDimensionalSortedMap<Integer,String,String> _parsedData = new TwoDimensionalTreeMap<>();
     private final List<String> _titles;
     private int _nextLnum = 0;
 
@@ -99,7 +99,7 @@ public class GenericCsvParser extends CSVParser {
     private List<String> parseRawLine()
             throws SyntaxErrorException {
 
-        List<String> fields = new LinkedList<String>();
+        List<String> fields = new LinkedList<>();
 
         while ( true ) {
 
@@ -191,11 +191,7 @@ public class GenericCsvParser extends CSVParser {
 
             return gcp;
 
-        } catch ( FileNotFoundException e ) {
-
-            return null;
-
-        } catch ( SyntaxErrorException e ) {
+        } catch ( FileNotFoundException | SyntaxErrorException e ) {
 
             return null;
 
@@ -213,13 +209,7 @@ public class GenericCsvParser extends CSVParser {
 
             gcp = new GenericCsvParser( "/Users/danny/Junk/test.csv" );
 
-        } catch ( FileNotFoundException e ) {
-
-            e.printStackTrace();
-            System.exit( 1 );
-            return;
-
-        } catch ( SyntaxErrorException e ) {
+        } catch ( FileNotFoundException | SyntaxErrorException e ) {
 
             e.printStackTrace();
             System.exit( 1 );
@@ -227,7 +217,7 @@ public class GenericCsvParser extends CSVParser {
 
         }
 
-        try {
+	try {
 
             gcp.parse();
 

@@ -20,7 +20,9 @@ public class DragAndDropEndpoints extends JFrame {
 
     private JPanel _panel1;
     private JButton _quitButton;
+    @SuppressWarnings("FieldCanBeLocal")
     private JPanel _left;
+    @SuppressWarnings("FieldCanBeLocal")
     private JPanel _right;
 
     public DragAndDropEndpoints() {

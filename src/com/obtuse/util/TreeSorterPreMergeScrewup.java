@@ -107,7 +107,7 @@ public class TreeSorterPreMergeScrewup<K extends Comparable<? super K>, V> imple
     public TreeSorterPreMergeScrewup() {
         super();
 
-        _sortedData = new TreeMap<K, Collection<V>>();
+        _sortedData = new TreeMap<>();
 
     }
 
@@ -123,7 +123,7 @@ public class TreeSorterPreMergeScrewup<K extends Comparable<? super K>, V> imple
     public TreeSorterPreMergeScrewup( @Nullable Comparator<? super K> comparator ) {
         super();
 
-        _sortedData = new TreeMap<K, Collection<V>>( comparator );
+        _sortedData = new TreeMap<>( comparator );
 
     }
 
@@ -137,7 +137,7 @@ public class TreeSorterPreMergeScrewup<K extends Comparable<? super K>, V> imple
     public TreeSorterPreMergeScrewup( @NotNull Map<K, V> map ) {
         super();
 
-        _sortedData = new TreeMap<K,Collection<V>>();
+        _sortedData = new TreeMap<>();
         for ( K key : map.keySet() ) {
 
             add( key, map.get( key ) );
@@ -156,7 +156,7 @@ public class TreeSorterPreMergeScrewup<K extends Comparable<? super K>, V> imple
     public TreeSorterPreMergeScrewup( @NotNull SortedMap<K, V> map ) {
         super();
 
-        _sortedData = new TreeMap<K, Collection<V>>( map.comparator() );
+        _sortedData = new TreeMap<>( map.comparator() );
         for ( K key : map.keySet() ) {
 
             add( key, map.get( key ) );
@@ -227,7 +227,7 @@ public class TreeSorterPreMergeScrewup<K extends Comparable<? super K>, V> imple
 
     public TreeSorterPreMergeScrewup<K, V> headSorter( K toKey ) {
 
-        return new TreeSorterPreMergeScrewup<K, V>( _sortedData.headMap( toKey ), 0 );
+        return new TreeSorterPreMergeScrewup<>( _sortedData.headMap( toKey ), 0 );
 
     }
 
@@ -250,7 +250,7 @@ public class TreeSorterPreMergeScrewup<K extends Comparable<? super K>, V> imple
 
     public TreeSorterPreMergeScrewup<K, V> tailSorter( K fromKey ) {
 
-        return new TreeSorterPreMergeScrewup<K, V>( _sortedData.tailMap( fromKey ), 0 );
+        return new TreeSorterPreMergeScrewup<>( _sortedData.tailMap( fromKey ), 0 );
 
     }
 
@@ -281,7 +281,7 @@ public class TreeSorterPreMergeScrewup<K extends Comparable<? super K>, V> imple
 
     public TreeSorterPreMergeScrewup<K, V> subSorter( @NotNull K fromKey, @NotNull K toKey ) {
 
-        return new TreeSorterPreMergeScrewup<K, V>( _sortedData.subMap( fromKey, toKey ), 0 );
+        return new TreeSorterPreMergeScrewup<>( _sortedData.subMap( fromKey, toKey ), 0 );
 
     }
 
@@ -348,7 +348,7 @@ public class TreeSorterPreMergeScrewup<K extends Comparable<? super K>, V> imple
 
         Collection<V> values = _sortedData.get( key );
 
-        return Collections.unmodifiableCollection( values == null ? new LinkedList<V>() : values );
+        return Collections.unmodifiableCollection( values == null ? new LinkedList<>() : values );
 
     }
 
@@ -366,7 +366,7 @@ public class TreeSorterPreMergeScrewup<K extends Comparable<? super K>, V> imple
     @NotNull
     public Collection<V> getAllValues() {
 
-        Collection<V> allValues = new LinkedList<V>();
+        Collection<V> allValues = new LinkedList<>();
         for ( K key : _sortedData.keySet() ) {
 
             allValues.addAll( getValues( key ) );
@@ -399,7 +399,7 @@ public class TreeSorterPreMergeScrewup<K extends Comparable<? super K>, V> imple
         Collection<V> values = _sortedData.get( key );
         if ( values == null ) {
 
-            values = new LinkedList<V>();
+            values = new LinkedList<>();
             _sortedData.put( key, values );
 
         }
@@ -520,7 +520,7 @@ public class TreeSorterPreMergeScrewup<K extends Comparable<? super K>, V> imple
         Collection<V> rval = _sortedData.remove( key );
         if ( rval == null ) {
 
-            rval = new LinkedList<V>();
+            rval = new LinkedList<>();
 
         }
 
@@ -531,14 +531,14 @@ public class TreeSorterPreMergeScrewup<K extends Comparable<? super K>, V> imple
     @NotNull
     public Collection<V> removeValue( @NotNull K key, @Nullable V value ) {
 
-	return removeValue( key, value, new FormattingLinkedList<V>() );
+	return removeValue( key, value, new FormattingLinkedList<>() );
 
     }
 
     @NotNull
     public Collection<V> removeValue( @Nullable V value ) {
 
-	Collection<V> deletedValues = new FormattingLinkedList<V>();
+	Collection<V> deletedValues = new FormattingLinkedList<>();
 
 	for ( Iterator<K> iterator = _sortedData.keySet().iterator(); iterator.hasNext(); ) {
 
@@ -593,7 +593,7 @@ public class TreeSorterPreMergeScrewup<K extends Comparable<? super K>, V> imple
     public Iterator<V> iterator() {
 
         @SuppressWarnings({ "UnnecessaryLocalVariable" })
-        Iterator<V> iter = new TreeSorterIterator<V>();
+        Iterator<V> iter = new TreeSorterIterator<>();
 
         return iter;
 
@@ -660,7 +660,7 @@ public class TreeSorterPreMergeScrewup<K extends Comparable<? super K>, V> imple
 
     public static void main( String[] args ) {
 
-        TreeSorterPreMergeScrewup<Integer, String> sorter = new TreeSorterPreMergeScrewup<Integer, String>();
+        TreeSorterPreMergeScrewup<Integer, String> sorter = new TreeSorterPreMergeScrewup<>();
 
         sorter.add( 1, "one" );
         sorter.add( 2, "two" );

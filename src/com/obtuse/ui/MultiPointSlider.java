@@ -34,7 +34,7 @@ public class MultiPointSlider extends JComponent {
 
     private Dictionary<Integer, MpsLabel> _labelTable = null;
     @SuppressWarnings("UseOfObsoleteCollectionType")
-    private Dictionary<Integer, BufferedImage> _cachedLabelTable = new Hashtable<Integer, BufferedImage>();
+    private Dictionary<Integer, BufferedImage> _cachedLabelTable = new Hashtable<>();
     private BoundedRangeModel _brm = null;
     private MpsKnobSize _knobSize;
     private PositionOnLine _positionOnLine = null;
@@ -65,7 +65,7 @@ public class MultiPointSlider extends JComponent {
     };
 
     private static final MpsKnob DEFAULT_KNOB;
-    private Collection<ChangeListener> _changeListeners = new LinkedList<ChangeListener>();
+    private Collection<ChangeListener> _changeListeners = new LinkedList<>();
     private int _minimumBreadth = 0;
     private int _minimumLength = 0;
     private static final int TIC_GAP = 2;
@@ -90,7 +90,7 @@ public class MultiPointSlider extends JComponent {
 
     }
 
-    public static enum PositionOnLine {
+    public enum PositionOnLine {
 
         ABOVE,
         BELOW,
@@ -1263,7 +1263,7 @@ public class MultiPointSlider extends JComponent {
     public static void main( String[] args ) {
 
         @SuppressWarnings("UseOfObsoleteCollectionType")
-        Dictionary<Integer, MpsLabel> labels = new Hashtable<Integer, MpsLabel>();
+        Dictionary<Integer, MpsLabel> labels = new Hashtable<>();
         labels.put( 2, new MpsLabel( "two" ) );
         labels.put( 20, new MpsLabel( "twenty" ) );
 

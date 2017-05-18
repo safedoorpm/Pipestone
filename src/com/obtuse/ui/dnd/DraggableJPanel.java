@@ -264,7 +264,7 @@ public class DraggableJPanel extends JPanel {
 	    String[] mimeTypes = new String[ dataFlavours.length];
 //            Logger.logMsg( "" + dataFlavours.length + " data flavours" );
 	    int ix = 0;
-	    SortedSet<String> uniqueMimeTypes = new TreeSet<String>();
+	    SortedSet<String> uniqueMimeTypes = new TreeSet<>();
 	    for ( DataFlavor flavour : dataFlavours ) {
 
 		String mimeType = flavour.getMimeType();

@@ -6,6 +6,7 @@ package com.obtuse.ui;
 
 import com.obtuse.util.ObtuseUtil;
 
+import javax.management.timer.*;
 import javax.swing.*;
 import java.awt.event.*;
 
@@ -293,14 +294,11 @@ public abstract class YesNoPopupMessageWindow
             }
         };
         //noinspection RefusedBequest
-        new Thread() {
-
-            public void run() {
-                //noinspection MagicNumber
-                ObtuseUtil.safeSleepMillis( javax.management.timer.Timer.ONE_SECOND * 50L );
-                dialog.fakeAnswer( true );
-            }
-        }.start();
+        new Thread( () -> {
+	    //noinspection MagicNumber
+	    ObtuseUtil.safeSleepMillis( javax.management.timer.Timer.ONE_SECOND * 50L );
+	    dialog.fakeAnswer( true );
+	} ).start();
         dialog.go();
     }
 

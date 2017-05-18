@@ -12,7 +12,7 @@ import java.util.*;
 @SuppressWarnings({ "ClassWithoutToString", "UnusedDeclaration" })
 public class PostParameters implements Serializable {
 
-    private final Map<String, String> _parameters = new TreeMap<String, String>();
+    private final Map<String, String> _parameters = new TreeMap<>();
 
     private static final byte POSTPARAMETERS_FORMAT_VERSION = (byte)1;
 

@@ -115,7 +115,7 @@ public class MpsLabel {
 
         }
 
-        Hashtable<Integer, MpsLabel> ht = new Hashtable<Integer, MpsLabel>();
+        Hashtable<Integer, MpsLabel> ht = new Hashtable<>();
         int scalingFactor = 1;
         for ( int i = 0; i < digits; i += 1 ) {
 
@@ -170,7 +170,7 @@ public class MpsLabel {
 
     public static Hashtable<Integer, MpsLabel> makeLabels( int min, int max, double incr, int digits ) {
 
-        Hashtable<Integer, MpsLabel> ht = new Hashtable<Integer, MpsLabel>();
+        Hashtable<Integer, MpsLabel> ht = new Hashtable<>();
         int scalingFactor = 1;
         for ( int i = 0; i < digits; i += 1 ) {
 

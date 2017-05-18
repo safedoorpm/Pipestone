@@ -201,15 +201,7 @@ public class PopupJTableEditor extends DefaultCellEditor {
     public static void main( String[] args ) {
 
 	EventQueue.invokeLater(
-		new Runnable() {
-
-		    public void run() {
-
-			createAndShowUI();
-
-		    }
-
-		}
+		PopupJTableEditor::createAndShowUI
 	);
 
     }

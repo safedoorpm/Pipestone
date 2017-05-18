@@ -17,7 +17,7 @@ import java.util.Map;
 public class SSLUtilities {
 
     private static final Map<SSLContextWrapper, SSLContextWrapper> _sslContexts =
-            new HashMap<SSLContextWrapper, SSLContextWrapper>();
+	    new HashMap<>();
 
 //    private static class MyTrustManager implements X509TrustManager {
 //

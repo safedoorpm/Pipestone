@@ -26,7 +26,7 @@ public class Pepys {
     public enum PepysEventType {
 	CREATED,
 	CHANGED,
-	GONE;
+	GONE
     }
 
     /**
@@ -261,7 +261,7 @@ public class Pepys {
 	 A list of weak references to all the listeners who have expressed an interest in getting notifications from this source.
 	 */
 
-	private final List<WeakReference<PepysEventListener>> _listeners = new FormattingLinkedList<WeakReference<PepysEventListener>>();
+	private final List<WeakReference<PepysEventListener>> _listeners = new FormattingLinkedList<>();
 
 	/**
 	 Create a weak reference to a source.
@@ -286,7 +286,7 @@ public class Pepys {
 
 	private synchronized void registerEventListener( @NotNull PepysEventListener listener ) {
 
-	    _listeners.add( new WeakReference<PepysEventListener>( listener ) );
+	    _listeners.add( new WeakReference<>( listener ) );
 
 	}
 
@@ -368,7 +368,7 @@ public class Pepys {
 	@NotNull
 	private List<PepysEventListener> getPepysEventListeners( String what, List<WeakReference<PepysEventListener>> listeners ) {
 
-	    final List<PepysEventListener> eligibleListeners = new FormattingLinkedList<PepysEventListener>();
+	    final List<PepysEventListener> eligibleListeners = new FormattingLinkedList<>();
 	    for ( Iterator<WeakReference<PepysEventListener>> iterator = listeners.iterator(); iterator.hasNext(); ) {
 
 		WeakReference<PepysEventListener> listenerReference = iterator.next();
@@ -406,7 +406,7 @@ public class Pepys {
 	 in our reference queue of recently garbage collected source objects.
 	 */
 
-	private static final Set<PhantomReference<PepysSource>> _activePhantoms = new HashSet<PhantomReference<PepysSource>>();
+	private static final Set<PhantomReference<PepysSource>> _activePhantoms = new HashSet<>();
 
 	/**
 	 A weak reference to the source object that this phantom reference is associated with.
@@ -504,7 +504,7 @@ public class Pepys {
      The reference queue onto which our JVM's garbage collector will place phantom references for gone (as in garbage collected) source objects.
      */
 
-    private final ReferenceQueue<PepysSource> _goneSources = new ReferenceQueue<PepysSource>();
+    private final ReferenceQueue<PepysSource> _goneSources = new ReferenceQueue<>();
 
     /**
      A weak hash mapping of source objects to their corresponding weak source references.
@@ -515,7 +515,7 @@ public class Pepys {
      reference on our phantom reference reference queue).
      */
 
-    private final WeakHashMap<PepysSource,PepysWeakSourceRef> _sourceMap = new WeakHashMap<PepysSource, PepysWeakSourceRef>();
+    private final WeakHashMap<PepysSource,PepysWeakSourceRef> _sourceMap = new WeakHashMap<>();
 
     /**
      Indicate whether or not our utility thread should continue to watch for and process new phantom references on our phantom reference reference queue.
@@ -531,6 +531,7 @@ public class Pepys {
      A reference to our utility thread.
      */
 
+    @SuppressWarnings("FieldCanBeLocal")
     private Thread _utilityThread;
 
     /**
@@ -643,8 +644,8 @@ public class Pepys {
 
     private synchronized void xRegisterInterest( @NotNull PepysSource source, @NotNull PepysEventListener listener ) {
 
-	WeakReference weakSource = new WeakReference<PepysSource>( source );
-	WeakReference weakListener = new WeakReference<PepysEventListener>( listener );
+	WeakReference weakSource = new WeakReference<>( source );
+	WeakReference weakListener = new WeakReference<>( listener );
 	PepysWeakSourceRef listeners = _sourceMap.get( source );
 	if ( listeners == null ) {
 

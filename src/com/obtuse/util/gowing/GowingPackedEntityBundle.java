@@ -124,7 +124,7 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName,GowingPackableT
     @SuppressWarnings("WeakerAccess")
     public String keysToString() {
 
-	FormattingLinkedList<EntityName> keys = new FormattingLinkedList<EntityName>( keySet() );
+	FormattingLinkedList<EntityName> keys = new FormattingLinkedList<>( keySet() );
 
 	return keys.toString();
 

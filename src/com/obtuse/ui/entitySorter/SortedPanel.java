@@ -272,7 +272,7 @@ public class SortedPanel<E> extends JPanel {
 	Box topPanel = new Box( BoxLayout.Y_AXIS );
 	final SortedPanel<MyButtonEntity> panel = new SortedPanel<>( "panel" );
 	panel.setLayout( new BoxLayout( panel, BoxLayout.X_AXIS ) );
-	final SortedPanelModel<String,MyButtonEntity> model = new SortedPanelModel<String, MyButtonEntity>( sks, "model" );
+	final SortedPanelModel<String,MyButtonEntity> model = new SortedPanelModel<>( sks, "model" );
 	panel.setModel( model );
 
 	JButton addButton = new JButton( "add a new button" );

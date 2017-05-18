@@ -15,7 +15,7 @@ public class NestedXMLPrinter implements Closeable {
     private String _currentIndentString = "";
     private boolean _needIndent = true;
 
-    private Stack<String> _tagStack = new Stack<String>();
+    private Stack<String> _tagStack = new Stack<>();
 
     private final int _indentPerLevel;
     private final PrintStream _ps;

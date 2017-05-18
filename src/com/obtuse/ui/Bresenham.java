@@ -25,7 +25,7 @@ public class Bresenham {
         int x1 = end.x;
         int y1 = end.y;
 
-        List<Point> line = new ArrayList<Point>();
+        List<Point> line = new ArrayList<>();
 
         int dx = Math.abs( x1 - x0 );
         int dy = Math.abs( y1 - y0 );

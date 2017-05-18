@@ -22,14 +22,14 @@ import java.util.*;
 
 public class StdGowingUnPackerContext implements GowingUnPackerContext {
 
-    private final SortedMap<EntityTypeName,Integer> _seenTypeNames = new TreeMap<EntityTypeName, Integer>();
-    private final SortedMap<Integer,EntityTypeName> _usedTypeIds = new TreeMap<Integer, EntityTypeName>();
+    private final SortedMap<EntityTypeName,Integer> _seenTypeNames = new TreeMap<>();
+    private final SortedMap<Integer,EntityTypeName> _usedTypeIds = new TreeMap<>();
 
-    private final List<EntityTypeName> _newTypeNames = new LinkedList<EntityTypeName>();
+    private final List<EntityTypeName> _newTypeNames = new LinkedList<>();
 
-    private final SortedMap<GowingEntityReference,GowingPackable> _seenInstanceIds = new TreeMap<GowingEntityReference,GowingPackable>();
+    private final SortedMap<GowingEntityReference,GowingPackable> _seenInstanceIds = new TreeMap<>();
 
-    private final SortedSet<GowingEntityReference> _unFinishedEntities = new TreeSet<GowingEntityReference>();
+    private final SortedSet<GowingEntityReference> _unFinishedEntities = new TreeSet<>();
 
     private int _nextTypeReferenceId = 1;
 
@@ -122,7 +122,7 @@ public class StdGowingUnPackerContext implements GowingUnPackerContext {
     @Override
     public Collection<GowingEntityReference> getUnfinishedEntities() {
 
-	return new TreeSet<GowingEntityReference>( _unFinishedEntities );
+	return new TreeSet<>( _unFinishedEntities );
 
     }
 

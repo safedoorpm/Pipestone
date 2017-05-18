@@ -17,9 +17,9 @@ import java.util.Vector;
 @SuppressWarnings("UnusedDeclaration")
 public abstract class AbstractCurveSequence implements GraphicsElement {
 
-    private LinkedList<AbstractCurveListener> _listeners = new LinkedList<AbstractCurveListener>();
+    private LinkedList<AbstractCurveListener> _listeners = new LinkedList<>();
 
-    private final List<Point2D> _points = new Vector<Point2D>();
+    private final List<Point2D> _points = new Vector<>();
 
     private GeneralPath _linesPath = null;
 
@@ -284,7 +284,7 @@ public abstract class AbstractCurveSequence implements GraphicsElement {
 
     protected Vector<Point2D> getDistinctPoints( double scale ) {
 
-        Vector<Point2D> rval = new Vector<Point2D>();
+        Vector<Point2D> rval = new Vector<>();
         Point2D lastPoint = null;
         int ix = 0;
         for ( Point2D point : getPoints() ) {

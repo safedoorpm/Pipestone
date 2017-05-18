@@ -45,6 +45,30 @@ public class FormattingVector<E> extends Vector<E> {
 
     }
 
+    public void setMaxElementsToFormat( int maxElementsToFormat ) {
+
+	_maxElementsToFormat = maxElementsToFormat;
+
+    }
+
+    public int getMaxElementsToFormat() {
+
+	return _maxElementsToFormat;
+
+    }
+
+    public void setTailElementsToAlwaysFormat( int tailElementsToAlwaysFormat ) {
+
+	_tailElementsToAlwaysFormat = tailElementsToAlwaysFormat;
+
+    }
+
+    public int getTailElementsToAlwaysFormat() {
+
+	return _tailElementsToAlwaysFormat;
+
+    }
+
     public String toString() {
 
         StringBuilder rval = new StringBuilder( "{" );
@@ -75,7 +99,7 @@ public class FormattingVector<E> extends Vector<E> {
 
     public static void main( String[] args ) {
 
-        List<Integer> list = new FormattingVector<Integer>();
+        List<Integer> list = new FormattingVector<>();
 
         for ( int i = 0; i < 15; i += 1 ) {
 

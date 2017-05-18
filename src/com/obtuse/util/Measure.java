@@ -31,17 +31,17 @@ public class Measure {
 
     private static final Long LOCK = 0L;
 
-    private static SortedMap<String,Stats> s_stats = new TreeMap<String, Stats>();
+    private static SortedMap<String,Stats> s_stats = new TreeMap<>();
 
     private static int s_maxCategoryNameLength = Math.max( OUTER_DONE_STATS.length(), INNER_DONE_STATS.length() );
 
     private static long s_measuringSinceMillis = System.currentTimeMillis();
 
-    private static SortedMap<Long,Stack<StackLevelInfo>> s_threadStacks = new TreeMap<Long, Stack<StackLevelInfo>>();
+    private static SortedMap<Long,Stack<StackLevelInfo>> s_threadStacks = new TreeMap<>();
 
-    private static SortedMap<String,Stats> s_crossThreadStats = new TreeMap<String, Stats>();
+    private static SortedMap<String,Stats> s_crossThreadStats = new TreeMap<>();
 
-    private static SortedMap<String,Stats> s_stackErrorStats = new TreeMap<String, Stats>();
+    private static SortedMap<String,Stats> s_stackErrorStats = new TreeMap<>();
 
     private static SortedMap<String,Stats> s_stackData;
     private static StackLevelStats s_stackStats = new StackLevelStats( "root", null );
@@ -65,7 +65,7 @@ public class Measure {
             super();
 
             _levelName = levelName;
-            _levelNames = new LinkedList<String>();
+            _levelNames = new LinkedList<>();
 
             StringBuilder sb = new StringBuilder().append( "/" );
             String arrow = "";
@@ -128,7 +128,7 @@ public class Measure {
             super();
 
             _levelName = levelName;
-            _ourChildren = new TreeMap<String, StackLevelStats>();
+            _ourChildren = new TreeMap<>();
             _ourStats = new Stats();
             _parent = parent;
 
@@ -154,7 +154,7 @@ public class Measure {
 
             } else {
 
-                List<String> relativePathCopy = new LinkedList<String>( relativePath );
+                List<String> relativePathCopy = new LinkedList<>( relativePath );
                 String nextChildName = relativePathCopy.remove( /*relativePathCopy.size() - 1*/ 0 );
 
                 StackLevelStats childNode = _ourChildren.get( nextChildName );
@@ -244,15 +244,15 @@ public class Measure {
                             + "   " + this
             );
 
-            TreeSorter<Double, String> sorted = new TreeSorter<Double, String>(
-                    new Comparator<Double>() {
+            TreeSorter<Double, String> sorted = new TreeSorter<>(
+		    new Comparator<Double>() {
 
-                        public int compare( Double lhs, Double rhs ) {
+			public int compare( Double lhs, Double rhs ) {
 
-                            return rhs.compareTo( lhs );
-                        }
-                    }
-            );
+			    return rhs.compareTo( lhs );
+			}
+		    }
+	    );
 
             for ( String categoryName : _ourChildren.keySet() ) {
 
@@ -295,7 +295,7 @@ public class Measure {
             Stack<StackLevelInfo> ourStack = Measure.s_threadStacks.get( threadId );
             if ( ourStack == null ) {
 
-                ourStack = new Stack<StackLevelInfo>();
+                ourStack = new Stack<>();
                 Measure.s_threadStacks.put( threadId, ourStack );
 
             }
@@ -466,9 +466,11 @@ public class Measure {
 
 	    Measure.s_stackStats.showStats( where, showTitle );
 
-	    TreeSorter<Double,String> sorted = new TreeSorter<Double, String>(
+	    TreeSorter<Double,String> sorted = new TreeSorter<>(
 		    new Comparator<Double>() {
+
 			public int compare( Double lhs, Double rhs ) {
+
 			    return rhs.compareTo( lhs );
 			}
 		    }

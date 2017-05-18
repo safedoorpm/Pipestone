@@ -109,7 +109,7 @@ public class StdGowingPacker implements GowingPacker {
 
     private final PrintWriter _writer;
 
-    private final SortedSet<GowingInstanceId> _previouslyPackedEntities = new TreeSet<GowingInstanceId>();
+    private final SortedSet<GowingInstanceId> _previouslyPackedEntities = new TreeSet<>();
 
     private boolean _finished = false;
 
@@ -209,7 +209,7 @@ public class StdGowingPacker implements GowingPacker {
 
 	for ( int pass = 1; true; pass += 1 ) {
 
-	    SortedSet<GowingInstanceId> notPackedEntities = new TreeSet<GowingInstanceId>();
+	    SortedSet<GowingInstanceId> notPackedEntities = new TreeSet<>();
 
 	    for ( GowingInstanceId instanceId : _packingContext.getSeenInstanceIds() ) {
 
@@ -1044,17 +1044,17 @@ public class StdGowingPacker implements GowingPacker {
 	    test = new StdGowingPackerContext.TestPackableClass( "howdy doody", null, new StdGowingPackerContext.SimplePackableClass( "grump!" ) );
 	    p2a.queuePackEntity( test );
 
-	    Map<String,EntityName> testMap = new TreeMap<String, EntityName>();
+	    Map<String,EntityName> testMap = new TreeMap<>();
 	    testMap.put( "hello", new EntityName( "HELLO" ) );
 	    testMap.put( "there", new EntityName( "THERE" ) );
 	    testMap.put( "world", new EntityName( "WORLD" ) );
-	    GowingPackableMapping testMapMapping = new GowingPackableMapping<String,EntityName>( testMap );
+	    GowingPackableMapping testMapMapping = new GowingPackableMapping<>( testMap );
 	    p2a.queuePackEntity( new EntityName( "fred" ), testMapMapping );
 
-	    GowingPackableCollection<Object> p2Collection = new GowingPackableCollection<Object>();
+	    GowingPackableCollection<Object> p2Collection = new GowingPackableCollection<>();
 	    p2Collection.add( "Hello" );
 	    p2Collection.add( "There" );
-	    GowingPackableCollection<String> p2C2 = new GowingPackableCollection<String>();
+	    GowingPackableCollection<String> p2C2 = new GowingPackableCollection<>();
 	    p2C2.addAll( Arrays.asList( "Mercury", "Venus", "Mars", "Jupiter" ) );
 	    p2Collection.add( p2C2 );
 	    p2a.queuePackEntity( new EntityName( "fred" ), p2Collection );

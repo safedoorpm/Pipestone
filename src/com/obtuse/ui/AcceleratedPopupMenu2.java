@@ -36,7 +36,8 @@ public class AcceleratedPopupMenu2 extends JDialog {
 
         _words = words;
 
-        _wordsList.setModel( _listModel );
+	//noinspection unchecked
+	_wordsList.setModel( _listModel );
 
         setContentPane( contentPane );
         setModal( true );
@@ -85,7 +86,8 @@ public class AcceleratedPopupMenu2 extends JDialog {
 
             if ( word.startsWith( prefix ) ) {
 
-                _listModel.addElement( word );
+		//noinspection unchecked
+		_listModel.addElement( word );
 
                 visibleCount += 1;
 
@@ -123,7 +125,7 @@ public class AcceleratedPopupMenu2 extends JDialog {
 
         BasicProgramConfigInfo.init( "Obtuse", "Pipestone", "Test", null );
 
-        List<String> words = new LinkedList<String>();
+        List<String> words = new LinkedList<>();
         for ( int i = 0; i < 25; i += 1 ) {
 
             words.add( VerbsList.pickVerb() );

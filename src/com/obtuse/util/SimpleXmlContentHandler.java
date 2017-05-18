@@ -14,7 +14,7 @@ public class SimpleXmlContentHandler extends DefaultHandler {
 
     private Locator _locator;
 
-    private final Stack<String> _nesting = new Stack<String>();
+    private final Stack<String> _nesting = new Stack<>();
     private final boolean _logActivity;
 
     public SimpleXmlContentHandler( boolean logActivity ) {

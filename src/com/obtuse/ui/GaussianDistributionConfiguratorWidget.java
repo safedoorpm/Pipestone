@@ -51,7 +51,7 @@ public class GaussianDistributionConfiguratorWidget extends JPanel {
             _standardDeviationPanel
     };
 
-    private final java.util.List<ChangeListener> _changeListeners = new LinkedList<ChangeListener>();
+    private final java.util.List<ChangeListener> _changeListeners = new LinkedList<>();
 
     @SuppressWarnings("StaticVariableNamingConvention")
     private static final Dictionary<Integer,MpsLabel> S_0TO_1BY_QUARTERS_LABELS;

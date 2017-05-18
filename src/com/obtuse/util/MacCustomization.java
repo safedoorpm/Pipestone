@@ -64,25 +64,13 @@ public class MacCustomization extends OSLevelCustomizations {
 
             UIManager.setLookAndFeel( laf );
 
-        } catch ( IllegalAccessException e ) {
-
-            Trace.event( "unable to find " + laf + " look and feel - using system default", e );
-
-        } catch ( UnsupportedLookAndFeelException e ) {
-
-            Trace.event( "unable to find " + laf + " look and feel - using system default", e );
-
-        } catch ( InstantiationException e ) {
-
-            Trace.event( "unable to find " + laf + " look and feel - using system default", e );
-
-        } catch ( ClassNotFoundException e ) {
+        } catch ( IllegalAccessException | UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException e ) {
 
             Trace.event( "unable to find " + laf + " look and feel - using system default", e );
 
         }
 
-        _app = Application.getApplication();
+	_app = Application.getApplication();
         //noinspection ClassWithoutToString,RefusedBequest
         ApplicationAdapter basicAdapter = new ApplicationAdapter() {
 

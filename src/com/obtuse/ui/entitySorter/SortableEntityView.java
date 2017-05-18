@@ -14,9 +14,9 @@ import javax.swing.*;
 
 public interface SortableEntityView<K extends Comparable<K>,E> {
 
-    public K getActiveKey();
+    K getActiveKey();
 
-    public void setActiveKey( K key );
+    void setActiveKey( K key );
 
     E getEntity();
 

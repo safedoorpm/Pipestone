@@ -7,7 +7,7 @@ package com.obtuse.util.exceptions;
 @SuppressWarnings({ "SameParameterValue", "UnusedDeclaration" })
 public class ParsingException extends Exception {
 
-    public static enum ErrorType {
+    public enum ErrorType {
         DATE_FORMAT_ERROR,
         INVALID_FIELD_VALUE,
         NUMBER_FORMAT_ERROR,

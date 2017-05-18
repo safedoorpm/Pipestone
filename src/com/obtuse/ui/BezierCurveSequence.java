@@ -217,7 +217,7 @@ public class BezierCurveSequence extends AbstractCurveSequence {
 
         }
 
-        _curves = new LinkedList<CubicBezierCurve>();
+        _curves = new LinkedList<>();
 
         _curvesPath = new GeneralPath();
         _controlsPath = new GeneralPath();

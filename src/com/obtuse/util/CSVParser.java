@@ -526,7 +526,7 @@ public class CSVParser implements Closeable {
     protected int[] getIntArray()
             throws SyntaxErrorException {
 
-        Vector<Integer> v = new Vector<Integer>();
+        Vector<Integer> v = new Vector<>();
 
         int ch = nextCh();
         if ( ch != (int)'[' ) {
@@ -580,7 +580,7 @@ public class CSVParser implements Closeable {
     protected double[] getDoubleArray()
             throws SyntaxErrorException {
 
-        Vector<Double> v = new Vector<Double>();
+        Vector<Double> v = new Vector<>();
 
         int ch = nextCh();
         if ( ch != (int)'[' ) {

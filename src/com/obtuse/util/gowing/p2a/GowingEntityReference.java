@@ -59,7 +59,7 @@ public class GowingEntityReference implements Comparable<GowingEntityReference> 
 
 	_version = version;
 
-	_entityReferenceNames = new TreeSet<EntityName>();
+	_entityReferenceNames = new TreeSet<>();
 	if ( entityReferenceNames != null ) {
 
 	    _entityReferenceNames.addAll( entityReferenceNames );

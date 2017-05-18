@@ -33,6 +33,7 @@ public class MpsTest2 extends JFrame {
     private JButton _button4;
     private JButton _button5;
     private JPanel _slider2panel;
+    @SuppressWarnings("FieldCanBeLocal")
     private MultiPointSlider _multiPointSlider1;
 
     public MpsTest2() {

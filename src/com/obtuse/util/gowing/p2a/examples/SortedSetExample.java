@@ -29,7 +29,7 @@ public class SortedSetExample extends GowingAbstractPackableEntity implements Go
 
     private static final int VERSION = 1;
 
-    private SortedSet<String> _myCollection = new TreeSet<String>();
+    private SortedSet<String> _myCollection = new TreeSet<>();
 
     private static final EntityName DATA_COLLECTION_NAME = new EntityName( "_dc" );
     private GowingEntityReference _dataCollectionReference = null;
@@ -112,7 +112,7 @@ public class SortedSetExample extends GowingAbstractPackableEntity implements Go
 		packer.getPackingContext()
 	);
 
-	GowingPackableCollection<String> p2c = new GowingPackableCollection<String>( _myCollection );
+	GowingPackableCollection<String> p2c = new GowingPackableCollection<>( _myCollection );
 	rval.addHolder( new GowingPackableEntityHolder( DATA_COLLECTION_NAME, p2c, packer, true ) );
 	rval.addHolder( new GowingStringHolder( NAME_NAME, _name, true ) );
 	rval.addHolder( new GowingStringHolder( DESCRIPTION_NAME, _description, false ) );

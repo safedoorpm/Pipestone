@@ -23,7 +23,7 @@ public class TreeAccumulator<K extends Comparable<K>> implements Accumulator<K>,
     public TreeAccumulator() {
         super();
 
-        _accumulator = new TreeMap<K, Long>();
+        _accumulator = new TreeMap<>();
 
     }
 
@@ -259,7 +259,7 @@ public class TreeAccumulator<K extends Comparable<K>> implements Accumulator<K>,
 
     public TreeSorter<Long,K> getSortedCounts( Comparator<Long> comparator ) {
 
-        TreeSorter<Long,K> sortedCounts = comparator == null ? new TreeSorter<Long,K>() : new TreeSorter<Long,K>( comparator );
+        TreeSorter<Long,K> sortedCounts = comparator == null ? new TreeSorter<>() : new TreeSorter<>( comparator );
         for ( K key : _accumulator.keySet() ) {
 
             sortedCounts.add( _accumulator.get( key ), key );

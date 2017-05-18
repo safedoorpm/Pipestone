@@ -25,7 +25,7 @@ public abstract class WindowWithMenus extends TrackedWindow {
 
     private static PreferencesHandler s_preferencesHandler;
 
-    private static final Collection<WindowWithMenus> s_allWindowsWithLogsMenuItem = new LinkedList<WindowWithMenus>();
+    private static final Collection<WindowWithMenus> s_allWindowsWithLogsMenuItem = new LinkedList<>();
     private static boolean s_showLogsMode;
 
     @SuppressWarnings({ "ClassWithoutToString", "SameParameterValue" })

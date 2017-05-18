@@ -9,10 +9,10 @@ import org.jetbrains.annotations.NotNull;
 
 public interface PepysEventListener {
 
-    public void PepysSourceCreated( @NotNull Pepys.PepysEvent event );
+    void PepysSourceCreated( @NotNull Pepys.PepysEvent event );
 
-    public void PepysSourceChanged( @NotNull Pepys.PepysEvent event );
+    void PepysSourceChanged( @NotNull Pepys.PepysEvent event );
 
-    public void PepysSourceGone( @NotNull Pepys.PepysEvent event );
+    void PepysSourceGone( @NotNull Pepys.PepysEvent event );
 
 }

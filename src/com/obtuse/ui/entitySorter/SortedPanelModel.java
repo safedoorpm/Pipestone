@@ -163,7 +163,7 @@ public class SortedPanelModel<K extends Comparable<K>, E extends SortableEntity>
 
     public int addEntity( @NotNull K key, @NotNull E entity ) {
 
-        return addEntity( new SortableEntityReference<K, E>( this, key, entity ) );
+        return addEntity( new SortableEntityReference<>( this, key, entity ) );
 
     }
 

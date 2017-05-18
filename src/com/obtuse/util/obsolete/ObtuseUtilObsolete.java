@@ -308,33 +308,9 @@ class ObtuseUtilObsolete {
             ObtuseUtilObsolete.closeQuietly( ois );
             return thing;
 
-        } catch ( IOException e ) {
-
-            // This must NOT be a fatal error - let the caller deal with it
-
-            if ( printStackTraceOnError ) {
-
-                //noinspection CallToPrintStackTrace
-                e.printStackTrace();
-
-            }
-
-            return null;
-
-        } catch ( ClassNotFoundException e ) {
-
-            // This must NOT be a fatal error - let the caller deal with it
-
-            if ( printStackTraceOnError ) {
-
-                //noinspection CallToPrintStackTrace
-                e.printStackTrace();
-
-            }
-
-            return null;
-
         } catch ( Exception e ) {
+
+            // This must NOT be a fatal error - let the caller deal with it
 
             if ( printStackTraceOnError ) {
 
@@ -1589,7 +1565,7 @@ class ObtuseUtilObsolete {
     @SuppressWarnings({ "CollectionDeclaredAsConcreteClass", "UseOfObsoleteCollectionType" })
     public static <K, V> Hashtable<K, V> unmodifiableHashtable( final Hashtable<? extends K, ? extends V> ht ) {
 
-        UnmodifiableHashtable<K, V> unmodifiableHashtable = new UnmodifiableHashtable<K, V>( ht );
+        UnmodifiableHashtable<K, V> unmodifiableHashtable = new UnmodifiableHashtable<>( ht );
 
         unmodifiableHashtable.makeReadonly();
 

@@ -30,11 +30,11 @@ public class DirectedGraph {
 
     public List<DirectedGraphVertex> topologicalSort( Collection<DirectedGraphVertex> vertices ) {
 
-        SortedSet<DirectedGraphVertex> temporarilyMarkedNodes = new TreeSet<DirectedGraphVertex>();
-        SortedSet<DirectedGraphVertex> permanentlyMarkedNodes = new TreeSet<DirectedGraphVertex>();
+        SortedSet<DirectedGraphVertex> temporarilyMarkedNodes = new TreeSet<>();
+        SortedSet<DirectedGraphVertex> permanentlyMarkedNodes = new TreeSet<>();
 
-        List<DirectedGraphVertex> sortedNodes = new LinkedList<DirectedGraphVertex>();
-        List<DirectedGraphVertex> unvisitedNodes = new LinkedList<DirectedGraphVertex>( vertices );
+        List<DirectedGraphVertex> sortedNodes = new LinkedList<>();
+        List<DirectedGraphVertex> unvisitedNodes = new LinkedList<>( vertices );
         while ( !unvisitedNodes.isEmpty() ) {
 
             DirectedGraphVertex node = unvisitedNodes.remove( 0 );

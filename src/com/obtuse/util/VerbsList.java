@@ -19,7 +19,7 @@ public class VerbsList {
 
     private static Random s_rng = new Random( System.currentTimeMillis() );
 
-    private static Vector<String> s_available = new Vector<String>();
+    private static Vector<String> s_available = new Vector<>();
 
     private static int s_iteration = -1;
 

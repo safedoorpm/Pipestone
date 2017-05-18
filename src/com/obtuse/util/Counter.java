@@ -21,7 +21,7 @@ public interface Counter<K> {
 
     Set<K> keySet();
 
-    public int getGrandTotal();
+    int getGrandTotal();
 
     K firstKey();
 

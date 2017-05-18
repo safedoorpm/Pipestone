@@ -23,10 +23,10 @@ public class DefaultMpsKnob extends MpsKnob {
 
     public static final float ORIENTED_IMAGE_BRIGHTNESS_FACTOR = 0.9f;
     private final SortedMap<PositionOnLine, Double> _rotations =
-            new TreeMap<PositionOnLine, Double>();
+	    new TreeMap<>();
     private ThreeDimensionalSortedMap<MpsKnobSize, PositionOnLine, Boolean, OrientedImage>
             _rotatedSelectedScaledImages =
-            new ThreeDimensionalTreeMap<MpsKnobSize, PositionOnLine, Boolean, OrientedImage>();
+	    new ThreeDimensionalTreeMap<>();
 
     public DefaultMpsKnob( Image image ) {
 

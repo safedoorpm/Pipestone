@@ -7,7 +7,7 @@ package com.obtuse.util;
 @SuppressWarnings("UnusedDeclaration")
 public class TwoDimensionalTreeCounter<K1,K2> implements TwoDimensionalCounter<K1, K2> {
 
-    private final TwoDimensionalSortedMap<K1,K2,Integer> _counter = new TwoDimensionalTreeMap<K1,K2,Integer>();
+    private final TwoDimensionalSortedMap<K1,K2,Integer> _counter = new TwoDimensionalTreeMap<>();
 
     public TwoDimensionalTreeCounter() {
         super();

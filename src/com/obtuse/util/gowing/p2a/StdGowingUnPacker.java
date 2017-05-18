@@ -633,6 +633,7 @@ public class StdGowingUnPacker implements GowingUnPacker {
 
 	    Optional<GowingDePackedEntityGroup> maybeResult = unPacker.unPack();
 
+	    //noinspection OptionalIsPresent
 	    if ( maybeResult.isPresent() ) {
 
 		GowingDePackedEntityGroup result = maybeResult.get();

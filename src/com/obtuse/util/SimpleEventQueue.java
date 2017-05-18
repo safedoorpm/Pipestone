@@ -15,7 +15,7 @@ public class SimpleEventQueue<T extends SimpleEvent> {
     public static final FormattedImmutableDate LAST_POSSIBLE_EVENT_TIME = new FormattedImmutableDate( Long.MAX_VALUE );
     public static final FormattedImmutableDate FIRST_POSSIBLE_EVENT_TIME = new FormattedImmutableDate( 0L );
 
-    private final SortedMap<FormattedImmutableDate,LinkedList<T>> _eventQueue = new TreeMap<FormattedImmutableDate,LinkedList<T>>();
+    private final SortedMap<FormattedImmutableDate,LinkedList<T>> _eventQueue = new TreeMap<>();
     private FormattedImmutableDate _now;
     private FormattedImmutableDate _endTime = SimpleEventQueue.LAST_POSSIBLE_EVENT_TIME;
 
@@ -35,7 +35,7 @@ public class SimpleEventQueue<T extends SimpleEvent> {
             super();
 
             _eventTime = new FormattedImmutableDate( eventTime );
-            _events = new LinkedList<T>();
+            _events = new LinkedList<>();
             add( event );
 
         }
@@ -44,7 +44,7 @@ public class SimpleEventQueue<T extends SimpleEvent> {
             super();
 
             _eventTime = new FormattedImmutableDate( eventTime );
-            _events = new LinkedList<T>();
+            _events = new LinkedList<>();
             addAll( event );
 
         }
@@ -270,7 +270,7 @@ public class SimpleEventQueue<T extends SimpleEvent> {
         LinkedList<T> queue = _eventQueue.get( when );
         if ( queue == null ) {
 
-            queue = new LinkedList<T>();
+            queue = new LinkedList<>();
             _eventQueue.put( when, queue );
 
         }
@@ -299,12 +299,12 @@ public class SimpleEventQueue<T extends SimpleEvent> {
 
                 if ( peek ) {
 
-                    return new TimestampedClockEventContainer<T>( peekNow, _eventQueue.get( peekNow ) );
+                    return new TimestampedClockEventContainer<>( peekNow, _eventQueue.get( peekNow ) );
 
                 } else {
 
                     _now = new FormattedImmutableDate( peekNow.getTime() + ( advanceNow ? 1 : 0 ) );
-                    return new TimestampedClockEventContainer<T>( peekNow, _eventQueue.remove( peekNow ) );
+                    return new TimestampedClockEventContainer<>( peekNow, _eventQueue.remove( peekNow ) );
 
                 }
 
@@ -323,11 +323,11 @@ public class SimpleEventQueue<T extends SimpleEvent> {
 
         } else if ( peek ) {
 
-            return new TimestampedClockEventInstance<T>( nextBatch.getEventTime(), nextBatch.getClockEvents().get( 0 ) );
+            return new TimestampedClockEventInstance<>( nextBatch.getEventTime(), nextBatch.getClockEvents().get( 0 ) );
 
         } else {
 
-            return new TimestampedClockEventInstance<T>( nextBatch.getEventTime(), _eventQueue.get( nextBatch.getEventTime() ).remove( 0 ) );
+            return new TimestampedClockEventInstance<>( nextBatch.getEventTime(), _eventQueue.get( nextBatch.getEventTime() ).remove( 0 ) );
 
         }
 
@@ -556,7 +556,7 @@ public class SimpleEventQueue<T extends SimpleEvent> {
 
         BasicProgramConfigInfo.init( "Obtuse", "SimpleEventQueue", "Test", null );
 
-        final SimpleEventQueue<SimpleEvent> eventQueue = new SimpleEventQueue<SimpleEvent>();
+        final SimpleEventQueue<SimpleEvent> eventQueue = new SimpleEventQueue<>();
 
         eventQueue.setEndTime( new FormattedImmutableDate( 7200 ) );
 

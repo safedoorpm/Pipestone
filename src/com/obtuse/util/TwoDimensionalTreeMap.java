@@ -9,7 +9,7 @@ import java.util.*;
 
 public class TwoDimensionalTreeMap<T1,T2,V> implements Serializable, TwoDimensionalSortedMap<T1,T2,V> {
 
-    private SortedMap<T1,SortedMap<T2,V>> _map = new TreeMap<T1,SortedMap<T2,V>>();
+    private SortedMap<T1,SortedMap<T2,V>> _map = new TreeMap<>();
 
     public TwoDimensionalTreeMap() {
         super();
@@ -45,7 +45,7 @@ public class TwoDimensionalTreeMap<T1,T2,V> implements Serializable, TwoDimensio
         SortedMap<T2,V> innerMap = _map.get( key1 );
         if ( innerMap == null && forceCreate ) {
 
-            innerMap = new TreeMap<T2,V>();
+            innerMap = new TreeMap<>();
             _map.put( key1, innerMap );
 
         }

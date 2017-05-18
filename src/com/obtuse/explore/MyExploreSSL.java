@@ -130,18 +130,13 @@ public class MyExploreSSL {
 
             sslContext = SSLUtilities.getOurClientSSLContext();
 
-        } catch ( PipestoneSSLException e ) {
-
-            Logger.logErr( "initializing SSL client socket factory", e );
-            System.exit( 1 );
-
-        } catch ( IOException e ) {
+        } catch ( PipestoneSSLException | IOException e ) {
 
             Logger.logErr( "initializing SSL client socket factory", e );
             System.exit( 1 );
 
         }
-        SSL_CLIENT_CONTEXT = sslContext;
+	SSL_CLIENT_CONTEXT = sslContext;
 
         s_sslClientSocketFactory = MyExploreSSL.SSL_CLIENT_CONTEXT.getSocketFactory();
 

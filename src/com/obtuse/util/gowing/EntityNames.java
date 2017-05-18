@@ -18,7 +18,7 @@ public class EntityNames {
 
 //    public static final EntityName ANON_ENTITY = new EntityName( "<anon>" );
 
-    private final SortedSet<EntityName> _entityNames = new TreeSet<EntityName>();
+    private final SortedSet<EntityName> _entityNames = new TreeSet<>();
 
     private final GowingPackable _entity;
 

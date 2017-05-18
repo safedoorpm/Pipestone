@@ -30,7 +30,7 @@ public class Trace {
 
     private static String s_supportContact;
 
-    private static final Map<Integer, TraceHook> s_traceHooks = new TreeMap<Integer, TraceHook>();
+    private static final Map<Integer, TraceHook> s_traceHooks = new TreeMap<>();
 
     private static final String TRACE_HOOKS_LOCK = "trace hooks lock";
 
@@ -43,7 +43,7 @@ public class Trace {
 
     private static File s_traceFileDirectory = new File( BasicProgramConfigInfo.getWorkingDirectory(), "traces" );
 
-    public static final Map<Long, Thread> s_exceptionsInProgress = new TreeMap<Long, Thread>();
+    public static final Map<Long, Thread> s_exceptionsInProgress = new TreeMap<>();
 
     public static final int MAX_FORMATTED_TRACE_DEPTH = 100;
 
@@ -161,7 +161,7 @@ public class Trace {
 
             if ( _exception != null ) {
 
-                List<String> results = new LinkedList<String>();
+                List<String> results = new LinkedList<>();
                 Trace.captureStackTrace( false, "", _exception, results );
                 for ( String s : results ) {
 
@@ -177,9 +177,9 @@ public class Trace {
 
     }
 
-    private static Queue<TraceEvent> s_traceEvents = new LinkedList<TraceEvent>();
+    private static Queue<TraceEvent> s_traceEvents = new LinkedList<>();
 
-    private static final List<TraceFileManager> s_traceFileManagers = new LinkedList<TraceFileManager>();
+    private static final List<TraceFileManager> s_traceFileManagers = new LinkedList<>();
 
     private static final int MAX_TRACE_EVENTS = 50000;
 
@@ -346,19 +346,19 @@ public class Trace {
         Map<Integer, TraceHook> hooks;
         synchronized ( Trace.TRACE_HOOKS_LOCK ) {
 
-            events = new LinkedList<TraceEvent>();
+            events = new LinkedList<>();
             for ( TraceEvent event : Trace.s_traceEvents ) {
                 events.add( event );
             }
 
-            hooks = new TreeMap<Integer, TraceHook>();
+            hooks = new TreeMap<>();
             for ( int hookId : Trace.s_traceHooks.keySet() ) {
                 hooks.put( hookId, Trace.s_traceHooks.get( hookId ) );
             }
 
         }
 
-        List<String> results = new LinkedList<String>();
+        List<String> results = new LinkedList<>();
         try {
 
             String what = "Trace requested at " + new Date() +
@@ -609,30 +609,26 @@ public class Trace {
     private static void tellTraceFileManagers( final String traceFname, final long timeStamp ) {
 
         //noinspection ClassWithoutToString,RefusedBequest
-        new Thread() {
+        new Thread( () -> {
 
-            public void run() {
+	    synchronized ( Trace.s_traceFileManagers ) {
 
-                synchronized ( Trace.s_traceFileManagers ) {
+		boolean handled = false;
+		for ( TraceFileManager tfm : Trace.s_traceFileManagers ) {
 
-                    boolean handled = false;
-                    for ( TraceFileManager tfm : Trace.s_traceFileManagers ) {
+		    tfm.newTraceFile( traceFname, timeStamp );
+		    handled = true;
 
-                        tfm.newTraceFile( traceFname, timeStamp );
-                        handled = true;
+		}
 
-                    }
+		if ( !handled && s_supportContact != null ) {
 
-                    if ( !handled && s_supportContact != null ) {
+		    Logger.logMsg( "please email \"" + traceFname + "\" to " + s_supportContact, null );
 
-                        Logger.logMsg( "please email \"" + traceFname + "\" to " + s_supportContact, null );
+		}
+	    }
 
-                    }
-                }
-
-            }
-
-        }.start();
+	} ).start();
 
     }
 
@@ -685,11 +681,6 @@ public class Trace {
                 }
 
             }.start();
-
-        } catch ( SocketException e ) {
-
-            Trace.emitTrace( "trace port listener unable to allocate listen socket on port " + port, e );
-            System.exit( 1 );
 
         } catch ( IOException e ) {
 
@@ -768,7 +759,7 @@ public class Trace {
 
     public static String[] formatDeeperStackTrace( Throwable e ) {
 
-        List<String> trace = new LinkedList<String>();
+        List<String> trace = new LinkedList<>();
 
         if ( e.getCause() == null ) {
 

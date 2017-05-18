@@ -440,15 +440,16 @@ public abstract class JListManager implements ButtonOwner {
                     _addButtonInfo = ButtonInfo.makeButtonLabel(
                             JListManager.this,
                             _addButton,
-                            new Runnable() {
-
-                                public void run() {
-
-                                    doAddButton();
-
-                                }
-
-                            },
+                            JListManager.this::doAddButton,
+//                            new Runnable() {
+//
+//                                public void run() {
+//
+//                                    doAddButton();
+//
+//                                }
+//
+//                            },
                             _addButtonName,
                             _resourceBaseDirectory,
                             ButtonInfo.getDefaultDarkeningFactor()
@@ -477,15 +478,7 @@ public abstract class JListManager implements ButtonOwner {
                     _deleteButtonInfo = ButtonInfo.makeButtonLabel(
                             JListManager.this,
                             _deleteButton,
-                            new Runnable() {
-
-                                public void run() {
-
-                                    doDeleteButton();
-
-                                }
-
-                            },
+			    JListManager.this::doDeleteButton,
                             _deleteButtonName,
                             _resourceBaseDirectory,
                             ButtonInfo.getDefaultDarkeningFactor()
@@ -518,15 +511,7 @@ public abstract class JListManager implements ButtonOwner {
                     _moveUpButtonInfo = ButtonInfo.makeButtonLabel(
                             JListManager.this,
                             _moveUpButton,
-                            new Runnable() {
-
-                                public void run() {
-
-                                    doMoveUpButton();
-
-                                }
-
-                            },
+			    JListManager.this::doMoveUpButton,
                             _moveUpButtonName,
                             _resourceBaseDirectory,
                             ButtonInfo.getDefaultDarkeningFactor()
@@ -559,15 +544,7 @@ public abstract class JListManager implements ButtonOwner {
                     _moveDownButtonInfo = ButtonInfo.makeButtonLabel(
                             JListManager.this,
                             _moveDownButton,
-                            new Runnable() {
-
-                                public void run() {
-
-                                    doMoveDownButton();
-
-                                }
-
-                            },
+			    JListManager.this::doMoveDownButton,
                             _moveDownButtonName,
                             _resourceBaseDirectory,
                             ButtonInfo.getDefaultDarkeningFactor()
@@ -608,15 +585,7 @@ public abstract class JListManager implements ButtonOwner {
                     _duplicateButtonInfo = ButtonInfo.makeButtonLabel(
                             JListManager.this,
                             _duplicateButton,
-                            new Runnable() {
-
-                                public void run() {
-
-                                    doDuplicateButton();
-
-                                }
-
-                            },
+			    JListManager.this::doDuplicateButton,
                             _duplicateButtonName,
                             _resourceBaseDirectory,
                             ButtonInfo.getDefaultDarkeningFactor()

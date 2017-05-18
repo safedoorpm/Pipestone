@@ -26,7 +26,7 @@ public class ThreeDimensionalTreeMapTest {
     @Before
     public void setUp() throws Exception {
 
-        _map = new ThreeDimensionalTreeMap<Integer, Integer, Integer, String>();
+        _map = new ThreeDimensionalTreeMap<>();
 
         if ( !BasicProgramConfigInfo.isInitialized() ) {
 
@@ -889,7 +889,7 @@ public class ThreeDimensionalTreeMapTest {
 
     private static Vector<String> getContents( ThreeDimensionalSortedMap<Integer,Integer,Integer,String> map ) {
 
-        Vector<String> values = new Vector<String>();
+        Vector<String> values = new Vector<>();
 
         for ( Iterator<String> iter = map.iterator(); iter.hasNext(); ) {
 
@@ -904,7 +904,7 @@ public class ThreeDimensionalTreeMapTest {
     @SuppressWarnings("UnusedDeclaration")
     private static SortedMap<Integer,String> getSortedContents( ThreeDimensionalSortedMap<Integer,Integer,Integer,String> map ) {
 
-        SortedMap<Integer,String> values = new TreeMap<Integer, String>();
+        SortedMap<Integer,String> values = new TreeMap<>();
 
         int i = 0;
 
@@ -922,7 +922,7 @@ public class ThreeDimensionalTreeMapTest {
 
     private static TreeCounter<String> getTreeCountedContents( ThreeDimensionalSortedMap<Integer,Integer,Integer,String> map ) {
 
-        TreeCounter<String> values = new TreeCounter<String>();
+        TreeCounter<String> values = new TreeCounter<>();
 
         for ( Iterator<String> iter = map.iterator(); iter.hasNext(); ) {
 

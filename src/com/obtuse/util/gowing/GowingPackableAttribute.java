@@ -18,7 +18,7 @@ import org.jetbrains.annotations.NotNull;
  A single unit of information associated with a specified {@link GowingPackableName}.
  */
 
-public class GowingPackableAttribute<NAME extends GowingPackableName> implements GowingPackable {
+public class GowingPackableAttribute implements GowingPackable {
 
     private static final EntityTypeName ENTITY_TYPE_NAME = new EntityTypeName( GowingPackableAttribute.class );
 
@@ -185,9 +185,9 @@ public class GowingPackableAttribute<NAME extends GowingPackableName> implements
 
     }
 
-    public NAME getName() {
+    public GowingPackableName getName() {
 
-	return (NAME)_name;
+	return _name;
 
     }
 

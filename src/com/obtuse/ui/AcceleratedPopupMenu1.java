@@ -21,6 +21,7 @@ import java.util.List;
 
 public class AcceleratedPopupMenu1 extends JPopupMenu {
 
+    @SuppressWarnings("FieldCanBeLocal")
     private JFrame _frame = new JFrame( "my frame" );
     private JPanel _panel = new JPanel();
     private StringBuilder _accelerator;
@@ -39,7 +40,7 @@ public class AcceleratedPopupMenu1 extends JPopupMenu {
         _secondMenuItem = new JMenuItem( "second menu item" );
         add( _secondMenuItem );
 
-        _wordMenuItems = new LinkedList<JMenuItem>();
+        _wordMenuItems = new LinkedList<>();
 
         for ( String word : words ) {
 
@@ -176,7 +177,7 @@ public class AcceleratedPopupMenu1 extends JPopupMenu {
 
         BasicProgramConfigInfo.init( "Obtuse", "Pipestone", "Test", null );
 
-        List<String> words = new LinkedList<String>();
+        List<String> words = new LinkedList<>();
         for ( int i = 0; i < 100; i += 1 ) {
 
             words.add( VerbsList.pickVerb() );

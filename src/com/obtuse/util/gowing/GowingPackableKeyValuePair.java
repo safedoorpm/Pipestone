@@ -191,13 +191,13 @@ public class GowingPackableKeyValuePair<K,V> extends GowingAbstractPackableEntit
 
     }
 
-    private static interface HolderFactory {
+    private interface HolderFactory {
 
 	GowingAbstractPackableHolder constructHolder( EntityName name, Object obj, GowingPacker packer );
 
     }
 
-    private static SortedMap<String,HolderFactory> _factories = new TreeMap<String, HolderFactory>();
+    private static SortedMap<String,HolderFactory> _factories = new TreeMap<>();
     static {
 
 	_factories.put(

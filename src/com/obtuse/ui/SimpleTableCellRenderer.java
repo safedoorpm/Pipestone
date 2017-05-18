@@ -15,7 +15,7 @@ import java.awt.*;
 @SuppressWarnings("UnusedDeclaration")
 public class SimpleTableCellRenderer extends DefaultTableCellRenderer {
 
-    public static enum Alignment {
+    public enum Alignment {
 
         LEFT {
             public int getSwingConstant() {

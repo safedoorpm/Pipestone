@@ -28,8 +28,11 @@ public abstract class ValidatedJTextField extends JTextField {
 
     private static final Random _rng = new Random( System.currentTimeMillis() );
 
+    @SuppressWarnings("FieldCanBeLocal")
     private final String CANCEL_EDIT = "cancel-edit-" + _rng.nextLong();
+    @SuppressWarnings("FieldCanBeLocal")
     private final InputMap _im;
+    @SuppressWarnings("FieldCanBeLocal")
     private final ActionMap _am;
 
     public ValidatedJTextField() {

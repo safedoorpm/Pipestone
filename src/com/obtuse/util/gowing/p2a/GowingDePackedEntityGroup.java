@@ -21,9 +21,9 @@ public class GowingDePackedEntityGroup {
 
     private final GowingFormatVersion _version;
 
-    private final FormattingLinkedList<GowingPackable> _allEntities = new FormattingLinkedList<GowingPackable>();
+    private final FormattingLinkedList<GowingPackable> _allEntities = new FormattingLinkedList<>();
 
-    private final TreeSorter<EntityName,GowingPackable> _namedClasses = new TreeSorter<EntityName, GowingPackable>();
+    private final TreeSorter<EntityName,GowingPackable> _namedClasses = new TreeSorter<>();
 
     @SuppressWarnings("WeakerAccess")
     protected GowingDePackedEntityGroup( @NotNull GowingFormatVersion version ) {

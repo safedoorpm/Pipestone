@@ -9,7 +9,7 @@ import java.util.*;
 
 public class ThreeDimensionalTreeMap<T1,T2,T3,V> implements Serializable, ThreeDimensionalSortedMap<T1,T2,T3,V> {
 
-    private SortedMap<T1,TwoDimensionalSortedMap<T2,T3,V>> _map = new TreeMap<T1,TwoDimensionalSortedMap<T2,T3,V>>();
+    private SortedMap<T1,TwoDimensionalSortedMap<T2,T3,V>> _map = new TreeMap<>();
 
     public ThreeDimensionalTreeMap() {
         super();
@@ -23,7 +23,7 @@ public class ThreeDimensionalTreeMap<T1,T2,T3,V> implements Serializable, ThreeD
         for ( T1 t1 : map.outerKeys() ) {
 
             TwoDimensionalSortedMap<T2,T3,V> innerMap = map.getInnerMap( t1, false );
-            _map.put( t1, new TwoDimensionalTreeMap<T2,T3,V>( innerMap ) );
+            _map.put( t1, new TwoDimensionalTreeMap<>( innerMap ) );
 
         }
 
@@ -42,7 +42,7 @@ public class ThreeDimensionalTreeMap<T1,T2,T3,V> implements Serializable, ThreeD
         TwoDimensionalSortedMap<T2,T3,V> innerMap = _map.get( key1 );
         if ( innerMap == null && forceCreate ) {
 
-            innerMap = new TwoDimensionalTreeMap<T2,T3,V>();
+            innerMap = new TwoDimensionalTreeMap<>();
             _map.put( key1, innerMap );
 
         }

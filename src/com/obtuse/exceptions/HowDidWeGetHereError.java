@@ -23,7 +23,7 @@ public class HowDidWeGetHereError
      * Describe how an oops catcher is informed that a {@link HowDidWeGetHereError} instance has been created and is, presumably, about to be thrown.
      */
 
-    public static interface OopsCatcher {
+    public interface OopsCatcher {
 
         /**
          * Notify someone about a {@link HowDidWeGetHereError} instance which is, presumably, about to be thrown.

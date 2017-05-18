@@ -62,7 +62,7 @@ public class ObtuseCalendarDate implements Comparable<ObtuseCalendarDate> {
     private final int _month;
     private final int _dayOfMonth;
 
-    public static enum MonthName {
+    public enum MonthName {
         JANUARY, FEBRUARY, MARCH,
 	APRIL, MAY, JUNE,
 	JULY, AUGUST, SEPTEMBER,
@@ -782,17 +782,9 @@ public class ObtuseCalendarDate implements Comparable<ObtuseCalendarDate> {
 	    Logger.logMsg( "this statement should print out March 1, 4 AD:  " + new ObtuseCalendarDate( "0004-03-01" ) );
 	    Logger.logMsg( "this statement should throw an exception:  " + new ObtuseCalendarDate( "0004-02-01" ) );
 
-	} catch ( HowDidWeGetHereError e ) {
+	} catch ( HowDidWeGetHereError | IllegalArgumentException | ParsingException e ) {
 
 	    e.printStackTrace();
-
-	} catch ( IllegalArgumentException e ) {
-
-	    e.printStackTrace();
-
-	} catch ( ParsingException e ) {
-
-	    e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
 
 	}
 

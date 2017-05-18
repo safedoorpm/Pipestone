@@ -27,8 +27,8 @@ public final class GowingInstanceId implements Comparable<GowingInstanceId> {
     private static final SimpleUniqueLongIdGenerator s_idGenerator = new SimpleUniqueLongIdGenerator( GowingInstanceId.class.getCanonicalName() + " - entity id generator" );
     private static final SimpleUniqueIntegerIdGenerator s_typeIdGenerator = new SimpleUniqueIntegerIdGenerator( GowingInstanceId.class.getCanonicalName() + " - type id generator" );
 
-    private static final SortedMap<String,Integer> s_typeNamesToTypeIds = new TreeMap<String,Integer>();
-    private static final SortedMap<Integer,String> s_typeIdsToTypeNames = new TreeMap<Integer,String>();
+    private static final SortedMap<String,Integer> s_typeNamesToTypeIds = new TreeMap<>();
+    private static final SortedMap<Integer,String> s_typeIdsToTypeNames = new TreeMap<>();
 
     private final Long _entityId;
 

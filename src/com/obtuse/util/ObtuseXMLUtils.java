@@ -23,7 +23,7 @@ import java.util.LinkedList;
 @SuppressWarnings("UnusedDeclaration")
 public class ObtuseXMLUtils {
 
-    public static interface CheckNode {
+    public interface CheckNode {
 
         /**
          * Determine if a candidate node is the target node.
@@ -539,7 +539,7 @@ public class ObtuseXMLUtils {
             Class<? extends InstanceFromXML> elementClass
     ) throws ObtuseXmlNodeException {
 
-        Collection<InstanceFromXML> rval = new LinkedList<InstanceFromXML>();
+        Collection<InstanceFromXML> rval = new LinkedList<>();
         Node arrayNode = ObtuseXMLUtils.findNode( parentNode, targetNodeName );
         NodeList elements = arrayNode.getChildNodes();
 

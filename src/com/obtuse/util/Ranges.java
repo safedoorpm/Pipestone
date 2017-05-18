@@ -35,8 +35,8 @@ public class Ranges<T extends Comparable<T>> implements Iterable<Range<T>>, Seri
     }
 
     @SuppressWarnings( { "ClassWithoutToString" } )
-    private final SortedMap<T,Range<T>> _ranges = new TreeMap<T,Range<T>>(
-            new RangeComparator()
+    private final SortedMap<T,Range<T>> _ranges = new TreeMap<>(
+	    new RangeComparator()
     );
 
     @SuppressWarnings( { "ClassWithoutToString" } )
@@ -79,7 +79,7 @@ public class Ranges<T extends Comparable<T>> implements Iterable<Range<T>>, Seri
     public Ranges<T> getOverlappingDateRanges( Range<? extends T> range, RangeFactory<T> rangeFactory )
             throws RejectRangeException {
 
-        Ranges<T> rval = new Ranges<T>( rangeFactory );
+        Ranges<T> rval = new Ranges<>( rangeFactory );
         for ( T key : _ranges.keySet() ) {
 
             Range<T> r = _ranges.get( key );
@@ -128,6 +128,10 @@ public class Ranges<T extends Comparable<T>> implements Iterable<Range<T>>, Seri
 
         m = new Measure( "tail map" );
         try {
+
+            // IntelliJ complains that the values returned by keySet() are not necessarily T instances.
+	    // It is wrong. The _ranges map uses T instances as keys which means that a tail map of a
+	    // _ranges map uses T instances as keys which means that this call to keySet can only return T instances.
 
             for ( T key : _ranges.tailMap( range.getStartValue() ).keySet() ) {
 
@@ -209,11 +213,11 @@ public class Ranges<T extends Comparable<T>> implements Iterable<Range<T>>, Seri
 
         }
 
-        SortedMap<T,Range<T>> sortedByStartValue = new TreeMap<T, Range<T>>();
-        SortedMap<T,Range<T>> sortedByEndValue = new TreeMap<T, Range<T>>();
+        SortedMap<T,Range<T>> sortedByStartValue = new TreeMap<>();
+        SortedMap<T,Range<T>> sortedByEndValue = new TreeMap<>();
         sortedByStartValue.put( newRange.getStartValue(), newRange );
         sortedByEndValue.put( newRange.getEndValue(), newRange );
-        SortedMap<T,Range<T>> existingRecordsToReplace = new TreeMap<T, Range<T>>();
+        SortedMap<T,Range<T>> existingRecordsToReplace = new TreeMap<>();
 
         for ( T startValue : _ranges.keySet() ) {
             Range<T> r = _ranges.get( startValue );
@@ -284,7 +288,7 @@ public class Ranges<T extends Comparable<T>> implements Iterable<Range<T>>, Seri
 
             public Range<Integer> createRange( Range<Integer> before, Range<Integer> after ) {
 
-                return new Range<Integer>( before.getStartValue(), after.getEndValue(), before.getLongStartValue(), after.getLongEndValue() );
+                return new Range<>( before.getStartValue(), after.getEndValue(), before.getLongStartValue(), after.getLongEndValue() );
 
             }
 
@@ -299,7 +303,7 @@ public class Ranges<T extends Comparable<T>> implements Iterable<Range<T>>, Seri
 
         };
 
-        Ranges<Integer> ranges = new Ranges<Integer>( rangeFactory );
+        Ranges<Integer> ranges = new Ranges<>( rangeFactory );
 
         Ranges.doit( ranges, 0, 0 );
         Ranges.doit( ranges, 10, 10 );
@@ -310,7 +314,7 @@ public class Ranges<T extends Comparable<T>> implements Iterable<Range<T>>, Seri
 
         Logger.logMsg( "starting again" );
 
-        ranges = new Ranges<Integer>( rangeFactory );
+        ranges = new Ranges<>( rangeFactory );
 
         Ranges.doit( ranges, 1, 10 );
         Ranges.doit( ranges, -10, -1 );
@@ -321,7 +325,7 @@ public class Ranges<T extends Comparable<T>> implements Iterable<Range<T>>, Seri
         Ranges.doit( ranges, 21, 30 );
 
         Logger.logMsg( "starting again" );
-        ranges = new Ranges<Integer>( rangeFactory );
+        ranges = new Ranges<>( rangeFactory );
 
         Ranges.doit( ranges, 1, 10 );
         Ranges.doit( ranges, 5, 15 );
@@ -331,7 +335,7 @@ public class Ranges<T extends Comparable<T>> implements Iterable<Range<T>>, Seri
 
     private static void doit( Ranges<Integer> ranges, int start, int end ) {
 
-        Ranges.doit( ranges, new Range<Integer>( start, end, (long)start, (long)end ) );
+        Ranges.doit( ranges, new Range<>( start, end, (long) start, (long) end ) );
 
     }
 

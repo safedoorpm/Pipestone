@@ -59,14 +59,14 @@ public class GowingPackableMapping<K,V> implements GowingPackable {
     public GowingPackableMapping() {
 	super();
 
-	_keyValuePairs = new FormattingLinkedList<GowingPackableKeyValuePair<K,V>>();
+	_keyValuePairs = new FormattingLinkedList<>();
 
     }
 
     public GowingPackableMapping( Map<? extends K, ? extends V> map ) {
 	super();
 
-	_keyValuePairs = new FormattingLinkedList<GowingPackableKeyValuePair<K,V>>();
+	_keyValuePairs = new FormattingLinkedList<>();
 
 	for ( K key : map.keySet() ) {
 
@@ -80,7 +80,7 @@ public class GowingPackableMapping<K,V> implements GowingPackable {
 
     public void addMapping( K key, V value ) {
 
-	GowingPackableKeyValuePair<K,V> kvp = new GowingPackableKeyValuePair<K, V>( key, value );
+	GowingPackableKeyValuePair<K,V> kvp = new GowingPackableKeyValuePair<>( key, value );
 
 	addMapping( kvp );
 
@@ -102,8 +102,8 @@ public class GowingPackableMapping<K,V> implements GowingPackable {
 	}
 
 	int ix = 0;
-	_keyValuePairs = new FormattingLinkedList<GowingPackableKeyValuePair<K,V>>();
-	_kvpReferences = new FormattingLinkedList<GowingEntityReference>();
+	_keyValuePairs = new FormattingLinkedList<>();
+	_kvpReferences = new FormattingLinkedList<>();
 	while ( true ) {
 
 	    GowingPackableThingHolder holder = bundle.get( new EntityName( "_" + ix ) );

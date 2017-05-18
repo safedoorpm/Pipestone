@@ -19,6 +19,7 @@ import java.util.Arrays;
  */
 public class DraggableJPanelTester extends JFrame {
 
+    @SuppressWarnings({ "FieldCanBeLocal", "unused" })
     private JPanel _javaPanel;
     private DraggableJPanel _draggableJPanel;
 

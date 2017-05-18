@@ -15,6 +15,7 @@ import java.util.Date;
  and methods have the same signature).
  */
 
+@SuppressWarnings("deprecation")
 @Deprecated
 public class CalendarDate extends ObtuseCalendarDate {
 
@@ -32,6 +33,7 @@ public class CalendarDate extends ObtuseCalendarDate {
 	super( obtuseCalendarDate );
     }
 
+    @SuppressWarnings("unused")
     public static int computeDurationDays( CalendarDate from, CalendarDate to ) {
 
 	return ObtuseCalendarDate.computeDurationDays( from, to );
@@ -61,13 +63,9 @@ public class CalendarDate extends ObtuseCalendarDate {
 
 	    }
 
-	} catch ( ParsingException e ) {
+	} catch ( ParsingException | HowDidWeGetHereError e ) {
 
 	    e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-
-	} catch ( HowDidWeGetHereError e ) {
-
-	    e.printStackTrace();
 
 	}
 

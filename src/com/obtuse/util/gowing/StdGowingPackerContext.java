@@ -22,10 +22,10 @@ public class StdGowingPackerContext implements GowingPackerContext {
 //    private final SortedMap<EntityTypeName,Integer> _seenTypeNames = new TreeMap<EntityTypeName, Integer>();
 //    private final SortedMap<Integer,EntityTypeName> _usedTypeIds = new TreeMap<Integer, EntityTypeName>();
 
-    private final SortedSet<Integer> _seenTypeIds = new TreeSet<Integer>();
-    private final SortedSet<Integer> _newTypeIds = new TreeSet<Integer>();
+    private final SortedSet<Integer> _seenTypeIds = new TreeSet<>();
+    private final SortedSet<Integer> _newTypeIds = new TreeSet<>();
 
-    private final TreeMap<GowingInstanceId,EntityNames> _seenInstanceIds = new TreeMap<GowingInstanceId,EntityNames>();
+    private final TreeMap<GowingInstanceId,EntityNames> _seenInstanceIds = new TreeMap<>();
 
     private int _nextTypeReferenceId = 1;
 
@@ -74,7 +74,7 @@ public class StdGowingPackerContext implements GowingPackerContext {
 //
 //    }
 
-    private final Accumulator<EntityTypeName> _highestPackingIdByType = new TreeAccumulator<EntityTypeName>();
+    private final Accumulator<EntityTypeName> _highestPackingIdByType = new TreeAccumulator<>();
 
     private GowingRequestorContext _requestorContext;
 
@@ -296,7 +296,7 @@ public class StdGowingPackerContext implements GowingPackerContext {
 
 	if ( !_seenInstanceIds.containsKey( entity.getInstanceId() ) ) {
 
-	    _seenInstanceIds.put( entity.getInstanceId(), new EntityNames( new LinkedList<EntityName>(), entity ) );
+	    _seenInstanceIds.put( entity.getInstanceId(), new EntityNames( new LinkedList<>(), entity ) );
 
 	}
 
@@ -345,7 +345,7 @@ public class StdGowingPackerContext implements GowingPackerContext {
     @NotNull
     public Collection<Integer> getNewTypeIds() {
 
-	LinkedList<Integer> rval = new LinkedList<Integer>( _newTypeIds );
+	LinkedList<Integer> rval = new LinkedList<>( _newTypeIds );
 	_newTypeIds.clear();
 
 	return rval;

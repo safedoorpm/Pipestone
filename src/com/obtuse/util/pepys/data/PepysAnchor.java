@@ -17,8 +17,8 @@ import java.util.Set;
 
 public class PepysAnchor<T extends PepysEventListener> {
 
-    private final Set<T> _listeners = new HashSet<T>();
-    private final Set<PepysSource> _sources = new HashSet<PepysSource>();
+    private final Set<T> _listeners = new HashSet<>();
+    private final Set<PepysSource> _sources = new HashSet<>();
 
     public synchronized T anchor( T listener ) {
 
