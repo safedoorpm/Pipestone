@@ -5,6 +5,7 @@
 package com.obtuse.util;
 
 import com.obtuse.util.exceptions.RejectRangeException;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.Serializable;
 import java.util.*;
@@ -76,7 +77,7 @@ public class Ranges<T extends Comparable<T>> implements Iterable<Range<T>>, Seri
 
     }
 
-    public Ranges<T> getOverlappingDateRanges( Range<? extends T> range, RangeFactory<T> rangeFactory )
+    public Ranges<T> getOverlappingDateRanges( Range<T> range, RangeFactory<T> rangeFactory )
             throws RejectRangeException {
 
         Ranges<T> rval = new Ranges<>( rangeFactory );
@@ -100,7 +101,7 @@ public class Ranges<T extends Comparable<T>> implements Iterable<Range<T>>, Seri
 
     }
 
-    public boolean hasOverlappedRanges( Range<? extends T> range )
+    public boolean hasOverlappedRanges( Range<T> range )
             throws RejectRangeException {
 
         Measure m = new Measure( "head map" );
@@ -133,8 +134,11 @@ public class Ranges<T extends Comparable<T>> implements Iterable<Range<T>>, Seri
 	    // It is wrong. The _ranges map uses T instances as keys which means that a tail map of a
 	    // _ranges map uses T instances as keys which means that this call to keySet can only return T instances.
 
-            for ( T key : _ranges.tailMap( range.getStartValue() ).keySet() ) {
+	    //noinspection unchecked
+	    for ( T key : _ranges.tailMap( range.getStartValue() ).keySet() ) {
 
+//                @SuppressWarnings("unchecked")
+//		T key = (T)keyObject;
                 Range<T> r = _ranges.get( key );
 
                 if ( r.overlaps( range ) ) {
@@ -197,12 +201,14 @@ public class Ranges<T extends Comparable<T>> implements Iterable<Range<T>>, Seri
 
     }
 
+    @NotNull
     public Iterator<Range<T>> iterator() {
 
         return _ranges.values().iterator();
 
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     private Ranges<T> myAdd( Range<T> newRange ) throws RejectRangeException {
 
         if ( _ranges.isEmpty() ) {
@@ -266,17 +272,17 @@ public class Ranges<T extends Comparable<T>> implements Iterable<Range<T>>, Seri
 
     public String toString() {
 
-        String rval = "";
+        StringBuilder rvalBuilder = new StringBuilder();
         String comma = "";
 
         for ( Range<T> r : _ranges.values() ) {
 
-            rval += comma + r;
+            rvalBuilder.append( comma ).append( r );
             comma = ", ";
 
         }
 
-        return "Range( { " + rval + " } )";
+        return "Range( { " + rvalBuilder.toString() + " } )";
 
     }
 
