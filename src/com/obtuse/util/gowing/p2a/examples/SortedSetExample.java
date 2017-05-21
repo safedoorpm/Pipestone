@@ -182,7 +182,7 @@ public class SortedSetExample extends GowingAbstractPackableEntity implements Go
 
     public static void main( String[] args ) {
 
-	BasicProgramConfigInfo.init( "Kenosee", "Experimenting", "Misc", null );
+	BasicProgramConfigInfo.init( "Obtuse", "Experimenting", "Misc", null );
 
         int[] primitive = new int[3];
         Integer[] container = new Integer[3];
