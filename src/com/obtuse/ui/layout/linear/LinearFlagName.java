@@ -149,7 +149,7 @@ public class LinearFlagName extends GowingPackableName {
 
     public static void main( String[] args ) {
 
-	BasicProgramConfigInfo.init( "Obtuse", "Burke2", "testing", null );
+	BasicProgramConfigInfo.init( "Obtuse", "Pipestone", "testing", null );
 
 	if ( s_knownFlags.isEmpty() ) {
 

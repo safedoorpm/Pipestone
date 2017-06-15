@@ -6,7 +6,6 @@
 package com.obtuse.ui.layout.linear;
 
 import com.obtuse.ui.layout.ComponentSizeRequirements;
-import com.obtuse.ui.layout.LinearLayoutUtil;
 import com.obtuse.ui.layout.LinearOrientation;
 import com.obtuse.util.Logger;
 import com.obtuse.util.ObtuseUtil;
@@ -20,7 +19,7 @@ import java.util.*;
  Encapsulate the cached sizing data about our target container.
  */
 
-public class Linear3Cache implements LayoutImplCache {
+public class LinearCache3 implements LayoutImplCache {
 
 //    private final boolean _trace;
 //
@@ -62,7 +61,7 @@ public class Linear3Cache implements LayoutImplCache {
 
         if ( isWatched() ) {
 
-            Logger.logMsg( "Linear3Cache.logIfWatched:  " + msg );
+            Logger.logMsg( "LinearCache3.logIfWatched:  " + msg );
 
             return true;
 
@@ -74,7 +73,7 @@ public class Linear3Cache implements LayoutImplCache {
 
     }
 
-    public Linear3Cache(
+    public LinearCache3(
     	LinearLayoutManager3 linearLayoutManager,
 	    LinearContainer3 target,
 	    @NotNull Hashtable<Component,LinearLayoutManager3.ConstraintsTable> allConstraints
@@ -85,11 +84,11 @@ public class Linear3Cache implements LayoutImplCache {
 
 	_target = target;
 
-	if ( target.getName().startsWith( "vtb(" ) ) {
-
-	    Logger.logMsg( "got a vtb container - \"" + target.getName() + "\"" );
-
-	}
+//	if ( target.getName().startsWith( "vtb(" ) ) {
+//
+//	    Logger.logMsg( "got a vtb container - \"" + target.getName() + "\"" );
+//
+//	}
 
 //	_orientation = orientation;
 //
@@ -157,6 +156,23 @@ public class Linear3Cache implements LayoutImplCache {
 	    LinearLayoutManager3.ConstraintsTable emptyConstraintsTable = new LinearLayoutManager3.ConstraintsTable();
 	    LinearLayoutManager3.SimpleConstraint disabledTrackParentsBreadthConstraint = new LinearLayoutManager3.SimpleConstraint( LinearLayoutManager3.TRACK_PARENTS_BREADTH_CONSTRAINT_TITLE, false );
 
+	    // Find the space sponge (where extra length space comes from).
+	    // If there's more than one, we'll use the last one (we'll get extra space on a shared basis some day).
+
+//	    LinearLayoutUtil.SpaceSponge spaceSponge = null;
+	    boolean hasSpaceSponge = false;
+	    for ( Component c : visibleComponents ) {
+
+	        if ( c instanceof LinearLayoutUtil.SpaceSponge ) {
+
+//	            spaceSponge = (LinearLayoutUtil.SpaceSponge) c;
+		    hasSpaceSponge = true;
+		    break;
+
+		}
+
+	    }
+
 	    for ( Component c : visibleComponents ) {
 
 		if ( LinearLayoutUtil.isComponentOnWatchlist( c ) ) {
@@ -165,11 +181,11 @@ public class Linear3Cache implements LayoutImplCache {
 
 		}
 
-		if ( "timelines container".equals( c.getName() ) ) {
-
-		    Logger.logMsg( "looking at timelines container" );
-
-		}
+//		if ( "timelines container".equals( c.getName() ) ) {
+//
+//		    Logger.logMsg( "looking at timelines container" );
+//
+//		}
 
 		LinearLayoutManager3.ConstraintsTable componentConstraints = allConstraints.getOrDefault( c, emptyConstraintsTable );
 		LinearLayoutManager3.Constraint trackParentsBreadthConstraint = componentConstraints.getOrDefault( LinearLayoutManager3.TRACK_PARENTS_BREADTH_CONSTRAINT_TITLE, disabledTrackParentsBreadthConstraint );
@@ -185,6 +201,8 @@ public class Linear3Cache implements LayoutImplCache {
 		Dimension min = c.getMinimumSize();
 		Dimension pref = c.getPreferredSize();
 		Dimension max = c.getMaximumSize();
+
+//		Logger.logMsg( "LC3@" + c + ":  min=" + min + ", pref=" + pref + ", max=" + max );
 
 		if ( componentTrackParentsBreadth ) {
 
@@ -279,8 +297,20 @@ public class Linear3Cache implements LayoutImplCache {
 
 		}
 
-		ComponentSizeRequirements xReq = new ComponentSizeRequirements( c, min.width, pref.width, max.width, 0f );
-		ComponentSizeRequirements yReq = new ComponentSizeRequirements( c, min.height, pref.height, max.height, 0f );
+		ComponentSizeRequirements xReq = new ComponentSizeRequirements(
+			c,
+			min.width,
+			pref.width,
+			( isHorizontal() && hasSpaceSponge && !( c instanceof LinearLayoutUtil.SpaceSponge ) ? pref.width : max.width ),
+			0f
+		);
+		ComponentSizeRequirements yReq = new ComponentSizeRequirements(
+			c,
+			min.height,
+			pref.height,
+			( isVertical() && hasSpaceSponge && !( c instanceof LinearLayoutUtil.SpaceSponge ) ? pref.height : max.height ),
+			0f
+		);
 
 		xSizes.add( xReq );
 		ySizes.add( yReq );
@@ -561,13 +591,13 @@ public class Linear3Cache implements LayoutImplCache {
 //
 //	}
 
-	String levelName = "adjusting " + getTarget().getName();
+//	String levelName = "adjusting " + getTarget().getName();
 
 	try {
 
-	    Logger.pushNesting( levelName );
+//	    Logger.pushNesting( levelName );
 
-	    Logger.logMsg( getTarget().getName() + "'s adjSpace is " + ObtuseUtil.fDim( adjSpace ) );
+//	    Logger.logMsg( getTarget().getName() + "'s adjSpace is " + ObtuseUtil.fDim( adjSpace ) );
 
 	    if ( isVertical() ) {
 
@@ -621,7 +651,7 @@ public class Linear3Cache implements LayoutImplCache {
 
 	} finally {
 
-	    Logger.popNestingLevel( levelName );
+//	    Logger.popNestingLevel( levelName );
 
 	}
 
@@ -742,8 +772,8 @@ public class Linear3Cache implements LayoutImplCache {
 
 //	logIfWatched( buf.toString() );
 
-	String levelName = "adjusting " + getTarget().getName() + " - allocated=" + allocated + ", pref=" + pref;
-	Logger.pushNesting( levelName );
+//	String levelName = "adjusting " + getTarget().getName() + " - allocated=" + allocated + ", pref=" + pref;
+//	Logger.pushNesting( levelName );
 
 	try {
 
@@ -761,7 +791,7 @@ public class Linear3Cache implements LayoutImplCache {
 
 	} finally {
 
-	    Logger.popNestingLevel( levelName );
+//	    Logger.popNestingLevel( levelName );
 
 	}
 
@@ -893,13 +923,13 @@ public class Linear3Cache implements LayoutImplCache {
 
 	    try {
 
-	        Logger.pushNesting( "setComponentBounds on " + c.getName() + ObtuseUtil.fBounds( r ) );
+//	        Logger.pushNesting( "setComponentBounds on " + c.getName() + ObtuseUtil.fBounds( r ) );
 
 		c.setBounds( r );
 
 	    } finally {
 
-	        Logger.popNestingLevel( "setComponentBounds on " + c.getName() + ObtuseUtil.fBounds( r ) );
+//	        Logger.popNestingLevel( "setComponentBounds on " + c.getName() + ObtuseUtil.fBounds( r ) );
 
 	    }
 

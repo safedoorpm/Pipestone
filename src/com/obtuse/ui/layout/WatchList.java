@@ -5,6 +5,7 @@
 
 package com.obtuse.ui.layout;
 
+import com.obtuse.ui.layout.linear.LinearLayoutUtil;
 import com.obtuse.util.Logger;
 import com.obtuse.util.NamedEntity;
 import org.jetbrains.annotations.NotNull;
@@ -12,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
 import java.awt.*;
 import java.util.WeakHashMap;
 
-import static com.obtuse.ui.layout.LinearLayoutUtil.fullName;
+import static com.obtuse.ui.layout.linear.LinearLayoutUtil.fullName;
 
 /**
  Manage a watchlist.

@@ -5,6 +5,8 @@
 
 package com.obtuse.ui.layout;
 
+import com.obtuse.ui.layout.linear.LinearLayoutUtil;
+
 import javax.swing.*;
 import java.awt.*;
 

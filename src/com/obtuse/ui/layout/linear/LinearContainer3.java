@@ -5,9 +5,7 @@
 
 package com.obtuse.ui.layout.linear;
 
-import com.obtuse.ui.layout.ConstraintTriplet;
-import com.obtuse.ui.layout.LinearContainer;
-import com.obtuse.ui.layout.LinearLayoutUtil;
+import com.obtuse.ui.layout.ConstraintTuple;
 import com.obtuse.ui.layout.LinearOrientation;
 import org.jetbrains.annotations.NotNull;
 
@@ -20,19 +18,19 @@ import java.util.LinkedList;
  A container which is intended to be managed by a {@link LinearLayoutManager3} instance.
  */
 
-public class LinearContainer3 extends JPanel implements LinearContainer {
+class LinearContainer3 extends JPanel implements LinearContainer {
 
     private static final java.util.List<LinearContainer3> _watchedContainers = new LinkedList<>();
 
-//    private ConstraintTriplet _breadthConstraints;
-//    private ConstraintTriplet _lengthConstraints;
+//    private ConstraintTuple _breadthConstraints;
+//    private ConstraintTuple _lengthConstraints;
 
     private ContainerConstraints _containerConstraints;
     private ComponentConstraints _componentConstraints;
 
-    private ConstraintTriplet _lengthConstraints;
+    private ConstraintTuple _lengthConstraints;
 
-    private ConstraintTriplet _breadthConstraints;
+    private ConstraintTuple _breadthConstraints;
 
     private boolean _trackParentBreadth;
 
@@ -131,30 +129,30 @@ public class LinearContainer3 extends JPanel implements LinearContainer {
     }
 
     @Override
-    public void setLengthConstraints( int minLength, int prefLength, int maxLength ) {
+    public void setLengthConstraints( int minLength, int maxLength ) {
 
-	setLengthConstraints( new ConstraintTriplet( minLength, prefLength, maxLength ) );
+	setLengthConstraints( new ConstraintTuple( minLength, maxLength ) );
 	revalidate();
 
     }
 
     @Override
-    public void setLengthConstraints( ConstraintTriplet lengthConstraints ) {
+    public void setLengthConstraints( ConstraintTuple lengthConstraints ) {
 
 	_lengthConstraints = lengthConstraints;
 
     }
 
     @Override
-    public void setBreadthConstraints( int minBreadth, int prefBreadth, int maxBreadth ) {
+    public void setBreadthConstraints( int minBreadth, int maxBreadth ) {
 
-	setBreadthConstraints( new ConstraintTriplet( minBreadth, prefBreadth, maxBreadth ) );
+	setBreadthConstraints( new ConstraintTuple( minBreadth, maxBreadth ) );
 	revalidate();
 
     }
 
     @Override
-    public void setBreadthConstraints( ConstraintTriplet breadthConstraints ) {
+    public void setBreadthConstraints( ConstraintTuple breadthConstraints ) {
 
 	_breadthConstraints = breadthConstraints;
 
@@ -173,26 +171,26 @@ public class LinearContainer3 extends JPanel implements LinearContainer {
 //    }
 
     @Override
-    public ConstraintTriplet getLengthConstraints() {
+    public ConstraintTuple getLengthConstraints() {
 
 	return _lengthConstraints;
 
     }
 
     @Override
-    public ConstraintTriplet getBreadthConstraints() {
+    public ConstraintTuple getBreadthConstraints() {
 
 	return _breadthConstraints;
 
     }
 
     public void setConstraints(
-	    int minBreadth, int prefBreadth, int maxBreadth,
-	    int minLength, int prefLength, int maxLength
+	    int minBreadth, int maxBreadth,
+	    int minLength, int maxLength
     ) {
 
-	setBreadthConstraints( minBreadth, prefBreadth, maxBreadth );
-	setLengthConstraints( minLength, prefLength, maxLength );
+	setBreadthConstraints( minBreadth, maxBreadth );
+	setLengthConstraints( minLength, maxLength );
 
     }
 
@@ -212,7 +210,7 @@ public class LinearContainer3 extends JPanel implements LinearContainer {
 //
 //    }
 //
-//    public int applyConstraints( ConstraintTriplet constraints, int value ) {
+//    public int applyConstraints( ConstraintTuple constraints, int value ) {
 //
 //	if ( constraints == null ) {
 //
@@ -236,7 +234,7 @@ public class LinearContainer3 extends JPanel implements LinearContainer {
 //
 //	} else {
 //
-//	    _breadthConstraints = new ConstraintTriplet( breadth.intValue(), breadth.intValue(), breadth.intValue() );
+//	    _breadthConstraints = new ConstraintTuple( breadth.intValue(), breadth.intValue(), breadth.intValue() );
 //
 //	}
 //
@@ -244,13 +242,13 @@ public class LinearContainer3 extends JPanel implements LinearContainer {
 
 //    public void setBreadthConstraints( int minBreadth, int prefBreadth, int maxBreadth ) {
 //
-//	_breadthConstraints = new ConstraintTriplet( minBreadth, prefBreadth, maxBreadth );
+//	_breadthConstraints = new ConstraintTuple( minBreadth, prefBreadth, maxBreadth );
 //
 //    }
 //
 //    public void setLengthConstraints( int minLength, int prefLength, int maxLength ) {
 //
-//	_lengthConstraints = new ConstraintTriplet( minLength, prefLength, maxLength );
+//	_lengthConstraints = new ConstraintTuple( minLength, prefLength, maxLength );
 //
 //    }
 
@@ -264,13 +262,13 @@ public class LinearContainer3 extends JPanel implements LinearContainer {
 //
 //    }
 //
-//    public ConstraintTriplet getBreadthConstraints() {
+//    public ConstraintTuple getBreadthConstraints() {
 //
 //	return _breadthConstraints;
 //
 //    }
 //
-//    public ConstraintTriplet getLengthConstraints() {
+//    public ConstraintTuple getLengthConstraints() {
 //
 //	return _lengthConstraints;
 //
@@ -292,7 +290,7 @@ public class LinearContainer3 extends JPanel implements LinearContainer {
 //
 //    }
 //
-//    public int applyConstraints( ConstraintTriplet constraints, int value ) {
+//    public int applyConstraints( ConstraintTuple constraints, int value ) {
 //
 //	if ( constraints == null ) {
 //

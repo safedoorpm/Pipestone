@@ -1,14 +1,10 @@
-/*
- * Copyright © 2017 Daniel Boulet
- * All rights reserved.
- */
-
-package com.obtuse.ui.layout;
+package com.obtuse.ui.layout.linear;
 
 import com.obtuse.ui.MyActionListener;
+import com.obtuse.ui.layout.LinearOrientation;
+import com.obtuse.ui.layout.WatchList;
 import com.obtuse.util.Logger;
 import com.obtuse.util.ObtuseUtil;
-import com.obtuse.ui.layout.linear.LinearContainer3;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -21,6 +17,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
+/*
+ * Copyright © 2015 Obtuse Systems Corporation
+ */
 
 /**
  %%% Something clever goes here.
@@ -594,6 +594,121 @@ public class LinearLayoutUtil {
 	Dimension getInitialMinimumSize();
 	Dimension getInitialPreferredSize();
 	Dimension getInitialMaximumSize();
+
+    }
+
+    public static class MyDimension extends Dimension {
+
+        public MyDimension() {
+            super();
+	}
+
+	public MyDimension( int width, int height ) {
+            super( width, height );
+	}
+
+	// Having a re-wrapper is a bad idea since the owner of the original Dimension instance
+	// might change their instance by directly changing the width and height fields.
+	// Mutable information classes are, as a general rule, EVIL!!!
+
+//	public MyDimension( Dimension d ) {
+//            super( d.width, d.height );
+//
+//	}
+
+	public String toString() {
+
+            return ObtuseUtil.fDim( this );
+
+	}
+
+    }
+
+    /**
+     Something that will grow or shrink on demand.
+     <p/>This essentially becomes the component where extra space gets put if needed to fill out the linear container.
+     If there's more than one sponge in a container then the extra space should get split evenly between the sponges.
+     */
+
+    public static class SpaceSponge extends JPanel {
+
+        public SpaceSponge() {
+            super();
+
+	}
+
+	public String toString() {
+
+            return "SpaceSponge( " + super.toString() + " )";
+
+	}
+
+    }
+
+    /**
+     Something that will firmly maintain a particular range of sizes.
+     */
+
+    public static class SpaceBrick extends JPanel {
+
+	private final MyDimension _min;
+	private final MyDimension _pref;
+	private final MyDimension _max;
+
+	public SpaceBrick( int minWidth, int minHeight, int prefWidth, int prefHeight, int maxWidth, int maxHeight ) {
+            this( new MyDimension( minWidth, minHeight ), new MyDimension( prefWidth, prefHeight ), new MyDimension( maxWidth, maxHeight ) );
+	}
+
+	public SpaceBrick( Dimension min, Dimension pref, Dimension max ) {
+	    super();
+
+	    _min = min instanceof MyDimension ? (MyDimension)min : new MyDimension( min.width, min.height );
+	    _pref = pref instanceof MyDimension ? (MyDimension)pref : new MyDimension( pref.width, pref.height );
+	    _max = max instanceof MyDimension ? (MyDimension)max : new MyDimension( max.width, max.height );
+
+	}
+
+	public Dimension getMinimumSize() {
+
+	    return _min;
+
+	}
+
+	public Dimension getPreferredSize() {
+
+	    return _min;
+
+	}
+
+	public Dimension getMaximumSize() {
+
+	    return _max;
+
+	}
+
+	public void setMinimumSize( Dimension min ) {
+
+	    Logger.logMsg( "SpaceBrick:  request to change min from " + _min + " to " + min + " ignored" );
+
+	}
+
+	public void setPreferredSize( Dimension pref ) {
+
+	    Logger.logMsg( "SpaceBrick:  request to change pref from " + _pref + " to " + pref + " ignored" );
+
+	}
+
+	public void setMaximumSize( Dimension max ) {
+
+	    Logger.logMsg( "SpaceBrick:  request to change max from " + _max + " to " + max + " ignored" );
+
+	}
+
+	public String toString() {
+
+	    return "SpaceBrick( min=" + _min + ", pref=" + _pref + ", max=" + _max + " )";
+
+	}
 
     }
 

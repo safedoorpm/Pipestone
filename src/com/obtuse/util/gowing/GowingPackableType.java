@@ -13,8 +13,6 @@ import java.util.Arrays;
  * Copyright © 2015 Obtuse Systems Corporation
  */
 
-//import com.savrola.burke.gui.old.BurkeTimelineView;
-
 /**
  The fundamental packable values supported by {@link GowingPackableAttribute}.
  */
@@ -278,7 +276,6 @@ public enum GowingPackableType {
 
 	public JComponent getViewComponent( SortableEntityView timelinePanel, GowingPackableAttribute attribute, int requestedMaxWidth ) {
 
-//	    return new BurkeTimelineLongTextElementView( timelinePanel, attribute, requestedMaxWidth );
 	    return new JLabel( "no support for viewing " + this + " (yet)" );
 
 	}

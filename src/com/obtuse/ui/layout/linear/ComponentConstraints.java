@@ -5,7 +5,7 @@
 
 package com.obtuse.ui.layout.linear;
 
-import com.obtuse.ui.layout.ConstraintTriplet;
+import com.obtuse.ui.layout.ConstraintTuple;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -19,12 +19,12 @@ public class ComponentConstraints {
     private final LinearFlagMap _componentFlags;
 
     @Nullable
-    private final ConstraintTriplet _widthConstraint;
+    private final ConstraintTuple _widthConstraint;
 
     @Nullable
-    private final ConstraintTriplet _heightConstraint;
+    private final ConstraintTuple _heightConstraint;
 
-    public ComponentConstraints( LinearFlagMap componentFlags, @Nullable ConstraintTriplet widthConstraint, @Nullable ConstraintTriplet heightConstraint ) {
+    public ComponentConstraints( LinearFlagMap componentFlags, @Nullable ConstraintTuple widthConstraint, @Nullable ConstraintTuple heightConstraint ) {
 //	this( componentFlags.toArray( new LinearFlagName[ componentFlags.size() ] ), widthConstraint, heightConstraint );
 
 	_componentFlags = componentFlags;
@@ -35,20 +35,20 @@ public class ComponentConstraints {
 
     }
 
-    public ComponentConstraints( LinearFlagNameValue[] componentFlags, @Nullable ConstraintTriplet widthConstraint, @Nullable ConstraintTriplet heightConstraint ) {
+    public ComponentConstraints( LinearFlagNameValue[] componentFlags, @Nullable ConstraintTuple widthConstraint, @Nullable ConstraintTuple heightConstraint ) {
 	this( LinearFlagMap.createCleanedMap( componentFlags ), widthConstraint, heightConstraint );
 
     }
 
     @Nullable
-    public ConstraintTriplet getWidthConstraint() {
+    public ConstraintTuple getWidthConstraint() {
 
 	return _widthConstraint;
 
     }
 
     @Nullable
-    public ConstraintTriplet getHeightConstraint() {
+    public ConstraintTuple getHeightConstraint() {
 
 	return _heightConstraint;
 

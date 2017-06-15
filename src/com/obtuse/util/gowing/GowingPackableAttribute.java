@@ -305,7 +305,7 @@ public class GowingPackableAttribute implements GowingPackable {
 
     public static void main( String[] args ) {
 
-	BasicProgramConfigInfo.init( "Savrola", "Burke", "testing", null );
+	BasicProgramConfigInfo.init( "Obtuse", "Pipestone", "testing", null );
 
 	GowingPackableAttribute.doit(
 		new GowingPackableAttribute( new GowingPackableName( "integral" ),

@@ -13,7 +13,7 @@ import java.awt.event.MouseEvent;
  */
 
 /**
- A JLabel which might more information when it is clicked (depends on whether or not more information is actually available).
+ A JLabel which might provide more information when it is clicked (depends on whether or not more information is actually available).
  */
 
 public class MessageLabel extends JLabel {

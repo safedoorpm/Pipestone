@@ -25,6 +25,7 @@ import java.util.*;
  Manage a list of {@link SelectableIndexCard}s.
  */
 
+@SuppressWarnings("unused")
 public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrollableLinearContainer3 {
 
     private final MyScrollableImplementation _MyScrollableImplementation = new MyScrollableImplementation( this, isVertical() );
@@ -55,16 +56,6 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
 		            selectedIndices.add( ix );
 			}
 		    }
-////		    if ( selectedIndices.equals( _lastSelection ) )
-//		    SortedSet<Integer> removed = new TreeSet<>( _lastSelection );
-//		    removed.removeAll( selectedIndices );
-//		    TreeSet<Integer> added = new TreeSet<>( selectedIndices );
-//		    added.removeAll( _lastSelection );
-//
-//		    for ( int removedIx : removed ) {
-//
-//		        setSelectedIndex(  );
-//		    }
 
 		    Logger.logMsg( "IndexCardBox:  selection changed:  " + Arrays.toString( selectedIndices.toArray() ) );
 		    int size = getComponentCount();
@@ -164,34 +155,6 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
 		}
 
 	    }
-
-//				Logger.logMsg(
-//					"got AWT event:  ID=" + mEvent.getID() + " - " + event +
-//					(
-//						c == null
-//							?
-//							""
-//							:
-//							(
-//								c == BurkeImageIndexCardView.this
-//									?
-//									" us"
-//									:
-//									(
-//										SwingUtilities.isDescendingFrom( BurkeImageIndexCardView.this, c )
-//											?
-//											" ours (" + c.getClass().getName() + " - " +
-//											( _burkeImageFile == null ? "no image" : "sn " + _burkeImageFile.getSerialNumber() ) +
-//											")" +
-//											( clickedUs ? " at us" : "" )
-//											:
-//											" someone else's (" + c.getClass().getName() + ")"
-//									)
-//							)
-//					)
-//				);
-//
-//				ObtuseUtil.doNothing();
 
 	}
 
@@ -686,7 +649,7 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
 
 	}
 
-	java.util.List<E> selectedItems = new ArrayList<E>();
+	java.util.List<E> selectedItems = new ArrayList<>();
 	for ( int i = iMin; i <= iMax; i++ ) {
 
 	    if ( sm.isSelectedIndex( i ) ) {
@@ -766,6 +729,7 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
 
     public Rectangle getCellBounds( int index ) {
 
+	@SuppressWarnings("UnnecessaryLocalVariable")
 	int row = index;        // keep it simple for now.
 	if ( row == -1 ) {
 
@@ -815,6 +779,119 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
 	}
 
 	return firstBounds;
+
+    }
+
+    private void verifySelectable( @NotNull Component comp ) {
+
+        if ( !( comp instanceof SelectableIndexCard ) ) {
+
+            throw new IllegalArgumentException(
+            	"IndexCardBox:  only components implementing SelectableIndexCard may be added to an IndexCardBox (comp is a " +
+		comp.getClass().getCanonicalName() + ")"
+	    );
+
+	}
+
+    }
+
+    /**
+     Add a component to the box.
+     Throws an {@link com.obtuse.ui.MessageLabel.AugmentedIllegalArgumentException}
+     if the component does not implement the {@link SelectableIndexCard} interface.
+     Otherwise equivalent to {@link Container#add(Component comp)} (see that method for more authoritative info).
+     @param comp the component to be added.
+     @return the added component.
+     @throws com.obtuse.ui.MessageLabel.AugmentedIllegalArgumentException if {@code comp} is {@code null}
+     or does not implement the {@link SelectableIndexCard} interface.
+     */
+
+    public Component add( @NotNull Component comp ) {
+
+        verifySelectable( comp );
+
+        return super.add( comp );
+
+    }
+
+    /**
+     Add a component to the box.
+     Throws an {@link com.obtuse.ui.MessageLabel.AugmentedIllegalArgumentException}
+     if the component does not implement the {@link SelectableIndexCard} interface.
+     Otherwise equivalent to {@link Container#add(String name,Component comp)} (see that method for more authoritative info).
+     <p/>According to Sun/Oracle, this method is obsolete as of 1.1.  Please use the method <code>add(Component, Object)</code> instead.
+     @param comp the component to be added.
+     @return the added component.
+     @throws com.obtuse.ui.MessageLabel.AugmentedIllegalArgumentException if {@code comp} is {@code null}
+     or does not implement the {@link SelectableIndexCard} interface.
+     */
+
+    public Component add( @NotNull String name, Component comp ) {
+
+        verifySelectable( comp );
+
+        return super.add( name, comp );
+
+    }
+
+    /**
+     Add a component to the box.
+     Throws an {@link com.obtuse.ui.MessageLabel.AugmentedIllegalArgumentException}
+     if the component does not implement the {@link SelectableIndexCard} interface.
+     Otherwise equivalent to {@link Container#add(Component comp,int ix)} (see that method for more authoritative info).
+     @param comp the component to be added.
+     @param ix the position in the container's list at which to insert
+     the component; <code>-1</code> means insert at the end component
+     @return the added component.
+     @throws com.obtuse.ui.MessageLabel.AugmentedIllegalArgumentException if {@code comp} is {@code null}
+     or does not implement the {@link SelectableIndexCard} interface.
+     */
+
+    public Component add( @NotNull Component comp, int ix ) {
+
+	verifySelectable( comp );
+
+	return super.add( comp, ix );
+
+    }
+
+    /**
+     Add a component to the box.
+     Throws an {@link com.obtuse.ui.MessageLabel.AugmentedIllegalArgumentException}
+     if the component does not implement the {@link SelectableIndexCard} interface.
+     Otherwise equivalent to {@link Container#add(Component comp,Object constraints)} (see that method for more authoritative info).
+     @param comp the component to be added.
+     @param constraints an object expressing layout constraints for this component.
+     @throws com.obtuse.ui.MessageLabel.AugmentedIllegalArgumentException if {@code comp} is {@code null}
+     or does not implement the {@link SelectableIndexCard} interface.
+     */
+
+    public void add( @NotNull Component comp, Object constraints ) {
+
+	verifySelectable( comp );
+
+	super.add( comp, constraints );
+
+    }
+
+    /**
+     Add a component to the box.
+     Throws an {@link com.obtuse.ui.MessageLabel.AugmentedIllegalArgumentException}
+     if the component does not implement the {@link SelectableIndexCard} interface.
+     Otherwise equivalent to {@link Container#add(Component comp,Object constraints,int index)} (see that method for more authoritative info).
+     @param comp the component to be added.
+     @param constraints an object expressing layout constraints for this component.
+     @param index the position in the container's list at which to insert
+     the component; <code>-1</code> means insert at the end component
+     @throws com.obtuse.ui.MessageLabel.AugmentedIllegalArgumentException if {@code comp} is {@code null}
+     or does not implement the {@link SelectableIndexCard} interface.
+     */
+
+    public void add( @NotNull Component comp, Object constraints, int index ) {
+
+	verifySelectable( comp );
+
+	super.add( comp, constraints, index );
 
     }
 

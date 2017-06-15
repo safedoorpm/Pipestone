@@ -11,7 +11,16 @@ package com.obtuse.ui.layout;
 
 public enum LinearOrientation {
 
+    /**
+     This linear container's components will be oriented vertically.
+     */
+
     VERTICAL,
+
+    /**
+     This linear container's components will be oriented horizontally.
+     */
+
     HORIZONTAL
 
 }

@@ -6,9 +6,7 @@
 package com.obtuse.ui.layout.linear;
 
 import com.obtuse.ui.MyActionListener;
-import com.obtuse.ui.layout.ConstraintTriplet;
-import com.obtuse.ui.layout.LinearContainer;
-import com.obtuse.ui.layout.LinearLayoutUtil;
+import com.obtuse.ui.layout.ConstraintTuple;
 import com.obtuse.ui.layout.LinearOrientation;
 import com.obtuse.util.BasicProgramConfigInfo;
 import com.obtuse.util.Logger;
@@ -259,15 +257,15 @@ public class LinearLayoutManager3 implements LayoutManager2 {
 
 	}
 
-	if ( oldConstraints == null ) {
-
-	    Logger.logMsg( "constraints for " + comp + " set to " + copy );
-
-	} else {
-
-	    Logger.logMsg( "constraints for " + comp + " changed from " + oldConstraints + " to " + copy );
-
-	}
+//	if ( oldConstraints == null ) {
+//
+//	    Logger.logMsg( "constraints for " + comp + " set to " + copy );
+//
+//	} else {
+//
+//	    Logger.logMsg( "constraints for " + comp + " changed from " + oldConstraints + " to " + copy );
+//
+//	}
 
 	_constraints.put( comp, copy );
 
@@ -287,7 +285,7 @@ public class LinearLayoutManager3 implements LayoutManager2 {
 
 	if ( _cache == null ) {
 
-	    _cache = new Linear3Cache( this, _target, _constraints );
+	    _cache = new LinearCache3( this, _target, _constraints );
 
 	}
 
@@ -422,7 +420,7 @@ public class LinearLayoutManager3 implements LayoutManager2 {
     @Override
     public synchronized void removeLayoutComponent( Component comp ) {
 
-	Logger.logMsg( "removeLayoutComponent( " + comp + " )" );
+//	Logger.logMsg( "removeLayoutComponent( " + comp + " )" );
 
 	implicitInvalidateLayout( "removeLayoutComponent", _target );
 
@@ -777,15 +775,14 @@ public class LinearLayoutManager3 implements LayoutManager2 {
     }
     public static void mainX( String[] args ) {
 
-	BasicProgramConfigInfo.init( "Obtuse", "Burke2", "Testing", null );
+	BasicProgramConfigInfo.init( "Obtuse", "Pipestone", "Testing", null );
 
 	JFrame frame = new JFrame( "LinearLayoutManager3" );
 	JPanel inner = makeMainContainer(
 		true,
 		LinearOrientation.VERTICAL,
 		null,
-		new ConstraintTriplet( 0, 20, 32767 ),
-		null
+		new ConstraintTuple( 0, 32767 )
 	);
 
 	JScrollPane scrollPane = new JScrollPane(
@@ -802,8 +799,7 @@ public class LinearLayoutManager3 implements LayoutManager2 {
 		true,
 		LinearOrientation.VERTICAL,
 		new Component[] { makeTestFiller( "blorf" ), scrollPane },
-		new ConstraintTriplet( 300, 400, 600 ),
-		null
+		new ConstraintTuple( 300, 600 )
 	);
 //	main.add( scrollPane );
 
@@ -833,8 +829,7 @@ public class LinearLayoutManager3 implements LayoutManager2 {
 	    @SuppressWarnings("SameParameterValue") boolean makeLinearContainer,
 	    @SuppressWarnings("SameParameterValue") LinearOrientation orientation,
 	    Component[] extraComponents,
-	    @Nullable ConstraintTriplet breadthConstraints,
-	    @SuppressWarnings("SameParameterValue") @Nullable ConstraintTriplet lengthConstraints
+	    @Nullable ConstraintTuple breadthConstraints
     ) {
 
 	JPanel main;
@@ -843,7 +838,6 @@ public class LinearLayoutManager3 implements LayoutManager2 {
 	    LinearContainer3 lc3 = new LinearContainer3( "main", orientation, null, null );
 
 	    lc3.setBreadthConstraints( breadthConstraints );
-	    lc3.setLengthConstraints( lengthConstraints );
 
 	    main = lc3;
 

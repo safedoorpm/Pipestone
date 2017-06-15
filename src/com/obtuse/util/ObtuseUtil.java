@@ -2434,7 +2434,7 @@ public class ObtuseUtil {
 
 	if ( maskValue == 0 ) {
 
-	    Logger.logMsg( "rememberBitName:  mask named \"" + name + "\" has value 0 - ignored" );
+//	    Logger.logMsg( "rememberBitName:  mask named \"" + name + "\" has value 0 - ignored" );
 
 	} else {
 
@@ -2444,18 +2444,18 @@ public class ObtuseUtil {
 
 		if ( s_maskExBits[bitIx] == null ) {
 
-		    Logger.logMsg( "rememberBitName:  1 << " + bitIx + " is named \"" + name + "\"" );
+//		    Logger.logMsg( "rememberBitName:  1 << " + bitIx + " is named \"" + name + "\"" );
 		    s_maskExBits[bitIx] = name;
 
 		} else {
 
-		    Logger.logMsg( "rememberBitName:  1 << " + bitIx + " is already called \"" + s_maskExBits[bitIx] + "\" when attempting to assign new name \"" + name + "\" - new name ignored" );
+//		    Logger.logMsg( "rememberBitName:  1 << " + bitIx + " is already called \"" + s_maskExBits[bitIx] + "\" when attempting to assign new name \"" + name + "\" - new name ignored" );
 
 		}
 
 	    } else {
 
-		Logger.logMsg( "rememberBitName:  bit mask " + Integer.toBinaryString( maskValue ) + " called \"" + name + "\" has more than one bit set - ignored" );
+//		Logger.logMsg( "rememberBitName:  bit mask " + Integer.toBinaryString( maskValue ) + " called \"" + name + "\" has more than one bit set - ignored" );
 
 	    }
 
