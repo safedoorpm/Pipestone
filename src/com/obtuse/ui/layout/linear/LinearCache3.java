@@ -191,11 +191,11 @@ public class LinearCache3 implements LayoutImplCache {
 		LinearLayoutManager3.Constraint trackParentsBreadthConstraint = componentConstraints.getOrDefault( LinearLayoutManager3.TRACK_PARENTS_BREADTH_CONSTRAINT_TITLE, disabledTrackParentsBreadthConstraint );
 		boolean componentTrackParentsBreadth = trackParentsBreadthConstraint.isEnabled();
 
-		if ( componentTrackParentsBreadth ) {
-
-		    Logger.logMsg( "track parent's breadth" );
-
-		}
+//		if ( componentTrackParentsBreadth ) {
+//
+//		    Logger.logMsg( "track parent's breadth" );
+//
+//		}
 
 
 		Dimension min = c.getMinimumSize();
@@ -204,15 +204,15 @@ public class LinearCache3 implements LayoutImplCache {
 
 //		Logger.logMsg( "LC3@" + c + ":  min=" + min + ", pref=" + pref + ", max=" + max );
 
-		if ( componentTrackParentsBreadth ) {
-
-		       Logger.logMsg(
-			    ObtuseUtil.fDim( "min", min ) + ", " +
-			    ObtuseUtil.fDim( "pref", pref ) + ", " +
-			    ObtuseUtil.fDim( "max", max )
-		    );
-
-		}
+//		if ( componentTrackParentsBreadth ) {
+//
+//		       Logger.logMsg(
+//			    ObtuseUtil.fDim( "min", min ) + ", " +
+//			    ObtuseUtil.fDim( "pref", pref ) + ", " +
+//			    ObtuseUtil.fDim( "max", max )
+//		    );
+//
+//		}
 
 		if ( c instanceof LinearContainer3 ) {
 
@@ -271,11 +271,11 @@ public class LinearCache3 implements LayoutImplCache {
 
 		}
 
-		if ( componentTrackParentsBreadth ) {
+//		if ( componentTrackParentsBreadth ) {
 
-		    Logger.logMsg( "track parent's breadth" );
+//		    Logger.logMsg( "track parent's breadth" );
 
-		}
+//		}
 
 		trackParentBreadth.add( componentTrackParentsBreadth );
 

@@ -6,6 +6,8 @@ package com.obtuse.exceptions;
 
 import org.jetbrains.annotations.Nullable;
 
+import java.io.PrintStream;
+
 /**
  * Thrown if something truly unexpected happens.
  */
@@ -14,20 +16,31 @@ public class HowDidWeGetHereError
         extends RuntimeException {
 
     /**
-     * The current oops catcher.
+     The current oops catcher.
      */
 
     private static OopsCatcher s_oopsCatcher = null;
 
     /**
-     * Describe how an oops catcher is informed that a {@link HowDidWeGetHereError} instance has been created and is, presumably, about to be thrown.
+     The (optional) {@link PrintStream} that a stack traceback should be printed on if an instance of this class is created.
+     <p/>Note that the stack traceback gets printed before this instance gets thrown which is a bit unconventional
+     but you'll (hopefully) get used to it.
+     */
+
+    private static PrintStream s_stackTracePrintStream = null;
+
+    /**
+     Describe how an oops catcher is informed that a {@link HowDidWeGetHereError} instance has been created and is, presumably, about to be thrown.
      */
 
     public interface OopsCatcher {
 
         /**
-         * Notify someone about a {@link HowDidWeGetHereError} instance which is, presumably, about to be thrown.
-         * @param e the {@link HowDidWeGetHereError} instance which has just been created and is, presumably, about to be thrown.
+         Notify someone about a {@link HowDidWeGetHereError} instance which is, presumably, about to be thrown.
+
+         @param e the {@link HowDidWeGetHereError} instance which has just been created and is, presumably, about to be thrown.
+         Note that a breakpoint in your oops catcher generally (always?) puts you right where you want to be when
+         a {@link HowDidWeGetHereError} is about to be thrown.
          */
 
         void oops( HowDidWeGetHereError e );
@@ -62,11 +75,41 @@ public class HowDidWeGetHereError
 
     private void notifyOopsCatcher() {
 
+        if ( s_stackTracePrintStream != null ) {
+
+            printStackTrace( getStackTracePrintStream() );
+
+        }
+
         if ( HowDidWeGetHereError.s_oopsCatcher != null ) {
 
             HowDidWeGetHereError.s_oopsCatcher.oops( this );
 
         }
+
+    }
+
+    /**
+     Specify the optional {@link PrintStream} that a stack traceback is
+     automagically printed on if an instance of this class gets created.
+     */
+
+    public static void setStackTracePrintStream( PrintStream stackTracePrintStream ) {
+
+        s_stackTracePrintStream = stackTracePrintStream;
+
+    }
+
+    /**
+     Get the optional {@link PrintStream} that a stack traceback is
+     automagically printed on if an instance of this class gets created.
+     @return the optional {@link PrintStream}.
+     */
+
+    @Nullable
+    public static PrintStream getStackTracePrintStream() {
+
+        return s_stackTracePrintStream;
 
     }
 

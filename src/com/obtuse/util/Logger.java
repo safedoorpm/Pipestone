@@ -17,16 +17,15 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 /**
- * Manage a simple logging facility.
- * <p/>
- * Note that {@link BasicProgramConfigInfo#init} <b><u>MUST</u></b> be called before this class is used in any way
- * which triggers
- * the invocation of this class's static initializer(s).  Experience seems to indicate that it is sufficient to call
- * {@link BasicProgramConfigInfo#init} before invoking any method defined by this class (your mileage may vary).
- *
- * @noinspection ClassWithoutToString, ForLoopReplaceableByForEach, RawUseOfParameterizedType,
- * UseOfSystemOutOrSystemErr, UnusedDeclaration
- */
+ Manage a simple logging facility.
+ <p/>
+ Note that {@link BasicProgramConfigInfo#init} <b><u>MUST</u></b> be called before this class is used in any way
+ which triggers
+ the invocation of this class's static initializer(s).  Experience seems to indicate that it is sufficient to call
+ {@link BasicProgramConfigInfo#init} before invoking any method defined by this class (your mileage may vary).
+
+ @noinspection ClassWithoutToString, ForLoopReplaceableByForEach, RawUseOfParameterizedType,
+ UseOfSystemOutOrSystemErr, UnusedDeclaration */
 
 public class Logger {
 
@@ -63,9 +62,9 @@ public class Logger {
 
     public static final String NESTING_INDENT = ".   ";
 
-    private static final TreeSorter<String,Function<String,Boolean>> s_interestingStuff = new TreeSorter<>();
+    private static final TreeSorter<String, Function<String, Boolean>> s_interestingStuff = new TreeSorter<>();
 
-//    private static int _nestingLevel = 0;
+    //    private static int _nestingLevel = 0;
     private static Stack<String> _nestingLevelNames = new Stack<>();
     private static String _nestingString = "";
 
@@ -132,112 +131,112 @@ public class Logger {
 
     public static boolean setLoggingEnabled( boolean enabled ) {
 
-	boolean wasEnabled = s_loggingEnabled;
+        boolean wasEnabled = s_loggingEnabled;
 
-	s_loggingEnabled = enabled;
+        s_loggingEnabled = enabled;
 
-	return wasEnabled;
+        return wasEnabled;
 
     }
 
     public static boolean isLoggingEnabled() {
 
-	return Logger.s_loggingEnabled;
+        return Logger.s_loggingEnabled;
 
     }
 
     public static void maybeLogMsg( @NotNull Supplier<String> composeLoggingMsg ) {
 
-	if ( Logger.s_loggingEnabled ) {
+        if ( Logger.s_loggingEnabled ) {
 
-	    String loggingMessage = composeLoggingMsg.get();
-	    Logger.logMsg( loggingMessage );
+            String loggingMessage = composeLoggingMsg.get();
+            Logger.logMsg( loggingMessage );
 
-	}
+        }
 
     }
 
     public static void maybeLogErr( @NotNull Supplier<String> composeLoggingMsg ) {
 
-	if ( Logger.s_loggingEnabled ) {
+        if ( Logger.s_loggingEnabled ) {
 
-	    String loggingMessage = composeLoggingMsg.get();
-	    Logger.logErr( loggingMessage );
+            String loggingMessage = composeLoggingMsg.get();
+            Logger.logErr( loggingMessage );
 
-	}
+        }
 
     }
 
     public static int pushNesting( @NotNull String levelName ) {
 
-	Logger.logMsg( "{ " + levelName );
+        Logger.logMsg( "{ " + levelName );
 
-	synchronized ( _nestingLevelLock ) {
+        synchronized ( _nestingLevelLock ) {
 
-	    _nestingLevelNames.push( levelName );
+            _nestingLevelNames.push( levelName );
 
-	}
+        }
 
-	return _nestingLevelNames.size();
+        return _nestingLevelNames.size();
 
     }
 
     public static String getTopNestingLevelName() {
 
-	synchronized ( _nestingLevelLock ) {
+        synchronized ( _nestingLevelLock ) {
 
-	    return _nestingLevelNames.peek();
+            return _nestingLevelNames.peek();
 
-	}
+        }
 
     }
 
     public static int popNestingLevel( @NotNull String levelName ) {
 
-	synchronized ( _nestingLevelLock ) {
+        synchronized ( _nestingLevelLock ) {
 
-	    if ( levelName.equals( _nestingLevelNames.peek() ) ) {
+            if ( levelName.equals( _nestingLevelNames.peek() ) ) {
 
-		_nestingLevelNames.pop();
+                _nestingLevelNames.pop();
 
-	    } else {
+            } else {
 
-		throw new HowDidWeGetHereError(
-			"Logger:  attempt to pop nesting level \"" + levelName + "\" when top level is \"" + _nestingLevelNames.peek() +
-			"\"" );
+                throw new HowDidWeGetHereError(
+                        "Logger:  attempt to pop nesting level \"" + levelName + "\" when top level is \"" + _nestingLevelNames.peek() +
+                        "\"" );
 
-	    }
+            }
 
-	    Logger.logMsg( "} " + levelName );
+            Logger.logMsg( "} " + levelName );
 
-	    return _nestingLevelNames.size();
+            return _nestingLevelNames.size();
 
-	}
+        }
 
     }
 
     public static String getNestingString() {
 
-	synchronized ( _nestingLevelLock ) {
+        synchronized ( _nestingLevelLock ) {
 
-	    int nestingLevel = _nestingLevelNames.size();
-	    int requiredLength = nestingLevel * NESTING_INDENT.length();
+            int nestingLevel = _nestingLevelNames.size();
+            int requiredLength = nestingLevel * NESTING_INDENT.length();
 
-	    if ( _nestingString.length() < requiredLength ) {
+            if ( _nestingString.length() < requiredLength ) {
 
-		_nestingString = ObtuseUtil.replicate( NESTING_INDENT, nestingLevel );
+                _nestingString = ObtuseUtil.replicate( NESTING_INDENT, nestingLevel );
 
-	    }
+            }
 
-	    return _nestingString.substring( 0, requiredLength );
+            return _nestingString.substring( 0, requiredLength );
 
-	}
+        }
 
     }
 
     /**
-     * Close this logger and set our mirror to null (this has the side-effect of closing our mirror if it is open and
-     * neither {@link System#out} nor {@link System#err}).
+     Close this logger and set our mirror to null (this has the side-effect of closing our mirror if it is open and
+     neither {@link System#out} nor {@link System#err}).
      */
 
     public synchronized void close() {
@@ -257,12 +256,12 @@ public class Logger {
     }
 
     /**
-     * Set this logger's mirror to the specified {@link java.io.PrintStream}. Any existing mirror is closed if it is
-     * open and
-     * neither {@link System#out} nor {@link System#err}).
-     *
-     * @param mirrorName the name of the mirror file/device/whatever.
-     * @param mirror     the PrintStream which is to be sent a copy of everything which is emitted by this Logger.
+     Set this logger's mirror to the specified {@link java.io.PrintStream}. Any existing mirror is closed if it is
+     open and
+     neither {@link System#out} nor {@link System#err}).
+
+     @param mirrorName the name of the mirror file/device/whatever.
+     @param mirror     the PrintStream which is to be sent a copy of everything which is emitted by this Logger.
      */
 
     private void internalSetMirror( String mirrorName, PrintStream mirror ) {
@@ -416,46 +415,46 @@ public class Logger {
 
     public synchronized void println( String logLine ) {
 
-	int vetoCount = 0;
+        int vetoCount = 0;
 
-	synchronized ( s_interestingStuff ) {
+        synchronized ( s_interestingStuff ) {
 
-	    for ( String interesting : s_interestingStuff.keySet() ) {
+            for ( String interesting : s_interestingStuff.keySet() ) {
 
-		if ( logLine.contains( interesting ) ) {
+                if ( logLine.contains( interesting ) ) {
 
-		    for ( Function<String,Boolean> func : s_interestingStuff.getValues( interesting ) ) {
+                    for ( Function<String, Boolean> func : s_interestingStuff.getValues( interesting ) ) {
 
-			if ( func.apply( logLine ) ) {
+                        if ( func.apply( logLine ) ) {
 
-			    vetoCount += 1;
+                            vetoCount += 1;
 
-			}
+                        }
 
-		    }
+                    }
 
-		}
+                }
 
-	    }
+            }
 
-	    if ( vetoCount != 0 ) {
+            if ( vetoCount != 0 ) {
 
-		synchronized ( s_interestingStuff ) {
+                synchronized ( s_interestingStuff ) {
 
-		    s_globalVetoCount += 1;
+                    s_globalVetoCount += 1;
 
-		    return;
+                    return;
 
-		}
+                }
 
-	    }
+            }
 
-	}
+        }
 
-	print( logLine );
-	printNewline();
+        print( logLine );
+        printNewline();
 
-	// The Java 1.4.2 docs are not clear as to whether System.out or System.err are
+        // The Java 1.4.2 docs are not clear as to whether System.out or System.err are
         // opened with auto-flushing enabled so we force a flush here just to be sure.
 
         flush();
@@ -464,6 +463,7 @@ public class Logger {
 
     /**
      Determine how many log lines have actually been vetoed.
+
      @return the number of log lines which have actually been vetoed.
      */
 
@@ -483,23 +483,23 @@ public class Logger {
      <p/>IMPORTANT: the log line is vetoed/suppressed if the specified {@code vetoer}'s {@code Boolean apply( String logLine )} method returns {@code false}; it is allowed through if the method returns {@link false}.
 
      @param targetString the specified target string.
-     @param vetoer the {@link Function}{@code <String,Boolean>} instance's {@code Boolean apply( String targetString )} method to call if a log line contains the specified target string.
+     @param vetoer       the {@link Function}{@code <String,Boolean>} instance's {@code Boolean apply( String targetString )} method to call if a log line contains the specified target string.
      <p/>Expect bad things to happen if from within a call to the {@link Function}{@code <String,Boolean>} instance's {@code Boolean apply( String targetString )} method, you try to log something which is matched by your vetoer or attempt to add or remove a vetoer.
      */
 
-    public synchronized void addLogLineVetoer( @NotNull String targetString, @NotNull Function<String,Boolean> vetoer ) {
+    public synchronized void addLogLineVetoer( @NotNull String targetString, @NotNull Function<String, Boolean> vetoer ) {
 
         synchronized ( s_interestingStuff ) {
 
             // Remove any existing instances of the specified matcher for the specified key.
 
-	    cancelLineFilter( targetString, vetoer );
+            cancelLineFilter( targetString, vetoer );
 
-	    // Put exactly one back.
+            // Put exactly one back.
 
             s_interestingStuff.add( targetString, vetoer );
 
-	}
+        }
 
     }
 
@@ -508,22 +508,25 @@ public class Logger {
      <p/>Requests to remove vetoers which are not actually associated with the specified target string are silently ignored.
 
      @param targetString the specified target string.
-     @param vetoer the {@link Function}{@code <String,Boolean>} instance previously added for the specified target string.
+     @param vetoer       the {@link Function}{@code <String,Boolean>} instance previously added for the specified target string.
      */
 
-    public synchronized void cancelLineFilter( @NotNull String targetString, @NotNull Function<String,Boolean> vetoer ) {
+    public synchronized void cancelLineFilter( @NotNull String targetString, @NotNull Function<String, Boolean> vetoer ) {
 
-	// Get rid of any existing instances of the specified matcher for the specified key.
+        // Get rid of any existing instances of the specified matcher for the specified key.
 
-	Collection<Function<String, Boolean>> removedVetoers = s_interestingStuff.removeValue( targetString, vetoer );
+        Collection<Function<String, Boolean>> removedVetoers = s_interestingStuff.removeValue( targetString, vetoer );
 
-	// There should have been zero or one matcher removed.
+        // There should have been zero or one matcher removed.
 
-	if ( removedVetoers.size() > 1 ) {
+        if ( removedVetoers.size() > 1 ) {
 
-	    throw new HowDidWeGetHereError( "Logger.cancelLineFilter:  more than one identical matcher for targetString=" + ObtuseUtil.enquoteForJavaString( targetString ) + " and matcher " + vetoer );
+            throw new HowDidWeGetHereError( "Logger.cancelLineFilter:  more than one identical matcher for targetString=" +
+                                            ObtuseUtil.enquoteForJavaString( targetString ) +
+                                            " and matcher " +
+                                            vetoer );
 
-	}
+        }
 
     }
 
@@ -534,13 +537,13 @@ public class Logger {
      @param vetoer a {@link Function}{@code <String,Boolean>} to be used to identify vetoers which are to be deleted.
      */
 
-    public synchronized void cancelLineFilters( @NotNull Function<String,Boolean> vetoer ) {
+    public synchronized void cancelLineFilters( @NotNull Function<String, Boolean> vetoer ) {
 
-	// Get rid of any existing instances of the specified matcher for the specified key.
+        // Get rid of any existing instances of the specified matcher for the specified key.
 
-	Collection<Function<String, Boolean>> vetoers = s_interestingStuff.removeValue( target -> target == vetoer, new Vector<>() );
+        Collection<Function<String, Boolean>> vetoers = s_interestingStuff.removeValue( target -> target == vetoer, new Vector<>() );
 
-	// It doesn't matter how many vetoers were deleted.
+        // It doesn't matter how many vetoers were deleted.
 
     }
 
@@ -551,8 +554,8 @@ public class Logger {
     }
 
     /**
-     * Flush the underlying {@link java.io.PrintStream}. Calling this method is generally not necessary as it is called
-     * implicitly after each newline is written.
+     Flush the underlying {@link java.io.PrintStream}. Calling this method is generally not necessary as it is called
+     implicitly after each newline is written.
      */
 
     public synchronized void flush() {
@@ -572,12 +575,12 @@ public class Logger {
     }
 
     /**
-     * Log an exception/error out via this Logger instance.
-     * <p/>
-     * The totally unadorned stack trace contained within the {@link Throwable} is written out via this Logger instance
-     * using {@link #print}.
-     *
-     * @param e the exception/error to be logged.
+     Log an exception/error out via this Logger instance.
+     <p/>
+     The totally unadorned stack trace contained within the {@link Throwable} is written out via this Logger instance
+     using {@link #print}.
+
+     @param e the exception/error to be logged.
      */
 
     public void log( Throwable e ) {
@@ -604,10 +607,10 @@ public class Logger {
     }
 
     /**
-     * Get the {@link java.io.File} object associated with the underlying {@link java.io.PrintStream}.
-     *
-     * @return the appropriate {@link java.io.File} object or null if our {@link #Logger(String, java.io.PrintStream)}
-     *         constructor was used to create this Logger.
+     Get the {@link java.io.File} object associated with the underlying {@link java.io.PrintStream}.
+
+     @return the appropriate {@link java.io.File} object or null if our {@link #Logger(String, java.io.PrintStream)}
+     constructor was used to create this Logger.
      */
 
     public File getOutputFile() {
@@ -617,9 +620,9 @@ public class Logger {
     }
 
     /**
-     * Get the name of the output file.
-     *
-     * @return the name of this Logger's output file.
+     Get the name of the output file.
+
+     @return the name of this Logger's output file.
      */
 
     public String getOutputFileName() {
@@ -637,9 +640,9 @@ public class Logger {
     }
 
     /**
-     * Get the Logger associated with stdout. The logger is allocated if it does not already exist.
-     *
-     * @return the Logger that is associated with {@link System#out}.
+     Get the Logger associated with stdout. The logger is allocated if it does not already exist.
+
+     @return the Logger that is associated with {@link System#out}.
      */
 
     public static Logger getStdout() {
@@ -654,8 +657,8 @@ public class Logger {
                 Logger.LOGS_DIRECTORY.mkdirs();
                 Logger.s_stdout.setMirror(
                         Logger.LOGS_DIRECTORY.getPath() + "/" +
-                                ( Logger.s_programName == null ? Logger.COMPONENT_NAME : Logger.s_programName ) +
-                                "_stdout_" + Logger.LOG_FILE_NAME_FORMATTER
+                        ( Logger.s_programName == null ? Logger.COMPONENT_NAME : Logger.s_programName ) +
+                        "_stdout_" + Logger.LOG_FILE_NAME_FORMATTER
                                 .format( new Date() ), -1L
                 );
 
@@ -673,9 +676,9 @@ public class Logger {
     }
 
     /**
-     * Get the Logger associated with stderr. The logger is allocated if it does not already exist.
-     *
-     * @return the Logger that is associated with {@link System#err}.
+     Get the Logger associated with stderr. The logger is allocated if it does not already exist.
+
+     @return the Logger that is associated with {@link System#err}.
      */
 
     public static Logger getStderr() {
@@ -690,8 +693,8 @@ public class Logger {
                 Logger.LOGS_DIRECTORY.mkdirs();
                 Logger.s_stderr.setMirror(
                         Logger.LOGS_DIRECTORY.getPath() + "/" +
-                                ( Logger.s_programName == null ? Logger.COMPONENT_NAME : Logger.s_programName ) +
-                                "_stderr_" + Logger.LOG_FILE_NAME_FORMATTER
+                        ( Logger.s_programName == null ? Logger.COMPONENT_NAME : Logger.s_programName ) +
+                        "_stderr_" + Logger.LOG_FILE_NAME_FORMATTER
                                 .format( new Date() ), -1L
                 );
 
@@ -720,13 +723,13 @@ public class Logger {
 //    }
 
     /**
-     * Get the Logger intended to be used for 'user friendly' messages.
-     * The logger is allocated if it does not already exist.
-     * <p/>
-     * Note that the 'user friendly' logger only sends messages to its listeners (i.e. if there are
-     * no listeners then there are no messages sent anywhere).
-     *
-     * @return the Logger that is intended to be used for 'user friendly' messages.
+     Get the Logger intended to be used for 'user friendly' messages.
+     The logger is allocated if it does not already exist.
+     <p/>
+     Note that the 'user friendly' logger only sends messages to its listeners (i.e. if there are
+     no listeners then there are no messages sent anywhere).
+
+     @return the Logger that is intended to be used for 'user friendly' messages.
      */
 
     public static Logger getFriendly() {
@@ -742,9 +745,9 @@ public class Logger {
     }
 
     /**
-     * Send a log message to the 'user friendly' logger.
-     *
-     * @param msg the message to be printed.
+     Send a log message to the 'user friendly' logger.
+
+     @param msg the message to be printed.
      */
 
     public static void logFriendly( String msg ) {
@@ -754,9 +757,9 @@ public class Logger {
     }
 
     /**
-     * Send a log message to stdout.
-     *
-     * @param msg the message to be printed.
+     Send a log message to stdout.
+
+     @param msg the message to be printed.
      */
 
     public static void logMsg( String msg ) {
@@ -787,9 +790,9 @@ public class Logger {
     }
 
     /**
-     * Send something to a Logger.
-     *
-     * @param msg what to send.
+     Send something to a Logger.
+
+     @param msg what to send.
      */
 
     public void msg( String msg ) {
@@ -800,10 +803,10 @@ public class Logger {
     }
 
     /**
-     * Log something with an optional throwable to a Logger.
-     *
-     * @param msg the message.
-     * @param e   the throwable (ignored if null).
+     Log something with an optional throwable to a Logger.
+
+     @param msg the message.
+     @param e   the throwable (ignored if null).
      */
 
     public void msg( String msg, Throwable e ) {
@@ -825,17 +828,17 @@ public class Logger {
     }
 
     /**
-     * Send a log message to the 'user friendly' logger and a probably different message to stdout.
-     *
-     * @param friendly the 'user friendly' message.
-     * @param geek     the 'geek-readable' message (if null then the friendly message takes its place).
+     Send a log message to the 'user friendly' logger and a probably different message to stdout.
+
+     @param friendly the 'user friendly' message.
+     @param geek     the 'geek-readable' message (if null then the friendly message takes its place).
      */
 
     public static void logMsg( String friendly, @Nullable String geek ) {
 
-	String prefixedMessage = Logger.getPrefix() + getNestingString() + ( geek == null ? friendly : geek );
+        String prefixedMessage = Logger.getPrefix() + getNestingString() + ( geek == null ? friendly : geek );
 
-	Logger.getFriendly().println( prefixedMessage );
+        Logger.getFriendly().println( prefixedMessage );
 
         Trace.event( prefixedMessage );
         Logger.getStdout().println( prefixedMessage );
@@ -843,9 +846,9 @@ public class Logger {
     }
 
     /**
-     * Send a log message to stderr.
-     *
-     * @param msg the message to be printed.
+     Send a log message to stderr.
+
+     @param msg the message to be printed.
      */
 
     public static void logErr( String msg ) {
@@ -857,25 +860,25 @@ public class Logger {
     }
 
     /**
-     * Send a log message to the 'user friendly' logger and a probably different message to stderr.
-     *
-     * @param friendly the 'user friendly' message.
-     * @param geek     the 'geek-readable' message (if null then the friendly message takes its place).
+     Send a log message to the 'user friendly' logger and a probably different message to stderr.
+
+     @param friendly the 'user friendly' message.
+     @param geek     the 'geek-readable' message (if null then the friendly message takes its place).
      */
 
     public static void logErr( String friendly, String geek ) {
 
         Logger.getFriendly().println( friendly );
 
-	Logger.logErr( geek == null ? friendly : geek );
+        Logger.logErr( geek == null ? friendly : geek );
 
     }
 
     /**
-     * Send a log message and a stack trace to stderr.
-     *
-     * @param msg the message to be printed.
-     * @param e   the throwable containing the stack trace.
+     Send a log message and a stack trace to stderr.
+
+     @param msg the message to be printed.
+     @param e   the throwable containing the stack trace.
      */
 
     public static void logErr( String msg, Throwable e ) {
@@ -892,26 +895,26 @@ public class Logger {
     }
 
     /**
-     * Send a log message to the 'user friendly' logger and a probably different message along with a
-     * stack trace to stderr.
-     *
-     * @param friendly the 'user friendly' message.
-     * @param geek     the 'geek-readable' message (if null then the friendly message takes its place).
-     * @param e        the throwable containing the stack trace.
+     Send a log message to the 'user friendly' logger and a probably different message along with a
+     stack trace to stderr.
+
+     @param friendly the 'user friendly' message.
+     @param geek     the 'geek-readable' message (if null then the friendly message takes its place).
+     @param e        the throwable containing the stack trace.
      */
 
     public static void logErr( String friendly, @Nullable String geek, Throwable e ) {
 
         Logger.getFriendly().println( friendly );
 
-	Logger.logErr( geek == null ? friendly : geek, e );
+        Logger.logErr( geek == null ? friendly : geek, e );
 
     }
 
     /**
-     * Add a listener.
-     *
-     * @param listener the listener to be added to this instance's list of listeners.
+     Add a listener.
+
+     @param listener the listener to be added to this instance's list of listeners.
      */
 
     public synchronized void addListener( LoggerListener listener ) {

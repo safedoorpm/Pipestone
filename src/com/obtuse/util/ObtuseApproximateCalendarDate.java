@@ -41,83 +41,109 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
         public enum Reason {
 
-            /** Not sure what went wrong. */
+            /**
+             Not sure what went wrong.
+             */
 
             UNKNOWN,
 
-	    /** Unable to parse empty strings. */
+            /**
+             Unable to parse empty strings.
+             */
 
-	    EMPTY_STRING,
+            EMPTY_STRING,
 
-	    /** Date range contains more than one comma. */
+            /**
+             Date range contains more than one comma.
+             */
 
-	    RANGE_TOO_MANY_COMMAS,
+            RANGE_TOO_MANY_COMMAS,
 
 	    /* Date range's starting date is invalid. */
 
-	    RANGE_INVALID_STARTING_DATE,
+            RANGE_INVALID_STARTING_DATE,
 
-	    /** Date range's ending date is invalid. */
+            /**
+             Date range's ending date is invalid.
+             */
 
-	    RANGE_INVALID_ENDING_DATE,
+            RANGE_INVALID_ENDING_DATE,
 
-	    /** Date range's first date is after its second date. */
+            /**
+             Date range's first date is after its second date.
+             */
 
-	    RANGE_BACKWARDS,
+            RANGE_BACKWARDS,
 
-	    /** Date range is structurally invalid (missing comma, missing either or both parentheses but has a comma, etc). */
+            /**
+             Date range is structurally invalid (missing comma, missing either or both parentheses but has a comma, etc).
+             */
 
-	    RANGE_INVALID,
+            RANGE_INVALID,
 
-	    /** Year is invalid (probably outside of supported range). */
+            /**
+             Year is invalid (probably outside of supported range).
+             */
 
-	    YEAR_INVALID,
-	    /** Decade is invalid (ends in a "0s" or a "0S" but otherwise invalid). */
+            YEAR_INVALID,
+            /**
+             Decade is invalid (ends in a "0s" or a "0S" but otherwise invalid).
+             */
 
-	    DECADE_INVALID,
+            DECADE_INVALID,
 
-	    /** Month is invalid (contains exactly one hyphen but is otherwise invalid). */
+            /**
+             Month is invalid (contains exactly one hyphen but is otherwise invalid).
+             */
 
-	    MONTH_INVALID,
+            MONTH_INVALID,
 
-	    /** Date is invalid (contains at least two hyphens but is otherwise invalid). */
+            /**
+             Date is invalid (contains at least two hyphens but is otherwise invalid).
+             */
 
-	    DATE_INVALID,
+            DATE_INVALID,
 
-	    /** No idea what the string might represent. */
+            /**
+             No idea what the string might represent.
+             */
 
-	    INCOMPREHENSIBLE
+            INCOMPREHENSIBLE
 
-	}
+        }
 
-	private final Reason _reason;
+        private final Reason _reason;
 
         public ObtuseApproximateCalendarDateParsingException() {
+
             super( "unknown error" );
 
-	    _reason = Reason.UNKNOWN;
-	}
+            _reason = Reason.UNKNOWN;
+        }
 
-	public ObtuseApproximateCalendarDateParsingException( Reason reason, @NotNull String msg ) {
-	    super( msg );
+        public ObtuseApproximateCalendarDateParsingException( Reason reason, @NotNull String msg ) {
 
-	    _reason = reason;
+            super( msg );
 
-	}
+            _reason = reason;
 
-	public ObtuseApproximateCalendarDateParsingException( Reason reason, @NotNull String msg, @Nullable Throwable cause ) {
-	    super( msg, cause );
+        }
 
-	    _reason = reason;
+        public ObtuseApproximateCalendarDateParsingException( Reason reason, @NotNull String msg, @Nullable Throwable cause ) {
 
-	}
+            super( msg, cause );
 
-	public ObtuseApproximateCalendarDateParsingException( Reason reason, @NotNull Throwable cause ) {
-	    super( "unknown error", cause );
+            _reason = reason;
 
-	    _reason = reason;
+        }
 
-	}
+        public ObtuseApproximateCalendarDateParsingException( Reason reason, @NotNull Throwable cause ) {
+
+            super( "unknown error", cause );
+
+            _reason = reason;
+
+        }
 
     }
 
@@ -135,38 +161,63 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
     public static GowingEntityFactory FACTORY = new GowingEntityFactory( ENTITY_TYPE_NAME ) {
 
-	@Override
-	public int getOldestSupportedVersion() {
+        @Override
+        public int getOldestSupportedVersion() {
 
-	    return VERSION;
-	}
+            return VERSION;
+        }
 
-	@Override
-	public int getNewestSupportedVersion() {
+        @Override
+        public int getNewestSupportedVersion() {
 
-	    return VERSION;
-	}
+            return VERSION;
+        }
 
-	@NotNull
-	@Override
-	public GowingPackable createEntity( @NotNull GowingUnPacker unPacker, @NotNull GowingPackedEntityBundle bundle, GowingEntityReference er )
-		throws GowingUnPackerParsingException {
+        @NotNull
+        @Override
+        public GowingPackable createEntity( @NotNull GowingUnPacker unPacker, @NotNull GowingPackedEntityBundle bundle, GowingEntityReference er )
+                throws GowingUnPackerParsingException {
 
-	    return new ObtuseApproximateCalendarDate( unPacker, bundle, er );
+            return new ObtuseApproximateCalendarDate( unPacker, bundle, er );
 
-	}
+        }
 
     };
 
     public enum DatePrecision {
 
-	DATE { public String title() { return "Date"; } },
-	MONTH { public String title() { return "Month"; } },
-	YEAR { public String title() { return "Year"; } },
-	DECADE { public String title() { return "Decade"; } },
-	RANGE { public String title() { return "Range"; } };
+        DATE {
+            public String title() {
 
-	public abstract String title();
+                return "Date";
+            }
+        },
+        MONTH {
+            public String title() {
+
+                return "Month";
+            }
+        },
+        YEAR {
+            public String title() {
+
+                return "Year";
+            }
+        },
+        DECADE {
+            public String title() {
+
+                return "Decade";
+            }
+        },
+        RANGE {
+            public String title() {
+
+                return "Range";
+            }
+        };
+
+        public abstract String title();
 
     }
 
@@ -180,137 +231,155 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
     private ObtuseCalendarDate _latestPossibleDate = null;
 
     public ObtuseApproximateCalendarDate( @NotNull ObtuseCalendarDate nominalCalendarDate, @NotNull DatePrecision precision ) {
-	super( new GowingNameMarkerThing() );
 
-	_nominalCalendarDate = nominalCalendarDate;
+        super( new GowingNameMarkerThing() );
 
-	// We need to specify/save the earliest and latest possible dates now since we cannot re-discover them later.
+        _nominalCalendarDate = nominalCalendarDate;
 
-	if ( precision == DatePrecision.RANGE ) {
+        // We need to specify/save the earliest and latest possible dates now since we cannot re-discover them later.
 
-	    _earliestPossibleDate = nominalCalendarDate;
-	    _latestPossibleDate = nominalCalendarDate;
+        if ( precision == DatePrecision.RANGE ) {
 
-	}
+            _earliestPossibleDate = nominalCalendarDate;
+            _latestPossibleDate = nominalCalendarDate;
 
-	_precision = precision;
+        }
+
+        _precision = precision;
 
     }
 
     public ObtuseApproximateCalendarDate() {
+
         this( new ObtuseCalendarDate( new Date() ), DatePrecision.DATE );
 
     }
 
     public ObtuseApproximateCalendarDate( @Nullable ObtuseCalendarDate xEarliestPossibleDate, @Nullable ObtuseCalendarDate xLatestPossibleDate ) {
-	super( new GowingNameMarkerThing() );
 
-	ObtuseCalendarDate earliestPossibleDate = xEarliestPossibleDate == null ? ObtuseCalendarDate.getEarliestSupportedDate() : xEarliestPossibleDate;
-	ObtuseCalendarDate latestPossibleDate = xLatestPossibleDate == null ? ObtuseCalendarDate.getLatestSupportedDate() : xLatestPossibleDate;
+        super( new GowingNameMarkerThing() );
 
-	if ( earliestPossibleDate.compareTo( latestPossibleDate ) > 0 ) {
+        ObtuseCalendarDate earliestPossibleDate =
+                xEarliestPossibleDate == null ? ObtuseCalendarDate.getEarliestSupportedDate() : xEarliestPossibleDate;
+        ObtuseCalendarDate latestPossibleDate = xLatestPossibleDate == null ? ObtuseCalendarDate.getLatestSupportedDate() : xLatestPossibleDate;
 
-	    throw new IllegalArgumentException(
-	    	"ObtuseApproximateCalendarDate:  attempt to create range-precise instance with earliest date " + earliestPossibleDate +
-		" which is after latest possible date " + latestPossibleDate
-	    );
+        if ( earliestPossibleDate.compareTo( latestPossibleDate ) > 0 ) {
 
-	}
+            throw new IllegalArgumentException(
+                    "ObtuseApproximateCalendarDate:  attempt to create range-precise instance with earliest date " + earliestPossibleDate +
+                    " which is after latest possible date " + latestPossibleDate
+            );
 
-	_earliestPossibleDate = earliestPossibleDate;
-	_latestPossibleDate = latestPossibleDate;
+        }
 
-	_nominalCalendarDate = earliestPossibleDate;
+        _earliestPossibleDate = earliestPossibleDate;
+        _latestPossibleDate = latestPossibleDate;
 
-	_precision = DatePrecision.RANGE;
+        _nominalCalendarDate = earliestPossibleDate;
+
+        _precision = DatePrecision.RANGE;
 
     }
 
     public ObtuseApproximateCalendarDate(
-	    GowingUnPacker unPacker,
-	    GowingPackedEntityBundle bundle,
-	    GowingEntityReference er
+            GowingUnPacker unPacker,
+            GowingPackedEntityBundle bundle,
+            GowingEntityReference er
     ) throws GowingUnPackerParsingException {
-	super( unPacker, bundle.getSuperBundle() );
 
-	_precision = ObtuseApproximateCalendarDate.makePrecision( bundle );
+        super( unPacker, bundle.getSuperBundle() );
 
-	if ( _precision == DatePrecision.RANGE ) {
+        _precision = ObtuseApproximateCalendarDate.makePrecision( bundle );
 
-	    _earliestPossibleDate = ObtuseApproximateCalendarDate.makeCalendarDate( bundle, ObtuseApproximateCalendarDate.EARLIEST_DATE_NAME );
-	    _latestPossibleDate = ObtuseApproximateCalendarDate.makeCalendarDate( bundle, ObtuseApproximateCalendarDate.LATEST_DATE_NAME );
-	    _nominalCalendarDate = _earliestPossibleDate;
+        if ( _precision == DatePrecision.RANGE ) {
 
-	} else {
+            _earliestPossibleDate = ObtuseApproximateCalendarDate.makeCalendarDate( bundle, ObtuseApproximateCalendarDate.EARLIEST_DATE_NAME );
+            _latestPossibleDate = ObtuseApproximateCalendarDate.makeCalendarDate( bundle, ObtuseApproximateCalendarDate.LATEST_DATE_NAME );
+            _nominalCalendarDate = _earliestPossibleDate;
 
-	    _nominalCalendarDate = ObtuseApproximateCalendarDate.makeCalendarDate( bundle, ObtuseApproximateCalendarDate.NOMINAL_DATE_NAME );
+        } else {
 
-	}
+            _nominalCalendarDate = ObtuseApproximateCalendarDate.makeCalendarDate( bundle, ObtuseApproximateCalendarDate.NOMINAL_DATE_NAME );
+
+        }
 
     }
 
-    private static ObtuseCalendarDate makeCalendarDate( GowingPackedEntityBundle bundle, EntityName whichDate ) throws GowingUnPackerParsingException {
+    private static ObtuseCalendarDate makeCalendarDate( GowingPackedEntityBundle bundle, EntityName whichDate )
+            throws GowingUnPackerParsingException {
 
-	try {
+        try {
 
-	    return new ObtuseCalendarDate( bundle.getNotNullField( whichDate ).StringValue() );
+            return new ObtuseCalendarDate( bundle.getNotNullField( whichDate ).StringValue() );
 
-	} catch ( ParsingException e ) {
+        } catch ( ParsingException e ) {
 
-	    throw new GowingUnPackerParsingException( e + " recovering date string" );
+            throw new GowingUnPackerParsingException( e + " recovering date string" );
 
-	}
+        }
 
     }
 
     private static DatePrecision makePrecision( GowingPackedEntityBundle bundle ) throws GowingUnPackerParsingException {
 
-	try {
+        try {
 
-	    return DatePrecision.valueOf( bundle.getNotNullField( ObtuseApproximateCalendarDate.PRECISION_NAME ).StringValue() );
+            return DatePrecision.valueOf( bundle.getNotNullField( ObtuseApproximateCalendarDate.PRECISION_NAME ).StringValue() );
 
-	} catch ( IllegalArgumentException e ) {
+        } catch ( IllegalArgumentException e ) {
 
-	    throw new GowingUnPackerParsingException( e + " recovering precision" );
+            throw new GowingUnPackerParsingException( e + " recovering precision" );
 
-	}
+        }
 
     }
 
     @NotNull
     @Override
     public GowingPackedEntityBundle bundleThyself(
-	    boolean isPackingSuper, GowingPacker packer
+            boolean isPackingSuper, GowingPacker packer
     ) {
 
-	GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
-		ObtuseApproximateCalendarDate.ENTITY_TYPE_NAME,
-		ObtuseApproximateCalendarDate.VERSION,
-		super.bundleRoot( packer ),
-		packer.getPackingContext()
-	);
+        GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
+                ObtuseApproximateCalendarDate.ENTITY_TYPE_NAME,
+                ObtuseApproximateCalendarDate.VERSION,
+                super.bundleRoot( packer ),
+                packer.getPackingContext()
+        );
 
-	if ( _precision == DatePrecision.RANGE ) {
+        if ( _precision == DatePrecision.RANGE ) {
 
-	    bundle.addHolder( new GowingStringHolder( ObtuseApproximateCalendarDate.EARLIEST_DATE_NAME, getEarliestPossibleDate().getDateString(), true ) );
-	    bundle.addHolder( new GowingStringHolder( ObtuseApproximateCalendarDate.LATEST_DATE_NAME, getLatestPossibleDate().getDateString(), true ) );
+            bundle.addHolder( new GowingStringHolder(
+                    ObtuseApproximateCalendarDate.EARLIEST_DATE_NAME,
+                    getEarliestPossibleDate().getDateString(),
+                    true
+            ) );
+            bundle.addHolder( new GowingStringHolder(
+                    ObtuseApproximateCalendarDate.LATEST_DATE_NAME,
+                    getLatestPossibleDate().getDateString(),
+                    true
+            ) );
 
-	} else {
+        } else {
 
-	    bundle.addHolder( new GowingStringHolder( ObtuseApproximateCalendarDate.NOMINAL_DATE_NAME, getNominalCalendarDate().getDateString(), true ) );
+            bundle.addHolder( new GowingStringHolder(
+                    ObtuseApproximateCalendarDate.NOMINAL_DATE_NAME,
+                    getNominalCalendarDate().getDateString(),
+                    true
+            ) );
 
-	}
+        }
 
-	bundle.addHolder( new GowingStringHolder( ObtuseApproximateCalendarDate.PRECISION_NAME, getPrecision().name(), true ) );
+        bundle.addHolder( new GowingStringHolder( ObtuseApproximateCalendarDate.PRECISION_NAME, getPrecision().name(), true ) );
 
-	return bundle;
+        return bundle;
 
     }
 
     @Override
     public boolean finishUnpacking( GowingUnPacker unPacker ) {
 
-	return true;
+        return true;
 
     }
 
@@ -319,58 +388,58 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
         if ( _earliestPossibleDate == null ) {
 
-	    switch ( _precision ) {
+            switch ( _precision ) {
 
-		case DATE:
+                case DATE:
 
-		    _earliestPossibleDate = _nominalCalendarDate;
-		    _latestPossibleDate = _nominalCalendarDate;
+                    _earliestPossibleDate = _nominalCalendarDate;
+                    _latestPossibleDate = _nominalCalendarDate;
 
-		    break;
+                    break;
 
-		case MONTH:
+                case MONTH:
 
-		    String monthRounded = ObtuseUtil.lpad( _nominalCalendarDate.getYear(), 4, '0' ) + '-' +
-					  ObtuseUtil.lpad( _nominalCalendarDate.getMonthOfYear() + 1, 2, '0' ) + '-' +
-					  "01";
+                    String monthRounded = ObtuseUtil.lpad( _nominalCalendarDate.getYear(), 4, '0' ) + '-' +
+                                          ObtuseUtil.lpad( _nominalCalendarDate.getMonthOfYear() + 1, 2, '0' ) + '-' +
+                                          "01";
 //		Logger.logMsg( "month rounded is \"" + monthRounded + "\"" );
 
-		    _earliestPossibleDate = parseCalendarDate( monthRounded );
+                    _earliestPossibleDate = parseCalendarDate( monthRounded );
 
-		    break;
+                    break;
 
-		case YEAR:
+                case YEAR:
 
-		    _earliestPossibleDate = parseCalendarDate(
-			    ObtuseUtil.lpad( _nominalCalendarDate.getYear(), 4, '0' ) + "-01-01"
-		    );
+                    _earliestPossibleDate = parseCalendarDate(
+                            ObtuseUtil.lpad( _nominalCalendarDate.getYear(), 4, '0' ) + "-01-01"
+                    );
 
-		    break;
+                    break;
 
-		case DECADE:
+                case DECADE:
 
-		    _earliestPossibleDate = parseCalendarDate(
-			    ObtuseUtil.lpad( 10 * ( _nominalCalendarDate.getYear() / 10 ), 4, '0' ) + "-01-01"
-		    );
+                    _earliestPossibleDate = parseCalendarDate(
+                            ObtuseUtil.lpad( 10 * ( _nominalCalendarDate.getYear() / 10 ), 4, '0' ) + "-01-01"
+                    );
 
-		    break;
+                    break;
 
-		case RANGE:
+                case RANGE:
 
-		    _earliestPossibleDate = parseCalendarDate( ObtuseCalendarDate.EARLIEST_SUPPORTED_DATE_STRING );
+                    _earliestPossibleDate = parseCalendarDate( ObtuseCalendarDate.EARLIEST_SUPPORTED_DATE_STRING );
 
-		    break;
+                    break;
 
 //		    throw new HowDidWeGetHereError( "ObtuseApproximateCalendarDate:  attempt to compute earliest date for range precision date (should have been provide via constructor)" );
 
-		default:
-		    throw new HowDidWeGetHereError( "ObtuseApproximateCalendarDate:  unsupported precision " + _precision );
+                default:
+                    throw new HowDidWeGetHereError( "ObtuseApproximateCalendarDate:  unsupported precision " + _precision );
 
-	    }
+            }
 
-	}
+        }
 
-	return _earliestPossibleDate;
+        return _earliestPossibleDate;
 
     }
 
@@ -379,65 +448,65 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
         if ( _latestPossibleDate == null ) {
 
-	    switch ( _precision ) {
+            switch ( _precision ) {
 
-		case DATE:
+                case DATE:
 
-		    _earliestPossibleDate = _nominalCalendarDate;
-		    _latestPossibleDate = _nominalCalendarDate;
+                    _earliestPossibleDate = _nominalCalendarDate;
+                    _latestPossibleDate = _nominalCalendarDate;
 
-		    break;
+                    break;
 
-		case MONTH:
+                case MONTH:
 
 //	        try {
 
-		    String yyyymmdd = ObtuseUtil.lpad( _nominalCalendarDate.getYear(), 4, '0' ) + '-' +
-				      ObtuseUtil.lpad( _nominalCalendarDate.getMonthOfYear() + 1, 2, '0' ) + '-' +
-				      ObtuseUtil.lpad( ObtuseCalendarDate.getDaysInMonth(
-					      _nominalCalendarDate.getYear(),
-					      _nominalCalendarDate.getMonthOfYear()
-				      ), 2, '0' );
+                    String yyyymmdd = ObtuseUtil.lpad( _nominalCalendarDate.getYear(), 4, '0' ) + '-' +
+                                      ObtuseUtil.lpad( _nominalCalendarDate.getMonthOfYear() + 1, 2, '0' ) + '-' +
+                                      ObtuseUtil.lpad( ObtuseCalendarDate.getDaysInMonth(
+                                              _nominalCalendarDate.getYear(),
+                                              _nominalCalendarDate.getMonthOfYear()
+                                      ), 2, '0' );
 
-		    _latestPossibleDate = parseCalendarDate( yyyymmdd );
+                    _latestPossibleDate = parseCalendarDate( yyyymmdd );
 
-		    break;
+                    break;
 
 //		}
 //		return parse(
 //
 //			"01" );
 
-		case YEAR:
+                case YEAR:
 
-		     _latestPossibleDate = parseCalendarDate(
-			    ObtuseUtil.lpad( _nominalCalendarDate.getYear(), 4, '0' ) + "-12-31"
-		    );
+                    _latestPossibleDate = parseCalendarDate(
+                            ObtuseUtil.lpad( _nominalCalendarDate.getYear(), 4, '0' ) + "-12-31"
+                    );
 
-		    break;
+                    break;
 
-		case DECADE:
+                case DECADE:
 
-		     _latestPossibleDate = parseCalendarDate(
-			    ObtuseUtil.lpad( 10 * ( _nominalCalendarDate.getYear() / 10 ) + 9, 4, '0' ) + "-12-31"
-		    );
+                    _latestPossibleDate = parseCalendarDate(
+                            ObtuseUtil.lpad( 10 * ( _nominalCalendarDate.getYear() / 10 ) + 9, 4, '0' ) + "-12-31"
+                    );
 
-		    break;
+                    break;
 
-		case RANGE:
+                case RANGE:
 
-		    _latestPossibleDate = parseCalendarDate( ObtuseCalendarDate.LATEST_SUPPORTED_DATE_STRING );
+                    _latestPossibleDate = parseCalendarDate( ObtuseCalendarDate.LATEST_SUPPORTED_DATE_STRING );
 
 //		    throw new HowDidWeGetHereError( "ObtuseApproximateCalendarDate:  attempt to compute latest date for range precision date (should have been provide via constructor)" );
 
-		default:
-		    throw new HowDidWeGetHereError( "ObtuseApproximateCalendarDate:  unsupported precision " + _precision );
+                default:
+                    throw new HowDidWeGetHereError( "ObtuseApproximateCalendarDate:  unsupported precision " + _precision );
 
-	    }
+            }
 
-	}
+        }
 
-	return _latestPossibleDate;
+        return _latestPossibleDate;
 
     }
 
@@ -465,6 +534,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
     /**
      Determine if this approximate date includes some other specific date.
+
      @param otherSpecificDate the other specific date.
      @return <tt>true</tt> if this approximate date includes the other specific date; <tt>false</tt> otherwise.
      */
@@ -477,6 +547,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
     /**
      Determine if this approximate date overlaps some other approximate date.
+
      @param otherApproximateDate the other approximate date.
      @return <tt>true</tt> if they overlap; <tt>false</tt> otherwise.
      */
@@ -489,19 +560,19 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
             return false;
 
-	}
+        }
 
-	// No. Are we completely after the other date?
+        // No. Are we completely after the other date?
 
-	if ( getEarliestPossibleDate().compareTo( otherApproximateDate.getLatestPossibleDate() ) > 0 ) {
+        if ( getEarliestPossibleDate().compareTo( otherApproximateDate.getLatestPossibleDate() ) > 0 ) {
 
-	    return false;
+            return false;
 
-	}
+        }
 
-	// No. We must overlap the other date.
+        // No. We must overlap the other date.
 
-	return true;
+        return true;
 
     }
 
@@ -532,13 +603,13 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
     public ObtuseCalendarDate getNominalCalendarDate() {
 
-	return _nominalCalendarDate;
+        return _nominalCalendarDate;
 
     }
 
     public DatePrecision getPrecision() {
 
-	return _precision;
+        return _precision;
 
     }
 
@@ -590,22 +661,28 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
      Note that each of these forms are distinguishable - you can tell if the original {@link ObtuseApproximateCalendarDate} was a date, month, year, or decade-precise date just by looking at how it is formatted by this method.
      There is probably going to be a static <tt>parse( String <i>approximateDateString</i>)</tt> method someday which takes advantage of this distinguishability to automagically parse an
      approximate date string correctly (e.g. <tt>"2015-10-12"</tt> would yield the date-precise date 2015-10-12 whereas <tt>"2015-10"</tt> would yield the month-precise date 2015-10.
+
      @return this instance's formatted date taking into account its precision.
      */
 
     public String format() {
 
-	switch ( _precision ) {
+        switch ( _precision ) {
 
-	    case DATE: return getNominalCalendarDate().getDateString();
+            case DATE:
+                return getNominalCalendarDate().getDateString();
 
-	    case MONTH: return getNominalCalendarDate().getDateString().substring( 0, 7 );
+            case MONTH:
+                return getNominalCalendarDate().getDateString().substring( 0, 7 );
 
-	    case YEAR: return getNominalCalendarDate().getDateString().substring( 0, 4 );
+            case YEAR:
+                return getNominalCalendarDate().getDateString().substring( 0, 4 );
 
-	    case DECADE: return getNominalCalendarDate().getDateString().substring( 0, 3 ) + "0s";
+            case DECADE:
+                return getNominalCalendarDate().getDateString().substring( 0, 3 ) + "0s";
 
-	    case RANGE: return "(" + getEarliestPossibleDate().getDateString() + "," + getLatestPossibleDate().getDateString() + ")";
+            case RANGE:
+                return "(" + getEarliestPossibleDate().getDateString() + "," + getLatestPossibleDate().getDateString() + ")";
 
 //		/*
 //		Round to the nearest decade where years ending in 8 and 9 round up and all other years round down.
@@ -626,10 +703,10 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 //
 //		}
 
-	    default:
-		return getNominalCalendarDate().getDateString();
+            default:
+                return getNominalCalendarDate().getDateString();
 
-	}
+        }
 
     }
 
@@ -649,27 +726,28 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
     /**
      Compare two instances primarily based on their earliest possible date, secondarily on their latest possible date, and tertiarily on the specified precisions.
+
      @param rhs the other instance.
      @return -1, 0 or 1 depending on whether this instance is less than, equal to or greater than the other instance.
      */
 
     public int compareTo( @NotNull ObtuseApproximateCalendarDate rhs ) {
 
-	int rval = getEarliestPossibleDate().compareTo( rhs.getEarliestPossibleDate() );
-	if ( rval == 0 ) {
+        int rval = getEarliestPossibleDate().compareTo( rhs.getEarliestPossibleDate() );
+        if ( rval == 0 ) {
 
-	    rval = getLatestPossibleDate().compareTo( rhs.getLatestPossibleDate() );
-	    if ( rval == 0 ) {
+            rval = getLatestPossibleDate().compareTo( rhs.getLatestPossibleDate() );
+            if ( rval == 0 ) {
 
-	        // DatePrecision values with higher ordinals are considered to be greater than values with lower ordinals.
+                // DatePrecision values with higher ordinals are considered to be greater than values with lower ordinals.
 
-	        rval = getPrecision().ordinal() - rhs.getPrecision().ordinal();
+                rval = getPrecision().ordinal() - rhs.getPrecision().ordinal();
 
-	    }
+            }
 
-	}
+        }
 
-	return rval;
+        return rval;
 
     }
 
@@ -680,25 +758,26 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
     public boolean equivalent( @NotNull ObtuseApproximateCalendarDate rhs ) {
 
         return getEarliestPossibleDate().equals( rhs.getEarliestPossibleDate() ) &&
-	       getLatestPossibleDate().equals( rhs.getLatestPossibleDate() );
+               getLatestPossibleDate().equals( rhs.getLatestPossibleDate() );
 
     }
 
     /**
      An implementation of equals which is, by definition, consistent with {@link #compareTo} when equals returns true.
+
      @param rhs the other instance.
      @return true if both instance's specified date and precision are the same; false otherwise.
      */
 
     public boolean equals( Object rhs ) {
 
-	return rhs instanceof ObtuseApproximateCalendarDate && compareTo( (ObtuseApproximateCalendarDate)rhs ) == 0;
+        return rhs instanceof ObtuseApproximateCalendarDate && compareTo( (ObtuseApproximateCalendarDate)rhs ) == 0;
 
     }
 
     public String toString() {
 
-	return "ObtuseApproximateCalendarDate( " + format() + " )";
+        return "ObtuseApproximateCalendarDate( " + format() + " )";
 
     }
 
@@ -708,316 +787,376 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
     private static final Pattern OACD_MONTH_PATTERN = Pattern.compile( "(\\d\\d\\d\\d)-(\\d\\d)" );
     private static final Pattern OACD_DATE_PATTERN = Pattern.compile( "(\\d\\d\\d\\d)-(\\d\\d)-(\\d\\d)" );
 
-
-    public static ObtuseApproximateCalendarDate parse( String dateString ) {
+    public static ObtuseApproximateCalendarDate parse( @NotNull String dateString ) {
 
         if ( dateString.length() == 0 ) {
 
             throw new ObtuseApproximateCalendarDateParsingException( Reason.EMPTY_STRING, "unable to parse empty strings" );
 
-	}
+        }
 
-	// If it starts with an opening parentheses, ends with a closing parentheses, and has a comma somewhere then it could only be a date range "(yyyy-mm-dd,yyyy-mm-dd)").
+        // If it starts with an opening parentheses, ends with a closing parentheses, and has a comma somewhere then it could only be a date range "(yyyy-mm-dd,yyyy-mm-dd)").
 
         if ( dateString.startsWith( "(" ) || dateString.indexOf( ',' ) >= 0 || dateString.endsWith( ")" ) ) {
 
-	    return parseDateRange( dateString );
+            return parseDateRange( dateString );
 
-	}
+        }
 
-	// Could it be a decade?
+        // Could it be a decade?
 
-	Matcher decadeMatcher = OACD_DECADE_PATTERN.matcher( dateString );
-	if ( decadeMatcher.matches() ) {
+        Matcher decadeMatcher = OACD_DECADE_PATTERN.matcher( dateString );
+        if ( decadeMatcher.matches() ) {
 
-	    String tmpDateString = decadeMatcher.group( 1 ) + "-01-01";
-	    try {
+            String tmpDateString = decadeMatcher.group( 1 ) + "-01-01";
+            try {
 
-		ObtuseCalendarDate tmpCalendarDate = ObtuseCalendarDate.parseCalendarDate( tmpDateString );
+                ObtuseCalendarDate tmpCalendarDate = ObtuseCalendarDate.parseCalendarDate( tmpDateString );
 
-		try {
+                try {
 
-		    return new ObtuseApproximateCalendarDate( tmpCalendarDate, DatePrecision.DECADE );
+                    return new ObtuseApproximateCalendarDate( tmpCalendarDate, DatePrecision.DECADE );
 
-		} catch ( Exception e ) {
+                } catch ( Exception e ) {
 
-		    throw new HowDidWeGetHereError( "exceptions should be impossible here (dateString is \"" + dateString + "\")", e );
+                    throw new HowDidWeGetHereError( "exceptions should be impossible here (dateString is \"" + dateString + "\")", e );
 
-		}
+                }
 
-	    } catch ( IllegalArgumentException e ) {
+            } catch ( IllegalArgumentException e ) {
 
-		throw new ObtuseApproximateCalendarDateParsingException( Reason.DECADE_INVALID, "invalid decade \"" + dateString + "\" (must be \"YYYYs\" or \"YYYYS\")", e );
+                throw new ObtuseApproximateCalendarDateParsingException(
+                        Reason.DECADE_INVALID,
+                        "invalid decade \"" + dateString + "\" (must be \"YYYYs\" or \"YYYYS\")",
+                        e
+                );
 
-	    }
+            }
 
-	}
+        }
 
-	// If it is just four digits then it could only be a year.
+        // If it is just four digits then it could only be a year.
 
-	Matcher yearMatcher = OACD_YEAR_PATTERN.matcher( dateString );
-	if ( yearMatcher.matches() ) {
+        String cleanedYearString = dateString;
+        if ( cleanedYearString.endsWith( "-00-00" ) ) {
 
-	    String tmpDateString = yearMatcher.group( 1 ) + "-01-01";
+            cleanedYearString = cleanedYearString.substring( 0, cleanedYearString.length() - 6 );
 
-	    try {
+        }
 
-		ObtuseCalendarDate tmpCalendarDate = ObtuseCalendarDate.parseCalendarDate( tmpDateString );
+        Matcher yearMatcher = OACD_YEAR_PATTERN.matcher( cleanedYearString );
+        if ( yearMatcher.matches() ) {
 
-		try {
+            String tmpDateString = yearMatcher.group( 1 ) + "-01-01";
 
-		    return new ObtuseApproximateCalendarDate( tmpCalendarDate, DatePrecision.YEAR );
+            try {
 
-		} catch ( Exception e ) {
+                ObtuseCalendarDate tmpCalendarDate = ObtuseCalendarDate.parseCalendarDate( tmpDateString );
 
-		    throw new HowDidWeGetHereError( "exceptions should be impossible here (dateString is \"" + dateString + "\")", e );
+                try {
 
-		}
+                    return new ObtuseApproximateCalendarDate( tmpCalendarDate, DatePrecision.YEAR );
 
-	    } catch ( IllegalArgumentException e ) {
+                } catch ( Exception e ) {
 
-		throw new ObtuseApproximateCalendarDateParsingException(
-			Reason.YEAR_INVALID,
-			"invalid year \"" + dateString + "\" (must be four digit year between " +
-			ObtuseCalendarDate.EARLIEST_SUPPORTED_DATE_STRING.substring( 0, 4 ) + " and " +
-			ObtuseCalendarDate.LATEST_SUPPORTED_DATE_STRING.substring( 0, 4 ) + ")",
-			e );
+                    throw new HowDidWeGetHereError( "exceptions should be impossible here (dateString is \"" + dateString + "\")", e );
 
-	    }
+                }
 
-	}
+            } catch ( IllegalArgumentException e ) {
 
-	// Could it be a month?
+                throw new ObtuseApproximateCalendarDateParsingException(
+                        Reason.YEAR_INVALID,
+                        "invalid year \"" + cleanedYearString + "\" (must be four digit year between " +
+                        ObtuseCalendarDate.EARLIEST_SUPPORTED_DATE_STRING.substring( 0, 4 ) + " and " +
+                        ObtuseCalendarDate.LATEST_SUPPORTED_DATE_STRING.substring( 0, 4 ) + ")",
+                        e
+                );
 
-	Matcher monthMatcher = OACD_MONTH_PATTERN.matcher( dateString );
-	if ( monthMatcher.matches() ) {
+            }
 
-	    String tmpDateString = dateString + "-01";
+        }
 
-	    try {
+        // Could it be a month?
 
-		ObtuseCalendarDate tmpCalendarDate = ObtuseCalendarDate.parseCalendarDate( tmpDateString );
+        String cleanedMonthString = dateString;
+        if ( cleanedMonthString.endsWith( "-00" ) ) {
 
-		try {
+            cleanedMonthString = cleanedMonthString.substring( 0, cleanedMonthString.length() - 3 );
 
-		    return new ObtuseApproximateCalendarDate( tmpCalendarDate, DatePrecision.MONTH );
+        }
 
-		} catch ( Exception e ) {
+        Matcher monthMatcher = OACD_MONTH_PATTERN.matcher( cleanedMonthString );
+        if ( monthMatcher.matches() ) {
 
-		    throw new HowDidWeGetHereError( "exceptions should be impossible here (dateString is \"" + dateString + "\")", e );
+            String tmpDateString = cleanedMonthString + "-01";
 
-		}
+            try {
 
-	    } catch ( IllegalArgumentException e ) {
+                ObtuseCalendarDate tmpCalendarDate = ObtuseCalendarDate.parseCalendarDate( tmpDateString );
 
-		throw new ObtuseApproximateCalendarDateParsingException( Reason.MONTH_INVALID, "invalid month \"" + dateString + "\" (must be YYYY-MM)", e );
+                try {
 
-	    }
+                    return new ObtuseApproximateCalendarDate( tmpCalendarDate, DatePrecision.MONTH );
 
-	}
+                } catch ( Exception e ) {
 
-	// Does it look like a simple calendar date?
+                    throw new HowDidWeGetHereError( "exceptions should be impossible here (dateString is \"" + dateString + "\")", e );
 
-	Matcher dateMatcher = OACD_DATE_PATTERN.matcher( dateString );
-	if ( dateMatcher.matches() ) {
+                }
 
-	    try {
+            } catch ( IllegalArgumentException e ) {
 
-		ObtuseCalendarDate tmpCalendarDate = ObtuseCalendarDate.parseCalendarDate( dateString );
+                throw new ObtuseApproximateCalendarDateParsingException(
+                        Reason.MONTH_INVALID,
+                        "invalid month \"" + cleanedMonthString + "\" (must be YYYY-MM)",
+                        e
+                );
 
-		try {
+            }
 
-		    return new ObtuseApproximateCalendarDate( tmpCalendarDate, DatePrecision.DATE );
+        }
 
-		} catch ( Exception e ) {
+        // Does it look like a simple calendar date?
 
-		    throw new HowDidWeGetHereError( "exceptions should be impossible here (dateString is \"" + dateString + "\")", e );
+        Matcher dateMatcher = OACD_DATE_PATTERN.matcher( dateString );
+        if ( dateMatcher.matches() ) {
 
-		}
+            try {
 
-	    } catch ( IllegalArgumentException e ) {
+                ObtuseCalendarDate tmpCalendarDate = ObtuseCalendarDate.parseCalendarDate( dateString );
 
-		throw new ObtuseApproximateCalendarDateParsingException( Reason.DATE_INVALID, "invalid date \"" + dateString + "\" (must be \"YYYY-MM-DD\")" );
+                try {
 
-	    }
+                    return new ObtuseApproximateCalendarDate( tmpCalendarDate, DatePrecision.DATE );
 
-	}
+                } catch ( Exception e ) {
 
-	// No idea what this fish is.
+                    throw new HowDidWeGetHereError( "exceptions should be impossible here (dateString is \"" + dateString + "\")", e );
 
-	throw new ObtuseApproximateCalendarDateParsingException( Reason.INCOMPREHENSIBLE, "unable to make sense of \"" + dateString + "\"" );
+                }
+
+            } catch ( IllegalArgumentException e ) {
+
+                throw new ObtuseApproximateCalendarDateParsingException(
+                        Reason.DATE_INVALID,
+                        "invalid date \"" + dateString + "\" (must be \"YYYY-MM-DD\")"
+                );
+
+            }
+
+        }
+
+        // No idea what this fish is.
+
+        throw new ObtuseApproximateCalendarDateParsingException( Reason.INCOMPREHENSIBLE, "unable to make sense of \"" + dateString + "\"" );
 
     }
 
     @NotNull
     public static ObtuseApproximateCalendarDate parseDateRange( String dateString ) {
 
-	if ( dateString.startsWith( "(" ) && dateString.indexOf( ',' ) >= 0 && dateString.endsWith( ")" ) ) {
+        if ( dateString.startsWith( "(" ) && dateString.indexOf( ',' ) >= 0 && dateString.endsWith( ")" ) ) {
 
-	    String firstDateString = dateString.substring( 1, dateString.indexOf( ',' ) );
-	    String secondDateString = dateString.substring( dateString.indexOf( ',' ) + 1, dateString.length() - 1 );
+            String firstDateString = dateString.substring( 1, dateString.indexOf( ',' ) );
+            String secondDateString = dateString.substring( dateString.indexOf( ',' ) + 1, dateString.length() - 1 );
 
-	    if ( secondDateString.indexOf( ',' ) >= 0 ) {
+            if ( secondDateString.indexOf( ',' ) >= 0 ) {
 
-		throw new ObtuseApproximateCalendarDateParsingException( Reason.RANGE_TOO_MANY_COMMAS, "too many commas in date range \"" + dateString + "\" (must be \"(YYYY-MM-DD,YYYY-MM-DD)\")" );
+                throw new ObtuseApproximateCalendarDateParsingException(
+                        Reason.RANGE_TOO_MANY_COMMAS,
+                        "too many commas in date range \"" +
+                        dateString +
+                        "\" (must be \"(YYYY-MM-DD,YYYY-MM-DD)\")"
+                );
 
-	    }
+            }
 
-	    Matcher firstDateMatcher = OACD_DATE_PATTERN.matcher( firstDateString );
-	    Matcher secondDateMatcher = OACD_DATE_PATTERN.matcher( secondDateString );
+            Matcher firstDateMatcher = OACD_DATE_PATTERN.matcher( firstDateString );
+            Matcher secondDateMatcher = OACD_DATE_PATTERN.matcher( secondDateString );
 
-	    if ( firstDateMatcher.matches() && secondDateMatcher.matches() ) {
+            if ( firstDateMatcher.matches() && secondDateMatcher.matches() ) {
 
-		ObtuseCalendarDate firstDate = null;
-		ObtuseCalendarDate secondDate = null;
-		ObtuseApproximateCalendarDateParsingException exception = null;
+                ObtuseCalendarDate firstDate = null;
+                ObtuseCalendarDate secondDate = null;
+                ObtuseApproximateCalendarDateParsingException exception = null;
 
-		try {
+                try {
 
-		    firstDate = ObtuseCalendarDate.parseCalendarDate( firstDateString );
+                    firstDate = ObtuseCalendarDate.parseCalendarDate( firstDateString );
 
-		    try {
+                    try {
 
-			secondDate = ObtuseCalendarDate.parseCalendarDate( secondDateString );
+                        secondDate = ObtuseCalendarDate.parseCalendarDate( secondDateString );
 
-			if ( firstDate.compareTo( secondDate ) > 0 ) {
+                        if ( firstDate.compareTo( secondDate ) > 0 ) {
 
-			    exception = new ObtuseApproximateCalendarDateParsingException( Reason.RANGE_BACKWARDS, "starting date in date range is after ending date in date range \"" + dateString + "\"" );
+                            exception = new ObtuseApproximateCalendarDateParsingException(
+                                    Reason.RANGE_BACKWARDS,
+                                    "starting date in date range is after ending date in date range \"" + dateString + "\""
+                            );
 
-			    ObtuseUtil.doNothing();
+                            ObtuseUtil.doNothing();
 
-			} else {
+                        } else {
 
-			    try {
+                            try {
 
-				return new ObtuseApproximateCalendarDate( firstDate, secondDate );
+                                return new ObtuseApproximateCalendarDate( firstDate, secondDate );
 
-			    } catch ( Exception e ) {
+                            } catch ( Exception e ) {
 
-				throw new HowDidWeGetHereError( "exceptions should be impossible here (dateString is \"" + dateString + "\")", e );
+                                throw new HowDidWeGetHereError( "exceptions should be impossible here (dateString is \"" + dateString + "\")", e );
 
-			    }
+                            }
 
-			}
+                        }
 
-		    } catch ( IllegalArgumentException e ) {
+                    } catch ( IllegalArgumentException e ) {
 
-			exception = new ObtuseApproximateCalendarDateParsingException( Reason.RANGE_INVALID_ENDING_DATE, "ending date in date range is invalid \"" + dateString + "\" (must be \"(YYYY-MM-DD,YYYY-MM-DD)\")", e );
+                        exception = new ObtuseApproximateCalendarDateParsingException( Reason.RANGE_INVALID_ENDING_DATE,
+                                                                                       "ending date in date range is invalid \"" +
+                                                                                       dateString +
+                                                                                       "\" (must be \"(YYYY-MM-DD,YYYY-MM-DD)\")",
+                                                                                       e
+                        );
 
-			ObtuseUtil.doNothing();
+                        ObtuseUtil.doNothing();
 
-		    }
+                    }
 
-		} catch ( IllegalArgumentException e ) {
+                } catch ( IllegalArgumentException e ) {
 
-		    exception = new ObtuseApproximateCalendarDateParsingException( Reason.RANGE_INVALID_ENDING_DATE, "starting date in date range is invalid \"" + dateString + "\" (must be \"(YYYY-MM-DD,YYYY-MM-DD)\")", e );
+                    exception = new ObtuseApproximateCalendarDateParsingException( Reason.RANGE_INVALID_ENDING_DATE,
+                                                                                   "starting date in date range is invalid \"" +
+                                                                                   dateString +
+                                                                                   "\" (must be \"(YYYY-MM-DD,YYYY-MM-DD)\")",
+                                                                                   e
+                    );
 
-		    ObtuseUtil.doNothing();
+                    ObtuseUtil.doNothing();
 
-		}
+                }
 
-		if ( exception == null ) {
+                if ( exception == null ) {
 
-		    throw new HowDidWeGetHereError( "something went wrong - no idea what (dateString is \"" + dateString + "\")" );
+                    throw new HowDidWeGetHereError( "something went wrong - no idea what (dateString is \"" + dateString + "\")" );
 
-		}
+                }
 
-		throw exception;
+                throw exception;
 
-	    } else if ( !firstDateMatcher.matches() ) {
+            } else if ( !firstDateMatcher.matches() ) {
 
-		throw new ObtuseApproximateCalendarDateParsingException( Reason.RANGE_INVALID_STARTING_DATE, "starting date in date range is invalid \"" + dateString + "\" (must be \"(YYYY-MM-DD,YYYY-MM-DD)\")" );
+                throw new ObtuseApproximateCalendarDateParsingException(
+                        Reason.RANGE_INVALID_STARTING_DATE,
+                        "starting date in date range is invalid \"" +
+                        dateString +
+                        "\" (must be \"(YYYY-MM-DD,YYYY-MM-DD)\")"
+                );
 
-	    } else {
+            } else {
 
-		throw new ObtuseApproximateCalendarDateParsingException( Reason.RANGE_INVALID_ENDING_DATE, "ending date in date range is invalid \"" + dateString + "\" (must be \"(YYYY-MM-DD,YYYY-MM-DD)\")" );
+                throw new ObtuseApproximateCalendarDateParsingException(
+                        Reason.RANGE_INVALID_ENDING_DATE,
+                        "ending date in date range is invalid \"" +
+                        dateString +
+                        "\" (must be \"(YYYY-MM-DD,YYYY-MM-DD)\")"
+                );
 
-	    }
+            }
 
-	} else {
+        } else {
 
-	    throw new ObtuseApproximateCalendarDateParsingException( Reason.RANGE_INVALID, "invalid date range \"" + dateString + "\" (must be \"(YYYY-MM-DD,YYYY-MM-DD)\")" );
+            throw new ObtuseApproximateCalendarDateParsingException(
+                    Reason.RANGE_INVALID,
+                    "invalid date range \"" + dateString + "\" (must be \"(YYYY-MM-DD,YYYY-MM-DD)\")"
+            );
 
-	}
+        }
 
     }
 
     private static void checkParsing( @NotNull String dateString, @Nullable ObtuseApproximateCalendarDate expectedDate ) {
 
-	try {
+        try {
 
-	    ObtuseApproximateCalendarDate approximateDate = parse( dateString );
-	    if ( approximateDate.equals( expectedDate ) ) {
+            ObtuseApproximateCalendarDate approximateDate = parse( dateString );
+            if ( approximateDate.equals( expectedDate ) ) {
 
-		Logger.logMsg( "\"" + dateString + "\" correctly parsed as \"" + approximateDate + "\"" );
+                Logger.logMsg( "\"" + dateString + "\" correctly parsed as \"" + approximateDate + "\"" );
 
-	    } else {
+            } else {
 
-		Logger.logErr( "\"" + dateString + "\" incorrectly parsed as \"" + approximateDate + "\"" );
+                Logger.logErr( "\"" + dateString + "\" incorrectly parsed as \"" + approximateDate + "\"" );
 
-		ObtuseUtil.doNothing();
+                ObtuseUtil.doNothing();
 
-	    }
+            }
 
-	} catch ( Exception e ) {
+        } catch ( Exception e ) {
 
-	    Logger.logErr( "exception parsing \"" + dateString + "\"", e );
+            Logger.logErr( "exception parsing \"" + dateString + "\"", e );
 
-	    ObtuseUtil.doNothing();
+            ObtuseUtil.doNothing();
 
-	}
+        }
 
     }
 
     public static void main( String[] args ) {
 
-	BasicProgramConfigInfo.init( "Obtuse", "Util", "Testing", null );
+        BasicProgramConfigInfo.init( "Obtuse", "Util", "Testing", null );
 
-	checkParsing( "2000s", new ObtuseApproximateCalendarDate( parseCalendarDate( "2006-01-01" ), DatePrecision.DECADE ) );
-	checkParsing( "2000", new ObtuseApproximateCalendarDate( parseCalendarDate( "2000-01-01" ), DatePrecision.YEAR ) );
-	checkParsing( "2000-10", new ObtuseApproximateCalendarDate( parseCalendarDate( "2000-10-01" ), DatePrecision.MONTH ) );
-	checkParsing( "2000-10-20", new ObtuseApproximateCalendarDate( parseCalendarDate( "2000-10-20" ), DatePrecision.DATE ) );
-	checkParsing( "(2000-10-20,2015-10-20)", new ObtuseApproximateCalendarDate( parseCalendarDate( "2000-10-20" ), parseCalendarDate( "2015-10-20") ) );
+        checkParsing( "2000s", new ObtuseApproximateCalendarDate( parseCalendarDate( "2006-01-01" ), DatePrecision.DECADE ) );
+        checkParsing( "2000", new ObtuseApproximateCalendarDate( parseCalendarDate( "2000-01-01" ), DatePrecision.YEAR ) );
+        checkParsing( "2000-10", new ObtuseApproximateCalendarDate( parseCalendarDate( "2000-10-01" ), DatePrecision.MONTH ) );
+        checkParsing( "2000-10-20", new ObtuseApproximateCalendarDate( parseCalendarDate( "2000-10-20" ), DatePrecision.DATE ) );
+        checkParsing(
+                "(2000-10-20,2015-10-20)",
+                new ObtuseApproximateCalendarDate( parseCalendarDate( "2000-10-20" ), parseCalendarDate( "2015-10-20" ) )
+        );
 
-	Logger.logMsg( "(2016-08-03,null) yields " + new ObtuseApproximateCalendarDate( parseCalendarDate( "2016-08-03"), (ObtuseCalendarDate) null ) );
-	Logger.logMsg( "(null,2016-08-03,null) yields " + new ObtuseApproximateCalendarDate( null, parseCalendarDate( "2016-08-03") ) );
-	checkOverlap(
-		new ObtuseApproximateCalendarDate( parseCalendarDate( "2005-03-07" ), ObtuseCalendarDate.getLatestSupportedDate() ),
-		new ObtuseApproximateCalendarDate( ObtuseCalendarDate.getEarliestSupportedDate(), parseCalendarDate( "2005-03-07" ) ),
-		true
-	);
-	checkOverlap(
-		new ObtuseApproximateCalendarDate( parseCalendarDate( "2005-01-01" ), ObtuseCalendarDate.getLatestSupportedDate() ),
-		new ObtuseApproximateCalendarDate( ObtuseCalendarDate.getEarliestSupportedDate(), parseCalendarDate( "2005-12-31" ) ),
-		true
-	);
-	checkOverlap(
-		new ObtuseApproximateCalendarDate( parseCalendarDate( "2005-03-07" ), ObtuseCalendarDate.getLatestSupportedDate() ),
-		new ObtuseApproximateCalendarDate( ObtuseCalendarDate.getEarliestSupportedDate(), parseCalendarDate( "2005-03-06" ) ),
-		false
-	);
-	checkOverlap(
-		new ObtuseApproximateCalendarDate( ObtuseCalendarDate.getEarliestSupportedDate(), ObtuseCalendarDate.getLatestSupportedDate() ),
-		new ObtuseApproximateCalendarDate( ObtuseCalendarDate.getEarliestSupportedDate(), parseCalendarDate( "2005-03-07" ) ),
-		true
-	);
-	checkOverlap(
-		new ObtuseApproximateCalendarDate( ObtuseCalendarDate.getEarliestSupportedDate(), ObtuseCalendarDate.getLatestSupportedDate() ),
-		new ObtuseApproximateCalendarDate( parseCalendarDate( "2005-03-07" ), ObtuseCalendarDate.getLatestSupportedDate() ),
-		true
-	);
-	checkOverlap(
-		new ObtuseApproximateCalendarDate( ObtuseCalendarDate.getEarliestSupportedDate(), ObtuseCalendarDate.getLatestSupportedDate() ),
-		new ObtuseApproximateCalendarDate( ObtuseCalendarDate.getEarliestSupportedDate(), ObtuseCalendarDate.getLatestSupportedDate() ),
-		true
-	);
+        Logger.logMsg( "(2016-08-03,null) yields " +
+                       new ObtuseApproximateCalendarDate( parseCalendarDate( "2016-08-03" ), (ObtuseCalendarDate)null ) );
+        Logger.logMsg( "(null,2016-08-03,null) yields " + new ObtuseApproximateCalendarDate( null, parseCalendarDate( "2016-08-03" ) ) );
+        checkOverlap(
+                new ObtuseApproximateCalendarDate( parseCalendarDate( "2005-03-07" ), ObtuseCalendarDate.getLatestSupportedDate() ),
+                new ObtuseApproximateCalendarDate( ObtuseCalendarDate.getEarliestSupportedDate(), parseCalendarDate( "2005-03-07" ) ),
+                true
+        );
+        checkOverlap(
+                new ObtuseApproximateCalendarDate( parseCalendarDate( "2005-01-01" ), ObtuseCalendarDate.getLatestSupportedDate() ),
+                new ObtuseApproximateCalendarDate( ObtuseCalendarDate.getEarliestSupportedDate(), parseCalendarDate( "2005-12-31" ) ),
+                true
+        );
+        checkOverlap(
+                new ObtuseApproximateCalendarDate( parseCalendarDate( "2005-03-07" ), ObtuseCalendarDate.getLatestSupportedDate() ),
+                new ObtuseApproximateCalendarDate( ObtuseCalendarDate.getEarliestSupportedDate(), parseCalendarDate( "2005-03-06" ) ),
+                false
+        );
+        checkOverlap(
+                new ObtuseApproximateCalendarDate( ObtuseCalendarDate.getEarliestSupportedDate(), ObtuseCalendarDate.getLatestSupportedDate() ),
+                new ObtuseApproximateCalendarDate( ObtuseCalendarDate.getEarliestSupportedDate(), parseCalendarDate( "2005-03-07" ) ),
+                true
+        );
+        checkOverlap(
+                new ObtuseApproximateCalendarDate( ObtuseCalendarDate.getEarliestSupportedDate(), ObtuseCalendarDate.getLatestSupportedDate() ),
+                new ObtuseApproximateCalendarDate( parseCalendarDate( "2005-03-07" ), ObtuseCalendarDate.getLatestSupportedDate() ),
+                true
+        );
+        checkOverlap(
+                new ObtuseApproximateCalendarDate( ObtuseCalendarDate.getEarliestSupportedDate(), ObtuseCalendarDate.getLatestSupportedDate() ),
+                new ObtuseApproximateCalendarDate( ObtuseCalendarDate.getEarliestSupportedDate(), ObtuseCalendarDate.getLatestSupportedDate() ),
+                true
+        );
 
-	equalsVsEquivalent(
-		new ObtuseApproximateCalendarDate( parseCalendarDate( "2020-03-03" ), DatePrecision.MONTH ),
-		new ObtuseApproximateCalendarDate( parseCalendarDate( "2020-03-01" ), parseCalendarDate( "2020-03-31" ) ),
-		false,
-		true
-	);
+        equalsVsEquivalent(
+                new ObtuseApproximateCalendarDate( parseCalendarDate( "2020-03-03" ), DatePrecision.MONTH ),
+                new ObtuseApproximateCalendarDate( parseCalendarDate( "2020-03-01" ), parseCalendarDate( "2020-03-31" ) ),
+                false,
+                true
+        );
 
 // test the tester (verify that it correctly handles incorrect results)
 //
@@ -1040,260 +1179,274 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 //		false
 //	);
 
-	Random rng = new Random( 12321421 );
-	for ( DatePrecision precision : DatePrecision.values() ) {
+        Random rng = new Random( 12321421 );
+        for ( DatePrecision precision : DatePrecision.values() ) {
 
-	    if ( precision != DatePrecision.RANGE ) {
+            if ( precision != DatePrecision.RANGE ) {
 
-		for ( int year = 1980; year < 2020; year += 1 ) {
+                for ( int year = 1980; year < 2020; year += 1 ) {
 
-		    try {
+                    try {
 
-			ObtuseCalendarDate calendarDate = new ObtuseCalendarDate(
-				"" +
-				year +
-				"-" + ObtuseUtil.lpad( 1 + rng.nextInt( 12 ), 2, '0' ) +
-				"-" + ObtuseUtil.lpad( 1 + rng.nextInt( 28 ), 2, '0' ) +
-				""
-			);
+                        ObtuseCalendarDate calendarDate = new ObtuseCalendarDate(
+                                "" +
+                                year +
+                                "-" + ObtuseUtil.lpad( 1 + rng.nextInt( 12 ), 2, '0' ) +
+                                "-" + ObtuseUtil.lpad( 1 + rng.nextInt( 28 ), 2, '0' ) +
+                                ""
+                        );
 
-			ObtuseApproximateCalendarDate date = new ObtuseApproximateCalendarDate(
-				calendarDate,
-				precision
-			);
+                        ObtuseApproximateCalendarDate date = new ObtuseApproximateCalendarDate(
+                                calendarDate,
+                                precision
+                        );
 
-			Logger.logMsg(
-				"" +
-				calendarDate +
-				" (" + date.getEarliestPossibleDate() + " <> " + date.getLatestPossibleDate() + ")" +
-				" rounds with " +
-				precision.name().toLowerCase() +
-				" precision formats as " +
-				date.format()
-			);
+                        Logger.logMsg(
+                                "" +
+                                calendarDate +
+                                " (" + date.getEarliestPossibleDate() + " <> " + date.getLatestPossibleDate() + ")" +
+                                " rounds with " +
+                                precision.name().toLowerCase() +
+                                " precision formats as " +
+                                date.format()
+                        );
 
-		    } catch ( ParsingException e ) {
+                    } catch ( ParsingException e ) {
 
-			e.printStackTrace();
+                        e.printStackTrace();
 
-		    }
+                    }
 
-		}
+                }
 
-		checkOverlap( "2010-10-10", null, "2010-10-10", null, true );
+                checkOverlap( "2010-10-10", null, "2010-10-10", null, true );
 
-		checkOverlap( "2012-10-10", DatePrecision.DATE, "2012-10-10", null, true );
-		checkOverlap( "2012-10-10", DatePrecision.MONTH, "2012-10-01", null, true );
-		checkOverlap( "2012-10-10", DatePrecision.YEAR, "2012-01-01", null, true );
-		checkOverlap( "2012-10-10", DatePrecision.DECADE, "2010-01-01", null, true );
+                checkOverlap( "2012-10-10", DatePrecision.DATE, "2012-10-10", null, true );
+                checkOverlap( "2012-10-10", DatePrecision.MONTH, "2012-10-01", null, true );
+                checkOverlap( "2012-10-10", DatePrecision.YEAR, "2012-01-01", null, true );
+                checkOverlap( "2012-10-10", DatePrecision.DECADE, "2010-01-01", null, true );
 
-		checkOverlap( "2012-10-10", DatePrecision.DATE, "2012-10-10", null, true );
-		checkOverlap( "2012-10-10", DatePrecision.MONTH, "2012-10-31", null, true );
-		checkOverlap( "2012-10-10", DatePrecision.YEAR, "2012-12-31", null, true );
-		checkOverlap( "2012-10-10", DatePrecision.DECADE, "2019-12-31", null, true );
+                checkOverlap( "2012-10-10", DatePrecision.DATE, "2012-10-10", null, true );
+                checkOverlap( "2012-10-10", DatePrecision.MONTH, "2012-10-31", null, true );
+                checkOverlap( "2012-10-10", DatePrecision.YEAR, "2012-12-31", null, true );
+                checkOverlap( "2012-10-10", DatePrecision.DECADE, "2019-12-31", null, true );
 
-		// as close to overlapping as possible but not actually overlapping
+                // as close to overlapping as possible but not actually overlapping
 
-		checkOverlap( "2012-10-10", DatePrecision.DATE, "2012-10-09", DatePrecision.DATE, false );
-		checkOverlap( "2012-10-01", DatePrecision.DATE, "2012-09-30", DatePrecision.MONTH, false );
-		checkOverlap( "2012-01-01", DatePrecision.DATE, "2011-12-31", DatePrecision.YEAR, false );
-		checkOverlap( "2010-01-01", DatePrecision.DATE, "2009-12-31", DatePrecision.DECADE, false );
+                checkOverlap( "2012-10-10", DatePrecision.DATE, "2012-10-09", DatePrecision.DATE, false );
+                checkOverlap( "2012-10-01", DatePrecision.DATE, "2012-09-30", DatePrecision.MONTH, false );
+                checkOverlap( "2012-01-01", DatePrecision.DATE, "2011-12-31", DatePrecision.YEAR, false );
+                checkOverlap( "2010-01-01", DatePrecision.DATE, "2009-12-31", DatePrecision.DECADE, false );
 
-		checkOverlap( "2012-10-10", DatePrecision.MONTH, "2012-09-30", DatePrecision.DATE, false );
-		checkOverlap( "2012-10-10", DatePrecision.MONTH, "2012-09-30", DatePrecision.MONTH, false );
-		checkOverlap( "2012-10-10", DatePrecision.MONTH, "2011-12-31", DatePrecision.YEAR, false );
-		checkOverlap( "2012-10-10", DatePrecision.MONTH, "2009-12-31", DatePrecision.DECADE, false );
+                checkOverlap( "2012-10-10", DatePrecision.MONTH, "2012-09-30", DatePrecision.DATE, false );
+                checkOverlap( "2012-10-10", DatePrecision.MONTH, "2012-09-30", DatePrecision.MONTH, false );
+                checkOverlap( "2012-10-10", DatePrecision.MONTH, "2011-12-31", DatePrecision.YEAR, false );
+                checkOverlap( "2012-10-10", DatePrecision.MONTH, "2009-12-31", DatePrecision.DECADE, false );
 
-		checkOverlap( "2012-10-10", DatePrecision.YEAR, "2011-12-31", DatePrecision.DATE, false );
-		checkOverlap( "2012-10-10", DatePrecision.YEAR, "2011-12-31", DatePrecision.MONTH, false );
-		checkOverlap( "2012-10-10", DatePrecision.YEAR, "2011-12-31", DatePrecision.YEAR, false );
-		checkOverlap( "2012-10-10", DatePrecision.YEAR, "2009-12-31", DatePrecision.DECADE, false );
+                checkOverlap( "2012-10-10", DatePrecision.YEAR, "2011-12-31", DatePrecision.DATE, false );
+                checkOverlap( "2012-10-10", DatePrecision.YEAR, "2011-12-31", DatePrecision.MONTH, false );
+                checkOverlap( "2012-10-10", DatePrecision.YEAR, "2011-12-31", DatePrecision.YEAR, false );
+                checkOverlap( "2012-10-10", DatePrecision.YEAR, "2009-12-31", DatePrecision.DECADE, false );
 
-		checkOverlap( "2012-10-10", DatePrecision.DECADE, "2009-12-31", null, false );
+                checkOverlap( "2012-10-10", DatePrecision.DECADE, "2009-12-31", null, false );
 
-		checkOverlap( "2012-10-10", DatePrecision.DATE, "2012-10-11", DatePrecision.DATE, false );
-		checkOverlap( "2012-10-31", DatePrecision.DATE, "2012-11-01", DatePrecision.MONTH, false );
-		checkOverlap( "2012-12-31", DatePrecision.DATE, "2013-01-01", DatePrecision.YEAR, false );
-		checkOverlap( "2019-12-31", DatePrecision.DATE, "2020-01-01", DatePrecision.DECADE, false );
+                checkOverlap( "2012-10-10", DatePrecision.DATE, "2012-10-11", DatePrecision.DATE, false );
+                checkOverlap( "2012-10-31", DatePrecision.DATE, "2012-11-01", DatePrecision.MONTH, false );
+                checkOverlap( "2012-12-31", DatePrecision.DATE, "2013-01-01", DatePrecision.YEAR, false );
+                checkOverlap( "2019-12-31", DatePrecision.DATE, "2020-01-01", DatePrecision.DECADE, false );
 
-		checkOverlap( "2012-10-10", DatePrecision.MONTH, "2012-11-01", DatePrecision.DATE, false );
-		checkOverlap( "2012-10-10", DatePrecision.MONTH, "2012-11-01", DatePrecision.MONTH, false );
-		checkOverlap( "2012-12-10", DatePrecision.MONTH, "2013-01-01", DatePrecision.YEAR, false );
-		checkOverlap( "2019-12-10", DatePrecision.MONTH, "2009-12-31", DatePrecision.DECADE, false );
+                checkOverlap( "2012-10-10", DatePrecision.MONTH, "2012-11-01", DatePrecision.DATE, false );
+                checkOverlap( "2012-10-10", DatePrecision.MONTH, "2012-11-01", DatePrecision.MONTH, false );
+                checkOverlap( "2012-12-10", DatePrecision.MONTH, "2013-01-01", DatePrecision.YEAR, false );
+                checkOverlap( "2019-12-10", DatePrecision.MONTH, "2009-12-31", DatePrecision.DECADE, false );
 
-		checkOverlap( "2012-10-10", DatePrecision.YEAR, "2013-01-01", DatePrecision.DATE, false );
-		checkOverlap( "2012-10-10", DatePrecision.YEAR, "2013-01-01", DatePrecision.MONTH, false );
-		checkOverlap( "2012-10-10", DatePrecision.YEAR, "2013-01-01", DatePrecision.YEAR, false );
-		checkOverlap( "2012-10-10", DatePrecision.YEAR, "2020-01-01", DatePrecision.DECADE, false );
+                checkOverlap( "2012-10-10", DatePrecision.YEAR, "2013-01-01", DatePrecision.DATE, false );
+                checkOverlap( "2012-10-10", DatePrecision.YEAR, "2013-01-01", DatePrecision.MONTH, false );
+                checkOverlap( "2012-10-10", DatePrecision.YEAR, "2013-01-01", DatePrecision.YEAR, false );
+                checkOverlap( "2012-10-10", DatePrecision.YEAR, "2020-01-01", DatePrecision.DECADE, false );
 
-		checkOverlap( "2012-10-10", DatePrecision.DECADE, "2020-01-01", null, false );
+                checkOverlap( "2012-10-10", DatePrecision.DECADE, "2020-01-01", null, false );
 
-		// non-zero gap
+                // non-zero gap
 
-		checkOverlap( "2012-10-10", DatePrecision.DATE, "2012-10-08", DatePrecision.DATE, false );
-		checkOverlap( "2012-10-01", DatePrecision.DATE, "2012-08-31", DatePrecision.MONTH, false );
-		checkOverlap( "2012-01-01", DatePrecision.DATE, "2010-12-31", DatePrecision.YEAR, false );
-		checkOverlap( "2010-01-01", DatePrecision.DATE, "1999-12-31", DatePrecision.DECADE, false );
+                checkOverlap( "2012-10-10", DatePrecision.DATE, "2012-10-08", DatePrecision.DATE, false );
+                checkOverlap( "2012-10-01", DatePrecision.DATE, "2012-08-31", DatePrecision.MONTH, false );
+                checkOverlap( "2012-01-01", DatePrecision.DATE, "2010-12-31", DatePrecision.YEAR, false );
+                checkOverlap( "2010-01-01", DatePrecision.DATE, "1999-12-31", DatePrecision.DECADE, false );
 
-		checkOverlap( "2012-10-10", DatePrecision.MONTH, "2012-09-30", DatePrecision.DATE, false );
-		checkOverlap( "2012-10-10", DatePrecision.MONTH, "2012-08-31", DatePrecision.MONTH, false );
-		checkOverlap( "2012-10-10", DatePrecision.MONTH, "2010-12-31", DatePrecision.YEAR, false );
-		checkOverlap( "2012-10-10", DatePrecision.MONTH, "1999-12-31", DatePrecision.DECADE, false );
+                checkOverlap( "2012-10-10", DatePrecision.MONTH, "2012-09-30", DatePrecision.DATE, false );
+                checkOverlap( "2012-10-10", DatePrecision.MONTH, "2012-08-31", DatePrecision.MONTH, false );
+                checkOverlap( "2012-10-10", DatePrecision.MONTH, "2010-12-31", DatePrecision.YEAR, false );
+                checkOverlap( "2012-10-10", DatePrecision.MONTH, "1999-12-31", DatePrecision.DECADE, false );
 
-		checkOverlap( "2012-10-10", DatePrecision.YEAR, "2011-12-30", DatePrecision.DATE, false );
-		checkOverlap( "2012-10-10", DatePrecision.YEAR, "2011-11-30", DatePrecision.MONTH, false );
-		checkOverlap( "2012-10-10", DatePrecision.YEAR, "2010-12-31", DatePrecision.YEAR, false );
-		checkOverlap( "2012-10-10", DatePrecision.YEAR, "1999-12-31", DatePrecision.DECADE, false );
+                checkOverlap( "2012-10-10", DatePrecision.YEAR, "2011-12-30", DatePrecision.DATE, false );
+                checkOverlap( "2012-10-10", DatePrecision.YEAR, "2011-11-30", DatePrecision.MONTH, false );
+                checkOverlap( "2012-10-10", DatePrecision.YEAR, "2010-12-31", DatePrecision.YEAR, false );
+                checkOverlap( "2012-10-10", DatePrecision.YEAR, "1999-12-31", DatePrecision.DECADE, false );
 
-		checkOverlap( "2012-10-10", DatePrecision.DECADE, "2009-12-31", null, false );
+                checkOverlap( "2012-10-10", DatePrecision.DECADE, "2009-12-31", null, false );
 
-		checkOverlap( "2012-10-10", DatePrecision.DATE, "2012-10-12", DatePrecision.DATE, false );
-		checkOverlap( "2012-10-31", DatePrecision.DATE, "2012-12-01", DatePrecision.MONTH, false );
-		checkOverlap( "2012-12-31", DatePrecision.DATE, "2014-01-01", DatePrecision.YEAR, false );
-		checkOverlap( "2019-12-31", DatePrecision.DATE, "2030-01-01", DatePrecision.DECADE, false );
+                checkOverlap( "2012-10-10", DatePrecision.DATE, "2012-10-12", DatePrecision.DATE, false );
+                checkOverlap( "2012-10-31", DatePrecision.DATE, "2012-12-01", DatePrecision.MONTH, false );
+                checkOverlap( "2012-12-31", DatePrecision.DATE, "2014-01-01", DatePrecision.YEAR, false );
+                checkOverlap( "2019-12-31", DatePrecision.DATE, "2030-01-01", DatePrecision.DECADE, false );
 
-		checkOverlap( "2012-10-10", DatePrecision.MONTH, "2012-11-02", DatePrecision.DATE, false );
-		checkOverlap( "2012-10-10", DatePrecision.MONTH, "2012-12-01", DatePrecision.MONTH, false );
-		checkOverlap( "2012-12-10", DatePrecision.MONTH, "2014-01-01", DatePrecision.YEAR, false );
-		checkOverlap( "2019-12-10", DatePrecision.MONTH, "2009-12-31", DatePrecision.DECADE, false );
+                checkOverlap( "2012-10-10", DatePrecision.MONTH, "2012-11-02", DatePrecision.DATE, false );
+                checkOverlap( "2012-10-10", DatePrecision.MONTH, "2012-12-01", DatePrecision.MONTH, false );
+                checkOverlap( "2012-12-10", DatePrecision.MONTH, "2014-01-01", DatePrecision.YEAR, false );
+                checkOverlap( "2019-12-10", DatePrecision.MONTH, "2009-12-31", DatePrecision.DECADE, false );
 
-		checkOverlap( "2012-10-10", DatePrecision.YEAR, "2013-01-01", DatePrecision.DATE, false );
-		checkOverlap( "2012-10-10", DatePrecision.YEAR, "2013-02-01", DatePrecision.MONTH, false );
-		checkOverlap( "2012-10-10", DatePrecision.YEAR, "2014-01-01", DatePrecision.YEAR, false );
-		checkOverlap( "2012-10-10", DatePrecision.YEAR, "2030-01-01", DatePrecision.DECADE, false );
+                checkOverlap( "2012-10-10", DatePrecision.YEAR, "2013-01-01", DatePrecision.DATE, false );
+                checkOverlap( "2012-10-10", DatePrecision.YEAR, "2013-02-01", DatePrecision.MONTH, false );
+                checkOverlap( "2012-10-10", DatePrecision.YEAR, "2014-01-01", DatePrecision.YEAR, false );
+                checkOverlap( "2012-10-10", DatePrecision.YEAR, "2030-01-01", DatePrecision.DECADE, false );
 
-		checkOverlap( "2012-10-10", DatePrecision.DECADE, "2030-01-01", null, false );
+                checkOverlap( "2012-10-10", DatePrecision.DECADE, "2030-01-01", null, false );
 
-	    }
+            }
 
-	}
+        }
 
-	checkIncludes( "2010-10-10", DatePrecision.DATE, "2010-10-08", false );
-	checkIncludes( "2010-10-10", DatePrecision.DATE, "2010-10-09", false );
-	checkIncludes( "2010-10-10", DatePrecision.DATE, "2010-10-10", true );
-	checkIncludes( "2010-10-10", DatePrecision.DATE, "2010-10-11", false );
-	checkIncludes( "2010-10-10", DatePrecision.DATE, "2010-10-12", false );
+        checkIncludes( "2010-10-10", DatePrecision.DATE, "2010-10-08", false );
+        checkIncludes( "2010-10-10", DatePrecision.DATE, "2010-10-09", false );
+        checkIncludes( "2010-10-10", DatePrecision.DATE, "2010-10-10", true );
+        checkIncludes( "2010-10-10", DatePrecision.DATE, "2010-10-11", false );
+        checkIncludes( "2010-10-10", DatePrecision.DATE, "2010-10-12", false );
 
-	checkIncludes( "2010-10-10", DatePrecision.MONTH, "2010-09-29", false );
-	checkIncludes( "2010-10-10", DatePrecision.MONTH, "2010-09-30", false );
-	checkIncludes( "2010-10-10", DatePrecision.MONTH, "2010-10-01", true );
-	checkIncludes( "2010-10-10", DatePrecision.MONTH, "2010-10-02", true );
-	checkIncludes( "2010-10-10", DatePrecision.MONTH, "2010-10-30", true );
-	checkIncludes( "2010-10-10", DatePrecision.MONTH, "2010-10-31", true );
-	checkIncludes( "2010-10-10", DatePrecision.MONTH, "2010-11-01", false );
-	checkIncludes( "2010-10-10", DatePrecision.MONTH, "2010-11-02", false );
+        checkIncludes( "2010-10-10", DatePrecision.MONTH, "2010-09-29", false );
+        checkIncludes( "2010-10-10", DatePrecision.MONTH, "2010-09-30", false );
+        checkIncludes( "2010-10-10", DatePrecision.MONTH, "2010-10-01", true );
+        checkIncludes( "2010-10-10", DatePrecision.MONTH, "2010-10-02", true );
+        checkIncludes( "2010-10-10", DatePrecision.MONTH, "2010-10-30", true );
+        checkIncludes( "2010-10-10", DatePrecision.MONTH, "2010-10-31", true );
+        checkIncludes( "2010-10-10", DatePrecision.MONTH, "2010-11-01", false );
+        checkIncludes( "2010-10-10", DatePrecision.MONTH, "2010-11-02", false );
 
-	checkIncludes( "2010-10-10", DatePrecision.YEAR, "2009-12-30", false );
-	checkIncludes( "2010-10-10", DatePrecision.YEAR, "2009-12-31", false );
-	checkIncludes( "2010-10-10", DatePrecision.YEAR, "2010-01-01", true );
-	checkIncludes( "2010-10-10", DatePrecision.YEAR, "2010-01-02", true );
-	checkIncludes( "2010-10-10", DatePrecision.YEAR, "2010-12-30", true );
-	checkIncludes( "2010-10-10", DatePrecision.YEAR, "2010-12-31", true );
-	checkIncludes( "2010-10-10", DatePrecision.YEAR, "2011-01-01", false );
-	checkIncludes( "2010-10-10", DatePrecision.YEAR, "2011-01-02", false );
+        checkIncludes( "2010-10-10", DatePrecision.YEAR, "2009-12-30", false );
+        checkIncludes( "2010-10-10", DatePrecision.YEAR, "2009-12-31", false );
+        checkIncludes( "2010-10-10", DatePrecision.YEAR, "2010-01-01", true );
+        checkIncludes( "2010-10-10", DatePrecision.YEAR, "2010-01-02", true );
+        checkIncludes( "2010-10-10", DatePrecision.YEAR, "2010-12-30", true );
+        checkIncludes( "2010-10-10", DatePrecision.YEAR, "2010-12-31", true );
+        checkIncludes( "2010-10-10", DatePrecision.YEAR, "2011-01-01", false );
+        checkIncludes( "2010-10-10", DatePrecision.YEAR, "2011-01-02", false );
 
-	checkIncludes( "2010-10-10", DatePrecision.DECADE, "2009-12-30", false );
-	checkIncludes( "2010-10-10", DatePrecision.DECADE, "2009-12-31", false );
-	checkIncludes( "2010-10-10", DatePrecision.DECADE, "2010-01-01", true );
-	checkIncludes( "2010-10-10", DatePrecision.DECADE, "2010-01-02", true );
-	checkIncludes( "2010-10-10", DatePrecision.DECADE, "2019-12-30", true );
-	checkIncludes( "2010-10-10", DatePrecision.DECADE, "2019-12-31", true );
-	checkIncludes( "2010-10-10", DatePrecision.DECADE, "2020-01-01", false );
-	checkIncludes( "2010-10-10", DatePrecision.DECADE, "2020-01-02", false );
+        checkIncludes( "2010-10-10", DatePrecision.DECADE, "2009-12-30", false );
+        checkIncludes( "2010-10-10", DatePrecision.DECADE, "2009-12-31", false );
+        checkIncludes( "2010-10-10", DatePrecision.DECADE, "2010-01-01", true );
+        checkIncludes( "2010-10-10", DatePrecision.DECADE, "2010-01-02", true );
+        checkIncludes( "2010-10-10", DatePrecision.DECADE, "2019-12-30", true );
+        checkIncludes( "2010-10-10", DatePrecision.DECADE, "2019-12-31", true );
+        checkIncludes( "2010-10-10", DatePrecision.DECADE, "2020-01-01", false );
+        checkIncludes( "2010-10-10", DatePrecision.DECADE, "2020-01-02", false );
 
     }
 
     private static void equalsVsEquivalent(
-	    ObtuseApproximateCalendarDate lhs,
-	    ObtuseApproximateCalendarDate rhs,
-	    boolean equalsOracle,
-	    boolean equivalentOracle
+            ObtuseApproximateCalendarDate lhs,
+            ObtuseApproximateCalendarDate rhs,
+            boolean equalsOracle,
+            boolean equivalentOracle
     ) {
 
         boolean equalsResult = lhs.equals( rhs );
-	boolean equivalentResult = lhs.equivalent( rhs );
-	if ( equalsOracle == equalsResult && equivalentOracle == equivalentResult ) {
+        boolean equivalentResult = lhs.equivalent( rhs );
+        if ( equalsOracle == equalsResult && equivalentOracle == equivalentResult ) {
 
-	    Logger.logMsg(
-		    "" + lhs + " vs " + rhs + ( equalsOracle ? " are" : " are not" ) + " equals and" +
-		    ( equivalentOracle ? " are" : " are not" ) + " equivalent"
-	    );
+            Logger.logMsg(
+                    "" + lhs + " vs " + rhs + ( equalsOracle ? " are" : " are not" ) + " equals and" +
+                    ( equivalentOracle ? " are" : " are not" ) + " equivalent"
+            );
 
-	} else if ( equalsOracle == equalsResult ) {
+        } else if ( equalsOracle == equalsResult ) {
 
-	    Logger.logErr(
-		    "" + lhs + " vs " + rhs + ( equalsOracle ? " are" : " are not" ) + " equals and" +
-		    ( equivalentOracle ? " are" : " are not" ) + " equivalent",
-		    new IllegalArgumentException( " - equivalent() disagrees" )
-	    );
+            Logger.logErr(
+                    "" + lhs + " vs " + rhs + ( equalsOracle ? " are" : " are not" ) + " equals and" +
+                    ( equivalentOracle ? " are" : " are not" ) + " equivalent",
+                    new IllegalArgumentException( " - equivalent() disagrees" )
+            );
 
-	} else if ( equivalentOracle == equivalentResult ) {
+        } else if ( equivalentOracle == equivalentResult ) {
 
-	    Logger.logErr(
-		    "" + lhs + " vs " + rhs + ( equalsOracle ? " are" : " are not" ) + " equals and" +
-		    ( equivalentOracle ? " are" : " are not" ) + " equivalent",
-		    new IllegalArgumentException( " - equals() disagrees" )
-	    );
+            Logger.logErr(
+                    "" + lhs + " vs " + rhs + ( equalsOracle ? " are" : " are not" ) + " equals and" +
+                    ( equivalentOracle ? " are" : " are not" ) + " equivalent",
+                    new IllegalArgumentException( " - equals() disagrees" )
+            );
 
-	} else {
+        } else {
 
-	    Logger.logErr(
-		    "" + lhs + " vs " + rhs + ( equalsOracle ? " are" : " are not" ) + " equals and" +
-		    ( equivalentOracle ? " are" : " are not" ) + " equivalent",
-		    new IllegalArgumentException( " - both equals and equivalent disagree" )
-	    );
+            Logger.logErr(
+                    "" + lhs + " vs " + rhs + ( equalsOracle ? " are" : " are not" ) + " equals and" +
+                    ( equivalentOracle ? " are" : " are not" ) + " equivalent",
+                    new IllegalArgumentException( " - both equals and equivalent disagree" )
+            );
 
-	}
+        }
 
     }
 
     private static boolean checkIncludes(
-	    String lhsDateString,
-	    DatePrecision precision,
-	    String rhsDateString,
-	    boolean oracle
+            String lhsDateString,
+            DatePrecision precision,
+            String rhsDateString,
+            boolean oracle
     ) {
 
-	try {
+        try {
 
-	    ObtuseApproximateCalendarDate lhs = new ObtuseApproximateCalendarDate( parseCalendarDate( lhsDateString ), precision );
-	    ObtuseCalendarDate rhs = parseCalendarDate( rhsDateString );
+            ObtuseApproximateCalendarDate lhs = new ObtuseApproximateCalendarDate( parseCalendarDate( lhsDateString ), precision );
+            ObtuseCalendarDate rhs = parseCalendarDate( rhsDateString );
 
-	    boolean result = lhs.includes( rhs );
-	    if ( result == oracle ) {
+            boolean result = lhs.includes( rhs );
+            if ( result == oracle ) {
 
-		if ( s_verboseTesting ) {
+                if ( s_verboseTesting ) {
 
-		    Logger.logMsg( "[ " + lhs.getEarliestPossibleDate() + ", " + lhs.getLatestPossibleDate() + " ] includes [ " + rhs + " ] yielded correct " + result );
+                    Logger.logMsg( "[ " +
+                                   lhs.getEarliestPossibleDate() +
+                                   ", " +
+                                   lhs.getLatestPossibleDate() +
+                                   " ] includes [ " +
+                                   rhs +
+                                   " ] yielded correct " +
+                                   result );
 
-		}
+                }
 
-		return true;
+                return true;
 
-	    } else {
+            } else {
 
-		Logger.logErr( "[ " + lhs.getEarliestPossibleDate() + ", " + lhs.getLatestPossibleDate() + " ] includes [ " + rhs + " ] yielded incorrect " + result, new IllegalArgumentException( "include oops" ) );
+                Logger.logErr( "[ " +
+                               lhs.getEarliestPossibleDate() +
+                               ", " +
+                               lhs.getLatestPossibleDate() +
+                               " ] includes [ " +
+                               rhs +
+                               " ] yielded incorrect " +
+                               result, new IllegalArgumentException( "include oops" ) );
 
-		return false;
+                return false;
 
-	    }
+            }
 
-	} catch ( Throwable e ) {
+        } catch ( Throwable e ) {
 
-	    Logger.logErr( "" + lhsDateString + "@" + precision + " includes " + rhsDateString + " blew up", e );
+            Logger.logErr( "" + lhsDateString + "@" + precision + " includes " + rhsDateString + " blew up", e );
 
-	    return false;
+            return false;
 
-	}
+        }
 
     }
 
     private static boolean checkOverlap(
-	    String lhsDateString,
-	    DatePrecision lhsPrecision,
-	    String rhsDateString,
-	    DatePrecision rhsPrecision,
-	    boolean oracle
+            String lhsDateString,
+            DatePrecision lhsPrecision,
+            String rhsDateString,
+            DatePrecision rhsPrecision,
+            boolean oracle
     ) {
 
         if ( lhsPrecision == null || rhsPrecision == null ) {
@@ -1302,88 +1455,99 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
             for ( DatePrecision p : DatePrecision.values() ) {
 
-		if ( p != DatePrecision.RANGE ) {
+                if ( p != DatePrecision.RANGE ) {
 
-		    if ( lhsPrecision == null ) {
+                    if ( lhsPrecision == null ) {
 
-			if ( !checkOverlap( lhsDateString, p, rhsDateString, rhsPrecision, oracle ) ) {
+                        if ( !checkOverlap( lhsDateString, p, rhsDateString, rhsPrecision, oracle ) ) {
 
-			    rval = false;
+                            rval = false;
 
-			}
+                        }
 
-		    } else {
+                    } else {
 
-			if ( !checkOverlap( lhsDateString, lhsPrecision, rhsDateString, p, oracle ) ) {
+                        if ( !checkOverlap( lhsDateString, lhsPrecision, rhsDateString, p, oracle ) ) {
 
-			    rval = false;
+                            rval = false;
 
-			}
+                        }
 
-		    }
+                    }
 
-		}
+                }
 
-	    }
+            }
 
-	    return rval;
+            return rval;
 
-	}
+        }
 
         try {
 
             ObtuseApproximateCalendarDate lhs = new ObtuseApproximateCalendarDate( parseCalendarDate( lhsDateString ), lhsPrecision );
-	    ObtuseApproximateCalendarDate rhs = new ObtuseApproximateCalendarDate( parseCalendarDate( rhsDateString ), rhsPrecision );
+            ObtuseApproximateCalendarDate rhs = new ObtuseApproximateCalendarDate( parseCalendarDate( rhsDateString ), rhsPrecision );
 
-	    return checkOverlap( lhs, rhs, oracle );
+            return checkOverlap( lhs, rhs, oracle );
 
-	} catch ( Throwable e ) {
+        } catch ( Throwable e ) {
 
-	    Logger.logErr( "" + lhsDateString + "@" + lhsPrecision + " overlaps " + rhsDateString + "@" + rhsPrecision + " blew up", e );
+            Logger.logErr( "" + lhsDateString + "@" + lhsPrecision + " overlaps " + rhsDateString + "@" + rhsPrecision + " blew up", e );
 
-	    return false;
+            return false;
 
-	}
+        }
 
     }
 
     private static boolean checkOverlap(
-	    ObtuseApproximateCalendarDate lhs,
-	    ObtuseApproximateCalendarDate rhs,
-	    boolean oracle
+            ObtuseApproximateCalendarDate lhs,
+            ObtuseApproximateCalendarDate rhs,
+            boolean oracle
     ) {
 
-	boolean result1 = lhs.overlaps( rhs );
-	boolean result2 = rhs.overlaps( lhs );
+        boolean result1 = lhs.overlaps( rhs );
+        boolean result2 = rhs.overlaps( lhs );
 
-	if ( result1 != result2 ) {
+        if ( result1 != result2 ) {
 
-	    Logger.logErr( "" + lhs + " overlaps " + rhs + " yielded " + result1 + " but " + rhs + " overlaps " + lhs + " yielded " + result2 );
+            Logger.logErr( "" + lhs + " overlaps " + rhs + " yielded " + result1 + " but " + rhs + " overlaps " + lhs + " yielded " + result2 );
 
-	    return false;
+            return false;
 
-	}
+        }
 
-	if ( result1 == oracle ) {
+        if ( result1 == oracle ) {
 
-	    if ( s_verboseTesting ) {
+            if ( s_verboseTesting ) {
 
-		Logger.logMsg(
-			"[ " + lhs.getEarliestPossibleDate() + ", " + lhs.getLatestPossibleDate() + " ] " +
-			"overlaps [ " + rhs.getEarliestPossibleDate() + ", " + rhs.getLatestPossibleDate() + " ] " +
-			"yielded correct " + result1
-		);
+                Logger.logMsg(
+                        "[ " + lhs.getEarliestPossibleDate() + ", " + lhs.getLatestPossibleDate() + " ] " +
+                        "overlaps [ " + rhs.getEarliestPossibleDate() + ", " + rhs.getLatestPossibleDate() + " ] " +
+                        "yielded correct " + result1
+                );
 
-	    }
+            }
 //		Logger.logMsg( "" + lhs.format() + " overlaps " + rhs.format() + " yielded correct " + result1 );
 
-	    return true;
+            return true;
 
-	}
+        }
 
-	Logger.logErr( "" + lhs.getNominalCalendarDate() + "@" + lhs.getPrecision() + " overlaps " + rhs.getNominalCalendarDate() + "@" + rhs.getPrecision() + " yielded " + result1 + " but oracle expected " + oracle, new IllegalArgumentException( "overlaps oops" ) );
+        Logger.logErr( "" +
+                       lhs.getNominalCalendarDate() +
+                       "@" +
+                       lhs.getPrecision() +
+                       " overlaps " +
+                       rhs.getNominalCalendarDate() +
+                       "@" +
+                       rhs.getPrecision() +
+                       " yielded " +
+                       result1 +
+                       " but oracle expected " +
+                       oracle, new IllegalArgumentException( "overlaps oops" ) );
 
-	return false;
+        return false;
 
     }
 

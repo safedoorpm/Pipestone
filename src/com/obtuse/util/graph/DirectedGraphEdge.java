@@ -9,7 +9,7 @@ package com.obtuse.util.graph;
  */
 
 @SuppressWarnings("UnusedDeclaration")
-public interface DirectedGraphEdge extends Edge {
+public interface DirectedGraphEdge {
 
     DirectedGraphVertex getSourceNode();
 

@@ -9,4 +9,5 @@ package com.obtuse.util.graph;
  */
 
 public interface Vertex extends Comparable<Vertex> {
+
 }

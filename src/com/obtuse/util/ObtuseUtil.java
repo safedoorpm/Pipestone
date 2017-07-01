@@ -27,7 +27,7 @@ import java.util.regex.Pattern;
 import java.util.zip.ZipFile;
 
 /**
- * A sometimes motley collectino of utility methods which I have found useful.
+ A sometimes motley collectino of utility methods which I have found useful.
  */
 
 @SuppressWarnings({ "UnusedDeclaration", "SameParameterValue" })
@@ -39,16 +39,17 @@ public class ObtuseUtil {
      Detect if we are running within the Java debugger.
      <p/>Be very very careful! Code that behaves differently in a debugger is, obviously, difficult to debug!!!
      <p/>This trick found at {@code http://www.rgagnon.com/javadetails/java-detect-if-running-in-debug-mode.html}
+
      @return {@code true} if the current JVM is under the control of the Java debugger; {@code false} otherwise.
      */
 
     public static boolean inJavaDebugger() {
 
-	boolean isDebug =
-		java.lang.management.ManagementFactory.getRuntimeMXBean().
-			getInputArguments().toString().indexOf("-agentlib:jdwp") > 0;
+        boolean isDebug =
+                java.lang.management.ManagementFactory.getRuntimeMXBean().
+                        getInputArguments().toString().indexOf( "-agentlib:jdwp" ) > 0;
 
-	return isDebug;
+        return isDebug;
 
     }
 
@@ -84,6 +85,7 @@ public class ObtuseUtil {
     /**
      Generate a hexadecimal string representing a specified long value and then strip off the unnecessary leading zeros.
      If the specified long value was equal to zero then the return string will contain the single character <tt>0</tt>.
+
      @param value the long value to be converted to a minimal hex string.
      @return the converted long value.
      */
@@ -103,14 +105,14 @@ public class ObtuseUtil {
     }
 
     /**
-     * Decodes the percent encoding scheme. <br/> For example: "an+example%20string" -> "an example string"
-     *
-     * @param str the string to be decoded.
-     *
-     * @return the decoded string.
+     Decodes the percent encoding scheme. <br/> For example: "an+example%20string" -> "an example string"
+
+     @param str the string to be decoded.
+     @return the decoded string.
      */
 
     public static String decodePercent( String str ) {
+
         try {
             StringBuilder sb = new StringBuilder();
             @SuppressWarnings("TooBroadScope") int i = 0;
@@ -132,8 +134,7 @@ public class ObtuseUtil {
                 }
             }
             return new String( sb.toString().getBytes() );
-        }
-        catch ( Exception e ) {
+        } catch ( Exception e ) {
             throw new IllegalArgumentException( "ERROR: Bad percent-encoding.", e );
         }
     }
@@ -143,16 +144,17 @@ public class ObtuseUtil {
      mechanism provided to make an immutable instance mutable again).
      <p/>This class is probably not perfectly immutable as it is a fair bit simpler than the unmodifiable ones implemented in
      {@link java.util.Collections}. It is, I (Danny) believe, better than not having an immutable hashtable class at all. 2017-01-07
+
      @param <K> The type of the keys for the hash table.
      @param <V> The type of the values in the hash table.
      */
 
-    private static class UnmodifiableHashtable<K,V> extends Hashtable<K,V> {
+    private static class UnmodifiableHashtable<K, V> extends Hashtable<K, V> {
 
         private boolean _readonly;
-        private final Hashtable<? extends K,? extends V> _ht;
+        private final Hashtable<? extends K, ? extends V> _ht;
 
-        private UnmodifiableHashtable( Hashtable<? extends K,? extends V> ht ) {
+        private UnmodifiableHashtable( Hashtable<? extends K, ? extends V> ht ) {
 
             super( ht );
             _ht = ht;
@@ -180,7 +182,7 @@ public class ObtuseUtil {
         }
 
         @NotNull
-        public Set<Map.Entry<K,V>> entrySet() {
+        public Set<Map.Entry<K, V>> entrySet() {
 
             if ( _readonly ) {
 
@@ -225,7 +227,7 @@ public class ObtuseUtil {
 
         }
 
-        public void putAll( Map<? extends K,? extends V> t ) {
+        public void putAll( Map<? extends K, ? extends V> t ) {
 
             if ( _readonly ) {
 
@@ -295,11 +297,11 @@ public class ObtuseUtil {
     }
 
     /**
-     * Turn a serializable object into a byte array. No muss, no fuss, no exceptions!
-     *
-     * @param thing                  the object which is to be serialized.
-     * @param printStackTraceOnError true if a stack trace should be printed if anything goes wrong.
-     * @return the serialized form of <tt>thing</tt> or null if serialization fails.
+     Turn a serializable object into a byte array. No muss, no fuss, no exceptions!
+
+     @param thing                  the object which is to be serialized.
+     @param printStackTraceOnError true if a stack trace should be printed if anything goes wrong.
+     @return the serialized form of <tt>thing</tt> or null if serialization fails.
      */
 
     @SuppressWarnings({ "SameParameterValue" })
@@ -339,12 +341,12 @@ public class ObtuseUtil {
     }
 
     /**
-     * Write a serializable object to a file. No muss, no fuss, no exceptions!
-     *
-     * @param thing the object which is to be serialized and written to the file.
-     * @param outputFile the file that the serialized object is to be written to.
-     * @param printStackTraceOnError true if a stack trace is to be printed if anything goes wrong.
-     * @return true if it worked; false otherwise.
+     Write a serializable object to a file. No muss, no fuss, no exceptions!
+
+     @param thing                  the object which is to be serialized and written to the file.
+     @param outputFile             the file that the serialized object is to be written to.
+     @param printStackTraceOnError true if a stack trace is to be printed if anything goes wrong.
+     @return true if it worked; false otherwise.
      */
 
     @SuppressWarnings("BooleanMethodNameMustStartWithQuestion")
@@ -371,14 +373,14 @@ public class ObtuseUtil {
     }
 
     /**
-     * Write a serializable object to a file.
-     * <p/>
-     * If it worked then nothing is returned. If it failed then an exception is thrown.
-     *
-     * @param thing the object which is to be serialized and written to the file.
-     * @param outputFile the file that the serialized object is to be written to.
-     * @throws java.io.IOException if something goes wrong. The most likely reasons are (probably)
-     * that it was not possible to create the output file or some part of <tt>thing</tt> is not serializable.
+     Write a serializable object to a file.
+     <p/>
+     If it worked then nothing is returned. If it failed then an exception is thrown.
+
+     @param thing      the object which is to be serialized and written to the file.
+     @param outputFile the file that the serialized object is to be written to.
+     @throws java.io.IOException if something goes wrong. The most likely reasons are (probably)
+     that it was not possible to create the output file or some part of <tt>thing</tt> is not serializable.
      */
 
     public static void writeSerializableObjectToFile( Serializable thing, File outputFile )
@@ -401,15 +403,15 @@ public class ObtuseUtil {
     }
 
     /**
-     * Turn the contents of a file back into a serializable thing. The first serialized object from the file is read
-     * and de-serialized.
-     *
-     * @param inputFile the file that the serialized object is to be read from.
-     * @return the de-serialized object or <tt>null</tt> if something goes wrong.
-     * @throws java.io.IOException    if an I/O error occurs opening or reading from the file or a deserialization
-     *                                error occurs (see {@link java.io.ObjectInputStream#readObject()} for details on what can
-     *                                go wrong).
-     * @throws ClassNotFoundException if the class of a serialized object in the file cannot be found.
+     Turn the contents of a file back into a serializable thing. The first serialized object from the file is read
+     and de-serialized.
+
+     @param inputFile the file that the serialized object is to be read from.
+     @return the de-serialized object or <tt>null</tt> if something goes wrong.
+     @throws java.io.IOException    if an I/O error occurs opening or reading from the file or a deserialization
+     error occurs (see {@link java.io.ObjectInputStream#readObject()} for details on what can
+     go wrong).
+     @throws ClassNotFoundException if the class of a serialized object in the file cannot be found.
      */
 
     @Nullable
@@ -421,14 +423,14 @@ public class ObtuseUtil {
     }
 
     /**
-     * Turn the contents of a file back into a serializable thing. The first serialized object from the file is read
-     * and de-serialized.
-     *
-     * @param inputFile the file that the serialized object is to be read from.
-     * @param printStackTraceOnError true if a stack trace is to be printed if anything goes wrong.
-     * @return the de-serialized object. If something goes wrong then <tt>null</tt> is returned. Note that it is possible to
-     * serialize a null pointer which means that de-serializing can legitimately yield a null pointer.
-     * Use {@link #recoverSerializedVersion(File)} if this is a concern as it will throw an exception of the de-serialization fails.
+     Turn the contents of a file back into a serializable thing. The first serialized object from the file is read
+     and de-serialized.
+
+     @param inputFile              the file that the serialized object is to be read from.
+     @param printStackTraceOnError true if a stack trace is to be printed if anything goes wrong.
+     @return the de-serialized object. If something goes wrong then <tt>null</tt> is returned. Note that it is possible to
+     serialize a null pointer which means that de-serializing can legitimately yield a null pointer.
+     Use {@link #recoverSerializedVersion(File)} if this is a concern as it will throw an exception of the de-serialization fails.
      */
 
     public static Serializable recoverSerializedVersion( File inputFile, boolean printStackTraceOnError ) {
@@ -452,18 +454,18 @@ public class ObtuseUtil {
     }
 
     /**
-     * Turn a byte array back into a serializable thing. Throws an exception if something goes wrong.
-     *
-     * @param sv the serialized form of the object.
-     * @return the de-serialized object or null if de-serialization fails.
-     * @throws java.io.IOException    if an I/O error occurs reading from the {@link java.io.InputStream} or a deserialization
-     *                                error occurs (see {@link java.io.ObjectInputStream#readObject()} for details on what can
-     *                                go wrong).
-     * @throws ClassNotFoundException if the class of a serialized object in the {@link java.io.InputStream} cannot be found.
-     * <p/>
-     * This method was marked as deprecated. I don't know why so I have disabled the deprecation marking.
-     * Danny 2017-01-07
-     * at-deprecated Use {@link #recoverSerializedVersion(java.io.File)} or {@link #recoverSerializedVersion(java.io.InputStream)} instead.
+     Turn a byte array back into a serializable thing. Throws an exception if something goes wrong.
+
+     @param sv the serialized form of the object.
+     @return the de-serialized object or null if de-serialization fails.
+     @throws java.io.IOException    if an I/O error occurs reading from the {@link java.io.InputStream} or a deserialization
+     error occurs (see {@link java.io.ObjectInputStream#readObject()} for details on what can
+     go wrong).
+     @throws ClassNotFoundException if the class of a serialized object in the {@link java.io.InputStream} cannot be found.
+     <p/>
+     This method was marked as deprecated. I don't know why so I have disabled the deprecation marking.
+     Danny 2017-01-07
+     at-deprecated Use {@link #recoverSerializedVersion(java.io.File)} or {@link #recoverSerializedVersion(java.io.InputStream)} instead.
      */
 
     public static Serializable recoverSerializedVersion( byte[] sv )
@@ -486,15 +488,15 @@ public class ObtuseUtil {
     }
 
     /**
-     * Turn an {@link java.io.InputStream} back into a serializable thing. The next serialized object from the stream is read
-     * and de-serialized. The stream is closed when this operation completes.
-     *
-     * @param is the input stream that the serialized object is to be read from.
-     * @return the de-serialized object or null if something goes wrong.
-     * @throws java.io.IOException    if an I/O error occurs reading from the {@link java.io.InputStream} or a deserialization
-     *                                error occurs (see {@link java.io.ObjectInputStream#readObject()} for details on what can
-     *                                go wrong).
-     * @throws ClassNotFoundException if the class of a serialized object in the {@link java.io.InputStream} cannot be found.
+     Turn an {@link java.io.InputStream} back into a serializable thing. The next serialized object from the stream is read
+     and de-serialized. The stream is closed when this operation completes.
+
+     @param is the input stream that the serialized object is to be read from.
+     @return the de-serialized object or null if something goes wrong.
+     @throws java.io.IOException    if an I/O error occurs reading from the {@link java.io.InputStream} or a deserialization
+     error occurs (see {@link java.io.ObjectInputStream#readObject()} for details on what can
+     go wrong).
+     @throws ClassNotFoundException if the class of a serialized object in the {@link java.io.InputStream} cannot be found.
      */
 
     private static Serializable recoverSerializedVersion( InputStream is )
@@ -516,13 +518,13 @@ public class ObtuseUtil {
     }
 
     /**
-     * Turn a byte array back into a serializable thing. Prints a stack trace and returns null if something goes wrong.
-     *
-     * @param sv the serialized form of the object.
-     * @param printStackTraceOnError true if a stack trace should be printed if anything goes wrong.
-     * @return the de-serialized object. If something goes wrong then <tt>null</tt> is returned. Note that it is possible to
-     * serialize a null pointer which means that de-serializing can legitimately yield a null pointer.
-     * Use {@link #recoverSerializedVersion(byte[])} if this is a concern as it will throw an exception of the de-serialization fails.
+     Turn a byte array back into a serializable thing. Prints a stack trace and returns null if something goes wrong.
+
+     @param sv                     the serialized form of the object.
+     @param printStackTraceOnError true if a stack trace should be printed if anything goes wrong.
+     @return the de-serialized object. If something goes wrong then <tt>null</tt> is returned. Note that it is possible to
+     serialize a null pointer which means that de-serializing can legitimately yield a null pointer.
+     Use {@link #recoverSerializedVersion(byte[])} if this is a concern as it will throw an exception of the de-serialization fails.
      */
 
     public static Serializable recoverSerializedVersion(
@@ -544,14 +546,14 @@ public class ObtuseUtil {
     }
 
     /**
-     * Turn an {@link java.io.InputStream} back into a serializable thing. The next serialized object from the stream is read
-     * and de-serialized. The stream is closed when this call completes.
-     *
-     * @param is the input stream that the serialized object is to be read from.
-     * @param printStackTraceOnError true if a stack trace should be printed if anything goes wrong.
-     * @return the de-serialized object. If something goes wrong then <tt>null</tt> is returned. Note that it is possible to
-     * serialize a null pointer which means that de-serializing can legitimately yield a null pointer.
-     * Use {@link #recoverSerializedVersion(InputStream)} if this is a concern as it will throw an exception of the de-serialization fails.
+     Turn an {@link java.io.InputStream} back into a serializable thing. The next serialized object from the stream is read
+     and de-serialized. The stream is closed when this call completes.
+
+     @param is                     the input stream that the serialized object is to be read from.
+     @param printStackTraceOnError true if a stack trace should be printed if anything goes wrong.
+     @return the de-serialized object. If something goes wrong then <tt>null</tt> is returned. Note that it is possible to
+     serialize a null pointer which means that de-serializing can legitimately yield a null pointer.
+     Use {@link #recoverSerializedVersion(InputStream)} if this is a concern as it will throw an exception of the de-serialization fails.
      */
 
     public static Serializable recoverSerializedVersion( InputStream is, boolean printStackTraceOnError ) {
@@ -587,14 +589,14 @@ public class ObtuseUtil {
     }
 
     /**
-     * Read the contents of a file into a byte array without needing to worry about exceptions.
-     *
-     * @param fname                  the name of the file to be read.
-     * @param maxLength              the maximum number of bytes to read (if the file is longer than this then the
-     *                               excess data is silently not returned).
-     * @param printStackTraceOnError specifies whether or not a stack trace is to be printed if an i/o error occurs.
-     * @return a byte array containing the data read from the file or null if the file could not be read for any reason.
-     *         A zero-length byte array is returned if the file exists but contains no data.
+     Read the contents of a file into a byte array without needing to worry about exceptions.
+
+     @param fname                  the name of the file to be read.
+     @param maxLength              the maximum number of bytes to read (if the file is longer than this then the
+     excess data is silently not returned).
+     @param printStackTraceOnError specifies whether or not a stack trace is to be printed if an i/o error occurs.
+     @return a byte array containing the data read from the file or null if the file could not be read for any reason.
+     A zero-length byte array is returned if the file exists but contains no data.
      */
 
     public static byte[] readEntireFile( String fname, int maxLength, boolean printStackTraceOnError ) {
@@ -610,14 +612,14 @@ public class ObtuseUtil {
     }
 
     /**
-     * Read the contents of a file into a byte array without needing to worry about exceptions.
-     *
-     * @param file                   the file to be read.
-     * @param maxLength              the maximum number of bytes to read (if the file is longer than this then the
-     *                               excess data is silently not returned).
-     * @param printStackTraceOnError specifies whether or not a stack trace is to be printed if an i/o error occurs.
-     * @return a byte array containing the data read from the file or null if the file could not be read for any reason.
-     *         A zero-length byte array is returned if the file exists but contains no data.
+     Read the contents of a file into a byte array without needing to worry about exceptions.
+
+     @param file                   the file to be read.
+     @param maxLength              the maximum number of bytes to read (if the file is longer than this then the
+     excess data is silently not returned).
+     @param printStackTraceOnError specifies whether or not a stack trace is to be printed if an i/o error occurs.
+     @return a byte array containing the data read from the file or null if the file could not be read for any reason.
+     A zero-length byte array is returned if the file exists but contains no data.
      */
 
     public static byte[] readEntireFile( File file, int maxLength, boolean printStackTraceOnError ) {
@@ -666,15 +668,15 @@ public class ObtuseUtil {
     }
 
     /**
-     * Read the contents of an {@link java.io.InputStream} into a byte array and return the byte array without needing to worry
-     * about exceptions.
-     *
-     * @param is                     the {@link java.io.InputStream} to read the data from.
-     * @param maxLength              the maximum number of bytes to read (if the stream's contents are longer than this
-     *                               then the excess data is left in the stream).
-     * @param printStackTraceOnError specifies whether or not a stack trace is to be printed if an i/o error occurs.
-     * @return a byte array containing the data read from the file or null if the file could not be read for any reason.
-     *         A zero-length byte array is returned if the stream contains no data.
+     Read the contents of an {@link java.io.InputStream} into a byte array and return the byte array without needing to worry
+     about exceptions.
+
+     @param is                     the {@link java.io.InputStream} to read the data from.
+     @param maxLength              the maximum number of bytes to read (if the stream's contents are longer than this
+     then the excess data is left in the stream).
+     @param printStackTraceOnError specifies whether or not a stack trace is to be printed if an i/o error occurs.
+     @return a byte array containing the data read from the file or null if the file could not be read for any reason.
+     A zero-length byte array is returned if the stream contains no data.
      */
 
     public static byte[] readEntireStream( InputStream is, int maxLength, boolean printStackTraceOnError ) {
@@ -716,12 +718,12 @@ public class ObtuseUtil {
     }
 
     /**
-     * Write the contents of a byte array into a file without needing to worry about exceptions.
-     *
-     * @param bytes                  the byte array to be written.
-     * @param fname                  the name of the file to be written.
-     * @param printStackTraceOnError specifies whether or not a stack trace is to be printed if an i/o error occurs.
-     * @return true if the operation succeeded and false otherwise.
+     Write the contents of a byte array into a file without needing to worry about exceptions.
+
+     @param bytes                  the byte array to be written.
+     @param fname                  the name of the file to be written.
+     @param printStackTraceOnError specifies whether or not a stack trace is to be printed if an i/o error occurs.
+     @return true if the operation succeeded and false otherwise.
      */
 
     @SuppressWarnings({ "BooleanMethodNameMustStartWithQuestion" })
@@ -732,12 +734,12 @@ public class ObtuseUtil {
     }
 
     /**
-     * Write the contents of a byte array into a file without needing to worry about exceptions.
-     *
-     * @param bytes                  the byte array to be written.
-     * @param file                   the file to be written.
-     * @param printStackTraceOnError specifies whether or not a stack trace is to be printed if an i/o error occurs.
-     * @return true if the operation succeeded and false otherwise.
+     Write the contents of a byte array into a file without needing to worry about exceptions.
+
+     @param bytes                  the byte array to be written.
+     @param file                   the file to be written.
+     @param printStackTraceOnError specifies whether or not a stack trace is to be printed if an i/o error occurs.
+     @return true if the operation succeeded and false otherwise.
      */
 
     @SuppressWarnings({ "BooleanMethodNameMustStartWithQuestion" })
@@ -773,12 +775,12 @@ public class ObtuseUtil {
     }
 
     /**
-     * Append the contents of a byte array into a file without needing to worry about exceptions.
-     *
-     * @param bytes                  the byte array to be written.
-     * @param file                   the file to be written.
-     * @param printStackTraceOnError specifies whether or not a stack trace is to be printed if an i/o error occurs.
-     * @return true if the operation succeeded and false otherwise.
+     Append the contents of a byte array into a file without needing to worry about exceptions.
+
+     @param bytes                  the byte array to be written.
+     @param file                   the file to be written.
+     @param printStackTraceOnError specifies whether or not a stack trace is to be printed if an i/o error occurs.
+     @return true if the operation succeeded and false otherwise.
      */
 
     @SuppressWarnings({ "BooleanMethodNameMustStartWithQuestion" })
@@ -814,12 +816,12 @@ public class ObtuseUtil {
     }
 
     /**
-     * Write the contents of a byte array to an {@link java.io.OutputStream} without needing to worry about exceptions.
-     *
-     * @param bytes                  the byte array to be written to the stream.
-     * @param os                     the {@link java.io.OutputStream} to write the byte array to.
-     * @param printStackTraceOnError specifies whether or not a stack trace is to be printed if an i/o error occurs.
-     * @return true if it worked, false otherwise.
+     Write the contents of a byte array to an {@link java.io.OutputStream} without needing to worry about exceptions.
+
+     @param bytes                  the byte array to be written to the stream.
+     @param os                     the {@link java.io.OutputStream} to write the byte array to.
+     @param printStackTraceOnError specifies whether or not a stack trace is to be printed if an i/o error occurs.
+     @return true if it worked, false otherwise.
      */
 
     @SuppressWarnings({ "BooleanMethodNameMustStartWithQuestion" })
@@ -847,13 +849,13 @@ public class ObtuseUtil {
     }
 
     /**
-     * Get the size of the serialized version of an object.
-     *
-     * @param thing the object which is to be serialized so that the length of its serialized form can be returned (the
-     *              serialized form of the object is discarded - it is often much more sensible to just serialize the
-     *              object using {@link #getSerializedVersion} and then just get the length of the returned byte
-     *              array).
-     * @return the length of the serialized form of the object.
+     Get the size of the serialized version of an object.
+
+     @param thing the object which is to be serialized so that the length of its serialized form can be returned (the
+     serialized form of the object is discarded - it is often much more sensible to just serialize the
+     object using {@link #getSerializedVersion} and then just get the length of the returned byte
+     array).
+     @return the length of the serialized form of the object.
      */
 
     public static int getSerializedSize( Serializable thing ) {
@@ -872,12 +874,12 @@ public class ObtuseUtil {
     }
 
     /**
-     * Validate the number and type of arguments passed to an XML-RPC routine.
-     *
-     * @param methodName the method which is to be called.
-     * @param actual     the actual parameters which are to be passed to the method.
-     * @param expected   a description of the parameter types which are expected.
-     * @return null if arguments are valid and an appropriate error message otherwise.
+     Validate the number and type of arguments passed to an XML-RPC routine.
+
+     @param methodName the method which is to be called.
+     @param actual     the actual parameters which are to be passed to the method.
+     @param expected   a description of the parameter types which are expected.
+     @return null if arguments are valid and an appropriate error message otherwise.
      */
 
     @SuppressWarnings({ "RawUseOfParameterizedType", "CollectionDeclaredAsConcreteClass" })
@@ -1013,7 +1015,7 @@ public class ObtuseUtil {
 
     public static String lpad( float value, int width, int digits ) {
 
-        return ObtuseUtil.lpad( (double) value, width, digits );
+        return ObtuseUtil.lpad( (double)value, width, digits );
 
     }
 
@@ -1058,12 +1060,12 @@ public class ObtuseUtil {
 
             }
 
-	    String format = formatBuilder.toString();
-	    ObtuseUtil.s_cachedFormats[v] = new DecimalFormat( format );
+            String format = formatBuilder.toString();
+            ObtuseUtil.s_cachedFormats[v] = new DecimalFormat( format );
 
         }
 
-        return ObtuseUtil.lpad( ObtuseUtil.s_cachedFormats[ v ].format( di ), w );
+        return ObtuseUtil.lpad( ObtuseUtil.s_cachedFormats[v].format( di ), w );
 
     }
 
@@ -1094,12 +1096,12 @@ public class ObtuseUtil {
 
             }
 
-	    String format = formatBuilder.toString();
-	    ObtuseUtil.s_cachedZeroFormats[v] = new DecimalFormat( format );
+            String format = formatBuilder.toString();
+            ObtuseUtil.s_cachedZeroFormats[v] = new DecimalFormat( format );
 
         }
 
-        return ObtuseUtil.lpad( ObtuseUtil.s_cachedZeroFormats[ v ].format( di ), w );
+        return ObtuseUtil.lpad( ObtuseUtil.s_cachedZeroFormats[v].format( di ), w );
 
     }
 
@@ -1139,13 +1141,13 @@ public class ObtuseUtil {
 //    }
 
     /**
-     * Pad a string on the left to a specified width using a specified padding character.
-     *
-     * @param s the string to be padded.
-     * @param w the width (i.e. length) of the padded string (if the string is already longer than this then the string
-     *          itself is returned as-is).
-     * @param p the character to be used to pad the string on the left if it is shorter than <tt>w</tt>.
-     * @return the padded string or the original string if it is already at least as wide as <tt>w</tt>.
+     Pad a string on the left to a specified width using a specified padding character.
+
+     @param s the string to be padded.
+     @param w the width (i.e. length) of the padded string (if the string is already longer than this then the string
+     itself is returned as-is).
+     @param p the character to be used to pad the string on the left if it is shorter than <tt>w</tt>.
+     @return the padded string or the original string if it is already at least as wide as <tt>w</tt>.
      */
 
     public static String lpad( String s, int w, char p ) {
@@ -1181,74 +1183,74 @@ public class ObtuseUtil {
     }
 
     /**
-     * Pad a string on the left and on the right to a specified width using blanks as the padding character.
-     * <p/>What happens conceptually is that while the string is narrower than the requested width,
-     * a single space character is added on an alternating basis on the left of the string or on the right of the string.
-     * For example, if the input string is two characters long and the requested width is five characters then the resulting
-     * string will start with two space characters followed by the two characters of the input string followed by one space character.
-     * <p/>
-     * Note that a call to this method using <tt>center( s, w )</tt> is equivalent to a call to {@link #center(String, int, char)}
-     * using <tt>center( s, w, '&nbsp;' )</tt>.
-     *
-     * @param s the string to be centered by appropriate padding on the left and the right.
-     * @param w the width (i.e. length) of the centered string (if the string is already longer than this then the string
-     *          itself is returned as-is).
-     * @return the centered string or the original string if it is already at least as wide as <tt>w</tt>.
+     Pad a string on the left and on the right to a specified width using blanks as the padding character.
+     <p/>What happens conceptually is that while the string is narrower than the requested width,
+     a single space character is added on an alternating basis on the left of the string or on the right of the string.
+     For example, if the input string is two characters long and the requested width is five characters then the resulting
+     string will start with two space characters followed by the two characters of the input string followed by one space character.
+     <p/>
+     Note that a call to this method using <tt>center( s, w )</tt> is equivalent to a call to {@link #center(String, int, char)}
+     using <tt>center( s, w, '&nbsp;' )</tt>.
+
+     @param s the string to be centered by appropriate padding on the left and the right.
+     @param w the width (i.e. length) of the centered string (if the string is already longer than this then the string
+     itself is returned as-is).
+     @return the centered string or the original string if it is already at least as wide as <tt>w</tt>.
      */
 
     public static String center( String s, int w ) {
 
-	return center( s, w, ' ' );
+        return center( s, w, ' ' );
 
     }
 
     /**
-     * Pad a string on the left and on the right to a specified width using a specified padding character.
-     * <p/>What happens conceptually is that while the string is narrower than the requested width,
-     * a padding character is added on an alternating basis on the left of the string or on the right of the string.
-     * For example, if the input string is two characters long and the requested width is five characters then the resulting
-     * string will start with two padding characters followed by the two characters of the input string followed by one padding character.
-     * <p/>A call to this method using <tt>center( null, w )</tt> is treated as thought it was a call to this method using <tt>center( "null", w )</tt>.
-     *
-     * @param s the string to be centered by appropriate padding on the left and the right (if <tt>s</tt> is <tt>null</tt> then the result
-     *          is as though <tt>s</tt> were the six character string <tt>"null"</tt>).
-     * @param w the width (i.e. length) of the centered string (if the string is already longer than this then the string
-     *          itself is returned as-is).
-     * @param ch the padding character.
-     * @return the centered string or the original string if it is already at least as wide as <tt>w</tt>.
+     Pad a string on the left and on the right to a specified width using a specified padding character.
+     <p/>What happens conceptually is that while the string is narrower than the requested width,
+     a padding character is added on an alternating basis on the left of the string or on the right of the string.
+     For example, if the input string is two characters long and the requested width is five characters then the resulting
+     string will start with two padding characters followed by the two characters of the input string followed by one padding character.
+     <p/>A call to this method using <tt>center( null, w )</tt> is treated as thought it was a call to this method using <tt>center( "null", w )</tt>.
+
+     @param s  the string to be centered by appropriate padding on the left and the right (if <tt>s</tt> is <tt>null</tt> then the result
+     is as though <tt>s</tt> were the six character string <tt>"null"</tt>).
+     @param w  the width (i.e. length) of the centered string (if the string is already longer than this then the string
+     itself is returned as-is).
+     @param ch the padding character.
+     @return the centered string or the original string if it is already at least as wide as <tt>w</tt>.
      */
 
     public static String center( String s, int w, char ch ) {
 
-	if ( s == null ) {
+        if ( s == null ) {
 
-	    return center( "null", w, ch );
+            return center( "null", w, ch );
 
-	}
+        }
 
-	int actualLength = s.length();
-	if ( actualLength >= w ) {
+        int actualLength = s.length();
+        if ( actualLength >= w ) {
 
-	    return s;
+            return s;
 
-	}
+        }
 
-	int leftPadding = ( w - actualLength + 1 ) >> 1;
-	int rightPadding = ( w - actualLength ) >> 1;
+        int leftPadding = ( w - actualLength + 1 ) >> 1;
+        int rightPadding = ( w - actualLength ) >> 1;
 
-	return generatePaddingString( leftPadding, ch, "" ) + s + generatePaddingString( rightPadding, ch, "" );
+        return generatePaddingString( leftPadding, ch, "" ) + s + generatePaddingString( rightPadding, ch, "" );
 
     }
 
     /**
-     * Pad a string on the left to a specified width using blanks as the padding character. Note that a call to this
-     * method using <tt>lpad( s, w )</tt> is equivalent to a call to {@link #lpad(String, int, char)} using <tt>lpad( s,
-     * w, '&nbsp;' )</tt>.
-     *
-     * @param s the string to be padded.
-     * @param w the width (i.e. length) of the padded string (if the string is already longer than this then the string
-     *          itself is returned as-is).
-     * @return the padded string or the original string if it is already at least as wide as <tt>w</tt>.
+     Pad a string on the left to a specified width using blanks as the padding character. Note that a call to this
+     method using <tt>lpad( s, w )</tt> is equivalent to a call to {@link #lpad(String, int, char)} using <tt>lpad( s,
+     w, '&nbsp;' )</tt>.
+
+     @param s the string to be padded.
+     @param w the width (i.e. length) of the padded string (if the string is already longer than this then the string
+     itself is returned as-is).
+     @return the padded string or the original string if it is already at least as wide as <tt>w</tt>.
      */
 
     public static String lpad( String s, int w ) {
@@ -1258,14 +1260,14 @@ public class ObtuseUtil {
     }
 
     /**
-     * Pad the string representation of a long on the left to a specified width using a specified padding character.
-     *
-     * @param l the long whose string representation is to be padded.
-     * @param w the width (i.e. length) of the padded string representation (if the string representation is already
-     *          longer than this then the string representation itself is returned as-is).
-     * @param p the character to be used to pad the string representation on the left if it is shorter than <tt>w</tt>.
-     * @return the padded string representation or the actual string representation if it is already at least as wide as
-     *         <tt>w</tt>.
+     Pad the string representation of a long on the left to a specified width using a specified padding character.
+
+     @param l the long whose string representation is to be padded.
+     @param w the width (i.e. length) of the padded string representation (if the string representation is already
+     longer than this then the string representation itself is returned as-is).
+     @param p the character to be used to pad the string representation on the left if it is shorter than <tt>w</tt>.
+     @return the padded string representation or the actual string representation if it is already at least as wide as
+     <tt>w</tt>.
      */
 
     public static String lpad( long l, int w, char p ) {
@@ -1275,15 +1277,15 @@ public class ObtuseUtil {
     }
 
     /**
-     * Pad the string representation of a long on the left to a specified width using blanks as the padding character.
-     * Note that a call to this method using <tt>lpad( l, w )</tt> is equivalent to a call to {@link
-     * #lpad(long, int, char)} using <tt>lpad( w, w, '&nbsp;' )</tt>.
-     *
-     * @param l the long whose string representation is to be padded.
-     * @param w the width (i.e. length) of the padded string representation (if the string representation is already
-     *          longer than this then the string representation itself is returned as-is).
-     * @return the padded string representation or the actual string representation if it is already at least as wide as
-     *         <tt>w</tt>.
+     Pad the string representation of a long on the left to a specified width using blanks as the padding character.
+     Note that a call to this method using <tt>lpad( l, w )</tt> is equivalent to a call to {@link
+    #lpad(long, int, char)} using <tt>lpad( w, w, '&nbsp;' )</tt>.
+
+     @param l the long whose string representation is to be padded.
+     @param w the width (i.e. length) of the padded string representation (if the string representation is already
+     longer than this then the string representation itself is returned as-is).
+     @return the padded string representation or the actual string representation if it is already at least as wide as
+     <tt>w</tt>.
      */
 
     public static String lpad( long l, int w ) {
@@ -1293,13 +1295,13 @@ public class ObtuseUtil {
     }
 
     /**
-     * Pad a string on the right to a specified width using a specified padding character.
-     *
-     * @param s the string to be padded.
-     * @param w the width (i.e. length) of the padded string (if the string is already longer than this then the string
-     *          itself is returned as-is).
-     * @param p the character to be used to pad the string on the right if it is shorter than <tt>w</tt>.
-     * @return the padded string or the original string if it is already at least as wide as <tt>w</tt>.
+     Pad a string on the right to a specified width using a specified padding character.
+
+     @param s the string to be padded.
+     @param w the width (i.e. length) of the padded string (if the string is already longer than this then the string
+     itself is returned as-is).
+     @param p the character to be used to pad the string on the right if it is shorter than <tt>w</tt>.
+     @return the padded string or the original string if it is already at least as wide as <tt>w</tt>.
      */
 
     public static String rpad( String s, int w, char p ) {
@@ -1319,14 +1321,14 @@ public class ObtuseUtil {
     }
 
     /**
-     * Pad a string on the right to a specified width using blanks as the padding character. Note that a call to this
-     * method using <tt>lpad( s, w )</tt> is equivalent to a call to {@link #lpad(String, int, char)} using <tt>lpad( s,
-     * w, '&nbsp;' )</tt>.
-     *
-     * @param s the string to be padded.
-     * @param w the width (i.e. length) of the padded string (if the string is already longer than this then the string
-     *          itself is returned as-is).
-     * @return the padded string or the original string if it is already at least as wide as <tt>w</tt>.
+     Pad a string on the right to a specified width using blanks as the padding character. Note that a call to this
+     method using <tt>lpad( s, w )</tt> is equivalent to a call to {@link #lpad(String, int, char)} using <tt>lpad( s,
+     w, '&nbsp;' )</tt>.
+
+     @param s the string to be padded.
+     @param w the width (i.e. length) of the padded string (if the string is already longer than this then the string
+     itself is returned as-is).
+     @return the padded string or the original string if it is already at least as wide as <tt>w</tt>.
      */
 
     public static String rpad( String s, int w ) {
@@ -1336,15 +1338,15 @@ public class ObtuseUtil {
     }
 
     /**
-     * Pad the string representation of a long on the right to a specified width using a specified padding character.
-     *
-     * @param l the long whose string representation is to be padded.
-     * @param w the width (i.e. length) of the padded string representation (if the string representation is already
-     *          longer than this then the string representation itself is returned as-is).
-     * @param p the character to be used to pad the string representation on the right if it is shorter than
-     *          <tt>w</tt>.
-     * @return the padded string representation or the actual string representation if it is already at least as wide as
-     *         <tt>w</tt>.
+     Pad the string representation of a long on the right to a specified width using a specified padding character.
+
+     @param l the long whose string representation is to be padded.
+     @param w the width (i.e. length) of the padded string representation (if the string representation is already
+     longer than this then the string representation itself is returned as-is).
+     @param p the character to be used to pad the string representation on the right if it is shorter than
+     <tt>w</tt>.
+     @return the padded string representation or the actual string representation if it is already at least as wide as
+     <tt>w</tt>.
      */
 
     public static String rpad( long l, int w, char p ) {
@@ -1354,15 +1356,15 @@ public class ObtuseUtil {
     }
 
     /**
-     * Pad the string representation of a long on the right to a specified width using blanks as the padding character.
-     * Note that a call to this method using <tt>lpad( l, w )</tt> is equivalent to a call to {@link
-     * #lpad(long, int, char)} using <tt>lpad( w, w, '&nbsp;' )</tt>.
-     *
-     * @param l the long whose string representation is to be padded.
-     * @param w the width (i.e. length) of the padded string representation (if the string representation is already
-     *          longer than this then the string representation itself is returned as-is).
-     * @return the padded string representation or the actual string representation if it is already at least as wide as
-     *         <tt>w</tt>.
+     Pad the string representation of a long on the right to a specified width using blanks as the padding character.
+     Note that a call to this method using <tt>lpad( l, w )</tt> is equivalent to a call to {@link
+    #lpad(long, int, char)} using <tt>lpad( w, w, '&nbsp;' )</tt>.
+
+     @param l the long whose string representation is to be padded.
+     @param w the width (i.e. length) of the padded string representation (if the string representation is already
+     longer than this then the string representation itself is returned as-is).
+     @return the padded string representation or the actual string representation if it is already at least as wide as
+     <tt>w</tt>.
      */
 
     public static String rpad( long l, int w ) {
@@ -1372,12 +1374,12 @@ public class ObtuseUtil {
     }
 
     /**
-     * Replicate a string a specified number of times.
-     * For example, <tt>replicate( "hello", 3 )</tt> yields <tt>"hellohellohello"</tt>.
-     *
-     * @param str   the string to replicate.
-     * @param count the number of copies to be made.
-     * @return the replicated string.
+     Replicate a string a specified number of times.
+     For example, <tt>replicate( "hello", 3 )</tt> yields <tt>"hellohellohello"</tt>.
+
+     @param str   the string to replicate.
+     @param count the number of copies to be made.
+     @return the replicated string.
      */
 
     public static String replicate( String str, int count ) {
@@ -1394,11 +1396,11 @@ public class ObtuseUtil {
     }
 
     /**
-     * Return a String containing the hex representation of a long value. For example, <tt>hexvalue( 27L )</tt> yields
-     * <tt>"000000000000001b"</tt>. Note that the string is always 16 characters long.
-     *
-     * @param v the long value whose hex representation is to be returned.
-     * @return the hex representation of <tt>v</tt>.
+     Return a String containing the hex representation of a long value. For example, <tt>hexvalue( 27L )</tt> yields
+     <tt>"000000000000001b"</tt>. Note that the string is always 16 characters long.
+
+     @param v the long value whose hex representation is to be returned.
+     @return the hex representation of <tt>v</tt>.
      */
 
     @SuppressWarnings({ "MagicNumber" })
@@ -1407,36 +1409,36 @@ public class ObtuseUtil {
         //noinspection UnnecessaryParentheses
 
         return ""
-               + ObtuseUtil.hexvalue( (int) ( ( v >> 32 ) & 0x00000000ffffffffL ) )
-               + ObtuseUtil.hexvalue( (int) ( v & 0x00000000ffffffffL ) );
+               + ObtuseUtil.hexvalue( (int)( ( v >> 32 ) & 0x00000000ffffffffL ) )
+               + ObtuseUtil.hexvalue( (int)( v & 0x00000000ffffffffL ) );
 
     }
 
     /**
-     * Return a String containing the hex representation of an int value. For example, <tt>hexvalue( 27 )</tt> yields
-     * <tt>"0000001b"</tt>. Note that the string is always 8 characters long.
-     *
-     * @param v the int value whose hex representation is to be returned.
-     * @return the hex representation of <tt>v</tt>.
+     Return a String containing the hex representation of an int value. For example, <tt>hexvalue( 27 )</tt> yields
+     <tt>"0000001b"</tt>. Note that the string is always 8 characters long.
+
+     @param v the int value whose hex representation is to be returned.
+     @return the hex representation of <tt>v</tt>.
      */
 
     @SuppressWarnings({ "UnnecessaryParentheses", "MagicNumber" })
     public static String hexvalue( int v ) {
 
         return ""
-               + ObtuseUtil.hexvalue( (byte) ( ( v >> 24 ) & 0xff ) )
-               + ObtuseUtil.hexvalue( (byte) ( ( v >> 16 ) & 0xff ) )
-               + ObtuseUtil.hexvalue( (byte) ( ( v >> 8 ) & 0xff ) )
-               + ObtuseUtil.hexvalue( (byte) ( v & 0xff ) );
+               + ObtuseUtil.hexvalue( (byte)( ( v >> 24 ) & 0xff ) )
+               + ObtuseUtil.hexvalue( (byte)( ( v >> 16 ) & 0xff ) )
+               + ObtuseUtil.hexvalue( (byte)( ( v >> 8 ) & 0xff ) )
+               + ObtuseUtil.hexvalue( (byte)( v & 0xff ) );
 
     }
 
     /**
-     * Return a String containing the hex representation of a single byte value. For example, <tt>hexvalue( (byte)27
-     * )</tt> yields <tt>"1b"</tt>. Note that the returned string is always two characters long.
-     *
-     * @param v the byte value whose hex representation is to be returned.
-     * @return the hex representation of <tt>v</tt>.
+     Return a String containing the hex representation of a single byte value. For example, <tt>hexvalue( (byte)27
+     )</tt> yields <tt>"1b"</tt>. Note that the returned string is always two characters long.
+
+     @param v the byte value whose hex representation is to be returned.
+     @return the hex representation of <tt>v</tt>.
      */
 
     @SuppressWarnings({ "UnnecessaryParentheses", "MagicNumber" })
@@ -1452,10 +1454,10 @@ public class ObtuseUtil {
     }
 
     /**
-     * Return a String containing the hex representation of a single char value. For example, <tt>hexvalue( ' ' )</tt> yields <tt>"1b"</tt>.
-     *
-     * @param v the byte value whose hex representation is to be returned.
-     * @return the hex representation of <tt>v</tt>.
+     Return a String containing the hex representation of a single char value. For example, <tt>hexvalue( ' ' )</tt> yields <tt>"1b"</tt>.
+
+     @param v the byte value whose hex representation is to be returned.
+     @return the hex representation of <tt>v</tt>.
      */
 
     @SuppressWarnings({ "UnnecessaryParentheses", "MagicNumber" })
@@ -1466,15 +1468,15 @@ public class ObtuseUtil {
     }
 
     /**
-     * Convert a byte array to its hexadecimal representation. For example, <tt>hexvalue( new byte[] { 1, 10, 100 }
-     * )</tt> yields <tt>"010a64"</tt>. Note that the returned string always contains twice as many characters as the
-     * input array contains bytes.
-     * <p/>
-     * While this method uses a {@link StringBuffer} to avoid creating lots and lots of dead strings, it will still
-     * consume quite a bit of memory if the byte array is sufficiently large.
-     *
-     * @param bv the byte array to be converted.
-     * @return the hex representation of <tt>v</tt>.
+     Convert a byte array to its hexadecimal representation. For example, <tt>hexvalue( new byte[] { 1, 10, 100 }
+     )</tt> yields <tt>"010a64"</tt>. Note that the returned string always contains twice as many characters as the
+     input array contains bytes.
+     <p/>
+     While this method uses a {@link StringBuffer} to avoid creating lots and lots of dead strings, it will still
+     consume quite a bit of memory if the byte array is sufficiently large.
+
+     @param bv the byte array to be converted.
+     @return the hex representation of <tt>v</tt>.
      */
 
     public static String hexvalue( byte[] bv ) {
@@ -1497,17 +1499,17 @@ public class ObtuseUtil {
     }
 
     /**
-     * Convert a byte array to its hexadecimal representation. For example, <tt>hexvalue( new byte[] { 1, 10, 100 }
-     * )</tt> yields <tt>"010a64"</tt>. Note that the returned string always contains twice as many characters as the
-     * input array contains bytes.
-     * <p/>
-     * While this method uses a {@link StringBuffer} to avoid creating lots and lots of dead strings, it will still
-     * consume quite a bit of memory if the byte array is sufficiently large.
-     *
-     * @param bv the byte array to be converted.
-     * @param off offset within the array to start converting at.
-     * @param len number of bytes to convert.
-     * @return the hex representation of <tt>v</tt>.
+     Convert a byte array to its hexadecimal representation. For example, <tt>hexvalue( new byte[] { 1, 10, 100 }
+     )</tt> yields <tt>"010a64"</tt>. Note that the returned string always contains twice as many characters as the
+     input array contains bytes.
+     <p/>
+     While this method uses a {@link StringBuffer} to avoid creating lots and lots of dead strings, it will still
+     consume quite a bit of memory if the byte array is sufficiently large.
+
+     @param bv  the byte array to be converted.
+     @param off offset within the array to start converting at.
+     @param len number of bytes to convert.
+     @return the hex representation of <tt>v</tt>.
      */
 
     public static String hexvalue( byte[] bv, int off, int len ) {
@@ -1523,8 +1525,8 @@ public class ObtuseUtil {
 
             byte b = bv[ix];
             rval.
-                    append( "0123456789abcdef".charAt( ( b >> 4 ) & 0xf ) ).
-                    append( "0123456789abcdef".charAt( b & 0xf ) );
+                        append( "0123456789abcdef".charAt( ( b >> 4 ) & 0xf ) ).
+                        append( "0123456789abcdef".charAt( b & 0xf ) );
 
         }
 
@@ -1533,7 +1535,7 @@ public class ObtuseUtil {
     }
 
     /**
-     * Decode a string of hex digits as a byte array.
+     Decode a string of hex digits as a byte array.
      */
 
     @NotNull
@@ -1554,7 +1556,7 @@ public class ObtuseUtil {
 
         }
 
-        byte[] rval = new byte[ hex.length() >> 1 ];
+        byte[] rval = new byte[hex.length() >> 1];
         char[] hexChars = hex.toCharArray();
         int inputIx = 0;
         int outputIx = 0;
@@ -1580,7 +1582,7 @@ public class ObtuseUtil {
 
             int highNibble = ( ch1 >= '0' && ch1 <= '9' ) ? ch1 - '0' : 10 + ch1 - 'a';
             int lowNibble = ( ch2 >= '0' && ch2 <= '9' ) ? ch2 - '0' : 10 + ch2 - 'a';
-            rval[outputIx] = (byte) ( ( highNibble << 4 ) | lowNibble );
+            rval[outputIx] = (byte)( ( highNibble << 4 ) | lowNibble );
 
             outputIx += 1;
 
@@ -1591,10 +1593,11 @@ public class ObtuseUtil {
     }
 
     /**
-     * Capitalizes the first letter of the specified string.
-     * @param str the string whose first letter is to be capitalized.
-     * @return the capitalized string.
-     * @throws IndexOutOfBoundsException if the string is empty.
+     Capitalizes the first letter of the specified string.
+
+     @param str the string whose first letter is to be capitalized.
+     @return the capitalized string.
+     @throws IndexOutOfBoundsException if the string is empty.
      */
 
     public static String capitalize( @NotNull String str ) {
@@ -1604,12 +1607,12 @@ public class ObtuseUtil {
     }
 
     /**
-     * Sleep for specified number of milliseconds without having to bother catching the InterruptedException potentially
-     * thrown by the regular sleep method.
-     *
-     * @param milliseconds the minimum number of milliseconds that the calling thread should be suspended for (the
-     *                     thread could conceivably be suspended for an arbitrary number of additional milliseconds
-     *                     depending upon far too many factors to enumerate here).
+     Sleep for specified number of milliseconds without having to bother catching the InterruptedException potentially
+     thrown by the regular sleep method.
+
+     @param milliseconds the minimum number of milliseconds that the calling thread should be suspended for (the
+     thread could conceivably be suspended for an arbitrary number of additional milliseconds
+     depending upon far too many factors to enumerate here).
      */
 
     public static void safeSleepMillis( long milliseconds ) {
@@ -1628,9 +1631,9 @@ public class ObtuseUtil {
     }
 
     /**
-     * Dump a byte array in hex - prints the contents of a byte array onto {@link System#out} in geek-readable form.
-     *
-     * @param data the byte array to be formatted and printed onto {@link System#out}.
+     Dump a byte array in hex - prints the contents of a byte array onto {@link System#out} in geek-readable form.
+
+     @param data the byte array to be formatted and printed onto {@link System#out}.
      */
 
     @SuppressWarnings({ "MagicNumber" })
@@ -1649,7 +1652,7 @@ public class ObtuseUtil {
 
                 if ( offset + j < data.length ) {
 
-                    rval.append( ObtuseUtil.hexvalue( data[ offset + j ] ) );
+                    rval.append( ObtuseUtil.hexvalue( data[offset + j] ) );
 
                 } else {
 
@@ -1684,18 +1687,18 @@ public class ObtuseUtil {
     }
 
     /**
-     * Escape ampersands and less-than characters in a string using HTML-style &amp;amp; and &amp;lt; constructs.
-     *
-     * @param str the string to be escaped.
-     * @return the escaped string.
+     Escape ampersands and less-than characters in a string using HTML-style &amp;amp; and &amp;lt; constructs.
+
+     @param str the string to be escaped.
+     @return the escaped string.
      */
 
     public static String htmlEscape( String str ) {
 
         String rval;
         String s = str;
-	StringBuilder rvalBuilder = new StringBuilder();
-	while ( true ) {
+        StringBuilder rvalBuilder = new StringBuilder();
+        while ( true ) {
 
             int ix1 = s.indexOf( (int)'&' );
             int ix2 = s.indexOf( (int)'<' );
@@ -1735,18 +1738,18 @@ public class ObtuseUtil {
             s = s.substring( 1 );
 
         }
-	rval = rvalBuilder.toString();
+        rval = rvalBuilder.toString();
 
-	rval += s;
+        rval += s;
 
         return rval;
 
     }
 
     /**
-     * Close something while ignoring any {@link java.io.IOException}s.
-     *
-     * @param thing the thing to be closed (which can be null in which case nothing is done).
+     Close something while ignoring any {@link java.io.IOException}s.
+
+     @param thing the thing to be closed (which can be null in which case nothing is done).
      */
 
     public static void closeQuietly( @Nullable Closeable thing ) {
@@ -1861,13 +1864,13 @@ public class ObtuseUtil {
 
         try {
 
-	    if ( postgresConnection != null ) {
+            if ( postgresConnection != null ) {
 
-		postgresConnection.close();
+                postgresConnection.close();
 
-	    }
+            }
 
-	} catch ( SQLException e ) {
+        } catch ( SQLException e ) {
 
             Logger.logErr( "close of PostgresConnection failed", e );
 
@@ -1875,8 +1878,8 @@ public class ObtuseUtil {
     }
 
     /**
-     * A method which deliberately does nothing.
-     * Useful as a statement upon which to set a breakpoint.
+     A method which deliberately does nothing.
+     Useful as a statement upon which to set a breakpoint.
      */
 
     public static void doNothing() {
@@ -1884,32 +1887,32 @@ public class ObtuseUtil {
     }
 
     /**
-     * Use double quotes to escape commas and quotes in the way that MS Excel seems to do it.
-     * <p/>
-     * Some examples are probably in order.
-     * <ul>
-     * <li>if the string is
-     * <blockquote><tt>hello world</tt></blockquote>
-     * then the output is the string itself (unchanged).
-     * <li>if the string is
-     * <blockquote><tt>hello,world</tt></blockquote>
-     * then the output is
-     * <blockquote><tt>"hello,world"</tt></blockquote>
-     * <li>if the string is
-     * <blockquote><tt>"hello" world</tt></blockquote>
-     * then the output is
-     * <blockquote><tt>"""hello"" world"</tt></blockquote>
-     * <li>if the string is
-     * <blockquote><tt>hello ",world"</tt></blockquote>
-     * then the output is
-     * <blockquote><tt>"hello "",world"""</tt></blockquote>
-     * </ul>
-     * Note that all the double quotes in the above examples actually appear in the strings.
-     * In other words, the above examples do <b>NOT</b> use double quotes to enclose strings.
-     *
-     * @param string the string to be enquoted.
-     * @return the original string if it does not contain quotes or commas; the enquoted string otherwise.
-     * @throws NullPointerException if <tt>string</tt> is null.
+     Use double quotes to escape commas and quotes in the way that MS Excel seems to do it.
+     <p/>
+     Some examples are probably in order.
+     <ul>
+     <li>if the string is
+     <blockquote><tt>hello world</tt></blockquote>
+     then the output is the string itself (unchanged).
+     <li>if the string is
+     <blockquote><tt>hello,world</tt></blockquote>
+     then the output is
+     <blockquote><tt>"hello,world"</tt></blockquote>
+     <li>if the string is
+     <blockquote><tt>"hello" world</tt></blockquote>
+     then the output is
+     <blockquote><tt>"""hello"" world"</tt></blockquote>
+     <li>if the string is
+     <blockquote><tt>hello ",world"</tt></blockquote>
+     then the output is
+     <blockquote><tt>"hello "",world"""</tt></blockquote>
+     </ul>
+     Note that all the double quotes in the above examples actually appear in the strings.
+     In other words, the above examples do <b>NOT</b> use double quotes to enclose strings.
+
+     @param string the string to be enquoted.
+     @return the original string if it does not contain quotes or commas; the enquoted string otherwise.
+     @throws NullPointerException if <tt>string</tt> is null.
      */
 
     public static String enquoteForCSV( String string ) {
@@ -1942,95 +1945,107 @@ public class ObtuseUtil {
 
     }
 
+    /**
+     Turn an arbitrary object into an enquoted for Java string.
+     @param obj the object to be enquoted.
+     @return the value generated by {@link #enquoteForJavaString}{@code ( String.valueOf( obj ) )}.
+     */
+
+    public static String enquoteForJavaObject( @Nullable Object obj ) {
+
+        return enquoteForJavaString( String.valueOf( obj ) );
+
+    }
+
     public static String enquoteForJavaString( String string ) {
 
-	if ( string == null ) {
+        if ( string == null ) {
 
-	    return "null";
+            return "null";
 
-	}
+        }
 
-	StringBuilder rval = new StringBuilder( "\"" );
-	for ( char c : string.toCharArray() ) {
+        StringBuilder rval = new StringBuilder( "\"" );
+        for ( char c : string.toCharArray() ) {
 
-	    switch ( c ) {
+            switch ( c ) {
 
-		case '\b':
-		    rval.append( "\\b" );
-		    break;
+                case '\b':
+                    rval.append( "\\b" );
+                    break;
 
-		case '\n':
-		    rval.append( "\\n" );
-		    break;
+                case '\n':
+                    rval.append( "\\n" );
+                    break;
 
-		case '\r':
-		    rval.append( "\\r" );
-		    break;
+                case '\r':
+                    rval.append( "\\r" );
+                    break;
 
-		case '\t':
-		    rval.append( "\\t" );
-		    break;
+                case '\t':
+                    rval.append( "\\t" );
+                    break;
 
-		case '\\':
-		    rval.append( "\\\\" );
-		    break;
+                case '\\':
+                    rval.append( "\\\\" );
+                    break;
 
-		case '"':
-		    rval.append( "\\\"" );
-		    break;
+                case '"':
+                    rval.append( "\\\"" );
+                    break;
 
-		default:
-		    rval.append( c );
+                default:
+                    rval.append( c );
 
-	    }
+            }
 
-	}
+        }
 
-	rval.append( '"' );
-	return rval.toString();
+        rval.append( '"' );
+        return rval.toString();
 
     }
 
     public static String enquoteForJavaCharacter( char ch ) {
 
-	StringBuilder rval = new StringBuilder( "'" );
+        StringBuilder rval = new StringBuilder( "'" );
 
-	switch ( ch ) {
+        switch ( ch ) {
 
-	    case '\n':
-		rval.append( "\\n" );
-		break;
+            case '\n':
+                rval.append( "\\n" );
+                break;
 
-	    case '\r':
-		rval.append( "\\r" );
-		break;
+            case '\r':
+                rval.append( "\\r" );
+                break;
 
-	    case '\t':
-		rval.append( "\\t" );
-		break;
+            case '\t':
+                rval.append( "\\t" );
+                break;
 
-	    case '\\':
-		rval.append( "\\\\" );
-		break;
+            case '\\':
+                rval.append( "\\\\" );
+                break;
 
-	    case '\'':
-		rval.append( "\\\'" );
-		break;
+            case '\'':
+                rval.append( "\\\'" );
+                break;
 
-	    default:
-		rval.append( ch );
+            default:
+                rval.append( ch );
 
-	}
+        }
 
-	rval.append( "'" );
+        rval.append( "'" );
 
-	return rval.toString();
+        return rval.toString();
 
     }
 
-    private static       MessageDigest s_md5Algorithm = null;
+    private static MessageDigest s_md5Algorithm = null;
     @SuppressWarnings("ConstantNamingConvention")
-    private static final Long          _md5Lock       = 0L;
+    private static final Long _md5Lock = 0L;
 
     @NotNull
     public static String computeMD5( InputStream is )
@@ -2147,15 +2162,15 @@ public class ObtuseUtil {
     }
 
     /**
-     * Add the contents of an array to a collection and return the collection.
-     * <p/>Returning the collection facilitates certain constructs including:
-     * <blockquote>
-     * <tt>doit( ObtuseUtil.addAll( new LinkedList&lt;String>(), new String[] { "hello", "there", "world" } );</tt>
-     * </blockquote>
-     *
-     * @param collection  the collection to which things are to be added.
-     * @param newElements the new elements to add to the collection.
-     * @return the collection after the elements have been added.
+     Add the contents of an array to a collection and return the collection.
+     <p/>Returning the collection facilitates certain constructs including:
+     <blockquote>
+     <tt>doit( ObtuseUtil.addAll( new LinkedList&lt;String>(), new String[] { "hello", "there", "world" } );</tt>
+     </blockquote>
+
+     @param collection  the collection to which things are to be added.
+     @param newElements the new elements to add to the collection.
+     @return the collection after the elements have been added.
      */
 
     @SafeVarargs
@@ -2190,21 +2205,22 @@ public class ObtuseUtil {
 //    }
 
     /**
-     * Returns an unmodifiable view of the specified hash table.
-     * This method allows modules to provide users with "read-only" access to internal hash tables (including {@link java.util.Dictionary}s).
-     * Query operations on the returned hash table "read through" to the specified hash table,
-     * and attempts to modify the returned hash table, whether direct or via its collection views,
-     * result in an UnsupportedOperationException.
-     * <p/>This method is probably less than perfect in the sense that there probably are at least somewhat sneaky ways
-     * to modify the 'unmodifiable' hashtable that it returns. That said, it is far better than nothing.
-     * @param ht the hash table for which an unmodifiable view is to be returned.
-     * @return an unmodifiable view of the specified hash table.
+     Returns an unmodifiable view of the specified hash table.
+     This method allows modules to provide users with "read-only" access to internal hash tables (including {@link java.util.Dictionary}s).
+     Query operations on the returned hash table "read through" to the specified hash table,
+     and attempts to modify the returned hash table, whether direct or via its collection views,
+     result in an UnsupportedOperationException.
+     <p/>This method is probably less than perfect in the sense that there probably are at least somewhat sneaky ways
+     to modify the 'unmodifiable' hashtable that it returns. That said, it is far better than nothing.
+
+     @param ht the hash table for which an unmodifiable view is to be returned.
+     @return an unmodifiable view of the specified hash table.
      */
 
     @SuppressWarnings("CollectionDeclaredAsConcreteClass")
-    public static <K,V> Hashtable<K,V> unmodifiableHashtable( final Hashtable<? extends K,? extends V> ht ) {
+    public static <K, V> Hashtable<K, V> unmodifiableHashtable( final Hashtable<? extends K, ? extends V> ht ) {
 
-        UnmodifiableHashtable<K,V> unmodifiableHashtable = new UnmodifiableHashtable<>( ht );
+        UnmodifiableHashtable<K, V> unmodifiableHashtable = new UnmodifiableHashtable<>( ht );
 
         unmodifiableHashtable.makeReadonly();
 
@@ -2216,65 +2232,65 @@ public class ObtuseUtil {
 
         BasicProgramConfigInfo.init( "Obtuse", "ObtuseUtil", "testing", null );
 
-	String s = "hello";
+        String s = "hello";
 
-	for ( int w = s.length() - 1; w <= s.length() + 4; w += 1 ) {
+        for ( int w = s.length() - 1; w <= s.length() + 4; w += 1 ) {
 
-	    Logger.logMsg( "center( \"" + s + "\", " + w + " ) yields \"" + center( s, w ) + '"' );
+            Logger.logMsg( "center( \"" + s + "\", " + w + " ) yields \"" + center( s, w ) + '"' );
 
-	}
+        }
 
-	for ( String value : new String[]{ "hello world", "", null } ) {
+        for ( String value : new String[]{ "hello world", "", null } ) {
 
-	    if ( ObtuseUtil.writeSerializableObjectToFile( value, new File( "test.ser" ), true ) ) {
+            if ( ObtuseUtil.writeSerializableObjectToFile( value, new File( "test.ser" ), true ) ) {
 
-		try {
+                try {
 
-		    String recoveredVersion = (String) ObtuseUtil.recoverSerializedVersion( new File( "test.ser" ) );
-		    if ( recoveredVersion == null ) {
+                    String recoveredVersion = (String)ObtuseUtil.recoverSerializedVersion( new File( "test.ser" ) );
+                    if ( recoveredVersion == null ) {
 
-			if ( value == null ) {
+                        if ( value == null ) {
 
-			    Logger.logMsg( "null made the round trip alive" );
+                            Logger.logMsg( "null made the round trip alive" );
 
-			} else {
+                        } else {
 
-			    Logger.logMsg( "got null back from serialized version of \"" + enquoteForJavaString( value ) + "\"" );
+                            Logger.logMsg( "got null back from serialized version of \"" + enquoteForJavaString( value ) + "\"" );
 
-			}
+                        }
 
-		    } else if ( "Hello world".equals( recoveredVersion ) ) {
+                    } else if ( "Hello world".equals( recoveredVersion ) ) {
 
-			Logger.logMsg( "serialization and de-serialization to/from files seems to work" );
+                        Logger.logMsg( "serialization and de-serialization to/from files seems to work" );
 
-		    }
+                    }
 
-		    doNothing();
+                    doNothing();
 
-		} catch ( IOException e ) {
+                } catch ( IOException e ) {
 
-		    Logger.logErr( "IOException trying to recover serialized version of \"" + enquoteForJavaString( value ) + "\"", e );
+                    Logger.logErr( "IOException trying to recover serialized version of \"" + enquoteForJavaString( value ) + "\"", e );
 
-		} catch ( ClassNotFoundException e ) {
+                } catch ( ClassNotFoundException e ) {
 
-		    Logger.logErr( "ClassNotFoundException trying to recover serialized version of \"" + enquoteForJavaString( value ) + "\"", e );
+                    Logger.logErr( "ClassNotFoundException trying to recover serialized version of \"" + enquoteForJavaString( value ) + "\"", e );
 
-		}
+                }
 
-	    } else {
+            } else {
 
-		Logger.logMsg( "unable to serialize test.ser" );
+                Logger.logMsg( "unable to serialize test.ser" );
 
-	    }
-	}
+            }
+        }
 
     }
 
     /**
-     * Get our process id (not guaranteed to work on all platforms).
-     * <p/>Found at
-     * <blockquote><tt>http://stackoverflow.com/questions/35842/how-can-a-java-program-get-its-own-process-id</tt></blockquote>
-     * (last referenced 2013/09/24)
+     Get our process id (not guaranteed to work on all platforms).
+     <p/>Found at
+     <blockquote><tt>http://stackoverflow.com/questions/35842/how-can-a-java-program-get-its-own-process-id</tt></blockquote>
+     (last referenced 2013/09/24)
      */
 
     private static Integer s_pid = null;
@@ -2288,21 +2304,21 @@ public class ObtuseUtil {
 
                 java.lang.management.RuntimeMXBean runtime =
                         java.lang.management.ManagementFactory.getRuntimeMXBean();
-                java.lang.reflect.Field jvm = runtime.getClass().getDeclaredField("jvm");
-                jvm.setAccessible(true);
+                java.lang.reflect.Field jvm = runtime.getClass().getDeclaredField( "jvm" );
+                jvm.setAccessible( true );
                 sun.management.VMManagement mgmt =
-                        (sun.management.VMManagement) jvm.get(runtime);
+                        (sun.management.VMManagement)jvm.get( runtime );
                 java.lang.reflect.Method pidMethod =
-                        mgmt.getClass().getDeclaredMethod("getProcessId");
+                        mgmt.getClass().getDeclaredMethod( "getProcessId" );
                 pidMethod.setAccessible( true );
 
-                ObtuseUtil.s_pid = (Integer) pidMethod.invoke(mgmt);
+                ObtuseUtil.s_pid = (Integer)pidMethod.invoke( mgmt );
 
             } catch ( InvocationTargetException | NoSuchMethodException | NoSuchFieldException | IllegalAccessException e ) {
                 // we did our best
             }
 
-	}
+        }
 
         return ObtuseUtil.s_pid.intValue();
 
@@ -2311,14 +2327,14 @@ public class ObtuseUtil {
     @NotNull
     public static String fDim( @NotNull String name, Dimension d ) {
 
-	return name + "=" + ObtuseUtil.fDim( d );
+        return name + "=" + ObtuseUtil.fDim( d );
 
     }
 
     @NotNull
     public static String fDim( Dimension d ) {
 
-	return d == null ? "null" : ObtuseUtil.fDim( d.width, d.height );
+        return d == null ? "null" : ObtuseUtil.fDim( d.width, d.height );
 
 
     }
@@ -2326,21 +2342,21 @@ public class ObtuseUtil {
     @NotNull
     public static String fDim( int width, int height ) {
 
-	return "(" + width + "," + height + ")";
+        return "(" + width + "," + height + ")";
 
     }
 
     @NotNull
     public static String fBounds( String name, Rectangle r ) {
 
-	return name + "=" + ( r == null ? "null" : ObtuseUtil.fBounds( r ) );
+        return name + "=" + ( r == null ? "null" : ObtuseUtil.fBounds( r ) );
 
     }
 
     @NotNull
     public static String fBounds( Rectangle r ) {
 
-	return r == null ? "null" : ObtuseUtil.fBounds( r.x, r.y, r.width, r.height );
+        return r == null ? "null" : ObtuseUtil.fBounds( r.x, r.y, r.width, r.height );
 
 
     }
@@ -2348,118 +2364,128 @@ public class ObtuseUtil {
     @NotNull
     public static String fBounds( int x, int y, int width, int height ) {
 
-	return "@( " + x + ", " + y + ", " + width + "x" + height + " )";
+        return "@( " + x + ", " + y + ", " + width + "x" + height + " )";
 
     }
 
     @NotNull
     public static String fInsets( Insets in ) {
 
-	return "i( l=" + in.left + ", r=" + in.right + ", t=" + in.top + ", b=" + in.bottom + " )";
+        return "i( l=" + in.left + ", r=" + in.right + ", t=" + in.top + ", b=" + in.bottom + " )";
 
     }
 
     /**
      Always returns true (avoids having to fool Java compiler when you want an always {@code true} value).
+
      @return {@code true}
      */
 
     public static boolean always() {
 
-	return true;
+        return true;
 
     }
 
     /**
      Never returns true (avoids having to fool Java compiler when you want an always {@code false} value).
+
      @return {@code true}
      */
 
     public static boolean never() {
 
-	return false;
+        return false;
 
     }
 
     private static String[] s_maskExBits = new String[32];
+
     static {
 
-	rememberBitName( InputEvent.SHIFT_MASK, "Shift" );
-	rememberBitName( InputEvent.CTRL_MASK, "Ctrl" );
-	rememberBitName( InputEvent.META_MASK, "Meta" );
-	rememberBitName( InputEvent.ALT_MASK, "Alt" );
-	rememberBitName( InputEvent.ALT_GRAPH_MASK, "AltGraph" );
-	rememberBitName( InputEvent.BUTTON1_MASK, "Button_1" );
-	rememberBitName( InputEvent.BUTTON2_MASK, "Button_2" );
-	rememberBitName( InputEvent.BUTTON3_MASK, "Button_3" );
-	rememberBitName( InputEvent.SHIFT_DOWN_MASK, "ShiftDown" );
-	rememberBitName( InputEvent.CTRL_DOWN_MASK, "CtrlDown" );
-	rememberBitName( InputEvent.META_DOWN_MASK, "MetaDown" );
-	rememberBitName( InputEvent.ALT_DOWN_MASK, "AltDown" );
-	rememberBitName( InputEvent.BUTTON1_DOWN_MASK, "Button_1_Down" );
-	rememberBitName( InputEvent.BUTTON2_DOWN_MASK, "Button_2_Down" );
-	rememberBitName( InputEvent.BUTTON3_DOWN_MASK, "Button_3_Down" );
-	rememberBitName( InputEvent.ALT_GRAPH_DOWN_MASK, "AltGraphDown" );
+        rememberBitName( InputEvent.SHIFT_MASK, "Shift" );
+        rememberBitName( InputEvent.CTRL_MASK, "Ctrl" );
+        rememberBitName( InputEvent.META_MASK, "Meta" );
+        rememberBitName( InputEvent.ALT_MASK, "Alt" );
+        rememberBitName( InputEvent.ALT_GRAPH_MASK, "AltGraph" );
+        rememberBitName( InputEvent.BUTTON1_MASK, "Button_1" );
+        rememberBitName( InputEvent.BUTTON2_MASK, "Button_2" );
+        rememberBitName( InputEvent.BUTTON3_MASK, "Button_3" );
+        rememberBitName( InputEvent.SHIFT_DOWN_MASK, "ShiftDown" );
+        rememberBitName( InputEvent.CTRL_DOWN_MASK, "CtrlDown" );
+        rememberBitName( InputEvent.META_DOWN_MASK, "MetaDown" );
+        rememberBitName( InputEvent.ALT_DOWN_MASK, "AltDown" );
+        rememberBitName( InputEvent.BUTTON1_DOWN_MASK, "Button_1_Down" );
+        rememberBitName( InputEvent.BUTTON2_DOWN_MASK, "Button_2_Down" );
+        rememberBitName( InputEvent.BUTTON3_DOWN_MASK, "Button_3_Down" );
+        rememberBitName( InputEvent.ALT_GRAPH_DOWN_MASK, "AltGraphDown" );
 
-	ObtuseUtil.doNothing();
+        ObtuseUtil.doNothing();
 
     }
 
     public static String getBitMaskName( int mask ) {
 
-	int numberOfTrailingZeros = Integer.numberOfTrailingZeros( mask );
-	int lowestOneBit = Integer.lowestOneBit( mask );
-	int highestOneBit = Integer.highestOneBit( mask );
-	try {
+        int numberOfTrailingZeros = Integer.numberOfTrailingZeros( mask );
+        int lowestOneBit = Integer.lowestOneBit( mask );
+        int highestOneBit = Integer.highestOneBit( mask );
+        try {
 
-	    if ( mask < 0 || highestOneBit != lowestOneBit || numberOfTrailingZeros >= 32 ) {
+            if ( mask < 0 || highestOneBit != lowestOneBit || numberOfTrailingZeros >= 32 ) {
 
-		return "<mask " + Integer.toBinaryString( mask ) + ">";
+                return "<mask " + Integer.toBinaryString( mask ) + ">";
 
-	    } else {
+            } else {
 
-		return "<" + s_maskExBits[ numberOfTrailingZeros ] + ">";
+                return "<" + s_maskExBits[numberOfTrailingZeros] + ">";
 
-	    }
+            }
 
-	} catch ( Exception e ) {
+        } catch ( Exception e ) {
 
-	    throw new HowDidWeGetHereError( "mask=" + mask + "= " + Integer.toBinaryString( mask ) + " lowestOneBit=" + lowestOneBit + ", highestOneBit=" + highestOneBit );
+            throw new HowDidWeGetHereError( "mask=" +
+                                            mask +
+                                            "= " +
+                                            Integer.toBinaryString( mask ) +
+                                            " lowestOneBit=" +
+                                            lowestOneBit +
+                                            ", highestOneBit=" +
+                                            highestOneBit );
 
-	}
+        }
 
     }
 
     private static void rememberBitName( int maskValue, String name ) {
 
-	if ( maskValue == 0 ) {
+        if ( maskValue == 0 ) {
 
 //	    Logger.logMsg( "rememberBitName:  mask named \"" + name + "\" has value 0 - ignored" );
 
-	} else {
+        } else {
 
-	    if ( Integer.highestOneBit( maskValue ) == Integer.lowestOneBit( maskValue ) ) {
+            if ( Integer.highestOneBit( maskValue ) == Integer.lowestOneBit( maskValue ) ) {
 
-		int bitIx = Integer.numberOfTrailingZeros( maskValue );
+                int bitIx = Integer.numberOfTrailingZeros( maskValue );
 
-		if ( s_maskExBits[bitIx] == null ) {
+                if ( s_maskExBits[bitIx] == null ) {
 
 //		    Logger.logMsg( "rememberBitName:  1 << " + bitIx + " is named \"" + name + "\"" );
-		    s_maskExBits[bitIx] = name;
+                    s_maskExBits[bitIx] = name;
 
-		} else {
+                } else {
 
 //		    Logger.logMsg( "rememberBitName:  1 << " + bitIx + " is already called \"" + s_maskExBits[bitIx] + "\" when attempting to assign new name \"" + name + "\" - new name ignored" );
 
-		}
+                }
 
-	    } else {
+            } else {
 
 //		Logger.logMsg( "rememberBitName:  bit mask " + Integer.toBinaryString( maskValue ) + " called \"" + name + "\" has more than one bit set - ignored" );
 
-	    }
+            }
 
-	}
+        }
 
     }
 

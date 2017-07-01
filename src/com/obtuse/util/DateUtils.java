@@ -35,6 +35,7 @@ public class DateUtils {
     private static final SimpleDateFormat MMDDYYYY_HHMM           = new SimpleDateFormat( "MM/dd/yyyy hh:mmaa" );
     //    private static final SimpleDateFormat HHMM                    = new SimpleDateFormat( "hh:mmaa" );
     private static final SimpleDateFormat MM_DD_YYYY              = new SimpleDateFormat( "MM/dd/yyyy" );
+    private static final SimpleDateFormat MMMM_D_YYYY             = new SimpleDateFormat( "MMMM d, YYYY" );
     private static final SimpleDateFormat MM_DD_YYYY_HH_MM        = new SimpleDateFormat( "MM/dd/yyyy hh:mmaa" );
     private static final SimpleDateFormat YYYY_MM_DD_HH_MM        = new SimpleDateFormat( "yyyy-MM-dd HH:mm" );
     private static final SimpleDateFormat YYYY_MM_DD_HH_MM_SS     = new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss" );
@@ -828,7 +829,7 @@ public class DateUtils {
      * Format a date string in our local time.
      *
      * @param dateTime the date to be formatted.
-     * @return the formatted date string.
+     * @return the formatted date string (e.g. {@code "Monday, July 1, 1867"}.
      */
 
     public static String formatWWWW_MMMM_D_YYYY( Date dateTime ) {
@@ -837,6 +838,25 @@ public class DateUtils {
 
             DateUtils.WWWW_MMMM_D_YYYY.setTimeZone( TimeZone.getDefault() );
             String s = DateUtils.WWWW_MMMM_D_YYYY.format( dateTime );
+            return s;
+
+        }
+
+    }
+
+    /**
+     * Format a date string in our local time.
+     *
+     * @param dateTime the date to be formatted.
+     * @return the formatted date string (e.g. {@code "July 1, 1867"}.
+     */
+
+    public static String formatMMMM_D_YYYY( Date dateTime ) {
+
+        synchronized ( DateUtils.MMMM_D_YYYY ) {
+
+            DateUtils.MMMM_D_YYYY.setTimeZone( TimeZone.getDefault() );
+            String s = DateUtils.MMMM_D_YYYY.format( dateTime );
             return s;
 
         }
@@ -986,5 +1006,13 @@ public class DateUtils {
 
     }
 
+    public static void main( String[] args ) {
+
+        System.out.println( formatWWWW_MMMM_D_YYYY( new Date()) );
+        System.out.println( formatMMMM_D_YYYY( new Date() ) );
+        System.out.println( formatWWWW_MMMM_D_YYYY( new Date( ObtuseCalendarDate.parseCalendarDate( "1867-07-01" ).getDateStartTimeMs() ) ) );
+        System.out.println( formatWWWW_MMMM_D_YYYY( new Date( ObtuseCalendarDate.parseCalendarDate( "1900-01-01" ).getDateStartTimeMs() ) ) );
+
+    }
 
 }
