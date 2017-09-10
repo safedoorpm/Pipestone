@@ -17,78 +17,80 @@ import java.util.Arrays;
 /**
  %%% Something clever goes here.
  */
+
 public class DraggableJPanelTester extends JFrame {
 
     @SuppressWarnings({ "FieldCanBeLocal", "unused" })
-    private JPanel _javaPanel;
+    private JPanel _jPanel;
     private DraggableJPanel _draggableJPanel;
 
     private JPanel _topPanel;
 
     public DraggableJPanelTester() {
-	super();
 
-	setContentPane( _topPanel );
-	setMinimumSize( new Dimension( 300, 300 ) );
+        super();
 
-	pack();
-	setVisible( true );
+        setContentPane( _topPanel );
+        setMinimumSize( new Dimension( 300, 300 ) );
+
+        pack();
+        setVisible( true );
 
     }
 
     private void createUIComponents() {
 
-	_draggableJPanel = new DraggableJPanel( TransferHandler.COPY );
+        _draggableJPanel = new DraggableJPanel( TransferHandler.COPY );
 
-	_javaPanel = _draggableJPanel;
+        _jPanel = _draggableJPanel;
         _draggableJPanel.setDataFlavorHandlers(
-		new AbstractDataFlavorHandler[] {
+                new AbstractDataFlavorHandler[]{
 
-			new BasicFlavorHandlers.SimpleImageDataFlavorHandler() {
+                        new BasicFlavorHandlers.SimpleImageDataFlavorHandler() {
 
-			    @Override
-			    protected void handleImage(
-				    TransferHandler.TransferSupport transferSupport,
-				    Image transferImage
-			    ) {
+                            @Override
+                            protected void handleImage(
+                                    TransferHandler.TransferSupport transferSupport,
+                                    Image transferImage
+                            ) {
 
-				_draggableJPanel.setBackgroundImage( transferImage );
+                                _draggableJPanel.setImage( transferImage );
 
-			    }
+                            }
 
-			},
+                        },
 
-			new BasicFlavorHandlers.SimpleFilesDataFlavorHandler() {
+                        new BasicFlavorHandlers.SimpleFilesDataFlavorHandler() {
 
-			    @Override
-			    public void handleFilesList(
-			    	TransferHandler.TransferSupport transferSupport,
-				    File[] transferFiles
-			    ) {
+                            @Override
+                            public void handleFilesList(
+                                    TransferHandler.TransferSupport transferSupport,
+                                    File[] transferFiles
+                            ) {
 
-				Logger.logMsg( "handling a file list:  " + Arrays.toString( transferFiles ) );
+                                Logger.logMsg( "handling a file list:  " + Arrays.toString( transferFiles ) );
 
-			    }
+                            }
 
-			},
+                        },
 
-			new BasicFlavorHandlers.SimpleStringDataFlavorHandler() {
+                        new BasicFlavorHandlers.SimpleStringDataFlavorHandler() {
 
-			    @Override
-			    protected void handleString(
-				    TransferHandler.TransferSupport transferSupport,
-				    String transferString
-			    ) {
+                            @Override
+                            protected void handleString(
+                                    TransferHandler.TransferSupport transferSupport,
+                                    String transferString
+                            ) {
 
-				Logger.logMsg( "handling a string:  " + ObtuseUtil.enquoteForJavaString( transferString ) );
+                                Logger.logMsg( "handling a string:  " + ObtuseUtil.enquoteForJavaString( transferString ) );
 
-			    }
+                            }
 
-			}
+                        }
 
-		}
+                }
 
-	);
+        );
 
         _draggableJPanel.setBorder( BorderFactory.createBevelBorder( BevelBorder.LOWERED ) );
 
@@ -96,7 +98,7 @@ public class DraggableJPanelTester extends JFrame {
 
     public static void main( String[] args ) {
 
-	BasicProgramConfigInfo.init( "Obtuse", "Pipestone", "Testing", null );
+        BasicProgramConfigInfo.init( "Obtuse", "Pipestone", "Testing", null );
 
         DraggableJPanelTester tester = new DraggableJPanelTester();
 

@@ -75,9 +75,11 @@ public class HowDidWeGetHereError
 
     private void notifyOopsCatcher() {
 
+        boolean tracebackPrinted = false;
         if ( s_stackTracePrintStream != null ) {
 
             printStackTrace( getStackTracePrintStream() );
+            tracebackPrinted = true;
 
         }
 

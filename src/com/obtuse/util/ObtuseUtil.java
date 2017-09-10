@@ -1883,7 +1883,6 @@ public class ObtuseUtil {
      */
 
     public static void doNothing() {
-
     }
 
     /**

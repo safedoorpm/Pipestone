@@ -18,17 +18,19 @@ import javax.swing.*;
 public abstract class AbstractScrollableLinearContainer3 extends LinearContainer3 implements Scrollable {
 
     public AbstractScrollableLinearContainer3( @NotNull String name, LinearOrientation orientation ) {
-	this( name, orientation, null, null );
+
+        this( name, orientation, null, null );
 
     }
 
     AbstractScrollableLinearContainer3(
-	    @NotNull String name,
-	    LinearOrientation orientation,
-	    @SuppressWarnings("SameParameterValue") ContainerConstraints containerConstraints,
-	    @SuppressWarnings("SameParameterValue") ComponentConstraints componentConstraints
+            @NotNull String name,
+            LinearOrientation orientation,
+            @SuppressWarnings("SameParameterValue") ContainerConstraints containerConstraints,
+            @SuppressWarnings("SameParameterValue") ComponentConstraints componentConstraints
     ) {
-	super( name, orientation, containerConstraints, componentConstraints );
+
+        super( name, orientation, containerConstraints, componentConstraints );
 
     }
 

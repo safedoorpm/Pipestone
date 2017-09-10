@@ -34,68 +34,80 @@ public class LinearLayoutUtil {
     private static WatchList<Component> s_componentWatchlist = new WatchList<>( "component watchlist" );
 
     private LinearLayoutUtil() {
-	super();
+
+        super();
 
     }
 
     public static boolean isContainerOnWatchlist( @NotNull Container c ) {
 
-	return s_containerWatchlist.isEntityOnWatchList( c );
+        return s_containerWatchlist.isEntityOnWatchList( c );
 
     }
 
     public static int addContainerToWatchList( @NotNull Container c ) {
 
-	return s_containerWatchlist.addEntityToWatchList( c );
+        return s_containerWatchlist.addEntityToWatchList( c );
 
     }
 
     public static int removeContainerFromWatchList( @NotNull Container c ) {
 
-	return s_containerWatchlist.removeEntityFromWatchList( c );
+        return s_containerWatchlist.removeEntityFromWatchList( c );
 
     }
 
     public static boolean isComponentOnWatchlist( @NotNull Component c ) {
 
-	return s_componentWatchlist.isEntityOnWatchList( c );
+        return s_componentWatchlist.isEntityOnWatchList( c );
 
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public static int addComponentToWatchList( @NotNull Component c ) {
 
-	return s_componentWatchlist.addEntityToWatchList( c );
+        return s_componentWatchlist.addEntityToWatchList( c );
 
     }
 
     public static int removeComponentFromWatchList( @NotNull Component c ) {
 
-	return s_componentWatchlist.removeEntityFromWatchList( c );
+        return s_componentWatchlist.removeEntityFromWatchList( c );
 
     }
 
     public static String describeBorder( Border border ) {
 
-	if ( border == null ) {
+        if ( border == null ) {
 
-	    return "<<null border>>";
+            return "<<null border>>";
 
-	}
+        }
 
-	if ( border instanceof EtchedBorder ) {
+        if ( border instanceof EtchedBorder ) {
 
-	    EtchedBorder b = (EtchedBorder) border;
-	    return "EtchedBorder( eType=" + ( b.getEtchType() == EtchedBorder.LOWERED ? "lowered" : "raised" ) + ", hColour=" + b.getHighlightColor() + ", sColor=" + b.getShadowColor() + " )";
+            EtchedBorder b = (EtchedBorder)border;
+            return "EtchedBorder( eType=" +
+                   ( b.getEtchType() == EtchedBorder.LOWERED ? "lowered" : "raised" ) +
+                   ", hColour=" +
+                   b.getHighlightColor() +
+                   ", sColor=" +
+                   b.getShadowColor() +
+                   " )";
 
-	} else if ( border instanceof LineBorder ) {
+        } else if ( border instanceof LineBorder ) {
 
-	    LineBorder b = (LineBorder) border;
-	    return "LineBorder( lColour=" + b.getLineColor() + ", thickness=" + b.getThickness() + ( b.getRoundedCorners() ? ", corners=rounded" : "" ) + " )";
+            LineBorder b = (LineBorder)border;
+            return "LineBorder( lColour=" +
+                   b.getLineColor() +
+                   ", thickness=" +
+                   b.getThickness() +
+                   ( b.getRoundedCorners() ? ", corners=rounded" : "" ) +
+                   " )";
 
-	}
+        }
 
-	return border.toString();
+        return border.toString();
     }
 
 //    @NotNull
@@ -126,227 +138,253 @@ public class LinearLayoutUtil {
     @NotNull
     public static LinearContainer createPanel3( String name, LinearOrientation orientation ) {
 
-	@SuppressWarnings("UnnecessaryLocalVariable")
-	LinearContainer rval = new LinearContainer3( name, orientation ) {
+        @SuppressWarnings("UnnecessaryLocalVariable")
+        LinearContainer rval = new LinearContainer3( name, orientation ) {
 
-	    public void setBounds( int x, int y, int w, int h ) {
+            public void setBounds( int x, int y, int w, int h ) {
 
-		super.setBounds( x, y, w, h );
-		Logger.logMsg( "SSLM.createdPanel3( name=\"" + getName() + "\", count=" + getComponentCount() + " ) setting container bounds to " + ObtuseUtil.fBounds( x, y, w, h ) );
+                super.setBounds( x, y, w, h );
+                Logger.logMsg( "SSLM.createdPanel3( name=\"" +
+                               getName() +
+                               "\", count=" +
+                               getComponentCount() +
+                               " ) setting container bounds to " +
+                               ObtuseUtil.fBounds( x, y, w, h ) );
 
-	    }
+            }
 
-	    public String toString() {
+            public String toString() {
 
-		return "SSLM.createdPanel3( \"" + getName() + "\", " + super.toString() + ")"; // + '[' + paramString() + ']';
+                return "SSLM.createdPanel3( \"" + getName() + "\", " + super.toString() + ")"; // + '[' + paramString() + ']';
 
-	    }
+            }
 
-	};
+        };
 
-	return rval;
+        return rval;
 
     }
 
     public static String myDrawLine( String who, Graphics2D g2d, int x1, int y1, int x2, int y2 ) {
 
-	String msg = "drawLine( " + x1 + ", " + y1 + ", " + x2 + ", " + y2 + " )";
-	g2d.drawLine( x1, y1, x2, y2 );
-	Logger.logMsg( who + ":  " + msg );
+        String msg = "drawLine( " + x1 + ", " + y1 + ", " + x2 + ", " + y2 + " )";
+        g2d.drawLine( x1, y1, x2, y2 );
+        Logger.logMsg( who + ":  " + msg );
 
-	return msg;
+        return msg;
 
     }
 
     @NotNull
     public static JComponent makeThing(
-	    @NotNull final String label,
-	    @Nullable Dimension minSize,
-	    @Nullable Dimension prefSize,
-	    @Nullable Dimension maxSize
+            @NotNull final String label,
+            @Nullable Dimension minSize,
+            @Nullable Dimension prefSize,
+            @Nullable Dimension maxSize
     ) {
 
-	JPanel rval = new JPanel() {
+        JPanel rval = new JPanel() {
 
-	    public String getName() {
+            public String getName() {
 
-		return label;
+                return label;
 
-	    }
+            }
 
-	    public void setMinimumSize( Dimension size ) {
+            public void setMinimumSize( Dimension size ) {
 
-		super.setMinimumSize( size );
-		if ( _reportShapeChanges ) {
+                super.setMinimumSize( size );
+                if ( _reportShapeChanges ) {
 
-		    Logger.logMsg( "Thing \"" + getName() + "\" minSize set to " + ObtuseUtil.fDim( size ) );
+                    Logger.logMsg( "Thing \"" + getName() + "\" minSize set to " + ObtuseUtil.fDim( size ) );
 
-		}
+                }
 
-	    }
+            }
 
-	    public void setPreferredSize( Dimension size ) {
+            public void setPreferredSize( Dimension size ) {
 
-		super.setPreferredSize( size );
-		if ( _reportShapeChanges ) {
+                super.setPreferredSize( size );
+                if ( _reportShapeChanges ) {
 
-		    Logger.logMsg( "Thing \"" + getName() + "\" prefSize set to " + ObtuseUtil.fDim( size ) );
+                    Logger.logMsg( "Thing \"" + getName() + "\" prefSize set to " + ObtuseUtil.fDim( size ) );
 
-		}
+                }
 
-	    }
+            }
 
-	    public void setMaximumSize( Dimension size ) {
+            public void setMaximumSize( Dimension size ) {
 
-		super.setMaximumSize( size );
-		if ( _reportShapeChanges ) {
+                super.setMaximumSize( size );
+                if ( _reportShapeChanges ) {
 
-		    Logger.logMsg( "Thing \"" + getName() + "\" maxSize set to " + ObtuseUtil.fDim( size ) );
+                    Logger.logMsg( "Thing \"" + getName() + "\" maxSize set to " + ObtuseUtil.fDim( size ) );
 
-		}
+                }
 
-	    }
+            }
 
-	    public void setBounds( int x, int y, int w, int h ) {
+            public void setBounds( int x, int y, int w, int h ) {
 
-		super.setBounds( x, y, w, h );
+                super.setBounds( x, y, w, h );
 
-		Logger.logMsg( "Thing \"" + getName() + "\" created by makeThing resized from " + ObtuseUtil.fBounds( getBounds() ) + " to " + ObtuseUtil.fBounds( x, y, w, h ) );
-		ObtuseUtil.doNothing();
+                Logger.logMsg( "Thing \"" +
+                               getName() +
+                               "\" created by makeThing resized from " +
+                               ObtuseUtil.fBounds( getBounds() ) +
+                               " to " +
+                               ObtuseUtil.fBounds( x, y, w, h ) );
+                ObtuseUtil.doNothing();
 
-	    }
+            }
 
-	    @SuppressWarnings("deprecation")
-	    public void reshape( int x, int y, int w, int h ) {
+            @SuppressWarnings("deprecation")
+            public void reshape( int x, int y, int w, int h ) {
 
-		super.reshape( x, y, w, h );
+                super.reshape( x, y, w, h );
 
-		Logger.logMsg( "Thing \"" + getName() + "\" created by makeThing RESHAPED from " + ObtuseUtil.fBounds( getBounds() ) + " to " + ObtuseUtil.fBounds( x, y, w, h ) );
-		ObtuseUtil.doNothing();
+                Logger.logMsg( "Thing \"" +
+                               getName() +
+                               "\" created by makeThing RESHAPED from " +
+                               ObtuseUtil.fBounds( getBounds() ) +
+                               " to " +
+                               ObtuseUtil.fBounds( x, y, w, h ) );
+                ObtuseUtil.doNothing();
 
-	    }
+            }
 
-	    protected void paintComponent( Graphics g ) {
+            protected void paintComponent( Graphics g ) {
 
-		super.paintComponent( g );
+                super.paintComponent( g );
 
-		Graphics2D g2d = (Graphics2D)g;
-		g2d.setColor( Color.BLUE );
-		Insets insets = getInsets();
-		int left = insets.left;
-		int top = insets.top;
-		int right = getWidth() - insets.right - 1;	// subtracting 1 accounts for fact that last pixel in a n pixel wide space is at location n-1
-		int bottom = getHeight() - insets.bottom - 1;	// subtracting 1 accounts for fact that last pixel in a n pixel wide space is at location n-1
-		String l1msg = myDrawLine( "thing", g2d, left, top, right, bottom );
-		String l2msg = myDrawLine( "thing", g2d, left, bottom, right, top );
-		Logger.logMsg(
-			"thing painted:  w=" + getWidth() + ", h=" + getHeight() + ", insets=" + ObtuseUtil.fInsets( insets ) +
-			", l1=" + l1msg +
-			", l2=" + l2msg
-		);
+                Graphics2D g2d = (Graphics2D)g;
+                g2d.setColor( Color.BLUE );
+                Insets insets = getInsets();
+                int left = insets.left;
+                int top = insets.top;
+                int right = getWidth() -
+                            insets.right -
+                            1;    // subtracting 1 accounts for fact that last pixel in a n pixel wide space is at location n-1
+                int bottom = getHeight() -
+                             insets.bottom -
+                             1;    // subtracting 1 accounts for fact that last pixel in a n pixel wide space is at location n-1
+                String l1msg = myDrawLine( "thing", g2d, left, top, right, bottom );
+                String l2msg = myDrawLine( "thing", g2d, left, bottom, right, top );
+                Logger.logMsg(
+                        "thing painted:  w=" + getWidth() + ", h=" + getHeight() + ", insets=" + ObtuseUtil.fInsets( insets ) +
+                        ", l1=" + l1msg +
+                        ", l2=" + l2msg
+                );
 //		g2d.drawLine( left, top, right, bottom );
 //		g2d.drawLine( left, bottom, right, top );
 
-	    }
+            }
 
-	    public String toString() {
+            public String toString() {
 
-		return "Thing( " +
-		       "\"" + getName() + "\", " +
-		       ObtuseUtil.fDim( "minSize", getMinimumSize() ) + ", " +
-		       ObtuseUtil.fDim( "prefSize", getPreferredSize() ) + ", " +
-		       ObtuseUtil.fDim( "maxSize", getMaximumSize() ) +
-		       ", bounds=" + ObtuseUtil.fBounds( getBounds() ) + ", " +
-		       super.toString() +
-		       " )";
+                return "Thing( " +
+                       "\"" + getName() + "\", " +
+                       ObtuseUtil.fDim( "minSize", getMinimumSize() ) + ", " +
+                       ObtuseUtil.fDim( "prefSize", getPreferredSize() ) + ", " +
+                       ObtuseUtil.fDim( "maxSize", getMaximumSize() ) +
+                       ", bounds=" + ObtuseUtil.fBounds( getBounds() ) + ", " +
+                       super.toString() +
+                       " )";
 
-	    }
+            }
 
-	};
+        };
 
-	addLocationTracer( rval );
+        addLocationTracer( rval );
 
-	rval.setBorder( BorderFactory.createBevelBorder( BevelBorder.LOWERED ) );
+        rval.setBorder( BorderFactory.createBevelBorder( BevelBorder.LOWERED ) );
 
-	rval.setMinimumSize( minSize );
-	rval.setPreferredSize( prefSize );
-	rval.setMaximumSize( maxSize );
+        rval.setMinimumSize( minSize );
+        rval.setPreferredSize( prefSize );
+        rval.setMaximumSize( maxSize );
 
-	Logger.logMsg( "Thing \"" + rval.getName() + "\"'s alignment is ( " + rval.getAlignmentX() + ", " + rval.getAlignmentY() + " ) @ " + ObtuseUtil.fBounds( rval.getBounds() ) );
+        Logger.logMsg( "Thing \"" +
+                       rval.getName() +
+                       "\"'s alignment is ( " +
+                       rval.getAlignmentX() +
+                       ", " +
+                       rval.getAlignmentY() +
+                       " ) @ " +
+                       ObtuseUtil.fBounds( rval.getBounds() ) );
 
-	return rval;
+        return rval;
 
     }
 
     public static void makeButtons( JComponent component, int nb ) {
 
-	makeButtons( component, nb, "Hello!", null );
+        makeButtons( component, nb, "Hello!", null );
 
     }
 
     public static void makeButtons( JComponent component, int nb, MyActionListener listener ) {
 
-	makeButtons( component, nb, "Hello!", listener );
+        makeButtons( component, nb, "Hello!", listener );
 
     }
 
     public static void makeButtons( JComponent component, int nb, String label ) {
 
-	makeButtons( component, nb, label, null );
+        makeButtons( component, nb, label, null );
 
     }
 
     public static void makeButtons( JComponent component, int nb, String label, MyActionListener listener ) {
 
-	component.setBorder( BorderFactory.createLineBorder( Color.GREEN ) );
-	addContainerToWatchList( component );
-	component.setAlignmentX( 0.5f );
-	component.setAlignmentY( 0.0f );
+        component.setBorder( BorderFactory.createLineBorder( Color.GREEN ) );
+        addContainerToWatchList( component );
+        component.setAlignmentX( 0.5f );
+        component.setAlignmentY( 0.0f );
 
-	for ( int i = 0; i < nb; i += 1 ) {
+        for ( int i = 0; i < nb; i += 1 ) {
 
-	    JButton jButton3 = new JButton( label ) {
-		public void setBounds( int x, int y, int width, int height ) {
+            JButton jButton3 = new JButton( label ) {
+                public void setBounds( int x, int y, int width, int height ) {
 
-		    super.setBounds( x, y, width, height );
+                    super.setBounds( x, y, width, height );
 
-		    Logger.logMsg( "jButton3's bounds set to " + ObtuseUtil.fBounds( x, y, width, height ) );
+                    Logger.logMsg( "jButton3's bounds set to " + ObtuseUtil.fBounds( x, y, width, height ) );
 
-		}
+                }
 
-		public String toString() {
+                public String toString() {
 
-		    return "jButton3:  " + super.toString();
+                    return "jButton3:  " + super.toString();
 
-		}
+                }
 
-	    };
-	    float alignmentX = nb == 1 ? 0.5f : Math.max( Math.min( i / (float) ( nb - 1 ), 1f ), 0f );
-	    Logger.logMsg( "alignmentX = " + alignmentX );
-	    jButton3.setAlignmentX( alignmentX );
-	    addComponentToWatchList( jButton3 );
+            };
+            float alignmentX = nb == 1 ? 0.5f : Math.max( Math.min( i / (float)( nb - 1 ), 1f ), 0f );
+            Logger.logMsg( "alignmentX = " + alignmentX );
+            jButton3.setAlignmentX( alignmentX );
+            addComponentToWatchList( jButton3 );
 
-	    jButton3.addActionListener(
-		    new MyActionListener() {
+            jButton3.addActionListener(
+                    new MyActionListener() {
 
-			@Override
-			public void myActionPerformed( ActionEvent actionEvent ) {
+                        @Override
+                        public void myActionPerformed( ActionEvent actionEvent ) {
 
-			    showWhereWeAre( jButton3, actionEvent );
-			    if ( listener != null ) {
+                            showWhereWeAre( jButton3, actionEvent );
+                            if ( listener != null ) {
 
-				listener.actionPerformed( actionEvent );
+                                listener.actionPerformed( actionEvent );
 
-			    }
+                            }
 
-			}
+                        }
 
-		    }
-	    );
+                    }
+            );
 
-	    component.add( jButton3 );
+            component.add( jButton3 );
 
-	}
+        }
 
 //	JComponent thing1 = makeThing( "thing", new Dimension( 15, 30 ), new Dimension( 20, 40 ), new Dimension( 90, 90 ) );
 //	thing1.setAlignmentX( 0.0f );
@@ -365,130 +403,136 @@ public class LinearLayoutUtil {
 
     public void setReportShapeChanges( boolean report ) {
 
-	LinearLayoutUtil._reportShapeChanges = report;
+        LinearLayoutUtil._reportShapeChanges = report;
 
     }
 
     public boolean reportShapeChanges() {
 
-	return LinearLayoutUtil._reportShapeChanges;
+        return LinearLayoutUtil._reportShapeChanges;
 
     }
 
     public static void describeGuiEntity( String why, Container container ) {
 
-	Logger.logMsg( ( why == null ? "" : why + ":  " ) + "structure of container \"" + container.getName() + "\" is " + ObtuseUtil.fBounds( container.getBounds() ) + " - " + container );
+        Logger.logMsg( ( why == null ? "" : why + ":  " ) +
+                       "structure of container \"" +
+                       container.getName() +
+                       "\" is " +
+                       ObtuseUtil.fBounds( container.getBounds() ) +
+                       " - " +
+                       container );
 
-	for ( Component c : container.getComponents() ) {
+        for ( Component c : container.getComponents() ) {
 
-	    describeGuiEntity( 0, c, false, false );
+            describeGuiEntity( 0, c, false, false );
 
-	}
+        }
 
-	Logger.logMsg( "" );
+        Logger.logMsg( "" );
 
     }
 
     public static void describeGuiEntity( int depth, Component component, boolean recurse, boolean showContents ) {
 
-	String formattedComponentName = fullName( component );
-	Logger.logMsg(
-		ObtuseUtil.replicate( "  ", depth ) + formattedComponentName + ObtuseUtil.fBounds( component.getBounds() ) +
-		":  " + component
+        String formattedComponentName = fullName( component );
+        Logger.logMsg(
+                ObtuseUtil.replicate( "  ", depth ) + formattedComponentName + ObtuseUtil.fBounds( component.getBounds() ) +
+                ":  " + component
 //		name
 //		+ " is " + ObtuseUtil.fBounds( component.getBounds() ) +
 //		", min=" + ObtuseUtil.fDim( component.getMinimumSize() ) +
 //		", pref=" + ObtuseUtil.fDim( component.getPreferredSize() ) +
 //		", max=" + ObtuseUtil.fDim( component.getMaximumSize() )
-	);
+        );
 
-	if ( component instanceof Container && showContents ) {
+        if ( component instanceof Container && showContents ) {
 
-	    for ( Component c : ((Container)component).getComponents() ) {
+            for ( Component c : ( (Container)component ).getComponents() ) {
 
-		describeGuiEntity( depth + 1, c, false, true );
+                describeGuiEntity( depth + 1, c, false, true );
 
-	    }
+            }
 
-	}
+        }
 
-	if ( recurse ) {
+        if ( recurse ) {
 
-	    Container parent = component.getParent();
-	    if ( parent != null ) {
+            Container parent = component.getParent();
+            if ( parent != null ) {
 
-		describeGuiEntity( depth + 1, parent, true, false );
+                describeGuiEntity( depth + 1, parent, true, false );
 
-	    }
+            }
 
-	}
+        }
 
     }
 
     public static String fullName( Container parent, Component c ) {
 
-	return "\"" + parent.getName() + "\"/\"" + fullName( c ) + "\"" + ( c instanceof Container ? "(c)" : "(?)" );
+        return "\"" + parent.getName() + "\"/\"" + fullName( c ) + "\"" + ( c instanceof Container ? "(c)" : "(?)" );
 
     }
 
     @NotNull
     public static String fullName( Component component ) {
 
-	String name = component.getName();
-	if ( name == null ) {
+        String name = component.getName();
+        if ( name == null ) {
 
-	    if ( component instanceof JButton ) {
+            if ( component instanceof JButton ) {
 
-		name = "buttonLabel=\"" + ((JButton)component).getText() + '"';
+                name = "buttonLabel=\"" + ( (JButton)component ).getText() + '"';
 
-	    } else {
+            } else {
 
-		name = "unknown name";
+                name = "unknown name";
 
-	    }
+            }
 
-	} else {
+        } else {
 
-	    name = "name=\"" + name + "\"";
+            name = "name=\"" + name + "\"";
 
-	}
+        }
 
-	return component.getClass().getName() + "(" + name + ")";
+        return component.getClass().getName() + "(" + name + ")";
 
     }
 
     public static void showWhereWeAre( Component start, AWTEvent e ) {
 
-	try {
+        try {
 
-	    Logger.pushNesting( "showWhereWeAre" );
+            Logger.pushNesting( "showWhereWeAre" );
 
-	    if ( e instanceof MouseEvent ) {
+            if ( e instanceof MouseEvent ) {
 
-		MouseEvent me = (MouseEvent) e;
+                MouseEvent me = (MouseEvent)e;
 
-		String msg = "click count = " + me.getClickCount() + ", " +
-			     "Click position :  ( " + me.getX() + ", " + me.getY() + " )";
+                String msg = "click count = " + me.getClickCount() + ", " +
+                             "Click position :  ( " + me.getX() + ", " + me.getY() + " )";
 
-		if ( me.getButton() == MouseEvent.NOBUTTON ) {
+                if ( me.getButton() == MouseEvent.NOBUTTON ) {
 
-		    Logger.logMsg( "SF(\"" + start.getName() + "\"):  " + "No button clicked, " + msg );
+                    Logger.logMsg( "SF(\"" + start.getName() + "\"):  " + "No button clicked, " + msg );
 
-		} else {
+                } else {
 
-		    Logger.logMsg( "SF(\"" + start.getName() + "\"):  " + "Button #" + me.getButton() + " clicked, " + msg );
+                    Logger.logMsg( "SF(\"" + start.getName() + "\"):  " + "Button #" + me.getButton() + " clicked, " + msg );
 
-		}
+                }
 
-	    }
+            }
 
-	    describeGuiEntity( 0, start, true, false );
+            describeGuiEntity( 0, start, true, false );
 
-	} finally {
+        } finally {
 
-	    Logger.popNestingLevel( "showWhereWeAre" );
+            Logger.popNestingLevel( "showWhereWeAre" );
 
-	}
+        }
 
     }
 
@@ -523,104 +567,122 @@ public class LinearLayoutUtil {
 
     public static void showStructure( Container start ) {
 
-	int depth = 0;
-	for ( Container c = start; c != null; c = c.getParent() ) {
+        int depth = 0;
+        for ( Container c = start; c != null; c = c.getParent() ) {
 
-	    Logger.logMsg(
-		    ObtuseUtil.replicate( "    ", depth ) + c.getClass().getName() + ":  " + toString( c ) //  c.getName(), c.getComponents() )
-	    );
+            Logger.logMsg(
+                    ObtuseUtil.replicate( "    ", depth ) + c.getClass().getName() + ":  " + toString( c ) //  c.getName(), c.getComponents() )
+            );
 
-	    depth += 1;
+            depth += 1;
 
-	}
+        }
 
-	Logger.logMsg( "" );
+        Logger.logMsg( "" );
     }
 
     public static void addLocationTracer( final Container container ) {
 
-	container.addMouseListener(
-		new MouseAdapter() {
+        container.addMouseListener(
+                new MouseAdapter() {
 
-		    public void mouseClicked( MouseEvent e ) {
+                    public void mouseClicked( MouseEvent e ) {
 
-			showWhereWeAre( container, e );
+                        showWhereWeAre( container, e );
 
-			ObtuseUtil.doNothing();
+                        ObtuseUtil.doNothing();
 
-		    }
+                    }
 
-		}
+                }
 
-	);
+        );
 
     }
 
     public static String toString( Container container ) {
 
-	StringBuilder sb = new StringBuilder( "{" );
-	String comma = "";
-	int count = container.getComponents().length;
-	int cc = container.getComponentCount();
-	ObtuseUtil.doNothing();
+        StringBuilder sb = new StringBuilder( "{" );
+        String comma = "";
+        int count = container.getComponents().length;
+        int cc = container.getComponentCount();
+        ObtuseUtil.doNothing();
 
-	for ( Component c : container.getComponents() ) {
+        for ( Component c : container.getComponents() ) {
 
-	    if ( comma.length() == 0 ) {
+            if ( comma.length() == 0 ) {
 
-		sb.append( ' ' );
+                sb.append( ' ' );
 
-	    }
+            }
 
-	    sb.append( comma ).append( fullName( container, c ) ); // ) append( '"' ).append( container.getName() ).append( "\"/\"" ).append( c.getName() ).append( '"' );
-	    comma = ", ";
+            sb.append( comma )
+              .append( fullName(
+                      container,
+                      c
+              ) ); // ) append( '"' ).append( container.getName() ).append( "\"/\"" ).append( c.getName() ).append( '"' );
+            comma = ", ";
 
-	}
+        }
 
-	if ( comma.length() > 0 ) {
+        if ( comma.length() > 0 ) {
 
-	    sb.append( ' ' );
+            sb.append( ' ' );
 
-	}
+        }
 
-	sb.append( '}' );
+        sb.append( '}' );
 
-	return "" + container.getClass().getSimpleName() + "( \"" + container.getName() + "\", " + container.getComponentCount() + " component" + ( container.getComponentCount() == 1 ? "" : "s" ) + ", " + sb + " )";
+        return "" +
+               container.getClass().getSimpleName() +
+               "( \"" +
+               container.getName() +
+               "\", " +
+               container.getComponentCount() +
+               " component" +
+               ( container.getComponentCount() == 1 ? "" : "s" ) +
+               ", " +
+               sb +
+               " )";
 
     }
 
     public interface LinearMagic {
 
-	Dimension getInitialMinimumSize();
-	Dimension getInitialPreferredSize();
-	Dimension getInitialMaximumSize();
+        Dimension getInitialMinimumSize();
+
+        Dimension getInitialPreferredSize();
+
+        Dimension getInitialMaximumSize();
 
     }
 
     public static class MyDimension extends Dimension {
 
         public MyDimension() {
+
             super();
-	}
+        }
 
-	public MyDimension( int width, int height ) {
+        public MyDimension( int width, int height ) {
+
             super( width, height );
-	}
+        }
 
-	// Having a re-wrapper is a bad idea since the owner of the original Dimension instance
-	// might change their instance by directly changing the width and height fields.
-	// Mutable information classes are, as a general rule, EVIL!!!
+        // Having a re-wrapper is a bad idea since the owner of the original Dimension instance
+        // might change their instance by directly changing the width and height fields.
+        // Mutable information classes are, as a general rule, EVIL!!!
 
 //	public MyDimension( Dimension d ) {
 //            super( d.width, d.height );
 //
 //	}
 
-	public String toString() {
+        public String toString() {
 
             return ObtuseUtil.fDim( this );
 
-	}
+        }
 
     }
 
@@ -633,15 +695,16 @@ public class LinearLayoutUtil {
     public static class SpaceSponge extends JPanel {
 
         public SpaceSponge() {
+
             super();
 
-	}
+        }
 
-	public String toString() {
+        public String toString() {
 
             return "SpaceSponge( " + super.toString() + " )";
 
-	}
+        }
 
     }
 
@@ -651,88 +714,91 @@ public class LinearLayoutUtil {
 
     public static class SpaceBrick extends JPanel {
 
-	private final MyDimension _min;
-	private final MyDimension _pref;
-	private final MyDimension _max;
+        private final MyDimension _min;
+        private final MyDimension _pref;
+        private final MyDimension _max;
 
-	public SpaceBrick( int minWidth, int minHeight, int prefWidth, int prefHeight, int maxWidth, int maxHeight ) {
+        public SpaceBrick( int minWidth, int minHeight, int prefWidth, int prefHeight, int maxWidth, int maxHeight ) {
+
             this( new MyDimension( minWidth, minHeight ), new MyDimension( prefWidth, prefHeight ), new MyDimension( maxWidth, maxHeight ) );
-	}
+        }
 
-	public SpaceBrick( Dimension min, Dimension pref, Dimension max ) {
-	    super();
+        public SpaceBrick( Dimension min, Dimension pref, Dimension max ) {
 
-	    _min = min instanceof MyDimension ? (MyDimension)min : new MyDimension( min.width, min.height );
-	    _pref = pref instanceof MyDimension ? (MyDimension)pref : new MyDimension( pref.width, pref.height );
-	    _max = max instanceof MyDimension ? (MyDimension)max : new MyDimension( max.width, max.height );
+            super();
 
-	}
+            _min = min instanceof MyDimension ? (MyDimension)min : new MyDimension( min.width, min.height );
+            _pref = pref instanceof MyDimension ? (MyDimension)pref : new MyDimension( pref.width, pref.height );
+            _max = max instanceof MyDimension ? (MyDimension)max : new MyDimension( max.width, max.height );
 
-	public Dimension getMinimumSize() {
+        }
 
-	    return _min;
+        public Dimension getMinimumSize() {
 
-	}
+            return _min;
 
-	public Dimension getPreferredSize() {
+        }
 
-	    return _min;
+        public Dimension getPreferredSize() {
 
-	}
+            return _min;
 
-	public Dimension getMaximumSize() {
+        }
 
-	    return _max;
+        public Dimension getMaximumSize() {
 
-	}
+            return _max;
 
-	public void setMinimumSize( Dimension min ) {
+        }
 
-	    Logger.logMsg( "SpaceBrick:  request to change min from " + _min + " to " + min + " ignored" );
+        public void setMinimumSize( Dimension min ) {
 
-	}
+            Logger.logMsg( "SpaceBrick:  request to change min from " + _min + " to " + min + " ignored" );
 
-	public void setPreferredSize( Dimension pref ) {
+        }
 
-	    Logger.logMsg( "SpaceBrick:  request to change pref from " + _pref + " to " + pref + " ignored" );
+        public void setPreferredSize( Dimension pref ) {
 
-	}
+            Logger.logMsg( "SpaceBrick:  request to change pref from " + _pref + " to " + pref + " ignored" );
 
-	public void setMaximumSize( Dimension max ) {
+        }
 
-	    Logger.logMsg( "SpaceBrick:  request to change max from " + _max + " to " + max + " ignored" );
+        public void setMaximumSize( Dimension max ) {
 
-	}
+            Logger.logMsg( "SpaceBrick:  request to change max from " + _max + " to " + max + " ignored" );
 
-	public String toString() {
+        }
 
-	    return "SpaceBrick( min=" + _min + ", pref=" + _pref + ", max=" + _max + " )";
+        public String toString() {
 
-	}
+            return "SpaceBrick( min=" + _min + ", pref=" + _pref + ", max=" + _max + " )";
+
+        }
 
     }
 
     public static class WeightedSimpleFiller extends JPanel {
 
-	private final float _weight;
+        private final float _weight;
 
-	public WeightedSimpleFiller( @NotNull String name, float weight ) {
-	    super();
+        public WeightedSimpleFiller( @NotNull String name, float weight ) {
 
-	    setName( name );
+            super();
 
-	    if ( weight <= 0 ) {
+            setName( name );
 
-		throw new IllegalArgumentException( "WeightedSimpleFiller:  weight must be positive (is " + weight + ")" );
+            if ( weight <= 0 ) {
 
-	    }
+                throw new IllegalArgumentException( "WeightedSimpleFiller:  weight must be positive (is " + weight + ")" );
 
-	    _weight = weight;
+            }
+
+            _weight = weight;
 
 //	    setBackground( Color.RED );
-	    setOpaque( false );
+            setOpaque( false );
 
-	    addLocationTracer( this );
+            addLocationTracer( this );
 //	    addMouseListener(
 //		new MouseAdapter() {
 //
@@ -748,89 +814,94 @@ public class LinearLayoutUtil {
 //
 //	    );
 
-	}
+        }
 
-	public LinearOrientation getOrientation() {
+        public LinearOrientation getOrientation() {
 
-	    Container parent = getParent();
+            Container parent = getParent();
 
-	    if ( parent == null ) {
+            if ( parent == null ) {
 
-		throw new IllegalArgumentException( "LinearLayoutManager.WeightedSimpleFiller:  unable to get orientation until we are placed in a LinearContainer2" );
+                throw new IllegalArgumentException(
+                        "LinearLayoutManager.WeightedSimpleFiller:  unable to get orientation until we are placed in a LinearContainer2" );
 
-	    }
+            }
 
-	    if ( parent instanceof LinearContainer ) {
+            if ( parent instanceof LinearContainer ) {
 
-		return ((LinearContainer)parent).getOrientation();
+                return ( (LinearContainer)parent ).getOrientation();
 
-	    } else {
+            } else {
 
-		throw new IllegalArgumentException( "LinearLayoutManager.WeightedSimpleFiller:  we must reside within a LinearContainer2 (we are in a " + parent.getClass().getName() + ")" );
+                throw new IllegalArgumentException(
+                        "LinearLayoutManager.WeightedSimpleFiller:  we must reside within a LinearContainer2 (we are in a " +
+                        parent.getClass().getName() +
+                        ")" );
 
-	    }
+            }
 
-	}
+        }
 
-	public void paintComponent( Graphics g ) {
+        public void paintComponent( Graphics g ) {
 
-	    super.paintComponent( g );
+            super.paintComponent( g );
 
-	    Graphics2D g2D = (Graphics2D)g.create();
+            Graphics2D g2D = (Graphics2D)g.create();
 
 //	    Color oldColour = g2D.getColor();
 
-	    if (isOpaque() ) {
+            if ( isOpaque() ) {
 
-		g2D.setColor( getBackground() );
+                g2D.setColor( getBackground() );
 
-		g2D.fillRect( 0, 0, getWidth(), getHeight() );
+                g2D.fillRect( 0, 0, getWidth(), getHeight() );
 
-	    }
+            }
 
-	    g2D.setColor( Color.BLACK );
+            g2D.setColor( Color.BLACK );
 
-	    for ( int x = 0; x < getWidth(); x += 100 ) {
+            for ( int x = 0; x < getWidth(); x += 100 ) {
 
-		g2D.drawLine( x, 0, x, getHeight() );
+                g2D.drawLine( x, 0, x, getHeight() );
 
-	    }
+            }
 
-	    for ( int y = 0; y < getHeight(); y += 100 ) {
+            for ( int y = 0; y < getHeight(); y += 100 ) {
 
-		g2D.drawLine( 0, y, getWidth(), y );
+                g2D.drawLine( 0, y, getWidth(), y );
 
-	    }
+            }
 
 //	    g2D.setColor( oldColour );
 
-	}
+        }
 
-	public float getWeight() {
+        public float getWeight() {
 
-	    return _weight;
+            return _weight;
 
-	}
+        }
 
-	public String toString() {
+        public String toString() {
 
-	    return "WeightedSimpleFiller( " + getWeight() + " )";
+            return "WeightedSimpleFiller( " + getWeight() + " )";
 
-	}
+        }
 
     }
 
     public static class SimpleFiller extends JPanel /*implements LinearMagic*/ {
 
-	public SimpleFiller( @NotNull String name ) {
-	    super();
+        public SimpleFiller( @NotNull String name ) {
 
-	    setName( name );
+            super();
+
+            setName( name );
 
 //	    setBackground( Color.RED );
-	    setOpaque( false );
+            setOpaque( false );
 
-	    addLocationTracer( this );
+            addLocationTracer( this );
 //	    addMouseListener(
 //		new MouseAdapter() {
 //
@@ -846,89 +917,92 @@ public class LinearLayoutUtil {
 //
 //	    );
 
-	}
+        }
 
-	public LinearOrientation getOrientation() {
+        public LinearOrientation getOrientation() {
 
-	    Container parent = getParent();
+            Container parent = getParent();
 
-	    if ( parent == null ) {
+            if ( parent == null ) {
 
-		throw new IllegalArgumentException( "LinearLayoutManager.SimpleFiller:  unable to get orientation until we are placed in a LinearContainer2" );
+                throw new IllegalArgumentException(
+                        "LinearLayoutManager.SimpleFiller:  unable to get orientation until we are placed in a LinearContainer2" );
 
-	    }
+            }
 
-	    if ( parent instanceof LinearContainer ) {
+            if ( parent instanceof LinearContainer ) {
 
-		return ((LinearContainer)parent).getOrientation();
+                return ( (LinearContainer)parent ).getOrientation();
 
-	    } else {
+            } else {
 
-		throw new IllegalArgumentException( "LinearLayoutManager.SimpleFiller:  we must reside within a LinearContainer2 (we are in a " + parent.getClass().getName() + ")" );
+                throw new IllegalArgumentException( "LinearLayoutManager.SimpleFiller:  we must reside within a LinearContainer2 (we are in a " +
+                                                    parent.getClass().getName() +
+                                                    ")" );
 
-	    }
+            }
 
-	}
+        }
 
-	public boolean isVertical() {
+        public boolean isVertical() {
 
-	    return getOrientation() == LinearOrientation.VERTICAL;
+            return getOrientation() == LinearOrientation.VERTICAL;
 
-	}
+        }
 
-	public boolean isHorizontal() {
+        public boolean isHorizontal() {
 
-	    return getOrientation() == LinearOrientation.HORIZONTAL;
+            return getOrientation() == LinearOrientation.HORIZONTAL;
 
-	}
+        }
 
-	public void paintComponent( Graphics g ) {
+        public void paintComponent( Graphics g ) {
 
-	    super.paintComponent( g );
+            super.paintComponent( g );
 
-	    Graphics2D g2D = (Graphics2D)g.create();
+            Graphics2D g2D = (Graphics2D)g.create();
 
 //	    Color oldColour = g2D.getColor();
 
-	    if (isOpaque() ) {
+            if ( isOpaque() ) {
 
-		g2D.setColor( getBackground() );
+                g2D.setColor( getBackground() );
 
-		g2D.fillRect( 0, 0, getWidth(), getHeight() );
+                g2D.fillRect( 0, 0, getWidth(), getHeight() );
 
-	    }
+            }
 
-	    g2D.setColor( Color.RED );
+            g2D.setColor( Color.RED );
 
-	    for ( int x = 0; x < getWidth(); x += 100 ) {
+            for ( int x = 0; x < getWidth(); x += 100 ) {
 
-		g2D.drawLine( x, 0, x, getHeight() );
+                g2D.drawLine( x, 0, x, getHeight() );
 
-	    }
+            }
 
-	    for ( int y = 0; y < getHeight(); y += 100 ) {
+            for ( int y = 0; y < getHeight(); y += 100 ) {
 
-		g2D.drawLine( 0, y, getWidth(), y );
+                g2D.drawLine( 0, y, getWidth(), y );
 
-	    }
+            }
 
-	}
+        }
 
-	public String toString() {
+        public String toString() {
 
-	    return "SimpleFiller( \"" + getOrientation() + "\" )";
+            return "SimpleFiller( \"" + getOrientation() + "\" )";
 
-	}
+        }
 
-	public Dimension getMaximumSize() {
+        public Dimension getMaximumSize() {
 
-	    Dimension rval = super.getMaximumSize();
+            Dimension rval = super.getMaximumSize();
 
-	    Logger.logMsg( "SimpleFiller.getMaximumSize() = " + ObtuseUtil.fDim( rval ) );
+            Logger.logMsg( "SimpleFiller.getMaximumSize() = " + ObtuseUtil.fDim( rval ) );
 
-	    return rval;
+            return rval;
 
-	}
+        }
 
     }
 

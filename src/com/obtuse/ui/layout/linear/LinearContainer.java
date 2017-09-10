@@ -50,14 +50,14 @@ public interface LinearContainer {
 
     /**
      Swing/AWT method.
-     <p/> {@link JComponent#add(Component,int)} for more info.
+     <p/> {@link JComponent#add(Component, int)} for more info.
      */
 
     Component add( Component comp, int ix );
 
     /**
      Swing/AWT method.
-     <p/> {@link JComponent#add(Component,Object)} for more info.
+     <p/> {@link JComponent#add(Component, Object)} for more info.
      */
 
     void add( Component comp, Object constraints );
@@ -155,28 +155,31 @@ public interface LinearContainer {
 
     /**
      Return this instance as a {@link Container}.
+
      @return this instance cast as a {@link Container}.
      */
 
     default Container getAsContainer() {
 
-	return (Container)this;
+        return (Container)this;
 
     }
 
     /**
      Return this instance as a {@link JComponent}.
+
      @return this instance cast as a {@link JComponent}.
      */
 
     default JComponent getAsJComponent() {
 
-	return (JComponent)this;
+        return (JComponent)this;
 
     }
 
     /**
      Get this linear container's orientation.
+
      @return this linear container's orientation.
      @see LinearOrientation#VERTICAL
      @see LinearOrientation#HORIZONTAL
@@ -184,11 +187,16 @@ public interface LinearContainer {
 
     LinearOrientation getOrientation();
 
+    boolean isVertical();
+
+    boolean isHorizontal();
+
     /**
      Provide a way to constrain the length of a component within a linear container.
      <p/>Constraining a component's length ensures that its height (in the case of vertically oriented components) or
      its width (in the case of horizontally oriented components) is within a specified minimum to maximum range.
      <p/>It is not clear that this ability to constrain a component's length is useful.
+
      @param minLength the minimum allowed length of a component in this linear container.
      Components which are shorter than this will be forced to be this long.
      @param maxLength the maximum allowed length of a component in this linear container.
@@ -199,7 +207,7 @@ public interface LinearContainer {
 
     /**
      Provide a way to constrain the length of a component within a linear container.
-     <p/>See {@link #setLengthConstraints(int,int)} and {@link ConstraintTuple} for more information.
+     <p/>See {@link #setLengthConstraints(int, int)} and {@link ConstraintTuple} for more information.
      */
 
     void setLengthConstraints( ConstraintTuple lengthConstraints );
@@ -208,6 +216,7 @@ public interface LinearContainer {
      Provide a way to constrain the breadth of a component within a linear container.
      <p/>Constraining a component's breadth ensures that its width (in the case of vertically oriented components) or
      its height (in the case of horizontally oriented components) is within a specified minimum to maximum range.
+
      @param minBreadth the minimum allowed breadth of a component in this linear container.
      Components which are narrower than this will be forced to have this breadth.
      @param maxBreadth the maximum allowed breadth of a component in this linear container.
@@ -218,15 +227,17 @@ public interface LinearContainer {
 
     /**
      Provide a way to constrain the length of a component within a linear container.
+
      @param breadthConstraints the breadth constraints for this instance.
      A {@code null} value removes this instance's breadth constraints.
-     <p/>See {@link #setLengthConstraints(int,int)} and {@link ConstraintTuple} for more information.
+     <p/>See {@link #setLengthConstraints(int, int)} and {@link ConstraintTuple} for more information.
      */
 
     void setBreadthConstraints( ConstraintTuple breadthConstraints );
 
     /**
      Apply this instance's breadth constraints to a specified value.
+
      @param v the specified value.
      @return the specified value if this instance has no breadth constraints.
      Otherwise, the value forced into the range [minimum breadth,maximum breadth] (values which are too low yield the minimum
@@ -235,12 +246,13 @@ public interface LinearContainer {
 
     default int applyBreadthConstraints( int v ) {
 
-	return applyConstraints( getBreadthConstraints(), v );
+        return applyConstraints( getBreadthConstraints(), v );
 
     }
 
     /**
      Apply this instance's length constraints to a specified value.
+
      @param v the specified value.
      @return the specified value if this instance has no length constraints.
      Otherwise, the value forced into the range [minimum length,maximum length] (values which are too low yield the minimum
@@ -249,15 +261,16 @@ public interface LinearContainer {
 
     default int applyLengthConstraints( int v ) {
 
-	return applyConstraints( getLengthConstraints(), v );
+        return applyConstraints( getLengthConstraints(), v );
 
     }
 
     /**
      Apply a {@link ConstraintTuple} to a specified value.
+
      @param doublet the {@link ConstraintTuple} to be applied to the specified value (how often does one get to legitimately
      name a parameter after an anagram of one's first initial and last name? Pretty cool! - D. Boulet).
-     @param v the specified value.
+     @param v       the specified value.
      @return the specified value if {@code doublet} is {@code null}.
      Otherwise, the value forced into the range {@code [doublet.minimum,doublet.maximum]} (values which are too low yield the {@code doublet.minimum} value,
      values which are too high yield the {@code doublet.maximum} value, all other values yield themselves).
@@ -265,23 +278,24 @@ public interface LinearContainer {
 
     default int applyConstraints( ConstraintTuple doublet, int v ) {
 
-	if ( doublet == null ) {
+        if ( doublet == null ) {
 
-	    return v;
+            return v;
 
-	} else {
+        } else {
 
-	    @SuppressWarnings("UnnecessaryLocalVariable")
-	    int newValue = Math.min( Math.max( doublet.minimum, v ), doublet.maximum );
+            @SuppressWarnings("UnnecessaryLocalVariable")
+            int newValue = Math.min( Math.max( doublet.minimum, v ), doublet.maximum );
 
-	    return newValue;
+            return newValue;
 
-	}
+        }
 
     }
 
     /**
      Get this instance's length constraints.
+
      @return this instance's length {@link ConstraintTuple} or {@code null} if this instance has no length {@link ConstraintTuple}.
      */
 
@@ -289,6 +303,7 @@ public interface LinearContainer {
 
     /**
      Get this instance's breadth constraints.
+
      @return this instance's breadth {@link ConstraintTuple} or {@code null} if this instance has no breadth {@link ConstraintTuple}.
      */
 

@@ -35,26 +35,28 @@ class LinearContainer3 extends JPanel implements LinearContainer {
     private boolean _trackParentBreadth;
 
     public LinearContainer3( @NotNull String name, LinearOrientation orientation ) {
+
         this( name, orientation, null, null );
 
     }
 
     LinearContainer3(
-    	@NotNull String name,
-	    LinearOrientation orientation,
-	    @SuppressWarnings("SameParameterValue") ContainerConstraints containerConstraints,
-	    @SuppressWarnings("SameParameterValue") ComponentConstraints componentConstraints
+            @NotNull String name,
+            LinearOrientation orientation,
+            @SuppressWarnings("SameParameterValue") ContainerConstraints containerConstraints,
+            @SuppressWarnings("SameParameterValue") ComponentConstraints componentConstraints
     ) {
-	super();
 
-	setName( name );
+        super();
+
+        setName( name );
 
 //	LinearLayoutUtil.addLocationTracer( this );
 
-	setLayout( new LinearLayoutManager3( orientation, this ) );
+        setLayout( new LinearLayoutManager3( orientation, this ) );
 
-	_containerConstraints = containerConstraints;
-	_componentConstraints = componentConstraints;
+        _containerConstraints = containerConstraints;
+        _componentConstraints = componentConstraints;
 
 //	getLayout();
 //	setBreadth( breadth );
@@ -65,9 +67,9 @@ class LinearContainer3 extends JPanel implements LinearContainer {
 
         if ( !_watchedContainers.contains( watched ) ) {
 
-	    _watchedContainers.add( watched );
+            _watchedContainers.add( watched );
 
-	}
+        }
 
 //        if ( _watched != watched ) {
 //
@@ -99,29 +101,33 @@ class LinearContainer3 extends JPanel implements LinearContainer {
 
     public LinearOrientation getOrientation() {
 
-	LayoutManager lm = getLayout();
-	if ( lm instanceof LinearLayoutManager3 ) {
+        LayoutManager lm = getLayout();
+        if ( lm instanceof LinearLayoutManager3 ) {
 
-	    return ((LinearLayoutManager3)lm).getOrientation();
+            return ( (LinearLayoutManager3)lm ).getOrientation();
 
-	} else if ( lm == null ) {
+        } else if ( lm == null ) {
 
-	    throw new IllegalArgumentException( "LinearContainer3:  no layout manager" );
+            throw new IllegalArgumentException( "LinearContainer3:  no layout manager" );
 
-	} else {
+        } else {
 
-	    throw new IllegalArgumentException( "LinearContainer3:  we need to be managed by a LinearLayoutManager3 (we are being managed by a " + lm.getClass().getName() + ")" );
+            throw new IllegalArgumentException( "LinearContainer3:  we need to be managed by a LinearLayoutManager3 (we are being managed by a " +
+                                                lm.getClass().getName() +
+                                                ")" );
 
-	}
+        }
 
     }
 
+    @Override
     public boolean isVertical() {
 
         return getOrientation() == LinearOrientation.VERTICAL;
 
     }
 
+    @Override
     public boolean isHorizontal() {
 
         return getOrientation() == LinearOrientation.HORIZONTAL;
@@ -131,30 +137,30 @@ class LinearContainer3 extends JPanel implements LinearContainer {
     @Override
     public void setLengthConstraints( int minLength, int maxLength ) {
 
-	setLengthConstraints( new ConstraintTuple( minLength, maxLength ) );
-	revalidate();
+        setLengthConstraints( new ConstraintTuple( minLength, maxLength ) );
+        revalidate();
 
     }
 
     @Override
     public void setLengthConstraints( ConstraintTuple lengthConstraints ) {
 
-	_lengthConstraints = lengthConstraints;
+        _lengthConstraints = lengthConstraints;
 
     }
 
     @Override
     public void setBreadthConstraints( int minBreadth, int maxBreadth ) {
 
-	setBreadthConstraints( new ConstraintTuple( minBreadth, maxBreadth ) );
-	revalidate();
+        setBreadthConstraints( new ConstraintTuple( minBreadth, maxBreadth ) );
+        revalidate();
 
     }
 
     @Override
     public void setBreadthConstraints( ConstraintTuple breadthConstraints ) {
 
-	_breadthConstraints = breadthConstraints;
+        _breadthConstraints = breadthConstraints;
 
     }
 
@@ -173,24 +179,24 @@ class LinearContainer3 extends JPanel implements LinearContainer {
     @Override
     public ConstraintTuple getLengthConstraints() {
 
-	return _lengthConstraints;
+        return _lengthConstraints;
 
     }
 
     @Override
     public ConstraintTuple getBreadthConstraints() {
 
-	return _breadthConstraints;
+        return _breadthConstraints;
 
     }
 
     public void setConstraints(
-	    int minBreadth, int maxBreadth,
-	    int minLength, int maxLength
+            int minBreadth, int maxBreadth,
+            int minLength, int maxLength
     ) {
 
-	setBreadthConstraints( minBreadth, maxBreadth );
-	setLengthConstraints( minLength, maxLength );
+        setBreadthConstraints( minBreadth, maxBreadth );
+        setLengthConstraints( minLength, maxLength );
 
     }
 
@@ -344,54 +350,54 @@ class LinearContainer3 extends JPanel implements LinearContainer {
 
     public String toString() {
 
-	return "LinearContainer3(" +
-	       " name=\"" + getName() + "\"," +
-	       " nComponents=" + getComponentCount() + "," +
-	       " alignment=(" + getAlignmentX() + "," + getAlignmentY() + ")," +
-	       " containerConstraints=" + _containerConstraints + "," +
-	       " componentConstraints=" + _componentConstraints + "," +
-	       " border=" + LinearLayoutUtil.describeBorder( getBorder() ) +
-	       " )";
+        return "LinearContainer3(" +
+               " name=\"" + getName() + "\"," +
+               " nComponents=" + getComponentCount() + "," +
+               " alignment=(" + getAlignmentX() + "," + getAlignmentY() + ")," +
+               " containerConstraints=" + _containerConstraints + "," +
+               " componentConstraints=" + _componentConstraints + "," +
+               " border=" + LinearLayoutUtil.describeBorder( getBorder() ) +
+               " )";
 
     }
 
     public void setContainerConstraints( ContainerConstraints containerConstraints ) {
 
-	_containerConstraints = containerConstraints;
+        _containerConstraints = containerConstraints;
 
-	revalidate();
+        revalidate();
 
     }
 
     public boolean hasContainerConstraints() {
 
-	return _containerConstraints != null;
+        return _containerConstraints != null;
 
     }
 
     public ContainerConstraints getContainerConstraints() {
 
-	return _containerConstraints;
+        return _containerConstraints;
 
     }
 
     public void setComponentConstraints( ContainerConstraints containerConstraints ) {
 
-	_containerConstraints = containerConstraints;
+        _containerConstraints = containerConstraints;
 
-	revalidate();
+        revalidate();
 
     }
 
     public boolean hasComponentConstraints() {
 
-	return _componentConstraints != null;
+        return _componentConstraints != null;
 
     }
 
     public ComponentConstraints getComponentConstraints() {
 
-	return _componentConstraints;
+        return _componentConstraints;
 
     }
 

@@ -12,6 +12,8 @@ import javax.management.timer.Timer;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  Represent a calendar date.
@@ -50,6 +52,10 @@ public class ObtuseCalendarDate implements Comparable<ObtuseCalendarDate> {
      */
 
     public static final String LATEST_SUPPORTED_DATE_STRING = "9999-12-31";
+
+//    private static final Pattern OACD_DATE_PATTERN = Pattern.compile( "(\\d\\d\\d\\d)-(\\d\\d)-(\\d\\d)" );
+//    private static final Pattern OACD_DATE_PATTERN = Pattern.compile( "(\\d\\d\\d\\d)\\s*-\\s*(\\d\\d)\\s*-\\s*(\\d\\d)" );
+    public static final Pattern OACD_DATE_PATTERN = Pattern.compile( "(\\d\\d\\d\\d)\\s*-\\s*(\\d\\d?)\\s*-\\s*(\\d\\d?)" );
 
     private static ObtuseCalendarDate s_earliestSupportedDate;
     private static ObtuseCalendarDate s_latestSupportedDate;
@@ -126,20 +132,30 @@ public class ObtuseCalendarDate implements Comparable<ObtuseCalendarDate> {
      You also need to know about the distinction between Julian dates and Gregorian dates in order to properly deal with Julian dates (this method interprets dates as Julian or Gregorian
      depending on their year, month and day as well as the locale that the method is operating within (still more stuff that you need to know - sorry but dates are just plain hard if you go back very far).
 
-     @param dateString a date in the format <code>YYYY-MM-DD</code> (note that the year portion really must be exactly 4 digits long, the month portion really must be exactly 2 digits long,
+     @param xdateString a date in the format <code>YYYY-MM-DD</code> (note that the year portion really must be exactly 4 digits long, the month portion really must be exactly 2 digits long,
      and the day of month portion really must be exactly 2 digits long; this also means that dates prior to 1000AD must have enough 0's prepended to the year to make it 4 digits long).
      @throws ParsingException if the date string cannot be parsed.
      */
 
-    public ObtuseCalendarDate( String dateString )
+    public ObtuseCalendarDate( String xdateString )
             throws ParsingException {
 
         super();
 
-        if ( dateString.length() != "2012-10-05".length() ) {
+        Matcher dateMatcher = OACD_DATE_PATTERN.matcher( xdateString );
+        if ( !dateMatcher.matches() ) {
+//        if ( dateString.length() != "2012-10-05".length() ) {
+
+//            throw new ParsingException(
+//                    "date \"" + xdateString + "\" is wrong length (must be _exactly_ " + "2012-10-05".length() + " characters)",
+//                    0,
+//                    0,
+//                    ParsingException.ErrorType.DATE_FORMAT_ERROR
+//            );
 
             throw new ParsingException(
-                    "date \"" + dateString + "\" is wrong length (must be _exactly_ " + "2012-10-05".length() + " characters)",
+                    "invalid date \"" + xdateString + "\" (must be \"YYYY-MM-DD\")",
+//                    "date \"" + xdateString + "\" doesn't look like a date to me",
                     0,
                     0,
                     ParsingException.ErrorType.DATE_FORMAT_ERROR
@@ -147,7 +163,10 @@ public class ObtuseCalendarDate implements Comparable<ObtuseCalendarDate> {
 
         }
 
-        _dateString = dateString;
+//        _dateString = dateString;
+        _dateString = ObtuseUtil.lpad( dateMatcher.group(1), 4, '0' ) + '-' +
+                      ObtuseUtil.lpad( dateMatcher.group(2), 2, '0' ) + '-' +
+                      ObtuseUtil.lpad( dateMatcher.group(3), 2, '0' );
 
 //        if ( dateString.length() != "2012-10-05".length() && dateString.length() != "999-01-01".length() ) {
 //
@@ -170,17 +189,17 @@ public class ObtuseCalendarDate implements Comparable<ObtuseCalendarDate> {
 //
 //	}
 
-        _midnightUtcMs = DateUtils.parseYYYY_MM_DD_utc( dateString, 0, false ).getTime();
+        _midnightUtcMs = DateUtils.parseYYYY_MM_DD_utc( _dateString, 0, false ).getTime();
 
         // Make sure nobody tries to slip a date that is to early for us to support properly.
         // Don't check if we are parsing the earliest date that we support or we'll spin off into infinite recursion land.
 
-        if ( !EARLIEST_SUPPORTED_DATE_STRING.equals( dateString ) ) {
+        if ( !EARLIEST_SUPPORTED_DATE_STRING.equals( _dateString ) ) {
 
             if ( _midnightUtcMs < getEarliestSupportedDate()._midnightUtcMs ) {
 
                 throw new ParsingException(
-                        dateString + " is an unsupported date (earliest supported date is " + EARLIEST_SUPPORTED_DATE_STRING + ")",
+                        _dateString + " is an unsupported date (earliest supported date is " + EARLIEST_SUPPORTED_DATE_STRING + ")",
                         0,
                         0,
                         ParsingException.ErrorType.DATE_FORMAT_ERROR
@@ -191,7 +210,7 @@ public class ObtuseCalendarDate implements Comparable<ObtuseCalendarDate> {
         }
 
         Calendar cal = Calendar.getInstance();
-        cal.setTime( DateUtils.parseYYYY_MM_DD( dateString, 0 ) );
+        cal.setTime( DateUtils.parseYYYY_MM_DD( _dateString, 0 ) );
         cal.set( Calendar.HOUR_OF_DAY, 0 );
         cal.set( Calendar.MINUTE, 0 );
         cal.set( Calendar.SECOND, 0 );

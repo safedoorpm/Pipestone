@@ -1,0 +1,3 @@
+Manifest-Version: 1.0
+Main-Class: xyz.kenosee.burke2.gui.evidenceEditor.NameIdBox2
+
