@@ -144,11 +144,11 @@ public class LinearCache3 implements LayoutImplCache {
                 Dimension pref = c.getPreferredSize();
                 Dimension max = c.getMaximumSize();
 
-                Logger.logMsg( "LC3@" + c + ":  min=" + min + ", pref=" + pref + ", max=" + max );
+                ObtuseUtil.report( "LC3@" + c + ":  min=" + min + ", pref=" + pref + ", max=" + max );
 
                 if ( componentTrackParentsBreadth ) {
 
-                    Logger.logMsg(
+                    ObtuseUtil.report(
                             "*** track parent's breadth:  " +
                             ObtuseUtil.fDim( "min", min ) + ", " +
                             ObtuseUtil.fDim( "pref", pref ) + ", " +

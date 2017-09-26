@@ -4,9 +4,7 @@
 
 package com.obtuse.util;
 
-import java.util.Collections;
-import java.util.Random;
-import java.util.Vector;
+import java.util.*;
 
 /**
  * A randomized verb picker.
@@ -1083,6 +1081,12 @@ public class VerbsList {
         String verb = s_available.remove( s_rng.nextInt( s_available.size() ) );
 
         return verb + ( s_iteration == 0 ? "" : " " + s_iteration );
+
+    }
+
+    public static SortedSet<String> getAllWords() {
+
+        return new TreeSet<>( Arrays.asList( s_verbs ) );
 
     }
 

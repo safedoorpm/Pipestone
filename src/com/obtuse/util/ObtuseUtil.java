@@ -34,11 +34,21 @@ import java.util.zip.ZipFile;
 public class ObtuseUtil {
 
     private static final Pattern HEX_STRING_PATTERN = Pattern.compile( "([0-9a-f][0-9a-f])*" );
+    private static boolean s_traceOnly = false;
+
+    /**
+     This is a class of utility methods - no point letting anyone instantiate instances.
+     */
+
+    private ObtuseUtil() {
+
+        super();
+    }
 
     /**
      Detect if we are running within the Java debugger.
      <p/>Be very very careful! Code that behaves differently in a debugger is, obviously, difficult to debug!!!
-     <p/>This trick found at {@code http://www.rgagnon.com/javadetails/java-detect-if-running-in-debug-mode.html}
+     <p/>This trick found at <a href="http://www.rgagnon.com/javadetails/java-detect-if-running-in-debug-mode.html">{@code http://www.rgagnon.com/javadetails/java-detect-if-running-in-debug-mode.html}</a>
 
      @return {@code true} if the current JVM is under the control of the Java debugger; {@code false} otherwise.
      */
@@ -140,7 +150,148 @@ public class ObtuseUtil {
     }
 
     /**
-     A derivative of the {@link Hashtable} which whose instances start out mutable but can be made immutable upon request (there is no
+     Determine if {@code [aStart,aLength)} overlaps with {@code [bStart,bEnd)}.
+     <p/>IMPORTANT: note that the two regions are closed on the left and open on the right.
+     Consequently, {@code [10,20)} does NOT overlap with {@code [20,30)} because {@code 20} is NOT included in the first region even though it is included in the second.
+     @param aStart start of the first region.
+     @param aEnd one pixel past the end of the first region.
+     @param bStart start of the second region.
+     @param bEnd one pixel past the end of the second region.
+     @return {@code true} if the regions overlap; {@code false} otherwise. Note that a region is considered to be empty if its start and end are equal (empty regions do not overlap with any region).
+     @throws IllegalArgumentException if {@code aStart > aEnd} or {@code bStart > bEnd}.
+     */
+
+    public static boolean overlapsBounds( int aStart, int aEnd, int bStart, int bEnd ) {
+
+        if ( aStart > aEnd ) {
+
+            throw new IllegalArgumentException( "ObtuseUtil.overlaps:  aStart=" + aStart + " is greater than aEnd=" + aEnd );
+//            return overlaps( aEnd, aStart, bStart, bEnd );
+
+        }
+
+        if ( bStart > bEnd ) {
+
+            throw new IllegalArgumentException( "ObtuseUtil.overlaps:  bStart=" + bStart + " is greater than bEnd=" + bEnd );
+//            return overlaps( aStart, aEnd, bEnd, bStart );
+
+        }
+
+        return aEnd > bStart && bEnd > aStart;
+
+    }
+
+    /**
+     Determine if the {@code aLength} sized region starting at {@code aStart} overlaps with the {@code bLength} sized region starting at {@code bStart}.
+     <p/>A few notes are in order:
+     <ol><li>the {@code length} sized region starting at {@code start} is exactly equivalent to a {@code -length} sized region starting at {@code start-length}</li>
+     <li>assuming that {@code length} is non-negative, the {@code length} sized region starting at {@code start} is equivalent to the region {@code [start,start+length)}
+     (expressed in the traditional way of describing closed and open ended regions)</li>
+     <li>zero length regions do not overlap with anything</li>
+     <li>assuming that LEN is non-negative, a LEN byte region starting at START does not overlap with any non-negative length region starting at START+LEN;
+     for example, the {@code 3} units long region starting at {@code 10} does not overlap with the {@code 5} units long region starting at {@code 13}</li>
+     </ol>
+     @param aStart start of the first region.
+     @param aLength the length of the first region.
+     @param bStart start of the second region.
+     @param bLength the length of the second region.
+     @return {@code true} if the regions overlap; {@code false} otherwise. Note that a region is considered to be empty if its start and end are equal (empty regions do not overlap with any region).
+     @throws IllegalArgumentException if {@code aStart} > {@code aLength} or {@code bStart > {@code bLength}}.
+     */
+
+    public static boolean overlapsLength( int aStart, int aLength, int bStart, int bLength ) {
+
+        if ( aLength <= 0 ) {
+
+            return aLength != 0 && overlapsLength( aStart - aLength, -aLength, bStart, bLength );
+
+        }
+
+        if ( bLength <= 0 ) {
+
+            return bLength != 0 && overlapsLength( aStart, aLength, bStart - bLength, -bLength );
+
+        }
+
+        int aEnd = aStart + aLength;
+        int bEnd = bStart + bLength;
+
+        return aEnd > bStart && bEnd > aStart;
+
+    }
+
+    /**
+     Determine if messages passed to {@link #report(String)} are logged and traced or just traced.
+     @param traceOnly {@code true} if messages passed to {@link #report(String)} are to be logged and traced; {@code false} if they are to be just traced.
+     */
+
+    public static void setTraceOnlyMode( boolean traceOnly ) {
+
+        s_traceOnly = traceOnly;
+
+    }
+
+    /**
+     Determine if trace-only mode is enabled.
+     @return {@code true} if trace-only mode is enabled; {@code false} otherwise.
+     */
+
+    public static boolean isTraceOnlyModeEnabled() {
+
+        return s_traceOnly;
+
+    }
+
+    /**
+     Depending on the setting of trace-only mode, either log and trace or just trace a message.
+     <p/>Messages are logged and traced by passing them to {@link Logger#logMsg(String)} (which implicitly also passes them to {@link Trace#event(String)}).
+     Messages are just traced by passing them directly to {@code Trace.event(String)}.
+     <p/>See {link #setTraceOnlyMode(boolean)} for more information.
+     @param msg the message in question.
+     */
+
+    public static void report( String msg, Throwable e ) {
+
+        if ( s_traceOnly ) {
+
+            Trace.event( msg );
+
+        } else if ( e == null ) {
+
+            Logger.logMsg( msg );
+
+        } else {
+
+            Logger.logErr( msg, e );
+
+        }
+
+    }
+
+    /**
+     Depending on the setting of trace-only mode, either log and trace or just trace a message.
+     <p/>Messages are logged and traced by passing them to {@link Logger#logMsg(String)} (which implicitly also passes them to {@link Trace#event(String)}).
+     Messages are just traced by passing them directly to {@code Trace.event(String)}.
+     <p/>See {link #setTraceOnlyMode(boolean)} for more information.
+     @param msg the message in question.
+     */
+
+    public static void report( String msg ) {
+
+        if ( s_traceOnly ) {
+
+            Trace.event( msg );
+
+        } else {
+
+            Logger.logMsg( msg );
+
+        }
+
+    }
+
+    /**
+     A derivative of the {@link Hashtable} whose instances start out mutable but can be made immutable upon request (there is no
      mechanism provided to make an immutable instance mutable again).
      <p/>This class is probably not perfectly immutable as it is a fair bit simpler than the unmodifiable ones implemented in
      {@link java.util.Collections}. It is, I (Danny) believe, better than not having an immutable hashtable class at all. 2017-01-07
@@ -285,15 +436,12 @@ public class ObtuseUtil {
 
         }
 
-    }
+        public String toString() {
 
-    /**
-     This is a class of utility methods - no point letting anyone instantiate instances.
-     */
+            return "UnmodifiableHashTable( " + super.toString() + " )";
 
-    private ObtuseUtil() {
+        }
 
-        super();
     }
 
     /**
@@ -2209,7 +2357,7 @@ public class ObtuseUtil {
      Query operations on the returned hash table "read through" to the specified hash table,
      and attempts to modify the returned hash table, whether direct or via its collection views,
      result in an UnsupportedOperationException.
-     <p/>This method is probably less than perfect in the sense that there probably are at least somewhat sneaky ways
+     <p/>This method is probably less than perfect in the sense that there are probably at least somewhat sneaky ways
      to modify the 'unmodifiable' hashtable that it returns. That said, it is far better than nothing.
 
      @param ht the hash table for which an unmodifiable view is to be returned.

@@ -8,6 +8,7 @@ package com.obtuse.ui;
 import com.obtuse.exceptions.HowDidWeGetHereError;
 import com.obtuse.ui.layout.LinearOrientation;
 import com.obtuse.ui.layout.linear.AbstractScrollableLinearContainer3;
+import com.obtuse.ui.scrollable.IrregularScrollableImpl;
 import com.obtuse.util.Logger;
 import com.obtuse.util.ObtuseUtil;
 import org.jetbrains.annotations.NotNull;
@@ -29,7 +30,7 @@ import java.util.function.Consumer;
 @SuppressWarnings("unused")
 public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrollableLinearContainer3 {
 
-    private final MyScrollableImplementation _MyScrollableImplementation = new MyScrollableImplementation( this, isVertical() );
+    private final IrregularScrollableImpl _irregularScrollableImpl = new IrregularScrollableImpl( this, isVertical() );
 
     private ListSelectionModel _selectionModel;
 
@@ -316,35 +317,45 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
     @Override
     public Dimension getPreferredScrollableViewportSize() {
 
-        return _MyScrollableImplementation.getPreferredScrollableViewportSize();
+        Dimension rval = _irregularScrollableImpl.getPreferredScrollableViewportSize();
+        ObtuseUtil.report( "### preferred scrollable viewport size is " + ObtuseUtil.fDim( rval ), new NumberFormatException( "where we are" ) );
+        return rval;
 
     }
 
     @Override
     public int getScrollableUnitIncrement( Rectangle visibleRect, int orientation, int direction ) {
 
-        return _MyScrollableImplementation.getScrollableUnitIncrement( visibleRect, orientation, direction );
+        int scrollableUnitIncrement = _irregularScrollableImpl.getScrollableUnitIncrement( visibleRect, orientation, direction );
+        ObtuseUtil.report( "### scrollable unit increment is " + scrollableUnitIncrement, new NumberFormatException( "where we are" ) );
+        return scrollableUnitIncrement;
 
     }
 
     @Override
     public int getScrollableBlockIncrement( Rectangle visibleRect, int orientation, int direction ) {
 
-        return _MyScrollableImplementation.getScrollableBlockIncrement( visibleRect, orientation, direction );
+        int scrollableBlockIncrement = _irregularScrollableImpl.getScrollableBlockIncrement( visibleRect, orientation, direction );
+        ObtuseUtil.report( "### scrollable block increment is " + scrollableBlockIncrement, new NumberFormatException( "where we are" ) );
+        return scrollableBlockIncrement;
 
     }
 
     @Override
     public boolean getScrollableTracksViewportWidth() {
 
-        return _MyScrollableImplementation.getScrollableTracksViewportWidth();
+        boolean rval = _irregularScrollableImpl.getScrollableTracksViewportWidth();
+        ObtuseUtil.report( "### scrollable tracks viewport width is " + rval, new NumberFormatException( "where we are" ) );
+        return rval;
 
     }
 
     @Override
     public boolean getScrollableTracksViewportHeight() {
 
-        return _MyScrollableImplementation.getScrollableTracksViewportHeight();
+        boolean rval = _irregularScrollableImpl.getScrollableTracksViewportHeight();
+        ObtuseUtil.report( "### scrollable tracks viewport height is " + rval, new NumberFormatException( "where we are" ) );
+        return rval;
 
     }
 
@@ -908,6 +919,12 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
         verifySelectable( comp );
 
         super.add( comp, constraints, index );
+
+    }
+
+    public String toString() {
+
+        return "IndexCardBox<>()";
 
     }
 
