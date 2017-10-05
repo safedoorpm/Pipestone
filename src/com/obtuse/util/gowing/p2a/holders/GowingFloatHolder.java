@@ -16,48 +16,51 @@ import org.jetbrains.annotations.NotNull;
 public class GowingFloatHolder extends GowingAbstractPackableHolder {
 
     public GowingFloatHolder( @NotNull EntityName name, Float v, @SuppressWarnings("SameParameterValue") boolean mandatory ) {
-	super( name, GowingConstants.TAG_FLOAT, v, mandatory );
+
+        super( name, GowingConstants.TAG_FLOAT, v, mandatory );
 
     }
 
     public GowingFloatHolder( @NotNull EntityName name, float[] v, @SuppressWarnings("SameParameterValue") boolean mandatory ) {
-	super( name, GowingConstants.TAG_FLOAT, v, mandatory, true );
+
+        super( name, GowingConstants.TAG_FLOAT, v, mandatory, true );
 
     }
 
     public GowingFloatHolder( @NotNull EntityName name, Float[] v, @SuppressWarnings("SameParameterValue") boolean mandatory ) {
-	super( name, GowingConstants.TAG_FLOAT, v, mandatory, false );
+
+        super( name, GowingConstants.TAG_FLOAT, v, mandatory, false );
 
     }
 
     public void emitRepresentation( GowingPacker packer2 ) {
 
-	Object value = getObjectValue();
+        Object value = getObjectValue();
 
-	if ( isMandatory() || value != null ) {
+        if ( isMandatory() || value != null ) {
 
-	    switch ( getKind() ) {
+            switch ( getKind() ) {
 
-		case SCALAR:
-		    packer2.emit( ( (Float) value ).floatValue() );
-		    break;
+                case SCALAR:
+                    packer2.emit( ( (Float)value ).floatValue() );
+                    break;
 
-		case PRIMITIVE_ARRAY:
-		    packer2.emit( ( (float[]) value ) );
-		    break;
+                case PRIMITIVE_ARRAY:
+                    packer2.emit( ( (float[])value ) );
+                    break;
 
-		case CONTAINER_ARRAY:
-		    packer2.emit( ( (Float[]) value ) );
-		    break;
+                case CONTAINER_ARRAY:
+                    packer2.emit( ( (Float[])value ) );
+                    break;
 
-	    }
+            }
 //	    packer2.emit( ( (Float) value ).floatValue() );
 
-	} else {
+        } else {
 
-	    packer2.emitNull();
+            packer2.emitNull();
 
-	}
+        }
 
     }
 

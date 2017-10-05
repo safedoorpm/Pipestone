@@ -234,6 +234,32 @@ public class Logger {
 
     }
 
+    public static void logStackTrace( Throwable e ) {
+
+        StackTraceElement[] trace = e.getStackTrace();
+
+        if ( trace == null ) {
+
+            logMsg( "no stack trace" );
+
+        } else {
+
+//	    Logger.logMsg( "stack trace has " + trace.length + " elements" );
+            logMsg( "" + e );
+            int ix = 0;
+            for ( StackTraceElement element : trace ) {
+
+//		Logger.logMsg( "[" + ix + "] = " + element );
+                logMsg( "    at " + element );
+
+                ix += 1;
+
+            }
+
+        }
+
+    }
+
     /**
      Close this logger and set our mirror to null (this has the side-effect of closing our mirror if it is open and
      neither {@link System#out} nor {@link System#err}).
@@ -522,7 +548,7 @@ public class Logger {
         if ( removedVetoers.size() > 1 ) {
 
             throw new HowDidWeGetHereError( "Logger.cancelLineFilter:  more than one identical matcher for targetString=" +
-                                            ObtuseUtil.enquoteForJavaString( targetString ) +
+                                            ObtuseUtil.enquoteToJavaString( targetString ) +
                                             " and matcher " +
                                             vetoer );
 

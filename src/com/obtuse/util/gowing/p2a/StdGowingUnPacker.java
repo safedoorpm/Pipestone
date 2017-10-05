@@ -33,15 +33,40 @@ public class StdGowingUnPacker implements GowingUnPacker {
     private final GowingTokenizer _tokenizer;
 
     private final GowingUnPackerContext _unPackerContext;
+    private final File _inputFile;
 
-    public StdGowingUnPacker( GowingTypeIndex typeIndex, File inputFile )
+    /**
+     Create a 'standard' text-oriented unpacker.
+     @param typeIndex a table of the known [un]packable entity types.
+     Every top-level entity type encountered by this unpacker must have an entry in this type index to allow this unpacker to know how to
+     instantiate the entity.
+     @param inputFile the file being read from.
+     <p/>While presumably the norm, it seems unreasonable to assume that this parameter will always be non-null.
+     For example, someone might want to unpack the contents of a byte array or some other in-memory object.
+     @throws IOException if something bad happens in I/O-land.
+     */
+
+    public StdGowingUnPacker( GowingTypeIndex typeIndex, @NotNull File inputFile )
             throws IOException {
 
         this( inputFile, new LineNumberReader( new FileReader( inputFile ) ), new StdGowingUnPackerContext( typeIndex ) );
 
     }
 
-    public StdGowingUnPacker( GowingTypeIndex typeIndex, File inputFile, Reader reader )
+    /**
+     Create a 'standard' text-oriented unpacker.
+     @param typeIndex a table of the known [un]packable entity types.
+     Every entity type encountered by this unpacker at the top level of the input stream (i.e. as an actual entity to be instantiated as opposed to
+     a super-type of an entity to be instantiated) must have an entry in this type index to allow this unpacker to know how to
+     instantiate the entity.
+     @param inputFile the file being read from.
+     <p/>While presumably the norm, it seems unreasonable to assume that this parameter will always be non-null.
+     For example, someone might want to unpack the contents of a byte array or some other in-memory object.
+     @param reader where the data is actually coming from.
+     @throws IOException if something bad happens in I/O-land.
+     */
+
+    public StdGowingUnPacker( GowingTypeIndex typeIndex, @NotNull File inputFile, Reader reader )
             throws IOException {
 
         this(
@@ -52,12 +77,24 @@ public class StdGowingUnPacker implements GowingUnPacker {
 
     }
 
+    /**
+     Create a 'standard' text-oriented unpacker.
+     @param inputFile the file being read from.
+     <p/>While presumably the norm, it seems unreasonable to assume that this parameter will always be non-null.
+     For example, someone might want to unpack the contents of a byte array or some other in-memory object.
+     @param reader where the data is actually coming from.
+     @param unPackerContext the context within which this operation is operating.
+     <p/>Mostly a table of known {@link GowingPackable} entities and a {@link GowingTypeIndex} describing how to instantiate entities found in the input stream.
+     @throws IOException if something bad happens in I/O-land.
+     */
+
     @SuppressWarnings({ "WeakerAccess", "RedundantThrows" })
-    public StdGowingUnPacker( File inputFile, LineNumberReader reader, @NotNull GowingUnPackerContext unPackerContext )
+    public StdGowingUnPacker( @Nullable File inputFile, LineNumberReader reader, @NotNull GowingUnPackerContext unPackerContext )
             throws IOException {
 
         super();
 
+        _inputFile = inputFile;
         _unPackerContext = unPackerContext;
         _unPackerContext.setInputFile( inputFile );
 
@@ -590,21 +627,21 @@ public class StdGowingUnPacker implements GowingUnPacker {
 
         GowingPackableThingHolder holder = valueToken.createHolder( identifierToken.identifierValue(), valueToken );
 
-        Logger.maybeLogMsg(
-                () -> "got field definition:  " +
-                      identifierToken.identifierValue() +
-                      " = " +
-                      valueToken.valueToString() +
-                      " (" +
-                      (
-                              valueToken.getObjectValue() == null
-                                      ?
-                                      "<<unknown type>>"
-                                      :
-                                      describeType( valueToken )
-                      ) +
-                      ")"
-        );
+//        Logger.maybeLogMsg(
+//                () -> "got field definition:  " +
+//                      identifierToken.identifierValue() +
+//                      " = " +
+//                      valueToken.valueToString() +
+//                      " (" +
+//                      (
+//                              valueToken.getObjectValue() == null
+//                                      ?
+//                                      "<<unknown type>>"
+//                                      :
+//                                      describeType( valueToken )
+//                      ) +
+//                      ")"
+//        );
 
         if ( bundle.containsKey( holder.getName() ) ) {
 
@@ -679,6 +716,12 @@ public class StdGowingUnPacker implements GowingUnPacker {
             Logger.logErr( "unable to create StdGowingUnPacker instance", e );
 
         }
+
+    }
+
+    public String toString() {
+
+        return "StdGowingUnPacker( input file = " + _inputFile + " )";
 
     }
 

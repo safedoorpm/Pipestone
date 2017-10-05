@@ -20,28 +20,29 @@ public class GowingPackableEntityHolder extends GowingAbstractPackableHolder {
     private final GowingInstanceId _instanceId;
 
     public GowingPackableEntityHolder(
-	    @NotNull EntityName name,
-	    GowingPackable v,
-	    GowingPacker packer,
-	    @SuppressWarnings("SameParameterValue") boolean mandatory
-				     ) {
-	super( name, GowingConstants.TAG_ENTITY_REFERENCE, v, mandatory );
+            @NotNull EntityName name,
+            GowingPackable v,
+            GowingPacker packer,
+            @SuppressWarnings("SameParameterValue") boolean mandatory
+    ) {
 
-	_instanceId = packer.queuePackEntity( v );
+        super( name, GowingConstants.TAG_ENTITY_REFERENCE, v, mandatory );
+
+        _instanceId = packer.queuePackableEntity( v );
 
     }
 
     public void emitRepresentation( GowingPacker packer2 ) {
 
-	Object value = getObjectValue();
+        Object value = getObjectValue();
 
-	if ( isMandatory() && value == null ) {
+        if ( isMandatory() && value == null ) {
 
-	    throw new IllegalArgumentException( "mandatory value not provided" );
+            throw new IllegalArgumentException( "mandatory value not provided" );
 
-	}
+        }
 
-	packer2.emit( _instanceId );
+        packer2.emit( _instanceId );
 
 //	if ( isMandatory() || value != null ) {
 //
@@ -57,7 +58,7 @@ public class GowingPackableEntityHolder extends GowingAbstractPackableHolder {
 
     public GowingInstanceId getInstanceId() {
 
-	return _instanceId;
+        return _instanceId;
 
     }
 

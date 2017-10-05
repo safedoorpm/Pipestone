@@ -16,47 +16,50 @@ import org.jetbrains.annotations.NotNull;
 public class GowingBooleanHolder extends GowingAbstractPackableHolder {
 
     public GowingBooleanHolder( @NotNull EntityName name, Boolean v, @SuppressWarnings("SameParameterValue") boolean mandatory ) {
-	super( name, GowingConstants.TAG_BOOLEAN, v, mandatory );
+
+        super( name, GowingConstants.TAG_BOOLEAN, v, mandatory );
 
     }
 
     public GowingBooleanHolder( @NotNull EntityName name, boolean[] v, @SuppressWarnings("SameParameterValue") boolean mandatory ) {
-	super( name, GowingConstants.TAG_BOOLEAN, v, mandatory, true );
+
+        super( name, GowingConstants.TAG_BOOLEAN, v, mandatory, true );
 
     }
 
     public GowingBooleanHolder( @NotNull EntityName name, Boolean[] v, @SuppressWarnings("SameParameterValue") boolean mandatory ) {
-	super( name, GowingConstants.TAG_BOOLEAN, v, mandatory, false );
+
+        super( name, GowingConstants.TAG_BOOLEAN, v, mandatory, false );
 
     }
 
     public void emitRepresentation( GowingPacker packer2 ) {
 
-	Object value = getObjectValue();
+        Object value = getObjectValue();
 
-	if ( isMandatory() || value != null ) {
+        if ( isMandatory() || value != null ) {
 
-	    switch ( getKind() ) {
+            switch ( getKind() ) {
 
-		case SCALAR:
-		    packer2.emit( ( (Boolean) value ).booleanValue() );
-		    break;
+                case SCALAR:
+                    packer2.emit( ( (Boolean)value ).booleanValue() );
+                    break;
 
-		case PRIMITIVE_ARRAY:
-		    packer2.emit( ( (boolean[]) value ) );
-		    break;
+                case PRIMITIVE_ARRAY:
+                    packer2.emit( ( (boolean[])value ) );
+                    break;
 
-		case CONTAINER_ARRAY:
-		    packer2.emit( ( (Boolean[]) value ) );
-		    break;
+                case CONTAINER_ARRAY:
+                    packer2.emit( ( (Boolean[])value ) );
+                    break;
 
-	    }
+            }
 
-	} else {
+        } else {
 
-	    packer2.emitNull();
+            packer2.emitNull();
 
-	}
+        }
 
     }
 

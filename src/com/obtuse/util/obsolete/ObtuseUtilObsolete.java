@@ -1330,7 +1330,7 @@ class ObtuseUtilObsolete {
      * @throws NullPointerException if <tt>string</tt> is null.
      */
 
-    public static String enquoteForCSV( String string ) {
+    public static String enquoteToCSV( String string ) {
 
         if ( !string.contains( "," ) && !string.contains( "\"" ) ) {
 
@@ -1360,7 +1360,7 @@ class ObtuseUtilObsolete {
 
     }
 
-    public static String enquoteForJavaString( String string ) {
+    public static String enquoteJavaString( String string ) {
 
         if ( string == null ) {
 
@@ -1532,7 +1532,7 @@ class ObtuseUtilObsolete {
 
 //    private static void doit( String s ) {
 //
-//        System.out.println( "<" + s + "> yielded <" + enquoteForCSV( s ) + ">" );
+//        System.out.println( "<" + s + "> yielded <" + enquoteToCSV( s ) + ">" );
 //
 //    }
 //

@@ -16,48 +16,51 @@ import org.jetbrains.annotations.NotNull;
 public class GowingShortHolder extends GowingAbstractPackableHolder {
 
     public GowingShortHolder( @NotNull EntityName name, Short v, boolean mandatory ) {
-	super( name, GowingConstants.TAG_SHORT, v, mandatory );
+
+        super( name, GowingConstants.TAG_SHORT, v, mandatory );
 
     }
 
     public GowingShortHolder( @NotNull EntityName name, short[] v, @SuppressWarnings("SameParameterValue") boolean mandatory ) {
-	super( name, GowingConstants.TAG_SHORT, v, mandatory, true );
+
+        super( name, GowingConstants.TAG_SHORT, v, mandatory, true );
 
     }
 
     public GowingShortHolder( @NotNull EntityName name, Short[] v, @SuppressWarnings("SameParameterValue") boolean mandatory ) {
-	super( name, GowingConstants.TAG_SHORT, v, mandatory, false );
+
+        super( name, GowingConstants.TAG_SHORT, v, mandatory, false );
 
     }
 
     public void emitRepresentation( GowingPacker packer2 ) {
 
-	Object value = getObjectValue();
+        Object value = getObjectValue();
 
-	if ( isMandatory() || value != null ) {
+        if ( isMandatory() || value != null ) {
 
-	    switch ( getKind() ) {
+            switch ( getKind() ) {
 
-		case SCALAR:
-		    packer2.emit( ( (Short) value ).shortValue() );
-		    break;
+                case SCALAR:
+                    packer2.emit( ( (Short)value ).shortValue() );
+                    break;
 
-		case PRIMITIVE_ARRAY:
-		    packer2.emit( ( (short[]) value ) );
-		    break;
+                case PRIMITIVE_ARRAY:
+                    packer2.emit( ( (short[])value ) );
+                    break;
 
-		case CONTAINER_ARRAY:
-		    packer2.emit( ( (Short[]) value ) );
-		    break;
+                case CONTAINER_ARRAY:
+                    packer2.emit( ( (Short[])value ) );
+                    break;
 
-	    }
+            }
 //	    packer2.emit( ( (Short) value ).shortValue() );
 
-	} else {
+        } else {
 
-	    packer2.emitNull();
+            packer2.emitNull();
 
-	}
+        }
 
     }
 

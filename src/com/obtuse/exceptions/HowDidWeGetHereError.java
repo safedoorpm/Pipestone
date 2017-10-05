@@ -15,6 +15,12 @@ import java.io.PrintStream;
 public class HowDidWeGetHereError
         extends RuntimeException {
 
+    static {
+
+        setStackTracePrintStream( System.err );
+
+    }
+
     /**
      The current oops catcher.
      */

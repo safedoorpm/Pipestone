@@ -140,9 +140,8 @@ public class SimpleUniqueLongIdGenerator implements UniqueLongIdGenerator {
         }
 
         _lastId += 1;
-        long uid = _lastId;
 
-        return uid;
+        return _lastId;
 
     }
 

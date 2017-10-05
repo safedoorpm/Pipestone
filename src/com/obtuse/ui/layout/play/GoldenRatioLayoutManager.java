@@ -140,11 +140,11 @@ public class GoldenRatioLayoutManager implements LayoutManager {
     public void addLayoutComponent( String name, Component comp ) {
 
 	logMsg(
-		"GoldenRatioLayoutManager.addLayoutComponent( " +
-		ObtuseUtil.enquoteForJavaString( name ) +
-		", " +
-		GoldenRatioLayoutManager.getComponentName( comp ) +
-		" )"
+			"GoldenRatioLayoutManager.addLayoutComponent( " +
+			ObtuseUtil.enquoteToJavaString( name ) +
+			", " +
+			GoldenRatioLayoutManager.getComponentName( comp ) +
+			" )"
 	);
 
     }

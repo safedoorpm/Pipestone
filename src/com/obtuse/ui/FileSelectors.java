@@ -29,18 +29,21 @@ public class FileSelectors {
      * @param parent the component that is requesting this dialog (ignored if null).
      * @param title the title for the dialog window and the approve button text.
      * @param startingDirectory where the game should begin (defaults to the user's home directory if null).
-     * @param dialogType the type of dialog.
+     * @param dialogType the type of dialog (either {@link JFileChooser#OPEN_DIALOG} or {@link JFileChooser#SAVE_DIALOG}).
+     *                   Use {@link #swingSelectFile(Component, String, File, String, boolean, FileFilter)} if you want a custom
      * See {@link javax.swing.JFileChooser#setDialogType} for more info.
+     * @param multiSelectionEnabled {@code true} if multiple files can be selected in one dialog; {@code false}.
      * @param fileFilter the optional file filter which selects which files should appear in the dialog.
      * @return the selected file if the "approve" button was clicked; null otherwise.
      */
 
-    public static File swingSelectFile( Component parent, String title, File startingDirectory, int dialogType, FileFilter fileFilter ) {
+    public static File[] swingSelectFile( Component parent, String title, File startingDirectory, int dialogType, boolean multiSelectionEnabled, FileFilter fileFilter ) {
 
         JFileChooser chooser = new JFileChooser();
         chooser.setDialogTitle( title );
         chooser.setApproveButtonText( title );
-        chooser.setDialogType( dialogType );
+        chooser.setMultiSelectionEnabled( multiSelectionEnabled );
+//        chooser.setDialogType( dialogType );
 
         if ( fileFilter != null ) {
 
@@ -77,10 +80,96 @@ public class FileSelectors {
 //        );
 
         chooser.setFileSelectionMode( JFileChooser.FILES_ONLY );
-        int rval = chooser.showSaveDialog( parent );
+        int rval;
+        switch ( dialogType ) {
+
+            case JFileChooser.OPEN_DIALOG:
+                rval = chooser.showOpenDialog( parent );
+                break;
+
+            case JFileChooser.SAVE_DIALOG:
+                rval = chooser.showSaveDialog( parent );
+                break;
+
+            case JFileChooser.CUSTOM_DIALOG:
+                throw new IllegalArgumentException( "FileSelectors.swingSelectFile:  this variant of swingSelectFile only supports OPEN and SAVE dialogs (not CUSTOM dialogs)" );
+
+            default:
+                throw new IllegalArgumentException( "FileSelectors.swingSelectFile:  unknown dialogType " + dialogType + " (must be JFileChooser.OPEN_DIALOG or JFileChooser.SAVE_DIALOG for this variant of swingSelectFile)" );
+        }
+
         if ( rval == JFileChooser.APPROVE_OPTION ) {
 
-            return chooser.getSelectedFile();
+            return chooser.getSelectedFiles();
+
+        } else {
+
+            return null;
+
+        }
+
+    }
+
+    /**
+     * Use the Swing {@link javax.swing.JFileChooser} to select a file using a custom button label.
+     * @param parent the component that is requesting this dialog (ignored if null).
+     * @param title the title for the dialog window and the approve button text.
+     * @param startingDirectory where the game should begin (defaults to the user's home directory if null).
+     * @param customLabel the custom label for this JFileChooser's approve button.
+     *                   Use {@link #swingSelectFile(Component, String, File, int, boolean, FileFilter)}
+     * See {@link javax.swing.JFileChooser#setDialogType} for more info.
+     * @param multiSelectionEnabled {@code true} if multiple files can be selected in one dialog; {@code false}.
+     * @param fileFilter the optional file filter which selects which files should appear in the dialog.
+     * @return the selected file if the "approve" button was clicked; null otherwise.
+     */
+
+    public static File[] swingSelectFile( Component parent, String title, File startingDirectory, String customLabel, boolean multiSelectionEnabled, FileFilter fileFilter ) {
+
+        JFileChooser chooser = new JFileChooser();
+        chooser.setDialogTitle( title );
+        chooser.setApproveButtonText( customLabel );
+        chooser.setMultiSelectionEnabled( multiSelectionEnabled );
+//        chooser.setDialogType( dialogType );
+
+        if ( fileFilter != null ) {
+
+            chooser.setFileFilter( fileFilter );
+
+        }
+
+//        chooser.setFileFilter(
+//                new javax.swing.filechooser.FileFilter() {
+//                    @SuppressWarnings({ "ParameterNameDiffersFromOverriddenParameter" })
+//                    @Override
+//                    public boolean accept( File file ) {
+//
+//                        try {
+//
+//                            File canonicalFile = file.getCanonicalFile();
+//
+//                            return file.isDirectory() || canonicalFile.getName().toLowerCase().endsWith( ".xml" );
+//
+//                        } catch ( IOException e ) {
+//
+//                            return false;
+//
+//                        }
+//
+//                    }
+//
+//                    @Override
+//                    public String getDescription() {
+//
+//                        return ".xml files";
+//                    }
+//                }
+//        );
+
+        chooser.setFileSelectionMode( JFileChooser.FILES_ONLY );
+        int rval = chooser.showDialog( parent, customLabel );
+        if ( rval == JFileChooser.APPROVE_OPTION ) {
+
+            return chooser.getSelectedFiles();
 
         } else {
 

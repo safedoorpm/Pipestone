@@ -17,26 +17,27 @@ import org.jetbrains.annotations.NotNull;
 public class GowingEntityReferenceHolder extends GowingAbstractPackableHolder {
 
     public GowingEntityReferenceHolder(
-	    @NotNull EntityName name,
-	    GowingEntityReference v,
-	    @SuppressWarnings("SameParameterValue") boolean mandatory
-				      ) {
-	super( name, GowingConstants.TAG_ENTITY_REFERENCE, v, mandatory );
+            @NotNull EntityName name,
+            GowingEntityReference v,
+            @SuppressWarnings("SameParameterValue") boolean mandatory
+    ) {
+
+        super( name, GowingConstants.TAG_ENTITY_REFERENCE, v, mandatory );
 
     }
 
     public void emitRepresentation( GowingPacker packer2 ) {
 
-	Object value = getObjectValue();
-	if ( isMandatory() || value != null ) {
+        Object value = getObjectValue();
+        if ( isMandatory() || value != null ) {
 
-	    packer2.emitEntityReference( ( (GowingEntityReference)value ).getTypeId(), ( (GowingEntityReference)value ).getEntityId() );
+            packer2.emitEntityReference( ( (GowingEntityReference)value ).getTypeId(), ( (GowingEntityReference)value ).getEntityId() );
 
-	} else {
+        } else {
 
-	    packer2.emitNull();
+            packer2.emitNull();
 
-	}
+        }
 
     }
 

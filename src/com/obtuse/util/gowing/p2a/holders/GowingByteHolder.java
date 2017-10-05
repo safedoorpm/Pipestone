@@ -16,47 +16,50 @@ import org.jetbrains.annotations.NotNull;
 public class GowingByteHolder extends GowingAbstractPackableHolder {
 
     public GowingByteHolder( @NotNull EntityName name, Byte v, @SuppressWarnings("SameParameterValue") boolean mandatory ) {
-	super( name, GowingConstants.TAG_BYTE, v, mandatory );
+
+        super( name, GowingConstants.TAG_BYTE, v, mandatory );
 
     }
 
     public GowingByteHolder( @NotNull EntityName name, byte[] v, @SuppressWarnings("SameParameterValue") boolean mandatory ) {
-	super( name, GowingConstants.TAG_BYTE, v, mandatory, true );
+
+        super( name, GowingConstants.TAG_BYTE, v, mandatory, true );
 
     }
 
     public GowingByteHolder( @NotNull EntityName name, Byte[] v, @SuppressWarnings("SameParameterValue") boolean mandatory ) {
-	super( name, GowingConstants.TAG_BYTE, v, mandatory, false );
+
+        super( name, GowingConstants.TAG_BYTE, v, mandatory, false );
 
     }
 
     public void emitRepresentation( GowingPacker packer2 ) {
 
-	Object value = getObjectValue();
+        Object value = getObjectValue();
 
-	if ( isMandatory() || value != null ) {
+        if ( isMandatory() || value != null ) {
 
-	    switch ( getKind() ) {
+            switch ( getKind() ) {
 
-	        case SCALAR:
-		    packer2.emit( ( (Byte) value ).byteValue() );
-		    break;
+                case SCALAR:
+                    packer2.emit( ( (Byte)value ).byteValue() );
+                    break;
 
-		case PRIMITIVE_ARRAY:
-		    packer2.emit( ( (byte[]) value ) );
-		    break;
+                case PRIMITIVE_ARRAY:
+                    packer2.emit( ( (byte[])value ) );
+                    break;
 
-		case CONTAINER_ARRAY:
-		    packer2.emit( ( (Byte[]) value ) );
-		    break;
+                case CONTAINER_ARRAY:
+                    packer2.emit( ( (Byte[])value ) );
+                    break;
 
-	    }
+            }
 
-	} else {
+        } else {
 
-	    packer2.emitNull();
+            packer2.emitNull();
 
-	}
+        }
 
     }
 

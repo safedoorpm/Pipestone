@@ -19,8 +19,8 @@ public abstract class GowingAbstractPackableHolder implements GowingPackableThin
 
     public enum Kind {
         SCALAR,
-	PRIMITIVE_ARRAY,
-	CONTAINER_ARRAY
+        PRIMITIVE_ARRAY,
+        CONTAINER_ARRAY
     }
 
     private final EntityName _name;
@@ -31,37 +31,39 @@ public abstract class GowingAbstractPackableHolder implements GowingPackableThin
 
     @SuppressWarnings("WeakerAccess")
     protected GowingAbstractPackableHolder( EntityName name, char tag, Object objectValue, boolean mandatory ) {
-	super();
 
-	_tag = tag;
-	_name = name;
-	_objectValue = objectValue;
-	_mandatory = mandatory;
-	_arrayKind = Kind.SCALAR;
+        super();
 
-	if ( _mandatory && _objectValue == null ) {
+        _tag = tag;
+        _name = name;
+        _objectValue = objectValue;
+        _mandatory = mandatory;
+        _arrayKind = Kind.SCALAR;
 
-	    throw new IllegalArgumentException( "mandatory " + name + " value is null" );
+        if ( _mandatory && _objectValue == null ) {
 
-	}
+            throw new IllegalArgumentException( "mandatory " + name + " value is null" );
+
+        }
 
     }
 
     @SuppressWarnings("WeakerAccess")
     protected GowingAbstractPackableHolder( EntityName name, char tag, Object objectValue, boolean mandatory, boolean primitiveArray ) {
-	super();
 
-	_tag = tag;
-	_name = name;
-	_objectValue = objectValue;
-	_mandatory = mandatory;
-	_arrayKind = primitiveArray ? Kind.PRIMITIVE_ARRAY : Kind.CONTAINER_ARRAY;
+        super();
 
-	if ( _mandatory && _objectValue == null ) {
+        _tag = tag;
+        _name = name;
+        _objectValue = objectValue;
+        _mandatory = mandatory;
+        _arrayKind = primitiveArray ? Kind.PRIMITIVE_ARRAY : Kind.CONTAINER_ARRAY;
 
-	    throw new IllegalArgumentException( "mandatory " + name + " value is null" );
+        if ( _mandatory && _objectValue == null ) {
 
-	}
+            throw new IllegalArgumentException( "mandatory " + name + " value is null" );
+
+        }
 
     }
 
@@ -75,147 +77,147 @@ public abstract class GowingAbstractPackableHolder implements GowingPackableThin
     @Override
     public boolean isNull() {
 
-	return getObjectValue() == null;
+        return getObjectValue() == null;
 
     }
 
     @Override
     public GowingEntityReference EntityTypeReference() {
 
-	return (GowingEntityReference) getObjectValue();
+        return (GowingEntityReference)getObjectValue();
 
     }
 
     @Override
     public boolean booleanValue() {
 
-	return BooleanValue().booleanValue();
+        return BooleanValue().booleanValue();
 
     }
 
     @Override
     public Boolean BooleanValue() {
 
-	return (Boolean)getObjectValue();
+        return (Boolean)getObjectValue();
 
     }
 
     @Override
     public boolean[] PrimitiveBooleanArrayValue() {
 
-	return (boolean[])getObjectValue();
+        return (boolean[])getObjectValue();
 
     }
 
     @Override
     public Boolean[] ContainerBooleanArrayValue() {
 
-	return (Boolean[])getObjectValue();
+        return (Boolean[])getObjectValue();
 
     }
 
     @Override
     public byte byteValue() {
 
-	return ByteValue().byteValue();
+        return ByteValue().byteValue();
 
     }
 
     @Override
     public Byte ByteValue() {
 
-	return (Byte)getObjectValue();
+        return (Byte)getObjectValue();
 
     }
 
     @Override
     public short shortValue() {
 
-	return ShortValue().shortValue();
+        return ShortValue().shortValue();
 
     }
 
     @Override
     public Short ShortValue() {
 
-	return (Short)getObjectValue();
+        return (Short)getObjectValue();
 
     }
 
     @Override
     public short[] PrimitiveShortArrayValue() {
 
-	return (short[])getObjectValue();
+        return (short[])getObjectValue();
 
     }
 
     @Override
     public Short[] ContainerShortArrayValue() {
 
-	return (Short[])getObjectValue();
+        return (Short[])getObjectValue();
 
     }
 
     @Override
     public int intValue() {
 
-	return IntegerValue().intValue();
+        return IntegerValue().intValue();
 
     }
 
     @Override
     public Integer IntegerValue() {
 
-	return (Integer)getObjectValue();
+        return (Integer)getObjectValue();
 
     }
 
     @Override
     public long longValue() {
 
-	return LongValue().longValue();
+        return LongValue().longValue();
 
     }
 
     @Override
     public Long LongValue() {
 
-	return (Long)getObjectValue();
+        return (Long)getObjectValue();
 
     }
 
     @Override
     public float floatValue() {
 
-	return FloatValue().floatValue();
+        return FloatValue().floatValue();
 
     }
 
     @Override
     public Float FloatValue() {
 
-	return (Float)getObjectValue();
+        return (Float)getObjectValue();
 
     }
 
     @Override
     public double doubleValue() {
 
-	return DoubleValue().doubleValue();
+        return DoubleValue().doubleValue();
 
     }
 
     @Override
     public Double DoubleValue() {
 
-	return (Double)getObjectValue();
+        return (Double)getObjectValue();
 
     }
 
     @Override
     public Number NumberValue() {
 
-	return (Number)getObjectValue();
+        return (Number)getObjectValue();
 
     }
 
@@ -223,151 +225,151 @@ public abstract class GowingAbstractPackableHolder implements GowingPackableThin
     public Number[] NumberArrayValue() {
 
         // unimplemented
-	return (Number[])getObjectValue();
+        return (Number[])getObjectValue();
 
     }
 
     @Override
     public char charValue() {
 
-	return CharacterValue().charValue();
+        return CharacterValue().charValue();
 
     }
 
     @Override
     public Character CharacterValue() {
 
-	return (Character)getObjectValue();
+        return (Character)getObjectValue();
 
     }
 
     @Override
     public char[] PrimitiveCharArrayValue() {
 
-	return (char[])getObjectValue();
+        return (char[])getObjectValue();
 
     }
 
     @Override
     public Character[] ContainerCharacterArrayValue() {
 
-	return (Character[])getObjectValue();
+        return (Character[])getObjectValue();
 
     }
 
     @Override
     public String StringValue() {
 
-	return (String)getObjectValue();
+        return (String)getObjectValue();
 
     }
 
     @Override
     public byte[] PrimitiveByteArrayValue() {
 
-	return (byte[])getObjectValue();
+        return (byte[])getObjectValue();
 
     }
 
     @Override
     public Byte[] ContainerByteArrayValue() {
 
-	return (Byte[])getObjectValue();
+        return (Byte[])getObjectValue();
 
     }
 
     @Override
     public int[] PrimitiveIntArrayValue() {
 
-	return (int[])getObjectValue();
+        return (int[])getObjectValue();
 
     }
 
     @Override
     public Integer[] ContainerIntegerArrayValue() {
 
-	return (Integer[])getObjectValue();
+        return (Integer[])getObjectValue();
 
     }
 
     @Override
     public long[] PrimitiveLongArrayValue() {
 
-	return (long[])getObjectValue();
+        return (long[])getObjectValue();
 
     }
 
     @Override
     public Long[] ContainerLongArrayValue() {
 
-	return (Long[])getObjectValue();
+        return (Long[])getObjectValue();
 
     }
 
     @Override
     public float[] PrimitiveFloatArrayValue() {
 
-	return (float[])getObjectValue();
+        return (float[])getObjectValue();
 
     }
 
     @Override
     public Float[] ContainerFloatArrayValue() {
 
-	return (Float[])getObjectValue();
+        return (Float[])getObjectValue();
 
     }
 
     @Override
     public double[] PrimitiveDoubleArrayValue() {
 
-	return (double[])getObjectValue();
+        return (double[])getObjectValue();
 
     }
 
     @Override
     public Double[] ContainerDoubleArrayValue() {
 
-	return (Double[])getObjectValue();
+        return (Double[])getObjectValue();
 
     }
 
     @Override
     public String[] StringArrayValue() {
 
-	return (String[])getObjectValue();
+        return (String[])getObjectValue();
 
     }
 
     @Override
     public GowingPackable[] PackableArrayValue() {
 
-	return (GowingPackable[])getObjectValue();
+        return (GowingPackable[])getObjectValue();
 
     }
 
     public EntityName getName() {
 
-	return _name;
+        return _name;
 
     }
 
     public char getTag() {
 
-	return _tag;
+        return _tag;
 
     }
 
     public Object getObjectValue() {
 
-	return _objectValue;
+        return _objectValue;
 
     }
 
     @SuppressWarnings("WeakerAccess")
     public boolean isMandatory() {
 
-	return _mandatory;
+        return _mandatory;
 
     }
 
@@ -390,12 +392,12 @@ public abstract class GowingAbstractPackableHolder implements GowingPackableThin
 //	}
 //	packer2.emit( _tag );
 
-	emitRepresentation( packer2 );
+        emitRepresentation( packer2 );
 
 //	packer2.emit( _mandatory ? '(' : '{' );
 //	packer2.emit( _mandatory ? ')' : '}' );
 
-	return false;
+        return false;
 
     }
 
@@ -425,25 +427,25 @@ public abstract class GowingAbstractPackableHolder implements GowingPackableThin
 
     public int compareTo( @NotNull GowingPackableThingHolder rhs ) {
 
-	return _name.compareTo( rhs.getName() );
+        return _name.compareTo( rhs.getName() );
 
     }
 
     public int hashCode() {
 
-	return _name.hashCode();
+        return _name.hashCode();
 
     }
 
     public boolean equals( Object rhs ) {
 
-	return rhs instanceof GowingPackableThingHolder && _name.equals( ((GowingPackableThingHolder)rhs).getName() );
+        return rhs instanceof GowingPackableThingHolder && _name.equals( ( (GowingPackableThingHolder)rhs ).getName() );
 
     }
 
     public String toString() {
 
-	return "NTH2( \"" + getName() + "\", " + getObjectValue() + " )";
+        return "NTH2( \"" + getName() + "\", " + getObjectValue() + " )";
 
     }
 

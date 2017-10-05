@@ -106,7 +106,7 @@ public class GowingEntityReference implements Comparable<GowingEntityReference> 
 	for ( EntityName entityName : entityNames ) {
 
 	    try {
-		sb.append( slash ).append( ObtuseUtil.enquoteForJavaString( entityName.getName() ) );
+		sb.append( slash ).append( ObtuseUtil.enquoteToJavaString( entityName.getName() ) );
 	    } catch ( Throwable e ) {
 		e.printStackTrace();
 	    }

@@ -4,6 +4,7 @@
 
 package com.obtuse.util;
 
+import com.obtuse.exceptions.HowDidWeGetHereError;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -63,6 +64,8 @@ public class BasicProgramConfigInfo {
             @SuppressWarnings("SameParameterValue") @NotNull String componentName,
             @SuppressWarnings("SameParameterValue") @Nullable Preferences preferences
     ) {
+
+        HowDidWeGetHereError.setStackTracePrintStream( System.err );
 
         BasicProgramConfigInfo.s_vendorName = vendorName.replace( ' ', '_' );
         BasicProgramConfigInfo.s_applicationName = applicationName.replace( ' ', '_' );

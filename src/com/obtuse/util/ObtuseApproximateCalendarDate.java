@@ -837,7 +837,8 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 //
 // OACD_DATE_PATTERN = Pattern.compile( "(\\d\\d\\d\\d)\\s*-\\s*(\\d\\d)\\s*-\\s*(\\d\\d)" );
 
-    public static ObtuseApproximateCalendarDate parse( @NotNull String dateString ) {
+    public static ObtuseApproximateCalendarDate parse( @NotNull String dateString )
+            throws ObtuseApproximateCalendarDateParsingException {
 
         dateString = dateString.trim();
 
@@ -1020,11 +1021,12 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
     }
 
     @NotNull
-    public static ObtuseApproximateCalendarDate parseDateRange( String dateString ) {
+    public static ObtuseApproximateCalendarDate parseDateRange( String dateString )
+            throws ObtuseApproximateCalendarDateParsingException {
 
         final String trimmedDateString = dateString.trim();
 
-        final String enquotedDateString = ObtuseUtil.enquoteForJavaString( trimmedDateString );
+        final String enquotedDateString = ObtuseUtil.enquoteToJavaString( trimmedDateString );
 
         String firstDateString = null;
         String secondDateString = null;

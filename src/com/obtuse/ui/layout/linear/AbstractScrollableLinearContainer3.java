@@ -23,7 +23,7 @@ public abstract class AbstractScrollableLinearContainer3 extends LinearContainer
 
     }
 
-    AbstractScrollableLinearContainer3(
+    public AbstractScrollableLinearContainer3(
             @NotNull String name,
             LinearOrientation orientation,
             @SuppressWarnings("SameParameterValue") ContainerConstraints containerConstraints,

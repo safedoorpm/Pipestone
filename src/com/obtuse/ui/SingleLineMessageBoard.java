@@ -117,7 +117,7 @@ public class SingleLineMessageBoard implements MessageBoardInterface {
 
     public String toString() {
 
-	return "SingleLineMessageBoard( " + ObtuseUtil.enquoteForJavaString(
+	return "SingleLineMessageBoard( " + ObtuseUtil.enquoteToJavaString(
 		_jLabel ==
 		null ? _jTextComponent.getText() : _jLabel.getText()
 	) + " )";

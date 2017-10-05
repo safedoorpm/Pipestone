@@ -309,7 +309,7 @@ public class ObtuseUtilTest {
     }
 
     @Test
-    public void testEnquoteForJavaString() throws Exception {
+    public void testenquoteJavaString() throws Exception {
 
     }
 

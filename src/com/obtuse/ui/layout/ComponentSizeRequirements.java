@@ -15,83 +15,85 @@ import java.awt.*;
  */
 
 public class ComponentSizeRequirements extends SizeRequirements {
+
     public final Component component;
 
     public ComponentSizeRequirements( Component component ) {
 
-	super();
+        super();
 
-	this.component = component;
+        this.component = component;
 
     }
 
     public ComponentSizeRequirements(
-    	Component component,
-	    int minimum,
-	    int preferred,
-	    int maximum,
-	    @SuppressWarnings("SameParameterValue") float alignment
+            Component component,
+            int minimum,
+            int preferred,
+            int maximum,
+            @SuppressWarnings("SameParameterValue") float alignment
     ) {
 
-	super( minimum, preferred, maximum, alignment );
+        super( minimum, preferred, maximum, alignment );
 
-	this.component = component;
+        this.component = component;
 
     }
 
     public static SizeRequirements getAlignedSizeRequirements(
-    	SizeRequirements[] children
+            SizeRequirements[] children
     ) {
-	SizeRequirements totalAscent = new SizeRequirements();
-	SizeRequirements totalDescent = new SizeRequirements();
-	for (int i = 0; i < children.length; i++) {
 
-	    SizeRequirements req = children[i];
+        SizeRequirements totalAscent = new SizeRequirements();
+        SizeRequirements totalDescent = new SizeRequirements();
+        for ( int i = 0; i < children.length; i++ ) {
+
+            SizeRequirements req = children[i];
 //	    Logger.logMsg( "req=" + req );
 
-	    int ascent = (int) (req.alignment * req.minimum);
-	    int descent = req.minimum - ascent;
-	    totalAscent.minimum = Math.max(ascent, totalAscent.minimum);
-	    totalDescent.minimum = Math.max(descent, totalDescent.minimum);
+            int ascent = (int)( req.alignment * req.minimum );
+            int descent = req.minimum - ascent;
+            totalAscent.minimum = Math.max( ascent, totalAscent.minimum );
+            totalDescent.minimum = Math.max( descent, totalDescent.minimum );
 //	    Logger.logMsg( "[" + i + "]:  ascent=" + ascent + ", descent=" + descent + ", totalAscent.minimum=" + totalAscent.minimum + ", totalDescent.minimum=" + totalDescent.minimum );
 
-	    ascent = (int) (req.alignment * req.preferred);
-	    descent = req.preferred - ascent;
-	    totalAscent.preferred = Math.max(ascent, totalAscent.preferred);
-	    totalDescent.preferred = Math.max(descent, totalDescent.preferred);
+            ascent = (int)( req.alignment * req.preferred );
+            descent = req.preferred - ascent;
+            totalAscent.preferred = Math.max( ascent, totalAscent.preferred );
+            totalDescent.preferred = Math.max( descent, totalDescent.preferred );
 //	    Logger.logMsg( "[" + i + "]:  ascent=" + ascent + ", descent=" + descent + ", totalAscent.preferred=" + totalAscent.preferred + ", totalDescent.preferred=" + totalDescent.preferred );
 
-	    ascent = (int) (req.alignment * req.maximum);
-	    descent = req.maximum - ascent;
-	    totalAscent.maximum = Math.max(ascent, totalAscent.maximum);
-	    totalDescent.maximum = Math.max(descent, totalDescent.maximum);
+            ascent = (int)( req.alignment * req.maximum );
+            descent = req.maximum - ascent;
+            totalAscent.maximum = Math.max( ascent, totalAscent.maximum );
+            totalDescent.maximum = Math.max( descent, totalDescent.maximum );
 //	    Logger.logMsg( "[" + i + "]:  ascent=" + ascent + ", descent=" + descent + ", totalAscent.maximum=" + totalAscent.maximum + ", totalDescent.maximum=" + totalDescent.maximum );
 
-	}
+        }
 
-	int min = (int) Math.min((long) totalAscent.minimum + (long) totalDescent.minimum, Integer.MAX_VALUE);
-	int pref = (int) Math.min((long) totalAscent.preferred + (long) totalDescent.preferred, Integer.MAX_VALUE);
-	int max = (int) Math.min((long) totalAscent.maximum + (long) totalDescent.maximum, Integer.MAX_VALUE);
+        int min = (int)Math.min( (long)totalAscent.minimum + (long)totalDescent.minimum, Integer.MAX_VALUE );
+        int pref = (int)Math.min( (long)totalAscent.preferred + (long)totalDescent.preferred, Integer.MAX_VALUE );
+        int max = (int)Math.min( (long)totalAscent.maximum + (long)totalDescent.maximum, Integer.MAX_VALUE );
 
 //	Logger.logMsg( "min/pref/max=" + min + "/" + pref + "/" + max );
 
-	float alignment = 0.0f;
-	if (min > 0) {
-	    alignment = (float) totalAscent.minimum / min;
-	    alignment = alignment > 1.0f ? 1.0f : alignment < 0.0f ? 0.0f : alignment;
-	}
+        float alignment = 0.0f;
+        if ( min > 0 ) {
+            alignment = (float)totalAscent.minimum / min;
+            alignment = alignment > 1.0f ? 1.0f : alignment < 0.0f ? 0.0f : alignment;
+        }
 
-	@SuppressWarnings("UnnecessaryLocalVariable")
-	SizeRequirements rval = new SizeRequirements( min, pref, max, alignment );
+        @SuppressWarnings("UnnecessaryLocalVariable")
+        SizeRequirements rval = new SizeRequirements( min, pref, max, alignment );
 //	Logger.logMsg( "rval=" + rval );
 //	Logger.logMsg( "" );
 
-	return rval;
+        return rval;
     }
 
     public String toString() {
 
-	return "ComponentSizeRequirements( " + LinearLayoutUtil.fullName( component.getParent(), component ) + ":  " + super.toString() + " )";
+        return "ComponentSizeRequirements( " + LinearLayoutUtil.fullName( component.getParent(), component ) + ":  " + super.toString() + " )";
 
     }
 

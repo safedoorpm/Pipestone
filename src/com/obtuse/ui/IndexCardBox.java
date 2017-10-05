@@ -48,6 +48,8 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
 
         super( name, linearOrientation );
 
+//        watch( this );
+
         _selectionModel = createSelectionModel();
 
         _doubleClickOnImageConsumer = doubleClickOnImageConsumer;
@@ -235,7 +237,7 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
 
     private void doSingleClick( int ix, SelectableIndexCard indexCard, MouseEvent mEvent ) {
 
-        Logger.logMsg( "####" );
+        Logger.logMsg( "{{{{" );
 
         Logger.logMsg( "doSingleClick:  modifier keys are " + MouseEvent.getModifiersExText( mEvent.getModifiersEx() ) );
         boolean gotOne = false;
@@ -250,55 +252,56 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
 
         }
 
-        if ( gotOne ) {
+        adjustSelection( ix, mEvent, false );
+//        if ( gotOne ) {
+//
+//            Logger.logMsg( "----" );
+//
+//        }
+//
+//        for ( int i = 0; i < 31; i += 1 ) {
+//
+//            if ( ( mEvent.getModifiers() & ( 1 << i ) ) != 0 ) {
+//
+//                Logger.logMsg( "modifiers:    1 << " + i + " (" + ObtuseUtil.getBitMaskName( 1 << i ) + ") is set" );
+//
+//            }
+//
+//        }
+//
+//        if ( mEvent.getModifiers() == ( InputEvent.BUTTON1_MASK ) ) {
+//
+//            // They just clicked on something - that something becomes the only selected thing
+//
+//            Logger.logMsg( "CLICK" );
+//
+////	    if ( isSelectedIndex( ix ) ) {
+//
+//            setSelectedIndex( ix );
+//
+////	    }
+//
+//        } else if ( mEvent.getModifiers() == ( InputEvent.META_MASK | InputEvent.BUTTON1_MASK ) ) {
+//
+//            // They just alt-clicked on something - that something's selection state flips (all other selected things remain selected)
+//
+//            Logger.logMsg( "ALT-CLICK" );
+//
+//            if ( isSelectedIndex( ix ) ) {
+//
+//                removeSelectionInterval( ix, ix );
+//
+//            } else {
+//
+//                addSelectionInterval( ix, ix );
+//
+//            }
+//
+//        } // that's it for now.
+//
+////	setSelectedValue( indexCard, false );
 
-            Logger.logMsg( "----" );
-
-        }
-
-        for ( int i = 0; i < 31; i += 1 ) {
-
-            if ( ( mEvent.getModifiers() & ( 1 << i ) ) != 0 ) {
-
-                Logger.logMsg( "modifiers:    1 << " + i + " (" + ObtuseUtil.getBitMaskName( 1 << i ) + ") is set" );
-
-            }
-
-        }
-
-        if ( mEvent.getModifiers() == ( InputEvent.BUTTON1_MASK ) ) {
-
-            // They just clicked on something - that something becomes the only selected thing
-
-            Logger.logMsg( "CLICK" );
-
-//	    if ( isSelectedIndex( ix ) ) {
-
-            setSelectedIndex( ix );
-
-//	    }
-
-        } else if ( mEvent.getModifiers() == ( InputEvent.META_MASK | InputEvent.BUTTON1_MASK ) ) {
-
-            // They just alt-clicked on something - that something's selection state flips (all other selected things remain selected)
-
-            Logger.logMsg( "ALT-CLICK" );
-
-            if ( isSelectedIndex( ix ) ) {
-
-                removeSelectionInterval( ix, ix );
-
-            } else {
-
-                addSelectionInterval( ix, ix );
-
-            }
-
-        } // that's it for now.
-
-//	setSelectedValue( indexCard, false );
-
-        Logger.logMsg( "####" );
+        Logger.logMsg( "}}}}" );
 
     }
 
@@ -394,6 +397,120 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
 
     }
 
+    /**
+     Adjust a selection based on mouse/keyboard input.
+     <p/>This method 'borrowed' from the Oracle Java source in order to ensure that I implement the exactly correct list selection and de-selection look-and-feel.
+     The starting point for this method was found in the Java 8 source for the {@code javax.swing.plaf.basic.BasicListUI} class.
+     It has been changed primarily if not entirely to account for the fact that we are managing components in a JPanel as opposed to elements in a JList.
+     That file is
+     <blockquote>Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
+     <br>ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.</blockquote>
+     @param row the row that the mouse is pointing at.
+     @param e the mouse event that got us here.
+     */
+
+    private void adjustSelection( int row, MouseEvent e, boolean isFileList ) {
+//        int row = SwingUtilities2.loc2IndexFileList( _selectionModel, e.getPoint());
+//        boolean isFileList = false;
+
+        if ( row < 0 ) {
+
+            // If shift is down in multi-select, we should do nothing.
+            // For single select or non-shift-click, clear the selection
+            if (
+                    isFileList && e.getID() == MouseEvent.MOUSE_PRESSED &&
+                    (
+                            !e.isShiftDown() ||
+                            _selectionModel.getSelectionMode() == ListSelectionModel.SINGLE_SELECTION
+                    )
+            ) {
+
+                _selectionModel.clearSelection();
+
+            }
+
+        } else {
+
+            int anchorIndex = adjustIndex( _selectionModel.getAnchorSelectionIndex(), getComponentCount() );
+            boolean anchorSelected;
+
+            if ( anchorIndex == -1 ) {
+
+                anchorIndex = 0;
+                anchorSelected = false;
+
+            } else {
+
+                anchorSelected = _selectionModel.isSelectedIndex( anchorIndex );
+
+            }
+
+            if ( anchorSelected && isMenuShortcutKeyDown( e ) ) {
+
+                if ( e.isShiftDown() ) {
+
+                    if ( anchorSelected ) {
+
+                        _selectionModel.addSelectionInterval( anchorIndex, row );
+
+                    } else {
+
+                        _selectionModel.removeSelectionInterval( anchorIndex, row );
+
+                        if ( isFileList ) {
+
+                            _selectionModel.addSelectionInterval( row, row );
+                            _selectionModel.setAnchorSelectionIndex( anchorIndex );
+
+                        }
+
+                    }
+
+                } else if ( _selectionModel.isSelectedIndex( row ) ) {
+
+                    _selectionModel.removeSelectionInterval( row, row );
+
+                } else {
+
+                    _selectionModel.addSelectionInterval( row, row );
+
+                }
+
+            } else if ( e.isShiftDown() ) {
+
+                _selectionModel.setSelectionInterval( anchorIndex, row );
+
+            } else {
+
+                _selectionModel.setSelectionInterval( row, row );
+
+            }
+
+        }
+
+    }
+
+    private static int adjustIndex(int index, int listSize ) {
+
+        return index < listSize ? index : -1;
+
+    }
+
+    static boolean isMenuShortcutKeyDown(InputEvent event) {
+
+        int modifiers = event.getModifiers();
+        int menuShortcutKeyMask = Toolkit.getDefaultToolkit().getMenuShortcutKeyMask();
+
+        Logger.logMsg(
+                "modifiers = " + modifiers + " == { " + MouseEvent.getMouseModifiersText( modifiers ) + " }" +
+                ", mask = " + menuShortcutKeyMask + " == { " + MouseEvent.getMouseModifiersText( menuShortcutKeyMask ) + " }" +
+                ", anded = " + ( modifiers & menuShortcutKeyMask ) + " == { " + MouseEvent.getMouseModifiersText( modifiers & menuShortcutKeyMask ) + " }"
+        );
+
+        return ( modifiers & menuShortcutKeyMask ) != 0;
+
+    }
+
     protected void fireSelectionValueChanged( int firstIndex, int lastIndex, boolean isAdjusting ) {
 
         Object[] listeners = listenerList.getListenerList();
@@ -462,9 +579,9 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
 
         }
 
-        /* Remove the forwarding ListSelectionListener from the old
-     * selectionModel, and add it to the new one, if necessary.
-         */
+        // Remove the forwarding ListSelectionListener from the old selectionModel
+        // and add it to the new one, if necessary.
+
         if ( selectionListener != null ) {
 
             _selectionModel.removeListSelectionListener( selectionListener );

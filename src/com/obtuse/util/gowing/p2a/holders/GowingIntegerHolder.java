@@ -16,48 +16,51 @@ import org.jetbrains.annotations.NotNull;
 public class GowingIntegerHolder extends GowingAbstractPackableHolder {
 
     public GowingIntegerHolder( @NotNull EntityName name, Integer v, boolean mandatory ) {
-	super( name, GowingConstants.TAG_INTEGER, v, mandatory );
+
+        super( name, GowingConstants.TAG_INTEGER, v, mandatory );
 
     }
 
     public GowingIntegerHolder( @NotNull EntityName name, int[] v, @SuppressWarnings("SameParameterValue") boolean mandatory ) {
-	super( name, GowingConstants.TAG_INTEGER, v, mandatory, true );
+
+        super( name, GowingConstants.TAG_INTEGER, v, mandatory, true );
 
     }
 
     public GowingIntegerHolder( @NotNull EntityName name, Integer[] v, @SuppressWarnings("SameParameterValue") boolean mandatory ) {
-	super( name, GowingConstants.TAG_INTEGER, v, mandatory, false );
+
+        super( name, GowingConstants.TAG_INTEGER, v, mandatory, false );
 
     }
 
     public void emitRepresentation( GowingPacker packer2 ) {
 
-	Object value = getObjectValue();
+        Object value = getObjectValue();
 
-	if ( isMandatory() || value != null ) {
+        if ( isMandatory() || value != null ) {
 
-	    switch ( getKind() ) {
+            switch ( getKind() ) {
 
-		case SCALAR:
-		    packer2.emit( ( (Integer) value ).intValue() );
-		    break;
+                case SCALAR:
+                    packer2.emit( ( (Integer)value ).intValue() );
+                    break;
 
-		case PRIMITIVE_ARRAY:
-		    packer2.emit( ( (int[]) value ) );
-		    break;
+                case PRIMITIVE_ARRAY:
+                    packer2.emit( ( (int[])value ) );
+                    break;
 
-		case CONTAINER_ARRAY:
-		    packer2.emit( ( (Integer[]) value ) );
-		    break;
+                case CONTAINER_ARRAY:
+                    packer2.emit( ( (Integer[])value ) );
+                    break;
 
-	    }
+            }
 //		packer2.emit( ( (Integer) value ).intValue() );
 
-	} else {
+        } else {
 
-	    packer2.emitNull();
+            packer2.emitNull();
 
-	}
+        }
 
     }
 

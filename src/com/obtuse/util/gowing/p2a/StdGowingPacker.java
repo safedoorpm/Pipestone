@@ -29,14 +29,14 @@ import java.util.*;
  An example entity:
  <blockquote><pre>
  public class Thing {
-     int _x;
-     Integer _y;
-     Thing _next;
-     public Thing( int x, Integer y, Thing next ) {
-         _x = x;
-         _y = y;
-         _next = next;
-     }
+ int _x;
+ Integer _y;
+ Thing _next;
+ public Thing( int x, Integer y, Thing next ) {
+ _x = x;
+ _y = y;
+ _next = next;
+ }
  };
  t1 = new Thing( 1, 2, null );
  t2 = new Thing( 3, null, null );
@@ -117,166 +117,209 @@ public class StdGowingPacker implements GowingPacker {
 
     @SuppressWarnings("WeakerAccess")
     public StdGowingPacker( @NotNull EntityName groupName, @NotNull File outputFile )
-	    throws FileNotFoundException {
-	this( groupName, outputFile, new PrintWriter( outputFile ), new StdGowingPackerContext() );
+            throws FileNotFoundException {
+
+        this( groupName, outputFile, new PrintWriter( outputFile ), new StdGowingPackerContext() );
 
     }
 
     public StdGowingPacker(
-	    @NotNull EntityName groupName,
-	    @NotNull File outputFile,
-	    @NotNull OutputStream outputStream
+            @NotNull EntityName groupName,
+            @NotNull File outputFile,
+            @NotNull OutputStream outputStream
     ) {
-	this( groupName, outputFile, new PrintWriter( outputStream, true ), new StdGowingPackerContext() );
+
+        this( groupName, outputFile, new PrintWriter( outputStream, true ), new StdGowingPackerContext() );
 
     }
 
     private StdGowingPacker(
-	    @NotNull EntityName groupName,
-	    @NotNull File outputFile,
-	    @NotNull PrintWriter writer,
-	    @NotNull GowingPackerContext packingContext
-			   ) {
+            @NotNull EntityName groupName,
+            @NotNull File outputFile,
+            @NotNull PrintWriter writer,
+            @NotNull GowingPackerContext packingContext
+    ) {
 
 //	_typeIndex = typeIndex;
-	_outputFile = outputFile;
-	_groupName = groupName;
-	_writer = writer;
+        _outputFile = outputFile;
+        _groupName = groupName;
+        _writer = writer;
 
 //	_writer.print( Constants.LINE_COMMENT_CHAR );
-	_writer.print( GowingConstants.TAG_FORMAT_VERSION );
-	_writer.print(
-		GowingConstants.MAJOR_FORMAT_VERSION * GowingConstants.FORMAT_VERSION_MULTIPLIER +
-		GowingConstants.MINOR_FORMAT_VERSION % GowingConstants.FORMAT_VERSION_MULTIPLIER
-	);
-	_writer.print( ':' );
-	_writer.print( ObtuseUtil.enquoteForJavaString( getGroupName().getName() ) );
-	_writer.println( ';' );
-	_writer.println( "" + GowingConstants.LINE_METADATA_CHAR + "OF=" + ObtuseUtil.enquoteForJavaString( outputFile.getAbsolutePath() ) + ';' );
-	Date now = new Date();
-	_writer.println( "" + GowingConstants.LINE_METADATA_CHAR + "ITS=" + ObtuseUtil.enquoteForJavaString( DateUtils.formatStandardMs( now ) ) + ';' );
-	_writer.println( "" + GowingConstants.LINE_METADATA_CHAR + "RTS=" + ObtuseUtil.enquoteForJavaString( now.toString() ) + ';' );
+        _writer.print( GowingConstants.TAG_FORMAT_VERSION );
+        _writer.print(
+                GowingConstants.MAJOR_FORMAT_VERSION * GowingConstants.FORMAT_VERSION_MULTIPLIER +
+                GowingConstants.MINOR_FORMAT_VERSION % GowingConstants.FORMAT_VERSION_MULTIPLIER
+        );
+        _writer.print( ':' );
+        _writer.print( ObtuseUtil.enquoteToJavaString( getGroupName().getName() ) );
+        _writer.println( ';' );
+        _writer.println( "" + GowingConstants.LINE_METADATA_CHAR + "OF=" + ObtuseUtil.enquoteToJavaString( outputFile.getAbsolutePath() ) + ';' );
+        Date now = new Date();
+        _writer.println( "" +
+                         GowingConstants.LINE_METADATA_CHAR +
+                         "ITS=" +
+                         ObtuseUtil.enquoteToJavaString( DateUtils.formatStandardMs( now ) ) +
+                         ';' );
+        _writer.println( "" + GowingConstants.LINE_METADATA_CHAR + "RTS=" + ObtuseUtil.enquoteToJavaString( now.toString() ) + ';' );
 
-	_packingContext = packingContext;
+        _packingContext = packingContext;
 
     }
 
     public void close() {
 
-	_writer.close();
+        _writer.close();
 
     }
 
     @NotNull
     public GowingPackerContext getPackingContext() {
 
-	return _packingContext;
+        return _packingContext;
 
     }
 
     @Override
-    public GowingInstanceId queuePackEntity( @Nullable GowingPackable entity ) {
+    public GowingInstanceId queuePackableEntity( @Nullable GowingPackable entity ) {
 
-	return queuePackEntity( null, entity );
+        if ( entity == null ) {
+
+            return null;
+
+        }
+
+        Logger.logMsg( "queuing " + entity.getInstanceId() + " / " + entity.getInstanceId().getTypeName() );
+
+        _packingContext.rememberPackableEntity( null, entity );
+
+        return entity.getInstanceId();
+
+//        return queuePackableEntity( null, entity );
 
     }
 
-    @Override
-    public GowingInstanceId queuePackEntity( @Nullable EntityName entityName, @Nullable GowingPackable entity ) {
+    // I'm not convinced that this is a service that we should offer - Danny.
 
-	if ( entity == null ) {
+    private GowingInstanceId queuePackableEntity( @Nullable EntityName entityName, @Nullable GowingPackable entity ) {
 
-	    return null;
+        if ( entity == null ) {
 
-	}
+            return null;
 
-	_packingContext.rememberPackableEntity( entityName, entity );
+        }
 
-	return entity.getInstanceId();
+//        if ( entityName != null && entity.getInstanceId().getTypeName().equals( entityName.getName() ) ) {
+//
+//            throw new HowDidWeGetHereError(
+//                    "StdGowingPacker.queuePackableEntity:  actual type name is " + entity.getInstanceId().getTypeName() +
+//                    " but caller claims it is " + entityName.getName()
+//            );
+//
+//        }
+
+        Logger.logMsg( "queuing " + entity.getInstanceId() + " / " + entity.getInstanceId().getTypeName() + " == " + entityName );
+
+        _packingContext.rememberPackableEntity( entityName, entity );
+
+        return entity.getInstanceId();
 
     }
 
     public int finish() {
 
-	if ( _finished ) {
+        if ( _finished ) {
 
-	    throw new IllegalArgumentException( "this packer can only be finished once" );
+            throw new IllegalArgumentException( "this packer can only be finished once" );
 
-	}
+        }
 
-	_finished = true;
-	int entityCount = 0;
+        _finished = true;
+        int entityCount = 0;
 
-	for ( int pass = 1; true; pass += 1 ) {
+        for ( int pass = 1; true; pass += 1 ) {
 
-	    SortedSet<GowingInstanceId> notPackedEntities = new TreeSet<>();
+            SortedSet<GowingInstanceId> notPackedEntities = new TreeSet<>();
 
-	    for ( GowingInstanceId instanceId : _packingContext.getSeenInstanceIds() ) {
+            for ( GowingInstanceId instanceId : _packingContext.getSeenInstanceIds() ) {
 
-		if ( !_previouslyPackedEntities.contains( instanceId ) ) {
+                if ( !_previouslyPackedEntities.contains( instanceId ) ) {
 
-		    Logger.logMsg( "will pack " + instanceId + " on next pass" );
+                    Logger.logMsg( "will pack " + instanceId + " on next pass" );
 
-		    notPackedEntities.add( instanceId );
+                    notPackedEntities.add( instanceId );
 
-		}
+                }
 
-	    }
+            }
 
-	    if ( notPackedEntities.isEmpty() ) {
+            if ( notPackedEntities.isEmpty() ) {
 
-		Logger.logMsg( "done packing" );
+                Logger.logMsg( "done packing" );
 
-		break;
+                break;
 
-	    }
+            }
 
-	    Logger.logMsg( "starting packing pass " + pass + " with " + notPackedEntities.size() + " yet to be packed entities" );
+            Logger.logMsg( "starting packing pass " + pass + " with " + notPackedEntities.size() + " yet to be packed entities" );
 
-	    for ( GowingInstanceId instanceId : notPackedEntities ) {
+            for ( GowingInstanceId instanceId : notPackedEntities ) {
 
-		Logger.logMsg( "packing " + instanceId );
-		actuallyPackEntity( instanceId );
-		entityCount += 1;
-		_previouslyPackedEntities.add( instanceId );
+                EntityNames names = _packingContext.getEntityNames( instanceId );
+                Logger.logMsg( "packing " + instanceId + " / " + names );
+                actuallyPackEntity( instanceId );
+                entityCount += 1;
+                _previouslyPackedEntities.add( instanceId );
 
-	    }
+            }
 
-	}
+        }
 
-	return entityCount;
+        return entityCount;
+
+    }
+
+    /**
+     Get the entities which we have been packed.
+     @return an unmodifiable sorted set of the {@link GowingInstanceId}s representing the entities which this instance has packed.
+     An empty set is returned if this method is called before {@link #finish()} has been called.
+     */
+
+    public SortedSet<GowingInstanceId> getPackedEntities() {
+
+        return Collections.unmodifiableSortedSet( _previouslyPackedEntities );
 
     }
 
     private void actuallyPackEntity( @NotNull GowingInstanceId instanceId ) {
 
-	Logger.logMsg( "@@@ actually packing " + instanceId );
-	EntityNames entityNames = _packingContext.getEntityNames( instanceId );
-	GowingPackedEntityBundle bundle = entityNames.getEntity().bundleThyself( false, this );
+        Logger.logMsg( "@@@ actually packing " + instanceId );
+        EntityNames entityNames = _packingContext.getEntityNames( instanceId );
+        GowingPackedEntityBundle bundle = entityNames.getEntity().bundleThyself( false, this );
 
-	Collection<Integer> newTypeIds = _packingContext.getNewTypeIds();
-	if ( !newTypeIds.isEmpty() ) {
+        Collection<Integer> newTypeIds = _packingContext.getNewTypeIds();
+        if ( !newTypeIds.isEmpty() ) {
 
-	    for ( Integer newTypeId : newTypeIds ) {
+            for ( Integer newTypeId : newTypeIds ) {
 
 //		int typeReferenceId = instanceId.getTypeId();
 
-		String typeName = GowingInstanceId.lookupTypeName( newTypeId );
+                String typeName = GowingInstanceId.lookupTypeName( newTypeId );
 //		if ( typeName.endsWith( "GowingPackableName" ) ) {
 //
 //		    Logger.logErr( "packing first GowingPackableName", new IllegalArgumentException(  ) );
 //
 //		}
 
-		Logger.logMsg( "recording class " + typeName );
-		_writer.print( newTypeId );
-		_writer.print( '@' );
-		_writer.print( ObtuseUtil.enquoteForJavaString( typeName ) );
-		_writer.println( ';' );
+                Logger.logMsg( "recording class " + typeName );
+                _writer.print( newTypeId );
+                _writer.print( '@' );
+                _writer.print( ObtuseUtil.enquoteToJavaString( typeName ) );
+                _writer.println( ';' );
 
-	    }
+            }
 
-	}
+        }
 
 //	if ( instanceId == null ) {
 //
@@ -293,18 +336,18 @@ public class StdGowingPacker implements GowingPacker {
 //
 //	}
 
-	emitEntityReference( instanceId, bundle.getVersion(), entityNames.getEntityNames() );
+        emitEntityReference( instanceId, bundle.getVersion(), entityNames.getEntityNames() );
 
 //	String reference = "" + pa.getPackingId().getTypeReferenceId() + ':' + pa.getPackingId().getEntityId();
 
 //	_writer.print( reference );
 
-	_writer.print( " = " );
+        _writer.print( " = " );
 
 //	Packable2 entityNames = pa.getPackable();
-	actuallyPackEntityBody( bundle );
+        actuallyPackEntityBody( bundle );
 
-	_writer.println( ";" );
+        _writer.println( ";" );
 
 //	String indent = ObtuseUtil.replicate( "\t", _depth );
 //	packEntityName( indent, entityName, false );
@@ -344,39 +387,39 @@ public class StdGowingPacker implements GowingPacker {
 
     private void actuallyPackEntityBody( @NotNull GowingPackedEntityBundle bundle ) {
 
-	_writer.print( "(" );
-	String comma = " ";
+        _writer.print( "(" );
+        String comma = " ";
 
-	GowingPackedEntityBundle superBundle = bundle.hasSuperBundle() ? bundle.getSuperBundle() : null;
-	if ( superBundle != null ) {
+        GowingPackedEntityBundle superBundle = bundle.hasSuperBundle() ? bundle.getSuperBundle() : null;
+        if ( superBundle != null ) {
 
 //	    GowingPackedEntityBundle superBundle = maybeSuperBundle.get();
-	    _writer.print( comma );
+            _writer.print( comma );
 
-	    emitEntityReference( superBundle.getTypeId(), 0, superBundle.getVersion(), null );
-	    _writer.print( "=" );
-	    actuallyPackEntityBody( superBundle );
+            emitEntityReference( superBundle.getTypeId(), 0, superBundle.getVersion(), null );
+            _writer.print( "=" );
+            actuallyPackEntityBody( superBundle );
 
-	    comma = ", ";
+            comma = ", ";
 
-	}
+        }
 
 //	_currentSeparator = " ";
-	for ( GowingPackableThingHolder thing : bundle.values() ) {
+        for ( GowingPackableThingHolder thing : bundle.values() ) {
 
-	    _writer.print( comma );
+            _writer.print( comma );
 
-	    emitName( thing.getName() );
+            emitName( thing.getName() );
 
-	    _writer.print( "=" );
+            _writer.print( "=" );
 
-	    thing.pack( this );
+            thing.pack( this );
 
-	    comma = ", ";
+            comma = ", ";
 
 //	    _currentSeparator = ", ";
 
-	}
+        }
 
 //	if ( !maybeSuperBundle.isPresent() && bundle.isEmpty()  /* bundle.getSuperBundle() == null && bundle.isEmpty() */ ) {
 //
@@ -388,409 +431,409 @@ public class StdGowingPacker implements GowingPacker {
 //
 //	}
 
-	_writer.print( " )" );
+        _writer.print( " )" );
 
     }
 
     @Override
     public void emitName( EntityName name ) {
 
-	_writer.print( name.getName() );
+        _writer.print( name.getName() );
 
     }
 
     private void emitEntityReference( GowingInstanceId instanceId, int version ) {
 
-	emitEntityReference( instanceId, version, null );
+        emitEntityReference( instanceId, version, null );
 
     }
 
     private void emitEntityReference( GowingInstanceId instanceId, int version, @Nullable Collection<EntityName> entityNames ) {
 
-	int typeId = instanceId.getTypeId();
-	long entityId = instanceId.getEntityId();
-	emitEntityReference( typeId, entityId, version, entityNames );
+        int typeId = instanceId.getTypeId();
+        long entityId = instanceId.getEntityId();
+        emitEntityReference( typeId, entityId, version, entityNames );
 
     }
 
     @Override
     public void emitEntityReference( int typeId, long entityId ) {
 
-	emitEntityReference( typeId, entityId, null, null );
+        emitEntityReference( typeId, entityId, null, null );
 
     }
 
     private void emitEntityReference( int typeId, long entityId, @Nullable Integer version, @Nullable Collection<EntityName> entityNames ) {
 
-	_writer.print( GowingConstants.TAG_ENTITY_REFERENCE );
-	_writer.print( typeId );
-	_writer.print( ':' );
+        _writer.print( GowingConstants.TAG_ENTITY_REFERENCE );
+        _writer.print( typeId );
+        _writer.print( ':' );
 
-	_writer.print( entityId );
-	if ( version != null ) {
+        _writer.print( entityId );
+        if ( version != null ) {
 
-	    _writer.print( 'v' );
-	    _writer.print( version );
+            _writer.print( 'v' );
+            _writer.print( version );
 
-	}
+        }
 
-	if ( entityNames != null && !entityNames.isEmpty() ) {
+        if ( entityNames != null && !entityNames.isEmpty() ) {
 
-	    _writer.print( GowingConstants.ENTITY_NAME_CLAUSE_MARKER );
-	    _writer.print( GowingEntityReference.formatNames( entityNames ) );
+            _writer.print( GowingConstants.ENTITY_NAME_CLAUSE_MARKER );
+            _writer.print( GowingEntityReference.formatNames( entityNames ) );
 
-	}
+        }
 
     }
 
     @Override
     public void emit( GowingInstanceId instanceId ) {
 
-	if ( instanceId == null ) {
+        if ( instanceId == null ) {
 
-	    emitNull();
+            emitNull();
 
-	} else {
+        } else {
 
-	    emitEntityReference( instanceId.getTypeId(), instanceId.getEntityId() );
+            emitEntityReference( instanceId.getTypeId(), instanceId.getEntityId() );
 
 //	    _writer.print( Constants.TAG_ENTITY_REFERENCE );
 //	    _writer.print( instanceId.getTypeReferenceId() );
 //	    _writer.print( ':' );
 //	    _writer.print( instanceId.getEntityId() );
 
-	}
+        }
 
     }
 
     @Override
     public void emit( String s ) {
 
-	if ( s == null ) {
+        if ( s == null ) {
 
-	    emitNull();
+            emitNull();
 
-	} else {
+        } else {
 
-	    _writer.print( ObtuseUtil.enquoteForJavaString( s ) );
+            _writer.print( ObtuseUtil.enquoteToJavaString( s ) );
 
-	}
+        }
 
     }
 
     @Override
     public void emit( char c ) {
 
-	_writer.print( GowingConstants.TAG_CHAR );
-	_writer.print( c );
+        _writer.print( GowingConstants.TAG_CHAR );
+        _writer.print( c );
 
     }
 
     @Override
     public void emit( double d ) {
 
-	_writer.print( GowingConstants.TAG_DOUBLE );
-	_writer.print( d );
+        _writer.print( GowingConstants.TAG_DOUBLE );
+        _writer.print( d );
 
     }
 
     @Override
     public void emit( double[] v ) {
 
-	_writer.print( GowingConstants.TAG_PRIMITIVE_ARRAY );
-	_writer.print( v.length );
-	_writer.print( GowingConstants.TAG_DOUBLE );
-	_writer.print( '[' );
+        _writer.print( GowingConstants.TAG_PRIMITIVE_ARRAY );
+        _writer.print( v.length );
+        _writer.print( GowingConstants.TAG_DOUBLE );
+        _writer.print( '[' );
 
-	String comma = "";
-	for ( double b : v ) {
+        String comma = "";
+        for ( double b : v ) {
 
-	    _writer.print( comma );
-	    _writer.print( b );
+            _writer.print( comma );
+            _writer.print( b );
 
-	    comma = ",";
+            comma = ",";
 
-	}
+        }
 
-	_writer.print( ']' );
+        _writer.print( ']' );
 
     }
 
     @Override
     public void emit( Double[] v ) {
 
-	_writer.print( GowingConstants.TAG_CONTAINER_ARRAY );
-	_writer.print( v.length );
-	_writer.print( GowingConstants.TAG_DOUBLE );
-	_writer.print( '[' );
+        _writer.print( GowingConstants.TAG_CONTAINER_ARRAY );
+        _writer.print( v.length );
+        _writer.print( GowingConstants.TAG_DOUBLE );
+        _writer.print( '[' );
 
-	String comma = "";
-	for ( Double b : v ) {
+        String comma = "";
+        for ( Double b : v ) {
 
-	    _writer.print( comma );
-	    if ( b == null ) {
+            _writer.print( comma );
+            if ( b == null ) {
 
-		_writer.print( GowingConstants.NULL_VALUE );
+                _writer.print( GowingConstants.NULL_VALUE );
 
-	    } else {
+            } else {
 
-		_writer.print( b );
+                _writer.print( b );
 
-	    }
+            }
 
-	    comma = ",";
+            comma = ",";
 
-	}
+        }
 
-	_writer.print( ']' );
+        _writer.print( ']' );
 
     }
 
     @Override
     public void emit( float f ) {
 
-	_writer.print( GowingConstants.TAG_FLOAT );
-	_writer.print( f );
+        _writer.print( GowingConstants.TAG_FLOAT );
+        _writer.print( f );
 
     }
 
     @Override
     public void emit( float[] v ) {
 
-	_writer.print( GowingConstants.TAG_PRIMITIVE_ARRAY );
-	_writer.print( v.length );
-	_writer.print( GowingConstants.TAG_FLOAT );
-	_writer.print( '[' );
+        _writer.print( GowingConstants.TAG_PRIMITIVE_ARRAY );
+        _writer.print( v.length );
+        _writer.print( GowingConstants.TAG_FLOAT );
+        _writer.print( '[' );
 
-	String comma = "";
-	for ( float b : v ) {
+        String comma = "";
+        for ( float b : v ) {
 
-	    _writer.print( comma );
-	    _writer.print( b );
+            _writer.print( comma );
+            _writer.print( b );
 
-	    comma = ",";
+            comma = ",";
 
-	}
+        }
 
-	_writer.print( ']' );
+        _writer.print( ']' );
 
     }
 
     @Override
     public void emit( Float[] v ) {
 
-	_writer.print( GowingConstants.TAG_CONTAINER_ARRAY );
-	_writer.print( v.length );
-	_writer.print( GowingConstants.TAG_FLOAT );
-	_writer.print( '[' );
+        _writer.print( GowingConstants.TAG_CONTAINER_ARRAY );
+        _writer.print( v.length );
+        _writer.print( GowingConstants.TAG_FLOAT );
+        _writer.print( '[' );
 
-	String comma = "";
-	for ( Float b : v ) {
+        String comma = "";
+        for ( Float b : v ) {
 
-	    _writer.print( comma );
-	    if ( b == null ) {
+            _writer.print( comma );
+            if ( b == null ) {
 
-		_writer.print( GowingConstants.NULL_VALUE );
+                _writer.print( GowingConstants.NULL_VALUE );
 
-	    } else {
+            } else {
 
-		_writer.print( b );
+                _writer.print( b );
 
-	    }
+            }
 
-	    comma = ",";
+            comma = ",";
 
-	}
+        }
 
-	_writer.print( ']' );
+        _writer.print( ']' );
 
     }
 
     @Override
     public void emit( long l ) {
 
-	_writer.print( GowingConstants.TAG_LONG );
-	_writer.print( l );
+        _writer.print( GowingConstants.TAG_LONG );
+        _writer.print( l );
 
     }
 
     @Override
     public void emit( long[] v ) {
 
-	_writer.print( GowingConstants.TAG_PRIMITIVE_ARRAY );
-	_writer.print( v.length );
-	_writer.print( GowingConstants.TAG_LONG );
-	_writer.print( '[' );
+        _writer.print( GowingConstants.TAG_PRIMITIVE_ARRAY );
+        _writer.print( v.length );
+        _writer.print( GowingConstants.TAG_LONG );
+        _writer.print( '[' );
 
-	String comma = "";
-	for ( long b : v ) {
+        String comma = "";
+        for ( long b : v ) {
 
-	    _writer.print( comma );
-	    _writer.print( b );
+            _writer.print( comma );
+            _writer.print( b );
 
-	    comma = ",";
+            comma = ",";
 
-	}
+        }
 
-	_writer.print( ']' );
+        _writer.print( ']' );
 
     }
 
     @Override
     public void emit( Long[] v ) {
 
-	_writer.print( GowingConstants.TAG_CONTAINER_ARRAY );
-	_writer.print( v.length );
-	_writer.print( GowingConstants.TAG_LONG );
-	_writer.print( '[' );
+        _writer.print( GowingConstants.TAG_CONTAINER_ARRAY );
+        _writer.print( v.length );
+        _writer.print( GowingConstants.TAG_LONG );
+        _writer.print( '[' );
 
-	String comma = "";
-	for ( Long b : v ) {
+        String comma = "";
+        for ( Long b : v ) {
 
-	    _writer.print( comma );
-	    if ( b == null ) {
+            _writer.print( comma );
+            if ( b == null ) {
 
-		_writer.print( GowingConstants.NULL_VALUE );
+                _writer.print( GowingConstants.NULL_VALUE );
 
-	    } else {
+            } else {
 
-		_writer.print( b );
+                _writer.print( b );
 
-	    }
+            }
 
-	    comma = ",";
+            comma = ",";
 
-	}
+        }
 
-	_writer.print( ']' );
+        _writer.print( ']' );
 
     }
 
     @Override
     public void emit( int i ) {
 
-	_writer.print( GowingConstants.TAG_INTEGER );
-	_writer.print( i );
+        _writer.print( GowingConstants.TAG_INTEGER );
+        _writer.print( i );
 
     }
 
     @Override
     public void emit( int[] v ) {
 
-	_writer.print( GowingConstants.TAG_PRIMITIVE_ARRAY );
-	_writer.print( v.length );
-	_writer.print( GowingConstants.TAG_INTEGER );
-	_writer.print( '[' );
+        _writer.print( GowingConstants.TAG_PRIMITIVE_ARRAY );
+        _writer.print( v.length );
+        _writer.print( GowingConstants.TAG_INTEGER );
+        _writer.print( '[' );
 
-	String comma = "";
-	for ( int b : v ) {
+        String comma = "";
+        for ( int b : v ) {
 
-	    _writer.print( comma );
-	    _writer.print( b );
+            _writer.print( comma );
+            _writer.print( b );
 
-	    comma = ",";
+            comma = ",";
 
-	}
+        }
 
-	_writer.print( ']' );
+        _writer.print( ']' );
 
     }
 
     @Override
     public void emit( Integer[] v ) {
 
-	_writer.print( GowingConstants.TAG_CONTAINER_ARRAY );
-	_writer.print( v.length );
-	_writer.print( GowingConstants.TAG_INTEGER );
-	_writer.print( '[' );
+        _writer.print( GowingConstants.TAG_CONTAINER_ARRAY );
+        _writer.print( v.length );
+        _writer.print( GowingConstants.TAG_INTEGER );
+        _writer.print( '[' );
 
-	String comma = "";
-	for ( Integer b : v ) {
+        String comma = "";
+        for ( Integer b : v ) {
 
-	    _writer.print( comma );
-	    if ( b == null ) {
+            _writer.print( comma );
+            if ( b == null ) {
 
-		_writer.print( GowingConstants.NULL_VALUE );
+                _writer.print( GowingConstants.NULL_VALUE );
 
-	    } else {
+            } else {
 
-		_writer.print( b );
+                _writer.print( b );
 
-	    }
+            }
 
-	    comma = ",";
+            comma = ",";
 
-	}
+        }
 
-	_writer.print( ']' );
+        _writer.print( ']' );
 
     }
 
     @Override
     public void emit( short s ) {
 
-	_writer.print( GowingConstants.TAG_SHORT );
-	_writer.print( s );
+        _writer.print( GowingConstants.TAG_SHORT );
+        _writer.print( s );
 
     }
 
     @Override
     public void emit( short[] v ) {
 
-	_writer.print( GowingConstants.TAG_PRIMITIVE_ARRAY );
-	_writer.print( v.length );
-	_writer.print( GowingConstants.TAG_SHORT );
-	_writer.print( '[' );
+        _writer.print( GowingConstants.TAG_PRIMITIVE_ARRAY );
+        _writer.print( v.length );
+        _writer.print( GowingConstants.TAG_SHORT );
+        _writer.print( '[' );
 
-	String comma = "";
-	for ( short b : v ) {
+        String comma = "";
+        for ( short b : v ) {
 
-	    _writer.print( comma );
-	    _writer.print( b );
+            _writer.print( comma );
+            _writer.print( b );
 
-	    comma = ",";
+            comma = ",";
 
-	}
+        }
 
-	_writer.print( ']' );
+        _writer.print( ']' );
 
     }
 
     @Override
     public void emit( Short[] v ) {
 
-	_writer.print( GowingConstants.TAG_CONTAINER_ARRAY );
-	_writer.print( v.length );
-	_writer.print( GowingConstants.TAG_SHORT );
-	_writer.print( '[' );
+        _writer.print( GowingConstants.TAG_CONTAINER_ARRAY );
+        _writer.print( v.length );
+        _writer.print( GowingConstants.TAG_SHORT );
+        _writer.print( '[' );
 
-	String comma = "";
-	for ( Short b : v ) {
+        String comma = "";
+        for ( Short b : v ) {
 
-	    _writer.print( comma );
-	    if ( b == null ) {
+            _writer.print( comma );
+            if ( b == null ) {
 
-		_writer.print( GowingConstants.NULL_VALUE );
+                _writer.print( GowingConstants.NULL_VALUE );
 
-	    } else {
+            } else {
 
-		_writer.print( b );
+                _writer.print( b );
 
-	    }
+            }
 
-	    comma = ",";
+            comma = ",";
 
-	}
+        }
 
-	_writer.print( ']' );
+        _writer.print( ']' );
 
     }
 
     @Override
     public void emit( byte b ) {
 
-	_writer.print( GowingConstants.TAG_BYTE );
-	_writer.print( ObtuseUtil.hexvalue( b ) );
+        _writer.print( GowingConstants.TAG_BYTE );
+        _writer.print( ObtuseUtil.hexvalue( b ) );
 
     }
 
@@ -799,128 +842,128 @@ public class StdGowingPacker implements GowingPacker {
     @Override
     public void emit( @NotNull byte[] v ) {
 
-	_writer.print( GowingConstants.TAG_PRIMITIVE_ARRAY );
-	_writer.print( v.length );
-	_writer.print( GowingConstants.TAG_BYTE );
-	_writer.print( '[' );
+        _writer.print( GowingConstants.TAG_PRIMITIVE_ARRAY );
+        _writer.print( v.length );
+        _writer.print( GowingConstants.TAG_BYTE );
+        _writer.print( '[' );
 
-	for ( byte b : v ) {
+        for ( byte b : v ) {
 
-	    int high = ( b >> 4 ) & 0xf;
-	    int low = (int)b & 0xf;
+            int high = ( b >> 4 ) & 0xf;
+            int low = (int)b & 0xf;
 
-	    _writer.print( HEX_CHARS[ high ] );
-	    _writer.print( HEX_CHARS[ low ] );
+            _writer.print( HEX_CHARS[high] );
+            _writer.print( HEX_CHARS[low] );
 
-	}
+        }
 
-	_writer.print( ']' );
+        _writer.print( ']' );
 
     }
 
     @Override
     public void emit( @NotNull Byte[] v ) {
 
-	_writer.print( GowingConstants.TAG_CONTAINER_ARRAY );
-	_writer.print( v.length );
-	_writer.print( GowingConstants.TAG_BYTE );
-	_writer.print( '[' );
-	String comma = "";
-	for ( Byte b : v ) {
+        _writer.print( GowingConstants.TAG_CONTAINER_ARRAY );
+        _writer.print( v.length );
+        _writer.print( GowingConstants.TAG_BYTE );
+        _writer.print( '[' );
+        String comma = "";
+        for ( Byte b : v ) {
 
-	    _writer.print( comma );
-	    comma = ",";
+            _writer.print( comma );
+            comma = ",";
 
-	    if ( b == null ) {
+            if ( b == null ) {
 
-		_writer.print( GowingConstants.NULL_VALUE );
+                _writer.print( GowingConstants.NULL_VALUE );
 
-	    } else {
+            } else {
 
-		int high = ( b >> 4 ) & 0xf;
-		int low = (int)b & 0xf;
+                int high = ( b >> 4 ) & 0xf;
+                int low = (int)b & 0xf;
 
-		_writer.print( HEX_CHARS[ high ] );
-		_writer.print( HEX_CHARS[ low ] );
+                _writer.print( HEX_CHARS[high] );
+                _writer.print( HEX_CHARS[low] );
 
-	    }
+            }
 
-	}
-	_writer.print( ']' );
+        }
+        _writer.print( ']' );
 
     }
 
     @Override
     public void emit( boolean b ) {
 
-	_writer.print( GowingConstants.TAG_BOOLEAN );
-	_writer.print( b ? 'T' : 'F' );
+        _writer.print( GowingConstants.TAG_BOOLEAN );
+        _writer.print( b ? 'T' : 'F' );
 
     }
 
     @Override
     public void emit( boolean[] v ) {
 
-	_writer.print( GowingConstants.TAG_PRIMITIVE_ARRAY );
-	_writer.print( v.length );
-	_writer.print( GowingConstants.TAG_BOOLEAN );
-	_writer.print( '[' );
+        _writer.print( GowingConstants.TAG_PRIMITIVE_ARRAY );
+        _writer.print( v.length );
+        _writer.print( GowingConstants.TAG_BOOLEAN );
+        _writer.print( '[' );
 
-	String comma = "";
-	for ( boolean b : v ) {
+        String comma = "";
+        for ( boolean b : v ) {
 
-	    _writer.print( comma );
-	    _writer.print( b ? 'T' : 'F' );
+            _writer.print( comma );
+            _writer.print( b ? 'T' : 'F' );
 
-	    comma = ",";
+            comma = ",";
 
-	}
+        }
 
-	_writer.print( ']' );
+        _writer.print( ']' );
 
     }
 
     @Override
     public void emit( Boolean[] v ) {
 
-	_writer.print( GowingConstants.TAG_CONTAINER_ARRAY );
-	_writer.print( v.length );
-	_writer.print( GowingConstants.TAG_BOOLEAN );
-	_writer.print( '[' );
+        _writer.print( GowingConstants.TAG_CONTAINER_ARRAY );
+        _writer.print( v.length );
+        _writer.print( GowingConstants.TAG_BOOLEAN );
+        _writer.print( '[' );
 
-	String comma = "";
-	for ( Boolean b : v ) {
+        String comma = "";
+        for ( Boolean b : v ) {
 
-	    _writer.print( comma );
-	    if ( b == null ) {
+            _writer.print( comma );
+            if ( b == null ) {
 
-		_writer.print( GowingConstants.NULL_VALUE );
+                _writer.print( GowingConstants.NULL_VALUE );
 
-	    } else {
+            } else {
 
-		_writer.print( b ? 'T' : 'F' );
+                _writer.print( b ? 'T' : 'F' );
 
-	    }
+            }
 
-	    comma = ",";
+            comma = ",";
 
-	}
+        }
 
-	_writer.print( ']' );
+        _writer.print( ']' );
 
     }
 
     @Override
     public void emitNull() {
 
-	_writer.print( GowingConstants.NULL_VALUE );
+        _writer.print( GowingConstants.NULL_VALUE );
 
     }
 
     @Override
     public void emit( EntityTypeName typeName ) {
 
-	_writer.print( typeName.getTypeName() );
+        _writer.print( typeName.getTypeName() );
 
     }
 
@@ -1003,20 +1046,20 @@ public class StdGowingPacker implements GowingPacker {
 
     public File getOutputFile() {
 
-	return _outputFile;
+        return _outputFile;
 
     }
 
     public static void main( String[] args ) {
 
-	BasicProgramConfigInfo.init( "Obtuse", "GowingPacker", "test", null );
+        BasicProgramConfigInfo.init( "Obtuse", "GowingPacker", "test", null );
 
-	try {
+        try {
 
 //	    GowingTypeIndex typeIndex = new GowingTypeIndex( "testing" );
 //	    StdPackingContext2 packingContext = new StdPackingContext2( typeIndex );
 
-	    StdGowingPacker p2a = new StdGowingPacker( new EntityName( "test group name" ), new File( "test1.p2a" ) );
+            StdGowingPacker p2a = new StdGowingPacker( new EntityName( "test group name" ), new File( "test1.p2a" ) );
 
 //	    Packable2ThingHolder2 pInt;
 //	    pInt = new IntegerHolder2( new EntityName( "intValue" ), 42, true );
@@ -1037,35 +1080,41 @@ public class StdGowingPacker implements GowingPacker {
 //	    pInt = new StringHolder2( new EntityName( "stringValue" ), "Hello \"world\"", true );
 //	    pInt.pack( p2a, ", " );
 
-	    StdGowingPackerContext.TestPackableClass test = new StdGowingPackerContext.TestPackableClass( "hello world", new StdGowingPackerContext.TestPackableClass( "inner reference", null, null ), null );
-	    p2a.queuePackEntity( test );
+            StdGowingPackerContext.TestPackableClass test = new StdGowingPackerContext.TestPackableClass( "hello world",
+                                                                                                          new StdGowingPackerContext.TestPackableClass( "inner reference",
+                                                                                                                                                        null,
+                                                                                                                                                        null
+                                                                                                          ),
+                                                                                                          null
+            );
+            p2a.queuePackableEntity( test );
 //	    p2a.actuallyPackEntity( test.getInstanceId() );
 
-	    test = new StdGowingPackerContext.TestPackableClass( "howdy doody", null, new StdGowingPackerContext.SimplePackableClass( "grump!" ) );
-	    p2a.queuePackEntity( test );
+            test = new StdGowingPackerContext.TestPackableClass( "howdy doody", null, new StdGowingPackerContext.SimplePackableClass( "grump!" ) );
+            p2a.queuePackableEntity( test );
 
-	    Map<String,EntityName> testMap = new TreeMap<>();
-	    testMap.put( "hello", new EntityName( "HELLO" ) );
-	    testMap.put( "there", new EntityName( "THERE" ) );
-	    testMap.put( "world", new EntityName( "WORLD" ) );
-	    GowingPackableMapping testMapMapping = new GowingPackableMapping<>( testMap );
-	    p2a.queuePackEntity( new EntityName( "fred" ), testMapMapping );
+            Map<String, EntityName> testMap = new TreeMap<>();
+            testMap.put( "hello", new EntityName( "HELLO" ) );
+            testMap.put( "there", new EntityName( "THERE" ) );
+            testMap.put( "world", new EntityName( "WORLD" ) );
+            GowingPackableMapping testMapMapping = new GowingPackableMapping<>( testMap );
+            p2a.queuePackableEntity( new EntityName( "fred" ), testMapMapping );
 
-	    GowingPackableCollection<Object> p2Collection = new GowingPackableCollection<>();
-	    p2Collection.add( "Hello" );
-	    p2Collection.add( "There" );
-	    GowingPackableCollection<String> p2C2 = new GowingPackableCollection<>();
-	    p2C2.addAll( Arrays.asList( "Mercury", "Venus", "Mars", "Jupiter" ) );
-	    p2Collection.add( p2C2 );
-	    p2a.queuePackEntity( new EntityName( "fred" ), p2Collection );
-	    p2a.queuePackEntity( new EntityName( "barney" ), p2Collection );
-	    p2a.queuePackEntity( new EntityName( "betty" ), p2Collection );
-	    p2a.queuePackEntity( new EntityName( "wilma" ), p2Collection );
-	    p2a.queuePackEntity( new EntityName( "betty" ), p2Collection );
-	    SortedSetExample sse = new SortedSetExample( "testSortedSet", null, new String[] { "alpha", "beta", "gamma" } );
-	    p2a.queuePackEntity( sse );
+            GowingPackableCollection<Object> p2Collection = new GowingPackableCollection<>();
+            p2Collection.add( "Hello" );
+            p2Collection.add( "There" );
+            GowingPackableCollection<String> p2C2 = new GowingPackableCollection<>();
+            p2C2.addAll( Arrays.asList( "Mercury", "Venus", "Mars", "Jupiter" ) );
+            p2Collection.add( p2C2 );
+            p2a.queuePackableEntity( new EntityName( "fred" ), p2Collection );
+            p2a.queuePackableEntity( new EntityName( "barney" ), p2Collection );
+            p2a.queuePackableEntity( new EntityName( "betty" ), p2Collection );
+            p2a.queuePackableEntity( new EntityName( "wilma" ), p2Collection );
+            p2a.queuePackableEntity( new EntityName( "betty" ), p2Collection );
+            SortedSetExample sse = new SortedSetExample( "testSortedSet", null, new String[]{ "alpha", "beta", "gamma" } );
+            p2a.queuePackableEntity( sse );
 
-	    p2a.finish();
+            p2a.finish();
 
 //	    p2a.actuallyPackEntity( test.getInstanceId() );
 
@@ -1078,7 +1127,7 @@ public class StdGowingPacker implements GowingPacker {
 //	    );
 //	    pInt.pack( p2a, ",\n" );
 
-	    // Now with null values.
+            // Now with null values.
 
 //	    pInt = new IntegerHolder2( new EntityName( "intValue" ), null, false );
 //	    pInt.pack( p2a, ", " );
@@ -1098,22 +1147,28 @@ public class StdGowingPacker implements GowingPacker {
 //	    pInt = new StringHolder2( new EntityName( "stringValue" ), null, false );
 //	    pInt.pack( p2a, ", " );
 
-	    p2a.close();
+            p2a.close();
 
-	    ObtuseUtil.doNothing();
+            ObtuseUtil.doNothing();
 
-	} catch ( FileNotFoundException e ) {
+        } catch ( FileNotFoundException e ) {
 
-	    e.printStackTrace();
+            e.printStackTrace();
 
-	}
+        }
 
     }
 
     @SuppressWarnings("WeakerAccess")
     public EntityName getGroupName() {
 
-	return _groupName;
+        return _groupName;
+
+    }
+
+    public String toString() {
+
+        return "StdGowingPacker( gn=" + _groupName + ", of=" + _outputFile + " )";
 
     }
 

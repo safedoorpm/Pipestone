@@ -37,7 +37,7 @@ public class TestDriveLevenshteinDistance {
             for ( String w2 : words ) {
 
                 double measure = ld.apply( w1, w2 );
-//                Logger.logMsg( "computeSimilarityMeasure( " + enquoteForJavaString( w1 ) + ", " + enquoteForJavaString( w2 ) + ":  " +
+//                Logger.logMsg( "computeSimilarityMeasure( " + enquoteToJavaString( w1 ) + ", " + enquoteToJavaString( w2 ) + ":  " +
 //                               measure );
                 results.add( measure, w1 + "<>" + w2 );
 

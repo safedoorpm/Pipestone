@@ -144,18 +144,18 @@ public class LinearCache3 implements LayoutImplCache {
                 Dimension pref = c.getPreferredSize();
                 Dimension max = c.getMaximumSize();
 
-                ObtuseUtil.report( "LC3@" + c + ":  min=" + min + ", pref=" + pref + ", max=" + max );
-
-                if ( componentTrackParentsBreadth ) {
-
-                    ObtuseUtil.report(
-                            "*** track parent's breadth:  " +
-                            ObtuseUtil.fDim( "min", min ) + ", " +
-                            ObtuseUtil.fDim( "pref", pref ) + ", " +
-                            ObtuseUtil.fDim( "max", max )
-                    );
-
-                }
+//                ObtuseUtil.report( "LC3@" + c + ":  min=" + min + ", pref=" + pref + ", max=" + max );
+//
+//                if ( componentTrackParentsBreadth ) {
+//
+//                    ObtuseUtil.report(
+//                            "*** track parent's breadth:  " +
+//                            ObtuseUtil.fDim( "min", min ) + ", " +
+//                            ObtuseUtil.fDim( "pref", pref ) + ", " +
+//                            ObtuseUtil.fDim( "max", max )
+//                    );
+//
+//                }
 
                 if ( c instanceof LinearContainer ) {
 
@@ -841,6 +841,12 @@ public class LinearCache3 implements LayoutImplCache {
 //		logIfWatched( "L3C.setComponentBounds:  about to compute bounds of " + LinearLayoutUtil.fullName( _target, c ) );
 //
 //	    }
+
+            if ( _target.isWatched() ) {
+
+                ObtuseUtil.doNothing();
+
+            }
 
             Rectangle r = computeComponentBoundingRectangle( ix );
 

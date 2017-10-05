@@ -40,7 +40,7 @@ public class BasicFlavorHandlers {
             try {
 
                 Logger.logMsg( "handling a string:  " +
-                               ObtuseUtil.enquoteForJavaString( (String)ts.getTransferable().getTransferData( DataFlavor.stringFlavor ) ) );
+                               ObtuseUtil.enquoteToJavaString( (String)ts.getTransferable().getTransferData( DataFlavor.stringFlavor ) ) );
 
                 handleString( ts, (String)ts.getTransferable().getTransferData( DataFlavor.stringFlavor ) );
 

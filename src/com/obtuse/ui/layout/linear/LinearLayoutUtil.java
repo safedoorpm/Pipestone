@@ -144,18 +144,73 @@ public class LinearLayoutUtil {
             public void setBounds( int x, int y, int w, int h ) {
 
                 super.setBounds( x, y, w, h );
-                Logger.logMsg( "SSLM.createdPanel3( name=\"" +
-                               getName() +
-                               "\", count=" +
-                               getComponentCount() +
-                               " ) setting container bounds to " +
-                               ObtuseUtil.fBounds( x, y, w, h ) );
+//                Logger.logMsg( "SSLM.createdPanel3( name=\"" +
+//                               getName() +
+//                               "\", count=" +
+//                               getComponentCount() +
+//                               " ) setting container bounds to " +
+//                               ObtuseUtil.fBounds( x, y, w, h ) );
 
             }
 
             public String toString() {
 
-                return "SSLM.createdPanel3( \"" + getName() + "\", " + super.toString() + ")"; // + '[' + paramString() + ']';
+                return "SSLM.createdPanel3( name=\"" +
+                       getName() +
+                       "\", cc=" +
+                       getComponentCount() +
+                       " ), bounds=" +
+                       ObtuseUtil.fBounds( getBounds() );
+//                return "SSLM.createdPanel3( \"" + getName() + "\", " + super.toString() + ")"; // + '[' + paramString() + ']';
+
+            }
+
+            public void setLayout( LayoutManager lm ) {
+
+                super.setLayout( lm );
+
+                Logger.logMsg( "layout manager set to " + lm );
+
+            }
+
+        };
+
+        return rval;
+
+    }
+
+    @NotNull
+    public static LinearContainer createPanel3(
+            @NotNull String name,
+            LinearOrientation orientation,
+            @SuppressWarnings("SameParameterValue") ContainerConstraints containerConstraints,
+            @SuppressWarnings("SameParameterValue") ComponentConstraints componentConstraints
+    ) {
+
+        @SuppressWarnings("UnnecessaryLocalVariable")
+        LinearContainer rval = new LinearContainer3( name, orientation, containerConstraints, componentConstraints ) {
+
+            public void setBounds( int x, int y, int w, int h ) {
+
+                super.setBounds( x, y, w, h );
+//                Logger.logMsg( "SSLM.createdPanel3( name=\"" +
+//                               getName() +
+//                               "\", count=" +
+//                               getComponentCount() +
+//                               " ) setting container bounds to " +
+//                               ObtuseUtil.fBounds( x, y, w, h ) );
+
+            }
+
+            public String toString() {
+
+                return "SSLM.createdPanel3( name=\"" +
+                       getName() +
+                       "\", cc=" +
+                       getComponentCount() +
+                       " ), bounds=" +
+                       ObtuseUtil.fBounds( getBounds() );
+//                return "SSLM.createdPanel3( \"" + getName() + "\", " + super.toString() + ")"; // + '[' + paramString() + ']';
 
             }
 
@@ -401,6 +456,104 @@ public class LinearLayoutUtil {
 //	addContainerToWatchList( buttons );
     }
 
+    @NotNull
+    public static LinearContainer getLinearContainer3( String title, LinearOrientation orientation, boolean watch ) {
+
+        final boolean logTrace = false;
+
+        final String interesting = "inner";
+
+        LinearContainer3 rval = new LinearContainer3( title, orientation ) {
+
+            public void logIt( Throwable e ) {
+
+                //noinspection ConstantConditions
+                if ( logTrace ) {
+
+                    Logger.logStackTrace( e );
+
+                } else {
+
+                    Logger.logMsg( e.getMessage() );
+
+                }
+
+            }
+
+            public void invalidate() {
+
+                super.invalidate();
+//		Logger.logMsg( title + "'s invalidate method called" );
+                logIt( new IllegalArgumentException( title + "'s invalidate method called" ) );
+//		ObtuseUtil.safeSleepMillis( 500l );
+
+            }
+
+            public void validate() {
+
+                super.invalidate();
+//		Logger.logMsg( title + "'s validate method called" );
+                logIt( new IllegalArgumentException( title + "'s validate method called" ) );
+//		ObtuseUtil.safeSleepMillis( 500l );
+
+            }
+
+            public void revalidate() {
+
+                super.invalidate();
+//		Logger.logMsg( title + "'s revalidate method called" );
+                logIt( new IllegalArgumentException( title + "'s revalidate method called" ) );
+//		ObtuseUtil.safeSleepMillis( 500l );
+
+            }
+
+            public void setBounds( Rectangle r ) {
+
+                super.setBounds( r );
+                if ( interesting.equals( title ) ) {
+
+                    Logger.logMsg( "" );
+                    Logger.logMsg( "" );
+                    Logger.logMsg( "### " + interesting + " bounds set to " + ObtuseUtil.fBounds( r ) + " using rectangle" );
+                    Logger.logMsg( "" );
+                    Logger.logMsg( "" );
+
+                }
+
+                logIt( new IllegalArgumentException( title + "'s setBounds( " + ObtuseUtil.fBounds( r ) + " ) called" ) );
+
+            }
+
+            public void setBounds( int x, int y, int w, int h ) {
+
+                super.setBounds( x, y, w, h );
+                if ( interesting.equals( title ) ) {
+
+                    Logger.logMsg( "" );
+                    Logger.logMsg( "" );
+                    Logger.logMsg( "### " + interesting + " bounds set to " + ObtuseUtil.fBounds( x, y, w, h ) + " using x, y, w and h" );
+                    Logger.logMsg( "" );
+                    Logger.logMsg( "" );
+
+                }
+                logIt( new IllegalArgumentException( title + "'s setBounds( " + ObtuseUtil.fBounds( x, y, w, h ) + " ) called" ) );
+
+//		Logger.logMsg( "SSLM.createdPanel3( name=\"" + getName() + "\", count=" + getComponentCount() + " ) setting container bounds to " + ObtuseUtil.fBounds( x, y, w, h ) );
+
+            }
+
+        };
+
+        if ( watch ) {
+
+            LinearContainer3.watch( rval );
+
+        }
+
+        return rval;
+
+    }
+
     public void setReportShapeChanges( boolean report ) {
 
         LinearLayoutUtil._reportShapeChanges = report;
@@ -497,7 +650,7 @@ public class LinearLayoutUtil {
 
         }
 
-        return component.getClass().getName() + "(" + name + ")";
+        return component.getClass().getCanonicalName() + "(" + name + ")";
 
     }
 
@@ -717,6 +870,11 @@ public class LinearLayoutUtil {
         private final MyDimension _min;
         private final MyDimension _pref;
         private final MyDimension _max;
+
+        public SpaceBrick( int width, int height ) {
+            this( width, height, width, height, width, height );
+
+        }
 
         public SpaceBrick( int minWidth, int minHeight, int prefWidth, int prefHeight, int maxWidth, int maxHeight ) {
 

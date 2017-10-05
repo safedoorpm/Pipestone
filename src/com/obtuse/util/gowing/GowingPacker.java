@@ -14,9 +14,9 @@ import java.io.Closeable;
 
 public interface GowingPacker extends Closeable {
 
-    GowingInstanceId queuePackEntity( GowingPackable entity );
+    GowingInstanceId queuePackableEntity( GowingPackable entity );
 
-    GowingInstanceId queuePackEntity( EntityName entityName, GowingPackable entity );
+//    GowingInstanceId queuePackableEntity( EntityName entityName, GowingPackable entity );
 
     @NotNull
     GowingPackerContext getPackingContext();

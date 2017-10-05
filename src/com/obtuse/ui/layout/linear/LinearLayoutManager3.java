@@ -421,7 +421,7 @@ public class LinearLayoutManager3 implements LayoutManager2 {
     @Override
     public void addLayoutComponent( String name, Component comp ) {
 
-        Logger.logMsg( "addLayoutComponent( " + ObtuseUtil.enquoteForJavaString( name ) + ", " + comp + " )" );
+        Logger.logMsg( "addLayoutComponent( " + ObtuseUtil.enquoteToJavaString( name ) + ", " + comp + " )" );
 
         implicitInvalidateLayout( "addLayoutComponent", _target );
 
@@ -486,7 +486,9 @@ public class LinearLayoutManager3 implements LayoutManager2 {
 
             if ( _target.isWatched() ) {
 
-//		    Logger.logMsg( "doing a layout of " + _target );
+                Logger.logMsg( "doing a layout of " + _target );
+
+                _target.doingLayout();
 
                 ObtuseUtil.doNothing();
 
@@ -494,6 +496,16 @@ public class LinearLayoutManager3 implements LayoutManager2 {
 
             cache = _cache;
             _cache.computePositions();
+
+            if ( _target.isWatched() ) {
+
+                Logger.logMsg( "done layout of " + _target );
+
+                _target.doneLayout();
+
+                ObtuseUtil.doNothing();
+
+            }
 
 //	    } finally {
 //
@@ -590,7 +602,7 @@ public class LinearLayoutManager3 implements LayoutManager2 {
 //        s_quietThread.start();
 
         JFrame frame = new JFrame( "test simple linear layouts" );
-        LinearContainer inner = getLinearContainer3( "inner", LinearOrientation.VERTICAL, true );
+        LinearContainer inner = LinearLayoutUtil.getLinearContainer3( "inner", LinearOrientation.VERTICAL, true );
         inner.setBorder( BorderFactory.createEtchedBorder() );
 
         JButton jb1 = new JButton( "Say Hello" );
@@ -625,7 +637,7 @@ public class LinearLayoutManager3 implements LayoutManager2 {
 
 //	inner.setMaximumSize( new Dimension( 300, 300 ) );
 
-        LinearContainer outer = getLinearContainer3( "outer", LinearOrientation.HORIZONTAL, true );
+        LinearContainer outer = LinearLayoutUtil.getLinearContainer3( "outer", LinearOrientation.HORIZONTAL, true );
         outer.setBorder( BorderFactory.createLineBorder( Color.RED ) );
         outer.add( inner.getAsContainer() );
         JButton jb3 = new JButton( "Flip" );
@@ -661,130 +673,6 @@ public class LinearLayoutManager3 implements LayoutManager2 {
         frame.setVisible( true );
 
         ObtuseUtil.doNothing();
-
-    }
-
-    @NotNull
-    public static LinearContainer getLinearContainer3( String title, LinearOrientation orientation, boolean watch ) {
-
-        final boolean logTrace = false;
-
-        final String interesting = "inner";
-
-        LinearContainer3 rval = new LinearContainer3( title, orientation ) {
-
-            public void logIt( Throwable e ) {
-
-                //noinspection ConstantConditions
-                if ( logTrace ) {
-
-                    logStackTrace( e );
-
-                } else {
-
-                    Logger.logMsg( e.getMessage() );
-
-                }
-
-            }
-
-            public void invalidate() {
-
-                super.invalidate();
-//		Logger.logMsg( title + "'s invalidate method called" );
-                logIt( new IllegalArgumentException( title + "'s invalidate method called" ) );
-//		ObtuseUtil.safeSleepMillis( 500l );
-
-            }
-
-            public void validate() {
-
-                super.invalidate();
-//		Logger.logMsg( title + "'s validate method called" );
-                logIt( new IllegalArgumentException( title + "'s validate method called" ) );
-//		ObtuseUtil.safeSleepMillis( 500l );
-
-            }
-
-            public void revalidate() {
-
-                super.invalidate();
-//		Logger.logMsg( title + "'s revalidate method called" );
-                logIt( new IllegalArgumentException( title + "'s revalidate method called" ) );
-//		ObtuseUtil.safeSleepMillis( 500l );
-
-            }
-
-            public void setBounds( Rectangle r ) {
-
-                super.setBounds( r );
-                if ( interesting.equals( title ) ) {
-
-                    Logger.logMsg( "" );
-                    Logger.logMsg( "" );
-                    Logger.logMsg( "### " + interesting + " bounds set to " + ObtuseUtil.fBounds( r ) + " using rectangle" );
-                    Logger.logMsg( "" );
-                    Logger.logMsg( "" );
-
-                }
-
-                logIt( new IllegalArgumentException( title + "'s setBounds( " + ObtuseUtil.fBounds( r ) + " ) called" ) );
-
-            }
-
-            public void setBounds( int x, int y, int w, int h ) {
-
-                super.setBounds( x, y, w, h );
-                if ( interesting.equals( title ) ) {
-
-                    Logger.logMsg( "" );
-                    Logger.logMsg( "" );
-                    Logger.logMsg( "### " + interesting + " bounds set to " + ObtuseUtil.fBounds( x, y, w, h ) + " using x, y, w and h" );
-                    Logger.logMsg( "" );
-                    Logger.logMsg( "" );
-
-                }
-                logIt( new IllegalArgumentException( title + "'s setBounds( " + ObtuseUtil.fBounds( x, y, w, h ) + " ) called" ) );
-
-//		Logger.logMsg( "SSLM.createdPanel3( name=\"" + getName() + "\", count=" + getComponentCount() + " ) setting container bounds to " + ObtuseUtil.fBounds( x, y, w, h ) );
-
-            }
-
-        };
-
-        if ( watch ) {
-
-            LinearContainer3.watch( rval );
-
-        }
-
-        return rval;
-
-    }
-
-    private static void logStackTrace( Throwable e ) {
-
-        StackTraceElement[] trace = e.getStackTrace();
-
-        if ( trace == null ) {
-
-            Logger.logMsg( "no stack trace" );
-
-        } else {
-
-//	    Logger.logMsg( "stack trace has " + trace.length + " elements" );
-            Logger.logMsg( "" + e );
-            int ix = 0;
-            for ( StackTraceElement element : trace ) {
-
-//		Logger.logMsg( "[" + ix + "] = " + element );
-                Logger.logMsg( "    at " + element );
-
-                ix += 1;
-
-            }
-
-        }
 
     }
 

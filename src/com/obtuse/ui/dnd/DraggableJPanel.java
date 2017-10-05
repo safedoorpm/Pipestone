@@ -545,7 +545,7 @@ public class DraggableJPanel extends SelectableImage implements MouseListener, F
 //
 //				try {
 //
-//				    Logger.logMsg( "handling a string:  " + ObtuseUtil.enquoteForJavaString( (String)ts.getTransferable().getTransferData( DataFlavor.stringFlavor ) ) );
+//				    Logger.logMsg( "handling a string:  " + ObtuseUtil.enquoteToJavaString( (String)ts.getTransferable().getTransferData( DataFlavor.stringFlavor ) ) );
 //
 //				} catch ( UnsupportedFlavorException | IOException e ) {
 //
@@ -588,7 +588,7 @@ public class DraggableJPanel extends SelectableImage implements MouseListener, F
     public DraggableJPanel( int how, boolean isDoubleBuffered ) {
         this( how, new FlowLayout(), isDoubleBuffered );
 
-        Logger.logMsg( "DraggableJPanel:  we are " + this );
+//        Logger.logMsg( "DraggableJPanel:  we are " + this );
 
     }
 

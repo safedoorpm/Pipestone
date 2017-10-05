@@ -4,7 +4,6 @@ import com.obtuse.util.gowing.EntityName;
 import com.obtuse.util.gowing.GowingPackable;
 import com.obtuse.util.gowing.GowingPacker;
 import com.obtuse.util.gowing.p2a.GowingConstants;
-import org.jetbrains.annotations.NotNull;
 
 /*
  * Copyright © 2015 Obtuse Systems Corporation
@@ -20,6 +19,7 @@ import org.jetbrains.annotations.NotNull;
 public class GowingArrayHolderObsolete extends GowingAbstractPackableHolder {
 
     GowingArrayHolderObsolete( String notImplemented ) {
+
         super( new EntityName( "not implemented" ), GowingConstants.TAG_CONTAINER_ARRAY, null, false );
     }
 

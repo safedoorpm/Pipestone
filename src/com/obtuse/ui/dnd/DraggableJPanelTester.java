@@ -82,7 +82,7 @@ public class DraggableJPanelTester extends JFrame {
                                     String transferString
                             ) {
 
-                                Logger.logMsg( "handling a string:  " + ObtuseUtil.enquoteForJavaString( transferString ) );
+                                Logger.logMsg( "handling a string:  " + ObtuseUtil.enquoteToJavaString( transferString ) );
 
                             }
 

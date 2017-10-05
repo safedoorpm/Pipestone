@@ -52,4 +52,10 @@ public class TransferActionListener implements ActionListener, PropertyChangeLis
 
     }
 
+    public String toString() {
+
+        return "TransferActionListener()";
+
+    }
+
 }

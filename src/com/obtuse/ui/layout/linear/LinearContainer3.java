@@ -18,7 +18,7 @@ import java.util.LinkedList;
  A container which is intended to be managed by a {@link LinearLayoutManager3} instance.
  */
 
-class LinearContainer3 extends JPanel implements LinearContainer {
+public class LinearContainer3 extends JPanel implements LinearContainer {
 
     private static final java.util.List<LinearContainer3> _watchedContainers = new LinkedList<>();
 
@@ -96,6 +96,22 @@ class LinearContainer3 extends JPanel implements LinearContainer {
     public boolean isWatched() {
 
         return _watchedContainers.contains( this );
+
+    }
+
+    /**
+     A hook for debuggin'.
+     */
+
+    public void doingLayout() {
+
+    }
+
+    /**
+     Another hook for debuggin'.
+     */
+
+    public void doneLayout() {
 
     }
 

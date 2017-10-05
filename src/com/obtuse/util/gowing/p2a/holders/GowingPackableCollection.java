@@ -30,10 +30,10 @@ import java.util.List;
  .
  .
  public PackedEntityBundle bundleThyself( boolean isPackingSuper, Packer2 packer ) {
-     PackedEntityBundle bundle = new ...;
-     Packable2Collection&lt;String> pc = new Packable2Collection&lt;String>( _myCollection );
-     bundle.addHolder( new StringHolder2( new EntityName( "_xxx" ), (Packable2)pc, packer, true ) );
-     return bundle;
+ PackedEntityBundle bundle = new ...;
+ Packable2Collection&lt;String> pc = new Packable2Collection&lt;String>( _myCollection );
+ bundle.addHolder( new StringHolder2( new EntityName( "_xxx" ), (Packable2)pc, packer, true ) );
+ return bundle;
  }
  .
  .
@@ -50,7 +50,7 @@ import java.util.List;
  .
  .
  public ExampleClass( UnPacker2 unPacker, PackedEntityBundle bundle ) {
-     super();
+ super();
 
  </pre>
  </blockquote>
@@ -69,99 +69,106 @@ public class GowingPackableCollection<E> extends LinkedList<E> implements Gowing
 
     public static final GowingEntityFactory FACTORY = new GowingEntityFactory( ENTITY_TYPE_NAME ) {
 
-	@Override
-	public int getOldestSupportedVersion() {
+        @Override
+        public int getOldestSupportedVersion() {
 
-	    return VERSION;
-	}
+            return VERSION;
+        }
 
-	@Override
-	public int getNewestSupportedVersion() {
+        @Override
+        public int getNewestSupportedVersion() {
 
-	    return VERSION;
-	}
+            return VERSION;
+        }
 
-	@Override
-	@NotNull
-	public GowingPackable createEntity( @NotNull GowingUnPacker unPacker, @NotNull GowingPackedEntityBundle bundle, GowingEntityReference er ) {
+        @Override
+        @NotNull
+        public GowingPackable createEntity( @NotNull GowingUnPacker unPacker, @NotNull GowingPackedEntityBundle bundle, GowingEntityReference er ) {
 
-	    return new GowingPackableCollection( unPacker, bundle );
+            return new GowingPackableCollection( unPacker, bundle );
 
-	}
+        }
 
     };
 
     public GowingPackableCollection() {
-	super();
 
-	_things = null;
+        super();
+
+        _things = null;
 
     }
 
     public GowingPackableCollection( Collection<? extends E> collection ) {
-	super( collection );
 
-	_things = null;
+        super( collection );
+
+        _things = null;
 
     }
 
     public GowingPackableCollection( GowingUnPacker unPacker, GowingPackedEntityBundle bundle ) {
-	super();
 
-	if ( bundle.getVersion() != VERSION ) {
+        super();
 
-	    throw new IllegalArgumentException( GowingPackableCollection.class.getCanonicalName() + ":  expected version " + VERSION + " but received version " + bundle.getVersion() );
+        if ( bundle.getVersion() != VERSION ) {
 
-	}
+            throw new IllegalArgumentException( GowingPackableCollection.class.getCanonicalName() +
+                                                ":  expected version " +
+                                                VERSION +
+                                                " but received version " +
+                                                bundle.getVersion() );
 
-	int ix = 0;
-	_things = new FormattingLinkedList();
-	while ( true ) {
+        }
 
-	    GowingPackableThingHolder holder = bundle.get( new EntityName( "_" + ix ) );
-	    if ( holder == null ) {
+        int ix = 0;
+        _things = new FormattingLinkedList();
+        while ( true ) {
 
-		break;
+            GowingPackableThingHolder holder = bundle.get( new EntityName( "_" + ix ) );
+            if ( holder == null ) {
 
-	    }
+                break;
 
-	    _things.add( holder.getObjectValue() );
+            }
 
-	    ix += 1;
+            _things.add( holder.getObjectValue() );
 
-	}
+            ix += 1;
 
-	ObtuseUtil.doNothing();
+        }
+
+        ObtuseUtil.doNothing();
 
     }
 
     @Override
     public boolean finishUnpacking( GowingUnPacker unPacker ) {
 
-	ObtuseUtil.doNothing();
+        ObtuseUtil.doNothing();
 
-	for ( Object obj : _things ) {
+        for ( Object obj : _things ) {
 
-	    if ( obj == null ) {
+            if ( obj == null ) {
 
-		add( null );
+                add( null );
 
-	    } else if ( obj instanceof GowingEntityReference ) {
+            } else if ( obj instanceof GowingEntityReference ) {
 
-		E value = (E) unPacker.resolveReference( (GowingEntityReference) obj );
-		add( value );
+                E value = (E)unPacker.resolveReference( (GowingEntityReference)obj );
+                add( value );
 
-	    } else {
+            } else {
 
-		add( (E)obj );
+                add( (E)obj );
 
-	    }
+            }
 
-	}
+        }
 
-	_things = null;
+        _things = null;
 
-	return true;
+        return true;
 
     }
 
@@ -169,7 +176,7 @@ public class GowingPackableCollection<E> extends LinkedList<E> implements Gowing
     @NotNull
     public final GowingInstanceId getInstanceId() {
 
-	return _instanceId;
+        return _instanceId;
 
     }
 
@@ -177,24 +184,24 @@ public class GowingPackableCollection<E> extends LinkedList<E> implements Gowing
     @Override
     public GowingPackedEntityBundle bundleThyself( boolean isPackingSuper, GowingPacker packer ) {
 
-	GowingPackedEntityBundle rval = new GowingPackedEntityBundle(
-		ENTITY_TYPE_NAME,
-		VERSION,
-		null,
-		packer.getPackingContext()
-	);
+        GowingPackedEntityBundle rval = new GowingPackedEntityBundle(
+                ENTITY_TYPE_NAME,
+                VERSION,
+                null,
+                packer.getPackingContext()
+        );
 
-	int ix = 0;
+        int ix = 0;
 
-	for ( Object obj : this ) {
+        for ( Object obj : this ) {
 
-	    GowingPackableKeyValuePair.packObj( rval, new EntityName( "_" + ix ), obj, packer );
+            GowingPackableKeyValuePair.packObj( rval, new EntityName( "_" + ix ), obj, packer );
 
-	    ix += 1;
+            ix += 1;
 
-	}
+        }
 
-	return rval;
+        return rval;
 
     }
 

@@ -379,4 +379,10 @@ public class StdGowingUnPackerContext implements GowingUnPackerContext {
 
     }
 
+    public String toString() {
+
+        return "StdGowingUnPackerContext( input file = " + ( _inputFile == null ? "<<unspecified>>" : _inputFile ) + " )";
+
+    }
+
 }

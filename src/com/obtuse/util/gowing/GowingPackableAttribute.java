@@ -249,7 +249,7 @@ public class GowingPackableAttribute implements GowingPackable {
 
 	} else if ( getAttributeType() == GowingPackableType.STRING || getAttributeType() == GowingPackableType.PLAIN_TEXT || getAttributeType() == GowingPackableType.HTML_TEXT ) {
 
-	    strValue = ObtuseUtil.enquoteForJavaString( (String) objectValue );
+	    strValue = ObtuseUtil.enquoteToJavaString( (String) objectValue );
 
 	} else {
 

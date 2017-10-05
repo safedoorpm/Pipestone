@@ -16,23 +16,24 @@ import org.jetbrains.annotations.NotNull;
 public class GowingEntityNameHolder extends GowingAbstractPackableHolder {
 
     public GowingEntityNameHolder( @NotNull EntityName name, EntityName v, @SuppressWarnings("SameParameterValue") boolean mandatory ) {
-	super( name, GowingConstants.TAG_ENTITY_NAME, v, mandatory );
+
+        super( name, GowingConstants.TAG_ENTITY_NAME, v, mandatory );
 
     }
 
     public void emitRepresentation( GowingPacker packer2 ) {
 
-	Object value = getObjectValue();
+        Object value = getObjectValue();
 
-	if ( isMandatory() || value != null ) {
+        if ( isMandatory() || value != null ) {
 
-	    packer2.emit( ( (EntityName) value ).getName() );
+            packer2.emit( ( (EntityName)value ).getName() );
 
-	} else {
+        } else {
 
-	    packer2.emitNull();
+            packer2.emitNull();
 
-	}
+        }
 
     }
 

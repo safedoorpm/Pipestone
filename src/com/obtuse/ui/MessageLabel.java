@@ -1,6 +1,5 @@
 package com.obtuse.ui;
 
-import com.obtuse.ui.OkPopupMessageWindow;
 import com.obtuse.util.Logger;
 import com.obtuse.util.ObtuseUtil;
 
@@ -100,7 +99,7 @@ public class MessageLabel extends JLabel {
 
 	public String toString() {
 
-            return "AugmentedMessage( " + ObtuseUtil.enquoteForJavaString( _message ) + ", " + ObtuseUtil.enquoteForJavaString( _extraInfo ) + " )";
+            return "AugmentedMessage( " + ObtuseUtil.enquoteToJavaString( _message ) + ", " + ObtuseUtil.enquoteToJavaString( _extraInfo ) + " )";
 
 	}
 

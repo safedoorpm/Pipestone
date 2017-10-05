@@ -16,23 +16,24 @@ import org.jetbrains.annotations.NotNull;
 public class GowingNullHolder extends GowingAbstractPackableHolder {
 
     public GowingNullHolder( @NotNull EntityName name ) {
-	super( name, GowingConstants.NULL_VALUE, null, false );
+
+        super( name, GowingConstants.NULL_VALUE, null, false );
 
     }
 
     public void emitRepresentation( GowingPacker packer2 ) {
 
-	Object value = getObjectValue();
+        Object value = getObjectValue();
 
-	if ( isMandatory() || value != null ) {
+        if ( isMandatory() || value != null ) {
 
-	    packer2.emit( ( (Integer) value ).intValue() );
+            packer2.emit( ( (Integer)value ).intValue() );
 
-	} else {
+        } else {
 
-	    packer2.emitNull();
+            packer2.emitNull();
 
-	}
+        }
 
     }
 
