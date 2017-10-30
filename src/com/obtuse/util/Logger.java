@@ -907,7 +907,7 @@ public class Logger {
      @param e   the throwable containing the stack trace.
      */
 
-    public static void logErr( String msg, Throwable e ) {
+    public static void logErr( String msg, @Nullable Throwable e ) {
 
         Logger.logErr( msg );
 
@@ -946,6 +946,12 @@ public class Logger {
     public synchronized void addListener( LoggerListener listener ) {
 
         _listeners.add( listener );
+
+    }
+
+    public String toString() {
+
+        return "Logger()";
 
     }
 

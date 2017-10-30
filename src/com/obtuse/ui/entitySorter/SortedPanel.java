@@ -15,6 +15,7 @@ import java.awt.event.ActionEvent;
 import java.util.Random;
 
 /**
+Danny
  A {@link JPanel} that works with a {@link SortedPanelModel}.
  */
 
@@ -25,33 +26,35 @@ public class SortedPanel<E> extends JPanel {
     private SortedPanelModel _model;
 
     public SortedPanel() {
+
         super();
 
     }
 
     public SortedPanel( String name ) {
+
         super();
 
-	setName( name );
+        setName( name );
 //	_name = name;
 
     }
 
     public void describe( String who ) {
 
-	Logger.logMsg( "describing SortedPanel \"" + who + "\"" );
+        Logger.logMsg( "describing SortedPanel \"" + who + "\"" );
 
-	int ix = 0;
-	Component c = this;
-	while ( c != null ) {
+        int ix = 0;
+        Component c = this;
+        while ( c != null ) {
 
-	    Logger.logMsg( "ix=" + ix + ":  " + c.getClass().getCanonicalName() );
+            Logger.logMsg( "ix=" + ix + ":  " + c.getClass().getCanonicalName() );
 
-	    c = c.getParent();
+            c = c.getParent();
 
-	    ix += 1;
+            ix += 1;
 
-	}
+        }
 
     }
 
@@ -64,93 +67,103 @@ public class SortedPanel<E> extends JPanel {
 
     public void setModel( @Nullable SortedPanelModel model ) {
 
-        Trace.event( "                                                                                                                            " + this + ".setModel( " + model + " )" );
+        Trace.event( "                                                                                                                            " +
+                     this +
+                     ".setModel( " +
+                     model +
+                     " )" );
         // Just pass on null operations.
 
-	if ( model == _model ) {
+        if ( model == _model ) {
 
-	    return;
+            return;
 
-	}
+        }
 
-	// Deal with disconnections quickly.
+        // Deal with disconnections quickly.
 
-	if ( model == null ) {
+        if ( model == null ) {
 
-	    SortedPanelModel ourModel = _model;
-	    _model = null;
+            SortedPanelModel ourModel = _model;
+            _model = null;
 
-	    // Note that ourModel cannot be null since we eliminated the possibility that model
-	    // and ourModel, a cached copy of _model as it existed when we were called,
-	    // were equal just above and we don't get here unless model is null. In other words,
-	    // _model wasn't null when we were called so it isn't null now.
-	    //
-	    // We still check if ourModel is null since the logic leading up to this statement could change someday.
+            // Note that ourModel cannot be null since we eliminated the possibility that model
+            // and ourModel, a cached copy of _model as it existed when we were called,
+            // were equal just above and we don't get here unless model is null. In other words,
+            // _model wasn't null when we were called so it isn't null now.
+            //
+            // We still check if ourModel is null since the logic leading up to this statement could change someday.
 
-	    //noinspection ConstantConditions
-	    if ( ourModel != null ) {
+            //noinspection ConstantConditions
+            if ( ourModel != null ) {
 
-		ourModel.adoptSortedPanel( null );
+                ourModel.adoptSortedPanel( null );
 
-	    }
+            }
 
-	}
+        }
 
-	// Make sure that the model is not already in use.
+        // Make sure that the model is not already in use.
 
-	if ( model != null && model.hasOwner() && model.getOwner() != this ) {
+        if ( model != null && model.hasOwner() && model.getOwner() != this ) {
 
-	    throw new IllegalArgumentException( "panel \"" + getName() + "\" cannot use model \"" + model.getName() + "\" because it is already owned by panel \"" + model.getOwner() + "\"" );
+            throw new IllegalArgumentException( "panel \"" +
+                                                getName() +
+                                                "\" cannot use model \"" +
+                                                model.getName() +
+                                                "\" because it is already owned by panel \"" +
+                                                model.getOwner() +
+                                                "\"" );
 
-	}
+        }
 
-	// Remove any existing model.
+        // Remove any existing model.
 
-	if ( _model != null ) {
+        if ( _model != null ) {
 
-	    _model.adoptSortedPanel( null );
+            _model.adoptSortedPanel( null );
 
-	    _model = null;
+            _model = null;
 
-	}
+        }
 
-	// Make sure that we are empty after any model change (if we are getting a new model then they will fill us up with their entities).
+        // Make sure that we are empty after any model change (if we are getting a new model then they will fill us up with their entities).
 
-	Trace.event( "cleanup time" );
+        Trace.event( "cleanup time" );
 
-	removeAll();
+        removeAll();
 
-	// Remember our model if we have been assigned a new one.
+        // Remember our model if we have been assigned a new one.
 
-	if ( model != null ) {
+        if ( model != null ) {
 
-	    _model = model;
-	    _model.adoptSortedPanel( this );
+            _model = model;
+            _model.adoptSortedPanel( this );
 
-	}
+        }
 
     }
 
     public SortableEntityView getEntityView( int ix ) {
 
-	//noinspection unchecked
-	return (SortableEntityView)getComponent( ix );
+        //noinspection unchecked
+        return (SortableEntityView)getComponent( ix );
 
     }
 
     public SortableEntityView[] getEntityViews() {
 
-	Component[] rval = getComponents();
-	@SuppressWarnings("unchecked")
-	SortableEntityView[] castRval = new SortableEntityView[rval.length];
-	for ( int i = 0; i < rval.length; i += 1 ) {
+        Component[] rval = getComponents();
+        @SuppressWarnings("unchecked")
+        SortableEntityView[] castRval = new SortableEntityView[rval.length];
+        for ( int i = 0; i < rval.length; i += 1 ) {
 
-	    //noinspection unchecked
-	    castRval[i] = (SortableEntityView)rval[i];
+            //noinspection unchecked
+            castRval[i] = (SortableEntityView)rval[i];
 
-	}
+        }
 
-	return castRval;
+        return castRval;
 
     }
 
@@ -168,7 +181,13 @@ public class SortedPanel<E> extends JPanel {
 
     public String toString() {
 
-        return "SortedPanel( \"" + getName() + "\", " + getComponentCount() + " components" + ( hasModel() ? ", model=\"" + getModel().getName() + "\"" : "\", no model" ) + " )";
+        return "SortedPanel( \"" +
+               getName() +
+               "\", " +
+               getComponentCount() +
+               " components" +
+               ( hasModel() ? ", model=\"" + getModel().getName() + "\"" : "\", no model" ) +
+               " )";
 
     }
 
@@ -176,13 +195,13 @@ public class SortedPanel<E> extends JPanel {
 
         SortedPanelModel oldModel = sp.getModel();
 
-	Trace.event( "<<<" + label );
-	Trace.event( "" + sp + ":  setting model to " + model + ( oldModel == null ? "" : ", currently " + oldModel ) );
+        Trace.event( "<<<" + label );
+        Trace.event( "" + sp + ":  setting model to " + model + ( oldModel == null ? "" : ", currently " + oldModel ) );
 
-	sp.setModel( model );
+        sp.setModel( model );
 
-	Trace.event( "" + sp + ":  result is " + model + ( oldModel == null ? "" : ", oldModel " + oldModel ) );
-	Trace.event( ">>>" + label );
+        Trace.event( "" + sp + ":  result is " + model + ( oldModel == null ? "" : ", oldModel " + oldModel ) );
+        Trace.event( ">>>" + label );
 
     }
 
@@ -190,13 +209,13 @@ public class SortedPanel<E> extends JPanel {
 
         SortedPanel oldSp = model.getOwner();
 
-	Trace.event( "<<<---" + label );
-	Trace.event( "" + model + ":  adopting " + sp + ( oldSp == null ? "" : ", currently " + oldSp ) );
+        Trace.event( "<<<---" + label );
+        Trace.event( "" + model + ":  adopting " + sp + ( oldSp == null ? "" : ", currently " + oldSp ) );
 
-	model.adoptSortedPanel( sp );
+        model.adoptSortedPanel( sp );
 
-	Trace.event( "" + model + ":  result is " + sp + ( oldSp == null ? "" : ", was " + oldSp ) );
-	Trace.event( ">>>---" + label );
+        Trace.event( "" + model + ":  result is " + sp + ( oldSp == null ? "" : ", was " + oldSp ) );
+        Trace.event( ">>>---" + label );
 
     }
 
@@ -214,53 +233,53 @@ public class SortedPanel<E> extends JPanel {
 
     public static void main( String[] args ) {
 
-	BasicProgramConfigInfo.init( "Obtuse", "Pipestone", "entitySorter", null );
+        BasicProgramConfigInfo.init( "Obtuse", "Pipestone", "entitySorter", null );
 
-	SortableKeySpace sks = SortableKeySpace.getKey( "sks" );
+        SortableKeySpace sks = SortableKeySpace.getKey( "sks" );
 
         SortedPanel p1 = new SortedPanel( "p1" );
-	p1.setLayout( new BoxLayout( p1, BoxLayout.Y_AXIS ) );
+        p1.setLayout( new BoxLayout( p1, BoxLayout.Y_AXIS ) );
 
-	Trace.event( "p1=" + p1 );
+        Trace.event( "p1=" + p1 );
 
-	testSetModel( "a1", p1, new SortedPanelModel( sks, "p1model" ) );
+        testSetModel( "a1", p1, new SortedPanelModel( sks, "p1model" ) );
 
 //	Trace.event( "p1 with model=" + p1 );
 
-	testSetModel( "a2", p1, null );
+        testSetModel( "a2", p1, null );
 
 //	Trace.event( "p1 with model removed=" + p1 );
 
-	testSetModel( "a3", p1, new SortedPanelModel( sks, "p2model" ) );
+        testSetModel( "a3", p1, new SortedPanelModel( sks, "p2model" ) );
 
 //	Trace.event( "p1 with a new model=" + p1 );
 
-	testSetModel( "a4", p1, p1.getModel() );
+        testSetModel( "a4", p1, p1.getModel() );
 
 //	Trace.event( "p1 with the same model after it was reassigned=" + p1 );
 
-	testSetModel( "a5", p1, new SortedPanelModel( sks, "p3model" ) );
+        testSetModel( "a5", p1, new SortedPanelModel( sks, "p3model" ) );
 
 //	Trace.event( "p1 with another new model=" + p1 );
 
-	Trace.event( "preparing to test SortedPanelModel.adoptSortedPanel" );
+        Trace.event( "preparing to test SortedPanelModel.adoptSortedPanel" );
 
-	SortedPanelModel m1 = new SortedPanelModel( sks, "m1" );
+        SortedPanelModel m1 = new SortedPanelModel( sks, "m1" );
 
-	testAdoptSortedPanel( "x1", p1.getModel(), null );
-	testAdoptSortedPanel( "x2", m1, null );
+        testAdoptSortedPanel( "x1", p1.getModel(), null );
+        testAdoptSortedPanel( "x2", m1, null );
 
-	testAdoptSortedPanel( "x3", m1, p1 );
+        testAdoptSortedPanel( "x3", m1, p1 );
 
-	testAdoptSortedPanel( "x4", m1, null );
-	testAdoptSortedPanel( "x5", m1, p1 );
-	testAdoptSortedPanel( "x6", m1, p1 );
-	testAdoptSortedPanel( "x7", m1, null );
-	SortedPanel p2 = new SortedPanel( "p2" );
-	p2.setLayout( new BoxLayout( p2, BoxLayout.Y_AXIS ) );
-	testAdoptSortedPanel( "x8", m1, p2 );
+        testAdoptSortedPanel( "x4", m1, null );
+        testAdoptSortedPanel( "x5", m1, p1 );
+        testAdoptSortedPanel( "x6", m1, p1 );
+        testAdoptSortedPanel( "x7", m1, null );
+        SortedPanel p2 = new SortedPanel( "p2" );
+        p2.setLayout( new BoxLayout( p2, BoxLayout.Y_AXIS ) );
+        testAdoptSortedPanel( "x8", m1, p2 );
 
-	testPanel( sks );
+        testPanel( sks );
 
     }
 
@@ -268,127 +287,141 @@ public class SortedPanel<E> extends JPanel {
 
         final Random rng = new Random();
 
-	JFrame frame = new JFrame( "Testing one two three" );
-	Box topPanel = new Box( BoxLayout.Y_AXIS );
-	final SortedPanel<MyButtonEntity> panel = new SortedPanel<>( "panel" );
-	panel.setLayout( new BoxLayout( panel, BoxLayout.X_AXIS ) );
-	final SortedPanelModel<String,MyButtonEntity> model = new SortedPanelModel<>( sks, "model" );
-	panel.setModel( model );
+        JFrame frame = new JFrame( "Testing one two three" );
+        Box topPanel = new Box( BoxLayout.Y_AXIS );
+        final SortedPanel<MyButtonEntity> panel = new SortedPanel<>( "panel" );
+        panel.setLayout( new BoxLayout( panel, BoxLayout.X_AXIS ) );
+        final SortedPanelModel<String, MyButtonEntity> model = new SortedPanelModel<>( sks, "model" );
+        panel.setModel( model );
 
-	JButton addButton = new JButton( "add a new button" );
-	JButton moveSomethingButton = new JButton( "move something" );
-	JButton cleanupButton = new JButton( "cleanup tree sorter" );
+        JButton addButton = new JButton( "add a new button" );
+        JButton moveSomethingButton = new JButton( "move something" );
+        JButton cleanupButton = new JButton( "cleanup tree sorter" );
 
-	final JScrollPane scrollPane = new JScrollPane( panel );
+        final JScrollPane scrollPane = new JScrollPane( panel );
 
-	addButton.addActionListener(
-		new MyActionListener() {
+        addButton.addActionListener(
+                new MyActionListener() {
 
-		    @Override
-		    public void myActionPerformed( ActionEvent e ) {
+                    @Override
+                    public void myActionPerformed( ActionEvent e ) {
 
-			double v = rng.nextDouble();
+                        double v = rng.nextDouble();
 //			Logger.logMsg( "v = " + v );
 
-			String newKey = v < .1 ? "DUPLICATE" : NounsList.pickNoun();
-			Trace.event( "adding new button \"" + newKey + "\"" );
-			model.addEntity(
-				newKey,
-				new MyButtonEntity( model, newKey.startsWith( "DUP" ) ? NounsList.pickNoun() : newKey )
-			);
-			scrollPane.revalidate();
+                        String newKey = v < .1 ? "DUPLICATE" : NounsList.pickNoun();
+                        Trace.event( "adding new button \"" + newKey + "\"" );
+                        model.addEntity(
+                                newKey,
+                                new MyButtonEntity( model, newKey.startsWith( "DUP" ) ? NounsList.pickNoun() : newKey )
+                        );
+                        scrollPane.revalidate();
 
-		    }
-		}
-	);
+                    }
+                }
+        );
 
-	moveSomethingButton.addActionListener(
-		new MyActionListener() {
+        moveSomethingButton.addActionListener(
+                new MyActionListener() {
 
-		    @Override
-		    public void myActionPerformed( ActionEvent actionEvent ) {
+                    @Override
+                    public void myActionPerformed( ActionEvent actionEvent ) {
 
-		        int ix = rng.nextInt( panel.getComponentCount() );
-			SortableEntityView<String,MyButtonEntity> view = (SortableEntityView<String, MyButtonEntity>) panel.getEntityView( ix );
-			MyButtonView myView = (MyButtonView)view;
-			myView.moveSomewhere();
+                        int ix = rng.nextInt( panel.getComponentCount() );
+                        @SuppressWarnings("unchecked")
+                        SortableEntityView<String, MyButtonEntity> view = (SortableEntityView<String, MyButtonEntity>)panel.getEntityView( ix );
+                        MyButtonView myView = (MyButtonView)view;
+                        myView.moveSomewhere();
 
-		    }
-		}
-	);
+                    }
+                }
+        );
 
-	cleanupButton.addActionListener(
-		new MyActionListener() {
+        cleanupButton.addActionListener(
+                new MyActionListener() {
 
-		    @Override
-		    public void myActionPerformed( ActionEvent actionEvent ) {
+                    @Override
+                    public void myActionPerformed( ActionEvent actionEvent ) {
 
-		        int count = model.cleanupDeadKeys();
+                        int count = model.cleanupDeadKeys();
 
-		        Trace.event( "cleaning up tree sorter removed " + count + " keys" );
+                        Trace.event( "cleaning up tree sorter removed " + count + " keys" );
 
-		    }
+                    }
 
-		}
-	);
+                }
+        );
 
-	topPanel.add( addButton );
-	topPanel.add( moveSomethingButton );
-	topPanel.add( cleanupButton );
-	topPanel.add( scrollPane );
+        topPanel.add( addButton );
+        topPanel.add( moveSomethingButton );
+        topPanel.add( cleanupButton );
+        topPanel.add( scrollPane );
 
-	frame.setContentPane( topPanel );
-	frame.setMinimumSize( new Dimension( 200, 200 ) );
+        frame.setContentPane( topPanel );
+        frame.setMinimumSize( new Dimension( 200, 200 ) );
 
-	model.addEntity(
-		NounsList.pickNoun(),
-		new MyButtonEntity( model, NounsList.pickNoun() )
-	);
+        model.addEntity(
+                NounsList.pickNoun(),
+                new MyButtonEntity( model, NounsList.pickNoun() )
+        );
 
-	frame.pack();
+        frame.pack();
 
-	frame.setVisible( true );
+        frame.setVisible( true );
 
     }
 
-    public <K extends Comparable<K>> void verifyConsistency( @NotNull TreeSorter<K,?> treeSorter ) {
+    public <K extends Comparable<K>> void verifyConsistency( @NotNull TreeSorter<K, ?> treeSorter ) {
 
         if ( treeSorter.size() == getComponentCount() ) {
 
-	    SortableEntityView<K,E> prev = null;
+            SortableEntityView<K, E> prev = null;
             int index = 0;
-	    for ( K key : treeSorter.keySet() ) {
+            for ( K key : treeSorter.keySet() ) {
 
-		for ( Object entity : treeSorter.getValues( key ) ) {
+                for ( Object entity : treeSorter.getValues( key ) ) {
 
 //		    Trace.event( "SortedPanel.verifyConsistency:  key = " + key + ", index = " + index );
-		    if ( prev == null ) {
+                    if ( prev == null ) {
 
-			prev = getEntityView( 0 );
-			index = 1;
+                        prev = getEntityView( 0 );
+                        index = 1;
 
-		    } else if ( prev.getActiveKey().compareTo( key ) > 0 ) {
+                    } else if ( prev.getActiveKey().compareTo( key ) > 0 ) {
 
-			throw new IllegalArgumentException( "SortedPanel:  tree sorter is not sorted:  [" + index + "] = {" + prev.getActiveKey() + "}, [" + ( index + 1 ) + "] = " + key );
+                        throw new IllegalArgumentException( "SortedPanel:  tree sorter is not sorted:  [" +
+                                                            index +
+                                                            "] = {" +
+                                                            prev.getActiveKey() +
+                                                            "}, [" +
+                                                            ( index + 1 ) +
+                                                            "] = " +
+                                                            key );
 
-		    } else {
+                    } else {
 
-			SortableEntityView<K,?> view = getEntityView( index );
-			if ( key.compareTo( view.getActiveKey() ) != 0 ) {
+                        SortableEntityView<K, ?> view = getEntityView( index );
+                        if ( key.compareTo( view.getActiveKey() ) != 0 ) {
 
-			    throw new IllegalArgumentException( "SortedPanel:  value at index [" + index + "] has active key {" + view.getActiveKey() + "} when we were expecting it to have key {" + key + "}" );
+                            throw new IllegalArgumentException( "SortedPanel:  value at index [" +
+                                                                index +
+                                                                "] has active key {" +
+                                                                view.getActiveKey() +
+                                                                "} when we were expecting it to have key {" +
+                                                                key +
+                                                                "}" );
 
-			}
+                        }
 
-			index += 1;
+                        index += 1;
 
-		    }
+                    }
 
-		}
+                }
 
-	    }
+            }
 
-	}
+        }
 
     }
 

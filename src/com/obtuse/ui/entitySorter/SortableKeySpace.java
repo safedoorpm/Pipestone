@@ -17,18 +17,19 @@ public class SortableKeySpace implements Comparable<SortableKeySpace> {
 
     private final String _keyName;
 
-    private static SortedMap<String,SortableKeySpace> s_knownKeys = new TreeMap<>();
+    private static SortedMap<String, SortableKeySpace> s_knownKeys = new TreeMap<>();
 
     private SortableKeySpace( @NotNull String keyName ) {
+
         super();
 
-	if ( keyName.isEmpty() ) {
+        if ( keyName.isEmpty() ) {
 
-	    throw new IllegalArgumentException( "SortableKeySpace:  key space name must not be an empty string" );
+            throw new IllegalArgumentException( "SortableKeySpace:  key space name must not be an empty string" );
 
-	}
+        }
 
-	_keyName = keyName;
+        _keyName = keyName;
 
     }
 
@@ -42,24 +43,25 @@ public class SortableKeySpace implements Comparable<SortableKeySpace> {
     /**
      Get a particular key.
      There are either zero or one keys with any particular name.
+
      @param keyName the name of the desired key.
      @return the requested key (created on-the-fly if it does not already exist).
      */
 
     @NotNull
-    public synchronized static SortableKeySpace getKey( @NotNull String keyName ) {
+    public static synchronized SortableKeySpace getKey( @NotNull String keyName ) {
 
         SortableKeySpace key = s_knownKeys.get( keyName );
 
         if ( key == null ) {
 
-	    key = new SortableKeySpace( keyName );
+            key = new SortableKeySpace( keyName );
 
-	    s_knownKeys.put( keyName, key );
+            s_knownKeys.put( keyName, key );
 
-	}
+        }
 
-	return key;
+        return key;
 
     }
 
@@ -71,7 +73,7 @@ public class SortableKeySpace implements Comparable<SortableKeySpace> {
 
     public boolean equals( Object rhs ) {
 
-        return rhs instanceof SortableKeySpace && compareTo( (SortableKeySpace) rhs ) == 0;
+        return rhs instanceof SortableKeySpace && compareTo( (SortableKeySpace)rhs ) == 0;
 
     }
 

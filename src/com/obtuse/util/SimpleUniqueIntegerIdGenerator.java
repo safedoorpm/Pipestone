@@ -15,6 +15,8 @@ package com.obtuse.util;
 
 public class SimpleUniqueIntegerIdGenerator implements UniqueIntegerIdGenerator {
 
+    public static final int DEFAULT_INITIAL_LAST_ID = 0;
+
     private int _lastId = 0;
 
     private final String _name;
@@ -57,12 +59,33 @@ public class SimpleUniqueIntegerIdGenerator implements UniqueIntegerIdGenerator 
     }
 
     /**
+     Set this instance's last id.
+     @param lastId the new last id value.
+     @throws IllegalArgumentException if this instance has already returned an id (in other words, if this instance's {@link #getUniqueId()} method
+     has already been invoked).
+     */
+
+    @Override
+    public void setLastId( int lastId ) {
+
+        if ( _lastId != DEFAULT_INITIAL_LAST_ID ) {
+
+            throw new IllegalArgumentException( "SimpleUniqueIntegerIdGenerator.setLastId:  cannot change last id after first actual id has been returned" );
+
+        }
+
+        _lastId = lastId;
+
+    }
+
+    /**
      Determine if this instance is allowed to generate duplicate ids.
      This will only occur if this instance runs out of unique int ids.
 
      @return <code>true</code> if duplicates are allowed; <code>false</code> otherwise.
      */
 
+    @Override
     public boolean allowDuplicates() {
 
         return _allowDuplicates;
@@ -75,6 +98,7 @@ public class SimpleUniqueIntegerIdGenerator implements UniqueIntegerIdGenerator 
      @return the name of this instance as provided to the constructor when it was created.
      */
 
+    @Override
     public String getName() {
 
         return _name;

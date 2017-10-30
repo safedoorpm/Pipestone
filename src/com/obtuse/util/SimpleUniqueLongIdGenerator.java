@@ -15,6 +15,8 @@ package com.obtuse.util;
 
 public class SimpleUniqueLongIdGenerator implements UniqueLongIdGenerator {
 
+    public static final long DEFAULT_INITIAL_LAST_ID = 0L;
+
     private long _lastId = 0;
 
     private final String _name;
@@ -42,7 +44,7 @@ public class SimpleUniqueLongIdGenerator implements UniqueLongIdGenerator {
     }
 
     /**
-     Create a simple id generator that generates unique positive values.
+     Create a simple id generator that generates unique long positive values.
      <p/>The values start at 1L and increase until all positive long values have been generated.
      Generators created via this constructor will never return the same value twice. The {@link #getUniqueId()} method will throw
      an <code>IllegalArgumentException</code> if it runs out of unique positive long values).
@@ -56,25 +58,27 @@ public class SimpleUniqueLongIdGenerator implements UniqueLongIdGenerator {
 
     }
 
-    /**
-     Determine if this instance is allowed to generate duplicate ids.
-     This will only occur if this instance runs out of unique long ids.
+    @Override
+    public void setLastId( final long lastId ) {
 
-     @return <code>true</code> if duplicates are allowed; <code>false</code> otherwise.
-     */
+        if ( _lastId != DEFAULT_INITIAL_LAST_ID ) {
 
+            throw new IllegalArgumentException( "SimpleUniqueLongIdGenerator.setLastId:  cannot change last id after first actual id has been returned" );
+
+        }
+
+        _lastId = lastId;
+
+    }
+
+    @Override
     public boolean allowDuplicates() {
 
         return _allowDuplicates;
 
     }
 
-    /**
-     Get the name of this instance.
-
-     @return the name of this instance as provided to the constructor when it was created.
-     */
-
+    @Override
     public String getName() {
 
         return _name;
