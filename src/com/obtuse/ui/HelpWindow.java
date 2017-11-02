@@ -37,7 +37,7 @@ public class HelpWindow extends JDialog {
         _helpTextPane.setEditable( false );
         _helpTextPane.setContentType( "text/html" );
 
-        String inputText = helpText;
+        StringBuilder inputText = new StringBuilder( helpText );
         String fontTag = getFontTag();
 
         // Append a <font face="Lucida Grande"> immediately after every <h1>, </h1>, <h2>, </h2>, ... tag.
@@ -53,8 +53,8 @@ public class HelpWindow extends JDialog {
                 if ( offset >= 0 ) {
 
                     fixedText += inputText.substring( 0, offset + before.length() );
-                    inputText = inputText.substring( offset + before.length() );
-                    if ( !inputText.startsWith( fontTag ) ) {
+                    inputText = new StringBuilder( inputText.substring( offset + before.length() ) );
+                    if ( !inputText.toString().startsWith( fontTag ) ) {
 
                         fixedText += fontTag;
 
@@ -68,7 +68,7 @@ public class HelpWindow extends JDialog {
 
             }
 
-            inputText = fixedText + inputText;
+            inputText.insert( 0, fixedText );
 
         }
 
@@ -80,9 +80,9 @@ public class HelpWindow extends JDialog {
 
 
         _okButton.addActionListener(
-                new ActionListener() {
+                new MyActionListener() {
 
-                    public void actionPerformed( ActionEvent e ) {
+                    public void myActionPerformed( ActionEvent e ) {
 
                         done();
 
@@ -105,9 +105,9 @@ public class HelpWindow extends JDialog {
         );
 
         _contentPane.registerKeyboardAction(
-                new ActionListener() {
+                new MyActionListener() {
 
-                    public void actionPerformed( ActionEvent e ) {
+                    public void myActionPerformed( ActionEvent e ) {
 
                         done();
 

@@ -4,11 +4,14 @@
 
 package com.obtuse.ui;
 
-import com.obtuse.util.*;
+import com.obtuse.util.OSLevelCustomizations;
+import com.obtuse.util.PreferencesHandler;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.util.Collection;
 import java.util.LinkedList;
 
@@ -66,10 +69,14 @@ public abstract class WindowWithMenus extends TrackedWindow {
         }
 
         _preferencesMenuItem.addActionListener(
-                new ActionListener() {
-                    public void actionPerformed( ActionEvent actionEvent ) {
+                new MyActionListener() {
+
+                    public void myActionPerformed( ActionEvent actionEvent ) {
+
                         handlePreferences();
+
                     }
+
                 }
         );
 
@@ -78,8 +85,9 @@ public abstract class WindowWithMenus extends TrackedWindow {
             _showLogsMenuItem = new JCheckBoxMenuItem( "Show Log Messages" );
 
             _showLogsMenuItem.addActionListener(
-                    new ActionListener() {
-                        public void actionPerformed( ActionEvent actionEvent ) {
+                    new MyActionListener() {
+
+                        public void myActionPerformed( ActionEvent actionEvent ) {
 
                             if ( _showLogsMenuItem.getState() ) {
 
@@ -94,6 +102,7 @@ public abstract class WindowWithMenus extends TrackedWindow {
                             WindowWithMenus.setAllShowLogsModeInMenu( _showLogsMenuItem.getState() );
 
                         }
+
                     }
             );
 
@@ -115,12 +124,14 @@ public abstract class WindowWithMenus extends TrackedWindow {
             JMenuItem exitItem = new JCheckBoxMenuItem( "Exit" );
 
             exitItem.addActionListener(
-                    new ActionListener() {
-                        public void actionPerformed( ActionEvent actionEvent ) {
+                    new MyActionListener() {
+
+                        public void myActionPerformed( ActionEvent actionEvent ) {
 
                             System.exit( 0 );
 
                         }
+
                     }
             );
 

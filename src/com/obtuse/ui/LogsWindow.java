@@ -4,11 +4,12 @@
 
 package com.obtuse.ui;
 
-import com.obtuse.util.*;
+import com.obtuse.util.BasicProgramConfigInfo;
+import com.obtuse.util.Logger;
+import com.obtuse.util.ObtuseUtil;
+import com.obtuse.util.Trace;
 
 import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
@@ -17,7 +18,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Date;
 import java.util.List;
 
 @SuppressWarnings({ "ClassWithoutToString", "UnusedDeclaration" })
@@ -25,7 +26,7 @@ public class LogsWindow extends WindowWithMenus {
 
     private JPanel _contentPane;
 
-    @SuppressWarnings( { "UnusedDeclaration" } )
+    @SuppressWarnings({ "UnusedDeclaration" })
     private JScrollPane _messageWindowScrollPane;
 
     private JList _messageWindowList;
@@ -36,7 +37,7 @@ public class LogsWindow extends WindowWithMenus {
 
     private static final Long WINDOW_LOCK = 0L;
 
-    @SuppressWarnings( { "FieldAccessedSynchronizedAndUnsynchronized" } )
+    @SuppressWarnings({ "FieldAccessedSynchronizedAndUnsynchronized" })
     private static LogsWindow s_logsWindow = null;
 
     private static DateFormat s_dateFormatter = new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss" );
@@ -59,6 +60,7 @@ public class LogsWindow extends WindowWithMenus {
 //    private static ImageIcon _loaLogo = BasicIconLogoHandler.fetchIconImage("loa_logo.png", LOGO_SIZE);
 
     public LogsWindow( String windowPrefsName ) {
+
         super( windowPrefsName, true );
 
         _systemClipboard = getToolkit().getSystemClipboard();
@@ -69,8 +71,8 @@ public class LogsWindow extends WindowWithMenus {
 
         //noinspection ClassWithoutToString
         _closeButton.addActionListener(
-                new ActionListener() {
-                    public void actionPerformed( ActionEvent actionEvent ) {
+                new MyActionListener() {
+                    public void myActionPerformed( ActionEvent actionEvent ) {
 
                         WindowWithMenus.setAllShowLogsModeInMenu( false );
                         setVisible( false );
@@ -94,38 +96,35 @@ public class LogsWindow extends WindowWithMenus {
                 }
         );
 
+        //noinspection unchecked
         _messageWindowList.setModel( _messagesListModel );
         _messageWindowList.setSelectionMode( ListSelectionModel.SINGLE_INTERVAL_SELECTION );
         _messageWindowList.addListSelectionListener(
-                new ListSelectionListener() {
+                listSelectionEvent -> {
 
-                    public void valueChanged( ListSelectionEvent listSelectionEvent ) {
+                    if ( !listSelectionEvent.getValueIsAdjusting() ) {
 
-                        if ( !listSelectionEvent.getValueIsAdjusting() ) {
+                        try {
 
-                            try {
+                            JList list = (JList)listSelectionEvent.getSource();
+                            int[] selectedIndices = list.getSelectedIndices();
 
-                                JList list = (JList)listSelectionEvent.getSource();
-                                int[] selectedIndices = list.getSelectedIndices();
+                            if ( selectedIndices.length > 0 ) {
 
-                                if ( selectedIndices.length > 0 ) {
+                                setMenuEnabled( "LW:LW", _copyMenuItem, true );
 
-                                    setMenuEnabled( "LW:LW", _copyMenuItem, true );
+                            } else {
 
-                                } else {
-
-                                    setMenuEnabled( "LW:LW", _copyMenuItem, false );
-
-                                }
-
-                            } catch ( ClassCastException e ) {
-
-                                Logger.logErr(
-                                        "unexpected object type in log message window's selection listener (" +
-                                        listSelectionEvent.getSource().getClass() + ") - selection ignored"
-                                );
+                                setMenuEnabled( "LW:LW", _copyMenuItem, false );
 
                             }
+
+                        } catch ( ClassCastException e ) {
+
+                            Logger.logErr(
+                                    "unexpected object type in log message window's selection listener (" +
+                                    listSelectionEvent.getSource().getClass() + ") - selection ignored"
+                            );
 
                         }
 
@@ -159,21 +158,18 @@ public class LogsWindow extends WindowWithMenus {
 
         } else {
 
-        //noinspection ClassWithoutToString
+            //noinspection ClassWithoutToString
             SwingUtilities.invokeLater(
 
-                    new Runnable() {
+                    () -> {
 
-                        public void run() {
-                            try {
+                        try {
 
-                                LogsWindow.getInstance().insertMessageAtEnd( timeStampedMessage );
+                            LogsWindow.getInstance().insertMessageAtEnd( timeStampedMessage );
 
-                            } catch ( RuntimeException e ) {
+                        } catch ( RuntimeException e ) {
 
-                                Logger.logErr( "unable to insert message \"" + msg + "\" into log messages", e );
-
-                            }
+                            Logger.logErr( "unable to insert message \"" + msg + "\" into log messages", e );
 
                         }
 
@@ -186,13 +182,14 @@ public class LogsWindow extends WindowWithMenus {
     }
 
     /**
-     * Utility method to trace the setting of a menu item's enabled state.
-     * <p/>This method lives in this class instead of say the Trace class because adding this method to the
-     * Trace class would result in any program that uses the Trace class implicitly sucking in a huge chunk of Swing.
-     * Since this class already uses Swing, putting the method here does no real harm.
-     * @param context where this is being done.
-     * @param menuItem the menu item in question.
-     * @param value its new state.
+     Utility method to trace the setting of a menu item's enabled state.
+     <p/>This method lives in this class instead of say the Trace class because adding this method to the
+     Trace class would result in any program that uses the Trace class implicitly sucking in a huge chunk of Swing.
+     Since this class already uses Swing, putting the method here does no real harm.
+
+     @param context  where this is being done.
+     @param menuItem the menu item in question.
+     @param value    its new state.
      */
 
     public static void setMenuEnabled( String context, JMenuItem menuItem, boolean value ) {
@@ -217,12 +214,13 @@ public class LogsWindow extends WindowWithMenus {
 //    }
 
     /**
-     * Utility method to trace the setting of a button's enabled state.
-     * <p/>This method lives in this class instead of say the Trace class because adding this method to the
-     * Trace class would result in any program that uses the Trace class implicitly sucking in a huge chunk of Swing.
-     * Since this class already uses Swing, putting the method here does no real harm.
-     * @param button the menu item in question.
-     * @param value its new state.
+     Utility method to trace the setting of a button's enabled state.
+     <p/>This method lives in this class instead of say the Trace class because adding this method to the
+     Trace class would result in any program that uses the Trace class implicitly sucking in a huge chunk of Swing.
+     Since this class already uses Swing, putting the method here does no real harm.
+
+     @param button the menu item in question.
+     @param value  its new state.
      */
 
     public static void setButtonEnabled( JButton button, boolean value ) {
@@ -241,12 +239,13 @@ public class LogsWindow extends WindowWithMenus {
     }
 
     /**
-     * Utility method to trace the setting of a label's enabled state.
-     * <p/>This method lives in this class instead of say the Trace class because adding this method to the
-     * Trace class would result in any program that uses the Trace class implicitly sucking in a huge chunk of Swing.
-     * Since this class already uses Swing, putting the method here does no real harm.
-     * @param label the menu item in question.
-     * @param value its new state.
+     Utility method to trace the setting of a label's enabled state.
+     <p/>This method lives in this class instead of say the Trace class because adding this method to the
+     Trace class would result in any program that uses the Trace class implicitly sucking in a huge chunk of Swing.
+     Since this class already uses Swing, putting the method here does no real harm.
+
+     @param label the menu item in question.
+     @param value its new state.
      */
 
     public static void setLabelEnabled( JLabel label, boolean value ) {
@@ -278,10 +277,12 @@ public class LogsWindow extends WindowWithMenus {
 
         if ( LogsWindow.s_useHTML ) {
 
+            //noinspection unchecked
             _messagesListModel.addElement( "<html><tt>" + ObtuseUtil.htmlEscape( timeStampedMessage ) + "</tt></html>" );
 
         } else {
 
+            //noinspection unchecked
             _messagesListModel.addElement( timeStampedMessage );
 
         }
@@ -362,10 +363,9 @@ public class LogsWindow extends WindowWithMenus {
         JMenuItem selectAllMenuItem = new JMenuItem( "Select All" );
         setMenuEnabled( "LW:dEM", selectAllMenuItem, true );
         selectAllMenuItem.addActionListener(
+                new MyActionListener() {
 
-                new ActionListener() {
-
-                    public void actionPerformed( ActionEvent actionEvent ) {
+                    public void myActionPerformed( ActionEvent actionEvent ) {
 
                         _messageWindowList.getSelectionModel().setSelectionInterval(
                                 0,
@@ -375,7 +375,6 @@ public class LogsWindow extends WindowWithMenus {
                     }
 
                 }
-
         );
 
         selectAllMenuItem.setAccelerator(
@@ -401,26 +400,25 @@ public class LogsWindow extends WindowWithMenus {
         setMenuEnabled( "LW:dEM", _copyMenuItem, false );
 
         _copyMenuItem.addActionListener(
+                new MyActionListener() {
 
-                new ActionListener() {
-
-                    public void actionPerformed( ActionEvent actionEvent ) {
+                    public void myActionPerformed( ActionEvent actionEvent ) {
 
                         StringWriter lines = new StringWriter();
                         PrintWriter writer = new PrintWriter( lines );
                         int[] selectedIndices = _messageWindowList.getSelectedIndices();
-			List selectedValues = _messageWindowList.getSelectedValuesList();
+                        List selectedValues = _messageWindowList.getSelectedValuesList();
 
 //                        for ( int ix = 0; ix < selectedIndices.length; ix += 1 ) {
-			int ix = 0;
-			for ( Object sv : selectedValues ) {
+                        int ix = 0;
+                        for ( Object sv : selectedValues ) {
 
-			    writer.print( sv );
-			    if ( ix < selectedIndices.length - 1 ) {
+                            writer.print( sv );
+                            if ( ix < selectedIndices.length - 1 ) {
 
-				writer.println();
+                                writer.println();
 
-			    }
+                            }
 
                             ix += 1;
 
@@ -458,6 +456,12 @@ public class LogsWindow extends WindowWithMenus {
         _editMenu.add( selectAllMenuItem );
 
         return _editMenu;
+
+    }
+
+    public String toString() {
+
+        return "LogsWindow()";
 
     }
 

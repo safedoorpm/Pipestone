@@ -4,9 +4,10 @@
 
 package com.obtuse.ui;
 
+import com.obtuse.util.ObtuseUtil;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.util.Random;
 
@@ -24,7 +25,7 @@ import java.util.Random;
  */
 
 @SuppressWarnings("UnusedDeclaration")
-public abstract class ValidatedJTextField extends JTextField {
+public abstract class ValidatedJTextField extends JTextField implements EditValueAdvocate<String> {
 
     private static final Random _rng = new Random( System.currentTimeMillis() );
 
@@ -83,10 +84,10 @@ public abstract class ValidatedJTextField extends JTextField {
         );
 
         addActionListener(
-                new ActionListener() {
+                new MyActionListener() {
 
                     @Override
-                    public void actionPerformed( ActionEvent actionEvent ) {
+                    public void myActionPerformed( ActionEvent actionEvent ) {
 
                         if ( isValueValid( getText() ) ) {
 
@@ -119,28 +120,10 @@ public abstract class ValidatedJTextField extends JTextField {
 
     }
 
-    /**
-     * Called when the user has clicked the ESC key to obtain the value to roll the JTextField back to.
-     * @return the rollback value.
-     */
+    public String toString() {
 
-    public abstract String getRollbackValue();
+        return "ValidatedJTextField( text=" + ObtuseUtil.enquoteToJavaString( getText() ) + " )";
 
-    /**
-     * Vet a candidate value as a pre-condition to storing this value as the model's new stored value.
-     * @param candidateValue the value to be validated.
-     * @return true if the candidate value is acceptable (will result in {@link #storeNewValue} being called with this same candidate value); false otherwise.
-     */
-
-    public abstract boolean isValueValid( String candidateValue );
-
-    /**
-     * Store a validated value into the model.
-     * <p/>This method is only called and is always called immediately after a call to {@link #isValueValid}.
-     * @param newValue the new value for the model.
-     * @param causedByReturnKey true if this store is being triggered by an ActionListener.actionPerformed call; false otherwise.
-     */
-
-    public abstract void storeNewValue( String newValue, boolean causedByReturnKey );
+    }
 
 }

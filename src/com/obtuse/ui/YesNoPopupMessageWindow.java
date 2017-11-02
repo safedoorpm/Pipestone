@@ -6,7 +6,6 @@ package com.obtuse.ui;
 
 import com.obtuse.util.ObtuseUtil;
 
-import javax.management.timer.*;
 import javax.swing.*;
 import java.awt.event.*;
 
@@ -45,31 +44,39 @@ public abstract class YesNoPopupMessageWindow
 
         _alternativeButton.setText( alternativeLabel );
         _alternativeButton.addActionListener(
-                new ActionListener() {
+                new MyActionListener() {
 
-                    public void actionPerformed( ActionEvent e ) {
+                    public void myActionPerformed( ActionEvent e ) {
 
                         onAlternativeChoice();
+
                     }
+
                 }
         );
 
         _defaultButton.setText( defaultLabel );
         _defaultButton.addActionListener(
-                new ActionListener() {
+                new MyActionListener() {
 
-                    public void actionPerformed( ActionEvent e ) {
+                    public void myActionPerformed( ActionEvent e ) {
 
                         onDefaultChoice();
+
                     }
+
                 }
         );
 
         _firstMessageField.setText( "<html>" + line1 );
         if ( line2 == null ) {
+
             _secondMessageField.setVisible( false );
+
         } else {
+
             _secondMessageField.setText( "<html>" + line2 );
+
         }
 
         // call onCancel() when cross is clicked
@@ -87,11 +94,14 @@ public abstract class YesNoPopupMessageWindow
 
         // call onCancel() on ESCAPE
         _contentPane.registerKeyboardAction(
-                new ActionListener() {
+                new MyActionListener() {
 
-                    public void actionPerformed( ActionEvent e ) {
+                    public void myActionPerformed( ActionEvent e ) {
+
 //                        onAlternativeChoice();
+
                     }
+
                 },
                 KeyStroke.getKeyStroke( KeyEvent.VK_ESCAPE, 0 ),
                 JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT
@@ -140,16 +150,18 @@ public abstract class YesNoPopupMessageWindow
     public void fakeAnswer( final boolean answer ) {
 
         SwingUtilities.invokeLater(
-                new Runnable() {
+                () -> {
 
-                    public void run() {
+                    if ( answer ) {
 
-                        if ( answer ) {
-                            onDefaultChoice();
-                        } else {
-                            onAlternativeChoice();
-                        }
+                        onDefaultChoice();
+
+                    } else {
+
+                        onAlternativeChoice();
+
                     }
+
                 }
         );
     }
@@ -159,10 +171,13 @@ public abstract class YesNoPopupMessageWindow
         setVisible( false );
 
         if ( !_gotAnswer ) {
+
             _answer = true;
             _gotAnswer = true;
             defaultChoice();
+
         }
+
         notifyAll();
 
         dispose();
@@ -225,36 +240,32 @@ public abstract class YesNoPopupMessageWindow
 
         SwingUtilities.invokeLater(
 
-                new Runnable() {
+                () -> {
 
-                    public void run() {
+                    //noinspection ClassWithoutToString
+                    YesNoPopupMessageWindow maybe = new YesNoPopupMessageWindow(
+                            line1,
+                            line2,
+                            defaultLabel,
+                            alternativeLabel
+                    ) {
 
-                        //noinspection ClassWithoutToString
-                        YesNoPopupMessageWindow maybe = new YesNoPopupMessageWindow(
-                                line1,
-                                line2,
-                                defaultLabel,
-                                alternativeLabel
-                        ) {
+                        protected void defaultChoice() {
 
-                            protected void defaultChoice() {
-
-                                if ( defaultRunnable != null ) {
-                                    defaultRunnable.run();
-                                }
+                            if ( defaultRunnable != null ) {
+                                defaultRunnable.run();
                             }
+                        }
 
-                            protected void alternativeChoice() {
+                        protected void alternativeChoice() {
 
-                                if ( alternativeRunnable != null ) {
-                                    alternativeRunnable.run();
-                                }
+                            if ( alternativeRunnable != null ) {
+                                alternativeRunnable.run();
                             }
-                        };
+                        }
+                    };
 
-                        maybe.go();
-
-                    }
+                    maybe.go();
 
                 }
 

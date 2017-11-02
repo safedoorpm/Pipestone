@@ -43,17 +43,30 @@ public class AcceleratedPopupMenu2 extends JDialog {
         setModal( true );
         getRootPane().setDefaultButton( buttonOK );
 
-        buttonOK.addActionListener( new ActionListener() {
-            public void actionPerformed( ActionEvent e ) {
-                onOK();
-            }
-        } );
+        buttonOK.addActionListener(
+                new MyActionListener() {
 
-        buttonCancel.addActionListener( new ActionListener() {
-            public void actionPerformed( ActionEvent e ) {
-                onCancel();
-            }
-        } );
+                    public void myActionPerformed( ActionEvent e ) {
+
+                        onOK();
+
+                    }
+
+                }
+        );
+
+        buttonCancel.addActionListener(
+
+                new MyActionListener() {
+
+                    public void myActionPerformed( ActionEvent e ) {
+
+                        onCancel();
+
+                    }
+
+                }
+        );
 
 // call onCancel() when cross is clicked
         setDefaultCloseOperation( DO_NOTHING_ON_CLOSE );
@@ -64,11 +77,19 @@ public class AcceleratedPopupMenu2 extends JDialog {
         } );
 
 // call onCancel() on ESCAPE
-        contentPane.registerKeyboardAction( new ActionListener() {
-            public void actionPerformed( ActionEvent e ) {
-                onCancel();
-            }
-        }, KeyStroke.getKeyStroke( KeyEvent.VK_ESCAPE, 0 ), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT );
+        contentPane.registerKeyboardAction(
+                new MyActionListener() {
+
+                    public void myActionPerformed( ActionEvent e ) {
+
+                        onCancel();
+
+                    }
+
+                },
+                KeyStroke.getKeyStroke( KeyEvent.VK_ESCAPE, 0 ),
+                JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT
+        );
 
         setWordVisibility();
 

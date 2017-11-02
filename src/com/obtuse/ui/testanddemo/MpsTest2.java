@@ -6,6 +6,7 @@ package com.obtuse.ui.testanddemo;
 
 import com.obtuse.ui.MpsKnobSize;
 import com.obtuse.ui.MultiPointSlider;
+import com.obtuse.ui.MyActionListener;
 import com.obtuse.util.BasicProgramConfigInfo;
 
 import javax.swing.*;
@@ -70,9 +71,9 @@ public class MpsTest2 extends JFrame {
         _slider2panel.add( _slider2 );
 
         _quitButton.addActionListener(
-                new ActionListener() {
+                new MyActionListener() {
 
-                    public void actionPerformed( ActionEvent actionEvent ) {
+                    public void myActionPerformed( ActionEvent actionEvent ) {
 
                         System.exit( 0 );
 

@@ -46,9 +46,9 @@ public class AcceleratedPopupMenu1 extends JPopupMenu {
 
             JMenuItem item = new JMenuItem( word );
             item.addActionListener(
-                    new ActionListener() {
+                    new MyActionListener() {
 
-                        public void actionPerformed( ActionEvent actionEvent ) {
+                        public void myActionPerformed( ActionEvent actionEvent ) {
 
                             JMenuItem menuItem = (JMenuItem) actionEvent.getSource();
 

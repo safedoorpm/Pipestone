@@ -17,7 +17,7 @@ import java.awt.event.*;
  * @noinspection ClassWithoutToString, UnusedDeclaration
  */
 
-public abstract class OkPopupMessageWindow extends JDialog {
+public class OkPopupMessageWindow extends JDialog {
 
     @SuppressWarnings({ "InstanceVariableNamingConvention" })
 
@@ -43,11 +43,14 @@ public abstract class OkPopupMessageWindow extends JDialog {
 
         _okButton.setText( buttonLabel );
         _okButton.addActionListener(
-                new ActionListener() {
-                    public void actionPerformed( ActionEvent e ) {
+                new MyActionListener() {
+
+                    public void myActionPerformed( ActionEvent e ) {
+
                         onOK();
-                        ok();
+
                     }
+
                 }
         );
 
@@ -72,7 +75,6 @@ public abstract class OkPopupMessageWindow extends JDialog {
                     public void windowClosing( WindowEvent e ) {
 
                         onOK();
-                        ok();
 
                     }
 
@@ -81,12 +83,11 @@ public abstract class OkPopupMessageWindow extends JDialog {
 
         // call onCancel() on ESCAPE
         _contentPane.registerKeyboardAction(
-                new ActionListener() {
+                new MyActionListener() {
 
-                    public void actionPerformed( ActionEvent e ) {
+                    public void myActionPerformed( ActionEvent e ) {
 
                         onOK();
-                        ok();
 
                     }
 
@@ -110,15 +111,19 @@ public abstract class OkPopupMessageWindow extends JDialog {
 
         dispose();
 
+        ok();
+
     }
 
     /**
-     * Called when someone clicks the ok button. This method is provided so that users of this class can deal with
+     * Called as the last thing an instance of this class does after someone clicks the ok button.
+     * In particular, this instance will have already invoked ({@link java.awt.Window#dispose()} on itself).
+     * This method is provided so that users of this class can deal with
      * clicks of the ok button themselves. The default implementation of this method does nothing.
      */
 
     @SuppressWarnings({ "InstanceMethodNamingConvention" })
-    protected abstract void ok();
+    protected void ok() {}
 
     /**
      * Wait for the human to click the button or otherwise dispose of the window.
@@ -150,14 +155,10 @@ public abstract class OkPopupMessageWindow extends JDialog {
     public void abortPopup( final String why ) {
 
         SwingUtilities.invokeLater(
-                new Runnable() {
+                () -> {
 
-                    public void run() {
-
-                        setVisible( false );
-                        aborted( why );
-
-                    }
+                    setVisible( false );
+                    aborted( why );
 
                 }
         );
@@ -185,32 +186,28 @@ public abstract class OkPopupMessageWindow extends JDialog {
     ) {
 
         SwingUtilities.invokeLater(
-                new Runnable() {
+                () -> {
 
-                    public void run() {
+                    //noinspection ClassWithoutToString
+                    OkPopupMessageWindow ok = new OkPopupMessageWindow(
+                            line1,
+                            line2,
+                            button
+                    ) {
 
-                        //noinspection ClassWithoutToString
-                        OkPopupMessageWindow ok = new OkPopupMessageWindow(
-                                line1,
-                                line2,
-                                button
-                        ) {
+                        protected void ok() {
 
-                            protected void ok() {
+                            if ( runnable != null ) {
 
-                                if ( runnable != null ) {
-
-                                    runnable.run();
-
-                                }
+                                runnable.run();
 
                             }
 
-                        };
+                        }
 
-                        ok.go();
+                    };
 
-                    }
+                    ok.go();
 
                 }
         );
@@ -250,39 +247,35 @@ public abstract class OkPopupMessageWindow extends JDialog {
             @Nullable final String buttonText
     ) {
 
-        Runnable runnable = new Runnable() {
+        Runnable runnable = () -> {
 
-            public void run() {
+            //noinspection ClassWithoutToString
+            OkPopupMessageWindow ok = new OkPopupMessageWindow(
+                    line1,
+                    line2 == null
+                            ?
+                            "Please click the button to terminate."
+                            :
+                            line2,
+                    buttonText == null ? "Sorry" : buttonText
+            ) {
 
-                //noinspection ClassWithoutToString
-                OkPopupMessageWindow ok = new OkPopupMessageWindow(
-                        line1,
-                        line2 == null
-                                ?
-                                "Please click the button to terminate."
-                                :
-                                line2,
-                        buttonText == null ? "Sorry" : buttonText
-                ) {
+                protected void ok() {
 
-                    protected void ok() {
-
-                        System.exit( 1 );
-
-                    }
-
-                };
-
-                ok.go();
-
-                // Try to keep the window in the foreground.
-                //noinspection InfiniteLoopStatement
-                while ( true ) {
-
-                    ObtuseUtil.safeSleepMillis( javax.management.timer.Timer.ONE_SECOND );
-                    ok.setVisible( true );
+                    System.exit( 1 );
 
                 }
+
+            };
+
+            ok.go();
+
+            // Try to keep the window in the foreground.
+            //noinspection InfiniteLoopStatement
+            while ( true ) {
+
+                ObtuseUtil.safeSleepMillis( javax.management.timer.Timer.ONE_SECOND );
+                ok.setVisible( true );
 
             }
 
@@ -319,38 +312,19 @@ public abstract class OkPopupMessageWindow extends JDialog {
                 "123456789.123456789.123456789.123456789.12345<br>123456789.123456789.123456789.123456789.12345",
                 "123456789.123456789.123456789.123456789.12345",
                 "OK"
-        ) {
-
-            public void ok() {
-
-                // just ignore it
-
-            }
-
-        };
+        );
 
         Logger.logMsg( "size is " + dialog.getSize() );
         dialog.go();
+
         dialog = new OkPopupMessageWindow(
                 "Looks like a nice day today", "Although I suppose it could rain", "Sigh"
-        ) {
-
-            protected void ok() {
-
-            }
-
-        };
-
+        );
         dialog.go();
-        dialog = new OkPopupMessageWindow( "How are you today?", "Fine Thanks" ) {
 
-            protected void ok() {
-
-            }
-
-        };
-
+        dialog = new OkPopupMessageWindow( "How are you today?", "Fine Thanks" );
         dialog.go();
+
         System.exit( 0 );
 
     }

@@ -5,7 +5,6 @@ package com.obtuse.util;
  */
 
 import com.obtuse.exceptions.HowDidWeGetHereError;
-import com.obtuse.util.exceptions.ParsingException;
 import com.obtuse.util.gowing.*;
 import com.obtuse.util.gowing.p2a.GowingEntityReference;
 import com.obtuse.util.gowing.p2a.GowingUnPackerParsingException;
@@ -18,7 +17,7 @@ import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static com.obtuse.util.ObtuseApproximateCalendarDate.ObtuseApproximateCalendarDateParsingException.Reason;
+import static com.obtuse.util.ObtuseApproximateCalendarDate.DateParsingException.Reason;
 import static com.obtuse.util.ObtuseCalendarDate.OACD_DATE_PATTERN;
 import static com.obtuse.util.ObtuseCalendarDate.parseCalendarDate;
 
@@ -43,7 +42,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
      are interested in IAE exceptions which will probably be interested in this runtime exception.
      */
 
-    public static class ObtuseApproximateCalendarDateParsingException extends IllegalArgumentException {
+    public static class DateParsingException extends IllegalArgumentException {
 
         public enum Reason {
 
@@ -114,14 +113,23 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
         private final Reason _reason;
 
-        public ObtuseApproximateCalendarDateParsingException() {
+        @SuppressWarnings("unused")
+        public DateParsingException() {
 
             super( "unknown error" );
 
             _reason = Reason.UNKNOWN;
+
         }
 
-        public ObtuseApproximateCalendarDateParsingException( Reason reason, @NotNull String msg ) {
+        @SuppressWarnings("unused")
+        public Reason getReason() {
+
+            return _reason;
+
+        }
+
+        public DateParsingException( Reason reason, @NotNull String msg ) {
 
             super( msg );
 
@@ -129,7 +137,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
         }
 
-        public ObtuseApproximateCalendarDateParsingException( Reason reason, @NotNull String msg, @Nullable Throwable cause ) {
+        public DateParsingException( Reason reason, @NotNull String msg, @Nullable Throwable cause ) {
 
             super( msg, cause );
 
@@ -137,7 +145,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
         }
 
-        public ObtuseApproximateCalendarDateParsingException( Reason reason, @NotNull Throwable cause ) {
+        public DateParsingException( Reason reason, @NotNull Throwable cause ) {
 
             super( "unknown error", cause );
 
@@ -343,7 +351,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
             return new ObtuseCalendarDate( bundle.getNotNullField( whichDate ).StringValue() );
 
-        } catch ( ParsingException e ) {
+        } catch ( com.obtuse.util.exceptions.ParsingException e ) {
 
             throw new GowingUnPackerParsingException( e + " recovering date string" );
 
@@ -541,28 +549,6 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
     }
 
-//    public boolean overlaps( ObtuseApproximateCalendarDate otherDate ) {
-//
-//        if ( getEarliestPossibleDate().compareTo( otherDate.getEarliestPossibleDate() ) <= 0 ) {
-//
-//            if ( otherDate.getEarliestPossibleDate().compareTo( getLatestPossibleDate() ) <= 0 ) {
-//
-//                return true;
-//
-//	    } else {
-//
-//	        return false;
-//
-//	    }
-//
-//	} else {
-//
-//	    return otherDate.overlaps( this );
-//
-//	}
-//
-//    }
-
     /**
      Determine if this approximate date includes some other specific date.
 
@@ -607,31 +593,6 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
     }
 
-    //    public ObtuseApproximateCalendarDate( GowingUnPacker unPacker, GowingPackedEntityBundle bundle, GowingEntityReference er ) throws GowingUnPackerParsingException {
-//	super();
-//
-//	try {
-//
-//	    _nominalCalendarDate = new ObtuseCalendarDate( bundle.getNotNullField( ObtuseApproximateCalendarDate.EARLIEST_DATE_NAME ).StringValue() );
-//
-//	} catch ( ParsingException e ) {
-//
-//	    throw new GowingUnPackerParsingException( e + " recovering date string" );
-//
-//	}
-//
-//	try {
-//
-//	    _precision = DatePrecision.valueOf( bundle.getNotNullField( ObtuseApproximateCalendarDate.PRECISION_NAME ).StringValue() );
-//
-//	} catch ( IllegalArgumentException e ) {
-//
-//	    throw new GowingUnPackerParsingException( e + " recovering precision" );
-//
-//	}
-//
-//    }
-
     public ObtuseCalendarDate getNominalCalendarDate() {
 
         return _nominalCalendarDate;
@@ -643,33 +604,6 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
         return _precision;
 
     }
-
-//    @NotNull
-//    @Override
-//    public GowingPackedEntityBundle bundleThyself(
-//	    boolean isPackingSuper, GowingPacker packer
-//    ) {
-//
-//	GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
-//		ObtuseApproximateCalendarDate.ENTITY_TYPE_NAME,
-//		ObtuseApproximateCalendarDate.VERSION,
-//		null,
-//		packer.getPackingContext()
-//	);
-//
-//	bundle.addHolder( new GowingStringHolder( ObtuseApproximateCalendarDate.EARLIEST_DATE_NAME, _nominalCalendarDate.getDateString(), true ) );
-//	bundle.addHolder( new GowingStringHolder( ObtuseApproximateCalendarDate.PRECISION_NAME, _precision.name(), true ) );
-//
-//	return bundle;
-//
-//    }
-//
-//    @Override
-//    public boolean finishUnpacking( GowingUnPacker unPacker ) {
-//
-//	return true;
-//
-//    }
 
     /**
      Format an approximate calendar date while taking into account its precision.
@@ -729,45 +663,12 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
                 }
 
-//		/*
-//		Round to the nearest decade where years ending in 8 and 9 round up and all other years round down.
-//		In other words, 1998 through 2007 round to the decade 2000, 2008 through 2018 round to the decade 2010, etc.
-//		 */
-//
-//		int year = Integer.parseInt( getCalendarDate().getDateString().substring( 0, 4 ) );
-//		int yearDigit = year % 10;
-//		int adjustedYearDigit = yearDigit - 3;
-//		int decade = year / 10;
-//		if ( adjustedYearDigit < 5 ) {
-//
-//		    return "" + ( decade * 10 );
-//
-//		} else {
-//
-//		    return "" + ( ( decade + 1 ) * 10 );
-//
-//		}
-
             default:
                 return getNominalCalendarDate().getDateString();
 
         }
 
     }
-
-//    /**
-//     Compare two instances based on the actual date that was provided when the instances were created.
-//     @param rhs the other instance.
-//     @return -1, 0 or 1 as specified by {@link Comparable#compareTo(Object)}.
-//     */
-//
-//    private final int compareTo( ObtuseApproximateCalendarDate rhs ) {
-//
-//	throw new IllegalArgumentException( "ObtuseApproximateCalendarDate cannot safely implement the Comparable interface as there is no safe way to" +
-//					    " incorporate the date's precision into the comparison and yet this class's equals method must incorporate" +
-//					    " the date's precision to provide sensible results." );
-//
-//    }
 
     /**
      Compare two instances primarily based on their earliest possible date, secondarily on their latest possible date, and tertiarily on the specified precisions.
@@ -826,25 +727,20 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
     }
 
-    private static final Pattern OACD_CENTURY_PATTERN = Pattern.compile( "(\\d\\d\\d\\d)\\s*[cC]" );
+//    private static final Pattern OACD_CENTURY_PATTERN = Pattern.compile( "(\\d\\d\\d\\d)\\s*[cC]" );
     private static final Pattern OACD_DECADE_PATTERN = Pattern.compile( "(\\d\\d\\d\\d)\\s*[sS]" );
     private static final Pattern OACD_YEAR_PATTERN = Pattern.compile( "(\\d\\d\\d\\d)" );
     private static final Pattern OACD_MONTH_PATTERN = Pattern.compile( "(\\d\\d\\d\\d)\\s*-\\s*(\\d\\d)" );
-//    private static final Pattern
-//
-//
-//
-//
-// OACD_DATE_PATTERN = Pattern.compile( "(\\d\\d\\d\\d)\\s*-\\s*(\\d\\d)\\s*-\\s*(\\d\\d)" );
 
+    @NotNull
     public static ObtuseApproximateCalendarDate parse( @NotNull String dateString )
-            throws ObtuseApproximateCalendarDateParsingException {
+            throws DateParsingException {
 
         dateString = dateString.trim();
 
         if ( dateString.length() == 0 ) {
 
-            throw new ObtuseApproximateCalendarDateParsingException( Reason.EMPTY_STRING, "unable to parse empty strings" );
+            throw new DateParsingException( Reason.EMPTY_STRING, "unable to parse empty strings" );
 
         }
 
@@ -892,7 +788,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
             } catch ( IllegalArgumentException e ) {
 
-                throw new ObtuseApproximateCalendarDateParsingException(
+                throw new DateParsingException(
                         Reason.DECADE_INVALID,
                         "invalid decade \"" + dateString + "\" (must be \"YYYYs\" or \"YYYYS\")",
                         e
@@ -932,7 +828,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
             } catch ( IllegalArgumentException e ) {
 
-                throw new ObtuseApproximateCalendarDateParsingException(
+                throw new DateParsingException(
                         Reason.YEAR_INVALID,
                         "invalid year \"" + cleanedYearString + "\" (must be four digit year between " +
                         ObtuseCalendarDate.EARLIEST_SUPPORTED_DATE_STRING.substring( 0, 4 ) + " and " +
@@ -974,7 +870,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
             } catch ( IllegalArgumentException e ) {
 
-                throw new ObtuseApproximateCalendarDateParsingException(
+                throw new DateParsingException(
                         Reason.MONTH_INVALID,
                         "invalid month \"" + cleanedMonthString + "\" (must be YYYY-MM)",
                         e
@@ -1005,7 +901,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
             } catch ( IllegalArgumentException e ) {
 
-                throw new ObtuseApproximateCalendarDateParsingException(
+                throw new DateParsingException(
                         Reason.DATE_INVALID,
                         "invalid date \"" + dateString + "\" (must be \"YYYY-MM-DD\")"
                 );
@@ -1016,20 +912,20 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
         // No idea what this fish is.
 
-        throw new ObtuseApproximateCalendarDateParsingException( Reason.INCOMPREHENSIBLE, "unable to make sense of \"" + dateString + "\"" );
+        throw new DateParsingException( Reason.INCOMPREHENSIBLE, "unable to make sense of \"" + dateString + "\"" );
 
     }
 
     @NotNull
     public static ObtuseApproximateCalendarDate parseDateRange( String dateString )
-            throws ObtuseApproximateCalendarDateParsingException {
+            throws DateParsingException {
 
         final String trimmedDateString = dateString.trim();
 
         final String enquotedDateString = ObtuseUtil.enquoteToJavaString( trimmedDateString );
 
-        String firstDateString = null;
-        String secondDateString = null;
+        String firstDateString;
+        String secondDateString;
 
         int semiColonOffset = trimmedDateString.indexOf( ';' );
         int colonOffset = trimmedDateString.indexOf( ':' );
@@ -1046,7 +942,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
             if ( semiColonOffset >= 0 && colonOffset >= 0 ) {
 
-                throw new ObtuseApproximateCalendarDateParsingException(
+                throw new DateParsingException(
                         Reason.RANGE_INVALID,
                         "more than one separator in date range " + enquotedDateString +
                         " (must be exactly one semi-colon or exactly one colon)"
@@ -1085,7 +981,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
             if ( tooManySeparators ) {
 
-                throw new ObtuseApproximateCalendarDateParsingException(
+                throw new DateParsingException(
                         Reason.RANGE_INVALID,
                         "too many colons or semicolons in date range " +
                         enquotedDateString +
@@ -1097,7 +993,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
             if ( noSeparators ) {
 
-                throw new ObtuseApproximateCalendarDateParsingException(
+                throw new DateParsingException(
                         Reason.RANGE_INVALID,
                         "no colon or semicolon in date range " +
                         enquotedDateString +
@@ -1116,7 +1012,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
             if ( !trimmedDateString.startsWith( "(" ) || trimmedDateString.endsWith( ")" ) ) {
 
-                throw new ObtuseApproximateCalendarDateParsingException(
+                throw new DateParsingException(
                         Reason.RANGE_INVALID,
                         "more than one separator in date range " + enquotedDateString +
                         " (must be exactly one semi-colon or exactly one colon)"
@@ -1142,7 +1038,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
             if ( tooManySeparators ) {
 
-                throw new ObtuseApproximateCalendarDateParsingException(
+                throw new DateParsingException(
                         Reason.RANGE_INVALID,
                         "too many commas in date range " +
                         enquotedDateString +
@@ -1154,7 +1050,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
             if ( noSeparators ) {
 
-                throw new ObtuseApproximateCalendarDateParsingException(
+                throw new DateParsingException(
                         Reason.RANGE_INVALID,
                         "comma in date range " +
                         enquotedDateString +
@@ -1173,7 +1069,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 //
 //            if ( s_requireNewStyleDateRanges ) {
 //
-//                throw new ObtuseApproximateCalendarDateParsingException(
+//                throw new ObtuseApproximateCalendarDate.DateParsingException(
 //                        Reason.RANGE_INVALID,
 //                        "no colon or semicolon in date range \"" +
 //                        trimmedDateString +
@@ -1182,7 +1078,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 //
 //            } else {
 //
-//                throw new ObtuseApproximateCalendarDateParsingException(
+//                throw new ObtuseApproximateCalendarDate.DateParsingException(
 //                        Reason.RANGE_INVALID,
 //                        "comma in date range \"" +
 //                        trimmedDateString +
@@ -1197,7 +1093,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 //
 //            if ( s_requireNewStyleDateRanges ) {
 //
-//                throw new ObtuseApproximateCalendarDateParsingException(
+//                throw new ObtuseApproximateCalendarDate.DateParsingException(
 //                        Reason.RANGE_INVALID,
 //                        "too many colons or semicolons in date range \"" +
 //                        trimmedDateString +
@@ -1206,7 +1102,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 //
 //            } else {
 //
-//                throw new ObtuseApproximateCalendarDateParsingException(
+//                throw new ObtuseApproximateCalendarDate.DateParsingException(
 //                        Reason.RANGE_INVALID,
 //                        "too many commas in date range \"" +
 //                        trimmedDateString +
@@ -1230,7 +1126,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
 //            if ( secondDateString.indexOf( ',' ) >= 0 ) {
 //
-//                throw new ObtuseApproximateCalendarDateParsingException(
+//                throw new ObtuseApproximateCalendarDate.DateParsingException(
 //                        Reason.RANGE_INVALID,
 //                        "too many commas in date range \"" +
 //                        trimmedDateString +
@@ -1244,9 +1140,9 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
         if ( firstDateMatcher.matches() && secondDateMatcher.matches() ) {
 
-            ObtuseCalendarDate firstDate = null;
-            ObtuseCalendarDate secondDate = null;
-            ObtuseApproximateCalendarDateParsingException exception = null;
+            ObtuseCalendarDate firstDate;
+            ObtuseCalendarDate secondDate;
+            DateParsingException exception;
 
             try {
 
@@ -1258,7 +1154,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
                     if ( firstDate.compareTo( secondDate ) > 0 ) {
 
-                        exception = new ObtuseApproximateCalendarDateParsingException(
+                        exception = new DateParsingException(
                                 Reason.RANGE_BACKWARDS,
                                 "starting date in date range is after ending date in date range " + enquotedDateString
                         );
@@ -1281,7 +1177,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
                 } catch ( IllegalArgumentException e ) {
 
-                    exception = new ObtuseApproximateCalendarDateParsingException(
+                    exception = new DateParsingException(
                             Reason.RANGE_INVALID_ENDING_DATE,
                             "ending date in date range is invalid " +
                             enquotedDateString +
@@ -1296,7 +1192,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
             } catch ( IllegalArgumentException e ) {
 
-                exception = new ObtuseApproximateCalendarDateParsingException(
+                exception = new DateParsingException(
                         Reason.RANGE_INVALID_ENDING_DATE,
                         "starting date in date range is invalid " +
                         enquotedDateString +
@@ -1309,6 +1205,9 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
             }
 
+            // This if statement is intended to detect bugs in the above code.
+            // Consequently, it being redundant is a 'good thing'.
+            //noinspection ConstantConditions
             if ( exception == null ) {
 
                 throw new HowDidWeGetHereError( "something went wrong - no idea what (trimmed date string is " + enquotedDateString + ")" );
@@ -1319,7 +1218,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
         } else if ( !firstDateMatcher.matches() ) {
 
-            throw new ObtuseApproximateCalendarDateParsingException(
+            throw new DateParsingException(
                     Reason.RANGE_INVALID_STARTING_DATE,
                     "starting date in date range is invalid " +
                     enquotedDateString +
@@ -1329,7 +1228,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
         } else {
 
-            throw new ObtuseApproximateCalendarDateParsingException(
+            throw new DateParsingException(
                     Reason.RANGE_INVALID_ENDING_DATE,
                     "ending date in date range is invalid " +
                     enquotedDateString +
@@ -1341,7 +1240,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
 //        } else {
 //
-//            throw new ObtuseApproximateCalendarDateParsingException(
+//            throw new ObtuseApproximateCalendarDate.DateParsingException(
 //                    Reason.RANGE_INVALID,
 //                    "invalid date range \"" + trimmedDateString + "\" " +
 //                    mustBe
@@ -1503,7 +1402,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
                                 date.format()
                         );
 
-                    } catch ( ParsingException e ) {
+                    } catch ( com.obtuse.util.exceptions.ParsingException e ) {
 
                         e.printStackTrace();
 
@@ -1637,8 +1536,8 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
     private static void equalsVsEquivalent(
             ObtuseApproximateCalendarDate lhs,
             ObtuseApproximateCalendarDate rhs,
-            boolean equalsOracle,
-            boolean equivalentOracle
+            @SuppressWarnings("SameParameterValue") boolean equalsOracle,
+            @SuppressWarnings("SameParameterValue") boolean equivalentOracle
     ) {
 
         boolean equalsResult = lhs.equals( rhs );
@@ -1678,8 +1577,9 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     private static boolean checkIncludes(
-            String lhsDateString,
+            @SuppressWarnings("SameParameterValue") String lhsDateString,
             DatePrecision precision,
             String rhsDateString,
             boolean oracle
