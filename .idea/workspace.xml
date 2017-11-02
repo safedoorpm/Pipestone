@@ -206,8 +206,8 @@
       <file leaf-file-name="ObtuseUtilObsolete.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/obsolete/ObtuseUtilObsolete.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="559">
-              <caret line="1542" column="36" lean-forward="false" selection-start-line="1542" selection-start-column="36" selection-end-line="1542" selection-end-column="36" />
+            <state relative-caret-position="236">
+              <caret line="1525" column="7" lean-forward="false" selection-start-line="1525" selection-start-column="7" selection-end-line="1525" selection-end-column="7" />
               <folding />
             </state>
           </provider>
@@ -2472,8 +2472,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/obsolete/ObtuseUtilObsolete.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="559">
-          <caret line="1542" column="36" lean-forward="false" selection-start-line="1542" selection-start-column="36" selection-end-line="1542" selection-end-column="36" />
+        <state relative-caret-position="236">
+          <caret line="1525" column="7" lean-forward="false" selection-start-line="1525" selection-start-column="7" selection-end-line="1525" selection-end-column="7" />
           <folding />
         </state>
       </provider>
