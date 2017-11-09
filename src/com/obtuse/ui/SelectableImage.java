@@ -40,7 +40,6 @@ package com.obtuse.ui;
 
 import com.obtuse.util.BasicProgramConfigInfo;
 import org.jetbrains.annotations.Nullable;
-import sun.nio.cs.Surrogate;
 
 import javax.accessibility.Accessible;
 import javax.swing.*;
@@ -57,7 +56,7 @@ public class SelectableImage extends JPanel
     Image _image;
     private Color _selectedColor;
 
-    public SelectableImage( boolean selectable, @Nullable Image image ) {
+    public SelectableImage( final boolean selectable, @Nullable final Image image ) {
         super();
 
         setSelectable( selectable );
@@ -73,19 +72,19 @@ public class SelectableImage extends JPanel
 
     }
 
-    public SelectableImage( @Nullable Image image ) {
+    public SelectableImage( @Nullable final Image image ) {
         this( true, image );
 
     }
 
-    public SelectableImage( boolean selectable, LayoutManager layout, boolean isDoubleBuffered ) {
+    public SelectableImage( final boolean selectable, final LayoutManager layout, final boolean isDoubleBuffered ) {
         super( layout, isDoubleBuffered );
 
         setSelectable( selectable );
 
     }
 
-    public SelectableImage( LayoutManager layout, boolean isDoubleBuffered ) {
+    public SelectableImage( final LayoutManager layout, final boolean isDoubleBuffered ) {
         this( true, layout, isDoubleBuffered );
     }
 
@@ -93,7 +92,7 @@ public class SelectableImage extends JPanel
         this( true, null );
     }
 
-    public void setSelectable( boolean selectable ) {
+    public void setSelectable( final boolean selectable ) {
 
         _selectable = selectable;
 
@@ -107,7 +106,7 @@ public class SelectableImage extends JPanel
 
     }
 
-    public void setImage( Image image ) {
+    public void setImage( final Image image ) {
 
         _image = image;
 
@@ -115,7 +114,7 @@ public class SelectableImage extends JPanel
 
     }
 
-    public void mouseClicked( MouseEvent e ) {
+    public void mouseClicked( final MouseEvent e ) {
 
         //Since the user clicked on us, let's get focus!
 
@@ -123,35 +122,35 @@ public class SelectableImage extends JPanel
 
     }
 
-    public void mouseEntered( MouseEvent e ) {
+    public void mouseEntered( final MouseEvent e ) {
 
     }
 
-    public void mouseExited( MouseEvent e ) {
+    public void mouseExited( final MouseEvent e ) {
 
     }
 
-    public void mousePressed( MouseEvent e ) {
+    public void mousePressed( final MouseEvent e ) {
 
     }
 
-    public void mouseReleased( MouseEvent e ) {
+    public void mouseReleased( final MouseEvent e ) {
 
     }
 
-    public void focusGained( FocusEvent e ) {
+    public void focusGained( final FocusEvent e ) {
         //Draw the component with a red border
         //indicating that it has focus.
         repaint();
     }
 
-    public void focusLost( FocusEvent e ) {
+    public void focusLost( final FocusEvent e ) {
         //Draw the component with a black border
         //indicating that it doesn't have focus.
         repaint();
     }
 
-    protected void paintComponent( Graphics graphics ) {
+    protected void paintComponent( final Graphics graphics ) {
 
         super.paintComponent( graphics );
 
@@ -227,7 +226,7 @@ public class SelectableImage extends JPanel
 
     }
 
-    public static void main( String[] args ) {
+    public static void main( final String[] args ) {
 
         BasicProgramConfigInfo.init( "Obtuse", "SelectableImage", "testing", null );
 

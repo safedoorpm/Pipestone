@@ -132,7 +132,7 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
      @param comparator the comparator that will be used to order this tree sorter.
      */
 
-    public TreeSorter( Comparator<? super K> comparator ) {
+    public TreeSorter( final Comparator<? super K> comparator ) {
 
         super();
 
@@ -148,7 +148,7 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
      @throws IllegalArgumentException if <code>map</code> is <code>null</code>.
      */
 
-    public TreeSorter( Map<K, V> map ) {
+    public TreeSorter( final Map<K, V> map ) {
 
         super();
 
@@ -169,7 +169,7 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
      @throws IllegalArgumentException if <code>map</code> is <code>null</code>.
      */
 
-    public TreeSorter( SortedMap<K, V> map ) {
+    public TreeSorter( final SortedMap<K, V> map ) {
 
         super();
 
@@ -198,7 +198,7 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
      @throws IllegalArgumentException if <code>sorter</code> is <code>null</code>.
      */
 
-    public TreeSorter( TreeSorter<K, V> sorter ) {
+    public TreeSorter( final TreeSorter<K, V> sorter ) {
 
         this();
 
@@ -221,7 +221,7 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
      that of one or more of the other publically available constructors.  This parameter is totally ignored.
      */
 
-    private TreeSorter( SortedMap<K, Collection<V>> map, int ignored ) {
+    private TreeSorter( final SortedMap<K, Collection<V>> map, final int ignored ) {
 
         super();
 
@@ -244,7 +244,7 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
      itself has a restricted range and <code>toKey</code> lies outside the bounds of the range.
      */
 
-    public TreeSorter<K, V> headSorter( K toKey ) {
+    public TreeSorter<K, V> headSorter( final K toKey ) {
 
         return new TreeSorter<>( _sortedData.headMap( toKey ), 0 );
 
@@ -265,7 +265,7 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
      itself has a restricted range and <code>fromKey</code> lies outside the bounds of the range.
      */
 
-    public TreeSorter<K, V> tailSorter( K fromKey ) {
+    public TreeSorter<K, V> tailSorter( final K fromKey ) {
 
         return new TreeSorter<>( _sortedData.tailMap( fromKey ), 0 );
 
@@ -294,7 +294,7 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
      </ul>
      */
 
-    public TreeSorter<K, V> subSorter( K fromKey, K toKey ) {
+    public TreeSorter<K, V> subSorter( final K fromKey, final K toKey ) {
 
         return new TreeSorter<>( _sortedData.subMap( fromKey, toKey ), 0 );
 
@@ -309,7 +309,7 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
      @throws IllegalArgumentException if <code>key</code> is <code>null</code>.
      */
 
-    public boolean containsKey( K key ) {
+    public boolean containsKey( final K key ) {
 
         return _sortedData.containsKey( key );
 
@@ -361,7 +361,7 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
      */
 
     @NotNull
-    public Collection<V> getValues( @NotNull K key ) {
+    public Collection<V> getValues( @NotNull final K key ) {
 
         Collection<V> values = _sortedData.get( key );
 
@@ -382,7 +382,7 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
      @return the number of values associated with the specified key (0 if the key does not exist within this tree sorter).
      */
 
-    public int countValues( K key ) {
+    public int countValues( final K key ) {
 
         Collection<V> values = _sortedData.get( key );
         return values == null ? 0 : values.size();
@@ -449,7 +449,7 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
      Note that the presence of target value is detected via a reference comparison (i.e. using == rather than a call to {@link Object#equals}).
      */
 
-    public int getFullValueIndex( V targetValue ) {
+    public int getFullValueIndex( final V targetValue ) {
 
         int index = 0;
         for ( V value : this ) {
@@ -480,7 +480,7 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
      Note that the target value is detected via a reference comparison (i.e. using == rather than a call to {@link Object#equals}).
      */
 
-    public List<Integer> getAllFullValueIndices( V targetValue ) {
+    public List<Integer> getAllFullValueIndices( final V targetValue ) {
 
         List<Integer> indices = new FormattingLinkedList<>();
         int index = 0;
@@ -520,7 +520,7 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
      @return the index of the first value of interest. <tt>-1</tt> if no values of interest exist for the specified key.
      */
 
-    public int getFullValueIndex( @NotNull K targetKey, V targetValue ) {
+    public int getFullValueIndex( @NotNull final K targetKey, final V targetValue ) {
 
         return getFullValueIndex(
                 targetKey,
@@ -539,7 +539,7 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
      @return the index of the first value of interest. <tt>-1</tt> if no values of interest exist for the specified key.
      */
 
-    public int getFullValueIndex( @NotNull K targetKey, ValueMatcher<V> matcher ) {
+    public int getFullValueIndex( @NotNull final K targetKey, final ValueMatcher<V> matcher ) {
 
         int index = 0;
         for ( K key : keySet() ) {
@@ -590,7 +590,7 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
      Note that the target value is detected via a reference comparison (i.e. using == rather than a call to {@link Object#equals}).
      */
 
-    public List<Integer> getAllFullValueIndices( @NotNull K targetKey, V targetValue ) {
+    public List<Integer> getAllFullValueIndices( @NotNull final K targetKey, final V targetValue ) {
 
         List<Integer> indices = new FormattingLinkedList<>();
         int currentIndex = 0;
@@ -657,7 +657,7 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
      @return the number of values in this tree sorter which are associated with keys which are less than <tt>targetKey</tt>.
      */
 
-    public int countValuesBeforeKey( K targetKey ) {
+    public int countValuesBeforeKey( final K targetKey ) {
 
         int currentIndex = 0;
         for ( K key : keySet() ) {
@@ -700,7 +700,7 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
      @throws IllegalArgumentException if <code>key</code> is <code>null</code> (note that <code>value</code> is allowed to be <code>null</code>).
      */
 
-    public final void add( @NotNull K key, @Nullable V value ) {
+    public final void add( @NotNull final K key, @Nullable final V value ) {
 
         Collection<V> values;
         //noinspection UnusedAssignment
@@ -721,7 +721,7 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
      @throws IllegalArgumentException if <code>map</code> is <code>null</code>.
      */
 
-    public void addAll( @NotNull Map<? extends K, ? extends V> map ) {
+    public void addAll( @NotNull final Map<? extends K, ? extends V> map ) {
 
         for ( K key : map.keySet() ) {
 
@@ -745,7 +745,7 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
      if an attempt is made to add the contents of a tree sorter to itself.
      */
 
-    public void addAll( @NotNull TreeSorter<K, V> sorter ) {
+    public void addAll( @NotNull final TreeSorter<K, V> sorter ) {
 
         if ( this == sorter ) {
 
@@ -779,7 +779,7 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
      @throws IllegalArgumentException if <code>key</code> is <code>null</code> or <code>values</code> is <code>null</code>.
      */
 
-    public void addAll( @NotNull K key, @NotNull Collection<V> values ) {
+    public void addAll( @NotNull final K key, @NotNull final Collection<V> values ) {
 
         for ( V value : values ) {
 
@@ -864,7 +864,7 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
      */
 
     @NotNull
-    public Collection<V> removeKeyAndValues( @NotNull K key ) {
+    public Collection<V> removeKeyAndValues( @NotNull final K key ) {
 
         Collection<V> rval = _sortedData.remove( key );
         if ( rval == null ) {
@@ -878,7 +878,7 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
     }
 
     @NotNull
-    public Collection<V> removeValue( @NotNull K key, @Nullable V value ) {
+    public Collection<V> removeValue( @NotNull final K key, @Nullable final V value ) {
 
         return removeValue( key, target -> value == target, new FormattingLinkedList<>() );
 
@@ -895,7 +895,7 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
      */
 
     @NotNull
-    public Collection<V> removeValue( @NotNull ValueMatcher<V> matcher, @NotNull Collection<V> deletedValues ) {
+    public Collection<V> removeValue( @NotNull final ValueMatcher<V> matcher, @NotNull final Collection<V> deletedValues ) {
 
         for ( Iterator<K> iterator = _sortedData.keySet().iterator(); iterator.hasNext(); ) {
 
@@ -915,7 +915,7 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
     }
 
     @NotNull
-    public Collection<V> removeValue( @NotNull K key, @NotNull ValueMatcher<V> matcher ) {
+    public Collection<V> removeValue( @NotNull final K key, @NotNull final ValueMatcher<V> matcher ) {
 
         return removeValueCarefully( key, matcher, new FormattingLinkedList<>(), true );
 
@@ -933,13 +933,13 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
      */
 
     @NotNull
-    public Collection<V> removeValue( @NotNull K key, @NotNull ValueMatcher<V> matcher, @NotNull Collection<V> deletedValues ) {
+    public Collection<V> removeValue( @NotNull final K key, @NotNull final ValueMatcher<V> matcher, @NotNull final Collection<V> deletedValues ) {
 
         return removeValueCarefully( key, matcher, deletedValues, true );
 
     }
 
-    Collection<V> removeValueCarefully( @NotNull K key, @NotNull ValueMatcher<V> matcher, @NotNull Collection<V> deletedValues, boolean removeKeys ) {
+    Collection<V> removeValueCarefully( @NotNull final K key, @NotNull final ValueMatcher<V> matcher, @NotNull final Collection<V> deletedValues, final boolean removeKeys ) {
 
         Collection<V> valuesAtKey = _sortedData.get( key );
         if ( valuesAtKey != null ) {
@@ -1058,7 +1058,7 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
 
     }
 
-    public static void main( String[] args ) {
+    public static void main( final String[] args ) {
 
         TreeSorter<Integer, String> sorter = new TreeSorter<>();
 
@@ -1105,7 +1105,7 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
         }
         System.out.println();
 
-        for ( int i = sorter.firstKey() - 1; i <= sorter.lastKey() + 1; i += 1 ) {
+        for ( int i = sorter.firstKey().intValue() - 1; i <= sorter.lastKey().intValue() + 1; i += 1 ) {
 
             System.out.println( "count of values before key " + i + " is " + sorter.countValuesBeforeKey( i ) );
 

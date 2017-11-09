@@ -35,7 +35,7 @@ public class IrregularScrollableImpl implements Scrollable {
 
     private final boolean _containerIsVertical;
 
-    public IrregularScrollableImpl( @NotNull Container container, boolean containerIsVertical ) {
+    public IrregularScrollableImpl( @NotNull final Container container, final boolean containerIsVertical ) {
 
         super();
 
@@ -65,7 +65,7 @@ public class IrregularScrollableImpl implements Scrollable {
     }
 
     @Override
-    public int getScrollableUnitIncrement( Rectangle visibleRect, int orientation, int direction ) {
+    public int getScrollableUnitIncrement( final Rectangle visibleRect, final int orientation, final int direction ) {
 
 
         int rval = 0;
@@ -94,7 +94,7 @@ public class IrregularScrollableImpl implements Scrollable {
 
     }
 
-    private int getScrollableUnitIncrement( ScrollableEntitiesManager sem ) {
+    private int getScrollableUnitIncrement( final ScrollableEntitiesManager sem ) {
 
         int topOfWindow = sem.getWindowStart();
 
@@ -202,7 +202,7 @@ public class IrregularScrollableImpl implements Scrollable {
     }
 
     @Override
-    public int getScrollableBlockIncrement( Rectangle visibleRect, int orientation, int direction ) {
+    public int getScrollableBlockIncrement( final Rectangle visibleRect, final int orientation, final int direction ) {
 
         int rval = 0;
 
@@ -231,7 +231,7 @@ public class IrregularScrollableImpl implements Scrollable {
 
     }
 
-    private int getScrollableBlockIncrement( ScrollableEntitiesManager sem ) {
+    private int getScrollableBlockIncrement( final ScrollableEntitiesManager sem ) {
 
         if ( sem.getWindowStart() > ( isContainerVertical() ? _container.getHeight() : _container.getWidth() ) ) {
 

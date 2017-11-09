@@ -24,7 +24,7 @@ public class ParsingException extends Exception {
     private final int _offset;
     private final ErrorType _errorType;
 
-    public ParsingException( String msg, int lineNumber, int offset, ErrorType errorType ) {
+    public ParsingException( final String msg, final int lineNumber, final int offset, final ErrorType errorType ) {
         super( msg );
 
         _lineNumber = lineNumber;

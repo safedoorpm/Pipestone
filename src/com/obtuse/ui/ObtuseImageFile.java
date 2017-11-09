@@ -79,17 +79,17 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
             super();
         }
 
-        public BurkeImageFileInstanceCreationFailed( String message ) {
+        public BurkeImageFileInstanceCreationFailed( final String message ) {
 
             super( message );
         }
 
-        public BurkeImageFileInstanceCreationFailed( String message, Throwable cause ) {
+        public BurkeImageFileInstanceCreationFailed( final String message, final Throwable cause ) {
 
             super( message, cause );
         }
 
-        public BurkeImageFileInstanceCreationFailed( Throwable cause ) {
+        public BurkeImageFileInstanceCreationFailed( final Throwable cause ) {
 
             super( cause );
         }
@@ -104,17 +104,17 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
             super();
         }
 
-        public BurkeImageFileCachedImageLoadFailed( String message ) {
+        public BurkeImageFileCachedImageLoadFailed( final String message ) {
 
             super( message );
         }
 
-        public BurkeImageFileCachedImageLoadFailed( String message, Throwable cause ) {
+        public BurkeImageFileCachedImageLoadFailed( final String message, final Throwable cause ) {
 
             super( message, cause );
         }
 
-        public BurkeImageFileCachedImageLoadFailed( Throwable cause ) {
+        public BurkeImageFileCachedImageLoadFailed( final Throwable cause ) {
 
             super( cause );
         }
@@ -131,7 +131,7 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
 
     private static File s_imageRepositoryFile;
 
-    public static GowingEntityFactory FACTORY = new GowingEntityFactory( ENTITY_TYPE_NAME ) {
+    public static final GowingEntityFactory FACTORY = new GowingEntityFactory( ENTITY_TYPE_NAME ) {
 
         @Override
         public int getOldestSupportedVersion() {
@@ -148,9 +148,9 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
         @NotNull
         @Override
         public GowingPackable createEntity(
-                @NotNull GowingUnPacker unPacker,
-                @NotNull GowingPackedEntityBundle bundle,
-                GowingEntityReference er
+                @NotNull final GowingUnPacker unPacker,
+                @NotNull final GowingPackedEntityBundle bundle,
+                final GowingEntityReference er
         )
                 throws GowingUnPackerParsingException {
 
@@ -160,7 +160,7 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
 
     };
 
-    private static GowingTypeIndex s_gowingTypeIndex;
+    private static final GowingTypeIndex s_gowingTypeIndex;
 
     static {
 
@@ -359,28 +359,28 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
 
     }
 
-    public ObtuseImageFile( @NotNull File f )
+    public ObtuseImageFile( @NotNull final File f )
             throws BurkeImageFileInstanceCreationFailed {
 
         this( "ObtuseImageFile( File )", null, f, null );
 
     }
 
-    public ObtuseImageFile( @NotNull ImageIcon imageIcon )
+    public ObtuseImageFile( @NotNull final ImageIcon imageIcon )
             throws BurkeImageFileInstanceCreationFailed {
 
         this( "ObtuseImageFile( ImageIcon )", null, null, imageIcon );
 
     }
 
-    public ObtuseImageFile( @NotNull URL originalURL )
+    public ObtuseImageFile( @NotNull final URL originalURL )
             throws BurkeImageFileInstanceCreationFailed {
 
         this( "ObtuseImageFile( URL )", originalURL, null, null );
 
     }
 
-    private ObtuseImageFile( String who, URL originalURL, File originalFile, ImageIcon imageIcon )
+    private ObtuseImageFile( final String who, final URL originalURL, final File originalFile, final ImageIcon imageIcon )
             throws BurkeImageFileInstanceCreationFailed {
 
         super( new GowingNameMarkerThing() );
@@ -468,7 +468,7 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
 
     }
 
-    public static synchronized void setImageRepositoryFile( File imageRepositoryFile ) {
+    public static synchronized void setImageRepositoryFile( final File imageRepositoryFile ) {
 
         if ( s_imageRepositoryFile == null ) {
 
@@ -503,7 +503,7 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
 
     }
 
-    public static void setLoadLogging( boolean loadLogging ) {
+    public static void setLoadLogging( final boolean loadLogging ) {
 
         s_loadLoggingEnabled = loadLogging;
 
@@ -533,7 +533,7 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
      Use Gowing to recover a ObtuseImageFile instance.
      */
 
-    public static ObtuseImageFile recoverBurkeImageFile( File burkeImageFileFile )
+    public static ObtuseImageFile recoverBurkeImageFile( final File burkeImageFileFile )
             throws IOException {
 
         Measure m = new Measure( "recover BIF" );
@@ -601,7 +601,7 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
      */
 
     @NotNull
-    public static SortedMap<Integer, ObtuseImageFile> getSpecifiedBurkeInfoFiles( File[] binfoFiles ) {
+    public static SortedMap<Integer, ObtuseImageFile> getSpecifiedBurkeInfoFiles( final File[] binfoFiles ) {
 
         SortedMap<Integer, ObtuseImageFile> rval = new TreeMap<>();
         for ( File f : binfoFiles ) {
@@ -721,7 +721,7 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
 
     }
 
-    public ObtuseImageFile( @SuppressWarnings("unused") GowingUnPacker unPacker, GowingPackedEntityBundle bundle ) {
+    public ObtuseImageFile( @SuppressWarnings("unused") final GowingUnPacker unPacker, final GowingPackedEntityBundle bundle ) {
 
         super( new GowingNameMarkerThing() );
 
@@ -810,7 +810,7 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
 
     }
 
-    private void setImageState( @NotNull ImageState newState ) {
+    private void setImageState( @NotNull final ImageState newState ) {
 
         if ( _imageState == ImageState.BROKEN && newState != ImageState.BROKEN ) {
 
@@ -834,7 +834,7 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
     }
 
     @SuppressWarnings("UnusedReturnValue")
-    private Image copyImageFileToCache( @Nullable Image originalImage )
+    private Image copyImageFileToCache( @Nullable final Image originalImage )
             throws IOException {
 
         if ( _ourSerialNumber <= 0 ) {
@@ -1027,7 +1027,7 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
 
     }
 
-    private int copyURLContentsToFile( URL inputURL, File outputFile )
+    private int copyURLContentsToFile( final URL inputURL, final File outputFile )
             throws IOException {
 
         int bytesRead = 0;
@@ -1122,7 +1122,7 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
 
     }
 
-    private void createImageInfoFile( Image originalImage )
+    private void createImageInfoFile( final Image originalImage )
             throws IOException {
 
         // Make sure that we've not done this before.
@@ -1264,14 +1264,14 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
     }
 
     @NotNull
-    public static File constructCachedImagRepositoryFileObject( int sn, String suffix ) {
+    public static File constructCachedImagRepositoryFileObject( final int sn, final String suffix ) {
 
         return new File( ObtuseImageFile.getImageRepositoryFile(), constructCachedImageRepositorySimpleBasename( sn ) + suffix );
 
     }
 
     @NotNull
-    public static File constructCachedImageRepositoryBasename( int sn ) {
+    public static File constructCachedImageRepositoryBasename( final int sn ) {
 
         return new File(
                 ObtuseImageFile.getImageRepositoryFile(),
@@ -1281,7 +1281,7 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
     }
 
     @NotNull
-    private static String constructCachedImageRepositorySimpleBasename( int sn ) {
+    private static String constructCachedImageRepositorySimpleBasename( final int sn ) {
 
         return ObtuseImageFile.GENERATED_IMAGE_FILE_PREFIX +
                ObtuseUtil.lpad( "" + sn, ObtuseImageFile.GENERATED_IMAGE_FILE_SN_LENGTH, '0'
@@ -1386,7 +1386,7 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
     }
 
     @NotNull
-    public static Optional<byte[]> captureImageAsFile( Image image, @SuppressWarnings("SameParameterValue") String formatName, String what ) {
+    public static Optional<byte[]> captureImageAsFile( final Image image, @SuppressWarnings("SameParameterValue") final String formatName, final String what ) {
 
         ByteArrayOutputStream baos = null;
 
@@ -1411,10 +1411,10 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
     }
 
     public static void captureImageViaOutputStream(
-            Image image,
-            String formatName,
-            String what,
-            OutputStream os
+            final Image image,
+            final String formatName,
+            final String what,
+            final OutputStream os
     ) {
 
         try {
@@ -1473,8 +1473,8 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
 
     @NotNull
     private ImageIcon maybeRegenerateThumbnail(
-            @NotNull ImageIcon originalImageIcon,
-            @SuppressWarnings("SameParameterValue") @Nullable ImageIcon scaledImageIcon
+            @NotNull final ImageIcon originalImageIcon,
+            @SuppressWarnings("SameParameterValue") @Nullable final ImageIcon scaledImageIcon
     ) {
 
         int origW = originalImageIcon.getIconWidth();
@@ -1513,7 +1513,7 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
 
     }
 
-    private Dimension getMinimumScalingFactor( int boxW, int boxH, int origW, int origH ) {
+    private Dimension getMinimumScalingFactor( final int boxW, final int boxH, final int origW, final int origH ) {
 
         // Compute the scaling factor which yields the desired width
         // and the scaling factor which yields the desired height.
@@ -1556,7 +1556,7 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
     }
 
     @SuppressWarnings("unused")
-    private double getGeometricScalingFactor( int boxW, int boxH, int origW, int origH ) {
+    private double getGeometricScalingFactor( final int boxW, final int boxH, final int origW, final int origH ) {
 
         // The scaling factor (sf) to convert the original image into the thumbnail image must satisfy at least one of a or b:
         // a: origW * sf == boxW and origH * sf <= boxH
@@ -1602,7 +1602,7 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
 
     @NotNull
     @Override
-    public GowingPackedEntityBundle bundleThyself( boolean isPackingSuper, GowingPacker packer ) {
+    public GowingPackedEntityBundle bundleThyself( final boolean isPackingSuper, final GowingPacker packer ) {
 
         GowingPackedEntityBundle rval = new GowingPackedEntityBundle(
                 ENTITY_TYPE_NAME,
@@ -1635,13 +1635,13 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
     }
 
     @Override
-    public boolean finishUnpacking( GowingUnPacker unPacker ) {
+    public boolean finishUnpacking( final GowingUnPacker unPacker ) {
 
         return true;
 
     }
 
-    public static void main( String[] args ) {
+    public static void main( final String[] args ) {
 
         BasicProgramConfigInfo.init( "Kenosee", "Burke2", "testing", null );
 
@@ -1664,7 +1664,7 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
         JFrame jf = new JFrame( "sanity test ObtuseImageFile" );
         JPanel jp = new JPanel() {
 
-            public void paintComponent( Graphics g ) {
+            public void paintComponent( final Graphics g ) {
 
                 super.paintComponent( g );
 
@@ -1673,10 +1673,10 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
             }
 
             public void paintImage(
-                    @NotNull Graphics origGraphics,
-                    @Nullable ObtuseImageFile bif,
-                    JPanel panel,
-                    Image image
+                    @NotNull final Graphics origGraphics,
+                    @Nullable final ObtuseImageFile bif,
+                    final JPanel panel,
+                    final Image image
             ) {
 
                 Graphics g = null;

@@ -27,7 +27,7 @@ public class JSliderTest extends JFrame {
 
     }
 
-    public static void main( String[] args ) {
+    public static void main( final String[] args ) {
 
         JSliderTest test = new JSliderTest();
         test.setVisible( true );

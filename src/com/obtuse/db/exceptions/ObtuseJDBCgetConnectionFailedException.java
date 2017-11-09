@@ -12,11 +12,11 @@ public class ObtuseJDBCgetConnectionFailedException extends Exception {
     }
 
     @SuppressWarnings({ "UnusedDeclaration" })
-    public ObtuseJDBCgetConnectionFailedException( String why ) {
+    public ObtuseJDBCgetConnectionFailedException( final String why ) {
         super(why);
     }
 
-    public ObtuseJDBCgetConnectionFailedException( String why, Throwable e ) {
+    public ObtuseJDBCgetConnectionFailedException( final String why, final Throwable e ) {
         super(why,e);
     }
 }

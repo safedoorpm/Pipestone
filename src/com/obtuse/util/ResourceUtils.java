@@ -18,7 +18,7 @@ public class ResourceUtils {
     }
 
     @SuppressWarnings("SameParameterValue")
-    public static BufferedInputStream openResource( String fileName, String resourceBaseDirectory )
+    public static BufferedInputStream openResource( final String fileName, final String resourceBaseDirectory )
             throws IOException {
 
         String resourcePath = resourceBaseDirectory + '/' + fileName;

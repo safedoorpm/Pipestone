@@ -14,24 +14,24 @@ public class ObtuseXmlNodeException extends Exception {
 
     }
 
-    public ObtuseXmlNodeException( String msg ) {
+    public ObtuseXmlNodeException( final String msg ) {
         super(msg);
 
     }
 
-    public ObtuseXmlNodeException( String msg, Throwable cause ) {
+    public ObtuseXmlNodeException( final String msg, final Throwable cause ) {
         super( msg, cause );
 
     }
 
-    public ObtuseXmlNodeException( String msg, int elementIndex ) {
+    public ObtuseXmlNodeException( final String msg, final int elementIndex ) {
         super( msg );
 
         _elementIndex = elementIndex;
 
     }
 
-    public ObtuseXmlNodeException( String msg, int elementIndex, Throwable cause ) {
+    public ObtuseXmlNodeException( final String msg, final int elementIndex, final Throwable cause ) {
         super( msg, cause );
 
         _elementIndex = elementIndex;

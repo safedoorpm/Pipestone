@@ -15,13 +15,13 @@ import org.jetbrains.annotations.NotNull;
 
 public class GowingStringHolder extends GowingAbstractPackableHolder {
 
-    public GowingStringHolder( @NotNull EntityName name, String v, boolean mandatory ) {
+    public GowingStringHolder( @NotNull final EntityName name, final String v, final boolean mandatory ) {
 
         super( name, GowingConstants.TAG_STRING, v, mandatory );
 
     }
 
-    public void emitRepresentation( GowingPacker packer2 ) {
+    public void emitRepresentation( final GowingPacker packer2 ) {
 
         Object value = getObjectValue();
         if ( isMandatory() || value != null ) {

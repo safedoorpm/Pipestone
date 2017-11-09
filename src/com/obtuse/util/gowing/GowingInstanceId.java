@@ -38,13 +38,13 @@ public final class GowingInstanceId implements Comparable<GowingInstanceId> {
 
     private final String _typeName;
 
-    public GowingInstanceId( EntityTypeName typeName ) {
+    public GowingInstanceId( final EntityTypeName typeName ) {
 
         this( typeName.getTypeName() );
 
     }
 
-    public GowingInstanceId( String typeName ) {
+    public GowingInstanceId( final String typeName ) {
 
         super();
 
@@ -55,13 +55,13 @@ public final class GowingInstanceId implements Comparable<GowingInstanceId> {
 
     }
 
-    public GowingInstanceId( Class<? extends GowingPackable> classObject ) {
+    public GowingInstanceId( final Class<? extends GowingPackable> classObject ) {
 
         this( classObject.getCanonicalName() );
 
     }
 
-    public static int allocateTypeId( String typeName ) {
+    public static int allocateTypeId( final String typeName ) {
 
         synchronized ( s_typeNamesToTypeIds ) {
 
@@ -80,14 +80,14 @@ public final class GowingInstanceId implements Comparable<GowingInstanceId> {
 
     }
 
-    public static String lookupTypeName( int typeId ) {
+    public static String lookupTypeName( final int typeId ) {
 
         return s_typeIdsToTypeNames.get( typeId );
 
     }
 
     @SuppressWarnings("WeakerAccess")
-    public static Integer lookupTypeId( String typeName ) {
+    public static Integer lookupTypeId( final String typeName ) {
 
         return s_typeNamesToTypeIds.get( typeName );
 
@@ -111,7 +111,7 @@ public final class GowingInstanceId implements Comparable<GowingInstanceId> {
 
     }
 
-    public int compareTo( @NotNull GowingInstanceId rhs ) {
+    public int compareTo( @NotNull final GowingInstanceId rhs ) {
 
         int rval = _typeName.compareTo( rhs._typeName );
         if ( rval == 0 ) {
@@ -124,7 +124,7 @@ public final class GowingInstanceId implements Comparable<GowingInstanceId> {
 
     }
 
-    public boolean equals( Object rhs ) {
+    public boolean equals( final Object rhs ) {
 
         return rhs instanceof GowingInstanceId && compareTo( (GowingInstanceId)rhs ) == 0;
 

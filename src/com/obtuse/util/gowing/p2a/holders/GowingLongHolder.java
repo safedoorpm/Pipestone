@@ -15,25 +15,25 @@ import org.jetbrains.annotations.NotNull;
 
 public class GowingLongHolder extends GowingAbstractPackableHolder {
 
-    public GowingLongHolder( @NotNull EntityName name, Long v, @SuppressWarnings("SameParameterValue") boolean mandatory ) {
+    public GowingLongHolder( @NotNull final EntityName name, final Long v, @SuppressWarnings("SameParameterValue") final boolean mandatory ) {
 
         super( name, GowingConstants.TAG_LONG, v, mandatory );
 
     }
 
-    public GowingLongHolder( @NotNull EntityName name, long[] v, @SuppressWarnings("SameParameterValue") boolean mandatory ) {
+    public GowingLongHolder( @NotNull final EntityName name, final long[] v, @SuppressWarnings("SameParameterValue") final boolean mandatory ) {
 
         super( name, GowingConstants.TAG_LONG, v, mandatory, true );
 
     }
 
-    public GowingLongHolder( @NotNull EntityName name, Long[] v, @SuppressWarnings("SameParameterValue") boolean mandatory ) {
+    public GowingLongHolder( @NotNull final EntityName name, final Long[] v, @SuppressWarnings("SameParameterValue") final boolean mandatory ) {
 
         super( name, GowingConstants.TAG_LONG, v, mandatory, false );
 
     }
 
-    public void emitRepresentation( GowingPacker packer2 ) {
+    public void emitRepresentation( final GowingPacker packer2 ) {
 
         Object value = getObjectValue();
 

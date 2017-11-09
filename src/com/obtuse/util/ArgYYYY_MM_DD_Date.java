@@ -17,12 +17,12 @@ import java.util.Date;
 @SuppressWarnings("UnusedDeclaration")
 public abstract class ArgYYYY_MM_DD_Date extends Arg {
 
-    protected ArgYYYY_MM_DD_Date( String keyword ) {
+    protected ArgYYYY_MM_DD_Date( final String keyword ) {
         super( keyword );
 
     }
 
-    public final void process( String keyword, String arg ) {
+    public final void process( final String keyword, final String arg ) {
 
         try {
 

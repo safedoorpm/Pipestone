@@ -26,7 +26,7 @@ public class LinearContainer3 extends JPanel implements LinearContainer {
 //    private ConstraintTuple _lengthConstraints;
 
     private ContainerConstraints _containerConstraints;
-    private ComponentConstraints _componentConstraints;
+    private final ComponentConstraints _componentConstraints;
 
     private ConstraintTuple _lengthConstraints;
 
@@ -34,17 +34,17 @@ public class LinearContainer3 extends JPanel implements LinearContainer {
 
     private boolean _trackParentBreadth;
 
-    public LinearContainer3( @NotNull String name, LinearOrientation orientation ) {
+    public LinearContainer3( @NotNull final String name, final LinearOrientation orientation ) {
 
         this( name, orientation, null, null );
 
     }
 
     LinearContainer3(
-            @NotNull String name,
-            LinearOrientation orientation,
-            @SuppressWarnings("SameParameterValue") ContainerConstraints containerConstraints,
-            @SuppressWarnings("SameParameterValue") ComponentConstraints componentConstraints
+            @NotNull final String name,
+            final LinearOrientation orientation,
+            @SuppressWarnings("SameParameterValue") final ContainerConstraints containerConstraints,
+            @SuppressWarnings("SameParameterValue") final ComponentConstraints componentConstraints
     ) {
 
         super();
@@ -63,7 +63,7 @@ public class LinearContainer3 extends JPanel implements LinearContainer {
 
     }
 
-    public static void watch( @NotNull LinearContainer3 watched ) {
+    public static void watch( @NotNull final LinearContainer3 watched ) {
 
         if ( !_watchedContainers.contains( watched ) ) {
 
@@ -81,7 +81,7 @@ public class LinearContainer3 extends JPanel implements LinearContainer {
 
     }
 
-    public static void unWatch( @NotNull LinearContainer3 watched ) {
+    public static void unWatch( @NotNull final LinearContainer3 watched ) {
 
         _watchedContainers.remove( watched );
 
@@ -151,7 +151,7 @@ public class LinearContainer3 extends JPanel implements LinearContainer {
     }
 
     @Override
-    public void setLengthConstraints( int minLength, int maxLength ) {
+    public void setLengthConstraints( final int minLength, final int maxLength ) {
 
         setLengthConstraints( new ConstraintTuple( minLength, maxLength ) );
         revalidate();
@@ -159,14 +159,14 @@ public class LinearContainer3 extends JPanel implements LinearContainer {
     }
 
     @Override
-    public void setLengthConstraints( ConstraintTuple lengthConstraints ) {
+    public void setLengthConstraints( final ConstraintTuple lengthConstraints ) {
 
         _lengthConstraints = lengthConstraints;
 
     }
 
     @Override
-    public void setBreadthConstraints( int minBreadth, int maxBreadth ) {
+    public void setBreadthConstraints( final int minBreadth, final int maxBreadth ) {
 
         setBreadthConstraints( new ConstraintTuple( minBreadth, maxBreadth ) );
         revalidate();
@@ -174,7 +174,7 @@ public class LinearContainer3 extends JPanel implements LinearContainer {
     }
 
     @Override
-    public void setBreadthConstraints( ConstraintTuple breadthConstraints ) {
+    public void setBreadthConstraints( final ConstraintTuple breadthConstraints ) {
 
         _breadthConstraints = breadthConstraints;
 
@@ -207,8 +207,8 @@ public class LinearContainer3 extends JPanel implements LinearContainer {
     }
 
     public void setConstraints(
-            int minBreadth, int maxBreadth,
-            int minLength, int maxLength
+            final int minBreadth, final int maxBreadth,
+            final int minLength, final int maxLength
     ) {
 
         setBreadthConstraints( minBreadth, maxBreadth );
@@ -377,7 +377,7 @@ public class LinearContainer3 extends JPanel implements LinearContainer {
 
     }
 
-    public void setContainerConstraints( ContainerConstraints containerConstraints ) {
+    public void setContainerConstraints( final ContainerConstraints containerConstraints ) {
 
         _containerConstraints = containerConstraints;
 
@@ -397,7 +397,7 @@ public class LinearContainer3 extends JPanel implements LinearContainer {
 
     }
 
-    public void setComponentConstraints( ContainerConstraints containerConstraints ) {
+    public void setComponentConstraints( final ContainerConstraints containerConstraints ) {
 
         _containerConstraints = containerConstraints;
 

@@ -59,10 +59,10 @@ public class BasicProgramConfigInfo {
      */
 
     public static void init(
-            @SuppressWarnings("SameParameterValue") @NotNull String vendorName,
-            @SuppressWarnings("SameParameterValue") @NotNull String applicationName,
-            @SuppressWarnings("SameParameterValue") @NotNull String componentName,
-            @SuppressWarnings("SameParameterValue") @Nullable Preferences preferences
+            @SuppressWarnings("SameParameterValue") @NotNull final String vendorName,
+            @SuppressWarnings("SameParameterValue") @NotNull final String applicationName,
+            @SuppressWarnings("SameParameterValue") @NotNull final String componentName,
+            @SuppressWarnings("SameParameterValue") @Nullable final Preferences preferences
     ) {
 
         HowDidWeGetHereError.setStackTracePrintStream( System.err );
@@ -163,7 +163,7 @@ public class BasicProgramConfigInfo {
 
     }
 
-    public static String getPreferenceIfEnabled( String prefsKey, String defaultValue ) {
+    public static String getPreferenceIfEnabled( final String prefsKey, final String defaultValue ) {
 
         if ( BasicProgramConfigInfo.s_preferences == null ) {
 
@@ -177,7 +177,7 @@ public class BasicProgramConfigInfo {
 
     }
 
-    public static void putPreferenceIfEnabled( String prefsKey, String value ) {
+    public static void putPreferenceIfEnabled( final String prefsKey, final String value ) {
 
         if ( BasicProgramConfigInfo.s_preferences != null ) {
 
@@ -199,19 +199,19 @@ public class BasicProgramConfigInfo {
 
     }
 
-    public static void setLogFileNameFormat( String logFileNameFormat ) {
+    public static void setLogFileNameFormat( final String logFileNameFormat ) {
 
         BasicProgramConfigInfo.s_logFileNameFormat = logFileNameFormat;
 
     }
 
-    public static void setDateFormat( DateFormat dateFormat ) {
+    public static void setDateFormat( final DateFormat dateFormat ) {
 
         BasicProgramConfigInfo.s_dateFormat = dateFormat;
 
     }
 
-    public static void doOsSpecificCustomizations( String programName ) {
+    public static void doOsSpecificCustomizations( final String programName ) {
 
         //        s_osLevelCustomizations = OSLevelCustomizations.getCustomizer( null );
 //        if ( s_osLevelCustomizations != null ) {

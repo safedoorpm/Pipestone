@@ -116,7 +116,7 @@ public class StdGowingPacker implements GowingPacker {
 //    private String _currentSeparator;
 
     @SuppressWarnings("WeakerAccess")
-    public StdGowingPacker( @NotNull EntityName groupName, @NotNull File outputFile )
+    public StdGowingPacker( @NotNull final EntityName groupName, @NotNull final File outputFile )
             throws FileNotFoundException {
 
         this( groupName, outputFile, new PrintWriter( outputFile ), new StdGowingPackerContext() );
@@ -124,9 +124,9 @@ public class StdGowingPacker implements GowingPacker {
     }
 
     public StdGowingPacker(
-            @NotNull EntityName groupName,
-            @NotNull File outputFile,
-            @NotNull OutputStream outputStream
+            @NotNull final EntityName groupName,
+            @NotNull final File outputFile,
+            @NotNull final OutputStream outputStream
     ) {
 
         this( groupName, outputFile, new PrintWriter( outputStream, true ), new StdGowingPackerContext() );
@@ -134,10 +134,10 @@ public class StdGowingPacker implements GowingPacker {
     }
 
     private StdGowingPacker(
-            @NotNull EntityName groupName,
-            @NotNull File outputFile,
-            @NotNull PrintWriter writer,
-            @NotNull GowingPackerContext packingContext
+            @NotNull final EntityName groupName,
+            @NotNull final File outputFile,
+            @NotNull final PrintWriter writer,
+            @NotNull final GowingPackerContext packingContext
     ) {
 
 //	_typeIndex = typeIndex;
@@ -181,7 +181,7 @@ public class StdGowingPacker implements GowingPacker {
     }
 
     @Override
-    public GowingInstanceId queuePackableEntity( @Nullable GowingPackable entity ) {
+    public GowingInstanceId queuePackableEntity( @Nullable final GowingPackable entity ) {
 
         if ( entity == null ) {
 
@@ -201,7 +201,7 @@ public class StdGowingPacker implements GowingPacker {
 
     // I'm not convinced that this is a service that we should offer - Danny.
 
-    private GowingInstanceId queuePackableEntity( @Nullable EntityName entityName, @Nullable GowingPackable entity ) {
+    private GowingInstanceId queuePackableEntity( @Nullable final EntityName entityName, @Nullable final GowingPackable entity ) {
 
         if ( entity == null ) {
 
@@ -291,7 +291,7 @@ public class StdGowingPacker implements GowingPacker {
 
     }
 
-    private void actuallyPackEntity( @NotNull GowingInstanceId instanceId ) {
+    private void actuallyPackEntity( @NotNull final GowingInstanceId instanceId ) {
 
         Logger.logMsg( "@@@ actually packing " + instanceId );
         EntityNames entityNames = _packingContext.getEntityNames( instanceId );
@@ -304,7 +304,7 @@ public class StdGowingPacker implements GowingPacker {
 
 //		int typeReferenceId = instanceId.getTypeId();
 
-                String typeName = GowingInstanceId.lookupTypeName( newTypeId );
+                String typeName = GowingInstanceId.lookupTypeName( newTypeId.intValue() );
 //		if ( typeName.endsWith( "GowingPackableName" ) ) {
 //
 //		    Logger.logErr( "packing first GowingPackableName", new IllegalArgumentException(  ) );
@@ -385,7 +385,7 @@ public class StdGowingPacker implements GowingPacker {
 
     }
 
-    private void actuallyPackEntityBody( @NotNull GowingPackedEntityBundle bundle ) {
+    private void actuallyPackEntityBody( @NotNull final GowingPackedEntityBundle bundle ) {
 
         _writer.print( "(" );
         String comma = " ";
@@ -436,19 +436,19 @@ public class StdGowingPacker implements GowingPacker {
     }
 
     @Override
-    public void emitName( EntityName name ) {
+    public void emitName( final EntityName name ) {
 
         _writer.print( name.getName() );
 
     }
 
-    private void emitEntityReference( GowingInstanceId instanceId, int version ) {
+    private void emitEntityReference( final GowingInstanceId instanceId, final int version ) {
 
         emitEntityReference( instanceId, version, null );
 
     }
 
-    private void emitEntityReference( GowingInstanceId instanceId, int version, @Nullable Collection<EntityName> entityNames ) {
+    private void emitEntityReference( final GowingInstanceId instanceId, final int version, @Nullable final Collection<EntityName> entityNames ) {
 
         int typeId = instanceId.getTypeId();
         long entityId = instanceId.getEntityId();
@@ -457,13 +457,13 @@ public class StdGowingPacker implements GowingPacker {
     }
 
     @Override
-    public void emitEntityReference( int typeId, long entityId ) {
+    public void emitEntityReference( final int typeId, final long entityId ) {
 
         emitEntityReference( typeId, entityId, null, null );
 
     }
 
-    private void emitEntityReference( int typeId, long entityId, @Nullable Integer version, @Nullable Collection<EntityName> entityNames ) {
+    private void emitEntityReference( final int typeId, final long entityId, @Nullable final Integer version, @Nullable final Collection<EntityName> entityNames ) {
 
         _writer.print( GowingConstants.TAG_ENTITY_REFERENCE );
         _writer.print( typeId );
@@ -487,7 +487,7 @@ public class StdGowingPacker implements GowingPacker {
     }
 
     @Override
-    public void emit( GowingInstanceId instanceId ) {
+    public void emit( final GowingInstanceId instanceId ) {
 
         if ( instanceId == null ) {
 
@@ -507,7 +507,7 @@ public class StdGowingPacker implements GowingPacker {
     }
 
     @Override
-    public void emit( String s ) {
+    public void emit( final String s ) {
 
         if ( s == null ) {
 
@@ -522,7 +522,7 @@ public class StdGowingPacker implements GowingPacker {
     }
 
     @Override
-    public void emit( char c ) {
+    public void emit( final char c ) {
 
         _writer.print( GowingConstants.TAG_CHAR );
         _writer.print( c );
@@ -530,7 +530,7 @@ public class StdGowingPacker implements GowingPacker {
     }
 
     @Override
-    public void emit( double d ) {
+    public void emit( final double d ) {
 
         _writer.print( GowingConstants.TAG_DOUBLE );
         _writer.print( d );
@@ -538,7 +538,7 @@ public class StdGowingPacker implements GowingPacker {
     }
 
     @Override
-    public void emit( double[] v ) {
+    public void emit( final double[] v ) {
 
         _writer.print( GowingConstants.TAG_PRIMITIVE_ARRAY );
         _writer.print( v.length );
@@ -560,7 +560,7 @@ public class StdGowingPacker implements GowingPacker {
     }
 
     @Override
-    public void emit( Double[] v ) {
+    public void emit( final Double[] v ) {
 
         _writer.print( GowingConstants.TAG_CONTAINER_ARRAY );
         _writer.print( v.length );
@@ -590,7 +590,7 @@ public class StdGowingPacker implements GowingPacker {
     }
 
     @Override
-    public void emit( float f ) {
+    public void emit( final float f ) {
 
         _writer.print( GowingConstants.TAG_FLOAT );
         _writer.print( f );
@@ -598,7 +598,7 @@ public class StdGowingPacker implements GowingPacker {
     }
 
     @Override
-    public void emit( float[] v ) {
+    public void emit( final float[] v ) {
 
         _writer.print( GowingConstants.TAG_PRIMITIVE_ARRAY );
         _writer.print( v.length );
@@ -620,7 +620,7 @@ public class StdGowingPacker implements GowingPacker {
     }
 
     @Override
-    public void emit( Float[] v ) {
+    public void emit( final Float[] v ) {
 
         _writer.print( GowingConstants.TAG_CONTAINER_ARRAY );
         _writer.print( v.length );
@@ -650,7 +650,7 @@ public class StdGowingPacker implements GowingPacker {
     }
 
     @Override
-    public void emit( long l ) {
+    public void emit( final long l ) {
 
         _writer.print( GowingConstants.TAG_LONG );
         _writer.print( l );
@@ -658,7 +658,7 @@ public class StdGowingPacker implements GowingPacker {
     }
 
     @Override
-    public void emit( long[] v ) {
+    public void emit( final long[] v ) {
 
         _writer.print( GowingConstants.TAG_PRIMITIVE_ARRAY );
         _writer.print( v.length );
@@ -680,7 +680,7 @@ public class StdGowingPacker implements GowingPacker {
     }
 
     @Override
-    public void emit( Long[] v ) {
+    public void emit( final Long[] v ) {
 
         _writer.print( GowingConstants.TAG_CONTAINER_ARRAY );
         _writer.print( v.length );
@@ -710,7 +710,7 @@ public class StdGowingPacker implements GowingPacker {
     }
 
     @Override
-    public void emit( int i ) {
+    public void emit( final int i ) {
 
         _writer.print( GowingConstants.TAG_INTEGER );
         _writer.print( i );
@@ -718,7 +718,7 @@ public class StdGowingPacker implements GowingPacker {
     }
 
     @Override
-    public void emit( int[] v ) {
+    public void emit( final int[] v ) {
 
         _writer.print( GowingConstants.TAG_PRIMITIVE_ARRAY );
         _writer.print( v.length );
@@ -740,7 +740,7 @@ public class StdGowingPacker implements GowingPacker {
     }
 
     @Override
-    public void emit( Integer[] v ) {
+    public void emit( final Integer[] v ) {
 
         _writer.print( GowingConstants.TAG_CONTAINER_ARRAY );
         _writer.print( v.length );
@@ -770,7 +770,7 @@ public class StdGowingPacker implements GowingPacker {
     }
 
     @Override
-    public void emit( short s ) {
+    public void emit( final short s ) {
 
         _writer.print( GowingConstants.TAG_SHORT );
         _writer.print( s );
@@ -778,7 +778,7 @@ public class StdGowingPacker implements GowingPacker {
     }
 
     @Override
-    public void emit( short[] v ) {
+    public void emit( final short[] v ) {
 
         _writer.print( GowingConstants.TAG_PRIMITIVE_ARRAY );
         _writer.print( v.length );
@@ -800,7 +800,7 @@ public class StdGowingPacker implements GowingPacker {
     }
 
     @Override
-    public void emit( Short[] v ) {
+    public void emit( final Short[] v ) {
 
         _writer.print( GowingConstants.TAG_CONTAINER_ARRAY );
         _writer.print( v.length );
@@ -830,7 +830,7 @@ public class StdGowingPacker implements GowingPacker {
     }
 
     @Override
-    public void emit( byte b ) {
+    public void emit( final byte b ) {
 
         _writer.print( GowingConstants.TAG_BYTE );
         _writer.print( ObtuseUtil.hexvalue( b ) );
@@ -840,7 +840,7 @@ public class StdGowingPacker implements GowingPacker {
     private static final char[] HEX_CHARS = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' };
 
     @Override
-    public void emit( @NotNull byte[] v ) {
+    public void emit( @NotNull final byte[] v ) {
 
         _writer.print( GowingConstants.TAG_PRIMITIVE_ARRAY );
         _writer.print( v.length );
@@ -862,7 +862,7 @@ public class StdGowingPacker implements GowingPacker {
     }
 
     @Override
-    public void emit( @NotNull Byte[] v ) {
+    public void emit( @NotNull final Byte[] v ) {
 
         _writer.print( GowingConstants.TAG_CONTAINER_ARRAY );
         _writer.print( v.length );
@@ -880,8 +880,8 @@ public class StdGowingPacker implements GowingPacker {
 
             } else {
 
-                int high = ( b >> 4 ) & 0xf;
-                int low = (int)b & 0xf;
+                int high = ( b.intValue() >> 4 ) & 0xf;
+                int low = b.intValue() & 0xf;
 
                 _writer.print( HEX_CHARS[high] );
                 _writer.print( HEX_CHARS[low] );
@@ -894,7 +894,7 @@ public class StdGowingPacker implements GowingPacker {
     }
 
     @Override
-    public void emit( boolean b ) {
+    public void emit( final boolean b ) {
 
         _writer.print( GowingConstants.TAG_BOOLEAN );
         _writer.print( b ? 'T' : 'F' );
@@ -902,7 +902,7 @@ public class StdGowingPacker implements GowingPacker {
     }
 
     @Override
-    public void emit( boolean[] v ) {
+    public void emit( final boolean[] v ) {
 
         _writer.print( GowingConstants.TAG_PRIMITIVE_ARRAY );
         _writer.print( v.length );
@@ -924,7 +924,7 @@ public class StdGowingPacker implements GowingPacker {
     }
 
     @Override
-    public void emit( Boolean[] v ) {
+    public void emit( final Boolean[] v ) {
 
         _writer.print( GowingConstants.TAG_CONTAINER_ARRAY );
         _writer.print( v.length );
@@ -941,7 +941,7 @@ public class StdGowingPacker implements GowingPacker {
 
             } else {
 
-                _writer.print( b ? 'T' : 'F' );
+                _writer.print( b.booleanValue() ? 'T' : 'F' );
 
             }
 
@@ -961,7 +961,7 @@ public class StdGowingPacker implements GowingPacker {
     }
 
     @Override
-    public void emit( EntityTypeName typeName ) {
+    public void emit( final EntityTypeName typeName ) {
 
         _writer.print( typeName.getTypeName() );
 
@@ -1050,7 +1050,7 @@ public class StdGowingPacker implements GowingPacker {
 
     }
 
-    public static void main( String[] args ) {
+    public static void main( final String[] args ) {
 
         BasicProgramConfigInfo.init( "Obtuse", "GowingPacker", "test", null );
 

@@ -10,12 +10,12 @@ package com.obtuse.util;
 
 public abstract class ArgInt extends Arg {
 
-    protected ArgInt( String keyword ) {
+    protected ArgInt( final String keyword ) {
         super( keyword );
 
     }
 
-    public final void process( String keyword, String arg ) {
+    public final void process( final String keyword, final String arg ) {
 
         try {
 

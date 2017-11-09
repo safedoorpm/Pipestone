@@ -18,13 +18,13 @@ import com.obtuse.util.gowing.p2a.GowingConstants;
 
 public class GowingArrayHolderObsolete extends GowingAbstractPackableHolder {
 
-    GowingArrayHolderObsolete( String notImplemented ) {
+    GowingArrayHolderObsolete( final String notImplemented ) {
 
         super( new EntityName( "not implemented" ), GowingConstants.TAG_CONTAINER_ARRAY, null, false );
     }
 
     @Override
-    public void emitRepresentation( GowingPacker packer2 ) {
+    public void emitRepresentation( final GowingPacker packer2 ) {
 
     }
 

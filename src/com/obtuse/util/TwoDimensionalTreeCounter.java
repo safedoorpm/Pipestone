@@ -14,7 +14,7 @@ public class TwoDimensionalTreeCounter<K1,K2> implements TwoDimensionalCounter<K
 
     }
 
-    public void count( K1 key1, K2 key2 ) {
+    public void count( final K1 key1, final K2 key2 ) {
 
         Integer count = _counter.get( key1, key2 );
         if ( count == null ) {
@@ -29,7 +29,7 @@ public class TwoDimensionalTreeCounter<K1,K2> implements TwoDimensionalCounter<K
 
     }
 
-    public int getCount( K1 key1, K2 key2 ) {
+    public int getCount( final K1 key1, final K2 key2 ) {
 
         Integer count = _counter.get( key1, key2 );
         if ( count == null ) {
@@ -44,7 +44,7 @@ public class TwoDimensionalTreeCounter<K1,K2> implements TwoDimensionalCounter<K
 
     }
 
-    public boolean containsKeys( K1 key1, K2 key2 ) {
+    public boolean containsKeys( final K1 key1, final K2 key2 ) {
 
         return _counter.get( key1, key2 ) != null;
 

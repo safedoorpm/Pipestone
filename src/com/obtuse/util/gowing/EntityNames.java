@@ -22,7 +22,7 @@ public class EntityNames {
 
     private final GowingPackable _entity;
 
-    public EntityNames( @NotNull Collection<EntityName> entityNames, @NotNull GowingPackable entity ) {
+    public EntityNames( @NotNull final Collection<EntityName> entityNames, @NotNull final GowingPackable entity ) {
 	super();
 
 	addAll( entityNames );
@@ -45,7 +45,7 @@ public class EntityNames {
 
     }
 
-    public void add( EntityName name ) {
+    public void add( final EntityName name ) {
 
 	if ( name == null ) {
 
@@ -57,7 +57,7 @@ public class EntityNames {
 
     }
 
-    public void addAll( Collection<EntityName> moreNames ) {
+    public void addAll( final Collection<EntityName> moreNames ) {
 
 	for ( EntityName entityName : moreNames ) {
 

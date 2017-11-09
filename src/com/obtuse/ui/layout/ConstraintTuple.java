@@ -44,7 +44,7 @@ public class ConstraintTuple {
      @param maximum the proposed maximum value.
      */
 
-    public ConstraintTuple( int minimum, int maximum ) {
+    public ConstraintTuple( final int minimum, final int maximum ) {
 
 	super();
 
@@ -75,7 +75,7 @@ public class ConstraintTuple {
      <blockquote>{@code new ConstraintTuple( x, x )}</blockquote>
      */
 
-    public ConstraintTuple( int value ) {
+    public ConstraintTuple( final int value ) {
 	this( value, value );
     }
 
@@ -108,7 +108,7 @@ public class ConstraintTuple {
      the same {@code minimum} and {@code maximum} values as this instance; {@code false} otherwise.
      */
 
-    public boolean equals( Object rhs ) {
+    public boolean equals( final Object rhs ) {
 
 	return rhs instanceof ConstraintTuple &&
 	       minimum == ( (ConstraintTuple) rhs ).minimum &&
@@ -136,7 +136,7 @@ public class ConstraintTuple {
      <blockquote>{@code this.equals( new ConstraintTuple( min, max ) )}</blockquote>
      */
 
-    public boolean equals( int min, int max ) {
+    public boolean equals( final int min, final int max ) {
 
         return this.equals( new ConstraintTuple( min, max ) );
 
@@ -158,7 +158,7 @@ public class ConstraintTuple {
 
     }
 
-    private static void doit( int min, int max, int eMin, int eMax ) {
+    private static void doit( final int min, final int max, final int eMin, final int eMax ) {
 
         ConstraintTuple ct = new ConstraintTuple( min, max );
         boolean correct = ct.minimum == eMin && ct.maximum == eMax;
@@ -170,7 +170,7 @@ public class ConstraintTuple {
 
     }
 
-    public static void main( String[] args ) {
+    public static void main( final String[] args ) {
 
 	BasicProgramConfigInfo.init( "Obtuse", "Pipestone", "testing", null );
 

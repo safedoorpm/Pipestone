@@ -48,13 +48,13 @@ public class ImageIconUtils {
 
     }
 
-    public static ImageIcon fetchIconImage( String fileName ) {
+    public static ImageIcon fetchIconImage( final String fileName ) {
 
         return ImageIconUtils.fetchIconImage( fileName, 0 );
 
     }
 
-    public static void setDefaultResourcesDirectory( String resourcesBaseDirectory ) {
+    public static void setDefaultResourcesDirectory( final String resourcesBaseDirectory ) {
 
         ImageIconUtils.s_resourcesBaseDirectory = resourcesBaseDirectory;
 
@@ -66,13 +66,13 @@ public class ImageIconUtils {
 
     }
 
-    public static ImageIcon fetchIconImage( String fileName, int size ) {
+    public static ImageIcon fetchIconImage( final String fileName, final int size ) {
 
         return ImageIconUtils.fetchIconImage( fileName, size, ImageIconUtils.s_resourcesBaseDirectory );
 
     }
 
-    public static ImageIcon fetchIconImage( String fileName, int size, String resourceBaseDirectory ) {
+    public static ImageIcon fetchIconImage( final String fileName, final int size, final String resourceBaseDirectory ) {
 
         URL url = null;
         try {
@@ -132,7 +132,7 @@ public class ImageIconUtils {
      * .image.BufferedImage}.
      */
 
-    public static BufferedImage toBufferedImage( Image xImage ) {
+    public static BufferedImage toBufferedImage( final Image xImage ) {
 
         if ( xImage instanceof BufferedImage ) {
 
@@ -159,7 +159,7 @@ public class ImageIconUtils {
      * @return a copy of the original image.
      */
 
-    public static BufferedImage copyToBufferedImage( Image xImage ) {
+    public static BufferedImage copyToBufferedImage( final Image xImage ) {
 
         // This code ensures that all the pixels in the image are loaded
 
@@ -239,7 +239,7 @@ public class ImageIconUtils {
      * @return true if the image has transparent pixels; false otherwise.
      */
 
-    public static boolean hasAlpha( Image image ) {
+    public static boolean hasAlpha( final Image image ) {
 
         // If buffered image, the color model is readily available
         if ( image instanceof BufferedImage ) {
@@ -276,7 +276,7 @@ public class ImageIconUtils {
      * @return the brighter or darker image (always a new image even if the scaling factor is 1.0).
      */
 
-    public static BufferedImage changeImageBrightness( Image image, float factor ) {
+    public static BufferedImage changeImageBrightness( final Image image, final float factor ) {
 
         BufferedImage bufferedVersion = ImageIconUtils.copyToBufferedImage( image );
 
@@ -296,7 +296,7 @@ public class ImageIconUtils {
      * @return the brighter or darker image (always a new {@link javax.swing.ImageIcon} even if the scaling factor is 1.0).
      */
 
-    public static ImageIcon changeImageIconBrightness( ImageIcon imageIcon, float scaleFactor ) {
+    public static ImageIcon changeImageIconBrightness( final ImageIcon imageIcon, final float scaleFactor ) {
 
         return new ImageIcon( ImageIconUtils.changeImageBrightness( imageIcon.getImage(), scaleFactor ) );
 

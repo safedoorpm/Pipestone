@@ -39,7 +39,7 @@ public class StdGowingUnPackerContext implements GowingUnPackerContext {
 
     private GowingRequestorContext _requestorContext;
 
-    public StdGowingUnPackerContext( @NotNull GowingTypeIndex typeIndex ) {
+    public StdGowingUnPackerContext( @NotNull final GowingTypeIndex typeIndex ) {
 
         super();
 
@@ -48,7 +48,7 @@ public class StdGowingUnPackerContext implements GowingUnPackerContext {
     }
 
     @Override
-    public void saveTypeAlias( StdGowingTokenizer.GowingToken2 typeIdToken, StdGowingTokenizer.GowingToken2 typeNameToken )
+    public void saveTypeAlias( final StdGowingTokenizer.GowingToken2 typeIdToken, final StdGowingTokenizer.GowingToken2 typeNameToken )
             throws GowingUnPackerParsingException {
 
         int typeReferenceId = typeIdToken.intValue();
@@ -82,7 +82,7 @@ public class StdGowingUnPackerContext implements GowingUnPackerContext {
     }
 
     @Override
-    public void setInputFile( File inputFile ) {
+    public void setInputFile( final File inputFile ) {
 
         _inputFile = inputFile;
 
@@ -96,7 +96,7 @@ public class StdGowingUnPackerContext implements GowingUnPackerContext {
     }
 
     @Override
-    public void setRequestorContext( GowingRequestorContext requestorContext ) {
+    public void setRequestorContext( final GowingRequestorContext requestorContext ) {
 
         if ( _requestorContext != null ) {
 
@@ -130,21 +130,21 @@ public class StdGowingUnPackerContext implements GowingUnPackerContext {
     }
 
     @Override
-    public void markEntitiesUnfinished( Collection<GowingEntityReference> unFinishedEntities ) {
+    public void markEntitiesUnfinished( final Collection<GowingEntityReference> unFinishedEntities ) {
 
         _unFinishedEntities.addAll( unFinishedEntities );
 
     }
 
     @Override
-    public boolean isEntityFinished( GowingEntityReference er ) {
+    public boolean isEntityFinished( final GowingEntityReference er ) {
 
         return !_unFinishedEntities.contains( er );
 
     }
 
     @Override
-    public void markEntityFinished( GowingEntityReference er ) {
+    public void markEntityFinished( final GowingEntityReference er ) {
 
         if ( isEntityFinished( er ) ) {
 
@@ -157,7 +157,7 @@ public class StdGowingUnPackerContext implements GowingUnPackerContext {
     }
 
     @Override
-    public void addUnfinishedEntities( Collection<GowingEntityReference> collection ) {
+    public void addUnfinishedEntities( final Collection<GowingEntityReference> collection ) {
 
         collection.addAll( _unFinishedEntities );
 
@@ -165,7 +165,7 @@ public class StdGowingUnPackerContext implements GowingUnPackerContext {
 
     @Override
     @NotNull
-    public Optional<EntityTypeName> findTypeByTypeReferenceId( int typeReferenceId ) {
+    public Optional<EntityTypeName> findTypeByTypeReferenceId( final int typeReferenceId ) {
 
         return Optional.ofNullable( _usedTypeIds.get( typeReferenceId ) );
 
@@ -173,7 +173,7 @@ public class StdGowingUnPackerContext implements GowingUnPackerContext {
 
     @Override
     @NotNull
-    public EntityTypeName getTypeByTypeReferenceId( int typeReferenceId ) {
+    public EntityTypeName getTypeByTypeReferenceId( final int typeReferenceId ) {
 
         Optional<EntityTypeName> maybeTypeName = findTypeByTypeReferenceId( typeReferenceId );
         return maybeTypeName.orElseThrow( () -> new IllegalArgumentException( "unknown type reference id " + typeReferenceId ) );
@@ -182,14 +182,14 @@ public class StdGowingUnPackerContext implements GowingUnPackerContext {
 
     @Override
     @NotNull
-    public Optional<Integer> findTypeReferenceId( EntityTypeName typeName ) {
+    public Optional<Integer> findTypeReferenceId( final EntityTypeName typeName ) {
 
         return Optional.ofNullable( _seenTypeNames.get( typeName ) );
 
     }
 
     @Override
-    public int getTypeReferenceId( EntityTypeName typeName ) {
+    public int getTypeReferenceId( final EntityTypeName typeName ) {
 
 
         Integer typeReferenceId = _seenTypeNames.get( typeName );
@@ -199,19 +199,19 @@ public class StdGowingUnPackerContext implements GowingUnPackerContext {
 
         }
 
-        return typeReferenceId;
+        return typeReferenceId.intValue();
 
     }
 
     @Override
-    public boolean isEntityKnown( GowingEntityReference er ) {
+    public boolean isEntityKnown( final GowingEntityReference er ) {
 
         return _seenInstanceIds.containsKey( er );
 
     }
 
     @Override
-    public GowingPackable recallPackableEntity( @NotNull GowingEntityReference er ) {
+    public GowingPackable recallPackableEntity( @NotNull final GowingEntityReference er ) {
 
         GowingPackable packable2 = _seenInstanceIds.get( er );
 //        Logger.logMsg( "recalling " + er + " as " + GowingUtil.describeGowingEntitySafely( packable2 ) );
@@ -228,7 +228,7 @@ public class StdGowingUnPackerContext implements GowingUnPackerContext {
     }
 
     @Override
-    public void rememberPackableEntity( StdGowingTokenizer.GowingToken2 token, GowingEntityReference er, GowingPackable entity ) {
+    public void rememberPackableEntity( final StdGowingTokenizer.GowingToken2 token, final GowingEntityReference er, final GowingPackable entity ) {
 
 //        Logger.logMsg( "remembering " + er + " = " + GowingUtil.describeGowingEntitySafely( entity ) );
 
@@ -270,7 +270,7 @@ public class StdGowingUnPackerContext implements GowingUnPackerContext {
 
     @Override
     @NotNull
-    public Optional<EntityTypeInfo> findTypeInfo( @NotNull EntityTypeName typeName ) {
+    public Optional<EntityTypeInfo> findTypeInfo( @NotNull final EntityTypeName typeName ) {
 
         return _typeIndex.findTypeInfo( typeName );
 
@@ -286,7 +286,7 @@ public class StdGowingUnPackerContext implements GowingUnPackerContext {
 
     @Override
     @NotNull
-    public EntityTypeInfo getTypeInfo( @NotNull EntityTypeName typeName ) {
+    public EntityTypeInfo getTypeInfo( @NotNull final EntityTypeName typeName ) {
 
         Optional<EntityTypeInfo> maybeRval = findTypeInfo( typeName );
         return maybeRval.orElseThrow( () -> new IllegalArgumentException( "unknown type \"" + typeName + "\"" ) );
@@ -302,7 +302,7 @@ public class StdGowingUnPackerContext implements GowingUnPackerContext {
 
     @Override
     @NotNull
-    public Optional<EntityTypeInfo> findTypeInfo( int typeReferenceId ) {
+    public Optional<EntityTypeInfo> findTypeInfo( final int typeReferenceId ) {
 
         Optional<EntityTypeName> maybeTypeName = findTypeByTypeReferenceId( typeReferenceId );
         if ( maybeTypeName.isPresent() ) {
@@ -348,14 +348,14 @@ public class StdGowingUnPackerContext implements GowingUnPackerContext {
 
     @Override
     @NotNull
-    public EntityTypeInfo getTypeInfo( int typeReferenceId ) {
+    public EntityTypeInfo getTypeInfo( final int typeReferenceId ) {
 
         Optional<EntityTypeInfo> maybeRval = findTypeInfo( typeReferenceId );
         return maybeRval.orElseThrow( () -> new IllegalArgumentException( "unknown type reference id " + typeReferenceId ) );
 
     }
 
-    public EntityTypeInfo registerFactory( GowingEntityFactory factory ) {
+    public EntityTypeInfo registerFactory( final GowingEntityFactory factory ) {
 
         Optional<EntityTypeInfo> rval = _typeIndex.findTypeInfo( factory.getTypeName() );
         return rval.orElseGet( () -> _typeIndex.addFactory( factory ) );
@@ -373,9 +373,9 @@ public class StdGowingUnPackerContext implements GowingUnPackerContext {
     }
 
     @Override
-    public boolean isTypeNameKnown( EntityTypeName typeName ) {
+    public boolean isTypeNameKnown( final EntityTypeName typeName ) {
 
-        return findTypeInfo( typeName ) != null;
+        return findTypeInfo( typeName ).isPresent();
 
     }
 

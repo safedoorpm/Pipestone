@@ -15,7 +15,7 @@ public class EntityTypeInfo {
     private final int _referenceId;
     private final GowingEntityFactory _factory;
 
-    public EntityTypeInfo( int referenceId, @NotNull GowingEntityFactory factory ) {
+    public EntityTypeInfo( final int referenceId, @NotNull final GowingEntityFactory factory ) {
 	super();
 
 	_referenceId = referenceId;

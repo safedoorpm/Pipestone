@@ -27,7 +27,7 @@ public abstract class PostgresConnection {
 
     private Connection _jdbcConnection = null;
 
-    protected PostgresConnection( String hostname, String dbName ) {
+    protected PostgresConnection( final String hostname, final String dbName ) {
         super();
 
         _hostname = hostname;
@@ -37,7 +37,7 @@ public abstract class PostgresConnection {
     }
 
     @SuppressWarnings( { "UnusedDeclaration", "unchecked", "UnusedAssignment" } )
-    public void connect( Properties props )
+    public void connect( final Properties props )
             throws
             ObtuseJDBCDriverLoadFailedException,
             ObtuseJDBCgetConnectionFailedException {

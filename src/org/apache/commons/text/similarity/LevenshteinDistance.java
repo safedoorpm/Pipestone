@@ -71,7 +71,7 @@ public class LevenshteinDistance implements EditDistance<Integer> {
      *        This may not be negative.
      */
     public LevenshteinDistance(final Integer threshold) {
-        if (threshold != null && threshold < 0) {
+        if (threshold != null && threshold.intValue() < 0) {
             throw new IllegalArgumentException("Threshold must not be negative");
         }
         this.threshold = threshold;
@@ -112,7 +112,7 @@ public class LevenshteinDistance implements EditDistance<Integer> {
     @Override
     public Integer apply(final CharSequence left, final CharSequence right) {
         if (threshold != null) {
-            return limitedCompare(left, right, threshold);
+            return limitedCompare( left, right, threshold.intValue() );
         }
         return unlimitedCompare(left, right);
     }

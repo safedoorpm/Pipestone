@@ -71,7 +71,7 @@ public class SimpleTableCellRenderer extends DefaultTableCellRenderer {
 
     private final Alignment _alignment;
 
-    private SimpleTableCellRenderer( Alignment alignment ) {
+    private SimpleTableCellRenderer( final Alignment alignment ) {
 
         super();
 
@@ -86,12 +86,12 @@ public class SimpleTableCellRenderer extends DefaultTableCellRenderer {
      */
 
     public Component getTableCellRendererComponent(
-            JTable table,
-            Object value,
-            boolean isSelected,
-            boolean hasFocus,
-            int row,
-            int column
+            final JTable table,
+            final Object value,
+            final boolean isSelected,
+            final boolean hasFocus,
+            final int row,
+            final int column
     ) {
 
         Component renderedCell = super.getTableCellRendererComponent(

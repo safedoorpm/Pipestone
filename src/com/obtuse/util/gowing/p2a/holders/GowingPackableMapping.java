@@ -48,7 +48,7 @@ public class GowingPackableMapping<K, V> implements GowingPackable {
 
         @Override
         @NotNull
-        public GowingPackable createEntity( @NotNull GowingUnPacker unPacker, @NotNull GowingPackedEntityBundle bundle, GowingEntityReference er ) {
+        public GowingPackable createEntity( @NotNull final GowingUnPacker unPacker, @NotNull final GowingPackedEntityBundle bundle, final GowingEntityReference er ) {
 
             return new GowingPackableMapping( unPacker, bundle, er );
 
@@ -64,7 +64,7 @@ public class GowingPackableMapping<K, V> implements GowingPackable {
 
     }
 
-    public GowingPackableMapping( Map<? extends K, ? extends V> map ) {
+    public GowingPackableMapping( final Map<? extends K, ? extends V> map ) {
 
         super();
 
@@ -80,7 +80,7 @@ public class GowingPackableMapping<K, V> implements GowingPackable {
 
     }
 
-    public void addMapping( K key, V value ) {
+    public void addMapping( final K key, final V value ) {
 
         GowingPackableKeyValuePair<K, V> kvp = new GowingPackableKeyValuePair<>( key, value );
 
@@ -88,13 +88,13 @@ public class GowingPackableMapping<K, V> implements GowingPackable {
 
     }
 
-    public void addMapping( GowingPackableKeyValuePair<K, V> kvp ) {
+    public void addMapping( final GowingPackableKeyValuePair<K, V> kvp ) {
 
         _keyValuePairs.add( kvp );
 
     }
 
-    public GowingPackableMapping( GowingUnPacker unPacker, GowingPackedEntityBundle bundle, GowingEntityReference er ) {
+    public GowingPackableMapping( final GowingUnPacker unPacker, final GowingPackedEntityBundle bundle, final GowingEntityReference er ) {
 
         super();
 
@@ -131,7 +131,7 @@ public class GowingPackableMapping<K, V> implements GowingPackable {
     }
 
     @Override
-    public boolean finishUnpacking( GowingUnPacker unPacker ) {
+    public boolean finishUnpacking( final GowingUnPacker unPacker ) {
 
         ObtuseUtil.doNothing();
 
@@ -178,7 +178,7 @@ public class GowingPackableMapping<K, V> implements GowingPackable {
 
     @NotNull
     @Override
-    public GowingPackedEntityBundle bundleThyself( boolean isPackingSuper, GowingPacker packer ) {
+    public GowingPackedEntityBundle bundleThyself( final boolean isPackingSuper, final GowingPacker packer ) {
 
         GowingPackedEntityBundle rval = new GowingPackedEntityBundle(
                 ENTITY_TYPE_NAME,

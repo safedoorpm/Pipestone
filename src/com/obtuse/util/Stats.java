@@ -33,7 +33,7 @@ public class Stats {
      * @param x the instance to be copied.
      */
 
-    public Stats( Stats x ) {
+    public Stats( final Stats x ) {
         super();
 
         _sum = x._sum;
@@ -49,7 +49,7 @@ public class Stats {
      * @param v the next value.
      */
 
-    public void datum( double v ) {
+    public void datum( final double v ) {
 
         _sum += v;
         _sumSq += v * v;
@@ -81,7 +81,7 @@ public class Stats {
      * @param n the number of separately accumulated values.
      */
 
-    public void datum( double sum, double sumsq, int n ) {
+    public void datum( final double sum, final double sumsq, final int n ) {
 
         _sum += sum;
         _sumSq += sumsq;

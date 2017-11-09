@@ -32,7 +32,7 @@ public class ArgParserExample {
 
                             new ArgInt( "-messageIdPrefix" ) {
 
-                                public void process( String keyword, int arg ) {
+                                public void process( final String keyword, final int arg ) {
 
                                     ExampleArgParser.s_messageIdPrefix = arg;
 
@@ -42,7 +42,7 @@ public class ArgParserExample {
 
                             new ArgString( "-deployment" ) {
 
-                                public void process( String keyword, String arg ) {
+                                public void process( final String keyword, final String arg ) {
 
                                     ExampleArgParser.s_deploymentName = arg;
 
@@ -52,7 +52,7 @@ public class ArgParserExample {
 
                             new ArgInt( "-pod" ) {
 
-                                public void process( String keyword, int arg ) {
+                                public void process( final String keyword, final int arg ) {
 
                                     ExampleArgParser.s_podNumber = arg;
 
@@ -62,7 +62,7 @@ public class ArgParserExample {
 
                             new ArgInt( "-traceport" ) {
 
-                                public void process( String keyword, int arg ) {
+                                public void process( final String keyword, final int arg ) {
 
                                     ExampleArgParser.s_tracePort = arg;
 
@@ -72,7 +72,7 @@ public class ArgParserExample {
 
                             new ArgInt( "-rmiregistryport" ) {
 
-                                public void process( String keyword, int arg ) {
+                                public void process( final String keyword, final int arg ) {
 
                                     ExampleArgParser.s_rmiRegistryPort = arg;
 
@@ -82,7 +82,7 @@ public class ArgParserExample {
 
                             new ArgString( "-supportEmailAddress" ) {
 
-                                public void process( String keyword, String arg ) {
+                                public void process( final String keyword, final String arg ) {
 
                                     s_supportEmailAddress = arg;
 
@@ -92,7 +92,7 @@ public class ArgParserExample {
 
                             new ArgString( "-callbackHostname" ) {
 
-                                public void process( String keyword, String arg ) {
+                                public void process( final String keyword, final String arg ) {
 
                                     ExampleArgParser.s_callbackHostname = arg;
 
@@ -113,7 +113,7 @@ public class ArgParserExample {
     }
 
     @SuppressWarnings( { "MagicNumber" })
-    public static void main( String[] args ) {
+    public static void main( final String[] args ) {
 
         //noinspection ClassWithoutToString,ClassWithoutToString
         ExampleArgParser argParser = new ExampleArgParser();

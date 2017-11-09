@@ -65,7 +65,7 @@ public class NearestPoint {
      * @param pn nearest point (return param)
      * @return distance squared between pa and nearest point (pn)
      */
-    public static double onLine(Point2D p1, Point2D p2, Point2D pa, Point2D pn) {
+    public static double onLine( final Point2D p1, final Point2D p2, final Point2D pa, final Point2D pn) {
         double dx = p2.getX() - p1.getX();
         double dy = p2.getY() - p1.getY();
         double dsq = dx * dx + dy * dy;
@@ -95,7 +95,7 @@ public class NearestPoint {
      * @param pn nearest point found (return param)
      * @return distance squared between pa and nearest point (pn)
      */
-    public static double onCurve( CubicBezierCurve c, Point2D pa, Point2D pn ) {
+    public static double onCurve( final CubicBezierCurve c, final Point2D pa, final Point2D pn ) {
 
         double[] tCandidate = new double[W_DEGREE]; // Possible roots
         Point2D[] v = { c.getP1(), c.getCtrlP1(), c.getCtrlP2(), c.getP2() };
@@ -140,7 +140,7 @@ public class NearestPoint {
      * all of the roots in the interval [0, 1]. Return the number of roots
      * found.
      */
-    private static int findRoots(Point2D[] w, int degree, double[] t, int depth) {
+    private static int findRoots( final Point2D[] w, final int degree, final double[] t, final int depth) {
 
         switch (crossingCount(w, degree)) {
         case 0: { // No solutions here
@@ -196,7 +196,7 @@ public class NearestPoint {
      * 5th-degree Bezier-format equation whose solution finds the point on the
      * curve nearest the user-defined point.
      */
-    private static Point2D[] convertToBezierForm(Point2D[] v, Point2D pa) {
+    private static Point2D[] convertToBezierForm( final Point2D[] v, final Point2D pa) {
 
         Point2D[] c = new Point2D.Double[DEGREE + 1]; // v(i) - pa
         Point2D[] d = new Point2D.Double[DEGREE]; // v(i+1) - v(i)
@@ -262,7 +262,7 @@ public class NearestPoint {
      * crosses the 0-axis. This number is >= the number of roots.
      *
      */
-    private static int crossingCount(Point2D[] v, int degree) {
+    private static int crossingCount( final Point2D[] v, final int degree) {
         int nCrossings = 0;
         int sign = v[0].getY() < 0 ? -1 : 1;
         int oldSign = sign;
@@ -280,7 +280,7 @@ public class NearestPoint {
      * is flat enough for recursive subdivision to bottom out.
      *
      */
-    private static boolean controlPolygonFlatEnough(Point2D[] v, int degree) {
+    private static boolean controlPolygonFlatEnough( final Point2D[] v, final int degree) {
 
         // Find the perpendicular distance
         // from each interior control point to
@@ -359,7 +359,7 @@ public class NearestPoint {
      * point to last with 0-axis.
      *
      */
-    private static double computeXIntercept(Point2D[] v, int degree) {
+    private static double computeXIntercept( final Point2D[] v, final int degree) {
 
         double XNM = v[degree].getX() - v[0].getX();
         double YNM = v[degree].getY() - v[0].getY();
@@ -371,8 +371,8 @@ public class NearestPoint {
         return (XNM * YMK - YNM * XMK) * detInv;
     }
 
-    private static Point2D bezier(Point2D[] c, int degree, double t,
-            Point2D[] left, Point2D[] right) {
+    private static Point2D bezier( final Point2D[] c, final int degree, final double t,
+                                   final Point2D[] left, final Point2D[] right) {
         // FIXME WIRED-252, move outside the method and make static
         Point2D[][] p = new Point2D.Double[W_DEGREE + 1][W_DEGREE + 1];
         for ( int i = 0; i < W_DEGREE + 1; i += 1 ) {
@@ -413,7 +413,7 @@ public class NearestPoint {
     /**
      * Test for onCurve
      */
-    public static void main(String[] args) {
+    public static void main( final String[] args) {
         Point2D pn = new Point2D.Double();
         CubicBezierCurve c = new CubicBezierCurve( null, new CubicCurve2D.Double(0, 0, 1, 2, 3, 3, 4, 2) );
         Point2D pa = new Point2D.Double(3.5, 2.0);

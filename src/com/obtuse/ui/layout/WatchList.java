@@ -25,14 +25,14 @@ public class WatchList<T extends Component> implements NamedEntity {
 
     private final String _name;
 
-    public WatchList( String name ) {
+    public WatchList( final String name ) {
 	super();
 
 	_name = name;
 
     }
 
-    public synchronized int addEntityToWatchList( @NotNull T c ) {
+    public synchronized int addEntityToWatchList( @NotNull final T c ) {
 
 	Logger.logMsg( "adding " + LinearLayoutUtil.fullName( c ) + " to watchlist" );
 
@@ -50,7 +50,7 @@ public class WatchList<T extends Component> implements NamedEntity {
 
     }
 
-    public synchronized int removeEntityFromWatchList( @NotNull T c ) {
+    public synchronized int removeEntityFromWatchList( @NotNull final T c ) {
 
 	Integer count = _watchList.get( c );
 	if ( count == null ) {
@@ -80,7 +80,7 @@ public class WatchList<T extends Component> implements NamedEntity {
 
     }
 
-    public synchronized boolean isEntityOnWatchList( @NotNull T c ) {
+    public synchronized boolean isEntityOnWatchList( @NotNull final T c ) {
 
 	return _watchList.containsKey( c );
 

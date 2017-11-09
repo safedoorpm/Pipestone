@@ -83,7 +83,7 @@ public class GowingPackableCollection<E> extends LinkedList<E> implements Gowing
 
         @Override
         @NotNull
-        public GowingPackable createEntity( @NotNull GowingUnPacker unPacker, @NotNull GowingPackedEntityBundle bundle, GowingEntityReference er ) {
+        public GowingPackable createEntity( @NotNull final GowingUnPacker unPacker, @NotNull final GowingPackedEntityBundle bundle, final GowingEntityReference er ) {
 
             return new GowingPackableCollection( unPacker, bundle );
 
@@ -99,7 +99,7 @@ public class GowingPackableCollection<E> extends LinkedList<E> implements Gowing
 
     }
 
-    public GowingPackableCollection( Collection<? extends E> collection ) {
+    public GowingPackableCollection( final Collection<? extends E> collection ) {
 
         super( collection );
 
@@ -107,7 +107,7 @@ public class GowingPackableCollection<E> extends LinkedList<E> implements Gowing
 
     }
 
-    public GowingPackableCollection( GowingUnPacker unPacker, GowingPackedEntityBundle bundle ) {
+    public GowingPackableCollection( final GowingUnPacker unPacker, final GowingPackedEntityBundle bundle ) {
 
         super();
 
@@ -143,7 +143,7 @@ public class GowingPackableCollection<E> extends LinkedList<E> implements Gowing
     }
 
     @Override
-    public boolean finishUnpacking( GowingUnPacker unPacker ) {
+    public boolean finishUnpacking( final GowingUnPacker unPacker ) {
 
         ObtuseUtil.doNothing();
 
@@ -182,7 +182,7 @@ public class GowingPackableCollection<E> extends LinkedList<E> implements Gowing
 
     @NotNull
     @Override
-    public GowingPackedEntityBundle bundleThyself( boolean isPackingSuper, GowingPacker packer ) {
+    public GowingPackedEntityBundle bundleThyself( final boolean isPackingSuper, final GowingPacker packer ) {
 
         GowingPackedEntityBundle rval = new GowingPackedEntityBundle(
                 ENTITY_TYPE_NAME,

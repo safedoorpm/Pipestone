@@ -48,7 +48,7 @@ public class ObtuseXMLUtils {
 
     }
 
-    public static void dumpXmlDocument( PrintStream ps, Document doc ) {
+    public static void dumpXmlDocument( final PrintStream ps, final Document doc ) {
 
         ps.println( "document name is \"" + doc.getNodeName() + "\"" );
         NodeList contents = doc.getChildNodes();
@@ -61,7 +61,7 @@ public class ObtuseXMLUtils {
 
     }
 
-    public static void dumpXmlNode( PrintStream ps, Node node, int depth ) {
+    public static void dumpXmlNode( final PrintStream ps, final Node node, final int depth ) {
 
         if ( "#text".equals( node.getNodeName() ) ) {
 
@@ -123,7 +123,7 @@ public class ObtuseXMLUtils {
 
     }
 
-    public static double[] getDoubleArray( Node parentNode, String targetNodeName )
+    public static double[] getDoubleArray( final Node parentNode, final String targetNodeName )
             throws ObtuseXmlNodeException {
 
         Node arrayNode = ObtuseXMLUtils.findNode( parentNode, targetNodeName );
@@ -168,7 +168,7 @@ public class ObtuseXMLUtils {
 
     }
 
-    public static int[] getIntegerArray( Node parentNode, String targetNodeName )
+    public static int[] getIntegerArray( final Node parentNode, final String targetNodeName )
             throws ObtuseXmlNodeException {
 
         Node arrayNode = ObtuseXMLUtils.findNode( parentNode, targetNodeName );
@@ -213,14 +213,15 @@ public class ObtuseXMLUtils {
 
     }
 
-    public static double getMandatoryDoubleAttributeValue( Node node, String attributeName )
+    public static double getMandatoryDoubleAttributeValue( final Node node, final String attributeName )
             throws ObtuseXmlNodeException {
 
+        //noinspection ConstantConditions
         return ObtuseXMLUtils.getDoubleAttributeValue( node, attributeName, true ).doubleValue();
 
     }
 
-    public static Double getDoubleAttributeValue( Node node, String attributeName, boolean mandatory )
+    public static Double getDoubleAttributeValue( final Node node, final String attributeName, final boolean mandatory )
             throws ObtuseXmlNodeException {
 
         String attributeValue = ObtuseXMLUtils.getAttributeValue( node, attributeName, mandatory );
@@ -248,14 +249,14 @@ public class ObtuseXMLUtils {
 
     }
 
-    public static String getMandatoryStringAttributeValue( Node node, String attributeName )
+    public static String getMandatoryStringAttributeValue( final Node node, final String attributeName )
             throws ObtuseXmlNodeException {
 
         return ObtuseXMLUtils.getStringAttributeValue( node, attributeName, true );
 
     }
 
-    public static String getStringAttributeValue( Node node, String attributeName, boolean mandatory )
+    public static String getStringAttributeValue( final Node node, final String attributeName, final boolean mandatory )
             throws ObtuseXmlNodeException {
 
         String attributeValue = ObtuseXMLUtils.getAttributeValue( node, attributeName, mandatory );
@@ -272,9 +273,10 @@ public class ObtuseXMLUtils {
     }
 
     @SuppressWarnings("BooleanMethodNameMustStartWithQuestion")
-    public static boolean getMandatoryBooleanAttributeValue( Node node, String attributeName )
+    public static boolean getMandatoryBooleanAttributeValue( final Node node, final String attributeName )
             throws ObtuseXmlNodeException {
 
+        //noinspection ConstantConditions
         return ObtuseXMLUtils.getBooleanAttributeValue( node, attributeName, true ).booleanValue();
 
     }
@@ -307,7 +309,7 @@ public class ObtuseXMLUtils {
 
     }
 
-    public static Boolean getBooleanAttributeValue( Node node, String attributeName, boolean mandatory )
+    public static Boolean getBooleanAttributeValue( final Node node, final String attributeName, final boolean mandatory )
             throws ObtuseXmlNodeException {
 
         String attributeValue = ObtuseXMLUtils.getAttributeValue( node, attributeName, mandatory );
@@ -358,14 +360,15 @@ public class ObtuseXMLUtils {
 
     }
 
-    public static int getMandatoryIntegerAttributeValue( Node node, String attributeName )
+    public static int getMandatoryIntegerAttributeValue( final Node node, final String attributeName )
             throws ObtuseXmlNodeException {
 
+        //noinspection ConstantConditions
         return ObtuseXMLUtils.getIntegerAttributeValue( node, attributeName, true ).intValue();
 
     }
 
-    public static Integer getIntegerAttributeValue( Node node, String attributeName, boolean mandatory )
+    public static Integer getIntegerAttributeValue( final Node node, final String attributeName, final boolean mandatory )
             throws ObtuseXmlNodeException {
 
         String attributeValue = ObtuseXMLUtils.getAttributeValue( node, attributeName, mandatory );
@@ -392,14 +395,14 @@ public class ObtuseXMLUtils {
 
     }
 
-    public static ObtuseCalendarDate getMandatoryCalendarDateAttributeValue( Node node, String attributeName )
+    public static ObtuseCalendarDate getMandatoryCalendarDateAttributeValue( final Node node, final String attributeName )
             throws ObtuseXmlNodeException {
 
         return ObtuseXMLUtils.getCalendarDateAttributeValue( node, attributeName, true );
 
     }
 
-    public static ObtuseCalendarDate getCalendarDateAttributeValue( Node node, String attributeName, boolean mandatory )
+    public static ObtuseCalendarDate getCalendarDateAttributeValue( final Node node, final String attributeName, final boolean mandatory )
             throws ObtuseXmlNodeException {
 
         String attributeValue = ObtuseXMLUtils.getAttributeValue( node, attributeName, mandatory );
@@ -428,14 +431,14 @@ public class ObtuseXMLUtils {
 
     }
 
-    public static FormattedImmutableDate getMandatoryDateTimeAttributeValue( Node node, String attributeName )
+    public static FormattedImmutableDate getMandatoryDateTimeAttributeValue( final Node node, final String attributeName )
             throws ObtuseXmlNodeException {
 
         return ObtuseXMLUtils.getDateTimeAttributeValue( node, attributeName, true );
 
     }
 
-    public static FormattedImmutableDate getDateTimeAttributeValue( Node node, String attributeName, boolean mandatory )
+    public static FormattedImmutableDate getDateTimeAttributeValue( final Node node, final String attributeName, final boolean mandatory )
             throws ObtuseXmlNodeException {
 
         String attributeValue = ObtuseXMLUtils.getAttributeValue( node, attributeName, mandatory );
@@ -464,7 +467,7 @@ public class ObtuseXMLUtils {
 
     }
 
-    public static String getAttributeValue( Node node, String attributeName, boolean mandatory )
+    public static String getAttributeValue( final Node node, final String attributeName, final boolean mandatory )
             throws ObtuseXmlNodeException {
 
         NamedNodeMap attributes = node.getAttributes();
@@ -532,11 +535,11 @@ public class ObtuseXMLUtils {
 //    }
 
     public static Collection<InstanceFromXML> getInstancesFromXML(
-            MessageProxy messageProxy,
-            @NotNull Node parentNode,
-            String targetNodeName,
-            String elementNodeName,
-            Class<? extends InstanceFromXML> elementClass
+            final MessageProxy messageProxy,
+            @NotNull final Node parentNode,
+            final String targetNodeName,
+            final String elementNodeName,
+            final Class<? extends InstanceFromXML> elementClass
     ) throws ObtuseXmlNodeException {
 
         Collection<InstanceFromXML> rval = new LinkedList<>();
@@ -579,7 +582,7 @@ public class ObtuseXMLUtils {
 
     }
 
-    public static InstanceFromXML getInstanceFromXML( MessageProxy messageProxy, Node parentNode, String targetNodeName, String name )
+    public static InstanceFromXML getInstanceFromXML( final MessageProxy messageProxy, final Node parentNode, final String targetNodeName, final String name )
             throws ObtuseXmlNodeException {
 
         Node instance = ObtuseXMLUtils.findNode( parentNode, targetNodeName );
@@ -600,12 +603,12 @@ public class ObtuseXMLUtils {
     }
 
     public static InstanceFromXML loadInstanceFromXML(
-            MessageProxy messageProxy,
-            @Nullable Node parent,
-            Node targetNode,
-            @Nullable Package optionalExpectedPackage,
-            Class<? extends InstanceFromXML> expectedClass,
-            String name
+            final MessageProxy messageProxy,
+            @Nullable final Node parent,
+            final Node targetNode,
+            @Nullable final Package optionalExpectedPackage,
+            final Class<? extends InstanceFromXML> expectedClass,
+            final String name
     ) {
 
         return ObtuseXMLUtils.loadInstanceFromXML(
@@ -619,12 +622,12 @@ public class ObtuseXMLUtils {
 
     }
     public static InstanceFromXML loadInstanceFromXML(
-            MessageProxy messageProxy,
-            @Nullable Node parent,
-            Node targetNode,
-            @Nullable Package[] optionalExpectedPackages,
-            Class<? extends InstanceFromXML> expectedClass,
-            String name
+            final MessageProxy messageProxy,
+            @Nullable final Node parent,
+            final Node targetNode,
+            @Nullable final Package[] optionalExpectedPackages,
+            final Class<? extends InstanceFromXML> expectedClass,
+            final String name
     ) {
 
         Package[] expectedPackages = optionalExpectedPackages == null ?
@@ -655,26 +658,26 @@ public class ObtuseXMLUtils {
 
         if ( targetClass == null ) {
 
-            String msg;
+            StringBuilder msg = new StringBuilder();
             if ( expectedPackages.length == 1 ) {
 
-                msg = "The " + name + " class must be in the " + expectedPackages[0].getName() + " package.";
+                msg.append( "The " ).append( name ).append( " class must be in the " ).append( expectedPackages[0].getName() ).append( " package." );
 
             } else {
 
-                msg = "The " + name + " class must be in one of the following packages:<blockquote>";
+                msg.append( "The " ).append( name ).append( " class must be in one of the following packages:<blockquote>" );
                 for ( Package targetPackage : expectedPackages ) {
 
-                    msg += targetPackage.getName();
+                    msg.append( targetPackage.getName() ).append( ' ' );
 
                 }
-                msg += "</blockquote>";
+                msg.append( "</blockquote>" );
 
             }
 
             messageProxy.error(
                     "Unknown/unsupported " + name + ":  " + targetNodeName,
-                    msg,
+                    msg.toString(),
                     "OK"
             );
 
@@ -692,6 +695,7 @@ public class ObtuseXMLUtils {
             if ( parent == null ) {
 
                 constructor = targetClass.getConstructor( MessageProxy.class, Node.class, Node.class );
+                //noinspection ConstantConditions
                 configClassInstance = (InstanceFromXML)constructor.newInstance(
                         messageProxy,
                         parent,
@@ -780,7 +784,7 @@ public class ObtuseXMLUtils {
 
     }
 
-    private static String formatCause( Throwable cause ) {
+    private static String formatCause( final Throwable cause ) {
 
         return (
                 cause.getMessage() == null
@@ -790,7 +794,7 @@ public class ObtuseXMLUtils {
 
     }
 
-    public static Node findNode( Node parentNode, Class<?> targetClass )
+    public static Node findNode( final Node parentNode, final Class<?> targetClass )
             throws ObtuseXmlNodeException {
 
         return ObtuseXMLUtils.findNode( parentNode, targetClass.getSimpleName() );
@@ -824,7 +828,7 @@ public class ObtuseXMLUtils {
                 parentNode,
                 new CheckNode() {
 
-                    public boolean isThisTheNode( Node candidateNode ) {
+                    public boolean isThisTheNode( final Node candidateNode ) {
 
                         return targetNodeName.equals( candidateNode.getNodeName() );
 
@@ -849,7 +853,7 @@ public class ObtuseXMLUtils {
                 parentNode,
                 new CheckNode() {
 
-                    public boolean isThisTheNode( Node candidateNode ) {
+                    public boolean isThisTheNode( final Node candidateNode ) {
 
                         return candidateNode.getNodeName().endsWith( suffix );
 
@@ -870,7 +874,7 @@ public class ObtuseXMLUtils {
 
     }
 
-    public static Node findNode( Node parentNode, CheckNode test )
+    public static Node findNode( final Node parentNode, final CheckNode test )
             throws ObtuseXmlNodeException {
 
         NodeList nodes = parentNode.getChildNodes();
@@ -891,7 +895,7 @@ public class ObtuseXMLUtils {
 
     }
 
-    public static String constructAttributeAssignment( String attributeName, String attributeValue, boolean mandatory )
+    public static String constructAttributeAssignment( final String attributeName, final String attributeValue, final boolean mandatory )
             throws ObtuseXmlNodeException {
 
         if ( attributeValue == null ) {
@@ -910,7 +914,7 @@ public class ObtuseXMLUtils {
 
     }
 
-    public static String constructAttributeAssignment( String attributeName, Boolean attributeValue, boolean mandatory )
+    public static String constructAttributeAssignment( final String attributeName, final Boolean attributeValue, final boolean mandatory )
             throws ObtuseXmlNodeException {
 
         if ( attributeValue == null ) {
@@ -929,7 +933,7 @@ public class ObtuseXMLUtils {
 
     }
 
-    public static String constructAttributeAssignment( String attributeName, Double attributeValue, boolean mandatory )
+    public static String constructAttributeAssignment( final String attributeName, final Double attributeValue, final boolean mandatory )
             throws ObtuseXmlNodeException {
 
         if ( attributeValue == null ) {
@@ -948,7 +952,7 @@ public class ObtuseXMLUtils {
 
     }
 
-    public static String constructAttributeAssignment( String attributeName, Integer attributeValue, boolean mandatory )
+    public static String constructAttributeAssignment( final String attributeName, final Integer attributeValue, final boolean mandatory )
             throws ObtuseXmlNodeException {
 
         if ( attributeValue == null ) {
@@ -967,7 +971,7 @@ public class ObtuseXMLUtils {
 
     }
 
-    public static String constructAttributeAssignment( String attributeName, Date attributeValue, boolean mandatory )
+    public static String constructAttributeAssignment( final String attributeName, final Date attributeValue, final boolean mandatory )
             throws ObtuseXmlNodeException {
 
         if ( attributeValue == null ) {

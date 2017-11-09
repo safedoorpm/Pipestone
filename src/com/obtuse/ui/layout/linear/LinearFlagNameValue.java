@@ -35,7 +35,7 @@ public class LinearFlagNameValue extends GowingPackableAttribute {
 
 	@Override
 	@NotNull
-	public GowingPackable createEntity( @NotNull GowingUnPacker unPacker, @NotNull GowingPackedEntityBundle bundle, GowingEntityReference er )
+	public GowingPackable createEntity( @NotNull final GowingUnPacker unPacker, @NotNull final GowingPackedEntityBundle bundle, final GowingEntityReference er )
 		throws GowingUnPackerParsingException {
 
 	    return new LinearFlagNameValue( unPacker, bundle, er );
@@ -44,7 +44,7 @@ public class LinearFlagNameValue extends GowingPackableAttribute {
 
     };
 
-    protected LinearFlagNameValue( LinearFlagName key, Object value, GowingPackableType type, boolean computed ) {
+    protected LinearFlagNameValue( final LinearFlagName key, final Object value, final GowingPackableType type, final boolean computed ) {
 	super( key, value, type, computed );
 
     }
@@ -54,7 +54,7 @@ public class LinearFlagNameValue extends GowingPackableAttribute {
 //
 //    }
 
-    public LinearFlagNameValue( GowingUnPacker unPacker, GowingPackedEntityBundle bundle, GowingEntityReference er )
+    public LinearFlagNameValue( final GowingUnPacker unPacker, final GowingPackedEntityBundle bundle, final GowingEntityReference er )
 	    throws GowingUnPackerParsingException {
 	super(
 		unPacker,
@@ -65,7 +65,7 @@ public class LinearFlagNameValue extends GowingPackableAttribute {
     }
 
     @NotNull
-    public GowingPackedEntityBundle bundleThyself( boolean isPackingSuper, GowingPacker packer ) {
+    public GowingPackedEntityBundle bundleThyself( final boolean isPackingSuper, final GowingPacker packer ) {
 
 	@SuppressWarnings("UnnecessaryLocalVariable")
 	GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(

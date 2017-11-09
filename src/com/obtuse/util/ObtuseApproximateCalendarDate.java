@@ -32,7 +32,7 @@ import static com.obtuse.util.ObtuseCalendarDate.parseCalendarDate;
 public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity implements Comparable<ObtuseApproximateCalendarDate> {
 
 //    private static boolean s_allowOldStyleDateRanges = false;
-    private static boolean s_requireNewStyleDateRanges = true;
+    private static final boolean s_requireNewStyleDateRanges = true;
 
     private final boolean _isUnknownApproximateDate;
 
@@ -42,7 +42,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
      are interested in IAE exceptions which will probably be interested in this runtime exception.
      */
 
-    public static class DateParsingException extends IllegalArgumentException {
+    public static class DateParsingException extends Exception {
 
         public enum Reason {
 
@@ -129,7 +129,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
         }
 
-        public DateParsingException( Reason reason, @NotNull String msg ) {
+        public DateParsingException( final Reason reason, @NotNull final String msg ) {
 
             super( msg );
 
@@ -137,7 +137,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
         }
 
-        public DateParsingException( Reason reason, @NotNull String msg, @Nullable Throwable cause ) {
+        public DateParsingException( final Reason reason, @NotNull final String msg, @Nullable final Throwable cause ) {
 
             super( msg, cause );
 
@@ -145,7 +145,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
         }
 
-        public DateParsingException( Reason reason, @NotNull Throwable cause ) {
+        public DateParsingException( final Reason reason, @NotNull final Throwable cause ) {
 
             super( "unknown error", cause );
 
@@ -164,7 +164,10 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
      <p/>Suggestion: consider using the {@code UNKNOWN_APPROXIMATE_DATE} instance in contexts where you might be tempted to use {@code null}.
      */
 
-    public static final ObtuseApproximateCalendarDate UNKNOWN_APPROXIMATE_DATE = new ObtuseApproximateCalendarDate( ObtuseCalendarDate.getEarliestSupportedDate(), ObtuseCalendarDate.getLatestSupportedDate() );
+    public static final ObtuseApproximateCalendarDate UNKNOWN_APPROXIMATE_DATE = new ObtuseApproximateCalendarDate(
+            ObtuseCalendarDate.getEarliestSupportedDate(),
+            ObtuseCalendarDate.getLatestSupportedDate()
+    );
 
     private static final EntityTypeName ENTITY_TYPE_NAME = new EntityTypeName( ObtuseApproximateCalendarDate.class );
 
@@ -194,7 +197,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
         @NotNull
         @Override
-        public GowingPackable createEntity( @NotNull GowingUnPacker unPacker, @NotNull GowingPackedEntityBundle bundle, GowingEntityReference er )
+        public GowingPackable createEntity( @NotNull final GowingUnPacker unPacker, @NotNull final GowingPackedEntityBundle bundle, final GowingEntityReference er )
                 throws GowingUnPackerParsingException {
 
             return new ObtuseApproximateCalendarDate( unPacker, bundle, er );
@@ -240,7 +243,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
     }
 
-    private static boolean s_verboseTesting = false;
+    private static final boolean s_verboseTesting = false;
 
     private final ObtuseCalendarDate _nominalCalendarDate;
 
@@ -249,7 +252,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
     private ObtuseCalendarDate _earliestPossibleDate = null;
     private ObtuseCalendarDate _latestPossibleDate = null;
 
-    public ObtuseApproximateCalendarDate( @NotNull ObtuseCalendarDate nominalCalendarDate, @NotNull DatePrecision precision ) {
+    public ObtuseApproximateCalendarDate( @NotNull final ObtuseCalendarDate nominalCalendarDate, @NotNull final DatePrecision precision ) {
 
         super( new GowingNameMarkerThing() );
 
@@ -276,7 +279,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
     }
 
-    public ObtuseApproximateCalendarDate( @Nullable ObtuseCalendarDate xEarliestPossibleDate, @Nullable ObtuseCalendarDate xLatestPossibleDate ) {
+    public ObtuseApproximateCalendarDate( @Nullable final ObtuseCalendarDate xEarliestPossibleDate, @Nullable final ObtuseCalendarDate xLatestPossibleDate ) {
 
         super( new GowingNameMarkerThing() );
 
@@ -305,9 +308,9 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
     }
 
     public ObtuseApproximateCalendarDate(
-            GowingUnPacker unPacker,
-            GowingPackedEntityBundle bundle,
-            GowingEntityReference er
+            final GowingUnPacker unPacker,
+            final GowingPackedEntityBundle bundle,
+            final GowingEntityReference er
     ) throws GowingUnPackerParsingException {
 
         super( unPacker, bundle.getSuperBundle() );
@@ -333,7 +336,8 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
     /**
      Determine if this instance encompass the entire range of supported dates and is thus an 'unknown' date.
      <p/>
-     Since instances of this class are immutable, the determination of whether or not a newly created instance is equal to {@link #UNKNOWN_APPROXIMATE_DATE} is determined when an instance is created.
+     Since instances of this class are immutable, the determination of whether or not a newly created instance is equal to
+     {@link #UNKNOWN_APPROXIMATE_DATE} is determined when an instance is created.
      This method returns said pre-computed knowledge (i.e. this method is very fast).
      @return {@code true} if this instance encompasses the entire range of supported dates; {@code false} otherwise.
      */
@@ -344,7 +348,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
     }
 
-    private static ObtuseCalendarDate makeCalendarDate( GowingPackedEntityBundle bundle, EntityName whichDate )
+    private static ObtuseCalendarDate makeCalendarDate( final GowingPackedEntityBundle bundle, final EntityName whichDate )
             throws GowingUnPackerParsingException {
 
         try {
@@ -359,7 +363,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
     }
 
-    private static DatePrecision makePrecision( GowingPackedEntityBundle bundle ) throws GowingUnPackerParsingException {
+    private static DatePrecision makePrecision( final GowingPackedEntityBundle bundle ) throws GowingUnPackerParsingException {
 
         try {
 
@@ -376,7 +380,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
     @NotNull
     @Override
     public GowingPackedEntityBundle bundleThyself(
-            boolean isPackingSuper, GowingPacker packer
+            final boolean isPackingSuper, final GowingPacker packer
     ) {
 
         GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
@@ -416,7 +420,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
     }
 
     @Override
-    public boolean finishUnpacking( GowingUnPacker unPacker ) {
+    public boolean finishUnpacking( final GowingUnPacker unPacker ) {
 
         return true;
 
@@ -556,7 +560,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
      @return <tt>true</tt> if this approximate date includes the other specific date; <tt>false</tt> otherwise.
      */
 
-    public boolean includes( ObtuseCalendarDate otherSpecificDate ) {
+    public boolean includes( final ObtuseCalendarDate otherSpecificDate ) {
 
         return getEarliestPossibleDate().compareTo( otherSpecificDate ) <= 0 && otherSpecificDate.compareTo( getLatestPossibleDate() ) <= 0;
 
@@ -569,7 +573,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
      @return <tt>true</tt> if they overlap; <tt>false</tt> otherwise.
      */
 
-    public boolean overlaps( ObtuseApproximateCalendarDate otherApproximateDate ) {
+    public boolean overlaps( final ObtuseApproximateCalendarDate otherApproximateDate ) {
 
         // Are we completely before the other date?
 
@@ -677,7 +681,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
      @return -1, 0 or 1 depending on whether this instance is less than, equal to or greater than the other instance.
      */
 
-    public int compareTo( @NotNull ObtuseApproximateCalendarDate rhs ) {
+    public int compareTo( @NotNull final ObtuseApproximateCalendarDate rhs ) {
 
         int rval = getEarliestPossibleDate().compareTo( rhs.getEarliestPossibleDate() );
         if ( rval == 0 ) {
@@ -701,7 +705,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
      Determine if two instances are equivalent (same earliest possible date and same latest possible date).
      */
 
-    public boolean equivalent( @NotNull ObtuseApproximateCalendarDate rhs ) {
+    public boolean equivalent( @NotNull final ObtuseApproximateCalendarDate rhs ) {
 
         return getEarliestPossibleDate().equals( rhs.getEarliestPossibleDate() ) &&
                getLatestPossibleDate().equals( rhs.getLatestPossibleDate() );
@@ -715,7 +719,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
      @return true if both instance's specified date and precision are the same; false otherwise.
      */
 
-    public boolean equals( Object rhs ) {
+    public boolean equals( final Object rhs ) {
 
         return rhs instanceof ObtuseApproximateCalendarDate && compareTo( (ObtuseApproximateCalendarDate)rhs ) == 0;
 
@@ -917,7 +921,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
     }
 
     @NotNull
-    public static ObtuseApproximateCalendarDate parseDateRange( String dateString )
+    public static ObtuseApproximateCalendarDate parseDateRange( final String dateString )
             throws DateParsingException {
 
         final String trimmedDateString = dateString.trim();
@@ -1250,7 +1254,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
     }
 
-    private static void checkParsing( @NotNull String dateString, @Nullable ObtuseApproximateCalendarDate expectedDate ) {
+    private static void checkParsing( @NotNull final String dateString, @Nullable final ObtuseApproximateCalendarDate expectedDate ) {
 
         try {
 
@@ -1277,7 +1281,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
     }
 
-    public static void main( String[] args ) {
+    public static void main( final String[] args ) {
 
         BasicProgramConfigInfo.init( "Obtuse", "Util", "Testing", null );
 
@@ -1534,10 +1538,10 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
     }
 
     private static void equalsVsEquivalent(
-            ObtuseApproximateCalendarDate lhs,
-            ObtuseApproximateCalendarDate rhs,
-            @SuppressWarnings("SameParameterValue") boolean equalsOracle,
-            @SuppressWarnings("SameParameterValue") boolean equivalentOracle
+            final ObtuseApproximateCalendarDate lhs,
+            final ObtuseApproximateCalendarDate rhs,
+            @SuppressWarnings("SameParameterValue") final boolean equalsOracle,
+            @SuppressWarnings("SameParameterValue") final boolean equivalentOracle
     ) {
 
         boolean equalsResult = lhs.equals( rhs );
@@ -1579,10 +1583,10 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
     @SuppressWarnings("UnusedReturnValue")
     private static boolean checkIncludes(
-            @SuppressWarnings("SameParameterValue") String lhsDateString,
-            DatePrecision precision,
-            String rhsDateString,
-            boolean oracle
+            @SuppressWarnings("SameParameterValue") final String lhsDateString,
+            final DatePrecision precision,
+            final String rhsDateString,
+            final boolean oracle
     ) {
 
         try {
@@ -1634,11 +1638,11 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
     }
 
     private static boolean checkOverlap(
-            String lhsDateString,
-            DatePrecision lhsPrecision,
-            String rhsDateString,
-            DatePrecision rhsPrecision,
-            boolean oracle
+            final String lhsDateString,
+            final DatePrecision lhsPrecision,
+            final String rhsDateString,
+            final DatePrecision rhsPrecision,
+            final boolean oracle
     ) {
 
         if ( lhsPrecision == null || rhsPrecision == null ) {
@@ -1693,9 +1697,9 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
     }
 
     private static boolean checkOverlap(
-            ObtuseApproximateCalendarDate lhs,
-            ObtuseApproximateCalendarDate rhs,
-            boolean oracle
+            final ObtuseApproximateCalendarDate lhs,
+            final ObtuseApproximateCalendarDate rhs,
+            final boolean oracle
     ) {
 
         boolean result1 = lhs.overlaps( rhs );

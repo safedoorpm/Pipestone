@@ -12,7 +12,7 @@ public abstract class SimpleEvent {
 
     private final String _description;
 
-    public SimpleEvent( String description ) {
+    public SimpleEvent( final String description ) {
         super();
 
         _description = description;

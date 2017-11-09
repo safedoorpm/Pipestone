@@ -12,7 +12,7 @@ public abstract class Arg {
 
     private final String _keyword;
 
-    protected Arg( String keyword ) {
+    protected Arg( final String keyword ) {
         super();
 
         _keyword = keyword;

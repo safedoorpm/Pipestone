@@ -185,7 +185,7 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
          @param offset    the offset within the line that we found it at.
          */
 
-        public GowingToken2( @NotNull TokenType tokenType, Object value, int lnum, int offset ) {
+        public GowingToken2( @NotNull final TokenType tokenType, final Object value, final int lnum, final int offset ) {
 
             super();
 
@@ -207,7 +207,7 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
          @param offset      the offset within the line that we found it at.
          */
 
-        public GowingToken2( @NotNull TokenType tokenType, @NotNull TokenType elementType, Object value, int lnum, int offset ) {
+        public GowingToken2( @NotNull final TokenType tokenType, @NotNull final TokenType elementType, final Object value, final int lnum, final int offset ) {
 
             super();
 
@@ -233,7 +233,7 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
          @param offset the offset within the line that we found it at.
          */
 
-        public GowingToken2( String errmsg, int lnum, int offset ) {
+        public GowingToken2( final String errmsg, final int lnum, final int offset ) {
 
             _tokenType = TokenType.ERROR;
             _elementType = null;
@@ -440,7 +440,7 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
 
         @SuppressWarnings("RedundantThrows")
         @NotNull
-        public GowingPackableThingHolder createHolder( EntityName entityName, GowingToken2 valueToken )
+        public GowingPackableThingHolder createHolder( final EntityName entityName, final GowingToken2 valueToken )
                 throws GowingUnPackerParsingException {
 
             GowingPackableThingHolder holder;
@@ -602,7 +602,7 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
 
 //	private final char[] _chars;
 
-    public StdGowingTokenizer( @NotNull GowingUnPackerContext unPackerContext, @NotNull LineNumberReader lineNumberReader ) {
+    public StdGowingTokenizer( @NotNull final GowingUnPackerContext unPackerContext, @NotNull final LineNumberReader lineNumberReader ) {
 
         super();
 
@@ -628,14 +628,14 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
 
     @SuppressWarnings("WeakerAccess")
     @NotNull
-    public static String cleanupTokenType( TokenType tokenType ) {
+    public static String cleanupTokenType( final TokenType tokenType ) {
 
         return tokenType.name().toLowerCase().replace( '_', '-' );
 
     }
 
     @Override
-    public void putBackToken( GowingToken2 token ) {
+    public void putBackToken( final GowingToken2 token ) {
 
         if ( _recursiveDepth > 0 ) {
 
@@ -767,7 +767,7 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
 //
 //    }
 
-    private String cleanupChar( int ch ) {
+    private String cleanupChar( final int ch ) {
 
         switch ( ch ) {
 
@@ -807,7 +807,7 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
 
     @Override
     @NotNull
-    public GowingToken2 getNextToken( boolean identifierAllowed, @NotNull TokenType requiredType )
+    public GowingToken2 getNextToken( final boolean identifierAllowed, @NotNull final TokenType requiredType )
             throws IOException, GowingUnPackerParsingException {
 
         try {
@@ -851,7 +851,7 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
 
     }
 
-    public byte parseHexByte( int upper, int lower ) {
+    public byte parseHexByte( final int upper, final int lower ) {
 
         int uValue;
         if ( upper >= '0' && upper <= '9' ) {
@@ -889,7 +889,7 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
 
     @Override
     @NotNull
-    public GowingToken2 getNextToken( boolean identifierAllowed )
+    public GowingToken2 getNextToken( final boolean identifierAllowed )
             throws IOException, GowingUnPackerParsingException {
 
         if ( _putBackToken != null ) {
@@ -1373,7 +1373,7 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
 //    }
 
     @NotNull
-    private GowingToken2 getArray2( boolean primitive )
+    private GowingToken2 getArray2( final boolean primitive )
             throws IOException {
 
         int ch;
@@ -1416,7 +1416,7 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
                 elementParser = new ElementParser() {
 
                     @Override
-                    public Object parse( int index )
+                    public Object parse( final int index )
                             throws IOException, NumberFormatException {
 
                         int ch = nextCh();
@@ -1458,7 +1458,7 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
                 elementParser = new ElementParser() {
 
                     @Override
-                    public Object parse( int index )
+                    public Object parse( final int index )
                             throws IOException {
 
                         int c1 = nextCh();
@@ -1537,7 +1537,7 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
                 elementParser = new ElementParser() {
 
                     @Override
-                    public Object parse( int index )
+                    public Object parse( final int index )
                             throws IOException {
 
                         String numericString = collectNumericString( "" );
@@ -1564,7 +1564,7 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
                 elementParser = new ElementParser() {
 
                     @Override
-                    public Object parse( int index )
+                    public Object parse( final int index )
                             throws IOException {
 
                         String numericString = collectNumericString( "" );
@@ -1591,7 +1591,7 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
                 elementParser = new ElementParser() {
 
                     @Override
-                    public Object parse( int index )
+                    public Object parse( final int index )
                             throws IOException {
 
                         String numericString = collectNumericString( "" );
@@ -1619,7 +1619,7 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
                 elementParser = new ElementParser() {
 
                     @Override
-                    public Object parse( int index )
+                    public Object parse( final int index )
                             throws IOException {
 
                         String numericString = collectNumericString( "" );
@@ -1647,7 +1647,7 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
                 elementParser = new ElementParser() {
 
                     @Override
-                    public Object parse( int index )
+                    public Object parse( final int index )
                             throws IOException {
 
                         String numericString = collectNumericString( "" );
@@ -2023,9 +2023,9 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
     @SuppressWarnings("WeakerAccess")
     @NotNull
     public GowingToken2 finishCollectingEntityReference(
-            boolean entityNameOk,
-            @SuppressWarnings("unused") GowingUnPackerContext unPackerContext,
-            int typeId
+            final boolean entityNameOk,
+            @SuppressWarnings("unused") final GowingUnPackerContext unPackerContext,
+            final int typeId
     )
             throws IOException, GowingUnPackerParsingException {
 
@@ -2056,7 +2056,7 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
             }
 
             version = entityVersionToken.intValue();
-            if ( version <= 0 ) {
+            if ( version.intValue() <= 0 ) {
 
                 throw new GowingUnPackerParsingException( "version number is not positive (" + version + ")", entityVersionToken );
 
@@ -2283,7 +2283,7 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
 
     }
 
-    private String collectNumericString( @SuppressWarnings("SameParameterValue") @NotNull String starter )
+    private String collectNumericString( @SuppressWarnings("SameParameterValue") @NotNull final String starter )
             throws IOException {
 
         StringBuilder buf = new StringBuilder( starter );
@@ -2339,7 +2339,7 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
 //
 //    }
 
-    private GowingToken2 parseNumeric( TokenType tokenType, NumericParser numericParser )
+    private GowingToken2 parseNumeric( final TokenType tokenType, final NumericParser numericParser )
             throws IOException {
 
         String numericString = collectNumericString( "" );
@@ -2355,7 +2355,7 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
 
     }
 
-    public static void main( String[] args ) {
+    public static void main( final String[] args ) {
 
         BasicProgramConfigInfo.init( "Obtuse", "Util", "testing", null );
 

@@ -7,8 +7,12 @@ package com.obtuse.util;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.*;
-import java.lang.management.*;
-import java.net.*;
+import java.lang.management.ManagementFactory;
+import java.lang.management.ThreadInfo;
+import java.lang.management.ThreadMXBean;
+import java.net.InetSocketAddress;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -49,7 +53,7 @@ public class Trace {
 
     private static boolean _printEvents = false;
 
-    public static void setSupportContact( String supportContact ) {
+    public static void setSupportContact( final String supportContact ) {
 
         Trace.s_supportContact = supportContact;
 
@@ -104,7 +108,7 @@ public class Trace {
 
         private Throwable _exception = null;
 
-        private TraceEvent( String event ) {
+        private TraceEvent( final String event ) {
             super();
 
             _event = event;
@@ -113,7 +117,7 @@ public class Trace {
 
         }
 
-        private TraceEvent( String why, Throwable e ) {
+        private TraceEvent( final String why, final Throwable e ) {
             this( why + ( e == null ? "" : " (associated exception:  " + e + ")" ) );
 
             _exception = e;
@@ -141,7 +145,7 @@ public class Trace {
 
         }
 
-        private void emit( List<String> results ) {
+        private void emit( final List<String> results ) {
 
             String pfx = Trace.OUR_DATE_FORMAT.format( _timestamp ) + " {" + _tid + "}:  ";
 
@@ -157,7 +161,12 @@ public class Trace {
 
         public String toString() {
 
-            String msg = Trace.OUR_DATE_FORMAT.format( _timestamp ) + " {" + _tid + "}:  " + _event;
+            StringBuilder msg = new StringBuilder();
+            msg.append( Trace.OUR_DATE_FORMAT.format( _timestamp ) )
+               .append( " {" )
+               .append( _tid )
+               .append( "}:  " )
+               .append( _event );
 
             if ( _exception != null ) {
 
@@ -165,13 +174,13 @@ public class Trace {
                 Trace.captureStackTrace( false, "", _exception, results );
                 for ( String s : results ) {
 
-                    msg += "\n" + s;
+                    msg.append( "\n" ).append( s );
 
                 }
 
             }
 
-            return msg;
+            return msg.toString();
 
         }
 
@@ -190,14 +199,14 @@ public class Trace {
     }
 
     @SuppressWarnings("UnusedDeclaration")
-    public static void setLiveTrace( boolean value ) {
+    public static void setLiveTrace( final boolean value ) {
 
         Trace.s_liveTrace = value;
 
     }
 
     @SuppressWarnings("UnusedDeclaration")
-    public static void register( TraceFileManager traceFileManager ) {
+    public static void register( final TraceFileManager traceFileManager ) {
 
         synchronized ( Trace.s_traceFileManagers ) {
 
@@ -208,7 +217,7 @@ public class Trace {
     }
 
     @SuppressWarnings("UnusedDeclaration")
-    public static void setProgramName( String programName ) {
+    public static void setProgramName( final String programName ) {
 
         Trace.s_programName = programName;
 
@@ -224,7 +233,7 @@ public class Trace {
      *         will get a different id number).
      */
 
-    public static int addTraceHook( TraceHook hook ) {
+    public static int addTraceHook( final TraceHook hook ) {
 
         synchronized ( Trace.TRACE_HOOKS_LOCK ) {
 
@@ -245,7 +254,7 @@ public class Trace {
      */
 
     @SuppressWarnings("UnusedDeclaration")
-    public static void removeTraceHook( int id ) {
+    public static void removeTraceHook( final int id ) {
 
         synchronized ( Trace.TRACE_HOOKS_LOCK ) {
 
@@ -256,25 +265,25 @@ public class Trace {
     }
 
     @SuppressWarnings("UnusedDeclaration")
-    public TraceHook getHook( int id ) {
+    public TraceHook getHook( final int id ) {
 
         return Trace.s_traceHooks.get( id );
 
     }
 
-    public static void event( String event ) {
+    public static void event( final String event ) {
 
         Trace.event( event, null );
 
     }
 
-    public static void event( Throwable e ) {
+    public static void event( final Throwable e ) {
 
         Trace.event( "unexpected exception", e );
 
     }
 
-    public static void event( String event, @Nullable Throwable e ) {
+    public static void event( final String event, @Nullable final Throwable e ) {
 
         if ( _printEvents ) {
 
@@ -336,7 +345,7 @@ public class Trace {
 
     }
 
-    public static List<String> getTrace( String why, String where ) {
+    public static List<String> getTrace( final String why, final String where ) {
 
         // Sitting on the trace hooks lock while collecting trace data risks a deadlock
         // (e.g. if some other thread tries to record a trace event) so we hold the
@@ -347,9 +356,7 @@ public class Trace {
         synchronized ( Trace.TRACE_HOOKS_LOCK ) {
 
             events = new LinkedList<>();
-            for ( TraceEvent event : Trace.s_traceEvents ) {
-                events.add( event );
-            }
+            events.addAll( Trace.s_traceEvents );
 
             hooks = new TreeMap<>();
             for ( int hookId : Trace.s_traceHooks.keySet() ) {
@@ -445,11 +452,7 @@ public class Trace {
                     System.out.println( "doing hook " + hook );
                     List<String> hookResults = hook.run();
 
-                    for ( String line : hookResults ) {
-
-                        results.add( line );
-
-                    }
+                    results.addAll( hookResults );
 
                 }
 
@@ -468,7 +471,7 @@ public class Trace {
     }
 
     @SuppressWarnings("UseOfSystemOutOrSystemErr")
-    public static String emitTrace( String why ) {
+    public static String emitTrace( final String why ) {
 
         String where = Trace._logFileNameFormatter.format( System.currentTimeMillis() );
         System.out.println( "where string built" );
@@ -486,13 +489,13 @@ public class Trace {
     }
 
     @SuppressWarnings("UnusedDeclaration")
-    public static String emitTrace( Throwable e ) {
+    public static String emitTrace( final Throwable e ) {
 
         return Trace.emitTrace( "unexpected exception", e );
 
     }
 
-    public static String emitTrace( String why, Throwable e ) {
+    public static String emitTrace( final String why, final Throwable e ) {
 
         if ( e == null ) {
 
@@ -518,7 +521,7 @@ public class Trace {
 
     }
 
-    private static void captureStackTrace( boolean bothStyles, String pfx, Throwable e, List<String> results ) {
+    private static void captureStackTrace( final boolean bothStyles, final String pfx, final Throwable e, final List<String> results ) {
 
         if ( bothStyles ) {
 
@@ -550,7 +553,7 @@ public class Trace {
     }
 
     @SuppressWarnings("SameParameterValue")
-    private static String emitResults( String why, List<String> results, String where, boolean compressOutput ) {
+    private static String emitResults( final String why, final List<String> results, final String where, final boolean compressOutput ) {
 
         final long timeStamp = System.currentTimeMillis();
 
@@ -633,7 +636,7 @@ public class Trace {
     }
 
     @SuppressWarnings("UnusedDeclaration")
-    public static void startTracePortListener( int port ) {
+    public static void startTracePortListener( final int port ) {
 
         try {
 
@@ -698,7 +701,7 @@ public class Trace {
     }
 
     @SuppressWarnings("UnusedDeclaration")
-    public static void setDirectory( File tmpSavrolaDir ) {
+    public static void setDirectory( final File tmpSavrolaDir ) {
 
         if ( tmpSavrolaDir != null ) {
 
@@ -708,7 +711,7 @@ public class Trace {
 
     }
 
-    public static void appendStackTrace( Collection<String> trace, Throwable e ) {
+    public static void appendStackTrace( final Collection<String> trace, final Throwable e ) {
 
         StackTraceElement[] stack = e.getStackTrace();
         for ( int i = 0; i < stack.length && i < Trace.MAX_FORMATTED_TRACE_DEPTH; i += 1 ) {
@@ -741,7 +744,7 @@ public class Trace {
 
     }
 
-    public static boolean setPrintEvents( boolean printEvents ) {
+    public static boolean setPrintEvents( final boolean printEvents ) {
 
         boolean oldValue = _printEvents;
 
@@ -757,7 +760,7 @@ public class Trace {
 
     }
 
-    public static String[] formatDeeperStackTrace( Throwable e ) {
+    public static String[] formatDeeperStackTrace( final Throwable e ) {
 
         List<String> trace = new LinkedList<>();
 

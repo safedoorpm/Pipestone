@@ -32,7 +32,7 @@ public abstract class WindowWithMenus extends TrackedWindow {
     private static boolean s_showLogsMode;
 
     @SuppressWarnings({ "ClassWithoutToString", "SameParameterValue" })
-    protected WindowWithMenus( String windowPrefsName, boolean includeLogsMenuItem ) {
+    protected WindowWithMenus( final String windowPrefsName, final boolean includeLogsMenuItem ) {
         super( windowPrefsName );
 
         _menuBar = new JMenuBar();
@@ -71,7 +71,7 @@ public abstract class WindowWithMenus extends TrackedWindow {
         _preferencesMenuItem.addActionListener(
                 new MyActionListener() {
 
-                    public void myActionPerformed( ActionEvent actionEvent ) {
+                    public void myActionPerformed( final ActionEvent actionEvent ) {
 
                         handlePreferences();
 
@@ -87,7 +87,7 @@ public abstract class WindowWithMenus extends TrackedWindow {
             _showLogsMenuItem.addActionListener(
                     new MyActionListener() {
 
-                        public void myActionPerformed( ActionEvent actionEvent ) {
+                        public void myActionPerformed( final ActionEvent actionEvent ) {
 
                             if ( _showLogsMenuItem.getState() ) {
 
@@ -126,7 +126,7 @@ public abstract class WindowWithMenus extends TrackedWindow {
             exitItem.addActionListener(
                     new MyActionListener() {
 
-                        public void myActionPerformed( ActionEvent actionEvent ) {
+                        public void myActionPerformed( final ActionEvent actionEvent ) {
 
                             System.exit( 0 );
 
@@ -174,7 +174,7 @@ public abstract class WindowWithMenus extends TrackedWindow {
      */
 
     @SuppressWarnings("UnusedDeclaration")
-    public static void setPreferencesHandler( PreferencesHandler preferencesHandler ) {
+    public static void setPreferencesHandler( final PreferencesHandler preferencesHandler ) {
 
         s_preferencesHandler = preferencesHandler;
 
@@ -196,7 +196,7 @@ public abstract class WindowWithMenus extends TrackedWindow {
 
     }
 
-    public static void setAllShowLogsModeInMenu( boolean value ) {
+    public static void setAllShowLogsModeInMenu( final boolean value ) {
 
         WindowWithMenus.s_showLogsMode = value;
         for ( WindowWithMenus window : WindowWithMenus.s_allWindowsWithLogsMenuItem ) {
@@ -207,7 +207,7 @@ public abstract class WindowWithMenus extends TrackedWindow {
 
     }
 
-    public void setShowLogsModeInMenu( boolean value ) {
+    public void setShowLogsModeInMenu( final boolean value ) {
 
         if ( _showLogsMenuItem != null ) {
 

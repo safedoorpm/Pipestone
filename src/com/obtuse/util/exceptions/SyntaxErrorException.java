@@ -10,12 +10,12 @@ package com.obtuse.util.exceptions;
 
 public class SyntaxErrorException extends Exception {
 
-    public SyntaxErrorException( String msg ) {
+    public SyntaxErrorException( final String msg ) {
         super( msg );
 
     }
 
-    public SyntaxErrorException( String msg, Throwable e ) {
+    public SyntaxErrorException( final String msg, final Throwable e ) {
         super( msg, e );
 
     }

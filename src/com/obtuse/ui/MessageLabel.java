@@ -21,32 +21,32 @@ public class MessageLabel extends JLabel {
 
         private final String _extraInfo;
 
-        public AugmentedIllegalArgumentException( String message, String extraInfo, Throwable cause ) {
+        public AugmentedIllegalArgumentException( final String message, final String extraInfo, final Throwable cause ) {
             super( message, cause );
 
             _extraInfo = extraInfo;
 
 	}
 
-	public AugmentedIllegalArgumentException( AugmentedMessage augmentedMessage ) {
+	public AugmentedIllegalArgumentException( final AugmentedMessage augmentedMessage ) {
             this( augmentedMessage.getMessage(), augmentedMessage.getExtraInfo() );
 	}
 
-	public AugmentedIllegalArgumentException( String message, String extraInfo ) {
+	public AugmentedIllegalArgumentException( final String message, final String extraInfo ) {
             this( message, extraInfo, null );
 	}
 
-	public AugmentedIllegalArgumentException( String message ) {
+	public AugmentedIllegalArgumentException( final String message ) {
 	    this( message, null, null );
 
 	}
 
-	public AugmentedIllegalArgumentException( String message, Throwable cause ) {
+	public AugmentedIllegalArgumentException( final String message, final Throwable cause ) {
             this( message, null, cause );
 
 	}
 
-	public AugmentedIllegalArgumentException( IllegalArgumentException iae ) {
+	public AugmentedIllegalArgumentException( final IllegalArgumentException iae ) {
             this( iae.getMessage(), null, iae.getCause() );
 
 	}
@@ -71,7 +71,7 @@ public class MessageLabel extends JLabel {
 
         private final String _extraInfo;
 
-        public AugmentedMessage( String message, String extraInfo ) {
+        public AugmentedMessage( final String message, final String extraInfo ) {
             super();
 
             _message = message;
@@ -80,7 +80,7 @@ public class MessageLabel extends JLabel {
 
 	}
 
-	public AugmentedMessage( String message ) {
+	public AugmentedMessage( final String message ) {
             this( message, null );
 
 	}
@@ -115,7 +115,7 @@ public class MessageLabel extends JLabel {
 	    new MouseAdapter() {
 
 		@Override
-		public void mouseClicked( MouseEvent e ) {
+		public void mouseClicked( final MouseEvent e ) {
 
 		    Logger.logMsg( "got a mouse click event:  " + e );
 
@@ -135,14 +135,14 @@ public class MessageLabel extends JLabel {
 
     }
 
-    public MessageLabel( String message, String extraInfo ) {
+    public MessageLabel( final String message, final String extraInfo ) {
         super();
 
 	setMessage( message, extraInfo );
 
     }
 
-    public MessageLabel( String message ) {
+    public MessageLabel( final String message ) {
 	this( message, null );
     }
 
@@ -152,13 +152,13 @@ public class MessageLabel extends JLabel {
 
     }
 
-    public void setMessage( String message ) {
+    public void setMessage( final String message ) {
 
         setMessage( message, null );
 
     }
 
-    public void setMessage( Exception e ) {
+    public void setMessage( final Exception e ) {
 
         if ( e instanceof AugmentedIllegalArgumentException ) {
 
@@ -174,7 +174,7 @@ public class MessageLabel extends JLabel {
 
     }
 
-    public void setMessage( String message, String extraInfo ) {
+    public void setMessage( final String message, final String extraInfo ) {
 
         setText( message == null ? "null" : message.startsWith( "<html>" ) ? message : "<html>" + message + "</html>" );
 
@@ -182,7 +182,7 @@ public class MessageLabel extends JLabel {
 
     }
 
-    public void setExtraInfo( String extraInfo ) {
+    public void setExtraInfo( final String extraInfo ) {
 
 	_extraInfo = extraInfo == null ? "" : extraInfo;
 

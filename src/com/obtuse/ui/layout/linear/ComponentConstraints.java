@@ -24,7 +24,7 @@ public class ComponentConstraints {
     @Nullable
     private final ConstraintTuple _heightConstraint;
 
-    public ComponentConstraints( LinearFlagMap componentFlags, @Nullable ConstraintTuple widthConstraint, @Nullable ConstraintTuple heightConstraint ) {
+    public ComponentConstraints( final LinearFlagMap componentFlags, @Nullable final ConstraintTuple widthConstraint, @Nullable final ConstraintTuple heightConstraint ) {
 //	this( componentFlags.toArray( new LinearFlagName[ componentFlags.size() ] ), widthConstraint, heightConstraint );
 
 	_componentFlags = componentFlags;
@@ -35,7 +35,7 @@ public class ComponentConstraints {
 
     }
 
-    public ComponentConstraints( LinearFlagNameValue[] componentFlags, @Nullable ConstraintTuple widthConstraint, @Nullable ConstraintTuple heightConstraint ) {
+    public ComponentConstraints( final LinearFlagNameValue[] componentFlags, @Nullable final ConstraintTuple widthConstraint, @Nullable final ConstraintTuple heightConstraint ) {
 	this( LinearFlagMap.createCleanedMap( componentFlags ), widthConstraint, heightConstraint );
 
     }

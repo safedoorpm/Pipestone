@@ -38,7 +38,7 @@ public class MyExploreSSL {
         @SuppressWarnings("UnusedDeclaration")
         private String _authType = null;
 
-        private MyTrustManager( X509TrustManager realTrustManager ) {
+        private MyTrustManager( final X509TrustManager realTrustManager ) {
 
             super();
 
@@ -52,13 +52,13 @@ public class MyExploreSSL {
 
         }
 
-        public void checkClientTrusted( X509Certificate[] certChain, String authType ) {
+        public void checkClientTrusted( final X509Certificate[] certChain, final String authType ) {
 
             throw new UnsupportedOperationException( "we don't support checking if the client is trustworthy" );
 
         }
 
-        public void checkServerTrusted( X509Certificate[] certChain, String authType )
+        public void checkServerTrusted( final X509Certificate[] certChain, final String authType )
                 throws CertificateException {
 
             //noinspection AssignmentToCollectionOrArrayFieldFromParameter
@@ -152,7 +152,7 @@ public class MyExploreSSL {
      * @param args the program's args.
      */
 
-    public static void main( String[] args ) {
+    public static void main( final String[] args ) {
 
         try {
 
@@ -207,7 +207,7 @@ public class MyExploreSSL {
         }
     }
 
-    private static boolean trialRun( KeyStore ks, @SuppressWarnings("SameParameterValue") String targetHost )
+    private static boolean trialRun( final KeyStore ks, @SuppressWarnings("SameParameterValue") final String targetHost )
             throws
             NoSuchAlgorithmException,
             KeyStoreException,

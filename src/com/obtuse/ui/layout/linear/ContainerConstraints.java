@@ -16,7 +16,7 @@ public class ContainerConstraints {
 
     private final LinearFlagMap _containerFlags;
 
-    public ContainerConstraints( LinearFlagMap containerFlags ) {
+    public ContainerConstraints( final LinearFlagMap containerFlags ) {
 	super();
 
 	_containerFlags = containerFlags;

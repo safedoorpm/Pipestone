@@ -30,7 +30,7 @@ public class PopupJTableEditor extends DefaultCellEditor {
 
     private JTextField _editorComponent;
 
-    public PopupJTableEditor( @NotNull String popupWindowTitle ) {
+    public PopupJTableEditor( @NotNull final String popupWindowTitle ) {
 
         super( new JTextField() );
 
@@ -59,7 +59,7 @@ public class PopupJTableEditor extends DefaultCellEditor {
 
     }
 
-    public Component getTableCellEditorComponent( JTable table, Object value, boolean isSelected, int row, int column ) {
+    public Component getTableCellEditorComponent( final JTable table, final Object value, final boolean isSelected, final int row, final int column ) {
 
         SwingUtilities.invokeLater(
                 () -> {
@@ -91,7 +91,7 @@ public class PopupJTableEditor extends DefaultCellEditor {
 
         private JTextArea textArea;
 
-        public PopupDialog( @NotNull String popupWindowTitle ) {
+        public PopupDialog( @NotNull final String popupWindowTitle ) {
 
             super( (Frame)null, popupWindowTitle, true );
 
@@ -121,7 +121,7 @@ public class PopupJTableEditor extends DefaultCellEditor {
             MyActionListener escListener = new MyActionListener() {
 
                 @Override
-                public void myActionPerformed( ActionEvent e ) {
+                public void myActionPerformed( final ActionEvent e ) {
 
                     setVisible( false );
 
@@ -138,7 +138,7 @@ public class PopupJTableEditor extends DefaultCellEditor {
             getRootPane().setDefaultButton( ok );
         }
 
-        public void setText( String text ) {
+        public void setText( final String text ) {
 
             textArea.setText( text );
 
@@ -148,7 +148,7 @@ public class PopupJTableEditor extends DefaultCellEditor {
     *   Save the changed text before hiding the popup
 	*/
 
-        public void actionPerformed( ActionEvent e ) {
+        public void actionPerformed( final ActionEvent e ) {
 
             String actionCommand = e.getActionCommand();
             if ( OK_BUTTON_LABEL.equals( actionCommand ) ) {
@@ -196,7 +196,7 @@ public class PopupJTableEditor extends DefaultCellEditor {
 
     }
 
-    public static void main( String[] args ) {
+    public static void main( final String[] args ) {
 
         EventQueue.invokeLater(
                 PopupJTableEditor::createAndShowUI

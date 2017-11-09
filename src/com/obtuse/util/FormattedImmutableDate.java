@@ -39,7 +39,7 @@ public class FormattedImmutableDate extends ImmutableDate implements GowingPacka
 
 	@NotNull
 	@Override
-	public GowingPackable createEntity( @NotNull GowingUnPacker unPacker, @NotNull GowingPackedEntityBundle bundle, GowingEntityReference er )
+	public GowingPackable createEntity( @NotNull final GowingUnPacker unPacker, @NotNull final GowingPackedEntityBundle bundle, final GowingEntityReference er )
 		throws GowingUnPackerParsingException {
 
 	    return new FormattedImmutableDate( unPacker, bundle, er );
@@ -69,7 +69,7 @@ public class FormattedImmutableDate extends ImmutableDate implements GowingPacka
      @throws IllegalArgumentException if <code>date</code> is <code>null</code>.
      */
 
-    public FormattedImmutableDate( @NotNull Date date ) {
+    public FormattedImmutableDate( @NotNull final Date date ) {
 	super( date );
 
     }
@@ -79,7 +79,7 @@ public class FormattedImmutableDate extends ImmutableDate implements GowingPacka
      @param timeMs the time since the Java epoch that this instance should represent.
      */
 
-    public FormattedImmutableDate( long timeMs ) {
+    public FormattedImmutableDate( final long timeMs ) {
 	super( timeMs );
 
     }
@@ -93,9 +93,9 @@ public class FormattedImmutableDate extends ImmutableDate implements GowingPacka
      */
 
     public FormattedImmutableDate(
-	    GowingUnPacker unPacker,
-	    GowingPackedEntityBundle bundle,
-	    GowingEntityReference er
+            final GowingUnPacker unPacker,
+            final GowingPackedEntityBundle bundle,
+            final GowingEntityReference er
     )
 	    throws GowingUnPackerParsingException {
 
@@ -106,7 +106,7 @@ public class FormattedImmutableDate extends ImmutableDate implements GowingPacka
     @NotNull
     @Override
     public GowingPackedEntityBundle bundleThyself(
-	    boolean isPackingSuper, GowingPacker packer
+            final boolean isPackingSuper, final GowingPacker packer
     ) {
 
 	GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
@@ -123,7 +123,7 @@ public class FormattedImmutableDate extends ImmutableDate implements GowingPacka
     }
 
     @Override
-    public boolean finishUnpacking( GowingUnPacker unPacker ) {
+    public boolean finishUnpacking( final GowingUnPacker unPacker ) {
 
 	return true;
 

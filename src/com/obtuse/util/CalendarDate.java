@@ -19,28 +19,28 @@ import java.util.Date;
 @Deprecated
 public class CalendarDate extends ObtuseCalendarDate {
 
-    public CalendarDate( String dateString )
+    public CalendarDate( final String dateString )
 	    throws ParsingException {
 	super( dateString );
     }
 
-    public CalendarDate( Date date ) {
+    public CalendarDate( final Date date ) {
 	super( date );
 
     }
 
-    public CalendarDate( ObtuseCalendarDate obtuseCalendarDate ) {
+    public CalendarDate( final ObtuseCalendarDate obtuseCalendarDate ) {
 	super( obtuseCalendarDate );
     }
 
     @SuppressWarnings("unused")
-    public static int computeDurationDays( CalendarDate from, CalendarDate to ) {
+    public static int computeDurationDays( final CalendarDate from, final CalendarDate to ) {
 
 	return ObtuseCalendarDate.computeDurationDays( from, to );
 
     }
 
-    public static CalendarDate addDays( CalendarDate date, int days ) {
+    public static CalendarDate addDays( final CalendarDate date, final int days ) {
 
 	CalendarDate newDate = new CalendarDate( ObtuseCalendarDate.addDays( date, days ) );
 
@@ -48,7 +48,7 @@ public class CalendarDate extends ObtuseCalendarDate {
 
     }
 
-    public static void main( String[] args ) {
+    public static void main( final String[] args ) {
 
 	BasicProgramConfigInfo.init( "Obtuse", "Shared", "ObtuseCalendarDate", null );
 

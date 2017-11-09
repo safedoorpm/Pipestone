@@ -17,7 +17,7 @@ public class Application {
 
     }
 
-    public void addApplicationListener(ApplicationAdapter basicAdapter) {
+    public void addApplicationListener( final ApplicationAdapter basicAdapter) {
 
     }
 
@@ -25,15 +25,15 @@ public class Application {
 
     }
 
-    public void setDockIconBadge(String msg) {
+    public void setDockIconBadge( final String msg) {
 
     }
 
-    public void setDockIconImage(Image icon) {
+    public void setDockIconImage( final Image icon) {
 
     }
 
-    public void setEnabledPreferencesMenu(boolean b) {
+    public void setEnabledPreferencesMenu( final boolean b) {
 
     }
 

@@ -18,7 +18,7 @@ public class SortableEntityReference<K extends Comparable<K>,E extends SortableE
 
     private final SortedPanelModel<K,E> _panelModel;
 
-    public SortableEntityReference( @NotNull SortedPanelModel<K,E> panelModel, @NotNull K key, @NotNull E value ) {
+    public SortableEntityReference( @NotNull final SortedPanelModel<K,E> panelModel, @NotNull final K key, @NotNull final E value ) {
         super();
 
 	_panelModel = panelModel;

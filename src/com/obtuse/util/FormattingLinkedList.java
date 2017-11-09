@@ -24,12 +24,12 @@ public class FormattingLinkedList<E> extends LinkedList<E> {
 
     }
 
-    public FormattingLinkedList(java.util.Collection<? extends E> es) {
+    public FormattingLinkedList( final java.util.Collection<? extends E> es) {
         super( es );
 
     }
 
-    private StringBuilder formatNakedRange( int startIx, int endIx ) {
+    private StringBuilder formatNakedRange( final int startIx, final int endIx ) {
 
         StringBuilder sb = new StringBuilder();
         String comma = "";
@@ -45,7 +45,7 @@ public class FormattingLinkedList<E> extends LinkedList<E> {
 
     }
 
-    public void setMaxElementsToFormat( int maxElementsToFormat ) {
+    public void setMaxElementsToFormat( final int maxElementsToFormat ) {
 
 	_maxElementsToFormat = maxElementsToFormat;
 
@@ -57,7 +57,7 @@ public class FormattingLinkedList<E> extends LinkedList<E> {
 
     }
 
-    public void setTailElementsToAlwaysFormat( int tailElementsToAlwaysFormat ) {
+    public void setTailElementsToAlwaysFormat( final int tailElementsToAlwaysFormat ) {
 
 	_tailElementsToAlwaysFormat = tailElementsToAlwaysFormat;
 
@@ -97,7 +97,7 @@ public class FormattingLinkedList<E> extends LinkedList<E> {
 
     }
 
-    public static void main( String[] args ) {
+    public static void main( final String[] args ) {
 
         List<Integer> list = new FormattingLinkedList<>();
 

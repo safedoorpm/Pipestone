@@ -31,7 +31,7 @@ public class SortedPanel<E> extends JPanel {
 
     }
 
-    public SortedPanel( String name ) {
+    public SortedPanel( final String name ) {
 
         super();
 
@@ -40,7 +40,7 @@ public class SortedPanel<E> extends JPanel {
 
     }
 
-    public void describe( String who ) {
+    public void describe( final String who ) {
 
         Logger.logMsg( "describing SortedPanel \"" + who + "\"" );
 
@@ -65,7 +65,7 @@ public class SortedPanel<E> extends JPanel {
 //
 //    }
 
-    public void setModel( @Nullable SortedPanelModel model ) {
+    public void setModel( @Nullable final SortedPanelModel model ) {
 
         Trace.event( "                                                                                                                            " +
                      this +
@@ -144,7 +144,7 @@ public class SortedPanel<E> extends JPanel {
 
     }
 
-    public SortableEntityView getEntityView( int ix ) {
+    public SortableEntityView getEntityView( final int ix ) {
 
         //noinspection unchecked
         return (SortableEntityView)getComponent( ix );
@@ -191,7 +191,7 @@ public class SortedPanel<E> extends JPanel {
 
     }
 
-    private static void testSetModel( String label, @NotNull SortedPanel sp, @Nullable SortedPanelModel model ) {
+    private static void testSetModel( final String label, @NotNull final SortedPanel sp, @Nullable final SortedPanelModel model ) {
 
         SortedPanelModel oldModel = sp.getModel();
 
@@ -205,7 +205,7 @@ public class SortedPanel<E> extends JPanel {
 
     }
 
-    private static void testAdoptSortedPanel( String label, @NotNull SortedPanelModel model, @Nullable SortedPanel sp ) {
+    private static void testAdoptSortedPanel( final String label, @NotNull final SortedPanelModel model, @Nullable final SortedPanel sp ) {
 
         SortedPanel oldSp = model.getOwner();
 
@@ -231,7 +231,7 @@ public class SortedPanel<E> extends JPanel {
 //
 //    }
 
-    public static void main( String[] args ) {
+    public static void main( final String[] args ) {
 
         BasicProgramConfigInfo.init( "Obtuse", "Pipestone", "entitySorter", null );
 
@@ -283,7 +283,7 @@ public class SortedPanel<E> extends JPanel {
 
     }
 
-    public static void testPanel( SortableKeySpace sks ) {
+    public static void testPanel( final SortableKeySpace sks ) {
 
         final Random rng = new Random();
 
@@ -304,7 +304,7 @@ public class SortedPanel<E> extends JPanel {
                 new MyActionListener() {
 
                     @Override
-                    public void myActionPerformed( ActionEvent e ) {
+                    public void myActionPerformed( final ActionEvent e ) {
 
                         double v = rng.nextDouble();
 //			Logger.logMsg( "v = " + v );
@@ -325,7 +325,7 @@ public class SortedPanel<E> extends JPanel {
                 new MyActionListener() {
 
                     @Override
-                    public void myActionPerformed( ActionEvent actionEvent ) {
+                    public void myActionPerformed( final ActionEvent actionEvent ) {
 
                         int ix = rng.nextInt( panel.getComponentCount() );
                         @SuppressWarnings("unchecked")
@@ -341,7 +341,7 @@ public class SortedPanel<E> extends JPanel {
                 new MyActionListener() {
 
                     @Override
-                    public void myActionPerformed( ActionEvent actionEvent ) {
+                    public void myActionPerformed( final ActionEvent actionEvent ) {
 
                         int count = model.cleanupDeadKeys();
 
@@ -371,7 +371,7 @@ public class SortedPanel<E> extends JPanel {
 
     }
 
-    public <K extends Comparable<K>> void verifyConsistency( @NotNull TreeSorter<K, ?> treeSorter ) {
+    public <K extends Comparable<K>> void verifyConsistency( @NotNull final TreeSorter<K, ?> treeSorter ) {
 
         if ( treeSorter.size() == getComponentCount() ) {
 

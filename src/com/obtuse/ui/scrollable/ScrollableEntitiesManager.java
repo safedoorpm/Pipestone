@@ -32,7 +32,7 @@ public class ScrollableEntitiesManager {
     private final ArrayList<Component> _visibleComponents = new ArrayList<>();
     private final boolean _scrollingVertical;
 
-    public ScrollableEntitiesManager( @NotNull IrregularScrollableImpl msi, Rectangle visibleRectangle, int orientation, int direction ) {
+    public ScrollableEntitiesManager( @NotNull final IrregularScrollableImpl msi, final Rectangle visibleRectangle, final int orientation, final int direction ) {
 
         super();
 
@@ -264,7 +264,7 @@ public class ScrollableEntitiesManager {
 
     }
 
-    public void adjustWindowStart( int adjustment ) {
+    public void adjustWindowStart( final int adjustment ) {
 
         _windowStart += adjustment;
 
@@ -288,7 +288,7 @@ public class ScrollableEntitiesManager {
 
     }
 
-    public boolean isEntityVisible( ScrollableEntity se ) {
+    public boolean isEntityVisible( final ScrollableEntity se ) {
 
         return ObtuseUtil.overlapsLength( _windowStart, _windowLength, se.getOffset(), se.getLength() - 1 );
 
@@ -320,7 +320,7 @@ public class ScrollableEntitiesManager {
 
     }
 
-    public void showEntities( String why ) {
+    public void showEntities( final String why ) {
 
         if ( !isCrossCut() ) {
 
@@ -356,7 +356,7 @@ public class ScrollableEntitiesManager {
     }
 
     @NotNull
-    public ScrollableEntity getScrollableEntityByIndex( int ix ) {
+    public ScrollableEntity getScrollableEntityByIndex( final int ix ) {
 
         if ( ix < 0 || ix >= _entities.length ) {
 
@@ -383,7 +383,7 @@ public class ScrollableEntitiesManager {
     }
 
     @NotNull
-    public Component getVisibleComponent( int ix ) {
+    public Component getVisibleComponent( final int ix ) {
 
         if ( isCrossCut() ) {
 

@@ -18,7 +18,7 @@ public class DateRange extends Range<Date> {
 
     private static final SimpleDateFormat YYYYMMDD = new SimpleDateFormat( "yyyy-MM-dd" );
 
-    public DateRange( Date startDate, Date endDate ) {
+    public DateRange( final Date startDate, final Date endDate ) {
         super( startDate, endDate, JulianDate.toJulian( startDate ), JulianDate.toJulian( endDate ) );
 
     }
@@ -29,7 +29,7 @@ public class DateRange extends Range<Date> {
 
     }
 
-    public boolean equals( Object rhs ) {
+    public boolean equals( final Object rhs ) {
 
         //noinspection OverlyStrongTypeCast
         return rhs instanceof DateRange &&
@@ -39,7 +39,7 @@ public class DateRange extends Range<Date> {
     }
 
     @SuppressWarnings( { "RefusedBequest" } )
-    public String format( Date value ) {
+    public String format( final Date value ) {
 
         return DateRange.YYYYMMDD.format( value );
 

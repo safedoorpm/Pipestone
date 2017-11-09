@@ -61,14 +61,14 @@ public class HowDidWeGetHereError
 
     }
 
-    public HowDidWeGetHereError( String msg ) {
+    public HowDidWeGetHereError( final String msg ) {
         super( msg );
 
         notifyOopsCatcher();
 
     }
 
-    public HowDidWeGetHereError( String msg, Throwable e ) {
+    public HowDidWeGetHereError( final String msg, final Throwable e ) {
         super(msg, e);
 
         notifyOopsCatcher();
@@ -102,7 +102,7 @@ public class HowDidWeGetHereError
      automagically printed on if an instance of this class gets created.
      */
 
-    public static void setStackTracePrintStream( PrintStream stackTracePrintStream ) {
+    public static void setStackTracePrintStream( final PrintStream stackTracePrintStream ) {
 
         s_stackTracePrintStream = stackTracePrintStream;
 
@@ -128,7 +128,7 @@ public class HowDidWeGetHereError
      */
 
     @SuppressWarnings("UnusedDeclaration")
-    public static OopsCatcher setOopsCatcher( @Nullable OopsCatcher oopsCatcher ) {
+    public static OopsCatcher setOopsCatcher( @Nullable final OopsCatcher oopsCatcher ) {
 
         OopsCatcher oldOopsCatcher = HowDidWeGetHereError.s_oopsCatcher;
 

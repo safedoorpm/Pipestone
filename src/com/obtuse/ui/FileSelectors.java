@@ -37,7 +37,7 @@ public class FileSelectors {
      * @return the selected file if the "approve" button was clicked; null otherwise.
      */
 
-    public static File[] swingSelectFile( Component parent, String title, File startingDirectory, int dialogType, boolean multiSelectionEnabled, FileFilter fileFilter ) {
+    public static File[] swingSelectFile( final Component parent, final String title, final File startingDirectory, final int dialogType, final boolean multiSelectionEnabled, final FileFilter fileFilter ) {
 
         JFileChooser chooser = new JFileChooser();
         chooser.setDialogTitle( title );
@@ -123,7 +123,7 @@ public class FileSelectors {
      * @return the selected file if the "approve" button was clicked; null otherwise.
      */
 
-    public static File[] swingSelectFile( Component parent, String title, File startingDirectory, String customLabel, boolean multiSelectionEnabled, FileFilter fileFilter ) {
+    public static File[] swingSelectFile( final Component parent, final String title, final File startingDirectory, final String customLabel, final boolean multiSelectionEnabled, final FileFilter fileFilter ) {
 
         JFileChooser chooser = new JFileChooser();
         chooser.setDialogTitle( title );
@@ -190,7 +190,7 @@ public class FileSelectors {
      * @return the selected file if the "approve" button was clicked; null otherwise.
      */
 
-    public static File awtSelectFile( Frame parent, String title, File startingDirectory, int mode, FilenameFilter filenameFilter ) {
+    public static File awtSelectFile( final Frame parent, final String title, final File startingDirectory, final int mode, final FilenameFilter filenameFilter ) {
 
         return FileSelectors.awtSelectFile( new FileDialog( parent, title, mode ), startingDirectory, filenameFilter );
 
@@ -207,7 +207,7 @@ public class FileSelectors {
      * @return the selected file if the "approve" button was clicked; null otherwise.
      */
 
-    public static File awtSelectFile( Dialog parent, String title, File startingDirectory, int mode, FilenameFilter filenameFilter ) {
+    public static File awtSelectFile( final Dialog parent, final String title, final File startingDirectory, final int mode, final FilenameFilter filenameFilter ) {
 
         return FileSelectors.awtSelectFile( new FileDialog( parent, title, mode ), startingDirectory, filenameFilter );
 
@@ -225,7 +225,7 @@ public class FileSelectors {
      * @return the selected file if the "approve" button was clicked; null otherwise.
      */
 
-    public static File awtSelectFile( FileDialog dialog, File startingDirectory, FilenameFilter filenameFilter ) {
+    public static File awtSelectFile( final FileDialog dialog, final File startingDirectory, final FilenameFilter filenameFilter ) {
 
         if ( filenameFilter != null ) {
 

@@ -31,10 +31,10 @@ public class TeeOutputStream extends OutputStream {
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat( "yyyy-MM-dd_HH.mm.ss.SSS" );
 
     public TeeOutputStream(
-	    @NotNull SocketAddress remoteSocketAddress,
-	    @NotNull SocketAddress localSocketAddress,
-	    @NotNull OutputStream socketOutputStream,
-	    boolean buffered
+            @NotNull final SocketAddress remoteSocketAddress,
+            @NotNull final SocketAddress localSocketAddress,
+            @NotNull final OutputStream socketOutputStream,
+            final boolean buffered
     )
 	    throws IOException {
 	super();
@@ -55,7 +55,7 @@ public class TeeOutputStream extends OutputStream {
 
     }
 
-    private static String constructTag( SocketAddress sa ) {
+    private static String constructTag( final SocketAddress sa ) {
 
 	if ( sa instanceof InetSocketAddress ) {
 
@@ -70,7 +70,7 @@ public class TeeOutputStream extends OutputStream {
 
     }
 
-    public static File constructLogFile( SocketAddress remoteSocketAddress, SocketAddress localSocketAddress )
+    public static File constructLogFile( final SocketAddress remoteSocketAddress, final SocketAddress localSocketAddress )
 	    throws IOException {
 
 	String sessionName = constructTag( remoteSocketAddress ) + "_" + constructTag( localSocketAddress );
@@ -92,21 +92,21 @@ public class TeeOutputStream extends OutputStream {
 
     }
 
-    public void write( int b ) throws IOException {
+    public void write( final int b ) throws IOException {
 
 	_outputStream.write( b );
 	_teeOutputStream.write( b );
 
     }
 
-    public void write( byte[] b ) throws IOException {
+    public void write( final byte[] b ) throws IOException {
 
 	_outputStream.write( b );
 	_teeOutputStream.write( b );
 
     }
 
-    public void write( byte[] b, int off, int len ) throws IOException {
+    public void write( final byte[] b, final int off, final int len ) throws IOException {
 
 	_outputStream.write( b, off, len );
 	_teeOutputStream.write( b, off, len );

@@ -120,7 +120,7 @@ public class TreeSorterPreMergeScrewup<K extends Comparable<? super K>, V> imple
      *                   If null, the natural ordering of the keys will be used.
      */
 
-    public TreeSorterPreMergeScrewup( @Nullable Comparator<? super K> comparator ) {
+    public TreeSorterPreMergeScrewup( @Nullable final Comparator<? super K> comparator ) {
         super();
 
         _sortedData = new TreeMap<>( comparator );
@@ -134,7 +134,7 @@ public class TreeSorterPreMergeScrewup<K extends Comparable<? super K>, V> imple
      * @throws IllegalArgumentException if <code>map</code> is <code>null</code>.
      */
 
-    public TreeSorterPreMergeScrewup( @NotNull Map<K, V> map ) {
+    public TreeSorterPreMergeScrewup( @NotNull final Map<K, V> map ) {
         super();
 
         _sortedData = new TreeMap<>();
@@ -153,7 +153,7 @@ public class TreeSorterPreMergeScrewup<K extends Comparable<? super K>, V> imple
      * @throws IllegalArgumentException if <code>map</code> is <code>null</code>.
      */
 
-    public TreeSorterPreMergeScrewup( @NotNull SortedMap<K, V> map ) {
+    public TreeSorterPreMergeScrewup( @NotNull final SortedMap<K, V> map ) {
         super();
 
         _sortedData = new TreeMap<>( map.comparator() );
@@ -180,7 +180,7 @@ public class TreeSorterPreMergeScrewup<K extends Comparable<? super K>, V> imple
      * @throws IllegalArgumentException if <code>sorter</code> is <code>null</code>.
      */
 
-    public TreeSorterPreMergeScrewup( @NotNull TreeSorterPreMergeScrewup<K, V> sorter ) {
+    public TreeSorterPreMergeScrewup( @NotNull final TreeSorterPreMergeScrewup<K, V> sorter ) {
         this();
 
         for ( K key : sorter.keySet() ) {
@@ -201,7 +201,7 @@ public class TreeSorterPreMergeScrewup<K extends Comparable<? super K>, V> imple
      *                that of one or more of the other publically available constructors.  This parameter is totally ignored.
      */
 
-    private TreeSorterPreMergeScrewup( SortedMap<K, Collection<V>> map, int ignored ) {
+    private TreeSorterPreMergeScrewup( final SortedMap<K, Collection<V>> map, final int ignored ) {
         super();
 
         _sortedData = map;
@@ -225,7 +225,7 @@ public class TreeSorterPreMergeScrewup<K extends Comparable<? super K>, V> imple
      * itself has a restricted range and <code>toKey</code> lies outside the bounds of the range.
      */
 
-    public TreeSorterPreMergeScrewup<K, V> headSorter( K toKey ) {
+    public TreeSorterPreMergeScrewup<K, V> headSorter( final K toKey ) {
 
         return new TreeSorterPreMergeScrewup<>( _sortedData.headMap( toKey ), 0 );
 
@@ -248,7 +248,7 @@ public class TreeSorterPreMergeScrewup<K extends Comparable<? super K>, V> imple
      * itself has a restricted range and <code>fromKey</code> lies outside the bounds of the range.
      */
 
-    public TreeSorterPreMergeScrewup<K, V> tailSorter( K fromKey ) {
+    public TreeSorterPreMergeScrewup<K, V> tailSorter( final K fromKey ) {
 
         return new TreeSorterPreMergeScrewup<>( _sortedData.tailMap( fromKey ), 0 );
 
@@ -279,7 +279,7 @@ public class TreeSorterPreMergeScrewup<K extends Comparable<? super K>, V> imple
      * </ul>
      */
 
-    public TreeSorterPreMergeScrewup<K, V> subSorter( @NotNull K fromKey, @NotNull K toKey ) {
+    public TreeSorterPreMergeScrewup<K, V> subSorter( @NotNull final K fromKey, @NotNull final K toKey ) {
 
         return new TreeSorterPreMergeScrewup<>( _sortedData.subMap( fromKey, toKey ), 0 );
 
@@ -293,7 +293,7 @@ public class TreeSorterPreMergeScrewup<K extends Comparable<? super K>, V> imple
      * @throws IllegalArgumentException if <code>key</code> is <code>null</code>.
      */
 
-    public boolean containsKey( @NotNull K key ) {
+    public boolean containsKey( @NotNull final K key ) {
 
         return _sortedData.containsKey( key );
 
@@ -344,7 +344,7 @@ public class TreeSorterPreMergeScrewup<K extends Comparable<? super K>, V> imple
      */
 
     @NotNull
-    public Collection<V> getValues( @NotNull K key ) {
+    public Collection<V> getValues( @NotNull final K key ) {
 
         Collection<V> values = _sortedData.get( key );
 
@@ -394,7 +394,7 @@ public class TreeSorterPreMergeScrewup<K extends Comparable<? super K>, V> imple
      * @throws IllegalArgumentException if <code>key</code> is <code>null</code> (note that <code>value</code> is allowed to be <code>null</code>).
      */
 
-    public final void add( @NotNull K key, @Nullable V value ) {
+    public final void add( @NotNull final K key, @Nullable final V value ) {
 
         Collection<V> values = _sortedData.get( key );
         if ( values == null ) {
@@ -420,7 +420,7 @@ public class TreeSorterPreMergeScrewup<K extends Comparable<? super K>, V> imple
      * @throws IllegalArgumentException if <code>map</code> is <code>null</code>.
      */
 
-    public void addAll( @NotNull Map<? extends K, ? extends V> map ) {
+    public void addAll( @NotNull final Map<? extends K, ? extends V> map ) {
 
         for ( K key : map.keySet() ) {
 
@@ -443,7 +443,7 @@ public class TreeSorterPreMergeScrewup<K extends Comparable<? super K>, V> imple
      * if an attempt is made to add the contents of a tree sorter to itself.
      */
 
-    public void addAll( @NotNull TreeSorterPreMergeScrewup<K, V> sorter ) {
+    public void addAll( @NotNull final TreeSorterPreMergeScrewup<K, V> sorter ) {
 
         if ( this == sorter ) {
 
@@ -476,7 +476,7 @@ public class TreeSorterPreMergeScrewup<K extends Comparable<? super K>, V> imple
      * @throws IllegalArgumentException if <code>key</code> is <code>null</code> or <code>values</code> is <code>null</code>.
      */
 
-    public void addAll( @NotNull K key, @NotNull Collection<V> values ) {
+    public void addAll( @NotNull final K key, @NotNull final Collection<V> values ) {
 
         for ( V value : values ) {
 
@@ -515,7 +515,7 @@ public class TreeSorterPreMergeScrewup<K extends Comparable<? super K>, V> imple
      */
 
     @NotNull
-    public Collection<V> removeKeyAndValues( @NotNull K key ) {
+    public Collection<V> removeKeyAndValues( @NotNull final K key ) {
 
         Collection<V> rval = _sortedData.remove( key );
         if ( rval == null ) {
@@ -529,14 +529,14 @@ public class TreeSorterPreMergeScrewup<K extends Comparable<? super K>, V> imple
     }
 
     @NotNull
-    public Collection<V> removeValue( @NotNull K key, @Nullable V value ) {
+    public Collection<V> removeValue( @NotNull final K key, @Nullable final V value ) {
 
 	return removeValue( key, value, new FormattingLinkedList<>() );
 
     }
 
     @NotNull
-    public Collection<V> removeValue( @Nullable V value ) {
+    public Collection<V> removeValue( @Nullable final V value ) {
 
 	Collection<V> deletedValues = new FormattingLinkedList<>();
 
@@ -558,7 +558,7 @@ public class TreeSorterPreMergeScrewup<K extends Comparable<? super K>, V> imple
     }
 
     @NotNull
-    public Collection<V> removeValue( @NotNull K key, @Nullable V value, @NotNull Collection<V> deletedValues ) {
+    public Collection<V> removeValue( @NotNull final K key, @Nullable final V value, @NotNull final Collection<V> deletedValues ) {
 
 	Collection<V> valuesAtKey = _sortedData.get( key );
 	if ( valuesAtKey != null ) {
@@ -658,7 +658,7 @@ public class TreeSorterPreMergeScrewup<K extends Comparable<? super K>, V> imple
 
     }
 
-    public static void main( String[] args ) {
+    public static void main( final String[] args ) {
 
         TreeSorterPreMergeScrewup<Integer, String> sorter = new TreeSorterPreMergeScrewup<>();
 

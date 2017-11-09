@@ -14,7 +14,7 @@ public class CubicBezierCurve implements GraphicsElement {
 
     private final CubicCurve2D _cubicCurve;
 
-    public CubicBezierCurve( BezierCurveSequence parent, CubicCurve2D cubicCurve ) {
+    public CubicBezierCurve( final BezierCurveSequence parent, final CubicCurve2D cubicCurve ) {
         super();
 
         _parent = parent;

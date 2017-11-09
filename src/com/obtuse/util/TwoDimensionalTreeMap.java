@@ -16,7 +16,7 @@ public class TwoDimensionalTreeMap<T1,T2,V> implements Serializable, TwoDimensio
 
     }
 
-    public TwoDimensionalTreeMap( TwoDimensionalSortedMap<T1,T2,V> map ) {
+    public TwoDimensionalTreeMap( final TwoDimensionalSortedMap<T1,T2,V> map ) {
         super();
 
         for ( T1 t1 : map.outerKeys() ) {
@@ -32,7 +32,7 @@ public class TwoDimensionalTreeMap<T1,T2,V> implements Serializable, TwoDimensio
 
     }
 
-    public void put( T1 key1, T2 key2, V value ) {
+    public void put( final T1 key1, final T2 key2, final V value ) {
 
         SortedMap<T2,V> innerMap = getInnerMap( key1, true );
 
@@ -40,7 +40,7 @@ public class TwoDimensionalTreeMap<T1,T2,V> implements Serializable, TwoDimensio
 
     }
 
-    public SortedMap<T2,V> getInnerMap( T1 key1, boolean forceCreate ) {
+    public SortedMap<T2,V> getInnerMap( final T1 key1, final boolean forceCreate ) {
 
         SortedMap<T2,V> innerMap = _map.get( key1 );
         if ( innerMap == null && forceCreate ) {
@@ -54,13 +54,13 @@ public class TwoDimensionalTreeMap<T1,T2,V> implements Serializable, TwoDimensio
 
     }
 
-    public SortedMap<T2,V> removeInnerMap( T1 key ) {
+    public SortedMap<T2,V> removeInnerMap( final T1 key ) {
 
         return _map.remove( key );
 
     }
 
-    public V get( T1 key1, T2 key2 ) {
+    public V get( final T1 key1, final T2 key2 ) {
 
         SortedMap<T2,V> innerMap = _map.get( key1 );
         if ( innerMap == null ) {
@@ -73,7 +73,7 @@ public class TwoDimensionalTreeMap<T1,T2,V> implements Serializable, TwoDimensio
 
     }
 
-    public V remove( T1 key1, T2 key2 ) {
+    public V remove( final T1 key1, final T2 key2 ) {
 
         V rval = null;
 

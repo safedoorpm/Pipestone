@@ -18,13 +18,13 @@ import java.net.UnknownHostException;
 
 public class TraceDebugConnectionHandler extends AbstractDebugConnectionHandler {
 
-    public TraceDebugConnectionHandler( Logger logger )
+    public TraceDebugConnectionHandler( final Logger logger )
             throws UnknownHostException {
         super( logger, "traceDebugConnectionHandler" );
 
     }
 
-    public static TraceDebugConnectionHandler launch( @Nullable File workingDirectory, @Nullable Logger logger ) {
+    public static TraceDebugConnectionHandler launch( @Nullable final File workingDirectory, @Nullable final Logger logger ) {
 
         TraceDebugConnectionHandler handler;
         try {
@@ -53,7 +53,7 @@ public class TraceDebugConnectionHandler extends AbstractDebugConnectionHandler 
     }
 
     @Override
-    public void connectionReceived( String handlerName, Socket clientSocket ) {
+    public void connectionReceived( final String handlerName, final Socket clientSocket ) {
 
         String msg = "triggered by connection from " + clientSocket;
 
@@ -70,7 +70,7 @@ public class TraceDebugConnectionHandler extends AbstractDebugConnectionHandler 
 
     }
 
-    public static void main( String[] args ) {
+    public static void main( final String[] args ) {
 
         BasicProgramConfigInfo.init( "Obtuse", "TraceDebugConnectionHandler", "Test", null );
 

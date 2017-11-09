@@ -16,7 +16,7 @@ public class MyButtonEntity implements SortableEntity {
 
     private final String _word;
 
-    public MyButtonEntity( SortedPanelModel<String, MyButtonEntity> myModel, String word ) {
+    public MyButtonEntity( final SortedPanelModel<String, MyButtonEntity> myModel, final String word ) {
 
 	super();
 
@@ -32,7 +32,7 @@ public class MyButtonEntity implements SortableEntity {
     }
 
     @NotNull
-    public SortableEntityView createEntityView( String key ) {
+    public SortableEntityView createEntityView( final String key ) {
 
 	return new MyButtonView( this, _myModel, _word, (String)key );
 
@@ -45,7 +45,7 @@ public class MyButtonEntity implements SortableEntity {
     }
 
     @Override
-    public <K extends Comparable<K>, E extends SortableEntity> SortableEntityView<K, E> createEntityView( SortedPanelModel<K, E> panelModel, K key ) {
+    public <K extends Comparable<K>, E extends SortableEntity> SortableEntityView<K, E> createEntityView( final SortedPanelModel<K, E> panelModel, final K key ) {
 
 	MyButtonView view = new MyButtonView( this, _myModel, _word, (String) key );
 	SortableEntityView<K, E> rval = (SortableEntityView<K, E>) view;

@@ -19,12 +19,12 @@ public class RejectRangeException extends Exception {
 
     }
 
-    public RejectRangeException( String why ) {
+    public RejectRangeException( final String why ) {
         super( why );
 
     }
 
-    public RejectRangeException( String why, Throwable e ) {
+    public RejectRangeException( final String why, final Throwable e ) {
         super( why, e );
 
     }

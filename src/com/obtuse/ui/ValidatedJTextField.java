@@ -41,19 +41,19 @@ public abstract class ValidatedJTextField extends JTextField implements EditValu
 
     }
 
-    public ValidatedJTextField( String text ) {
+    public ValidatedJTextField( final String text ) {
         super( text );
 
         setInputVerifier(
                 new InputVerifier() {
                     @Override
-                    public boolean verify( JComponent jComponent ) {
+                    public boolean verify( final JComponent jComponent ) {
 
                         return isValueValid( getText() );
 
                     }
 
-                    public boolean shouldYieldFocus( JComponent jComponent ) {
+                    public boolean shouldYieldFocus( final JComponent jComponent ) {
 
                         if ( verify( jComponent ) ) {
 
@@ -87,7 +87,7 @@ public abstract class ValidatedJTextField extends JTextField implements EditValu
                 new MyActionListener() {
 
                     @Override
-                    public void myActionPerformed( ActionEvent actionEvent ) {
+                    public void myActionPerformed( final ActionEvent actionEvent ) {
 
                         if ( isValueValid( getText() ) ) {
 
@@ -109,7 +109,7 @@ public abstract class ValidatedJTextField extends JTextField implements EditValu
                 new AbstractAction() {
 
                     @Override
-                    public void actionPerformed( ActionEvent actionEvent ) {
+                    public void actionPerformed( final ActionEvent actionEvent ) {
 
                         setText( getRollbackValue() );
 

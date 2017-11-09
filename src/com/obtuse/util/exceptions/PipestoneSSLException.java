@@ -14,12 +14,12 @@ public class PipestoneSSLException extends Exception {
         Trace.event( this );
     }
 
-    public PipestoneSSLException( String why ) {
+    public PipestoneSSLException( final String why ) {
         super( why );
         Trace.event( this );
     }
 
-    public PipestoneSSLException( String why, Throwable e ) {
+    public PipestoneSSLException( final String why, final Throwable e ) {
         super( why, e );
         Trace.event( this );
     }

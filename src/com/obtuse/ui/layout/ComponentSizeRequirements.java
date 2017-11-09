@@ -18,7 +18,7 @@ public class ComponentSizeRequirements extends SizeRequirements {
 
     public final Component component;
 
-    public ComponentSizeRequirements( Component component ) {
+    public ComponentSizeRequirements( final Component component ) {
 
         super();
 
@@ -27,11 +27,11 @@ public class ComponentSizeRequirements extends SizeRequirements {
     }
 
     public ComponentSizeRequirements(
-            Component component,
-            int minimum,
-            int preferred,
-            int maximum,
-            @SuppressWarnings("SameParameterValue") float alignment
+            final Component component,
+            final int minimum,
+            final int preferred,
+            final int maximum,
+            @SuppressWarnings("SameParameterValue") final float alignment
     ) {
 
         super( minimum, preferred, maximum, alignment );
@@ -41,7 +41,7 @@ public class ComponentSizeRequirements extends SizeRequirements {
     }
 
     public static SizeRequirements getAlignedSizeRequirements(
-            SizeRequirements[] children
+            final SizeRequirements[] children
     ) {
 
         SizeRequirements totalAscent = new SizeRequirements();

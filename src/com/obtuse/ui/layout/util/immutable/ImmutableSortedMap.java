@@ -23,13 +23,13 @@ public class ImmutableSortedMap<K,V>
 
     private final SortedMap<K, ? extends V> sm;
 
-    public ImmutableSortedMap(SortedMap<K, ? extends V> m) {super(m); sm = m; }
+    public ImmutableSortedMap( final SortedMap<K, ? extends V> m) {super( m); sm = m; }
     public Comparator<? super K> comparator()   { return sm.comparator(); }
-    public SortedMap<K,V> subMap(K fromKey, K toKey)
+    public SortedMap<K,V> subMap( final K fromKey, final K toKey)
     { return new ImmutableSortedMap<>( sm.subMap( fromKey, toKey)); }
-    public SortedMap<K,V> headMap(K toKey)
+    public SortedMap<K,V> headMap( final K toKey)
     { return new ImmutableSortedMap<>( sm.headMap( toKey)); }
-    public SortedMap<K,V> tailMap(K fromKey)
+    public SortedMap<K,V> tailMap( final K fromKey)
     { return new ImmutableSortedMap<>( sm.tailMap( fromKey)); }
     public K firstKey()                           { return sm.firstKey(); }
     public K lastKey()                             { return sm.lastKey(); }

@@ -27,7 +27,6 @@ import java.util.function.Consumer;
  Manage a list of {@link SelectableIndexCard}s.
  */
 
-@SuppressWarnings("unused")
 public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrollableLinearContainer3 {
 
     private final IrregularScrollableImpl _irregularScrollableImpl = new IrregularScrollableImpl( this, isVertical() );
@@ -44,7 +43,7 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
 
     //    private int _verticalUnitIncrement = 10;
 
-    public IndexCardBox( String name, LinearOrientation linearOrientation, @NotNull Consumer<IndexCardBox<E>> doubleClickOnImageConsumer ) {
+    public IndexCardBox( final String name, final LinearOrientation linearOrientation, @NotNull final Consumer<IndexCardBox<E>> doubleClickOnImageConsumer ) {
 
         super( name, linearOrientation );
 
@@ -109,7 +108,7 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
 
     }
 
-    public void doMouseClick( MouseEvent mEvent ) {
+    public void doMouseClick( final MouseEvent mEvent ) {
 
         if ( mEvent.getID() == MouseEvent.MOUSE_CLICKED | mEvent.getID() == MouseEvent.MOUSE_PRESSED ||
              mEvent.getID() == MouseEvent.MOUSE_RELEASED ) {
@@ -168,7 +167,7 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
 
     }
 
-    public void doMouseClick( @NotNull SelectableIndexCard indexCard, @NotNull MouseEvent mEvent ) {
+    public void doMouseClick( @NotNull final SelectableIndexCard indexCard, @NotNull final MouseEvent mEvent ) {
 
         if ( mEvent.getID() == MouseEvent.MOUSE_CLICKED ) {
 
@@ -191,7 +190,7 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
 
     }
 
-    public int getComponentIx( SelectableIndexCard indexCard ) {
+    public int getComponentIx( final SelectableIndexCard indexCard ) {
 
         for ( int ix = 0; ix < getModelSize(); ix += 1 ) {
 
@@ -209,7 +208,7 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
 
     }
 
-    private void doMouseClick( int ix, @NotNull SelectableIndexCard indexCard, @NotNull MouseEvent mEvent ) {
+    private void doMouseClick( final int ix, @NotNull final SelectableIndexCard indexCard, @NotNull final MouseEvent mEvent ) {
 
         switch ( mEvent.getClickCount() ) {
 
@@ -235,7 +234,7 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
 
     }
 
-    private void doSingleClick( int ix, SelectableIndexCard indexCard, MouseEvent mEvent ) {
+    private void doSingleClick( final int ix, final SelectableIndexCard indexCard, final MouseEvent mEvent ) {
 
         Logger.logMsg( "{{{{" );
 
@@ -305,7 +304,7 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
 
     }
 
-    private void doDoubleClick( int ix, SelectableIndexCard indexCard, MouseEvent mEvent ) {
+    private void doDoubleClick( final int ix, final SelectableIndexCard indexCard, final MouseEvent mEvent ) {
 
         Logger.logMsg( "double click on " + indexCard.getWhat() );
 
@@ -327,7 +326,7 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
     }
 
     @Override
-    public int getScrollableUnitIncrement( Rectangle visibleRect, int orientation, int direction ) {
+    public int getScrollableUnitIncrement( final Rectangle visibleRect, final int orientation, final int direction ) {
 
         int scrollableUnitIncrement = _irregularScrollableImpl.getScrollableUnitIncrement( visibleRect, orientation, direction );
         ObtuseUtil.report( "### scrollable unit increment is " + scrollableUnitIncrement, new NumberFormatException( "where we are" ) );
@@ -336,7 +335,7 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
     }
 
     @Override
-    public int getScrollableBlockIncrement( Rectangle visibleRect, int orientation, int direction ) {
+    public int getScrollableBlockIncrement( final Rectangle visibleRect, final int orientation, final int direction ) {
 
         int scrollableBlockIncrement = _irregularScrollableImpl.getScrollableBlockIncrement( visibleRect, orientation, direction );
         ObtuseUtil.report( "### scrollable block increment is " + scrollableBlockIncrement, new NumberFormatException( "where we are" ) );
@@ -409,7 +408,7 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
      @param e the mouse event that got us here.
      */
 
-    private void adjustSelection( int row, MouseEvent e, boolean isFileList ) {
+    private void adjustSelection( final int row, final MouseEvent e, final boolean isFileList ) {
 //        int row = SwingUtilities2.loc2IndexFileList( _selectionModel, e.getPoint());
 //        boolean isFileList = false;
 
@@ -449,22 +448,28 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
 
                 if ( e.isShiftDown() ) {
 
-                    if ( anchorSelected ) {
+                    _selectionModel.addSelectionInterval( anchorIndex, row );
 
-                        _selectionModel.addSelectionInterval( anchorIndex, row );
+// anchorSelected is always true at this point. Consequently, the only statement inside this first if is the only statement in this
+// sequence of code that is ever executed. That's why that one statement of code is the only code within our containing if block
+// and why the code below is commented out.
 
-                    } else {
-
-                        _selectionModel.removeSelectionInterval( anchorIndex, row );
-
-                        if ( isFileList ) {
-
-                            _selectionModel.addSelectionInterval( row, row );
-                            _selectionModel.setAnchorSelectionIndex( anchorIndex );
-
-                        }
-
-                    }
+//                    if ( anchorSelected ) {
+//
+//                        _selectionModel.addSelectionInterval( anchorIndex, row );
+//
+//                    } else {
+//
+//                        _selectionModel.removeSelectionInterval( anchorIndex, row );
+//
+//                        if ( isFileList ) {
+//
+//                            _selectionModel.addSelectionInterval( row, row );
+//                            _selectionModel.setAnchorSelectionIndex( anchorIndex );
+//
+//                        }
+//
+//                    }
 
                 } else if ( _selectionModel.isSelectedIndex( row ) ) {
 
@@ -490,13 +495,13 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
 
     }
 
-    private static int adjustIndex(int index, int listSize ) {
+    private static int adjustIndex( final int index, final int listSize ) {
 
         return index < listSize ? index : -1;
 
     }
 
-    static boolean isMenuShortcutKeyDown(InputEvent event) {
+    static boolean isMenuShortcutKeyDown( final InputEvent event) {
 
         int modifiers = event.getModifiers();
         int menuShortcutKeyMask = Toolkit.getDefaultToolkit().getMenuShortcutKeyMask();
@@ -511,7 +516,7 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
 
     }
 
-    protected void fireSelectionValueChanged( int firstIndex, int lastIndex, boolean isAdjusting ) {
+    protected void fireSelectionValueChanged( final int firstIndex, final int lastIndex, final boolean isAdjusting ) {
 
         Object[] listeners = listenerList.getListenerList();
         ListSelectionEvent e = null;
@@ -535,7 +540,7 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
 
     private class ListSelectionHandler implements ListSelectionListener, Serializable {
 
-        public void valueChanged( ListSelectionEvent e ) {
+        public void valueChanged( final ListSelectionEvent e ) {
 
             fireSelectionValueChanged(
                     e.getFirstIndex(),
@@ -546,7 +551,7 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
 
     }
 
-    public void addListSelectionListener( ListSelectionListener listener ) {
+    public void addListSelectionListener( final ListSelectionListener listener ) {
 
         if ( selectionListener == null ) {
 
@@ -559,7 +564,7 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
 
     }
 
-    public void removeListSelectionListener( ListSelectionListener listener ) {
+    public void removeListSelectionListener( final ListSelectionListener listener ) {
 
         listenerList.remove( ListSelectionListener.class, listener );
 
@@ -571,7 +576,7 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
 
     }
 
-    public void setSelectionModel( ListSelectionModel selectionModel ) {
+    public void setSelectionModel( final ListSelectionModel selectionModel ) {
 
         if ( selectionModel == null ) {
 
@@ -595,7 +600,7 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
 
     }
 
-    public void setSelectionMode( int selectionMode ) {
+    public void setSelectionMode( final int selectionMode ) {
 
         getSelectionModel().setSelectionMode( selectionMode );
 
@@ -631,7 +636,7 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
 
     }
 
-    public boolean isSelectedIndex( int index ) {
+    public boolean isSelectedIndex( final int index ) {
 
         return getSelectionModel().isSelectedIndex( index );
 
@@ -649,25 +654,25 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
 
     }
 
-    public void setSelectionInterval( int anchor, int lead ) {
+    public void setSelectionInterval( final int anchor, final int lead ) {
 
         getSelectionModel().setSelectionInterval( anchor, lead );
 
     }
 
-    public void addSelectionInterval( int anchor, int lead ) {
+    public void addSelectionInterval( final int anchor, final int lead ) {
 
         getSelectionModel().addSelectionInterval( anchor, lead );
 
     }
 
-    public void removeSelectionInterval( int index0, int index1 ) {
+    public void removeSelectionInterval( final int index0, final int index1 ) {
 
         getSelectionModel().removeSelectionInterval( index0, index1 );
 
     }
 
-    public void setValueIsAdjusting( boolean b ) {
+    public void setValueIsAdjusting( final boolean b ) {
 
         getSelectionModel().setValueIsAdjusting( b );
 
@@ -717,7 +722,7 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
     }
 
     @SuppressWarnings("unchecked")
-    public E getModelElementAt( int index ) {
+    public E getModelElementAt( final int index ) {
 
         try {
 
@@ -733,7 +738,7 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
 
     }
 
-    public void setSelectedIndex( int index ) {
+    public void setSelectedIndex( final int index ) {
 
 //	for ( E entity : getSelectedValuesList() ) {
 //
@@ -756,7 +761,7 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
 
     }
 
-    public void setSelectedIndices( int[] indices ) {
+    public void setSelectedIndices( final int[] indices ) {
 
         ListSelectionModel sm = getSelectionModel();
         sm.clearSelection();
@@ -817,7 +822,7 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
 
     }
 
-    public void setSelectedValue( Object anObject, @SuppressWarnings("SameParameterValue") boolean shouldScroll ) {
+    public void setSelectedValue( final Object anObject, @SuppressWarnings("SameParameterValue") final boolean shouldScroll ) {
 
         if ( anObject == null ) {
 
@@ -855,7 +860,7 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
 
     }
 
-    public void ensureIndexIsVisible( int index ) {
+    public void ensureIndexIsVisible( final int index ) {
 
         Rectangle cellBounds = getCellBounds( index, index );
         if ( cellBounds != null ) {
@@ -866,7 +871,7 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
 
     }
 
-    public Rectangle getCellBounds( int index ) {
+    public Rectangle getCellBounds( final int index ) {
 
         @SuppressWarnings("UnnecessaryLocalVariable")
         int row = index;        // keep it simple for now.
@@ -884,7 +889,7 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
 
     }
 
-    public Rectangle getCellBounds( int index0, int index1 ) {
+    public Rectangle getCellBounds( final int index0, final int index1 ) {
 
         int minIndex = Math.min( index0, index1 );
         int maxIndex = Math.max( index0, index1 );
@@ -921,7 +926,7 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
 
     }
 
-    private void verifySelectable( @NotNull Component comp ) {
+    private void verifySelectable( @NotNull final Component comp ) {
 
         if ( !( comp instanceof SelectableIndexCard ) ) {
 
@@ -946,7 +951,7 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
      or does not implement the {@link SelectableIndexCard} interface.
      */
 
-    public Component add( @NotNull Component comp ) {
+    public Component add( @NotNull final Component comp ) {
 
         verifySelectable( comp );
 
@@ -967,7 +972,7 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
      or does not implement the {@link SelectableIndexCard} interface.
      */
 
-    public Component add( @NotNull String name, Component comp ) {
+    public Component add( @NotNull final String name, final Component comp ) {
 
         verifySelectable( comp );
 
@@ -989,7 +994,7 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
      or does not implement the {@link SelectableIndexCard} interface.
      */
 
-    public Component add( @NotNull Component comp, int ix ) {
+    public Component add( @NotNull final Component comp, final int ix ) {
 
         verifySelectable( comp );
 
@@ -1009,7 +1014,7 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
      or does not implement the {@link SelectableIndexCard} interface.
      */
 
-    public void add( @NotNull Component comp, Object constraints ) {
+    public void add( @NotNull final Component comp, final Object constraints ) {
 
         verifySelectable( comp );
 
@@ -1031,7 +1036,7 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
      or does not implement the {@link SelectableIndexCard} interface.
      */
 
-    public void add( @NotNull Component comp, Object constraints, int index ) {
+    public void add( @NotNull final Component comp, final Object constraints, final int index ) {
 
         verifySelectable( comp );
 

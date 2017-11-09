@@ -19,7 +19,7 @@ public final class EntityName implements Comparable<EntityName> {
 
     private final String _name;
 
-    public EntityName( @NotNull String name ) {
+    public EntityName( @NotNull final String name ) {
 	super();
 
 	_name = name.trim();
@@ -52,14 +52,14 @@ public final class EntityName implements Comparable<EntityName> {
     }
 
     @Override
-    public int compareTo( @NotNull EntityName entityName ) {
+    public int compareTo( @NotNull final EntityName entityName ) {
 
 	return _name.compareTo( entityName._name );
 
     }
 
     @Override
-    public boolean equals( Object rhs ) {
+    public boolean equals( final Object rhs ) {
 
 	return rhs instanceof EntityName && compareTo( (EntityName)rhs ) == 0;
 

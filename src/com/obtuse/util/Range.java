@@ -21,7 +21,7 @@ public class Range<T extends Comparable<T>> implements Serializable {
     private final long _longStartValue;
     private final long _longEndValue;
 
-    public Range( T startValue, T endValue, long longStartValue, long longEndValue ) {
+    public Range( final T startValue, final T endValue, final long longStartValue, final long longEndValue ) {
         super();
 
         if ( startValue.compareTo( endValue ) > 0 ) {
@@ -72,7 +72,7 @@ public class Range<T extends Comparable<T>> implements Serializable {
      * derived classes' implementations of this method to detect who knows what sort of inconsistencies.
      */
 
-    public boolean completelyContains( Range<T> rhs )
+    public boolean completelyContains( final Range<T> rhs )
             throws RejectRangeException {
 
         //noinspection RedundantIfStatement
@@ -98,7 +98,7 @@ public class Range<T extends Comparable<T>> implements Serializable {
      * derived classes' implementations of this method to detect who knows what sort of inconsistencies.
      */
 
-    public boolean completelyInside( Range<T> rhs )
+    public boolean completelyInside( final Range<T> rhs )
             throws RejectRangeException {
 
         return rhs.completelyContains( this );
@@ -114,7 +114,7 @@ public class Range<T extends Comparable<T>> implements Serializable {
      * derived classes' implementations of this method to detect who knows what sort of inconsistencies.
      */
 
-    public boolean overlaps( Range<? extends T> rhs )
+    public boolean overlaps( final Range<? extends T> rhs )
             throws RejectRangeException {
 
 //        Logger.logMsg( "ls=" + getLongStartValue() + ", le=" + getLongEndValue() + ", rhs.ls=" + rhs.getLongStartValue() + ", rhs.le=" + rhs.getLongEndValue() );
@@ -139,14 +139,14 @@ public class Range<T extends Comparable<T>> implements Serializable {
      * derived classes' implementations of this method to detect who knows what sort of inconsistencies.
      */
 
-    public boolean touches( Range<? extends T> rhs )
+    public boolean touches( final Range<? extends T> rhs )
             throws RejectRangeException {
 
         return _longEndValue + 1L == rhs.getLongStartValue() || _longStartValue - 1L == rhs.getLongEndValue();
 
     }
 
-    protected String format( T value ) {
+    protected String format( final T value ) {
 
         return "" + value;
 
@@ -196,7 +196,7 @@ public class Range<T extends Comparable<T>> implements Serializable {
 
     }
 
-    public void dump( String why ) {
+    public void dump( final String why ) {
 
         Logger.logMsg( why );
 

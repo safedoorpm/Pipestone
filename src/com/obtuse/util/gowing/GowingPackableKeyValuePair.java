@@ -47,7 +47,7 @@ public class GowingPackableKeyValuePair<K,V> extends GowingAbstractPackableEntit
 
 	@Override
 	@NotNull
-	public GowingPackable createEntity( @NotNull GowingUnPacker unPacker, @NotNull GowingPackedEntityBundle bundle, GowingEntityReference er ) {
+	public GowingPackable createEntity( @NotNull final GowingUnPacker unPacker, @NotNull final GowingPackedEntityBundle bundle, final GowingEntityReference er ) {
 
 	    return new GowingPackableKeyValuePair( unPacker, bundle, er );
 
@@ -55,7 +55,7 @@ public class GowingPackableKeyValuePair<K,V> extends GowingAbstractPackableEntit
 
     };
 
-    public GowingPackableKeyValuePair( K key, V value ) {
+    public GowingPackableKeyValuePair( final K key, final V value ) {
 	super( new GowingNameMarkerThing() );
 
 	_key = key;
@@ -74,7 +74,7 @@ public class GowingPackableKeyValuePair<K,V> extends GowingAbstractPackableEntit
 
     }
 
-    public GowingPackableKeyValuePair( GowingUnPacker unPacker, @NotNull GowingPackedEntityBundle bundle, GowingEntityReference er ) {
+    public GowingPackableKeyValuePair( final GowingUnPacker unPacker, @NotNull final GowingPackedEntityBundle bundle, final GowingEntityReference er ) {
 	super( unPacker, bundle.getSuperBundle() );
 
 	Logger.logMsg( "reconstructing KVP " + er );
@@ -103,7 +103,7 @@ public class GowingPackableKeyValuePair<K,V> extends GowingAbstractPackableEntit
 
     @NotNull
     @Override
-    public GowingPackedEntityBundle bundleThyself( boolean isPackingSuper, GowingPacker packer ) {
+    public GowingPackedEntityBundle bundleThyself( final boolean isPackingSuper, final GowingPacker packer ) {
 
 	GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
 		ENTITY_TYPE_NAME,
@@ -121,7 +121,7 @@ public class GowingPackableKeyValuePair<K,V> extends GowingAbstractPackableEntit
     }
 
     @Override
-    public boolean finishUnpacking( GowingUnPacker unPacker ) {
+    public boolean finishUnpacking( final GowingUnPacker unPacker ) {
 
 	if ( _keyReference instanceof GowingEntityReference && !unPacker.isEntityFinished( (GowingEntityReference)_keyReference ) ) {
 
@@ -177,7 +177,7 @@ public class GowingPackableKeyValuePair<K,V> extends GowingAbstractPackableEntit
      @return the object of interest.
      */
 
-    public static Object fetchActualValue( GowingUnPacker unPacker, Object value ) {
+    public static Object fetchActualValue( final GowingUnPacker unPacker, final Object value ) {
 
 	if ( value instanceof GowingEntityReference ) {
 
@@ -205,7 +205,7 @@ public class GowingPackableKeyValuePair<K,V> extends GowingAbstractPackableEntit
 		new HolderFactory() {
 
 		    @Override
-		    public GowingAbstractPackableHolder constructHolder( EntityName name, Object obj, GowingPacker packer ) {
+		    public GowingAbstractPackableHolder constructHolder( final EntityName name, final Object obj, final GowingPacker packer ) {
 
 			return new GowingStringHolder( name, (String)obj, true );
 
@@ -219,7 +219,7 @@ public class GowingPackableKeyValuePair<K,V> extends GowingAbstractPackableEntit
 		new HolderFactory() {
 
 		    @Override
-		    public GowingAbstractPackableHolder constructHolder( EntityName name, Object obj, GowingPacker packer ) {
+		    public GowingAbstractPackableHolder constructHolder( final EntityName name, final Object obj, final GowingPacker packer ) {
 
 			return new GowingByteHolder( name, (Byte)obj, true );
 
@@ -233,7 +233,7 @@ public class GowingPackableKeyValuePair<K,V> extends GowingAbstractPackableEntit
 		new HolderFactory() {
 
 		    @Override
-		    public GowingAbstractPackableHolder constructHolder( EntityName name, Object obj, GowingPacker packer ) {
+		    public GowingAbstractPackableHolder constructHolder( final EntityName name, final Object obj, final GowingPacker packer ) {
 
 			return new GowingShortHolder( name, (Short)obj, true );
 
@@ -247,7 +247,7 @@ public class GowingPackableKeyValuePair<K,V> extends GowingAbstractPackableEntit
 		new HolderFactory() {
 
 		    @Override
-		    public GowingIntegerHolder constructHolder( EntityName name, Object obj, GowingPacker packer ) {
+		    public GowingIntegerHolder constructHolder( final EntityName name, final Object obj, final GowingPacker packer ) {
 
 			return new GowingIntegerHolder( name, (Integer)obj, true );
 
@@ -261,7 +261,7 @@ public class GowingPackableKeyValuePair<K,V> extends GowingAbstractPackableEntit
 		new HolderFactory() {
 
 		    @Override
-		    public GowingAbstractPackableHolder constructHolder( EntityName name, Object obj, GowingPacker packer ) {
+		    public GowingAbstractPackableHolder constructHolder( final EntityName name, final Object obj, final GowingPacker packer ) {
 
 			return new GowingLongHolder( name, (Long)obj, true );
 
@@ -275,7 +275,7 @@ public class GowingPackableKeyValuePair<K,V> extends GowingAbstractPackableEntit
 		new HolderFactory() {
 
 		    @Override
-		    public GowingAbstractPackableHolder constructHolder( EntityName name, Object obj, GowingPacker packer ) {
+		    public GowingAbstractPackableHolder constructHolder( final EntityName name, final Object obj, final GowingPacker packer ) {
 
 			return new GowingFloatHolder( name, (Float)obj, true );
 
@@ -289,7 +289,7 @@ public class GowingPackableKeyValuePair<K,V> extends GowingAbstractPackableEntit
 		new HolderFactory() {
 
 		    @Override
-		    public GowingAbstractPackableHolder constructHolder( EntityName name, Object obj, GowingPacker packer ) {
+		    public GowingAbstractPackableHolder constructHolder( final EntityName name, final Object obj, final GowingPacker packer ) {
 
 			return new GowingDoubleHolder( name, (Double)obj, true );
 
@@ -303,7 +303,7 @@ public class GowingPackableKeyValuePair<K,V> extends GowingAbstractPackableEntit
 		new HolderFactory() {
 
 		    @Override
-		    public GowingAbstractPackableHolder constructHolder( EntityName name, Object obj, GowingPacker packer ) {
+		    public GowingAbstractPackableHolder constructHolder( final EntityName name, final Object obj, final GowingPacker packer ) {
 
 			return new GowingBooleanHolder( name, (Boolean)obj, true );
 
@@ -317,7 +317,7 @@ public class GowingPackableKeyValuePair<K,V> extends GowingAbstractPackableEntit
 		new HolderFactory() {
 
 		    @Override
-		    public GowingAbstractPackableHolder constructHolder( EntityName name, Object obj, GowingPacker packer ) {
+		    public GowingAbstractPackableHolder constructHolder( final EntityName name, final Object obj, final GowingPacker packer ) {
 
 			return new GowingEntityNameHolder( name, (EntityName)obj, true );
 
@@ -328,7 +328,7 @@ public class GowingPackableKeyValuePair<K,V> extends GowingAbstractPackableEntit
 
     }
 
-    public static boolean isObjectsClassSupported( @Nullable Object obj ) {
+    public static boolean isObjectsClassSupported( @Nullable final Object obj ) {
 
 	if ( obj == null || obj instanceof GowingPackable ) {
 
@@ -346,20 +346,20 @@ public class GowingPackableKeyValuePair<K,V> extends GowingAbstractPackableEntit
 
     }
 
-    public static boolean isClassSupported( @NotNull Class entityClass ) {
+    public static boolean isClassSupported( @NotNull final Class entityClass ) {
 
 	boolean rval = _factories.containsKey( entityClass.getCanonicalName() );
 	return rval;
 
     }
 
-    public static void packObj( GowingPackedEntityBundle bundle, EntityName entityName, Object obj, GowingPacker packer ) {
+    public static void packObj( final GowingPackedEntityBundle bundle, final EntityName entityName, final Object obj, final GowingPacker packer ) {
 
 	packObj( bundle, entityName, obj, packer, false );
 
     }
 
-    public static void packObj( GowingPackedEntityBundle bundle, EntityName entityName, Object obj, GowingPacker packer, boolean classSupportVerified ) {
+    public static void packObj( final GowingPackedEntityBundle bundle, final EntityName entityName, final Object obj, final GowingPacker packer, final boolean classSupportVerified ) {
 
 	if ( obj == null ) {
 

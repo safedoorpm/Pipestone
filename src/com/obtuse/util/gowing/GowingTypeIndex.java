@@ -25,7 +25,7 @@ public class GowingTypeIndex {
 
     private int _nextReferenceIndex = 1;
 
-    public GowingTypeIndex( String typeIndexName ) {
+    public GowingTypeIndex( final String typeIndexName ) {
 	super();
 
 	_typeIndexName = typeIndexName;
@@ -44,7 +44,7 @@ public class GowingTypeIndex {
      */
 
     @NotNull
-    public EntityTypeInfo addFactory( @NotNull GowingEntityFactory newFactory ) {
+    public EntityTypeInfo addFactory( @NotNull final GowingEntityFactory newFactory ) {
 
 //	if ( !newFactory.isLockedDown() ) {
 //
@@ -136,9 +136,8 @@ public class GowingTypeIndex {
      @return the corresponding type's info or <code>null</code> if we don't have the specified type in our index.
      */
 
-//    @Nullable
     @NotNull
-    public Optional<EntityTypeInfo> findTypeInfo( @NotNull EntityTypeName typeName ) {
+    public Optional<EntityTypeInfo> findTypeInfo( @NotNull final EntityTypeName typeName ) {
 
 	return Optional.ofNullable( _typeNameToTypeInfoMapping.get( typeName ) );
 
@@ -150,7 +149,7 @@ public class GowingTypeIndex {
      @return <tt>true</tt> if we have type info for the specified type; <tt>false</tt> otherwise.
      */
 
-    public boolean hasTypeInfo( @NotNull EntityTypeName typeName ) {
+    public boolean hasTypeInfo( @NotNull final EntityTypeName typeName ) {
 
         return _typeNameToTypeInfoMapping.containsKey( typeName );
 
@@ -164,7 +163,7 @@ public class GowingTypeIndex {
      */
 
     @NotNull
-    public EntityTypeInfo getTypeInfo( @NotNull EntityTypeName typeName ) {
+    public EntityTypeInfo getTypeInfo( @NotNull final EntityTypeName typeName ) {
 
         Optional<EntityTypeInfo> maybeEntityFactory = findTypeInfo( typeName );
 	return maybeEntityFactory.orElseThrow( ()->new IllegalArgumentException( "no type info found for type named \"" + typeName + "\"" ) );

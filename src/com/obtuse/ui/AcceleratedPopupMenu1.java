@@ -29,7 +29,7 @@ public class AcceleratedPopupMenu1 extends JPopupMenu {
     private JMenuItem _secondMenuItem;
     private List<JMenuItem> _wordMenuItems;
 
-    public AcceleratedPopupMenu1( String[] words ) {
+    public AcceleratedPopupMenu1( final String[] words ) {
         super();
 
         _frame.setContentPane( _panel );
@@ -48,7 +48,7 @@ public class AcceleratedPopupMenu1 extends JPopupMenu {
             item.addActionListener(
                     new MyActionListener() {
 
-                        public void myActionPerformed( ActionEvent actionEvent ) {
+                        public void myActionPerformed( final ActionEvent actionEvent ) {
 
                             JMenuItem menuItem = (JMenuItem) actionEvent.getSource();
 
@@ -67,7 +67,7 @@ public class AcceleratedPopupMenu1 extends JPopupMenu {
         _panel.addMouseListener(
                 new MouseAdapter() {
 
-                    public void mousePressed( MouseEvent e ) {
+                    public void mousePressed( final MouseEvent e ) {
 
                         _accelerator = new StringBuilder();
                         setVisibility();
@@ -85,7 +85,7 @@ public class AcceleratedPopupMenu1 extends JPopupMenu {
         addMenuKeyListener(
                 new MenuKeyListener() {
 
-                    public void menuKeyTyped( MenuKeyEvent keyEvent ) {
+                    public void menuKeyTyped( final MenuKeyEvent keyEvent ) {
 
                         char keyChar = keyEvent.getKeyChar();
                         Logger.logMsg( "key typed \"" + keyChar + "\" + " + ObtuseUtil.hexvalue( ( "" + keyChar ).getBytes() ) );
@@ -107,13 +107,13 @@ public class AcceleratedPopupMenu1 extends JPopupMenu {
 
                     }
 
-                    public void menuKeyPressed( MenuKeyEvent keyEvent ) {
+                    public void menuKeyPressed( final MenuKeyEvent keyEvent ) {
 
                         Logger.logMsg( "key pressed \"" + keyEvent.getKeyChar() + "\"" );
 
                     }
 
-                    public void menuKeyReleased( MenuKeyEvent keyEvent ) {
+                    public void menuKeyReleased( final MenuKeyEvent keyEvent ) {
 
                         Logger.logMsg( "key released \"" + keyEvent.getKeyChar() + "\"" );
 
@@ -169,11 +169,11 @@ public class AcceleratedPopupMenu1 extends JPopupMenu {
 
     }
 
-    public AcceleratedPopupMenu1( Collection<String> words ) {
+    public AcceleratedPopupMenu1( final Collection<String> words ) {
         this( words.toArray( new String[words.size()] ) );
     }
 
-    public static void main( String[] args ) {
+    public static void main( final String[] args ) {
 
         BasicProgramConfigInfo.init( "Obtuse", "Pipestone", "Test", null );
 

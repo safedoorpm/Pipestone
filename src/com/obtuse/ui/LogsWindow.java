@@ -59,7 +59,7 @@ public class LogsWindow extends WindowWithMenus {
 
 //    private static ImageIcon _loaLogo = BasicIconLogoHandler.fetchIconImage("loa_logo.png", LOGO_SIZE);
 
-    public LogsWindow( String windowPrefsName ) {
+    public LogsWindow( final String windowPrefsName ) {
 
         super( windowPrefsName, true );
 
@@ -72,7 +72,7 @@ public class LogsWindow extends WindowWithMenus {
         //noinspection ClassWithoutToString
         _closeButton.addActionListener(
                 new MyActionListener() {
-                    public void myActionPerformed( ActionEvent actionEvent ) {
+                    public void myActionPerformed( final ActionEvent actionEvent ) {
 
                         WindowWithMenus.setAllShowLogsModeInMenu( false );
                         setVisible( false );
@@ -89,7 +89,7 @@ public class LogsWindow extends WindowWithMenus {
         //noinspection RefusedBequest,ClassWithoutToString
         addWindowListener(
                 new WindowAdapter() {
-                    public void windowClosing( WindowEvent e ) {
+                    public void windowClosing( final WindowEvent e ) {
 
                         WindowWithMenus.setAllShowLogsModeInMenu( false );
                     }
@@ -143,13 +143,13 @@ public class LogsWindow extends WindowWithMenus {
     }
 
     @SuppressWarnings({ "UnusedDeclaration" })
-    public static void addMessage( String msg ) {
+    public static void addMessage( final String msg ) {
 
         LogsWindow.addMessage( new Date(), msg );
 
     }
 
-    public static void addMessage( Date when, final String msg ) {
+    public static void addMessage( final Date when, final String msg ) {
 
         final String timeStampedMessage = LogsWindow.s_dateFormatter.format( when ) + ":  " + msg;
         if ( SwingUtilities.isEventDispatchThread() ) {
@@ -192,7 +192,7 @@ public class LogsWindow extends WindowWithMenus {
      @param value    its new state.
      */
 
-    public static void setMenuEnabled( String context, JMenuItem menuItem, boolean value ) {
+    public static void setMenuEnabled( final String context, final JMenuItem menuItem, final boolean value ) {
 
         String text = menuItem.getText();
         if ( text == null ) {
@@ -223,7 +223,7 @@ public class LogsWindow extends WindowWithMenus {
      @param value  its new state.
      */
 
-    public static void setButtonEnabled( JButton button, boolean value ) {
+    public static void setButtonEnabled( final JButton button, final boolean value ) {
 
         String text = button.getText();
         if ( text == null ) {
@@ -248,7 +248,7 @@ public class LogsWindow extends WindowWithMenus {
      @param value its new state.
      */
 
-    public static void setLabelEnabled( JLabel label, boolean value ) {
+    public static void setLabelEnabled( final JLabel label, final boolean value ) {
 
         String text = label.getText();
         if ( text == null ) {
@@ -263,7 +263,7 @@ public class LogsWindow extends WindowWithMenus {
 
     }
 
-    private void insertMessageAtEnd( String timeStampedMessage ) {
+    private void insertMessageAtEnd( final String timeStampedMessage ) {
 
         int listSize = _messagesListModel.getSize();
         if ( listSize >= LogsWindow.MAX_LINES_IN_MESSAGE_WINDOW ) {
@@ -299,7 +299,7 @@ public class LogsWindow extends WindowWithMenus {
     }
 
     @SuppressWarnings({ "UnusedDeclaration" })
-    public void setUseHTML( boolean useHTML ) {
+    public void setUseHTML( final boolean useHTML ) {
 
         //noinspection AssignmentToStaticFieldFromInstanceMethod
         LogsWindow.s_useHTML = useHTML;
@@ -365,7 +365,7 @@ public class LogsWindow extends WindowWithMenus {
         selectAllMenuItem.addActionListener(
                 new MyActionListener() {
 
-                    public void myActionPerformed( ActionEvent actionEvent ) {
+                    public void myActionPerformed( final ActionEvent actionEvent ) {
 
                         _messageWindowList.getSelectionModel().setSelectionInterval(
                                 0,
@@ -402,7 +402,7 @@ public class LogsWindow extends WindowWithMenus {
         _copyMenuItem.addActionListener(
                 new MyActionListener() {
 
-                    public void myActionPerformed( ActionEvent actionEvent ) {
+                    public void myActionPerformed( final ActionEvent actionEvent ) {
 
                         StringWriter lines = new StringWriter();
                         PrintWriter writer = new PrintWriter( lines );

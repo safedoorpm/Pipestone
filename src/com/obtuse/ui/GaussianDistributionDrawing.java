@@ -20,7 +20,7 @@ public class GaussianDistributionDrawing extends StackedGaussianDistributionsDra
 
     }
 
-    public GaussianDistributionDrawing( GaussianDistribution gd ) {
+    public GaussianDistributionDrawing( final GaussianDistribution gd ) {
 
         this( gd, 0.0, 1.0 );
 
@@ -28,9 +28,9 @@ public class GaussianDistributionDrawing extends StackedGaussianDistributionsDra
 
     @SuppressWarnings("SameParameterValue")
     public GaussianDistributionDrawing(
-            GaussianDistribution gd,
-            double from,
-            double to
+            final GaussianDistribution gd,
+            final double from,
+            final double to
     ) {
 
         super(
@@ -48,7 +48,7 @@ public class GaussianDistributionDrawing extends StackedGaussianDistributionsDra
     }
 
     @SuppressWarnings("UnusedDeclaration")
-    public void setDistribution( GaussianDistribution gd ) {
+    public void setDistribution( final GaussianDistribution gd ) {
 
         setDistributions(
                 new WeightedGaussianDistribution[] {

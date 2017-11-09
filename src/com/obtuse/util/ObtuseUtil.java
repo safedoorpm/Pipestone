@@ -64,7 +64,7 @@ public class ObtuseUtil {
     }
 
     @Nullable
-    public static String extractKeywordValueSemiColon( String url, String keyword ) {
+    public static String extractKeywordValueSemiColon( final String url, final String keyword ) {
 
         String wrappedURL = ";" + url;
         String wrappedKeyword = ";" + keyword + "=";
@@ -101,7 +101,7 @@ public class ObtuseUtil {
      */
 
     @NotNull
-    public static String getMinimalHexValue( long value ) {
+    public static String getMinimalHexValue( final long value ) {
 
         String original = hexvalue( value );
         int off = 0;
@@ -121,7 +121,7 @@ public class ObtuseUtil {
      @return the decoded string.
      */
 
-    public static String decodePercent( String str ) {
+    public static String decodePercent( final String str ) {
 
         try {
             StringBuilder sb = new StringBuilder();
@@ -161,7 +161,7 @@ public class ObtuseUtil {
      @throws IllegalArgumentException if {@code aStart > aEnd} or {@code bStart > bEnd}.
      */
 
-    public static boolean overlapsBounds( int aStart, int aEnd, int bStart, int bEnd ) {
+    public static boolean overlapsBounds( final int aStart, final int aEnd, final int bStart, final int bEnd ) {
 
         if ( aStart > aEnd ) {
 
@@ -199,7 +199,7 @@ public class ObtuseUtil {
      @throws IllegalArgumentException if {@code aStart} > {@code aLength} or {@code bStart > {@code bLength}}.
      */
 
-    public static boolean overlapsLength( int aStart, int aLength, int bStart, int bLength ) {
+    public static boolean overlapsLength( final int aStart, final int aLength, final int bStart, final int bLength ) {
 
         if ( aLength <= 0 ) {
 
@@ -225,7 +225,7 @@ public class ObtuseUtil {
      @param traceOnly {@code true} if messages passed to {@link #report(String)} are to be logged and traced; {@code false} if they are to be just traced.
      */
 
-    public static void setTraceOnlyMode( boolean traceOnly ) {
+    public static void setTraceOnlyMode( final boolean traceOnly ) {
 
         s_traceOnly = traceOnly;
 
@@ -250,7 +250,7 @@ public class ObtuseUtil {
      @param msg the message in question.
      */
 
-    public static void report( String msg, Throwable e ) {
+    public static void report( final String msg, final Throwable e ) {
 
         if ( s_traceOnly ) {
 
@@ -276,7 +276,7 @@ public class ObtuseUtil {
      @param msg the message in question.
      */
 
-    public static void report( String msg ) {
+    public static void report( final String msg ) {
 
         if ( s_traceOnly ) {
 
@@ -305,7 +305,7 @@ public class ObtuseUtil {
         private boolean _readonly;
         private final Hashtable<? extends K, ? extends V> _ht;
 
-        private UnmodifiableHashtable( Hashtable<? extends K, ? extends V> ht ) {
+        private UnmodifiableHashtable( final Hashtable<? extends K, ? extends V> ht ) {
 
             super( ht );
             _ht = ht;
@@ -364,7 +364,7 @@ public class ObtuseUtil {
 
         }
 
-        public V put( K key, V value ) {
+        public V put( final K key, final V value ) {
 
             if ( _readonly ) {
 
@@ -378,7 +378,7 @@ public class ObtuseUtil {
 
         }
 
-        public void putAll( Map<? extends K, ? extends V> t ) {
+        public void putAll( final Map<? extends K, ? extends V> t ) {
 
             if ( _readonly ) {
 
@@ -407,7 +407,7 @@ public class ObtuseUtil {
 
         }
 
-        public V remove( Object key ) {
+        public V remove( final Object key ) {
 
             if ( _readonly ) {
 
@@ -454,7 +454,7 @@ public class ObtuseUtil {
 
     @SuppressWarnings({ "SameParameterValue" })
     @Nullable
-    public static byte[] getSerializedVersion( Serializable thing, boolean printStackTraceOnError ) {
+    public static byte[] getSerializedVersion( final Serializable thing, final boolean printStackTraceOnError ) {
 
         ByteArrayOutputStream bos = null;
         ObjectOutputStream oos = null;
@@ -498,7 +498,7 @@ public class ObtuseUtil {
      */
 
     @SuppressWarnings("BooleanMethodNameMustStartWithQuestion")
-    public static boolean writeSerializableObjectToFile( Serializable thing, File outputFile, boolean printStackTraceOnError ) {
+    public static boolean writeSerializableObjectToFile( final Serializable thing, final File outputFile, final boolean printStackTraceOnError ) {
 
         try {
 
@@ -531,7 +531,7 @@ public class ObtuseUtil {
      that it was not possible to create the output file or some part of <tt>thing</tt> is not serializable.
      */
 
-    public static void writeSerializableObjectToFile( Serializable thing, File outputFile )
+    public static void writeSerializableObjectToFile( final Serializable thing, final File outputFile )
             throws IOException {
 
         ObjectOutputStream oos = null;
@@ -563,7 +563,7 @@ public class ObtuseUtil {
      */
 
     @Nullable
-    public static Serializable recoverSerializedVersion( File inputFile )
+    public static Serializable recoverSerializedVersion( final File inputFile )
             throws IOException, ClassNotFoundException {
 
         return ObtuseUtil.recoverSerializedVersion( new BufferedInputStream( new FileInputStream( inputFile ) ) );
@@ -581,7 +581,7 @@ public class ObtuseUtil {
      Use {@link #recoverSerializedVersion(File)} if this is a concern as it will throw an exception of the de-serialization fails.
      */
 
-    public static Serializable recoverSerializedVersion( File inputFile, boolean printStackTraceOnError ) {
+    public static Serializable recoverSerializedVersion( final File inputFile, final boolean printStackTraceOnError ) {
 
         try {
 
@@ -616,7 +616,7 @@ public class ObtuseUtil {
      at-deprecated Use {@link #recoverSerializedVersion(java.io.File)} or {@link #recoverSerializedVersion(java.io.InputStream)} instead.
      */
 
-    public static Serializable recoverSerializedVersion( byte[] sv )
+    public static Serializable recoverSerializedVersion( final byte[] sv )
             throws ClassNotFoundException, IOException {
 
         ByteArrayInputStream bis = null;
@@ -647,7 +647,7 @@ public class ObtuseUtil {
      @throws ClassNotFoundException if the class of a serialized object in the {@link java.io.InputStream} cannot be found.
      */
 
-    private static Serializable recoverSerializedVersion( InputStream is )
+    private static Serializable recoverSerializedVersion( final InputStream is )
             throws ClassNotFoundException, IOException {
 
         ObjectInputStream ois = null;
@@ -676,8 +676,8 @@ public class ObtuseUtil {
      */
 
     public static Serializable recoverSerializedVersion(
-            byte[] sv,
-            boolean printStackTraceOnError
+            final byte[] sv,
+            final boolean printStackTraceOnError
     ) {
 
         ByteArrayInputStream bis = new ByteArrayInputStream( sv );
@@ -704,7 +704,7 @@ public class ObtuseUtil {
      Use {@link #recoverSerializedVersion(InputStream)} if this is a concern as it will throw an exception of the de-serialization fails.
      */
 
-    public static Serializable recoverSerializedVersion( InputStream is, boolean printStackTraceOnError ) {
+    public static Serializable recoverSerializedVersion( final InputStream is, final boolean printStackTraceOnError ) {
 
         ObjectInputStream ois = null;
 
@@ -747,7 +747,7 @@ public class ObtuseUtil {
      A zero-length byte array is returned if the file exists but contains no data.
      */
 
-    public static byte[] readEntireFile( String fname, int maxLength, boolean printStackTraceOnError ) {
+    public static byte[] readEntireFile( final String fname, final int maxLength, final boolean printStackTraceOnError ) {
 
         if ( fname == null ) {
 
@@ -770,7 +770,7 @@ public class ObtuseUtil {
      A zero-length byte array is returned if the file exists but contains no data.
      */
 
-    public static byte[] readEntireFile( File file, int maxLength, boolean printStackTraceOnError ) {
+    public static byte[] readEntireFile( final File file, final int maxLength, final boolean printStackTraceOnError ) {
 
         if ( file == null ) {
 
@@ -827,7 +827,7 @@ public class ObtuseUtil {
      A zero-length byte array is returned if the stream contains no data.
      */
 
-    public static byte[] readEntireStream( InputStream is, int maxLength, boolean printStackTraceOnError ) {
+    public static byte[] readEntireStream( final InputStream is, final int maxLength, final boolean printStackTraceOnError ) {
 
         if ( is == null ) {
 
@@ -875,7 +875,7 @@ public class ObtuseUtil {
      */
 
     @SuppressWarnings({ "BooleanMethodNameMustStartWithQuestion" })
-    public static boolean writeBytesToFile( byte[] bytes, String fname, boolean printStackTraceOnError ) {
+    public static boolean writeBytesToFile( final byte[] bytes, final String fname, final boolean printStackTraceOnError ) {
 
         return ObtuseUtil.writeBytesToFile( bytes, new File( fname ), printStackTraceOnError );
 
@@ -891,7 +891,7 @@ public class ObtuseUtil {
      */
 
     @SuppressWarnings({ "BooleanMethodNameMustStartWithQuestion" })
-    public static boolean writeBytesToFile( byte[] bytes, File file, boolean printStackTraceOnError ) {
+    public static boolean writeBytesToFile( final byte[] bytes, final File file, final boolean printStackTraceOnError ) {
 
         FileOutputStream fs = null;
         try {
@@ -932,7 +932,7 @@ public class ObtuseUtil {
      */
 
     @SuppressWarnings({ "BooleanMethodNameMustStartWithQuestion" })
-    public static boolean appendBytesToFile( byte[] bytes, File file, boolean printStackTraceOnError ) {
+    public static boolean appendBytesToFile( final byte[] bytes, final File file, final boolean printStackTraceOnError ) {
 
         FileOutputStream fs = null;
         try {
@@ -973,7 +973,7 @@ public class ObtuseUtil {
      */
 
     @SuppressWarnings({ "BooleanMethodNameMustStartWithQuestion" })
-    public static boolean writeBytesToStream( byte[] bytes, OutputStream os, boolean printStackTraceOnError ) {
+    public static boolean writeBytesToStream( final byte[] bytes, final OutputStream os, final boolean printStackTraceOnError ) {
 
         try {
 
@@ -1006,7 +1006,7 @@ public class ObtuseUtil {
      @return the length of the serialized form of the object.
      */
 
-    public static int getSerializedSize( Serializable thing ) {
+    public static int getSerializedSize( final Serializable thing ) {
 
         byte[] sv = ObtuseUtil.getSerializedVersion( thing, false );
         if ( sv == null ) {
@@ -1032,9 +1032,9 @@ public class ObtuseUtil {
 
     @SuppressWarnings({ "RawUseOfParameterizedType", "CollectionDeclaredAsConcreteClass" })
     public static String validateArgs(
-            String methodName,
-            @SuppressWarnings("rawtypes") Vector actual,
-            @SuppressWarnings("rawtypes") Class[] expected
+            final String methodName,
+            @SuppressWarnings("rawtypes") final Vector actual,
+            @SuppressWarnings("rawtypes") final Class[] expected
     ) {
 
         if ( actual.size() != expected.length ) {
@@ -1069,15 +1069,15 @@ public class ObtuseUtil {
 
     }
 
-    private static DecimalFormat s_readable = new DecimalFormat( "###,###,###,###,###,###,##0" );
+    private static final DecimalFormat s_readable = new DecimalFormat( "###,###,###,###,###,###,##0" );
 
-    public static String readable( long value ) {
+    public static String readable( final long value ) {
 
         return ObtuseUtil.s_readable.format( value );
 
     }
 
-    private static String readable( String sValue ) {
+    private static String readable( final String sValue ) {
 
         int offset = sValue.indexOf( '.' );
         if ( offset < 0 ) {
@@ -1101,67 +1101,67 @@ public class ObtuseUtil {
 
     }
 
-    public static String lpadReadable( long value, int w ) {
+    public static String lpadReadable( final long value, final int w ) {
 
         return ObtuseUtil.lpad( ObtuseUtil.readable( value ), w );
 
     }
 
-    public static String lpadReadable( float value, int width, int digits ) {
+    public static String lpadReadable( final float value, final int width, final int digits ) {
 
         return ObtuseUtil.lpad( ObtuseUtil.readable( ObtuseUtil.lpad( value, 0, digits ) ), width );
 
     }
 
-    public static String lpadReadable( double value, int width, int digits ) {
+    public static String lpadReadable( final double value, final int width, final int digits ) {
 
         return ObtuseUtil.lpad( ObtuseUtil.readable( ObtuseUtil.lpad( value, 0, digits ) ), width );
 
     }
 
-    public static String rpadReadable( long value, int w ) {
+    public static String rpadReadable( final long value, final int w ) {
 
         return ObtuseUtil.rpad( ObtuseUtil.readable( value ), w );
 
     }
 
-    public static String rpadReadable( float value, int width, int digits ) {
+    public static String rpadReadable( final float value, final int width, final int digits ) {
 
         return ObtuseUtil.rpad( ObtuseUtil.readable( ObtuseUtil.lpad( value, 0, digits ) ), width );
 
     }
 
-    public static String rpadReadable( double value, int width, int digits ) {
+    public static String rpadReadable( final double value, final int width, final int digits ) {
 
         return ObtuseUtil.rpad( ObtuseUtil.readable( ObtuseUtil.lpad( value, 0, digits ) ), width );
 
     }
 
-    public static String lpadReadable0( float value, int width, int digits ) {
+    public static String lpadReadable0( final float value, final int width, final int digits ) {
 
         return ObtuseUtil.lpad( ObtuseUtil.readable( ObtuseUtil.lpad0( value, 0, digits ) ), width );
 
     }
 
-    public static String lpadReadable0( double value, int width, int digits ) {
+    public static String lpadReadable0( final double value, final int width, final int digits ) {
 
         return ObtuseUtil.lpad( ObtuseUtil.readable( ObtuseUtil.lpad0( value, 0, digits ) ), width );
 
     }
 
-    public static String rpadReadable0( float value, int width, int digits ) {
+    public static String rpadReadable0( final float value, final int width, final int digits ) {
 
         return ObtuseUtil.rpad( ObtuseUtil.readable( ObtuseUtil.lpad0( value, 0, digits ) ), width );
 
     }
 
-    public static String rpadReadable0( double value, int width, int digits ) {
+    public static String rpadReadable0( final double value, final int width, final int digits ) {
 
         return ObtuseUtil.rpad( ObtuseUtil.readable( ObtuseUtil.lpad0( value, 0, digits ) ), width );
 
     }
 
-    public static String lpad( float value, int width, int digits ) {
+    public static String lpad( final float value, final int width, final int digits ) {
 
         return ObtuseUtil.lpad( (double)value, width, digits );
 
@@ -1169,7 +1169,7 @@ public class ObtuseUtil {
 
     private static DecimalFormat[] s_cachedFormats = new DecimalFormat[1];
 
-    public static String lpad( double di, int w, int v ) {
+    public static String lpad( final double di, final int w, final int v ) {
 
         if ( Double.isNaN( di ) ) {
 
@@ -1219,7 +1219,7 @@ public class ObtuseUtil {
 
     private static DecimalFormat[] s_cachedZeroFormats = new DecimalFormat[1];
 
-    public static String lpad0( double di, int w, int v ) {
+    public static String lpad0( final double di, final int w, final int v ) {
 
         if ( Double.isNaN( di ) ) {
 
@@ -1298,14 +1298,14 @@ public class ObtuseUtil {
      @return the padded string or the original string if it is already at least as wide as <tt>w</tt>.
      */
 
-    public static String lpad( String s, int w, char p ) {
+    public static String lpad( final String s, final int w, final char p ) {
 
         String str = s == null ? "null" : s;
         return ObtuseUtil.generatePaddingString( w, p, str ) + str;
 
     }
 
-    public static String generatePaddingString( int w, char p, String str ) {
+    public static String generatePaddingString( final int w, final char p, final String str ) {
 
         int padding = w - str.length();
         String padString;
@@ -1346,7 +1346,7 @@ public class ObtuseUtil {
      @return the centered string or the original string if it is already at least as wide as <tt>w</tt>.
      */
 
-    public static String center( String s, int w ) {
+    public static String center( final String s, final int w ) {
 
         return center( s, w, ' ' );
 
@@ -1368,7 +1368,7 @@ public class ObtuseUtil {
      @return the centered string or the original string if it is already at least as wide as <tt>w</tt>.
      */
 
-    public static String center( String s, int w, char ch ) {
+    public static String center( final String s, final int w, final char ch ) {
 
         if ( s == null ) {
 
@@ -1401,7 +1401,7 @@ public class ObtuseUtil {
      @return the padded string or the original string if it is already at least as wide as <tt>w</tt>.
      */
 
-    public static String lpad( String s, int w ) {
+    public static String lpad( final String s, final int w ) {
 
         return ObtuseUtil.lpad( s, w, ' ' );
 
@@ -1418,7 +1418,7 @@ public class ObtuseUtil {
      <tt>w</tt>.
      */
 
-    public static String lpad( long l, int w, char p ) {
+    public static String lpad( final long l, final int w, final char p ) {
 
         return ObtuseUtil.lpad( "" + l, w, p );
 
@@ -1436,7 +1436,7 @@ public class ObtuseUtil {
      <tt>w</tt>.
      */
 
-    public static String lpad( long l, int w ) {
+    public static String lpad( final long l, final int w ) {
 
         return ObtuseUtil.lpad( "" + l, w );
 
@@ -1452,7 +1452,7 @@ public class ObtuseUtil {
      @return the padded string or the original string if it is already at least as wide as <tt>w</tt>.
      */
 
-    public static String rpad( String s, int w, char p ) {
+    public static String rpad( final String s, final int w, final char p ) {
 
         String str = s == null ? "null" : s;
         return str + ObtuseUtil.generatePaddingString( w, p, str );
@@ -1479,7 +1479,7 @@ public class ObtuseUtil {
      @return the padded string or the original string if it is already at least as wide as <tt>w</tt>.
      */
 
-    public static String rpad( String s, int w ) {
+    public static String rpad( final String s, final int w ) {
 
         return ObtuseUtil.rpad( s, w, ' ' );
 
@@ -1497,7 +1497,7 @@ public class ObtuseUtil {
      <tt>w</tt>.
      */
 
-    public static String rpad( long l, int w, char p ) {
+    public static String rpad( final long l, final int w, final char p ) {
 
         return ObtuseUtil.rpad( "" + l, w, p );
 
@@ -1515,7 +1515,7 @@ public class ObtuseUtil {
      <tt>w</tt>.
      */
 
-    public static String rpad( long l, int w ) {
+    public static String rpad( final long l, final int w ) {
 
         return ObtuseUtil.rpad( "" + l, w );
 
@@ -1530,7 +1530,7 @@ public class ObtuseUtil {
      @return the replicated string.
      */
 
-    public static String replicate( String str, int count ) {
+    public static String replicate( final String str, final int count ) {
 
         StringBuilder rval = new StringBuilder();
         for ( int i = 0; i < count; i += 1 ) {
@@ -1552,7 +1552,7 @@ public class ObtuseUtil {
      */
 
     @SuppressWarnings({ "MagicNumber" })
-    public static String hexvalue( long v ) {
+    public static String hexvalue( final long v ) {
 
         //noinspection UnnecessaryParentheses
 
@@ -1571,7 +1571,7 @@ public class ObtuseUtil {
      */
 
     @SuppressWarnings({ "UnnecessaryParentheses", "MagicNumber" })
-    public static String hexvalue( int v ) {
+    public static String hexvalue( final int v ) {
 
         return ""
                + ObtuseUtil.hexvalue( (byte)( ( v >> 24 ) & 0xff ) )
@@ -1590,7 +1590,7 @@ public class ObtuseUtil {
      */
 
     @SuppressWarnings({ "UnnecessaryParentheses", "MagicNumber" })
-    public static String hexvalue( byte v ) {
+    public static String hexvalue( final byte v ) {
 
         int high = ( v >> 4 ) & 0xf;
         int low = (int)v & 0xf;
@@ -1609,7 +1609,7 @@ public class ObtuseUtil {
      */
 
     @SuppressWarnings({ "UnnecessaryParentheses", "MagicNumber" })
-    public static String hexvalue( char v ) {
+    public static String hexvalue( final char v ) {
 
         return ObtuseUtil.hexvalue( Character.toString( v ).getBytes() );
 
@@ -1627,7 +1627,7 @@ public class ObtuseUtil {
      @return the hex representation of <tt>v</tt>.
      */
 
-    public static String hexvalue( byte[] bv ) {
+    public static String hexvalue( final byte[] bv ) {
 
         if ( bv == null ) {
 
@@ -1660,7 +1660,7 @@ public class ObtuseUtil {
      @return the hex representation of <tt>v</tt>.
      */
 
-    public static String hexvalue( byte[] bv, int off, int len ) {
+    public static String hexvalue( final byte[] bv, final int off, final int len ) {
 
         if ( bv == null ) {
 
@@ -1687,7 +1687,7 @@ public class ObtuseUtil {
      */
 
     @NotNull
-    public static byte[] decodeHexAsByteArray( @NotNull String hexString ) {
+    public static byte[] decodeHexAsByteArray( @NotNull final String hexString ) {
 
         String hex = hexString.toLowerCase();
 
@@ -1728,8 +1728,8 @@ public class ObtuseUtil {
 
             inputIx += 1;
 
-            int highNibble = ( ch1 >= '0' && ch1 <= '9' ) ? ch1 - '0' : 10 + ch1 - 'a';
-            int lowNibble = ( ch2 >= '0' && ch2 <= '9' ) ? ch2 - '0' : 10 + ch2 - 'a';
+            @SuppressWarnings("ConstantConditions") int highNibble = ( ch1 >= '0' && ch1 <= '9' ) ? ch1 - '0' : 10 + ch1 - 'a';
+            @SuppressWarnings("ConstantConditions") int lowNibble = ( ch2 >= '0' && ch2 <= '9' ) ? ch2 - '0' : 10 + ch2 - 'a';
             rval[outputIx] = (byte)( ( highNibble << 4 ) | lowNibble );
 
             outputIx += 1;
@@ -1748,7 +1748,7 @@ public class ObtuseUtil {
      @throws IndexOutOfBoundsException if the string is empty.
      */
 
-    public static String capitalize( @NotNull String str ) {
+    public static String capitalize( @NotNull final String str ) {
 
         return str.substring( 0, 1 ).toUpperCase() + str.substring( 1 );
 
@@ -1763,7 +1763,7 @@ public class ObtuseUtil {
      depending upon far too many factors to enumerate here).
      */
 
-    public static void safeSleepMillis( long milliseconds ) {
+    public static void safeSleepMillis( final long milliseconds ) {
 
         try {
 
@@ -1785,7 +1785,7 @@ public class ObtuseUtil {
      */
 
     @SuppressWarnings({ "MagicNumber" })
-    public static void dump( byte[] data ) {
+    public static void dump( final byte[] data ) {
 
         for ( int offset = 0; offset < data.length; offset += 16 ) {
 
@@ -1841,7 +1841,7 @@ public class ObtuseUtil {
      @return the escaped string.
      */
 
-    public static String htmlEscape( String str ) {
+    public static String htmlEscape( final String str ) {
 
         String rval;
         String s = str;
@@ -1900,7 +1900,7 @@ public class ObtuseUtil {
      @param thing the thing to be closed (which can be null in which case nothing is done).
      */
 
-    public static void closeQuietly( @Nullable Closeable thing ) {
+    public static void closeQuietly( @Nullable final Closeable thing ) {
 
         try {
 
@@ -1918,7 +1918,7 @@ public class ObtuseUtil {
 
     }
 
-    public static void closeQuietly( @Nullable ServerSocket sock ) {
+    public static void closeQuietly( @Nullable final ServerSocket sock ) {
 
         try {
 
@@ -1936,7 +1936,7 @@ public class ObtuseUtil {
 
     }
 
-    public static void closeQuietly( @Nullable Socket sock ) {
+    public static void closeQuietly( @Nullable final Socket sock ) {
 
         try {
 
@@ -1954,7 +1954,7 @@ public class ObtuseUtil {
 
     }
 
-    public static void closeQuietly( @Nullable ZipFile zipFile ) {
+    public static void closeQuietly( @Nullable final ZipFile zipFile ) {
 
         try {
 
@@ -1972,7 +1972,7 @@ public class ObtuseUtil {
 
     }
 
-    public static void closeQuietly( @Nullable ResultSet rs ) {
+    public static void closeQuietly( @Nullable final ResultSet rs ) {
 
         try {
 
@@ -1990,7 +1990,7 @@ public class ObtuseUtil {
 
     }
 
-    public static void closeQuietly( @Nullable PreparedStatement rs ) {
+    public static void closeQuietly( @Nullable final PreparedStatement rs ) {
 
         try {
 
@@ -2008,7 +2008,7 @@ public class ObtuseUtil {
 
     }
 
-    public static void closeQuietly( @Nullable PostgresConnection postgresConnection ) {
+    public static void closeQuietly( @Nullable final PostgresConnection postgresConnection ) {
 
         try {
 
@@ -2062,7 +2062,7 @@ public class ObtuseUtil {
      @throws NullPointerException if <tt>string</tt> is null.
      */
 
-    public static String enquoteToCSV( String string ) {
+    public static String enquoteToCSV( final String string ) {
 
         if ( !string.contains( "," ) && !string.contains( "\"" ) ) {
 
@@ -2098,7 +2098,7 @@ public class ObtuseUtil {
      @return the value generated by {@link #enquoteToJavaString}{@code ( String.valueOf( obj ) )}.
      */
 
-    public static String enquoteJavaObject( @Nullable Object obj ) {
+    public static String enquoteJavaObject( @Nullable final Object obj ) {
 
         return enquoteToJavaString( String.valueOf( obj ) );
 
@@ -2114,7 +2114,7 @@ public class ObtuseUtil {
      That two different input values yield the same result is pretty ugly. This is why this method is private.
      */
 
-    private static StringBuilder enquoteJavaStringToNakedStringBuilder( @Nullable String string ) {
+    private static StringBuilder enquoteJavaStringToNakedStringBuilder( @Nullable final String string ) {
 
         if ( string == null ) {
 
@@ -2142,7 +2142,7 @@ public class ObtuseUtil {
      @return the resulting enquoted string (if {@code string} is {@code null} then the return value is the string {@code "null"}).
      */
 
-    public static String enquoteToJavaString( @Nullable String string ) {
+    public static String enquoteToJavaString( @Nullable final String string ) {
 
         return enquoteToJavaStringBuilder( string ).toString();
 
@@ -2158,7 +2158,7 @@ public class ObtuseUtil {
      That two different input values yield the same result is pretty ugly. This is why this method is private.
      */
 
-    public static String enquoteToNakedJavaString( @Nullable String string ) {
+    public static String enquoteToNakedJavaString( @Nullable final String string ) {
 
         if ( string == null ) {
 
@@ -2180,7 +2180,7 @@ public class ObtuseUtil {
      if {@code string} is the six character string {@code "null"} then the result is a {@link StringBuilder} equivalent to the string {@code "\"null\""}).
      */
 
-    private static StringBuilder enquoteToJavaStringBuilder( @Nullable String string ) {
+    private static StringBuilder enquoteToJavaStringBuilder( @Nullable final String string ) {
 
         if ( string == null ) {
 
@@ -2240,7 +2240,7 @@ public class ObtuseUtil {
      @return the resulting enquoted {@link String}.
      */
 
-    public static String enquoteToNakedJavaCharacter( char ch ) {
+    public static String enquoteToNakedJavaCharacter( final char ch ) {
 
         switch ( ch ) {
 
@@ -2277,7 +2277,7 @@ public class ObtuseUtil {
      @return the resulting enquoted {@link String}.
      */
 
-    public static String enquoteToJavaCharacter( char ch ) {
+    public static String enquoteToJavaCharacter( final char ch ) {
 
         return "'" + enquoteToNakedJavaCharacter( ch ) + "'";
 
@@ -2323,7 +2323,7 @@ public class ObtuseUtil {
     private static final Long _md5Lock = 0L;
 
     @NotNull
-    public static String computeMD5( InputStream is )
+    public static String computeMD5( final InputStream is )
             throws IOException {
 
         synchronized ( ObtuseUtil._md5Lock ) {
@@ -2384,7 +2384,7 @@ public class ObtuseUtil {
     }
 
     @NotNull
-    public static String computeMD5( File file )
+    public static String computeMD5( final File file )
             throws IOException {
 
         FileInputStream fis = new FileInputStream( file );
@@ -2400,37 +2400,37 @@ public class ObtuseUtil {
 
     }
 
-    public static int safeDivide( int numerator, int denominator ) {
+    public static int safeDivide( final int numerator, final int denominator ) {
 
         return denominator == 0 ? 0 : numerator / denominator;
 
     }
 
-    public static int safeDivide( int numerator, int denominator, int safeReturnValue ) {
+    public static int safeDivide( final int numerator, final int denominator, final int safeReturnValue ) {
 
         return denominator == 0 ? safeReturnValue : numerator / denominator;
 
     }
 
-    public static long safeDivide( long numerator, long denominator ) {
+    public static long safeDivide( final long numerator, final long denominator ) {
 
         return denominator == 0 ? 0 : numerator / denominator;
 
     }
 
-    public static long safeDivide( long numerator, long denominator, long safeReturnValue ) {
+    public static long safeDivide( final long numerator, final long denominator, final long safeReturnValue ) {
 
         return denominator == 0 ? safeReturnValue : numerator / denominator;
 
     }
 
-    public static double safeDivide( double numerator, double denominator ) {
+    public static double safeDivide( final double numerator, final double denominator ) {
 
         return denominator == 0.0 ? 0.0 : numerator / denominator;
 
     }
 
-    public static double safeDivide( double numerator, double denominator, double safeReturnValue ) {
+    public static double safeDivide( final double numerator, final double denominator, final double safeReturnValue ) {
 
         return denominator == 0.0 ? safeReturnValue : numerator / denominator;
 
@@ -2450,8 +2450,8 @@ public class ObtuseUtil {
 
     @SafeVarargs
     public static <T> Collection<T> addAll(
-            Collection<T> collection,
-            T... newElements
+            final Collection<T> collection,
+            final T... newElements
     ) {
 
         Collections.addAll( collection, newElements );
@@ -2503,7 +2503,7 @@ public class ObtuseUtil {
 
     }
 
-    private static void doString( @Nullable String input ) {
+    private static void doString( @Nullable final String input ) {
 
         String nakedOutput = enquoteToNakedJavaString( input );
         String output = enquoteToJavaString( input );
@@ -2517,7 +2517,7 @@ public class ObtuseUtil {
 
     }
 
-    public static void main( String[] args ) {
+    public static void main( final String[] args ) {
 
         BasicProgramConfigInfo.init( "Obtuse", "ObtuseUtil", "testing", null );
 
@@ -2620,14 +2620,14 @@ public class ObtuseUtil {
     }
 
     @NotNull
-    public static String fDim( @NotNull String name, Dimension d ) {
+    public static String fDim( @NotNull final String name, final Dimension d ) {
 
         return name + "=" + ObtuseUtil.fDim( d );
 
     }
 
     @NotNull
-    public static String fDim( Dimension d ) {
+    public static String fDim( final Dimension d ) {
 
         return d == null ? "null" : ObtuseUtil.fDim( d.width, d.height );
 
@@ -2635,21 +2635,21 @@ public class ObtuseUtil {
     }
 
     @NotNull
-    public static String fDim( int width, int height ) {
+    public static String fDim( final int width, final int height ) {
 
         return "(" + width + "," + height + ")";
 
     }
 
     @NotNull
-    public static String fBounds( String name, Rectangle r ) {
+    public static String fBounds( final String name, final Rectangle r ) {
 
         return name + "=" + ( r == null ? "null" : ObtuseUtil.fBounds( r ) );
 
     }
 
     @NotNull
-    public static String fBounds( Rectangle r ) {
+    public static String fBounds( final Rectangle r ) {
 
         return r == null ? "null" : ObtuseUtil.fBounds( r.x, r.y, r.width, r.height );
 
@@ -2657,14 +2657,14 @@ public class ObtuseUtil {
     }
 
     @NotNull
-    public static String fBounds( int x, int y, int width, int height ) {
+    public static String fBounds( final int x, final int y, final int width, final int height ) {
 
         return "@( " + x + ", " + y + ", " + width + "x" + height + " )";
 
     }
 
     @NotNull
-    public static String fInsets( Insets in ) {
+    public static String fInsets( final Insets in ) {
 
         return "i( l=" + in.left + ", r=" + in.right + ", t=" + in.top + ", b=" + in.bottom + " )";
 
@@ -2694,7 +2694,7 @@ public class ObtuseUtil {
 
     }
 
-    private static String[] s_maskExBits = new String[32];
+    private static final String[] s_maskExBits = new String[32];
 
     static {
 
@@ -2719,7 +2719,7 @@ public class ObtuseUtil {
 
     }
 
-    public static String getBitMaskName( int mask ) {
+    public static String getBitMaskName( final int mask ) {
 
         int numberOfTrailingZeros = Integer.numberOfTrailingZeros( mask );
         int lowestOneBit = Integer.lowestOneBit( mask );
@@ -2751,7 +2751,7 @@ public class ObtuseUtil {
 
     }
 
-    private static void rememberBitName( int maskValue, String name ) {
+    private static void rememberBitName( final int maskValue, final String name ) {
 
         if ( maskValue == 0 ) {
 

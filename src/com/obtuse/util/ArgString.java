@@ -10,7 +10,7 @@ package com.obtuse.util;
 
 public abstract class ArgString extends Arg {
 
-    protected ArgString( String keyword ) {
+    protected ArgString( final String keyword ) {
         super( keyword );
     }
 

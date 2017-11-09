@@ -50,7 +50,7 @@ public class RandomCentral {
 
     }
 
-    public static int nextInt( int n ) {
+    public static int nextInt( final int n ) {
 
         synchronized ( RandomCentral.getInstance() ) {
 

@@ -40,7 +40,7 @@ public class LinearFlagName extends GowingPackableName {
 
 	@Override
 	@NotNull
-	public GowingPackable createEntity( @NotNull GowingUnPacker unPacker, @NotNull GowingPackedEntityBundle bundle, GowingEntityReference er )
+	public GowingPackable createEntity( @NotNull final GowingUnPacker unPacker, @NotNull final GowingPackedEntityBundle bundle, final GowingEntityReference er )
 		throws GowingUnPackerParsingException {
 
 	    return new LinearFlagName( unPacker, bundle, er );
@@ -59,7 +59,7 @@ public class LinearFlagName extends GowingPackableName {
 
 //    private final String _name;
 
-    private final static SortedMap<String,LinearFlagName> s_knownFlags;
+    private static final SortedMap<String,LinearFlagName> s_knownFlags;
 
     static {
 
@@ -75,7 +75,7 @@ public class LinearFlagName extends GowingPackableName {
 
     }
 
-    private LinearFlagName( String name ) {
+    private LinearFlagName( final String name ) {
 	super( name );
 
 	synchronized ( s_knownFlags ) {
@@ -87,7 +87,7 @@ public class LinearFlagName extends GowingPackableName {
 
     }
 
-    public LinearFlagName( GowingUnPacker unPacker, GowingPackedEntityBundle bundle, GowingEntityReference er )
+    public LinearFlagName( final GowingUnPacker unPacker, final GowingPackedEntityBundle bundle, final GowingEntityReference er )
 	    throws GowingUnPackerParsingException {
 	super(
 		unPacker,
@@ -98,7 +98,7 @@ public class LinearFlagName extends GowingPackableName {
     }
 
     @NotNull
-    public GowingPackedEntityBundle bundleThyself( boolean isPackingSuper, GowingPacker packer ) {
+    public GowingPackedEntityBundle bundleThyself( final boolean isPackingSuper, final GowingPacker packer ) {
 
 	@SuppressWarnings("UnnecessaryLocalVariable")
 	GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
@@ -112,13 +112,13 @@ public class LinearFlagName extends GowingPackableName {
 
     }
 
-    public boolean equals( Object rhs ) {
+    public boolean equals( final Object rhs ) {
 
 	return rhs instanceof LinearFlagName && super.equals( rhs );
 
     }
 
-    public static String describe( @NotNull Collection<LinearFlagNameValue> flags ) {
+    public static String describe( @NotNull final Collection<LinearFlagNameValue> flags ) {
 
 	synchronized ( s_knownFlags ) {
 
@@ -147,7 +147,7 @@ public class LinearFlagName extends GowingPackableName {
 
     }
 
-    public static void main( String[] args ) {
+    public static void main( final String[] args ) {
 
 	BasicProgramConfigInfo.init( "Obtuse", "Pipestone", "testing", null );
 

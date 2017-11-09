@@ -31,13 +31,13 @@ public enum GowingPackableType {
 
 	}
 
-	public JComponent getViewComponent( SortableEntityView timelinePanel, GowingPackableAttribute attribute, int requestedMaxWidth ) {
+	public JComponent getViewComponent( final SortableEntityView timelinePanel, final GowingPackableAttribute attribute, final int requestedMaxWidth ) {
 
 	    return new JLabel( "no support for viewing " + this + " (yet)" );
 
 	}
 
-	public String validate( @NotNull String s ) {
+	public String validate( @NotNull final String s ) {
 
 	    return "validation of collections not support (yet?)";
 //	    try {
@@ -69,13 +69,13 @@ public enum GowingPackableType {
 
 	}
 
-	public JComponent getViewComponent( SortableEntityView timelinePanel, GowingPackableAttribute attribute, int requestedMaxWidth ) {
+	public JComponent getViewComponent( final SortableEntityView timelinePanel, final GowingPackableAttribute attribute, final int requestedMaxWidth ) {
 
 	    return new JLabel( "no support for viewing " + this + " (yet)" );
 
 	}
 
-	public String validate( @NotNull String s ) {
+	public String validate( @NotNull final String s ) {
 
 	    try {
 
@@ -106,13 +106,13 @@ public enum GowingPackableType {
 
 	}
 
-	public JComponent getViewComponent( SortableEntityView timelinePanel, GowingPackableAttribute attribute, int requestedMaxWidth ) {
+	public JComponent getViewComponent( final SortableEntityView timelinePanel, final GowingPackableAttribute attribute, final int requestedMaxWidth ) {
 
 	    return new JLabel( "no support for viewing " + this + " (yet)" );
 
 	}
 
-	public String validate( @NotNull String s ) {
+	public String validate( @NotNull final String s ) {
 
 	    try {
 
@@ -143,13 +143,13 @@ public enum GowingPackableType {
 
 	}
 
-	public JComponent getViewComponent( SortableEntityView timelinePanel, GowingPackableAttribute attribute, int requestedMaxWidth ) {
+	public JComponent getViewComponent( final SortableEntityView timelinePanel, final GowingPackableAttribute attribute, final int requestedMaxWidth ) {
 
 	    return new JLabel( "no support for viewing " + this + " (yet)" );
 
 	}
 
-	public String validate( @NotNull String s ) {
+	public String validate( @NotNull final String s ) {
 
 	    return "approximate dates are not (yet) supported";
 
@@ -169,13 +169,13 @@ public enum GowingPackableType {
 
 	}
 
-	public JComponent getViewComponent( SortableEntityView timelinePanel, GowingPackableAttribute attribute, int requestedMaxWidth ) {
+	public JComponent getViewComponent( final SortableEntityView timelinePanel, final GowingPackableAttribute attribute, final int requestedMaxWidth ) {
 
 	    return new JLabel( "no support for viewing " + this + " (yet)" );
 
 	}
 
-	public String validate( @NotNull String s ) {
+	public String validate( @NotNull final String s ) {
 
 	    try {
 
@@ -205,13 +205,13 @@ public enum GowingPackableType {
 
 	}
 
-	public JComponent getViewComponent( SortableEntityView timelinePanel, GowingPackableAttribute attribute, int requestedMaxWidth ) {
+	public JComponent getViewComponent( final SortableEntityView timelinePanel, final GowingPackableAttribute attribute, final int requestedMaxWidth ) {
 
 	    return new JLabel( "no support for viewing " + this + " (yet)" );
 
 	}
 
-	public String validate( @NotNull String s ) {
+	public String validate( @NotNull final String s ) {
 
 	    String strUC = s.toUpperCase();
 
@@ -248,13 +248,13 @@ public enum GowingPackableType {
 
 	}
 
-	public JComponent getViewComponent( SortableEntityView timelinePanel, GowingPackableAttribute attribute, int requestedMaxWidth ) {
+	public JComponent getViewComponent( final SortableEntityView timelinePanel, final GowingPackableAttribute attribute, final int requestedMaxWidth ) {
 
 	    return new JLabel( "no support for viewing " + this + " (yet)" );
 
 	}
 
-	public String validate( @NotNull String s ) {
+	public String validate( @NotNull final String s ) {
 
 	    return null;
 
@@ -274,13 +274,13 @@ public enum GowingPackableType {
 
 	}
 
-	public JComponent getViewComponent( SortableEntityView timelinePanel, GowingPackableAttribute attribute, int requestedMaxWidth ) {
+	public JComponent getViewComponent( final SortableEntityView timelinePanel, final GowingPackableAttribute attribute, final int requestedMaxWidth ) {
 
 	    return new JLabel( "no support for viewing " + this + " (yet)" );
 
 	}
 
-	public String validate( @NotNull String s ) {
+	public String validate( @NotNull final String s ) {
 
 	    return null;
 
@@ -300,13 +300,13 @@ public enum GowingPackableType {
 
 	}
 
-	public JComponent getViewComponent( SortableEntityView timelinePanel, GowingPackableAttribute attribute, int requestedMaxWidth ) {
+	public JComponent getViewComponent( final SortableEntityView timelinePanel, final GowingPackableAttribute attribute, final int requestedMaxWidth ) {
 
 	    return new JLabel( "no support for viewing " + this + " (yet)" );
 
 	}
 
-	public String validate( @NotNull String s ) {
+	public String validate( @NotNull final String s ) {
 
 	    try {
 
@@ -336,7 +336,7 @@ public enum GowingPackableType {
 
 	}
 
-	public JComponent getViewComponent( SortableEntityView timelinePanel, GowingPackableAttribute attribute, int requestedMaxWidth ) {
+	public JComponent getViewComponent( final SortableEntityView timelinePanel, final GowingPackableAttribute attribute, final int requestedMaxWidth ) {
 
 	    return new JLabel( "no support for viewing " + this + " (yet)" );
 
@@ -344,7 +344,7 @@ public enum GowingPackableType {
 
 	private final String[] s_validImageFileSuffixes = { ".jpg", ".jpeg", ".gif", ".png" };
 
-	public String validate( @NotNull String s ) {
+	public String validate( @NotNull final String s ) {
 
 	    String rval = GowingPackableType.URL.validate( s );
 	    if ( rval == null ) {
@@ -382,13 +382,13 @@ public enum GowingPackableType {
 
 	}
 
-	public JComponent getViewComponent( SortableEntityView timelinePanel, GowingPackableAttribute attribute, int requestedMaxWidth ) {
+	public JComponent getViewComponent( final SortableEntityView timelinePanel, final GowingPackableAttribute attribute, final int requestedMaxWidth ) {
 
 	    return new JLabel( "no support for viewing " + this + " (yet)" );
 
 	}
 
-	public String validate( @NotNull String s ) {
+	public String validate( @NotNull final String s ) {
 
 	    return null;
 

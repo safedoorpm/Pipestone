@@ -22,7 +22,7 @@ public class HelpWindow extends JDialog {
 
     private static String _preferredFontTag;
 
-    public HelpWindow( String title, String helpText ) {
+    public HelpWindow( final String title, final String helpText ) {
         super();
 
         setContentPane( _contentPane );
@@ -82,7 +82,7 @@ public class HelpWindow extends JDialog {
         _okButton.addActionListener(
                 new MyActionListener() {
 
-                    public void myActionPerformed( ActionEvent e ) {
+                    public void myActionPerformed( final ActionEvent e ) {
 
                         done();
 
@@ -95,7 +95,7 @@ public class HelpWindow extends JDialog {
         addWindowListener(
                 new WindowAdapter() {
 
-                    public void windowClosing( WindowEvent e ) {
+                    public void windowClosing( final WindowEvent e ) {
 
                         done();
 
@@ -107,7 +107,7 @@ public class HelpWindow extends JDialog {
         _contentPane.registerKeyboardAction(
                 new MyActionListener() {
 
-                    public void myActionPerformed( ActionEvent e ) {
+                    public void myActionPerformed( final ActionEvent e ) {
 
                         done();
 
@@ -144,14 +144,14 @@ public class HelpWindow extends JDialog {
 
     }
 
-    public static void launch( String title, String helpText ) {
+    public static void launch( final String title, final String helpText ) {
 
         @SuppressWarnings({ "UnusedDeclaration", "UnusedAssignment" })
         HelpWindow dialog = new HelpWindow( title, helpText );
 
     }
 
-    public static void main( String[] args ) {
+    public static void main( final String[] args ) {
 
         HelpWindow dialog = new HelpWindow(
                 "Help Window Title",

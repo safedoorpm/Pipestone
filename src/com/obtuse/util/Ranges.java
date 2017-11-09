@@ -27,7 +27,7 @@ public class Ranges<T extends Comparable<T>> implements Iterable<Range<T>>, Seri
 
     private class RangeComparator implements Comparator<T>, Serializable {
 
-        public int compare( T lhs, T rhs ) {
+        public int compare( final T lhs, final T rhs ) {
 
             return lhs.compareTo( rhs );
 
@@ -43,7 +43,7 @@ public class Ranges<T extends Comparable<T>> implements Iterable<Range<T>>, Seri
     @SuppressWarnings( { "ClassWithoutToString" } )
     private final RangeFactory<T> _rangeFactory;
 
-    public Ranges( Range<T> range, RangeFactory<T> rangeFactory )
+    public Ranges( final Range<T> range, final RangeFactory<T> rangeFactory )
             throws RejectRangeException {
         super();
 
@@ -52,7 +52,7 @@ public class Ranges<T extends Comparable<T>> implements Iterable<Range<T>>, Seri
 
     }
 
-    public Ranges( RangeFactory<T> rangeFactory ) {
+    public Ranges( final RangeFactory<T> rangeFactory ) {
         super();
 
         _rangeFactory = rangeFactory;
@@ -77,7 +77,7 @@ public class Ranges<T extends Comparable<T>> implements Iterable<Range<T>>, Seri
 
     }
 
-    public Ranges<T> getOverlappingDateRanges( Range<T> range, RangeFactory<T> rangeFactory )
+    public Ranges<T> getOverlappingDateRanges( final Range<T> range, final RangeFactory<T> rangeFactory )
             throws RejectRangeException {
 
         Ranges<T> rval = new Ranges<>( rangeFactory );
@@ -101,7 +101,7 @@ public class Ranges<T extends Comparable<T>> implements Iterable<Range<T>>, Seri
 
     }
 
-    public boolean hasOverlappedRanges( Range<T> range )
+    public boolean hasOverlappedRanges( final Range<T> range )
             throws RejectRangeException {
 
         Measure m = new Measure( "head map" );
@@ -174,7 +174,7 @@ public class Ranges<T extends Comparable<T>> implements Iterable<Range<T>>, Seri
      * @throws com.obtuse.util.exceptions.RejectRangeException thrown if this instance's DateRangeFactory throws this exception.
      */
 
-    public Ranges<T> add( Range<T> newRange )
+    public Ranges<T> add( final Range<T> newRange )
             throws RejectRangeException {
 
         myAdd( newRange );
@@ -194,7 +194,7 @@ public class Ranges<T extends Comparable<T>> implements Iterable<Range<T>>, Seri
 
     }
 
-    public void dump( String why ) {
+    public void dump( final String why ) {
 
         Logger.logMsg( "dumping range - " + why );
         dump();
@@ -209,7 +209,7 @@ public class Ranges<T extends Comparable<T>> implements Iterable<Range<T>>, Seri
     }
 
     @SuppressWarnings("UnusedReturnValue")
-    private Ranges<T> myAdd( Range<T> newRange ) throws RejectRangeException {
+    private Ranges<T> myAdd( final Range<T> newRange ) throws RejectRangeException {
 
         if ( _ranges.isEmpty() ) {
 
@@ -287,20 +287,20 @@ public class Ranges<T extends Comparable<T>> implements Iterable<Range<T>>, Seri
     }
 
     @SuppressWarnings( { "MagicNumber", "UseOfSystemOutOrSystemErr" } )
-    public static void main( String[] args ) {
+    public static void main( final String[] args ) {
 
         @SuppressWarnings( { "ClassWithoutToString" } )
         RangeFactory<Integer> rangeFactory = new RangeFactory<Integer>() {
 
-            public Range<Integer> createRange( Range<Integer> before, Range<Integer> after ) {
+            public Range<Integer> createRange( final Range<Integer> before, final Range<Integer> after ) {
 
                 return new Range<>( before.getStartValue(), after.getEndValue(), before.getLongStartValue(), after.getLongEndValue() );
 
             }
 
             public Range<Integer> createMergedRange(
-                    SortedMap<Integer, Range<Integer>> sortedByStartValue,
-                    SortedMap<Integer, Range<Integer>> sortedByEndValue
+                    final SortedMap<Integer, Range<Integer>> sortedByStartValue,
+                    final SortedMap<Integer, Range<Integer>> sortedByEndValue
             ) {
 
                 return createRange( sortedByStartValue.get( sortedByStartValue.firstKey() ), sortedByEndValue.get( sortedByEndValue.lastKey() ) );
@@ -339,14 +339,14 @@ public class Ranges<T extends Comparable<T>> implements Iterable<Range<T>>, Seri
 
     }
 
-    private static void doit( Ranges<Integer> ranges, int start, int end ) {
+    private static void doit( final Ranges<Integer> ranges, final int start, final int end ) {
 
         Ranges.doit( ranges, new Range<>( start, end, (long) start, (long) end ) );
 
     }
 
     @SuppressWarnings( { "UseOfSystemOutOrSystemErr", "CallToPrintStackTrace" } )
-    private static void doit( Ranges<Integer> ranges, Range<Integer> newRange ) {
+    private static void doit( final Ranges<Integer> ranges, final Range<Integer> newRange ) {
 
         try {
 

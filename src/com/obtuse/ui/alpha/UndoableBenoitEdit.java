@@ -19,7 +19,7 @@ public abstract class UndoableBenoitEdit implements UndoableEdit {
 //    private final Runnable _redo;
 
     public UndoableBenoitEdit(
-            String presentationName //,
+            final String presentationName //,
 //            Runnable undo,
 //            Runnable redo
     ) {
@@ -93,13 +93,13 @@ public abstract class UndoableBenoitEdit implements UndoableEdit {
 
     }
 
-    public boolean addEdit( UndoableEdit undoableEdit ) {
+    public boolean addEdit( final UndoableEdit undoableEdit ) {
 
         return false;
 
     }
 
-    public boolean replaceEdit( UndoableEdit undoableEdit ) {
+    public boolean replaceEdit( final UndoableEdit undoableEdit ) {
 
         return false;
 

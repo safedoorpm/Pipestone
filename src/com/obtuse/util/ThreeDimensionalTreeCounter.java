@@ -13,7 +13,7 @@ public class ThreeDimensionalTreeCounter<K1,K2,K3> implements ThreeDimensionalCo
 
     }
 
-    public void count( K1 key1, K2 key2, K3 key3 ) {
+    public void count( final K1 key1, final K2 key2, final K3 key3 ) {
 
         Integer count = _counter.get( key1, key2, key3 );
         if ( count == null ) {
@@ -28,7 +28,7 @@ public class ThreeDimensionalTreeCounter<K1,K2,K3> implements ThreeDimensionalCo
 
     }
 
-    public int getCount( K1 key1, K2 key2, K3 key3 ) {
+    public int getCount( final K1 key1, final K2 key2, final K3 key3 ) {
 
         Integer count = _counter.get( key1, key2, key3 );
         if ( count == null ) {
@@ -43,7 +43,7 @@ public class ThreeDimensionalTreeCounter<K1,K2,K3> implements ThreeDimensionalCo
 
     }
 
-    public boolean containsKeys( K1 key1, K2 key2, K3 key3 ) {
+    public boolean containsKeys( final K1 key1, final K2 key2, final K3 key3 ) {
 
         return _counter.get( key1, key2, key3 ) != null;
 
@@ -55,7 +55,7 @@ public class ThreeDimensionalTreeCounter<K1,K2,K3> implements ThreeDimensionalCo
 
     }
 
-    public static void main( String[] args ) {
+    public static void main( final String[] args ) {
 
         BasicProgramConfigInfo.init( "Obtuse", "Shared", "3Dcounter", null );
 

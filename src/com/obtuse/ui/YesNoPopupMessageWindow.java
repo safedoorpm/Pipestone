@@ -28,10 +28,10 @@ public abstract class YesNoPopupMessageWindow
     private boolean _gotAnswer;
 
     protected YesNoPopupMessageWindow(
-            String line1,
-            String line2,
-            String defaultLabel,
-            String alternativeLabel
+            final String line1,
+            final String line2,
+            final String defaultLabel,
+            final String alternativeLabel
     ) {
 
         super();
@@ -46,7 +46,7 @@ public abstract class YesNoPopupMessageWindow
         _alternativeButton.addActionListener(
                 new MyActionListener() {
 
-                    public void myActionPerformed( ActionEvent e ) {
+                    public void myActionPerformed( final ActionEvent e ) {
 
                         onAlternativeChoice();
 
@@ -59,7 +59,7 @@ public abstract class YesNoPopupMessageWindow
         _defaultButton.addActionListener(
                 new MyActionListener() {
 
-                    public void myActionPerformed( ActionEvent e ) {
+                    public void myActionPerformed( final ActionEvent e ) {
 
                         onDefaultChoice();
 
@@ -86,7 +86,7 @@ public abstract class YesNoPopupMessageWindow
         addWindowListener(
                 new WindowAdapter() {
 
-                    public void windowClosing( WindowEvent e ) {
+                    public void windowClosing( final WindowEvent e ) {
 //                        onAlternativeChoice();
                     }
                 }
@@ -96,7 +96,7 @@ public abstract class YesNoPopupMessageWindow
         _contentPane.registerKeyboardAction(
                 new MyActionListener() {
 
-                    public void myActionPerformed( ActionEvent e ) {
+                    public void myActionPerformed( final ActionEvent e ) {
 
 //                        onAlternativeChoice();
 
@@ -113,7 +113,7 @@ public abstract class YesNoPopupMessageWindow
     }
 
     protected YesNoPopupMessageWindow(
-            String line1, String defaultLabel, String alternativeLabel
+            final String line1, final String defaultLabel, final String alternativeLabel
     ) {
 
         this( line1, null, defaultLabel, alternativeLabel );
@@ -285,7 +285,7 @@ public abstract class YesNoPopupMessageWindow
 
     }
 
-    public static void main( String[] args ) {
+    public static void main( final String[] args ) {
 
         final YesNoPopupMessageWindow dialog = new YesNoPopupMessageWindow(
                 "Are we having fun yet?<br>More words<br>Even more words<br>Still more words",

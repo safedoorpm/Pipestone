@@ -27,7 +27,7 @@ public class BasicFlavorHandlers {
         super();
     }
 
-    public static abstract class SimpleStringDataFlavorHandler extends AbstractDataFlavorHandler {
+    public abstract static class SimpleStringDataFlavorHandler extends AbstractDataFlavorHandler {
 
         public SimpleStringDataFlavorHandler() {
 
@@ -35,7 +35,7 @@ public class BasicFlavorHandlers {
         }
 
         @Override
-        public boolean handleTransfer( TransferHandler.TransferSupport ts ) {
+        public boolean handleTransfer( final TransferHandler.TransferSupport ts ) {
 
             try {
 
@@ -63,7 +63,7 @@ public class BasicFlavorHandlers {
 
     }
 
-    public static abstract class SimpleFilesDataFlavorHandler extends AbstractDataFlavorHandler {
+    public abstract static class SimpleFilesDataFlavorHandler extends AbstractDataFlavorHandler {
 
         public SimpleFilesDataFlavorHandler() {
 
@@ -71,7 +71,7 @@ public class BasicFlavorHandlers {
         }
 
         @Override
-        public boolean handleTransfer( TransferHandler.TransferSupport ts ) {
+        public boolean handleTransfer( final TransferHandler.TransferSupport ts ) {
 
             try {
 
@@ -104,7 +104,7 @@ public class BasicFlavorHandlers {
     }
 
 
-    public static abstract class SimpleImageDataFlavorHandler extends AbstractDataFlavorHandler {
+    public abstract static class SimpleImageDataFlavorHandler extends AbstractDataFlavorHandler {
 
         public SimpleImageDataFlavorHandler() {
 
@@ -112,7 +112,7 @@ public class BasicFlavorHandlers {
         }
 
         @Override
-        public boolean handleTransfer( TransferHandler.TransferSupport ts ) {
+        public boolean handleTransfer( final TransferHandler.TransferSupport ts ) {
 
             Logger.logMsg( "handling an image" );
 

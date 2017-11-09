@@ -46,7 +46,7 @@ public class StdGowingUnPacker implements GowingUnPacker {
      @throws IOException if something bad happens in I/O-land.
      */
 
-    public StdGowingUnPacker( GowingTypeIndex typeIndex, @NotNull File inputFile )
+    public StdGowingUnPacker( final GowingTypeIndex typeIndex, @NotNull final File inputFile )
             throws IOException {
 
         this( inputFile, new LineNumberReader( new FileReader( inputFile ) ), new StdGowingUnPackerContext( typeIndex ) );
@@ -66,7 +66,7 @@ public class StdGowingUnPacker implements GowingUnPacker {
      @throws IOException if something bad happens in I/O-land.
      */
 
-    public StdGowingUnPacker( GowingTypeIndex typeIndex, @NotNull File inputFile, Reader reader )
+    public StdGowingUnPacker( final GowingTypeIndex typeIndex, @NotNull final File inputFile, final Reader reader )
             throws IOException {
 
         this(
@@ -89,7 +89,7 @@ public class StdGowingUnPacker implements GowingUnPacker {
      */
 
     @SuppressWarnings({ "WeakerAccess", "RedundantThrows" })
-    public StdGowingUnPacker( @Nullable File inputFile, LineNumberReader reader, @NotNull GowingUnPackerContext unPackerContext )
+    public StdGowingUnPacker( @Nullable final File inputFile, final LineNumberReader reader, @NotNull final GowingUnPackerContext unPackerContext )
             throws IOException {
 
         super();
@@ -258,9 +258,9 @@ public class StdGowingUnPacker implements GowingUnPacker {
 
     @NotNull
     private GowingPackable constructEntity(
-            GowingEntityReference er,
-            StdGowingTokenizer.GowingToken2 token,
-            @NotNull GowingPackedEntityBundle bundle
+            final GowingEntityReference er,
+            final StdGowingTokenizer.GowingToken2 token,
+            @NotNull final GowingPackedEntityBundle bundle
     )
             throws GowingUnPackerParsingException {
 
@@ -365,7 +365,7 @@ public class StdGowingUnPacker implements GowingUnPacker {
     }
 
     @Override
-    public GowingPackable resolveReference( @Nullable GowingEntityReference er ) {
+    public GowingPackable resolveReference( @Nullable final GowingEntityReference er ) {
 
         if ( er == null ) {
 
@@ -377,7 +377,7 @@ public class StdGowingUnPacker implements GowingUnPacker {
 
     }
 
-    public boolean isEntityFinished( GowingEntityReference er ) {
+    public boolean isEntityFinished( final GowingEntityReference er ) {
 
         return _unPackerContext.isEntityFinished( er );
 
@@ -397,7 +397,7 @@ public class StdGowingUnPacker implements GowingUnPacker {
     }
 
     @NotNull
-    private GowingPackedEntityBundle collectEntityDefinitionClause( boolean parsingSuperClause )
+    private GowingPackedEntityBundle collectEntityDefinitionClause( final boolean parsingSuperClause )
             throws IOException, GowingUnPackerParsingException {
 
         StdGowingTokenizer.GowingToken2 ourEntityReferenceToken = _tokenizer.getNextToken( false, StdGowingTokenizer.TokenType.ENTITY_REFERENCE );
@@ -470,7 +470,7 @@ public class StdGowingUnPacker implements GowingUnPacker {
                                 entityTypeName,
                                 ourEntityReferenceToken.entityReference().getTypeId(),
                                 superClause,
-                                version,
+                                version.intValue(),
                                 _unPackerContext
                         );
 
@@ -500,7 +500,7 @@ public class StdGowingUnPacker implements GowingUnPacker {
                                     entityTypeName,
                                     ourEntityReferenceToken.entityReference().getTypeId(),
                                     null,
-                                    version,
+                                    version.intValue(),
                                     _unPackerContext
                             );
 
@@ -608,7 +608,7 @@ public class StdGowingUnPacker implements GowingUnPacker {
 //
 //    }
 
-    private void collectFieldDefinitionClause( GowingPackedEntityBundle bundle )
+    private void collectFieldDefinitionClause( final GowingPackedEntityBundle bundle )
             throws IOException, GowingUnPackerParsingException {
 
 //	P2ATokenizer.GowingToken2 equalSize = _tokenizer.getNextToken( false, P2ATokenizer.TokenType.EQUAL_SIGN );
@@ -653,7 +653,7 @@ public class StdGowingUnPacker implements GowingUnPacker {
 
     }
 
-    private String describeType( StdGowingTokenizer.GowingToken2 valueToken ) {
+    private String describeType( final StdGowingTokenizer.GowingToken2 valueToken ) {
 
         if ( valueToken.type() == StdGowingTokenizer.TokenType.PRIMITIVE_ARRAY ) {
 
@@ -682,7 +682,7 @@ public class StdGowingUnPacker implements GowingUnPacker {
 
     }
 
-    public static void main( String[] args ) {
+    public static void main( final String[] args ) {
 
         BasicProgramConfigInfo.init( "Obtuse", "Packer", "testing", null );
 

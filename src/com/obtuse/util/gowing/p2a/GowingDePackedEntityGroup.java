@@ -26,7 +26,7 @@ public class GowingDePackedEntityGroup {
     private final TreeSorter<EntityName,GowingPackable> _namedClasses = new TreeSorter<>();
 
     @SuppressWarnings("WeakerAccess")
-    protected GowingDePackedEntityGroup( @NotNull GowingFormatVersion version ) {
+    protected GowingDePackedEntityGroup( @NotNull final GowingFormatVersion version ) {
 	super();
 
 	_version = version;
@@ -47,7 +47,7 @@ public class GowingDePackedEntityGroup {
     }
 
     @SuppressWarnings("UnusedReturnValue")
-    public GowingDePackedEntityGroup add( @NotNull Collection<EntityName> classNames, @NotNull GowingPackable newEntity ) {
+    public GowingDePackedEntityGroup add( @NotNull final Collection<EntityName> classNames, @NotNull final GowingPackable newEntity ) {
 
 	_allEntities.add( newEntity );
 	for ( EntityName className : classNames ) {

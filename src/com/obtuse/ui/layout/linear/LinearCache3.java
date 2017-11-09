@@ -54,9 +54,9 @@ public class LinearCache3 implements LayoutImplCache {
 //    private Insets _insets;
 
     public LinearCache3(
-            LinearLayoutManager3 linearLayoutManager,
-            LinearContainer3 target,
-            @NotNull Hashtable<Component, LinearLayoutManager3.ConstraintsTable> allConstraints
+            final LinearLayoutManager3 linearLayoutManager,
+            final LinearContainer3 target,
+            @NotNull final Hashtable<Component, LinearLayoutManager3.ConstraintsTable> allConstraints
     ) {
 
         super();
@@ -289,7 +289,7 @@ public class LinearCache3 implements LayoutImplCache {
     }
 
     @SuppressWarnings("UnusedReturnValue")
-    public boolean logIfWatched( String msg ) {
+    public boolean logIfWatched( final String msg ) {
 
         if ( isWatched() ) {
 
@@ -312,15 +312,15 @@ public class LinearCache3 implements LayoutImplCache {
     }
 
     private void workingOnWatchlistComponent(
-            @SuppressWarnings({ "SameParameterValue", "unused" }) String what,
-            @SuppressWarnings("unused") Component c
+            @SuppressWarnings({ "SameParameterValue", "unused" }) final String what,
+            @SuppressWarnings("unused") final Component c
     ) {
 
 //	logIfWatched( "working on " + LinearLayoutUtil.fullName( c ) );
 
     }
 
-    private String showAlignment( float alignmentX, float alignmentY ) {
+    private String showAlignment( final float alignmentX, final float alignmentY ) {
 
         return "alignment( " + alignmentX + ", " + alignmentY + " )";
 
@@ -339,7 +339,7 @@ public class LinearCache3 implements LayoutImplCache {
 
     }
 
-    public Component getVisibleComponent( int ix ) {
+    public Component getVisibleComponent( final int ix ) {
 
         return _breadthSizes[ix].component;
 
@@ -449,7 +449,7 @@ public class LinearCache3 implements LayoutImplCache {
 //
 //    }
 
-    private void addInsets( Dimension size ) {
+    private void addInsets( final Dimension size ) {
 
         Insets insets = _target.getInsets();
 
@@ -597,13 +597,13 @@ public class LinearCache3 implements LayoutImplCache {
     }
 
     private void calculateAlignedPositions(
-            int allocated,
-            SizeRequirements total,
-            SizeRequirements[] children,
-            int[] offsets,
-            int[] spans,
-            @SuppressWarnings("SameParameterValue") boolean normal,
-            boolean[] trackParentBreadth
+            final int allocated,
+            final SizeRequirements total,
+            final SizeRequirements[] children,
+            final int[] offsets,
+            final int[] spans,
+            @SuppressWarnings("SameParameterValue") final boolean normal,
+            final boolean[] trackParentBreadth
     ) {
 
         if ( isWatched() ) {
@@ -660,12 +660,12 @@ public class LinearCache3 implements LayoutImplCache {
     }
 
     private void calculateTiledPositions(
-            int allocated,
-            SizeRequirements total,
-            SizeRequirements[] children,
-            int[] offsets,
-            int[] spans,
-            @SuppressWarnings("SameParameterValue") boolean forward
+            final int allocated,
+            final SizeRequirements total,
+            final SizeRequirements[] children,
+            final int[] offsets,
+            final int[] spans,
+            @SuppressWarnings("SameParameterValue") final boolean forward
     ) {
 
         if ( isWatched() ) {
@@ -725,10 +725,10 @@ public class LinearCache3 implements LayoutImplCache {
     }
 
     private void compressedTile(
-            int allocated, long min, long pref, long max,
-            SizeRequirements[] request,
-            int[] offsets, int[] spans,
-            boolean forward
+            final int allocated, final long min, final long pref, final long max,
+            final SizeRequirements[] request,
+            final int[] offsets, final int[] spans,
+            final boolean forward
     ) {
 
         if ( isWatched() ) {
@@ -778,10 +778,10 @@ public class LinearCache3 implements LayoutImplCache {
     }
 
     private void expandedTile(
-            int allocated, long min, long pref, long max,
-            SizeRequirements[] request,
-            int[] offsets, int[] spans,
-            boolean forward
+            final int allocated, final long min, final long pref, final long max,
+            final SizeRequirements[] request,
+            final int[] offsets, final int[] spans,
+            final boolean forward
     ) {
 
         if ( isWatched() ) {
@@ -877,7 +877,7 @@ public class LinearCache3 implements LayoutImplCache {
     }
 
     @NotNull
-    public Rectangle computeComponentBoundingRectangle( int ix ) {
+    public Rectangle computeComponentBoundingRectangle( final int ix ) {
 
         Insets in = _target.getInsets();
         return new Rectangle(

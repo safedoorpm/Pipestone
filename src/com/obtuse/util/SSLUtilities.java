@@ -125,7 +125,7 @@ public class SSLUtilities {
 
         private final char[] _keystorePassword;
 
-        private SSLContextWrapper( boolean clientMode, String keystoreFname, char[] keystorePassword ) {
+        private SSLContextWrapper( final boolean clientMode, final String keystoreFname, final char[] keystorePassword ) {
             super();
 
             _clientMode = clientMode;
@@ -134,7 +134,7 @@ public class SSLUtilities {
 
         }
 
-        private void setSSLContext( SSLContext sslContext ) {
+        private void setSSLContext( final SSLContext sslContext ) {
 
             _sslContext = sslContext;
 
@@ -153,7 +153,7 @@ public class SSLUtilities {
         }
 
         @SuppressWarnings( { "EqualsWhichDoesntCheckParameterClass" } )
-        public boolean equals( Object xrhs ) {
+        public boolean equals( final Object xrhs ) {
 
             try {
 
@@ -220,11 +220,11 @@ public class SSLUtilities {
      */
 
     public static SSLContext getSSLContext(
-            boolean clientMode,
-            String keystoreFileName,
-            InputStream keystoreInputStream,
-            char[] keystorePassword,
-            @Nullable char[] keyPassword
+            final boolean clientMode,
+            final String keystoreFileName,
+            final InputStream keystoreInputStream,
+            final char[] keystorePassword,
+            @Nullable final char[] keyPassword
     )
             throws
             PipestoneSSLException {
@@ -309,10 +309,10 @@ public class SSLUtilities {
     }
 
     private static SSLContext createSSLContext(
-            boolean clientMode,
-            InputStream keyStoreInputStream,
-            char[] keystorePassword,
-            char[] keyPassword
+            final boolean clientMode,
+            final InputStream keyStoreInputStream,
+            final char[] keystorePassword,
+            final char[] keyPassword
     )
             throws
             KeyStoreException,
@@ -392,10 +392,10 @@ public class SSLUtilities {
 
     @SuppressWarnings("UnusedDeclaration")
     public static SSLContext createWrappedSSLContext(
-            boolean clientMode,
-            File keystoreFile,
-            char[] keystorePassword,
-            char[] keyPassword
+            final boolean clientMode,
+            final File keystoreFile,
+            final char[] keystorePassword,
+            final char[] keyPassword
     )
             throws FileNotFoundException, PipestoneSSLException {
 
@@ -415,7 +415,7 @@ public class SSLUtilities {
     }
 
     public static SSLContext createWrappedSSLContext(
-            boolean clientMode, InputStream keyStoreInputStream, char[] keystorePassword, char[] keyPassword
+            final boolean clientMode, final InputStream keyStoreInputStream, final char[] keystorePassword, final char[] keyPassword
     )
             throws
             PipestoneSSLException {

@@ -33,7 +33,7 @@ public class SimpleUniqueLongIdGenerator implements UniqueLongIdGenerator {
      if it runs out of unique positive long values).
      */
 
-    public SimpleUniqueLongIdGenerator( String name, boolean allowDuplicates ) {
+    public SimpleUniqueLongIdGenerator( final String name, final boolean allowDuplicates ) {
 
         super();
 
@@ -52,7 +52,7 @@ public class SimpleUniqueLongIdGenerator implements UniqueLongIdGenerator {
      @param name the name of this generator (used in toString and possibly useful in your debug code).
      */
 
-    public SimpleUniqueLongIdGenerator( String name ) {
+    public SimpleUniqueLongIdGenerator( final String name ) {
 
         this( name, false );
 
@@ -150,7 +150,7 @@ public class SimpleUniqueLongIdGenerator implements UniqueLongIdGenerator {
     }
 
     @SuppressWarnings("UseOfSystemOutOrSystemErr")
-    public static void main( String[] args ) {
+    public static void main( final String[] args ) {
 
         SimpleUniqueLongIdGenerator outerGenerator = new SimpleUniqueLongIdGenerator( "SULIG test outer" );
         for ( int ii = 0; ii < 10; ii += 1 ) {

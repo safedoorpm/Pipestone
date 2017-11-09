@@ -44,7 +44,7 @@ public class GowingPackableAttribute implements GowingPackable {
 
 	@NotNull
 	@Override
-	public GowingPackable createEntity( @NotNull GowingUnPacker unPacker, @NotNull GowingPackedEntityBundle bundle, GowingEntityReference er ) {
+	public GowingPackable createEntity( @NotNull final GowingUnPacker unPacker, @NotNull final GowingPackedEntityBundle bundle, final GowingEntityReference er ) {
 
 	    return new GowingPackableAttribute( unPacker, bundle, er );
 
@@ -72,7 +72,7 @@ public class GowingPackableAttribute implements GowingPackable {
 
     private Object _value;
 
-    public GowingPackableAttribute( GowingPackableName name, Object value, GowingPackableType attributeType, boolean computed ) {
+    public GowingPackableAttribute( final GowingPackableName name, final Object value, final GowingPackableType attributeType, final boolean computed ) {
 	super();
 
 	_name = name;
@@ -99,7 +99,7 @@ public class GowingPackableAttribute implements GowingPackable {
 
     }
 
-    protected GowingPackableAttribute( GowingUnPacker unPacker, GowingPackedEntityBundle bundle, GowingEntityReference er ) {
+    protected GowingPackableAttribute( final GowingUnPacker unPacker, final GowingPackedEntityBundle bundle, final GowingEntityReference er ) {
 	this(
 		new GowingPackableName( bundle.getNotNullField( GowingPackableAttribute.N_NAME ).StringValue() ),
 		null,
@@ -113,7 +113,7 @@ public class GowingPackableAttribute implements GowingPackable {
 
     @NotNull
     @Override
-    public GowingPackedEntityBundle bundleThyself( boolean isPackingSuper, GowingPacker packer ) {
+    public GowingPackedEntityBundle bundleThyself( final boolean isPackingSuper, final GowingPacker packer ) {
 
 	GowingPackedEntityBundle rval = new GowingPackedEntityBundle(
 		GowingPackableAttribute.ENTITY_TYPE_NAME,
@@ -139,7 +139,7 @@ public class GowingPackableAttribute implements GowingPackable {
     }
 
     @Override
-    public boolean finishUnpacking( GowingUnPacker unPacker ) {
+    public boolean finishUnpacking( final GowingUnPacker unPacker ) {
 
 	if ( _valueHolder == null ) {
 
@@ -205,13 +205,13 @@ public class GowingPackableAttribute implements GowingPackable {
 
     public long getIntegralValue() {
 
-	return (Long)_value;
+	return ( (Long)_value ).longValue();
 
     }
 
     public double getFloatingPointValue() {
 
-	return (Double)_value;
+	return ( (Double)_value ).doubleValue();
 
     }
 
@@ -235,7 +235,7 @@ public class GowingPackableAttribute implements GowingPackable {
 
     public boolean getBooleanValue() {
 
-	return (Boolean)_value;
+	return ( (Boolean)_value ).booleanValue();
 
     }
 
@@ -261,7 +261,7 @@ public class GowingPackableAttribute implements GowingPackable {
 
     }
 
-    private static void doit( GowingPackableAttribute ba ) {
+    private static void doit( final GowingPackableAttribute ba ) {
 
 	switch ( ba.getAttributeType() ) {
 
@@ -303,7 +303,7 @@ public class GowingPackableAttribute implements GowingPackable {
 
     }
 
-    public static void main( String[] args ) {
+    public static void main( final String[] args ) {
 
 	BasicProgramConfigInfo.init( "Obtuse", "Pipestone", "testing", null );
 

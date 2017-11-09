@@ -30,8 +30,8 @@ public class LinearLayoutUtil {
 
     static boolean _reportShapeChanges;
 
-    private static WatchList<Container> s_containerWatchlist = new WatchList<>( "container watchlist" );
-    private static WatchList<Component> s_componentWatchlist = new WatchList<>( "component watchlist" );
+    private static final WatchList<Container> s_containerWatchlist = new WatchList<>( "container watchlist" );
+    private static final WatchList<Component> s_componentWatchlist = new WatchList<>( "component watchlist" );
 
     private LinearLayoutUtil() {
 
@@ -39,44 +39,44 @@ public class LinearLayoutUtil {
 
     }
 
-    public static boolean isContainerOnWatchlist( @NotNull Container c ) {
+    public static boolean isContainerOnWatchlist( @NotNull final Container c ) {
 
         return s_containerWatchlist.isEntityOnWatchList( c );
 
     }
 
-    public static int addContainerToWatchList( @NotNull Container c ) {
+    public static int addContainerToWatchList( @NotNull final Container c ) {
 
         return s_containerWatchlist.addEntityToWatchList( c );
 
     }
 
-    public static int removeContainerFromWatchList( @NotNull Container c ) {
+    public static int removeContainerFromWatchList( @NotNull final Container c ) {
 
         return s_containerWatchlist.removeEntityFromWatchList( c );
 
     }
 
-    public static boolean isComponentOnWatchlist( @NotNull Component c ) {
+    public static boolean isComponentOnWatchlist( @NotNull final Component c ) {
 
         return s_componentWatchlist.isEntityOnWatchList( c );
 
     }
 
     @SuppressWarnings("UnusedReturnValue")
-    public static int addComponentToWatchList( @NotNull Component c ) {
+    public static int addComponentToWatchList( @NotNull final Component c ) {
 
         return s_componentWatchlist.addEntityToWatchList( c );
 
     }
 
-    public static int removeComponentFromWatchList( @NotNull Component c ) {
+    public static int removeComponentFromWatchList( @NotNull final Component c ) {
 
         return s_componentWatchlist.removeEntityFromWatchList( c );
 
     }
 
-    public static String describeBorder( Border border ) {
+    public static String describeBorder( final Border border ) {
 
         if ( border == null ) {
 
@@ -136,12 +136,12 @@ public class LinearLayoutUtil {
 //    }
 
     @NotNull
-    public static LinearContainer createPanel3( String name, LinearOrientation orientation ) {
+    public static LinearContainer createPanel3( final String name, final LinearOrientation orientation ) {
 
         @SuppressWarnings("UnnecessaryLocalVariable")
         LinearContainer rval = new LinearContainer3( name, orientation ) {
 
-            public void setBounds( int x, int y, int w, int h ) {
+            public void setBounds( final int x, final int y, final int w, final int h ) {
 
                 super.setBounds( x, y, w, h );
 //                Logger.logMsg( "SSLM.createdPanel3( name=\"" +
@@ -165,11 +165,13 @@ public class LinearLayoutUtil {
 
             }
 
-            public void setLayout( LayoutManager lm ) {
+            public void setLayout( final LayoutManager lm ) {
 
                 super.setLayout( lm );
 
-                Logger.logMsg( "layout manager set to " + lm );
+//                Logger.logMsg( "layout manager set to " + lm );
+
+                ObtuseUtil.doNothing();
 
             }
 
@@ -181,16 +183,16 @@ public class LinearLayoutUtil {
 
     @NotNull
     public static LinearContainer createPanel3(
-            @NotNull String name,
-            LinearOrientation orientation,
-            @SuppressWarnings("SameParameterValue") ContainerConstraints containerConstraints,
-            @SuppressWarnings("SameParameterValue") ComponentConstraints componentConstraints
+            @NotNull final String name,
+            final LinearOrientation orientation,
+            @SuppressWarnings("SameParameterValue") final ContainerConstraints containerConstraints,
+            @SuppressWarnings("SameParameterValue") final ComponentConstraints componentConstraints
     ) {
 
         @SuppressWarnings("UnnecessaryLocalVariable")
         LinearContainer rval = new LinearContainer3( name, orientation, containerConstraints, componentConstraints ) {
 
-            public void setBounds( int x, int y, int w, int h ) {
+            public void setBounds( final int x, final int y, final int w, final int h ) {
 
                 super.setBounds( x, y, w, h );
 //                Logger.logMsg( "SSLM.createdPanel3( name=\"" +
@@ -220,7 +222,7 @@ public class LinearLayoutUtil {
 
     }
 
-    public static String myDrawLine( String who, Graphics2D g2d, int x1, int y1, int x2, int y2 ) {
+    public static String myDrawLine( final String who, final Graphics2D g2d, final int x1, final int y1, final int x2, final int y2 ) {
 
         String msg = "drawLine( " + x1 + ", " + y1 + ", " + x2 + ", " + y2 + " )";
         g2d.drawLine( x1, y1, x2, y2 );
@@ -233,9 +235,9 @@ public class LinearLayoutUtil {
     @NotNull
     public static JComponent makeThing(
             @NotNull final String label,
-            @Nullable Dimension minSize,
-            @Nullable Dimension prefSize,
-            @Nullable Dimension maxSize
+            @Nullable final Dimension minSize,
+            @Nullable final Dimension prefSize,
+            @Nullable final Dimension maxSize
     ) {
 
         JPanel rval = new JPanel() {
@@ -246,7 +248,7 @@ public class LinearLayoutUtil {
 
             }
 
-            public void setMinimumSize( Dimension size ) {
+            public void setMinimumSize( final Dimension size ) {
 
                 super.setMinimumSize( size );
                 if ( _reportShapeChanges ) {
@@ -257,7 +259,7 @@ public class LinearLayoutUtil {
 
             }
 
-            public void setPreferredSize( Dimension size ) {
+            public void setPreferredSize( final Dimension size ) {
 
                 super.setPreferredSize( size );
                 if ( _reportShapeChanges ) {
@@ -268,7 +270,7 @@ public class LinearLayoutUtil {
 
             }
 
-            public void setMaximumSize( Dimension size ) {
+            public void setMaximumSize( final Dimension size ) {
 
                 super.setMaximumSize( size );
                 if ( _reportShapeChanges ) {
@@ -279,7 +281,7 @@ public class LinearLayoutUtil {
 
             }
 
-            public void setBounds( int x, int y, int w, int h ) {
+            public void setBounds( final int x, final int y, final int w, final int h ) {
 
                 super.setBounds( x, y, w, h );
 
@@ -294,7 +296,7 @@ public class LinearLayoutUtil {
             }
 
             @SuppressWarnings("deprecation")
-            public void reshape( int x, int y, int w, int h ) {
+            public void reshape( final int x, final int y, final int w, final int h ) {
 
                 super.reshape( x, y, w, h );
 
@@ -308,7 +310,7 @@ public class LinearLayoutUtil {
 
             }
 
-            protected void paintComponent( Graphics g ) {
+            protected void paintComponent( final Graphics g ) {
 
                 super.paintComponent( g );
 
@@ -371,25 +373,25 @@ public class LinearLayoutUtil {
 
     }
 
-    public static void makeButtons( JComponent component, int nb ) {
+    public static void makeButtons( final JComponent component, final int nb ) {
 
         makeButtons( component, nb, "Hello!", null );
 
     }
 
-    public static void makeButtons( JComponent component, int nb, MyActionListener listener ) {
+    public static void makeButtons( final JComponent component, final int nb, final MyActionListener listener ) {
 
         makeButtons( component, nb, "Hello!", listener );
 
     }
 
-    public static void makeButtons( JComponent component, int nb, String label ) {
+    public static void makeButtons( final JComponent component, final int nb, final String label ) {
 
         makeButtons( component, nb, label, null );
 
     }
 
-    public static void makeButtons( JComponent component, int nb, String label, MyActionListener listener ) {
+    public static void makeButtons( final JComponent component, final int nb, final String label, final MyActionListener listener ) {
 
         component.setBorder( BorderFactory.createLineBorder( Color.GREEN ) );
         addContainerToWatchList( component );
@@ -399,7 +401,7 @@ public class LinearLayoutUtil {
         for ( int i = 0; i < nb; i += 1 ) {
 
             JButton jButton3 = new JButton( label ) {
-                public void setBounds( int x, int y, int width, int height ) {
+                public void setBounds( final int x, final int y, final int width, final int height ) {
 
                     super.setBounds( x, y, width, height );
 
@@ -423,7 +425,7 @@ public class LinearLayoutUtil {
                     new MyActionListener() {
 
                         @Override
-                        public void myActionPerformed( ActionEvent actionEvent ) {
+                        public void myActionPerformed( final ActionEvent actionEvent ) {
 
                             showWhereWeAre( jButton3, actionEvent );
                             if ( listener != null ) {
@@ -457,7 +459,7 @@ public class LinearLayoutUtil {
     }
 
     @NotNull
-    public static LinearContainer getLinearContainer3( String title, LinearOrientation orientation, boolean watch ) {
+    public static LinearContainer getLinearContainer3( final String title, final LinearOrientation orientation, final boolean watch ) {
 
         final boolean logTrace = false;
 
@@ -465,7 +467,7 @@ public class LinearLayoutUtil {
 
         LinearContainer3 rval = new LinearContainer3( title, orientation ) {
 
-            public void logIt( Throwable e ) {
+            public void logIt( final Throwable e ) {
 
                 //noinspection ConstantConditions
                 if ( logTrace ) {
@@ -507,7 +509,7 @@ public class LinearLayoutUtil {
 
             }
 
-            public void setBounds( Rectangle r ) {
+            public void setBounds( final Rectangle r ) {
 
                 super.setBounds( r );
                 if ( interesting.equals( title ) ) {
@@ -524,7 +526,7 @@ public class LinearLayoutUtil {
 
             }
 
-            public void setBounds( int x, int y, int w, int h ) {
+            public void setBounds( final int x, final int y, final int w, final int h ) {
 
                 super.setBounds( x, y, w, h );
                 if ( interesting.equals( title ) ) {
@@ -554,7 +556,7 @@ public class LinearLayoutUtil {
 
     }
 
-    public void setReportShapeChanges( boolean report ) {
+    public void setReportShapeChanges( final boolean report ) {
 
         LinearLayoutUtil._reportShapeChanges = report;
 
@@ -566,7 +568,7 @@ public class LinearLayoutUtil {
 
     }
 
-    public static void describeGuiEntity( String why, Container container ) {
+    public static void describeGuiEntity( final String why, final Container container ) {
 
         Logger.logMsg( ( why == null ? "" : why + ":  " ) +
                        "structure of container \"" +
@@ -586,7 +588,7 @@ public class LinearLayoutUtil {
 
     }
 
-    public static void describeGuiEntity( int depth, Component component, boolean recurse, boolean showContents ) {
+    public static void describeGuiEntity( final int depth, final Component component, final boolean recurse, final boolean showContents ) {
 
         String formattedComponentName = fullName( component );
         Logger.logMsg(
@@ -622,14 +624,14 @@ public class LinearLayoutUtil {
 
     }
 
-    public static String fullName( Container parent, Component c ) {
+    public static String fullName( final Container parent, final Component c ) {
 
         return "\"" + parent.getName() + "\"/\"" + fullName( c ) + "\"" + ( c instanceof Container ? "(c)" : "(?)" );
 
     }
 
     @NotNull
-    public static String fullName( Component component ) {
+    public static String fullName( final Component component ) {
 
         String name = component.getName();
         if ( name == null ) {
@@ -654,7 +656,7 @@ public class LinearLayoutUtil {
 
     }
 
-    public static void showWhereWeAre( Component start, AWTEvent e ) {
+    public static void showWhereWeAre( final Component start, final AWTEvent e ) {
 
         try {
 
@@ -718,7 +720,7 @@ public class LinearLayoutUtil {
 //
 //    }
 
-    public static void showStructure( Container start ) {
+    public static void showStructure( final Container start ) {
 
         int depth = 0;
         for ( Container c = start; c != null; c = c.getParent() ) {
@@ -739,7 +741,7 @@ public class LinearLayoutUtil {
         container.addMouseListener(
                 new MouseAdapter() {
 
-                    public void mouseClicked( MouseEvent e ) {
+                    public void mouseClicked( final MouseEvent e ) {
 
                         showWhereWeAre( container, e );
 
@@ -753,7 +755,7 @@ public class LinearLayoutUtil {
 
     }
 
-    public static String toString( Container container ) {
+    public static String toString( final Container container ) {
 
         StringBuilder sb = new StringBuilder( "{" );
         String comma = "";
@@ -817,7 +819,7 @@ public class LinearLayoutUtil {
             super();
         }
 
-        public MyDimension( int width, int height ) {
+        public MyDimension( final int width, final int height ) {
 
             super( width, height );
         }
@@ -871,17 +873,17 @@ public class LinearLayoutUtil {
         private final MyDimension _pref;
         private final MyDimension _max;
 
-        public SpaceBrick( int width, int height ) {
+        public SpaceBrick( final int width, final int height ) {
             this( width, height, width, height, width, height );
 
         }
 
-        public SpaceBrick( int minWidth, int minHeight, int prefWidth, int prefHeight, int maxWidth, int maxHeight ) {
+        public SpaceBrick( final int minWidth, final int minHeight, final int prefWidth, final int prefHeight, final int maxWidth, final int maxHeight ) {
 
             this( new MyDimension( minWidth, minHeight ), new MyDimension( prefWidth, prefHeight ), new MyDimension( maxWidth, maxHeight ) );
         }
 
-        public SpaceBrick( Dimension min, Dimension pref, Dimension max ) {
+        public SpaceBrick( final Dimension min, final Dimension pref, final Dimension max ) {
 
             super();
 
@@ -909,19 +911,19 @@ public class LinearLayoutUtil {
 
         }
 
-        public void setMinimumSize( Dimension min ) {
+        public void setMinimumSize( final Dimension min ) {
 
             Logger.logMsg( "SpaceBrick:  request to change min from " + _min + " to " + min + " ignored" );
 
         }
 
-        public void setPreferredSize( Dimension pref ) {
+        public void setPreferredSize( final Dimension pref ) {
 
             Logger.logMsg( "SpaceBrick:  request to change pref from " + _pref + " to " + pref + " ignored" );
 
         }
 
-        public void setMaximumSize( Dimension max ) {
+        public void setMaximumSize( final Dimension max ) {
 
             Logger.logMsg( "SpaceBrick:  request to change max from " + _max + " to " + max + " ignored" );
 
@@ -939,7 +941,7 @@ public class LinearLayoutUtil {
 
         private final float _weight;
 
-        public WeightedSimpleFiller( @NotNull String name, float weight ) {
+        public WeightedSimpleFiller( @NotNull final String name, final float weight ) {
 
             super();
 
@@ -1000,7 +1002,7 @@ public class LinearLayoutUtil {
 
         }
 
-        public void paintComponent( Graphics g ) {
+        public void paintComponent( final Graphics g ) {
 
             super.paintComponent( g );
 
@@ -1050,7 +1052,7 @@ public class LinearLayoutUtil {
 
     public static class SimpleFiller extends JPanel /*implements LinearMagic*/ {
 
-        public SimpleFiller( @NotNull String name ) {
+        public SimpleFiller( @NotNull final String name ) {
 
             super();
 
@@ -1114,7 +1116,7 @@ public class LinearLayoutUtil {
 
         }
 
-        public void paintComponent( Graphics g ) {
+        public void paintComponent( final Graphics g ) {
 
             super.paintComponent( g );
 

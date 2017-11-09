@@ -75,7 +75,7 @@ public class MacCustomization extends OSLevelCustomizations {
         ApplicationAdapter basicAdapter = new ApplicationAdapter() {
 
             @SuppressWarnings( { "RefusedBequest" } )
-            public void handleQuit( ApplicationEvent e ) {
+            public void handleQuit( final ApplicationEvent e ) {
 
                 if ( _quitCatcher == null || _quitCatcher.quitAttempted() ) {
 
@@ -85,7 +85,7 @@ public class MacCustomization extends OSLevelCustomizations {
 
             }
 
-            public void handleAbout( ApplicationEvent e ) {
+            public void handleAbout( final ApplicationEvent e ) {
 
                 e.setHandled( true );
                 if ( _aboutWindowHandler != null ) {
@@ -98,11 +98,12 @@ public class MacCustomization extends OSLevelCustomizations {
 
         };
 
+        assert _app != null;
         _app.addApplicationListener( basicAdapter );
 
         ApplicationAdapter preferencesAdapter = new ApplicationAdapter() {
 
-            public void handlePreferences( ApplicationEvent e ) {
+            public void handlePreferences( final ApplicationEvent e ) {
 
                 e.setHandled( true );
                 if ( _prefsHandler != null ) {
@@ -121,13 +122,13 @@ public class MacCustomization extends OSLevelCustomizations {
 
     }
 
-    public void setDockBadge( String msg ) {
+    public void setDockBadge( final String msg ) {
 
         _app.setDockIconBadge( msg );
 
     }
 
-    public void setDockIconImage( Image icon ) {
+    public void setDockIconImage( final Image icon ) {
 
         _app.setDockIconImage( icon );
 
@@ -139,13 +140,13 @@ public class MacCustomization extends OSLevelCustomizations {
 
     }
 
-    public void setQuitCatcher( QuitCatcher quitCatcher ) {
+    public void setQuitCatcher( final QuitCatcher quitCatcher ) {
 
         _quitCatcher = quitCatcher;
 
     }
 
-    public void setPreferencesHandler( PreferencesHandler prefsHandler ) {
+    public void setPreferencesHandler( final PreferencesHandler prefsHandler ) {
 
         //noinspection ClassWithoutToString,RefusedBequest
         _prefsHandler = prefsHandler;
@@ -160,7 +161,7 @@ public class MacCustomization extends OSLevelCustomizations {
 
     }
 
-    public void setAboutWindowHandler( AboutWindowHandler aboutWindowHandler ) {
+    public void setAboutWindowHandler( final AboutWindowHandler aboutWindowHandler ) {
 
         _aboutWindowHandler = aboutWindowHandler;
 

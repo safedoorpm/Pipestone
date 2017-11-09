@@ -30,7 +30,7 @@ public abstract class GowingAbstractPackableHolder implements GowingPackableThin
     private final Kind _arrayKind;
 
     @SuppressWarnings("WeakerAccess")
-    protected GowingAbstractPackableHolder( EntityName name, char tag, Object objectValue, boolean mandatory ) {
+    protected GowingAbstractPackableHolder( final EntityName name, final char tag, final Object objectValue, final boolean mandatory ) {
 
         super();
 
@@ -49,7 +49,7 @@ public abstract class GowingAbstractPackableHolder implements GowingPackableThin
     }
 
     @SuppressWarnings("WeakerAccess")
-    protected GowingAbstractPackableHolder( EntityName name, char tag, Object objectValue, boolean mandatory, boolean primitiveArray ) {
+    protected GowingAbstractPackableHolder( final EntityName name, final char tag, final Object objectValue, final boolean mandatory, final boolean primitiveArray ) {
 
         super();
 
@@ -374,7 +374,7 @@ public abstract class GowingAbstractPackableHolder implements GowingPackableThin
     }
 
     @Override
-    public boolean pack( GowingPacker packer2 ) {
+    public boolean pack( final GowingPacker packer2 ) {
 
 //	if ( separator != null ) {
 //
@@ -425,7 +425,7 @@ public abstract class GowingAbstractPackableHolder implements GowingPackableThin
 //
 //    }
 
-    public int compareTo( @NotNull GowingPackableThingHolder rhs ) {
+    public int compareTo( @NotNull final GowingPackableThingHolder rhs ) {
 
         return _name.compareTo( rhs.getName() );
 
@@ -437,7 +437,7 @@ public abstract class GowingAbstractPackableHolder implements GowingPackableThin
 
     }
 
-    public boolean equals( Object rhs ) {
+    public boolean equals( final Object rhs ) {
 
         return rhs instanceof GowingPackableThingHolder && _name.equals( ( (GowingPackableThingHolder)rhs ).getName() );
 

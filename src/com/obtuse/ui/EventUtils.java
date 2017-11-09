@@ -29,7 +29,7 @@ public class EventUtils {
 	super();
     }
 
-    public static void event( String where, MouseEvent event ) {
+    public static void event( final String where, final MouseEvent event ) {
 
 	String eventType;
 	switch ( event.getID() ) {
@@ -56,14 +56,14 @@ public class EventUtils {
 
     }
 
-    public static void event( String why, PopupMenuEvent event ) {
+    public static void event( final String why, final PopupMenuEvent event ) {
 
 	String msg = "popup menu event:  " + why + " in " + getTopParent( (Component)event.getSource() );
 	maybeLog( msg );
 
     }
 
-    public static void event( String why, ActionEvent event ) {
+    public static void event( final String why, final ActionEvent event ) {
 
 	Object source = event.getSource();
 	if ( source instanceof JMenuItem ) {
@@ -88,7 +88,7 @@ public class EventUtils {
 
     }
 
-    public static void maybeLog( String msg ) {
+    public static void maybeLog( final String msg ) {
 
 	if ( _logEvents ) {
 
@@ -102,7 +102,7 @@ public class EventUtils {
 
     }
 
-    public static Object getTopParent( Component xComponent ) {
+    public static Object getTopParent( final Component xComponent ) {
 
 	String in = "";
 

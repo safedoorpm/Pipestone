@@ -44,7 +44,7 @@ public class BezierCurveSequence extends AbstractCurveSequence {
         private CubicBezierCurve _cubicBezierCurve;
         private Point2D _point;
 
-        public PointOnCurve( CubicBezierCurve cubicBezierCurve, int curveIndex, Point2D point ) {
+        public PointOnCurve( final CubicBezierCurve cubicBezierCurve, final int curveIndex, final Point2D point ) {
             super();
 
             _curveIndex = curveIndex;
@@ -77,7 +77,7 @@ public class BezierCurveSequence extends AbstractCurveSequence {
      * Create an empty curved line.
      */
 
-    public BezierCurveSequence( GraphicsElement parent ) {
+    public BezierCurveSequence( final GraphicsElement parent ) {
         super( parent );
 
         flushCachedData();
@@ -127,7 +127,7 @@ public class BezierCurveSequence extends AbstractCurveSequence {
      * @return the closest point to p (null if the curve sequence is empty).
      */
 
-    public PointOnCurve findNearestPoint( Point2D p ) {
+    public PointOnCurve findNearestPoint( final Point2D p ) {
 
         //        Point2D currentNearestPoint = null;
 //        int nearestPointCurveIndex = -1;
@@ -154,7 +154,7 @@ public class BezierCurveSequence extends AbstractCurveSequence {
 
     }
 
-    public double getSquaredDistanceToNearestPointOnCurve( Point2D p ) {
+    public double getSquaredDistanceToNearestPointOnCurve( final Point2D p ) {
 
         PointOnCurve nearestPointOnCurve = findNearestPoint( p );
 
@@ -201,7 +201,7 @@ public class BezierCurveSequence extends AbstractCurveSequence {
      * @return a shape describing either the curve or the control bars.
      */
 
-    protected GeneralPath getAutoCurveOrControlsPath( boolean getCurve ) {
+    protected GeneralPath getAutoCurveOrControlsPath( final boolean getCurve ) {
 
         //noinspection FloatingPointEquality
         if ( getCurve && _curvesPath != null ) {
@@ -329,7 +329,7 @@ public class BezierCurveSequence extends AbstractCurveSequence {
      * @return the intersection between the two lines or null if they do not intersect.
      */
     private static Point2D findIntersection(
-            Point2D a1, Point2D a2, Point2D b1, Point2D b2
+            final Point2D a1, final Point2D a2, final Point2D b1, final Point2D b2
     ) {
 
         // Parametric equation for first line is:
@@ -431,7 +431,7 @@ public class BezierCurveSequence extends AbstractCurveSequence {
 //    }
 
     @SuppressWarnings( { "UseOfSystemOutOrSystemErr" } )
-    public BezierCurveSequence getOffsetCurve( float offset ) {
+    public BezierCurveSequence getOffsetCurve( final float offset ) {
 
         BezierCurveSequence rval = new BezierCurveSequence( null );
         rval.setScale( getScale() );
@@ -529,7 +529,7 @@ public class BezierCurveSequence extends AbstractCurveSequence {
 
     }
 
-    private static Point2D rotatePoint90( float x, float y ) {
+    private static Point2D rotatePoint90( final float x, final float y ) {
 
         return new Point2D.Float( -y, x );
 

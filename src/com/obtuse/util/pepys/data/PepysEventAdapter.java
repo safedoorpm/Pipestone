@@ -13,17 +13,17 @@ import org.jetbrains.annotations.NotNull;
 public class PepysEventAdapter implements PepysEventListener {
 
     @Override
-    public void PepysSourceCreated( @NotNull Pepys.PepysEvent event ) {
+    public void PepysSourceCreated( @NotNull final Pepys.PepysEvent event ) {
 
     }
 
     @Override
-    public void PepysSourceChanged( @NotNull Pepys.PepysEvent event ) {
+    public void PepysSourceChanged( @NotNull final Pepys.PepysEvent event ) {
 
     }
 
     @Override
-    public void PepysSourceGone( @NotNull Pepys.PepysEvent event ) {
+    public void PepysSourceGone( @NotNull final Pepys.PepysEvent event ) {
 
     }
 

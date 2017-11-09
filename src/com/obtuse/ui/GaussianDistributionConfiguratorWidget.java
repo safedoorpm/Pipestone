@@ -76,7 +76,7 @@ public class GaussianDistributionConfiguratorWidget extends JPanel {
 
     }
 
-    public GaussianDistributionConfiguratorWidget( float weight, float center, float stdDev ) {
+    public GaussianDistributionConfiguratorWidget( final float weight, final float center, final float stdDev ) {
 
         super();
 
@@ -125,7 +125,7 @@ public class GaussianDistributionConfiguratorWidget extends JPanel {
         _weightSlider.getModel().addChangeListener(
                 new ChangeListener() {
 
-                    public void stateChanged( ChangeEvent changeEvent ) {
+                    public void stateChanged( final ChangeEvent changeEvent ) {
 
                         Logger.logMsg(
                                 "weight changed:  " +
@@ -145,7 +145,7 @@ public class GaussianDistributionConfiguratorWidget extends JPanel {
         _centerSlider.getModel().addChangeListener(
                 new ChangeListener() {
 
-                    public void stateChanged( ChangeEvent changeEvent ) {
+                    public void stateChanged( final ChangeEvent changeEvent ) {
 
 //                        Logger.logMsg(
 //                                "center changed:  " +
@@ -165,7 +165,7 @@ public class GaussianDistributionConfiguratorWidget extends JPanel {
         _standardDeviationSlider.getModel().addChangeListener(
                 new ChangeListener() {
 
-                    public void stateChanged( ChangeEvent changeEvent ) {
+                    public void stateChanged( final ChangeEvent changeEvent ) {
 
 //                        Logger.logMsg(
 //                                "std dev changed:  " +
@@ -219,20 +219,20 @@ public class GaussianDistributionConfiguratorWidget extends JPanel {
 
     }
 
-    public void addChangeListener( ChangeListener changeListener ) {
+    public void addChangeListener( final ChangeListener changeListener ) {
 
         removeChangeListener( changeListener );
         _changeListeners.add( changeListener );
 
     }
 
-    public void removeChangeListener( ChangeListener changeListener ) {
+    public void removeChangeListener( final ChangeListener changeListener ) {
 
         _changeListeners.remove( changeListener );
 
     }
 
-    private void fireChangeListeners( ChangeEvent changeEvent ) {
+    private void fireChangeListeners( final ChangeEvent changeEvent ) {
 
         for ( ChangeListener changeListener : _changeListeners ) {
 
@@ -270,13 +270,13 @@ public class GaussianDistributionConfiguratorWidget extends JPanel {
 
     @SuppressWarnings("SameParameterValue")
     private void configureSlider(
-            MultiPointSlider slider,
-            int minimum,
-            int maximum,
-            int value,
-            int majorTicks,
-            int minorTicks,
-            @Nullable Dictionary<Integer, MpsLabel> labels
+            final MultiPointSlider slider,
+            final int minimum,
+            final int maximum,
+            final int value,
+            final int majorTicks,
+            final int minorTicks,
+            @Nullable final Dictionary<Integer, MpsLabel> labels
     ) {
 
         slider.setMinimum( minimum );
@@ -302,7 +302,7 @@ public class GaussianDistributionConfiguratorWidget extends JPanel {
 
     }
 
-    public static void main( String[] args ) {
+    public static void main( final String[] args ) {
 
         BasicProgramConfigInfo.init( "Obtuse", "Shared", "StandardDeviationConfigurationWidget", null );
 
@@ -336,7 +336,7 @@ public class GaussianDistributionConfiguratorWidget extends JPanel {
             widget.addChangeListener(
                     new ChangeListener() {
 
-                        public void stateChanged( ChangeEvent changeEvent ) {
+                        public void stateChanged( final ChangeEvent changeEvent ) {
 
                             pgdd.setDistributions(
                                     new WeightedGaussianDistribution[] {

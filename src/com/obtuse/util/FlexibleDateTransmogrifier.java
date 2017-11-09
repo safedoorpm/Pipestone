@@ -335,7 +335,13 @@ public class FlexibleDateTransmogrifier {
      See {@link FlexibleDateTransmogrifier} JavaDocs for more information.
      */
 
-    public static Optional<String> transmogrify( String dateString ) {
+    public static Optional<String> transmogrify( final String dateString ) {
+
+        if ( ObtuseApproximateCalendarDate.FORMATTED_UNKNOWN_APPROXIMATE_DATE.equalsIgnoreCase( dateString.trim() ) ) {
+
+            return Optional.of( ObtuseApproximateCalendarDate.FORMATTED_UNKNOWN_APPROXIMATE_DATE );
+
+        }
 
         try {
 
@@ -375,7 +381,7 @@ public class FlexibleDateTransmogrifier {
 
     }
 
-    private static Optional<String> doit( int ix, Pattern p, boolean numericMonth, String dateString, int yyIx, int mmIx, int ddIx ) {
+    private static Optional<String> doit( final int ix, final Pattern p, final boolean numericMonth, final String dateString, final int yyIx, final int mmIx, final int ddIx ) {
 
         StringBuilder sb = new StringBuilder();
 
@@ -481,7 +487,7 @@ public class FlexibleDateTransmogrifier {
 
     }
 
-    private static int parseYear( String yearString ) {
+    private static int parseYear( final String yearString ) {
 
         try {
 
@@ -509,7 +515,7 @@ public class FlexibleDateTransmogrifier {
             "july", "august", "september", "october", "november", "december"
     };
 
-    private static int parseCharacterMonth( String monthString ) {
+    private static int parseCharacterMonth( final String monthString ) {
 
         if ( monthString.length() < 3 ) {
 
@@ -541,7 +547,7 @@ public class FlexibleDateTransmogrifier {
 
     }
 
-    private static int parseNumericMonth( String monthString ) {
+    private static int parseNumericMonth( final String monthString ) {
 
         try {
 
@@ -564,7 +570,7 @@ public class FlexibleDateTransmogrifier {
 
     }
 
-    private static int parseDay( String dayString ) {
+    private static int parseDay( final String dayString ) {
 
         try {
 
@@ -587,7 +593,7 @@ public class FlexibleDateTransmogrifier {
 
     }
 
-    public static void main( String[] args ) {
+    public static void main( final String[] args ) {
 
         BasicProgramConfigInfo.init( "Obtuse", "Pipestone", "testing", null );
 

@@ -21,7 +21,7 @@ public class GaussianDistribution {
     private final double _variance;
     private final double _standardDeviation;
 
-    public GaussianDistribution( double center, double standardDeviation ) {
+    public GaussianDistribution( final double center, final double standardDeviation ) {
 
         super();
 
@@ -49,7 +49,7 @@ public class GaussianDistribution {
 
     }
 
-    public double getY( double x ) {
+    public double getY( final double x ) {
 
         return Math.pow(
                 Math.exp( -( ( x - _center ) * ( x - _center ) / ( 2 * _variance ) ) ),
@@ -58,13 +58,13 @@ public class GaussianDistribution {
 
     }
 
-    public double generateValue( Random rng ) {
+    public double generateValue( final Random rng ) {
 
         return _center + rng.nextGaussian() * _standardDeviation;
 
     }
 
-    public void emitAsXml( NestedXMLPrinter ps ) {
+    public void emitAsXml( final NestedXMLPrinter ps ) {
 
         ps.emitTag(
                 "GD",
@@ -83,7 +83,7 @@ public class GaussianDistribution {
     }
 
     @SuppressWarnings("MagicNumber")
-    private static void doit( Random rng, double center, double standardDeviation, int nTrials ) {
+    private static void doit( final Random rng, final double center, final double standardDeviation, final int nTrials ) {
 
         GaussianDistribution dp = new GaussianDistribution( center, standardDeviation );
         Stats stats = new Stats();
@@ -129,7 +129,7 @@ public class GaussianDistribution {
     private static final int NTRIALS = 1000000;
 
     @SuppressWarnings("MagicNumber")
-    public static void main( String[] args ) {
+    public static void main( final String[] args ) {
 
         Random rng = new MersenneTwister();
         GaussianDistribution.doit( rng, 0.0, 1.0, GaussianDistribution.NTRIALS );

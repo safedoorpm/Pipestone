@@ -52,7 +52,7 @@ public class Pepys {
          @param source    the source of the event.
          */
 
-        public PepysEvent( @NotNull PepysEventType eventType, @NotNull PepysSource source ) {
+        public PepysEvent( @NotNull final PepysEventType eventType, @NotNull final PepysSource source ) {
 
             this( eventType, source, null );
 
@@ -66,7 +66,7 @@ public class Pepys {
          @param auxSource a secondary source of interest (the newly created source should <code>eventType</code> be <code>CREATED</code>).
          */
 
-        public PepysEvent( @NotNull PepysEventType eventType, @NotNull PepysSource source, @Nullable PepysSource auxSource ) {
+        public PepysEvent( @NotNull final PepysEventType eventType, @NotNull final PepysSource source, @Nullable final PepysSource auxSource ) {
 
             if ( eventType == PepysEventType.GONE ) {
 
@@ -97,7 +97,7 @@ public class Pepys {
          The event's type will be <code>GONE</code> and its <code>source</code> and <code>auxSource</code> fields will be null.
          */
 
-        private PepysEvent( long sourceId ) {
+        private PepysEvent( final long sourceId ) {
 
             super();
 
@@ -180,7 +180,7 @@ public class Pepys {
 
     public static class PepysGoneEvent extends PepysEvent {
 
-        private PepysGoneEvent( long sourceId ) {
+        private PepysGoneEvent( final long sourceId ) {
 
             super( sourceId );
 
@@ -194,7 +194,7 @@ public class Pepys {
 
     public static class PepysTestEvent extends PepysEvent {
 
-        private PepysTestEvent( @NotNull PepysEventType eventType, @NotNull PepysSource source ) {
+        private PepysTestEvent( @NotNull final PepysEventType eventType, @NotNull final PepysSource source ) {
 
             super( eventType, source );
 
@@ -208,7 +208,7 @@ public class Pepys {
 
     public static class PepysGenericEvent extends PepysEvent {
 
-        private PepysGenericEvent( @NotNull PepysEventType eventType, @NotNull PepysSource source ) {
+        private PepysGenericEvent( @NotNull final PepysEventType eventType, @NotNull final PepysSource source ) {
 
             super( eventType, source );
 
@@ -220,7 +220,7 @@ public class Pepys {
 
         private final PepysEvent _proxiedEvent;
 
-        public ProxiedPepysEvent( @NotNull PepysEventType eventType, @NotNull PepysSource source, PepysEvent proxiedEvent ) {
+        public ProxiedPepysEvent( @NotNull final PepysEventType eventType, @NotNull final PepysSource source, final PepysEvent proxiedEvent ) {
 
             super( eventType, source );
 
@@ -290,7 +290,7 @@ public class Pepys {
          @param source the referenced source.
          */
 
-        private PepysWeakSourceRef( @NotNull PepysSource source ) {
+        private PepysWeakSourceRef( @NotNull final PepysSource source ) {
 
             super( source );
 
@@ -308,7 +308,7 @@ public class Pepys {
          @param listener the listener.
          */
 
-        private synchronized void registerEventListener( @NotNull PepysEventListener listener ) {
+        private synchronized void registerEventListener( @NotNull final PepysEventListener listener ) {
 
             _listeners.add( new WeakReference<>( listener ) );
 
@@ -390,7 +390,7 @@ public class Pepys {
          */
 
         @NotNull
-        private List<PepysEventListener> getPepysEventListeners( String what, List<WeakReference<PepysEventListener>> listeners ) {
+        private List<PepysEventListener> getPepysEventListeners( final String what, final List<WeakReference<PepysEventListener>> listeners ) {
 
             final List<PepysEventListener> eligibleListeners = new FormattingLinkedList<>();
             for ( Iterator<WeakReference<PepysEventListener>> iterator = listeners.iterator(); iterator.hasNext(); ) {
@@ -456,7 +456,7 @@ public class Pepys {
          when the source object of interest gets garbage collected.
          */
 
-        private PepysPhantomSourceRef( @NotNull PepysSource source, @NotNull ReferenceQueue<PepysSource> phantomReferenceQueue ) {
+        private PepysPhantomSourceRef( @NotNull final PepysSource source, @NotNull final ReferenceQueue<PepysSource> phantomReferenceQueue ) {
 
             super( source, phantomReferenceQueue );
 
@@ -646,9 +646,9 @@ public class Pepys {
      */
 
     public static void registerInterest(
-            @NotNull PepysSource source,
-            @NotNull PepysAnchor anchor,
-            @NotNull PepysEventListener listener
+            @NotNull final PepysSource source,
+            @NotNull final PepysAnchor anchor,
+            @NotNull final PepysEventListener listener
     ) {
 
         //noinspection unchecked
@@ -675,7 +675,7 @@ public class Pepys {
      @param listener the listener which is to receive events sent by the specified source object.
      */
 
-    private synchronized void xRegisterInterest( @NotNull PepysSource source, @NotNull PepysEventListener listener ) {
+    private synchronized void xRegisterInterest( @NotNull final PepysSource source, @NotNull final PepysEventListener listener ) {
 
         WeakReference weakSource = new WeakReference<>( source );
         WeakReference weakListener = new WeakReference<>( listener );
@@ -731,7 +731,7 @@ public class Pepys {
      wisdom of letting the source object's class's implementation be responsible for calling this method.
      */
 
-    public static void fireEvent( @Nullable PepysEvent event ) {
+    public static void fireEvent( @Nullable final PepysEvent event ) {
 
         if ( event != null ) {
 
@@ -753,7 +753,7 @@ public class Pepys {
      This method just returns without doing anything useful if the specified array reference is null.
      */
 
-    public static void fireEvents( @Nullable PepysEvent[] events ) {
+    public static void fireEvents( @Nullable final PepysEvent[] events ) {
 
         if ( events != null ) {
 
@@ -788,7 +788,7 @@ public class Pepys {
      This method just returns without doing anything useful if the specified collection reference is null.
      */
 
-    public static void fireEvents( @Nullable Collection<PepysEvent> events ) {
+    public static void fireEvents( @Nullable final Collection<PepysEvent> events ) {
 
         if ( events != null ) {
 
@@ -819,7 +819,7 @@ public class Pepys {
      @param event the event to be delivered to registered listeners of the source object specified by said event.
      */
 
-    private synchronized void xFireEvent( @NotNull PepysEvent event ) {
+    private synchronized void xFireEvent( @NotNull final PepysEvent event ) {
 
         PepysWeakSourceRef weakSourceRef = _sourceMap.get( event.getSource() );
 
@@ -837,7 +837,7 @@ public class Pepys {
 
     // Some fairly rudimentary test code.
 
-    public static void main( String[] args ) {
+    public static void main( final String[] args ) {
 
         BasicProgramConfigInfo.init( "Obtuse", "Pepys", "testing", null );
 
@@ -907,21 +907,21 @@ public class Pepys {
         PepysEventListener s1listener1 = new PepysEventListener() {
 
             @Override
-            public void PepysSourceCreated( @NotNull PepysEvent event ) {
+            public void PepysSourceCreated( @NotNull final PepysEvent event ) {
 
                 Logger.logMsg( "l1: s1 got source changed event " + event );
 
             }
 
             @Override
-            public void PepysSourceChanged( @NotNull PepysEvent event ) {
+            public void PepysSourceChanged( @NotNull final PepysEvent event ) {
 
                 Logger.logMsg( "l1: s1 got source changed event " + event );
 
             }
 
             @Override
-            public void PepysSourceGone( @NotNull PepysEvent event ) {
+            public void PepysSourceGone( @NotNull final PepysEvent event ) {
 
                 Logger.logMsg( "l1: s2 got source gone event " + event );
 
@@ -937,21 +937,21 @@ public class Pepys {
         PepysEventListener s1listener2 = new PepysEventListener() {
 
             @Override
-            public void PepysSourceCreated( @NotNull PepysEvent event ) {
+            public void PepysSourceCreated( @NotNull final PepysEvent event ) {
 
                 Logger.logMsg( "l2: s1 got source created event " + event );
 
             }
 
             @Override
-            public void PepysSourceChanged( @NotNull PepysEvent event ) {
+            public void PepysSourceChanged( @NotNull final PepysEvent event ) {
 
                 Logger.logMsg( "l2: s1 got source changed event " + event );
 
             }
 
             @Override
-            public void PepysSourceGone( @NotNull PepysEvent event ) {
+            public void PepysSourceGone( @NotNull final PepysEvent event ) {
 
                 Logger.logMsg( "l2: s1 got source gone event " + event );
 
@@ -961,21 +961,21 @@ public class Pepys {
         PepysEventListener s2listener3 = new PepysEventListener() {
 
             @Override
-            public void PepysSourceCreated( @NotNull PepysEvent event ) {
+            public void PepysSourceCreated( @NotNull final PepysEvent event ) {
 
                 Logger.logMsg( "l2: s2 got source created event " + event );
 
             }
 
             @Override
-            public void PepysSourceChanged( @NotNull PepysEvent event ) {
+            public void PepysSourceChanged( @NotNull final PepysEvent event ) {
 
                 Logger.logMsg( "l2: s2 got source changed event " + event );
 
             }
 
             @Override
-            public void PepysSourceGone( @NotNull PepysEvent event ) {
+            public void PepysSourceGone( @NotNull final PepysEvent event ) {
 
                 Logger.logMsg( "l2: s2 got source gone event " + event );
 

@@ -20,7 +20,7 @@ public class TransferActionListener implements ActionListener, PropertyChangeLis
     }
 
     @Override
-    public void actionPerformed( ActionEvent e ) {
+    public void actionPerformed( final ActionEvent e ) {
 
         if ( focusOwner != null ) {
 
@@ -37,7 +37,7 @@ public class TransferActionListener implements ActionListener, PropertyChangeLis
     }
 
     @Override
-    public void propertyChange( PropertyChangeEvent evt ) {
+    public void propertyChange( final PropertyChangeEvent evt ) {
 
         Object o = evt.getNewValue();
         if ( o instanceof JComponent ) {

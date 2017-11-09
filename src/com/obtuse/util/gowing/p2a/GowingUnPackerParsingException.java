@@ -21,17 +21,17 @@ public class GowingUnPackerParsingException extends Exception {
 //
 //    }
 
-    public GowingUnPackerParsingException( String msg ) {
+    public GowingUnPackerParsingException( final String msg ) {
 	this( msg, null );
 
     }
 
-    public GowingUnPackerParsingException( String msg, @Nullable StdGowingTokenizer.GowingToken2 causeToken ) {
+    public GowingUnPackerParsingException( final String msg, @Nullable final StdGowingTokenizer.GowingToken2 causeToken ) {
 	this( msg, causeToken, null );
 
     }
 
-    public GowingUnPackerParsingException( String msg, @Nullable StdGowingTokenizer.GowingToken2 causeToken, @Nullable Throwable cause ) {
+    public GowingUnPackerParsingException( final String msg, @Nullable final StdGowingTokenizer.GowingToken2 causeToken, @Nullable final Throwable cause ) {
 	super( msg, cause );
 
 	_causeToken = causeToken;
@@ -45,7 +45,7 @@ public class GowingUnPackerParsingException extends Exception {
 
     }
 
-    public void setCauseToken( StdGowingTokenizer.GowingToken2 token ) {
+    public void setCauseToken( final StdGowingTokenizer.GowingToken2 token ) {
 
 	if ( _causeToken == null ) {
 

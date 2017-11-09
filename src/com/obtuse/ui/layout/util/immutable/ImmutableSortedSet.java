@@ -22,17 +22,17 @@ public class ImmutableSortedSet<E>
     private static final long serialVersionUID = -4929149591599911165L;
     private final SortedSet<E> ss;
 
-    protected ImmutableSortedSet(SortedSet<E> s) {super( s); ss = s;}
+    protected ImmutableSortedSet( final SortedSet<E> s) {super( s); ss = s;}
 
     public Comparator<? super E> comparator() {return ss.comparator();}
 
-    public SortedSet<E> subSet(E fromElement, E toElement) {
+    public SortedSet<E> subSet( final E fromElement, final E toElement) {
 	return new ImmutableSortedSet<>( ss.subSet( fromElement, toElement));
     }
-    public SortedSet<E> headSet(E toElement) {
+    public SortedSet<E> headSet( final E toElement) {
 	return new ImmutableSortedSet<>( ss.headSet( toElement));
     }
-    public SortedSet<E> tailSet(E fromElement) {
+    public SortedSet<E> tailSet( final E fromElement) {
 	return new ImmutableSortedSet<>( ss.tailSet( fromElement));
     }
 

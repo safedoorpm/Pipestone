@@ -61,7 +61,7 @@ public class Measure {
         private final String _fullStackTrace;
         private final List<String> _levelNames;
 
-        public StackLevelInfo( String levelName, Stack<StackLevelInfo> stack ) {
+        public StackLevelInfo( final String levelName, final Stack<StackLevelInfo> stack ) {
             super();
 
             _levelName = levelName;
@@ -124,7 +124,7 @@ public class Measure {
         private final StackLevelStats _parent;
         private final String _levelName;
 
-        public StackLevelStats( String levelName, StackLevelStats parent ) {
+        public StackLevelStats( final String levelName, final StackLevelStats parent ) {
             super();
 
             _levelName = levelName;
@@ -146,7 +146,7 @@ public class Measure {
 
         }
 
-        public void datum( List<String> relativePath, long delta ) {
+        public void datum( final List<String> relativePath, final long delta ) {
 
             if ( relativePath.isEmpty() ) {
 
@@ -204,7 +204,7 @@ public class Measure {
 
         }
 
-        public void showStats( PrintStream where, boolean showTitle ) {
+        public void showStats( final PrintStream where, final boolean showTitle ) {
 
             if ( showTitle ) {
 
@@ -247,7 +247,7 @@ public class Measure {
             TreeSorter<Double, String> sorted = new TreeSorter<>(
 		    new Comparator<Double>() {
 
-			public int compare( Double lhs, Double rhs ) {
+			public int compare( final Double lhs, final Double rhs ) {
 
 			    return rhs.compareTo( lhs );
 			}
@@ -274,7 +274,7 @@ public class Measure {
 
     }
 
-    public Measure( String categoryName ) {
+    public Measure( final String categoryName ) {
         super();
 
         _categoryName = categoryName;
@@ -386,14 +386,14 @@ public class Measure {
 
     }
 
-    public static void setGloballyEnabled( boolean globallyEnabled ) {
+    public static void setGloballyEnabled( final boolean globallyEnabled ) {
 
         Measure.s_globallyEnabled = globallyEnabled;
 
     }
 
 
-    public static double adjustMean( String categoryName, double mean ) {
+    public static double adjustMean( final String categoryName, final double mean ) {
 
         if ( !Measure.s_globallyEnabled || categoryName.startsWith( "<" ) ) {
 
@@ -407,7 +407,7 @@ public class Measure {
 
     }
 
-    public static double adjustSum( String categoryName, double sum, int n ) {
+    public static double adjustSum( final String categoryName, final double sum, final int n ) {
 
         if ( !Measure.s_globallyEnabled || categoryName.startsWith( "<" ) ) {
 
@@ -421,7 +421,7 @@ public class Measure {
 
     }
 
-    private void recordData( SortedMap<String,Stats> map, long delta ) {
+    private void recordData( final SortedMap<String,Stats> map, final long delta ) {
 
         Measure.recordData( map, _categoryName, delta );
 
@@ -429,7 +429,7 @@ public class Measure {
 
     }
 
-    private static void recordData( SortedMap<String,Stats> map, String name, long delta ) {
+    private static void recordData( final SortedMap<String,Stats> map, final String name, final long delta ) {
 
 //	synchronized ( Measure.LOCK ) {
 
@@ -447,14 +447,14 @@ public class Measure {
 
     }
 
-    public static void showStats( PrintStream where ) {
+    public static void showStats( final PrintStream where ) {
 
         Measure.showStats( where, true );
 
     }
 
     @SuppressWarnings({ "SameParameterValue" })
-    public static void showStats( PrintStream where, boolean showTitle ) {
+    public static void showStats( final PrintStream where, final boolean showTitle ) {
 
         if ( !Measure.s_globallyEnabled ) {
 
@@ -469,7 +469,7 @@ public class Measure {
 	    TreeSorter<Double,String> sorted = new TreeSorter<>(
 		    new Comparator<Double>() {
 
-			public int compare( Double lhs, Double rhs ) {
+			public int compare( final Double lhs, final Double rhs ) {
 
 			    return rhs.compareTo( lhs );
 			}
@@ -562,7 +562,7 @@ public class Measure {
 
     }
 
-    public static void measure( String categoryName, Runnable runnable ) {
+    public static void measure( final String categoryName, final Runnable runnable ) {
 
         Measure measure = new Measure( categoryName );
         runnable.run();

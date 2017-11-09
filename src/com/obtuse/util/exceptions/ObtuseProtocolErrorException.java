@@ -20,14 +20,14 @@ public class ObtuseProtocolErrorException extends Exception {
 
     }
 
-    public ObtuseProtocolErrorException( String why ) {
+    public ObtuseProtocolErrorException( final String why ) {
         super( why );
 
         Trace.event( this );
 
     }
 
-    public ObtuseProtocolErrorException( String why, Throwable e ) {
+    public ObtuseProtocolErrorException( final String why, final Throwable e ) {
         super( why, e );
 
         Trace.event( this );

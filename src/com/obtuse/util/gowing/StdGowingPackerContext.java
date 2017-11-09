@@ -40,7 +40,7 @@ public class StdGowingPackerContext implements GowingPackerContext {
     }
 
     @Override
-    public void setRequestorContext( GowingRequestorContext requestorContext ) {
+    public void setRequestorContext( final GowingRequestorContext requestorContext ) {
 
         if ( _requestorContext != null ) {
 
@@ -60,7 +60,7 @@ public class StdGowingPackerContext implements GowingPackerContext {
     }
 
     @Override
-    public void rememberPackableEntity( EntityName entityName, GowingPackable entity ) {
+    public void rememberPackableEntity( final EntityName entityName, final GowingPackable entity ) {
 
         @SuppressWarnings("UnusedAssignment")
         int typeReferenceId = GowingInstanceId.allocateTypeId( entity.getInstanceId().getTypeName() );
@@ -81,13 +81,13 @@ public class StdGowingPackerContext implements GowingPackerContext {
 
     @Override
     @NotNull
-    public EntityNames getEntityNames( GowingInstanceId instanceId ) {
+    public EntityNames getEntityNames( final GowingInstanceId instanceId ) {
 
         return _seenInstanceIds.get( instanceId );
 
     }
 
-    public int rememberTypeName( EntityTypeName typeName ) {
+    public int rememberTypeName( final EntityTypeName typeName ) {
 
         int typeId = GowingInstanceId.allocateTypeId( typeName.getTypeName() );
 
@@ -146,9 +146,9 @@ public class StdGowingPackerContext implements GowingPackerContext {
             @Override
             @NotNull
             public GowingPackable createEntity(
-                    @NotNull GowingUnPacker unPacker,
-                    @NotNull GowingPackedEntityBundle bundle,
-                    GowingEntityReference er
+                    @NotNull final GowingUnPacker unPacker,
+                    @NotNull final GowingPackedEntityBundle bundle,
+                    final GowingEntityReference er
             ) {
 
                 return new TestPackableClass( unPacker, bundle, er );
@@ -165,7 +165,7 @@ public class StdGowingPackerContext implements GowingPackerContext {
         private TestPackableClass _inner;
         private GowingEntityReference _innerReference;
 
-        public TestPackableClass( @NotNull String payload, @Nullable TestPackableClass inner, @Nullable SimplePackableClass simple ) {
+        public TestPackableClass( @NotNull final String payload, @Nullable final TestPackableClass inner, @Nullable final SimplePackableClass simple ) {
 
             super( new GowingNameMarkerThing() );
 
@@ -178,7 +178,7 @@ public class StdGowingPackerContext implements GowingPackerContext {
 
         }
 
-        public TestPackableClass( GowingUnPacker unPacker, @NotNull GowingPackedEntityBundle bundle, GowingEntityReference er ) {
+        public TestPackableClass( final GowingUnPacker unPacker, @NotNull final GowingPackedEntityBundle bundle, final GowingEntityReference er ) {
 
             super( unPacker, bundle.getSuperBundle() );
 
@@ -204,7 +204,7 @@ public class StdGowingPackerContext implements GowingPackerContext {
 
         @NotNull
         @Override
-        public GowingPackedEntityBundle bundleThyself( boolean isPackingSuper, GowingPacker packer ) {
+        public GowingPackedEntityBundle bundleThyself( final boolean isPackingSuper, final GowingPacker packer ) {
 
             GowingPackedEntityBundle rval = new GowingPackedEntityBundle(
                     ENTITY_TYPE_NAME,
@@ -229,7 +229,7 @@ public class StdGowingPackerContext implements GowingPackerContext {
         }
 
         @Override
-        public boolean finishUnpacking( GowingUnPacker unPacker ) {
+        public boolean finishUnpacking( final GowingUnPacker unPacker ) {
 
             _simple = (SimplePackableClass)unPacker.resolveReference( _simpleReference );
             _inner = (TestPackableClass)unPacker.resolveReference( _innerReference );
@@ -271,9 +271,9 @@ public class StdGowingPackerContext implements GowingPackerContext {
             @Override
             @NotNull
             public GowingPackable createEntity(
-                    @NotNull GowingUnPacker unPacker,
-                    @NotNull GowingPackedEntityBundle bundle,
-                    GowingEntityReference er
+                    @NotNull final GowingUnPacker unPacker,
+                    @NotNull final GowingPackedEntityBundle bundle,
+                    final GowingEntityReference er
             ) {
 
                 return new SimplePackableClass( unPacker, bundle, er );
@@ -284,7 +284,7 @@ public class StdGowingPackerContext implements GowingPackerContext {
 
         private final String _payload;
 
-        public SimplePackableClass( @NotNull String payload ) {
+        public SimplePackableClass( @NotNull final String payload ) {
 
             super( new GowingNameMarkerThing() );
 
@@ -292,7 +292,7 @@ public class StdGowingPackerContext implements GowingPackerContext {
 
         }
 
-        public SimplePackableClass( GowingUnPacker unPacker, GowingPackedEntityBundle bundle, GowingEntityReference er ) {
+        public SimplePackableClass( final GowingUnPacker unPacker, final GowingPackedEntityBundle bundle, final GowingEntityReference er ) {
 
             super( new GowingNameMarkerThing() );
 
@@ -313,7 +313,7 @@ public class StdGowingPackerContext implements GowingPackerContext {
 
         @NotNull
         @Override
-        public GowingPackedEntityBundle bundleThyself( boolean isPackingSuper, GowingPacker packer ) {
+        public GowingPackedEntityBundle bundleThyself( final boolean isPackingSuper, final GowingPacker packer ) {
 
             GowingPackedEntityBundle rval = new GowingPackedEntityBundle(
                     ENTITY_TYPE_NAME,
@@ -330,7 +330,7 @@ public class StdGowingPackerContext implements GowingPackerContext {
         }
 
         @Override
-        public boolean finishUnpacking( GowingUnPacker unPacker ) {
+        public boolean finishUnpacking( final GowingUnPacker unPacker ) {
 
             // Nothing to be done here.
 

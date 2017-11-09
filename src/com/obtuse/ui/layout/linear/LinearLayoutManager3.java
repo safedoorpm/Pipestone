@@ -47,7 +47,7 @@ public class LinearLayoutManager3 implements LayoutManager2 {
 
         private final boolean _enabled;
 
-        public SimpleConstraint( @SuppressWarnings("SameParameterValue") @NotNull String name, boolean enabled ) {
+        public SimpleConstraint( @SuppressWarnings("SameParameterValue") @NotNull final String name, final boolean enabled ) {
 
             super();
 
@@ -75,13 +75,13 @@ public class LinearLayoutManager3 implements LayoutManager2 {
 
         }
 
-        public boolean equals( Object rhs ) {
+        public boolean equals( final Object rhs ) {
 
             return rhs instanceof Constraint && getName().equals( ( (Constraint)rhs ).getName() );
 
         }
 
-        public int compareTo( Constraint rhs ) {
+        public int compareTo( final Constraint rhs ) {
 
             return getName().compareTo( rhs.getName() );
 
@@ -147,7 +147,7 @@ public class LinearLayoutManager3 implements LayoutManager2 {
 
         }
 
-        public ConstraintsTable( Constraint singletonConstraint ) {
+        public ConstraintsTable( final Constraint singletonConstraint ) {
 
             super();
 
@@ -166,8 +166,8 @@ public class LinearLayoutManager3 implements LayoutManager2 {
     private LayoutImplCache _cache;
 
     public LinearLayoutManager3(
-            @NotNull LinearOrientation orientation,
-            @NotNull LinearContainer3 linearContainer3
+            @NotNull final LinearOrientation orientation,
+            @NotNull final LinearContainer3 linearContainer3
     ) {
 
         super();
@@ -180,7 +180,7 @@ public class LinearLayoutManager3 implements LayoutManager2 {
     }
 
     @Override
-    public synchronized void addLayoutComponent( Component comp, Object xConstraints ) {
+    public synchronized void addLayoutComponent( final Component comp, final Object xConstraints ) {
 
 //	Logger.maybeLogMsg( () -> "addLayoutComponent( " + comp + ", " + xConstraints + " )" );
 
@@ -276,7 +276,7 @@ public class LinearLayoutManager3 implements LayoutManager2 {
 
     }
 
-    private void checkContainer( String who, Container target ) {
+    private void checkContainer( final String who, final Container target ) {
 
         if ( target != _target ) {
 
@@ -302,7 +302,7 @@ public class LinearLayoutManager3 implements LayoutManager2 {
     }
 
     @Override
-    public synchronized float getLayoutAlignmentX( Container target ) {
+    public synchronized float getLayoutAlignmentX( final Container target ) {
 
         checkContainer( "getLayoutAlignmentX", target );
         preLoadCacheIfNecessary();
@@ -312,7 +312,7 @@ public class LinearLayoutManager3 implements LayoutManager2 {
     }
 
     @Override
-    public float getLayoutAlignmentY( Container target ) {
+    public float getLayoutAlignmentY( final Container target ) {
 
         checkContainer( "getLayoutAlignmentY", target );
         preLoadCacheIfNecessary();
@@ -321,7 +321,7 @@ public class LinearLayoutManager3 implements LayoutManager2 {
 
     }
 
-    private synchronized void implicitInvalidateLayout( String requester, LinearContainer3 target ) {
+    private synchronized void implicitInvalidateLayout( final String requester, final LinearContainer3 target ) {
 
 //        if ( _target != null && _target.isWatched() && _cache != null ) {
 //
@@ -354,7 +354,7 @@ public class LinearLayoutManager3 implements LayoutManager2 {
     }
 
     @Override
-    public synchronized Dimension preferredLayoutSize( Container target ) {
+    public synchronized Dimension preferredLayoutSize( final Container target ) {
 
         checkContainer( "preferredLayoutSize", target );
         preLoadCacheIfNecessary();
@@ -374,7 +374,7 @@ public class LinearLayoutManager3 implements LayoutManager2 {
     }
 
     @Override
-    public synchronized Dimension minimumLayoutSize( Container target ) {
+    public synchronized Dimension minimumLayoutSize( final Container target ) {
 
         checkContainer( "minimumLayoutSize", target );
         preLoadCacheIfNecessary();
@@ -397,7 +397,7 @@ public class LinearLayoutManager3 implements LayoutManager2 {
     }
 
     @Override
-    public synchronized Dimension maximumLayoutSize( Container target ) {
+    public synchronized Dimension maximumLayoutSize( final Container target ) {
 
         checkContainer( "maximumLayoutSize", target );
         preLoadCacheIfNecessary();
@@ -410,7 +410,7 @@ public class LinearLayoutManager3 implements LayoutManager2 {
     }
 
     @Override
-    public synchronized void invalidateLayout( Container target ) {
+    public synchronized void invalidateLayout( final Container target ) {
 
         checkContainer( "invalidateLayout", target );
 
@@ -419,7 +419,7 @@ public class LinearLayoutManager3 implements LayoutManager2 {
     }
 
     @Override
-    public void addLayoutComponent( String name, Component comp ) {
+    public void addLayoutComponent( final String name, final Component comp ) {
 
         Logger.logMsg( "addLayoutComponent( " + ObtuseUtil.enquoteToJavaString( name ) + ", " + comp + " )" );
 
@@ -428,7 +428,7 @@ public class LinearLayoutManager3 implements LayoutManager2 {
     }
 
     @Override
-    public synchronized void removeLayoutComponent( Component comp ) {
+    public synchronized void removeLayoutComponent( final Component comp ) {
 
 //	Logger.logMsg( "removeLayoutComponent( " + comp + " )" );
 
@@ -447,7 +447,7 @@ public class LinearLayoutManager3 implements LayoutManager2 {
     }
 
     @Override
-    public void layoutContainer( Container parent ) {
+    public void layoutContainer( final Container parent ) {
 
         LayoutImplCache cache;
 
@@ -569,7 +569,7 @@ public class LinearLayoutManager3 implements LayoutManager2 {
 
     }
 
-    public static void main( String[] args ) {
+    public static void main( final String[] args ) {
 
         BasicProgramConfigInfo.init( "Obtuse", "LinearLayoutManager3", "testing", null );
 
@@ -610,7 +610,7 @@ public class LinearLayoutManager3 implements LayoutManager2 {
                 new MyActionListener() {
 
                     @Override
-                    public void myActionPerformed( ActionEvent actionEvent ) {
+                    public void myActionPerformed( final ActionEvent actionEvent ) {
 
                         Logger.logMsg( "hello" );
 
@@ -625,7 +625,7 @@ public class LinearLayoutManager3 implements LayoutManager2 {
                 new MyActionListener() {
 
                     @Override
-                    public void myActionPerformed( ActionEvent actionEvent ) {
+                    public void myActionPerformed( final ActionEvent actionEvent ) {
 
                         Logger.logMsg( "Boo!" );
 
@@ -645,7 +645,7 @@ public class LinearLayoutManager3 implements LayoutManager2 {
                 new MyActionListener() {
 
                     @Override
-                    public void myActionPerformed( ActionEvent actionEvent ) {
+                    public void myActionPerformed( final ActionEvent actionEvent ) {
 
                         if ( "Flip".equals( jb3.getText() ) ) {
 
@@ -676,7 +676,7 @@ public class LinearLayoutManager3 implements LayoutManager2 {
 
     }
 
-    public static void mainX( String[] args ) {
+    public static void mainX( final String[] args ) {
 
         BasicProgramConfigInfo.init( "Obtuse", "Pipestone", "Testing", null );
 
@@ -729,10 +729,10 @@ public class LinearLayoutManager3 implements LayoutManager2 {
 
     @NotNull
     public static JPanel makeMainContainer(
-            @SuppressWarnings("SameParameterValue") boolean makeLinearContainer,
-            @SuppressWarnings("SameParameterValue") LinearOrientation orientation,
-            Component[] extraComponents,
-            @Nullable ConstraintTuple breadthConstraints
+            @SuppressWarnings("SameParameterValue") final boolean makeLinearContainer,
+            @SuppressWarnings("SameParameterValue") final LinearOrientation orientation,
+            final Component[] extraComponents,
+            @Nullable final ConstraintTuple breadthConstraints
     ) {
 
         JPanel main;
@@ -763,7 +763,7 @@ public class LinearLayoutManager3 implements LayoutManager2 {
                 new MyActionListener() {
 
                     @Override
-                    public void myActionPerformed( ActionEvent actionEvent ) {
+                    public void myActionPerformed( final ActionEvent actionEvent ) {
 
                         if ( actionEvent.getSource() instanceof JButton ) {
 
@@ -810,7 +810,7 @@ public class LinearLayoutManager3 implements LayoutManager2 {
         JPanel filler;
         filler = new JPanel() {
 
-            protected void paintComponent( Graphics g ) {
+            protected void paintComponent( final Graphics g ) {
 
                 super.paintComponent( g );
 

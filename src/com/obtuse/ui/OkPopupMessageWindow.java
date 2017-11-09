@@ -30,9 +30,9 @@ public class OkPopupMessageWindow extends JDialog {
     private JLabel _secondMessageField;
 
     protected OkPopupMessageWindow(
-            String firstMessage,
-            @Nullable String secondMessage,
-            String buttonLabel
+            final String firstMessage,
+            @Nullable final String secondMessage,
+            final String buttonLabel
     ) {
         super();
 
@@ -45,7 +45,7 @@ public class OkPopupMessageWindow extends JDialog {
         _okButton.addActionListener(
                 new MyActionListener() {
 
-                    public void myActionPerformed( ActionEvent e ) {
+                    public void myActionPerformed( final ActionEvent e ) {
 
                         onOK();
 
@@ -72,7 +72,7 @@ public class OkPopupMessageWindow extends JDialog {
         addWindowListener(
                 new WindowAdapter() {
 
-                    public void windowClosing( WindowEvent e ) {
+                    public void windowClosing( final WindowEvent e ) {
 
                         onOK();
 
@@ -85,7 +85,7 @@ public class OkPopupMessageWindow extends JDialog {
         _contentPane.registerKeyboardAction(
                 new MyActionListener() {
 
-                    public void myActionPerformed( ActionEvent e ) {
+                    public void myActionPerformed( final ActionEvent e ) {
 
                         onOK();
 
@@ -102,7 +102,7 @@ public class OkPopupMessageWindow extends JDialog {
     }
 
     @SuppressWarnings({ "SameParameterValue" })
-    protected OkPopupMessageWindow( String firstMessage, String buttonLabel ) {
+    protected OkPopupMessageWindow( final String firstMessage, final String buttonLabel ) {
         this( firstMessage, null, buttonLabel );
 
     }
@@ -172,7 +172,7 @@ public class OkPopupMessageWindow extends JDialog {
      */
 
     @SuppressWarnings({ "EmptyMethod", "NoopMethodInAbstractClass" })
-    public void aborted( String why ) {
+    public void aborted( final String why ) {
 
         // Do nothing by default.
 
@@ -215,26 +215,26 @@ public class OkPopupMessageWindow extends JDialog {
     }
 
     @SuppressWarnings({ "SameParameterValue" })
-    public static void doit( String line1, String button ) {
+    public static void doit( final String line1, final String button ) {
 
         OkPopupMessageWindow.doit( line1, null, button, null );
 
     }
 
     @SuppressWarnings({ "SameParameterValue" })
-    public static void doit( String line1, String line2, String button ) {
+    public static void doit( final String line1, final String line2, final String button ) {
 
         OkPopupMessageWindow.doit( line1, line2, button, null );
 
     }
 
-    public static void fatal( String line1 ) {
+    public static void fatal( final String line1 ) {
 
         OkPopupMessageWindow.fatal( line1, null, "Sorry" );
 
     }
 
-    public static void fatal( String line1, String line2 ) {
+    public static void fatal( final String line1, final String line2 ) {
 
         OkPopupMessageWindow.fatal( line1, line2, "Sorry" );
 

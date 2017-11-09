@@ -56,7 +56,7 @@ public class MpsTest extends JFrame {
 
     }
 
-    public static void main( String[] args ) {
+    public static void main( final String[] args ) {
 
         BasicProgramConfigInfo.init( "Obtuse", "MpsTest", "testing", null );
 
@@ -141,7 +141,7 @@ public class MpsTest extends JFrame {
         slider.addChangeListener(
                 new ChangeListener() {
 
-                    public void stateChanged( ChangeEvent changeEvent ) {
+                    public void stateChanged( final ChangeEvent changeEvent ) {
 
                         Logger.logMsg( "left slider changed:  value is " + leftSlider.getModel().getValue() );
 

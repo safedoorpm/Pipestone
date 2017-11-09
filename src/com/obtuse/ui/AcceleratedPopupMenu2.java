@@ -27,11 +27,11 @@ public class AcceleratedPopupMenu2 extends JDialog {
     private final DefaultListModel _listModel = new DefaultListModel();
     private final StringBuilder _accelerator = new StringBuilder();
 
-    public AcceleratedPopupMenu2( Collection<String> words ) {
+    public AcceleratedPopupMenu2( final Collection<String> words ) {
         this( words.toArray( new String[words.size()] ) );
     }
 
-    public AcceleratedPopupMenu2( String[] words ) {
+    public AcceleratedPopupMenu2( final String[] words ) {
         super();
 
         _words = words;
@@ -46,7 +46,7 @@ public class AcceleratedPopupMenu2 extends JDialog {
         buttonOK.addActionListener(
                 new MyActionListener() {
 
-                    public void myActionPerformed( ActionEvent e ) {
+                    public void myActionPerformed( final ActionEvent e ) {
 
                         onOK();
 
@@ -59,7 +59,7 @@ public class AcceleratedPopupMenu2 extends JDialog {
 
                 new MyActionListener() {
 
-                    public void myActionPerformed( ActionEvent e ) {
+                    public void myActionPerformed( final ActionEvent e ) {
 
                         onCancel();
 
@@ -71,7 +71,7 @@ public class AcceleratedPopupMenu2 extends JDialog {
 // call onCancel() when cross is clicked
         setDefaultCloseOperation( DO_NOTHING_ON_CLOSE );
         addWindowListener( new WindowAdapter() {
-            public void windowClosing( WindowEvent e ) {
+            public void windowClosing( final WindowEvent e ) {
                 onCancel();
             }
         } );
@@ -80,7 +80,7 @@ public class AcceleratedPopupMenu2 extends JDialog {
         contentPane.registerKeyboardAction(
                 new MyActionListener() {
 
-                    public void myActionPerformed( ActionEvent e ) {
+                    public void myActionPerformed( final ActionEvent e ) {
 
                         onCancel();
 
@@ -142,7 +142,7 @@ public class AcceleratedPopupMenu2 extends JDialog {
         dispose();
     }
 
-    public static void main( String[] args ) {
+    public static void main( final String[] args ) {
 
         BasicProgramConfigInfo.init( "Obtuse", "Pipestone", "Test", null );
 

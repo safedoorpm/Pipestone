@@ -35,7 +35,7 @@ public abstract class AbstractDebugConnectionHandler extends Thread {
 //
 //    }
 
-    protected AbstractDebugConnectionHandler( @Nullable Logger logger, String handlerName )
+    protected AbstractDebugConnectionHandler( @Nullable final Logger logger, final String handlerName )
             throws UnknownHostException {
         super( handlerName );
 
@@ -47,13 +47,13 @@ public abstract class AbstractDebugConnectionHandler extends Thread {
     }
 
     @SuppressWarnings("UnusedDeclaration")
-    protected AbstractDebugConnectionHandler( String handlerName )
+    protected AbstractDebugConnectionHandler( final String handlerName )
             throws IOException {
         this( null, handlerName );
 
     }
 
-    protected void launch( @Nullable File workingDirectory, int portNumber )
+    protected void launch( @Nullable final File workingDirectory, final int portNumber )
             throws IOException {
 
 //        try {
@@ -148,13 +148,13 @@ public abstract class AbstractDebugConnectionHandler extends Thread {
 
     public abstract void connectionReceived( String handlerName, Socket clientSocket );
 
-    protected void errmsg( String msg ) {
+    protected void errmsg( final String msg ) {
 
         AbstractDebugConnectionHandler.errmsg( _logger, msg );
 
     }
 
-    protected static void errmsg( Logger logger, String msg ) {
+    protected static void errmsg( final Logger logger, final String msg ) {
 
         if ( logger == null ) {
 
@@ -168,13 +168,13 @@ public abstract class AbstractDebugConnectionHandler extends Thread {
 
     }
 
-    protected void errmsg( String msg, Throwable exception ) {
+    protected void errmsg( final String msg, final Throwable exception ) {
 
         AbstractDebugConnectionHandler.errmsg( _logger, msg, exception );
 
     }
 
-    protected static void errmsg( Logger logger, String msg, Throwable exception ) {
+    protected static void errmsg( final Logger logger, final String msg, final Throwable exception ) {
 
         if ( exception == null ) {
 

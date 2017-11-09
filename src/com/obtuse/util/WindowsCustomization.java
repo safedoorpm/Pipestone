@@ -67,19 +67,19 @@ public class WindowsCustomization extends OSLevelCustomizations {
 
     }
 
-    public void setDockBadge( String msg ) {
+    public void setDockBadge( final String msg ) {
 
 //        _app.setDockIconBadge( msg );
 
     }
 
-    public void setDockIconImage( Image icon ) {
+    public void setDockIconImage( final Image icon ) {
 
 //        _app.setDockIconImage( icon );
 
     }
 
-    public void setQuitCatcher( QuitCatcher quitCatcher ) {
+    public void setQuitCatcher( final QuitCatcher quitCatcher ) {
 
         _quitCatcher = quitCatcher;
 
@@ -91,7 +91,7 @@ public class WindowsCustomization extends OSLevelCustomizations {
 
     }
 
-    public void setAboutWindowHandler( AboutWindowHandler aboutWindowHandler ) {
+    public void setAboutWindowHandler( final AboutWindowHandler aboutWindowHandler ) {
 
         _aboutWindowHandler = aboutWindowHandler;
 

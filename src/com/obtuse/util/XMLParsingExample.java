@@ -19,7 +19,7 @@ public class XMLParsingExample {
 
     }
 
-    public static void main( String[] args ) {
+    public static void main( final String[] args ) {
 
         BasicProgramConfigInfo.init( "Obtuse", "XML", "ParsingExample", null );
 
@@ -30,7 +30,7 @@ public class XMLParsingExample {
     }
 
     @SuppressWarnings("SameParameterValue")
-    private static void parseOnTheFly( String inputFilename ) {
+    private static void parseOnTheFly( final String inputFilename ) {
 
         SAXParserFactory spf = SAXParserFactory.newInstance();
         @SuppressWarnings("TooBroadScope")
@@ -90,7 +90,7 @@ public class XMLParsingExample {
     }
 
     @SuppressWarnings("SameParameterValue")
-    private static void loadEntireDocument( String inputFilename ) {
+    private static void loadEntireDocument( final String inputFilename ) {
 
         Document doc;
         try {

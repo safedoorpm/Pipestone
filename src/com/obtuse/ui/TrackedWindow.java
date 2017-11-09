@@ -22,7 +22,7 @@ public class TrackedWindow extends JFrame {
 
     private boolean _inToString = false;
 
-    public TrackedWindow( String windowPrefsName ) {
+    public TrackedWindow( final String windowPrefsName ) {
         super();
 
 //        _appName = appName;
@@ -33,23 +33,23 @@ public class TrackedWindow extends JFrame {
         addComponentListener(
                 new ComponentListener() {
 
-                    public void componentResized( ComponentEvent componentEvent ) {
+                    public void componentResized( final ComponentEvent componentEvent ) {
 
                         saveWindowGeometry();
 
                     }
 
-                    public void componentMoved( ComponentEvent componentEvent ) {
+                    public void componentMoved( final ComponentEvent componentEvent ) {
 
                         saveWindowGeometry();
 
                     }
 
-                    public void componentShown( ComponentEvent componentEvent ) {
+                    public void componentShown( final ComponentEvent componentEvent ) {
 
                     }
 
-                    public void componentHidden( ComponentEvent componentEvent ) {
+                    public void componentHidden( final ComponentEvent componentEvent ) {
 
                     }
 
@@ -68,7 +68,7 @@ public class TrackedWindow extends JFrame {
 
     }
 
-    private void saveWindowGeometry( Rectangle windowGeometry ) {
+    private void saveWindowGeometry( final Rectangle windowGeometry ) {
 
 //        Logger.logMsg( _windowGeometryPrefsKey + ":  saving window geometry \"" + windowGeometry + "\"" );
         if ( BasicProgramConfigInfo.getPreferences() != null ) {
@@ -93,7 +93,7 @@ public class TrackedWindow extends JFrame {
     }
 
     @SuppressWarnings({ "UnusedDeclaration" })
-    protected void restoreWindowGeometry( int width, int height ) {
+    protected void restoreWindowGeometry( final int width, final int height ) {
 
         Rectangle windowGeometry = getSavedGeometry();
         if ( windowGeometry.width < width ) {

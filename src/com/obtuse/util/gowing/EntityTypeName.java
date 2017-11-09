@@ -27,10 +27,10 @@ public final class EntityTypeName implements Comparable<EntityTypeName> {
 
 //    private final GowingInstanceId _instanceId = new GowingInstanceId( getClass() );
 
-    public EntityTypeName( Class<? extends GowingPackable> className ) {
+    public EntityTypeName( final Class<? extends GowingPackable> className ) {
 	this( className.getCanonicalName() );
     }
-    public EntityTypeName( String name ) {
+    public EntityTypeName( final String name ) {
 	super();
 
 	_name = name;
@@ -89,14 +89,14 @@ public final class EntityTypeName implements Comparable<EntityTypeName> {
     }
 
     @Override
-    public int compareTo( @NotNull EntityTypeName typeName2 ) {
+    public int compareTo( @NotNull final EntityTypeName typeName2 ) {
 
 	return _name.compareTo( typeName2._name );
 
     }
 
     @Override
-    public boolean equals( Object rhs ) {
+    public boolean equals( final Object rhs ) {
 
 	return rhs instanceof EntityTypeName && compareTo( (EntityTypeName)rhs ) == 0;
 

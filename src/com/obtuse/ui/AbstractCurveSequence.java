@@ -43,7 +43,7 @@ public abstract class AbstractCurveSequence implements GraphicsElement {
 
     }
 
-    protected AbstractCurveSequence( GraphicsElement parent ) {
+    protected AbstractCurveSequence( final GraphicsElement parent ) {
         super();
 
         _parent = parent;
@@ -107,7 +107,7 @@ public abstract class AbstractCurveSequence implements GraphicsElement {
 
     }
 
-    public Point2D getPoint( int ix ) {
+    public Point2D getPoint( final int ix ) {
 
         return _points.get( ix );
 
@@ -142,7 +142,7 @@ public abstract class AbstractCurveSequence implements GraphicsElement {
      * @param changeType what has changed.
      */
 
-    protected void fireChangeListeners( AbstractCurveListener.ChangeType changeType ) {
+    protected void fireChangeListeners( final AbstractCurveListener.ChangeType changeType ) {
 
         for ( AbstractCurveListener listener : getChangeListeners() ) {
 
@@ -152,13 +152,13 @@ public abstract class AbstractCurveSequence implements GraphicsElement {
 
     }
 
-    public void addChangeListener( AbstractCurveListener listener ) {
+    public void addChangeListener( final AbstractCurveListener listener ) {
 
         _listeners.add( listener );
 
     }
 
-    public void removeChangeListener( AbstractCurveListener listener ) {
+    public void removeChangeListener( final AbstractCurveListener listener ) {
 
         _listeners.remove( listener );
 
@@ -177,7 +177,7 @@ public abstract class AbstractCurveSequence implements GraphicsElement {
      * affect how {@link #removePoint(java.awt.geom.Point2D)} behaves in potentially quite mysterious ways.
      */
 
-    public void addPoint( Point2D point ) {
+    public void addPoint( final Point2D point ) {
 
         _points.add( point );
 
@@ -197,7 +197,7 @@ public abstract class AbstractCurveSequence implements GraphicsElement {
      * @return true if the specified {@link java.awt.Point} object was found and removed; false otherwise.
      */
 
-    public boolean removePoint( Point2D point ) {
+    public boolean removePoint( final Point2D point ) {
 
         if ( _points.contains( point ) ) {
 
@@ -252,13 +252,13 @@ public abstract class AbstractCurveSequence implements GraphicsElement {
 
     }
 
-    protected String fmtPoint( Point2D p ) {
+    protected String fmtPoint( final Point2D p ) {
 
         return "[" + ObtuseUtil.lpad( p.getX(), 0, 2 ) + ',' + ObtuseUtil.lpad( p.getY(), 0, 2 ) + "]";
 
     }
 
-    protected String fmtPoints( Point2D[] points ) {
+    protected String fmtPoints( final Point2D[] points ) {
 
         StringBuilder desc = new StringBuilder();
 
@@ -282,7 +282,7 @@ public abstract class AbstractCurveSequence implements GraphicsElement {
      * @return the scaled sequence of points without consecutive duplicates.
      */
 
-    protected Vector<Point2D> getDistinctPoints( double scale ) {
+    protected Vector<Point2D> getDistinctPoints( final double scale ) {
 
         Vector<Point2D> rval = new Vector<>();
         Point2D lastPoint = null;
@@ -310,7 +310,7 @@ public abstract class AbstractCurveSequence implements GraphicsElement {
 
     }
 
-    public void setScale( double scale ) {
+    public void setScale( final double scale ) {
 
         _scale = scale;
 
@@ -336,7 +336,7 @@ public abstract class AbstractCurveSequence implements GraphicsElement {
      * @return the curve as cross marks.
      */
 
-    public GeneralPath getMarkedPoints( float crossSize ) {
+    public GeneralPath getMarkedPoints( final float crossSize ) {
 
         GeneralPath path = new GeneralPath();
 
@@ -357,7 +357,7 @@ public abstract class AbstractCurveSequence implements GraphicsElement {
 
     }
 
-    public void setStrength( double strength ) {
+    public void setStrength( final double strength ) {
 
         //noinspection FloatingPointEquality
         if ( strength != _strength ) {

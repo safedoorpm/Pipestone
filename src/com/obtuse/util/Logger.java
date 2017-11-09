@@ -109,7 +109,7 @@ public class Logger {
 
     private static int s_globalVetoCount = 0;
 
-    public Logger( File outputFile, boolean append )
+    public Logger( final File outputFile, final boolean append )
             throws
             FileNotFoundException {
 
@@ -120,7 +120,7 @@ public class Logger {
 
     }
 
-    public Logger( String outputFileName, PrintStream outputStream ) {
+    public Logger( final String outputFileName, final PrintStream outputStream ) {
 
         super();
 
@@ -129,7 +129,7 @@ public class Logger {
 
     }
 
-    public static boolean setLoggingEnabled( boolean enabled ) {
+    public static boolean setLoggingEnabled( final boolean enabled ) {
 
         boolean wasEnabled = s_loggingEnabled;
 
@@ -145,7 +145,7 @@ public class Logger {
 
     }
 
-    public static void maybeLogMsg( @NotNull Supplier<String> composeLoggingMsg ) {
+    public static void maybeLogMsg( @NotNull final Supplier<String> composeLoggingMsg ) {
 
         if ( Logger.s_loggingEnabled ) {
 
@@ -156,7 +156,7 @@ public class Logger {
 
     }
 
-    public static void maybeLogErr( @NotNull Supplier<String> composeLoggingMsg ) {
+    public static void maybeLogErr( @NotNull final Supplier<String> composeLoggingMsg ) {
 
         if ( Logger.s_loggingEnabled ) {
 
@@ -167,7 +167,7 @@ public class Logger {
 
     }
 
-    public static int pushNesting( @NotNull String levelName ) {
+    public static int pushNesting( @NotNull final String levelName ) {
 
         Logger.logMsg( "{ " + levelName );
 
@@ -191,7 +191,7 @@ public class Logger {
 
     }
 
-    public static int popNestingLevel( @NotNull String levelName ) {
+    public static int popNestingLevel( @NotNull final String levelName ) {
 
         synchronized ( _nestingLevelLock ) {
 
@@ -234,7 +234,7 @@ public class Logger {
 
     }
 
-    public static void logStackTrace( Throwable e ) {
+    public static void logStackTrace( final Throwable e ) {
 
         StackTraceElement[] trace = e.getStackTrace();
 
@@ -290,7 +290,7 @@ public class Logger {
      @param mirror     the PrintStream which is to be sent a copy of everything which is emitted by this Logger.
      */
 
-    private void internalSetMirror( String mirrorName, PrintStream mirror ) {
+    private void internalSetMirror( final String mirrorName, final PrintStream mirror ) {
 
         // Make sure we don't accidentally close stdout or stderr.
         // Note:  use of != instead of equals() is deliberate!
@@ -320,7 +320,7 @@ public class Logger {
 
     }
 
-    public void setMirror( String mirrorFilename, long key )
+    public void setMirror( final String mirrorFilename, final long key )
             throws
             FileNotFoundException {
 
@@ -328,13 +328,13 @@ public class Logger {
 
     }
 
-    public static String formatTOD( Date when ) {
+    public static String formatTOD( final Date when ) {
 
         return Logger.OUR_DATE_FORMAT.format( when );
 
     }
 
-    private void printSegment( String s ) {
+    private void printSegment( final String s ) {
 
         if ( _messageStartTime == null ) {
 
@@ -404,7 +404,7 @@ public class Logger {
 
     }
 
-    public synchronized void print( String Xs ) {
+    public synchronized void print( final String Xs ) {
 
         //noinspection UnnecessaryLocalVariable
         String s = Xs;
@@ -439,7 +439,7 @@ public class Logger {
 
     }
 
-    public synchronized void println( String logLine ) {
+    public synchronized void println( final String logLine ) {
 
         int vetoCount = 0;
 
@@ -451,7 +451,7 @@ public class Logger {
 
                     for ( Function<String, Boolean> func : s_interestingStuff.getValues( interesting ) ) {
 
-                        if ( func.apply( logLine ) ) {
+                        if ( func.apply( logLine ).booleanValue() ) {
 
                             vetoCount += 1;
 
@@ -513,7 +513,7 @@ public class Logger {
      <p/>Expect bad things to happen if from within a call to the {@link Function}{@code <String,Boolean>} instance's {@code Boolean apply( String targetString )} method, you try to log something which is matched by your vetoer or attempt to add or remove a vetoer.
      */
 
-    public synchronized void addLogLineVetoer( @NotNull String targetString, @NotNull Function<String, Boolean> vetoer ) {
+    public synchronized void addLogLineVetoer( @NotNull final String targetString, @NotNull final Function<String, Boolean> vetoer ) {
 
         synchronized ( s_interestingStuff ) {
 
@@ -537,7 +537,7 @@ public class Logger {
      @param vetoer       the {@link Function}{@code <String,Boolean>} instance previously added for the specified target string.
      */
 
-    public synchronized void cancelLineFilter( @NotNull String targetString, @NotNull Function<String, Boolean> vetoer ) {
+    public synchronized void cancelLineFilter( @NotNull final String targetString, @NotNull final Function<String, Boolean> vetoer ) {
 
         // Get rid of any existing instances of the specified matcher for the specified key.
 
@@ -563,7 +563,7 @@ public class Logger {
      @param vetoer a {@link Function}{@code <String,Boolean>} to be used to identify vetoers which are to be deleted.
      */
 
-    public synchronized void cancelLineFilters( @NotNull Function<String, Boolean> vetoer ) {
+    public synchronized void cancelLineFilters( @NotNull final Function<String, Boolean> vetoer ) {
 
         // Get rid of any existing instances of the specified matcher for the specified key.
 
@@ -609,7 +609,7 @@ public class Logger {
      @param e the exception/error to be logged.
      */
 
-    public void log( Throwable e ) {
+    public void log( final Throwable e ) {
 
         StringWriter sw = new StringWriter();
         PrintWriter pw = new PrintWriter( sw );
@@ -776,7 +776,7 @@ public class Logger {
      @param msg the message to be printed.
      */
 
-    public static void logFriendly( String msg ) {
+    public static void logFriendly( final String msg ) {
 
         Logger.getFriendly().println( Logger.getPrefix() + getNestingString() + msg );
 
@@ -788,14 +788,14 @@ public class Logger {
      @param msg the message to be printed.
      */
 
-    public static void logMsg( String msg ) {
+    public static void logMsg( final String msg ) {
 
         Trace.event( msg );
         Logger.getStdout().println( Logger.getPrefix() + getNestingString() + msg );
 
     }
 
-    public static void logMsgs( String[] lines ) {
+    public static void logMsgs( final String[] lines ) {
 
         for ( String line : lines ) {
 
@@ -805,7 +805,7 @@ public class Logger {
 
     }
 
-    public static void logMsgs( Collection<String> lines ) {
+    public static void logMsgs( final Collection<String> lines ) {
 
         for ( String line : lines ) {
 
@@ -821,7 +821,7 @@ public class Logger {
      @param msg what to send.
      */
 
-    public void msg( String msg ) {
+    public void msg( final String msg ) {
 
         Trace.event( msg );
         println( Logger.getPrefix() + getNestingString() + msg );
@@ -835,7 +835,7 @@ public class Logger {
      @param e   the throwable (ignored if null).
      */
 
-    public void msg( String msg, Throwable e ) {
+    public void msg( final String msg, final Throwable e ) {
 
         Trace.event( msg, e );
         println( Logger.getPrefix() + getNestingString() + msg );
@@ -860,7 +860,7 @@ public class Logger {
      @param geek     the 'geek-readable' message (if null then the friendly message takes its place).
      */
 
-    public static void logMsg( String friendly, @Nullable String geek ) {
+    public static void logMsg( final String friendly, @Nullable final String geek ) {
 
         String prefixedMessage = Logger.getPrefix() + getNestingString() + ( geek == null ? friendly : geek );
 
@@ -877,7 +877,7 @@ public class Logger {
      @param msg the message to be printed.
      */
 
-    public static void logErr( String msg ) {
+    public static void logErr( final String msg ) {
 
         String prefixedMessage = Logger.getPrefix() + getNestingString() + msg;
         Trace.event( prefixedMessage );
@@ -892,7 +892,7 @@ public class Logger {
      @param geek     the 'geek-readable' message (if null then the friendly message takes its place).
      */
 
-    public static void logErr( String friendly, String geek ) {
+    public static void logErr( final String friendly, final String geek ) {
 
         Logger.getFriendly().println( friendly );
 
@@ -907,7 +907,7 @@ public class Logger {
      @param e   the throwable containing the stack trace.
      */
 
-    public static void logErr( String msg, @Nullable Throwable e ) {
+    public static void logErr( final String msg, @Nullable final Throwable e ) {
 
         Logger.logErr( msg );
 
@@ -929,7 +929,7 @@ public class Logger {
      @param e        the throwable containing the stack trace.
      */
 
-    public static void logErr( String friendly, @Nullable String geek, Throwable e ) {
+    public static void logErr( final String friendly, @Nullable final String geek, final Throwable e ) {
 
         Logger.getFriendly().println( friendly );
 
@@ -943,7 +943,7 @@ public class Logger {
      @param listener the listener to be added to this instance's list of listeners.
      */
 
-    public synchronized void addListener( LoggerListener listener ) {
+    public synchronized void addListener( final LoggerListener listener ) {
 
         _listeners.add( listener );
 

@@ -20,10 +20,10 @@ public class GowingPackableEntityHolder extends GowingAbstractPackableHolder {
     private final GowingInstanceId _instanceId;
 
     public GowingPackableEntityHolder(
-            @NotNull EntityName name,
-            GowingPackable v,
-            GowingPacker packer,
-            @SuppressWarnings("SameParameterValue") boolean mandatory
+            @NotNull final EntityName name,
+            final GowingPackable v,
+            final GowingPacker packer,
+            @SuppressWarnings("SameParameterValue") final boolean mandatory
     ) {
 
         super( name, GowingConstants.TAG_ENTITY_REFERENCE, v, mandatory );
@@ -32,7 +32,7 @@ public class GowingPackableEntityHolder extends GowingAbstractPackableHolder {
 
     }
 
-    public void emitRepresentation( GowingPacker packer2 ) {
+    public void emitRepresentation( final GowingPacker packer2 ) {
 
         Object value = getObjectValue();
 

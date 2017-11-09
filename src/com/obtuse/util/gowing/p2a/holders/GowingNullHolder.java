@@ -15,13 +15,13 @@ import org.jetbrains.annotations.NotNull;
 
 public class GowingNullHolder extends GowingAbstractPackableHolder {
 
-    public GowingNullHolder( @NotNull EntityName name ) {
+    public GowingNullHolder( @NotNull final EntityName name ) {
 
         super( name, GowingConstants.NULL_VALUE, null, false );
 
     }
 
-    public void emitRepresentation( GowingPacker packer2 ) {
+    public void emitRepresentation( final GowingPacker packer2 ) {
 
         Object value = getObjectValue();
 

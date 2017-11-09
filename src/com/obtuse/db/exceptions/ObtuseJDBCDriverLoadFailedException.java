@@ -11,11 +11,11 @@ public class ObtuseJDBCDriverLoadFailedException extends Exception {
         super();
     }
 
-    public ObtuseJDBCDriverLoadFailedException( String why ) {
+    public ObtuseJDBCDriverLoadFailedException( final String why ) {
         super(why);
     }
 
-    public ObtuseJDBCDriverLoadFailedException( String why, Throwable e ) {
+    public ObtuseJDBCDriverLoadFailedException( final String why, final Throwable e ) {
         super(why,e);
     }
 }

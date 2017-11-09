@@ -39,9 +39,9 @@ public class StackedGaussianDistributionsDrawing extends JPanel {
 //    }
 
     public StackedGaussianDistributionsDrawing(
-            WeightedGaussianDistribution[] gds,
-            double from,
-            double to
+            final WeightedGaussianDistribution[] gds,
+            final double from,
+            final double to
     ) {
 
         super();
@@ -58,7 +58,7 @@ public class StackedGaussianDistributionsDrawing extends JPanel {
     }
 
     @SuppressWarnings("ConstantConditions")
-    public void paint( Graphics g ) {
+    public void paint( final Graphics g ) {
 
 //        Graphics2D g2d = (Graphics2D)g;
 
@@ -135,14 +135,14 @@ public class StackedGaussianDistributionsDrawing extends JPanel {
     }
 
     @SuppressWarnings("SameParameterValue")
-    private double mapXtoDrawing( int pX, int minD, int maxD, double minR, double maxR ) {
+    private double mapXtoDrawing( final int pX, final int minD, final int maxD, final double minR, final double maxR ) {
 
         //noinspection UnnecessaryParentheses
         return minR + ( ( pX - minD ) * ( maxR - minR ) ) / ( maxD - minD );
 
     }
 
-    public static void main( String[] args ) {
+    public static void main( final String[] args ) {
 
         BasicProgramConfigInfo.init( "Obtuse", "Shared", "GDD", null );
 
@@ -155,7 +155,7 @@ public class StackedGaussianDistributionsDrawing extends JPanel {
     }
 
     @SuppressWarnings("UnusedDeclaration")
-    public void setDistributions( Collection<WeightedGaussianDistribution> gds ) {
+    public void setDistributions( final Collection<WeightedGaussianDistribution> gds ) {
 
         _gds =
                 gds.toArray( new WeightedGaussianDistribution[gds.size()] );
@@ -164,7 +164,7 @@ public class StackedGaussianDistributionsDrawing extends JPanel {
 
     }
 
-    public void setDistributions( WeightedGaussianDistribution[] gds ) {
+    public void setDistributions( final WeightedGaussianDistribution[] gds ) {
 
         _gds = Arrays.copyOf( gds, gds.length );
         repaint();

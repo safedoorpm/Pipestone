@@ -41,7 +41,7 @@ public abstract class AbstractChoiceManager /*implements Comparable<AbstractChoi
 
     }
 
-    public boolean equals( Object rhs ) {
+    public boolean equals( final Object rhs ) {
 
         return rhs instanceof AbstractChoiceManager && getSn() == ((AbstractChoiceManager)rhs).getSn();
 

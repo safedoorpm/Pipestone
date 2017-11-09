@@ -24,7 +24,7 @@ public class ImmutableCollection<E> implements Collection<E>, Serializable {
 
     final Collection<? extends E> c;
 
-    protected ImmutableCollection(Collection<? extends E> c) {
+    protected ImmutableCollection( final Collection<? extends E> c) {
 	if (c==null)
 	    throw new NullPointerException();
 	this.c = c;
@@ -32,9 +32,9 @@ public class ImmutableCollection<E> implements Collection<E>, Serializable {
 
     public int size()                   {return c.size();}
     public boolean isEmpty()            {return c.isEmpty();}
-    public boolean contains(Object o)   {return c.contains(o);}
+    public boolean contains( final Object o)   {return c.contains( o);}
     public Object[] toArray()           {return c.toArray();}
-    public <T> T[] toArray(T[] a)       {return c.toArray(a);}
+    public <T> T[] toArray( final T[] a)       {return c.toArray( a);}
     public String toString()            {return c.toString();}
 
     public Iterator<E> iterator() {
@@ -47,30 +47,30 @@ public class ImmutableCollection<E> implements Collection<E>, Serializable {
 		throw new UnsupportedOperationException();
 	    }
 	    @Override
-	    public void forEachRemaining(Consumer<? super E> action) {
+	    public void forEachRemaining( final Consumer<? super E> action) {
 		// Use backing collection version
 		i.forEachRemaining(action);
 	    }
 	};
     }
 
-    public boolean add(E e) {
+    public boolean add( final E e) {
 	throw new UnsupportedOperationException();
     }
-    public boolean remove(Object o) {
+    public boolean remove( final Object o) {
 	throw new UnsupportedOperationException();
     }
 
-    public boolean containsAll(Collection<?> coll) {
+    public boolean containsAll( final Collection<?> coll) {
 	return c.containsAll(coll);
     }
-    public boolean addAll(Collection<? extends E> coll) {
+    public boolean addAll( final Collection<? extends E> coll) {
 	throw new UnsupportedOperationException();
     }
-    public boolean removeAll(Collection<?> coll) {
+    public boolean removeAll( final Collection<?> coll) {
 	throw new UnsupportedOperationException();
     }
-    public boolean retainAll(Collection<?> coll) {
+    public boolean retainAll( final Collection<?> coll) {
 	throw new UnsupportedOperationException();
     }
     public void clear() {
@@ -79,11 +79,11 @@ public class ImmutableCollection<E> implements Collection<E>, Serializable {
 
     // Override default methods in Collection
     @Override
-    public void forEach(Consumer<? super E> action) {
+    public void forEach( final Consumer<? super E> action) {
 	c.forEach(action);
     }
     @Override
-    public boolean removeIf(Predicate<? super E> filter) {
+    public boolean removeIf( final Predicate<? super E> filter) {
 	throw new UnsupportedOperationException();
     }
     @SuppressWarnings("unchecked")

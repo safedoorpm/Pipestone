@@ -82,7 +82,7 @@ public class GoldenRatioLayoutManager implements LayoutManager {
      @param mp the optional message proxy instance. If provided, this instance will generate log (debug) messages by sending them to the specified message proxy.
      */
 
-    public GoldenRatioLayoutManager( @Nullable MessageProxy mp ) {
+    public GoldenRatioLayoutManager( @Nullable final MessageProxy mp ) {
 	this( mp, null );
 
     }
@@ -94,7 +94,7 @@ public class GoldenRatioLayoutManager implements LayoutManager {
      @param name the optional name of the about-to-be-created instance (used to tag log messages).
      */
 
-    public GoldenRatioLayoutManager( @Nullable MessageProxy mp, @Nullable String name ) {
+    public GoldenRatioLayoutManager( @Nullable final MessageProxy mp, @Nullable final String name ) {
 	super();
 
 	_name = name;
@@ -137,7 +137,7 @@ public class GoldenRatioLayoutManager implements LayoutManager {
      */
 
     @Override
-    public void addLayoutComponent( String name, Component comp ) {
+    public void addLayoutComponent( final String name, final Component comp ) {
 
 	logMsg(
 			"GoldenRatioLayoutManager.addLayoutComponent( " +
@@ -156,7 +156,7 @@ public class GoldenRatioLayoutManager implements LayoutManager {
      <i>fred</i> would be the value returned by <code>component.getName()</code>.
      */
 
-    public static String getComponentName( Component component ) {
+    public static String getComponentName( final Component component ) {
 
 	return component.getClass().getSimpleName() + "(" + component.getName() + ")";
 
@@ -170,7 +170,7 @@ public class GoldenRatioLayoutManager implements LayoutManager {
      */
 
     @Override
-    public void removeLayoutComponent( Component component ) {
+    public void removeLayoutComponent( final Component component ) {
 
 	logMsg( "GoldenRatioLayoutManager.removeLayoutComponent( " + GoldenRatioLayoutManager.getComponentName( component ) + " )" );
 
@@ -185,7 +185,7 @@ public class GoldenRatioLayoutManager implements LayoutManager {
 
     @NotNull
     @Override
-    public Dimension preferredLayoutSize( Container container ) {
+    public Dimension preferredLayoutSize( final Container container ) {
 
 	Dimension preferredSize = minimumLayoutSize( container );
 
@@ -205,7 +205,7 @@ public class GoldenRatioLayoutManager implements LayoutManager {
 
     @NotNull
     @Override
-    public Dimension minimumLayoutSize( Container container ) {
+    public Dimension minimumLayoutSize( final Container container ) {
 
 	return new Dimension( 25, 25 );
 
@@ -222,7 +222,7 @@ public class GoldenRatioLayoutManager implements LayoutManager {
      */
 
     @NotNull
-    private Dimension computeSizeWithinInsets( Container container ) {
+    private Dimension computeSizeWithinInsets( final Container container ) {
 
 	Insets insets = container.getInsets();
 	return new Dimension( insets.left + insets.right, insets.top + insets.bottom );
@@ -267,7 +267,7 @@ public class GoldenRatioLayoutManager implements LayoutManager {
      */
 
     @Override
-    public void layoutContainer( Container container ) {
+    public void layoutContainer( final Container container ) {
 
 	Insets insets = container.getInsets();
 	@SuppressWarnings("UnnecessaryLocalVariable") int originalAvailableWidth = container.getWidth() - ( insets.left + insets.right );
@@ -589,7 +589,7 @@ public class GoldenRatioLayoutManager implements LayoutManager {
 
     }
 
-    private void setBounds( int stage, Component c, int x, int y, int w, int h, double ratio ) {
+    private void setBounds( final int stage, final Component c, final int x, final int y, final int w, final int h, final double ratio ) {
 
 	logMsg(
 		"                                                                      stage " +
@@ -616,30 +616,30 @@ public class GoldenRatioLayoutManager implements LayoutManager {
 //
 //    }
 
-    private static int adj( double d ) {
+    private static int adj( final double d ) {
 
 	return round( d );
 
     }
 
-    private static int round( double d ) {
+    private static int round( final double d ) {
 
 	return (int) Math.floor( (double) ( d + 0.5F ) );
 
     }
 
-    private boolean fuzzyEquals( Dimension lhs, Dimension rhs ) {
+    private boolean fuzzyEquals( final Dimension lhs, final Dimension rhs ) {
 
 	return Math.abs( lhs.width - rhs.width ) <= 1 && Math.abs( lhs.height - rhs.height ) <= 1;
 
     }
 
     private Dimension computeBestValidRectangleSize(
-	    Dimension bestRectangleSize,
-	    int availableWidth,
-	    int availableHeight,
-	    int proposedWidth,
-	    int proposedHeight
+            final Dimension bestRectangleSize,
+            final int availableWidth,
+            final int availableHeight,
+            int proposedWidth,
+            int proposedHeight
     ) {
 
 	if ( proposedWidth == availableWidth - 1 || proposedWidth == availableWidth + 1 ) {
@@ -690,7 +690,7 @@ public class GoldenRatioLayoutManager implements LayoutManager {
 
     }
 
-    private int adjustWidth( String why, int availableWidth, int availableHeight, double widthOverHeight, boolean horizontal ) {
+    private int adjustWidth( final String why, final int availableWidth, final int availableHeight, final double widthOverHeight, final boolean horizontal ) {
 
 	logMsg( "adjust width(" + why + "):  w/h=" + widthOverHeight );
 
@@ -740,7 +740,7 @@ public class GoldenRatioLayoutManager implements LayoutManager {
 
     }
 
-    private int adjustHeight( String why, int availableWidth, int availableHeight, double widthOverHeight, boolean horizontal ) {
+    private int adjustHeight( final String why, final int availableWidth, final int availableHeight, final double widthOverHeight, final boolean horizontal ) {
 
 	logMsg( "adjust height(" + why + "):  h/w=" + 1 / widthOverHeight );
 	int newAvailableHeight = horizontal ? (int)Math.round( availableWidth / GoldenRatioLayoutManager.GOLDEN_RATIO ) : (int)Math.round( availableWidth * GoldenRatioLayoutManager.GOLDEN_RATIO );
@@ -789,7 +789,7 @@ public class GoldenRatioLayoutManager implements LayoutManager {
 
     }
 
-    private void logMsg( String msg ) {
+    private void logMsg( final String msg ) {
 
 	if ( _mp != null ) {
 

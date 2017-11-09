@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 
 public abstract class MyActionListener implements ActionListener {
 
-    public final void actionPerformed( ActionEvent actionEvent ) {
+    public final void actionPerformed( final ActionEvent actionEvent ) {
 
         try {
 

@@ -19,8 +19,8 @@ public class ImmutableSet<E> extends ImmutableCollection<E>
 	implements Set<E>, Serializable {
     private static final long serialVersionUID = -9215047833775013803L;
 
-    protected ImmutableSet(Set<? extends E> s)     {super( s);}
+    protected ImmutableSet( final Set<? extends E> s)     {super( s);}
     @SuppressWarnings("EqualsWhichDoesntCheckParameterClass")
-    public boolean equals(Object o) {return o == this || c.equals( o);}
+    public boolean equals( final Object o) {return o == this || c.equals( o);}
     public int hashCode()           {return c.hashCode();}
 }

@@ -18,13 +18,13 @@ import java.net.UnknownHostException;
 
 public class HaltDebugConnectionHandler extends AbstractDebugConnectionHandler {
 
-    public HaltDebugConnectionHandler( Logger logger )
+    public HaltDebugConnectionHandler( final Logger logger )
             throws UnknownHostException {
         super( logger, "haltDebugConnectionHandler" );
 
     }
 
-    public static HaltDebugConnectionHandler launch( @Nullable File workingDirectory, @Nullable Logger logger ) {
+    public static HaltDebugConnectionHandler launch( @Nullable final File workingDirectory, @Nullable final Logger logger ) {
 
         HaltDebugConnectionHandler handler;
         try {
@@ -53,7 +53,7 @@ public class HaltDebugConnectionHandler extends AbstractDebugConnectionHandler {
     }
 
     @Override
-    public void connectionReceived( String handlerName, Socket clientSocket ) {
+    public void connectionReceived( final String handlerName, final Socket clientSocket ) {
 
         String msg = "HALT triggered by connection from " + clientSocket;
 
@@ -71,7 +71,7 @@ public class HaltDebugConnectionHandler extends AbstractDebugConnectionHandler {
 
     }
 
-    public static void main( String[] args ) {
+    public static void main( final String[] args ) {
 
         BasicProgramConfigInfo.init( "Obtuse", "HaltDebugConnectionHandler", "Test", null );
 

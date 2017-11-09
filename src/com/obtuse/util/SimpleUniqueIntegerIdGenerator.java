@@ -33,7 +33,7 @@ public class SimpleUniqueIntegerIdGenerator implements UniqueIntegerIdGenerator 
      if it runs out of unique positive int values).
      */
 
-    public SimpleUniqueIntegerIdGenerator( String name, boolean allowDuplicates ) {
+    public SimpleUniqueIntegerIdGenerator( final String name, final boolean allowDuplicates ) {
 
         super();
 
@@ -52,7 +52,7 @@ public class SimpleUniqueIntegerIdGenerator implements UniqueIntegerIdGenerator 
      @param name the name of this generator (used in toString and possibly useful in your debug code).
      */
 
-    public SimpleUniqueIntegerIdGenerator( String name ) {
+    public SimpleUniqueIntegerIdGenerator( final String name ) {
 
         this( name, false );
 
@@ -66,7 +66,7 @@ public class SimpleUniqueIntegerIdGenerator implements UniqueIntegerIdGenerator 
      */
 
     @Override
-    public void setLastId( int lastId ) {
+    public void setLastId( final int lastId ) {
 
         if ( _lastId != DEFAULT_INITIAL_LAST_ID ) {
 
@@ -170,7 +170,7 @@ public class SimpleUniqueIntegerIdGenerator implements UniqueIntegerIdGenerator 
     }
 
     @SuppressWarnings("UseOfSystemOutOrSystemErr")
-    public static void main( String[] args ) {
+    public static void main( final String[] args ) {
 
         SimpleUniqueIntegerIdGenerator outerGenerator = new SimpleUniqueIntegerIdGenerator( "SUIIG test outer" );
         for ( int ii = 0; ii < 10; ii += 1 ) {

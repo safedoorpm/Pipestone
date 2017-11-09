@@ -16,7 +16,7 @@ public class ArgParser {
 
     private final Map<String, Arg> _args = new TreeMap<>();
 
-    public ArgParser( Arg[] args ) {
+    public ArgParser( final Arg[] args ) {
         super();
 
         for ( Arg pDesc : args ) {
@@ -36,7 +36,7 @@ public class ArgParser {
     }
 
     @SuppressWarnings( { "BooleanMethodIsAlwaysInverted" } )
-    public boolean parse( String[] args ) {
+    public boolean parse( final String[] args ) {
         int i = 0;
 
         while ( i < args.length ) {

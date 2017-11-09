@@ -28,7 +28,7 @@ import java.util.TreeSet;
 
 public class DraggableJPanel extends SelectableImage implements MouseListener, FocusListener {
 
-    public void mouseClicked( MouseEvent e ) {
+    public void mouseClicked( final MouseEvent e ) {
 
         //Since the user clicked on us, let's get focus!
 
@@ -36,23 +36,23 @@ public class DraggableJPanel extends SelectableImage implements MouseListener, F
 
     }
 
-    public void mouseEntered( MouseEvent e ) {
+    public void mouseEntered( final MouseEvent e ) {
 
     }
 
-    public void mouseExited( MouseEvent e ) {
+    public void mouseExited( final MouseEvent e ) {
 
     }
 
-    public void mousePressed( MouseEvent e ) {
+    public void mousePressed( final MouseEvent e ) {
 
     }
 
-    public void mouseReleased( MouseEvent e ) {
+    public void mouseReleased( final MouseEvent e ) {
 
     }
 
-    public void focusGained( FocusEvent e ) {
+    public void focusGained( final FocusEvent e ) {
 
         super.focusGained( e );
 
@@ -62,7 +62,7 @@ public class DraggableJPanel extends SelectableImage implements MouseListener, F
 
     }
 
-    public void focusLost( FocusEvent e ) {
+    public void focusLost( final FocusEvent e ) {
 
         super.focusLost( e );
 
@@ -72,7 +72,7 @@ public class DraggableJPanel extends SelectableImage implements MouseListener, F
 
     }
 
-    public void setTransferHandler( TransferHandler handler ) {
+    public void setTransferHandler( final TransferHandler handler ) {
 
 //        Logger.logErr( "call to setTransferHandler to " + handler, new IllegalArgumentException( "just testing 1" ) );
 
@@ -88,7 +88,7 @@ public class DraggableJPanel extends SelectableImage implements MouseListener, F
 
     }
 
-    public void setDataFlavorHandlers( AbstractDataFlavorHandler[] dataFlavorHandlers ) {
+    public void setDataFlavorHandlers( final AbstractDataFlavorHandler[] dataFlavorHandlers ) {
 
         TransferHandler tf = getTransferHandler();
         if ( tf instanceof OurTransferHandler ) {
@@ -134,11 +134,11 @@ public class DraggableJPanel extends SelectableImage implements MouseListener, F
 
     private class OurTransferHandler extends TransferHandler {
 
-        int _supportedActions;
+        final int _supportedActions;
 
         AbstractDataFlavorHandler[] _dataFlavorHandlers;
 
-        public OurTransferHandler( int supportedActions, @Nullable AbstractDataFlavorHandler[] dataFlavorHandlers ) {
+        public OurTransferHandler( final int supportedActions, @Nullable final AbstractDataFlavorHandler[] dataFlavorHandlers ) {
 
             _supportedActions = supportedActions;
 
@@ -146,7 +146,7 @@ public class DraggableJPanel extends SelectableImage implements MouseListener, F
 
         }
 
-        public boolean canImport( TransferSupport support ) {
+        public boolean canImport( final TransferSupport support ) {
 
             AbstractDataFlavorHandler handler = getHandler( support );
 
@@ -161,7 +161,7 @@ public class DraggableJPanel extends SelectableImage implements MouseListener, F
 
         }
 
-        public AbstractDataFlavorHandler getHandler( TransferSupport support ) {
+        public AbstractDataFlavorHandler getHandler( final TransferSupport support ) {
 
             Logger.logMsg( "" );
             Logger.logMsg( "pondering a drop" );
@@ -300,7 +300,7 @@ public class DraggableJPanel extends SelectableImage implements MouseListener, F
 
         }
 
-        private void showAvailableFlavours( TransferSupport support ) {
+        private void showAvailableFlavours( final TransferSupport support ) {
 
             DataFlavor[] dataFlavours = support.getTransferable().getTransferDataFlavors();
             String[] mimeTypes = new String[dataFlavours.length];
@@ -317,7 +317,7 @@ public class DraggableJPanel extends SelectableImage implements MouseListener, F
             Logger.logMsg( "available flavours are " + Arrays.toString( uniqueMimeTypes.toArray( new String[uniqueMimeTypes.size()] ) ) );
         }
 
-        public boolean importData( TransferSupport support ) {
+        public boolean importData( final TransferSupport support ) {
 
             Logger.logMsg( "importData( TransferSupport " + support + " )" );
 
@@ -372,7 +372,7 @@ public class DraggableJPanel extends SelectableImage implements MouseListener, F
 //
 //	}
 
-        public final boolean importData( JComponent jComponent, Transferable t ) {
+        public final boolean importData( final JComponent jComponent, final Transferable t ) {
 
             Logger.logMsg( "importData( JComponent " + jComponent + ", Transferable " + t + " )" );
 
@@ -380,7 +380,7 @@ public class DraggableJPanel extends SelectableImage implements MouseListener, F
 
         }
 
-        public void setDataFlavorHandlers( AbstractDataFlavorHandler[] dataFlavorHandlers ) {
+        public void setDataFlavorHandlers( final AbstractDataFlavorHandler[] dataFlavorHandlers ) {
 
             _dataFlavorHandlers = dataFlavorHandlers;
 
@@ -478,7 +478,7 @@ public class DraggableJPanel extends SelectableImage implements MouseListener, F
      @param isDoubleBuffered a boolean, true for double-buffering, which uses additional memory space to achieve fast, flicker-free updates.
      */
 
-    public DraggableJPanel( int how, LayoutManager layout, boolean isDoubleBuffered ) {
+    public DraggableJPanel( final int how, final LayoutManager layout, final boolean isDoubleBuffered ) {
 
         super( layout, isDoubleBuffered );
 
@@ -585,7 +585,7 @@ public class DraggableJPanel extends SelectableImage implements MouseListener, F
      @param isDoubleBuffered a boolean, true for double-buffering, which uses additional memory space to achieve fast, flicker-free updates.
      */
 
-    public DraggableJPanel( int how, boolean isDoubleBuffered ) {
+    public DraggableJPanel( final int how, final boolean isDoubleBuffered ) {
         this( how, new FlowLayout(), isDoubleBuffered );
 
 //        Logger.logMsg( "DraggableJPanel:  we are " + this );
@@ -600,7 +600,7 @@ public class DraggableJPanel extends SelectableImage implements MouseListener, F
      @param layout the layout manager to be used to manage the panel.
      */
 
-    public DraggableJPanel( int how, LayoutManager layout ) {
+    public DraggableJPanel( final int how, final LayoutManager layout ) {
 
         this( how, layout, true );
     }
@@ -612,7 +612,7 @@ public class DraggableJPanel extends SelectableImage implements MouseListener, F
      Specified using either {@link TransferHandler}.NONE or some combination of {@link TransferHandler}.COPY, {@link TransferHandler}.MOVE, {@link TransferHandler}.COPY_OR_MOVE, or {@link TransferHandler}.LINK or-ed together.
      */
 
-    public DraggableJPanel( int how ) {
+    public DraggableJPanel( final int how ) {
 
         this( how, true );
     }

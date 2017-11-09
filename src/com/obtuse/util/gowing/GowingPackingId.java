@@ -25,7 +25,7 @@ public class GowingPackingId implements Comparable<GowingPackingId> {
 
     private final Long _entityId;
 
-    public GowingPackingId( @NotNull EntityTypeName entityTypeName, int typeReferenceId, long entityId ) {
+    public GowingPackingId( @NotNull final EntityTypeName entityTypeName, final int typeReferenceId, final long entityId ) {
 
 	_entityTypeName = entityTypeName;
 	_typeReferenceId = typeReferenceId;
@@ -41,7 +41,7 @@ public class GowingPackingId implements Comparable<GowingPackingId> {
 
     public long getEntityId() {
 
-	return _entityId;
+	return _entityId.longValue();
 
     }
 
@@ -58,7 +58,7 @@ public class GowingPackingId implements Comparable<GowingPackingId> {
     }
 
     @Override
-    public int compareTo( @NotNull GowingPackingId rhs ) {
+    public int compareTo( @NotNull final GowingPackingId rhs ) {
 
 	int rval = _entityTypeName.compareTo( rhs._entityTypeName );
 	if ( rval == 0 ) {
@@ -74,7 +74,7 @@ public class GowingPackingId implements Comparable<GowingPackingId> {
     }
 
     @Override
-    public boolean equals( Object rhs ) {
+    public boolean equals( final Object rhs ) {
 
 	return rhs instanceof GowingPackingId && compareTo( (GowingPackingId)rhs ) == 0;
 

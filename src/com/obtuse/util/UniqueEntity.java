@@ -39,7 +39,7 @@ public class UniqueEntity implements UniqueWithId {
      * @param uniqueLongIdGenerator the unique id generator to be used to compute this newly created instance's id value.
      */
 
-    public UniqueEntity( UniqueLongIdGenerator uniqueLongIdGenerator ) {
+    public UniqueEntity( final UniqueLongIdGenerator uniqueLongIdGenerator ) {
         super();
 
         _id = uniqueLongIdGenerator.getUniqueId();
@@ -98,7 +98,7 @@ public class UniqueEntity implements UniqueWithId {
      * @return true if the other object is "equal to" this one.
      */
 
-    public boolean equals( Object rhs ) {
+    public boolean equals( final Object rhs ) {
 
         return rhs instanceof UniqueEntity && ((UniqueEntity)rhs).getId() == getId();
 

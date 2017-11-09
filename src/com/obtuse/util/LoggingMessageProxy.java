@@ -34,7 +34,7 @@ public class LoggingMessageProxy implements MessageProxy {
      @param messageProxy the specified facility (if <code>null</code> then messages are logged via the Obtuse {@link Logger} facility).
      */
 
-    public LoggingMessageProxy( @Nullable MessageProxy messageProxy ) {
+    public LoggingMessageProxy( @Nullable final MessageProxy messageProxy ) {
         super();
 
         _passThroughMessageProxy = messageProxy;
@@ -62,7 +62,7 @@ public class LoggingMessageProxy implements MessageProxy {
     }
 
     @Override
-    public void fatal( @NotNull String msg ) {
+    public void fatal( @NotNull final String msg ) {
 
         if ( _passThroughMessageProxy == null ) {
 
@@ -78,7 +78,7 @@ public class LoggingMessageProxy implements MessageProxy {
     }
 
     @Override
-    public void fatal( @NotNull String msg, @Nullable String appendix ) {
+    public void fatal( @NotNull final String msg, @Nullable final String appendix ) {
 
         if ( _passThroughMessageProxy == null ) {
 
@@ -100,7 +100,7 @@ public class LoggingMessageProxy implements MessageProxy {
     }
 
     @Override
-    public void fatal( @NotNull String msg, @Nullable Throwable e ) {
+    public void fatal( @NotNull final String msg, @Nullable final Throwable e ) {
 
         if ( _passThroughMessageProxy == null ) {
 
@@ -117,7 +117,7 @@ public class LoggingMessageProxy implements MessageProxy {
     }
 
     @Override
-    public void fatal( @NotNull String msg, @Nullable String appendix, @Nullable String contextName ) {
+    public void fatal( @NotNull final String msg, @Nullable final String appendix, @Nullable final String contextName ) {
 
         if ( _passThroughMessageProxy == null ) {
 
@@ -134,7 +134,7 @@ public class LoggingMessageProxy implements MessageProxy {
     }
 
     @Override
-    public void error( @NotNull String msg ) {
+    public void error( @NotNull final String msg ) {
 
         if ( _passThroughMessageProxy == null ) {
 
@@ -151,7 +151,7 @@ public class LoggingMessageProxy implements MessageProxy {
     }
 
     @Override
-    public void error( @NotNull String msg, @Nullable String appendix ) {
+    public void error( @NotNull final String msg, @Nullable final String appendix ) {
 
         if ( _passThroughMessageProxy == null ) {
 
@@ -173,7 +173,7 @@ public class LoggingMessageProxy implements MessageProxy {
     }
 
     @Override
-    public void error( @NotNull String msg, @Nullable Throwable e ) {
+    public void error( @NotNull final String msg, @Nullable final Throwable e ) {
 
         if ( _passThroughMessageProxy == null ) {
 
@@ -190,7 +190,7 @@ public class LoggingMessageProxy implements MessageProxy {
     }
 
     @Override
-    public void error( @NotNull String msg, @Nullable String appendix, @Nullable String contextName ) {
+    public void error( @NotNull final String msg, @Nullable final String appendix, @Nullable final String contextName ) {
 
         if ( _passThroughMessageProxy == null ) {
 
@@ -207,7 +207,7 @@ public class LoggingMessageProxy implements MessageProxy {
     }
 
     @Override
-    public void info( @NotNull String msg ) {
+    public void info( @NotNull final String msg ) {
 
         if ( _passThroughMessageProxy == null ) {
 
@@ -225,7 +225,7 @@ public class LoggingMessageProxy implements MessageProxy {
     }
 
     @Override
-    public void info( @NotNull String msg, @Nullable String appendix ) {
+    public void info( @NotNull final String msg, @Nullable final String appendix ) {
 
         if ( _passThroughMessageProxy == null ) {
 
@@ -249,7 +249,7 @@ public class LoggingMessageProxy implements MessageProxy {
     }
 
     @Override
-    public void info( @NotNull String msg, @Nullable String appendix, @Nullable String contextName ) {
+    public void info( @NotNull final String msg, @Nullable final String appendix, @Nullable final String contextName ) {
 
         if ( _passThroughMessageProxy == null ) {
 

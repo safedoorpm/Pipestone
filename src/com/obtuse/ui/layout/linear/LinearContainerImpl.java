@@ -13,17 +13,17 @@ import org.jetbrains.annotations.NotNull;
 
 public class LinearContainerImpl extends LinearContainer3 {
 
-    public LinearContainerImpl( @NotNull String name, LinearOrientation orientation ) {
+    public LinearContainerImpl( @NotNull final String name, final LinearOrientation orientation ) {
 
         this( name, orientation, null, null );
 
     }
 
     public LinearContainerImpl(
-            @NotNull String name,
-            LinearOrientation orientation,
-            @SuppressWarnings("SameParameterValue") ContainerConstraints containerConstraints,
-            @SuppressWarnings("SameParameterValue") ComponentConstraints componentConstraints
+            @NotNull final String name,
+            final LinearOrientation orientation,
+            @SuppressWarnings("SameParameterValue") final ContainerConstraints containerConstraints,
+            @SuppressWarnings("SameParameterValue") final ComponentConstraints componentConstraints
     ) {
 
         super( name, orientation, containerConstraints, componentConstraints );

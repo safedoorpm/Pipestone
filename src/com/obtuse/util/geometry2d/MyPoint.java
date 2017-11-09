@@ -34,13 +34,13 @@ public class MyPoint extends Point2D.Double {
      Create a new point at the specified coordinates.
      */
 
-    public MyPoint( double x, double y ) {
+    public MyPoint( final double x, final double y ) {
 
 	super( x, y );
 
     }
 
-    public static String pToString( Double p ) {
+    public static String pToString( final Double p ) {
 
 	return "[" + p.x + "," + p.y + "]";
 
@@ -61,13 +61,13 @@ public class MyPoint extends Point2D.Double {
 
     }
 
-    public MyPoint rotateDegrees( double degrees ) {
+    public MyPoint rotateDegrees( final double degrees ) {
 
 	return rotateTheta( Math.PI * degrees / 180 );
 
     }
 
-    public MyPoint rotateTheta( double theta ) {
+    public MyPoint rotateTheta( final double theta ) {
 
 	double cosTheta = Math.cos( theta );
 	double sinTheta = Math.sin( theta );
@@ -83,13 +83,13 @@ public class MyPoint extends Point2D.Double {
 
     }
 
-    public MyPoint move( double adjX, double adjY ) {
+    public MyPoint move( final double adjX, final double adjY ) {
 
 	return new MyPoint( x + adjX, y + adjY );
 
     }
 
-    public boolean nearlyEquals( Double rhs ) {
+    public boolean nearlyEquals( final Double rhs ) {
 
 	return Util.nearlyEqual( x, rhs.x ) && Util.nearlyEqual( y, rhs.y );
 

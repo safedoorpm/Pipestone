@@ -24,7 +24,7 @@ public class ButtonInfo {
     private static final float DEFAULT_DARKENING_FACTOR = 0.8f;
     private static float s_defaultDarkeningFactor = ButtonInfo.DEFAULT_DARKENING_FACTOR;
 
-    private ButtonInfo( JLabel button, ImageIcon pressedIcon, ImageIcon unpressedIcon, Runnable action ) {
+    private ButtonInfo( final JLabel button, final ImageIcon pressedIcon, final ImageIcon unpressedIcon, final Runnable action ) {
         super();
 
         _button = button;
@@ -34,7 +34,7 @@ public class ButtonInfo {
 
     }
 
-    public static void setDefaultDarkeningFactor( float factor ) {
+    public static void setDefaultDarkeningFactor( final float factor ) {
 
         ButtonInfo.s_defaultDarkeningFactor = factor;
 
@@ -71,10 +71,10 @@ public class ButtonInfo {
     }
 
     public static ButtonInfo makeButtonLabel(
-                final ButtonOwner buttonOwner,
-                JLabel button,
-                Runnable action,
-                String buttonName
+            final ButtonOwner buttonOwner,
+            final JLabel button,
+            final Runnable action,
+            final String buttonName
     ) {
 
         return ButtonInfo.makeButtonLabel(
@@ -90,11 +90,11 @@ public class ButtonInfo {
 
     public static ButtonInfo makeButtonLabel(
             final ButtonOwner buttonOwner,
-            JLabel button,
-            Runnable action,
-            String buttonName,
-            String resourceBaseDirectory,
-            float darkeningFactor
+            final JLabel button,
+            final Runnable action,
+            final String buttonName,
+            final String resourceBaseDirectory,
+            final float darkeningFactor
     ) {
 
         ImageIcon unpressedIcon = ImageIconUtils.fetchIconImage(
@@ -118,10 +118,10 @@ public class ButtonInfo {
 
     public static ButtonInfo makeButtonLabel(
             final ButtonOwner buttonOwner,
-            JLabel button,
-            Runnable action,
-            ImageIcon unpressedIcon,
-            ImageIcon pressedIcon
+            final JLabel button,
+            final Runnable action,
+            final ImageIcon unpressedIcon,
+            final ImageIcon pressedIcon
     ) {
 
         int width = Math.max( pressedIcon.getIconWidth(), unpressedIcon.getIconWidth() );
@@ -131,7 +131,7 @@ public class ButtonInfo {
 
         button.addMouseListener(
                 new MouseListener() {
-                    public void mouseClicked( MouseEvent mouseEvent ) {
+                    public void mouseClicked( final MouseEvent mouseEvent ) {
 
                         if ( bi.getButton().isEnabled() ) {
 
@@ -142,7 +142,7 @@ public class ButtonInfo {
 
                     }
 
-                    public void mousePressed( MouseEvent mouseEvent ) {
+                    public void mousePressed( final MouseEvent mouseEvent ) {
 
                         if ( bi.getPressedIcon() != null && bi.getButton().isEnabled() ) {
 
@@ -152,7 +152,7 @@ public class ButtonInfo {
 
                     }
 
-                    public void mouseReleased( MouseEvent mouseEvent ) {
+                    public void mouseReleased( final MouseEvent mouseEvent ) {
 
                         if ( bi.getButton().isEnabled() ) {
 
@@ -162,7 +162,7 @@ public class ButtonInfo {
 
                     }
 
-                    public void mouseEntered( MouseEvent mouseEvent ) {
+                    public void mouseEntered( final MouseEvent mouseEvent ) {
 
                         if ( bi.getButton().isEnabled() ) {
 
@@ -172,7 +172,7 @@ public class ButtonInfo {
 
                     }
 
-                    public void mouseExited( MouseEvent mouseEvent ) {
+                    public void mouseExited( final MouseEvent mouseEvent ) {
 
                         if ( bi.getButton().isEnabled() ) {
 

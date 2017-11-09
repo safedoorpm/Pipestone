@@ -19,7 +19,7 @@ public class SortableKeySpace implements Comparable<SortableKeySpace> {
 
     private static SortedMap<String, SortableKeySpace> s_knownKeys = new TreeMap<>();
 
-    private SortableKeySpace( @NotNull String keyName ) {
+    private SortableKeySpace( @NotNull final String keyName ) {
 
         super();
 
@@ -49,7 +49,7 @@ public class SortableKeySpace implements Comparable<SortableKeySpace> {
      */
 
     @NotNull
-    public static synchronized SortableKeySpace getKey( @NotNull String keyName ) {
+    public static synchronized SortableKeySpace getKey( @NotNull final String keyName ) {
 
         SortableKeySpace key = s_knownKeys.get( keyName );
 
@@ -71,13 +71,13 @@ public class SortableKeySpace implements Comparable<SortableKeySpace> {
 
     }
 
-    public boolean equals( Object rhs ) {
+    public boolean equals( final Object rhs ) {
 
         return rhs instanceof SortableKeySpace && compareTo( (SortableKeySpace)rhs ) == 0;
 
     }
 
-    public int compareTo( @NotNull SortableKeySpace rhs ) {
+    public int compareTo( @NotNull final SortableKeySpace rhs ) {
 
         return getName().compareTo( rhs.getName() );
 

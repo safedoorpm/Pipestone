@@ -23,13 +23,13 @@ public class Util {
      @return true if they are equal to within <code>1e-10</code> in absolute terms.
      */
 
-    public static boolean nearlyEqual( double a, double b ) {
+    public static boolean nearlyEqual( final double a, final double b ) {
 
 	return nearlyEqual( a, b, 1e-10 );
 
     }
 
-    public static boolean nearlyEqual( double a, double b, double epsilon ) {
+    public static boolean nearlyEqual( final double a, final double b, final double epsilon ) {
 
 	double diff = Math.abs( a - b );
 
@@ -45,7 +45,7 @@ public class Util {
      @return the sine of the specified angle.
      */
 
-    public static double sinDegrees( double degrees ) {
+    public static double sinDegrees( final double degrees ) {
 
 	return Math.sin( Math.PI * degrees / 180 );
 
@@ -59,13 +59,13 @@ public class Util {
      @return the cosine of the specified angle.
      */
 
-    public static double cosDegrees( double degrees ) {
+    public static double cosDegrees( final double degrees ) {
 
 	return Math.cos( Math.PI * degrees / 180 );
 
     }
 
-    public static double dotProduct( Line2D.Double a, Line2D.Double b ) {
+    public static double dotProduct( final Line2D.Double a, final Line2D.Double b ) {
 
 	MyPoint aVector = new MyPoint( a.x2 - a.x1, a.y2 - a.y1 );
 	MyPoint bVector = new MyPoint( b.x2 - b.x1, b.y2 - b.y1 );

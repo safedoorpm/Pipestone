@@ -33,10 +33,10 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName, GowingPackable
     private final int _typeId;
 
     public GowingPackedEntityBundle(
-            @NotNull EntityTypeName typeName,
-            int version,
-            @Nullable GowingPackedEntityBundle superBundle,
-            @NotNull GowingPackerContext packerContext
+            @NotNull final EntityTypeName typeName,
+            final int version,
+            @Nullable final GowingPackedEntityBundle superBundle,
+            @NotNull final GowingPackerContext packerContext
     ) {
 
         super();
@@ -49,11 +49,11 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName, GowingPackable
     }
 
     public GowingPackedEntityBundle(
-            @NotNull EntityTypeName typeName,
-            int typeId,
-            @Nullable GowingPackedEntityBundle superBundle,
-            int version,
-            @NotNull GowingUnPackerContext unPackerContext
+            @NotNull final EntityTypeName typeName,
+            final int typeId,
+            @Nullable final GowingPackedEntityBundle superBundle,
+            final int version,
+            @NotNull final GowingUnPackerContext unPackerContext
     ) {
 
         super();
@@ -112,7 +112,7 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName, GowingPackable
 
     }
 
-    public void addHolder( GowingPackableThingHolder holder ) {
+    public void addHolder( final GowingPackableThingHolder holder ) {
 
         put( holder.getName(), holder );
 
@@ -126,7 +126,7 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName, GowingPackable
      @throws ClassCastException if the specified field exists but is not a GowingEntityReference value.
      */
 
-    public GowingEntityReference getOptionalEntityReference( EntityName name ) {
+    public GowingEntityReference getOptionalEntityReference( final EntityName name ) {
 
         GowingPackableThingHolder ref = getNullableField( name );
         if ( ref == null ) {
@@ -152,7 +152,7 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName, GowingPackable
      */
 
     @NotNull
-    public GowingEntityReference getMandatoryEntityReference( EntityName name ) {
+    public GowingEntityReference getMandatoryEntityReference( final EntityName name ) {
 
         GowingPackableThingHolder ref = getNotNullField( name );
 
@@ -169,7 +169,7 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName, GowingPackable
      @throws NullPointerException     if the field specified exists within this bundle but is null.
      */
 
-    public GowingPackableThingHolder getNotNullField( EntityName name ) {
+    public GowingPackableThingHolder getNotNullField( final EntityName name ) {
 
         GowingPackableThingHolder holder = get( name );
         if ( holder == null ) {
@@ -195,7 +195,7 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName, GowingPackable
      @return the holder containing the field.
      */
 
-    public GowingPackableThingHolder getNullableField( EntityName name ) {
+    public GowingPackableThingHolder getNullableField( final EntityName name ) {
 
         GowingPackableThingHolder holder = get( name );
         if ( holder == null ) {
@@ -216,13 +216,13 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName, GowingPackable
      @return {@code true} if a field by that name exists; {@code false} otherwise.
      */
 
-    public boolean doesFieldExist( EntityName tag ) {
+    public boolean doesFieldExist( final EntityName tag ) {
 
         return containsKey( tag );
 
     }
 
-    public URI recoverURI( EntityName tag ) {
+    public URI recoverURI( final EntityName tag ) {
 
         String s = getNullableField( tag ).StringValue();
         if ( s == null ) {
@@ -245,7 +245,7 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName, GowingPackable
 
     }
 
-    public URL recoverURL( EntityName tag ) {
+    public URL recoverURL( final EntityName tag ) {
 
         String s = getNullableField( tag ).StringValue();
         if ( s == null ) {
@@ -268,7 +268,7 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName, GowingPackable
 
     }
 
-    public File recoverFile( EntityName tag ) {
+    public File recoverFile( final EntityName tag ) {
 
         String s = getNullableField( tag ).StringValue();
         if ( s == null ) {
@@ -283,217 +283,217 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName, GowingPackable
 
     }
 
-    public String StringValue( EntityName gtag ) {
+    public String StringValue( final EntityName gtag ) {
 
         return getNullableField( gtag ).StringValue();
 
     }
 
-    public String[] StringArrayValue( EntityName gtag ) {
+    public String[] StringArrayValue( final EntityName gtag ) {
 
         return getNullableField( gtag ).StringArrayValue();
 
     }
 
-    public byte byteValue( EntityName gtag ) {
+    public byte byteValue( final EntityName gtag ) {
 
         return getNotNullField( gtag ).byteValue();
 
     }
 
-    public byte[] byteArrayValue( EntityName gtag ) {
+    public byte[] byteArrayValue( final EntityName gtag ) {
 
         return getNullableField( gtag ).PrimitiveByteArrayValue();
 
     }
 
-    public Byte ByteValue( EntityName gtag ) {
+    public Byte ByteValue( final EntityName gtag ) {
 
         return getNullableField( gtag ).ByteValue();
 
     }
 
-    public Byte[] ByteArrayValue( EntityName gtag ) {
+    public Byte[] ByteArrayValue( final EntityName gtag ) {
 
         return getNullableField( gtag ).ContainerByteArrayValue();
 
     }
 
-    public short shortValue( EntityName gtag ) {
+    public short shortValue( final EntityName gtag ) {
 
         return getNotNullField( gtag ).shortValue();
 
     }
 
-    public short[] shortArrayValue( EntityName gtag ) {
+    public short[] shortArrayValue( final EntityName gtag ) {
 
         return getNullableField( gtag ).PrimitiveShortArrayValue();
 
     }
 
-    public Short ShortValue( EntityName gtag ) {
+    public Short ShortValue( final EntityName gtag ) {
 
         return getNullableField( gtag ).ShortValue();
 
     }
 
-    public Short[] ShortArrayValue( EntityName gtag ) {
+    public Short[] ShortArrayValue( final EntityName gtag ) {
 
         return getNullableField( gtag ).ContainerShortArrayValue();
 
     }
 
-    public int intValue( EntityName gtag ) {
+    public int intValue( final EntityName gtag ) {
 
         return getNotNullField( gtag ).intValue();
 
     }
 
-    public int[] intArrayValue( EntityName gtag ) {
+    public int[] intArrayValue( final EntityName gtag ) {
 
         return getNullableField( gtag ).PrimitiveIntArrayValue();
 
     }
 
-    public Integer IntegerValue( EntityName gtag ) {
+    public Integer IntegerValue( final EntityName gtag ) {
 
         return getNullableField( gtag ).IntegerValue();
 
     }
 
-    public Integer[] IntegerArrayValue( EntityName gtag ) {
+    public Integer[] IntegerArrayValue( final EntityName gtag ) {
 
         return getNullableField( gtag ).ContainerIntegerArrayValue();
 
     }
 
-    public long longValue( EntityName gtag ) {
+    public long longValue( final EntityName gtag ) {
 
         return getNotNullField( gtag ).longValue();
 
     }
 
-    public long[] longArrayValue( EntityName gtag ) {
+    public long[] longArrayValue( final EntityName gtag ) {
 
         return getNullableField( gtag ).PrimitiveLongArrayValue();
 
     }
 
-    public Long LongValue( EntityName gtag ) {
+    public Long LongValue( final EntityName gtag ) {
 
         return getNullableField( gtag ).LongValue();
 
     }
 
-    public Long[] LongArrayValue( EntityName gtag ) {
+    public Long[] LongArrayValue( final EntityName gtag ) {
 
         return getNullableField( gtag ).ContainerLongArrayValue();
 
     }
 
-    public float floatValue( EntityName gtag ) {
+    public float floatValue( final EntityName gtag ) {
 
         return getNotNullField( gtag ).floatValue();
 
     }
 
-    public float[] floatArrayValue( EntityName gtag ) {
+    public float[] floatArrayValue( final EntityName gtag ) {
 
         return getNullableField( gtag ).PrimitiveFloatArrayValue();
 
     }
 
-    public Float FloatValue( EntityName gtag ) {
+    public Float FloatValue( final EntityName gtag ) {
 
         return getNullableField( gtag ).FloatValue();
 
     }
 
-    public Float[] FloatArrayValue( EntityName gtag ) {
+    public Float[] FloatArrayValue( final EntityName gtag ) {
 
         return getNullableField( gtag ).ContainerFloatArrayValue();
 
     }
 
-    public double doubleValue( EntityName gtag ) {
+    public double doubleValue( final EntityName gtag ) {
 
         return getNotNullField( gtag ).doubleValue();
 
     }
 
-    public double[] doubleArrayValue( EntityName gtag ) {
+    public double[] doubleArrayValue( final EntityName gtag ) {
 
         return getNullableField( gtag ).PrimitiveDoubleArrayValue();
 
     }
 
-    public Double DoubleValue( EntityName gtag ) {
+    public Double DoubleValue( final EntityName gtag ) {
 
         return getNullableField( gtag ).DoubleValue();
 
     }
 
-    public Double[] DoubleArrayValue( EntityName gtag ) {
+    public Double[] DoubleArrayValue( final EntityName gtag ) {
 
         return getNullableField( gtag ).ContainerDoubleArrayValue();
 
     }
 
-    public char charValue( EntityName gtag ) {
+    public char charValue( final EntityName gtag ) {
 
         return getNotNullField( gtag ).charValue();
 
     }
 
-    public char[] charArrayValue( EntityName gtag ) {
+    public char[] charArrayValue( final EntityName gtag ) {
 
         return getNullableField( gtag ).PrimitiveCharArrayValue();
 
     }
 
-    public Character CharacterValue( EntityName gtag ) {
+    public Character CharacterValue( final EntityName gtag ) {
 
         return getNullableField( gtag ).CharacterValue();
 
     }
 
-    public Character[] CharacterArrayValue( EntityName gtag ) {
+    public Character[] CharacterArrayValue( final EntityName gtag ) {
 
         return getNullableField( gtag ).ContainerCharacterArrayValue();
 
     }
 
-    public boolean booleanValue( EntityName gtag ) {
+    public boolean booleanValue( final EntityName gtag ) {
 
         return getNotNullField( gtag ).booleanValue();
 
     }
 
-    public boolean[] booleanArrayValue( EntityName gtag ) {
+    public boolean[] booleanArrayValue( final EntityName gtag ) {
 
         return getNullableField( gtag ).PrimitiveBooleanArrayValue();
 
     }
 
-    public Boolean BooleanValue( EntityName gtag ) {
+    public Boolean BooleanValue( final EntityName gtag ) {
 
         return getNullableField( gtag ).BooleanValue();
 
     }
 
-    public Boolean[] BooleanArrayValue( EntityName gtag ) {
+    public Boolean[] BooleanArrayValue( final EntityName gtag ) {
 
         return getNullableField( gtag ).ContainerBooleanArrayValue();
 
     }
 
-    public Number NumberValue( EntityName gtag ) {
+    public Number NumberValue( final EntityName gtag ) {
 
         return getNullableField( gtag ).NumberValue();
 
     }
 
-    public Number[] NumberArrayValue( EntityName gtag ) {
+    public Number[] NumberArrayValue( final EntityName gtag ) {
 
         return getNullableField( gtag ).NumberArrayValue();
 

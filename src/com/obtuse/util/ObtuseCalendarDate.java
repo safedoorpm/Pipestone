@@ -100,7 +100,7 @@ public class ObtuseCalendarDate implements Comparable<ObtuseCalendarDate> {
             return upcaseName( name() );
         }
 
-        private String upcaseName( String s ) {
+        private String upcaseName( final String s ) {
 
             return s.substring( 0, 1 ).toUpperCase() + s.substring( 1 ).toLowerCase();
 
@@ -137,7 +137,7 @@ public class ObtuseCalendarDate implements Comparable<ObtuseCalendarDate> {
      @throws ParsingException if the date string cannot be parsed.
      */
 
-    public ObtuseCalendarDate( String xdateString )
+    public ObtuseCalendarDate( final String xdateString )
             throws ParsingException {
 
         super();
@@ -259,7 +259,7 @@ public class ObtuseCalendarDate implements Comparable<ObtuseCalendarDate> {
      @param date the input date.
      */
 
-    public ObtuseCalendarDate( Date date ) {
+    public ObtuseCalendarDate( final Date date ) {
 
         super();
 
@@ -300,7 +300,7 @@ public class ObtuseCalendarDate implements Comparable<ObtuseCalendarDate> {
      @param date the instance to be cloned.
      */
 
-    public ObtuseCalendarDate( ObtuseCalendarDate date ) {
+    public ObtuseCalendarDate( final ObtuseCalendarDate date ) {
 
         super();
 
@@ -368,7 +368,7 @@ public class ObtuseCalendarDate implements Comparable<ObtuseCalendarDate> {
      Return the number of days in the date's month (properly handles leap years including century years).
      */
 
-    public static int getDaysInMonth( int year, int month ) {
+    public static int getDaysInMonth( final int year, final int month ) {
 
         Calendar cal = Calendar.getInstance();
 
@@ -468,7 +468,7 @@ public class ObtuseCalendarDate implements Comparable<ObtuseCalendarDate> {
      @throws IllegalArgumentException
      */
 
-    public static ObtuseCalendarDate parseCalendarDate( String date ) throws IllegalArgumentException {
+    public static ObtuseCalendarDate parseCalendarDate( final String date ) throws IllegalArgumentException {
 
         try {
 
@@ -499,7 +499,7 @@ public class ObtuseCalendarDate implements Comparable<ObtuseCalendarDate> {
      @throws IllegalArgumentException if <code>from</code> is greater than <code>to</code>.
      */
 
-    public static int computeDurationDays( ObtuseCalendarDate from, ObtuseCalendarDate to ) {
+    public static int computeDurationDays( final ObtuseCalendarDate from, final ObtuseCalendarDate to ) {
 
         if ( from.compareTo( to ) > 0 ) {
 
@@ -533,7 +533,7 @@ public class ObtuseCalendarDate implements Comparable<ObtuseCalendarDate> {
      @return the resulting calendar date.
      */
 
-    public static ObtuseCalendarDate addDays( ObtuseCalendarDate date, int delta ) {
+    public static ObtuseCalendarDate addDays( final ObtuseCalendarDate date, final int delta ) {
 
         Calendar cal = Calendar.getInstance();
         cal.setTimeInMillis( date._dateStartTimeMs );
@@ -662,7 +662,7 @@ public class ObtuseCalendarDate implements Comparable<ObtuseCalendarDate> {
      @return <code>true</code> if <code>rhs</code> is an {@link ObtuseCalendarDate} instance representing the same calendar date as this instance represents.
      */
 
-    public boolean equals( Object rhs ) {
+    public boolean equals( final Object rhs ) {
 
         //noinspection ChainOfInstanceofChecks
         if ( rhs instanceof ObtuseCalendarDate ) {
@@ -709,7 +709,7 @@ public class ObtuseCalendarDate implements Comparable<ObtuseCalendarDate> {
      a value greater than 0 if this instance's calendar date is after the <code>rhs</code> instance's calendar date.
      */
 
-    public int compareTo( @NotNull ObtuseCalendarDate rhs ) {
+    public int compareTo( @NotNull final ObtuseCalendarDate rhs ) {
 
         return _dateString.compareTo( rhs._dateString );
 
@@ -725,7 +725,7 @@ public class ObtuseCalendarDate implements Comparable<ObtuseCalendarDate> {
      @return true if the <code>rhs</code> {@link Date} instance specifies a time in the local timezone which is on the same calendar date as this instance's calendar date.
      */
 
-    public boolean containsDate( Date rhs ) {
+    public boolean containsDate( final Date rhs ) {
 
         return _dateStartTimeMs <= rhs.getTime() && rhs.getTime() <= _dateEndTimeMs;
 
@@ -744,7 +744,7 @@ public class ObtuseCalendarDate implements Comparable<ObtuseCalendarDate> {
 
     }
 
-    public static void main( String[] args ) {
+    public static void main( final String[] args ) {
 
         BasicProgramConfigInfo.init( "Obtuse", "Shared", "ObtuseCalendarDate", null );
 

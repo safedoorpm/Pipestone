@@ -20,7 +20,7 @@ public class PepysAnchor<T extends PepysEventListener> {
     private final Set<T> _listeners = new HashSet<>();
     private final Set<PepysSource> _sources = new HashSet<>();
 
-    public synchronized T anchor( T listener ) {
+    public synchronized T anchor( final T listener ) {
 
 	_listeners.add( listener );
 
@@ -36,7 +36,7 @@ public class PepysAnchor<T extends PepysEventListener> {
 //
 //    }
 
-    public synchronized T castOff( T listener ) {
+    public synchronized T castOff( final T listener ) {
 
 	if ( _listeners.contains( listener ) ) {
 

@@ -1028,7 +1028,7 @@ public class NounsList {
 
     }
 
-    public static void main( String[] args ) {
+    public static void main( final String[] args ) {
 
 //        s_nouns = s_testVerbs;
         for ( int i = 0; i < 20; i += 1 ) {

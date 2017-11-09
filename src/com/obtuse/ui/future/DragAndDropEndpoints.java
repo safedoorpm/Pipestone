@@ -34,7 +34,7 @@ public class DragAndDropEndpoints extends JFrame {
                 new MyActionListener() {
 
                     @Override
-                    public void myActionPerformed( ActionEvent actionEvent ) {
+                    public void myActionPerformed( final ActionEvent actionEvent ) {
 
                         System.exit( 0 );
 
@@ -53,7 +53,7 @@ public class DragAndDropEndpoints extends JFrame {
 
     }
 
-    public static void main( String[] args ) {
+    public static void main( final String[] args ) {
 
         BasicProgramConfigInfo.init( "Obtuse", "FirstFridays", "testing", null );
 
@@ -66,7 +66,7 @@ public class DragAndDropEndpoints extends JFrame {
 
         _left = new JPanel() {
 
-            public void paintComponent( Graphics g ) {
+            public void paintComponent( final Graphics g ) {
 
                 super.paintComponent( g );
 
@@ -87,7 +87,7 @@ public class DragAndDropEndpoints extends JFrame {
 
         _right = new JPanel() {
 
-            public void paintComponent( Graphics g ) {
+            public void paintComponent( final Graphics g ) {
 
                 super.paintComponent( g );
 
@@ -101,7 +101,7 @@ public class DragAndDropEndpoints extends JFrame {
 
     }
 
-    private void drawHill( Graphics2D g2d, boolean up, int x0, int y0, int x1, int y1 ) {
+    private void drawHill( final Graphics2D g2d, final boolean up, final int x0, final int y0, final int x1, final int y1 ) {
 
         Color oldColor = g2d.getColor();
 

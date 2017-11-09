@@ -25,7 +25,7 @@ public class LinearFlagMap extends ImmutableSortedMap<LinearFlagName,LinearFlagN
                   provided collection after this constructor returns will have no impact on the instance that this constructor creates.
      */
 
-    public LinearFlagMap( Map<LinearFlagName,LinearFlagNameValue> flags ) {
+    public LinearFlagMap( final Map<LinearFlagName,LinearFlagNameValue> flags ) {
 	super( createCleanedMap( flags.values() ) );
     }
 
@@ -36,7 +36,7 @@ public class LinearFlagMap extends ImmutableSortedMap<LinearFlagName,LinearFlagN
      provided array after this constructor returns will have no impact on the instance that this constructor creates.
      */
 
-    public LinearFlagMap( LinearFlagNameValue[] flags ) {
+    public LinearFlagMap( final LinearFlagNameValue[] flags ) {
 	super( createCleanedMap( flags ) );
     }
 
@@ -47,7 +47,7 @@ public class LinearFlagMap extends ImmutableSortedMap<LinearFlagName,LinearFlagN
      @return a {@link LinearFlagMap} containing only the specified flag.
      */
 
-    public static LinearFlagMap createSingletonSet( @NotNull LinearFlagNameValue flag ) {
+    public static LinearFlagMap createSingletonSet( @NotNull final LinearFlagNameValue flag ) {
 
 	return createCleanedMap( new LinearFlagNameValue[] { flag } );
 
@@ -59,7 +59,7 @@ public class LinearFlagMap extends ImmutableSortedMap<LinearFlagName,LinearFlagN
      @return the resulting {@link LinearFlagMap} instance.
      */
 
-    public static LinearFlagMap createCleanedMap( Collection<LinearFlagNameValue> flags ) {
+    public static LinearFlagMap createCleanedMap( final Collection<LinearFlagNameValue> flags ) {
 
 	SortedMap<LinearFlagName,LinearFlagNameValue> rval = new TreeMap<>();
 	for ( LinearFlagNameValue flag : flags ) {
@@ -82,7 +82,7 @@ public class LinearFlagMap extends ImmutableSortedMap<LinearFlagName,LinearFlagN
      @return the resulting {@link LinearFlagMap} instance.
      */
 
-    public static LinearFlagMap createCleanedMap( LinearFlagNameValue[] flags ) {
+    public static LinearFlagMap createCleanedMap( final LinearFlagNameValue[] flags ) {
 
 	return createCleanedMap( Arrays.asList( flags ) );
 
@@ -95,7 +95,7 @@ public class LinearFlagMap extends ImmutableSortedMap<LinearFlagName,LinearFlagN
      @return the new flag set.
      */
 
-    public LinearFlagMap addIfMissing( Collection<LinearFlagNameValue> flags ) {
+    public LinearFlagMap addIfMissing( final Collection<LinearFlagNameValue> flags ) {
 
 	SortedMap<LinearFlagName,LinearFlagNameValue> existing = new TreeMap<>( this );
 	for ( LinearFlagNameValue flag : flags ) {
@@ -121,7 +121,7 @@ public class LinearFlagMap extends ImmutableSortedMap<LinearFlagName,LinearFlagN
      @return the new flag set.
      */
 
-    public LinearFlagMap keepThese( Collection<LinearFlagName> flags ) {
+    public LinearFlagMap keepThese( final Collection<LinearFlagName> flags ) {
 
 	SortedMap<LinearFlagName,LinearFlagNameValue> existing = new TreeMap<>( this );
 	SortedSet<LinearFlagName> keepers = new TreeSet<>( flags );
@@ -141,7 +141,7 @@ public class LinearFlagMap extends ImmutableSortedMap<LinearFlagName,LinearFlagN
      @return the new flag set.
      */
 
-    public LinearFlagMap exceptThese( Collection<LinearFlagName> flags ) {
+    public LinearFlagMap exceptThese( final Collection<LinearFlagName> flags ) {
 
 	SortedMap<LinearFlagName,LinearFlagNameValue> existing = new TreeMap<>( this );
 	for (LinearFlagName flag : flags ) {

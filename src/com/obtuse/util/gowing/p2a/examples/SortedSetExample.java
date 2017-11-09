@@ -58,9 +58,9 @@ public class SortedSetExample extends GowingAbstractPackableEntity implements Go
         @Override
         @NotNull
         public GowingPackable createEntity(
-                @NotNull GowingUnPacker unPacker,
-                @NotNull GowingPackedEntityBundle bundle,
-                GowingEntityReference er
+                @NotNull final GowingUnPacker unPacker,
+                @NotNull final GowingPackedEntityBundle bundle,
+                final GowingEntityReference er
         ) {
 
             return new SortedSetExample( unPacker, bundle );
@@ -69,7 +69,7 @@ public class SortedSetExample extends GowingAbstractPackableEntity implements Go
 
     };
 
-    public SortedSetExample( @NotNull String name, @Nullable String description, String[] contents ) {
+    public SortedSetExample( @NotNull final String name, @Nullable final String description, final String[] contents ) {
 
         super( new GowingNameMarkerThing() );
 
@@ -86,7 +86,7 @@ public class SortedSetExample extends GowingAbstractPackableEntity implements Go
 
     }
 
-    public SortedSetExample( GowingUnPacker unPacker, GowingPackedEntityBundle bundle ) {
+    public SortedSetExample( final GowingUnPacker unPacker, final GowingPackedEntityBundle bundle ) {
 
         super( new GowingNameMarkerThing() );
 
@@ -103,7 +103,7 @@ public class SortedSetExample extends GowingAbstractPackableEntity implements Go
 
     @NotNull
     @Override
-    public GowingPackedEntityBundle bundleThyself( boolean isPackingSuper, GowingPacker packer ) {
+    public GowingPackedEntityBundle bundleThyself( final boolean isPackingSuper, final GowingPacker packer ) {
 
         GowingPackedEntityBundle rval = new GowingPackedEntityBundle(
                 ENTITY_TYPE_NAME,
@@ -151,7 +151,7 @@ public class SortedSetExample extends GowingAbstractPackableEntity implements Go
     }
 
     @Override
-    public boolean finishUnpacking( GowingUnPacker unPacker ) {
+    public boolean finishUnpacking( final GowingUnPacker unPacker ) {
 
         if ( !unPacker.isEntityFinished( _dataCollectionReference ) ) {
 
@@ -180,7 +180,7 @@ public class SortedSetExample extends GowingAbstractPackableEntity implements Go
 
     }
 
-    public static void main( String[] args ) {
+    public static void main( final String[] args ) {
 
         BasicProgramConfigInfo.init( "Obtuse", "Experimenting", "Misc", null );
 

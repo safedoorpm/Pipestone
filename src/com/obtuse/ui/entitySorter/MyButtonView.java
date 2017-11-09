@@ -30,10 +30,10 @@ public class MyButtonView extends Box implements SortableEntityView<String,MyBut
     private final String _word;
 
     public MyButtonView(
-	    final MyButtonEntity myEntity,
-	    final SortedPanelModel<String, MyButtonEntity> myModel,
-	    String word,
-	    String key
+            final MyButtonEntity myEntity,
+            final SortedPanelModel<String, MyButtonEntity> myModel,
+            final String word,
+            final String key
     ) {
 //	    super( NounsList.pickNoun() + " " + label + " #" + getNextCount() );
 	super( BoxLayout.X_AXIS );
@@ -70,7 +70,7 @@ public class MyButtonView extends Box implements SortableEntityView<String,MyBut
 		new MyActionListener() {
 
 		    @Override
-		    public void myActionPerformed( ActionEvent actionEvent ) {
+		    public void myActionPerformed( final ActionEvent actionEvent ) {
 
 			moveSomewhere();
 
@@ -113,7 +113,7 @@ public class MyButtonView extends Box implements SortableEntityView<String,MyBut
 
     }
 
-    private static String makeLabel( String key, String word ) {
+    private static String makeLabel( final String key, final String word ) {
 
         return "\"" + key + "\" -> \"" + word + "\"";
 
@@ -133,7 +133,7 @@ public class MyButtonView extends Box implements SortableEntityView<String,MyBut
     }
 
     @Override
-    public void setActiveKey( String key ) {
+    public void setActiveKey( final String key ) {
 
 	_key = key;
 

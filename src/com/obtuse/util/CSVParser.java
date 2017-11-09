@@ -30,7 +30,7 @@ public class CSVParser implements Closeable {
      * @param input the input stream which is to be parsed.
      */
 
-    public CSVParser( BufferedReader input ) {
+    public CSVParser( final BufferedReader input ) {
         super();
 
         _input = input;
@@ -137,7 +137,7 @@ public class CSVParser implements Closeable {
      * @throws IllegalArgumentException if there is already one character pushed back onto the stream.
      */
 
-    protected void pushback( int ch ) {
+    protected void pushback( final int ch ) {
 
         if ( _pushedBack ) {
 
@@ -189,7 +189,7 @@ public class CSVParser implements Closeable {
      * @return the sequence of characters.
      */
 
-    protected String getWord( String charSet ) {
+    protected String getWord( final String charSet ) {
 
         if ( charSet.indexOf( ',' ) >= 0 ) {
 
@@ -197,18 +197,18 @@ public class CSVParser implements Closeable {
 
         }
 
-        String rval = "";
+        StringBuilder rval = new StringBuilder();
         int ch;
         while ( charSet.indexOf( ch = nextCh() ) >= 0 ) {
 
-            rval += (char)ch;
+            rval.append( (char)ch );
 
         }
 
         pushback( ch );
 
         // Logger.logMsg("word is \"" + rval + "\"");
-        return rval;
+        return rval.toString();
 
     }
 
@@ -356,7 +356,7 @@ public class CSVParser implements Closeable {
         }
 
         int iCh;
-        String rval = "";
+        StringBuilder rval = new StringBuilder();
         while ( ( iCh = nextCh() ) != delim && iCh != (int)'\n' && iCh != -1 ) {
 
             char ch = (char)iCh;
@@ -368,23 +368,23 @@ public class CSVParser implements Closeable {
                 switch ( iCh ) {
 
                     case 'n':
-                        rval += '\n';
+                        rval.append( '\n' );
                         break;
 
                     case 'r':
-                        rval += '\r';
+                        rval.append( '\r' );
                         break;
 
                     case 't':
-                        rval += '\t';
+                        rval.append( '\t' );
                         break;
 
                     case 'b':
-                        rval += '\b';
+                        rval.append( '\b' );
                         break;
 
                     case '\\':
-                        rval += '\\';
+                        rval.append( '\\' );
                         break;
 
                     default:
@@ -394,7 +394,7 @@ public class CSVParser implements Closeable {
 
             } else {
 
-                rval += (char)ch;
+                rval.append( (char)ch );
 
             }
 
@@ -402,7 +402,7 @@ public class CSVParser implements Closeable {
 
         if ( iCh == delim ) {
 
-            return rval;
+            return rval.toString();
 
         }
 
@@ -468,7 +468,7 @@ public class CSVParser implements Closeable {
      * @throws SyntaxErrorException if a syntax error is encountered (of course).
      */
 
-    public static ImmutableDate parseDate( String dateStr )
+    public static ImmutableDate parseDate( final String dateStr )
             throws SyntaxErrorException {
 
         try {
@@ -490,7 +490,7 @@ public class CSVParser implements Closeable {
      * @return the resulting string
      */
 
-    private String fmtHex( int val ) {
+    private String fmtHex( final int val ) {
 
         if ( val == 0 ) {
 

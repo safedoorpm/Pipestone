@@ -41,9 +41,9 @@ public class ScrollableEntity {
      */
 
     public ScrollableEntity(
-            ScrollableEntitiesManager sem,
-            int ix,
-            Container container
+            final ScrollableEntitiesManager sem,
+            final int ix,
+            final Container container
     ) {
 
         super();
@@ -77,8 +77,8 @@ public class ScrollableEntity {
      */
 
     public ScrollableEntity(
-            ScrollableEntitiesManager sem,
-            Container container
+            final ScrollableEntitiesManager sem,
+            final Container container
     ) {
         super();
 

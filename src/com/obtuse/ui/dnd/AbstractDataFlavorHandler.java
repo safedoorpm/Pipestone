@@ -15,7 +15,7 @@ public abstract class AbstractDataFlavorHandler {
 
     private final DataFlavor _supportedFlavor;
 
-    public AbstractDataFlavorHandler( DataFlavor supportedFlavor ) {
+    public AbstractDataFlavorHandler( final DataFlavor supportedFlavor ) {
 
 	super();
 

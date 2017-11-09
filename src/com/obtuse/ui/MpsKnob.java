@@ -18,7 +18,7 @@ public abstract class MpsKnob {
 
     private BufferedImage _image;
 
-    public MpsKnob( Image image ) {
+    public MpsKnob( final Image image ) {
 
         super();
 
@@ -27,7 +27,7 @@ public abstract class MpsKnob {
     }
 
     @SuppressWarnings("UnusedDeclaration")
-    protected void setImage( Image image ) {
+    protected void setImage( final Image image ) {
 
         _image = ImageIconUtils.toBufferedImage( image );
 

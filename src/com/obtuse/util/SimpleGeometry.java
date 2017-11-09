@@ -26,7 +26,7 @@ public class SimpleGeometry {
      * <blockquote>y1 + ( y2 - y1 ) * x</blockquote>
      */
 
-    public static double interpolate( double y1, double y2, double x ) {
+    public static double interpolate( final double y1, final double y2, final double x ) {
 
         return SimpleGeometry.interpolate( 0.0, y1, 1.0, y2, x );
 
@@ -48,7 +48,7 @@ public class SimpleGeometry {
      * @throws IllegalArgumentException if <tt>x1</tt> exactly equals <tt>x2</tt>.
      */
 
-        public static double interpolate( double x1, double y1, double x2, double y2, double x ) {
+        public static double interpolate( final double x1, final double y1, final double x2, final double y2, final double x ) {
 
         @SuppressWarnings({ "UnnecessaryLocalVariable" })
         double rval = y1 + ( y2 - y1 ) * ( x - x1 ) / ( x2 - x1 );

@@ -672,7 +672,7 @@ public class ThreeDimensionalTreeMapTest {
         // Verify that there is still one outer key and that it is the correct one
 
         Assert.assertEquals( 1, _map.outerKeys().size() );
-        Assert.assertNotNull( _map.outerKeys().contains( 3 ) );
+        _map.outerKeys();
 
     }
 
@@ -887,7 +887,7 @@ public class ThreeDimensionalTreeMapTest {
 
     }
 
-    private static Vector<String> getContents( ThreeDimensionalSortedMap<Integer,Integer,Integer,String> map ) {
+    private static Vector<String> getContents( final ThreeDimensionalSortedMap<Integer,Integer,Integer,String> map ) {
 
         Vector<String> values = new Vector<>();
 
@@ -902,7 +902,7 @@ public class ThreeDimensionalTreeMapTest {
     }
 
     @SuppressWarnings("UnusedDeclaration")
-    private static SortedMap<Integer,String> getSortedContents( ThreeDimensionalSortedMap<Integer,Integer,Integer,String> map ) {
+    private static SortedMap<Integer,String> getSortedContents( final ThreeDimensionalSortedMap<Integer,Integer,Integer,String> map ) {
 
         SortedMap<Integer,String> values = new TreeMap<>();
 
@@ -920,7 +920,7 @@ public class ThreeDimensionalTreeMapTest {
 
     }
 
-    private static TreeCounter<String> getTreeCountedContents( ThreeDimensionalSortedMap<Integer,Integer,Integer,String> map ) {
+    private static TreeCounter<String> getTreeCountedContents( final ThreeDimensionalSortedMap<Integer,Integer,Integer,String> map ) {
 
         TreeCounter<String> values = new TreeCounter<>();
 

@@ -48,7 +48,7 @@ public class MultiPointSlider extends JComponent {
     private MpsKnob _knob;
     private ChangeListener _myChangeListener = new ChangeListener() {
 
-        public void stateChanged( ChangeEvent changeEvent ) {
+        public void stateChanged( final ChangeEvent changeEvent ) {
 
 //            Logger.logMsg( "repainting due to state change" );
             repaint();
@@ -99,7 +99,7 @@ public class MultiPointSlider extends JComponent {
 
     }
 
-    public MultiPointSlider( String name, BoundedRangeModel brm ) {
+    public MultiPointSlider( final String name, final BoundedRangeModel brm ) {
 
         super();
 
@@ -126,7 +126,7 @@ public class MultiPointSlider extends JComponent {
         addMouseListener(
                 new MouseListener() {
 
-                    public void mouseClicked( MouseEvent mouseEvent ) {
+                    public void mouseClicked( final MouseEvent mouseEvent ) {
 
 //                        Point hotSpot = mapValueToPoint( _brm.getValue() );
 //                        boolean insideKnob = _knob.isPointOnKnob(
@@ -147,7 +147,7 @@ public class MultiPointSlider extends JComponent {
 
                     }
 
-                    public void mousePressed( MouseEvent mouseEvent ) {
+                    public void mousePressed( final MouseEvent mouseEvent ) {
 
                         Point hotSpot = mapValueToPoint( _brm.getValue() );
                         boolean insideKnob = _knob.isPointOnKnob(
@@ -180,7 +180,7 @@ public class MultiPointSlider extends JComponent {
 
                     }
 
-                    public void mouseReleased( MouseEvent mouseEvent ) {
+                    public void mouseReleased( final MouseEvent mouseEvent ) {
 
                         //noinspection StatementWithEmptyBody
                         if ( _isSelected ) {
@@ -200,11 +200,11 @@ public class MultiPointSlider extends JComponent {
 
                     }
 
-                    public void mouseEntered( MouseEvent mouseEvent ) {
+                    public void mouseEntered( final MouseEvent mouseEvent ) {
 
                     }
 
-                    public void mouseExited( MouseEvent mouseEvent ) {
+                    public void mouseExited( final MouseEvent mouseEvent ) {
 
                     }
 
@@ -214,7 +214,7 @@ public class MultiPointSlider extends JComponent {
         addMouseMotionListener(
                 new MouseMotionListener() {
 
-                    public void mouseDragged( MouseEvent mouseEvent ) {
+                    public void mouseDragged( final MouseEvent mouseEvent ) {
 
                         //noinspection StatementWithEmptyBody
                         if ( _isSelected ) {
@@ -233,7 +233,7 @@ public class MultiPointSlider extends JComponent {
 
                     }
 
-                    public void mouseMoved( MouseEvent mouseEvent ) {
+                    public void mouseMoved( final MouseEvent mouseEvent ) {
 
                     }
 
@@ -248,7 +248,7 @@ public class MultiPointSlider extends JComponent {
 
     }
 
-    public static void setTraceSizeChanges( boolean traceSizeChanges ) {
+    public static void setTraceSizeChanges( final boolean traceSizeChanges ) {
 
         MultiPointSlider.s_traceSizeChanges = traceSizeChanges;
 
@@ -260,7 +260,7 @@ public class MultiPointSlider extends JComponent {
 
     }
 
-    public void setKnobSize( MpsKnobSize knobSize ) {
+    public void setKnobSize( final MpsKnobSize knobSize ) {
 
         _knobSize = knobSize;
 
@@ -278,7 +278,7 @@ public class MultiPointSlider extends JComponent {
 
     }
 
-    public void setKnob( MpsKnob knob ) {
+    public void setKnob( final MpsKnob knob ) {
 
         if ( knob == null ) {
 
@@ -292,7 +292,7 @@ public class MultiPointSlider extends JComponent {
 
     }
 
-    private void notifyListeners( ChangeEvent changeEvent ) {
+    private void notifyListeners( final ChangeEvent changeEvent ) {
 
         for ( ChangeListener listener : _changeListeners ) {
 
@@ -302,14 +302,14 @@ public class MultiPointSlider extends JComponent {
 
     }
 
-    public void addChangeListener( ChangeListener listener ) {
+    public void addChangeListener( final ChangeListener listener ) {
 
         removeChangeListener( listener );
         _changeListeners.add( listener );
 
     }
 
-    public void removeChangeListener( ChangeListener listener ) {
+    public void removeChangeListener( final ChangeListener listener ) {
 
         _changeListeners.remove( listener );
 
@@ -321,7 +321,7 @@ public class MultiPointSlider extends JComponent {
 
     }
 
-    private void adjustValue( Point clickPoint ) {
+    private void adjustValue( final Point clickPoint ) {
 
         computeDrawingParameters();
 
@@ -376,13 +376,13 @@ public class MultiPointSlider extends JComponent {
 
     }
 
-    public MultiPointSlider( String name, int min, int max ) {
+    public MultiPointSlider( final String name, final int min, final int max ) {
 
         this( name, min, max, min );
 
     }
 
-    public MultiPointSlider( String name, int min, int max, int value ) {
+    public MultiPointSlider( final String name, final int min, final int max, final int value ) {
 
         this(
                 name,
@@ -397,28 +397,28 @@ public class MultiPointSlider extends JComponent {
 
     }
 
-    public void setMinimum( int minimum ) {
+    public void setMinimum( final int minimum ) {
 
         _brm.setMinimum( minimum );
         repaint();
 
     }
 
-    public void setMaximum( int maximum ) {
+    public void setMaximum( final int maximum ) {
 
         _brm.setMaximum( maximum );
         repaint();
 
     }
 
-    public void setExtent( int extent ) {
+    public void setExtent( final int extent ) {
 
         _brm.setExtent( extent );
         repaint();
 
     }
 
-    public void setValue( int value ) {
+    public void setValue( final int value ) {
 
         _brm.setValue( value );
         repaint();
@@ -431,7 +431,7 @@ public class MultiPointSlider extends JComponent {
 
     }
 
-    private Point mapValueToPoint( int value ) {
+    private Point mapValueToPoint( final int value ) {
 
         if ( _positionOnLine == PositionOnLine.ABOVE || _positionOnLine == PositionOnLine.BELOW ) {
 
@@ -451,7 +451,7 @@ public class MultiPointSlider extends JComponent {
 
     }
 
-    private int mapPointToValue( Point p ) {
+    private int mapPointToValue( final Point p ) {
 
         return _brm.getMinimum() +
                Math.round(
@@ -480,7 +480,7 @@ public class MultiPointSlider extends JComponent {
 
     }
 
-    public BufferedImage getLabel( Graphics2D g2d, int value ) {
+    public BufferedImage getLabel( final Graphics2D g2d, final int value ) {
 
         BufferedImage labelImage = _cachedLabelTable.get( value );
         if ( labelImage == null ) {
@@ -938,7 +938,7 @@ public class MultiPointSlider extends JComponent {
 
     }
 
-    public void setMinimumSize( Dimension size ) {
+    public void setMinimumSize( final Dimension size ) {
 
         if ( MultiPointSlider.s_traceSizeChanges && isInteresting() ) {
 
@@ -950,7 +950,7 @@ public class MultiPointSlider extends JComponent {
 
     }
 
-    public void setMaximumSize( Dimension size ) {
+    public void setMaximumSize( final Dimension size ) {
 
         if ( MultiPointSlider.s_traceSizeChanges && isInteresting() ) {
 
@@ -962,7 +962,7 @@ public class MultiPointSlider extends JComponent {
 
     }
 
-    public void setPreferredSize( Dimension size ) {
+    public void setPreferredSize( final Dimension size ) {
 
         if ( MultiPointSlider.s_traceSizeChanges && isInteresting() ) {
 
@@ -974,7 +974,7 @@ public class MultiPointSlider extends JComponent {
 
     }
 
-    public void setBounds( int x, int y, int width, int height ) {
+    public void setBounds( final int x, final int y, final int width, final int height ) {
 
         if ( MultiPointSlider.s_traceSizeChanges && isInteresting() ) {
 
@@ -986,7 +986,7 @@ public class MultiPointSlider extends JComponent {
 
     }
 
-    public void setBounds( Rectangle bounds ) {
+    public void setBounds( final Rectangle bounds ) {
 
         if ( MultiPointSlider.s_traceSizeChanges && isInteresting() ) {
 
@@ -998,7 +998,7 @@ public class MultiPointSlider extends JComponent {
 
     }
 
-    public void paint( Graphics g ) {
+    public void paint( final Graphics g ) {
 
         Graphics2D g2d = (Graphics2D)g;
         computeDrawingParameters();
@@ -1170,7 +1170,7 @@ public class MultiPointSlider extends JComponent {
 //
 //    }
 
-    private int drawTickMarks( @Nullable Graphics g, int tickSpacing, int tickLength ) {
+    private int drawTickMarks( @Nullable final Graphics g, final int tickSpacing, final int tickLength ) {
 
         if ( g != null ) {
 
@@ -1225,7 +1225,7 @@ public class MultiPointSlider extends JComponent {
 
     }
 
-    public void setPaintLabels( boolean paintLabels ) {
+    public void setPaintLabels( final boolean paintLabels ) {
 
         _paintLabels = paintLabels;
         _minimumSize = null;
@@ -1239,7 +1239,7 @@ public class MultiPointSlider extends JComponent {
 
     }
 
-    public void setLabelTable( Dictionary<Integer, MpsLabel> labelTable ) {
+    public void setLabelTable( final Dictionary<Integer, MpsLabel> labelTable ) {
 
         //noinspection AssignmentToCollectionOrArrayFieldFromParameter
         _labelTable = labelTable;
@@ -1260,7 +1260,7 @@ public class MultiPointSlider extends JComponent {
     }
 
     @SuppressWarnings("MagicNumber")
-    public static void main( String[] args ) {
+    public static void main( final String[] args ) {
 
         @SuppressWarnings("UseOfObsoleteCollectionType")
         Dictionary<Integer, MpsLabel> labels = new Hashtable<>();
@@ -1330,7 +1330,7 @@ public class MultiPointSlider extends JComponent {
         slider.addChangeListener(
                 new ChangeListener() {
 
-                    public void stateChanged( ChangeEvent changeEvent ) {
+                    public void stateChanged( final ChangeEvent changeEvent ) {
 
                         Logger.logMsg( "left slider changed:  value is " + leftSlider.getModel().getValue() );
 
@@ -1383,7 +1383,7 @@ public class MultiPointSlider extends JComponent {
 
     }
 
-    public void setModel( BoundedRangeModel brm ) {
+    public void setModel( final BoundedRangeModel brm ) {
 
         if ( _brm != null ) {
 
@@ -1404,7 +1404,7 @@ public class MultiPointSlider extends JComponent {
 
     }
 
-    public final void setPositionOnLine( PositionOnLine positionOnLine ) {
+    public final void setPositionOnLine( final PositionOnLine positionOnLine ) {
 
         if ( _positionOnLine != null && _positionOnLine == positionOnLine ) {
 
@@ -1436,7 +1436,7 @@ public class MultiPointSlider extends JComponent {
 
     }
 
-    public void setDrawSliderLine( boolean drawSliderLine ) {
+    public void setDrawSliderLine( final boolean drawSliderLine ) {
 
         _drawSliderLine = drawSliderLine;
         _minimumSize = null;
@@ -1449,7 +1449,7 @@ public class MultiPointSlider extends JComponent {
 
     }
 
-    public void setMinorTickSpacing( int minorTickSpacing ) {
+    public void setMinorTickSpacing( final int minorTickSpacing ) {
 
         _minorTickSpacing = minorTickSpacing;
         _minimumSize = null;
@@ -1462,7 +1462,7 @@ public class MultiPointSlider extends JComponent {
 
     }
 
-    public void setMajorTickSpacing( int majorTickSpacing ) {
+    public void setMajorTickSpacing( final int majorTickSpacing ) {
 
         _majorTickSpacing = majorTickSpacing;
         _minimumSize = null;
@@ -1476,7 +1476,7 @@ public class MultiPointSlider extends JComponent {
 
     }
 
-    public void setPaintTicks( boolean paintTicks ) {
+    public void setPaintTicks( final boolean paintTicks ) {
 
         _paintTicks = paintTicks;
         _minimumSize = null;
@@ -1494,7 +1494,7 @@ public class MultiPointSlider extends JComponent {
         private final Point _hotSpotWithinImage;
         private final BufferedImage _image;
 
-        public OrientedImage( Point hotSpotWithinImage, BufferedImage image ) {
+        public OrientedImage( final Point hotSpotWithinImage, final BufferedImage image ) {
 
             super();
 
@@ -1503,7 +1503,7 @@ public class MultiPointSlider extends JComponent {
 
         }
 
-        public boolean isPointInImage( Point actualHotSpot, Point p ) {
+        public boolean isPointInImage( final Point actualHotSpot, final Point p ) {
 
             Point imageLocation = new Point(
                     actualHotSpot.x - _hotSpotWithinImage.x,
@@ -1552,7 +1552,7 @@ public class MultiPointSlider extends JComponent {
 
         }
 
-        public void drawImage( Graphics2D g, Point actualHotSpot ) {
+        public void drawImage( final Graphics2D g, final Point actualHotSpot ) {
 
             g.translate( actualHotSpot.x, actualHotSpot.y );
             //            g.drawLine( -5, 0, 5, 0 );

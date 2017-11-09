@@ -19,12 +19,12 @@ package com.obtuse.util;
 @SuppressWarnings("UnusedDeclaration")
 public abstract class ArgYesNo extends Arg {
 
-    protected ArgYesNo( String keyword ) {
+    protected ArgYesNo( final String keyword ) {
         super( keyword );
 
     }
 
-    public final void process( String keyword, String arg ) {
+    public final void process( final String keyword, final String arg ) {
 
         if ( "yes".equalsIgnoreCase( arg ) || "y".equalsIgnoreCase( arg ) ) {
 

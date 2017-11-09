@@ -19,7 +19,7 @@ public class GowingFormatVersion {
 
     private final EntityName _groupName;
 
-    public GowingFormatVersion( StdGowingTokenizer.GowingToken2 token, EntityName groupName )
+    public GowingFormatVersion( final StdGowingTokenizer.GowingToken2 token, final EntityName groupName )
 	    throws GowingUnPackerParsingException {
 	super();
 

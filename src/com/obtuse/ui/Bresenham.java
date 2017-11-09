@@ -18,7 +18,7 @@ public class Bresenham {
      * @return the line as a list of points.
      */
 
-    public List<Point> computeLine( Point start, Point end ) {
+    public List<Point> computeLine( final Point start, final Point end ) {
 
         int x0 = start.x;
         int y0 = start.y;

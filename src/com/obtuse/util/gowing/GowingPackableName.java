@@ -43,7 +43,7 @@ public class GowingPackableName implements GowingPackable, Comparable<GowingPack
 	@NotNull
 	@Override
 	public GowingPackable createEntity(
-		@NotNull GowingUnPacker unPacker, @NotNull GowingPackedEntityBundle bundle, GowingEntityReference er
+            @NotNull final GowingUnPacker unPacker, @NotNull final GowingPackedEntityBundle bundle, final GowingEntityReference er
 	) {
 
 	    return new GowingPackableName( unPacker, bundle, er );
@@ -58,14 +58,14 @@ public class GowingPackableName implements GowingPackable, Comparable<GowingPack
 
     private static SortedMap<String,GowingPackableName> s_knownAttributeNames = new TreeMap<>();
 
-    public GowingPackableName( @NotNull String name ) {
+    public GowingPackableName( @NotNull final String name ) {
 	super();
 
 	_name = name;
 
     }
 
-    public GowingPackableName( GowingUnPacker unPacker, GowingPackedEntityBundle bundle, GowingEntityReference er ) {
+    public GowingPackableName( final GowingUnPacker unPacker, final GowingPackedEntityBundle bundle, final GowingEntityReference er ) {
 	this( bundle.getNotNullField( NAME_NAME ).StringValue() );
 
     }
@@ -78,14 +78,14 @@ public class GowingPackableName implements GowingPackable, Comparable<GowingPack
     }
 
     @Override
-    public int compareTo( @NotNull GowingPackableName rhs ) {
+    public int compareTo( @NotNull final GowingPackableName rhs ) {
 
 	return getName().compareTo( rhs.getName() );
 
     }
 
     @Override
-    public boolean equals( Object rhs ) {
+    public boolean equals( final Object rhs ) {
 
 	return rhs instanceof GowingPackableName && compareTo( (GowingPackableName) rhs ) == 0;
 
@@ -108,7 +108,7 @@ public class GowingPackableName implements GowingPackable, Comparable<GowingPack
 
     @NotNull
     @Override
-    public GowingPackedEntityBundle bundleThyself( boolean isPackingSuper, GowingPacker packer ) {
+    public GowingPackedEntityBundle bundleThyself( final boolean isPackingSuper, final GowingPacker packer ) {
 
 	GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
 		ENTITY_TYPE_NAME,
@@ -124,7 +124,7 @@ public class GowingPackableName implements GowingPackable, Comparable<GowingPack
     }
 
     @Override
-    public boolean finishUnpacking( GowingUnPacker unPacker ) {
+    public boolean finishUnpacking( final GowingUnPacker unPacker ) {
 
 	return true;
 

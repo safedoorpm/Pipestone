@@ -28,7 +28,7 @@ public class TreeAccumulator<K extends Comparable<K>> implements Accumulator<K>,
     }
 
     @SuppressWarnings("UnusedDeclaration")
-    public TreeAccumulator( Accumulator<K> accumulator ) {
+    public TreeAccumulator( final Accumulator<K> accumulator ) {
         this();
 
         for ( K key : accumulator.keySet() ) {
@@ -39,7 +39,7 @@ public class TreeAccumulator<K extends Comparable<K>> implements Accumulator<K>,
 
     }
 
-    public TreeAccumulator( Counter<K> counter ) {
+    public TreeAccumulator( final Counter<K> counter ) {
         this();
 
         for ( K key : counter.keySet() ) {
@@ -62,7 +62,7 @@ public class TreeAccumulator<K extends Comparable<K>> implements Accumulator<K>,
      */
 
     @Override
-    public long forceCount( K thing, long newCount ) throws IllegalArgumentException {
+    public long forceCount( final K thing, final long newCount ) throws IllegalArgumentException {
 
 	if ( newCount < 0 ) {
 
@@ -110,7 +110,7 @@ public class TreeAccumulator<K extends Comparable<K>> implements Accumulator<K>,
      */
 
     @Override
-    public long accumulate( K thing, long delta ) throws IllegalArgumentException {
+    public long accumulate( final K thing, final long delta ) throws IllegalArgumentException {
 
 	long newCount;
         if ( _accumulator.containsKey( thing ) ) {
@@ -162,7 +162,7 @@ public class TreeAccumulator<K extends Comparable<K>> implements Accumulator<K>,
 
     }
 
-    public long increment( K thing ) {
+    public long increment( final K thing ) {
 
         return accumulate( thing, 1 );
 
@@ -215,13 +215,13 @@ public class TreeAccumulator<K extends Comparable<K>> implements Accumulator<K>,
 
     }
 
-    public boolean containsKey( K thing ) {
+    public boolean containsKey( final K thing ) {
 
         return _accumulator.containsKey( thing );
 
     }
 
-    public long getCount( K thing ) {
+    public long getCount( final K thing ) {
 
         Long count = _accumulator.get( thing );
 
@@ -257,7 +257,7 @@ public class TreeAccumulator<K extends Comparable<K>> implements Accumulator<K>,
 
     }
 
-    public TreeSorter<Long,K> getSortedCounts( Comparator<Long> comparator ) {
+    public TreeSorter<Long,K> getSortedCounts( final Comparator<Long> comparator ) {
 
         TreeSorter<Long,K> sortedCounts = comparator == null ? new TreeSorter<>() : new TreeSorter<>( comparator );
         for ( K key : _accumulator.keySet() ) {

@@ -21,106 +21,109 @@ public class SingleLineMessageBoard implements MessageBoardInterface {
 
     private int _nextIdNumber = 0;
 
-    public SingleLineMessageBoard( @NotNull JTextComponent textComponent ) {
-	super();
+    public SingleLineMessageBoard( @NotNull final JTextComponent textComponent ) {
 
-	_jTextComponent = textComponent;
-	_jLabel = null;
+        super();
+
+        _jTextComponent = textComponent;
+        _jLabel = null;
 
     }
 
-    public SingleLineMessageBoard( @NotNull JLabel jLabel ) {
-	super();
+    public SingleLineMessageBoard( @NotNull final JLabel jLabel ) {
 
-	_jTextComponent = null;
-	_jLabel = jLabel;
+        super();
+
+        _jTextComponent = null;
+        _jLabel = jLabel;
 
     }
 
     public JTextComponent getJTextComponent() {
 
-	return _jTextComponent;
+        return _jTextComponent;
 
     }
 
     public JLabel getJLabel() {
 
-	return _jLabel;
+        return _jLabel;
 
     }
 
     @Override
-    public int postMessage( @NotNull String msg ) {
+    public int postMessage( @NotNull final String msg ) {
 
-	setTextValue( msg );
+        setTextValue( msg );
 
-	_nextIdNumber += 1;
-	return _nextIdNumber - 1;
+        _nextIdNumber += 1;
+        return _nextIdNumber - 1;
 
     }
 
-    private void setTextValue( @NotNull String msg ) {
+    private void setTextValue( @NotNull final String msg ) {
 
-	if ( _jLabel == null ) {
+        if ( _jLabel == null ) {
 
-	    _jTextComponent.setText( msg );
+            assert _jTextComponent != null;
+            _jTextComponent.setText( msg );
 
-	} else {
+        } else {
 
-	    _jLabel.setText( msg );
+            _jLabel.setText( msg );
 
-	}
+        }
 
     }
 
     @Override
     public int getOldestValidIdNumber() {
 
-	return _nextIdNumber - 1;
+        return _nextIdNumber - 1;
 
     }
 
     @Override
     public int getNewestValidIdNumber() {
 
-	return _nextIdNumber - 1;
+        return _nextIdNumber - 1;
 
     }
 
     @Override
     public boolean clearAllMessages() {
 
-	return clearMessages( getOldestValidIdNumber(), getNewestValidIdNumber() );
+        return clearMessages( getOldestValidIdNumber(), getNewestValidIdNumber() );
 
     }
 
     @Override
-    public boolean clearMessages( int oldestIdNumber, int newestIdNumber ) {
+    public boolean clearMessages( final int oldestIdNumber, final int newestIdNumber ) {
 
-	if ( oldestIdNumber > newestIdNumber ) {
+        if ( oldestIdNumber > newestIdNumber ) {
 
-	    return clearMessages( newestIdNumber, oldestIdNumber );
+            return clearMessages( newestIdNumber, oldestIdNumber );
 
-	}
+        }
 
-	if ( oldestIdNumber <= getOldestValidIdNumber() && newestIdNumber >= getNewestValidIdNumber() ) {
+        if ( oldestIdNumber <= getOldestValidIdNumber() && newestIdNumber >= getNewestValidIdNumber() ) {
 
-	    setTextValue( "" );
+            setTextValue( "" );
 
-	    return true;
+            return true;
 
-	}
+        }
 
-	return false;
+        return false;
 
     }
 
     public String toString() {
 
-	return "SingleLineMessageBoard( " + ObtuseUtil.enquoteToJavaString(
-		_jLabel ==
-		null ? _jTextComponent.getText() : _jLabel.getText()
-	) + " )";
+        assert _jTextComponent != null;
+        return "SingleLineMessageBoard( " + ObtuseUtil.enquoteToJavaString(
+                _jLabel == null ? _jTextComponent.getText() : _jLabel.getText()
+        ) + " )";
 
     }
 

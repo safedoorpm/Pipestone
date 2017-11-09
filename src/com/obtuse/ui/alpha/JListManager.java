@@ -33,7 +33,7 @@ public abstract class JListManager implements ButtonOwner {
 
         private final Object[] _objects;
 
-        protected UndoManagedObjects( String presentationName, Object[] objects ) {
+        protected UndoManagedObjects( final String presentationName, final Object[] objects ) {
             super( presentationName );
 
             _objects = new Object[objects.length];
@@ -41,7 +41,7 @@ public abstract class JListManager implements ButtonOwner {
 
         }
 
-        protected UndoManagedObjects( String presentationName, Collection<Object> objects ) {
+        protected UndoManagedObjects( final String presentationName, final Collection<Object> objects ) {
             super( presentationName );
 
             _objects = new Object[objects.size()];
@@ -314,7 +314,7 @@ public abstract class JListManager implements ButtonOwner {
         private final int _row;
         private final Object _listElement;
 
-        public ListElement( int row, Object listElement ) {
+        public ListElement( final int row, final Object listElement ) {
 
             super();
 
@@ -626,7 +626,7 @@ public abstract class JListManager implements ButtonOwner {
          * @throws IllegalArgumentException if called after a successful call to {@link #configure}.
          */
 
-        public void setAddButtonIncluded( boolean addButtonIncluded ) {
+        public void setAddButtonIncluded( final boolean addButtonIncluded ) {
 
             checkIfTooLate( "setAddButtonIncluded" );
             _addButtonIncluded = addButtonIncluded;
@@ -651,7 +651,7 @@ public abstract class JListManager implements ButtonOwner {
          * @throws IllegalArgumentException if called after a successful call to {@link #configure}.
          */
 
-        public void setDeleteButtonIncluded( boolean deleteButtonIncluded ) {
+        public void setDeleteButtonIncluded( final boolean deleteButtonIncluded ) {
 
             checkIfTooLate( "setDeleteButtonIncluded" );
             _deleteButtonIncluded = deleteButtonIncluded;
@@ -676,7 +676,7 @@ public abstract class JListManager implements ButtonOwner {
          * @throws IllegalArgumentException if called after a successful call to {@link #configure}.
          */
 
-        public void setMoveUpButtonIncluded( boolean moveUpButtonIncluded ) {
+        public void setMoveUpButtonIncluded( final boolean moveUpButtonIncluded ) {
 
             checkIfTooLate( "setMoveUpButtonIncluded" );
             _moveUpButtonIncluded = moveUpButtonIncluded;
@@ -701,7 +701,7 @@ public abstract class JListManager implements ButtonOwner {
          * @throws IllegalArgumentException if called after a successful call to {@link #configure}.
          */
 
-        public void setMoveDownButtonIncluded( boolean moveDownButtonIncluded ) {
+        public void setMoveDownButtonIncluded( final boolean moveDownButtonIncluded ) {
 
             checkIfTooLate( "setMoveDownButtonIncluded" );
             _moveDownButtonIncluded = moveDownButtonIncluded;
@@ -726,7 +726,7 @@ public abstract class JListManager implements ButtonOwner {
          * @throws IllegalArgumentException if called after a successful call to {@link #configure}.
          */
 
-        public void setDuplicateButtonIncluded( boolean duplicateButtonIncluded ) {
+        public void setDuplicateButtonIncluded( final boolean duplicateButtonIncluded ) {
 
             checkIfTooLate( "setDuplicateButtonIncluded" );
             _duplicateButtonIncluded = duplicateButtonIncluded;
@@ -769,7 +769,7 @@ public abstract class JListManager implements ButtonOwner {
          *                   (see {@link #getAddButtonName} for more info).
          */
 
-        public void setAddButton( JLabel addButton, String buttonName ) {
+        public void setAddButton( final JLabel addButton, final String buttonName ) {
 
             checkIfTooLate( "setAddButton" );
             _addButton = addButton;
@@ -803,7 +803,7 @@ public abstract class JListManager implements ButtonOwner {
          *                   (see {@link #getDeleteButtonName} for more info).
          */
 
-        public void setDeleteButton( JLabel deleteButton, String buttonName ) {
+        public void setDeleteButton( final JLabel deleteButton, final String buttonName ) {
 
             checkIfTooLate( "setDeleteButton" );
             _deleteButton = deleteButton;
@@ -837,7 +837,7 @@ public abstract class JListManager implements ButtonOwner {
          *                   (see {@link #getMoveUpButtonName} for more info).
          */
 
-        public void setMoveUpButton( JLabel moveUpButton, String buttonName ) {
+        public void setMoveUpButton( final JLabel moveUpButton, final String buttonName ) {
 
             checkIfTooLate( "setMoveUpButton" );
             _moveUpButton = moveUpButton;
@@ -871,7 +871,7 @@ public abstract class JListManager implements ButtonOwner {
          *                   (see {@link #getMoveDownButtonName} for more info).
          */
 
-        public void setMoveDownButton( JLabel moveDownButton, String buttonName ) {
+        public void setMoveDownButton( final JLabel moveDownButton, final String buttonName ) {
 
             checkIfTooLate( "setMoveDownButton" );
             _moveDownButton = moveDownButton;
@@ -905,7 +905,7 @@ public abstract class JListManager implements ButtonOwner {
          *                   (see {@link #getDuplicateButtonName} for more info).
          */
 
-        public void setDuplicateButton( JLabel duplicateButton, String buttonName ) {
+        public void setDuplicateButton( final JLabel duplicateButton, final String buttonName ) {
 
             checkIfTooLate( "setDuplicateButton" );
             _duplicateButton = duplicateButton;
@@ -1074,7 +1074,7 @@ public abstract class JListManager implements ButtonOwner {
          * @param button the button to be enabled or disabled (this method is a no-op if this parameter is null).
          * @param enabled true if the button is to be enabled; false otherwise.
          */
-        private void setButtonEnabledState( JLabel button, boolean enabled ) {
+        private void setButtonEnabledState( final JLabel button, final boolean enabled ) {
 
             if ( button != null ) {
 
@@ -1109,7 +1109,7 @@ public abstract class JListManager implements ButtonOwner {
          *                                 click of the 'delete' button; false otherwise.
          */
 
-        public void setMultipleDeleteAllowed( boolean multipleDeleteAllowed ) {
+        public void setMultipleDeleteAllowed( final boolean multipleDeleteAllowed ) {
 
             checkIfTooLate( "setMultipleDeleteAllowed" );
 
@@ -1142,7 +1142,7 @@ public abstract class JListManager implements ButtonOwner {
          *                                 click of the 'duplicate' button; false otherwise.
          */
 
-        public void setMultipleDuplicateAllowed( boolean multipleDuplicateAllowed ) {
+        public void setMultipleDuplicateAllowed( final boolean multipleDuplicateAllowed ) {
 
             checkIfTooLate( "setMultipleDuplicateAllowed" );
 
@@ -1174,7 +1174,7 @@ public abstract class JListManager implements ButtonOwner {
      *                              the button images used by this instance's {@link JListManager.ButtonPanel}.
      */
 
-    protected JListManager( String name, String resourceBaseDirectory ) {
+    protected JListManager( final String name, final String resourceBaseDirectory ) {
 
         super();
 
@@ -1187,7 +1187,7 @@ public abstract class JListManager implements ButtonOwner {
         _jList.addListSelectionListener(
                 new ListSelectionListener() {
 
-                    public void valueChanged( ListSelectionEvent listSelectionEvent ) {
+                    public void valueChanged( final ListSelectionEvent listSelectionEvent ) {
 
                         setButtonStates();
 
@@ -1934,7 +1934,7 @@ public abstract class JListManager implements ButtonOwner {
      * has been configured.
      */
 
-    public void setUndoManager( UndoManager undoManager ) {
+    public void setUndoManager( final UndoManager undoManager ) {
 
         checkIfTooLate( "setUndoManager" );
         _undoManager = undoManager;
@@ -1960,7 +1960,7 @@ public abstract class JListManager implements ButtonOwner {
      * has been configured or if this instance's undoableListElementFactory is already set.
      */
 
-    public void setListElementFactory( ListElementFactory listElementFactory ) {
+    public void setListElementFactory( final ListElementFactory listElementFactory ) {
 
         checkIfTooLate( "setListElementFactory" );
         if ( _undoableListElementFactory != null ) {
@@ -1993,7 +1993,7 @@ public abstract class JListManager implements ButtonOwner {
      * has been configured or if this instance's regular listElementFactory is already set.
      */
 
-    public void setUndoableListElementFactory( UndoableListElementFactory undoableListElementFactory ) {
+    public void setUndoableListElementFactory( final UndoableListElementFactory undoableListElementFactory ) {
 
         checkIfTooLate( "setListElementFactory" );
         if ( _listElementFactory != null ) {
@@ -2014,7 +2014,7 @@ public abstract class JListManager implements ButtonOwner {
      * @param methodName which setting is being called to make a change which might be too late.
      */
 
-    private void checkIfTooLate( String methodName ) {
+    private void checkIfTooLate( final String methodName ) {
 
         if ( _buttonPanel.isPanelReady() ) {
 

@@ -27,7 +27,7 @@ public class TreeCounter<K extends Comparable<K>> implements Counter<K>, Seriali
     }
 
     @SuppressWarnings("UnusedDeclaration")
-    public TreeCounter( Counter<K> counter ) {
+    public TreeCounter( final Counter<K> counter ) {
         super();
 
         _counts = new TreeMap<>();
@@ -41,7 +41,7 @@ public class TreeCounter<K extends Comparable<K>> implements Counter<K>, Seriali
 
     }
 
-    public void count( K thing ) {
+    public void count( final K thing ) {
 
         _grandTotal += 1;
 
@@ -87,13 +87,13 @@ public class TreeCounter<K extends Comparable<K>> implements Counter<K>, Seriali
 
     }
 
-    public boolean containsKey( K thing ) {
+    public boolean containsKey( final K thing ) {
 
         return _counts.containsKey( thing );
 
     }
 
-    public int getCount( K thing ) {
+    public int getCount( final K thing ) {
 
         Integer count = _counts.get( thing );
 

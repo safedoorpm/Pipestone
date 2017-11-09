@@ -27,44 +27,50 @@ public class GowingEntityReference implements Comparable<GowingEntityReference> 
 
 //    private final EntityTypeName _typeName;
 
-    public GowingEntityReference( int typeId, long entityId, @Nullable Integer version ) {
-	this( typeId, entityId, version, null );
+    public GowingEntityReference( final int typeId, final long entityId, @Nullable final Integer version ) {
+
+        this( typeId, entityId, version, null );
     }
 
-    public GowingEntityReference( int typeId, long entityId, @Nullable Integer version, @Nullable Collection<EntityName> entityReferenceNames ) {
+    public GowingEntityReference(
+            final int typeId,
+            final long entityId,
+            @Nullable final Integer version,
+            @Nullable final Collection<EntityName> entityReferenceNames
+    ) {
 
-	if ( typeId <= 0 ) {
+        if ( typeId <= 0 ) {
 
-	    throw new IndexOutOfBoundsException( "type id (" + typeId + ") must be positive" );
+            throw new IndexOutOfBoundsException( "type id (" + typeId + ") must be positive" );
 
-	}
+        }
 
-	if ( entityId < 0L ) {
+        if ( entityId < 0L ) {
 
-	    throw new IndexOutOfBoundsException( "entity id (" + entityId + ") must be non-negative" );
+            throw new IndexOutOfBoundsException( "entity id (" + entityId + ") must be non-negative" );
 
-	}
+        }
 
-	if ( version != null && version <= 0 ) {
+        if ( version != null && version.intValue() <= 0 ) {
 
-	    throw new IndexOutOfBoundsException( "version (" + version + ") must be positive if it is provided" );
+            throw new IndexOutOfBoundsException( "version (" + version + ") must be positive if it is provided" );
 
-	}
+        }
 
 //	_typeName = typeName;
 
-	_typeId = typeId;
+        _typeId = typeId;
 
-	_entityId = entityId;
+        _entityId = entityId;
 
-	_version = version;
+        _version = version;
 
-	_entityReferenceNames = new TreeSet<>();
-	if ( entityReferenceNames != null ) {
+        _entityReferenceNames = new TreeSet<>();
+        if ( entityReferenceNames != null ) {
 
-	    _entityReferenceNames.addAll( entityReferenceNames );
+            _entityReferenceNames.addAll( entityReferenceNames );
 
-	}
+        }
 
     }
 
@@ -76,70 +82,71 @@ public class GowingEntityReference implements Comparable<GowingEntityReference> 
 
     public int getTypeId() {
 
-	return _typeId;
+        return _typeId.intValue();
+
     }
 
     public long getEntityId() {
 
-	return _entityId;
+        return _entityId.longValue();
 
     }
 
     @Nullable
     public Integer getVersion() {
 
-	return _version;
+        return _version;
 
     }
 
     @NotNull
     public SortedSet<EntityName> getEntityReferenceNames() {
 
-	return Collections.unmodifiableSortedSet( _entityReferenceNames );
+        return Collections.unmodifiableSortedSet( _entityReferenceNames );
 
     }
 
-    public static String formatNames( Collection<EntityName> entityNames ) {
+    public static String formatNames( final Collection<EntityName> entityNames ) {
 
-	StringBuilder sb = new StringBuilder();
-	String slash = "";
-	for ( EntityName entityName : entityNames ) {
+        StringBuilder sb = new StringBuilder();
+        String slash = "";
+        for ( EntityName entityName : entityNames ) {
 
-	    try {
-		sb.append( slash ).append( ObtuseUtil.enquoteToJavaString( entityName.getName() ) );
-	    } catch ( Throwable e ) {
-		e.printStackTrace();
-	    }
-	    slash = "/";
+            try {
+                sb.append( slash ).append( ObtuseUtil.enquoteToJavaString( entityName.getName() ) );
+            } catch ( Throwable e ) {
+                e.printStackTrace();
+            }
+            slash = "/";
 
-	}
+        }
 
-	return sb.toString();
-
-    }
-
-    public int compareTo( @NotNull GowingEntityReference rhs ) {
-
-	int rval = _typeId.compareTo( rhs._typeId );
-	if ( rval == 0 ) {
-
-	    rval = _entityId.compareTo( rhs._entityId );
-
-	}
-
-	return rval;
+        return sb.toString();
 
     }
 
-    public boolean equals( Object rhs ) {
+    public int compareTo( @NotNull final GowingEntityReference rhs ) {
 
-	return rhs instanceof GowingEntityReference && compareTo( (GowingEntityReference) rhs ) == 0;
+        int rval = _typeId.compareTo( rhs._typeId );
+        if ( rval == 0 ) {
+
+            rval = _entityId.compareTo( rhs._entityId );
+
+        }
+
+        return rval;
+
+    }
+
+    public boolean equals( final Object rhs ) {
+
+        return rhs instanceof GowingEntityReference && compareTo( (GowingEntityReference)rhs ) == 0;
 
     }
 
     public int hashCode() {
 
-	return _entityId.hashCode();
+        return _entityId.hashCode();
 
     }
 
@@ -147,19 +154,19 @@ public class GowingEntityReference implements Comparable<GowingEntityReference> 
 
 //	return "EntityTypeReference( typeId=" + _typeId + ", entityId=" + _entityId + ", version=" + _version + " )";
 
-	return "ER( " + format() + " )";
+        return "ER( " + format() + " )";
 
     }
 
     @NotNull
     public String format() {
 
-	return GowingConstants.TAG_ENTITY_REFERENCE +
-	       _typeId +
-	       ":" +
-	       _entityId +
-	       ( _version == null ? "" : "v" + _version ) +
-	       ( getEntityReferenceNames().isEmpty() ? "" : GowingConstants.ENTITY_NAME_CLAUSE_MARKER + formatNames( getEntityReferenceNames() ) );
+        return GowingConstants.TAG_ENTITY_REFERENCE +
+               _typeId +
+               ":" +
+               _entityId +
+               ( _version == null ? "" : "v" + _version ) +
+               ( getEntityReferenceNames().isEmpty() ? "" : GowingConstants.ENTITY_NAME_CLAUSE_MARKER + formatNames( getEntityReferenceNames() ) );
 
     }
 

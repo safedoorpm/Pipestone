@@ -39,7 +39,7 @@ public class JulianDate {
      * @return the Julian day for the specified Gregorian date.
      */
 
-    public static long toJulian( int[] ymd ) {
+    public static long toJulian( final int[] ymd ) {
 
         int year = ymd[0];
         int month = ymd[1]; // jan=1, feb=2,...
@@ -90,7 +90,7 @@ public class JulianDate {
      * @return the Julian day for the specified {@link java.util.Date}.
      */
 
-    public static synchronized long toJulian( Date date ) {
+    public static synchronized long toJulian( final Date date ) {
 
         JulianDate.s_gregorianCalendar.setTime( date );
         int yy = JulianDate.s_gregorianCalendar.get( Calendar.YEAR );
@@ -114,7 +114,7 @@ public class JulianDate {
      */
 
     @SuppressWarnings("MagicNumber")
-    public static int[] fromJulian( double inJulian ) {
+    public static int[] fromJulian( final double inJulian ) {
 
         int ja = (int)inJulian;
         if ( ja >= JulianDate.JGREG ) {
@@ -151,7 +151,7 @@ public class JulianDate {
     }
 
     @SuppressWarnings("MagicNumber")
-    public static void main( String[] args ) {
+    public static void main( final String[] args ) {
 
         // FIRST TEST reference point
         Logger.logMsg(

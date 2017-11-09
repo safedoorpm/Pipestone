@@ -24,7 +24,7 @@ public class ImmutableMap<K, V> implements Map<K, V>, Serializable {
 
     private final Map<? extends K, ? extends V> m;
 
-    ImmutableMap( Map<? extends K, ? extends V> m ) {
+    ImmutableMap( final Map<? extends K, ? extends V> m ) {
 
         if ( m == null ) {
             throw new NullPointerException();
@@ -42,32 +42,32 @@ public class ImmutableMap<K, V> implements Map<K, V>, Serializable {
         return m.isEmpty();
     }
 
-    public boolean containsKey( Object key ) {
+    public boolean containsKey( final Object key ) {
 
         return m.containsKey( key );
     }
 
-    public boolean containsValue( Object val ) {
+    public boolean containsValue( final Object val ) {
 
         return m.containsValue( val );
     }
 
-    public V get( Object key ) {
+    public V get( final Object key ) {
 
         return m.get( key );
     }
 
-    public V put( K key, V value ) {
+    public V put( final K key, final V value ) {
 
         throw new UnsupportedOperationException();
     }
 
-    public V remove( Object key ) {
+    public V remove( final Object key ) {
 
         throw new UnsupportedOperationException();
     }
 
-    public void putAll( Map<? extends K, ? extends V> m ) {
+    public void putAll( final Map<? extends K, ? extends V> m ) {
 
         throw new UnsupportedOperationException();
     }
@@ -110,13 +110,13 @@ public class ImmutableMap<K, V> implements Map<K, V>, Serializable {
      <p>
      NB: Do not replace with Object.equals until JDK-8015417 is resolved.
      */
-    static boolean eq( Object o1, Object o2 ) {
+    static boolean eq( final Object o1, final Object o2 ) {
 
         return o1 == null ? o2 == null : o1.equals( o2 );
     }
 
     @SuppressWarnings("EqualsWhichDoesntCheckParameterClass")
-    public boolean equals( Object o ) {
+    public boolean equals( final Object o ) {
 
         return o == this || m.equals( o );
     }
@@ -134,57 +134,57 @@ public class ImmutableMap<K, V> implements Map<K, V>, Serializable {
     // Override default methods in Map
     @Override
     @SuppressWarnings("unchecked")
-    public V getOrDefault( Object k, V defaultValue ) {
+    public V getOrDefault( final Object k, final V defaultValue ) {
         // Safe cast as we don't change the value
         return ( (Map<K, V>)m ).getOrDefault( k, defaultValue );
     }
 
     @Override
-    public void forEach( BiConsumer<? super K, ? super V> action ) {
+    public void forEach( final BiConsumer<? super K, ? super V> action ) {
 
         m.forEach( action );
     }
 
     @Override
-    public void replaceAll( BiFunction<? super K, ? super V, ? extends V> function ) {
+    public void replaceAll( final BiFunction<? super K, ? super V, ? extends V> function ) {
 
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public V putIfAbsent( K key, V value ) {
+    public V putIfAbsent( final K key, final V value ) {
 
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public boolean remove( Object key, Object value ) {
+    public boolean remove( final Object key, final Object value ) {
 
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public boolean replace( K key, V oldValue, V newValue ) {
+    public boolean replace( final K key, final V oldValue, final V newValue ) {
 
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public V replace( K key, V value ) {
+    public V replace( final K key, final V value ) {
 
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public V computeIfAbsent( K key, Function<? super K, ? extends V> mappingFunction ) {
+    public V computeIfAbsent( final K key, final Function<? super K, ? extends V> mappingFunction ) {
 
         throw new UnsupportedOperationException();
     }
 
     @Override
     public V computeIfPresent(
-            K key,
-            BiFunction<? super K, ? super V, ? extends V> remappingFunction
+            final K key,
+            final BiFunction<? super K, ? super V, ? extends V> remappingFunction
     ) {
 
         throw new UnsupportedOperationException();
@@ -192,8 +192,8 @@ public class ImmutableMap<K, V> implements Map<K, V>, Serializable {
 
     @Override
     public V compute(
-            K key,
-            BiFunction<? super K, ? super V, ? extends V> remappingFunction
+            final K key,
+            final BiFunction<? super K, ? super V, ? extends V> remappingFunction
     ) {
 
         throw new UnsupportedOperationException();
@@ -201,8 +201,8 @@ public class ImmutableMap<K, V> implements Map<K, V>, Serializable {
 
     @Override
     public V merge(
-            K key, V value,
-            BiFunction<? super V, ? super V, ? extends V> remappingFunction
+            final K key, final V value,
+            final BiFunction<? super V, ? super V, ? extends V> remappingFunction
     ) {
 
         throw new UnsupportedOperationException();
@@ -222,17 +222,17 @@ public class ImmutableMap<K, V> implements Map<K, V>, Serializable {
         private static final long serialVersionUID = 7854390611657943733L;
 
         @SuppressWarnings({ "unchecked", "rawtypes" })
-        UnmodifiableEntrySet( Set<? extends Map.Entry<? extends K, ? extends V>> s ) {
+        UnmodifiableEntrySet( final Set<? extends Map.Entry<? extends K, ? extends V>> s ) {
             // Need to cast to raw in order to work around a limitation in the type system
             super( (Set)s );
         }
 
-        static <K, V> Consumer<Entry<K, V>> entryConsumer( Consumer<? super Entry<K, V>> action ) {
+        static <K, V> Consumer<Entry<K, V>> entryConsumer( final Consumer<? super Entry<K, V>> action ) {
 
             return e -> action.accept( new ImmutableMap.UnmodifiableEntrySet.UnmodifiableEntry<>( e ) );
         }
 
-        public void forEach( Consumer<? super Entry<K, V>> action ) {
+        public void forEach( final Consumer<? super Entry<K, V>> action ) {
 
             Objects.requireNonNull( action );
             c.forEach( entryConsumer( action ) );
@@ -243,20 +243,20 @@ public class ImmutableMap<K, V> implements Map<K, V>, Serializable {
 
             final Spliterator<Map.Entry<K, V>> s;
 
-            UnmodifiableEntrySetSpliterator( Spliterator<Entry<K, V>> s ) {
+            UnmodifiableEntrySetSpliterator( final Spliterator<Entry<K, V>> s ) {
 
                 this.s = s;
             }
 
             @Override
-            public boolean tryAdvance( Consumer<? super Entry<K, V>> action ) {
+            public boolean tryAdvance( final Consumer<? super Entry<K, V>> action ) {
 
                 Objects.requireNonNull( action );
                 return s.tryAdvance( entryConsumer( action ) );
             }
 
             @Override
-            public void forEachRemaining( Consumer<? super Entry<K, V>> action ) {
+            public void forEachRemaining( final Consumer<? super Entry<K, V>> action ) {
 
                 Objects.requireNonNull( action );
                 s.forEachRemaining( entryConsumer( action ) );
@@ -290,7 +290,7 @@ public class ImmutableMap<K, V> implements Map<K, V>, Serializable {
             }
 
             @Override
-            public boolean hasCharacteristics( int characteristics ) {
+            public boolean hasCharacteristics( final int characteristics ) {
 
                 return s.hasCharacteristics( characteristics );
             }
@@ -354,7 +354,7 @@ public class ImmutableMap<K, V> implements Map<K, V>, Serializable {
         }
 
         @SuppressWarnings("unchecked")
-        public <T> T[] toArray( T[] a ) {
+        public <T> T[] toArray( final T[] a ) {
             // We don't pass a to c.toArray, to avoid window of
             // vulnerability wherein an unscrupulous multithreaded client
             // could get his hands on raw (unwrapped) Entries from c.
@@ -381,7 +381,7 @@ public class ImmutableMap<K, V> implements Map<K, V>, Serializable {
          that the equality-candidate is Map.Entry and calls its
          setValue method.
          */
-        public boolean contains( Object o ) {
+        public boolean contains( final Object o ) {
 
             if ( !( o instanceof Map.Entry ) ) {
                 return false;
@@ -395,7 +395,7 @@ public class ImmutableMap<K, V> implements Map<K, V>, Serializable {
          an unscrupulous List whose contains(Object o) method senses
          when o is a Map.Entry, and calls o.setValue.
          */
-        public boolean containsAll( Collection<?> coll ) {
+        public boolean containsAll( final Collection<?> coll ) {
 
             for ( Object e : coll ) {
                 if ( !contains( e ) ) // Invokes safe contains() above
@@ -406,7 +406,7 @@ public class ImmutableMap<K, V> implements Map<K, V>, Serializable {
             return true;
         }
 
-        public boolean equals( Object o ) {
+        public boolean equals( final Object o ) {
 
             if ( o == this ) {
                 return true;
@@ -431,9 +431,9 @@ public class ImmutableMap<K, V> implements Map<K, V>, Serializable {
          */
         private static class UnmodifiableEntry<K, V> implements Map.Entry<K, V> {
 
-            private Map.Entry<? extends K, ? extends V> e;
+            private final Map.Entry<? extends K, ? extends V> e;
 
-            UnmodifiableEntry( Map.Entry<? extends K, ? extends V> e ) {
+            UnmodifiableEntry( final Map.Entry<? extends K, ? extends V> e ) {
 
                 this.e = Objects.requireNonNull( e );
             }
@@ -448,7 +448,7 @@ public class ImmutableMap<K, V> implements Map<K, V>, Serializable {
                 return e.getValue();
             }
 
-            public V setValue( V value ) {
+            public V setValue( final V value ) {
 
                 throw new UnsupportedOperationException();
             }
@@ -458,7 +458,7 @@ public class ImmutableMap<K, V> implements Map<K, V>, Serializable {
                 return e.hashCode();
             }
 
-            public boolean equals( Object o ) {
+            public boolean equals( final Object o ) {
 
                 if ( this == o ) {
                     return true;

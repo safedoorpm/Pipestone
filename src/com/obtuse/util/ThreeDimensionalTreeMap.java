@@ -17,7 +17,7 @@ public class ThreeDimensionalTreeMap<T1,T2,T3,V> implements Serializable, ThreeD
     }
 
     @SuppressWarnings("UnusedDeclaration")
-    public ThreeDimensionalTreeMap( ThreeDimensionalSortedMap<T1,T2,T3,V> map ) {
+    public ThreeDimensionalTreeMap( final ThreeDimensionalSortedMap<T1,T2,T3,V> map ) {
         super();
 
         for ( T1 t1 : map.outerKeys() ) {
@@ -29,7 +29,7 @@ public class ThreeDimensionalTreeMap<T1,T2,T3,V> implements Serializable, ThreeD
 
     }
 
-    public void put( T1 key1, T2 key2, T3 key3, V value ) {
+    public void put( final T1 key1, final T2 key2, final T3 key3, final V value ) {
 
         TwoDimensionalSortedMap<T2,T3,V> innerMap = getInnerMap( key1, true );
 
@@ -37,7 +37,7 @@ public class ThreeDimensionalTreeMap<T1,T2,T3,V> implements Serializable, ThreeD
 
     }
 
-    public TwoDimensionalSortedMap<T2,T3,V> getInnerMap( T1 key1, boolean forceCreate ) {
+    public TwoDimensionalSortedMap<T2,T3,V> getInnerMap( final T1 key1, final boolean forceCreate ) {
 
         TwoDimensionalSortedMap<T2,T3,V> innerMap = _map.get( key1 );
         if ( innerMap == null && forceCreate ) {
@@ -51,13 +51,13 @@ public class ThreeDimensionalTreeMap<T1,T2,T3,V> implements Serializable, ThreeD
 
     }
 
-    public TwoDimensionalSortedMap<T2,T3,V> removeInnerMap( T1 key ) {
+    public TwoDimensionalSortedMap<T2,T3,V> removeInnerMap( final T1 key ) {
 
         return _map.remove( key );
 
     }
 
-    public V get( T1 key1, T2 key2, T3 key3 ) {
+    public V get( final T1 key1, final T2 key2, final T3 key3 ) {
 
         TwoDimensionalSortedMap<T2,T3,V> innerMap = _map.get( key1 );
         if ( innerMap == null ) {
@@ -70,7 +70,7 @@ public class ThreeDimensionalTreeMap<T1,T2,T3,V> implements Serializable, ThreeD
 
     }
 
-    public V remove( T1 key1, T2 key2, T3 key3 ) {
+    public V remove( final T1 key1, final T2 key2, final T3 key3 ) {
 
         V rval = null;
 

@@ -36,13 +36,13 @@ public class GenericCsvParser extends CSVParser {
 //        }
 //    }
 
-    public GenericCsvParser( String fileName )
+    public GenericCsvParser( final String fileName )
             throws FileNotFoundException, SyntaxErrorException {
         this( fileName, new BufferedReader( new FileReader( fileName ) ) );
 
     }
 
-    public GenericCsvParser( String description, BufferedReader input )
+    public GenericCsvParser( final String description, final BufferedReader input )
             throws SyntaxErrorException {
         super( input );
 
@@ -152,13 +152,13 @@ public class GenericCsvParser extends CSVParser {
      * @return true if the line of data exists.
      */
 
-    public boolean hasLine( int lnum ) {
+    public boolean hasLine( final int lnum ) {
 
         return lnum > 0 && lnum < _nextLnum;
 
     }
 
-    public String getString( int lnum, String title ) {
+    public String getString( final int lnum, final String title ) {
 
         return _parsedData.get( lnum, title );
 
@@ -182,7 +182,7 @@ public class GenericCsvParser extends CSVParser {
 
     }
 
-    public static GenericCsvParser parseQuietly( String fileName ) {
+    public static GenericCsvParser parseQuietly( final String fileName ) {
 
         try {
 
@@ -199,7 +199,7 @@ public class GenericCsvParser extends CSVParser {
 
     }
 
-    public static void main( String[] args ) {
+    public static void main( final String[] args ) {
 
         BasicProgramConfigInfo.init( "Obtuse", "Utils", "GenericCsvParser", null );
 

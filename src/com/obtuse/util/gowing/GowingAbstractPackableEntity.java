@@ -36,7 +36,7 @@ public abstract class GowingAbstractPackableEntity implements GowingPackable {
 
         }
 
-        private GowingNameMarkerThing( String name ) {
+        private GowingNameMarkerThing( final String name ) {
 
             super();
 
@@ -64,7 +64,7 @@ public abstract class GowingAbstractPackableEntity implements GowingPackable {
      (use the {@link #GowingAbstractPackableEntity(GowingUnPacker,GowingPackedEntityBundle)} constructor when unpacking.
      */
 
-    protected GowingAbstractPackableEntity( @NotNull GowingNameMarkerThing gowingThing ) {
+    protected GowingAbstractPackableEntity( @NotNull final GowingNameMarkerThing gowingThing ) {
 
         super();
 
@@ -79,7 +79,7 @@ public abstract class GowingAbstractPackableEntity implements GowingPackable {
      @param bundle   the bundle extracted from the input stream of packed stuff.
      */
 
-    protected GowingAbstractPackableEntity( GowingUnPacker unPacker, @NotNull GowingPackedEntityBundle bundle ) {
+    protected GowingAbstractPackableEntity( final GowingUnPacker unPacker, @NotNull final GowingPackedEntityBundle bundle ) {
 
         super();
 
@@ -92,7 +92,7 @@ public abstract class GowingAbstractPackableEntity implements GowingPackable {
      @param packer
      @return
      */
-    protected final GowingPackedEntityBundle bundleRoot( GowingPacker packer ) {
+    protected final GowingPackedEntityBundle bundleRoot( final GowingPacker packer ) {
 
         GowingPackedEntityBundle rval = new GowingPackedEntityBundle(
                 ENTITY_TYPE_NAME,

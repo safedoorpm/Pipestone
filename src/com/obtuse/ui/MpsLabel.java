@@ -24,7 +24,7 @@ public class MpsLabel {
     private BufferedImage _generatedImage = null;
     private Font _generatedImageFont = null;
 
-    public MpsLabel( String text ) {
+    public MpsLabel( final String text ) {
 
         super();
 
@@ -39,19 +39,19 @@ public class MpsLabel {
 
     }
 
-    public MpsLabel( int value ) {
+    public MpsLabel( final int value ) {
 
         this( "" + value );
 
     }
 
-    public MpsLabel( double value, int digits ) {
+    public MpsLabel( final double value, final int digits ) {
 
         this( ObtuseUtil.lpad( value, 0, digits ) );
 
     }
 
-    public MpsLabel( Image image ) {
+    public MpsLabel( final Image image ) {
 
         super();
 
@@ -107,7 +107,7 @@ public class MpsLabel {
      * @throws IllegalArgumentException if digits is negative.
      */
 
-    public static Hashtable<Integer, MpsLabel> makeLabels( int min, int max, int incr, int digits ) {
+    public static Hashtable<Integer, MpsLabel> makeLabels( final int min, final int max, final int incr, final int digits ) {
 
         if ( digits < 0 ) {
 
@@ -168,7 +168,7 @@ public class MpsLabel {
      * @return a dictionary of axis labels constructed according to the above criteria.
      */
 
-    public static Hashtable<Integer, MpsLabel> makeLabels( int min, int max, double incr, int digits ) {
+    public static Hashtable<Integer, MpsLabel> makeLabels( final int min, final int max, final double incr, final int digits ) {
 
         Hashtable<Integer, MpsLabel> ht = new Hashtable<>();
         int scalingFactor = 1;
@@ -199,7 +199,7 @@ public class MpsLabel {
 
     }
 
-    public BufferedImage getGeneratedImage( Graphics2D g2d ) {
+    public BufferedImage getGeneratedImage( final Graphics2D g2d ) {
 
         // Punt any cached image if it was produced using a font which is different
         // than the current font.

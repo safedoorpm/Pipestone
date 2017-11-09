@@ -73,7 +73,7 @@ public class MpsTest2 extends JFrame {
         _quitButton.addActionListener(
                 new MyActionListener() {
 
-                    public void myActionPerformed( ActionEvent actionEvent ) {
+                    public void myActionPerformed( final ActionEvent actionEvent ) {
 
                         System.exit( 0 );
 
@@ -87,7 +87,7 @@ public class MpsTest2 extends JFrame {
 
     }
 
-    public static void main( String[] args ) {
+    public static void main( final String[] args ) {
 
         MpsTest2 mt = new MpsTest2();
 

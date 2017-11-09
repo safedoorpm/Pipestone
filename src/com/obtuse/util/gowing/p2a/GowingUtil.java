@@ -21,7 +21,7 @@ public class GowingUtil {
 
     }
 
-    public static String describeGowingEntitySafely( GowingPackable packable ) {
+    public static String describeGowingEntitySafely( final GowingPackable packable ) {
 
         if ( packable == null ) {
 

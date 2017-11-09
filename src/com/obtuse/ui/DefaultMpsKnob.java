@@ -28,7 +28,7 @@ public class DefaultMpsKnob extends MpsKnob {
             _rotatedSelectedScaledImages =
 	    new ThreeDimensionalTreeMap<>();
 
-    public DefaultMpsKnob( Image image ) {
+    public DefaultMpsKnob( final Image image ) {
 
         super( image );
 
@@ -60,11 +60,11 @@ public class DefaultMpsKnob extends MpsKnob {
 
     @Override
     public boolean isPointOnKnob(
-            Point hotSpot,
-            MpsKnobSize knobSize,
-            boolean isSelected,
-            PositionOnLine positionOnLine,
-            Point point
+            final Point hotSpot,
+            final MpsKnobSize knobSize,
+            final boolean isSelected,
+            final PositionOnLine positionOnLine,
+            final Point point
     ) {
 
         MultiPointSlider.OrientedImage orientedImage = getOrientedImage( knobSize, positionOnLine, isSelected );
@@ -75,12 +75,12 @@ public class DefaultMpsKnob extends MpsKnob {
 
     @Override
     public void drawKnob(
-            Graphics2D g,
-            Point hotSpot,
-            MpsKnobSize knobSize,
-            boolean isSelected,
-            PositionOnLine positionOnLine,
-            ImageObserver imageObserver
+            final Graphics2D g,
+            final Point hotSpot,
+            final MpsKnobSize knobSize,
+            final boolean isSelected,
+            final PositionOnLine positionOnLine,
+            final ImageObserver imageObserver
     ) {
 
         MultiPointSlider.OrientedImage img = getOrientedImage( knobSize, positionOnLine, isSelected );
@@ -143,9 +143,9 @@ public class DefaultMpsKnob extends MpsKnob {
 
     @Override
     public MultiPointSlider.OrientedImage getOrientedImage(
-            MpsKnobSize knobSize,
-            PositionOnLine positionOnLine,
-            boolean isSelected
+            final MpsKnobSize knobSize,
+            final PositionOnLine positionOnLine,
+            final boolean isSelected
     ) {
 
         int ks = knobSize.integerSize();

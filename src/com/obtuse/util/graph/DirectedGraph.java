@@ -28,7 +28,7 @@ public class DirectedGraph {
      * @return the topologically sorted vertices in the specified directed graph; null if graph has any cycles.
      */
 
-    public List<DirectedGraphVertex> topologicalSort( Collection<DirectedGraphVertex> vertices ) {
+    public List<DirectedGraphVertex> topologicalSort( final Collection<DirectedGraphVertex> vertices ) {
 
         SortedSet<DirectedGraphVertex> temporarilyMarkedNodes = new TreeSet<>();
         SortedSet<DirectedGraphVertex> permanentlyMarkedNodes = new TreeSet<>();
@@ -63,10 +63,10 @@ public class DirectedGraph {
 
     @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     private boolean topologicalSortVisitNode(
-            DirectedGraphVertex node,
-            Collection<DirectedGraphVertex> temporarilyMarkedNodes,
-            SortedSet<DirectedGraphVertex> permanentlyMarkedNodes,
-            List<DirectedGraphVertex> sortedNodes
+            final DirectedGraphVertex node,
+            final Collection<DirectedGraphVertex> temporarilyMarkedNodes,
+            final SortedSet<DirectedGraphVertex> permanentlyMarkedNodes,
+            final List<DirectedGraphVertex> sortedNodes
     ) {
 
         if ( temporarilyMarkedNodes.contains( node ) ) {

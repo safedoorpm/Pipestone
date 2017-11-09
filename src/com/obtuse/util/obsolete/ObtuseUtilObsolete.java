@@ -32,7 +32,7 @@ class ObtuseUtilObsolete {
         private boolean _readonly;
         private final Hashtable<? extends K, ? extends V> _ht;
 
-        private UnmodifiableHashtable( Hashtable<? extends K, ? extends V> ht ) {
+        private UnmodifiableHashtable( final Hashtable<? extends K, ? extends V> ht ) {
 
             super( ht );
             _ht = ht;
@@ -91,7 +91,7 @@ class ObtuseUtilObsolete {
 
         }
 
-        public V put( K key, V value ) {
+        public V put( final K key, final V value ) {
 
             if ( _readonly ) {
 
@@ -105,7 +105,7 @@ class ObtuseUtilObsolete {
 
         }
 
-        public void putAll( Map<? extends K, ? extends V> t ) {
+        public void putAll( final Map<? extends K, ? extends V> t ) {
 
             if ( _readonly ) {
 
@@ -134,7 +134,7 @@ class ObtuseUtilObsolete {
 
         }
 
-        public V remove( Object key ) {
+        public V remove( final Object key ) {
 
             if ( _readonly ) {
 
@@ -179,7 +179,7 @@ class ObtuseUtilObsolete {
      */
 
     @SuppressWarnings({ "SameParameterValue" })
-    public static byte[] getSerializedVersion( Serializable thing, boolean printStackTraceOnError ) {
+    public static byte[] getSerializedVersion( final Serializable thing, final boolean printStackTraceOnError ) {
 
         try {
 
@@ -223,7 +223,7 @@ class ObtuseUtilObsolete {
      */
 
     public static Serializable recoverSerializedVersion(
-            byte[] sv
+            final byte[] sv
     )
             throws ClassNotFoundException, IOException {
 
@@ -244,7 +244,7 @@ class ObtuseUtilObsolete {
      * @throws ClassNotFoundException if the class of a serialized object in the {@link java.io.InputStream} cannot be found.
      */
 
-    private static Serializable recoverSerializedVersion( InputStream is )
+    private static Serializable recoverSerializedVersion( final InputStream is )
             throws ClassNotFoundException, IOException {
 
         ObjectInputStream ois = null;
@@ -273,8 +273,8 @@ class ObtuseUtilObsolete {
      */
 
     public static Serializable recoverSerializedVersion(
-            byte[] sv,
-            boolean printStackTraceOnError
+            final byte[] sv,
+            final boolean printStackTraceOnError
     ) {
 
         ByteArrayInputStream bis = new ByteArrayInputStream( sv );
@@ -299,7 +299,7 @@ class ObtuseUtilObsolete {
      * @return the de-serialized object or null if something goes wrong.
      */
 
-    public static Serializable recoverSerializedVersion( InputStream is, boolean printStackTraceOnError ) {
+    public static Serializable recoverSerializedVersion( final InputStream is, final boolean printStackTraceOnError ) {
 
         try {
 
@@ -336,7 +336,7 @@ class ObtuseUtilObsolete {
      *         A zero-length byte array is returned if the file exists but contains no data.
      */
 
-    public static byte[] readEntireFile( String fname, int maxLength, boolean printStackTraceOnError ) {
+    public static byte[] readEntireFile( final String fname, final int maxLength, final boolean printStackTraceOnError ) {
 
         if ( fname == null ) {
 
@@ -359,7 +359,7 @@ class ObtuseUtilObsolete {
      *         A zero-length byte array is returned if the file exists but contains no data.
      */
 
-    public static byte[] readEntireFile( File file, int maxLength, boolean printStackTraceOnError ) {
+    public static byte[] readEntireFile( final File file, final int maxLength, final boolean printStackTraceOnError ) {
 
         if ( file == null ) {
 
@@ -416,7 +416,7 @@ class ObtuseUtilObsolete {
      *         A zero-length byte array is returned if the stream contains no data.
      */
 
-    public static byte[] readEntireStream( InputStream is, int maxLength, boolean printStackTraceOnError ) {
+    public static byte[] readEntireStream( final InputStream is, final int maxLength, final boolean printStackTraceOnError ) {
 
         if ( is == null ) {
 
@@ -491,7 +491,7 @@ class ObtuseUtilObsolete {
      */
 
     @SuppressWarnings({ "BooleanMethodNameMustStartWithQuestion" })
-    public static boolean writeBytesToFile( byte[] bytes, String fname, boolean printStackTraceOnError ) {
+    public static boolean writeBytesToFile( final byte[] bytes, final String fname, final boolean printStackTraceOnError ) {
 
         return ObtuseUtilObsolete.writeBytesToFile( bytes, new File( fname ), printStackTraceOnError );
 
@@ -507,7 +507,7 @@ class ObtuseUtilObsolete {
      */
 
     @SuppressWarnings({ "BooleanMethodNameMustStartWithQuestion" })
-    public static boolean writeBytesToFile( byte[] bytes, File file, boolean printStackTraceOnError ) {
+    public static boolean writeBytesToFile( final byte[] bytes, final File file, final boolean printStackTraceOnError ) {
 
         FileOutputStream fs = null;
         try {
@@ -548,7 +548,7 @@ class ObtuseUtilObsolete {
      */
 
     @SuppressWarnings({ "BooleanMethodNameMustStartWithQuestion" })
-    public static boolean writeBytesToStream( byte[] bytes, OutputStream os, boolean printStackTraceOnError ) {
+    public static boolean writeBytesToStream( final byte[] bytes, final OutputStream os, final boolean printStackTraceOnError ) {
 
         try {
 
@@ -581,7 +581,7 @@ class ObtuseUtilObsolete {
      * @return the length of the serialized form of the object.
      */
 
-    public static int getSerializedSize( Serializable thing ) {
+    public static int getSerializedSize( final Serializable thing ) {
 
         byte[] sv = ObtuseUtilObsolete.getSerializedVersion( thing, false );
         if ( sv == null ) {
@@ -607,9 +607,9 @@ class ObtuseUtilObsolete {
 
     @SuppressWarnings({ "RawUseOfParameterizedType", "CollectionDeclaredAsConcreteClass" })
     public static String validateArgs(
-            String methodName,
-            @SuppressWarnings("UseOfObsoleteCollectionType") Vector actual,
-            Class[] expected
+            final String methodName,
+            @SuppressWarnings("UseOfObsoleteCollectionType") final Vector actual,
+            final Class[] expected
     ) {
 
         if ( actual.size() != expected.length ) {
@@ -644,7 +644,7 @@ class ObtuseUtilObsolete {
 
     }
 
-    public static String lpad( float value, int width, int digits ) {
+    public static String lpad( final float value, final int width, final int digits ) {
 
         return ObtuseUtilObsolete.lpad( (double)value, width, digits );
 
@@ -652,7 +652,7 @@ class ObtuseUtilObsolete {
 
     private static DecimalFormat[] s_cachedFormats = new DecimalFormat[1];
 
-    public static String lpad( double di, int w, int v ) {
+    public static String lpad( final double di, final int w, final int v ) {
 
         if ( v >= ObtuseUtilObsolete.s_cachedFormats.length ) {
 
@@ -664,14 +664,14 @@ class ObtuseUtilObsolete {
 
         if ( ObtuseUtilObsolete.s_cachedFormats[v] == null ) {
 
-            String format = "0.";
+            StringBuilder format = new StringBuilder( "0." );
             for ( int i = 0; i < v; i += 1 ) {
 
-                format += "#";
+                format.append( "#" );
 
             }
 
-            ObtuseUtilObsolete.s_cachedFormats[v] = new DecimalFormat( format );
+            ObtuseUtilObsolete.s_cachedFormats[v] = new DecimalFormat( format.toString() );
 
         }
 
@@ -681,7 +681,7 @@ class ObtuseUtilObsolete {
 
     private static DecimalFormat[] s_cachedZeroFormats = new DecimalFormat[1];
 
-    public static String lpad0( double di, int w, int v ) {
+    public static String lpad0( final double di, final int w, final int v ) {
 
         if ( v >= ObtuseUtilObsolete.s_cachedZeroFormats.length ) {
 
@@ -693,14 +693,14 @@ class ObtuseUtilObsolete {
 
         if ( ObtuseUtilObsolete.s_cachedZeroFormats[v] == null ) {
 
-            String format = "0.";
+            StringBuilder format = new StringBuilder( "0." );
             for ( int i = 0; i < v; i += 1 ) {
 
-                format += "0";
+                format.append( "0" );
 
             }
 
-            ObtuseUtilObsolete.s_cachedZeroFormats[v] = new DecimalFormat( format );
+            ObtuseUtilObsolete.s_cachedZeroFormats[v] = new DecimalFormat( format.toString() );
 
         }
 
@@ -753,14 +753,14 @@ class ObtuseUtilObsolete {
      * @return the padded string or the original string if it is already at least as wide as <tt>w</tt>.
      */
 
-    public static String lpad( String s, int w, char p ) {
+    public static String lpad( final String s, final int w, final char p ) {
 
         String str = s == null ? "null" : s;
         return ObtuseUtilObsolete.generatePaddingString( w, p, str ) + str;
 
     }
 
-    public static String generatePaddingString( int w, char p, String str ) {
+    public static String generatePaddingString( final int w, final char p, final String str ) {
 
         int padding = w - str.length();
         String padString;
@@ -796,7 +796,7 @@ class ObtuseUtilObsolete {
      * @return the padded string or the original string if it is already at least as wide as <tt>w</tt>.
      */
 
-    public static String lpad( String s, int w ) {
+    public static String lpad( final String s, final int w ) {
 
         return ObtuseUtilObsolete.lpad( s, w, ' ' );
 
@@ -813,7 +813,7 @@ class ObtuseUtilObsolete {
      *         <tt>w</tt>.
      */
 
-    public static String lpad( long l, int w, char p ) {
+    public static String lpad( final long l, final int w, final char p ) {
 
         return ObtuseUtilObsolete.lpad( "" + l, w, p );
 
@@ -831,7 +831,7 @@ class ObtuseUtilObsolete {
      *         <tt>w</tt>.
      */
 
-    public static String lpad( long l, int w ) {
+    public static String lpad( final long l, final int w ) {
 
         return ObtuseUtilObsolete.lpad( "" + l, w );
 
@@ -847,7 +847,7 @@ class ObtuseUtilObsolete {
      * @return the padded string or the original string if it is already at least as wide as <tt>w</tt>.
      */
 
-    public static String rpad( String s, int w, char p ) {
+    public static String rpad( final String s, final int w, final char p ) {
 
         String str = s == null ? "null" : s;
         return str + ObtuseUtilObsolete.generatePaddingString( w, p, str );
@@ -874,7 +874,7 @@ class ObtuseUtilObsolete {
      * @return the padded string or the original string if it is already at least as wide as <tt>w</tt>.
      */
 
-    public static String rpad( String s, int w ) {
+    public static String rpad( final String s, final int w ) {
 
         return ObtuseUtilObsolete.rpad( s, w, ' ' );
 
@@ -892,7 +892,7 @@ class ObtuseUtilObsolete {
      *         <tt>w</tt>.
      */
 
-    public static String rpad( long l, int w, char p ) {
+    public static String rpad( final long l, final int w, final char p ) {
 
         return ObtuseUtilObsolete.rpad( "" + l, w, p );
 
@@ -910,7 +910,7 @@ class ObtuseUtilObsolete {
      *         <tt>w</tt>.
      */
 
-    public static String rpad( long l, int w ) {
+    public static String rpad( final long l, final int w ) {
 
         return ObtuseUtilObsolete.rpad( "" + l, w );
 
@@ -925,7 +925,7 @@ class ObtuseUtilObsolete {
      * @return the replicated string.
      */
 
-    public static String replicate( String str, int count ) {
+    public static String replicate( final String str, final int count ) {
 
         StringBuilder rval = new StringBuilder();
         for ( int i = 0; i < count; i += 1 ) {
@@ -947,7 +947,7 @@ class ObtuseUtilObsolete {
      */
 
     @SuppressWarnings({ "MagicNumber" })
-    public static String hexvalue( long v ) {
+    public static String hexvalue( final long v ) {
 
         //noinspection UnnecessaryParentheses
 
@@ -966,7 +966,7 @@ class ObtuseUtilObsolete {
      */
 
     @SuppressWarnings({ "UnnecessaryParentheses", "MagicNumber" })
-    public static String hexvalue( int v ) {
+    public static String hexvalue( final int v ) {
 
         return ""
                + ObtuseUtilObsolete.hexvalue( (byte)( ( v >> 24 ) & 0xff ) )
@@ -985,7 +985,7 @@ class ObtuseUtilObsolete {
      */
 
     @SuppressWarnings({ "UnnecessaryParentheses", "MagicNumber" })
-    public static String hexvalue( byte v ) {
+    public static String hexvalue( final byte v ) {
 
         int high = ( v >> 4 ) & 0xf;
         int low = (int)v & 0xf;
@@ -1008,7 +1008,7 @@ class ObtuseUtilObsolete {
      * @return the hex representation of <tt>v</tt>.
      */
 
-    public static String hexvalue( byte[] bv ) {
+    public static String hexvalue( final byte[] bv ) {
 
         if ( bv == null ) {
 
@@ -1036,7 +1036,7 @@ class ObtuseUtilObsolete {
      *                     depending upon far too many factors to enumerate here).
      */
 
-    public static void safeSleepMillis( long milliseconds ) {
+    public static void safeSleepMillis( final long milliseconds ) {
 
         try {
 
@@ -1058,7 +1058,7 @@ class ObtuseUtilObsolete {
      */
 
     @SuppressWarnings({ "MagicNumber" })
-    public static void dump( byte[] data ) {
+    public static void dump( final byte[] data ) {
 
         for ( int offset = 0; offset < data.length; offset += 16 ) {
 
@@ -1114,9 +1114,9 @@ class ObtuseUtilObsolete {
      * @return the escaped string.
      */
 
-    public static String htmlEscape( String str ) {
+    public static String htmlEscape( final String str ) {
 
-        String rval = "";
+        StringBuilder rval = new StringBuilder();
         String s = str;
         while ( true ) {
 
@@ -1143,15 +1143,15 @@ class ObtuseUtilObsolete {
 
             }
 
-            rval += s.substring( 0, ix );
+            rval.append( s.substring( 0, ix ) );
             s = s.substring( ix );
             if ( s.startsWith( "&" ) ) {
 
-                rval += "&amp;";
+                rval.append( "&amp;" );
 
             } else {
 
-                rval += "&lt;";
+                rval.append( "&lt;" );
 
             }
 
@@ -1159,9 +1159,9 @@ class ObtuseUtilObsolete {
 
         }
 
-        rval += s;
+        rval.append( s );
 
-        return rval;
+        return rval.toString();
 
     }
 
@@ -1171,7 +1171,7 @@ class ObtuseUtilObsolete {
      * @param thing the thing to be closed.
      */
 
-    public static void closeQuietly( Closeable thing ) {
+    public static void closeQuietly( final Closeable thing ) {
 
         try {
 
@@ -1189,7 +1189,7 @@ class ObtuseUtilObsolete {
 
     }
 
-    public static void closeQuietly( ServerSocket sock ) {
+    public static void closeQuietly( final ServerSocket sock ) {
 
         try {
 
@@ -1207,7 +1207,7 @@ class ObtuseUtilObsolete {
 
     }
 
-    public static void closeQuietly( Socket sock ) {
+    public static void closeQuietly( final Socket sock ) {
 
         try {
 
@@ -1225,7 +1225,7 @@ class ObtuseUtilObsolete {
 
     }
 
-    public static void closeQuietly( ZipFile zipFile ) {
+    public static void closeQuietly( final ZipFile zipFile ) {
 
         try {
 
@@ -1243,7 +1243,7 @@ class ObtuseUtilObsolete {
 
     }
 
-    public static void closeQuietly( ResultSet rs ) {
+    public static void closeQuietly( final ResultSet rs ) {
 
         try {
 
@@ -1261,7 +1261,7 @@ class ObtuseUtilObsolete {
 
     }
 
-    public static void closeQuietly( PreparedStatement rs ) {
+    public static void closeQuietly( final PreparedStatement rs ) {
 
         try {
 
@@ -1279,7 +1279,7 @@ class ObtuseUtilObsolete {
 
     }
 
-    public static void closeQuietly( PostgresConnection postgresConnection ) {
+    public static void closeQuietly( final PostgresConnection postgresConnection ) {
 
         try {
 
@@ -1330,7 +1330,7 @@ class ObtuseUtilObsolete {
      * @throws NullPointerException if <tt>string</tt> is null.
      */
 
-    public static String enquoteToCSV( String string ) {
+    public static String enquoteToCSV( final String string ) {
 
         if ( !string.contains( "," ) && !string.contains( "\"" ) ) {
 
@@ -1360,7 +1360,7 @@ class ObtuseUtilObsolete {
 
     }
 
-    public static String enquoteJavaString( String string ) {
+    public static String enquoteJavaString( final String string ) {
 
         if ( string == null ) {
 
@@ -1409,7 +1409,7 @@ class ObtuseUtilObsolete {
     @SuppressWarnings("ConstantNamingConvention")
     private static final Long _md5Lock = 0L;
 
-    public static String computeMD5( InputStream is )
+    public static String computeMD5( final InputStream is )
             throws IOException {
 
         synchronized ( ObtuseUtilObsolete._md5Lock ) {
@@ -1468,7 +1468,7 @@ class ObtuseUtilObsolete {
 
     }
 
-    public static String computeMD5( File file )
+    public static String computeMD5( final File file )
             throws IOException {
 
         FileInputStream fis = new FileInputStream( file );
@@ -1484,25 +1484,25 @@ class ObtuseUtilObsolete {
 
     }
 
-    public static int safeDivide( int numerator, int denominator ) {
+    public static int safeDivide( final int numerator, final int denominator ) {
 
         return denominator == 0 ? 0 : numerator / denominator;
 
     }
 
-    public static int safeDivide( int numerator, int denominator, int safeReturnValue ) {
+    public static int safeDivide( final int numerator, final int denominator, final int safeReturnValue ) {
 
         return denominator == 0 ? safeReturnValue : numerator / denominator;
 
     }
 
-    public static double safeDivide( double numerator, double denominator ) {
+    public static double safeDivide( final double numerator, final double denominator ) {
 
         return denominator == 0 ? 0 : numerator / denominator;
 
     }
 
-    public static double safeDivide( double numerator, double denominator, double safeReturnValue ) {
+    public static double safeDivide( final double numerator, final double denominator, final double safeReturnValue ) {
 
         return denominator == 0.0 ? safeReturnValue : numerator / denominator;
 
@@ -1521,8 +1521,8 @@ class ObtuseUtilObsolete {
      */
 
     public static <T> Collection<T> addAll(
-            Collection<T> collection,
-            T... newElements
+            final Collection<T> collection,
+            final T... newElements
     ) {
 
         Collections.addAll( collection, newElements );

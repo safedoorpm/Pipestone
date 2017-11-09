@@ -16,7 +16,7 @@ public class WeightedGaussianDistribution extends GaussianDistribution implement
 
     private final double _weight;
 
-    public WeightedGaussianDistribution( double weight, double center, double standardDeviation ) {
+    public WeightedGaussianDistribution( final double weight, final double center, final double standardDeviation ) {
 
         super( center, standardDeviation );
 
@@ -32,7 +32,7 @@ public class WeightedGaussianDistribution extends GaussianDistribution implement
 
     }
 
-    public WeightedGaussianDistribution( MessageProxy messageProxy, Node parentNode, Node targetNode )
+    public WeightedGaussianDistribution( final MessageProxy messageProxy, final Node parentNode, final Node targetNode )
             throws ObtuseXmlNodeException {
 
         super(
@@ -50,7 +50,7 @@ public class WeightedGaussianDistribution extends GaussianDistribution implement
 
     }
 
-    public void emitAsXml( NestedXMLPrinter ps ) {
+    public void emitAsXml( final NestedXMLPrinter ps ) {
 
         ps.emitTag(
                 "WeightedGaussianDistribution",

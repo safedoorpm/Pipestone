@@ -24,7 +24,7 @@ public class OrderedEntity<T> implements Comparable<OrderedEntity<T>> {
      * @param entity the entity to assign the specified ordering to.
      */
 
-    public OrderedEntity( int ordering, T entity ) {
+    public OrderedEntity( final int ordering, final T entity ) {
         super();
 
         _ordering = ordering;
@@ -51,7 +51,7 @@ public class OrderedEntity<T> implements Comparable<OrderedEntity<T>> {
      * @return true if the other instance is a {@link com.obtuse.util.OrderedEntity} and if the two instance's defined orderings are equal; false otherwise.
      */
 
-    public boolean equals( Object rhs ) {
+    public boolean equals( final Object rhs ) {
 
         //noinspection RawUseOfParameterizedType
         return rhs instanceof OrderedEntity && getOrdering() == ((OrderedEntity)rhs).getOrdering();
@@ -64,7 +64,7 @@ public class OrderedEntity<T> implements Comparable<OrderedEntity<T>> {
 
     }
 
-    public int compareTo( @NotNull OrderedEntity<T> rhs ) {
+    public int compareTo( @NotNull final OrderedEntity<T> rhs ) {
 
         return _ordering.compareTo( rhs.getOrdering() );
 

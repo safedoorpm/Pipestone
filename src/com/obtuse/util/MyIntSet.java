@@ -35,7 +35,7 @@ public class MyIntSet implements Iterable<Long>, Serializable {
      @param value the long to be added.
      */
 
-    public void add( long value ) {
+    public void add( final long value ) {
 
         if ( _valueBits == null ) {
 
@@ -89,7 +89,7 @@ public class MyIntSet implements Iterable<Long>, Serializable {
 
     }
 
-    public boolean contains( long value ) {
+    public boolean contains( final long value ) {
 
 	if ( _valueBits == null ) {
 
@@ -111,7 +111,7 @@ public class MyIntSet implements Iterable<Long>, Serializable {
 
     }
 
-    public boolean remove( long value ) {
+    public boolean remove( final long value ) {
 
 	if ( _valueBits == null ) {
 
@@ -293,7 +293,7 @@ public class MyIntSet implements Iterable<Long>, Serializable {
 //    }
 
     @SuppressWarnings("MagicNumber")
-    public static void main( String[] args ) {
+    public static void main( final String[] args ) {
 
 	BasicProgramConfigInfo.init( "Obtuse", "Pipestone", "MyIntSet", null );
 	LoggingMessageProxy mp = new LoggingMessageProxy();

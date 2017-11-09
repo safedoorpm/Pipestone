@@ -50,8 +50,8 @@ public class DraggableJPanelTester extends JFrame {
 
                             @Override
                             protected void handleImage(
-                                    TransferHandler.TransferSupport transferSupport,
-                                    Image transferImage
+                                    final TransferHandler.TransferSupport transferSupport,
+                                    final Image transferImage
                             ) {
 
                                 _draggableJPanel.setImage( transferImage );
@@ -64,8 +64,8 @@ public class DraggableJPanelTester extends JFrame {
 
                             @Override
                             public void handleFilesList(
-                                    TransferHandler.TransferSupport transferSupport,
-                                    File[] transferFiles
+                                    final TransferHandler.TransferSupport transferSupport,
+                                    final File[] transferFiles
                             ) {
 
                                 Logger.logMsg( "handling a file list:  " + Arrays.toString( transferFiles ) );
@@ -78,8 +78,8 @@ public class DraggableJPanelTester extends JFrame {
 
                             @Override
                             protected void handleString(
-                                    TransferHandler.TransferSupport transferSupport,
-                                    String transferString
+                                    final TransferHandler.TransferSupport transferSupport,
+                                    final String transferString
                             ) {
 
                                 Logger.logMsg( "handling a string:  " + ObtuseUtil.enquoteToJavaString( transferString ) );
@@ -96,7 +96,7 @@ public class DraggableJPanelTester extends JFrame {
 
     }
 
-    public static void main( String[] args ) {
+    public static void main( final String[] args ) {
 
         BasicProgramConfigInfo.init( "Obtuse", "Pipestone", "Testing", null );
 

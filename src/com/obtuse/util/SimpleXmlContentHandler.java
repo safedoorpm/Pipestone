@@ -17,14 +17,14 @@ public class SimpleXmlContentHandler extends DefaultHandler {
     private final Stack<String> _nesting = new Stack<>();
     private final boolean _logActivity;
 
-    public SimpleXmlContentHandler( boolean logActivity ) {
+    public SimpleXmlContentHandler( final boolean logActivity ) {
         super();
 
         _logActivity = logActivity;
 
     }
 
-    public void setDocumentLocator( Locator locator ) {
+    public void setDocumentLocator( final Locator locator ) {
 
         _locator = locator;
 
@@ -52,7 +52,7 @@ public class SimpleXmlContentHandler extends DefaultHandler {
 
     }
 
-    public void startElement( String uri, String localName, String qName, Attributes attributes )
+    public void startElement( final String uri, final String localName, final String qName, final Attributes attributes )
             throws SAXException {
 
         _nesting.push( qName );
@@ -70,7 +70,7 @@ public class SimpleXmlContentHandler extends DefaultHandler {
 
     }
 
-    public static String formatAttributes( Attributes attributes ) {
+    public static String formatAttributes( final Attributes attributes ) {
 
         if ( attributes.getLength() == 0 ) {
 
@@ -99,7 +99,7 @@ public class SimpleXmlContentHandler extends DefaultHandler {
 
     }
 
-    public void endElement( String uri, String localName, String qName )
+    public void endElement( final String uri, final String localName, final String qName )
             throws SAXException {
 
         if ( _nesting.peek().equals( qName ) ) {
@@ -127,7 +127,7 @@ public class SimpleXmlContentHandler extends DefaultHandler {
 
     }
 
-    public void characters( char[] chars, int start, int length )
+    public void characters( final char[] chars, final int start, final int length )
             throws SAXException {
 
         if ( _logActivity ) {
@@ -138,7 +138,7 @@ public class SimpleXmlContentHandler extends DefaultHandler {
 
     }
 
-    public void ignorableWhitespace( char[] chars, int start, int length )
+    public void ignorableWhitespace( final char[] chars, final int start, final int length )
             throws SAXException {
 
         if ( _logActivity ) {
@@ -149,12 +149,12 @@ public class SimpleXmlContentHandler extends DefaultHandler {
 
     }
 
-    public void processingInstruction( String s, String s1 )
+    public void processingInstruction( final String s, final String s1 )
             throws SAXException {
 
     }
 
-    public void skippedEntity( String s )
+    public void skippedEntity( final String s )
             throws SAXException {
 
     }

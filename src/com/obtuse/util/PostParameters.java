@@ -128,7 +128,7 @@ public class PostParameters implements Serializable {
         super();
     }
 
-    public PostParameters( String encodedParms )
+    public PostParameters( final String encodedParms )
             throws
             InterruptedException {
         super();
@@ -136,7 +136,7 @@ public class PostParameters implements Serializable {
         PostParameters.decodeParms( encodedParms, this );
     }
 
-    public PostParameters( PostParameters source ) {
+    public PostParameters( final PostParameters source ) {
         super();
 
         for ( String key : source.getKeys() ) {
@@ -159,13 +159,13 @@ public class PostParameters implements Serializable {
 
     }
 
-    public void setParameter( String key, String value ) {
+    public void setParameter( final String key, final String value ) {
 
         _parameters.put( key, value );
 
     }
 
-    public String getParameter( String key ) {
+    public String getParameter( final String key ) {
 
         return _parameters.get( key );
 
@@ -226,7 +226,7 @@ public class PostParameters implements Serializable {
      * @throws InterruptedException if the operation needs to be aborted due to an error.
      */
 
-    public static void decodeParms( String parms, PostParameters p )
+    public static void decodeParms( final String parms, final PostParameters p )
             throws
             InterruptedException {
 
@@ -289,7 +289,7 @@ public class PostParameters implements Serializable {
     }
 
     @SuppressWarnings( { "UnnecessaryLocalVariable" } )
-    public static PostParameters makeProperties( String encodedProperties ) {
+    public static PostParameters makeProperties( final String encodedProperties ) {
 
         try {
 
@@ -308,7 +308,7 @@ public class PostParameters implements Serializable {
 
     }
 
-    public static boolean crossCompare( String encodedV1String, String encodedV2String ) {
+    public static boolean crossCompare( final String encodedV1String, final String encodedV2String ) {
 
         boolean worked = true;
 

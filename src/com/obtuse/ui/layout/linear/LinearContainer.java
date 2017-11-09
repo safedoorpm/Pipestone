@@ -244,7 +244,7 @@ public interface LinearContainer {
      breadth, values which are too high yield the maximum breadth, all other values yield themselves).
      */
 
-    default int applyBreadthConstraints( int v ) {
+    default int applyBreadthConstraints( final int v ) {
 
         return applyConstraints( getBreadthConstraints(), v );
 
@@ -259,7 +259,7 @@ public interface LinearContainer {
      length, values which are too high yield the maximum length, all other values yield themselves).
      */
 
-    default int applyLengthConstraints( int v ) {
+    default int applyLengthConstraints( final int v ) {
 
         return applyConstraints( getLengthConstraints(), v );
 
@@ -276,7 +276,7 @@ public interface LinearContainer {
      values which are too high yield the {@code doublet.maximum} value, all other values yield themselves).
      */
 
-    default int applyConstraints( ConstraintTuple doublet, int v ) {
+    default int applyConstraints( final ConstraintTuple doublet, final int v ) {
 
         if ( doublet == null ) {
 
