@@ -4,6 +4,9 @@
 
 package com.obtuse.util;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Iterator;
@@ -13,7 +16,7 @@ import java.util.Set;
  * Describe how a three dimensional sorted map behaves.
  */
 
-public interface ThreeDimensionalSortedMap<T1,T2,T3,V> extends Serializable {
+public interface ThreeDimensionalSortedMap<T1,T2,T3,V> extends Iterable<V>, Serializable {
 
     /**
      * Put a value into the map.
@@ -23,7 +26,7 @@ public interface ThreeDimensionalSortedMap<T1,T2,T3,V> extends Serializable {
      * @param value the value.
      */
 
-    void put( T1 key1, T2 key2, T3 key3, V value );
+    void put( @NotNull T1 key1, @NotNull T2 key2, @NotNull T3 key3, @Nullable V value );
 
     /**
      * Get a particular inner map.
@@ -34,7 +37,23 @@ public interface ThreeDimensionalSortedMap<T1,T2,T3,V> extends Serializable {
      * Consequently, changes to the returned map change this instance.
      */
 
-    TwoDimensionalSortedMap<T2,T3,V> getInnerMap( T1 key1, boolean forceCreate );
+    @Nullable
+    TwoDimensionalSortedMap<T2,T3,V> getInnerMap( @NotNull T1 key1, boolean forceCreate );
+
+    /**
+     * Get a particular inner map which is guaranteed to not be {@code null}.
+     * <p/>This method is exactly equivalent to
+     * <blockquote>
+     *     <pre>{@link #getInnerMap}( key1, true )</pre>
+     </blockquote>
+     * @param key1 the key for the desired inner map.
+     * @return the requested inner map (created and inserted into this instance if it does not already exist).
+     * Note that the returned inner map is the actual inner map used by this instance for the specified key.
+     * Consequently, changes to the returned map change this instance.
+     */
+
+    @NotNull
+    TwoDimensionalSortedMap<T2,T3,V> getNotNullInnerMap( @NotNull T1 key1 );
 
     /**
      * Remove a particular inner map.
@@ -44,7 +63,8 @@ public interface ThreeDimensionalSortedMap<T1,T2,T3,V> extends Serializable {
      * @return the just deleted inner map (will be null if the key does not have an inner map currently associated with it).
      */
 
-    TwoDimensionalSortedMap<T2,T3,V> removeInnerMap( T1 key );
+    @Nullable
+    TwoDimensionalSortedMap<T2,T3,V> removeInnerMap( @NotNull T1 key );
 
     /**
      * Get a particular value.
@@ -54,7 +74,8 @@ public interface ThreeDimensionalSortedMap<T1,T2,T3,V> extends Serializable {
      * @return the requested value (will be null if this combination of key values leads to a null value or does not correspond to a value in the tree).
      */
 
-    V get( T1 key1, T2 key2, T3 key3 );
+    @Nullable
+    V get( @NotNull T1 key1, @NotNull T2 key2, @NotNull T3 key3 );
 
     /**
      * Remove a particular value.
@@ -64,7 +85,8 @@ public interface ThreeDimensionalSortedMap<T1,T2,T3,V> extends Serializable {
      * @return the requested value (will be null if this combination of key values leads to a null value or does not correspond to a value in the tree).
      */
 
-    V remove( T1 key1, T2 key2, T3 key3 );
+    @Nullable
+    V remove( @NotNull T1 key1, @NotNull T2 key2, @NotNull T3 key3 );
 
     /**
      * Get the outer keys (also known as the first dimension's keys).
@@ -73,6 +95,7 @@ public interface ThreeDimensionalSortedMap<T1,T2,T3,V> extends Serializable {
      * Consequently, changes to the returned set of keys change this instance.
      */
 
+    @NotNull
     Set<T1> outerKeys();
 
     /**
@@ -82,6 +105,7 @@ public interface ThreeDimensionalSortedMap<T1,T2,T3,V> extends Serializable {
      * Consequently, changes to the returned maps changes this instance.
      */
 
+    @NotNull
     Collection<TwoDimensionalSortedMap<T2,T3,V>> innerMaps();
 
     /**
@@ -90,6 +114,7 @@ public interface ThreeDimensionalSortedMap<T1,T2,T3,V> extends Serializable {
      * @return an iterator that iterates across all the values in the tree.
      */
 
+    @NotNull
     Iterator<V> iterator();
 
     /**

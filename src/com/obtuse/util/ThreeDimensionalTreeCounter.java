@@ -68,9 +68,9 @@ public class ThreeDimensionalTreeCounter<K1,K2,K3> implements ThreeDimensionalCo
 
         for ( int ix : counter.getThreeDimensionalSortedMap().outerKeys() ) {
 
-            for ( String str : counter.getThreeDimensionalSortedMap().getInnerMap( ix, false ).outerKeys() ) {
+            for ( String str : counter.getThreeDimensionalSortedMap().getNotNullInnerMap( ix ).outerKeys() ) {
 
-                for ( boolean bool : counter.getThreeDimensionalSortedMap().getInnerMap( ix, false ).getInnerMap( str, false ).keySet() ) {
+                for ( boolean bool : counter.getThreeDimensionalSortedMap().getNotNullInnerMap( ix ).getNotNullInnerMap( str ).keySet() ) {
 
                     Logger.logMsg( ObtuseUtil.lpad( ix, 6 ) + " : " + ObtuseUtil.rpad( str, 5 ) + " : " + ( bool ? "true " : "false" ) + " : " + counter.getCount( ix, str, bool ) );
 

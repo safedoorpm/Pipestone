@@ -326,42 +326,6 @@ public class StdGowingUnPacker implements GowingUnPacker {
 
         }
 
-//	EntityTypeInfo typeInfo = _unPackerContext.findTypeInfo( typeName );
-//	if ( typeInfo == null ) {
-//
-//	    throw new GowingUnPackerParsingException( "no factory for type id " + er.getTypeId() + " (" + _unPackerContext.findTypeByTypeReferenceId( er.getTypeId() ) + ")", token );
-//
-//	}
-//
-//	GowingEntityFactory factory = typeInfo.getFactory();
-//
-//	/*
-//	Create the entity.
-//	If something goes wrong, augment the GowingUnPackerParsingException with the current token unless the exception already specifies a token.
-//	In either case, rethrow the exception.
-//	 */
-//
-//	GowingPackable entity;
-//	try {
-//
-//	    entity = factory.createEntity( this, bundle, er );
-//
-//	} catch ( GowingUnPackerParsingException e ) {
-//
-//	    if ( e.getCauseToken() == null ) {
-//
-//		e.setCauseToken( token );
-//
-//	    }
-//
-//	    throw e;
-//
-//	}
-//
-//	_unPackerContext.rememberPackableEntity( token, er, entity );
-//
-//	return entity;
-
     }
 
     @Override

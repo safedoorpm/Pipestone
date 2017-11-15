@@ -4,6 +4,9 @@
 
 package com.obtuse.util;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import java.io.Serializable;
 import java.util.*;
 
@@ -22,9 +25,13 @@ public class TwoDimensionalTreeMap<T1,T2,V> implements Serializable, TwoDimensio
         for ( T1 t1 : map.outerKeys() ) {
 
             SortedMap<T2,V> innerMap = map.getInnerMap( t1, false );
-            for ( T2 t2 : innerMap.keySet() ) {
+            if ( innerMap != null ) {
 
-                put( t1, t2, innerMap.get( t2 ) );
+                for ( T2 t2 : innerMap.keySet() ) {
+
+                    put( t1, t2, innerMap.get( t2 ) );
+
+                }
 
             }
 
@@ -32,14 +39,17 @@ public class TwoDimensionalTreeMap<T1,T2,V> implements Serializable, TwoDimensio
 
     }
 
+    @Override
     public void put( final T1 key1, final T2 key2, final V value ) {
 
-        SortedMap<T2,V> innerMap = getInnerMap( key1, true );
+        SortedMap<T2,V> innerMap = getNotNullInnerMap( key1 );
 
         innerMap.put( key2, value );
 
     }
 
+    @Override
+    @Nullable
     public SortedMap<T2,V> getInnerMap( final T1 key1, final boolean forceCreate ) {
 
         SortedMap<T2,V> innerMap = _map.get( key1 );
@@ -54,12 +64,26 @@ public class TwoDimensionalTreeMap<T1,T2,V> implements Serializable, TwoDimensio
 
     }
 
+    @Override
+    @NotNull
+    public SortedMap<T2,V> getNotNullInnerMap( final T1 key1 ) {
+
+        SortedMap<T2, V> innerMap = _map.computeIfAbsent( key1, k -> new TreeMap<>() );
+
+        return innerMap;
+
+    }
+
+    @Override
+    @Nullable
     public SortedMap<T2,V> removeInnerMap( final T1 key ) {
 
         return _map.remove( key );
 
     }
 
+    @Override
+    @Nullable
     public V get( final T1 key1, final T2 key2 ) {
 
         SortedMap<T2,V> innerMap = _map.get( key1 );
@@ -73,6 +97,8 @@ public class TwoDimensionalTreeMap<T1,T2,V> implements Serializable, TwoDimensio
 
     }
 
+    @Override
+    @Nullable
     public V remove( final T1 key1, final T2 key2 ) {
 
         V rval = null;
@@ -91,6 +117,7 @@ public class TwoDimensionalTreeMap<T1,T2,V> implements Serializable, TwoDimensio
 
     }
 
+    @Override
     public int size() {
 
         int totalSize = 0;
@@ -104,6 +131,7 @@ public class TwoDimensionalTreeMap<T1,T2,V> implements Serializable, TwoDimensio
 
     }
 
+    @Override
     public boolean isEmpty() {
 
         // We could just use "return size() == 0" but the short circuiting that we do below makes this approach
@@ -129,18 +157,24 @@ public class TwoDimensionalTreeMap<T1,T2,V> implements Serializable, TwoDimensio
 
     }
 
+    @Override
+    @NotNull
     public Set<T1> outerKeys() {
 
         return _map.keySet();
 
     }
 
+    @Override
+    @NotNull
     public Collection<SortedMap<T2,V>> innerMaps() {
 
         return _map.values();
 
     }
 
+    @Override
+    @NotNull
     public Iterator<V> iterator() {
 
         return new Iterator<V>() {
@@ -167,7 +201,7 @@ public class TwoDimensionalTreeMap<T1,T2,V> implements Serializable, TwoDimensio
 
                     SortedMap<T2,V> innerMap = getInnerMap( _activeOuterKey, false );
                     //noinspection StatementWithEmptyBody
-                    if ( innerMap.isEmpty() ) {
+                    if ( innerMap == null || innerMap.isEmpty() ) {
 
                         // skip this one
 
@@ -217,6 +251,7 @@ public class TwoDimensionalTreeMap<T1,T2,V> implements Serializable, TwoDimensio
 
     }
 
+    @NotNull
     public String toString() {
 
         return "TwoDimensionalTreeMap( size = " + size() + " )";

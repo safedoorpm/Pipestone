@@ -8,6 +8,7 @@ package com.obtuse.util;
  * Generate unique long ids within some id-space.
  */
 
+@SuppressWarnings("unused")
 public interface UniqueLongIdGenerator {
 
     /**

@@ -85,59 +85,7 @@ public class DefaultMpsKnob extends MpsKnob {
 
         MultiPointSlider.OrientedImage img = getOrientedImage( knobSize, positionOnLine, isSelected );
 
-//        int x = hotSpot.x - knobSize.integerSize() / 2;
-//        int y = hotSpot.y - knobSize.integerSize();
-
         img.drawImage( g, hotSpot );
-
-//                Logger.logMsg(
-//                        "hX = " + hotSpot.x + ", hy = " + hotSpot.y + ", x = " + x + ", y = " + y + ", knobSize = ( " +
-//                        knobSize + ", " + knobSize.integerSize() + " ), isSelected = " + isSelected + ", pol = " + positionOnLine
-//                );
-//
-//                double rotation = _rotations.get( positionOnLine );
-//                if ( rotation != 0.0 ) {
-//
-//                    g.rotate( rotation, hotSpot.x, hotSpot.y );
-//
-//                }
-//
-//                int fudgeX = 0;
-//                int fudgeY = 0;
-//                switch ( positionOnLine ) {
-//
-//                    case ABOVE:
-//                        fudgeX = 0;
-//                        break;
-//
-//                    case BELOW:
-//                        fudgeX = -1;
-//                        fudgeY = -1;
-//                        break;
-//
-//                    case LEFT:
-//                        fudgeX = -1;
-//                        break;
-//
-//                    case RIGHT:
-//                        fudgeX = 0;
-//                        fudgeY = -1;
-//                        break;
-//
-//                }
-//
-//                g.drawImage(
-//                        img,
-//                        x + fudgeX,
-//                        y - 1 + fudgeY,
-//                        imageObserver
-//                );
-//
-//                if ( rotation != 0.0 ) {
-//
-//                    g.rotate( -rotation, hotSpot.x, hotSpot.y );
-//
-//                }
 
     }
 
@@ -186,14 +134,6 @@ public class DefaultMpsKnob extends MpsKnob {
                     Graphics2D g2d = (Graphics2D)rotatedImage.getGraphics();
                     Double rotation = _rotations.get( positionOnLine );
                     g2d.rotate( rotation.doubleValue() );
-//                            g2d.setColor( Color.RED );
-//                            g2d.drawLine( 0, 0, 50, 50 );
-//                            g2d.setColor( Color.BLUE );
-//                            g2d.drawLine( 0, 0, -50, 50 );
-//                            g2d.setColor( Color.GREEN );
-//                            g2d.drawLine( 0, 0, 50, -50 );
-//                            g2d.setColor( Color.WHITE );
-//                            g2d.drawLine( 0, 0, -50, -50 );
 
                     @SuppressWarnings("UnusedDeclaration")
                     boolean drawImageRval;
@@ -223,14 +163,6 @@ public class DefaultMpsKnob extends MpsKnob {
 
                     Graphics2D g2d = (Graphics2D)rotatedImage.getGraphics();
                     g2d.rotate( _rotations.get( PositionOnLine.BELOW ).doubleValue() );
-//                            g2d.setColor( Color.RED );
-//                            g2d.drawLine( 0, 0, 50, 50 );
-//                            g2d.setColor( Color.BLUE );
-//                            g2d.drawLine( 0, 0, -50, 50 );
-//                            g2d.setColor( Color.GREEN );
-//                            g2d.drawLine( 0, 0, 50, -50 );
-//                            g2d.setColor( Color.WHITE );
-//                            g2d.drawLine( 0, 0, -50, -50 );
                     g2d.drawImage( sourceImage, -rotatedImage.getWidth( null ), -rotatedImage.getHeight( null ), null );
                     hotSpot = new Point( ks / 2, -2 );
 

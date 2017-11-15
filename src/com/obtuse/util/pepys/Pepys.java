@@ -21,7 +21,7 @@ import java.util.*;
  The desk across which all news travels.
  */
 
-@SuppressWarnings("unused")
+@SuppressWarnings({ "unused", "unchecked" })
 public class Pepys {
 
     public enum PepysEventType {
@@ -413,6 +413,13 @@ public class Pepys {
             }
 
             return eligibleListeners;
+
+        }
+
+        public String toString() {
+
+            return "PepysWeakSourceRef( sourceId=" + _sourceId + " )";
+
         }
 
     }
@@ -517,6 +524,12 @@ public class Pepys {
                 PepysPhantomSourceRef._activePhantoms.remove( this );
 
             }
+
+        }
+
+        public String toString() {
+
+            return "PepysPhantomSourceRef()";
 
         }
 
@@ -651,7 +664,6 @@ public class Pepys {
             @NotNull final PepysEventListener listener
     ) {
 
-        //noinspection unchecked
         Pepys.s_pepys.xRegisterInterest( source, anchor.anchor( listener ) );
 
     }
@@ -792,19 +804,7 @@ public class Pepys {
 
         if ( events != null ) {
 
-            synchronized ( Pepys.s_pepys ) {
-
-                for ( PepysEvent event : events ) {
-
-                    if ( event != null ) {
-
-                        Pepys.s_pepys.xFireEvent( event );
-
-                    }
-
-                }
-
-            }
+            fireEvents( events.toArray( new PepysEvent[ events.size() ] ) );
 
         }
 
@@ -901,7 +901,6 @@ public class Pepys {
 
         };
 
-        //noinspection unchecked
         PepysAnchor<PepysEventListener> anchor = new PepysAnchor();
 
         PepysEventListener s1listener1 = new PepysEventListener() {
@@ -1013,6 +1012,12 @@ public class Pepys {
         ObtuseUtil.safeSleepMillis( 3000L );
         Logger.logMsg( "done" );
         ObtuseUtil.safeSleepMillis( 3000L );
+
+    }
+
+    public String toString() {
+
+        return "Pepys()";
 
     }
 

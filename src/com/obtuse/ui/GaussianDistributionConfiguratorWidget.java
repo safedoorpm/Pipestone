@@ -80,17 +80,6 @@ public class GaussianDistributionConfiguratorWidget extends JPanel {
 
         super();
 
-//        for ( JPanel panel : _verticalPanels ) {
-//
-//            panel.setLayout( new BoxLayout( panel, BoxLayout.Y_AXIS ) );
-//
-//        }
-//        for ( JPanel panel : _horizontalPanels ) {
-//
-//            panel.setLayout( new BoxLayout( panel, BoxLayout.X_AXIS ) );
-//
-//        }
-
         //noinspection ThisEscapedInObjectConstruction
         setLayout( new BoxLayout( this, BoxLayout.X_AXIS ) );
         add( _panel1 );
@@ -147,13 +136,6 @@ public class GaussianDistributionConfiguratorWidget extends JPanel {
 
                     public void stateChanged( final ChangeEvent changeEvent ) {
 
-//                        Logger.logMsg(
-//                                "center changed:  " +
-//                                "value = " + _centerSlider.getModel().getValue() + ", " +
-//                                "min = " + _centerSlider.getModel().getMinimum() + ", " +
-//                                "max = " + _centerSlider.getModel().getMaximum()
-//                        );
-
                         setDistribution();
                         fireChangeListeners( changeEvent );
 
@@ -166,13 +148,6 @@ public class GaussianDistributionConfiguratorWidget extends JPanel {
                 new ChangeListener() {
 
                     public void stateChanged( final ChangeEvent changeEvent ) {
-
-//                        Logger.logMsg(
-//                                "std dev changed:  " +
-//                                "value = " + _standardDeviationSlider.getModel().getValue() + ", " +
-//                                "min = " + _standardDeviationSlider.getModel().getMinimum() + ", " +
-//                                "max = " + _standardDeviationSlider.getModel().getMaximum()
-//                        );
 
                         if ( _standardDeviationSlider.getValue() == 0 ) {
 
@@ -286,7 +261,6 @@ public class GaussianDistributionConfiguratorWidget extends JPanel {
         slider.setMinorTickSpacing( minorTicks );
         slider.setPaintLabels( true );
         slider.setPaintTicks( majorTicks > 0 || minorTicks > 0 );
-//        slider.setPaintTrack( true );
         slider.setLabelTable( labels );
 
     }

@@ -18,8 +18,6 @@ public class ParsingException extends Exception {
         MISC_ERROR_TYPE
     }
 
-    //public static final String HELLO_WORLD = "hello world";
-
     private final int _lineNumber;
     private final int _offset;
     private final ErrorType _errorType;

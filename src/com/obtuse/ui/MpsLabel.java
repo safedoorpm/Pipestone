@@ -64,18 +64,6 @@ public class MpsLabel {
         _textLabel = null;
         _imageLabel = image;
 
-//        if ( image instanceof BufferedImage ) {
-//
-//            _imageLabel = (BufferedImage)image;
-//
-//        } else {
-//
-//            _imageLabel = ImageIconUtils.toBufferedImage( image );
-//
-//        }
-//
-//        _generatedImage = _imageLabel;
-
     }
 
     /**
@@ -223,14 +211,8 @@ public class MpsLabel {
 
                 // Need to use the text variant
 
-//                TextLayout textLayout = new TextLayout( _textLabel, g2d.getFont(), g2d.getFontRenderContext() );
-//                Rectangle2D bounds = textLayout.getBounds();
-//                Logger.logMsg( "bounds is " + bounds );
-//                _generatedImage = new BufferedImage( bounds.getWidth(), bounds.getHeight(), BufferedImage.TYPE_INT_ARGB );
-
                 FontMetrics fontMetrics = g2d.getFontMetrics( g2d.getFont() );
                 Rectangle2D bounds = fontMetrics.getStringBounds( _textLabel, g2d );
-//                Logger.logMsg( "bounds for \"" + _textLabel + "\" is " + bounds );
                 int width = fontMetrics.stringWidth( _textLabel );
                 int height = fontMetrics.getHeight();
 
@@ -242,7 +224,6 @@ public class MpsLabel {
                 Graphics tg = _generatedImage.getGraphics();
                 tg.setColor( g2d.getColor() );
                 tg.drawString( _textLabel, -(int)Math.ceil( bounds.getX() ), -(int)Math.ceil( bounds.getY() ) );
-//                tg.drawString( _textLabel, 5, 5 );
 
                 _generatedImageFont = g2d.getFont();
 

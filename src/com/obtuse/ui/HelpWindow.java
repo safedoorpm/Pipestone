@@ -130,7 +130,6 @@ public class HelpWindow extends JDialog {
 
             String fontFace = "Lucida Grande";
             _preferredFontTag = "<font face=\"" + fontFace + "\">";
-//            _preferredFontTag = "";
 
         }
 

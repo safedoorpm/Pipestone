@@ -55,6 +55,7 @@ public class ObtuseUtil {
 
     public static boolean inJavaDebugger() {
 
+        @SuppressWarnings("UnnecessaryLocalVariable")
         boolean isDebug =
                 java.lang.management.ManagementFactory.getRuntimeMXBean().
                         getInputArguments().toString().indexOf( "-agentlib:jdwp" ) > 0;
@@ -124,39 +125,50 @@ public class ObtuseUtil {
     public static String decodePercent( final String str ) {
 
         try {
+
             StringBuilder sb = new StringBuilder();
-            @SuppressWarnings("TooBroadScope") int i = 0;
-            //noinspection ForLoopWithMissingComponent
-            for ( ; i < str.length(); i++ ) {
+            for ( int i = 0; i < str.length(); i++ ) {
+
                 char c = str.charAt( i );
                 switch ( c ) {
+
                     case '+':
                         sb.append( ' ' );
                         break;
+
                     case '%':
                         //noinspection MagicNumber
                         sb.append( (char)Integer.parseInt( str.substring( i + 1, i + 3 ), 16 ) );
                         i += 2;
                         break;
+
                     default:
                         sb.append( c );
                         break;
+
                 }
+
             }
+
             return new String( sb.toString().getBytes() );
+
         } catch ( Exception e ) {
+
             throw new IllegalArgumentException( "ERROR: Bad percent-encoding.", e );
+
         }
+
     }
 
     /**
      Determine if {@code [aStart,aLength)} overlaps with {@code [bStart,bEnd)}.
      <p/>IMPORTANT: note that the two regions are closed on the left and open on the right.
      Consequently, {@code [10,20)} does NOT overlap with {@code [20,30)} because {@code 20} is NOT included in the first region even though it is included in the second.
+
      @param aStart start of the first region.
-     @param aEnd one pixel past the end of the first region.
+     @param aEnd   one pixel past the end of the first region.
      @param bStart start of the second region.
-     @param bEnd one pixel past the end of the second region.
+     @param bEnd   one pixel past the end of the second region.
      @return {@code true} if the regions overlap; {@code false} otherwise. Note that a region is considered to be empty if its start and end are equal (empty regions do not overlap with any region).
      @throws IllegalArgumentException if {@code aStart > aEnd} or {@code bStart > bEnd}.
      */
@@ -191,9 +203,10 @@ public class ObtuseUtil {
      <li>assuming that LEN is non-negative, a LEN byte region starting at START does not overlap with any non-negative length region starting at START+LEN;
      for example, the {@code 3} units long region starting at {@code 10} does not overlap with the {@code 5} units long region starting at {@code 13}</li>
      </ol>
-     @param aStart start of the first region.
+
+     @param aStart  start of the first region.
      @param aLength the length of the first region.
-     @param bStart start of the second region.
+     @param bStart  start of the second region.
      @param bLength the length of the second region.
      @return {@code true} if the regions overlap; {@code false} otherwise. Note that a region is considered to be empty if its start and end are equal (empty regions do not overlap with any region).
      @throws IllegalArgumentException if {@code aStart} > {@code aLength} or {@code bStart > {@code bLength}}.
@@ -222,6 +235,7 @@ public class ObtuseUtil {
 
     /**
      Determine if messages passed to {@link #report(String)} are logged and traced or just traced.
+
      @param traceOnly {@code true} if messages passed to {@link #report(String)} are to be logged and traced; {@code false} if they are to be just traced.
      */
 
@@ -233,6 +247,7 @@ public class ObtuseUtil {
 
     /**
      Determine if trace-only mode is enabled.
+
      @return {@code true} if trace-only mode is enabled; {@code false} otherwise.
      */
 
@@ -247,6 +262,7 @@ public class ObtuseUtil {
      <p/>Messages are logged and traced by passing them to {@link Logger#logMsg(String)} (which implicitly also passes them to {@link Trace#event(String)}).
      Messages are just traced by passing them directly to {@code Trace.event(String)}.
      <p/>See {link #setTraceOnlyMode(boolean)} for more information.
+
      @param msg the message in question.
      */
 
@@ -273,6 +289,7 @@ public class ObtuseUtil {
      <p/>Messages are logged and traced by passing them to {@link Logger#logMsg(String)} (which implicitly also passes them to {@link Trace#event(String)}).
      Messages are just traced by passing them directly to {@code Trace.event(String)}.
      <p/>See {link #setTraceOnlyMode(boolean)} for more information.
+
      @param msg the message in question.
      */
 
@@ -300,6 +317,7 @@ public class ObtuseUtil {
      @param <V> The type of the values in the hash table.
      */
 
+    @SuppressWarnings("unchecked")
     private static class UnmodifiableHashtable<K, V> extends Hashtable<K, V> {
 
         private boolean _readonly;
@@ -336,8 +354,6 @@ public class ObtuseUtil {
         public Set<Map.Entry<K, V>> entrySet() {
 
             if ( _readonly ) {
-
-                //noinspection unchecked,rawtypes
 
                 return (Set)Collections.unmodifiableSet( _ht.entrySet() );
 
@@ -2031,6 +2047,7 @@ public class ObtuseUtil {
      */
 
     public static void doNothing() {
+
     }
 
     /**
@@ -2094,6 +2111,7 @@ public class ObtuseUtil {
 
     /**
      Turn an arbitrary object into an enquoted for Java string.
+
      @param obj the object to be enquoted.
      @return the value generated by {@link #enquoteToJavaString}{@code ( String.valueOf( obj ) )}.
      */
@@ -2109,6 +2127,7 @@ public class ObtuseUtil {
      <p/>The main thing that this method does is that it turns special characters like '\n', '\t', '\"' etc into
      "\\n", "\\t", "\\\"" etc. For example, the 17 character Java string "hello\tthere\nworld" gets turned into
      the 19 character Java string "hello\\tthere\\nworld".
+
      @param string the string.
      @return the resulting enquoted string in a {@link StringBuilder} (if {@code string} is {@code null} or {@code "null"} then the return value is a {@link StringBuilder} equivalent to the string {@code "null"}).
      That two different input values yield the same result is pretty ugly. This is why this method is private.
@@ -2138,6 +2157,7 @@ public class ObtuseUtil {
      <p/>The main thing that this method does is that it turns special characters like '\n', '\t', '\"' etc into
      "\\n", "\\t", "\\\"" etc. For example, the 17 character Java string {@code "hello\tthere\nworld"} gets turned into
      the 21 character Java string {@code "\"hello\\tthere\\nworld\""}.
+
      @param string the string.
      @return the resulting enquoted string (if {@code string} is {@code null} then the return value is the string {@code "null"}).
      */
@@ -2153,6 +2173,7 @@ public class ObtuseUtil {
      <p/>The main thing that this method does is that it turns special characters like '\n', '\t', '\"' etc into
      "\\n", "\\t", "\\\"" etc. For example, the 17 character Java string {@code "hello\tthere\nworld"} gets turned into
      the 19 character Java string {@code "hello\\tthere\\nworld"}.
+
      @param string the string.
      @return the resulting enquoted string (if {@code string} is {@code null} or {@code "null"} then the return value is the string {@code "null"}).
      That two different input values yield the same result is pretty ugly. This is why this method is private.
@@ -2175,6 +2196,7 @@ public class ObtuseUtil {
      <p/>The main thing that this method does is that it turns special characters like '\n', '\t', '\"', etc in the input string into
      "\\n", "\\t", "\\\"", etc in the output string. For example, the 17 character Java string {@code "hello\tthere\nworld"} gets turned into
      the 21 character Java string {@code "\"hello\\tthere\\nworld\""}.
+
      @param string the string.
      @return the resulting enquoted string (if {@code string} is {@code null} then the return value is a {@link StringBuilder} equivalent to the string {@code "null"};
      if {@code string} is the six character string {@code "null"} then the result is a {@link StringBuilder} equivalent to the string {@code "\"null\""}).
@@ -2236,6 +2258,7 @@ public class ObtuseUtil {
      Turn a char into a {@link String} containing a properly quoted version of the char (without surrounding quotes).
      <p/>The main thing that this method does is that it turns special characters like '\n', '\t', '\"' etc into
      "\\n", "\\t", "\\\"", etc.
+
      @param ch the {@code char}.
      @return the resulting enquoted {@link String}.
      */
@@ -2273,6 +2296,7 @@ public class ObtuseUtil {
      Turn a char into a {@link String} containing a properly quoted version of the char (with surrounding single quotes).
      <p/>The main thing that this method does is that it turns special characters like '\n', '\t', '\"' etc into
      strings like "'\\n'", "'\\t'", "'\\\"'" etc.
+
      @param ch the {@code char}.
      @return the resulting enquoted {@link String}.
      */
@@ -2510,10 +2534,30 @@ public class ObtuseUtil {
         StringBuilder nsb = enquoteJavaStringToNakedStringBuilder( input );
         StringBuilder sb = enquoteToJavaStringBuilder( input );
 
-        Logger.logMsg( "" + ( input == null ? "null" : input.length() ) + " char input string becomes " + nakedOutput.length() + " char naked output string " + nakedOutput );
-        Logger.logMsg( "" + ( input == null ? "null" : input.length() ) + " char input string becomes " + output.length() + " char output string " + output );
-        Logger.logMsg( "" + ( input == null ? "null" : input.length() ) + " char input string becomes " + nsb.length() + " char naked output StringBuilder " + nsb );
-        Logger.logMsg( "" + ( input == null ? "null" : input.length() ) + " char input string becomes " + sb.length() + " char output StringBuilder " + sb );
+        Logger.logMsg( "" +
+                       ( input == null ? "null" : input.length() ) +
+                       " char input string becomes " +
+                       nakedOutput.length() +
+                       " char naked output string " +
+                       nakedOutput );
+        Logger.logMsg( "" +
+                       ( input == null ? "null" : input.length() ) +
+                       " char input string becomes " +
+                       output.length() +
+                       " char output string " +
+                       output );
+        Logger.logMsg( "" +
+                       ( input == null ? "null" : input.length() ) +
+                       " char input string becomes " +
+                       nsb.length() +
+                       " char naked output StringBuilder " +
+                       nsb );
+        Logger.logMsg( "" +
+                       ( input == null ? "null" : input.length() ) +
+                       " char input string becomes " +
+                       sb.length() +
+                       " char output StringBuilder " +
+                       sb );
 
     }
 
@@ -2581,14 +2625,19 @@ public class ObtuseUtil {
 
     }
 
+    private static Integer s_pid = null;
+
     /**
      Get our process id (not guaranteed to work on all platforms).
-     <p/>Found at
+     <p/>This is pretty much pure black magic.
+     Found at
      <blockquote><tt>http://stackoverflow.com/questions/35842/how-can-a-java-program-get-its-own-process-id</tt></blockquote>
-     (last referenced 2013/09/24)
-     */
+     (first referenced 2013/09/24; last referenced 2017/11/15)
+     <p>There is some grounds for optimism.
+     Apparently, <blockquote>{@code long pid = ProcessHandle.current().getPid();}</blockquote> yields the desired result on Java 9.
 
-    private static Integer s_pid = null;
+     @return the process id of the process running our JVM or {@code -1} if the particular flavour of black magic used by this method fails on your platform.
+     */
 
     public static int getPid() {
 
@@ -2599,12 +2648,13 @@ public class ObtuseUtil {
 
                 java.lang.management.RuntimeMXBean runtime =
                         java.lang.management.ManagementFactory.getRuntimeMXBean();
+                @SuppressWarnings("JavaReflectionMemberAccess")
                 java.lang.reflect.Field jvm = runtime.getClass().getDeclaredField( "jvm" );
                 jvm.setAccessible( true );
                 sun.management.VMManagement mgmt =
                         (sun.management.VMManagement)jvm.get( runtime );
-                java.lang.reflect.Method pidMethod =
-                        mgmt.getClass().getDeclaredMethod( "getProcessId" );
+                @SuppressWarnings("JavaReflectionMemberAccess")
+                java.lang.reflect.Method pidMethod = mgmt.getClass().getDeclaredMethod( "getProcessId" );
                 pidMethod.setAccessible( true );
 
                 ObtuseUtil.s_pid = (Integer)pidMethod.invoke( mgmt );
@@ -2753,11 +2803,7 @@ public class ObtuseUtil {
 
     private static void rememberBitName( final int maskValue, final String name ) {
 
-        if ( maskValue == 0 ) {
-
-//	    Logger.logMsg( "rememberBitName:  mask named \"" + name + "\" has value 0 - ignored" );
-
-        } else {
+        if ( maskValue != 0 ) {
 
             if ( Integer.highestOneBit( maskValue ) == Integer.lowestOneBit( maskValue ) ) {
 
@@ -2765,20 +2811,35 @@ public class ObtuseUtil {
 
                 if ( s_maskExBits[bitIx] == null ) {
 
-//		    Logger.logMsg( "rememberBitName:  1 << " + bitIx + " is named \"" + name + "\"" );
+//                    Logger.logMsg( "rememberBitName:  1 << " + bitIx + " is named \"" + name + "\"" );
+
                     s_maskExBits[bitIx] = name;
 
-                } else {
-
-//		    Logger.logMsg( "rememberBitName:  1 << " + bitIx + " is already called \"" + s_maskExBits[bitIx] + "\" when attempting to assign new name \"" + name + "\" - new name ignored" );
+//                } else {
+//
+//                    Logger.logMsg( "rememberBitName:  1 << " +
+//                                   bitIx +
+//                                   " is already called \"" +
+//                                   s_maskExBits[bitIx] +
+//                                   "\" when attempting to assign new name \"" +
+//                                   name +
+//                                   "\" - new name ignored" );
 
                 }
 
-            } else {
-
-//		Logger.logMsg( "rememberBitName:  bit mask " + Integer.toBinaryString( maskValue ) + " called \"" + name + "\" has more than one bit set - ignored" );
+//            } else {
+//
+//                Logger.logMsg( "rememberBitName:  bit mask " +
+//                               Integer.toBinaryString( maskValue ) +
+//                               " called \"" +
+//                               name +
+//                               "\" has more than one bit set - ignored" );
 
             }
+
+//        } else {
+//
+//            Logger.logMsg( "rememberBitName:  mask named \"" + name + "\" has value 0 - ignored" );
 
         }
 

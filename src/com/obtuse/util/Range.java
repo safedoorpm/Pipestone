@@ -114,7 +114,7 @@ public class Range<T extends Comparable<T>> implements Serializable {
      * derived classes' implementations of this method to detect who knows what sort of inconsistencies.
      */
 
-    public boolean overlaps( final Range<? extends T> rhs )
+    public boolean overlaps( final Range rhs )
             throws RejectRangeException {
 
 //        Logger.logMsg( "ls=" + getLongStartValue() + ", le=" + getLongEndValue() + ", rhs.ls=" + rhs.getLongStartValue() + ", rhs.le=" + rhs.getLongEndValue() );
@@ -139,7 +139,7 @@ public class Range<T extends Comparable<T>> implements Serializable {
      * derived classes' implementations of this method to detect who knows what sort of inconsistencies.
      */
 
-    public boolean touches( final Range<? extends T> rhs )
+    public boolean touches( final Range rhs )
             throws RejectRangeException {
 
         return _longEndValue + 1L == rhs.getLongStartValue() || _longStartValue - 1L == rhs.getLongEndValue();

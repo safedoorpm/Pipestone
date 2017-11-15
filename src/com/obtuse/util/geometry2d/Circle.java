@@ -2,6 +2,12 @@ package com.obtuse.util.geometry2d;
 
 /*
  * Copyright © 2015 Daniel Boulet
+ *
+ * I don't remember writing this class.
+ * Then again, I don't remember where I got it from if I didn't write it.
+ * Should you know who did write this class, please let me know (danny@matilda.com) so that I can give the author proper credit
+ * and deal with the obvious issue with the above copyright notice should it turn out that I did not write this class (it is, after all,
+ * just barely possible that someone will be able to prove that I wrote this class - unlikely but possible).
  */
 
 import com.obtuse.exceptions.HowDidWeGetHereError;
@@ -138,6 +144,11 @@ public class Circle {
 
         /**
          Return a copy of the array of points which were provided when this instance was created.
+         <p>This method might return a {@code null} value in certain circumstances.
+         If you are certain that it cannot return a {@code null} value in your circumstances,
+         you might prefer to call {@link #getMandatoryPoints()} to avoid your IDE
+         grumbling at you about theoretically possible {@code null} values (a consequence of
+         this method being declared to be {@code @Nullable}.</p>
 
          @return a copy of the array of points (both the array and the points within the array will
          be copies which the caller is free to do with as they wish. Each call to this method returns
@@ -164,6 +175,32 @@ public class Circle {
 
             }
 
+        }
+
+        /**
+         Return a copy of the array of points which were provided when this instance was created.
+         <p>This method throws an {@link IllegalArgumentException} if it would otherwise
+         return a {@code null} value.
+         This allows this method to be marked as {@code @NotNull} which provides all sorts
+         of reassurance to some IDEs.</p>
+
+         @return a copy of the array of points (both the array and the points within the array will
+         be copies which the caller is free to do with as they wish. Each call to this method returns
+         a new copy of the array.
+         */
+
+        @NotNull
+        public MyPoint[] getMandatoryPoints() {
+
+            MyPoint[] rval = getPoints();
+            if ( rval == null ) {
+                
+                throw new IllegalArgumentException( "IntersectionInfo.getMandatoryPoints:  call to getMandatoryPoints() when there actually are no points" );
+                
+            }
+            
+            return rval;
+            
         }
 
         /**
@@ -224,6 +261,7 @@ public class Circle {
      Beware of roundoff error problems . . .
      */
 
+    @SuppressWarnings("NonFinalFieldReferenceInEquals")
     public boolean equals( final Object rhs ) {
 
         if ( rhs instanceof Circle ) {
@@ -298,6 +336,7 @@ public class Circle {
 
     }
 
+    @SuppressWarnings("unused")
     public static IntersectionInfo computeCircleCircleIntersection(
             final double x0,
             final double y0,
@@ -494,6 +533,7 @@ public class Circle {
 
         // Determine the absolute intersection points.
 
+        @SuppressWarnings("UnnecessaryLocalVariable")
         IntersectionInfo rval = new IntersectionInfo(
                 new MyPoint[]{
                         new MyPoint( x2 + rx, y2 + ry ),
@@ -514,6 +554,7 @@ public class Circle {
      @return {@link com.obtuse.util.geometry2d.Circle.IntersectionInfo} instance indicating which intersection points, if any, were found.
      */
 
+    @SuppressWarnings("unused")
     @NotNull
     public IntersectionInfo intersects( @NotNull final Circle other ) {
 
@@ -733,33 +774,52 @@ public class Circle {
 
         if ( info == null ) {
 
-            throw new HowDidWeGetHereError( "circle D " +
-                                            d +
-                                            " is identical to circle C " +
-                                            this +
-                                            " when computing tangent lines from point P " +
-                                            p +
-                                            " to circle C (should be impossible)" );
-
+            throw new HowDidWeGetHereError(
+                    "Circle.computeTangentLines:  " +
+                    "circle D " +
+                    d +
+                    " is identical to circle C " +
+                    this +
+                    " when computing tangent lines from point P " +
+                    p +
+                    " to circle C (should be impossible)"
+            );
+            
         }
 
         if ( info.getCount() != 2 ) {
 
-            throw new HowDidWeGetHereError( "found " +
-                                            info.getCount() +
-                                            " intersection point" +
-                                            ( info.getCount() == 1 ? "" : "s" ) +
-                                            " between circle C " +
-                                            this +
-                                            " and circle D " +
-                                            d +
-                                            " when computing tangent lines from point P " +
-                                            p +
-                                            " to circle C (should be impossible)" );
-
+            throw new HowDidWeGetHereError(
+                    "Circle.computeTangentLines:  " +
+                    "found " +
+                    info.getCount() +
+                    " intersection point" +
+                    ( info.getCount() == 1 ? "" : "s" ) +
+                    " between circle C " +
+                    this +
+                    " and circle D " +
+                    d +
+                    " when computing tangent lines from point P " +
+                    p +
+                    " to circle C (should be impossible)"
+            );
+            
         }
 
-        return info.getPoints();
+        // If the above call to info.getCount() returns rather than throwing an exception then info.getPoints() is guaranteed to return an array with 0, 1 or 2 points in it.
+        // Since we've called info.getCount() above, a null return value from info.getPoints() is worthy of a HowDidWeGetHereError.
+
+        MyPoint[] rval = info.getPoints();
+        if ( rval == null ) {
+            
+            throw new HowDidWeGetHereError(
+                    "Circle.computeTangentLines:  " +
+                    "info.getCount() just said we'd get two points but we didn't even get an array of points"
+            );
+            
+        }
+        
+        return rval;
 
     }
 
@@ -795,6 +855,7 @@ public class Circle {
      @return the new circle.
      */
 
+    @SuppressWarnings("unused")
     public Circle moveRelative( final Point2D.Double delta ) {
 
         return new Circle( new MyPoint( _center.x + delta.x, _center.y + delta.y ), _radius );
@@ -834,6 +895,7 @@ public class Circle {
      @return the new circle.
      */
 
+    @SuppressWarnings("unused")
     public Circle moveTo( final Point2D.Double newLocation ) {
 
         return new Circle( new MyPoint( newLocation.x, newLocation.y ), _radius );
@@ -854,6 +916,7 @@ public class Circle {
      @return the new circle.
      */
 
+    @SuppressWarnings("unused")
     public Circle moveTo( final double xLocation, final double yLocation ) {
 
         return new Circle( new MyPoint( _center.x + xLocation, _center.y + yLocation ), _radius );
@@ -874,6 +937,7 @@ public class Circle {
      @return the rotated circle.
      */
 
+    @SuppressWarnings("unused")
     public Circle rotateDegrees( final double degrees ) {
 
         return rotateTheta( Math.PI * degrees / 180 );
@@ -1311,6 +1375,7 @@ public class Circle {
      @return the adjusted array.
      */
 
+    @SuppressWarnings("unused")
     private static MyPoint[] rotateIntersectionsDegrees( @Nullable final MyPoint[] correctIntersections, final double degrees ) {
 
         return rotateIntersectionsTheta( correctIntersections, Math.PI * degrees / 180 );
@@ -1361,6 +1426,7 @@ public class Circle {
 
     }
 
+    @SuppressWarnings("UnnecessaryReturnStatement")
     private static void validate(
             @NotNull final Circle circle1,
             @NotNull final Circle circle2,
@@ -1370,8 +1436,8 @@ public class Circle {
 
         if ( !info.infiniteIntersections() &&
              info.getCount() == 2 &&
-             Util.nearlyEqual( info.getPoints()[0].x, info.getPoints()[1].x, 1e-5 ) &&
-             Util.nearlyEqual( info.getPoints()[0].y, info.getPoints()[1].y, 1e-5 ) ) {
+             Util.nearlyEqual( info.getMandatoryPoints()[0].x, info.getMandatoryPoints()[1].x, 1e-5 ) &&
+             Util.nearlyEqual( info.getMandatoryPoints()[0].y, info.getMandatoryPoints()[1].y, 1e-5 ) ) {
 
             validate(
                     circle1,
@@ -1379,8 +1445,8 @@ public class Circle {
                     new IntersectionInfo(
                             new Point2D.Double[]{
                                     new Point2D.Double(
-                                            ( info.getPoints()[0].x + info.getPoints()[1].x ) / 2,
-                                            ( info.getPoints()[0].y + info.getPoints()[1].y ) / 2
+                                            ( info.getMandatoryPoints()[0].x + info.getMandatoryPoints()[1].x ) / 2,
+                                            ( info.getMandatoryPoints()[0].y + info.getMandatoryPoints()[1].y ) / 2
                                     )
                             }
                     ),
@@ -1451,7 +1517,7 @@ public class Circle {
 
                     case 1:
 
-                        if ( correctIntersections[0].nearlyEquals( info.getPoints()[0] ) ) {
+                        if ( correctIntersections[0].nearlyEquals( info.getMandatoryPoints()[0] ) ) {
 
                             Logger.logMsg(
                                     "    we correctly determined that " +
@@ -1473,7 +1539,7 @@ public class Circle {
                                     " at " +
                                     correctIntersections[0] +
                                     " but we found that it intersects at " +
-                                    info.getPoints()[0]
+                                    info.getMandatoryPoints()[0]
                             );
 
                         }
@@ -1482,8 +1548,8 @@ public class Circle {
 
                     case 2:
 
-                        if ( correctIntersections[0].nearlyEquals( info.getPoints()[0] ) &&
-                             correctIntersections[1].nearlyEquals( info.getPoints()[1] ) ) {
+                        if ( correctIntersections[0].nearlyEquals( info.getMandatoryPoints()[0] ) &&
+                             correctIntersections[1].nearlyEquals( info.getMandatoryPoints()[1] ) ) {
 
                             Logger.logMsg(
                                     "    we correctly determined that " +
@@ -1491,13 +1557,13 @@ public class Circle {
                                     " intersects " +
                                     circle2 +
                                     " at " +
-                                    info.getPoints()[0] +
+                                    info.getMandatoryPoints()[0] +
                                     " and at " +
-                                    info.getPoints()[1]
+                                    info.getMandatoryPoints()[1]
                             );
 
-                        } else if ( correctIntersections[1].nearlyEquals( info.getPoints()[0] ) &&
-                                    correctIntersections[0].nearlyEquals( info.getPoints()[1] ) ) {
+                        } else if ( correctIntersections[1].nearlyEquals( info.getMandatoryPoints()[0] ) &&
+                                    correctIntersections[0].nearlyEquals( info.getMandatoryPoints()[1] ) ) {
 
                             Logger.logMsg(
                                     "    we correctly except for order determined that " +
@@ -1505,9 +1571,9 @@ public class Circle {
                                     " intersects " +
                                     circle2 +
                                     " at " +
-                                    info.getPoints()[0] +
+                                    info.getMandatoryPoints()[0] +
                                     " and at " +
-                                    info.getPoints()[1]
+                                    info.getMandatoryPoints()[1]
                             );
 
                         } else {
@@ -1519,9 +1585,9 @@ public class Circle {
                                     " intersects " +
                                     circle2 +
                                     " at " +
-                                    info.getPoints()[0] +
+                                    info.getMandatoryPoints()[0] +
                                     " and at " +
-                                    info.getPoints()[1] +
+                                    info.getMandatoryPoints()[1] +
                                     " but they actually intersect at " +
                                     correctIntersections[0] +
                                     " and at " +

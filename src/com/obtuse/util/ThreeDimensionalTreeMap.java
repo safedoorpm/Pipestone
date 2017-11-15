@@ -4,6 +4,9 @@
 
 package com.obtuse.util;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import java.io.Serializable;
 import java.util.*;
 
@@ -17,7 +20,7 @@ public class ThreeDimensionalTreeMap<T1,T2,T3,V> implements Serializable, ThreeD
     }
 
     @SuppressWarnings("UnusedDeclaration")
-    public ThreeDimensionalTreeMap( final ThreeDimensionalSortedMap<T1,T2,T3,V> map ) {
+    public ThreeDimensionalTreeMap( @NotNull final ThreeDimensionalSortedMap<T1,T2,T3,V> map ) {
         super();
 
         for ( T1 t1 : map.outerKeys() ) {
@@ -29,15 +32,33 @@ public class ThreeDimensionalTreeMap<T1,T2,T3,V> implements Serializable, ThreeD
 
     }
 
-    public void put( final T1 key1, final T2 key2, final T3 key3, final V value ) {
+    public void put( @NotNull final T1 key1, @NotNull final T2 key2, @NotNull final T3 key3, @Nullable final V value ) {
 
-        TwoDimensionalSortedMap<T2,T3,V> innerMap = getInnerMap( key1, true );
+        TwoDimensionalSortedMap<T2,T3,V> innerMap = getNotNullInnerMap( key1 );
 
         innerMap.put( key2, key3, value );
 
     }
 
-    public TwoDimensionalSortedMap<T2,T3,V> getInnerMap( final T1 key1, final boolean forceCreate ) {
+    @Override
+    @NotNull
+    public TwoDimensionalSortedMap<T2,T3,V> getNotNullInnerMap( @NotNull final T1 key1 ) {
+
+        TwoDimensionalSortedMap<T2,T3,V> innerMap = _map.get( key1 );
+        if ( innerMap == null ) {
+
+            innerMap = new TwoDimensionalTreeMap<>();
+            _map.put( key1, innerMap );
+
+        }
+
+        return innerMap;
+
+    }
+
+    @Override
+    @Nullable
+    public TwoDimensionalSortedMap<T2,T3,V> getInnerMap( @NotNull final T1 key1, final boolean forceCreate ) {
 
         TwoDimensionalSortedMap<T2,T3,V> innerMap = _map.get( key1 );
         if ( innerMap == null && forceCreate ) {
@@ -51,13 +72,17 @@ public class ThreeDimensionalTreeMap<T1,T2,T3,V> implements Serializable, ThreeD
 
     }
 
-    public TwoDimensionalSortedMap<T2,T3,V> removeInnerMap( final T1 key ) {
+    @Override
+    @Nullable
+    public TwoDimensionalSortedMap<T2,T3,V> removeInnerMap( @NotNull final T1 key ) {
 
         return _map.remove( key );
 
     }
 
-    public V get( final T1 key1, final T2 key2, final T3 key3 ) {
+    @Override
+    @Nullable
+    public V get( @NotNull final T1 key1, @NotNull final T2 key2, @NotNull final T3 key3 ) {
 
         TwoDimensionalSortedMap<T2,T3,V> innerMap = _map.get( key1 );
         if ( innerMap == null ) {
@@ -70,7 +95,9 @@ public class ThreeDimensionalTreeMap<T1,T2,T3,V> implements Serializable, ThreeD
 
     }
 
-    public V remove( final T1 key1, final T2 key2, final T3 key3 ) {
+    @Override
+    @Nullable
+    public V remove( @NotNull final T1 key1, @NotNull final T2 key2, @NotNull final T3 key3 ) {
 
         V rval = null;
 
@@ -88,6 +115,7 @@ public class ThreeDimensionalTreeMap<T1,T2,T3,V> implements Serializable, ThreeD
 
     }
 
+    @Override
     public int size() {
 
         int totalSize = 0;
@@ -101,6 +129,7 @@ public class ThreeDimensionalTreeMap<T1,T2,T3,V> implements Serializable, ThreeD
 
     }
 
+    @Override
     public boolean isEmpty() {
 
         // We could just use "return size() == 0" but the short circuiting that we do below makes this approach
@@ -126,18 +155,24 @@ public class ThreeDimensionalTreeMap<T1,T2,T3,V> implements Serializable, ThreeD
 
     }
 
+    @Override
+    @NotNull
     public Set<T1> outerKeys() {
 
         return _map.keySet();
 
     }
 
+    @Override
+    @NotNull
     public Collection<TwoDimensionalSortedMap<T2,T3,V>> innerMaps() {
 
         return _map.values();
 
     }
 
+    @Override
+    @NotNull
     public Iterator<V> iterator() {
 
         return new Iterator<V>() {
@@ -164,13 +199,14 @@ public class ThreeDimensionalTreeMap<T1,T2,T3,V> implements Serializable, ThreeD
 
                     TwoDimensionalSortedMap<T2,T3,V> innerMap = getInnerMap( _activeOuterKey, false );
                     //noinspection StatementWithEmptyBody
-                    if ( innerMap.isEmpty() ) {
+                    if ( innerMap == null || innerMap.isEmpty() ) {
 
                         // skip this one
 
                     } else {
 
                         _innerIterator = innerMap.iterator();
+
                         break;
 
                     }

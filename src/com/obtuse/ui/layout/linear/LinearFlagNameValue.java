@@ -21,61 +21,58 @@ public class LinearFlagNameValue extends GowingPackableAttribute {
 
     public static final GowingEntityFactory FACTORY = new GowingEntityFactory( ENTITY_TYPE_NAME ) {
 
-	@Override
-	public int getOldestSupportedVersion() {
+        @Override
+        public int getOldestSupportedVersion() {
 
-	    return VERSION;
-	}
+            return VERSION;
+        }
 
-	@Override
-	public int getNewestSupportedVersion() {
+        @Override
+        public int getNewestSupportedVersion() {
 
-	    return VERSION;
-	}
+            return VERSION;
+        }
 
-	@Override
-	@NotNull
-	public GowingPackable createEntity( @NotNull final GowingUnPacker unPacker, @NotNull final GowingPackedEntityBundle bundle, final GowingEntityReference er )
-		throws GowingUnPackerParsingException {
+        @Override
+        @NotNull
+        public GowingPackable createEntity(
+                @NotNull final GowingUnPacker unPacker,
+                @NotNull final GowingPackedEntityBundle bundle,
+                final GowingEntityReference er
+        )
+                throws GowingUnPackerParsingException {
 
-	    return new LinearFlagNameValue( unPacker, bundle, er );
+            return new LinearFlagNameValue( unPacker, bundle );
 
-	}
+        }
 
     };
 
     protected LinearFlagNameValue( final LinearFlagName key, final Object value, final GowingPackableType type, final boolean computed ) {
-	super( key, value, type, computed );
+
+        super( key, value, type, computed );
 
     }
 
-//    protected LinearFlagNameValue( GowingUnPacker unPacker, GowingPackedEntityBundle bundle, GowingEntityReference er ) {
-//	super( unPacker, bundle, er );
-//
-//    }
+    public LinearFlagNameValue( final GowingUnPacker unPacker, final GowingPackedEntityBundle bundle )
+            throws GowingUnPackerParsingException {
 
-    public LinearFlagNameValue( final GowingUnPacker unPacker, final GowingPackedEntityBundle bundle, final GowingEntityReference er )
-	    throws GowingUnPackerParsingException {
-	super(
-		unPacker,
-		bundle.getSuperBundle(),
-		er
-	);
+        super( unPacker, bundle.getSuperBundle() );
 
     }
 
     @NotNull
     public GowingPackedEntityBundle bundleThyself( final boolean isPackingSuper, final GowingPacker packer ) {
 
-	@SuppressWarnings("UnnecessaryLocalVariable")
-	GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
-		LinearFlagNameValue.ENTITY_TYPE_NAME,
-		LinearFlagNameValue.VERSION,
-		super.bundleThyself( true, packer ),
-		packer.getPackingContext()
-	);
+        @SuppressWarnings("UnnecessaryLocalVariable")
+        GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
+                LinearFlagNameValue.ENTITY_TYPE_NAME,
+                LinearFlagNameValue.VERSION,
+                super.bundleThyself( true, packer ),
+                packer.getPackingContext()
+        );
 
-	return bundle;
+        return bundle;
 
     }
 

@@ -16,7 +16,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Vector;
 
-@SuppressWarnings( { "UnusedDeclaration", "UnnecessaryParentheses" } )
+@SuppressWarnings({ "UnusedDeclaration", "UnnecessaryParentheses" })
 public class BezierCurveSequence extends AbstractCurveSequence {
 
     private List<CubicBezierCurve> _curves = null;
@@ -26,18 +26,6 @@ public class BezierCurveSequence extends AbstractCurveSequence {
 
     private double _cachedStrength = -1.0;
 
-    //    /**
-//     * Something that wants to be informed when a {@link BezierCurveSequence} instance changes.
-//     */
-//
-//    public interface BezierCurveListener {
-//
-//        enum ChangeType { POINT_ADDED, POINT_REMOVED, POINT_MOVED, SCALE_CHANGED }
-//
-//        void lineChanged( ChangeType changeType );
-//
-//    }
-
     public class PointOnCurve implements PointOnGraphicsElement {
 
         private int _curveIndex;
@@ -45,6 +33,7 @@ public class BezierCurveSequence extends AbstractCurveSequence {
         private Point2D _point;
 
         public PointOnCurve( final CubicBezierCurve cubicBezierCurve, final int curveIndex, final Point2D point ) {
+
             super();
 
             _curveIndex = curveIndex;
@@ -52,12 +41,6 @@ public class BezierCurveSequence extends AbstractCurveSequence {
             _point = point;
 
         }
-
-//        public int getElementIndex() {
-//
-//            return _curveIndex;
-//
-//        }
 
         public CubicBezierCurve getGraphicsElement() {
 
@@ -74,10 +57,11 @@ public class BezierCurveSequence extends AbstractCurveSequence {
     }
 
     /**
-     * Create an empty curved line.
+     Create an empty curved line.
      */
 
     public BezierCurveSequence( final GraphicsElement parent ) {
+
         super( parent );
 
         flushCachedData();
@@ -122,15 +106,13 @@ public class BezierCurveSequence extends AbstractCurveSequence {
     }
 
     /**
-     * Find the nearest point on one of the curves and return both the point and the curve.
-     * @param p the point from which we must find the shortest line to the curve from.
-     * @return the closest point to p (null if the curve sequence is empty).
+     Find the nearest point on one of the curves and return both the point and the curve.
+
+     @param p the point from which we must find the shortest line to the curve from.
+     @return the closest point to p (null if the curve sequence is empty).
      */
 
     public PointOnCurve findNearestPoint( final Point2D p ) {
-
-        //        Point2D currentNearestPoint = null;
-//        int nearestPointCurveIndex = -1;
 
         getCubicCurves();
 
@@ -185,20 +167,21 @@ public class BezierCurveSequence extends AbstractCurveSequence {
     }
 
     /**
-     * Construct a sequence of cubic Bezier curves using the current sequence of points.
-     * <p/>
-     * This method computes the parameters of a sequence of smoothly connected Bezier
-     * curves using this instance's current sequence of points.  The method then returns
-     * a {@link java.awt.geom.GeneralPath} which contains either a sequence of
-     * connected Bezier curves or a sequence of Bezier curve control bars (the lines with
-     * handles on them that many user interfaces provide to allow the user to control the
-     * shape of individual Bezier curves) as specified by this method's <tt>getCurve</tt>
-     * parameter.
-     *  This method actually computes both the curves
-     * and the control bars because it is not possible to describe the curves without the
-     * control bars.
-     * @param getCurve true if the curve is to be returned; false if the control bars are to be returned.
-     * @return a shape describing either the curve or the control bars.
+     Construct a sequence of cubic Bezier curves using the current sequence of points.
+     <p/>
+     This method computes the parameters of a sequence of smoothly connected Bezier
+     curves using this instance's current sequence of points.  The method then returns
+     a {@link java.awt.geom.GeneralPath} which contains either a sequence of
+     connected Bezier curves or a sequence of Bezier curve control bars (the lines with
+     handles on them that many user interfaces provide to allow the user to control the
+     shape of individual Bezier curves) as specified by this method's <tt>getCurve</tt>
+     parameter.
+     This method actually computes both the curves
+     and the control bars because it is not possible to describe the curves without the
+     control bars.
+
+     @param getCurve true if the curve is to be returned; false if the control bars are to be returned.
+     @return a shape describing either the curve or the control bars.
      */
 
     protected GeneralPath getAutoCurveOrControlsPath( final boolean getCurve ) {
@@ -224,8 +207,6 @@ public class BezierCurveSequence extends AbstractCurveSequence {
 
         _cachedStrength = getStrength();
 
-//        Logger.logMsg( "building automatic Bezier path for " + this );
-
         Vector<Point2D> pointsVector = getDistinctPoints( getScale() );
 
         Point2D[] points = pointsVector.toArray( new Point2D[pointsVector.size()] );
@@ -235,8 +216,6 @@ public class BezierCurveSequence extends AbstractCurveSequence {
             return getCurve ? _curvesPath : _controlsPath;
 
         }
-
-//        Logger.logMsg( "curve with duplicates eliminated is " + fmtPoints( points ) );
 
         Point2D originPoint = points[0];
 
@@ -267,8 +246,8 @@ public class BezierCurveSequence extends AbstractCurveSequence {
 
             } else {
 
-                double nextPointX = points[ ix + 1 ].getX();
-                double nextPointY = points[ ix + 1 ].getY();
+                double nextPointX = points[ix + 1].getX();
+                double nextPointY = points[ix + 1].getY();
                 unscaledNextControlSlopeX = nextPointX - prevPointX;
                 unscaledNextControlSlopeY = nextPointY - prevPointY;
 
@@ -282,7 +261,11 @@ public class BezierCurveSequence extends AbstractCurveSequence {
 
                 // Don't know which direction to rotate it in.
 
-                throw new IllegalArgumentException( "curve has duplicate points even after duplicates were supposedly stripped out (original is " + getPoints() + ", stripped is " + fmtPoints( points ) + ")" );
+                throw new IllegalArgumentException( "curve has duplicate points even after duplicates were supposedly stripped out (original is " +
+                                                    getPoints() +
+                                                    ", stripped is " +
+                                                    fmtPoints( points ) +
+                                                    ")" );
 
             }
 
@@ -301,7 +284,10 @@ public class BezierCurveSequence extends AbstractCurveSequence {
             double c2x = thisPointX - nextControlSlopeX;
             double c2y = thisPointY - nextControlSlopeY;
 
-            _curves.add( new CubicBezierCurve( this, new CubicCurve2D.Double( prevPointX, prevPointY, c1x, c1y, c2x, c2y, thisPointX, thisPointY ) ) );
+            _curves.add( new CubicBezierCurve(
+                    this,
+                    new CubicCurve2D.Double( prevPointX, prevPointY, c1x, c1y, c2x, c2y, thisPointX, thisPointY )
+            ) );
 
             _curvesPath.curveTo( c1x, c1y, c2x, c2y, thisPointX, thisPointY );
 
@@ -321,12 +307,13 @@ public class BezierCurveSequence extends AbstractCurveSequence {
     }
 
     /**
-     * Find the intersection between two lines.
-     * @param a1 a point on the first line.
-     * @param a2 a different point on the first line.
-     * @param b1 a point on the second line.
-     * @param b2 a different point on the second line.
-     * @return the intersection between the two lines or null if they do not intersect.
+     Find the intersection between two lines.
+
+     @param a1 a point on the first line.
+     @param a2 a different point on the first line.
+     @param b1 a point on the second line.
+     @param b2 a different point on the second line.
+     @return the intersection between the two lines or null if they do not intersect.
      */
     private static Point2D findIntersection(
             final Point2D a1, final Point2D a2, final Point2D b1, final Point2D b2
@@ -371,19 +358,17 @@ public class BezierCurveSequence extends AbstractCurveSequence {
         //noinspection MagicNumber
         if ( Math.abs( ( a2.getX() - a1.getX() ) * ( b2.getY() - b1.getY() ) - ( a2.getY() - a1.getY() ) * ( b2.getX() - b1.getX() ) ) < 0.0000001 ) {
 
-//            System.out.println( "" + Math.abs( ( a2.x - a1.x ) * ( b2.y - b1.y ) - ( a2.y - a1.y ) * ( b2.x - b1.x ) ) + " is too close to zero" );
-
             return null;
 
         } else {
 
             double t = (
-                    ( b1.getX() - a1.getX() ) * ( b2.getY() - b1.getY() ) -
-                    ( b1.getY() - a1.getY() ) * ( b2.getX() - b1.getX() )
-            ) / (
-                    ( a2.getX() - a1.getX() ) * ( b2.getY() - b1.getY() ) -
-                    ( a2.getY() - a1.getY() ) * ( b2.getX() - b1.getX() )
-            );
+                               ( b1.getX() - a1.getX() ) * ( b2.getY() - b1.getY() ) -
+                               ( b1.getY() - a1.getY() ) * ( b2.getX() - b1.getX() )
+                       ) / (
+                               ( a2.getX() - a1.getX() ) * ( b2.getY() - b1.getY() ) -
+                               ( a2.getY() - a1.getY() ) * ( b2.getX() - b1.getX() )
+                       );
             double x = a1.getX() + t * ( a2.getX() - a1.getX() );
             double y = a1.getY() + t * ( a2.getY() - a1.getY() );
 
@@ -393,44 +378,7 @@ public class BezierCurveSequence extends AbstractCurveSequence {
 
     }
 
-//    @SuppressWarnings( { "UseOfSystemOutOrSystemErr" } )
-//    private static Point2D doit( Point2D.Float a1, Point2D.Float a2, Point2D.Float b1, Point2D.Float b2 ) {
-//
-//        Point2D intersection = findIntersection( a1, a2, b1, b2 );
-//        if ( intersection == null ) {
-//
-//            System.out.println(
-//                    "(" + a1.x + "," + a1.y + ") -> " +
-//                    "(" + a2.x + "," + a2.y + ") and " +
-//                    "(" + b1.x + "," + b1.y + ") -> " +
-//                    "(" + b2.x + "," + b2.y + ") do not intersect"
-//            );
-//
-//        } else {
-//
-//            System.out.println(
-//                    "(" + a1.x + "," + a1.y + ") -> " +
-//                    "(" + a2.x + "," + a2.y + ") and " +
-//                    "(" + b1.x + "," + b1.y + ") -> " +
-//                    "(" + b2.x + "," + b2.y + ") intersect at " +
-//                    "(" + intersection.getX() + "," + intersection.getY() + ")"
-//            );
-//
-//        }
-//
-//        return intersection;
-//
-//    }
-//
-//    @SuppressWarnings( { "MagicNumber" } )
-//    public static void main( String[] args ) {
-//
-//        doit( new Point2D.Float( 0.0f, 0.0f ), new Point2D.Float( 1.0f, 1.0f ), new Point2D.Float( 2.0f, 0.0f ), new Point2D.Float( 2.0f, 1.0f ) );
-//        doit( new Point2D.Float( 0.0f, 0.0f ), new Point2D.Float( 1.0f, 1.0f ), new Point2D.Float( 2.0f, 0.0f ), new Point2D.Float( 3.0f, 1.0000001f ) );
-//
-//    }
-
-    @SuppressWarnings( { "UseOfSystemOutOrSystemErr" } )
+    @SuppressWarnings({ "UseOfSystemOutOrSystemErr" })
     public BezierCurveSequence getOffsetCurve( final float offset ) {
 
         BezierCurveSequence rval = new BezierCurveSequence( null );
@@ -440,39 +388,17 @@ public class BezierCurveSequence extends AbstractCurveSequence {
 
         Point2D[] points = pointsVector.toArray( new Point2D[pointsVector.size()] );
 
-//        Logger.logMsg( "curve with duplicates eliminated is " + fmtPoints( points ) );
-
-//            Point2D originPoint = points[0];
-
-//            Point2D previousPoint = new Point2D.Float( -offset, 0.0f );
-//            float prevPointX = (float)previousPoint.getX() - offset;
-//            float prevPointY = (float)previousPoint.getY();
-
         for ( int ix = 0; ix < points.length; ix += 1 ) {
 
             Point2D previousPoint, nextPoint;
             if ( ix == 0 ) {
 
-//                if ( points.length > 1 && points[1].getY() > points[0].getY() ) {
-
-                    System.out.print( "***" );
-//                    previousPoint = new Point2D.Float( -offset, 0.0f );
-//                    nextPoint = new Point2D.Float( offset, 0.0f );
+                System.out.print( "***" );
                 previousPoint = new Point2D.Float( 0.0f, 0.0f );
                 nextPoint = new Point2D.Float( 1.0f, 0.0f );
 
-//                } else {
-//
-//                    System.out.print( "   " );
-//                    previousPoint = new Point2D.Float( -offset, 0.0f );
-//                    nextPoint = new Point2D.Float( offset, 0.0f );
-//
-//                }
-
             } else if ( ix == points.length - 1 ) {
 
-//                previousPoint = new Point2D.Float( -offset, 0.0f );
-//                nextPoint = new Point2D.Float( offset, 0.0f );
                 previousPoint = new Point2D.Float( 0.0f, 0.0f );
                 nextPoint = new Point2D.Float( 1.0f, 0.0f );
 
@@ -483,7 +409,7 @@ public class BezierCurveSequence extends AbstractCurveSequence {
 
             }
 
-            Point2D thisPoint = points[ ix ];
+            Point2D thisPoint = points[ix];
 
             float unscaledNextControlSlopeX = (float)nextPoint.getX() - (float)previousPoint.getX();
             float unscaledNextControlSlopeY = (float)nextPoint.getY() - (float)previousPoint.getY();
@@ -500,9 +426,21 @@ public class BezierCurveSequence extends AbstractCurveSequence {
 
             Point2D rotatedPoint = rotatePoint90( nextControlSlopeX, nextControlSlopeY );
 
-            Point2D offsetPoint = new Point2D.Float( (float)thisPoint.getX() + (float)rotatedPoint.getX(), (float)thisPoint.getY() + (float)rotatedPoint.getY() );
+            Point2D offsetPoint =
+                    new Point2D.Float( (float)thisPoint.getX() + (float)rotatedPoint.getX(), (float)thisPoint.getY() + (float)rotatedPoint.getY() );
             if ( ix == 1 ) {
-                Logger.logMsg( "at offset " + ObtuseUtil.lpad( offset, 0, 2 ) + " point " + fmtPoint( points[ 0 ] ) + " rotated using " + fmtPoint( new Point2D.Float( unscaledNextControlSlopeX, unscaledNextControlSlopeY ) ) + " / " + fmtPoint( new Point2D.Float( nextControlSlopeX, nextControlSlopeY ) ) + " and " + fmtPoint( rotatedPoint ) + " to " + fmtPoint( offsetPoint ) );
+                Logger.logMsg( "at offset " +
+                               ObtuseUtil.lpad( offset, 0, 2 ) +
+                               " point " +
+                               fmtPoint( points[0] ) +
+                               " rotated using " +
+                               fmtPoint( new Point2D.Float( unscaledNextControlSlopeX, unscaledNextControlSlopeY ) ) +
+                               " / " +
+                               fmtPoint( new Point2D.Float( nextControlSlopeX, nextControlSlopeY ) ) +
+                               " and " +
+                               fmtPoint( rotatedPoint ) +
+                               " to " +
+                               fmtPoint( offsetPoint ) );
             }
 
             rval.addPoint( offsetPoint );
@@ -515,7 +453,7 @@ public class BezierCurveSequence extends AbstractCurveSequence {
 
     static {
 
-        for ( Point2D p : new Point2D[] {
+        for ( Point2D p : new Point2D[]{
                 new Point2D.Float( 1.0f, 0.0f ),
                 new Point2D.Float( 0.0f, 1.0f ),
                 new Point2D.Float( -1.0f, 0.0f ),
@@ -523,7 +461,7 @@ public class BezierCurveSequence extends AbstractCurveSequence {
         } ) {
 
             //noinspection ObjectToString
-            Logger.logMsg( "point " + p + " rotates to " + rotatePoint90( (float) p.getX(), (float) p.getY() ) );
+            Logger.logMsg( "point " + p + " rotates to " + rotatePoint90( (float)p.getX(), (float)p.getY() ) );
 
         }
 

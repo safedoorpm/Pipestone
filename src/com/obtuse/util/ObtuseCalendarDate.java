@@ -380,6 +380,7 @@ public class ObtuseCalendarDate implements Comparable<ObtuseCalendarDate> {
         cal.add( Calendar.MONTH, 1 );
         cal.add( Calendar.DAY_OF_YEAR, -1 );
 
+        @SuppressWarnings("UnnecessaryLocalVariable")
         int rval = cal.get( Calendar.DAY_OF_MONTH );
 
         return rval;
@@ -465,7 +466,9 @@ public class ObtuseCalendarDate implements Comparable<ObtuseCalendarDate> {
      Construct an instance without forcing the user to bother with catching the parsing exception.
      We'll turn it into an {@link IllegalArgumentException} if something goes wrong.
 
-     @throws IllegalArgumentException
+     @throws IllegalArgumentException if the parse fails.
+     The {@link IllegalArgumentException} will contain the underlying {@link ParsingException} as its cause
+     (accessible via {@link IllegalArgumentException#getCause()}).
      */
 
     public static ObtuseCalendarDate parseCalendarDate( final String date ) throws IllegalArgumentException {

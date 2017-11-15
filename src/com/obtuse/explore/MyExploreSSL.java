@@ -24,8 +24,6 @@ public class MyExploreSSL {
     @SuppressWarnings("UnusedDeclaration")
     private static final SSLSocketFactory s_sslClientSocketFactory;
 
-//    private String _serverComponentName = null;
-
     @SuppressWarnings("FieldCanBeLocal")
     private static int s_myIx = 0;
 
@@ -99,12 +97,6 @@ public class MyExploreSSL {
                     Logger.logMsg( "encoded form is " + cert.getEncoded().length + " bytes long" );
                     Logger.logMsg( "cert's class is " + cert.getClass() );
 
-//                    _myIx += 1;
-//                    ks.setCertificateEntry( "balzac-" + _myIx, cert );
-
-//                    Logger.logMsg( "added to trusted certs" );
-//                    Logger.logMsg( "" );
-
                 }
 
             } catch ( NoSuchAlgorithmException e ) {
@@ -155,8 +147,6 @@ public class MyExploreSSL {
     public static void main( final String[] args ) {
 
         try {
-
-//            InputStream keystoreInputStream = new ByteArrayInputStream( SavrolaClientKeystore.keystore );
 
             // Get an empty keystore.
 

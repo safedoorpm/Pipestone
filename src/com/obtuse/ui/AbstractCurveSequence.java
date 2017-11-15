@@ -292,13 +292,8 @@ public abstract class AbstractCurveSequence implements GraphicsElement {
             //noinspection FloatingPointEquality,StatementWithEmptyBody
             if ( lastPoint == null || lastPoint.getX() != point.getX() || lastPoint.getY() != point.getY() ) {
 
-//                Logger.logMsg( "keeping  p[" + ix + "] = (" + point.getX() + "," + point.getY() + ")" );
                 rval.add( new Point2D.Float( (float)( point.getX() * scale ), (float)( point.getY() * scale ) ) );
                 lastPoint = point;
-
-            } else {
-
-//                Logger.logMsg( "ignoring p[" + ix + "] = (" + lastPoint.getX() + "," + lastPoint.getY() + ")" );
 
             }
 

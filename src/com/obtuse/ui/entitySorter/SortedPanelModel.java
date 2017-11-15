@@ -18,6 +18,7 @@ import java.util.Collection;
  A model that manages the sorting of {@link SortableEntityReference} within a {@link SortedPanel}.
  */
 
+@SuppressWarnings("unchecked")
 public class SortedPanelModel<K extends Comparable<K>, E extends SortableEntity> { // extends SortableEntityReference<K,? extends SortableEntity> &SortableEntity> {
 
     private final TreeSorter<K, SortableEntityReference<K, E>> _treeSorter = new TreeSorter<>();

@@ -21,7 +21,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-@SuppressWarnings({ "ClassWithoutToString", "UnusedDeclaration" })
+@SuppressWarnings({ "ClassWithoutToString", "UnusedDeclaration", "unchecked" })
 public class LogsWindow extends WindowWithMenus {
 
     private JPanel _contentPane;
@@ -46,18 +46,8 @@ public class LogsWindow extends WindowWithMenus {
 
     public static final int MAX_LINES_IN_MESSAGE_WINDOW = 1000;
 
-//    public static final int LOGO_SIZE = 80;
-
-    @SuppressWarnings("FieldCanBeLocal")
-    private JMenu _editMenu;
-    private JMenuItem _copyMenuItem;
-
     @SuppressWarnings("CanBeFinal")
     private Clipboard _systemClipboard;
-
-//    private static final String WINDOW_NAME = "LogsWindow";
-
-//    private static ImageIcon _loaLogo = BasicIconLogoHandler.fetchIconImage("loa_logo.png", LOGO_SIZE);
 
     public LogsWindow( final String windowPrefsName ) {
 
@@ -96,7 +86,6 @@ public class LogsWindow extends WindowWithMenus {
                 }
         );
 
-        //noinspection unchecked
         _messageWindowList.setModel( _messagesListModel );
         _messageWindowList.setSelectionMode( ListSelectionModel.SINGLE_INTERVAL_SELECTION );
         _messageWindowList.addListSelectionListener(
@@ -111,11 +100,11 @@ public class LogsWindow extends WindowWithMenus {
 
                             if ( selectedIndices.length > 0 ) {
 
-                                setMenuEnabled( "LW:LW", _copyMenuItem, true );
+                                setMenuEnabled( "LW:LW", getEditMenu().getCopyMenuItem(), true );
 
                             } else {
 
-                                setMenuEnabled( "LW:LW", _copyMenuItem, false );
+                                setMenuEnabled( "LW:LW", getEditMenu().getCopyMenuItem(), false );
 
                             }
 
@@ -180,38 +169,6 @@ public class LogsWindow extends WindowWithMenus {
         }
 
     }
-
-    /**
-     Utility method to trace the setting of a menu item's enabled state.
-     <p/>This method lives in this class instead of say the Trace class because adding this method to the
-     Trace class would result in any program that uses the Trace class implicitly sucking in a huge chunk of Swing.
-     Since this class already uses Swing, putting the method here does no real harm.
-
-     @param context  where this is being done.
-     @param menuItem the menu item in question.
-     @param value    its new state.
-     */
-
-    public static void setMenuEnabled( final String context, final JMenuItem menuItem, final boolean value ) {
-
-        String text = menuItem.getText();
-        if ( text == null ) {
-
-            text = "<unknown>";
-
-        }
-
-        Trace.event( ( context == null ? "" : context + ":  " ) + "menu item \"" + text + "\" set to " + ( value ? "enabled" : "not enabled" ) );
-
-        menuItem.setEnabled( value );
-
-    }
-
-//    public static void setMenuEnabled( JMenuItem menuItem, boolean value ) {
-//
-//        setMenuEnabled( null, menuItem, value );
-//
-//    }
 
     /**
      Utility method to trace the setting of a button's enabled state.
@@ -356,9 +313,9 @@ public class LogsWindow extends WindowWithMenus {
 
     }
 
-    protected JMenu defineEditMenu() {
+    protected BasicEditMenu defineEditMenu() {
 
-        _editMenu = new JMenu( "Edit" );
+        BasicEditMenu editMenu = new BasicEditMenu( "Edit" );
 
         JMenuItem selectAllMenuItem = new JMenuItem( "Select All" );
         setMenuEnabled( "LW:dEM", selectAllMenuItem, true );
@@ -395,11 +352,11 @@ public class LogsWindow extends WindowWithMenus {
 
         setMenuEnabled( "LW:dEM", cutMenuItem, false );
 
-        _copyMenuItem = new JMenuItem( "Copy" );
+        JMenuItem copyMenuItem = new JMenuItem( "Copy" );
 
-        setMenuEnabled( "LW:dEM", _copyMenuItem, false );
+        setMenuEnabled( "LW:dEM", copyMenuItem, false );
 
-        _copyMenuItem.addActionListener(
+        copyMenuItem.addActionListener(
                 new MyActionListener() {
 
                     public void myActionPerformed( final ActionEvent actionEvent ) {
@@ -409,7 +366,6 @@ public class LogsWindow extends WindowWithMenus {
                         int[] selectedIndices = _messageWindowList.getSelectedIndices();
                         List selectedValues = _messageWindowList.getSelectedValuesList();
 
-//                        for ( int ix = 0; ix < selectedIndices.length; ix += 1 ) {
                         int ix = 0;
                         for ( Object sv : selectedValues ) {
 
@@ -434,7 +390,7 @@ public class LogsWindow extends WindowWithMenus {
 
         );
 
-        _copyMenuItem.setAccelerator(
+        copyMenuItem.setAccelerator(
                 KeyStroke.getKeyStroke(
                         KeyEvent.VK_C, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()
                 )
@@ -450,12 +406,12 @@ public class LogsWindow extends WindowWithMenus {
 
         setMenuEnabled( "LW:dEM", pasteMenuItem, false );
 
-        _editMenu.add( cutMenuItem );   // never enabled (yet?)
-        _editMenu.add( _copyMenuItem );
-        _editMenu.add( pasteMenuItem ); // never enabled (yet?)
-        _editMenu.add( selectAllMenuItem );
+        editMenu.setCutMenuItem( cutMenuItem );   // never enabled (yet?)
+        editMenu.setCopyMenuItem( copyMenuItem );
+        editMenu.setPasteMenuItem( pasteMenuItem ); // never enabled (yet?)
+        editMenu.setSelectAllMenuItem( selectAllMenuItem );
 
-        return _editMenu;
+        return editMenu;
 
     }
 

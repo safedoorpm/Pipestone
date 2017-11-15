@@ -6,21 +6,130 @@ package com.obtuse.ui;
 
 import com.obtuse.util.OSLevelCustomizations;
 import com.obtuse.util.PreferencesHandler;
+import com.obtuse.util.Trace;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.util.Collection;
 import java.util.LinkedList;
 
 @SuppressWarnings( { "FieldCanBeLocal" } )
-public abstract class WindowWithMenus extends TrackedWindow {
+public class WindowWithMenus extends TrackedWindow {
+
+    public static class BasicEditMenu extends JMenu {
+
+        private JMenuItem _cutMenuItem;
+        private JMenuItem _copyMenuItem;
+        private JMenuItem _pasteMenuItem;
+        private JMenuItem _selectAllMenuItem;
+
+        public BasicEditMenu( @NotNull final String menuName ) {
+            super( menuName );
+
+        }
+
+//        public BasicEditMenu( @NotNull final String menuName, @Nullable final JMenuItem cutMenuItem, @Nullable final JMenuItem copyMenuItem, @Nullable final JMenuItem pasteMenuItem ) {
+//            super( menuName );
+//
+//            _cutMenuItem = cutMenuItem;
+//            _copyMenuItem = copyMenuItem;
+//            _pasteMenuItem = pasteMenuItem;
+//
+//        }
+
+        public JMenuItem getCutMenuItem() {
+
+            return _cutMenuItem;
+
+        }
+
+        public void setCutMenuItem( final JMenuItem cutMenuItem ) {
+
+            if ( _cutMenuItem != null ) {
+
+                remove( _cutMenuItem );
+
+            }
+
+            _cutMenuItem = cutMenuItem;
+            add( cutMenuItem );
+
+        }
+
+        public JMenuItem getCopyMenuItem() {
+
+            return _copyMenuItem;
+
+        }
+
+        public void setCopyMenuItem( final JMenuItem copyMenuItem ) {
+
+            if ( _copyMenuItem != null ) {
+
+                remove( _copyMenuItem );
+
+            }
+
+            _copyMenuItem = copyMenuItem;
+            add( copyMenuItem );
+
+        }
+
+        public JMenuItem getPasteMenuItem() {
+
+            return _pasteMenuItem;
+
+        }
+
+        public void setPasteMenuItem( final JMenuItem pasteMenuItem ) {
+
+            if ( _pasteMenuItem != null ) {
+
+                remove( _pasteMenuItem );
+
+            }
+
+            _pasteMenuItem = pasteMenuItem;
+            add( pasteMenuItem );
+
+        }
+
+        public JMenuItem getSelectAllMenuItem() {
+
+            return _selectAllMenuItem;
+
+        }
+
+        public void setSelectAllMenuItem( final JMenuItem selectAllMenuItem ) {
+
+            if ( _selectAllMenuItem != null ) {
+
+                remove( _selectAllMenuItem );
+
+            }
+
+            _selectAllMenuItem = selectAllMenuItem;
+            add( selectAllMenuItem );
+
+        }
+
+        public String toString() {
+
+            return "BasicEditMenu()";
+
+        }
+
+    }
 
     private final JMenuBar _menuBar;
 
     private final JMenu _fileMenu;
+
+    private final BasicEditMenu _editMenu;
 
     private final JMenuItem _preferencesMenuItem;
 
@@ -32,7 +141,7 @@ public abstract class WindowWithMenus extends TrackedWindow {
     private static boolean s_showLogsMode;
 
     @SuppressWarnings({ "ClassWithoutToString", "SameParameterValue" })
-    protected WindowWithMenus( final String windowPrefsName, final boolean includeLogsMenuItem ) {
+    public WindowWithMenus( final String windowPrefsName, final boolean includeLogsMenuItem ) {
         super( windowPrefsName );
 
         _menuBar = new JMenuBar();
@@ -140,7 +249,9 @@ public abstract class WindowWithMenus extends TrackedWindow {
 
         _menuBar.add( _fileMenu );
 
-        _menuBar.add( defineEditMenu() );
+        _editMenu = defineEditMenu();
+
+        _menuBar.add( _editMenu );
 
 //        // Replace the coffee cup icon in Windows XP JFrames
 //
@@ -196,6 +307,32 @@ public abstract class WindowWithMenus extends TrackedWindow {
 
     }
 
+    /**
+     Utility method to trace the setting of a menu item's enabled state.
+     <p/>This method lives in this class instead of say the Trace class because adding this method to the
+     Trace class would result in any program that uses the Trace class implicitly sucking in a huge chunk of Swing.
+     Since this class already uses Swing, putting the method here does no real harm.
+
+     @param context  where this is being done.
+     @param menuItem the menu item in question.
+     @param value    its new state.
+     */
+
+    public static void setMenuEnabled( final String context, final JMenuItem menuItem, final boolean value ) {
+
+        String text = menuItem.getText();
+        if ( text == null ) {
+
+            text = "<unknown>";
+
+        }
+
+        Trace.event( ( context == null ? "" : context + ":  " ) + "menu item \"" + text + "\" set to " + ( value ? "enabled" : "not enabled" ) );
+
+        menuItem.setEnabled( value );
+
+    }
+
     public static void setAllShowLogsModeInMenu( final boolean value ) {
 
         WindowWithMenus.s_showLogsMode = value;
@@ -217,60 +354,60 @@ public abstract class WindowWithMenus extends TrackedWindow {
 
     }
 
+    @NotNull
+    protected BasicEditMenu getEditMenu() {
+
+        return _editMenu;
+
+    }
+
     /**
-     * Create an Edit menu that has Cut, Copy and Paste items which are always disabled to ensure that the menu exists and 'looks nice' if
+     * Create an Edit menu that has Cut, Copy, Paste and Select All items which are always disabled to ensure that the menu exists and 'looks nice' if
      * this window does not actually need an Edit menu.
      * <p/>
      * Override this method in your derived class if you want an Edit menu that actually accomplishes something.
-     * @return this window's Edit menu.
+     * @return a {@link BasicEditMenu} defining a simple Edit menu.
      */
 
-    protected JMenu defineEditMenu() {
+    protected BasicEditMenu defineEditMenu() {
 
-        JMenu skeletalEditMenu = new JMenu( "Edit" );
+        BasicEditMenu skeletalEditMenu = new BasicEditMenu( "Edit" );
 
-        JMenuItem selectAllMenuItem = new JMenuItem( "Select All" );
-        LogsWindow.setMenuEnabled( "WWM:dEM", selectAllMenuItem, false );
-        selectAllMenuItem.setAccelerator(
+        skeletalEditMenu.setCutMenuItem( createMenuItem( "Cut", KeyEvent.VK_X ) );
 
-                KeyStroke.getKeyStroke(
-                        KeyEvent.VK_A, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()
-                )
+        skeletalEditMenu.setCopyMenuItem( createMenuItem( "Copy", KeyEvent.VK_C ) );
 
-        );
+        skeletalEditMenu.setPasteMenuItem( createMenuItem( "Paste", KeyEvent.VK_V ) );
 
-        JMenuItem cutMenuItem = new JMenuItem( "Cut" );
-        LogsWindow.setMenuEnabled( "WWM:dEM", cutMenuItem, false );
-        cutMenuItem.setAccelerator(
-                KeyStroke.getKeyStroke(
-                        KeyEvent.VK_X, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()
-                )
-        );
+        skeletalEditMenu.setSelectAllMenuItem( createMenuItem( "Select All", KeyEvent.VK_A ) );
 
-
-        JMenuItem copyMenuItem = new JMenuItem( "Copy" );
-        LogsWindow.setMenuEnabled( "WWM:dEM", copyMenuItem, false );
-        copyMenuItem.setAccelerator(
-                KeyStroke.getKeyStroke(
-                        KeyEvent.VK_C, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()
-                )
-        );
-
-        JMenuItem pasteMenuItem = new JMenuItem( "Paste" );
-        LogsWindow.setMenuEnabled( "WWM:dEM", pasteMenuItem, false );
-        pasteMenuItem.setAccelerator(
-                KeyStroke.getKeyStroke(
-                        KeyEvent.VK_V, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()
-                )
-        );
-
-
-        skeletalEditMenu.add( cutMenuItem );
-        skeletalEditMenu.add( copyMenuItem );
-        skeletalEditMenu.add( pasteMenuItem );
-        skeletalEditMenu.add( selectAllMenuItem );
+//        skeletalEditMenu.add( cutMenuItem );
+//        skeletalEditMenu.add( copyMenuItem );
+//        skeletalEditMenu.add( pasteMenuItem );
+//        skeletalEditMenu.add( selectAllMenuItem );
 
         return skeletalEditMenu;
+
+    }
+
+    @NotNull
+    private static JMenuItem createMenuItem( final String operationName, final int keyEvent ) {
+
+        JMenuItem menuItem = new JMenuItem( operationName );
+        setMenuEnabled( "WWM:dEM", menuItem, false );
+        menuItem.setAccelerator(
+                KeyStroke.getKeyStroke(
+                        keyEvent, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()
+                )
+        );
+
+        return menuItem;
+
+    }
+
+    public String toString() {
+
+        return "WindowWithMenus()";
 
     }
 

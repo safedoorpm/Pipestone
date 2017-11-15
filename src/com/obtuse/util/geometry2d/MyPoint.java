@@ -9,7 +9,7 @@ import java.awt.geom.Point2D;
 /**
  A slightly improved extension of the {@link java.awt.geom.Point2D.Double} class.
  <p/>
- This class provides a {@link #toString} method which produces a 'prettier' result that the {@link java.awt.geom.Point2D.Double#toString} method produces.
+ This class provides a {@link #toString} method which produces a 'prettier' result than the {@link java.awt.geom.Point2D.Double#toString} method produces.
  It also provides a few useful methods. which yield new instances of this class.
  <p/>
  Note that since this class is derived from the {@link java.awt.geom.Point2D.Double} class, instances of this class may be used anywhere
@@ -24,9 +24,10 @@ public class MyPoint extends Point2D.Double {
      Create a new point at the origin.
      */
 
+    @SuppressWarnings("unused")
     public MyPoint() {
 
-	super();
+        super();
 
     }
 
@@ -36,13 +37,13 @@ public class MyPoint extends Point2D.Double {
 
     public MyPoint( final double x, final double y ) {
 
-	super( x, y );
+        super( x, y );
 
     }
 
     public static String pToString( final Double p ) {
 
-	return "[" + p.x + "," + p.y + "]";
+        return "[" + p.x + "," + p.y + "]";
 
     }
 
@@ -57,41 +58,42 @@ public class MyPoint extends Point2D.Double {
 
     public String toString() {
 
-	return pToString( this );
+        return pToString( this );
 
     }
 
+    @SuppressWarnings("unused")
     public MyPoint rotateDegrees( final double degrees ) {
 
-	return rotateTheta( Math.PI * degrees / 180 );
+        return rotateTheta( Math.PI * degrees / 180 );
 
     }
 
     public MyPoint rotateTheta( final double theta ) {
 
-	double cosTheta = Math.cos( theta );
-	double sinTheta = Math.sin( theta );
+        double cosTheta = Math.cos( theta );
+        double sinTheta = Math.sin( theta );
 
 //	    Logger.logMsg( "point theta = " + theta + ", cosTheta = " + cosTheta + ", sinTheta = " + sinTheta );
 
-	MyPoint rotated = new MyPoint(
-		cosTheta * x - sinTheta * y,
-		sinTheta * x + cosTheta * y
-	);
+        @SuppressWarnings("UnnecessaryLocalVariable") MyPoint rotated = new MyPoint(
+                cosTheta * x - sinTheta * y,
+                sinTheta * x + cosTheta * y
+        );
 
-	return rotated;
+        return rotated;
 
     }
 
     public MyPoint move( final double adjX, final double adjY ) {
 
-	return new MyPoint( x + adjX, y + adjY );
+        return new MyPoint( x + adjX, y + adjY );
 
     }
 
     public boolean nearlyEquals( final Double rhs ) {
 
-	return Util.nearlyEqual( x, rhs.x ) && Util.nearlyEqual( y, rhs.y );
+        return Util.nearlyEqual( x, rhs.x ) && Util.nearlyEqual( y, rhs.y );
 
     }
 

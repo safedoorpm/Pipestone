@@ -56,6 +56,7 @@ import java.util.List;
  </blockquote>
  */
 
+@SuppressWarnings("unchecked")
 public class GowingPackableCollection<E> extends LinkedList<E> implements GowingPackable {
 
     private static final EntityTypeName ENTITY_TYPE_NAME = new EntityTypeName( GowingPackableCollection.class.getCanonicalName() );

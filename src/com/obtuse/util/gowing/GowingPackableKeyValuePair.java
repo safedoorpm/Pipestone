@@ -18,7 +18,8 @@ import java.util.TreeMap;
  Carry around a key-value pair in a packable format.
  */
 
-public class GowingPackableKeyValuePair<K,V> extends GowingAbstractPackableEntity {
+@SuppressWarnings("unchecked")
+public class GowingPackableKeyValuePair<K, V> extends GowingAbstractPackableEntity {
 
     private static final EntityTypeName ENTITY_TYPE_NAME = new EntityTypeName( GowingPackableKeyValuePair.class.getCanonicalName() );
     private static final int VERSION = 1;
@@ -33,66 +34,76 @@ public class GowingPackableKeyValuePair<K,V> extends GowingAbstractPackableEntit
 
     public static final GowingEntityFactory FACTORY = new GowingEntityFactory( ENTITY_TYPE_NAME ) {
 
-	@Override
-	public int getOldestSupportedVersion() {
+        @Override
+        public int getOldestSupportedVersion() {
 
-	    return VERSION;
-	}
+            return VERSION;
+        }
 
-	@Override
-	public int getNewestSupportedVersion() {
+        @Override
+        public int getNewestSupportedVersion() {
 
-	    return VERSION;
-	}
+            return VERSION;
+        }
 
-	@Override
-	@NotNull
-	public GowingPackable createEntity( @NotNull final GowingUnPacker unPacker, @NotNull final GowingPackedEntityBundle bundle, final GowingEntityReference er ) {
+        @Override
+        @NotNull
+        public GowingPackable createEntity(
+                @NotNull final GowingUnPacker unPacker,
+                @NotNull final GowingPackedEntityBundle bundle,
+                final GowingEntityReference er
+        ) {
 
-	    return new GowingPackableKeyValuePair( unPacker, bundle, er );
+            return new GowingPackableKeyValuePair( unPacker, bundle, er );
 
-	}
+        }
 
     };
 
     public GowingPackableKeyValuePair( final K key, final V value ) {
-	super( new GowingNameMarkerThing() );
 
-	_key = key;
-	_value = value;
+        super( new GowingNameMarkerThing() );
 
-	if ( !isObjectsClassSupported( key ) ) {
+        _key = key;
+        _value = value;
 
-	    throw new IllegalArgumentException( "GowingPackableKeyValuePair:  key objects of class " + key.getClass() + " are not supported" );
+        if ( !isObjectsClassSupported( key ) ) {
 
-	}
-	if ( !isObjectsClassSupported( value ) ) {
+            throw new IllegalArgumentException( "GowingPackableKeyValuePair:  key objects of class " + key.getClass() + " are not supported" );
 
-	    throw new IllegalArgumentException( "GowingPackableKeyValuePair:  value objects of class " + key.getClass() + " are not supported" );
+        }
+        if ( !isObjectsClassSupported( value ) ) {
 
-	}
+            throw new IllegalArgumentException( "GowingPackableKeyValuePair:  value objects of class " + key.getClass() + " are not supported" );
+
+        }
 
     }
 
-    public GowingPackableKeyValuePair( final GowingUnPacker unPacker, @NotNull final GowingPackedEntityBundle bundle, final GowingEntityReference er ) {
-	super( unPacker, bundle.getSuperBundle() );
+    public GowingPackableKeyValuePair(
+            final GowingUnPacker unPacker,
+            @NotNull final GowingPackedEntityBundle bundle,
+            final GowingEntityReference er
+    ) {
 
-	Logger.logMsg( "reconstructing KVP " + er );
+        super( unPacker, bundle.getSuperBundle() );
 
-	_keyReference = bundle.getNotNullField( KEY_FIELD_NAME ).getObjectValue();
-	_valueReference = bundle.getNotNullField( VALUE_FIELD_NAME ).getObjectValue();
+        Logger.logMsg( "reconstructing KVP " + er );
+
+        _keyReference = bundle.getNotNullField( KEY_FIELD_NAME ).getObjectValue();
+        _valueReference = bundle.getNotNullField( VALUE_FIELD_NAME ).getObjectValue();
 
     }
 
     public K getKey() {
 
-	return _key;
+        return _key;
 
     }
 
     public V getValue() {
 
-	return _value;
+        return _value;
 
     }
 
@@ -105,40 +116,38 @@ public class GowingPackableKeyValuePair<K,V> extends GowingAbstractPackableEntit
     @Override
     public GowingPackedEntityBundle bundleThyself( final boolean isPackingSuper, final GowingPacker packer ) {
 
-	GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
-		ENTITY_TYPE_NAME,
-		VERSION,
-		// super.bundleThyself( true, packer ),
-		super.bundleRoot( packer ),
-		packer.getPackingContext()
-	);
+        GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
+                ENTITY_TYPE_NAME,
+                VERSION,
+                // super.bundleThyself( true, packer ),
+                super.bundleRoot( packer ),
+                packer.getPackingContext()
+        );
 
-	packObj( bundle, KEY_FIELD_NAME, _key, packer, true );
-	packObj( bundle, VALUE_FIELD_NAME, _value, packer, true );
+        packObj( bundle, KEY_FIELD_NAME, _key, packer, true );
+        packObj( bundle, VALUE_FIELD_NAME, _value, packer, true );
 
-	return bundle;
+        return bundle;
 
     }
 
     @Override
     public boolean finishUnpacking( final GowingUnPacker unPacker ) {
 
-	if ( _keyReference instanceof GowingEntityReference && !unPacker.isEntityFinished( (GowingEntityReference)_keyReference ) ) {
+        if ( _keyReference instanceof GowingEntityReference && !unPacker.isEntityFinished( (GowingEntityReference)_keyReference ) ) {
 
-	    return false;
+            return false;
 
-	}
+        }
 
-	if ( _valueReference instanceof GowingEntityReference && !unPacker.isEntityFinished( (GowingEntityReference)_valueReference ) ) {
+        if ( _valueReference instanceof GowingEntityReference && !unPacker.isEntityFinished( (GowingEntityReference)_valueReference ) ) {
 
-	    return false;
+            return false;
 
-	}
+        }
 
-	//noinspection unchecked
-	_key = (K)fetchActualValue( unPacker, _keyReference );
-	//noinspection unchecked
-	_value = (V)fetchActualValue( unPacker, _valueReference );
+        _key = (K)fetchActualValue( unPacker, _keyReference );
+        _value = (V)fetchActualValue( unPacker, _valueReference );
 
 //	if ( _keyReference instanceof GowingEntityReference ) {
 //
@@ -162,235 +171,245 @@ public class GowingPackableKeyValuePair<K,V> extends GowingAbstractPackableEntit
 //
 //	}
 
-	_keyReference = null;
-	_valueReference = null;
+        _keyReference = null;
+        _valueReference = null;
 
-	return true;
+        return true;
 
     }
 
     /**
      If an object is a {@link GowingEntityReference} then use {@link GowingUnPacker#resolveReference(GowingEntityReference)} to get the entity; otherwise, return the object.
      <p/>This may seem like a rather specialized operation but the use case actually comes up fairly often.
+
      @param unPacker the unpacker that can resolve {@link GowingEntityReference}s.
-     @param value the object in question.
+     @param value    the object in question.
      @return the object of interest.
      */
 
     public static Object fetchActualValue( final GowingUnPacker unPacker, final Object value ) {
 
-	if ( value instanceof GowingEntityReference ) {
+        if ( value instanceof GowingEntityReference ) {
 
-	    return unPacker.resolveReference( (GowingEntityReference) value );
+            return unPacker.resolveReference( (GowingEntityReference)value );
 
-	} else {
+        } else {
 
-	    return value;
+            return value;
 
-	}
+        }
 
     }
 
     private interface HolderFactory {
 
-	GowingAbstractPackableHolder constructHolder( EntityName name, Object obj, GowingPacker packer );
+        GowingAbstractPackableHolder constructHolder( EntityName name, Object obj, GowingPacker packer );
 
     }
 
-    private static SortedMap<String,HolderFactory> _factories = new TreeMap<>();
+    private static SortedMap<String, HolderFactory> _factories = new TreeMap<>();
+
     static {
 
-	_factories.put(
-		String.class.getCanonicalName(),
-		new HolderFactory() {
+        _factories.put(
+                String.class.getCanonicalName(),
+                new HolderFactory() {
 
-		    @Override
-		    public GowingAbstractPackableHolder constructHolder( final EntityName name, final Object obj, final GowingPacker packer ) {
+                    @Override
+                    public GowingAbstractPackableHolder constructHolder( final EntityName name, final Object obj, final GowingPacker packer ) {
 
-			return new GowingStringHolder( name, (String)obj, true );
+                        return new GowingStringHolder( name, (String)obj, true );
 
-		    }
+                    }
 
-		}
-	);
+                }
+        );
 
-	_factories.put(
-		Byte.class.getCanonicalName(),
-		new HolderFactory() {
+        _factories.put(
+                Byte.class.getCanonicalName(),
+                new HolderFactory() {
 
-		    @Override
-		    public GowingAbstractPackableHolder constructHolder( final EntityName name, final Object obj, final GowingPacker packer ) {
+                    @Override
+                    public GowingAbstractPackableHolder constructHolder( final EntityName name, final Object obj, final GowingPacker packer ) {
 
-			return new GowingByteHolder( name, (Byte)obj, true );
+                        return new GowingByteHolder( name, (Byte)obj, true );
 
-		    }
+                    }
 
-		}
-	);
+                }
+        );
 
-	_factories.put(
-		Short.class.getCanonicalName(),
-		new HolderFactory() {
+        _factories.put(
+                Short.class.getCanonicalName(),
+                new HolderFactory() {
 
-		    @Override
-		    public GowingAbstractPackableHolder constructHolder( final EntityName name, final Object obj, final GowingPacker packer ) {
+                    @Override
+                    public GowingAbstractPackableHolder constructHolder( final EntityName name, final Object obj, final GowingPacker packer ) {
 
-			return new GowingShortHolder( name, (Short)obj, true );
+                        return new GowingShortHolder( name, (Short)obj, true );
 
-		    }
+                    }
 
-		}
-	);
+                }
+        );
 
-	_factories.put(
-		Integer.class.getCanonicalName(),
-		new HolderFactory() {
+        _factories.put(
+                Integer.class.getCanonicalName(),
+                new HolderFactory() {
 
-		    @Override
-		    public GowingIntegerHolder constructHolder( final EntityName name, final Object obj, final GowingPacker packer ) {
+                    @Override
+                    public GowingIntegerHolder constructHolder( final EntityName name, final Object obj, final GowingPacker packer ) {
 
-			return new GowingIntegerHolder( name, (Integer)obj, true );
+                        return new GowingIntegerHolder( name, (Integer)obj, true );
 
-		    }
+                    }
 
-		}
-	);
+                }
+        );
 
-	_factories.put(
-		Long.class.getCanonicalName(),
-		new HolderFactory() {
+        _factories.put(
+                Long.class.getCanonicalName(),
+                new HolderFactory() {
 
-		    @Override
-		    public GowingAbstractPackableHolder constructHolder( final EntityName name, final Object obj, final GowingPacker packer ) {
+                    @Override
+                    public GowingAbstractPackableHolder constructHolder( final EntityName name, final Object obj, final GowingPacker packer ) {
 
-			return new GowingLongHolder( name, (Long)obj, true );
+                        return new GowingLongHolder( name, (Long)obj, true );
 
-		    }
+                    }
 
-		}
-	);
+                }
+        );
 
-	_factories.put(
-		Float.class.getCanonicalName(),
-		new HolderFactory() {
+        _factories.put(
+                Float.class.getCanonicalName(),
+                new HolderFactory() {
 
-		    @Override
-		    public GowingAbstractPackableHolder constructHolder( final EntityName name, final Object obj, final GowingPacker packer ) {
+                    @Override
+                    public GowingAbstractPackableHolder constructHolder( final EntityName name, final Object obj, final GowingPacker packer ) {
 
-			return new GowingFloatHolder( name, (Float)obj, true );
+                        return new GowingFloatHolder( name, (Float)obj, true );
 
-		    }
+                    }
 
-		}
-	);
+                }
+        );
 
-	_factories.put(
-		Double.class.getCanonicalName(),
-		new HolderFactory() {
+        _factories.put(
+                Double.class.getCanonicalName(),
+                new HolderFactory() {
 
-		    @Override
-		    public GowingAbstractPackableHolder constructHolder( final EntityName name, final Object obj, final GowingPacker packer ) {
+                    @Override
+                    public GowingAbstractPackableHolder constructHolder( final EntityName name, final Object obj, final GowingPacker packer ) {
 
-			return new GowingDoubleHolder( name, (Double)obj, true );
+                        return new GowingDoubleHolder( name, (Double)obj, true );
 
-		    }
+                    }
 
-		}
-	);
+                }
+        );
 
-	_factories.put(
-		Boolean.class.getCanonicalName(),
-		new HolderFactory() {
+        _factories.put(
+                Boolean.class.getCanonicalName(),
+                new HolderFactory() {
 
-		    @Override
-		    public GowingAbstractPackableHolder constructHolder( final EntityName name, final Object obj, final GowingPacker packer ) {
+                    @Override
+                    public GowingAbstractPackableHolder constructHolder( final EntityName name, final Object obj, final GowingPacker packer ) {
 
-			return new GowingBooleanHolder( name, (Boolean)obj, true );
+                        return new GowingBooleanHolder( name, (Boolean)obj, true );
 
-		    }
+                    }
 
-		}
-	);
+                }
+        );
 
-	_factories.put(
-		EntityName.class.getCanonicalName(),
-		new HolderFactory() {
+        _factories.put(
+                EntityName.class.getCanonicalName(),
+                new HolderFactory() {
 
-		    @Override
-		    public GowingAbstractPackableHolder constructHolder( final EntityName name, final Object obj, final GowingPacker packer ) {
+                    @Override
+                    public GowingAbstractPackableHolder constructHolder( final EntityName name, final Object obj, final GowingPacker packer ) {
 
-			return new GowingEntityNameHolder( name, (EntityName)obj, true );
+                        return new GowingEntityNameHolder( name, (EntityName)obj, true );
 
-		    }
+                    }
 
-		}
-	);
+                }
+        );
 
     }
 
     public static boolean isObjectsClassSupported( @Nullable final Object obj ) {
 
-	if ( obj == null || obj instanceof GowingPackable ) {
+        if ( obj == null || obj instanceof GowingPackable ) {
 
-	    return true;
+            return true;
 
-	} else if ( obj instanceof EntityName ) {
+        } else if ( obj instanceof EntityName ) {
 
-	    return true;
+            return true;
 
-	} else {
+        } else {
 
-	    return isClassSupported( obj.getClass() );
+            return isClassSupported( obj.getClass() );
 
-	}
+        }
 
     }
 
     public static boolean isClassSupported( @NotNull final Class entityClass ) {
 
-	boolean rval = _factories.containsKey( entityClass.getCanonicalName() );
-	return rval;
+        boolean rval = _factories.containsKey( entityClass.getCanonicalName() );
+        return rval;
 
     }
 
     public static void packObj( final GowingPackedEntityBundle bundle, final EntityName entityName, final Object obj, final GowingPacker packer ) {
 
-	packObj( bundle, entityName, obj, packer, false );
+        packObj( bundle, entityName, obj, packer, false );
 
     }
 
-    public static void packObj( final GowingPackedEntityBundle bundle, final EntityName entityName, final Object obj, final GowingPacker packer, final boolean classSupportVerified ) {
+    public static void packObj(
+            final GowingPackedEntityBundle bundle,
+            final EntityName entityName,
+            final Object obj,
+            final GowingPacker packer,
+            final boolean classSupportVerified
+    ) {
 
-	if ( obj == null ) {
+        if ( obj == null ) {
 
-	    bundle.addHolder( new GowingNullHolder( entityName ) );
+            bundle.addHolder( new GowingNullHolder( entityName ) );
 
-	} else if ( obj instanceof GowingPackable ) {
+        } else if ( obj instanceof GowingPackable ) {
 
-	    bundle.addHolder( new GowingPackableEntityHolder( entityName, (GowingPackable) obj, packer, true ) );
+            bundle.addHolder( new GowingPackableEntityHolder( entityName, (GowingPackable)obj, packer, true ) );
 
-	} else {
+        } else {
 
-	    String className = obj.getClass().getCanonicalName();
-	    HolderFactory factory = _factories.get( className );
+            String className = obj.getClass().getCanonicalName();
+            HolderFactory factory = _factories.get( className );
 
-	    if ( factory == null ) {
+            if ( factory == null ) {
 
-		if ( classSupportVerified ) {
+                if ( classSupportVerified ) {
 
-		    throw new HowDidWeGetHereError( "GowingPackableKeyValuePair#packObj:  unsupported object class " + className + " (should have been caught by earlier verification)" );
+                    throw new HowDidWeGetHereError( "GowingPackableKeyValuePair#packObj:  unsupported object class " +
+                                                    className +
+                                                    " (should have been caught by earlier verification)" );
 
-		} else {
+                } else {
 
-		    throw new IllegalArgumentException( "GowingPackableKeyValuePair#packObj:  unsupported object class " + className );
+                    throw new IllegalArgumentException( "GowingPackableKeyValuePair#packObj:  unsupported object class " + className );
 
-		}
+                }
 
-	    }
+            }
 
-	    bundle.addHolder( factory.constructHolder( entityName, obj, packer ) );
+            bundle.addHolder( factory.constructHolder( entityName, obj, packer ) );
 
-	}
+        }
 
     }
 
@@ -448,7 +467,7 @@ public class GowingPackableKeyValuePair<K,V> extends GowingAbstractPackableEntit
 
     public String toString() {
 
-	return "GowingPackableKeyValuePair( key=" + _key + ", value = " + _value + " )";
+        return "GowingPackableKeyValuePair( key=" + _key + ", value = " + _value + " )";
 
     }
 

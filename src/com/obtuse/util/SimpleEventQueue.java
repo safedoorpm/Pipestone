@@ -267,13 +267,7 @@ public class SimpleEventQueue<T extends SimpleEvent> {
 
         }
 
-        LinkedList<T> queue = _eventQueue.get( when );
-        if ( queue == null ) {
-
-            queue = new LinkedList<>();
-            _eventQueue.put( when, queue );
-
-        }
+        LinkedList<T> queue = _eventQueue.computeIfAbsent( when, k -> new LinkedList<>() );
 
         return queue;
 

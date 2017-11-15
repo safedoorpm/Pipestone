@@ -53,12 +53,6 @@ public abstract class AbstractChoiceManager /*implements Comparable<AbstractChoi
 
     }
 
-//    public int compareTo( AbstractChoiceManager acm ) {
-//
-//        return getChoiceName().compareTo( acm.getChoiceName() );
-//
-//    }
-
     public String toString() {
 
         return _choiceName;

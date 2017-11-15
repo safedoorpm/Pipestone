@@ -43,6 +43,7 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
 
     private final SortedMap<K, Collection<V>> _sortedData;
 
+    @SuppressWarnings("unchecked")
     private class TreeSorterIterator<VV> implements Iterator<VV> {
 
         private Iterator<K> _outerIterator;
@@ -67,7 +68,6 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
                 if ( _outerIterator.hasNext() ) {
 
                     _currentKey = _outerIterator.next();
-                    //noinspection unchecked
                     _currentList = (Collection<VV>)_sortedData.get( _currentKey );
 
                     _innerIterator = _currentList.iterator();

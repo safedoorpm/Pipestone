@@ -68,7 +68,8 @@ public class AcceleratedPopupMenu2 extends JDialog {
                 }
         );
 
-// call onCancel() when cross is clicked
+        // call onCancel() when cross is clicked
+
         setDefaultCloseOperation( DO_NOTHING_ON_CLOSE );
         addWindowListener( new WindowAdapter() {
             public void windowClosing( final WindowEvent e ) {
@@ -76,7 +77,8 @@ public class AcceleratedPopupMenu2 extends JDialog {
             }
         } );
 
-// call onCancel() on ESCAPE
+        // call onCancel() on ESCAPE
+
         contentPane.registerKeyboardAction(
                 new MyActionListener() {
 
@@ -116,30 +118,19 @@ public class AcceleratedPopupMenu2 extends JDialog {
 
         }
 
-//        if ( visibleCount == 0 ) {
-//
-//            _firstMenuItem.setVisible( true );
-//
-//        } else {
-//
-//            _firstMenuItem.setVisible( true );
-//
-//        }
-//
-//        RulesSpreadsheetCanvas.setMenuEnabled( _firstMenuItem, false );
-//        RulesSpreadsheetCanvas.setMenuEnabled( _secondMenuItem, false );
-
         pack();
     }
 
     private void onOK() {
-// add your code here
+
         dispose();
+
     }
 
     private void onCancel() {
-// add your code here if necessary
+
         dispose();
+
     }
 
     public static void main( final String[] args ) {

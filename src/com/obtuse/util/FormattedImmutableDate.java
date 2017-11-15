@@ -25,26 +25,30 @@ public class FormattedImmutableDate extends ImmutableDate implements GowingPacka
 
     public static GowingEntityFactory FACTORY = new GowingEntityFactory( ENTITY_TYPE_NAME ) {
 
-	@Override
-	public int getOldestSupportedVersion() {
+        @Override
+        public int getOldestSupportedVersion() {
 
-	    return VERSION;
-	}
+            return VERSION;
+        }
 
-	@Override
-	public int getNewestSupportedVersion() {
+        @Override
+        public int getNewestSupportedVersion() {
 
-	    return VERSION;
-	}
+            return VERSION;
+        }
 
-	@NotNull
-	@Override
-	public GowingPackable createEntity( @NotNull final GowingUnPacker unPacker, @NotNull final GowingPackedEntityBundle bundle, final GowingEntityReference er )
-		throws GowingUnPackerParsingException {
+        @NotNull
+        @Override
+        public GowingPackable createEntity(
+                @NotNull final GowingUnPacker unPacker,
+                @NotNull final GowingPackedEntityBundle bundle,
+                final GowingEntityReference er
+        )
+                throws GowingUnPackerParsingException {
 
-	    return new FormattedImmutableDate( unPacker, bundle, er );
+            return new FormattedImmutableDate( unPacker, bundle );
 
-	}
+        }
 
     };
 
@@ -59,47 +63,51 @@ public class FormattedImmutableDate extends ImmutableDate implements GowingPacka
      */
 
     public FormattedImmutableDate() {
-	super();
+
+        super();
 
     }
 
     /**
      Create an instance which represents the time of a specified {@link Date} instance.
+
      @param date the specified {@link Date} instance.
      @throws IllegalArgumentException if <code>date</code> is <code>null</code>.
      */
 
     public FormattedImmutableDate( @NotNull final Date date ) {
-	super( date );
+
+        super( date );
 
     }
 
     /**
      Create an instance which represents a time specified in milliseconds since the Java epoch.
+
      @param timeMs the time since the Java epoch that this instance should represent.
      */
 
     public FormattedImmutableDate( final long timeMs ) {
-	super( timeMs );
+
+        super( timeMs );
 
     }
 
     /**
      Recover an instance from a {@link GowingPackedEntityBundle} instance.
+
      @param unPacker the active Gowing unpacker.
-     @param bundle the bundle representing the instance to be recovered.
-     @param er the entity reference for the instance being recovered.
+     @param bundle   the bundle representing the instance to be recovered.
      @throws GowingUnPackerParsingException if something goes wrong.
      */
 
     public FormattedImmutableDate(
             final GowingUnPacker unPacker,
-            final GowingPackedEntityBundle bundle,
-            final GowingEntityReference er
+            final GowingPackedEntityBundle bundle
     )
-	    throws GowingUnPackerParsingException {
+            throws GowingUnPackerParsingException {
 
-	this( bundle.getNotNullField( ImmutableDate.TIME_MS_NAME ).longValue() );
+        this( bundle.getNotNullField( ImmutableDate.TIME_MS_NAME ).longValue() );
 
     }
 
@@ -109,59 +117,70 @@ public class FormattedImmutableDate extends ImmutableDate implements GowingPacka
             final boolean isPackingSuper, final GowingPacker packer
     ) {
 
-	GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
-		FormattedImmutableDate.ENTITY_TYPE_NAME,
-		FormattedImmutableDate.VERSION,
-		null,
-		packer.getPackingContext()
-	);
+        GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
+                FormattedImmutableDate.ENTITY_TYPE_NAME,
+                FormattedImmutableDate.VERSION,
+                null,
+                packer.getPackingContext()
+        );
 
-	bundle.addHolder( new GowingLongHolder( ImmutableDate.TIME_MS_NAME, getTime(), true ) );
+        bundle.addHolder( new GowingLongHolder( ImmutableDate.TIME_MS_NAME, getTime(), true ) );
 
-	return bundle;
+        return bundle;
 
     }
 
     @Override
     public boolean finishUnpacking( final GowingUnPacker unPacker ) {
 
-	return true;
+        return true;
 
     }
 
     public String getYYYY_MM_DD() {
 
-	if ( _yyyy_mm_dd == null ) {
+        if ( _yyyy_mm_dd == null ) {
 
-	    _yyyy_mm_dd = DateUtils.formatYYYY_MM_DD( this );
+            _yyyy_mm_dd = DateUtils.formatYYYY_MM_DD( this );
 
-	}
+        }
 
-	return _yyyy_mm_dd;
+        return _yyyy_mm_dd;
 
     }
 
     public String getYYYY_MM_DD_HH_MM_SS() {
 
-	if ( _yyyy_mm_dd_hh_mm_ss == null ) {
+        if ( _yyyy_mm_dd_hh_mm_ss == null ) {
 
-	    _yyyy_mm_dd_hh_mm_ss = DateUtils.formatYYYY_MM_DD_HH_MM_SS( this );
+            _yyyy_mm_dd_hh_mm_ss = DateUtils.formatYYYY_MM_DD_HH_MM_SS( this );
 
-	}
+        }
 
-	return _yyyy_mm_dd_hh_mm_ss;
+        return _yyyy_mm_dd_hh_mm_ss;
 
     }
 
     public String getYYYY_MM_DD_HH_MM() {
 
-	if ( _yyyy_mm_dd_hh_mm == null ) {
+        if ( _yyyy_mm_dd_hh_mm == null ) {
 
-	    _yyyy_mm_dd_hh_mm = DateUtils.formatYYYY_MM_DD_HH_MM( this );
+            _yyyy_mm_dd_hh_mm = DateUtils.formatYYYY_MM_DD_HH_MM( this );
 
-	}
+        }
 
-	return _yyyy_mm_dd_hh_mm;
+        return _yyyy_mm_dd_hh_mm;
+
+    }
+
+    /**
+     Format this instance.
+     @return the value returned by calling {@link #getYYYY_MM_DD_HH_MM_SS()}.
+     */
+
+    public String toString() {
+
+        return getYYYY_MM_DD_HH_MM_SS();
 
     }
 

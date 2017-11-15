@@ -4,6 +4,8 @@
 
 package com.obtuse.util;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -139,6 +141,7 @@ public class MyIntSet implements Iterable<Long>, Serializable {
 
     }
 
+    @NotNull
     public Iterator<Long> iterator() {
 
         for ( int i = 0; i < _valueBits.length; i += 1 ) {

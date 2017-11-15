@@ -43,41 +43,12 @@ public class FileSelectors {
         chooser.setDialogTitle( title );
         chooser.setApproveButtonText( title );
         chooser.setMultiSelectionEnabled( multiSelectionEnabled );
-//        chooser.setDialogType( dialogType );
 
         if ( fileFilter != null ) {
 
             chooser.setFileFilter( fileFilter );
 
         }
-
-//        chooser.setFileFilter(
-//                new javax.swing.filechooser.FileFilter() {
-//                    @SuppressWarnings({ "ParameterNameDiffersFromOverriddenParameter" })
-//                    @Override
-//                    public boolean accept( File file ) {
-//
-//                        try {
-//
-//                            File canonicalFile = file.getCanonicalFile();
-//
-//                            return file.isDirectory() || canonicalFile.getName().toLowerCase().endsWith( ".xml" );
-//
-//                        } catch ( IOException e ) {
-//
-//                            return false;
-//
-//                        }
-//
-//                    }
-//
-//                    @Override
-//                    public String getDescription() {
-//
-//                        return ".xml files";
-//                    }
-//                }
-//        );
 
         chooser.setFileSelectionMode( JFileChooser.FILES_ONLY );
         int rval;
@@ -129,41 +100,12 @@ public class FileSelectors {
         chooser.setDialogTitle( title );
         chooser.setApproveButtonText( customLabel );
         chooser.setMultiSelectionEnabled( multiSelectionEnabled );
-//        chooser.setDialogType( dialogType );
 
         if ( fileFilter != null ) {
 
             chooser.setFileFilter( fileFilter );
 
         }
-
-//        chooser.setFileFilter(
-//                new javax.swing.filechooser.FileFilter() {
-//                    @SuppressWarnings({ "ParameterNameDiffersFromOverriddenParameter" })
-//                    @Override
-//                    public boolean accept( File file ) {
-//
-//                        try {
-//
-//                            File canonicalFile = file.getCanonicalFile();
-//
-//                            return file.isDirectory() || canonicalFile.getName().toLowerCase().endsWith( ".xml" );
-//
-//                        } catch ( IOException e ) {
-//
-//                            return false;
-//
-//                        }
-//
-//                    }
-//
-//                    @Override
-//                    public String getDescription() {
-//
-//                        return ".xml files";
-//                    }
-//                }
-//        );
 
         chooser.setFileSelectionMode( JFileChooser.FILES_ONLY );
         int rval = chooser.showDialog( parent, customLabel );
@@ -238,29 +180,6 @@ public class FileSelectors {
             dialog.setDirectory( startingDirectory.getAbsolutePath() );
 
         }
-
-//        dialog.setFilenameFilter(
-//                new FilenameFilter() {
-//
-//                    public boolean accept( File dir, String fileName ) {
-//
-//                        File file = new File( dir, fileName );
-//                        try {
-//
-//                            File canonicalFile = file.getCanonicalFile();
-//
-//                            return file.isDirectory() || canonicalFile.getName().toLowerCase().endsWith( ".xml" );
-//
-//                        } catch ( IOException e ) {
-//
-//                            return false;
-//
-//                        }
-//
-//                    }
-//
-//                }
-//        );
 
         dialog.setVisible( true );
 

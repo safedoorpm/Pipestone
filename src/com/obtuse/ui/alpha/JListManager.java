@@ -18,7 +18,7 @@ import java.util.*;
  * associated add, delete, up, down and duplicate buttons.
  */
 
-@SuppressWarnings("UnusedDeclaration")
+@SuppressWarnings({ "UnusedDeclaration", "unchecked" })
 public abstract class JListManager implements ButtonOwner {
 
     public interface ListElementFactory {

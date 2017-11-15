@@ -43,7 +43,7 @@ public class LinearFlagName extends GowingPackableName {
 	public GowingPackable createEntity( @NotNull final GowingUnPacker unPacker, @NotNull final GowingPackedEntityBundle bundle, final GowingEntityReference er )
 		throws GowingUnPackerParsingException {
 
-	    return new LinearFlagName( unPacker, bundle, er );
+	    return new LinearFlagName( unPacker, bundle );
 
 	}
 
@@ -87,12 +87,11 @@ public class LinearFlagName extends GowingPackableName {
 
     }
 
-    public LinearFlagName( final GowingUnPacker unPacker, final GowingPackedEntityBundle bundle, final GowingEntityReference er )
+    public LinearFlagName( final GowingUnPacker unPacker, final GowingPackedEntityBundle bundle )
 	    throws GowingUnPackerParsingException {
 	super(
 		unPacker,
-		bundle.getSuperBundle(),
-		er
+		bundle.getSuperBundle()
 	);
 
     }

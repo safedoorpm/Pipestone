@@ -42,6 +42,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
      are interested in IAE exceptions which will probably be interested in this runtime exception.
      */
 
+    @SuppressWarnings("unused")
     public static class DateParsingException extends Exception {
 
         public enum Reason {
@@ -200,7 +201,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
         public GowingPackable createEntity( @NotNull final GowingUnPacker unPacker, @NotNull final GowingPackedEntityBundle bundle, final GowingEntityReference er )
                 throws GowingUnPackerParsingException {
 
-            return new ObtuseApproximateCalendarDate( unPacker, bundle, er );
+            return new ObtuseApproximateCalendarDate( unPacker, bundle );
 
         }
 
@@ -279,27 +280,27 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
     }
 
-    public ObtuseApproximateCalendarDate( @Nullable final ObtuseCalendarDate xEarliestPossibleDate, @Nullable final ObtuseCalendarDate xLatestPossibleDate ) {
+    public ObtuseApproximateCalendarDate( @Nullable final ObtuseCalendarDate earliestPossibleDate, @Nullable final ObtuseCalendarDate latestPossibleDate ) {
 
         super( new GowingNameMarkerThing() );
 
-        ObtuseCalendarDate earliestPossibleDate =
-                xEarliestPossibleDate == null ? ObtuseCalendarDate.getEarliestSupportedDate() : xEarliestPossibleDate;
-        ObtuseCalendarDate latestPossibleDate = xLatestPossibleDate == null ? ObtuseCalendarDate.getLatestSupportedDate() : xLatestPossibleDate;
+        ObtuseCalendarDate xEarliestPossibleDate =
+                earliestPossibleDate == null ? ObtuseCalendarDate.getEarliestSupportedDate() : earliestPossibleDate;
+        ObtuseCalendarDate xLatestPossibleDate = latestPossibleDate == null ? ObtuseCalendarDate.getLatestSupportedDate() : latestPossibleDate;
 
-        if ( earliestPossibleDate.compareTo( latestPossibleDate ) > 0 ) {
+        if ( xEarliestPossibleDate.compareTo( xLatestPossibleDate ) > 0 ) {
 
             throw new IllegalArgumentException(
-                    "ObtuseApproximateCalendarDate:  attempt to create range-precise instance with earliest date " + earliestPossibleDate +
-                    " which is after latest possible date " + latestPossibleDate
+                    "ObtuseApproximateCalendarDate:  attempt to create range-precise instance with earliest date " + xEarliestPossibleDate +
+                    " which is after latest possible date " + xLatestPossibleDate
             );
 
         }
 
-        _earliestPossibleDate = earliestPossibleDate;
-        _latestPossibleDate = latestPossibleDate;
+        _earliestPossibleDate = xEarliestPossibleDate;
+        _latestPossibleDate = xLatestPossibleDate;
 
-        _nominalCalendarDate = earliestPossibleDate;
+        _nominalCalendarDate = xEarliestPossibleDate;
 
         _precision = DatePrecision.RANGE;
 
@@ -309,8 +310,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
     public ObtuseApproximateCalendarDate(
             final GowingUnPacker unPacker,
-            final GowingPackedEntityBundle bundle,
-            final GowingEntityReference er
+            final GowingPackedEntityBundle bundle
     ) throws GowingUnPackerParsingException {
 
         super( unPacker, bundle.getSuperBundle() );

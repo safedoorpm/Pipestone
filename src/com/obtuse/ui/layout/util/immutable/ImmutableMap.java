@@ -5,6 +5,8 @@
 
 package com.obtuse.ui.layout.util.immutable;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.Serializable;
 import java.util.*;
 import java.util.function.BiConsumer;
@@ -321,6 +323,7 @@ public class ImmutableMap<K, V> implements Map<K, V>, Serializable {
             return StreamSupport.stream( spliterator(), true );
         }
 
+        @NotNull
         public Iterator<Map.Entry<K, V>> iterator() {
 
             return new Iterator<Map.Entry<K, V>>() {

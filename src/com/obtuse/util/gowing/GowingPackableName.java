@@ -1,6 +1,5 @@
 package com.obtuse.util.gowing;
 
-import com.obtuse.util.ObtuseUtil;
 import com.obtuse.util.gowing.p2a.GowingEntityReference;
 import com.obtuse.util.gowing.p2a.holders.GowingStringHolder;
 import org.jetbrains.annotations.NotNull;
@@ -46,7 +45,7 @@ public class GowingPackableName implements GowingPackable, Comparable<GowingPack
             @NotNull final GowingUnPacker unPacker, @NotNull final GowingPackedEntityBundle bundle, final GowingEntityReference er
 	) {
 
-	    return new GowingPackableName( unPacker, bundle, er );
+	    return new GowingPackableName( unPacker, bundle );
 
 	}
 
@@ -65,7 +64,7 @@ public class GowingPackableName implements GowingPackable, Comparable<GowingPack
 
     }
 
-    public GowingPackableName( final GowingUnPacker unPacker, final GowingPackedEntityBundle bundle, final GowingEntityReference er ) {
+    public GowingPackableName( final GowingUnPacker unPacker, final GowingPackedEntityBundle bundle ) {
 	this( bundle.getNotNullField( NAME_NAME ).StringValue() );
 
     }

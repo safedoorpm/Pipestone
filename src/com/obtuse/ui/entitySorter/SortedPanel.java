@@ -19,6 +19,7 @@ Danny
  A {@link JPanel} that works with a {@link SortedPanelModel}.
  */
 
+@SuppressWarnings("unchecked")
 public class SortedPanel<E> extends JPanel {
 
 //    private String _name;

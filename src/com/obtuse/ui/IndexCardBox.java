@@ -39,22 +39,14 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
 
     private final Consumer<IndexCardBox<E>> _doubleClickOnImageConsumer;
 
-//    private ListModel<E> _dataModel;
-
-    //    private int _verticalUnitIncrement = 10;
-
     public IndexCardBox( final String name, final LinearOrientation linearOrientation, @NotNull final Consumer<IndexCardBox<E>> doubleClickOnImageConsumer ) {
 
         super( name, linearOrientation );
-
-//        watch( this );
 
         _selectionModel = createSelectionModel();
 
         _doubleClickOnImageConsumer = doubleClickOnImageConsumer;
 
-//	setupAwtEventListener();
-//
         _selectionModel.addListSelectionListener(
                 e -> {
                     SortedSet<Integer> selectedIndices = new TreeSet<>();
@@ -94,8 +86,6 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
                 event -> {
 
                     if ( event instanceof MouseEvent ) {
-
-//			    Logger.logMsg( "its a mouse event:  " + event );
 
                         MouseEvent mEvent = (MouseEvent)event;
                         doMouseClick( mEvent );
@@ -252,53 +242,6 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
         }
 
         adjustSelection( ix, mEvent, false );
-//        if ( gotOne ) {
-//
-//            Logger.logMsg( "----" );
-//
-//        }
-//
-//        for ( int i = 0; i < 31; i += 1 ) {
-//
-//            if ( ( mEvent.getModifiers() & ( 1 << i ) ) != 0 ) {
-//
-//                Logger.logMsg( "modifiers:    1 << " + i + " (" + ObtuseUtil.getBitMaskName( 1 << i ) + ") is set" );
-//
-//            }
-//
-//        }
-//
-//        if ( mEvent.getModifiers() == ( InputEvent.BUTTON1_MASK ) ) {
-//
-//            // They just clicked on something - that something becomes the only selected thing
-//
-//            Logger.logMsg( "CLICK" );
-//
-////	    if ( isSelectedIndex( ix ) ) {
-//
-//            setSelectedIndex( ix );
-//
-////	    }
-//
-//        } else if ( mEvent.getModifiers() == ( InputEvent.META_MASK | InputEvent.BUTTON1_MASK ) ) {
-//
-//            // They just alt-clicked on something - that something's selection state flips (all other selected things remain selected)
-//
-//            Logger.logMsg( "ALT-CLICK" );
-//
-//            if ( isSelectedIndex( ix ) ) {
-//
-//                removeSelectionInterval( ix, ix );
-//
-//            } else {
-//
-//                addSelectionInterval( ix, ix );
-//
-//            }
-//
-//        } // that's it for now.
-//
-////	setSelectedValue( indexCard, false );
 
         Logger.logMsg( "}}}}" );
 
@@ -361,29 +304,6 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
 
     }
 
-//    public ListModel<E> getModel() {
-//
-//	return _dataModel;
-//
-//    }
-
-//    public void setModel(ListModel<E> model) {
-//
-//	if (model == null) {
-//
-//	    throw new IllegalArgumentException("model must be non null");
-//
-//	}
-//
-//	ListModel<E> oldValue = _dataModel;
-//	_dataModel = model;
-//
-//	firePropertyChange("model", oldValue, _dataModel);
-//
-//	clearSelection();
-//
-//    }
-
     protected ListSelectionModel createSelectionModel() {
 
         return new DefaultListSelectionModel();
@@ -409,8 +329,6 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
      */
 
     private void adjustSelection( final int row, final MouseEvent e, final boolean isFileList ) {
-//        int row = SwingUtilities2.loc2IndexFileList( _selectionModel, e.getPoint());
-//        boolean isFileList = false;
 
         if ( row < 0 ) {
 
@@ -450,26 +368,26 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
 
                     _selectionModel.addSelectionInterval( anchorIndex, row );
 
-// anchorSelected is always true at this point. Consequently, the only statement inside this first if is the only statement in this
-// sequence of code that is ever executed. That's why that one statement of code is the only code within our containing if block
-// and why the code below is commented out.
+    // anchorSelected is always true at this point. Consequently, the only statement inside this first if is the only statement in this
+    // sequence of code that is ever executed. That's why that one statement of code is the only code within our containing if block
+    // and why the code below is commented out.
 
-//                    if ( anchorSelected ) {
-//
-//                        _selectionModel.addSelectionInterval( anchorIndex, row );
-//
-//                    } else {
-//
-//                        _selectionModel.removeSelectionInterval( anchorIndex, row );
-//
-//                        if ( isFileList ) {
-//
-//                            _selectionModel.addSelectionInterval( row, row );
-//                            _selectionModel.setAnchorSelectionIndex( anchorIndex );
-//
-//                        }
-//
-//                    }
+    //                    if ( anchorSelected ) {
+    //
+    //                        _selectionModel.addSelectionInterval( anchorIndex, row );
+    //
+    //                    } else {
+    //
+    //                        _selectionModel.removeSelectionInterval( anchorIndex, row );
+    //
+    //                        if ( isFileList ) {
+    //
+    //                            _selectionModel.addSelectionInterval( row, row );
+    //                            _selectionModel.setAnchorSelectionIndex( anchorIndex );
+    //
+    //                        }
+    //
+    //                    }
 
                 } else if ( _selectionModel.isSelectedIndex( row ) ) {
 
@@ -740,12 +658,6 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
 
     public void setSelectedIndex( final int index ) {
 
-//	for ( E entity : getSelectedValuesList() ) {
-//
-//	    entity.setSelected( false );
-//
-//	}
-
         if ( index >= getModelSize() ) {
 
             return;
@@ -753,11 +665,6 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
         }
 
         getSelectionModel().setSelectionInterval( index, index );
-//	if ( index >= 0 ) {
-//
-//	    getModelElementAt( index ).setSelected( true );
-//
-//	}
 
     }
 
@@ -781,8 +688,6 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
     public java.util.List<E> getSelectedValuesList() {
 
         ListSelectionModel sm = getSelectionModel();
-
-//	ListModel<E> dm = getModel();
 
         int iMin = sm.getMinSelectionIndex();
         int iMax = sm.getMaxSelectionIndex();

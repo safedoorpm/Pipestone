@@ -110,9 +110,6 @@ public class MultiPointSlider extends JComponent {
 
         _knob = MultiPointSlider.DEFAULT_KNOB;
 
-//        setLayout( new BoxLayout( this, Box ) );
-//        add( _knob );
-
         _paintTicks = false;
         _paintLabels = false;
 
@@ -127,23 +124,6 @@ public class MultiPointSlider extends JComponent {
                 new MouseListener() {
 
                     public void mouseClicked( final MouseEvent mouseEvent ) {
-
-//                        Point hotSpot = mapValueToPoint( _brm.getValue() );
-//                        boolean insideKnob = _knob.isPointOnKnob(
-//                                hotSpot,
-//                                _knobSize,
-//                                _isSelected,
-//                                _positionOnLine,
-//                                mouseEvent.getPoint()
-//                        );
-
-//                        Logger.logMsg(
-//                                "mouse clicked:  hotspot is " + hotSpot +
-//                                ", point is " + mouseEvent.getPoint() +
-//                                ", isSelected is " + _isSelected +
-//                                ", pol is " + _positionOnLine +
-//                                ", insideKnob is " + insideKnob
-//                        );
 
                     }
 
@@ -163,20 +143,13 @@ public class MultiPointSlider extends JComponent {
                             _isSelected = true;
                             _startingPoint = mouseEvent.getPoint();
                             _startingValue = _brm.getValue();
-//                            Logger.logMsg( "repainting because mouse pressed inside knob" );
                             repaint();
-
-//                            Logger.logMsg( "mouse pressed:  inside, sP = " + _startingPoint + ", sV = " + _startingValue );
 
                         } else {
 
                             _isSelected = false;
 
-//                            Logger.logMsg( "mouse pressed:  outside" );
-
                         }
-
-//                        repaint();
 
                     }
 
@@ -347,16 +320,6 @@ public class MultiPointSlider extends JComponent {
 
         _brm.setValue( newValue );
 
-//        Logger.logMsg(
-//                "adjust value: " +
-//                        " md = " + moveDistance + "," +
-//                        " _sV = " + _startingValue + "," +
-//                        " sHP = " + startingHotSpot + "," +
-//                        " nP = " + newPoint + "," +
-//                        " nV = " + _brm.getValue() + "," +
-//                        " _brm = " + _brm
-//        );
-
     }
 
     @SuppressWarnings("UnusedDeclaration")
@@ -523,19 +486,10 @@ public class MultiPointSlider extends JComponent {
 
     }
 
-    //    int _s1Count = 0;
     @SuppressWarnings("ConstantConditions")
     public Dimension computeMinimumSize() {
 
-//        if ( isInteresting() ) {
-//
-//            Logger.logMsg( _name + ":  call to computeMinimumSize()" );
-//
-//        }
-
         OrientedImage orientedImage = _knob.getOrientedImage( _knobSize, _positionOnLine, _isSelected );
-//        if ( "s3s7".contains( _name ) )
-//        Logger.logMsg( _name + ":  " + orientedImage );
 
         int knobBreadth;
         if ( isVerticalOrientation() ) {
@@ -550,7 +504,6 @@ public class MultiPointSlider extends JComponent {
 
         int breadth = 0;
         breadth += knobBreadth;
-//        if ( isInteresting() ) Logger.logMsg( "breadth = " + breadth );
 
         if ( _paintTicks && ( _minorTickSpacing > 0 || _majorTickSpacing > 0 ) ) {
 
@@ -568,7 +521,6 @@ public class MultiPointSlider extends JComponent {
             }
 
             breadth += ticSpace;
-//            if ( isInteresting() ) Logger.logMsg( "breadth = " + breadth + " ( + ticSpace " + ticSpace + " )" );
 
         }
 
@@ -580,23 +532,14 @@ public class MultiPointSlider extends JComponent {
         // to the point, the hot spot is not necessarily located at the midpoint
         // of the knob.
 
-//        String what;
         int minValueOverhang;
         int maxValueOverhang;
         if ( isVerticalOrientation() ) {
-
-//            if ( "s3s7".contains( _name ) )
-//            Logger.logMsg( "oIsh = " + orientedImage.getScreenHeight() + ", oIhs = " + orientedImage.getHotSpotWithinImage() );
-//            what = "a";
 
             minValueOverhang = orientedImage.getHotSpotWithinImage().y;
             maxValueOverhang = orientedImage.getScreenHeight() - orientedImage.getHotSpotWithinImage().y;
 
         } else {
-
-//            if ( "s3s7".contains( _name ) )
-//                Logger.logMsg( "oIsh = " + orientedImage.getScreenHeight() + ", oIhs = " + orientedImage.getHotSpotWithinImage() );
-//            what = "b";
 
             minValueOverhang = orientedImage.getHotSpotWithinImage().x;
             maxValueOverhang = orientedImage.getScreenWidth() - orientedImage.getHotSpotWithinImage().x;
@@ -607,9 +550,6 @@ public class MultiPointSlider extends JComponent {
 
         minValueOverhang = Math.max( 0, minValueOverhang );
         maxValueOverhang = Math.max( 0, maxValueOverhang );
-
-//        if ( "s3s7".contains( _name ) )
-//        Logger.logMsg( _name + ":  what = " + what + "; minVO = " + _minValueOverhang + "; maxVO = " + _maxValueOverhang );
 
         /*
          * Do we need to account for the space consumed by labels?
@@ -679,46 +619,35 @@ public class MultiPointSlider extends JComponent {
             // We computed how much of the knob might protrude out each end earlier so we just
             // need to remember the max of each pair.
 
-//            Logger.logMsg( "before:  minVO = " + _minValueOverhang + ", maxVO = " + _maxValueOverhang + ", fL.h = " + firstLabel.getHeight() + ", fL.w = " + firstLabel.getWidth() + ", lL.h = " + lastLabel.getHeight() + ", lL.w = " + lastLabel.getWidth() );
-
-//            String how;
             if ( isVerticalOrientation() ) {
 
-//                how = "a";
                 if ( firstLabel != null ) {
 
-//                    how = "v1";
                     minValueOverhang = Math.max( ( firstLabel.getHeight() + 1 ) / 2, minValueOverhang );
 
                 }
 
                 if ( lastLabel != null ) {
 
-//                    how = "v2";
                     maxValueOverhang = Math.max( ( lastLabel.getHeight() + 1 ) / 2, maxValueOverhang );
 
                 }
 
             } else {
 
-//                how = "b";
                 if ( firstLabel != null ) {
 
-//                    how = "v3";
                     minValueOverhang = Math.max( ( firstLabel.getWidth() + 1 ) / 2, minValueOverhang );
 
                 }
 
                 if ( lastLabel != null ) {
 
-//                    how = "v4";
                     maxValueOverhang = Math.max( ( lastLabel.getWidth() + 1 ) / 2, maxValueOverhang );
 
                 }
 
             }
-
-//            Logger.logMsg( "how = " + how );
 
             // Compute the minimum line length while making sure we don't end up with a teensy tiny line.
 
@@ -726,7 +655,6 @@ public class MultiPointSlider extends JComponent {
                                                               MultiPointSlider.MINIMUM_LABEL_GAP_SPACE;
 
             length = Math.max( MultiPointSlider.MINIMUM_LINE_LENGTH, minLabelSpace );
-//            length = minLabelSpace < MINIMUM_LINE_LENGTH ? MINIMUM_LINE_LENGTH : minLabelSpace;
 
         } else {
 
@@ -765,12 +693,6 @@ public class MultiPointSlider extends JComponent {
 
             }
 
-//            if ( "s3s7".contains( _name ) ) {
-//
-//                Logger.logMsg( "when = " + when );
-//
-//            }
-
         }
 
         _length = length;
@@ -778,16 +700,9 @@ public class MultiPointSlider extends JComponent {
 
         length = minValueOverhang + length + maxValueOverhang;
 
-//        if ( "s3s7".contains( _name ) ) {
-//
-//            Logger.logMsg( _name + "  minVO = " + minValueOverhang + ", maxVO = " + maxValueOverhang + ", es = " + _endSpace + ", l = " + _length );
-//
-//        }
-
         // We've got it!
 
         Dimension actualSize;
-//        Logger.logMsg( _name + ":  min size = " + super.getMinimumSize() + ", max size = " + super.getMaximumSize() + ", pref size = " + super.getPreferredSize() );
 
         if ( isVerticalOrientation() ) {
 
@@ -817,10 +732,6 @@ public class MultiPointSlider extends JComponent {
                     Math.max( _minimumSize.width, getWidth() ),
                     Math.max( _minimumSize.height, getHeight() )
             );
-//            if ( isInteresting() ) {
-//                Logger.logMsg( "min size is " + _minimumSize + ", actual size is " + actualSize );
-//                Logger.logMsg( "" );
-//            }
 
             if ( _minimumSize.width < actualSize.width ) {
 
@@ -852,19 +763,6 @@ public class MultiPointSlider extends JComponent {
 
         }
 
-//        if ( "s3s7".contains( _name ) ) {
-//
-//            Logger.logMsg(
-//                    "" + _name + ":  breadth = " + breadth + ", length = " + length + ", knob breadth = " + knobBreadth + ", min size = ( " +
-//                    _minimumSize.getWidth() + ", " + _minimumSize.getHeight() + " ), line position = " + _linePosition
-//            );
-//
-//            Logger.logMsg( _name + ":  " + _minimumSize );
-//
-//        }
-
-//        Logger.logMsg( "slider \"" + _name + "\" has a computed minimum size of " + _minimumSize );
-
         if ( isInteresting() && (
                 _lastMinimumSize == null || _lastMinimumSize.width != _minimumSize.width ||
                 _lastMinimumSize.height != _minimumSize.height
@@ -883,9 +781,6 @@ public class MultiPointSlider extends JComponent {
 
         Dimension minimumSize = computeMinimumSize();
         Dimension rval = super.getMinimumSize();
-//        if ( interesting() ) Logger.logMsg( _name + "  computeMinimumSize() returned " + minimumSize + ", super.getMinimumSize() returned " + rval );
-//        rval.width = Math.max( minimumSize.width, rval.width );
-//        rval.height = Math.max( minimumSize.height, rval.height );
         if ( isInteresting() ) {
 
             Logger.logMsg( _name + ": getMinimumSize() returned " + rval );
@@ -1272,7 +1167,6 @@ public class MultiPointSlider extends JComponent {
         frame.setTitle( "Hi there" );
         JPanel bluePanel = new JPanel();
         bluePanel.setLayout( new BoxLayout( bluePanel, BoxLayout.Y_AXIS ) );
-//        bluePanel.setBackground( new Color( 200, 200, 255 ) );
         MultiPointSlider slider = new MultiPointSlider( "s1", 0, 10 );
         slider.setLabelTable( labels );
         slider.setMinorTickSpacing( 1 );
@@ -1317,7 +1211,6 @@ public class MultiPointSlider extends JComponent {
 
         JPanel redPanel = new JPanel();
         redPanel.setLayout( new BoxLayout( redPanel, BoxLayout.X_AXIS ) );
-//        redPanel.setBackground( new Color( 255, 200, 200 ) );
         slider = new MultiPointSlider( "s5", 0, 10 );
         slider.setLabelTable( labels );
         slider.setMinorTickSpacing( 1 );

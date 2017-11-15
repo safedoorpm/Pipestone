@@ -10,6 +10,7 @@ import org.jetbrains.annotations.NotNull;
  The user of this class should override those methods which are of interest.
  */
 
+@SuppressWarnings("unused")
 public class PepysEventAdapter implements PepysEventListener {
 
     @Override

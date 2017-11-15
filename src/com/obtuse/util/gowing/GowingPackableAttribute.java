@@ -46,7 +46,7 @@ public class GowingPackableAttribute implements GowingPackable {
 	@Override
 	public GowingPackable createEntity( @NotNull final GowingUnPacker unPacker, @NotNull final GowingPackedEntityBundle bundle, final GowingEntityReference er ) {
 
-	    return new GowingPackableAttribute( unPacker, bundle, er );
+	    return new GowingPackableAttribute( unPacker, bundle );
 
 	}
 
@@ -99,7 +99,7 @@ public class GowingPackableAttribute implements GowingPackable {
 
     }
 
-    protected GowingPackableAttribute( final GowingUnPacker unPacker, final GowingPackedEntityBundle bundle, final GowingEntityReference er ) {
+    protected GowingPackableAttribute( final GowingUnPacker unPacker, final GowingPackedEntityBundle bundle ) {
 	this(
 		new GowingPackableName( bundle.getNotNullField( GowingPackableAttribute.N_NAME ).StringValue() ),
 		null,
