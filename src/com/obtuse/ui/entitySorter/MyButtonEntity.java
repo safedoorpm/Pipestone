@@ -48,7 +48,7 @@ public class MyButtonEntity implements SortableEntity {
     public <K extends Comparable<K>, E extends SortableEntity> SortableEntityView<K, E> createEntityView( final SortedPanelModel<K, E> panelModel, final K key ) {
 
 	MyButtonView view = new MyButtonView( this, _myModel, _word, (String) key );
-	SortableEntityView<K, E> rval = (SortableEntityView<K, E>) view;
+	@SuppressWarnings("unchecked") SortableEntityView<K, E> rval = (SortableEntityView<K, E>) view;
 	return rval;
 
     }

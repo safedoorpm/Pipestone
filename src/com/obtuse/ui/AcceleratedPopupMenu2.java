@@ -24,20 +24,20 @@ public class AcceleratedPopupMenu2 extends JDialog {
     private JScrollPane _wordsScrollPane;
 
     private final String[] _words;
-    private final DefaultListModel _listModel = new DefaultListModel();
+    private final DefaultListModel<String> _listModel = new DefaultListModel<>();
     private final StringBuilder _accelerator = new StringBuilder();
 
     public AcceleratedPopupMenu2( final Collection<String> words ) {
         this( words.toArray( new String[words.size()] ) );
     }
 
+    @SuppressWarnings("unchecked")
     public AcceleratedPopupMenu2( final String[] words ) {
         super();
 
         _words = words;
 
-	//noinspection unchecked
-	_wordsList.setModel( _listModel );
+        _wordsList.setModel( _listModel );
 
         setContentPane( contentPane );
         setModal( true );
@@ -109,8 +109,8 @@ public class AcceleratedPopupMenu2 extends JDialog {
 
             if ( word.startsWith( prefix ) ) {
 
-		//noinspection unchecked
-		_listModel.addElement( word );
+                //noinspection unchecked
+                _listModel.addElement( word );
 
                 visibleCount += 1;
 
@@ -130,6 +130,12 @@ public class AcceleratedPopupMenu2 extends JDialog {
     private void onCancel() {
 
         dispose();
+
+    }
+
+    public String toString() {
+
+        return "AcceleratedPopupMenu2()";
 
     }
 

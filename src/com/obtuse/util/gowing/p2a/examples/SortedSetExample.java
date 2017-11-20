@@ -159,7 +159,8 @@ public class SortedSetExample extends GowingAbstractPackableEntity implements Go
 
         }
 
-        GowingPackableCollection<String> dataCollection = (GowingPackableCollection<String>)unPacker.resolveReference( _dataCollectionReference );
+        @SuppressWarnings("unchecked") GowingPackableCollection<String> dataCollection
+                = (GowingPackableCollection<String>)unPacker.resolveReference( _dataCollectionReference );
 
         _myCollection.addAll( dataCollection );
 

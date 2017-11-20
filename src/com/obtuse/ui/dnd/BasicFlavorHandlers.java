@@ -76,7 +76,7 @@ public class BasicFlavorHandlers {
             try {
 
                 Object transferData = ts.getTransferable().getTransferData( DataFlavor.javaFileListFlavor );
-                List list = (List)transferData;
+                @SuppressWarnings("unchecked") List<File> list = (List)transferData;
                 Object[] objects = list.toArray( new File[list.size()] );
                 File[] files = (File[])objects;
                 Logger.logMsg( "files array is " + files.getClass() );
