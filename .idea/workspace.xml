@@ -4,19 +4,7 @@
     <option name="SCOPE_TYPE" value="3" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/tableutils/CustomizableCellEditor.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/tableutils/UniqueThingTableCellEditor.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/obtuse/util/things/package-info.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/obtuse/util/ThingInfo.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/things/ThingInfo.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/obtuse/util/ThingName.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/things/ThingName.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/obtuse/util/ThingNameFactory.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/things/ThingNameFactory.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/ui/MessageLabel.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/MessageLabel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/ui/tableutils/FrameworkTableModel.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/tableutils/FrameworkTableModel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/FlexibleDateTransmogrifier.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/FlexibleDateTransmogrifier.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/obtuse/util/ObtuseApproximateCalendarDate.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ObtuseApproximateCalendarDate.java" />
-    </list>
+    <list default="true" id="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" name="Default" comment="" />
     <ignored path="Pipestone.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -1262,7 +1250,7 @@
       <workItem from="1497549524064" duration="292000" />
       <workItem from="1510636686770" duration="2865000" />
       <workItem from="1510770593175" duration="5816000" />
-      <workItem from="1511477634467" duration="83000" />
+      <workItem from="1511477634467" duration="328000" />
     </task>
     <task id="LOCAL-00001" summary="Major re-sync with danny's personal toolkit.">
       <created>1359580956092</created>
@@ -1579,11 +1567,18 @@
       <option name="project" value="LOCAL" />
       <updated>1510775598581</updated>
     </task>
-    <option name="localTasksCounter" value="46" />
+    <task id="LOCAL-00046" summary="Add parsing for more date formats in FlexibleDateTransmogrifier.&#10;Rework the parse method in ObtuseApproximateCalendarDate to use FlexibleDateTransmogrifier for most styles of dates (date ranges don't use it yet).&#10;Cleanup.">
+      <created>1511477817239</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1511477817239</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="733975000" />
+    <option name="totallyTimeSpent" value="734220000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1730,7 +1725,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Simplify and make the allocation of Gowing instance ids much more robust by using&#10;&#10;private final GowingInstanceId _instanceId = new GowingInstanceId( getClass() );&#10;&#10;to allocate all instance ids based on the actual final implementation class of the instance that they describe." />
     <MESSAGE value="Cleaned up Gowing facility (better Javadocs, old commented out removed, etc).&#10;Marginal but useful cleanup on TreeSorter.java class.&#10;New first cut at generalizing the handling of messages (heading towards generalizing the logging window stuff)." />
     <MESSAGE value="Checkpoint commit prior to doing some experimenting on Niepce." />
     <MESSAGE value="Checkpoint commit and push prior to trip to Winnipeg." />
@@ -1755,7 +1749,8 @@
     <MESSAGE value="Almost entirely cleanup." />
     <MESSAGE value="Rework the various ObtuseUtil.enquote... methods.&#10;&#10;Cleanup." />
     <MESSAGE value="More cleanup than I should admit to needing to do (sigh)." />
-    <option name="LAST_COMMIT_MESSAGE" value="More cleanup than I should admit to needing to do (sigh)." />
+    <MESSAGE value="Add parsing for more date formats in FlexibleDateTransmogrifier.&#10;Rework the parse method in ObtuseApproximateCalendarDate to use FlexibleDateTransmogrifier for most styles of dates (date ranges don't use it yet).&#10;Cleanup." />
+    <option name="LAST_COMMIT_MESSAGE" value="Add parsing for more date formats in FlexibleDateTransmogrifier.&#10;Rework the parse method in ObtuseApproximateCalendarDate to use FlexibleDateTransmogrifier for most styles of dates (date ranges don't use it yet).&#10;Cleanup." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -2448,6 +2443,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="342">
           <caret line="20" column="13" lean-forward="false" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
+          <folding />
         </state>
       </provider>
     </entry>
