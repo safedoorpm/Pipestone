@@ -8,7 +8,7 @@ package com.obtuse.ui.tableutils;
 import com.obtuse.exceptions.HowDidWeGetHereError;
 import com.obtuse.util.Logger;
 import com.obtuse.util.SimpleUniqueIntegerIdGenerator;
-import com.obtuse.util.ThingNameFactory;
+import com.obtuse.util.things.ThingNameFactory;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

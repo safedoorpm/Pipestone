@@ -304,7 +304,9 @@ public class FlexibleDateTransmogrifier {
     public static Pattern YYYY_MMM_DD = Pattern.compile( "(\\d{4}) +([A-Za-z]{3,}) +(\\d\\d?)" );
     public static Pattern YYYY_MMM_DD_N = Pattern.compile( "(\\d{4}) +(\\d\\d?) +(\\d\\d?)" );
     public static Pattern MMM_YYYY = Pattern.compile( "([A-Za-z]{3,}) +(\\d{4})" );
-    public static Pattern MMM_DD_YYYY = Pattern.compile( "([A-Za-z]{3,}) +(\\d\\d?) *, +(\\d{4})" );
+    public static Pattern MMM_DD_YYYY1 = Pattern.compile( "([A-Za-z]{3,}) +(\\d\\d?) *, *(\\d{4})" );
+    public static Pattern MMM_DD_YYYY2 = Pattern.compile( "([A-Za-z]{3,}) +(\\d\\d?) */ *(\\d{4})" );
+    public static Pattern MMM_DD_YYYY3 = Pattern.compile( "([A-Za-z]{3,}) +(\\d\\d?) +(\\d{4})" );
 
     private static PatternInfo[] s_patternInfos = {
             new PatternInfo( YYYY, 1, -1, -1, true ),
@@ -318,7 +320,9 @@ public class FlexibleDateTransmogrifier {
             new PatternInfo( DD_MMM_YYYY_N, 3, 2, 1, true ),
             new PatternInfo( YYYY_MMM_DD, 1, 2, 3, false ),
             new PatternInfo( YYYY_MMM_DD_N, 1, 2, 3, true ),
-            new PatternInfo( MMM_DD_YYYY, 3, 1, 2, false ),
+            new PatternInfo( MMM_DD_YYYY1, 3, 1, 2, false ),
+            new PatternInfo( MMM_DD_YYYY2, 3, 1, 2, false ),
+            new PatternInfo( MMM_DD_YYYY3, 3, 1, 2, false ),
             new PatternInfo( MMM_YYYY, 2, 1, -1, false ),
     };
 

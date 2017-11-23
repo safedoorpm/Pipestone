@@ -3,7 +3,7 @@
  * All rights reserved.
  */
 
-package com.obtuse.util;
+package com.obtuse.util.things;
 
 import com.obtuse.ui.MessageLabel;
 import org.jetbrains.annotations.NotNull;
@@ -18,6 +18,8 @@ public interface ThingNameFactory {
 
     /**
      Take the name of something in string form and turn it into an actual {@link ThingName}.
+     <p/>This is used by the {@link com.obtuse.ui.tableutils.UniqueThingTableCellEditor} when validating newly edited field values
+     (a consequence of how {@link javax.swing.table.TableCellEditor}s work).
      @param name the name of the something.
      @return the {@link ThingName} of the something.
      */
@@ -49,8 +51,20 @@ public interface ThingNameFactory {
     @NotNull
     String getThingsTypeName( boolean forceCapitalizeFirstLetter );
 
+    /**
+     Get the default class for cells in a table column.
+     <p/>Used by the {@link com.obtuse.ui.tableutils.FrameworkTableModel.CManager} class.
+     @return the default class for cells in a table column.
+     */
+
     @NotNull
     Class<?> getDefaultClass();
+
+    /**
+     Get the title for a table column.
+     <p/>Used by the {@link com.obtuse.ui.tableutils.FrameworkTableModel.CManager} class.
+     @return the title for a table column.
+     */
 
     @NotNull
     String getColumnTitleString();

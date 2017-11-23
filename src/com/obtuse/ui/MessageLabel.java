@@ -174,6 +174,7 @@ public class MessageLabel extends JLabel {
     public MessageLabel( @Nullable final String message ) {
 
         this( message, null );
+
     }
 
     /**
@@ -243,6 +244,8 @@ public class MessageLabel extends JLabel {
     public void setExtraInfo( @Nullable final String extraInfo ) {
 
         _extraInfo = extraInfo == null ? "" : extraInfo;
+
+        setToolTipText( _extraInfo );
 
     }
 

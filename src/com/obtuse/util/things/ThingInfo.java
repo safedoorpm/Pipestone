@@ -3,7 +3,7 @@
  * All rights reserved.
  */
 
-package com.obtuse.util;
+package com.obtuse.util.things;
 
 import org.jetbrains.annotations.NotNull;
 import com.obtuse.ui.tableutils.CheckBoxRowWrapper;

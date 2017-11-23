@@ -3,8 +3,9 @@
  * All rights reserved.
  */
 
-package com.obtuse.util;
+package com.obtuse.util.things;
 
+import com.obtuse.util.ObtuseUtil;
 import org.jetbrains.annotations.NotNull;
 
 /**
