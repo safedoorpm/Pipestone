@@ -505,6 +505,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
 //	        try {
 
+                    //noinspection SpellCheckingInspection
                     String yyyymmdd = ObtuseUtil.lpad( _nominalCalendarDate.getYear(), 4, '0' ) + '-' +
                                       ObtuseUtil.lpad( _nominalCalendarDate.getMonthOfYear() + 1, 2, '0' ) + '-' +
                                       ObtuseUtil.lpad( ObtuseCalendarDate.getDaysInMonth(
@@ -733,6 +734,44 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
     }
 
     /**
+     Helper method that makes it easier to format dates when starting with an
+     {@link Optional}&lt;{@link String}&gt;.
+
+     @param optDateString an {@link Optional}&lt;{@link String}&gt; which is either empty or contains a date string
+     acceptable to {@link #parse(String)}.
+     @return an {@link Optional}&lt;{@link ObtuseApproximateCalendarDate}&gt;
+     containing the parsed date if {@code optDateString} contains a date in a format acceptable to {@link #parse(String)};
+     an empty {@link Optional}&lt;{@link ObtuseApproximateCalendarDate}&gt; otherwise (if {@code optDateString}
+     was either empty or contains something that {@link #parse(String)} is unable to parse.
+     <p>Note that unlike {@link #parse(String)}, this helper method does not throw an exception if parsing fails.</p>
+     */
+    public static Optional<ObtuseApproximateCalendarDate> parse(
+            @SuppressWarnings("OptionalUsedAsFieldOrParameterType") @NotNull final Optional<String> optDateString
+    ) {
+
+        if ( optDateString.isPresent() ) {
+
+            try {
+
+                return Optional.of( parse( optDateString.get() ) );
+
+            } catch ( IllegalArgumentException e ) {
+
+                return Optional.empty();
+
+            } catch ( DateParsingException e ) {
+
+                return Optional.empty();
+
+            }
+
+        } else {
+
+            return Optional.empty();
+
+        }
+    }
+    /**
      Attempt to parse a string.
      <p/>
      This method first tries to parse the date string assuming that it is in canonical form (yyyy-mm-dd).
@@ -744,14 +783,16 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
      @param dateString the date string which is to be parse.
      @return the parsed date string.
      @throws DateParsingException if the parsing attempt fails.
+     @throws IllegalArgumentException if the call to {@link FlexibleDateTransmogrifier#transmogrify(String)} fails.
      */
 
-    public static ObtuseApproximateCalendarDate parse( @NotNull String dateString )
+    @NotNull
+    public static ObtuseApproximateCalendarDate parse( @NotNull final String dateString )
             throws DateParsingException {
 
         try {
 
-            ObtuseApproximateCalendarDate rval = internalParse( dateString, dateString );
+            @SuppressWarnings("UnnecessaryLocalVariable") ObtuseApproximateCalendarDate rval = internalParse( dateString, dateString );
 
             return rval;
 
@@ -760,7 +801,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
             Optional<String> cleanedDate = FlexibleDateTransmogrifier.transmogrify( dateString );
             if ( cleanedDate.isPresent() ) {
 
-                ObtuseApproximateCalendarDate rval = internalParse( dateString, cleanedDate.get() );
+                @SuppressWarnings("UnnecessaryLocalVariable") ObtuseApproximateCalendarDate rval = internalParse( dateString, cleanedDate.get() );
 
                 return rval;
 
@@ -779,18 +820,18 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
     private static final Pattern OACD_MONTH_PATTERN = Pattern.compile( "(\\d\\d\\d\\d)\\s*-\\s*(\\d\\d)" );
 
     @NotNull
-    private static ObtuseApproximateCalendarDate internalParse( @NotNull String providedDateString, @NotNull String cleanedDateString )
+    private static ObtuseApproximateCalendarDate internalParse( @NotNull final String providedDateString, @NotNull final String cleanedDateString )
             throws DateParsingException {
 
-        cleanedDateString = cleanedDateString.trim();
+        String trimmedCleanedDateString = cleanedDateString.trim();
 
-        if ( cleanedDateString.length() == 0 ) {
+        if ( trimmedCleanedDateString.isEmpty() ) {
 
-            throw new DateParsingException( Reason.EMPTY_STRING, "unable to parse empty strings" );
+            throw new DateParsingException( Reason.EMPTY_STRING, "unable to parse empty date strings" );
 
         }
 
-        if ( FORMATTED_UNKNOWN_APPROXIMATE_DATE.equalsIgnoreCase( cleanedDateString ) ) {
+        if ( FORMATTED_UNKNOWN_APPROXIMATE_DATE.equalsIgnoreCase( trimmedCleanedDateString ) ) {
 
             return UNKNOWN_APPROXIMATE_DATE;
 
@@ -800,21 +841,21 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
         if ( s_requireNewStyleDateRanges ) {
 
-            if ( cleanedDateString.indexOf( ':' ) >= 0 || cleanedDateString.indexOf( ';' ) >= 0 ) {
+            if ( trimmedCleanedDateString.indexOf( ':' ) >= 0 || trimmedCleanedDateString.indexOf( ';' ) >= 0 ) {
 
-                return parseDateRange( cleanedDateString );
+                return parseDateRange( trimmedCleanedDateString );
 
             }
 
-        } else if ( cleanedDateString.startsWith( "(" ) || cleanedDateString.indexOf( ',' ) >= 0 || cleanedDateString.endsWith( ")" ) ) {
+        } else if ( trimmedCleanedDateString.startsWith( "(" ) || trimmedCleanedDateString.indexOf( ',' ) >= 0 || trimmedCleanedDateString.endsWith( ")" ) ) {
 
-            return parseDateRange( cleanedDateString );
+            return parseDateRange( trimmedCleanedDateString );
 
         }
 
         // Could it be a decade?
 
-        Matcher decadeMatcher = OACD_DECADE_PATTERN.matcher( cleanedDateString );
+        Matcher decadeMatcher = OACD_DECADE_PATTERN.matcher( trimmedCleanedDateString );
         if ( decadeMatcher.matches() ) {
 
             String tmpDateString = decadeMatcher.group( 1 ) + "-01-01";
@@ -828,15 +869,16 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
                 } catch ( Exception e ) {
 
-                    throw new HowDidWeGetHereError( "exceptions should be impossible here (dateString is \"" + cleanedDateString + "\")", e );
+                    throw new HowDidWeGetHereError( "exceptions should be impossible here (dateString is \"" + trimmedCleanedDateString + "\")", e );
 
                 }
 
             } catch ( IllegalArgumentException e ) {
 
+                //noinspection SpellCheckingInspection
                 throw new DateParsingException(
                         Reason.DECADE_INVALID,
-                        "invalid decade \"" + cleanedDateString + "\" (must be \"YYYYs\" or \"YYYYS\")",
+                        "invalid decade \"" + providedDateString + "\" (must be \"YYYYs\" or \"YYYYS\")",
                         e
                 );
 
@@ -846,7 +888,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
         // If it is just four digits then it could only be a year.
 
-        String cleanedYearString = cleanedDateString;
+        String cleanedYearString = trimmedCleanedDateString;
         if ( cleanedYearString.endsWith( "-00-00" ) ) {
 
             cleanedYearString = cleanedYearString.substring( 0, cleanedYearString.length() - 6 );
@@ -868,7 +910,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
                 } catch ( Exception e ) {
 
-                    throw new HowDidWeGetHereError( "exceptions should be impossible here (dateString is \"" + cleanedDateString + "\")", e );
+                    throw new HowDidWeGetHereError( "exceptions should be impossible here (dateString is \"" + trimmedCleanedDateString + "\")", e );
 
                 }
 
@@ -876,7 +918,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
                 throw new DateParsingException(
                         Reason.YEAR_INVALID,
-                        "invalid year \"" + cleanedYearString + "\" (must be four digit year between " +
+                        "invalid year \"" + providedDateString + "\" (must be four digit year between " +
                         ObtuseCalendarDate.EARLIEST_SUPPORTED_DATE_STRING.substring( 0, 4 ) + " and " +
                         ObtuseCalendarDate.LATEST_SUPPORTED_DATE_STRING.substring( 0, 4 ) + ")",
                         e
@@ -888,7 +930,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
         // Could it be a month?
 
-        String cleanedMonthString = cleanedDateString;
+        String cleanedMonthString = trimmedCleanedDateString;
         if ( cleanedMonthString.endsWith( "-00" ) ) {
 
             cleanedMonthString = cleanedMonthString.substring( 0, cleanedMonthString.length() - 3 );
@@ -910,7 +952,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
                 } catch ( Exception e ) {
 
-                    throw new HowDidWeGetHereError( "exceptions should be impossible here (dateString is \"" + cleanedDateString + "\")", e );
+                    throw new HowDidWeGetHereError( "exceptions should be impossible here (dateString is \"" + trimmedCleanedDateString + "\")", e );
 
                 }
 
@@ -918,7 +960,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
                 throw new DateParsingException(
                         Reason.MONTH_INVALID,
-                        "invalid month \"" + cleanedMonthString + "\" (must be YYYY-MM)",
+                        "invalid month \"" + cleanedMonthString + "\"",
                         e
                 );
 
@@ -928,12 +970,12 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
         // Does it look like a simple calendar date?
 
-        Matcher dateMatcher = OACD_DATE_PATTERN.matcher( cleanedDateString );
+        Matcher dateMatcher = OACD_DATE_PATTERN.matcher( trimmedCleanedDateString );
         if ( dateMatcher.matches() ) {
 
             try {
 
-                ObtuseCalendarDate tmpCalendarDate = ObtuseCalendarDate.parseCalendarDate( cleanedDateString );
+                ObtuseCalendarDate tmpCalendarDate = ObtuseCalendarDate.parseCalendarDate( trimmedCleanedDateString );
 
                 try {
 
@@ -941,7 +983,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
                 } catch ( Exception e ) {
 
-                    throw new HowDidWeGetHereError( "exceptions should be impossible here (dateString is \"" + cleanedDateString + "\")", e );
+                    throw new HowDidWeGetHereError( "exceptions should be impossible here (dateString is \"" + trimmedCleanedDateString + "\")", e );
 
                 }
 
@@ -949,7 +991,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
                 throw new DateParsingException(
                         Reason.DATE_INVALID,
-                        "invalid date \"" + cleanedDateString + "\" (must be \"YYYY-MM-DD\")"
+                        "invalid date \"" + providedDateString + "\""
                 );
 
             }
@@ -958,7 +1000,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
         // No idea what this fish is.
 
-        throw new DateParsingException( Reason.INCOMPREHENSIBLE, "unable to make sense of \"" + cleanedDateString + "\"" );
+        throw new DateParsingException( Reason.INCOMPREHENSIBLE, "unable to make sense of \"" + providedDateString + "\" as a date" );
 
     }
 

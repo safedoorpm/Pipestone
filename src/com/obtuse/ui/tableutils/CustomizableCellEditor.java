@@ -28,6 +28,20 @@ public abstract class CustomizableCellEditor extends DefaultCellEditor {
 
         super( new JTextField() );
 
+        // Daniel Boulet danny somewhere in matilda.com 2017/11/24:
+        //
+        // I don't really know why the line
+        //
+        //    getComponent().setName( "Table.editor" );
+        //
+        // is here.
+        //
+        // In my defence, the whole cell editor stuff bears an amazingly strong resemblance to black magic
+        // at times and I can recall getting a little desperate back when I was figuring out how to make this
+        // CustomizableCellEditor class work.
+        //
+        // Also, the JTable.GenericEditor class does this (again, don't really know why).
+
         getComponent().setName( "Table.editor" );
 
     }
@@ -62,12 +76,6 @@ public abstract class CustomizableCellEditor extends DefaultCellEditor {
             // Otherwise, they will return quietly.
 
             validate( s );
-
-//	    if ( constructor.getDeclaringClass() == String.class ) {
-//
-//		value = s;
-//
-//	    }
 
             // If the edit box is empty then stop the editing session.
             // Backward compatibility demands that the value of the editing session be an empty string if the cell's {@code class} is

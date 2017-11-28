@@ -102,6 +102,7 @@ public class FlexibleDateTransmogrifier {
     private static TestData[] s_testData = {
             new TestData(
                     new String[] {
+                            "32 may 1972",
                             "",
                             "932", "12321",
                             "1972-", "0932-", "932-",
@@ -109,7 +110,6 @@ public class FlexibleDateTransmogrifier {
                             "1972/", "0932/", "932/",
                             "2 ma 1972",
                             "2 marc 1972",
-                            "32 may 1972",
                             "1972 may 32",
                             "1972-05-32",
                             "1972.05.32",
@@ -326,7 +326,9 @@ public class FlexibleDateTransmogrifier {
             new PatternInfo( MMM_YYYY, 2, 1, -1, false ),
     };
 
-    private static boolean s_verbose = false;
+    private static boolean s_traceOneCall = false;
+
+    private static boolean s_traceAllCalls = false;
 
     private FlexibleDateTransmogrifier() {
         super();
@@ -353,7 +355,7 @@ public class FlexibleDateTransmogrifier {
             Optional<String> rval;
             for ( int i = 0; i < s_patternInfos.length; i++ ) {
                 PatternInfo pi = s_patternInfos[i];
-                if ( s_verbose ) {
+                if ( s_traceOneCall | s_traceAllCalls ) {
 
                     Logger.logMsg( "trying " + pi + " for \"" + dateString + "\"" );
                     ObtuseUtil.doNothing();
@@ -373,7 +375,7 @@ public class FlexibleDateTransmogrifier {
 
         } finally {
 
-            s_verbose = false;
+            s_traceOneCall = false;
 
         }
 
@@ -381,7 +383,13 @@ public class FlexibleDateTransmogrifier {
 
     public static void traceOneCall() {
 
-        s_verbose = true;
+        s_traceOneCall = true;
+
+    }
+
+    public static void setTraceAllCalls( final boolean traceAllCalls ) {
+
+        s_traceAllCalls = traceAllCalls;
 
     }
 
@@ -414,7 +422,7 @@ public class FlexibleDateTransmogrifier {
 
                 }
 
-                if ( s_verbose ) {
+                if ( s_traceOneCall || s_traceAllCalls ) {
 
                     for ( int i = 0; i < m.groupCount(); i += 1 ) {
 
@@ -479,7 +487,7 @@ public class FlexibleDateTransmogrifier {
 
         } else {
 
-            if ( s_verbose ) {
+            if ( s_traceOneCall | s_traceAllCalls ) {
 
                 Logger.logMsg( "pattern match of " + p + " on \"" + dateString + "\" failed, sb:  " + sb );
 
