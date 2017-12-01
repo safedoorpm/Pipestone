@@ -62,7 +62,7 @@ public class LinearFlagNameValue extends GowingPackableAttribute {
     }
 
     @NotNull
-    public GowingPackedEntityBundle bundleThyself( final boolean isPackingSuper, final GowingPacker packer ) {
+    public GowingPackedEntityBundle bundleThyself( final boolean isPackingSuper, @NotNull final GowingPacker packer ) {
 
         @SuppressWarnings("UnnecessaryLocalVariable")
         GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(

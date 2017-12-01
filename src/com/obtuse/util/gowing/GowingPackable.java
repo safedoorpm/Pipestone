@@ -52,8 +52,8 @@ public interface GowingPackable {
     GowingInstanceId getInstanceId();
 
     @NotNull
-    GowingPackedEntityBundle bundleThyself( boolean isPackingSuper, GowingPacker packer );
+    GowingPackedEntityBundle bundleThyself( boolean isPackingSuper, @NotNull GowingPacker packer );
 
-    boolean finishUnpacking( GowingUnPacker unPacker );
+    boolean finishUnpacking( @NotNull GowingUnPacker unPacker );
 
 }

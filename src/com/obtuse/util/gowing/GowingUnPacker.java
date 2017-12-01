@@ -21,10 +21,19 @@ public interface GowingUnPacker extends Closeable {
     @NotNull
     Optional<GowingDePackedEntityGroup> unPack();
 
+    void registerMetaDataHandler( @NotNull GowingMetaDataHandler handler );
+
     GowingPackable resolveReference( GowingEntityReference er );
 
     GowingUnPackerContext getUnPackerContext();
 
-    boolean isEntityFinished( GowingEntityReference entityReference );
+    /**
+     Determine if a specified entity has been declared done.
+     @param entityReference the entity reference for the entity of interest.
+     @return {@code true} if {@code entityReference} is {@code null} or if it has been declared done
+     by an earlier return value of {@code true} from its {@link GowingPackable#finishUnpacking(GowingUnPacker)} method.
+     */
+
+    boolean isEntityFinished( @Nullable GowingEntityReference entityReference );
 
 }

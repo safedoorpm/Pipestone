@@ -6,6 +6,7 @@ package com.obtuse.util;
 
 import com.obtuse.db.PostgresConnection;
 import com.obtuse.exceptions.HowDidWeGetHereError;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -64,8 +65,7 @@ public class ObtuseUtil {
 
     }
 
-    @Nullable
-    public static String extractKeywordValueSemiColon( final String url, final String keyword ) {
+    public static @Nullable String extractKeywordValueSemiColon( final String url, final String keyword ) {
 
         String wrappedURL = ";" + url;
         String wrappedKeyword = ";" + keyword + "=";
@@ -101,8 +101,7 @@ public class ObtuseUtil {
      @return the converted long value.
      */
 
-    @NotNull
-    public static String getMinimalHexValue( final long value ) {
+    public static @NotNull String getMinimalHexValue( final long value ) {
 
         String original = hexvalue( value );
         int off = 0;
@@ -308,6 +307,44 @@ public class ObtuseUtil {
     }
 
     /**
+     Format a count/size value with proper pluralization.
+     <p>This method eases the task of formatting a value with proper pluralization.
+     A few examples should get the point across:</p>
+     <blockquote>
+     {@code formatCount( 0, "entry", "entries" )} yields {@code "2 entries"}
+     <br>{@code formatCount( 1, "fish", "fishes" )} yields {@code "1 fish"}
+     <br>{@code formatCount( 2, "entry", "entries" )} yields {@code "2 entries"}
+     </blockquote>
+     Specifically, a count value of 1 yields a result using the {@code singular} term
+     whereas any other count value yields a result using the {@code plural} term.
+     @param count the count/size value.
+     @param singular the phrase to postpend the count with if it is equal to 1.
+     @param plural the phrase to postpend the count with if it is not equal to 1.
+     @return the formatted value.
+     */
+
+    @Contract(pure = true)
+    @NotNull public static String formatCount( final int count, @NotNull final String singular, @NotNull final String plural ) {
+
+        return "" + count + " " + ( count == 1 ? singular : plural );
+
+    }
+
+    /**
+     Format a count/size value with proper pluralization.
+     <p>Exactly equivalent to {@code formatCount( count, "element", "elements" )}</p>
+     @param count the count/size.
+     @return the formatted value.
+     */
+
+    @Contract(pure = true)
+    @NotNull public static String formatCount( final int count ) {
+
+        return formatCount( count, "element", "elements" );
+
+    }
+
+    /**
      A derivative of the {@link Hashtable} whose instances start out mutable but can be made immutable upon request (there is no
      mechanism provided to make an immutable instance mutable again).
      <p/>This class is probably not perfectly immutable as it is a fair bit simpler than the unmodifiable ones implemented in
@@ -350,8 +387,7 @@ public class ObtuseUtil {
 
         }
 
-        @NotNull
-        public Set<Map.Entry<K, V>> entrySet() {
+        public @NotNull Set<Map.Entry<K, V>> entrySet() {
 
             if ( _readonly ) {
 
@@ -365,8 +401,7 @@ public class ObtuseUtil {
 
         }
 
-        @NotNull
-        public Set<K> keySet() {
+        public @NotNull Set<K> keySet() {
 
             if ( _readonly ) {
 
@@ -437,8 +472,7 @@ public class ObtuseUtil {
 
         }
 
-        @NotNull
-        public Collection<V> values() {
+        public @NotNull Collection<V> values() {
 
             if ( _readonly ) {
 
@@ -469,8 +503,7 @@ public class ObtuseUtil {
      */
 
     @SuppressWarnings({ "SameParameterValue" })
-    @Nullable
-    public static byte[] getSerializedVersion( final Serializable thing, final boolean printStackTraceOnError ) {
+    public static @Nullable byte[] getSerializedVersion( final Serializable thing, final boolean printStackTraceOnError ) {
 
         ByteArrayOutputStream bos = null;
         ObjectOutputStream oos = null;
@@ -578,8 +611,7 @@ public class ObtuseUtil {
      @throws ClassNotFoundException if the class of a serialized object in the file cannot be found.
      */
 
-    @Nullable
-    public static Serializable recoverSerializedVersion( final File inputFile )
+    public static @Nullable Serializable recoverSerializedVersion( final File inputFile )
             throws IOException, ClassNotFoundException {
 
         return ObtuseUtil.recoverSerializedVersion( new BufferedInputStream( new FileInputStream( inputFile ) ) );
@@ -1702,8 +1734,7 @@ public class ObtuseUtil {
      Decode a string of hex digits as a byte array.
      */
 
-    @NotNull
-    public static byte[] decodeHexAsByteArray( @NotNull final String hexString ) {
+    public static @NotNull byte[] decodeHexAsByteArray( @NotNull final String hexString ) {
 
         String hex = hexString.toLowerCase();
 
@@ -2254,6 +2285,59 @@ public class ObtuseUtil {
 
     }
 
+    public static class StringMapping {
+
+        public final String from;
+
+        public final String to;
+
+        private StringMapping( String from, String to ) {
+            super();
+
+            this.from = from;
+            this.to = to;
+
+        }
+
+        public String toString() {
+
+            return enquoteToJavaString( from ) + "->" + enquoteToJavaString( to );
+
+        }
+
+    }
+
+    public static class StringCharMapping {
+
+        public final String from;
+
+        public final char to;
+
+        private StringCharMapping( String from, char to ) {
+            super();
+
+            this.from = from;
+            this.to = to;
+
+        }
+
+        public String toString() {
+
+            return enquoteToJavaString( from ) + "->" + enquoteToJavaCharacter( to );
+
+        }
+
+    }
+
+    private static StringCharMapping[] reverseJavaMappings = {
+            new StringCharMapping( "\\b", '\b' ),
+            new StringCharMapping( "\\n", '\n' ),
+            new StringCharMapping( "\\r", '\r' ),
+            new StringCharMapping( "\\t", '\t' ),
+            new StringCharMapping( "\\\\", '\\' ),
+            new StringCharMapping( "\\\'", '\'' )
+    };
+
     /**
      Turn a char into a {@link String} containing a properly quoted version of the char (without surrounding quotes).
      <p/>The main thing that this method does is that it turns special characters like '\n', '\t', '\"' etc into
@@ -2289,6 +2373,64 @@ public class ObtuseUtil {
                 return String.valueOf( ch );
 
         }
+
+    }
+
+    @Nullable
+    public static String parseJavaString( @NotNull final String javaString ) {
+
+        if ( "null".equals( javaString ) ) {
+
+            return null;
+
+        }
+
+        if ( javaString.startsWith( "\"" ) && javaString.endsWith( "\"" ) ) {
+
+            return parseNakedJavaString( javaString.substring( 1, javaString.length() - 1 ) );
+
+        } else {
+
+            throw new IllegalArgumentException(
+                    "ObtuseUtil.parseJavaString:  string (" + javaString + ") is not surrounded by double quotes"
+            );
+
+        }
+
+    }
+
+    @NotNull
+    public static String parseNakedJavaString( @NotNull final String nakedJavaString ) {
+
+        StringBuilder sb = new StringBuilder();
+        int totalLength = nakedJavaString.length();
+        int off = 0;
+        while ( off < nakedJavaString.length() ) {
+
+            char mapped = nakedJavaString.charAt( off );
+            String original = String.valueOf( mapped );
+
+//            String remaining = nakedJavaString.substring( off );
+//            int remainingLength = totalLength - off;
+            for ( StringCharMapping scm : reverseJavaMappings ) {
+
+                if ( nakedJavaString.startsWith( scm.from, off ) ) {
+
+                    original = scm.from;
+                    mapped = scm.to;
+                    break;
+
+                }
+
+            }
+
+            off += original.length();
+
+            sb.append( mapped );
+
+        }
+
+        return sb.toString();
 
     }
 
@@ -2346,8 +2488,7 @@ public class ObtuseUtil {
     @SuppressWarnings("ConstantNamingConvention")
     private static final Long _md5Lock = 0L;
 
-    @NotNull
-    public static String computeMD5( final InputStream is )
+    public static @NotNull String computeMD5( final InputStream is )
             throws IOException {
 
         synchronized ( ObtuseUtil._md5Lock ) {
@@ -2407,8 +2548,7 @@ public class ObtuseUtil {
 
     }
 
-    @NotNull
-    public static String computeMD5( final File file )
+    public static @NotNull String computeMD5( final File file )
             throws IOException {
 
         FileInputStream fis = new FileInputStream( file );
@@ -2529,32 +2669,55 @@ public class ObtuseUtil {
 
     private static void doString( @Nullable final String input ) {
 
+        Logger.logMsg( "input string is " + ( input == null ? "null" : ( "<<<" + input + ">>>" ) ) );
+
         String nakedOutput = enquoteToNakedJavaString( input );
         String output = enquoteToJavaString( input );
+        String parsed = parseJavaString( output );
         StringBuilder nsb = enquoteJavaStringToNakedStringBuilder( input );
         StringBuilder sb = enquoteToJavaStringBuilder( input );
 
+        if (
+                input == null
+                ?
+                parsed != null
+                :
+                !input.equals( parsed )
+        ) {
+
+            Logger.logErr( "got unexpected output=" + output + ", parsed=" + parsed + " from input=<<<" + input + ">>>" );
+
+            doNothing();
+
+        }
+
         Logger.logMsg( "" +
-                       ( input == null ? "null" : input.length() ) +
-                       " char input string becomes " +
+                       ( input == null ? "null " : ( "" + input.length() + " char " ) ) +
+                       "input string becomes " +
                        nakedOutput.length() +
                        " char naked output string " +
                        nakedOutput );
         Logger.logMsg( "" +
-                       ( input == null ? "null" : input.length() ) +
-                       " char input string becomes " +
+                       ( input == null ? "null " : ( "" + input.length() + " char " ) ) +
+                       "input string becomes " +
                        output.length() +
                        " char output string " +
                        output );
         Logger.logMsg( "" +
-                       ( input == null ? "null" : input.length() ) +
-                       " char input string becomes " +
+                       ( input == null ? "null " : ( "" + input.length() + " char " ) ) +
+                       "input string becomes " +
+                       ( parsed == null ? "null " : ( "" + parsed.length() + " char " ) ) +
+                       "parsed string" +
+                       ( parsed == null ? "" : parsed ) );
+        Logger.logMsg( "" +
+                       ( input == null ? "null " : ( "" + input.length() + " char " ) ) +
+                       "input string becomes " +
                        nsb.length() +
                        " char naked output StringBuilder " +
                        nsb );
         Logger.logMsg( "" +
-                       ( input == null ? "null" : input.length() ) +
-                       " char input string becomes " +
+                       ( input == null ? "null " : ( "" + input.length() + " char " ) ) +
+                       "input string becomes " +
                        sb.length() +
                        " char output StringBuilder " +
                        sb );
@@ -2568,6 +2731,8 @@ public class ObtuseUtil {
         doString( null );
         doString( "null" );
         doString( "hello\tthere\nworld" );
+        doString( "dq=\", sq=\', bs=\b, nl=\n, rt=\r, t=\t, bs=\\" );
+
         Logger.logMsg( "input char \n becomes naked char string {" + enquoteToNakedJavaCharacter( '\n' ) + "}" );
         Logger.logMsg( "input char \n becomes char string {" + enquoteToJavaCharacter( '\n' ) + "}" );
 
@@ -2669,52 +2834,45 @@ public class ObtuseUtil {
 
     }
 
-    @NotNull
-    public static String fDim( @NotNull final String name, final Dimension d ) {
+    public static @NotNull String fDim( @NotNull final String name, final Dimension d ) {
 
         return name + "=" + ObtuseUtil.fDim( d );
 
     }
 
-    @NotNull
-    public static String fDim( final Dimension d ) {
+    public static @NotNull String fDim( final Dimension d ) {
 
         return d == null ? "null" : ObtuseUtil.fDim( d.width, d.height );
 
 
     }
 
-    @NotNull
-    public static String fDim( final int width, final int height ) {
+    public static @NotNull String fDim( final int width, final int height ) {
 
         return "(" + width + "," + height + ")";
 
     }
 
-    @NotNull
-    public static String fBounds( final String name, final Rectangle r ) {
+    public static @NotNull String fBounds( final String name, final Rectangle r ) {
 
         return name + "=" + ( r == null ? "null" : ObtuseUtil.fBounds( r ) );
 
     }
 
-    @NotNull
-    public static String fBounds( final Rectangle r ) {
+    public static @NotNull String fBounds( final Rectangle r ) {
 
         return r == null ? "null" : ObtuseUtil.fBounds( r.x, r.y, r.width, r.height );
 
 
     }
 
-    @NotNull
-    public static String fBounds( final int x, final int y, final int width, final int height ) {
+    public static @NotNull String fBounds( final int x, final int y, final int width, final int height ) {
 
         return "@( " + x + ", " + y + ", " + width + "x" + height + " )";
 
     }
 
-    @NotNull
-    public static String fInsets( final Insets in ) {
+    public static @NotNull String fInsets( final Insets in ) {
 
         return "i( l=" + in.left + ", r=" + in.right + ", t=" + in.top + ", b=" + in.bottom + " )";
 

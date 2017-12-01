@@ -214,10 +214,14 @@ public class DateUtils {
 
     /**
      * Format a date string in a 'standard' format which includes milliseconds.
-     * <p/>The 'standard' format is
+     * <p>The 'standard' format is</p>
      * <blockquote><tt>yyyy-MM-dd'T'HH:mm:ss.SSSZ</tt></blockquote>
-     * or
+     * For example, the date and time 2001-07-04 12:08:56.235 Canadian Mountain Standard time would be
+     * formatted as
      * <blockquote><tt>2001-07-04T12:08:56.235-0700</tt></blockquote>
+     * @param dateTime the date and time to be formatted.
+     * @return the specified date and time formatted using code which is equivalent to
+     * <blockquote><tt>new SimpleDateFormat( "yyyy-MM-dd'T'HH:mm:ss.SSSZ" ).format( dateTime );</tt></blockquote>
      */
 
     public static String formatStandardMs( final Date dateTime ) {
@@ -225,7 +229,9 @@ public class DateUtils {
         synchronized ( DateUtils.STANDARD_MS ) {
 
             DateUtils.STANDARD_MS.setTimeZone( TimeZone.getDefault() );
+
             String s = DateUtils.STANDARD_MS.format( dateTime );
+
             return s;
 
         }

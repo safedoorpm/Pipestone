@@ -79,8 +79,36 @@ public interface GowingPacker extends Closeable {
 
     void emit( EntityTypeName typeName );
 
+    /**
+     Emit a metadata comment with a String value.
+     @param name the name of the comment (some non-empty combination of uppercase letters and underscores).
+     @param value the value (anything that {@link com.obtuse.util.ObtuseUtil#enquoteToJavaString(String)} can handle).
+     */
 
+    void emitMetaData( String name, String value );
 
-//    void actuallyPackEntities();
+    /**
+     Emit a metadata comment with a long value.
+     @param name the name of the comment (some non-empty combination of uppercase letters and underscores).
+     @param value any long value.
+     */
+
+    void emitMetaData( String name, long value );
+
+    /**
+     Emit a metadata comment with a boolean value.
+     @param name the name of the comment (some non-empty combination of uppercase letters and underscores).
+     @param value any boolean value (in other words, {@code true} or {@code false}).
+     */
+
+    void emitMetaData( String name, boolean value );
+
+    /**
+     Emit a metadata comment with a double value.
+     @param name the name of the comment (some non-empty combination of uppercase letters and underscores).
+     @param value the value any double value including NaN and the infinities.
+     */
+
+    void emitMetaData( String name, double value );
 
 }

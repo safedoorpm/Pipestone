@@ -20,80 +20,79 @@ public class GowingPackableName implements GowingPackable, Comparable<GowingPack
     private static final EntityTypeName ENTITY_TYPE_NAME = new EntityTypeName( GowingPackableName.class );
 
     private static final int VERSION = 1;
-
-    private static final EntityName NAME_NAME = new EntityName( "_ban" );
-
     public static final GowingEntityFactory FACTORY = new GowingEntityFactory( GowingPackableName.ENTITY_TYPE_NAME ) {
 
-	@Override
-	public int getOldestSupportedVersion() {
+        @Override
+        public int getOldestSupportedVersion() {
 
-	    return GowingPackableName.VERSION;
+            return GowingPackableName.VERSION;
 
-	}
+        }
 
-	@Override
-	public int getNewestSupportedVersion() {
+        @Override
+        public int getNewestSupportedVersion() {
 
-	    return GowingPackableName.VERSION;
+            return GowingPackableName.VERSION;
 
-	}
+        }
 
-	@NotNull
-	@Override
-	public GowingPackable createEntity(
-            @NotNull final GowingUnPacker unPacker, @NotNull final GowingPackedEntityBundle bundle, final GowingEntityReference er
-	) {
+        @NotNull
+        @Override
+        public GowingPackable createEntity(
+                @NotNull final GowingUnPacker unPacker,
+                @NotNull final GowingPackedEntityBundle bundle,
+                final GowingEntityReference er
+        ) {
 
-	    return new GowingPackableName( unPacker, bundle );
+            return new GowingPackableName( unPacker, bundle );
 
-	}
+        }
 
     };
-
+    private static final EntityName NAME_NAME = new EntityName( "_ban" );
+    private static SortedMap<String, GowingPackableName> s_knownAttributeNames = new TreeMap<>();
     private final GowingInstanceId _instanceId = new GowingInstanceId( getClass() );
-
     private String _name;
 
-    private static SortedMap<String,GowingPackableName> s_knownAttributeNames = new TreeMap<>();
-
     public GowingPackableName( @NotNull final String name ) {
-	super();
 
-	_name = name;
+        super();
+
+        _name = name;
 
     }
 
     public GowingPackableName( final GowingUnPacker unPacker, final GowingPackedEntityBundle bundle ) {
-	this( bundle.getNotNullField( NAME_NAME ).StringValue() );
+
+        this( bundle.getNotNullField( NAME_NAME ).StringValue() );
 
     }
 
     @NotNull
     public String getName() {
 
-	return _name;
+        return _name;
 
     }
 
     @Override
     public int compareTo( @NotNull final GowingPackableName rhs ) {
 
-	return getName().compareTo( rhs.getName() );
+        return getName().compareTo( rhs.getName() );
 
     }
 
     @Override
     public boolean equals( final Object rhs ) {
 
-	return rhs instanceof GowingPackableName && compareTo( (GowingPackableName) rhs ) == 0;
+        return rhs instanceof GowingPackableName && compareTo( (GowingPackableName)rhs ) == 0;
 
     }
 
     @Override
     public int hashCode() {
 
-	return getName().hashCode();
+        return getName().hashCode();
 
     }
 
@@ -101,31 +100,31 @@ public class GowingPackableName implements GowingPackable, Comparable<GowingPack
     @Override
     public GowingInstanceId getInstanceId() {
 
-	return _instanceId;
+        return _instanceId;
 
     }
 
     @NotNull
     @Override
-    public GowingPackedEntityBundle bundleThyself( final boolean isPackingSuper, final GowingPacker packer ) {
+    public GowingPackedEntityBundle bundleThyself( final boolean isPackingSuper, @NotNull final GowingPacker packer ) {
 
-	GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
-		ENTITY_TYPE_NAME,
-		VERSION,
-		null,
-		packer.getPackingContext()
-	);
+        GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
+                ENTITY_TYPE_NAME,
+                VERSION,
+//		null,
+                packer.getPackingContext()
+        );
 
-	bundle.addHolder( new GowingStringHolder( NAME_NAME, getName(), true ) );
+        bundle.addHolder( new GowingStringHolder( NAME_NAME, getName(), true ) );
 
-	return bundle;
+        return bundle;
 
     }
 
     @Override
-    public boolean finishUnpacking( final GowingUnPacker unPacker ) {
+    public boolean finishUnpacking( @NotNull final GowingUnPacker unPacker ) {
 
-	return true;
+        return true;
 
     }
 

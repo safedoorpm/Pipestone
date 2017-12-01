@@ -7,6 +7,7 @@ import com.obtuse.util.gowing.p2a.GowingUnPackerParsingException;
 import com.obtuse.util.gowing.p2a.GowingUtil;
 import com.obtuse.util.gowing.p2a.StdGowingTokenizer;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.util.*;
@@ -137,9 +138,9 @@ public class StdGowingUnPackerContext implements GowingUnPackerContext {
     }
 
     @Override
-    public boolean isEntityFinished( final GowingEntityReference er ) {
+    public boolean isEntityFinished( @Nullable final GowingEntityReference er ) {
 
-        return !_unFinishedEntities.contains( er );
+        return !( er != null && _unFinishedEntities.contains( er ) );
 
     }
 

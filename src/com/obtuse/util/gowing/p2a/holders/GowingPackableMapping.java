@@ -131,7 +131,7 @@ public class GowingPackableMapping<K, V> implements GowingPackable {
     }
 
     @Override
-    public boolean finishUnpacking( final GowingUnPacker unPacker ) {
+    public boolean finishUnpacking( @NotNull final GowingUnPacker unPacker ) {
 
         ObtuseUtil.doNothing();
 
@@ -178,12 +178,12 @@ public class GowingPackableMapping<K, V> implements GowingPackable {
 
     @NotNull
     @Override
-    public GowingPackedEntityBundle bundleThyself( final boolean isPackingSuper, final GowingPacker packer ) {
+    public GowingPackedEntityBundle bundleThyself( final boolean isPackingSuper, @NotNull final GowingPacker packer ) {
 
-        GowingPackedEntityBundle rval = new GowingPackedEntityBundle(
+        GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
                 ENTITY_TYPE_NAME,
                 VERSION,
-                null,
+//                null,
                 packer.getPackingContext()
         );
 
@@ -191,14 +191,14 @@ public class GowingPackableMapping<K, V> implements GowingPackable {
 
         for ( GowingPackableKeyValuePair kvp : _keyValuePairs ) {
 
-            rval.addHolder( new GowingPackableEntityHolder( new EntityName( "_" + ix ), kvp, packer, true ) );
-//	    Packable2KeyValuePair.packObj( rval, new EntityName( "_" + ix ), kvp, packer );
+            bundle.addHolder( new GowingPackableEntityHolder( new EntityName( "_" + ix ), kvp, packer, true ) );
+//	    Packable2KeyValuePair.packObj( bundle, new EntityName( "_" + ix ), kvp, packer );
 
             ix += 1;
 
         }
 
-        return rval;
+        return bundle;
 
     }
 

@@ -42,14 +42,17 @@ public interface GowingPackableThingHolder extends Comparable<GowingPackableThin
 
     boolean isNull();
 
-    /**
-     Return this instance's object after casting it to a {@link GowingEntityReference}.
-     <p/>This method is exactly equivalent to <blockquote><code>(EntityTypeReference)(this.getObjectValue())</code></blockquote>
-     @return this instance's object after casting it to a {@link GowingEntityReference}.
-     @throws ClassCastException if this instance's object is not actually a {@link GowingEntityReference} instance.
-     */
-
-    GowingEntityReference EntityTypeReference();
+//    /**
+//     Return this instance's object after casting it to a {@link GowingEntityReference}.
+//     <p/>This method is exactly equivalent to <blockquote><code>(EntityTypeReference)(this.getObjectValue())</code></blockquote>
+//     {@link GowingPackedEntityBundle#getMandatoryEntityReference(EntityName)} and
+//     {@link GowingPackedEntityBundle#getOptionalEntityReference(EntityName)} are at least arguably clearer
+//     ways to do what this method does.
+//     @return this instance's object after casting it to a {@link GowingEntityReference}.
+//     @throws ClassCastException if this instance's object is not actually a {@link GowingEntityReference} instance.
+//     */
+//
+//    GowingEntityReference EntityTypeReference();
 
     /**
      Cast this instance's object to a {@link Character} and return its <code>char</code> value.

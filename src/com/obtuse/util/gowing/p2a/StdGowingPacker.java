@@ -16,6 +16,8 @@ import java.io.FileNotFoundException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /*
  * Copyright © 2015 Obtuse Systems Corporation
@@ -113,9 +115,10 @@ public class StdGowingPacker implements GowingPacker {
 
     private boolean _finished = false;
 
+    private SortedMap<String,Object> s_usedMetaDataKeywords = new TreeMap<>();
+
 //    private String _currentSeparator;
 
-    @SuppressWarnings("WeakerAccess")
     public StdGowingPacker( @NotNull final EntityName groupName, @NotNull final File outputFile )
             throws FileNotFoundException {
 
@@ -139,6 +142,7 @@ public class StdGowingPacker implements GowingPacker {
             @NotNull final PrintWriter writer,
             @NotNull final GowingPackerContext packingContext
     ) {
+        super();
 
 //	_typeIndex = typeIndex;
         _outputFile = outputFile;
@@ -154,14 +158,16 @@ public class StdGowingPacker implements GowingPacker {
         _writer.print( ':' );
         _writer.print( ObtuseUtil.enquoteToJavaString( getGroupName().getName() ) );
         _writer.println( ';' );
-        _writer.println( "" + GowingConstants.LINE_METADATA_CHAR + "OF=" + ObtuseUtil.enquoteToJavaString( outputFile.getAbsolutePath() ) + ';' );
+        emitMetaData( GowingConstants.METADATA_OUTPUT_FILENAME, outputFile.getAbsolutePath() );
         Date now = new Date();
-        _writer.println( "" +
-                         GowingConstants.LINE_METADATA_CHAR +
-                         "ITS=" +
-                         ObtuseUtil.enquoteToJavaString( DateUtils.formatStandardMs( now ) ) +
-                         ';' );
-        _writer.println( "" + GowingConstants.LINE_METADATA_CHAR + "RTS=" + ObtuseUtil.enquoteToJavaString( now.toString() ) + ';' );
+        emitMetaData( GowingConstants.METADATA_OUTPUT_ITS, DateUtils.formatStandardMs( now ) );
+        emitMetaData( GowingConstants.METADATA_OUTPUT_RTS, now.toString() );
+//        _writer.println( "" +
+//                         GowingConstants.LINE_METADATA_CHAR +
+//                         "ITS=" +
+//                         ObtuseUtil.enquoteToJavaString( DateUtils.formatStandardMs( now ) ) +
+//                         ';' );
+//        _writer.println( "" + GowingConstants.LINE_METADATA_CHAR + "RTS=" + ObtuseUtil.enquoteToJavaString( now.toString() ) + ';' );
 
         _packingContext = packingContext;
 
@@ -401,6 +407,10 @@ public class StdGowingPacker implements GowingPacker {
             actuallyPackEntityBody( superBundle );
 
             comma = ", ";
+
+        } else {
+
+            ObtuseUtil.doNothing();
 
         }
 
@@ -967,6 +977,105 @@ public class StdGowingPacker implements GowingPacker {
 
     }
 
+    private static final Pattern s_validMetaDataKeywordPattern = Pattern.compile( "[A-Z_]+" );
+
+    private void checkOutboundMetaDataKeyword( @NotNull final String keyword, Object value ) {
+
+        String errmsg = isValidMetaDataKeyword( keyword );
+        if ( errmsg != null ) {
+
+            throw new IllegalArgumentException( "StdGowingPacker.emitMetaData:  " + errmsg );
+
+        }
+
+        if ( s_usedMetaDataKeywords.containsKey( keyword ) ) {
+
+            throw new IllegalArgumentException(
+                    "StdGowingPacker.emitMetaData:  " +
+                    ( keyword.startsWith( "_" ) ? "reserved " : "" ) +
+                    "metadata keyword " +
+                    ObtuseUtil.enquoteToJavaString( keyword ) +
+                    " already used for " +
+                    (
+                            value == null
+                            ?
+                            "null"
+                            :
+                            (
+                                    value.getClass().getCanonicalName() + " value " +
+                                    ObtuseUtil.enquoteToJavaString( String.valueOf( s_usedMetaDataKeywords.get( keyword ) ) )
+                            )
+                    )
+            );
+
+        }
+
+        s_usedMetaDataKeywords.put( keyword, value );
+
+    }
+
+    public static String isValidMetaDataKeyword( final @NotNull String keyword ) {
+
+        Matcher m = s_validMetaDataKeywordPattern.matcher( keyword );
+        if ( !m.matches() ) {
+
+            return "metadata keyword " +
+                   ObtuseUtil.enquoteToJavaString( keyword ) +
+                   " is invalid (must be some non-empty combination of uppercase letters and underscores;" +
+                   " all keywords starting with an underscore are reserved)";
+
+        }
+
+        if ( keyword.startsWith( "_" ) ) {
+
+            if ( !GowingConstants.RESERVED_KEYWORDS.contains( keyword ) ) {
+
+                return "invalid reserved keyword " + ObtuseUtil.enquoteToJavaString( keyword );
+
+            }
+
+        }
+
+        return null;
+
+    }
+
+    @Override
+    public void emitMetaData( @NotNull final String name, @NotNull final String value ) {
+
+        checkOutboundMetaDataKeyword( name, value );
+
+        _writer.println( "" + GowingConstants.LINE_METADATA_CHAR + name + '=' + ObtuseUtil.enquoteToJavaString( value ) + ';' );
+
+    }
+
+    @Override
+    public void emitMetaData( @NotNull final String name, final long value ) {
+
+        checkOutboundMetaDataKeyword( name, value );
+
+        _writer.println( "" + GowingConstants.LINE_METADATA_CHAR + name + '=' + Long.toString( value ) + "L;" );
+
+    }
+
+    @Override
+    public void emitMetaData( @NotNull final String name, final boolean value ) {
+
+        checkOutboundMetaDataKeyword( name, value );
+
+        _writer.println( "" + GowingConstants.LINE_METADATA_CHAR + name + '=' + ( value ? 'T' : 'F' ) + "B;" );
+
+    }
+
+    @Override
+    public void emitMetaData( @NotNull final String name, final double value ) {
+
+        checkOutboundMetaDataKeyword( name, value );
+
+        _writer.println( "" + GowingConstants.LINE_METADATA_CHAR + name + '=' + Double.toString( value ) + "D;" );
+
+    }
+
 //    private void packInstanceReference( String indent, InstanceReference backRef ) {
 //
 //	_writer.print( indent );
@@ -1060,6 +1169,17 @@ public class StdGowingPacker implements GowingPacker {
 //	    StdPackingContext2 packingContext = new StdPackingContext2( typeIndex );
 
             StdGowingPacker p2a = new StdGowingPacker( new EntityName( "test group name" ), new File( "test1.p2a" ) );
+            p2a.emitMetaData( GowingConstants.METADATA_NEXT_ID, 12345654321L );
+//            p2a.emitMetaData( GowingConstants.METADATA_OUTPUT_ITS, "boom!" );
+            p2a.emitMetaData( "TEST_DOUBLE", Math.PI );
+            p2a.emitMetaData( "TEST_NAN", Double.NaN );
+            p2a.emitMetaData( "TEST_PINF", Double.POSITIVE_INFINITY );
+            p2a.emitMetaData( "TEST_NINF", Double.NEGATIVE_INFINITY );
+            p2a.emitMetaData( "TEST_ZERO", 0.0 );
+            p2a.emitMetaData( "TEST_NZERO", -0.0 );
+            p2a.emitMetaData( "TEST_STRING", "Testing one two three" );
+            p2a.emitMetaData( "TEST_BOOLEAN_TRUE", true );
+            p2a.emitMetaData( "TEST_BOOLEAN_FALSE", false );
 
 //	    Packable2ThingHolder2 pInt;
 //	    pInt = new IntegerHolder2( new EntityName( "intValue" ), 42, true );
@@ -1080,12 +1200,14 @@ public class StdGowingPacker implements GowingPacker {
 //	    pInt = new StringHolder2( new EntityName( "stringValue" ), "Hello \"world\"", true );
 //	    pInt.pack( p2a, ", " );
 
-            StdGowingPackerContext.TestPackableClass test = new StdGowingPackerContext.TestPackableClass( "hello world",
-                                                                                                          new StdGowingPackerContext.TestPackableClass( "inner reference",
-                                                                                                                                                        null,
-                                                                                                                                                        null
-                                                                                                          ),
-                                                                                                          null
+            StdGowingPackerContext.TestPackableClass test =
+                    new StdGowingPackerContext.TestPackableClass( "hello world",
+                                                                  new StdGowingPackerContext.TestPackableClass(
+                                                                          "inner reference",
+                                                                          null,
+                                                                          null
+                                                                  ),
+                                                                  null
             );
             p2a.queuePackableEntity( test );
 //	    p2a.actuallyPackEntity( test.getInstanceId() );

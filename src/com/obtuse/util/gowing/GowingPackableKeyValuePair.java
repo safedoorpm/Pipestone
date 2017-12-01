@@ -114,7 +114,7 @@ public class GowingPackableKeyValuePair<K, V> extends GowingAbstractPackableEnti
 
     @NotNull
     @Override
-    public GowingPackedEntityBundle bundleThyself( final boolean isPackingSuper, final GowingPacker packer ) {
+    public GowingPackedEntityBundle bundleThyself( final boolean isPackingSuper, @NotNull final GowingPacker packer ) {
 
         GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
                 ENTITY_TYPE_NAME,
@@ -132,7 +132,7 @@ public class GowingPackableKeyValuePair<K, V> extends GowingAbstractPackableEnti
     }
 
     @Override
-    public boolean finishUnpacking( final GowingUnPacker unPacker ) {
+    public boolean finishUnpacking( @NotNull final GowingUnPacker unPacker ) {
 
         if ( _keyReference instanceof GowingEntityReference && !unPacker.isEntityFinished( (GowingEntityReference)_keyReference ) ) {
 

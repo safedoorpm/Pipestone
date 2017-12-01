@@ -35,8 +35,6 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
 
     private GowingToken2 _putBackToken;
 
-//    private boolean _ignoreWhitespace;
-
     private int _lastLineLength;
 
     private int _lnum;
@@ -137,8 +135,6 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
             int ord = ordinal();
             return byteOrdinal <= ord && ord <= floatOrdinal;
         }
-
-//	public final static TokenType[] SCALAR_TYPES = { BOOLEAN, BYTE, SHORT, INTEGER, LONG, FLOAT, DOUBLE, STRING, ENTITY_REFERENCE };
 
         public boolean isScalarType() {
 
@@ -285,12 +281,6 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
 
         }
 
-//	public char charValue() {
-//
-//	    return ( (Character) _value ).charValue();
-//
-//	}
-
         public byte byteValue() {
 
             return ( (Number)_value ).byteValue();
@@ -326,18 +316,6 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
             return ( (Number)_value ).floatValue();
 
         }
-
-//	public int typeIdValue() {
-//
-//	    return ( (GowingEntityReference) _value ).getTypeId();
-//
-//	}
-//
-//	public long entityIdValue() {
-//
-//	    return ( (GowingEntityReference) _value ).getEntityId();
-//
-//	}
 
         public GowingEntityReference entityReference() {
 
@@ -579,17 +557,12 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
                     break;
 
                 case ENTITY_REFERENCE:
-//		    EntityTypeName entityTypeName = unPackerContext.findTypeByTypeReferenceId( valueToken.typeIdValue() );
-//		    if ( entityTypeName == null ) {
-//
-//			throw new UnPacker2ParsingException( "unknown type id " + valueToken.typeIdValue(), valueToken );
-//
-//		    }
 
                     holder = new GowingEntityReferenceHolder( entityName, valueToken.entityReference(), true );
                     break;
 
                 default:
+
                     throw new HowDidWeGetHereError( "token type " + tokenType + " is not a 'value' type" );
 
             }
@@ -599,8 +572,6 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
         }
 
     }
-
-//	private final char[] _chars;
 
     public StdGowingTokenizer( @NotNull final GowingUnPackerContext unPackerContext, @NotNull final LineNumberReader lineNumberReader ) {
 
@@ -614,8 +585,6 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
         _recursiveDepth = 0;
         _lnum = 1;
         _offset = 0;
-
-//	_ignoreWhitespace = true;
 
     }
 
@@ -752,20 +721,6 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
         return ch;
 
     }
-
-//    @SuppressWarnings("unused")
-//    private boolean ignoreWhitespace() {
-//
-//	return _ignoreWhitespace;
-//
-//    }
-//
-//    @SuppressWarnings("unused")
-//    private void setIgnoreWhitespace( boolean ignoreWhitespace ) {
-//
-//	_ignoreWhitespace = ignoreWhitespace;
-//
-//    }
 
     private String cleanupChar( final int ch ) {
 
@@ -905,7 +860,6 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
 
             _recursiveDepth += 1;
 
-//	boolean spinAgain;
             int ch;
 
             while ( true ) {
@@ -969,16 +923,6 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
 
                             }
 
-//			    try {
-//
-//				int typeId = Integer.parseInt( identifier.getName().substring( 1 ) );
-//
-//				GowingToken2 maybeColonToken = getNextToken( false );
-//				if ( maybeColonToken.type() == TokenType.COLON ) {
-//
-//
-//				}
-//			    }
                         }
 
                     }
@@ -1017,11 +961,32 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
 
                             }
 
+                            if ( isMetaData ) {
+
+                                Logger.logMsg( "Found metadata comment:  " + ObtuseUtil.enquoteToJavaString( sb.toString() ) );
+
+                                String errmsg = notifyMetaDataHandlers( sb.toString() );
+                                if ( errmsg != null ) {
+
+                                    GowingToken2 errorToken =
+                                            new GowingToken2( errmsg,
+                                                              _lnum,
+                                                              _offset
+                                            );
+
+                                    Logger.logErr( "oops - " + errorToken );
+
+                                    return errorToken;
+
+                                }
+
+                                ObtuseUtil.doNothing();
+
+                            }
+
 //			    Logger.maybeLogMsg( () -> "ignoring " + ( isMetaData ? "metadata" : "comment" ) + ":  " + ObtuseUtil.enquoteToJavaString( sb.toString() ) );
 
                         }
-
-                        //		    spinAgain = true;
 
                         break;
 
@@ -1076,8 +1041,7 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
 
                             try {
 
-//				int value = Integer.parseInt( "0x" + ( (char) c1 ) + ( (char) c2 ) );
-                                byte value = parseHexByte( c1, c2 ); // Byte.parseByte( "" + (char)c1 + (char)c2, 16 );
+                                byte value = parseHexByte( c1, c2 );
 
                                 return new GowingToken2( TokenType.BYTE, value, _lnum, _offset );
 
@@ -1240,137 +1204,141 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
 
     }
 
-//    @NotNull
-//    private GowingToken2 getPrimitiveByteArray()
-//	    throws IOException {
-//
-//	int ch;
-//	Logger.logMsg( "parsing primitive array" );
-//
-//	int length = 0;
-//	ch = nextCh();
-//	while ( true ) {
-//
-//	    if ( ch >= '0' && ch <= '9' ) {
-//
-//		length = length * 10 + ( ch - '0' );
-//
-//		ch = nextCh();
-//
-//	    } else {
-//
-//		break;
-//
-//	    }
-//
-//	}
-//
-//	// ch is now the element type
-//
-//	TokenType elementType;
-//	switch ( ch ) {
-//
-//	    case GowingConstants.TAG_BYTE:
-//
-//		elementType = TokenType.BYTE;
-//
-//		ch = nextCh();
-//		if ( ch != '[' ) {
-//
-//		    return new GowingToken2( "unexpected character " + cleanupChar( ch ) + " (expected '[')", _lnum, _offset );
-//
-//		}
-//
-//		byte[] v = new byte[length];
-//		for ( int ix = 0; ix < length; ix += 1 ) {
-//
-//		    int c1 = nextCh();
-//		    if ( !Character.isDefined( c1 ) ) {
-//
-//			return new GowingToken2( "expected first hex digit [0-9a-f] @ array offset " + ix + " but found " + cleanupChar( c1 ), _lnum, _offset );
-//
-//		    }
-//
-//		    int c2 = nextCh();
-//		    if ( c2 == -1 ) {
-//
-//			return new GowingToken2( "expected second hex digit [0-9a-f] @ array offset " + ix + " but found " + cleanupChar( c2 ), _lnum, _offset );
-//
-//		    }
-//
-//		    try {
-//
-////				int value = Integer.parseInt( "0x" + ( (char) c1 ) + ( (char) c2 ) );
-//			byte value = parseHexByte( c1, c2 ); // Byte.parseByte( "" + (char)c1 + (char)c2, 16 );
-//
-//			v[ix] = value;
-//
-//		    } catch ( NumberFormatException e ) {
-//
-//			return new GowingToken2(
-//				"expected two digit hex value @ array offset " + ix + " but found \"" + ( (char) c1 ) + ( (char) c2 ) + '"',
-//				_lnum,
-//				_offset
-//			);
-//
-//		    }
-//
-//		}
-//
-//		ch = nextCh();
-//		if ( ch == ']' ) {
-//
-//		    if ( elementType.isScalarType() ) {
-//
-//			return new GowingToken2( TokenType.PRIMITIVE_ARRAY, elementType, v, _lnum, _offset );
-//
-//		    } else {
-//
-//			return new GowingToken2(
-//				"array has no defined element type",
-//				_lnum,
-//				_offset
-//			);
-//
-//		    }
-//
-//		} else {
-//
-//		    return new GowingToken2( "unexpected character " + cleanupChar( ch ) + " (expected ']')", _lnum, _offset );
-//
-//		}
-//
-//	    case GowingConstants.TAG_DOUBLE:
-//
-//		return parseNumericArray( true, length, TokenType.DOUBLE, new double[length] );
-//
-//	    case GowingConstants.TAG_FLOAT:
-//
-//		return parseNumericArray( true, length, TokenType.FLOAT, new float[length] );
-//
-//	    case GowingConstants.TAG_INTEGER:
-//
-//		return parseNumericArray( true, length, TokenType.INTEGER, new int[length] );
-//
-//	    case GowingConstants.TAG_LONG:
-//
-//		return parseNumericArray( true, length, TokenType.LONG, new long[3] );
-//
-//	    case GowingConstants.TAG_SHORT:
-//
-//		return parseNumericArray( true, length, TokenType.SHORT, new short[3] );
-//
-//	    default:
-//
-//		return new GowingToken2(
-//			"no support for arrays of token type " + ch,
-//			_lnum,
-//			_offset
-//		);
-//
-//	}
-//
-//    }
+    private List<GowingMetaDataHandler> s_metadataHandlers = new ArrayList<>();
+
+    @Override
+    public void registerMetaDataHandler( @NotNull final GowingMetaDataHandler handler ) {
+
+        s_metadataHandlers.add( handler );
+
+    }
+
+    private String notifyMetaDataHandlers( @NotNull final String metaDataLine ) {
+
+        String trimmed = metaDataLine.trim();
+        Logger.logMsg( "got metadata line:  " + trimmed );
+
+        int off = 0;
+        if ( !trimmed.startsWith( String.valueOf( GowingConstants.LINE_METADATA_CHAR ) ) ) {
+
+            throw new HowDidWeGetHereError(
+                    "StdGowingTokenizer:  invalid metadata line (doesn't start with '" +
+                    GowingConstants.LINE_METADATA_CHAR + "') - " + trimmed
+            );
+
+        }
+
+        int equalSignOffset = trimmed.indexOf( '=' );
+        if ( equalSignOffset < 0 ) {
+
+            return "invalid metadata line (no equals sign) - " + trimmed;
+
+        }
+
+        if ( !trimmed.endsWith( ";" ) ) {
+
+            return "invalid metadata line (does not end with a semicolon) - " + trimmed;
+
+        }
+
+        String keyword = trimmed.substring( 1, equalSignOffset ).trim();
+
+        String errmsg = StdGowingPacker.isValidMetaDataKeyword( keyword );
+        if ( errmsg != null ) {
+
+            return errmsg;
+
+        }
+
+        String rawValue = trimmed.substring( equalSignOffset + 1, trimmed.length() - 1 ).trim();
+
+        if ( rawValue.endsWith( "L" ) || rawValue.endsWith( "l" ) ) {
+
+            long value;
+            try {
+
+                value = Long.parseLong( rawValue.substring( 0, rawValue.length() - 1 ) );
+
+            } catch ( NumberFormatException e ) {
+
+                return "invalid metadata value (has L suffix but is not a long value) - " + keyword + '=' + rawValue;
+
+            }
+
+            for ( GowingMetaDataHandler handler : s_metadataHandlers ) {
+
+                handler.processMetaData( keyword, value );
+
+            }
+
+            return null;
+
+        } else if ( rawValue.endsWith( "D" ) || rawValue.endsWith( "d" ) ) {
+
+            double value;
+            try {
+
+                value = Double.parseDouble( rawValue.substring( 0, rawValue.length() - 1 ) );
+
+            } catch ( NumberFormatException e ) {
+
+                return "invalid metadata value (has D suffix but is not a double value) - " + keyword + '=' + rawValue;
+
+            }
+
+            for ( GowingMetaDataHandler handler : s_metadataHandlers ) {
+
+                handler.processMetaData( keyword, value );
+
+            }
+
+            return null;
+
+        } else if ( rawValue.endsWith( "B" ) || rawValue.endsWith( "d" ) ) {
+
+            Boolean value;
+            if ( "T".equals( rawValue.substring( 0, rawValue.length() -1 ) ) ) {
+
+                value = true;
+
+            } else if ( "F".equals( rawValue.substring( 0, rawValue.length() -1 ) ) ) {
+
+                value = false;
+
+            } else {
+
+                return "invalid metadata value( has B suffix but is neither \"true\" or \"false\" in lower case) - " +
+                       keyword + '=' + rawValue;
+
+            }
+
+            for ( GowingMetaDataHandler handler : s_metadataHandlers ) {
+
+                handler.processMetaData( keyword, value );
+
+            }
+
+            return null;
+
+        } else if ( rawValue.startsWith( "\"" ) && rawValue.endsWith( "\"" ) ) {
+
+            String value = ObtuseUtil.parseNakedJavaString( rawValue.substring( 1, rawValue.length() - 1 ) );
+
+            for ( GowingMetaDataHandler handler : s_metadataHandlers ) {
+
+                handler.processMetaData( keyword, value );
+
+            }
+
+            return null;
+
+        } else {
+
+            return "invalid metadata value - " + keyword + '=' + rawValue;
+
+        }
+
+    }
 
     @NotNull
     private GowingToken2 getArray2( final boolean primitive )
@@ -1505,25 +1473,6 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
                         return "byte ElementParser";
 
                     }
-
-//			//			try {
-//
-////				int value = Integer.parseInt( "0x" + ( (char) c1 ) + ( (char) c2 ) );
-//			    byte value = parseHexByte( c1, c2 ); // Byte.parseByte( "" + (char)c1 + (char)c2, 16 );
-//
-//			    Array.set( array, index, value );
-//
-//			} catch ( NumberFormatException e ) {
-//
-//			    return new GowingToken2(
-//				    "expected two digit hex value @ array offset " + index + " but found \"" + ( (char) c1 ) + ( (char) c2 ) + '"',
-//				    _lnum,
-//				    _offset
-//			    );
-//
-//			}
-//
-//		    }
 
                 };
 
@@ -1731,25 +1680,6 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
 
             }
 
-//	    if ( !primitive && !elementType.equals( TokenType.BYTE ) ) {
-//
-//		if ( ix > 0 ) {
-//
-//		    ch = nextCh();
-//		    if ( ch != ',' ) {
-//
-//			return new GowingToken2(
-//				"expected comma in array after element " + ( ix - 1 ) + " but found " + cleanupChar( ch ),
-//				_lnum,
-//				_offset
-//			);
-//
-//		    }
-//
-//		}
-//
-//	    }
-
             ch = nextCh();
 
             if ( ch == GowingConstants.NULL_VALUE ) {
@@ -1802,39 +1732,6 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
 
         }
 
-//	    int c1 = nextCh();
-//		    if ( !Character.isDefined( c1 ) ) {
-//
-//			return new GowingToken2( "expected first hex digit [0-9a-f] @ array offset " + ix + " but found " + cleanupChar( c1 ), _lnum, _offset );
-//
-//		    }
-//
-//		    int c2 = nextCh();
-//		    if ( c2 == -1 ) {
-//
-//			return new GowingToken2( "expected second hex digit [0-9a-f] @ array offset " + ix + " but found " + cleanupChar( c2 ), _lnum, _offset );
-//
-//		    }
-//
-//		    try {
-//
-////				int value = Integer.parseInt( "0x" + ( (char) c1 ) + ( (char) c2 ) );
-//			byte value = parseHexByte( c1, c2 ); // Byte.parseByte( "" + (char)c1 + (char)c2, 16 );
-//
-//			v[ix] = value;
-//
-//		    } catch ( NumberFormatException e ) {
-//
-//			return new GowingToken2(
-//				"expected two digit hex value @ array offset " + ix + " but found \"" + ( (char) c1 ) + ( (char) c2 ) + '"',
-//				_lnum,
-//				_offset
-//			);
-//
-//		    }
-//
-//		}
-
         ch = nextCh();
         if ( ch == ']' ) {
 
@@ -1858,167 +1755,7 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
 
         }
 
-//	    case GowingConstants.TAG_DOUBLE:
-//
-//		return parseNumericArray( true, length, TokenType.DOUBLE, new double[length] );
-//
-//	    case GowingConstants.TAG_FLOAT:
-//
-//		return parseNumericArray( true, length, TokenType.FLOAT, new float[length] );
-//
-//	    case GowingConstants.TAG_INTEGER:
-//
-//		return parseNumericArray( true, length, TokenType.INTEGER, new int[length] );
-//
-//	    case GowingConstants.TAG_LONG:
-//
-//		return parseNumericArray( true, length, TokenType.LONG, new long[3] );
-//
-//	    case GowingConstants.TAG_SHORT:
-//
-//		return parseNumericArray( true, length, TokenType.SHORT, new short[3] );
-
-//	}
-
     }
-
-//    private GowingToken2 parseNumericArray( boolean primitive, int length, TokenType elementType, Object array ) {
-//
-//        throw new HowDidWeGetHereError( "not implemented" );
-//
-//    }
-
-//    @NotNull
-//    private GowingToken2 getContainerArray()
-//	    throws IOException {
-//
-//	int ch;
-//	Logger.logMsg( "parsing container array" );
-//
-//	int length = 0;
-//	ch = nextCh();
-//	while ( true ) {
-//
-//	    if ( ch >= '0' && ch <= '9' ) {
-//
-//		length = length * 10 + ( ch - '0' );
-//
-//		ch = nextCh();
-//
-//	    } else {
-//
-//		break;
-//
-//	    }
-//
-//	}
-//
-//	// ch is now the element type
-//
-//	TokenType elementType;
-//	switch ( ch ) {
-//
-//	    case GowingConstants.TAG_BYTE:
-//
-//		elementType = TokenType.BYTE;
-//
-//		ch = nextCh();
-//		if ( ch != '[' ) {
-//
-//		    return new GowingToken2( "unexpected character " + cleanupChar( ch ) + " (expected '[')", _lnum, _offset );
-//
-//		}
-//
-//		Byte[] v = new Byte[length];
-//		for ( int ix = 0; ix < length; ix += 1 ) {
-//
-//		    if ( ix > 0 ) {
-//
-//		        ch = nextCh();
-//		        if ( ch != ',' ) {
-//
-//		            return new GowingToken2( "expected comma in array after element " + (ix - 1) + " but found " + cleanupChar( ch ), _lnum, _offset );
-//
-//			}
-//
-//		    }
-//
-//		    ch = nextCh();
-//		    if ( ch == GowingConstants.NULL_VALUE ) {
-//
-//			v[ix] = null;
-//
-//		    } else {
-//
-//		        int c1 = ch;
-//			if ( !Character.isDefined( c1 ) ) {
-//
-//			    return new GowingToken2( "expected first hex digit [0-9a-f] @ array offset " + ix + " but found " + cleanupChar( c1 ), _lnum, _offset );
-//
-//			}
-//
-//			int c2 = nextCh();
-//			if ( c2 == -1 ) {
-//
-//			    return new GowingToken2( "expected second hex digit [0-9a-f] @ array offset " + ix + " but found " + cleanupChar( c2 ), _lnum, _offset );
-//
-//			}
-//
-//			try {
-//
-//    //				int value = Integer.parseInt( "0x" + ( (char) c1 ) + ( (char) c2 ) );
-//			    byte value = parseHexByte( c1, c2 ); // Byte.parseByte( "" + (char)c1 + (char)c2, 16 );
-//
-//			    v[ix] = value;
-//
-//			} catch ( NumberFormatException e ) {
-//
-//			    return new GowingToken2(
-//				    "expected two digit hex value @ array offset " + ix + " but found \"" + ( (char) c1 ) + ( (char) c2 ) + '"',
-//				    _lnum,
-//				    _offset
-//			    );
-//
-//			}
-//
-//		    }
-//
-//		}
-//
-//		ch = nextCh();
-//		if ( ch == ']' ) {
-//
-//		    if ( elementType.isScalarType() ) {
-//
-//			return new GowingToken2( TokenType.CONTAINER_ARRAY, elementType, v, _lnum, _offset );
-//
-//		    } else {
-//
-//			return new GowingToken2(
-//				"array has no defined element type",
-//				_lnum,
-//				_offset
-//			);
-//
-//		    }
-//
-//		} else {
-//
-//		    return new GowingToken2( "unexpected character " + cleanupChar( ch ) + " (expected ']')", _lnum, _offset );
-//
-//		}
-//
-//	    default:
-//
-//		return new GowingToken2(
-//			"no support for arrays of token type " + ch,
-//			_lnum,
-//			_offset
-//		);
-//
-//	}
-//
-//    }
 
     @SuppressWarnings("WeakerAccess")
     @NotNull
@@ -2069,8 +1806,6 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
             putBackChar();
 
         }
-
-//	GowingToken2 entityNameString = null;
 
         SortedSet<EntityName> entityNames = new TreeSet<>();
 
@@ -2123,31 +1858,11 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
 
         }
 
-//	    } else {
-//
-//		throw new UnPacker2ParsingException( "no version provided in entity reference that requires one", entityIdToken );
-//
-//	    }
-//
-//	} else {
-//
-//	    int ch = peekCh();
-//	    if ( ch == 'v' ) {
-//
-//		throw new UnPacker2ParsingException( "unexpected version clause on entity reference", entityIdToken );
-//
-//	    }
-//
-//	    version = null;	// signal that there is no version expected
-//
-//	}
-
         try {
 
             return new GowingToken2(
                     TokenType.ENTITY_REFERENCE,
                     new GowingEntityReference(
-//			    unPackerContext.findTypeByTypeReferenceId( typeId ),
                             typeId,
                             entityIdToken.longValue(),
                             version,
@@ -2309,36 +2024,6 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
 
     }
 
-//    private String collectFloatingPointString( char precisionIndicator )
-//	    throws IOException {
-//
-//	StringBuilder buf = new StringBuilder();
-//	while ( true ) {
-//
-//	    int ch = nextCh();
-//
-//	    if ( Character.isDigit( ch ) || ( buf.length() == 0 && ch == '-' ) ) {
-//
-//		buf.append( (char) ch );
-//
-//	    } else {
-//
-//		if ( ch != precisionIndicator ) {
-//
-//		    putBackChar();
-//
-//		}
-//
-//		break;
-//
-//	    }
-//
-//	}
-//
-//	return buf.toString();
-//
-//    }
-
     private GowingToken2 parseNumeric( final TokenType tokenType, final NumericParser numericParser )
             throws IOException {
 
@@ -2399,25 +2084,6 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
             e.printStackTrace();
 
         }
-
-//	Logger.logMsg( "parsing small enough short . . . " + Short.parseShort( "32767" ) );
-//	Logger.logMsg( "parsing small enough short . . . " + Short.parseShort( "-32768" ) );
-//	Logger.logMsg( "parsing too large short . . ." );
-//	Logger.logMsg( "got " + Short.parseShort( "32768" ) );
-//	System.exit( 0 );
-
-//	try {
-//
-//	    LineNumberReader lnr = new LineNumberReader( new StringReader( "i43230573975978" ) );
-//
-//	    P2ATokenizer tokenizer = new P2ATokenizer( lnr );
-//
-////	    for ( int i = 0; i < )
-//	} catch ( FileNotFoundException e ) {
-//
-//	    e.printStackTrace();
-//
-//	}
 
     }
 

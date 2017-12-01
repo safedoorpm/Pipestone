@@ -2,6 +2,9 @@
   <profile version="1.0">
     <option name="myName" value="Project Default" />
     <inspection_tool class="Convert2MethodRef" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="MissortedModifiers" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="m_requireAnnotationsFirst" value="false" />
+    </inspection_tool>
     <inspection_tool class="UnnecessaryLocalVariable" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="m_ignoreImmediatelyReturnedVariables" value="true" />
       <option name="m_ignoreAnnotatedVariables" value="false" />

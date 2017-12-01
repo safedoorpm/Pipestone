@@ -13,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Date;
 
 /**
- An immutable date which caches certain formatted versions.
+ An immutable date which caches certain formatted variants.
  */
 
 @SuppressWarnings({ "InstanceVariableNamingConvention", "InstanceMethodNamingConvention", "UnusedDeclaration" })
@@ -114,13 +114,13 @@ public class FormattedImmutableDate extends ImmutableDate implements GowingPacka
     @NotNull
     @Override
     public GowingPackedEntityBundle bundleThyself(
-            final boolean isPackingSuper, final GowingPacker packer
+            final boolean isPackingSuper, @NotNull final GowingPacker packer
     ) {
 
         GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
                 FormattedImmutableDate.ENTITY_TYPE_NAME,
                 FormattedImmutableDate.VERSION,
-                null,
+//                null,
                 packer.getPackingContext()
         );
 
@@ -131,7 +131,7 @@ public class FormattedImmutableDate extends ImmutableDate implements GowingPacka
     }
 
     @Override
-    public boolean finishUnpacking( final GowingUnPacker unPacker ) {
+    public boolean finishUnpacking( @NotNull final GowingUnPacker unPacker ) {
 
         return true;
 

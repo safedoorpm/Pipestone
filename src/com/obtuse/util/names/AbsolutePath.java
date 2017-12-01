@@ -6,6 +6,10 @@
 package com.obtuse.util.names;
 
 import com.obtuse.exceptions.HowDidWeGetHereError;
+import com.obtuse.util.Logger;
+import com.obtuse.util.ObtuseUtil;
+import com.obtuse.util.gowing.*;
+import com.obtuse.util.gowing.p2a.GowingEntityReference;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
@@ -16,6 +20,40 @@ import java.util.Collection;
  */
 
 public class AbsolutePath extends RelativePath {
+
+    private static final EntityTypeName ENTITY_TYPE_NAME = new EntityTypeName( AbsolutePath.class.getCanonicalName() );
+
+    private static final int VERSION = 1;
+
+    public static GowingEntityFactory FACTORY = new GowingEntityFactory( ENTITY_TYPE_NAME ) {
+
+        @Override
+        public int getOldestSupportedVersion() {
+
+            return VERSION;
+
+        }
+
+        @Override
+        public int getNewestSupportedVersion() {
+
+            return VERSION;
+
+        }
+
+        @Override
+        @NotNull
+        public GowingPackable createEntity(
+                @NotNull final GowingUnPacker unPacker,
+                @NotNull final GowingPackedEntityBundle bundle,
+                final GowingEntityReference er
+        ) {
+
+            return new AbsolutePath( unPacker, bundle );
+
+        }
+
+    };
 
     public static final AbsolutePath ABSOLUTE_ROOT_PATH = new AbsolutePath();
 
@@ -40,6 +78,46 @@ public class AbsolutePath extends RelativePath {
 
     public AbsolutePath() {
         super( new SegmentName[] { SegmentName.ROOT_SEGMENT } );
+
+    }
+
+    private AbsolutePath( @NotNull final GowingUnPacker unPacker, @NotNull final GowingPackedEntityBundle bundle ) {
+        super( unPacker, bundle.getSuperBundle() );
+
+    }
+
+    @NotNull
+    @Override
+    public GowingPackedEntityBundle bundleThyself(
+            final boolean isPackingSuper, @NotNull final GowingPacker packer
+    ) {
+
+        GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
+                ENTITY_TYPE_NAME,
+                VERSION,
+                super.bundleThyself( true, packer ),
+                packer.getPackingContext()
+        );
+
+        return bundle;
+
+    }
+
+    public boolean finishUnpacking( @NotNull final GowingUnPacker unPacker ) {
+
+        if ( super.finishUnpacking( unPacker ) ) {
+
+            Logger.logMsg( "done unpacking absolute path " + this );
+
+            return true;
+
+        } else {
+
+            Logger.logMsg( "NOT done unpacking absolute path (too dangerous to invoke toString())" );
+
+            return false;
+
+        }
 
     }
 

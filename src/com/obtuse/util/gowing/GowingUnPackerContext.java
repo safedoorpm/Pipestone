@@ -62,7 +62,7 @@ public interface GowingUnPackerContext {
 
     void markEntitiesUnfinished( Collection<GowingEntityReference> unFinishedEntities );
 
-    boolean isEntityFinished( GowingEntityReference er );
+    boolean isEntityFinished( @Nullable GowingEntityReference er );
 
     void markEntityFinished( GowingEntityReference er );
 

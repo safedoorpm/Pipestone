@@ -14,36 +14,34 @@ import java.util.Date;
 
 /**
  A derivation of the {@link java.util.Date} class whose instances are immutable.
- <p/>Attempts to call any of the various setters defined in the {@link java.util.Date} class result in an {@link UnsupportedOperationException} being thrown.
+ <p/>Attempts to call any of the various setters defined in the {@link java.util.Date} class result in an
+ {@link UnsupportedOperationException} being thrown.
  Also, none of the deprecated constructors in the {@link java.util.Date} class exist in this class.
  */
 
 @SuppressWarnings({ "deprecation", "UnusedDeclaration" })
 public class ImmutableDate extends Date implements GowingPackable {
 
-    private static final EntityTypeName ENTITY_TYPE_NAME = new EntityTypeName( ImmutableDate.class );
-
-    private static final int VERSION = 1;
-
     protected static final EntityName TIME_MS_NAME = new EntityName( "_tms" );
-
+    private static final EntityTypeName ENTITY_TYPE_NAME = new EntityTypeName( ImmutableDate.class );
+    private static final int VERSION = 1;
     private final GowingInstanceId _instanceId = new GowingInstanceId( getClass() );
 
     public ImmutableDate() {
 
-	super();
+        super();
 
     }
 
     public ImmutableDate( @NotNull final Date date ) {
 
-	super( date.getTime() );
+        super( date.getTime() );
 
     }
 
     public ImmutableDate( final long date ) {
 
-	super( date );
+        super( date );
 
     }
 
@@ -52,35 +50,35 @@ public class ImmutableDate extends Date implements GowingPackable {
             final GowingPackedEntityBundle bundle,
             final GowingEntityReference er
     )
-	    throws GowingUnPackerParsingException {
+            throws GowingUnPackerParsingException {
 
-	this( bundle.getNotNullField( ImmutableDate.TIME_MS_NAME ).longValue() );
+        this( bundle.getNotNullField( ImmutableDate.TIME_MS_NAME ).longValue() );
 
     }
 
     @NotNull
     @Override
     public GowingPackedEntityBundle bundleThyself(
-            final boolean isPackingSuper, final GowingPacker packer
+            final boolean isPackingSuper, @NotNull final GowingPacker packer
     ) {
 
-	GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
-		ImmutableDate.ENTITY_TYPE_NAME,
-		ImmutableDate.VERSION,
-		null,
-		packer.getPackingContext()
-	);
+        GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
+                ImmutableDate.ENTITY_TYPE_NAME,
+                ImmutableDate.VERSION,
+//		null,
+                packer.getPackingContext()
+        );
 
-	bundle.addHolder( new GowingLongHolder( ImmutableDate.TIME_MS_NAME, getTime(), true ) );
+        bundle.addHolder( new GowingLongHolder( ImmutableDate.TIME_MS_NAME, getTime(), true ) );
 
-	return bundle;
+        return bundle;
 
     }
 
     @Override
-    public boolean finishUnpacking( final GowingUnPacker unPacker ) {
+    public boolean finishUnpacking( @NotNull final GowingUnPacker unPacker ) {
 
-	return true;
+        return true;
 
     }
 
@@ -88,49 +86,49 @@ public class ImmutableDate extends Date implements GowingPackable {
     @NotNull
     public final GowingInstanceId getInstanceId() {
 
-	return _instanceId;
+        return _instanceId;
 
     }
 
     public void setDate( final int date ) {
 
-	throw new UnsupportedOperationException( "instances of ImmutableDate are immutable" );
+        throw new UnsupportedOperationException( "instances of ImmutableDate are immutable" );
 
     }
 
     public void setHours( final int hours ) {
 
-	throw new UnsupportedOperationException( "instances of ImmutableDate are immutable" );
+        throw new UnsupportedOperationException( "instances of ImmutableDate are immutable" );
 
     }
 
     public void setMinutes( final int minutes ) {
 
-	throw new UnsupportedOperationException( "instances of ImmutableDate are immutable" );
+        throw new UnsupportedOperationException( "instances of ImmutableDate are immutable" );
 
     }
 
     public void setMonth( final int month ) {
 
-	throw new UnsupportedOperationException( "instances of ImmutableDate are immutable" );
+        throw new UnsupportedOperationException( "instances of ImmutableDate are immutable" );
 
     }
 
     public void setSeconds( final int seconds ) {
 
-	throw new UnsupportedOperationException( "instances of ImmutableDate are immutable" );
+        throw new UnsupportedOperationException( "instances of ImmutableDate are immutable" );
 
     }
 
     public void setTime( final long time ) {
 
-	throw new UnsupportedOperationException( "instances of ImmutableDate are immutable" );
+        throw new UnsupportedOperationException( "instances of ImmutableDate are immutable" );
 
     }
 
     public void setYear( final int year ) {
 
-	throw new UnsupportedOperationException( "instances of ImmutableDate are immutable" );
+        throw new UnsupportedOperationException( "instances of ImmutableDate are immutable" );
 
     }
 

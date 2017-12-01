@@ -7,7 +7,14 @@ package com.obtuse.util.names;
 
 import com.obtuse.util.BasicProgramConfigInfo;
 import com.obtuse.util.Logger;
+import com.obtuse.util.ObtuseApproximateCalendarDate;
 import com.obtuse.util.ObtuseUtil;
+import com.obtuse.util.gowing.*;
+import com.obtuse.util.gowing.p2a.GowingEntityReference;
+import com.obtuse.util.gowing.p2a.examples.SortedSetExample;
+import com.obtuse.util.gowing.p2a.holders.GowingPackableCollection;
+import com.obtuse.util.gowing.p2a.holders.GowingPackableEntityHolder;
+import com.obtuse.util.gowing.p2a.holders.GowingStringHolder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -20,10 +27,48 @@ import java.util.function.Supplier;
  */
 
 @SuppressWarnings("unused")
-public class RelativePath implements Iterable<SegmentName>, Comparable<RelativePath> {
+public class RelativePath extends GowingAbstractPackableEntity implements Iterable<SegmentName>, Comparable<RelativePath> {
 
-    private final List<SegmentName> _segments;
+    private static final EntityTypeName ENTITY_TYPE_NAME = new EntityTypeName( RelativePath.class.getCanonicalName() );
+
+    private static final int VERSION = 1;
+
+    private static final EntityName SEGMENTS = new EntityName( "_s" );
+    private static final EntityName COMPARE_VALUE = new EntityName( "_cv" );
+
+    public static GowingEntityFactory FACTORY = new GowingEntityFactory( ENTITY_TYPE_NAME ) {
+
+        @Override
+        public int getOldestSupportedVersion() {
+
+            return VERSION;
+
+        }
+
+        @Override
+        public int getNewestSupportedVersion() {
+
+            return VERSION;
+
+        }
+
+        @Override
+        @NotNull
+        public GowingPackable createEntity(
+                @NotNull final GowingUnPacker unPacker,
+                @NotNull final GowingPackedEntityBundle bundle,
+                final GowingEntityReference er
+        ) {
+
+            return new RelativePath( unPacker, bundle );
+
+        }
+
+    };
+
+    private List<SegmentName> _segments;
     private final String _compareValue;
+    private GowingEntityReference _segmentsEntityReference;
 
     /**
      Create a relative or an absolute path instance.
@@ -40,12 +85,30 @@ public class RelativePath implements Iterable<SegmentName>, Comparable<RelativeP
      */
 
     public RelativePath( @NotNull final SegmentName[] segments ) {
-        super();
+        super( new GowingNameMarkerThing() );
+
+        _compareValue = finishConstructor( this instanceof AbsolutePath, segments );
+
+    }
+
+    @NotNull
+    private String finishConstructor( final boolean shouldBeAbsoluteInstance, @NotNull final SegmentName[] segments ) {
 
         List<SegmentName> tmpSegments = new ArrayList<>();
         StringBuilder sb = new StringBuilder( "{" );
         String separator = "";
         boolean isAbsolutePath = this instanceof AbsolutePath;
+        if ( shouldBeAbsoluteInstance != isAbsolutePath ) {
+
+            throw new IllegalArgumentException(
+                    "RelativePath.finishConstructor:  expected to be creating " +
+                    ( shouldBeAbsoluteInstance ? "AbsolutePath" : "RelativePath" ) +
+                    " instance but we're in a " +
+                    ( isAbsolutePath ? "AbsolutePath" : "RelativePath" ) +
+                    " instance"
+            );
+
+        }
         if ( isAbsolutePath ) {
 
             tmpSegments.add( SegmentName.ROOT_SEGMENT );
@@ -95,13 +158,24 @@ public class RelativePath implements Iterable<SegmentName>, Comparable<RelativeP
         _segments = Collections.unmodifiableList( tmpSegments );
 
         sb.append( "}" );
-        _compareValue = sb.toString();
 
-        if ( _segments.size() == 0 ) {
+        if ( _segments.isEmpty() ) {
 
             throw new IllegalArgumentException( ourName + ":  paths must not be empty" );
 
         }
+
+        return sb.toString();
+
+    }
+
+    protected RelativePath( @NotNull final GowingUnPacker unPacker, @NotNull final GowingPackedEntityBundle bundle ) {
+        super( unPacker, bundle.getSuperBundle() );
+
+        _segmentsEntityReference = bundle.getMandatoryEntityReference( SEGMENTS );
+        _compareValue = bundle.getNotNullField( COMPARE_VALUE ).StringValue();
+
+        ObtuseUtil.doNothing();
 
     }
 
@@ -156,41 +230,6 @@ public class RelativePath implements Iterable<SegmentName>, Comparable<RelativeP
 
     }
 
-//    public static SegmentName[] prefixIfNecessary( @NotNull final SegmentName[] segments ) {
-//
-//        if ( segments.length == 0 || !ROOT_SEGMENT.equals( segments[0] ) ) {
-//
-//            return concat( new SegmentName[] { ROOT_SEGMENT }, segments );
-//
-//        } else {
-//
-//            return concat( new SegmentName[0], segments );
-//
-//        }
-//
-//    }
-//
-//    public static SegmentName[] prefixIfNecessary( @NotNull final RelativePath path ) {
-//
-//        return prefixIfNecessary( path._segments );
-//
-//    }
-//
-//    public static SegmentName[] prefixIfNecessary( @NotNull final List<SegmentName> segments ) {
-//
-//        if ( segments.size() == 0 || !ROOT_SEGMENT.equals( segments.get( 0) ) ) {
-//
-//            return concat( new SegmentName[] { ROOT_SEGMENT }, segments );
-//
-//        } else {
-//
-//            return concat( new SegmentName[0], segments );
-//
-//        }
-//
-//    }
-
-
     /**
      Get a list of this instance's segment names.
      @return an unmodifiable list of this instance's segment names.
@@ -238,6 +277,7 @@ public class RelativePath implements Iterable<SegmentName>, Comparable<RelativeP
      Return the number of segments in this instance.
      @return the number of segments in this instance.
      */
+
     public int size() {
 
         return _segments.size();
@@ -253,7 +293,7 @@ public class RelativePath implements Iterable<SegmentName>, Comparable<RelativeP
 
     public boolean isEmpty() {
 
-        return _segments.size() == 0;
+        return _segments.isEmpty();
 
     }
 
@@ -265,6 +305,21 @@ public class RelativePath implements Iterable<SegmentName>, Comparable<RelativeP
     public boolean isAbsolute() {
 
         return this instanceof AbsolutePath;
+
+    }
+
+    public String[] getStringPathArray() {
+
+        String[] rval = new String[_segments.size()];
+
+        int ix = 0;
+        for ( SegmentName sn : _segments ) {
+
+            rval[ix] = sn.getSegmentName();
+
+        }
+
+        return rval;
 
     }
 
@@ -621,6 +676,240 @@ public class RelativePath implements Iterable<SegmentName>, Comparable<RelativeP
     public int stringLength() {
 
         return _compareValue.length();
+
+    }
+
+    /**
+     Determine if any segment contains a specified String.
+     <p>This can be useful for ensuring that calls to {@link #getCanonicalForm()}
+     or the {@code getDelimitedPathString} family of methods yield unique values for all
+     paths of interest.</p>
+     @param string the String of interest.
+     @return {@code true} if any of the this path's segments contain the specified String; {@code false} otherwise.
+     */
+
+    public boolean hasSegmentContainingString( @NotNull final String string ) {
+
+        for ( SegmentName sn : getNames() ) {
+
+            if ( sn.getSegmentName().contains( string ) ) {
+
+                return false;
+
+            }
+
+        }
+
+        return true;
+
+    }
+
+    /**
+     Determine if any segment contains any of specified array of strings.
+     <p>This can be useful for ensuring that calls to {@link #getCanonicalForm()}
+     or the {@code getDelimitedPathString} family of methods yield unique values for all
+     paths of interest.</p>
+     @param strings the array of strings of interest.
+     @return {@code true} if any of the this path's segments contain any of the specified string; {@code false} otherwise.
+     */
+
+    public boolean hasSegmentContainingString( @NotNull final String[] strings ) {
+
+        for ( SegmentName sn : getNames() ) {
+
+            String segmentName = sn.getSegmentName();
+            for ( String string : strings ) {
+
+                if ( segmentName.contains( string ) ) {
+
+                    return false;
+
+                }
+
+            }
+
+        }
+
+        return true;
+
+    }
+
+    /**
+     Determine if any segment contains any of specified {@link Collection} of strings.
+     <p>This can be useful for ensuring that calls to {@link #getCanonicalForm()}
+     or the {@code getDelimitedPathString} family of methods yield unique values for all
+     paths of interest.</p>
+     @param strings the {@link Collection} of strings of interest.
+     @return {@code true} if any of the this path's segments contain any of the specified string; {@code false} otherwise.
+     */
+
+    public boolean hasSegmentContainingString( @NotNull final Collection<String> strings ) {
+
+        for ( SegmentName sn : getNames() ) {
+
+            String segmentName = sn.getSegmentName();
+            for ( String string : strings ) {
+
+                if ( segmentName.contains( string ) ) {
+
+                    return false;
+
+                }
+
+            }
+
+        }
+
+        return true;
+
+    }
+
+    /**
+     Get this path as a string with segment names delimited by a {@code "/"}.
+     <p>A call to this method is exactly equivalent to the following call to the one-parameter version of this method</p>
+     <blockquote>{@code getDelimitedPathString( "/" )}</blockquote>
+     @return the delimited path.
+     */
+
+    @NotNull
+    public String getSlashDelimitedPathString() {
+
+        return getDelimitedPathString( "/" );
+
+    }
+
+    /**
+     Get this path as a string with segment names delimited by a specified delimiter.
+     <p>A call to this method of the form</p>
+     <blockquote>{@code getDelimitedPathString( a )}</blockquote>
+     is exactly equivalent to the following call to the two-parameter version of this method
+     <blockquote>{@code getDelimitedPathString( a, a )}</blockquote>
+     @param delimiter the delimiter to appear at the start of the string if this instance is an absolute path and between
+     pairs of segment names.
+     @return the delimited path.
+     */
+
+    @NotNull
+    public String getDelimitedPathString( @NotNull final String delimiter ) {
+
+        return getDelimitedPathString( delimiter, delimiter );
+
+    }
+
+    /**
+     Get this path as a string with segment names delimited by specified delimiters.
+     <p>Should the caller care, it is the caller's responsibility to ensure that the specified delimiters
+     do not appear within segment names. This could matter if this method is being used to obtain a
+     canonical name which is guaranteed to be unique for any unique path. For example, consider the following
+     two distinct absolute paths:</p>
+     <blockquote><code>AbsolutePath a = new AbsolutePath( new SegmentName( "a/b" ) );</code>
+     <br>
+     and
+     <br><code>AbsolutePath b = new AbsolutePath( new SegmentName[] { new SegmentName( "a" ), new SegmentName( "b" ) } );</code></blockquote>
+     Given the above two paths, the following calls both yield the same result ({@code "/a/b"}):
+     <blockquote><code>String aPath = a.getDelimitedPathString( "/", "/" );</code>
+     <br>
+     and
+     <br><code>String bPath = b.getDelimitedPathString( "/", "/" );</code></blockquote>
+     @param rootString the delimiter to appear at the start of the string if this instance is an absolute path (ignored otherwise).
+     @param separator the delimiter to separate pairs of segment names.
+     @return the delimited path.
+     */
+
+    @NotNull
+    public String getDelimitedPathString( @NotNull final String rootString, @NotNull final String separator ) {
+
+        StringBuilder sb = new StringBuilder();
+        boolean firstSegment = true;
+        for ( SegmentName sn : getNames() ) {
+
+            if ( sn.equals( SegmentName.ROOT_SEGMENT ) ) {
+
+                sb.append( rootString );
+
+            } else {
+
+                sb.append( firstSegment ? "" : separator ).append( sn.getSegmentName() );
+
+            }
+
+            firstSegment = false;
+
+        }
+
+        return sb.toString();
+
+    }
+
+    @NotNull
+    @Override
+    public GowingPackedEntityBundle bundleThyself(
+            final boolean isPackingSuper, @NotNull final GowingPacker packer
+    ) {
+
+        GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
+                ENTITY_TYPE_NAME,
+                VERSION,
+                super.bundleRoot( packer ),
+                packer.getPackingContext()
+        );
+
+        GowingPackableCollection<String> segments = new GowingPackableCollection<>();
+        Collections.addAll( segments, getStringPathArray() );
+
+        bundle.addHolder( new GowingPackableEntityHolder( SEGMENTS, segments, packer, true ) );
+        bundle.addHolder( new GowingStringHolder( COMPARE_VALUE, _compareValue, true ) );
+
+        return bundle;
+
+    }
+
+    @Override
+    public boolean finishUnpacking( @NotNull final GowingUnPacker unPacker ) {
+
+        if ( !unPacker.isEntityFinished( _segmentsEntityReference ) ) {
+
+            return false;
+
+        }
+
+        @SuppressWarnings("unchecked") GowingPackableCollection<String> segments =
+                (GowingPackableCollection<String>)unPacker.resolveReference( _segmentsEntityReference );
+
+        SegmentName[] tmpSegments = new SegmentName[segments.size()];
+        boolean isAbsolutePath = false;
+        int ix = 0;
+        for ( String sn : segments ) {
+
+            if ( SegmentName.ROOT_STRING_NAME.equals( sn ) ) {
+
+                tmpSegments[ix] = SegmentName.ROOT_SEGMENT;
+                isAbsolutePath = true;
+
+            } else {
+
+                tmpSegments[ix] = new SegmentName( sn );
+
+            }
+
+            ix += 1;
+
+        }
+
+        String expectedCompareValue = finishConstructor( isAbsolutePath, tmpSegments );
+
+        String ourName = isAbsolutePath ? "AbsolutePath" : "RelativePath";
+
+        if ( !expectedCompareValue.equals( _compareValue ) ) {
+
+            throw new IllegalArgumentException(
+                    "RelativePath." + ourName + ":  unpacked compare path " + _compareValue +
+                    " not identical to computed compare path " + expectedCompareValue
+            );
+
+        }
+
+        return true;
 
     }
 

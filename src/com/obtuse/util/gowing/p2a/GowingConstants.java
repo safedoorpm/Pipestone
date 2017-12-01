@@ -4,6 +4,8 @@ package com.obtuse.util.gowing.p2a;
  * Copyright © 2015 Obtuse Systems Corporation
  */
 
+import java.util.*;
+
 /**
  Configuration constants.
  <p/>
@@ -121,6 +123,53 @@ public class GowingConstants {
     static final long MINOR_FORMAT_VERSION = 1L;
 
     public static final long FORMAT_VERSION_MULTIPLIER = 1000000L;
+
+    // Metadata tags
+
+    /**
+     The long next id that our multi-generational id generator is to emit.
+     */
+
+    public static final String METADATA_NEXT_ID = "_NEXT_ID";
+
+    /**
+     The String name of the output file being generated.
+     */
+
+    public static final String METADATA_OUTPUT_FILENAME = "_OUTPUT_FILENAME";
+
+    /**
+     The time that the output file was written in a 'standard' format.
+     <p>The 'standard' format is what would be produced by the following Java expression:</p>
+     <blockquote><tt>new SimpleDateFormat( "yyyy-MM-dd'T'HH:mm:ss.SSSZ" ).format( dateTime )</tt></blockquote>
+     Note that the above format is one of the ISO 8601 date and time formats described at
+     <blockquote><a href="http://support.sas.com/documentation/cdl/en/lrdict/64316/HTML/default/viewer.htm#a003169814.htm">http://support.sas.com/documentation/cdl/en/lrdict/64316/HTML/default/viewer.htm#a003169814.htm</a></blockquote>
+     */
+
+    public static final String METADATA_OUTPUT_ITS = "_OUTPUT_ITS";
+
+    /**
+     The time that the output file was written in the somewhat more readable format produced by the {@link Date#toString()} method.
+     */
+
+    public static final String METADATA_OUTPUT_RTS = "_OUTPUT_RTS";
+
+    /**
+     A sorted set containing all of the valid reserved keywords (all keywords starting with an underscore are reserved).
+     */
+
+    public static final SortedSet<String> RESERVED_KEYWORDS;
+    static {
+
+        SortedSet<String> reservedKeywords = new TreeSet<>();
+        reservedKeywords.add( METADATA_NEXT_ID );
+        reservedKeywords.add( METADATA_OUTPUT_FILENAME );
+        reservedKeywords.add( METADATA_OUTPUT_ITS );
+        reservedKeywords.add( METADATA_OUTPUT_RTS );
+
+        RESERVED_KEYWORDS = Collections.unmodifiableSortedSet( reservedKeywords );
+
+    }
 
     /**
      A byte value.

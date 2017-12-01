@@ -60,8 +60,17 @@ public abstract class GowingAbstractPackableEntity implements GowingPackable {
 
     /**
      Provide a simple but non-trivial constructor to ensure that the implementor of our descendant classes at least ponders the question of which of our constructors to call.
-     <p/>Put another way, use this constructor in all situations except when unpacking a packed instance
-     (use the {@link #GowingAbstractPackableEntity(GowingUnPacker,GowingPackedEntityBundle)} constructor when unpacking.
+     <p>Put another way, use this constructor in all situations except when unpacking a packed instance
+     (use the {@link #GowingAbstractPackableEntity(GowingUnPacker,GowingPackedEntityBundle)} constructor when unpacking
+     a packed instance).</p>
+     <p>If you look at the source for the constructors provided by this class then you might
+     conclude that you can use this constructor when unpacking. That might be true today but
+     future implementations of this class might actually require the use of the
+     {@link #GowingAbstractPackableEntity(GowingUnPacker,GowingPackedEntityBundle)}
+     constructor when unpacking.
+     Consequently, it is STRONGLY advised that you use the
+     {@link #GowingAbstractPackableEntity(GowingUnPacker,GowingPackedEntityBundle)} constructor
+     when unpacking and this constructor when creating an instance in other contexts.</p>
      */
 
     protected GowingAbstractPackableEntity( @NotNull final GowingNameMarkerThing gowingThing ) {
@@ -74,12 +83,18 @@ public abstract class GowingAbstractPackableEntity implements GowingPackable {
 
     /**
      Provide a Gowing-compatible constructor for use when unpacking a packed instance.
-
+     <p>If you look at the source for the constructors provided by this class then you might
+     conclude that you can use the {@link #GowingAbstractPackableEntity(GowingNameMarkerThing)}
+     constructor when unpacking. That might be true today but
+     future implementations of this class might actually require the use of this constructor when unpacking.
+     Consequently, it is STRONGLY advised that you use this constructor
+     when unpacking and the {@link #GowingAbstractPackableEntity(GowingNameMarkerThing)} constructor when
+     creating an instance in other contexts.</p>
      @param unPacker the unpacker that's leading this circus.
      @param bundle   the bundle extracted from the input stream of packed stuff.
      */
 
-    protected GowingAbstractPackableEntity( final GowingUnPacker unPacker, @NotNull final GowingPackedEntityBundle bundle ) {
+    protected GowingAbstractPackableEntity( @NotNull final GowingUnPacker unPacker, @NotNull final GowingPackedEntityBundle bundle ) {
 
         super();
 
@@ -94,16 +109,16 @@ public abstract class GowingAbstractPackableEntity implements GowingPackable {
      */
     protected final GowingPackedEntityBundle bundleRoot( final GowingPacker packer ) {
 
-        GowingPackedEntityBundle rval = new GowingPackedEntityBundle(
+        GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
                 ENTITY_TYPE_NAME,
                 VERSION,
-                null,
+//                null,
                 packer.getPackingContext()
         );
 
-        rval.addHolder( new GowingStringHolder( GOWING_NAME, _gowingThing.getGowingStringName(), true ) );
+        bundle.addHolder( new GowingStringHolder( GOWING_NAME, _gowingThing.getGowingStringName(), true ) );
 
-        return rval;
+        return bundle;
 
     }
 

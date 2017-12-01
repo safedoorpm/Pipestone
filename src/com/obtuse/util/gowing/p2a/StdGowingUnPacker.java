@@ -12,7 +12,9 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 /*
@@ -329,6 +331,13 @@ public class StdGowingUnPacker implements GowingUnPacker {
     }
 
     @Override
+    public void registerMetaDataHandler( @NotNull final GowingMetaDataHandler handler ) {
+
+        _tokenizer.registerMetaDataHandler( handler );
+
+    }
+
+    @Override
     public GowingPackable resolveReference( @Nullable final GowingEntityReference er ) {
 
         if ( er == null ) {
@@ -341,7 +350,7 @@ public class StdGowingUnPacker implements GowingUnPacker {
 
     }
 
-    public boolean isEntityFinished( final GowingEntityReference er ) {
+    public boolean isEntityFinished( @Nullable final GowingEntityReference er ) {
 
         return _unPackerContext.isEntityFinished( er );
 
@@ -463,9 +472,10 @@ public class StdGowingUnPacker implements GowingUnPacker {
                             bundle = new GowingPackedEntityBundle(
                                     entityTypeName,
                                     ourEntityReferenceToken.entityReference().getTypeId(),
-                                    null,
-                                    version.intValue(),
-                                    _unPackerContext
+//                                    null,
+                                    version.intValue()
+//                                    ,
+//                                    _unPackerContext
                             );
 
                         }
@@ -485,9 +495,10 @@ public class StdGowingUnPacker implements GowingUnPacker {
                             bundle = new GowingPackedEntityBundle(
                                     entityTypeName,
                                     ourEntityReferenceToken.entityReference().getTypeId(),
-                                    null,
-                                    -1,
-                                    _unPackerContext
+//                                    null,
+                                    -1
+//                                    ,
+//                                    _unPackerContext
                             );
 
                         }
@@ -653,6 +664,38 @@ public class StdGowingUnPacker implements GowingUnPacker {
         try {
 
             GowingUnPacker unPacker = new StdGowingUnPacker( new GowingTypeIndex( "test unpacker" ), new File( "test1.p2a" ) );
+            unPacker.registerMetaDataHandler(
+                    new GowingMetaDataHandler() {
+                        @Override
+                        public void processMetaData( final String name, final String value ) {
+
+                            Logger.logMsg( "got string metadata element:  " + name + "->" + ObtuseUtil.enquoteToJavaString( value ) );
+
+                        }
+
+                        @Override
+                        public void processMetaData( final String name, final long value ) {
+
+                            Logger.logMsg( "got long metadata element:  " + name + "->" + value );
+
+                        }
+
+                        @Override
+                        public void processMetaData( final String name, final boolean value ) {
+
+                            Logger.logMsg( "got boolean metadata element:  " + name + "->" + value );
+
+                        }
+
+                        @Override
+                        public void processMetaData( final String name, final double value ) {
+
+                            Logger.logMsg( "got double metadata element:  " + name + "->" + value );
+
+                        }
+
+                    }
+            );
 
             unPacker.getUnPackerContext().registerFactory( StdGowingPackerContext.TestPackableClass.FACTORY );
             unPacker.getUnPackerContext().registerFactory( StdGowingPackerContext.SimplePackableClass.FACTORY );

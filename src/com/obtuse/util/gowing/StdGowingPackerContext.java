@@ -194,42 +194,42 @@ public class StdGowingPackerContext implements GowingPackerContext {
 
             _payload = bundle.getNotNullField( new EntityName( "_payload" ) ).StringValue();
 
-            _simpleReference = bundle.getNullableField( new EntityName( "_simple" ) ).EntityTypeReference();
+            _simpleReference = bundle.getOptionalEntityReference( new EntityName( "_simple" ) );
 
             _iValue = bundle.getNotNullField( new EntityName( "_iValue" ) ).intValue();
 
-            _innerReference = bundle.getNullableField( new EntityName( "_inner" ) ).EntityTypeReference();
+            _innerReference = bundle.getOptionalEntityReference( new EntityName( "_inner" ) );
 
         }
 
         @NotNull
         @Override
-        public GowingPackedEntityBundle bundleThyself( final boolean isPackingSuper, final GowingPacker packer ) {
+        public GowingPackedEntityBundle bundleThyself( final boolean isPackingSuper, @NotNull final GowingPacker packer ) {
 
-            GowingPackedEntityBundle rval = new GowingPackedEntityBundle(
+            GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
                     ENTITY_TYPE_NAME,
                     VERSION,
                     super.bundleRoot( packer ),
                     packer.getPackingContext()
             );
 
-            rval.addHolder( new GowingPackableEntityHolder( new EntityName( "_simple" ), _simple, packer, false ) );
-            rval.addHolder( new GowingPackableEntityHolder( new EntityName( "_inner" ), _inner, packer, false ) );
-            rval.addHolder( new GowingStringHolder( new EntityName( "_payload" ), _payload, true ) );
-            rval.addHolder( new GowingIntegerHolder( new EntityName( "_iValue" ), _iValue, false ) );
-            rval.addHolder( new GowingBooleanHolder( new EntityName( "_booleanValue" ), true, true ) );
-            rval.addHolder( new GowingDoubleHolder( new EntityName( "_doubleValue" ), Math.PI, false ) );
-            rval.addHolder( new GowingFloatHolder( new EntityName( "_floatValue" ), 1.1f, true ) );
-            rval.addHolder( new GowingShortHolder( new EntityName( "_shortValue" ), (short)15, false ) );
-            rval.addHolder( new GowingLongHolder( new EntityName( "_longValue" ), 123L, true ) );
-            rval.addHolder( new GowingEntityNameHolder( new EntityName( "_entityName" ), new EntityName( "froz botnick" ), true ) );
+            bundle.addHolder( new GowingPackableEntityHolder( new EntityName( "_simple" ), _simple, packer, false ) );
+            bundle.addHolder( new GowingPackableEntityHolder( new EntityName( "_inner" ), _inner, packer, false ) );
+            bundle.addHolder( new GowingStringHolder( new EntityName( "_payload" ), _payload, true ) );
+            bundle.addHolder( new GowingIntegerHolder( new EntityName( "_iValue" ), _iValue, false ) );
+            bundle.addHolder( new GowingBooleanHolder( new EntityName( "_booleanValue" ), true, true ) );
+            bundle.addHolder( new GowingDoubleHolder( new EntityName( "_doubleValue" ), Math.PI, false ) );
+            bundle.addHolder( new GowingFloatHolder( new EntityName( "_floatValue" ), 1.1f, true ) );
+            bundle.addHolder( new GowingShortHolder( new EntityName( "_shortValue" ), (short)15, false ) );
+            bundle.addHolder( new GowingLongHolder( new EntityName( "_longValue" ), 123L, true ) );
+            bundle.addHolder( new GowingEntityNameHolder( new EntityName( "_entityName" ), new EntityName( "froz botnick" ), true ) );
 
-            return rval;
+            return bundle;
 
         }
 
         @Override
-        public boolean finishUnpacking( final GowingUnPacker unPacker ) {
+        public boolean finishUnpacking( @NotNull final GowingUnPacker unPacker ) {
 
             _simple = (SimplePackableClass)unPacker.resolveReference( _simpleReference );
             _inner = (TestPackableClass)unPacker.resolveReference( _innerReference );
@@ -294,7 +294,7 @@ public class StdGowingPackerContext implements GowingPackerContext {
 
         public SimplePackableClass( final GowingUnPacker unPacker, final GowingPackedEntityBundle bundle, final GowingEntityReference er ) {
 
-            super( new GowingNameMarkerThing() );
+            super( unPacker, bundle.getSuperBundle() );
 
             if ( bundle.getVersion() != VERSION ) {
 
@@ -313,24 +313,25 @@ public class StdGowingPackerContext implements GowingPackerContext {
 
         @NotNull
         @Override
-        public GowingPackedEntityBundle bundleThyself( final boolean isPackingSuper, final GowingPacker packer ) {
+        public GowingPackedEntityBundle bundleThyself( final boolean isPackingSuper, @NotNull final GowingPacker packer ) {
 
-            GowingPackedEntityBundle rval = new GowingPackedEntityBundle(
+            GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
                     ENTITY_TYPE_NAME,
                     VERSION,
+                    super.bundleRoot( packer ),
                     // super.bundleThyself( true, packer ),
-                    null,
+//                    null,
                     packer.getPackingContext()
             );
 
-            rval.addHolder( new GowingStringHolder( new EntityName( "_thing" ), _payload, true ) );
+            bundle.addHolder( new GowingStringHolder( new EntityName( "_thing" ), _payload, true ) );
 
-            return rval;
+            return bundle;
 
         }
 
         @Override
-        public boolean finishUnpacking( final GowingUnPacker unPacker ) {
+        public boolean finishUnpacking( @NotNull final GowingUnPacker unPacker ) {
 
             // Nothing to be done here.
 

@@ -10,15 +10,6 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/annotations.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
           <root url="jar://$MODULE_DIR$/postgresql-8.1-408.jdbc3.jar!/" />
         </CLASSES>
         <JAVADOC />
@@ -29,6 +20,15 @@
       <library>
         <CLASSES>
           <root url="jar://$MODULE_DIR$/junit-4.10.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/annotations-java8.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

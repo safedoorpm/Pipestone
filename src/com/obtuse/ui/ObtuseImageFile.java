@@ -723,7 +723,7 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
 
     public ObtuseImageFile( @SuppressWarnings("unused") final GowingUnPacker unPacker, final GowingPackedEntityBundle bundle ) {
 
-        super( new GowingNameMarkerThing() );
+        super( unPacker, bundle.getSuperBundle() );
 
         _imageState = ImageState.valueOf( bundle.StringValue( IMAGE_STATE_NAME ) );
         _originalURI = bundle.recoverURI( ORIGINAL_URI_GTAG );
@@ -1602,40 +1602,40 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
 
     @NotNull
     @Override
-    public GowingPackedEntityBundle bundleThyself( final boolean isPackingSuper, final GowingPacker packer ) {
+    public GowingPackedEntityBundle bundleThyself( final boolean isPackingSuper, @NotNull final GowingPacker packer ) {
 
-        GowingPackedEntityBundle rval = new GowingPackedEntityBundle(
+        GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
                 ENTITY_TYPE_NAME,
                 VERSION,
                 super.bundleRoot( packer ),
                 packer.getPackingContext()
         );
 
-        rval.addHolder( new GowingStringHolder( IMAGE_STATE_NAME, _imageState.name(), true ) );
-        rval.addHolder( new GowingStringHolder( ORIGINAL_URI_GTAG, _originalURI == null ? null : _originalURI.toString(), false ) );
-        rval.addHolder( new GowingStringHolder( ORIGINAL_URL_GTAG, _originalURL == null ? null : _originalURL.toString(), false ) );
-        rval.addHolder( new GowingStringHolder( ORIGINAL_FILE_GTAG, _originalFile == null ? null : _originalFile.getPath(), false ) );
-        rval.addHolder( new GowingStringHolder( ORIGINAL_IMAGE_FORMAT_GTAG, _originalImageFormat, false ) );
-        rval.addHolder( new GowingStringHolder( CACHED_IMAGE_FORMAT_GTAG, _cachedImageFormat, false ) );
-        rval.addHolder( new GowingIntegerHolder( CACHED_IMAGE_WIDTH_GTAG, _cachedImageWidth, false ) );
-        rval.addHolder( new GowingIntegerHolder( CACHED_IMAGE_HEIGHT_GTAG, _cachedImageHeight, false ) );
-        rval.addHolder( new GowingIntegerHolder( OUR_SERIAL_NUMBER_NAME, _ourSerialNumber, false ) );
-        rval.addHolder( new GowingStringHolder(
+        bundle.addHolder( new GowingStringHolder( IMAGE_STATE_NAME, _imageState.name(), true ) );
+        bundle.addHolder( new GowingStringHolder( ORIGINAL_URI_GTAG, _originalURI == null ? null : _originalURI.toString(), false ) );
+        bundle.addHolder( new GowingStringHolder( ORIGINAL_URL_GTAG, _originalURL == null ? null : _originalURL.toString(), false ) );
+        bundle.addHolder( new GowingStringHolder( ORIGINAL_FILE_GTAG, _originalFile == null ? null : _originalFile.getPath(), false ) );
+        bundle.addHolder( new GowingStringHolder( ORIGINAL_IMAGE_FORMAT_GTAG, _originalImageFormat, false ) );
+        bundle.addHolder( new GowingStringHolder( CACHED_IMAGE_FORMAT_GTAG, _cachedImageFormat, false ) );
+        bundle.addHolder( new GowingIntegerHolder( CACHED_IMAGE_WIDTH_GTAG, _cachedImageWidth, false ) );
+        bundle.addHolder( new GowingIntegerHolder( CACHED_IMAGE_HEIGHT_GTAG, _cachedImageHeight, false ) );
+        bundle.addHolder( new GowingIntegerHolder( OUR_SERIAL_NUMBER_NAME, _ourSerialNumber, false ) );
+        bundle.addHolder( new GowingStringHolder(
                 CACHED_IMAGE_FILE_BASENAME_GTAG,
                 _diagnosticCachedFilesBasename == null ? null : _diagnosticCachedFilesBasename.toString(),
                 false
         ) );
-        rval.addHolder( new GowingStringHolder( IMAGE_MD5_GTAG, _imageFileMD5, false ) );
-        rval.addHolder( new GowingStringHolder( TITLE_GTAG, _title, false ) );
-        rval.addHolder( new GowingLongHolder( CACHED_IMAGE_FILE_SIZE_GTAG, _cachedImageFileSize, false ) );
-        rval.addHolder( new GowingByteHolder( THUMBNAIL_IMAGE_BYTES_NAME, _thumbnailImageBytes, false ) );
+        bundle.addHolder( new GowingStringHolder( IMAGE_MD5_GTAG, _imageFileMD5, false ) );
+        bundle.addHolder( new GowingStringHolder( TITLE_GTAG, _title, false ) );
+        bundle.addHolder( new GowingLongHolder( CACHED_IMAGE_FILE_SIZE_GTAG, _cachedImageFileSize, false ) );
+        bundle.addHolder( new GowingByteHolder( THUMBNAIL_IMAGE_BYTES_NAME, _thumbnailImageBytes, false ) );
 
-        return rval;
+        return bundle;
 
     }
 
     @Override
-    public boolean finishUnpacking( final GowingUnPacker unPacker ) {
+    public boolean finishUnpacking( @NotNull final GowingUnPacker unPacker ) {
 
         return true;
 

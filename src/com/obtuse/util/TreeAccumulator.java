@@ -5,6 +5,8 @@ import java.util.Comparator;
 import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
  * An enhanced version of the {@link TreeCounter} class that uses long values to accumulate possibly quite large values.
@@ -231,6 +233,11 @@ public class TreeAccumulator<K extends Comparable<K>> implements Accumulator<K>,
 
     public String toString() {
 
+        String rval = _accumulator
+                .keySet()
+                .stream()
+                .map( String::valueOf )
+                .collect( Collectors.joining( "TreeCounter( ", ", ", " )" ) );
         StringBuilder counts = new StringBuilder( "TreeCounter( " );
         String comma = "";
 

@@ -381,7 +381,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
     @NotNull
     @Override
     public GowingPackedEntityBundle bundleThyself(
-            final boolean isPackingSuper, final GowingPacker packer
+            final boolean isPackingSuper, @NotNull final GowingPacker packer
     ) {
 
         GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
@@ -421,7 +421,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
     }
 
     @Override
-    public boolean finishUnpacking( final GowingUnPacker unPacker ) {
+    public boolean finishUnpacking( @NotNull final GowingUnPacker unPacker ) {
 
         return true;
 

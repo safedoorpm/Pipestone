@@ -26,7 +26,7 @@ public class UniqueThingTableCellEditor<T extends ThingInfo> extends Customizabl
 
     private final int _row;
 
-    private final int _col;
+    @SuppressWarnings({ "FieldCanBeLocal", "unused" }) private final int _col;
 
     private final MessageLabel _jMessage;
 

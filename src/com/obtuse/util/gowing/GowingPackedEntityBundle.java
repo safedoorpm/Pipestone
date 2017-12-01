@@ -2,8 +2,10 @@ package com.obtuse.util.gowing;
 
 import com.obtuse.exceptions.HowDidWeGetHereError;
 import com.obtuse.util.FormattingLinkedList;
+import com.obtuse.util.Logger;
 import com.obtuse.util.ObtuseUtil;
 import com.obtuse.util.gowing.p2a.GowingEntityReference;
+import com.obtuse.util.gowing.p2a.holders.GowingAbstractPackableHolder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -35,7 +37,7 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName, GowingPackable
     public GowingPackedEntityBundle(
             @NotNull final EntityTypeName typeName,
             final int version,
-            @Nullable final GowingPackedEntityBundle superBundle,
+            @NotNull final GowingPackedEntityBundle superBundle,
             @NotNull final GowingPackerContext packerContext
     ) {
 
@@ -50,13 +52,40 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName, GowingPackable
 
     public GowingPackedEntityBundle(
             @NotNull final EntityTypeName typeName,
-            final int typeId,
-            @Nullable final GowingPackedEntityBundle superBundle,
             final int version,
-            @NotNull final GowingUnPackerContext unPackerContext
+            @NotNull final GowingPackerContext packerContext
     ) {
 
         super();
+
+        _typeName = typeName;
+        _version = version;
+        _typeId = packerContext.rememberTypeName( typeName );
+        _superBundle = null;
+
+    }
+
+    public GowingPackedEntityBundle(
+            @NotNull final EntityTypeName typeName,
+            final int typeId,
+            @NotNull final GowingPackedEntityBundle superBundle,
+            final int version,
+            @NotNull final GowingUnPackerContext unPackerContext
+    ) {
+        super();
+
+        if ( typeName.equals( unPackerContext.getTypeByTypeReferenceId( typeId ) ) ) {
+
+            Logger.logMsg( "GPEB:  got expected type name " + typeName + " for type id " + typeId );
+
+        } else {
+
+            Logger.logMsg(
+                    "GPEB:  got unexpected type name " + unPackerContext.getTypeByTypeReferenceId( typeId ) +
+                    " for type id " + typeId + " (expected " + typeName + ")"
+            );
+
+        }
 
         _typeName = typeName;
         _typeId = typeId; // unPackerContext.rememberTypeName( typeName );
@@ -65,8 +94,30 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName, GowingPackable
 
     }
 
+    public GowingPackedEntityBundle(
+            final EntityTypeName typeName,
+            final int typeId,
+            final int version
+//            ,
+//            final @NotNull GowingPackerContext packingContext
+    ) {
+        super();
+
+        _typeName = typeName;
+        _typeId = typeId;
+        _version = version;
+        _superBundle = null;
+
+    }
+
     @NotNull
     public GowingPackedEntityBundle getSuperBundle() {
+
+        if ( _superBundle == null ) {
+
+            throw new HowDidWeGetHereError( "GowingPackedEntityBundle:  request for null super bundle" );
+
+        }
 
         return _superBundle;
 
@@ -126,7 +177,8 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName, GowingPackable
      @throws ClassCastException if the specified field exists but is not a GowingEntityReference value.
      */
 
-    public GowingEntityReference getOptionalEntityReference( final EntityName name ) {
+    @Nullable
+    public GowingEntityReference getOptionalEntityReference( @NotNull final EntityName name ) {
 
         GowingPackableThingHolder ref = getNullableField( name );
         if ( ref == null ) {
@@ -135,7 +187,9 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName, GowingPackable
 
         } else {
 
-            return ref.EntityTypeReference();
+            return ((GowingAbstractPackableHolder)ref).EntityTypeReference();
+
+//            return ref.EntityTypeReference();
 
         }
 
@@ -152,11 +206,20 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName, GowingPackable
      */
 
     @NotNull
-    public GowingEntityReference getMandatoryEntityReference( final EntityName name ) {
+    public GowingEntityReference getMandatoryEntityReference( @NotNull final EntityName name ) {
 
         GowingPackableThingHolder ref = getNotNullField( name );
 
-        return ref.EntityTypeReference();
+//        if ( ref instanceof GowingAbstractPackableHolder ) {
+
+        return ((GowingAbstractPackableHolder)ref).EntityTypeReference();
+
+//        } else {
+//
+//            throw new
+//        }
+
+//        return ref.EntityTypeReference();
 
     }
 

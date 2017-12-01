@@ -81,7 +81,6 @@ public abstract class GowingAbstractPackableHolder implements GowingPackableThin
 
     }
 
-    @Override
     public GowingEntityReference EntityTypeReference() {
 
         return (GowingEntityReference)getObjectValue();

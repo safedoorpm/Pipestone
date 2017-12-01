@@ -144,7 +144,7 @@ public class GowingPackableCollection<E> extends LinkedList<E> implements Gowing
     }
 
     @Override
-    public boolean finishUnpacking( final GowingUnPacker unPacker ) {
+    public boolean finishUnpacking( @NotNull final GowingUnPacker unPacker ) {
 
         ObtuseUtil.doNothing();
 
@@ -183,12 +183,12 @@ public class GowingPackableCollection<E> extends LinkedList<E> implements Gowing
 
     @NotNull
     @Override
-    public GowingPackedEntityBundle bundleThyself( final boolean isPackingSuper, final GowingPacker packer ) {
+    public GowingPackedEntityBundle bundleThyself( final boolean isPackingSuper, @NotNull final GowingPacker packer ) {
 
-        GowingPackedEntityBundle rval = new GowingPackedEntityBundle(
+        GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
                 ENTITY_TYPE_NAME,
                 VERSION,
-                null,
+//                null,
                 packer.getPackingContext()
         );
 
@@ -196,13 +196,13 @@ public class GowingPackableCollection<E> extends LinkedList<E> implements Gowing
 
         for ( Object obj : this ) {
 
-            GowingPackableKeyValuePair.packObj( rval, new EntityName( "_" + ix ), obj, packer );
+            GowingPackableKeyValuePair.packObj( bundle, new EntityName( "_" + ix ), obj, packer );
 
             ix += 1;
 
         }
 
-        return rval;
+        return bundle;
 
     }
 
