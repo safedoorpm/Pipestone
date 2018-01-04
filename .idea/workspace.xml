@@ -4,87 +4,9 @@
     <option name="SCOPE_TYPE" value="3" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" name="Default" comment="Make more classes Gowing-compatible.&#10;Fix a defect in Gowing where empty objects would get a version number of -1 during restoration instead of their actual version number.&#10;Specify the nullability of arrays separately from their contents in all sorts of places.&#10;Ensure that RelativePath instances appear to have an empty list of path instances during construction (this ensures that RelativePath.toString doesn't explode if used during construction).&#10;Lots of cleanup in a wide array of classes.">
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/TracingGowingMetaDataHandler.java" />
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/danny.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/danny.xml" />
+    <list default="true" id="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" name="Default" comment="">
+      <change beforePath="" afterPath="$PROJECT_DIR$/annotations-java8.jar" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/AbstractCurveSequence.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/AbstractCurveSequence.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/AcceleratedPopupMenu1.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/AcceleratedPopupMenu1.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/AcceleratedPopupMenu2.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/AcceleratedPopupMenu2.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/FileSelectors.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/FileSelectors.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/GaussianDistributionConfiguratorWidget.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/GaussianDistributionConfiguratorWidget.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/IndexCardBox.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/IndexCardBox.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/ObtuseImageFile.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/ObtuseImageFile.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/StackedGaussianDistributionsDrawing.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/StackedGaussianDistributionsDrawing.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/ValidatedJTextField.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/ValidatedJTextField.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/dnd/DraggableJPanel.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/dnd/DraggableJPanel.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/future/DragAndDropEndpoints.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/future/DragAndDropEndpoints.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/layout/ConstraintTuple.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/layout/ConstraintTuple.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/layout/linear/ComponentConstraints.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/layout/linear/ComponentConstraints.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/layout/play/GoldenRatioLayoutManager.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/layout/play/GoldenRatioLayoutManager.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/ArgParser.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ArgParser.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/DateUtils.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/DateUtils.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/FlexibleDateTransmogrifier.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/FlexibleDateTransmogrifier.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/GenericCsvParser.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/GenericCsvParser.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/ImmutableDate.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ImmutableDate.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/JulianDate.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/JulianDate.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/Logger.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/Logger.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/NestedXMLPrinter.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/NestedXMLPrinter.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/ObtuseApproximateCalendarDate.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ObtuseApproximateCalendarDate.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/ObtuseCalendarDate.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ObtuseCalendarDate.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/ObtuseUtil.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ObtuseUtil.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/SimpleEventQueue.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/SimpleEventQueue.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/SimpleXmlContentHandler.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/SimpleXmlContentHandler.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/TeeOutputStream.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/TeeOutputStream.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/geometry2d/Circle.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/geometry2d/Circle.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/EntityName.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/EntityName.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/EntityNames.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/EntityNames.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/EntityTypeInfo.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/EntityTypeInfo.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingAbstractPackableEntity.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingAbstractPackableEntity.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingEntityFactory.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingEntityFactory.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingMetaDataHandler.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingMetaDataHandler.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackable.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackable.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackableAttribute.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackableAttribute.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackableKeyValuePair.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackableKeyValuePair.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackableName.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackableName.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackableThingHolder.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackableThingHolder.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackableType.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackableType.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackedEntityBundle.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackedEntityBundle.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPacker.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPacker.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackerContext.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackerContext.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingTypeIndex.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingTypeIndex.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingUnPacker.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingUnPacker.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingUnPackerContext.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingUnPackerContext.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/StdGowingPackerContext.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/StdGowingPackerContext.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/StdGowingUnPackerContext.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/StdGowingUnPackerContext.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingConstants.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingConstants.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingDePackedEntityGroup.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingUnPackedEntityGroup.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingEntityReference.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingEntityReference.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingUnPackerParsingException.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingUnPackerParsingException.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingUtil.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingUtil.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingPacker.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingPacker.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingTokenizer.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingTokenizer.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingUnPacker.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingUnPacker.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/examples/SortedSetExample.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/examples/SortedSetExample.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingAbstractPackableHolder.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingAbstractPackableHolder.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingArrayHolderObsolete.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingBooleanHolder.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingBooleanHolder.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingByteHolder.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingByteHolder.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingDoubleHolder.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingDoubleHolder.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingEntityNameHolder.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingEntityNameHolder.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingEntityReferenceHolder.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingEntityReferenceHolder.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingFloatHolder.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingFloatHolder.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingIntegerHolder.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingIntegerHolder.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingLongHolder.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingLongHolder.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingNullHolder.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingNullHolder.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingPackableCollection.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingPackableCollection.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingPackableEntityHolder.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingPackableEntityHolder.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingPackableMapping.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingPackableMapping.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingShortHolder.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingShortHolder.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingStringHolder.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingStringHolder.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/package-info.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/package-info.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/names/RelativePath.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/names/RelativePath.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/pepys/Pepys.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/pepys/Pepys.java" />
     </list>
     <ignored path="Pipestone.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -268,21 +190,14 @@
       <file leaf-file-name="TeeOutputStream.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/TeeOutputStream.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="19">
-              <caret line="201" column="41" lean-forward="false" selection-start-line="201" selection-start-column="41" selection-end-line="201" selection-end-column="41" />
+            <state relative-caret-position="551">
+              <caret line="229" column="0" lean-forward="false" selection-start-line="229" selection-start-column="0" selection-end-line="229" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#480#507#0" expanded="true" />
+                <element signature="e#565#601#0" expanded="true" />
+                <element signature="e#721#771#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="File.java" pinned="false" current-in-tab="false">
-        <entry file="jar:///usr/lib/jvm/java-8-oracle/src.zip!/java/io/File.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4712">
-              <caret line="283" column="61" lean-forward="false" selection-start-line="283" selection-start-column="52" selection-end-line="283" selection-end-column="61" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -292,16 +207,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1539">
               <caret line="95" column="0" lean-forward="false" selection-start-line="95" selection-start-column="0" selection-end-line="95" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FileNotFoundException.java" pinned="false" current-in-tab="false">
-        <entry file="jar:///usr/lib/jvm/java-8-oracle/src.zip!/java/io/FileNotFoundException.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="912">
-              <caret line="75" column="12" lean-forward="false" selection-start-line="75" selection-start-column="12" selection-end-line="75" selection-end-column="12" />
               <folding />
             </state>
           </provider>
@@ -1507,7 +1412,7 @@
       <workItem from="1512313893744" duration="4920000" />
       <workItem from="1512536692223" duration="6315000" />
       <workItem from="1513440900019" duration="6031000" />
-      <workItem from="1515051511079" duration="498000" />
+      <workItem from="1515051511079" duration="1050000" />
     </task>
     <task id="LOCAL-00001" summary="Major re-sync with danny's personal toolkit.">
       <created>1359580956092</created>
@@ -1845,11 +1750,18 @@
       <option name="project" value="LOCAL" />
       <updated>1515051989436</updated>
     </task>
-    <option name="localTasksCounter" value="49" />
+    <task id="LOCAL-00049" summary="Make more classes Gowing-compatible.&#10;Fix a defect in Gowing where empty objects would get a version number of -1 during restoration instead of their actual version number.&#10;Specify the nullability of arrays separately from their contents in all sorts of places.&#10;Ensure that RelativePath instances appear to have an empty list of path instances during construction (this ensures that RelativePath.toString doesn't explode if used during construction).&#10;Lots of cleanup in a wide array of classes.">
+      <created>1515052042170</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1515052042170</updated>
+    </task>
+    <option name="localTasksCounter" value="50" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="791609000" />
+    <option name="totallyTimeSpent" value="792161000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1862,9 +1774,11 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="97" y="51" width="2443" height="1494" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.118644066" sideWeight="0.67289025" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30076924" sideWeight="0.9753381" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1895,7 +1809,6 @@
       <window_info id="Duplicates" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32952926" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32997844" sideWeight="0.49722221" order="15" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32457292" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30076924" sideWeight="0.9753381" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39985272" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32960624" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1958,17 +1871,6 @@
               </option>
               <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
                 <collection />
-              </option>
-              <option name="FILTERS">
-                <map>
-                  <entry key="text">
-                    <value>
-                      <list>
-                        <option value="treesorter" />
-                      </list>
-                    </value>
-                  </entry>
-                </map>
               </option>
               <option name="COLUMN_ORDER">
                 <list>
@@ -2395,6 +2297,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-846">
           <caret line="12" column="3" lean-forward="true" selection-start-line="12" selection-start-column="3" selection-end-line="12" selection-end-column="3" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2410,6 +2313,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="446">
           <caret line="70" column="0" lean-forward="false" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2467,6 +2371,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1530">
           <caret line="24" column="19" lean-forward="false" selection-start-line="24" selection-start-column="19" selection-end-line="24" selection-end-column="19" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2474,6 +2379,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="114">
           <caret line="9" column="3" lean-forward="false" selection-start-line="9" selection-start-column="3" selection-end-line="9" selection-end-column="3" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2488,6 +2394,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="275">
           <caret line="59" column="0" lean-forward="false" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2503,6 +2410,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="457">
           <caret line="113" column="0" lean-forward="false" selection-start-line="113" selection-start-column="0" selection-end-line="113" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2517,6 +2425,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="389">
           <caret line="384" column="0" lean-forward="false" selection-start-line="384" selection-start-column="0" selection-end-line="384" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2524,6 +2433,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1444">
           <caret line="84" column="16" lean-forward="false" selection-start-line="84" selection-start-column="16" selection-end-line="84" selection-end-column="16" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2546,6 +2456,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-67">
           <caret line="394" column="7" lean-forward="true" selection-start-line="394" selection-start-column="7" selection-end-line="394" selection-end-column="7" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2553,6 +2464,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="304">
           <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2598,6 +2510,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="565">
           <caret line="193" column="0" lean-forward="false" selection-start-line="193" selection-start-column="0" selection-end-line="193" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2605,6 +2518,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="248">
           <caret line="38" column="0" lean-forward="true" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2612,6 +2526,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="294">
           <caret line="169" column="0" lean-forward="false" selection-start-line="169" selection-start-column="0" selection-end-line="169" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2626,6 +2541,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="294">
           <caret line="342" column="0" lean-forward="false" selection-start-line="342" selection-start-column="0" selection-end-line="342" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2640,6 +2556,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2711,6 +2628,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="275">
           <caret line="129" column="19" lean-forward="false" selection-start-line="129" selection-start-column="19" selection-end-line="129" selection-end-column="19" />
+          <folding>
+            <element signature="e#15711#15712#0" expanded="false" />
+            <element signature="e#15747#15748#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -2756,10 +2677,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/TeeOutputStream.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="201" column="41" lean-forward="false" selection-start-line="201" selection-start-column="41" selection-end-line="201" selection-end-column="41" />
+        <state relative-caret-position="551">
+          <caret line="229" column="0" lean-forward="false" selection-start-line="229" selection-start-column="0" selection-end-line="229" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#480#507#0" expanded="true" />
+            <element signature="e#565#601#0" expanded="true" />
+            <element signature="e#721#771#0" expanded="true" />
           </folding>
         </state>
       </provider>
