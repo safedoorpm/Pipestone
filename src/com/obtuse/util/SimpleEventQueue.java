@@ -155,15 +155,8 @@ public class SimpleEventQueue<T extends SimpleEvent> {
 
             }
 
-//            int ix = 0;
-//            for ( ClockEvent event : _eventQueue.get( when ) ) {
-//
-//                Logger.logMsg( "" + new Date( when ) + " / " + ix + ":  " + event );
-//                ix += 1;
-//
-//            }
-
         }
+
         msg.append( " ]" );
         Logger.logMsg( msg.toString() );
 
@@ -185,24 +178,7 @@ public class SimpleEventQueue<T extends SimpleEvent> {
 
         }
 
-//        showQueue();
-
     }
-
-//    private void queueBefore( long when, ClockEvent event ) {
-//
-//        if ( when > _endTime ) {
-//
-//            Logger.logMsg( "attempt to queue event \"" + event + "\" at " + new Date( when ) + " which is after the end time of " + new Date( _endTime ) + " - ignored" );
-//            return;
-//
-//        }
-//
-//        List<ClockEvent> queue = findQueue( when );
-//
-//        queue.add( 0, event );
-//
-//    }
 
     public void qAfter( final Date when, final T event ) {
 
@@ -212,8 +188,6 @@ public class SimpleEventQueue<T extends SimpleEvent> {
             Logger.logMsg( "event " + event + " queued after " + DateUtils.formatYYYY_MM_DD_HH_MM_SS_SSS( when ) );
 
         }
-
-//        showQueue();
 
     }
 
@@ -423,52 +397,6 @@ public class SimpleEventQueue<T extends SimpleEvent> {
 
     }
 
-//        while ( true ) {
-//
-//            if ( _eventQueue.isEmpty() ) {
-//
-//                return null;
-//
-//            }
-//
-//            long peekNow = _eventQueue.firstKey().longValue();
-//            LinkedList<ClockEvent> queue = _eventQueue.get( peekNow );
-//
-//            if ( queue.isEmpty() ) {
-//
-//                _eventQueue.remove( peekNow );
-//
-//            } else {
-//
-//                if ( peek ) {
-//
-//                    return new TimestampedClockEventContainer( peekNow, queue.getFirst() );
-//
-//                } else {
-//
-//                    _now = peekNow;
-//                    return new TimestampedClockEventContainer( _now, queue.remove() );
-//
-//                }
-//
-//            }
-//
-//        }
-//
-//    }
-
-//    public TimestampedClockEventContainer getNextEvent() {
-//
-//        return peekOrGetNextEvent( false );
-//
-//    }
-//
-//    public TimestampedClockEventContainer peekNextEvent() {
-//
-//        return peekOrGetNextEvent( true );
-//
-//    }
-
     @SuppressWarnings({ "StaticMethodNamingConvention" })
     public void go() {
 
@@ -511,38 +439,6 @@ public class SimpleEventQueue<T extends SimpleEvent> {
             }
 
         }
-
-//        while ( !_eventQueue.isEmpty() ) {
-//
-//            _now = _eventQueue.firstKey().intValue();
-//            List<ClockEvent> queue = _eventQueue.get( _now );
-//
-//            Date when = new Date( _now );
-//            Logger.logMsg( "doing events for " + when );
-//
-//            while ( !queue.isEmpty() ) {
-//
-//                ClockEvent nextEvent = queue.remove( 0 );
-//                Logger.logMsg( "doing event " + nextEvent + " for " + when );
-//
-//                try {
-//
-//                    nextEvent.run( _now );
-//
-//                } catch ( Throwable e ) {
-//
-////                    Logger.flushMsg();
-//                    Logger.logErr( "event \"" + nextEvent + "\" failed @ " + when, e );
-////                    Logger.flushErr();
-//
-//                }
-//
-//            }
-//
-//            _eventQueue.remove( _now );
-//            _now += 1;
-//
-//        }
 
     }
 

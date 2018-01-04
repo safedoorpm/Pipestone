@@ -4,30 +4,31 @@ import com.obtuse.util.gowing.EntityName;
 import com.obtuse.util.gowing.GowingPacker;
 import com.obtuse.util.gowing.p2a.GowingConstants;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /*
  * Copyright © 2015 Obtuse Systems Corporation
  */
 
 /**
- Pack a long value.
+ Carry a long value.
  */
 
 public class GowingLongHolder extends GowingAbstractPackableHolder {
 
-    public GowingLongHolder( @NotNull final EntityName name, final Long v, @SuppressWarnings("SameParameterValue") final boolean mandatory ) {
+    public GowingLongHolder( @NotNull final EntityName name, @Nullable final Long v, @SuppressWarnings("SameParameterValue") final boolean mandatory ) {
 
         super( name, GowingConstants.TAG_LONG, v, mandatory );
 
     }
 
-    public GowingLongHolder( @NotNull final EntityName name, final long[] v, @SuppressWarnings("SameParameterValue") final boolean mandatory ) {
+    public GowingLongHolder( @NotNull final EntityName name, final long@NotNull[] v, @SuppressWarnings("SameParameterValue") final boolean mandatory ) {
 
         super( name, GowingConstants.TAG_LONG, v, mandatory, true );
 
     }
 
-    public GowingLongHolder( @NotNull final EntityName name, final Long[] v, @SuppressWarnings("SameParameterValue") final boolean mandatory ) {
+    public GowingLongHolder( @NotNull final EntityName name, @Nullable final Long@NotNull[] v, @SuppressWarnings("SameParameterValue") final boolean mandatory ) {
 
         super( name, GowingConstants.TAG_LONG, v, mandatory, false );
 
@@ -54,7 +55,6 @@ public class GowingLongHolder extends GowingAbstractPackableHolder {
                     break;
 
             }
-//	    packer2.emit( ( (Long) value ).longValue() );
 
         } else {
 

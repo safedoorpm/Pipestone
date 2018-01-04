@@ -25,35 +25,27 @@ public enum GowingPackableType {
 
     COLLECTION {
 
-	public String getDescriptiveName() {
+        public String getDescriptiveName() {
 
-	    return "Collection";
+            return "Collection";
 
-	}
+        }
 
-	public JComponent getViewComponent( final SortableEntityView timelinePanel, final GowingPackableAttribute attribute, final int requestedMaxWidth ) {
+        public JComponent getViewComponent(
+                final SortableEntityView timelinePanel,
+                final GowingPackableAttribute attribute,
+                final int requestedMaxWidth
+        ) {
 
-	    return new JLabel( "no support for viewing " + this + " (yet)" );
+            return new JLabel( "no support for viewing " + this + " (yet)" );
 
-	}
+        }
 
-	public String validate( @NotNull final String s ) {
+        public String validate( @NotNull final String s ) {
 
-	    return "validation of collections not support (yet?)";
-//	    try {
-//
-//		//noinspection ResultOfMethodCallIgnored
-//		Long.parseLong( s );
-//
-//		return null;
-//
-//	    } catch ( NumberFormatException e ) {
-//
-//		return e.getMessage();
-//
-//	    }
+            return "validation of collections not support (yet?)";
 
-	}
+        }
 
     },
 
@@ -62,35 +54,38 @@ public enum GowingPackableType {
      */
 
     INTEGRAL {
+        public String getDescriptiveName() {
 
-	public String getDescriptiveName() {
+            return "Integral";
 
-	    return "Integral";
+        }
 
-	}
+        public JComponent getViewComponent(
+                final SortableEntityView timelinePanel,
+                final GowingPackableAttribute attribute,
+                final int requestedMaxWidth
+        ) {
 
-	public JComponent getViewComponent( final SortableEntityView timelinePanel, final GowingPackableAttribute attribute, final int requestedMaxWidth ) {
+            return new JLabel( "no support for viewing " + this + " (yet)" );
 
-	    return new JLabel( "no support for viewing " + this + " (yet)" );
+        }
 
-	}
+        public String validate( @NotNull final String s ) {
 
-	public String validate( @NotNull final String s ) {
+            try {
 
-	    try {
+                //noinspection ResultOfMethodCallIgnored
+                Long.parseLong( s );
 
-		//noinspection ResultOfMethodCallIgnored
-		Long.parseLong( s );
+                return null;
 
-		return null;
+            } catch ( NumberFormatException e ) {
 
-	    } catch ( NumberFormatException e ) {
+                return e.getMessage();
 
-		return e.getMessage();
+            }
 
-	    }
-
-	}
+        }
 
     },
 
@@ -99,35 +94,38 @@ public enum GowingPackableType {
      */
 
     FLOATING_POINT {
+        public String getDescriptiveName() {
 
-	public String getDescriptiveName() {
+            return "Floating point";
 
-	    return "Floating point";
+        }
 
-	}
+        public JComponent getViewComponent(
+                final SortableEntityView timelinePanel,
+                final GowingPackableAttribute attribute,
+                final int requestedMaxWidth
+        ) {
 
-	public JComponent getViewComponent( final SortableEntityView timelinePanel, final GowingPackableAttribute attribute, final int requestedMaxWidth ) {
+            return new JLabel( "no support for viewing " + this + " (yet)" );
 
-	    return new JLabel( "no support for viewing " + this + " (yet)" );
+        }
 
-	}
+        public String validate( @NotNull final String s ) {
 
-	public String validate( @NotNull final String s ) {
+            try {
 
-	    try {
+                //noinspection ResultOfMethodCallIgnored
+                Double.parseDouble( s );
 
-		//noinspection ResultOfMethodCallIgnored
-		Double.parseDouble( s );
+                return null;
 
-		return null;
+            } catch ( NumberFormatException e ) {
 
-	    } catch ( NumberFormatException e ) {
+                return e.getMessage();
 
-		return e.getMessage();
+            }
 
-	    }
-
-	}
+        }
 
     },
 
@@ -136,24 +134,27 @@ public enum GowingPackableType {
      */
 
     APPROXIMATE_DATE {
+        public String getDescriptiveName() {
 
-	public String getDescriptiveName() {
+            return "Approximate date";
 
-	    return "Approximate date";
+        }
 
-	}
+        public JComponent getViewComponent(
+                final SortableEntityView timelinePanel,
+                final GowingPackableAttribute attribute,
+                final int requestedMaxWidth
+        ) {
 
-	public JComponent getViewComponent( final SortableEntityView timelinePanel, final GowingPackableAttribute attribute, final int requestedMaxWidth ) {
+            return new JLabel( "no support for viewing " + this + " (yet)" );
 
-	    return new JLabel( "no support for viewing " + this + " (yet)" );
+        }
 
-	}
+        public String validate( @NotNull final String s ) {
 
-	public String validate( @NotNull final String s ) {
+            return "approximate dates are not (yet) supported";
 
-	    return "approximate dates are not (yet) supported";
-
-	}
+        }
 
     },
 
@@ -162,34 +163,37 @@ public enum GowingPackableType {
      */
 
     PRECISE_DATE {
+        public String getDescriptiveName() {
 
-	public String getDescriptiveName() {
+            return "Precise date";
 
-	    return "Precise date";
+        }
 
-	}
+        public JComponent getViewComponent(
+                final SortableEntityView timelinePanel,
+                final GowingPackableAttribute attribute,
+                final int requestedMaxWidth
+        ) {
 
-	public JComponent getViewComponent( final SortableEntityView timelinePanel, final GowingPackableAttribute attribute, final int requestedMaxWidth ) {
+            return new JLabel( "no support for viewing " + this + " (yet)" );
 
-	    return new JLabel( "no support for viewing " + this + " (yet)" );
+        }
 
-	}
+        public String validate( @NotNull final String s ) {
 
-	public String validate( @NotNull final String s ) {
+            try {
 
-	    try {
+                DateUtils.parseYYYY_MM_DD( s, 0 );
 
-		DateUtils.parseYYYY_MM_DD( s, 0 );
+                return null;
 
-		return null;
+            } catch ( ParsingException e ) {
 
-	    } catch ( ParsingException e ) {
+                return "date must be in the format YYYY-MM-DD";
 
-		return "date must be in the format YYYY-MM-DD";
+            }
 
-	    }
-
-	}
+        }
 
     },
 
@@ -198,41 +202,44 @@ public enum GowingPackableType {
      */
 
     BOOLEAN {
+        public String getDescriptiveName() {
 
-	public String getDescriptiveName() {
+            return "Boolean";
 
-	    return "Boolean";
+        }
 
-	}
+        public JComponent getViewComponent(
+                final SortableEntityView timelinePanel,
+                final GowingPackableAttribute attribute,
+                final int requestedMaxWidth
+        ) {
 
-	public JComponent getViewComponent( final SortableEntityView timelinePanel, final GowingPackableAttribute attribute, final int requestedMaxWidth ) {
+            return new JLabel( "no support for viewing " + this + " (yet)" );
 
-	    return new JLabel( "no support for viewing " + this + " (yet)" );
+        }
 
-	}
+        public String validate( @NotNull final String s ) {
 
-	public String validate( @NotNull final String s ) {
+            String strUC = s.toUpperCase();
 
-	    String strUC = s.toUpperCase();
+            if (
+                    "T".equals( strUC ) ||
+                    "F".equals( strUC ) ||
+                    "TRUE".equals( strUC ) ||
+                    "FALSE".equals( strUC ) ||
+                    "Y".equals( strUC ) ||
+                    "N".equals( strUC ) ||
+                    "YES".equals( strUC ) ||
+                    "NO".equals( strUC )
+                    ) {
 
-	    if (
-		    "T".equals( strUC ) ||
-		    "F".equals( strUC ) ||
-		    "TRUE".equals( strUC ) ||
-		    "FALSE".equals( strUC ) ||
-		    "Y".equals( strUC ) ||
-		    "N".equals( strUC ) ||
-		    "YES".equals( strUC ) ||
-		    "NO".equals( strUC )
-		    ) {
+                return null;
 
-		return null;
+            }
 
-	    }
+            return "value must be one of y, n, t, f, yes, no, true, or false in any mixture of upper or lower case";
 
-	    return "value must be one of y, n, t, f, yes, no, true, or false in any mixture of upper or lower case";
-
-	}
+        }
 
     },
 
@@ -241,24 +248,27 @@ public enum GowingPackableType {
      */
 
     STRING {
+        public String getDescriptiveName() {
 
-	public String getDescriptiveName() {
+            return "String";
 
-	    return "String";
+        }
 
-	}
+        public JComponent getViewComponent(
+                final SortableEntityView timelinePanel,
+                final GowingPackableAttribute attribute,
+                final int requestedMaxWidth
+        ) {
 
-	public JComponent getViewComponent( final SortableEntityView timelinePanel, final GowingPackableAttribute attribute, final int requestedMaxWidth ) {
+            return new JLabel( "no support for viewing " + this + " (yet)" );
 
-	    return new JLabel( "no support for viewing " + this + " (yet)" );
+        }
 
-	}
+        public String validate( @NotNull final String s ) {
 
-	public String validate( @NotNull final String s ) {
+            return null;
 
-	    return null;
-
-	}
+        }
 
     },
 
@@ -267,24 +277,27 @@ public enum GowingPackableType {
      */
 
     PLAIN_TEXT {
+        public String getDescriptiveName() {
 
-	public String getDescriptiveName() {
+            return "Plain Text";
 
-	    return "Plain Text";
+        }
 
-	}
+        public JComponent getViewComponent(
+                final SortableEntityView timelinePanel,
+                final GowingPackableAttribute attribute,
+                final int requestedMaxWidth
+        ) {
 
-	public JComponent getViewComponent( final SortableEntityView timelinePanel, final GowingPackableAttribute attribute, final int requestedMaxWidth ) {
+            return new JLabel( "no support for viewing " + this + " (yet)" );
 
-	    return new JLabel( "no support for viewing " + this + " (yet)" );
+        }
 
-	}
+        public String validate( @NotNull final String s ) {
 
-	public String validate( @NotNull final String s ) {
+            return null;
 
-	    return null;
-
-	}
+        }
 
     },
 
@@ -293,34 +306,37 @@ public enum GowingPackableType {
      */
 
     URL {
+        public String getDescriptiveName() {
 
-	public String getDescriptiveName() {
+            return "URL";
 
-	    return "URL";
+        }
 
-	}
+        public JComponent getViewComponent(
+                final SortableEntityView timelinePanel,
+                final GowingPackableAttribute attribute,
+                final int requestedMaxWidth
+        ) {
 
-	public JComponent getViewComponent( final SortableEntityView timelinePanel, final GowingPackableAttribute attribute, final int requestedMaxWidth ) {
+            return new JLabel( "no support for viewing " + this + " (yet)" );
 
-	    return new JLabel( "no support for viewing " + this + " (yet)" );
+        }
 
-	}
+        public String validate( @NotNull final String s ) {
 
-	public String validate( @NotNull final String s ) {
+            try {
 
-	    try {
+                new java.net.URL( s );
 
-		new java.net.URL( s );
+                return null;
 
-		return null;
+            } catch ( MalformedURLException e ) {
 
-	    } catch ( MalformedURLException e ) {
+                return "invalid URL";
 
-		return "invalid URL";
+            }
 
-	    }
-
-	}
+        }
 
     },
 
@@ -329,44 +345,50 @@ public enum GowingPackableType {
      */
 
     IMAGE {
+        public String getDescriptiveName() {
 
-	public String getDescriptiveName() {
+            return "Image";
 
-	    return "Image";
+        }
 
-	}
+        public JComponent getViewComponent(
+                final SortableEntityView timelinePanel,
+                final GowingPackableAttribute attribute,
+                final int requestedMaxWidth
+        ) {
 
-	public JComponent getViewComponent( final SortableEntityView timelinePanel, final GowingPackableAttribute attribute, final int requestedMaxWidth ) {
+            return new JLabel( "no support for viewing " + this + " (yet)" );
 
-	    return new JLabel( "no support for viewing " + this + " (yet)" );
+        }
 
-	}
+        private final String[] s_validImageFileSuffixes = { ".jpg", ".jpeg", ".gif", ".png" };
 
-	private final String[] s_validImageFileSuffixes = { ".jpg", ".jpeg", ".gif", ".png" };
+        public String validate( @NotNull final String s ) {
 
-	public String validate( @NotNull final String s ) {
+            String rval = GowingPackableType.URL.validate( s );
+            if ( rval == null ) {
 
-	    String rval = GowingPackableType.URL.validate( s );
-	    if ( rval == null ) {
+                String sLC = s.toLowerCase();
+                for ( String suffix : s_validImageFileSuffixes ) {
 
-		String sLC = s.toLowerCase();
-		for ( String suffix : s_validImageFileSuffixes ) {
+                    if ( sLC.endsWith( suffix ) ) {
 
-		    if ( sLC.endsWith( suffix ) ) {
+                        return null;
 
-			return null;
+                    }
 
-		    }
+                }
 
-		}
+                return "invalid file suffix (must be one of " + Arrays.toString( s_validImageFileSuffixes ).replace(
+                        "[",
+                        ""
+                ).replace( "]", "" ) + ")";
 
-		return "invalid file suffix (must be one of " + Arrays.toString( s_validImageFileSuffixes ).replace( "[", "" ).replace( "]", "" ) + ")";
+            }
 
-	    }
+            return rval;
 
-	    return rval;
-
-	}
+        }
 
     },
 
@@ -375,24 +397,27 @@ public enum GowingPackableType {
      */
 
     HTML_TEXT {
+        public String getDescriptiveName() {
 
-	public String getDescriptiveName() {
+            return "HTML text";
 
-	    return "HTML text";
+        }
 
-	}
+        public JComponent getViewComponent(
+                final SortableEntityView timelinePanel,
+                final GowingPackableAttribute attribute,
+                final int requestedMaxWidth
+        ) {
 
-	public JComponent getViewComponent( final SortableEntityView timelinePanel, final GowingPackableAttribute attribute, final int requestedMaxWidth ) {
+            return new JLabel( "no support for viewing " + this + " (yet)" );
 
-	    return new JLabel( "no support for viewing " + this + " (yet)" );
+        }
 
-	}
+        public String validate( @NotNull final String s ) {
 
-	public String validate( @NotNull final String s ) {
+            return null;
 
-	    return null;
-
-	}
+        }
 
     };
 
@@ -400,10 +425,14 @@ public enum GowingPackableType {
 
     public abstract String validate( @NotNull String v );
 
-//    public abstract JComponent getViewComponent( SortableEntityView timelinePanel, GowingPackableAttribute attribute, int requestedMaxWidth );
+    public boolean isCollection() {
 
-    public boolean isCollection() { return this == GowingPackableType.COLLECTION; }
+        return this == GowingPackableType.COLLECTION;
+    }
 
-    public boolean isSimpleValidationSupported() { return this != GowingPackableType.COLLECTION; }
+    public boolean isSimpleValidationSupported() {
+
+        return this != GowingPackableType.COLLECTION;
+    }
 
 }

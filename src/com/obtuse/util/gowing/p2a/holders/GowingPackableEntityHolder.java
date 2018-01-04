@@ -12,7 +12,7 @@ import org.jetbrains.annotations.NotNull;
  */
 
 /**
- Pack a packable entity.
+ Carry a packable entity.
  */
 
 public class GowingPackableEntityHolder extends GowingAbstractPackableHolder {
@@ -44,16 +44,6 @@ public class GowingPackableEntityHolder extends GowingAbstractPackableHolder {
 
         packer2.emit( _instanceId );
 
-//	if ( isMandatory() || value != null ) {
-//
-//	    packer2.emit( _instanceId );
-//
-//	} else {
-//
-//	    packer2.emitNull();
-//
-//	}
-
     }
 
     public GowingInstanceId getInstanceId() {
@@ -61,9 +51,5 @@ public class GowingPackableEntityHolder extends GowingAbstractPackableHolder {
         return _instanceId;
 
     }
-
-//    public static IntegerHolder2 parse( @NotNull EntityName name, UnPacker2 unPacker, boolean mandatory ) {
-//
-//    }
 
 }

@@ -24,6 +24,7 @@ import java.util.TreeMap;
  Carry around the packed form of an entity.
  */
 
+@SuppressWarnings("unused")
 public class GowingPackedEntityBundle extends TreeMap<EntityName, GowingPackableThingHolder> {
 
     private final EntityTypeName _typeName;
@@ -48,6 +49,12 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName, GowingPackable
         _typeId = packerContext.rememberTypeName( typeName );
         _superBundle = superBundle;
 
+        if ( version <= 0 ) {
+
+            throw new IllegalArgumentException( "GowingPackedEntityBundle( packing, tn=" + typeName + ", ti=" + _typeId + ", v=" + version + ", sb=set ):  version is invalid" );
+
+        }
+
     }
 
     public GowingPackedEntityBundle(
@@ -62,6 +69,12 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName, GowingPackable
         _version = version;
         _typeId = packerContext.rememberTypeName( typeName );
         _superBundle = null;
+
+        if ( version <= 0 ) {
+
+            throw new IllegalArgumentException( "GowingPackedEntityBundle( packing, tn=" + typeName + ", v=" + version + ", sb=omitted ):  version is invalid" );
+
+        }
 
     }
 
@@ -92,14 +105,18 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName, GowingPackable
         _superBundle = superBundle;
         _version = version;
 
+        if ( version <= 0 ) {
+
+            throw new IllegalArgumentException( "GowingPackedEntityBundle( unpacking, tn=" + typeName + ", ti=" + typeId + ", v=" + version + ", sb=set ):  version is invalid" );
+
+        }
+
     }
 
     public GowingPackedEntityBundle(
             final EntityTypeName typeName,
             final int typeId,
             final int version
-//            ,
-//            final @NotNull GowingPackerContext packingContext
     ) {
         super();
 
@@ -107,6 +124,12 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName, GowingPackable
         _typeId = typeId;
         _version = version;
         _superBundle = null;
+
+        if ( version <= 0 ) {
+
+            throw new IllegalArgumentException( "GowingPackedEntityBundle( short, tn=" + typeName + ", ti=" + typeId + ", v=" + version + ", sb=set ):  version is invalid" );
+
+        }
 
     }
 
@@ -163,9 +186,11 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName, GowingPackable
 
     }
 
-    public void addHolder( final GowingPackableThingHolder holder ) {
+    public GowingPackedEntityBundle addHolder( final GowingPackableThingHolder holder ) {
 
         put( holder.getName(), holder );
+
+        return this;
 
     }
 
@@ -189,8 +214,6 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName, GowingPackable
 
             return ((GowingAbstractPackableHolder)ref).EntityTypeReference();
 
-//            return ref.EntityTypeReference();
-
         }
 
     }
@@ -210,16 +233,7 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName, GowingPackable
 
         GowingPackableThingHolder ref = getNotNullField( name );
 
-//        if ( ref instanceof GowingAbstractPackableHolder ) {
-
         return ((GowingAbstractPackableHolder)ref).EntityTypeReference();
-
-//        } else {
-//
-//            throw new
-//        }
-
-//        return ref.EntityTypeReference();
 
     }
 

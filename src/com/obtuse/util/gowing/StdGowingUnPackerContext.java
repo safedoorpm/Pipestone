@@ -215,7 +215,6 @@ public class StdGowingUnPackerContext implements GowingUnPackerContext {
     public GowingPackable recallPackableEntity( @NotNull final GowingEntityReference er ) {
 
         GowingPackable packable2 = _seenInstanceIds.get( er );
-//        Logger.logMsg( "recalling " + er + " as " + GowingUtil.describeGowingEntitySafely( packable2 ) );
 
         return packable2;
 
@@ -230,8 +229,6 @@ public class StdGowingUnPackerContext implements GowingUnPackerContext {
 
     @Override
     public void rememberPackableEntity( final StdGowingTokenizer.GowingToken2 token, final GowingEntityReference er, final GowingPackable entity ) {
-
-//        Logger.logMsg( "remembering " + er + " = " + GowingUtil.describeGowingEntitySafely( entity ) );
 
         if ( isEntityKnown( er ) ) {
 
@@ -328,14 +325,6 @@ public class StdGowingUnPackerContext implements GowingUnPackerContext {
             return Optional.empty();
 
         }
-//	return maybeTypeName.
-//	if ( typeName == null ) {
-//
-//	    return null;
-//
-//	}
-//
-//	return _typeIndex.findTypeInfo( typeName );
 
     }
 
@@ -352,6 +341,7 @@ public class StdGowingUnPackerContext implements GowingUnPackerContext {
     public EntityTypeInfo getTypeInfo( final int typeReferenceId ) {
 
         Optional<EntityTypeInfo> maybeRval = findTypeInfo( typeReferenceId );
+
         return maybeRval.orElseThrow( () -> new IllegalArgumentException( "unknown type reference id " + typeReferenceId ) );
 
     }
@@ -359,17 +349,8 @@ public class StdGowingUnPackerContext implements GowingUnPackerContext {
     public EntityTypeInfo registerFactory( final GowingEntityFactory factory ) {
 
         Optional<EntityTypeInfo> rval = _typeIndex.findTypeInfo( factory.getTypeName() );
-        return rval.orElseGet( () -> _typeIndex.addFactory( factory ) );
 
-//	if ( rval == null ) {
-//
-//	    return _typeIndex.addFactory( factory );
-//
-//	} else {
-//
-//	    return rval;
-//
-//	}
+        return rval.orElseGet( () -> _typeIndex.addFactory( factory ) );
 
     }
 

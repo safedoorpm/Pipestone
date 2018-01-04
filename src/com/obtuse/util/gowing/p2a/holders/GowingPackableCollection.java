@@ -108,7 +108,10 @@ public class GowingPackableCollection<E> extends LinkedList<E> implements Gowing
 
     }
 
-    public GowingPackableCollection( final GowingUnPacker unPacker, final GowingPackedEntityBundle bundle ) {
+    public GowingPackableCollection(
+            @SuppressWarnings("unused") final GowingUnPacker unPacker,
+            final GowingPackedEntityBundle bundle
+    ) {
 
         super();
 
@@ -150,6 +153,20 @@ public class GowingPackableCollection<E> extends LinkedList<E> implements Gowing
 
         for ( Object obj : _things ) {
 
+            if ( obj instanceof GowingEntityReference ) {
+
+                if ( !unPacker.isEntityFinished( (GowingEntityReference)obj ) ) {
+
+                    return false;
+
+                }
+
+            }
+
+        }
+
+        for ( Object obj : _things ) {
+
             if ( obj == null ) {
 
                 add( null );
@@ -188,7 +205,6 @@ public class GowingPackableCollection<E> extends LinkedList<E> implements Gowing
         GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
                 ENTITY_TYPE_NAME,
                 VERSION,
-//                null,
                 packer.getPackingContext()
         );
 

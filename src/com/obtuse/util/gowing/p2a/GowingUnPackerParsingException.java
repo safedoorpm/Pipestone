@@ -14,54 +14,60 @@ public class GowingUnPackerParsingException extends Exception {
 
     private StdGowingTokenizer.GowingToken2 _causeToken;
 
-//    public UnPacker2ParseError( String msg ) {
-//	super( msg );
-//
-//	_causeToken = null;
-//
-//    }
-
     public GowingUnPackerParsingException( final String msg ) {
-	this( msg, null );
+
+        this( msg, null, null );
 
     }
 
     public GowingUnPackerParsingException( final String msg, @Nullable final StdGowingTokenizer.GowingToken2 causeToken ) {
-	this( msg, causeToken, null );
+
+        this( msg, causeToken, null );
 
     }
 
-    public GowingUnPackerParsingException( final String msg, @Nullable final StdGowingTokenizer.GowingToken2 causeToken, @Nullable final Throwable cause ) {
-	super( msg, cause );
+    public GowingUnPackerParsingException( final String msg, @Nullable final Throwable cause ) {
 
-	_causeToken = causeToken;
+        this( msg, null, cause );
+
+    }
+
+    public GowingUnPackerParsingException(
+            final String msg,
+            @Nullable final StdGowingTokenizer.GowingToken2 causeToken,
+            @Nullable final Throwable cause
+    ) {
+
+        super( msg, cause );
+
+        _causeToken = causeToken;
 
     }
 
     @Nullable
     public StdGowingTokenizer.GowingToken2 getCauseToken() {
 
-	return _causeToken;
+        return _causeToken;
 
     }
 
     public void setCauseToken( final StdGowingTokenizer.GowingToken2 token ) {
 
-	if ( _causeToken == null ) {
+        if ( _causeToken == null ) {
 
-	    _causeToken = token;
+            _causeToken = token;
 
-	} else {
+        } else {
 
-	    throw new IllegalArgumentException( "token already set in " + this, this );
+            throw new IllegalArgumentException( "token already set in " + this, this );
 
-	}
+        }
 
     }
 
     public String toString() {
 
-	return "UnPacker2ParseError( \"" + getMessage() + "\", causeToken = " + _causeToken + " )";
+        return "UnPacker2ParseError( \"" + getMessage() + "\", causeToken = " + _causeToken + " )";
 
     }
 

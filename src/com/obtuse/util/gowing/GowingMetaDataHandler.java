@@ -6,7 +6,7 @@
 package com.obtuse.util.gowing;
 
 /**
- Something that can handle parsed metadata comments.
+ Something that is interested in seeing parsed metadata comments.
  */
 
 public interface GowingMetaDataHandler {

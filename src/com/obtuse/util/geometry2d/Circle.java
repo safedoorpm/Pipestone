@@ -5,9 +5,10 @@ package com.obtuse.util.geometry2d;
  *
  * I don't remember writing this class.
  * Then again, I don't remember where I got it from if I didn't write it.
- * Should you know who did write this class, please let me know (danny@matilda.com) so that I can give the author proper credit
- * and deal with the obvious issue with the above copyright notice should it turn out that I did not write this class (it is, after all,
- * just barely possible that someone will be able to prove that I wrote this class - unlikely but possible).
+ * Should you know who did write this class, please let me know (danny@matilda.com) so that I can give
+ * the author proper credit and deal with the obvious issue with the above copyright notice should it
+ * turn out that I did not write this class (it is, after all, just barely possible that someone will
+ * be able to prove that I wrote this class - unlikely but possible).
  */
 
 import com.obtuse.exceptions.HowDidWeGetHereError;
@@ -65,7 +66,7 @@ public class Circle {
          if a non-null <code>points</code> array has more than 2 elements.
          */
 
-        public IntersectionInfo( @Nullable final Point2D.Double[] points ) {
+        public IntersectionInfo( final Point2D.Double[] points ) {
 
             super();
 
@@ -1284,7 +1285,11 @@ public class Circle {
      intersect at an infinite number of points).
      */
 
-    private static void doRotations( @NotNull final Circle circle1, @NotNull final Circle circle2, @Nullable final MyPoint[] correctIntersections ) {
+    private static void doRotations(
+            @NotNull final Circle circle1,
+            @NotNull final Circle circle2,
+            @NotNull final MyPoint @Nullable[] correctIntersections
+    ) {
 
         double[] rotationsTheta = { 0, .3467834678, 0.5 * Math.PI, Math.PI, 1.5 * Math.PI, 2.0 * Math.PI, 17.777 * Math.PI };
         for ( double theta : rotationsTheta ) {
@@ -1304,7 +1309,11 @@ public class Circle {
      intersect at an infinite number of points).
      */
 
-    private static void doMoves( @NotNull final Circle circle1, @NotNull final Circle circle2, @Nullable final MyPoint[] correctIntersections ) {
+    private static void doMoves(
+            @NotNull final Circle circle1,
+            @NotNull final Circle circle2,
+            @NotNull final MyPoint @Nullable[] correctIntersections
+    ) {
 
         double[] adjustments = { 0, Math.sqrt( 2 ), Math.sqrt( 3 ), Math.PI };
 
@@ -1346,7 +1355,11 @@ public class Circle {
      @return the adjusted array.
      */
 
-    private static MyPoint[] moveIntersections( @Nullable final MyPoint[] correctIntersections, final double adjX, final double adjY ) {
+    private static @NotNull MyPoint @Nullable[] moveIntersections(
+            @NotNull final MyPoint @Nullable[] correctIntersections,
+            final double adjX,
+            final double adjY
+    ) {
 
         if ( correctIntersections == null ) {
 
@@ -1376,7 +1389,10 @@ public class Circle {
      */
 
     @SuppressWarnings("unused")
-    private static MyPoint[] rotateIntersectionsDegrees( @Nullable final MyPoint[] correctIntersections, final double degrees ) {
+    private static @NotNull MyPoint @Nullable[] rotateIntersectionsDegrees(
+            @NotNull final MyPoint @Nullable[] correctIntersections,
+            final double degrees
+    ) {
 
         return rotateIntersectionsTheta( correctIntersections, Math.PI * degrees / 180 );
 
@@ -1392,7 +1408,10 @@ public class Circle {
      @return the adjusted array.
      */
 
-    private static MyPoint[] rotateIntersectionsTheta( @Nullable final MyPoint[] correctIntersections, final double theta ) {
+    private static @NotNull MyPoint @Nullable[] rotateIntersectionsTheta(
+            @NotNull final MyPoint @Nullable[] correctIntersections,
+            final double theta
+    ) {
 
         if ( correctIntersections == null ) {
 
@@ -1420,7 +1439,11 @@ public class Circle {
      intersect at an infinite number of points).
      */
 
-    private static void doOneSet( @NotNull final Circle circle1, @NotNull final Circle circle2, @Nullable final MyPoint[] correctIntersections ) {
+    private static void doOneSet(
+            @NotNull final Circle circle1,
+            @NotNull final Circle circle2,
+            @NotNull final MyPoint @Nullable[] correctIntersections
+    ) {
 
         validate( circle1, circle2, circle1.computeCircleCircleIntersection( circle2, true ), correctIntersections );
 
@@ -1431,7 +1454,7 @@ public class Circle {
             @NotNull final Circle circle1,
             @NotNull final Circle circle2,
             @NotNull final IntersectionInfo info,
-            @Nullable final MyPoint[] correctIntersections
+            @NotNull final MyPoint @Nullable[] correctIntersections
     ) {
 
         if ( !info.infiniteIntersections() &&

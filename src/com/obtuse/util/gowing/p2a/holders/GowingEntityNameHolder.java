@@ -10,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
  */
 
 /**
- Pack a boolean value.
+ Carry an entity name value.
  */
 
 public class GowingEntityNameHolder extends GowingAbstractPackableHolder {

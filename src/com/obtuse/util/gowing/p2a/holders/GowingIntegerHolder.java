@@ -4,30 +4,31 @@ import com.obtuse.util.gowing.EntityName;
 import com.obtuse.util.gowing.GowingPacker;
 import com.obtuse.util.gowing.p2a.GowingConstants;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /*
  * Copyright © 2015 Obtuse Systems Corporation
  */
 
 /**
- Pack an integer value.
+ Carry an integer value.
  */
 
 public class GowingIntegerHolder extends GowingAbstractPackableHolder {
 
-    public GowingIntegerHolder( @NotNull final EntityName name, final Integer v, final boolean mandatory ) {
+    public GowingIntegerHolder( @NotNull final EntityName name, @Nullable final Integer v, final boolean mandatory ) {
 
         super( name, GowingConstants.TAG_INTEGER, v, mandatory );
 
     }
 
-    public GowingIntegerHolder( @NotNull final EntityName name, final int[] v, @SuppressWarnings("SameParameterValue") final boolean mandatory ) {
+    public GowingIntegerHolder( @NotNull final EntityName name, final int@NotNull[] v, @SuppressWarnings("SameParameterValue") final boolean mandatory ) {
 
         super( name, GowingConstants.TAG_INTEGER, v, mandatory, true );
 
     }
 
-    public GowingIntegerHolder( @NotNull final EntityName name, final Integer[] v, @SuppressWarnings("SameParameterValue") final boolean mandatory ) {
+    public GowingIntegerHolder( @NotNull final EntityName name, @Nullable final Integer@NotNull[] v, @SuppressWarnings("SameParameterValue") final boolean mandatory ) {
 
         super( name, GowingConstants.TAG_INTEGER, v, mandatory, false );
 
@@ -54,7 +55,6 @@ public class GowingIntegerHolder extends GowingAbstractPackableHolder {
                     break;
 
             }
-//		packer2.emit( ( (Integer) value ).intValue() );
 
         } else {
 
@@ -63,9 +63,5 @@ public class GowingIntegerHolder extends GowingAbstractPackableHolder {
         }
 
     }
-
-//    public static IntegerHolder2 parse( @NotNull EntityName name, UnPacker2 unPacker, boolean mandatory ) {
-//
-//    }
 
 }

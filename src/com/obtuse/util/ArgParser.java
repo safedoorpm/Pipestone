@@ -4,6 +4,8 @@
 
 package com.obtuse.util;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -16,7 +18,7 @@ public class ArgParser {
 
     private final Map<String, Arg> _args = new TreeMap<>();
 
-    public ArgParser( final Arg[] args ) {
+    public ArgParser( @NotNull final Arg@NotNull[] args ) {
         super();
 
         for ( Arg pDesc : args ) {
@@ -36,7 +38,7 @@ public class ArgParser {
     }
 
     @SuppressWarnings( { "BooleanMethodIsAlwaysInverted" } )
-    public boolean parse( final String[] args ) {
+    public boolean parse( @NotNull final String@NotNull[] args ) {
         int i = 0;
 
         while ( i < args.length ) {

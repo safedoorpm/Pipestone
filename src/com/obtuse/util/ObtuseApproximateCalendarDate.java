@@ -241,6 +241,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
             }
         };
 
+        @SuppressWarnings("unused")
         public abstract String title();
 
     }
@@ -254,7 +255,17 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
     private ObtuseCalendarDate _earliestPossibleDate = null;
     private ObtuseCalendarDate _latestPossibleDate = null;
 
-    public ObtuseApproximateCalendarDate( @NotNull final ObtuseCalendarDate nominalCalendarDate, @NotNull final DatePrecision precision ) {
+    @SuppressWarnings("unused")
+    public ObtuseApproximateCalendarDate() {
+
+        this( new ObtuseCalendarDate( new Date() ), DatePrecision.DATE );
+
+    }
+
+    public ObtuseApproximateCalendarDate(
+            @NotNull final ObtuseCalendarDate nominalCalendarDate,
+            @NotNull final DatePrecision precision
+    ) {
 
         super( new GowingNameMarkerThing() );
 
@@ -275,13 +286,10 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
     }
 
-    public ObtuseApproximateCalendarDate() {
-
-        this( new ObtuseCalendarDate( new Date() ), DatePrecision.DATE );
-
-    }
-
-    public ObtuseApproximateCalendarDate( @Nullable final ObtuseCalendarDate earliestPossibleDate, @Nullable final ObtuseCalendarDate latestPossibleDate ) {
+    public ObtuseApproximateCalendarDate(
+            @Nullable final ObtuseCalendarDate earliestPossibleDate,
+            @Nullable final ObtuseCalendarDate latestPossibleDate
+    ) {
 
         super( new GowingNameMarkerThing() );
 
@@ -330,7 +338,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
         }
 
-        _isUnknownApproximateDate = _earliestPossibleDate.equals( ObtuseCalendarDate.getEarliestSupportedDate() ) && _latestPossibleDate.equals( ObtuseCalendarDate.getLatestSupportedDate() );
+        _isUnknownApproximateDate = getEarliestPossibleDate().equals( ObtuseCalendarDate.getEarliestSupportedDate() ) && getLatestPossibleDate().equals( ObtuseCalendarDate.getLatestSupportedDate() );
 
     }
 
@@ -358,7 +366,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
         } catch ( com.obtuse.util.exceptions.ParsingException e ) {
 
-            throw new GowingUnPackerParsingException( e + " recovering date string" );
+            throw new GowingUnPackerParsingException( e + " recovering date string", e );
 
         }
 
@@ -372,7 +380,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
         } catch ( IllegalArgumentException e ) {
 
-            throw new GowingUnPackerParsingException( e + " recovering precision" );
+            throw new GowingUnPackerParsingException( e + " recovering precision", e );
 
         }
 
@@ -751,6 +759,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
         if ( optDateString.isPresent() ) {
 
+            //noinspection TryWithIdenticalCatches
             try {
 
                 return Optional.of( parse( optDateString.get() ) );
@@ -771,6 +780,28 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
         }
     }
+
+    /**
+     Quietly attempt to parse a date string.
+     <p>Turns any {@link DateParsingException} into an (unchecked) {@link IllegalArgumentException} which wraps the
+     {@link DateParsingException}.</p>
+     */
+
+    @NotNull
+    public static ObtuseApproximateCalendarDate parseQuietly( @NotNull final String dateString ) {
+
+        try {
+
+            return parse( dateString );
+
+        } catch ( DateParsingException e ) {
+
+            throw new IllegalArgumentException( "unable to parse \"" + dateString + "\"", e );
+
+        }
+
+    }
+
     /**
      Attempt to parse a string.
      <p/>

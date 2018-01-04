@@ -183,7 +183,6 @@ public class GowingPackableMapping<K, V> implements GowingPackable {
         GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
                 ENTITY_TYPE_NAME,
                 VERSION,
-//                null,
                 packer.getPackingContext()
         );
 
@@ -192,7 +191,6 @@ public class GowingPackableMapping<K, V> implements GowingPackable {
         for ( GowingPackableKeyValuePair kvp : _keyValuePairs ) {
 
             bundle.addHolder( new GowingPackableEntityHolder( new EntityName( "_" + ix ), kvp, packer, true ) );
-//	    Packable2KeyValuePair.packObj( bundle, new EntityName( "_" + ix ), kvp, packer );
 
             ix += 1;
 

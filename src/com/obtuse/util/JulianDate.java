@@ -4,6 +4,8 @@
 
 package com.obtuse.util;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.*;
 
 public class JulianDate {
@@ -39,7 +41,7 @@ public class JulianDate {
      * @return the Julian day for the specified Gregorian date.
      */
 
-    public static long toJulian( final int[] ymd ) {
+    public static long toJulian( final int@NotNull [] ymd ) {
 
         int year = ymd[0];
         int month = ymd[1]; // jan=1, feb=2,...
@@ -90,7 +92,7 @@ public class JulianDate {
      * @return the Julian day for the specified {@link java.util.Date}.
      */
 
-    public static synchronized long toJulian( final Date date ) {
+    public static synchronized long toJulian( @NotNull final Date date ) {
 
         JulianDate.s_gregorianCalendar.setTime( date );
         int yy = JulianDate.s_gregorianCalendar.get( Calendar.YEAR );

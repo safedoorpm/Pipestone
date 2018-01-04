@@ -4,6 +4,7 @@
 
 package com.obtuse.util;
 
+import org.jetbrains.annotations.NotNull;
 import org.xml.sax.*;
 import org.xml.sax.helpers.DefaultHandler;
 
@@ -127,7 +128,7 @@ public class SimpleXmlContentHandler extends DefaultHandler {
 
     }
 
-    public void characters( final char[] chars, final int start, final int length )
+    public void characters( final char@NotNull[] chars, final int start, final int length )
             throws SAXException {
 
         if ( _logActivity ) {
@@ -138,7 +139,7 @@ public class SimpleXmlContentHandler extends DefaultHandler {
 
     }
 
-    public void ignorableWhitespace( final char[] chars, final int start, final int length )
+    public void ignorableWhitespace( final char@NotNull[] chars, final int start, final int length )
             throws SAXException {
 
         if ( _logActivity ) {

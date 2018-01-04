@@ -7,6 +7,7 @@ package com.obtuse.ui;
 import com.obtuse.util.BasicProgramConfigInfo;
 import com.obtuse.util.Logger;
 import com.obtuse.util.VerbsList;
+import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.awt.event.*;
@@ -32,7 +33,7 @@ public class AcceleratedPopupMenu2 extends JDialog {
     }
 
     @SuppressWarnings("unchecked")
-    public AcceleratedPopupMenu2( final String[] words ) {
+    public AcceleratedPopupMenu2( @NotNull final String@NotNull [] words ) {
         super();
 
         _words = words;

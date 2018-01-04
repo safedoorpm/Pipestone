@@ -4,6 +4,9 @@
 
 package com.obtuse.ui;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import java.awt.*;
@@ -37,7 +40,7 @@ public class FileSelectors {
      * @return the selected file if the "approve" button was clicked; null otherwise.
      */
 
-    public static File[] swingSelectFile( final Component parent, final String title, final File startingDirectory, final int dialogType, final boolean multiSelectionEnabled, final FileFilter fileFilter ) {
+    public static @NotNull File@Nullable[] swingSelectFile( final Component parent, final String title, final File startingDirectory, final int dialogType, final boolean multiSelectionEnabled, final FileFilter fileFilter ) {
 
         JFileChooser chooser = new JFileChooser();
         chooser.setDialogTitle( title );
@@ -94,7 +97,7 @@ public class FileSelectors {
      * @return the selected file if the "approve" button was clicked; null otherwise.
      */
 
-    public static File[] swingSelectFile( final Component parent, final String title, final File startingDirectory, final String customLabel, final boolean multiSelectionEnabled, final FileFilter fileFilter ) {
+    public static @NotNull File@Nullable[] swingSelectFile( final Component parent, final String title, final File startingDirectory, final String customLabel, final boolean multiSelectionEnabled, final FileFilter fileFilter ) {
 
         JFileChooser chooser = new JFileChooser();
         chooser.setDialogTitle( title );

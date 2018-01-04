@@ -4,30 +4,31 @@ import com.obtuse.util.gowing.EntityName;
 import com.obtuse.util.gowing.GowingPacker;
 import com.obtuse.util.gowing.p2a.GowingConstants;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /*
  * Copyright © 2015 Obtuse Systems Corporation
  */
 
 /**
- Pack a byte value.
+ Carry a byte value.
  */
 
 public class GowingByteHolder extends GowingAbstractPackableHolder {
 
-    public GowingByteHolder( @NotNull final EntityName name, final Byte v, @SuppressWarnings("SameParameterValue") final boolean mandatory ) {
+    public GowingByteHolder( @NotNull final EntityName name, @Nullable final Byte v, @SuppressWarnings("SameParameterValue") final boolean mandatory ) {
 
         super( name, GowingConstants.TAG_BYTE, v, mandatory );
 
     }
 
-    public GowingByteHolder( @NotNull final EntityName name, final byte[] v, @SuppressWarnings("SameParameterValue") final boolean mandatory ) {
+    public GowingByteHolder( @NotNull final EntityName name, final byte@NotNull[] v, @SuppressWarnings("SameParameterValue") final boolean mandatory ) {
 
         super( name, GowingConstants.TAG_BYTE, v, mandatory, true );
 
     }
 
-    public GowingByteHolder( @NotNull final EntityName name, final Byte[] v, @SuppressWarnings("SameParameterValue") final boolean mandatory ) {
+    public GowingByteHolder( @NotNull final EntityName name, @Nullable final Byte@NotNull[] v, @SuppressWarnings("SameParameterValue") final boolean mandatory ) {
 
         super( name, GowingConstants.TAG_BYTE, v, mandatory, false );
 
@@ -62,9 +63,5 @@ public class GowingByteHolder extends GowingAbstractPackableHolder {
         }
 
     }
-
-//    public static IntegerHolder2 parse( @NotNull EntityName name, UnPacker2 unPacker, boolean mandatory ) {
-//
-//    }
 
 }

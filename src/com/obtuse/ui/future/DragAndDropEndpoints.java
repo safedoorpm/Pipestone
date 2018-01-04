@@ -43,12 +43,6 @@ public class DragAndDropEndpoints extends JFrame {
                 }
         );
 
-//        _left.setBorder( BorderFactory.createEtchedBorder() );
-//        _right.setBorder( BorderFactory.createEtchedBorder() );
-//        _left.setBorder( BorderFactory.createBevelBorder( BevelBorder.RAISED ) );
-//        _right.setBorder( BorderFactory.createEtchedBorder( BevelBorder.LOWERED ) );
-
-//        setMinimumSize( new Dimension( 400, 400 ) );
         pack();
 
     }
@@ -112,13 +106,6 @@ public class DragAndDropEndpoints extends JFrame {
                 new Point( x1, y1 ),
                 new Point( x0, y1 )
         };
-
-//        Color[] colors = new Color[] {
-//                SystemColor.controlLtHighlight.darker(),
-//                SystemColor.controlShadow.darker().darker(),
-//                SystemColor.controlShadow.darker(),
-//                SystemColor.controlLtHighlight
-//        };
 
         Color[] colors = new Color[] {
                 new Color( 240, 240, 240 + 10 ).brighter(),

@@ -1,6 +1,6 @@
 package com.obtuse.util.gowing;
 
-import com.obtuse.util.gowing.p2a.GowingDePackedEntityGroup;
+import com.obtuse.util.gowing.p2a.GowingUnPackedEntityGroup;
 import com.obtuse.util.gowing.p2a.GowingEntityReference;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -18,8 +18,10 @@ import java.util.Optional;
 
 public interface GowingUnPacker extends Closeable {
 
+    boolean isClosed();
+
     @NotNull
-    Optional<GowingDePackedEntityGroup> unPack();
+    Optional<GowingUnPackedEntityGroup> unPack();
 
     void registerMetaDataHandler( @NotNull GowingMetaDataHandler handler );
 

@@ -6,6 +6,7 @@ package com.obtuse.ui;
 
 import com.obtuse.util.BasicProgramConfigInfo;
 import com.obtuse.util.WeightedGaussianDistribution;
+import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,7 +14,7 @@ import java.util.Arrays;
 import java.util.Collection;
 
 /**
- * Draw one or more stacked proportionally weighted gaussian distributions.
+ * Draw one or more stacked proportionally weighted Gaussian distributions.
  */
 
 public class StackedGaussianDistributionsDrawing extends JPanel {
@@ -39,7 +40,7 @@ public class StackedGaussianDistributionsDrawing extends JPanel {
 //    }
 
     public StackedGaussianDistributionsDrawing(
-            final WeightedGaussianDistribution[] gds,
+            @NotNull final WeightedGaussianDistribution@NotNull[] gds,
             final double from,
             final double to
     ) {
@@ -164,10 +165,16 @@ public class StackedGaussianDistributionsDrawing extends JPanel {
 
     }
 
-    public void setDistributions( final WeightedGaussianDistribution[] gds ) {
+    public void setDistributions( @NotNull final WeightedGaussianDistribution@NotNull[] gds ) {
 
         _gds = Arrays.copyOf( gds, gds.length );
         repaint();
+
+    }
+
+    public String toString() {
+
+        return "StackedGaussianDistributionsDrawing( from=" + _from + ", to=" + _to + ", layerCount=" + _gds.length + " )";
 
     }
 

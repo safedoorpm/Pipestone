@@ -5,6 +5,7 @@
 package com.obtuse.ui;
 
 import com.obtuse.util.ObtuseUtil;
+import org.jetbrains.annotations.NotNull;
 
 import java.awt.geom.GeneralPath;
 import java.awt.geom.Point2D;
@@ -164,7 +165,7 @@ public abstract class AbstractCurveSequence implements GraphicsElement {
 
     }
 
-    public AbstractCurveListener[] getChangeListeners() {
+    public @NotNull AbstractCurveListener@NotNull[] getChangeListeners() {
 
         return _listeners.toArray( new AbstractCurveListener[_listeners.size()] );
 
@@ -258,7 +259,7 @@ public abstract class AbstractCurveSequence implements GraphicsElement {
 
     }
 
-    protected String fmtPoints( final Point2D[] points ) {
+    protected String fmtPoints( final @NotNull Point2D@NotNull[] points ) {
 
         StringBuilder desc = new StringBuilder();
 

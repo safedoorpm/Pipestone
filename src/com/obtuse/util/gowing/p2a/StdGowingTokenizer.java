@@ -43,7 +43,7 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
 
     private int _lastCh;
 
-    private int _recursiveDepth = 0;
+    private int _recursiveDepth;
 
     public enum TokenType {
 
@@ -341,6 +341,7 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
 
         }
 
+        @SuppressWarnings("unused")
         public String valueToString() {
 
             Object value = getObjectValue();
@@ -790,14 +791,6 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
 
             }
 
-//	} catch ( IOException e ) {
-//
-//	    e.printStackTrace();
-//
-//	} catch ( UnPacker2ParseError unPacker2ParseError ) {
-//
-//	    unPacker2ParseError.printStackTrace();
-
         } finally {
 
             _recursiveDepth -= 1;
@@ -955,7 +948,6 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
                             StringBuilder sb = new StringBuilder();
                             while ( ch != '\n' && ch != -1 ) {
 
-//				Logger.logMsg( "ignoring '" + ( Character.isDefined( ch ) ? (char) ch : '?' ) + "'" );
                                 sb.append( (char)ch );
                                 ch = nextRawCh();
 
@@ -983,8 +975,6 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
                                 ObtuseUtil.doNothing();
 
                             }
-
-//			    Logger.maybeLogMsg( () -> "ignoring " + ( isMetaData ? "metadata" : "comment" ) + ":  " + ObtuseUtil.enquoteToJavaString( sb.toString() ) );
 
                         }
 
@@ -1218,7 +1208,6 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
         String trimmed = metaDataLine.trim();
         Logger.logMsg( "got metadata line:  " + trimmed );
 
-        int off = 0;
         if ( !trimmed.startsWith( String.valueOf( GowingConstants.LINE_METADATA_CHAR ) ) ) {
 
             throw new HowDidWeGetHereError(
@@ -1636,8 +1625,6 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
 
         for ( int ix = 0; ix < length; ix += 1 ) {
 
-//	    Logger.logMsg( "doing index " + ix );
-
             ObtuseUtil.doNothing();
 
             if ( ix > 0 ) {
@@ -1658,7 +1645,7 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
 
                     } else {
 
-//		        Logger.logMsg( "swallowed a mandatory comma prior to index " + ix + " in " + elementType + " " + ( primitive ? "primitive" : "container" ) + "array" );
+                        // We just swallowed a mandatory comma - cough it up and put it back.
 
                         putBackChar();
 

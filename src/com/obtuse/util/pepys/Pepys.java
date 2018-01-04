@@ -765,7 +765,7 @@ public class Pepys {
      This method just returns without doing anything useful if the specified array reference is null.
      */
 
-    public static void fireEvents( @Nullable final PepysEvent[] events ) {
+    public static void fireEvents( @Nullable final PepysEvent@Nullable[] events ) {
 
         if ( events != null ) {
 

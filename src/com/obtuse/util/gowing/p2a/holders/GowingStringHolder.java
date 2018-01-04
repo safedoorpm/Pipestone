@@ -10,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
  */
 
 /**
- Pack a String value.
+ Carry a String value.
  */
 
 public class GowingStringHolder extends GowingAbstractPackableHolder {

@@ -11,7 +11,7 @@ import org.jetbrains.annotations.NotNull;
  */
 
 /**
- Pack an entity reference value.
+ Carry an entity reference value.
  */
 
 public class GowingEntityReferenceHolder extends GowingAbstractPackableHolder {

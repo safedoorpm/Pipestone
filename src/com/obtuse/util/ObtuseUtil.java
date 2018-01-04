@@ -49,7 +49,8 @@ public class ObtuseUtil {
     /**
      Detect if we are running within the Java debugger.
      <p/>Be very very careful! Code that behaves differently in a debugger is, obviously, difficult to debug!!!
-     <p/>This trick found at <a href="http://www.rgagnon.com/javadetails/java-detect-if-running-in-debug-mode.html">{@code http://www.rgagnon.com/javadetails/java-detect-if-running-in-debug-mode.html}</a>
+     <p/>This trick found at <a href="http://www.rgagnon.com/javadetails/java-detect-if-running-in-debug-mode.html">{@code
+    http://www.rgagnon.com/javadetails/java-detect-if-running-in-debug-mode.html}</a>
 
      @return {@code true} if the current JVM is under the control of the Java debugger; {@code false} otherwise.
      */
@@ -162,13 +163,15 @@ public class ObtuseUtil {
     /**
      Determine if {@code [aStart,aLength)} overlaps with {@code [bStart,bEnd)}.
      <p/>IMPORTANT: note that the two regions are closed on the left and open on the right.
-     Consequently, {@code [10,20)} does NOT overlap with {@code [20,30)} because {@code 20} is NOT included in the first region even though it is included in the second.
+     Consequently, {@code [10,20)} does NOT overlap with {@code [20,30)} because {@code 20} is NOT included in the first
+     region even though it is included in the second.
 
      @param aStart start of the first region.
      @param aEnd   one pixel past the end of the first region.
      @param bStart start of the second region.
      @param bEnd   one pixel past the end of the second region.
-     @return {@code true} if the regions overlap; {@code false} otherwise. Note that a region is considered to be empty if its start and end are equal (empty regions do not overlap with any region).
+     @return {@code true} if the regions overlap; {@code false} otherwise. Note that a region is considered to be empty if
+     its start and end are equal (empty regions do not overlap with any region).
      @throws IllegalArgumentException if {@code aStart > aEnd} or {@code bStart > bEnd}.
      */
 
@@ -193,21 +196,27 @@ public class ObtuseUtil {
     }
 
     /**
-     Determine if the {@code aLength} sized region starting at {@code aStart} overlaps with the {@code bLength} sized region starting at {@code bStart}.
+     Determine if the {@code aLength} sized region starting at {@code aStart} overlaps with the {@code bLength} sized
+     region starting at {@code bStart}.
      <p/>A few notes are in order:
-     <ol><li>the {@code length} sized region starting at {@code start} is exactly equivalent to a {@code -length} sized region starting at {@code start-length}</li>
-     <li>assuming that {@code length} is non-negative, the {@code length} sized region starting at {@code start} is equivalent to the region {@code [start,start+length)}
+     <ol><li>the {@code length} sized region starting at {@code start} is exactly equivalent to a {@code -length} sized
+     region starting at {@code start-length}</li>
+     <li>assuming that {@code length} is non-negative, the {@code length} sized region starting at {@code start} is
+     equivalent to the region {@code [start,start+length)}
      (expressed in the traditional way of describing closed and open ended regions)</li>
      <li>zero length regions do not overlap with anything</li>
-     <li>assuming that LEN is non-negative, a LEN byte region starting at START does not overlap with any non-negative length region starting at START+LEN;
-     for example, the {@code 3} units long region starting at {@code 10} does not overlap with the {@code 5} units long region starting at {@code 13}</li>
+     <li>assuming that LEN is non-negative, a LEN byte region starting at START does not overlap with any non-negative
+     length region starting at START+LEN;
+     for example, the {@code 3} units long region starting at {@code 10} does not overlap with the {@code 5} units long
+     region starting at {@code 13}</li>
      </ol>
 
      @param aStart  start of the first region.
      @param aLength the length of the first region.
      @param bStart  start of the second region.
      @param bLength the length of the second region.
-     @return {@code true} if the regions overlap; {@code false} otherwise. Note that a region is considered to be empty if its start and end are equal (empty regions do not overlap with any region).
+     @return {@code true} if the regions overlap; {@code false} otherwise. Note that a region is considered to be empty if
+     its start and end are equal (empty regions do not overlap with any region).
      @throws IllegalArgumentException if {@code aStart} > {@code aLength} or {@code bStart > {@code bLength}}.
      */
 
@@ -235,7 +244,8 @@ public class ObtuseUtil {
     /**
      Determine if messages passed to {@link #report(String)} are logged and traced or just traced.
 
-     @param traceOnly {@code true} if messages passed to {@link #report(String)} are to be logged and traced; {@code false} if they are to be just traced.
+     @param traceOnly {@code true} if messages passed to {@link #report(String)} are to be logged and traced; {@code
+     false} if they are to be just traced.
      */
 
     public static void setTraceOnlyMode( final boolean traceOnly ) {
@@ -258,7 +268,8 @@ public class ObtuseUtil {
 
     /**
      Depending on the setting of trace-only mode, either log and trace or just trace a message.
-     <p/>Messages are logged and traced by passing them to {@link Logger#logMsg(String)} (which implicitly also passes them to {@link Trace#event(String)}).
+     <p/>Messages are logged and traced by passing them to {@link Logger#logMsg(String)} (which implicitly also passes
+     them to {@link Trace#event(String)}).
      Messages are just traced by passing them directly to {@code Trace.event(String)}.
      <p/>See {link #setTraceOnlyMode(boolean)} for more information.
 
@@ -285,7 +296,8 @@ public class ObtuseUtil {
 
     /**
      Depending on the setting of trace-only mode, either log and trace or just trace a message.
-     <p/>Messages are logged and traced by passing them to {@link Logger#logMsg(String)} (which implicitly also passes them to {@link Trace#event(String)}).
+     <p/>Messages are logged and traced by passing them to {@link Logger#logMsg(String)} (which implicitly also passes
+     them to {@link Trace#event(String)}).
      Messages are just traced by passing them directly to {@code Trace.event(String)}.
      <p/>See {link #setTraceOnlyMode(boolean)} for more information.
 
@@ -317,14 +329,19 @@ public class ObtuseUtil {
      </blockquote>
      Specifically, a count value of 1 yields a result using the {@code singular} term
      whereas any other count value yields a result using the {@code plural} term.
-     @param count the count/size value.
+
+     @param count    the count/size value.
      @param singular the phrase to postpend the count with if it is equal to 1.
-     @param plural the phrase to postpend the count with if it is not equal to 1.
+     @param plural   the phrase to postpend the count with if it is not equal to 1.
      @return the formatted value.
      */
 
     @Contract(pure = true)
-    @NotNull public static String formatCount( final int count, @NotNull final String singular, @NotNull final String plural ) {
+    @NotNull
+    public static String formatCount(
+            final int count, @NotNull final String singular, @NotNull final String
+            plural
+    ) {
 
         return "" + count + " " + ( count == 1 ? singular : plural );
 
@@ -333,22 +350,26 @@ public class ObtuseUtil {
     /**
      Format a count/size value with proper pluralization.
      <p>Exactly equivalent to {@code formatCount( count, "element", "elements" )}</p>
+
      @param count the count/size.
      @return the formatted value.
      */
 
     @Contract(pure = true)
-    @NotNull public static String formatCount( final int count ) {
+    @NotNull
+    public static String formatCount( final int count ) {
 
         return formatCount( count, "element", "elements" );
 
     }
 
     /**
-     A derivative of the {@link Hashtable} whose instances start out mutable but can be made immutable upon request (there is no
+     A derivative of the {@link Hashtable} whose instances start out mutable but can be made immutable upon request (there
+     is no
      mechanism provided to make an immutable instance mutable again).
      <p/>This class is probably not perfectly immutable as it is a fair bit simpler than the unmodifiable ones implemented in
-     {@link java.util.Collections}. It is, I (Danny) believe, better than not having an immutable hashtable class at all. 2017-01-07
+     {@link java.util.Collections}. It is, I (Danny) believe, better than not having an immutable hashtable class at all.
+     2017-01-07
 
      @param <K> The type of the keys for the hash table.
      @param <V> The type of the values in the hash table.
@@ -547,7 +568,11 @@ public class ObtuseUtil {
      */
 
     @SuppressWarnings("BooleanMethodNameMustStartWithQuestion")
-    public static boolean writeSerializableObjectToFile( final Serializable thing, final File outputFile, final boolean printStackTraceOnError ) {
+    public static boolean writeSerializableObjectToFile(
+            final Serializable thing,
+            final File outputFile,
+            final boolean printStackTraceOnError
+    ) {
 
         try {
 
@@ -626,7 +651,8 @@ public class ObtuseUtil {
      @param printStackTraceOnError true if a stack trace is to be printed if anything goes wrong.
      @return the de-serialized object. If something goes wrong then <tt>null</tt> is returned. Note that it is possible to
      serialize a null pointer which means that de-serializing can legitimately yield a null pointer.
-     Use {@link #recoverSerializedVersion(File)} if this is a concern as it will throw an exception of the de-serialization fails.
+     Use {@link #recoverSerializedVersion(File)} if this is a concern as it will throw an exception of the
+     de-serialization fails.
      */
 
     public static Serializable recoverSerializedVersion( final File inputFile, final boolean printStackTraceOnError ) {
@@ -661,10 +687,11 @@ public class ObtuseUtil {
      <p/>
      This method was marked as deprecated. I don't know why so I have disabled the deprecation marking.
      Danny 2017-01-07
-     at-deprecated Use {@link #recoverSerializedVersion(java.io.File)} or {@link #recoverSerializedVersion(java.io.InputStream)} instead.
+     at-deprecated Use {@link #recoverSerializedVersion(java.io.File)} or
+     {@link #recoverSerializedVersion(java.io.InputStream)} instead.
      */
 
-    public static Serializable recoverSerializedVersion( final byte[] sv )
+    public static Serializable recoverSerializedVersion( final byte@NotNull[] sv )
             throws ClassNotFoundException, IOException {
 
         ByteArrayInputStream bis = null;
@@ -720,7 +747,8 @@ public class ObtuseUtil {
      @param printStackTraceOnError true if a stack trace should be printed if anything goes wrong.
      @return the de-serialized object. If something goes wrong then <tt>null</tt> is returned. Note that it is possible to
      serialize a null pointer which means that de-serializing can legitimately yield a null pointer.
-     Use {@link #recoverSerializedVersion(byte[])} if this is a concern as it will throw an exception of the de-serialization fails.
+     Use {@link #recoverSerializedVersion(byte[])} if this is a concern as it will throw an exception of the
+     de-serialization fails.
      */
 
     public static Serializable recoverSerializedVersion(
@@ -749,7 +777,8 @@ public class ObtuseUtil {
      @param printStackTraceOnError true if a stack trace should be printed if anything goes wrong.
      @return the de-serialized object. If something goes wrong then <tt>null</tt> is returned. Note that it is possible to
      serialize a null pointer which means that de-serializing can legitimately yield a null pointer.
-     Use {@link #recoverSerializedVersion(InputStream)} if this is a concern as it will throw an exception of the de-serialization fails.
+     Use {@link #recoverSerializedVersion(InputStream)} if this is a concern as it will throw an exception of the
+     de-serialization fails.
      */
 
     public static Serializable recoverSerializedVersion( final InputStream is, final boolean printStackTraceOnError ) {
@@ -875,7 +904,9 @@ public class ObtuseUtil {
      A zero-length byte array is returned if the stream contains no data.
      */
 
-    public static byte[] readEntireStream( final InputStream is, final int maxLength, final boolean printStackTraceOnError ) {
+    public static byte[] readEntireStream(
+            final InputStream is, final int maxLength, final boolean printStackTraceOnError
+    ) {
 
         if ( is == null ) {
 
@@ -923,7 +954,7 @@ public class ObtuseUtil {
      */
 
     @SuppressWarnings({ "BooleanMethodNameMustStartWithQuestion" })
-    public static boolean writeBytesToFile( final byte[] bytes, final String fname, final boolean printStackTraceOnError ) {
+    public static boolean writeBytesToFile( final byte@NotNull[] bytes, final String fname, final boolean printStackTraceOnError ) {
 
         return ObtuseUtil.writeBytesToFile( bytes, new File( fname ), printStackTraceOnError );
 
@@ -939,7 +970,7 @@ public class ObtuseUtil {
      */
 
     @SuppressWarnings({ "BooleanMethodNameMustStartWithQuestion" })
-    public static boolean writeBytesToFile( final byte[] bytes, final File file, final boolean printStackTraceOnError ) {
+    public static boolean writeBytesToFile( final byte@NotNull[] bytes, final File file, final boolean printStackTraceOnError ) {
 
         FileOutputStream fs = null;
         try {
@@ -980,7 +1011,7 @@ public class ObtuseUtil {
      */
 
     @SuppressWarnings({ "BooleanMethodNameMustStartWithQuestion" })
-    public static boolean appendBytesToFile( final byte[] bytes, final File file, final boolean printStackTraceOnError ) {
+    public static boolean appendBytesToFile( final byte@NotNull[] bytes, @NotNull final File file, final boolean printStackTraceOnError ) {
 
         FileOutputStream fs = null;
         try {
@@ -1021,7 +1052,11 @@ public class ObtuseUtil {
      */
 
     @SuppressWarnings({ "BooleanMethodNameMustStartWithQuestion" })
-    public static boolean writeBytesToStream( final byte[] bytes, final OutputStream os, final boolean printStackTraceOnError ) {
+    public static boolean writeBytesToStream(
+            final byte[] bytes,
+            final OutputStream os,
+            final boolean printStackTraceOnError
+    ) {
 
         try {
 
@@ -1383,9 +1418,11 @@ public class ObtuseUtil {
      <p/>What happens conceptually is that while the string is narrower than the requested width,
      a single space character is added on an alternating basis on the left of the string or on the right of the string.
      For example, if the input string is two characters long and the requested width is five characters then the resulting
-     string will start with two space characters followed by the two characters of the input string followed by one space character.
+     string will start with two space characters followed by the two characters of the input string followed by one space
+     character.
      <p/>
-     Note that a call to this method using <tt>center( s, w )</tt> is equivalent to a call to {@link #center(String, int, char)}
+     Note that a call to this method using <tt>center( s, w )</tt> is equivalent to a call to
+     {@link #center(String, int, char)}
      using <tt>center( s, w, '&nbsp;' )</tt>.
 
      @param s the string to be centered by appropriate padding on the left and the right.
@@ -1405,10 +1442,13 @@ public class ObtuseUtil {
      <p/>What happens conceptually is that while the string is narrower than the requested width,
      a padding character is added on an alternating basis on the left of the string or on the right of the string.
      For example, if the input string is two characters long and the requested width is five characters then the resulting
-     string will start with two padding characters followed by the two characters of the input string followed by one padding character.
-     <p/>A call to this method using <tt>center( null, w )</tt> is treated as thought it was a call to this method using <tt>center( "null", w )</tt>.
+     string will start with two padding characters followed by the two characters of the input string followed by one
+     padding character.
+     <p/>A call to this method using <tt>center( null, w )</tt> is treated as thought it was a call to this method using
+     <tt>center( "null", w )</tt>.
 
-     @param s  the string to be centered by appropriate padding on the left and the right (if <tt>s</tt> is <tt>null</tt> then the result
+     @param s  the string to be centered by appropriate padding on the left and the right (if <tt>s</tt> is <tt>null</tt>
+     then the result
      is as though <tt>s</tt> were the six character string <tt>"null"</tt>).
      @param w  the width (i.e. length) of the centered string (if the string is already longer than this then the string
      itself is returned as-is).
@@ -1650,7 +1690,8 @@ public class ObtuseUtil {
     }
 
     /**
-     Return a String containing the hex representation of a single char value. For example, <tt>hexvalue( ' ' )</tt> yields <tt>"1b"</tt>.
+     Return a String containing the hex representation of a single char value. For example, <tt>hexvalue( ' ' )</tt>
+     yields <tt>"1b"</tt>.
 
      @param v the byte value whose hex representation is to be returned.
      @return the hex representation of <tt>v</tt>.
@@ -1675,7 +1716,7 @@ public class ObtuseUtil {
      @return the hex representation of <tt>v</tt>.
      */
 
-    public static String hexvalue( final byte[] bv ) {
+    public static String hexvalue( final byte@Nullable[] bv ) {
 
         if ( bv == null ) {
 
@@ -1708,7 +1749,7 @@ public class ObtuseUtil {
      @return the hex representation of <tt>v</tt>.
      */
 
-    public static String hexvalue( final byte[] bv, final int off, final int len ) {
+    public static String hexvalue( final byte@Nullable[] bv, final int off, final int len ) {
 
         if ( bv == null ) {
 
@@ -1775,8 +1816,10 @@ public class ObtuseUtil {
 
             inputIx += 1;
 
-            @SuppressWarnings("ConstantConditions") int highNibble = ( ch1 >= '0' && ch1 <= '9' ) ? ch1 - '0' : 10 + ch1 - 'a';
-            @SuppressWarnings("ConstantConditions") int lowNibble = ( ch2 >= '0' && ch2 <= '9' ) ? ch2 - '0' : 10 + ch2 - 'a';
+            @SuppressWarnings("ConstantConditions") int highNibble =
+                    ( ch1 >= '0' && ch1 <= '9' ) ? ch1 - '0' : 10 + ch1 - 'a';
+            @SuppressWarnings("ConstantConditions") int lowNibble =
+                    ( ch2 >= '0' && ch2 <= '9' ) ? ch2 - '0' : 10 + ch2 - 'a';
             rval[outputIx] = (byte)( ( highNibble << 4 ) | lowNibble );
 
             outputIx += 1;
@@ -1832,7 +1875,7 @@ public class ObtuseUtil {
      */
 
     @SuppressWarnings({ "MagicNumber" })
-    public static void dump( final byte[] data ) {
+    public static void dump( final byte@NotNull[] data ) {
 
         for ( int offset = 0; offset < data.length; offset += 16 ) {
 
@@ -2160,7 +2203,8 @@ public class ObtuseUtil {
      the 19 character Java string "hello\\tthere\\nworld".
 
      @param string the string.
-     @return the resulting enquoted string in a {@link StringBuilder} (if {@code string} is {@code null} or {@code "null"} then the return value is a {@link StringBuilder} equivalent to the string {@code "null"}).
+     @return the resulting enquoted string in a {@link StringBuilder} (if {@code string} is {@code null} or {@code "null"}
+     then the return value is a {@link StringBuilder} equivalent to the string {@code "null"}).
      That two different input values yield the same result is pretty ugly. This is why this method is private.
      */
 
@@ -2190,7 +2234,8 @@ public class ObtuseUtil {
      the 21 character Java string {@code "\"hello\\tthere\\nworld\""}.
 
      @param string the string.
-     @return the resulting enquoted string (if {@code string} is {@code null} then the return value is the string {@code "null"}).
+     @return the resulting enquoted string (if {@code string} is {@code null} then the return value is the string {@code
+     "null"}).
      */
 
     public static String enquoteToJavaString( @Nullable final String string ) {
@@ -2206,7 +2251,8 @@ public class ObtuseUtil {
      the 19 character Java string {@code "hello\\tthere\\nworld"}.
 
      @param string the string.
-     @return the resulting enquoted string (if {@code string} is {@code null} or {@code "null"} then the return value is the string {@code "null"}).
+     @return the resulting enquoted string (if {@code string} is {@code null} or {@code "null"} then the return value is
+     the string {@code "null"}).
      That two different input values yield the same result is pretty ugly. This is why this method is private.
      */
 
@@ -2224,13 +2270,17 @@ public class ObtuseUtil {
 
     /**
      Turn a string into a properly enquoted Java string (with surrounding double quotes) in a {@link String}.
-     <p/>The main thing that this method does is that it turns special characters like '\n', '\t', '\"', etc in the input string into
-     "\\n", "\\t", "\\\"", etc in the output string. For example, the 17 character Java string {@code "hello\tthere\nworld"} gets turned into
+     <p/>The main thing that this method does is that it turns special characters like '\n', '\t', '\"', etc in the input
+     string into
+     "\\n", "\\t", "\\\"", etc in the output string. For example, the 17 character Java string {@code
+    "hello\tthere\nworld"} gets turned into
      the 21 character Java string {@code "\"hello\\tthere\\nworld\""}.
 
      @param string the string.
-     @return the resulting enquoted string (if {@code string} is {@code null} then the return value is a {@link StringBuilder} equivalent to the string {@code "null"};
-     if {@code string} is the six character string {@code "null"} then the result is a {@link StringBuilder} equivalent to the string {@code "\"null\""}).
+     @return the resulting enquoted string (if {@code string} is {@code null} then the return value is a
+     {@link StringBuilder} equivalent to the string {@code "null"};
+     if {@code string} is the six character string {@code "null"} then the result is a {@link StringBuilder} equivalent to
+     the string {@code "\"null\""}).
      */
 
     private static StringBuilder enquoteToJavaStringBuilder( @Nullable final String string ) {
@@ -2292,6 +2342,7 @@ public class ObtuseUtil {
         public final String to;
 
         private StringMapping( String from, String to ) {
+
             super();
 
             this.from = from;
@@ -2314,6 +2365,7 @@ public class ObtuseUtil {
         public final char to;
 
         private StringCharMapping( String from, char to ) {
+
             super();
 
             this.from = from;
@@ -2484,65 +2536,76 @@ public class ObtuseUtil {
 
     }
 
-    private static MessageDigest s_md5Algorithm = null;
-    @SuppressWarnings("ConstantNamingConvention")
-    private static final Long _md5Lock = 0L;
+    public static MessageDigest getMD5MessageDigest() {
+
+        MessageDigest md5Algorithm;
+
+        try {
+
+            md5Algorithm = MessageDigest.getInstance( "MD5" );
+
+        } catch ( NoSuchAlgorithmException e ) {
+
+            // There's no real risk that this can happen is there?
+
+            throw new IllegalArgumentException( "This version of Java does not support MD5 checksums" );
+
+        }
+
+        return md5Algorithm;
+
+    }
+
+    public static @NotNull String computeMD5( @NotNull final byte data@NotNull[] ) {
+
+        MessageDigest md5Algorithm;
+        md5Algorithm = getMD5MessageDigest();
+
+        BufferedInputStream fis = null;
+
+        md5Algorithm.reset();
+
+        byte[] digest = md5Algorithm.digest( data );
+
+        return ObtuseUtil.hexvalue( digest );
+
+    }
 
     public static @NotNull String computeMD5( final InputStream is )
             throws IOException {
 
-        synchronized ( ObtuseUtil._md5Lock ) {
+        MessageDigest md5Algorithm;
+        md5Algorithm = getMD5MessageDigest();
 
-            if ( ObtuseUtil.s_md5Algorithm == null ) {
+        BufferedInputStream fis = null;
 
-                MessageDigest alg;
-                try {
+        try {
 
-                    alg = MessageDigest.getInstance( "MD5" );
+            md5Algorithm.reset();
+            fis = new BufferedInputStream( is );
 
-                } catch ( NoSuchAlgorithmException e ) {
+            //noinspection MagicNumber
+            byte[] buffer = new byte[1024];
+            while ( true ) {
 
-                    // There's no real risk that this can happen is there?
+                int rLen = fis.read( buffer );
+                if ( rLen < 0 ) {
 
-                    throw new IllegalArgumentException( "This version of Java does not support MD5 checksums" );
-
-                }
-
-                ObtuseUtil.s_md5Algorithm = alg;
-
-            }
-
-            BufferedInputStream fis = null;
-
-            try {
-
-                ObtuseUtil.s_md5Algorithm.reset();
-                fis = new BufferedInputStream( is );
-
-                //noinspection MagicNumber
-                byte[] buffer = new byte[1024];
-                while ( true ) {
-
-                    int rLen = fis.read( buffer );
-                    if ( rLen < 0 ) {
-
-                        break;
-
-                    }
-
-                    ObtuseUtil.s_md5Algorithm.update( buffer, 0, rLen );
+                    break;
 
                 }
 
-                byte[] digest = ObtuseUtil.s_md5Algorithm.digest();
-
-                return ObtuseUtil.hexvalue( digest );
-
-            } finally {
-
-                ObtuseUtil.closeQuietly( fis );
+                md5Algorithm.update( buffer, 0, rLen );
 
             }
+
+            byte[] digest = md5Algorithm.digest();
+
+            return ObtuseUtil.hexvalue( digest );
+
+        } finally {
+
+            ObtuseUtil.closeQuietly( fis );
 
         }
 
@@ -2645,7 +2708,8 @@ public class ObtuseUtil {
 
     /**
      Returns an unmodifiable view of the specified hash table.
-     This method allows modules to provide users with "read-only" access to internal hash tables (including {@link java.util.Dictionary}s).
+     This method allows modules to provide users with "read-only" access to internal hash tables (including
+     {@link java.util.Dictionary}s).
      Query operations on the returned hash table "read through" to the specified hash table,
      and attempts to modify the returned hash table, whether direct or via its collection views,
      result in an UnsupportedOperationException.
@@ -2679,11 +2743,11 @@ public class ObtuseUtil {
 
         if (
                 input == null
-                ?
-                parsed != null
-                :
-                !input.equals( parsed )
-        ) {
+                        ?
+                        parsed != null
+                        :
+                        !input.equals( parsed )
+                ) {
 
             Logger.logErr( "got unexpected output=" + output + ", parsed=" + parsed + " from input=<<<" + input + ">>>" );
 
@@ -2759,7 +2823,9 @@ public class ObtuseUtil {
 
                         } else {
 
-                            Logger.logMsg( "got null back from serialized version of \"" + enquoteToJavaString( value ) + "\"" );
+                            Logger.logMsg( "got null back from serialized version of \"" +
+                                           enquoteToJavaString( value ) +
+                                           "\"" );
 
                         }
 
@@ -2773,11 +2839,15 @@ public class ObtuseUtil {
 
                 } catch ( IOException e ) {
 
-                    Logger.logErr( "IOException trying to recover serialized version of \"" + enquoteToJavaString( value ) + "\"", e );
+                    Logger.logErr( "IOException trying to recover serialized version of \"" +
+                                   enquoteToJavaString( value ) +
+                                   "\"", e );
 
                 } catch ( ClassNotFoundException e ) {
 
-                    Logger.logErr( "ClassNotFoundException trying to recover serialized version of \"" + enquoteToJavaString( value ) + "\"", e );
+                    Logger.logErr( "ClassNotFoundException trying to recover serialized version of \"" +
+                                   enquoteToJavaString( value ) +
+                                   "\"", e );
 
                 }
 
@@ -2799,9 +2869,11 @@ public class ObtuseUtil {
      <blockquote><tt>http://stackoverflow.com/questions/35842/how-can-a-java-program-get-its-own-process-id</tt></blockquote>
      (first referenced 2013/09/24; last referenced 2017/11/15)
      <p>There is some grounds for optimism.
-     Apparently, <blockquote>{@code long pid = ProcessHandle.current().getPid();}</blockquote> yields the desired result on Java 9.
+     Apparently, <blockquote>{@code long pid = ProcessHandle.current().getPid();}</blockquote> yields the desired result
+     on Java 9.
 
-     @return the process id of the process running our JVM or {@code -1} if the particular flavour of black magic used by this method fails on your platform.
+     @return the process id of the process running our JVM or {@code -1} if the particular flavour of black magic used by
+     this method fails on your platform.
      */
 
     public static int getPid() {

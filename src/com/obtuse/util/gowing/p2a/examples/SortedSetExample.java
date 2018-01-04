@@ -69,7 +69,7 @@ public class SortedSetExample extends GowingAbstractPackableEntity implements Go
 
     };
 
-    public SortedSetExample( @NotNull final String name, @Nullable final String description, final String[] contents ) {
+    public SortedSetExample( @NotNull final String name, @Nullable final String description, final @NotNull String@NotNull[] contents ) {
 
         super( new GowingNameMarkerThing() );
 

@@ -10,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
  */
 
 /**
- Pack a null value.
+ Carry a null value.
  */
 
 public class GowingNullHolder extends GowingAbstractPackableHolder {
@@ -36,9 +36,5 @@ public class GowingNullHolder extends GowingAbstractPackableHolder {
         }
 
     }
-
-//    public static IntegerHolder2 parse( @NotNull EntityName name, UnPacker2 unPacker, boolean mandatory ) {
-//
-//    }
 
 }

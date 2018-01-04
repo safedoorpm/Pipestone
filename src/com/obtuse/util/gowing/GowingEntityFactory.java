@@ -25,57 +25,59 @@ public abstract class GowingEntityFactory implements Comparable<GowingEntityFact
 
     @SuppressWarnings("WeakerAccess")
     protected GowingEntityFactory( @NotNull final EntityTypeName entityTypeName ) {
-	super();
 
-	_entityTypeName = entityTypeName;
+        super();
+
+        _entityTypeName = entityTypeName;
 
     }
 
     public EntityTypeName getTypeName() {
 
-	return _entityTypeName;
+        return _entityTypeName;
 
     }
 
     public abstract int getOldestSupportedVersion();
+
     public abstract int getNewestSupportedVersion();
 
     @NotNull
     public abstract GowingPackable createEntity(
-	    @NotNull GowingUnPacker unPacker,
-	    @NotNull GowingPackedEntityBundle bundle,
-	    GowingEntityReference er
+            @NotNull GowingUnPacker unPacker,
+            @NotNull GowingPackedEntityBundle bundle,
+            GowingEntityReference er
     ) throws GowingUnPackerParsingException;
 
     @NotNull
     public EntityTypeName getEntityTypeName() {
 
-	return _entityTypeName;
+        return _entityTypeName;
 
     }
 
     public int compareTo( @NotNull final GowingEntityFactory rhs ) {
 
-	return _entityTypeName.compareTo( rhs._entityTypeName );
+        return _entityTypeName.compareTo( rhs._entityTypeName );
 
     }
 
     public boolean equals( final Object rhs ) {
 
-	return rhs instanceof GowingEntityFactory && compareTo( (GowingEntityFactory)rhs ) == 0;
+        return rhs instanceof GowingEntityFactory && compareTo( (GowingEntityFactory)rhs ) == 0;
 
     }
 
     public int hashCode() {
 
-	return _entityTypeName.hashCode();
+        return _entityTypeName.hashCode();
 
     }
 
     @NotNull
     public String toString() {
 
-	return "EntityFactory( \"" + _entityTypeName + "\" )";
+        return "EntityFactory( \"" + _entityTypeName + "\" )";
 
     }
 

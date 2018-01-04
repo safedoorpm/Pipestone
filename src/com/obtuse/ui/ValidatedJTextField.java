@@ -59,20 +59,9 @@ public abstract class ValidatedJTextField extends JTextField implements EditValu
 
                             storeNewValue( getText(), false );
 
-//                            _displayNameIssuesField.setText( "" );
-//
-//                            _group.setDisplayName( _displayNameField.getText() );
-//
-//                            Central.invalidateGroupViewsContainingGroup(
-//                                    _group,
-//                                    InvalidationReason.GROUP_DISPLAY_NAME_CHANGED
-//                            );
-
                             return true;
 
                         } else {
-
-//                            _displayNameIssuesField.setText( validateEditedDisplayName() );
 
                             return false;
 
@@ -102,7 +91,6 @@ public abstract class ValidatedJTextField extends JTextField implements EditValu
 
         _im = getInputMap();
         _am = getActionMap();
-//        _im.put( KeyStroke.getKeyStroke( "ESCAPE" ), CANCEL_DISPLAY_NAME_EDIT );
         _im.put( KeyStroke.getKeyStroke( KeyEvent.VK_ESCAPE, 0 ), CANCEL_EDIT );
         _am.put(
                 CANCEL_EDIT,

@@ -4,30 +4,31 @@ import com.obtuse.util.gowing.EntityName;
 import com.obtuse.util.gowing.GowingPacker;
 import com.obtuse.util.gowing.p2a.GowingConstants;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /*
  * Copyright © 2015 Obtuse Systems Corporation
  */
 
 /**
- Pack a boolean value.
+ Carry a boolean value.
  */
 
 public class GowingBooleanHolder extends GowingAbstractPackableHolder {
 
-    public GowingBooleanHolder( @NotNull final EntityName name, final Boolean v, @SuppressWarnings("SameParameterValue") final boolean mandatory ) {
+    public GowingBooleanHolder( @NotNull final EntityName name, @Nullable final Boolean v, @SuppressWarnings("SameParameterValue") final boolean mandatory ) {
 
         super( name, GowingConstants.TAG_BOOLEAN, v, mandatory );
 
     }
 
-    public GowingBooleanHolder( @NotNull final EntityName name, final boolean[] v, @SuppressWarnings("SameParameterValue") final boolean mandatory ) {
+    public GowingBooleanHolder( @NotNull final EntityName name, final boolean@NotNull[] v, @SuppressWarnings("SameParameterValue") final boolean mandatory ) {
 
         super( name, GowingConstants.TAG_BOOLEAN, v, mandatory, true );
 
     }
 
-    public GowingBooleanHolder( @NotNull final EntityName name, final Boolean[] v, @SuppressWarnings("SameParameterValue") final boolean mandatory ) {
+    public GowingBooleanHolder( @NotNull final EntityName name, @Nullable final Boolean@NotNull[] v, @SuppressWarnings("SameParameterValue") final boolean mandatory ) {
 
         super( name, GowingConstants.TAG_BOOLEAN, v, mandatory, false );
 

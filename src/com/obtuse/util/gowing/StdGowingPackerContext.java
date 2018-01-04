@@ -19,9 +19,6 @@ import java.util.*;
 
 public class StdGowingPackerContext implements GowingPackerContext {
 
-//    private final SortedMap<EntityTypeName,Integer> _seenTypeNames = new TreeMap<EntityTypeName, Integer>();
-//    private final SortedMap<Integer,EntityTypeName> _usedTypeIds = new TreeMap<Integer, EntityTypeName>();
-
     private final SortedSet<Integer> _seenTypeIds = new TreeSet<>();
     private final SortedSet<Integer> _newTypeIds = new TreeSet<>();
 
@@ -156,6 +153,7 @@ public class StdGowingPackerContext implements GowingPackerContext {
             }
 
         };
+
         private final String _payload;
         private SimplePackableClass _simple;
         private GowingEntityReference _simpleReference;
@@ -168,8 +166,6 @@ public class StdGowingPackerContext implements GowingPackerContext {
         public TestPackableClass( @NotNull final String payload, @Nullable final TestPackableClass inner, @Nullable final SimplePackableClass simple ) {
 
             super( new GowingNameMarkerThing() );
-
-//	    context.registerFactory( FACTORY );
 
             _simple = simple;
             _inner = inner;
@@ -319,8 +315,6 @@ public class StdGowingPackerContext implements GowingPackerContext {
                     ENTITY_TYPE_NAME,
                     VERSION,
                     super.bundleRoot( packer ),
-                    // super.bundleThyself( true, packer ),
-//                    null,
                     packer.getPackingContext()
             );
 

@@ -1,7 +1,5 @@
 package com.obtuse.util.gowing;
 
-import com.obtuse.util.gowing.p2a.GowingEntityReference;
-
 /*
  * Copyright © 2015 Obtuse Systems Corporation
  */
@@ -15,26 +13,42 @@ public interface GowingPackableThingHolder extends Comparable<GowingPackableThin
     boolean pack( GowingPacker packer2 );
 
     char[] PrimitiveCharArrayValue();
-    Character[] ContainerCharacterArrayValue();
-    boolean[] PrimitiveBooleanArrayValue();
-    Boolean[] ContainerBooleanArrayValue();
-    byte[] PrimitiveByteArrayValue();
-    Byte[] ContainerByteArrayValue();
-    short[] PrimitiveShortArrayValue();
-    Short[] ContainerShortArrayValue();
-    int[] PrimitiveIntArrayValue();
-    Integer[] ContainerIntegerArrayValue();
-    long[] PrimitiveLongArrayValue();
-    Long[] ContainerLongArrayValue();
-    float[] PrimitiveFloatArrayValue();
-    Float[] ContainerFloatArrayValue();
-    double[] PrimitiveDoubleArrayValue();
-    Double[] ContainerDoubleArrayValue();
-    Number[] NumberArrayValue();
-    String[] StringArrayValue();
-    GowingPackable[] PackableArrayValue();
 
-//    void emitActualValue( Packer2 packer );
+    Character[] ContainerCharacterArrayValue();
+
+    boolean[] PrimitiveBooleanArrayValue();
+
+    Boolean[] ContainerBooleanArrayValue();
+
+    byte[] PrimitiveByteArrayValue();
+
+    Byte[] ContainerByteArrayValue();
+
+    short[] PrimitiveShortArrayValue();
+
+    Short[] ContainerShortArrayValue();
+
+    int[] PrimitiveIntArrayValue();
+
+    Integer[] ContainerIntegerArrayValue();
+
+    long[] PrimitiveLongArrayValue();
+
+    Long[] ContainerLongArrayValue();
+
+    float[] PrimitiveFloatArrayValue();
+
+    Float[] ContainerFloatArrayValue();
+
+    double[] PrimitiveDoubleArrayValue();
+
+    Double[] ContainerDoubleArrayValue();
+
+    Number[] NumberArrayValue();
+
+    String[] StringArrayValue();
+
+    GowingPackable[] PackableArrayValue();
 
     EntityName getName();
 
@@ -42,21 +56,10 @@ public interface GowingPackableThingHolder extends Comparable<GowingPackableThin
 
     boolean isNull();
 
-//    /**
-//     Return this instance's object after casting it to a {@link GowingEntityReference}.
-//     <p/>This method is exactly equivalent to <blockquote><code>(EntityTypeReference)(this.getObjectValue())</code></blockquote>
-//     {@link GowingPackedEntityBundle#getMandatoryEntityReference(EntityName)} and
-//     {@link GowingPackedEntityBundle#getOptionalEntityReference(EntityName)} are at least arguably clearer
-//     ways to do what this method does.
-//     @return this instance's object after casting it to a {@link GowingEntityReference}.
-//     @throws ClassCastException if this instance's object is not actually a {@link GowingEntityReference} instance.
-//     */
-//
-//    GowingEntityReference EntityTypeReference();
-
     /**
      Cast this instance's object to a {@link Character} and return its <code>char</code> value.
      <p/>This method is exactly equivalent to <blockquote><code>this.CharacterValue().charValue()</code></blockquote>
+
      @return this instance's char value.
      @throws ClassCastException if this instance's object is not actually a {@link Character} instance.
      */
@@ -66,6 +69,7 @@ public interface GowingPackableThingHolder extends Comparable<GowingPackableThin
     /**
      Return this instance's object after casting it to a {@link Character}.
      <p/>This method is exactly equivalent to <blockquote><code>(Character)(this.getObjectValue())</code></blockquote>
+
      @return this instance's object after casting it to a {@link Character}.
      @throws ClassCastException if this instance's object is not actually a {@link Character} instance.
      */
@@ -75,6 +79,7 @@ public interface GowingPackableThingHolder extends Comparable<GowingPackableThin
     /**
      Return this instance's object after casting it to a {@link String}.
      <p/>This method is exactly equivalent to <blockquote><code>(String)(this.getObjectValue())</code></blockquote>
+
      @return this instance's object after casting it to a {@link String}.
      @throws ClassCastException if this instance's object is not actually a {@link String} instance.
      */
@@ -84,6 +89,7 @@ public interface GowingPackableThingHolder extends Comparable<GowingPackableThin
     /**
      Cast this instance's object to a {@link Boolean} and return its <code>boolean</code> value.
      <p/>This method is exactly equivalent to <blockquote><code>this.BooleanValue().booleanValue()</code></blockquote>
+
      @return this instance's char value.
      @throws ClassCastException if this instance's object is not actually a {@link Boolean} instance.
      */
@@ -93,6 +99,7 @@ public interface GowingPackableThingHolder extends Comparable<GowingPackableThin
     /**
      Return this instance's object after casting it to a {@link Boolean}.
      <p/>This method is exactly equivalent to <blockquote><code>(Boolean)(this.getObjectValue())</code></blockquote>
+
      @return this instance's object after casting it to a {@link Boolean}.
      @throws ClassCastException if this instance's object is not actually a {@link Boolean} instance.
      */
@@ -102,6 +109,7 @@ public interface GowingPackableThingHolder extends Comparable<GowingPackableThin
     /**
      Cast this instance's object to a {@link Number} and return its <code>byte</code> value.
      <p/>This method is exactly equivalent to <blockquote><code>this.NumberValue().byteValue()</code></blockquote>
+
      @return this instance's byte value.
      @throws ClassCastException if this instance's object is not actually a {@link Number} instance.
      */
@@ -111,6 +119,7 @@ public interface GowingPackableThingHolder extends Comparable<GowingPackableThin
     /**
      Return this instance's object after casting it to a {@link Byte}.
      <p/>This method is exactly equivalent to <blockquote><code>(Byte)(this.getObjectValue())</code></blockquote>
+
      @return this instance's object after casting it to a {@link Byte}.
      @throws ClassCastException if this instance's object is not actually a {@link Byte} instance.
      */
@@ -120,6 +129,7 @@ public interface GowingPackableThingHolder extends Comparable<GowingPackableThin
     /**
      Cast this instance's object to a {@link Number} and return its <code>short</code> value.
      <p/>This method is exactly equivalent to <blockquote><code>this.NumberValue().shortValue()</code></blockquote>
+
      @return this instance's short value.
      @throws ClassCastException if this instance's object is not actually a {@link Number} instance.
      */
@@ -129,6 +139,7 @@ public interface GowingPackableThingHolder extends Comparable<GowingPackableThin
     /**
      Return this instance's object after casting it to a {@link Short}.
      <p/>This method is exactly equivalent to <blockquote><code>(Short)(this.getObjectValue())</code></blockquote>
+
      @return this instance's object after casting it to a {@link Short}.
      @throws ClassCastException if this instance's object is not actually a {@link Short} instance.
      */
@@ -138,6 +149,7 @@ public interface GowingPackableThingHolder extends Comparable<GowingPackableThin
     /**
      Cast this instance's object to a {@link Number} and return its <code>int</code> value.
      <p/>This method is exactly equivalent to <blockquote><code>this.NumberValue().intValue()</code></blockquote>
+
      @return this instance's int value.
      @throws ClassCastException if this instance's object is not actually a {@link Number} instance.
      */
@@ -147,6 +159,7 @@ public interface GowingPackableThingHolder extends Comparable<GowingPackableThin
     /**
      Return this instance's object after casting it to a {@link Integer}.
      <p/>This method is exactly equivalent to <blockquote><code>(Integer)(this.getObjectValue())</code></blockquote>
+
      @return this instance's object after casting it to a {@link Integer}.
      @throws ClassCastException if this instance's object is not actually a {@link Integer} instance.
      */
@@ -156,6 +169,7 @@ public interface GowingPackableThingHolder extends Comparable<GowingPackableThin
     /**
      Cast this instance's object to a {@link Number} and return its <code>long</code> value.
      <p/>This method is exactly equivalent to <blockquote><code>this.NumberValue().longValue()</code></blockquote>
+
      @return this instance's long value.
      @throws ClassCastException if this instance's object is not actually a {@link Number} instance.
      */
@@ -165,6 +179,7 @@ public interface GowingPackableThingHolder extends Comparable<GowingPackableThin
     /**
      Return this instance's object after casting it to a {@link Long}.
      <p/>This method is exactly equivalent to <blockquote><code>(Long)(this.getObjectValue())</code></blockquote>
+
      @return this instance's object after casting it to a {@link Long}.
      @throws ClassCastException if this instance's object is not actually a {@link Long} instance.
      */
@@ -174,6 +189,7 @@ public interface GowingPackableThingHolder extends Comparable<GowingPackableThin
     /**
      Cast this instance's object to a {@link Number} and return its <code>float</code> value.
      <p/>This method is exactly equivalent to <blockquote><code>this.NumberValue().floatValue()</code></blockquote>
+
      @return this instance's float value.
      @throws ClassCastException if this instance's object is not actually a {@link Number} instance.
      */
@@ -183,6 +199,7 @@ public interface GowingPackableThingHolder extends Comparable<GowingPackableThin
     /**
      Return this instance's object after casting it to a {@link Float}.
      <p/>This method is exactly equivalent to <blockquote><code>(Float)(this.getObjectValue())</code></blockquote>
+
      @return this instance's object after casting it to a {@link Float}.
      @throws ClassCastException if this instance's object is not actually a {@link Float} instance.
      */
@@ -192,6 +209,7 @@ public interface GowingPackableThingHolder extends Comparable<GowingPackableThin
     /**
      Cast this instance's object to a {@link Number} and return its <code>double</code> value.
      <p/>This method is exactly equivalent to <blockquote><code>this.NumberValue().doubleValue()</code></blockquote>
+
      @return this instance's double value.
      @throws ClassCastException if this instance's object is not actually a {@link Number} instance.
      */
@@ -201,6 +219,7 @@ public interface GowingPackableThingHolder extends Comparable<GowingPackableThin
     /**
      Return this instance's object after casting it to a {@link Double}.
      <p/>This method is exactly equivalent to <blockquote><code>(Double)(this.getObjectValue())</code></blockquote>
+
      @return this instance's object after casting it to a {@link Double}.
      @throws ClassCastException if this instance's object is not actually a {@link Double} instance.
      */
@@ -210,6 +229,7 @@ public interface GowingPackableThingHolder extends Comparable<GowingPackableThin
     /**
      Cast this instance's object after casting it to a {@link Number}.
      <p/>This method is exactly equivalent to <blockquote><code>(Number)(this.getObjectValue())</code></blockquote>
+
      @return this instance's object after casting it to a {@link Number}.
      @throws ClassCastException if this instance's object is not actually a {@link Number} instance.
      */
@@ -218,6 +238,7 @@ public interface GowingPackableThingHolder extends Comparable<GowingPackableThin
 
     /**
      Emit the portable representation of this instance's object.
+
      @param packer2 the packer to use to get the job done.
      */
 

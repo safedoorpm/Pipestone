@@ -6,6 +6,7 @@
 package com.obtuse.util;
 
 import com.obtuse.exceptions.HowDidWeGetHereError;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.Optional;
@@ -68,7 +69,7 @@ public class FlexibleDateTransmogrifier {
 
         }
 
-        private TestData( final String[] inputs, final String output ) {
+        private TestData( @NotNull final String@NotNull[] inputs, final String output ) {
             super();
 
             this.input = new String[inputs.length];
@@ -83,7 +84,7 @@ public class FlexibleDateTransmogrifier {
 
         }
 
-        public TestData( final String[] inputs ) {
+        public TestData( @NotNull final String@NotNull[] inputs ) {
 
             this.input = new String[inputs.length];
             System.arraycopy( inputs, 0, this.input, 0, inputs.length );
@@ -141,6 +142,10 @@ public class FlexibleDateTransmogrifier {
                             "1972-1", "1972.1", "1972/1",
                             "1972 - 01", "1972 . 01", "1972 / 01",
                             "1972 - 1", "1972 . 1", "1972 / 1",
+                            "1972-01-00", "1972.01.00", "1972/01/00",
+                            "1972-01-0", "1972.01.0", "1972/01/0",
+                            "1972-1-00", "1972.1.00", "1972/1/00",
+                            "1972-1-0", "1972.1.0", "1972/1/0"
                     },
                     "1972-01"
             ),
@@ -218,7 +223,7 @@ public class FlexibleDateTransmogrifier {
             new TestData( "deCember 22 , 1972", "1972-12-22" ),
     };
 
-    private static class PatternInfo {
+    public static class PatternInfo {
 
         private final Pattern _pattern;
         private final int _yyIx;
@@ -226,7 +231,7 @@ public class FlexibleDateTransmogrifier {
         private final int _ddIx;
         private final boolean _numericMonth;
 
-        private PatternInfo( final Pattern pattern, final int yyIx, final int mmIx, final int ddIx, final boolean numericMonth ) {
+        public PatternInfo( final Pattern pattern, final int yyIx, final int mmIx, final int ddIx, final boolean numericMonth ) {
 
             if ( ( yyIx == mmIx && yyIx > 0 ) || ( mmIx == ddIx && mmIx > 0 ) || ( yyIx == ddIx && yyIx > 0 ) ) {
 
@@ -296,6 +301,12 @@ public class FlexibleDateTransmogrifier {
     public static Pattern YYYY_MM_DD_DASHES = Pattern.compile( "(\\d{4}) *- *(\\d\\d?) *- *(\\d\\d?)" );
     public static Pattern YYYY_MM_DD_PERIODS = Pattern.compile( "(\\d{4}) *\\. *(\\d\\d?) *\\. *(\\d\\d?)" );
     public static Pattern YYYY_MM_DD_SLASHES = Pattern.compile( "(\\d{4}) */ *(\\d\\d?) */ *(\\d\\d?)" );
+    public static Pattern YYYY_MM_00_DASHES = Pattern.compile( "(\\d{4}) *- *(\\d\\d?) *- *00?" );
+    public static Pattern YYYY_MM_00_PERIODS = Pattern.compile( "(\\d{4}) *\\. *(\\d\\d?) *\\. *00?" );
+    public static Pattern YYYY_MM_00_SLASHES = Pattern.compile( "(\\d{4}) */ *(\\d\\d?) */ *00?" );
+    public static Pattern YYYY_00_00_DASHES = Pattern.compile( "(\\d{4}) *- *00? *- *00?" );
+    public static Pattern YYYY_00_00_PERIODS = Pattern.compile( "(\\d{4}) *\\. *00? *\\. *00?" );
+    public static Pattern YYYY_00_00_SLASHES = Pattern.compile( "(\\d{4}) */ *00? */ *00?" );
     public static Pattern YYYY_MM_DASHES = Pattern.compile( "(\\d{4}) *- *(\\d\\d?)" );
     public static Pattern YYYY_MM_PERIODS = Pattern.compile( "(\\d{4}) *\\. *(\\d\\d?)" );
     public static Pattern YYYY_MM_SLASHES = Pattern.compile( "(\\d{4}) */ *(\\d\\d?)" );
@@ -313,6 +324,12 @@ public class FlexibleDateTransmogrifier {
             new PatternInfo( YYYY_MM_DD_DASHES, 1, 2, 3, true ),
             new PatternInfo( YYYY_MM_DD_PERIODS, 1, 2, 3, true ),
             new PatternInfo( YYYY_MM_DD_SLASHES, 1, 2, 3, true ),
+            new PatternInfo( YYYY_MM_00_DASHES, 1, 2, -1, true ),
+            new PatternInfo( YYYY_MM_00_PERIODS, 1, 2, -1, true ),
+            new PatternInfo( YYYY_MM_00_SLASHES, 1, 2, -1, true ),
+            new PatternInfo( YYYY_00_00_DASHES, 1, -1, -1, true ),
+            new PatternInfo( YYYY_00_00_PERIODS, 1, -1, -1, true ),
+            new PatternInfo( YYYY_00_00_SLASHES, 1, -1, -1, true ),
             new PatternInfo( YYYY_MM_DASHES, 1, 2, -1, true ),
             new PatternInfo( YYYY_MM_PERIODS, 1, 2, -1, true ),
             new PatternInfo( YYYY_MM_SLASHES, 1, 2, -1, true ),
@@ -393,7 +410,19 @@ public class FlexibleDateTransmogrifier {
 
     }
 
-    private static Optional<String> doit( final int ix, final Pattern p, final boolean numericMonth, final String dateString, final int yyIx, final int mmIx, final int ddIx ) {
+    /**
+     Transmogrify a date using a specified pattern (not for the faint of heart).
+     @param ix used for debug output
+     @param p the pattern to be used to take apart the date string
+     @param numericMonth are numeric months required or prohibited (no support WITHIN this method for making them optional).
+     @param dateString the date string to be parsed
+     @param yyIx which group in a successful matcher (1-origin) contains the year (if the match works).
+     @param mmIx which group in a successful matcher (1-origin) contains the month (if the match works).
+     @param ddIx which group in a successful matcher (1-origin) contains the month (if the match works).
+     @return an Optional containingthe date in yyyy-mm-dd format if the parse worked; empty otherwise.
+     */
+
+    public static Optional<String> doit( final int ix, final Pattern p, final boolean numericMonth, final String dateString, final int yyIx, final int mmIx, final int ddIx ) {
 
         StringBuilder sb = new StringBuilder();
 
@@ -406,7 +435,7 @@ public class FlexibleDateTransmogrifier {
                   .append( ix )
                   .append( ", yyIx=" )
                   .append( yyIx )
-                  .append( "mmIx=" )
+                  .append( ", mmIx=" )
                   .append( mmIx )
                   .append( ", ddIx=" )
                   .append( ddIx )
@@ -424,7 +453,7 @@ public class FlexibleDateTransmogrifier {
 
                 if ( s_traceOneCall || s_traceAllCalls ) {
 
-                    for ( int i = 0; i < m.groupCount(); i += 1 ) {
+                    for ( int i = 0; i <= m.groupCount(); i += 1 ) {
 
                         Logger.logMsg( "group(" + i + ")=>>>" + m.group(i) + "<<<" );
 

@@ -16,37 +16,38 @@ public class EntityTypeInfo {
     private final GowingEntityFactory _factory;
 
     public EntityTypeInfo( final int referenceId, @NotNull final GowingEntityFactory factory ) {
-	super();
 
-	_referenceId = referenceId;
+        super();
 
-	_factory = factory;
+        _referenceId = referenceId;
+
+        _factory = factory;
 
     }
 
     @NotNull
     public EntityTypeName getTypeName() {
 
-	return getFactory().getTypeName();
+        return getFactory().getTypeName();
 
     }
 
     public int getReferenceId() {
 
-	return _referenceId;
+        return _referenceId;
 
     }
 
     @NotNull
     public GowingEntityFactory getFactory() {
 
-	return _factory;
+        return _factory;
 
     }
 
     public String toString() {
 
-	return "EntityTypeInfo( \"" + _factory.getTypeName() + "\", " + _referenceId + " )";
+        return "EntityTypeInfo( \"" + _factory.getTypeName() + "\", " + _referenceId + " )";
 
     }
 

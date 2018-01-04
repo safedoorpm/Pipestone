@@ -107,11 +107,6 @@ public class GowingPackableKeyValuePair<K, V> extends GowingAbstractPackableEnti
 
     }
 
-//    public boolean isFinished( UnPacker2 unPacker ) {
-//
-//	return unPacker.isEntityFinished(  );
-//    }
-
     @NotNull
     @Override
     public GowingPackedEntityBundle bundleThyself( final boolean isPackingSuper, @NotNull final GowingPacker packer ) {
@@ -148,28 +143,6 @@ public class GowingPackableKeyValuePair<K, V> extends GowingAbstractPackableEnti
 
         _key = (K)fetchActualValue( unPacker, _keyReference );
         _value = (V)fetchActualValue( unPacker, _valueReference );
-
-//	if ( _keyReference instanceof GowingEntityReference ) {
-//
-////	    _key = (K) unPacker.resolveReference( ((EntityReferenceHolder2)_keyReference).EntityTypeReference() );
-//	    _key = (K) unPacker.resolveReference( (GowingEntityReference)_keyReference );
-//
-//	} else {
-//
-//	    _key = (K) _keyReference;
-//
-//	}
-//
-//	if ( _valueReference instanceof GowingEntityReference ) {
-//
-////	    _value = (V) unPacker.resolveReference( ((EntityReferenceHolder2)_valueReference).EntityTypeReference() );
-//	    _value = (V) unPacker.resolveReference( (GowingEntityReference)_valueReference );
-//
-//	} else {
-//
-//	    _value = (V) _valueReference;
-//
-//	}
 
         _keyReference = null;
         _valueReference = null;
@@ -412,58 +385,6 @@ public class GowingPackableKeyValuePair<K, V> extends GowingAbstractPackableEnti
         }
 
     }
-
-//    private void packObj( PackedEntityBundle bundle, String name, Object obj, Packer2 packer ) {
-//
-//	EntityName entityName = new EntityName( name );
-//	if ( obj == null ) {
-//
-//	    bundle.addHolder( new NullHolder2( entityName ) );
-//
-//	} else if ( obj instanceof Packable2 ) {
-//
-//	    bundle.addHolder( new PackableEntityHolder2( entityName, (Packable2) obj, packer, true ) );
-//
-//	} else {
-//
-//	    if ( obj instanceof String ) {
-//
-//		bundle.addHolder( new StringHolder2( entityName, (String)obj, true ) );
-//
-//	    } else if ( obj instanceof Byte ) {
-//
-//		bundle.addHolder( new ByteHolder2( entityName, (Byte) obj, true ) );
-//
-//	    } else if ( obj instanceof Short ) {
-//
-//		bundle.addHolder( new ShortHolder2( entityName, (Short) obj, true ) );
-//
-//	    } else if ( obj instanceof Integer ) {
-//
-//		bundle.addHolder( new IntegerHolder2( entityName, (Integer) obj, true ) );
-//
-//	    } else if ( obj instanceof Long ) {
-//
-//		bundle.addHolder( new LongHolder2( entityName, (Long) obj, true ) );
-//
-//	    } else if ( obj instanceof Float ) {
-//
-//		bundle.addHolder( new FloatHolder2( entityName, (Float) obj, true ) );
-//
-//	    } else if ( obj instanceof Double ) {
-//
-//		bundle.addHolder( new DoubleHolder2( entityName, (Double) obj, true ) );
-//
-//	    } else if ( obj instanceof Boolean ) {
-//
-//		bundle.addHolder( new BooleanHolder2( entityName, (Boolean) obj, true ) );
-//
-//	    }
-//
-//	    Class<? extends Object> objClass = obj.getClass();
-//	}
-//
-//    }
 
     public String toString() {
 

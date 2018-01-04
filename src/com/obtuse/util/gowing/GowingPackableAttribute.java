@@ -58,7 +58,6 @@ public class GowingPackableAttribute implements GowingPackable {
     private static final EntityName COMPUTED_NAME = new EntityName( "_c" );
     private final GowingInstanceId _instanceId = new GowingInstanceId( getClass() );
 
-//    private static final EntityName APPROXIMATE_DATE_NAME = new EntityName( "_adt" );
     private final GowingPackableType _attributeType;
     private final boolean _computed;
     private final GowingPackableName _name;
@@ -194,7 +193,6 @@ public class GowingPackableAttribute implements GowingPackable {
         GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
                 GowingPackableAttribute.ENTITY_TYPE_NAME,
                 GowingPackableAttribute.VERSION,
-//                null,
                 packer.getPackingContext()
         );
 

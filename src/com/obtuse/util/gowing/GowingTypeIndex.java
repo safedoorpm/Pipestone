@@ -19,7 +19,6 @@ import java.util.TreeMap;
 public class GowingTypeIndex {
 
     private final SortedMap<EntityTypeName,EntityTypeInfo> _typeNameToTypeInfoMapping = new TreeMap<>();
-//    private final SortedMap<Integer,EntityTypeInfo> _referenceIdToTypeInfoMapping = new TreeMap<Integer, EntityTypeInfo>();
 
     private final String _typeIndexName;
 
@@ -46,12 +45,6 @@ public class GowingTypeIndex {
     @NotNull
     public EntityTypeInfo addFactory( @NotNull final GowingEntityFactory newFactory ) {
 
-//	if ( !newFactory.isLockedDown() ) {
-//
-//	    throw new IllegalArgumentException( "" + newFactory + ":  cannot add unlocked factory to type index" );
-//
-//	}
-
 	Optional<EntityTypeInfo> maybeTypeInfo = findTypeInfo( newFactory.getEntityTypeName() );
 	//noinspection OptionalIsPresent
 	if ( maybeTypeInfo.isPresent() ) {
@@ -60,13 +53,6 @@ public class GowingTypeIndex {
 
 	}
 
-//	typeInfo = findFactory( newFactory.getEntityTypeId() );
-//	if ( typeInfo != null ) {
-//
-//	    throw new IllegalArgumentException( "" + newFactory + ":  cannot add factory because type index already contains entry for type id " + typeInfo.getEntityTypeId() + " associated with type name \"" + typeInfo.getEntityName() + "\"" );
-//
-//	}
-
 	int referenceId = _nextReferenceIndex;
 	_nextReferenceIndex += 1;
 	EntityTypeInfo typeInfo = new EntityTypeInfo( referenceId, newFactory );
@@ -74,50 +60,10 @@ public class GowingTypeIndex {
 		newFactory.getEntityTypeName(),
 		typeInfo
 	);
-//	_typeIdToFactoryMapping.put( newFactory.getEntityTypeId(), newFactory );
 
 	return typeInfo;
 
     }
-
-//    /**
-//     Append an unlocked type factory to this type index.
-//     @param newFactory the still unlocked type factory.
-//     The specified type factory is assigned the next available type id in this type index (0 if this type index is empty, the highest existing type id plus one otherwise).
-//     The specified type factory is then locked down and added to this type index.
-//     @throws IllegalArgumentException if any of the following are true:
-//     <ol>
-//     <li>the specified type factory is already locked down.</li>
-//     <li>if the specified type factory's type name already exists in this type index.</li>
-//     <li>if there is already a type in this index with type id 32767 (i.e. the index is effectively full).</li>
-//     */
-//
-//    public void appendFactory( @NotNull EntityFactory2 newFactory ) {
-//
-//	if ( newFactory.isLockedDown() ) {
-//
-//	    throw new IllegalArgumentException( "" + newFactory + ":  cannot append a factory which is already locked down" );
-//
-//	}
-//
-//	short highestExistingTypeId = 0;
-//	if ( !_typeIdToFactoryMapping.isEmpty() ) {
-//
-//	    highestExistingTypeId = _typeIdToFactoryMapping.lastKey();
-//
-//	}
-//
-//	if ( highestExistingTypeId == Short.MAX_VALUE ) {
-//
-//	    throw new IllegalArgumentException( "" + newFactory + ":  type index is full (highest existing type id is 32767 which leaves no room for another one)" );
-//
-//	}
-//
-//	newFactory.reconfigTypeId( (short) ( highestExistingTypeId + 1 ) );
-//
-//	addFactory( newFactory.lockdown() );
-//
-//    }
 
     /**
      Get this index's name.
@@ -168,51 +114,7 @@ public class GowingTypeIndex {
         Optional<EntityTypeInfo> maybeEntityFactory = findTypeInfo( typeName );
 	return maybeEntityFactory.orElseThrow( ()->new IllegalArgumentException( "no type info found for type named \"" + typeName + "\"" ) );
 
-//	if ( hasTypeInfo( typeName ) ) {
-//
-//	    return maybeEntityFactory.get();
-//
-//	} else {
-//
-//	    throw new IllegalArgumentException( "no type info found for type named \"" + typeName + "\"" );
-//
-//	}
-
     }
-
-//    /**
-//     Find an {@link EntityFactory2} via its type id.
-//     @param typeId the id of the type of interest.
-//     @return the corresponding entity factory or <code>null</code> if no such factory exists within this type index.
-//     */
-//
-//    @Nullable
-//    EntityFactory2 findFactory( short typeId ) {
-//
-//	return _typeIdToFactoryMapping.get( typeId );
-//
-//    }
-//
-//    /**
-//     Get an {@link EntityFactory2} via its type id when failure is not an option.
-//     @param typeId the id of the type of interest.
-//     @return the corresponding entity factory.
-//     @throws IllegalArgumentException if no such factory exists within this type index.
-//     */
-//
-//    @NotNull
-//    EntityFactory2 getFactory( short typeId ) {
-//
-//	EntityFactory2 entityFactory = findFactory( typeId );
-//	if ( entityFactory == null ) {
-//
-//	    throw new IllegalArgumentException( "no factory found for type id " + typeId );
-//
-//	}
-//
-//	return entityFactory;
-//
-//    }
 
     public String toString() {
 

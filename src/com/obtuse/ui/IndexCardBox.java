@@ -668,7 +668,7 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
 
     }
 
-    public void setSelectedIndices( final int[] indices ) {
+    public void setSelectedIndices( final int@NotNull[] indices ) {
 
         ListSelectionModel sm = getSelectionModel();
         sm.clearSelection();

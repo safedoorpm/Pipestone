@@ -795,7 +795,7 @@ public class Logger {
 
     }
 
-    public static void logMsgs( final String[] lines ) {
+    public static void logMsgs( @NotNull final String@NotNull[] lines ) {
 
         for ( String line : lines ) {
 

@@ -155,6 +155,28 @@ public class DateUtils {
 
     }
 
+//    /**
+//     * Parse an MDYYYY format date string (accepts one or two digit month and day).
+//     *
+//     * @param token      the date string.
+//     * @param lineNumber where the date was found.
+//     * @return the result in UTC.
+//     * @throws ParsingException if the token does not contain a valid date string.
+//     */
+//
+//    public static ImmutableDate parseMDYYYY( final String token, final int lineNumber )
+//            throws ParsingException {
+//
+//        synchronized ( DateUtils.MDYYYY ) {
+//
+//            DateUtils.MDYYYY.setTimeZone( TimeZone.getDefault() );
+//            ImmutableDate date = DateUtils.dateParse( DateUtils.MDYYYY, token, lineNumber );
+//            return date;
+//
+//        }
+//
+//    }
+
     /**
      * Format a date and time string in our local time.
      *
@@ -175,7 +197,7 @@ public class DateUtils {
     }
 
     /**
-     * Format a date string in our local time.
+     * Format a date string in MM/DD/YYYY format.
      *
      * @param dateTime the date to be formatted.
      * @return the formatted date string.
@@ -192,6 +214,25 @@ public class DateUtils {
         }
 
     }
+
+//    /**
+//     * Format a date string in M/D/YYYY format (one digit month or day if possible).
+//     *
+//     * @param dateTime the date to be formatted.
+//     * @return the formatted date string.
+//     */
+//
+//    public static String formatMDYYYY( final Date dateTime ) {
+//
+//        synchronized ( DateUtils.MDYYYY ) {
+//
+//            DateUtils.MDYYYY.setTimeZone( TimeZone.getDefault() );
+//            String s = DateUtils.MDYYYY.format( dateTime );
+//            return s;
+//
+//        }
+//
+//    }
 
     /**
      * Format a date string in a 'standard' format which excludes milliseconds.

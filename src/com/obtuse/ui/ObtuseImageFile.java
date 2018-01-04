@@ -543,14 +543,14 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
 //            Logger.logMsg( "recovering BIF from " + ProjectName.enquote( burkeImageFileFile.getPath() ) );
 
             StdGowingUnPacker unPacker = new StdGowingUnPacker( s_gowingTypeIndex, burkeImageFileFile );
-            Optional<GowingDePackedEntityGroup> optionalResult = unPacker.unPack();
+            Optional<GowingUnPackedEntityGroup> optionalResult = unPacker.unPack();
 
 //            long startTime = System.currentTimeMillis();
 
             ObtuseImageFile bif = null;
             if ( optionalResult.isPresent() ) {
 
-                GowingDePackedEntityGroup result = optionalResult.get();
+                GowingUnPackedEntityGroup result = optionalResult.get();
 
 
                 for ( GowingPackable entity : result.getAllEntities() ) {
@@ -601,7 +601,7 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
      */
 
     @NotNull
-    public static SortedMap<Integer, ObtuseImageFile> getSpecifiedBurkeInfoFiles( final File[] binfoFiles ) {
+    public static SortedMap<Integer, ObtuseImageFile> getSpecifiedBurkeInfoFiles( @NotNull final File@NotNull[] binfoFiles ) {
 
         SortedMap<Integer, ObtuseImageFile> rval = new TreeMap<>();
         for ( File f : binfoFiles ) {

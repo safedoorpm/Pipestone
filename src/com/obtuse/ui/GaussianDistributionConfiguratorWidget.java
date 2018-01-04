@@ -35,7 +35,7 @@ public class GaussianDistributionConfiguratorWidget extends JPanel {
     private JPanel _standardDeviationInnerPanel;
     private JPanel _outerPanel;
 
-    @SuppressWarnings({ "UnusedDeclaration", "MismatchedReadAndWriteOfArray" })
+    @SuppressWarnings({ "UnusedDeclaration", "MismatchedReadAndWriteOfArray", "ConstantConditions" })
     private JPanel[] _horizontalPanels = {
             _panel1,
             _outerPanel,
@@ -44,7 +44,7 @@ public class GaussianDistributionConfiguratorWidget extends JPanel {
             _standardDeviationInnerPanel
     };
 
-    @SuppressWarnings({ "UnusedDeclaration", "MismatchedReadAndWriteOfArray" })
+    @SuppressWarnings({ "UnusedDeclaration", "MismatchedReadAndWriteOfArray", "ConstantConditions" })
     private JPanel[] _verticalPanels = {
             _weightPanel,
             _centerPanel,
@@ -330,6 +330,13 @@ public class GaussianDistributionConfiguratorWidget extends JPanel {
 
         xx.pack();
         xx.setVisible( true );
+
+    }
+
+    @Override
+    public String toString() {
+
+        return super.toString();
 
     }
 

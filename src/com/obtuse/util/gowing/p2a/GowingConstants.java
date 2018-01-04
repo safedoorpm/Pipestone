@@ -155,7 +155,8 @@ public class GowingConstants {
     public static final String METADATA_OUTPUT_RTS = "_OUTPUT_RTS";
 
     /**
-     A sorted set containing all of the valid reserved keywords (all keywords starting with an underscore are reserved).
+     A sorted set containing all of the valid reserved keywords.
+     <p>Note that all keywords starting with an underscore are also reserved.</p>
      */
 
     public static final SortedSet<String> RESERVED_KEYWORDS;

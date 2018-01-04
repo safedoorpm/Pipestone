@@ -1,8 +1,10 @@
 package com.obtuse.util.gowing;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.Closeable;
+import java.io.IOException;
 
 /*
  * Copyright © 2015 Obtuse Systems Corporation
@@ -16,64 +18,62 @@ public interface GowingPacker extends Closeable {
 
     GowingInstanceId queuePackableEntity( GowingPackable entity );
 
-//    GowingInstanceId queuePackableEntity( EntityName entityName, GowingPackable entity );
-
     @NotNull
     GowingPackerContext getPackingContext();
 
-    int finish();
+    int finish() throws IOException;
 
-    void emitName( EntityName name );
+    void emitName( @NotNull EntityName name );
 
     void emitEntityReference( int typeId, long entityId );
 
-    void emit( GowingInstanceId instanceId );
+    void emit( @Nullable GowingInstanceId instanceId );
 
-    void emit( String s );
+    void emit( @Nullable String s );
 
     void emit( char c );
 
     void emit( long l );
 
-    void emit( long[] lv );
+    void emit( long@NotNull[] lv );
 
-    void emit( Long[] v );
+    void emit( @Nullable Long@NotNull[] v );
 
     void emit( double d );
 
-    void emit( double[] v );
+    void emit( double@NotNull[] v );
 
-    void emit( Double[] v );
+    void emit( @Nullable Double@NotNull[] v );
 
     void emit( float f );
 
-    void emit( float[] v );
+    void emit( float@NotNull[] v );
 
-    void emit( Float[] v );
+    void emit( @Nullable Float@NotNull[] v );
 
     void emit( int i );
 
-    void emit( int[] v );
+    void emit( int@NotNull[] v );
 
-    void emit( Integer[] v );
+    void emit( @Nullable Integer@NotNull[] v );
 
     void emit( short s );
 
-    void emit( short[] v );
+    void emit( short@NotNull[] v );
 
-    void emit( Short[] v );
+    void emit( @Nullable Short@NotNull[] v );
 
     void emit( byte b );
 
-    void emit( byte[] v );
+    void emit( byte@NotNull[] v );
 
-    void emit( Byte[] v );
+    void emit( @Nullable Byte@NotNull[] v );
 
     void emit( boolean b );
 
-    void emit( boolean[] v );
+    void emit( boolean@NotNull[] v );
 
-    void emit( Boolean[] v );
+    void emit( @Nullable Boolean@NotNull[] v );
 
     void emitNull();
 
@@ -85,7 +85,7 @@ public interface GowingPacker extends Closeable {
      @param value the value (anything that {@link com.obtuse.util.ObtuseUtil#enquoteToJavaString(String)} can handle).
      */
 
-    void emitMetaData( String name, String value );
+    void emitMetaData( @NotNull String name, @NotNull String value );
 
     /**
      Emit a metadata comment with a long value.
@@ -93,7 +93,7 @@ public interface GowingPacker extends Closeable {
      @param value any long value.
      */
 
-    void emitMetaData( String name, long value );
+    void emitMetaData( @NotNull String name, long value );
 
     /**
      Emit a metadata comment with a boolean value.
@@ -101,7 +101,7 @@ public interface GowingPacker extends Closeable {
      @param value any boolean value (in other words, {@code true} or {@code false}).
      */
 
-    void emitMetaData( String name, boolean value );
+    void emitMetaData( @NotNull String name, boolean value );
 
     /**
      Emit a metadata comment with a double value.
@@ -109,6 +109,6 @@ public interface GowingPacker extends Closeable {
      @param value the value any double value including NaN and the infinities.
      */
 
-    void emitMetaData( String name, double value );
+    void emitMetaData( @NotNull String name, double value );
 
 }

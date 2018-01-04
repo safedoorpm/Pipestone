@@ -94,7 +94,10 @@ public abstract class GowingAbstractPackableEntity implements GowingPackable {
      @param bundle   the bundle extracted from the input stream of packed stuff.
      */
 
-    protected GowingAbstractPackableEntity( @NotNull final GowingUnPacker unPacker, @NotNull final GowingPackedEntityBundle bundle ) {
+    protected GowingAbstractPackableEntity(
+            @SuppressWarnings("unused") @NotNull final GowingUnPacker unPacker,
+            @NotNull final GowingPackedEntityBundle bundle
+    ) {
 
         super();
 
@@ -104,15 +107,20 @@ public abstract class GowingAbstractPackableEntity implements GowingPackable {
 
     /**
      Provide 'capstone' bundling services.
-     @param packer
-     @return
+     @param packer our packer.
+     @return a bundle containing just our Gowing string name.
+     Note that nobody really cares about our Gowing string name. The real point of this method is to provide
+     something equivalent to {@link #bundleThyself(boolean, GowingPacker)} for our immediate descendant to call
+     without having to call that something {@code bundleThyself} (if our bundler uses the standard name then
+     any developer of an immediate descendant of this class who forgets to write their own {@code bundleThyself}
+     method won't get a "but you forgot to implement the abstract {@code bundleThyself} compile-time error).
      */
+
     protected final GowingPackedEntityBundle bundleRoot( final GowingPacker packer ) {
 
         GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
                 ENTITY_TYPE_NAME,
                 VERSION,
-//                null,
                 packer.getPackingContext()
         );
 
@@ -121,12 +129,6 @@ public abstract class GowingAbstractPackableEntity implements GowingPackable {
         return bundle;
 
     }
-
-//    public String getGowingName() {
-//
-//        return _gowingName;
-//
-//    }
 
     @Override
     @NotNull

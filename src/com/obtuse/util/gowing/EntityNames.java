@@ -16,86 +16,66 @@ import java.util.TreeSet;
 
 public class EntityNames {
 
-//    public static final EntityName ANON_ENTITY = new EntityName( "<anon>" );
-
     private final SortedSet<EntityName> _entityNames = new TreeSet<>();
 
     private final GowingPackable _entity;
 
     public EntityNames( @NotNull final Collection<EntityName> entityNames, @NotNull final GowingPackable entity ) {
-	super();
 
-	addAll( entityNames );
+        super();
 
-	_entity = entity;
+        addAll( entityNames );
+
+        _entity = entity;
 
     }
 
     @NotNull
     public Collection<EntityName> getEntityNames() {
 
-	return _entityNames;
+        return _entityNames;
 
     }
 
     @NotNull
     public GowingPackable getEntity() {
 
-	return _entity;
+        return _entity;
 
     }
 
     public void add( final EntityName name ) {
 
-	if ( name == null ) {
+        if ( name == null ) {
 
-	    throw new IllegalArgumentException( "cannot add a null name" );
+            throw new IllegalArgumentException( "cannot add a null name" );
 
-	}
+        }
 
-	_entityNames.add( name );
+        _entityNames.add( name );
 
     }
 
     public void addAll( final Collection<EntityName> moreNames ) {
 
-	for ( EntityName entityName : moreNames ) {
+        for ( EntityName entityName : moreNames ) {
 
-	    if ( entityName == null ) {
+            if ( entityName == null ) {
 
-		throw new IllegalArgumentException( "cannot add null names" );
+                throw new IllegalArgumentException( "cannot add null names" );
 
-	    }
+            }
 
-	    _entityNames.add( entityName );
+            _entityNames.add( entityName );
 
-	}
+        }
 
     }
 
     public String toString() {
 
-	return "EntityNames( names=" + getEntityNames() + ", entity=" + getEntity() + " )";
+        return "EntityNames( names=" + getEntityNames() + ", entity=" + getEntity() + " )";
 
     }
-
-//    @Override
-//    public int compareTo( EntityNames rhs ) {
-//
-//	return _entityName.compareTo( rhs._entityName );
-//
-//    }
-//
-//    public int hashCode() {
-//
-//	return _entityName.hashCode();
-//
-//    }
-//
-//    public boolean equals( Object rhs ) {
-//
-//	return rhs instanceof EntityNames && compareTo( (EntityNames)rhs ) == 0;
-//
-//    }
 
 }

@@ -25,8 +25,6 @@ public class GowingEntityReference implements Comparable<GowingEntityReference> 
     private final Integer _version;
     private final SortedSet<EntityName> _entityReferenceNames;
 
-//    private final EntityTypeName _typeName;
-
     public GowingEntityReference( final int typeId, final long entityId, @Nullable final Integer version ) {
 
         this( typeId, entityId, version, null );
@@ -57,8 +55,6 @@ public class GowingEntityReference implements Comparable<GowingEntityReference> 
 
         }
 
-//	_typeName = typeName;
-
         _typeId = typeId;
 
         _entityId = entityId;
@@ -73,12 +69,6 @@ public class GowingEntityReference implements Comparable<GowingEntityReference> 
         }
 
     }
-
-//    public EntityTypeName getTypeName() {
-//
-//	return _typeName;
-//
-//    }
 
     public int getTypeId() {
 
@@ -152,8 +142,6 @@ public class GowingEntityReference implements Comparable<GowingEntityReference> 
 
     public String toString() {
 
-//	return "EntityTypeReference( typeId=" + _typeId + ", entityId=" + _entityId + ", version=" + _version + " )";
-
         return "ER( " + format() + " )";
 
     }
@@ -161,7 +149,7 @@ public class GowingEntityReference implements Comparable<GowingEntityReference> 
     @NotNull
     public String format() {
 
-        return GowingConstants.TAG_ENTITY_REFERENCE +
+        return "" + GowingConstants.TAG_ENTITY_REFERENCE +
                _typeId +
                ":" +
                _entityId +

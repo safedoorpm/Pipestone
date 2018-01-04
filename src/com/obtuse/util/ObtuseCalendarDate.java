@@ -6,6 +6,10 @@ package com.obtuse.util;
 
 import com.obtuse.exceptions.HowDidWeGetHereError;
 import com.obtuse.util.exceptions.ParsingException;
+import com.obtuse.util.gowing.*;
+import com.obtuse.util.gowing.p2a.GowingEntityReference;
+import com.obtuse.util.gowing.p2a.GowingUnPackerParsingException;
+import com.obtuse.util.gowing.p2a.holders.GowingStringHolder;
 import org.jetbrains.annotations.NotNull;
 
 import javax.management.timer.Timer;
@@ -38,7 +42,52 @@ import java.util.regex.Pattern;
  */
 
 @SuppressWarnings("UnusedDeclaration")
-public class ObtuseCalendarDate implements Comparable<ObtuseCalendarDate> {
+public class ObtuseCalendarDate extends GowingAbstractPackableEntity implements Comparable<ObtuseCalendarDate> {
+
+    private static final EntityTypeName ENTITY_TYPE_NAME = new EntityTypeName( ObtuseCalendarDate.class );
+
+    private static final int VERSION = 1;
+
+    private static final EntityName DATE_STRING = new EntityName( "_ds" );
+
+    public static GowingEntityFactory FACTORY = new GowingEntityFactory( ENTITY_TYPE_NAME ) {
+
+        @Override
+        public int getOldestSupportedVersion() {
+
+            return VERSION;
+        }
+
+        @Override
+        public int getNewestSupportedVersion() {
+
+            return VERSION;
+        }
+
+        @NotNull
+        @Override
+        public GowingPackable createEntity(
+                @NotNull final GowingUnPacker unPacker,
+                @NotNull final GowingPackedEntityBundle bundle,
+                final GowingEntityReference er
+        )
+                throws GowingUnPackerParsingException {
+
+            String dateString = bundle.getNotNullField( DATE_STRING ).StringValue();
+
+            try {
+
+                return new ObtuseCalendarDate( dateString );
+
+            } catch ( com.obtuse.util.exceptions.ParsingException e ) {
+
+                throw new GowingUnPackerParsingException( e + " recovering date string", e );
+
+            }
+
+        }
+
+    };
 
     /**
      The earliest date that this class supports.
@@ -68,6 +117,32 @@ public class ObtuseCalendarDate implements Comparable<ObtuseCalendarDate> {
     private final int _month;
     private final int _dayOfMonth;
 
+    @NotNull
+    @Override
+    public GowingPackedEntityBundle bundleThyself(
+            final boolean isPackingSuper, @NotNull final GowingPacker packer
+    ) {
+
+        GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
+                ObtuseCalendarDate.ENTITY_TYPE_NAME,
+                ObtuseCalendarDate.VERSION,
+                super.bundleRoot( packer ),
+                packer.getPackingContext()
+        );
+
+        bundle.addHolder( new GowingStringHolder( DATE_STRING, _dateString, true ) );
+
+        return bundle;
+
+    }
+
+    @Override
+    public boolean finishUnpacking( @NotNull final GowingUnPacker unPacker ) {
+
+        return true;
+
+    }
+
     public enum MonthName {
         JANUARY,
         FEBRUARY,
@@ -81,19 +156,6 @@ public class ObtuseCalendarDate implements Comparable<ObtuseCalendarDate> {
         OCTOBER,
         NOVEMBER,
         DECEMBER;
-
-//        JANUARY { public String getLongName() { return "January"; } },
-//	FEBRUARY { public String getLongName() { return "February"; } },
-//	MARCH { public String getLongName() { return "xxx"; } },
-//	APRIL { public String getLongName() { return "xxx"; } },
-//	MAY { public String getLongName() { return "xxx"; } },
-//	JUNE { public String getLongName() { return "xxx"; } },
-//	JULY { public String getLongName() { return "xxx"; } },
-//	AUGUST { public String getLongName() { return "xxx"; } },
-//	SEPTEMBER { public String getLongName() { return "xxx"; } },
-//	OCTOBER { public String getLongName() { return "xxx"; } },
-//	NOVEMBER { public String getLongName() { return "xxx"; } },
-//	DECEMBER { public String getLongName() { return "xxx"; } };
 
         public String getLongName() {
 
@@ -113,19 +175,6 @@ public class ObtuseCalendarDate implements Comparable<ObtuseCalendarDate> {
 
     }
 
-//    public static final int JANUARY = 0;
-//    public static final int FEBRUARY = 1;
-//    public static final int MARCH = 2;
-//    public static final int APRIL = 3;
-//    public static final int MAY = 4;
-//    public static final int JUNE = 5;
-//    public static final int JULY = 6;
-//    public static final int AUGUST = 7;
-//    public static final int SEPTEMBER = 8;
-//    public static final int OCTOBER = 9;
-//    public static final int NOVEMBER = 10;
-//    public static final int DECEMBER = 11;
-
     /**
      Create an instance from a date string of the format <code>YYYY-MM-DD</code>.
      <p/>This method supports dates in the range 0001-01-01 through 9999-12-31 although you need to know a lot about historical dating to properly deal with dates much before about 1000AD.
@@ -140,22 +189,13 @@ public class ObtuseCalendarDate implements Comparable<ObtuseCalendarDate> {
     public ObtuseCalendarDate( final String xdateString )
             throws ParsingException {
 
-        super();
+        super( new GowingNameMarkerThing() );
 
         Matcher dateMatcher = OACD_DATE_PATTERN.matcher( xdateString );
         if ( !dateMatcher.matches() ) {
-//        if ( dateString.length() != "2012-10-05".length() ) {
-
-//            throw new ParsingException(
-//                    "date \"" + xdateString + "\" is wrong length (must be _exactly_ " + "2012-10-05".length() + " characters)",
-//                    0,
-//                    0,
-//                    ParsingException.ErrorType.DATE_FORMAT_ERROR
-//            );
 
             throw new ParsingException(
                     "invalid date \"" + xdateString + "\" (must be \"YYYY-MM-DD\")",
-//                    "date \"" + xdateString + "\" doesn't look like a date to me",
                     0,
                     0,
                     ParsingException.ErrorType.DATE_FORMAT_ERROR
@@ -163,31 +203,9 @@ public class ObtuseCalendarDate implements Comparable<ObtuseCalendarDate> {
 
         }
 
-//        _dateString = dateString;
         _dateString = ObtuseUtil.lpad( dateMatcher.group(1), 4, '0' ) + '-' +
                       ObtuseUtil.lpad( dateMatcher.group(2), 2, '0' ) + '-' +
                       ObtuseUtil.lpad( dateMatcher.group(3), 2, '0' );
-
-//        if ( dateString.length() != "2012-10-05".length() && dateString.length() != "999-01-01".length() ) {
-//
-//            throw new ParsingException(
-//                    "date \"" + dateString + "\" is wrong length (must be _exactly_ " + "999-01-01".length() + " or " + "2012-10-05".length() + " characters)",
-//                    0,
-//                    0,
-//                    ParsingException.ErrorType.DATE_FORMAT_ERROR
-//            );
-//
-//        }
-//
-//        if ( dateString.length() == "999-01-01".length() ) {
-//
-//	    _dateString = "0" + dateString;
-//
-//	} else {
-//
-//	    _dateString = dateString;
-//
-//	}
 
         _midnightUtcMs = DateUtils.parseYYYY_MM_DD_utc( _dateString, 0, false ).getTime();
 
@@ -227,28 +245,6 @@ public class ObtuseCalendarDate implements Comparable<ObtuseCalendarDate> {
         cal.add( Calendar.DAY_OF_YEAR, 1 );
         _dateEndTimeMs = cal.getTimeInMillis() - 1;
 
-//	_year = Integer.parseInt( _dateString.substring( 0, 4 ) );
-//	_month = Integer.parseInt( _dateString.substring( 5, 7 ) ) - 1;
-//	_dayOfMonth = Integer.parseInt( _dateString.substring( 8 ) ) - 1;
-//
-//	if ( _year != calYear ) {
-//
-//	    throw new HowDidWeGetHereError( "date \"" + dateString + "\" has Calendar object year of " + calYear + " but parsed year of " + _year );
-//
-//	}
-//
-//	if ( _month != calMonth ) {
-//
-//	    throw new HowDidWeGetHereError( "date \"" + dateString + "\" has zero-origin Calendar object month of " + calMonth + " but parsed zero-origin month of " + _month );
-//
-//	}
-//
-//	if ( _dayOfMonth != calDayOfMonth ) {
-//
-//	    throw new HowDidWeGetHereError( "date \"" + dateString + "\" has zero-origin Calendar object day of month of " + calDayOfMonth + " but parsed zero-origin day of month of " + _dayOfMonth );
-//
-//	}
-
     }
 
     /**
@@ -261,7 +257,7 @@ public class ObtuseCalendarDate implements Comparable<ObtuseCalendarDate> {
 
     public ObtuseCalendarDate( final Date date ) {
 
-        super();
+        super( new GowingNameMarkerThing() );
 
         _dateString = DateUtils.formatYYYY_MM_DD( date );
         try {
@@ -288,10 +284,6 @@ public class ObtuseCalendarDate implements Comparable<ObtuseCalendarDate> {
         cal.add( Calendar.DAY_OF_YEAR, 1 );
         _dateEndTimeMs = cal.getTimeInMillis() - 1;
 
-//	_year = Integer.parseInt( _dateString.substring( 0, 4 ) );
-//	_month = Integer.parseInt( _dateString.substring( 5, 7 ) ) - 1;
-//	_dayOfMonth = Integer.parseInt( _dateString.substring( 8 ) );
-
     }
 
     /**
@@ -302,7 +294,7 @@ public class ObtuseCalendarDate implements Comparable<ObtuseCalendarDate> {
 
     public ObtuseCalendarDate( final ObtuseCalendarDate date ) {
 
-        super();
+        super( new GowingNameMarkerThing() );
 
         _dateString = date.getDateString();
         _dateStartTimeMs = date.getDateStartTimeMs();
@@ -384,81 +376,6 @@ public class ObtuseCalendarDate implements Comparable<ObtuseCalendarDate> {
         int rval = cal.get( Calendar.DAY_OF_MONTH );
 
         return rval;
-
-//	if ( month == FEBRUARY ) {
-//
-//	    Calendar cal = Calendar.getInstance();
-//
-//	    cal.setLenient( false );
-//
-//	    cal.set( Calendar.YEAR, year );
-//	    cal.set( Calendar.MONTH, Calendar.MARCH );
-//	    cal.set( Calendar.DAY_OF_MONTH, 1 );
-//	    cal.add( Calendar.DAY_OF_YEAR, 1 );
-//
-//	    int rval = cal.get( Calendar.DAY_OF_MONTH );
-//
-//	    return rval;
-//
-//	}
-
-//        %%% get Calendar object for March 1st, subtract one day and use that date's day of month
-//        if ( year <= 0 ) {
-//
-//            throw new IllegalArgumentException( "ObtuseCalendarDate.getDaysInMonth( int year, int month ):  year must be non-negative" );
-//
-//	}
-//
-//        switch ( month ) {
-//
-//	    // Thirty days hath September, April, June and November.
-//
-//	    case SEPTEMBER:
-//	    case APRIL:
-//	    case JUNE:
-//	    case NOVEMBER:
-//
-//		return 30;
-//
-//	    // All the rest have thirty one,
-//
-//	    case JANUARY:
-//	    case MARCH:
-//	    case MAY:
-//	    case JULY:
-//	    case AUGUST:
-//	    case OCTOBER:
-//	    case DECEMBER:
-//
-//		return 31;
-//
-//	    // 'cept that pesky February . . .
-//
-//	    case FEBRUARY:
-//
-//		if ( year % 4 == 0 ) {
-//
-//		    if ( year % 100 == 0 && year % 400 != 0 ) {
-//
-//			return 28;
-//
-//		    } else {
-//
-//			return 29;
-//
-//		    }
-//
-//		} else {
-//
-//		    return 28;
-//
-//		}
-//
-//	    default:
-//
-//	        throw new IllegalArgumentException( "ObtuseCalendarDate.getDaysInMonth( int year, int month ):  bogus month " + month + " - month must be between 1 and 12 inclusive" );
-//
-//	}
 
     }
 
@@ -803,8 +720,6 @@ public class ObtuseCalendarDate implements Comparable<ObtuseCalendarDate> {
 
                 Logger.logMsg( "year:  " + year );
 
-//                Logger.logMsg( "February in " + year + " has " + getDaysInMonth( year, MonthName.FEBRUARY.ordinal() ) );
-
                 for ( int month = 0; month < 12; month += 1 ) {
 
                     MonthName monthName = MonthName.values()[month];
@@ -833,13 +748,10 @@ public class ObtuseCalendarDate implements Comparable<ObtuseCalendarDate> {
                     ")"
             );
 
-//	    for ( int month = 0; month < 12; month += 1 ) {
-//
-//	    }
-
             GregorianCalendar gregorianCalendar = new GregorianCalendar();
             Logger.logMsg( "Julian to Gregorian switch occurred on " + gregorianCalendar.getGregorianChange() );
             gregorianCalendar.setTimeInMillis( ObtuseCalendarDate.parseCalendarDate( "1582-10-01" ).getDateStartTimeMs() );
+
             for ( int i = 0; i < 30; i += 1 ) {
 
                 Logger.logMsg( "i=" + i + ", date is " + gregorianCalendar.getTime() );
@@ -879,9 +791,6 @@ public class ObtuseCalendarDate implements Comparable<ObtuseCalendarDate> {
             }
 
         }
-
-//	Logger.logMsg( "pre-Java 8 date support ends at " + new Date( Long.MAX_VALUE ) + " or epoch+" + ObtuseUtil.readable( Long.MAX_VALUE ) + " ms" );
-//	Logger.logMsg( "Long.MAX_VALUE equals about " + Long.MAX_VALUE / (1000L * 86400 * 365 + 1000L * 86400 / 4 ) );
 
     }
 

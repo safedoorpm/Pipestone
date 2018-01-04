@@ -347,6 +347,7 @@ public abstract class GowingAbstractPackableHolder implements GowingPackableThin
 
     }
 
+    @Override
     public EntityName getName() {
 
         return _name;
@@ -375,54 +376,11 @@ public abstract class GowingAbstractPackableHolder implements GowingPackableThin
     @Override
     public boolean pack( final GowingPacker packer2 ) {
 
-//	if ( separator != null ) {
-//
-//	    packer2.emit( separator );
-//
-//	}
-
-//	packer2.emitName( getName() );
-
-//	packer2.emit( '=' );
-//	if ( !_mandatory ) {
-//
-//	    packer2.emit( '?' );
-//
-//	}
-//	packer2.emit( _tag );
-
         emitRepresentation( packer2 );
-
-//	packer2.emit( _mandatory ? '(' : '{' );
-//	packer2.emit( _mandatory ? ')' : '}' );
 
         return false;
 
     }
-
-//    /**
-//     Emit the string representation using a mechanism that works for most types.
-//     <p/>This method gets overridden in classes responsible for types that need special handling.
-//     * @param packer2 where to send the string representation.
-//     */
-//
-//    public void emitRepresentation( Packer2 packer2 ) {
-//
-//	Object value = getObjectValue();
-//
-//	if ( isMandatory() || value != null ) {
-//
-////	    packer2.emit( value.toString() );
-//
-//	    emitActualValue( packer2 );
-//
-//	} else {
-//
-//	    packer2.emitNull();
-//
-//	}
-//
-//    }
 
     public int compareTo( @NotNull final GowingPackableThingHolder rhs ) {
 

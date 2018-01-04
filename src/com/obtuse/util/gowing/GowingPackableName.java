@@ -111,7 +111,6 @@ public class GowingPackableName implements GowingPackable, Comparable<GowingPack
         GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
                 ENTITY_TYPE_NAME,
                 VERSION,
-//		null,
                 packer.getPackingContext()
         );
 

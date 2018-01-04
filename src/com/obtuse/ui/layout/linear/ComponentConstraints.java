@@ -10,7 +10,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
- Describe the constraints that a component within a {@link LinearContainer3} wants the {@link LinearLayoutManager3} to follow.
+ Describe the constraints that a component within a {@link LinearContainer3} wants the {@link LinearLayoutManager3} to
+ follow.
  <p/>Instances of this class are immutable. This allows them to be safely shared by multiple components.
  */
 
@@ -24,82 +25,91 @@ public class ComponentConstraints {
     @Nullable
     private final ConstraintTuple _heightConstraint;
 
-    public ComponentConstraints( final LinearFlagMap componentFlags, @Nullable final ConstraintTuple widthConstraint, @Nullable final ConstraintTuple heightConstraint ) {
+    public ComponentConstraints(
+            final LinearFlagMap componentFlags,
+            @Nullable final ConstraintTuple widthConstraint,
+            @Nullable final ConstraintTuple heightConstraint
+    ) {
 //	this( componentFlags.toArray( new LinearFlagName[ componentFlags.size() ] ), widthConstraint, heightConstraint );
 
-	_componentFlags = componentFlags;
+        _componentFlags = componentFlags;
 
-	_widthConstraint = widthConstraint;
+        _widthConstraint = widthConstraint;
 
-	_heightConstraint = heightConstraint;
+        _heightConstraint = heightConstraint;
 
     }
 
-    public ComponentConstraints( final LinearFlagNameValue[] componentFlags, @Nullable final ConstraintTuple widthConstraint, @Nullable final ConstraintTuple heightConstraint ) {
-	this( LinearFlagMap.createCleanedMap( componentFlags ), widthConstraint, heightConstraint );
+    public ComponentConstraints(
+            final LinearFlagNameValue[] componentFlags,
+            @Nullable final ConstraintTuple widthConstraint,
+            @Nullable final ConstraintTuple heightConstraint
+    ) {
+
+        this( LinearFlagMap.createCleanedMap( componentFlags ), widthConstraint, heightConstraint );
 
     }
 
     @Nullable
     public ConstraintTuple getWidthConstraint() {
 
-	return _widthConstraint;
+        return _widthConstraint;
 
     }
 
     @Nullable
     public ConstraintTuple getHeightConstraint() {
 
-	return _heightConstraint;
+        return _heightConstraint;
 
     }
 
     @NotNull
     LinearFlagMap getComponentFlags() {
 
-	return _componentFlags;
+        return _componentFlags;
 
     }
 
     public boolean isLeftJustified() {
 
-	return getComponentFlags().containsKey( LinearFlagName.LEFT_JUSTIFIED );
+        return getComponentFlags().containsKey( LinearFlagName.LEFT_JUSTIFIED );
 
     }
 
     public boolean isRightJustified() {
 
-	return ( getComponentFlags().containsKey( LinearFlagName.RIGHT_JUSTIFIED ) );
+        return ( getComponentFlags().containsKey( LinearFlagName.RIGHT_JUSTIFIED ) );
 
     }
 
     public boolean isHorizontallyJustified() {
 
-	return isLeftJustified() && isRightJustified();
+        return isLeftJustified() && isRightJustified();
 
     }
 
     public boolean isTopJustified() {
 
-	return ( getComponentFlags().containsKey( LinearFlagName.TOP_JUSTIFIED ) );
+        return ( getComponentFlags().containsKey( LinearFlagName.TOP_JUSTIFIED ) );
 
     }
 
     public boolean isBottomJustified() {
 
-	return ( getComponentFlags().containsKey( LinearFlagName.BOTTOM_JUSTIFIED ) );
+        return ( getComponentFlags().containsKey( LinearFlagName.BOTTOM_JUSTIFIED ) );
 
     }
 
     public boolean isVerticallyJustified() {
 
-	return isTopJustified() && isBottomJustified();
+        return isTopJustified() && isBottomJustified();
 
     }
 
     public String toString() {
 
-	return "ComponentConstraints( " + getComponentFlags() + " )";
+        return "ComponentConstraints( " + getComponentFlags() + " )";
 
     }
 

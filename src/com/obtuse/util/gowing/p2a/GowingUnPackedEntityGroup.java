@@ -17,76 +17,80 @@ import java.util.Collection;
  <p/>Should probably be an inner class although other unpackers might find it useful.
  */
 
-public class GowingDePackedEntityGroup {
+public class GowingUnPackedEntityGroup {
 
     private final GowingFormatVersion _version;
 
     private final FormattingLinkedList<GowingPackable> _allEntities = new FormattingLinkedList<>();
 
-    private final TreeSorter<EntityName,GowingPackable> _namedClasses = new TreeSorter<>();
+    private final TreeSorter<EntityName, GowingPackable> _namedClasses = new TreeSorter<>();
 
     @SuppressWarnings("WeakerAccess")
-    protected GowingDePackedEntityGroup( @NotNull final GowingFormatVersion version ) {
-	super();
+    protected GowingUnPackedEntityGroup( @NotNull final GowingFormatVersion version ) {
 
-	_version = version;
+        super();
+
+        _version = version;
 
     }
 
     public GowingFormatVersion getFormatVersion() {
 
-	return _version;
+        return _version;
 
     }
 
     @SuppressWarnings("WeakerAccess")
     public EntityName getGroupName() {
 
-	return _version.getGroupName();
+        return _version.getGroupName();
 
     }
 
     @SuppressWarnings("UnusedReturnValue")
-    public GowingDePackedEntityGroup add( @NotNull final Collection<EntityName> classNames, @NotNull final GowingPackable newEntity ) {
+    public GowingUnPackedEntityGroup add(
+            @NotNull final Collection<EntityName> classNames,
+            @NotNull final GowingPackable newEntity
+    ) {
 
-	_allEntities.add( newEntity );
-	for ( EntityName className : classNames ) {
+        _allEntities.add( newEntity );
+        for ( EntityName className : classNames ) {
 
-	    _namedClasses.add( className, newEntity );
+            _namedClasses.add( className, newEntity );
 
-	}
+        }
 
-	return this;
+        return this;
 
     }
 
     public TreeSorter<EntityName, GowingPackable> getNamedClasses() {
 
-	return _namedClasses;
+        return _namedClasses;
 
     }
 
     public FormattingLinkedList<GowingPackable> getAllEntities() {
 
-	return _allEntities;
+        return _allEntities;
 
     }
 
     public int size() {
 
-	return _allEntities.size();
+        return _allEntities.size();
 
     }
 
     public boolean isEmpty() {
 
-	return _allEntities.isEmpty();
+        return _allEntities.isEmpty();
 
     }
 
     public String toString() {
 
-	return "GowingDePackedEntityGroup( \"" + getGroupName() + "\", " + getAllEntities() + " )";
+        return "GowingUnPackedEntityGroup( \"" + getGroupName() + "\", " + getAllEntities() + " )";
 
     }
 

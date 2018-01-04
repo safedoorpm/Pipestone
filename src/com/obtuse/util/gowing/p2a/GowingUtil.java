@@ -13,7 +13,6 @@ import org.jetbrains.annotations.NotNull;
 
 public class GowingUtil {
 
-
     /**
      Effectively mark this class as a utility class.
      */
@@ -69,7 +68,6 @@ public class GowingUtil {
 
             } else {
 
-//                int ll = b.intValue();
                 int ll = b;
                 int high = ( ll >> 4 ) & 0xf;
                 int low = ll & 0xf;

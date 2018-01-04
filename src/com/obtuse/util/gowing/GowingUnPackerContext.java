@@ -21,16 +21,6 @@ import java.util.Optional;
 
 public interface GowingUnPackerContext {
 
-//    PackingId2 allocatePackingId( EntityTypeName entityTypeName );
-
-//    PackingId2 allocatePackingId( EntityTypeName entityTypeName, long idWithinType );
-
-//    long getHighestPackingIdForType( EntityTypeName entityTypeName );
-
-//    int getOrAllocateTypeReferenceId( Packable2 entity );
-
-//    int getOrAllocateTypeReferenceId( EntityTypeName typeName );
-
     @NotNull
     Optional<Integer> findTypeReferenceId( EntityTypeName typeName );
 
@@ -44,14 +34,8 @@ public interface GowingUnPackerContext {
 
     void rememberPackableEntity( StdGowingTokenizer.GowingToken2 token, GowingEntityReference etr, GowingPackable entity );
 
-//    @NotNull
-//    Packable2 getInstance( InstanceId instanceId );
-
     @NotNull
     Collection<EntityTypeName> getNewTypeNames();
-
-//    @Nullable
-//    StdPackingContext2.PackingAssociation findPackingAssociation( InstanceId instanceId );
 
     @NotNull
     GowingTypeIndex getTypeIndex();
@@ -90,8 +74,6 @@ public interface GowingUnPackerContext {
 
     @SuppressWarnings("UnusedReturnValue")
     EntityTypeInfo registerFactory( GowingEntityFactory factory );
-
-//    Collection<InstanceId> getSeenInstanceIds();
 
     void saveTypeAlias( StdGowingTokenizer.GowingToken2 typeIdToken, StdGowingTokenizer.GowingToken2 typeNameToken )
 	    throws GowingUnPackerParsingException;

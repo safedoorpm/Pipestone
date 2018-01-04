@@ -132,4 +132,10 @@ public class ImmutableDate extends Date implements GowingPackable {
 
     }
 
+    public String toString() {
+
+        return "ImmutableDate( " + super.toString() + " )";
+
+    }
+
 }
