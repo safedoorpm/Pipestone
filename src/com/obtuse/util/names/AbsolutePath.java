@@ -57,7 +57,7 @@ public class AbsolutePath extends RelativePath {
 
     public static final AbsolutePath ABSOLUTE_ROOT_PATH = new AbsolutePath();
 
-    public AbsolutePath( @NotNull final SegmentName[] segments ) {
+    public AbsolutePath( @NotNull final SegmentName@NotNull[] segments ) {
         super( segments );
     }
 
