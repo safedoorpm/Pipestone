@@ -18,6 +18,8 @@ public interface GowingPacker extends Closeable {
 
     GowingInstanceId queuePackableEntity( GowingPackable entity );
 
+    GowingInstanceId queuePackableEntity( EntityName entityName, GowingPackable entity );
+
     @NotNull
     GowingPackerContext getPackingContext();
 

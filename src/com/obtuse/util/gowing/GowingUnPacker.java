@@ -20,6 +20,16 @@ public interface GowingUnPacker extends Closeable {
 
     boolean isClosed();
 
+    /**
+     Get the {@link GowingEntityReference} of the entity currently being finished by a call to
+     {@link GowingPackable#finishUnpacking(GowingUnPacker)}.
+     <p>This method only returns non-null values while {@link GowingPackable#finishUnpacking(GowingUnPacker)} is executing.</p>
+     @return {@link GowingEntityReference} of the entity currently being finished by a call to
+     {@link GowingPackable#finishUnpacking(GowingUnPacker)}.
+     */
+
+    GowingEntityReference getCurrentEntityReference();
+
     @NotNull
     Optional<GowingUnPackedEntityGroup> unPack();
 

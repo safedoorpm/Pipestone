@@ -5,8 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/annotations-java8.jar" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPacker.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPacker.java" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingPacker.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingPacker.java" />
     </list>
     <ignored path="Pipestone.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -194,9 +195,6 @@
               <caret line="229" column="0" lean-forward="false" selection-start-line="229" selection-start-column="0" selection-end-line="229" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#480#507#0" expanded="true" />
-                <element signature="e#565#601#0" expanded="true" />
-                <element signature="e#721#771#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -1412,7 +1410,7 @@
       <workItem from="1512313893744" duration="4920000" />
       <workItem from="1512536692223" duration="6315000" />
       <workItem from="1513440900019" duration="6031000" />
-      <workItem from="1515051511079" duration="1050000" />
+      <workItem from="1515051511079" duration="2024000" />
     </task>
     <task id="LOCAL-00001" summary="Major re-sync with danny's personal toolkit.">
       <created>1359580956092</created>
@@ -1761,7 +1759,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="792161000" />
+    <option name="totallyTimeSpent" value="793135000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1774,7 +1772,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="97" y="51" width="2443" height="1494" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.118644066" sideWeight="0.67289025" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -2681,9 +2678,6 @@
           <caret line="229" column="0" lean-forward="false" selection-start-line="229" selection-start-column="0" selection-end-line="229" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#480#507#0" expanded="true" />
-            <element signature="e#565#601#0" expanded="true" />
-            <element signature="e#721#771#0" expanded="true" />
           </folding>
         </state>
       </provider>

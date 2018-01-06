@@ -186,9 +186,7 @@ public class StdGowingPacker implements GowingPacker {
 
     }
 
-    // I'm not convinced that this is a service that we should offer - Danny.
-
-    private GowingInstanceId queuePackableEntity( @Nullable final EntityName entityName, @Nullable final GowingPackable entity ) {
+    public GowingInstanceId queuePackableEntity( @Nullable final EntityName entityName, @Nullable final GowingPackable entity ) {
 
         if ( entity == null ) {
 

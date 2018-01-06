@@ -493,7 +493,7 @@ public class FrameworkTableModel<D extends CheckBoxRowWrapper.RowData> extends C
 
             Logger.logMsg( "setting cell at (" +
                            row +
-                           ", " +
+                           "," +
                            col +
                            ") to " +
                            ( value == null ? null : ( value.getClass().getSimpleName() + " instance = (" + value + ")" ) ) );
@@ -588,7 +588,7 @@ public class FrameworkTableModel<D extends CheckBoxRowWrapper.RowData> extends C
 
         }
 
-        Logger.logMsg( "cell( " + row + "," + col + " ) is " + ( rval ? "" : "not " ) + "editable because " + how );
+        Logger.logMsg( "cell(" + row + "," + col + ") is " + ( rval ? "" : "not " ) + "editable because " + how );
 
         return rval;
 

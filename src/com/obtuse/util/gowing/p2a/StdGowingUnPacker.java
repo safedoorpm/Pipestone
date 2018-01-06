@@ -33,6 +33,7 @@ public class StdGowingUnPacker implements GowingUnPacker {
     private final GowingUnPackerContext _unPackerContext;
     private final File _inputFile;
     private Optional<GowingUnPackedEntityGroup> _unpackedGroup = null;
+    private GowingEntityReference _currentEntityReference = null;
 
     private boolean _closed = false;
 
@@ -160,6 +161,13 @@ public class StdGowingUnPacker implements GowingUnPacker {
     }
 
     @Override
+    public GowingEntityReference getCurrentEntityReference() {
+
+        return _currentEntityReference;
+
+    }
+
+    @Override
     @NotNull
     public Optional<GowingUnPackedEntityGroup> unPack() {
 
@@ -235,11 +243,21 @@ public class StdGowingUnPacker implements GowingUnPacker {
 
                     if ( !_unPackerContext.isEntityFinished( er ) ) {
 
-                        GowingPackable entity = resolveReference( er );
-                        if ( entity.finishUnpacking( this ) ) {
+                        try {
 
-                            _unPackerContext.markEntityFinished( er );
-                            finishedSomething = true;
+                            GowingPackable entity = resolveReference( er );
+                            _currentEntityReference = er;
+
+                            if ( entity.finishUnpacking( this ) ) {
+
+                                _unPackerContext.markEntityFinished( er );
+                                finishedSomething = true;
+
+                            }
+
+                        } finally {
+
+                            _currentEntityReference = null;
 
                         }
 

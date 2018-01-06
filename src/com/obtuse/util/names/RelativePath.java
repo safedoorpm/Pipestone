@@ -318,6 +318,8 @@ public class RelativePath extends GowingAbstractPackableEntity implements Iterab
 
             rval[ix] = sn.getSegmentName();
 
+            ix += 1;
+
         }
 
         return rval;

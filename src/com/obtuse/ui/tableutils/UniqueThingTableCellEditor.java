@@ -6,6 +6,7 @@
 package com.obtuse.ui.tableutils;
 
 import com.obtuse.ui.MessageLabel;
+import com.obtuse.ui.MessageLabelInterface;
 import com.obtuse.util.*;
 import com.obtuse.util.things.ThingInfo;
 import com.obtuse.util.things.ThingName;
@@ -28,7 +29,7 @@ public class UniqueThingTableCellEditor<T extends ThingInfo> extends Customizabl
 
     @SuppressWarnings({ "FieldCanBeLocal", "unused" }) private final int _col;
 
-    private final MessageLabel _jMessage;
+    private final MessageLabelInterface _jMessage;
 
     private final ThingNameFactory _nameFactory;
 
@@ -37,7 +38,7 @@ public class UniqueThingTableCellEditor<T extends ThingInfo> extends Customizabl
             final int row,
             final int col,
             @NotNull final ThingNameFactory nameFactory,
-            @Nullable final MessageLabel jMessage
+            @Nullable final MessageLabelInterface jMessage
     ) {
 
         super();

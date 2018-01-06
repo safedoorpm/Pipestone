@@ -18,7 +18,7 @@ import java.util.Optional;
  A JLabel which might provide more information when it is clicked (depends on whether or not more information is actually available).
  */
 
-public class MessageLabel extends JLabel {
+public class MessageLabel extends JLabel implements MessageLabelInterface {
 
     public static class AugmentedIllegalArgumentException extends IllegalArgumentException {
 
@@ -124,7 +124,6 @@ public class MessageLabel extends JLabel {
      */
 
     public MessageLabel() {
-
         this( null, null );
 
         addMouseListener(
@@ -159,7 +158,6 @@ public class MessageLabel extends JLabel {
      */
 
     public MessageLabel( @Nullable final String message, @Nullable final String extraInfo ) {
-
         super();
 
         setMessage( message, extraInfo );

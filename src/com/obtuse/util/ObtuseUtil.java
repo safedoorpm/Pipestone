@@ -6,6 +6,11 @@ package com.obtuse.util;
 
 import com.obtuse.db.PostgresConnection;
 import com.obtuse.exceptions.HowDidWeGetHereError;
+import com.obtuse.util.gowing.EntityName;
+import com.obtuse.util.gowing.GowingPackable;
+import com.obtuse.util.gowing.GowingPacker;
+import com.obtuse.util.gowing.p2a.StdGowingPacker;
+import com.obtuse.util.gowing.p2a.holders.GowingPackableCollection;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -16,6 +21,8 @@ import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.PreparedStatement;
@@ -1076,6 +1083,75 @@ public class ObtuseUtil {
             return false;
 
         }
+
+    }
+
+    /**
+     Copy the contents of a file to a new file.
+     <p>The new file must not exist when this method is called.</p>
+     @param inputFile the (existing) file to be copied from.
+     @param outputFile the (non-existent) file to be copied to.
+     @param tracebackOnError print traceback to {@code stderr} on error if {@code true}; print nothing on error if {@code false}.
+     @return {@code true} if it worked; {@code false} if it failed.
+     */
+
+    public static boolean copyFile( @NotNull final File inputFile, @NotNull final File outputFile, final boolean tracebackOnError ) {
+
+        InputStream is = null;
+        OutputStream os = null;
+        boolean rval;
+        boolean removeOutputFile = false;
+        try {
+
+            if ( outputFile.exists() ) {
+
+                throw new IOException( "" + outputFile + " (File already exists)" );
+
+            }
+
+            removeOutputFile = true;
+
+            is = new FileInputStream( inputFile );
+            os = new FileOutputStream( outputFile );
+
+            long totalCopied = 0;
+            byte[] buffer = new byte[64 * 1024];
+            int inLength;
+            while ( ( inLength = is.read( buffer ) ) > 0 ) {
+
+                os.write( buffer, 0, inLength );
+                totalCopied += inLength;
+
+            }
+
+            Logger.logMsg( "wrote a total of " + totalCopied + " bytes" );
+
+            rval = true;
+
+        } catch ( IOException e ) {
+
+            if ( tracebackOnError ) {
+
+                Logger.logErr( "ObtuseUtil.copyFile( \"" + inputFile + "\", \"" + outputFile + "\" ):  " + e.getMessage(), e );
+
+            }
+
+            if ( removeOutputFile ) {
+
+                outputFile.delete();
+
+            }
+
+            rval = false;
+
+        } finally {
+
+            closeQuietly( is );
+            closeQuietly( os );
+
+        }
+
+        return rval;
 
     }
 
@@ -3070,6 +3146,41 @@ public class ObtuseUtil {
 //        } else {
 //
 //            Logger.logMsg( "rememberBitName:  mask named \"" + name + "\" has value 0 - ignored" );
+
+        }
+
+    }
+
+    public static void quietGowingSave(
+            @NotNull final EntityName groupName,
+            @NotNull final GowingPackable item,
+            @NotNull final File outputFile
+    ) {
+
+        try {
+
+            GowingPacker packer = new StdGowingPacker( groupName, outputFile );
+            packer.queuePackableEntity( groupName, item );
+            packer.finish();
+            packer.close();
+
+        } catch ( FileNotFoundException e ) {
+
+            Logger.logErr( "unable to create output file " + outputFile, e );
+
+            ObtuseUtil.doNothing();
+
+        } catch ( IOException e ) {
+
+            Logger.logErr( "I/O error writing to " + outputFile, e );
+
+            ObtuseUtil.doNothing();
+
+        } catch ( Throwable e ) {
+
+            Logger.logErr( "Unexpected throwable writing to " + outputFile, e );
+
+            ObtuseUtil.doNothing();
 
         }
 

@@ -1,6 +1,7 @@
 package com.obtuse.util.gowing.p2a.holders;
 
 import com.obtuse.util.FormattingLinkedList;
+import com.obtuse.util.Logger;
 import com.obtuse.util.ObtuseUtil;
 import com.obtuse.util.gowing.*;
 import com.obtuse.util.gowing.p2a.GowingEntityReference;
@@ -149,6 +150,8 @@ public class GowingPackableCollection<E> extends LinkedList<E> implements Gowing
     @Override
     public boolean finishUnpacking( @NotNull final GowingUnPacker unPacker ) {
 
+        Logger.logMsg( "GowingPackableCollection.finishUnpacking:  unpacking " + unPacker.getCurrentEntityReference() );
+
         ObtuseUtil.doNothing();
 
         for ( Object obj : _things ) {
@@ -164,6 +167,9 @@ public class GowingPackableCollection<E> extends LinkedList<E> implements Gowing
             }
 
         }
+
+        Logger.logMsg( "GowingPackableCollection.finishUnpacking:  ready to unpack " + unPacker.getCurrentEntityReference() );
+        ObtuseUtil.doNothing();
 
         for ( Object obj : _things ) {
 
@@ -219,6 +225,12 @@ public class GowingPackableCollection<E> extends LinkedList<E> implements Gowing
         }
 
         return bundle;
+
+    }
+
+    public String toString() {
+
+        return "GowingPackableCollection( size=" + size() + " )";
 
     }
 
