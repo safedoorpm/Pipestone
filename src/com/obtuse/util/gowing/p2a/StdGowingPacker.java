@@ -110,20 +110,43 @@ public class StdGowingPacker implements GowingPacker {
 
     private SortedMap<String,Object> s_usedMetaDataKeywords = new TreeMap<>();
 
-    public StdGowingPacker( @NotNull final EntityName groupName, @NotNull final File outputFile )
+    private boolean _verbose = false;
+
+    @SuppressWarnings("unused")
+    public StdGowingPacker( @NotNull final EntityName groupName, @NotNull final File outputFile, final boolean verbose )
             throws FileNotFoundException {
 
-        this( groupName, outputFile, new PrintWriter( outputFile ), new StdGowingPackerContext() );
+        this( groupName, outputFile, new PrintWriter( outputFile ), new StdGowingPackerContext(), verbose );
 
     }
 
+    @SuppressWarnings({ "RedundantThrows", "unused" })
+    public StdGowingPacker(
+            @NotNull final EntityName groupName,
+            @NotNull final File outputFile,
+            @NotNull final OutputStream outputStream,
+            final boolean verbose
+    ) throws FileNotFoundException {
+
+        this( groupName, outputFile, new PrintWriter( outputStream, true ), new StdGowingPackerContext(), verbose );
+
+    }
+
+    public StdGowingPacker( @NotNull final EntityName groupName, @NotNull final File outputFile )
+            throws FileNotFoundException {
+
+        this( groupName, outputFile, new PrintWriter( outputFile ), new StdGowingPackerContext(), false );
+
+    }
+
+    @SuppressWarnings("RedundantThrows")
     public StdGowingPacker(
             @NotNull final EntityName groupName,
             @NotNull final File outputFile,
             @NotNull final OutputStream outputStream
     ) throws FileNotFoundException {
 
-        this( groupName, outputFile, new PrintWriter( outputStream, true ), new StdGowingPackerContext() );
+        this( groupName, outputFile, new PrintWriter( outputStream, true ), new StdGowingPackerContext(), false );
 
     }
 
@@ -131,9 +154,12 @@ public class StdGowingPacker implements GowingPacker {
             @NotNull final EntityName groupName,
             @NotNull final File outputFile,
             @NotNull final PrintWriter writer,
-            @NotNull final GowingPackerContext packingContext
+            @NotNull final GowingPackerContext packingContext,
+            final boolean verbose
     ) {
         super();
+
+        _verbose = verbose;
 
         _outputFile = outputFile;
         _groupName = groupName;
@@ -178,7 +204,7 @@ public class StdGowingPacker implements GowingPacker {
 
         }
 
-        Logger.logMsg( "queuing " + entity.getInstanceId() + " / " + entity.getInstanceId().getTypeName() );
+        if ( _verbose ) Logger.logMsg( "queuing " + entity.getInstanceId() + " / " + entity.getInstanceId().getTypeName() );
 
         _packingContext.rememberPackableEntity( null, entity );
 
@@ -194,7 +220,7 @@ public class StdGowingPacker implements GowingPacker {
 
         }
 
-        Logger.logMsg( "queuing " + entity.getInstanceId() + " / " + entity.getInstanceId().getTypeName() + " == " + entityName );
+        if ( _verbose ) Logger.logMsg( "queuing " + entity.getInstanceId() + " / " + entity.getInstanceId().getTypeName() + " == " + entityName );
 
         _packingContext.rememberPackableEntity( entityName, entity );
 
@@ -221,7 +247,7 @@ public class StdGowingPacker implements GowingPacker {
 
                 if ( !_previouslyPackedEntities.contains( instanceId ) ) {
 
-                    Logger.logMsg( "will pack " + instanceId + " on next pass" );
+                    if ( _verbose ) Logger.logMsg( "will pack " + instanceId + " on next pass" );
 
                     notPackedEntities.add( instanceId );
 
@@ -231,18 +257,18 @@ public class StdGowingPacker implements GowingPacker {
 
             if ( notPackedEntities.isEmpty() ) {
 
-                Logger.logMsg( "done packing" );
+                Logger.logMsg( "Gowing is done packing global group " + _groupName + " (it took " + pass + " pass" + ( pass == 1 ? "" : "es" ) + " to pack " + entityCount + " entit" + ( entityCount == 1 ? "y" : "ies" ) + ")" );
 
                 break;
 
             }
 
-            Logger.logMsg( "starting packing pass " + pass + " with " + notPackedEntities.size() + " yet to be packed entities" );
+            if ( _verbose ) Logger.logMsg( "starting packing pass " + pass + " with " + notPackedEntities.size() + " yet to be packed entities" );
 
             for ( GowingInstanceId instanceId : notPackedEntities ) {
 
                 EntityNames names = _packingContext.getEntityNames( instanceId );
-                Logger.logMsg( "packing " + instanceId + " / " + names );
+                if ( _verbose ) Logger.logMsg( "packing " + instanceId + " / " + names );
                 actuallyPackEntity( instanceId );
                 entityCount += 1;
                 _previouslyPackedEntities.add( instanceId );
@@ -270,7 +296,7 @@ public class StdGowingPacker implements GowingPacker {
 
     private void actuallyPackEntity( @NotNull final GowingInstanceId instanceId ) {
 
-        Logger.logMsg( "@@@ actually packing " + instanceId );
+        if ( _verbose ) Logger.logMsg( "@@@ actually packing " + instanceId );
         EntityNames entityNames = _packingContext.getEntityNames( instanceId );
         GowingPackedEntityBundle bundle = entityNames.getEntity().bundleThyself( false, this );
 
@@ -281,7 +307,7 @@ public class StdGowingPacker implements GowingPacker {
 
                 String typeName = GowingInstanceId.lookupTypeName( newTypeId.intValue() );
 
-                Logger.logMsg( "recording class " + typeName );
+                if ( _verbose ) Logger.logMsg( "recording class " + typeName );
 
                 _writer.print( newTypeId );
                 _writer.print( '@' );
@@ -349,6 +375,7 @@ public class StdGowingPacker implements GowingPacker {
 
     }
 
+    @SuppressWarnings("unused")
     private void emitEntityReference( final GowingInstanceId instanceId, final int version ) {
 
         emitEntityReference( instanceId, version, null );
@@ -440,7 +467,7 @@ public class StdGowingPacker implements GowingPacker {
     }
 
     @Override
-    public void emit( final double@NotNull[] v ) {
+    public void emit( @NotNull final double[] v ) {
 
         _writer.print( GowingConstants.TAG_PRIMITIVE_ARRAY );
         _writer.print( v.length );
@@ -500,7 +527,7 @@ public class StdGowingPacker implements GowingPacker {
     }
 
     @Override
-    public void emit( final float@NotNull[] v ) {
+    public void emit( @NotNull final float[] v ) {
 
         _writer.print( GowingConstants.TAG_PRIMITIVE_ARRAY );
         _writer.print( v.length );
@@ -560,7 +587,7 @@ public class StdGowingPacker implements GowingPacker {
     }
 
     @Override
-    public void emit( final long@NotNull[] v ) {
+    public void emit( @NotNull final long[] v ) {
 
         _writer.print( GowingConstants.TAG_PRIMITIVE_ARRAY );
         _writer.print( v.length );
@@ -620,7 +647,7 @@ public class StdGowingPacker implements GowingPacker {
     }
 
     @Override
-    public void emit( final int@NotNull[] v ) {
+    public void emit( @NotNull final int[] v ) {
 
         _writer.print( GowingConstants.TAG_PRIMITIVE_ARRAY );
         _writer.print( v.length );
@@ -680,7 +707,7 @@ public class StdGowingPacker implements GowingPacker {
     }
 
     @Override
-    public void emit( final short@NotNull[] v ) {
+    public void emit( @NotNull final short[] v ) {
 
         _writer.print( GowingConstants.TAG_PRIMITIVE_ARRAY );
         _writer.print( v.length );
@@ -742,7 +769,7 @@ public class StdGowingPacker implements GowingPacker {
     private static final char[] HEX_CHARS = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' };
 
     @Override
-    public void emit( final byte@NotNull[] v ) {
+    public void emit( @NotNull final byte[] v ) {
 
         _writer.print( GowingConstants.TAG_PRIMITIVE_ARRAY );
         _writer.print( v.length );
@@ -968,6 +995,7 @@ public class StdGowingPacker implements GowingPacker {
 
     }
 
+    @Override
     public File getOutputFile() {
 
         return _outputFile;
@@ -1045,7 +1073,7 @@ public class StdGowingPacker implements GowingPacker {
 
     }
 
-    @SuppressWarnings("WeakerAccess")
+    @Override
     public EntityName getGroupName() {
 
         return _groupName;

@@ -6,10 +6,9 @@ package com.obtuse.util;
 
 import java.io.PrintStream;
 import java.util.*;
-import java.util.function.Function;
 
 /**
- * Measure how long things take.
+ Measure how long things take.
  */
 
 @SuppressWarnings("UnusedDeclaration")
@@ -27,24 +26,29 @@ public class Measure {
 
     private final boolean _initialized;
 
+    private boolean _finished = false;
+
+    private long _finishedDelta = 0L;
+
     private final Stack<StackLevelInfo> _ourStack;
 
     private static final Long LOCK = 0L;
 
-    private static SortedMap<String,Stats> s_stats = new TreeMap<>();
+    private static SortedMap<String, Stats> s_stats = new TreeMap<>();
 
     private static int s_maxCategoryNameLength = Math.max( OUTER_DONE_STATS.length(), INNER_DONE_STATS.length() );
 
     private static long s_measuringSinceMillis = System.currentTimeMillis();
 
-    private static SortedMap<Long,Stack<StackLevelInfo>> s_threadStacks = new TreeMap<>();
+    private static SortedMap<Long, Stack<StackLevelInfo>> s_threadStacks = new TreeMap<>();
 
-    private static SortedMap<String,Stats> s_crossThreadStats = new TreeMap<>();
+    private static SortedMap<String, Stats> s_crossThreadStats = new TreeMap<>();
 
-    private static SortedMap<String,Stats> s_stackErrorStats = new TreeMap<>();
+    private static SortedMap<String, Stats> s_stackErrorStats = new TreeMap<>();
 
-    private static SortedMap<String,Stats> s_stackData;
+    private static SortedMap<String, Stats> s_stackData;
     private static StackLevelStats s_stackStats = new StackLevelStats( "root", null );
+
     static {
 
         s_stats.put( OUTER_DONE_STATS, new Stats() );
@@ -62,6 +66,7 @@ public class Measure {
         private final List<String> _levelNames;
 
         public StackLevelInfo( final String levelName, final Stack<StackLevelInfo> stack ) {
+
             super();
 
             _levelName = levelName;
@@ -119,12 +124,13 @@ public class Measure {
 
     public static class StackLevelStats {
 
-        private final SortedMap<String,StackLevelStats> _ourChildren;
+        private final SortedMap<String, StackLevelStats> _ourChildren;
         private final Stats _ourStats;
         private final StackLevelStats _parent;
         private final String _levelName;
 
         public StackLevelStats( final String levelName, final StackLevelStats parent ) {
+
             super();
 
             _levelName = levelName;
@@ -210,49 +216,41 @@ public class Measure {
 
                 where.println(
                         ObtuseUtil.lpad( "count", 10 )
-                                + "   " +
-                                ObtuseUtil.lpad( "mean", 14 )
-                                + "   " +
-                                ObtuseUtil.lpad( "stdev", 14 )
-                                + "   " +
-                                ObtuseUtil.lpad( "total", 16 )
-                                + "   " +
-                                "stack trace"
+                        + "   " +
+                        ObtuseUtil.lpad( "mean", 14 )
+                        + "   " +
+                        ObtuseUtil.lpad( "stdev", 14 )
+                        + "   " +
+                        ObtuseUtil.lpad( "total", 16 )
+                        + "   " +
+                        "stack trace"
                 );
 
             }
 
             where.println(
-                    ObtuseUtil.lpad( (long) _ourStats.n(), 10 )
-                            + " : " +
-                            String.format( "%14.9f", _ourStats.n() == 0 ? 0 : _ourStats.mean() )
-                            + " : " +
-                            String.format( "%14.9f", _ourStats.n() == 0 ? 0 : _ourStats.populationStdev() )
-                            + " : " +
-                            String.format( "%16.9f", _ourStats.sum() )
-                            + "   " + this
+                    ObtuseUtil.lpad( (long)_ourStats.n(), 10 )
+                    + " : " +
+                    String.format( "%14.9f", _ourStats.n() == 0 ? 0 : _ourStats.mean() )
+                    + " : " +
+                    String.format( "%14.9f", _ourStats.n() == 0 ? 0 : _ourStats.populationStdev() )
+                    + " : " +
+                    String.format( "%16.9f", _ourStats.sum() )
+                    + "   " + this
             );
 
             where.println(
                     ObtuseUtil.lpad( "", 10 )
-                            + " * " +
-                            String.format( "%14.9f", _ourStats.n() == 0 ? 0 : Measure.adjustMean( "", _ourStats.mean() ) )
-                            + " * " +
-                            ObtuseUtil.lpad( "", 14 )
-                            + " * " +
-                            String.format( "%16.9f", Measure.adjustSum( "", _ourStats.sum(), _ourStats.n() ) )
-                            + "   " + this
+                    + " * " +
+                    String.format( "%14.9f", _ourStats.n() == 0 ? 0 : Measure.adjustMean( "", _ourStats.mean() ) )
+                    + " * " +
+                    ObtuseUtil.lpad( "", 14 )
+                    + " * " +
+                    String.format( "%16.9f", Measure.adjustSum( "", _ourStats.sum(), _ourStats.n() ) )
+                    + "   " + this
             );
 
-            TreeSorter<Double, String> sorted = new TreeSorter<>(
-		    new Comparator<Double>() {
-
-			public int compare( final Double lhs, final Double rhs ) {
-
-			    return rhs.compareTo( lhs );
-			}
-		    }
-	    );
+            TreeSorter<Double, String> sorted = new TreeSorter<>( Comparator.reverseOrder() );
 
             for ( String categoryName : _ourChildren.keySet() ) {
 
@@ -275,6 +273,7 @@ public class Measure {
     }
 
     public Measure( final String categoryName ) {
+
         super();
 
         _categoryName = categoryName;
@@ -292,13 +291,7 @@ public class Measure {
         synchronized ( Measure.LOCK ) {
 
             long threadId = Thread.currentThread().getId();
-            Stack<StackLevelInfo> ourStack = Measure.s_threadStacks.get( threadId );
-            if ( ourStack == null ) {
-
-                ourStack = new Stack<>();
-                Measure.s_threadStacks.put( threadId, ourStack );
-
-            }
+            Stack<StackLevelInfo> ourStack = Measure.s_threadStacks.computeIfAbsent( threadId, k -> new Stack<>() );
 
             _ourStack = ourStack;
 
@@ -310,11 +303,17 @@ public class Measure {
 
     }
 
-    public void done() {
+    public long done() {
 
         if ( !_initialized ) {
 
-            return;
+            return 0;
+
+        }
+
+        if ( _finished ) {
+
+            return 0;
 
         }
 
@@ -372,11 +371,27 @@ public class Measure {
         Measure.recordData( Measure.s_stats, Measure.OUTER_DONE_STATS, System.currentTimeMillis() - now );
 //        Measure.s_outerDoneStats.datum( ( System.currentTimeMillis() - now ) / 1e3 );
 
+        _finished = true;
+
+        return delta;
+
     }
 
     public boolean isInitialized() {
 
         return _initialized;
+
+    }
+
+    public boolean isFinished() {
+
+        return _finished;
+
+    }
+
+    public long getFinishedDelta() {
+
+        return _finished ? 0 : _finishedDelta;
 
     }
 
@@ -421,7 +436,7 @@ public class Measure {
 
     }
 
-    private void recordData( final SortedMap<String,Stats> map, final long delta ) {
+    private void recordData( final SortedMap<String, Stats> map, final long delta ) {
 
         Measure.recordData( map, _categoryName, delta );
 
@@ -429,13 +444,13 @@ public class Measure {
 
     }
 
-    private static void recordData( final SortedMap<String,Stats> map, final String name, final long delta ) {
+    private static void recordData( final SortedMap<String, Stats> map, final String name, final long delta ) {
 
 //	synchronized ( Measure.LOCK ) {
 
-	    Stats stats = map.computeIfAbsent( name, k -> new Stats() );
+        Stats stats = map.computeIfAbsent( name, k -> new Stats() );
 
-	    stats.datum( (double)delta / 1e3 );
+        stats.datum( (double)delta / 1e3 );
 
 //	}
 
@@ -462,19 +477,11 @@ public class Measure {
 
         }
 
-	synchronized ( Measure.LOCK ) {
+        synchronized ( Measure.LOCK ) {
 
-	    Measure.s_stackStats.showStats( where, showTitle );
+            Measure.s_stackStats.showStats( where, showTitle );
 
-	    TreeSorter<Double,String> sorted = new TreeSorter<>(
-		    new Comparator<Double>() {
-
-			public int compare( final Double lhs, final Double rhs ) {
-
-			    return rhs.compareTo( lhs );
-			}
-		    }
-	    );
+            TreeSorter<Double, String> sorted = new TreeSorter<>( Comparator.reverseOrder() );
 
 //        SortedMap<Double,String> sorted = new TreeMap<Double, String>(
 //                new Comparator<Double>() {
@@ -484,71 +491,73 @@ public class Measure {
 //                }
 //        );
 
-	    for ( String categoryName : Measure.s_stats.keySet() ) {
+            for ( String categoryName : Measure.s_stats.keySet() ) {
 
-		Stats stats = Measure.s_stats.get( categoryName );
+                Stats stats = Measure.s_stats.get( categoryName );
 
-		double value = Measure.adjustSum( categoryName, stats.sum(), stats.n() );
+                double value = Measure.adjustSum( categoryName, stats.sum(), stats.n() );
 
-		sorted.add( value, categoryName );
+                sorted.add( value, categoryName );
 
-	    }
+            }
 
-	    if ( showTitle ) {
+            if ( showTitle ) {
 
-		where.println(
-			ObtuseUtil.rpad( "category", Measure.s_maxCategoryNameLength + 2 )
-				+ "   " +
-				ObtuseUtil.lpad( "count", 10 )
-				+ "   " +
-				ObtuseUtil.lpad( "mean", 14 )
-				+ "   " +
-				ObtuseUtil.lpad( "stdev", 14 )
-				+ "   " +
-				ObtuseUtil.lpad( "total", 16 )
-		);
+                where.println(
+                        ObtuseUtil.rpad( "category", Measure.s_maxCategoryNameLength + 2 )
+                        + "   " +
+                        ObtuseUtil.lpad( "count", 10 )
+                        + "   " +
+                        ObtuseUtil.lpad( "mean", 14 )
+                        + "   " +
+                        ObtuseUtil.lpad( "stdev", 14 )
+                        + "   " +
+                        ObtuseUtil.lpad( "total", 16 )
+                );
 
-	    }
+            }
 
-	    for ( String categoryName : sorted.getAllValues() ) {
+            for ( String categoryName : sorted.getAllValues() ) {
 
-		Stats stats = Measure.s_stats.get( categoryName );
+                Stats stats = Measure.s_stats.get( categoryName );
 
-		where.println(
-			ObtuseUtil.rpad( categoryName, Measure.s_maxCategoryNameLength + 2 )
-				+ " : " +
-				ObtuseUtil.lpad( (long) stats.n(), 10 )
-				+ " : " +
-				String.format( "%14.9f", stats.mean() )
-				+ " : " +
-				String.format( "%14.9f", stats.populationStdev() )
-				+ " : " +
-				String.format( "%16.9f", stats.sum() )
-		);
+                where.println(
+                        ObtuseUtil.rpad( categoryName, Measure.s_maxCategoryNameLength + 2 )
+                        + " : " +
+                        ObtuseUtil.lpad( (long)stats.n(), 10 )
+                        + " : " +
+                        String.format( "%14.9f", stats.mean() )
+                        + " : " +
+                        String.format( "%14.9f", stats.populationStdev() )
+                        + " : " +
+                        String.format( "%16.9f", stats.sum() )
+                );
 
-		where.println(
-			ObtuseUtil.rpad( "", Measure.s_maxCategoryNameLength + 2 )
-				+ " * " +
-				ObtuseUtil.lpad( "", 10 )
-				+ " * " +
-				String.format( "%14.9f", Measure.adjustMean( categoryName, stats.mean() ) )
-				+ " * " +
-				ObtuseUtil.lpad( "", 14 )
-				+ " * " +
-				String.format( "%16.9f", Measure.adjustSum( categoryName, stats.sum(), stats.n() ) )
-		);
+                where.println(
+                        ObtuseUtil.rpad( "", Measure.s_maxCategoryNameLength + 2 )
+                        + " * " +
+                        ObtuseUtil.lpad( "", 10 )
+                        + " * " +
+                        String.format( "%14.9f", Measure.adjustMean( categoryName, stats.mean() ) )
+                        + " * " +
+                        ObtuseUtil.lpad( "", 14 )
+                        + " * " +
+                        String.format( "%16.9f", Measure.adjustSum( categoryName, stats.sum(), stats.n() ) )
+                );
 
 
-	    }
+            }
 
-	    where.println();
+            where.println();
 
-	    String adjustmentAsString = String.format( "%14.9f", Measure.s_stats.get( Measure.OUTER_DONE_STATS ).mean() );
-	    where.println( "* means adjusted by " + adjustmentAsString + " and sums adjusted by n * " + adjustmentAsString );
+            String adjustmentAsString = String.format( "%14.9f", Measure.s_stats.get( Measure.OUTER_DONE_STATS ).mean() );
+            where.println( "* means adjusted by " + adjustmentAsString + " and sums adjusted by n * " + adjustmentAsString );
 
-	    where.println( "Measuring for " + Math.round( ( System.currentTimeMillis() - Measure.s_measuringSinceMillis ) / 1e3 ) + " seconds" );
+            where.println( "Measuring for " +
+                           Math.round( ( System.currentTimeMillis() - Measure.s_measuringSinceMillis ) / 1e3 ) +
+                           " seconds" );
 
-	}
+        }
 //        where.println( "Outer done stats are " + Measure.s_outerDoneStats );
 //        where.println( "Inner done stats are " + Measure.s_innerDoneStats );
 
@@ -562,11 +571,35 @@ public class Measure {
 
     }
 
-    public static void measure( final String categoryName, final Runnable runnable ) {
+    public static long measure( final String categoryName, final Runnable runnable ) {
 
         Measure measure = new Measure( categoryName );
         runnable.run();
-        measure.done();
+        return measure.done();
+
+    }
+
+    public String toString() {
+
+        if ( _initialized ) {
+
+            if ( _finished ) {
+
+                return "Measure( finished delta=" + DateUtils.formatDuration( _finishedDelta ) + " )";
+
+            } else {
+
+                return "Measure( active delta=" +
+                       DateUtils.formatDuration( System.currentTimeMillis() - _startTimeMillis ) +
+                       " )";
+
+            }
+
+        } else {
+
+            return "Measure( <<uninitialized>> )";
+
+        }
 
     }
 

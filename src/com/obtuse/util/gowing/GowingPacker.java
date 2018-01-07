@@ -4,6 +4,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.Closeable;
+import java.io.File;
 import java.io.IOException;
 
 /*
@@ -37,37 +38,37 @@ public interface GowingPacker extends Closeable {
 
     void emit( long l );
 
-    void emit( long@NotNull[] lv );
+    void emit( @NotNull long[] lv );
 
     void emit( @Nullable Long@NotNull[] v );
 
     void emit( double d );
 
-    void emit( double@NotNull[] v );
+    void emit( @NotNull double[] v );
 
     void emit( @Nullable Double@NotNull[] v );
 
     void emit( float f );
 
-    void emit( float@NotNull[] v );
+    void emit( @NotNull float[] v );
 
     void emit( @Nullable Float@NotNull[] v );
 
     void emit( int i );
 
-    void emit( int@NotNull[] v );
+    void emit( @NotNull int[] v );
 
     void emit( @Nullable Integer@NotNull[] v );
 
     void emit( short s );
 
-    void emit( short@NotNull[] v );
+    void emit( @NotNull short[] v );
 
     void emit( @Nullable Short@NotNull[] v );
 
     void emit( byte b );
 
-    void emit( byte@NotNull[] v );
+    void emit( @NotNull byte[] v );
 
     void emit( @Nullable Byte@NotNull[] v );
 
@@ -113,4 +114,7 @@ public interface GowingPacker extends Closeable {
 
     void emitMetaData( @NotNull String name, double value );
 
+    File getOutputFile();
+
+    EntityName getGroupName();
 }

@@ -955,7 +955,7 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
 
                             if ( isMetaData ) {
 
-                                Logger.logMsg( "Found metadata comment:  " + ObtuseUtil.enquoteToJavaString( sb.toString() ) );
+//                                Logger.logMsg( "Found metadata comment:  " + ObtuseUtil.enquoteToJavaString( sb.toString() ) );
 
                                 String errmsg = notifyMetaDataHandlers( sb.toString() );
                                 if ( errmsg != null ) {
@@ -1206,7 +1206,7 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
     private String notifyMetaDataHandlers( @NotNull final String metaDataLine ) {
 
         String trimmed = metaDataLine.trim();
-        Logger.logMsg( "got metadata line:  " + trimmed );
+//        Logger.logMsg( "got metadata line:  " + trimmed );
 
         if ( !trimmed.startsWith( String.valueOf( GowingConstants.LINE_METADATA_CHAR ) ) ) {
 
@@ -1285,7 +1285,7 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
 
         } else if ( rawValue.endsWith( "B" ) || rawValue.endsWith( "d" ) ) {
 
-            Boolean value;
+            boolean value;
             if ( "T".equals( rawValue.substring( 0, rawValue.length() -1 ) ) ) {
 
                 value = true;

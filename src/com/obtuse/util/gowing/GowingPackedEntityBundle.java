@@ -89,7 +89,11 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName, GowingPackable
 
         if ( typeName.equals( unPackerContext.getTypeByTypeReferenceId( typeId ) ) ) {
 
-            Logger.logMsg( "GPEB:  got expected type name " + typeName + " for type id " + typeId );
+            if ( ObtuseUtil.never() ) {
+
+                Logger.logMsg( "GPEB:  got expected type name " + typeName + " for type id " + typeId );
+
+            }
 
         } else {
 
