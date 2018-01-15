@@ -30,6 +30,6 @@ public abstract class MyActionListener implements ActionListener {
 
     }
 
-    public abstract void myActionPerformed( ActionEvent actionEvent );
+    protected abstract void myActionPerformed( ActionEvent actionEvent );
 
 }

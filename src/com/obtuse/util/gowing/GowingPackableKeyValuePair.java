@@ -21,7 +21,7 @@ import java.util.TreeMap;
 @SuppressWarnings("unchecked")
 public class GowingPackableKeyValuePair<K, V> extends GowingAbstractPackableEntity {
 
-    private static final EntityTypeName ENTITY_TYPE_NAME = new EntityTypeName( GowingPackableKeyValuePair.class.getCanonicalName() );
+    private static final EntityTypeName ENTITY_TYPE_NAME = new EntityTypeName( GowingPackableKeyValuePair.class );
     private static final int VERSION = 1;
 
     private static final EntityName KEY_FIELD_NAME = new EntityName( "_k" );
@@ -186,139 +186,60 @@ public class GowingPackableKeyValuePair<K, V> extends GowingAbstractPackableEnti
 
         _factories.put(
                 String.class.getCanonicalName(),
-                new HolderFactory() {
-
-                    @Override
-                    public GowingAbstractPackableHolder constructHolder( final EntityName name, final Object obj, final GowingPacker packer ) {
-
-                        return new GowingStringHolder( name, (String)obj, true );
-
-                    }
-
-                }
+                ( name, obj, packer ) -> new GowingStringHolder( name, (String)obj, true )
         );
 
         _factories.put(
                 Byte.class.getCanonicalName(),
-                new HolderFactory() {
-
-                    @Override
-                    public GowingAbstractPackableHolder constructHolder( final EntityName name, final Object obj, final GowingPacker packer ) {
-
-                        return new GowingByteHolder( name, (Byte)obj, true );
-
-                    }
-
-                }
+                ( name, obj, packer ) -> new GowingByteHolder( name, (Byte)obj, true )
         );
 
         _factories.put(
                 Short.class.getCanonicalName(),
-                new HolderFactory() {
-
-                    @Override
-                    public GowingAbstractPackableHolder constructHolder( final EntityName name, final Object obj, final GowingPacker packer ) {
-
-                        return new GowingShortHolder( name, (Short)obj, true );
-
-                    }
-
-                }
+                ( name, obj, packer ) -> new GowingShortHolder( name, (Short)obj, true )
         );
 
         _factories.put(
                 Integer.class.getCanonicalName(),
-                new HolderFactory() {
-
-                    @Override
-                    public GowingIntegerHolder constructHolder( final EntityName name, final Object obj, final GowingPacker packer ) {
-
-                        return new GowingIntegerHolder( name, (Integer)obj, true );
-
-                    }
-
-                }
+                ( name, obj, packer ) -> new GowingIntegerHolder( name, (Integer)obj, true )
         );
 
         _factories.put(
                 Long.class.getCanonicalName(),
-                new HolderFactory() {
-
-                    @Override
-                    public GowingAbstractPackableHolder constructHolder( final EntityName name, final Object obj, final GowingPacker packer ) {
-
-                        return new GowingLongHolder( name, (Long)obj, true );
-
-                    }
-
-                }
+                ( name, obj, packer ) -> new GowingLongHolder( name, (Long)obj, true )
         );
 
         _factories.put(
                 Float.class.getCanonicalName(),
-                new HolderFactory() {
-
-                    @Override
-                    public GowingAbstractPackableHolder constructHolder( final EntityName name, final Object obj, final GowingPacker packer ) {
-
-                        return new GowingFloatHolder( name, (Float)obj, true );
-
-                    }
-
-                }
+                ( name, obj, packer ) -> new GowingFloatHolder( name, (Float)obj, true )
         );
 
         _factories.put(
                 Double.class.getCanonicalName(),
-                new HolderFactory() {
-
-                    @Override
-                    public GowingAbstractPackableHolder constructHolder( final EntityName name, final Object obj, final GowingPacker packer ) {
-
-                        return new GowingDoubleHolder( name, (Double)obj, true );
-
-                    }
-
-                }
+                ( name, obj, packer ) -> new GowingDoubleHolder( name, (Double)obj, true )
         );
 
         _factories.put(
                 Boolean.class.getCanonicalName(),
-                new HolderFactory() {
-
-                    @Override
-                    public GowingAbstractPackableHolder constructHolder( final EntityName name, final Object obj, final GowingPacker packer ) {
-
-                        return new GowingBooleanHolder( name, (Boolean)obj, true );
-
-                    }
-
-                }
+                ( name, obj, packer ) -> new GowingBooleanHolder( name, (Boolean)obj, true )
         );
 
         _factories.put(
                 EntityName.class.getCanonicalName(),
-                new HolderFactory() {
-
-                    @Override
-                    public GowingAbstractPackableHolder constructHolder( final EntityName name, final Object obj, final GowingPacker packer ) {
-
-                        return new GowingEntityNameHolder( name, (EntityName)obj, true );
-
-                    }
-
-                }
+                ( name, obj, packer ) -> new GowingEntityNameHolder( name, (EntityName)obj, true )
         );
 
     }
 
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     public static boolean isObjectsClassSupported( @Nullable final Object obj ) {
 
         if ( obj == null || obj instanceof GowingPackable ) {
 
             return true;
 
-        } else if ( obj instanceof EntityName ) {
+        } else //noinspection SimplifiableIfStatement
+            if ( obj instanceof EntityName ) {
 
             return true;
 
@@ -332,7 +253,8 @@ public class GowingPackableKeyValuePair<K, V> extends GowingAbstractPackableEnti
 
     public static boolean isClassSupported( @NotNull final Class entityClass ) {
 
-        boolean rval = _factories.containsKey( entityClass.getCanonicalName() );
+        @SuppressWarnings("UnnecessaryLocalVariable") boolean rval = _factories.containsKey( entityClass.getCanonicalName() );
+
         return rval;
 
     }

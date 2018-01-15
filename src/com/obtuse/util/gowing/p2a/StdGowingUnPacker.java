@@ -23,16 +23,14 @@ import java.util.Optional;
 
 public class StdGowingUnPacker implements GowingUnPacker {
 
-    public static final long OLDEST_MAJOR_VERSION = 1L;
-    public static final long NEWEST_MAJOR_VERSION = 1L;
-    public static final long OLDEST_MINOR_VERSION = 1L;
-    public static final long NEWEST_MINOR_VERSION = 1L;
-
     private final GowingTokenizer _tokenizer;
 
     private final GowingUnPackerContext _unPackerContext;
     private final File _inputFile;
+
+    @SuppressWarnings({ "OptionalUsedAsFieldOrParameterType", "OptionalAssignedToNull" })
     private Optional<GowingUnPackedEntityGroup> _unpackedGroup = null;
+
     private GowingEntityReference _currentEntityReference = null;
 
     private boolean _closed = false;
@@ -73,7 +71,12 @@ public class StdGowingUnPacker implements GowingUnPacker {
      @throws IOException if something bad happens in I/O-land.
      */
 
-    public StdGowingUnPacker( final GowingTypeIndex typeIndex, @NotNull final File inputFile, final Reader reader )
+    @SuppressWarnings("unused")
+    public StdGowingUnPacker(
+            @NotNull final GowingTypeIndex typeIndex,
+            @NotNull final File inputFile,
+            @NotNull final Reader reader
+    )
             throws IOException {
 
         this(
@@ -100,7 +103,7 @@ public class StdGowingUnPacker implements GowingUnPacker {
     @SuppressWarnings({ "WeakerAccess", "RedundantThrows" })
     public StdGowingUnPacker(
             @Nullable final File inputFile,
-            final LineNumberReader reader,
+            @NotNull final LineNumberReader reader,
             @NotNull final GowingUnPackerContext unPackerContext
     )
             throws IOException {
@@ -123,11 +126,13 @@ public class StdGowingUnPacker implements GowingUnPacker {
             throws IOException {
 
         _tokenizer.close();
+        //noinspection OptionalAssignedToNull
         _unpackedGroup = null;
         _closed = true;
 
     }
 
+    @NotNull
     private GowingFormatVersion parseVersion()
             throws IOException, GowingUnPackerParsingException {
 
@@ -135,7 +140,7 @@ public class StdGowingUnPacker implements GowingUnPacker {
                 false,
                 StdGowingTokenizer.TokenType.FORMAT_VERSION
         );
-        @SuppressWarnings("UnusedAssignment") StdGowingTokenizer.GowingToken2 colon =
+        @SuppressWarnings({ "UnusedAssignment", "unused" }) StdGowingTokenizer.GowingToken2 colon =
                 _tokenizer.getNextToken( false, StdGowingTokenizer.TokenType.COLON );
         StdGowingTokenizer.GowingToken2 groupName = _tokenizer.getNextToken( false, StdGowingTokenizer.TokenType.STRING );
 
@@ -150,7 +155,7 @@ public class StdGowingUnPacker implements GowingUnPacker {
 
     }
 
-    private void checkClosed( String who ) {
+    private void checkClosed( @NotNull final String who ) {
 
         if ( isClosed() ) {
 
@@ -182,17 +187,25 @@ public class StdGowingUnPacker implements GowingUnPacker {
 
         _unpackedGroup = Optional.empty();
 
+        Measure stageMeasure = null;
         try {
 
             GowingUnPackedEntityGroup group;
 
+            stageMeasure = new Measure( "StdGowingUnPacker - parse version" );
+
             GowingFormatVersion version = parseVersion();
-            @SuppressWarnings("UnusedAssignment") StdGowingTokenizer.GowingToken2 semiColon =
+            @SuppressWarnings({ "UnusedAssignment", "unused" }) StdGowingTokenizer.GowingToken2 semiColon =
                     _tokenizer.getNextToken( false, StdGowingTokenizer.TokenType.SEMI_COLON );
 
             group = new GowingUnPackedEntityGroup( version );
 
+            stageMeasure.done();
+            stageMeasure = new Measure( "StdGowingUnPacker - unpacking" );
+
             while ( true ) {
+
+                Measure unpackOne = new Measure( "StdGowingUnPacker - unpack one" );
 
                 StdGowingTokenizer.GowingToken2 token = _tokenizer.getNextToken( false );
 
@@ -207,7 +220,7 @@ public class StdGowingUnPacker implements GowingUnPacker {
 
                     _tokenizer.putBackToken( token );
                     GowingPackedEntityBundle bundle = collectEntityDefinitionClause( false );
-                    @SuppressWarnings("UnusedAssignment") StdGowingTokenizer.GowingToken2 semiColonToken =
+                    @SuppressWarnings({ "UnusedAssignment", "unused" }) StdGowingTokenizer.GowingToken2 semiColonToken =
                             _tokenizer.getNextToken( false, StdGowingTokenizer.TokenType.SEMI_COLON );
 
                     GowingPackable entity = constructEntity( token.entityReference(), token, bundle );
@@ -224,12 +237,19 @@ public class StdGowingUnPacker implements GowingUnPacker {
 
                 }
 
+                unpackOne.done();
+
             }
+
+            stageMeasure.done();
+            stageMeasure = new Measure( "StdGowingUnPacker - finishing" );
 
             _unPackerContext.clearUnFinishedEntities();
             _unPackerContext.markEntitiesUnfinished( _unPackerContext.getSeenEntityReferences() );
 
-            while ( true ) {
+            for ( int finishingPass = 1; true; finishingPass += 1 ) {
+
+                int finishedCount = 0;
 
                 Collection<GowingEntityReference> unFinishedEntities = _unPackerContext.getUnfinishedEntities();
                 if ( unFinishedEntities.isEmpty() ) {
@@ -238,22 +258,28 @@ public class StdGowingUnPacker implements GowingUnPacker {
 
                 }
 
+                Measure finishingPassMeasure = new Measure( "StdGowingUnPacker - finishing pass" );
+
                 boolean finishedSomething = false;
                 for ( GowingEntityReference er : unFinishedEntities ) {
 
                     if ( !_unPackerContext.isEntityFinished( er ) ) {
 
+                        Measure finishOne = new Measure( "StdGowingUnPacker - finish one" );
                         try {
 
                             GowingPackable entity = resolveReference( er );
                             _currentEntityReference = er;
 
+                            Measure typeMeasure = new Measure( "StdGowingUnPacker - finish " + entity.getInstanceId().getTypeName() );
                             if ( entity.finishUnpacking( this ) ) {
 
                                 _unPackerContext.markEntityFinished( er );
+                                finishedCount += 1;
                                 finishedSomething = true;
 
                             }
+                            typeMeasure.done();
 
                         } finally {
 
@@ -261,7 +287,20 @@ public class StdGowingUnPacker implements GowingUnPacker {
 
                         }
 
+                        finishOne.done();
+
                     }
+
+                }
+
+                long finishingPassDuration = finishingPassMeasure.done();
+                if ( Measure.isGloballyEnabled() ) {
+
+                    Logger.logMsg(
+                            "StdGowingUnPacker:  finishing pass " + finishingPass +
+                            " done (" + finishedCount + " items finished) - " +
+                            DateUtils.formatDuration( finishingPassDuration )
+                    );
 
                 }
 
@@ -269,14 +308,13 @@ public class StdGowingUnPacker implements GowingUnPacker {
 
                     throw new HowDidWeGetHereError( "nothing left that can be finished (" +
                                                     unFinishedEntities.size() +
-                                                    " unfinished entit" +
-                                                    ( unFinishedEntities.size() == 1 ? "y" : "ies" ) +
+                                                    " unfinished " +
+                                                    ( unFinishedEntities.size() == 1 ? "entity" : "entities" ) +
                                                     " still unfinished)" );
 
                 }
 
             }
-
 
             rval = Optional.of( group );
 
@@ -293,6 +331,12 @@ public class StdGowingUnPacker implements GowingUnPacker {
             rval = Optional.empty();
 
         } finally {
+
+            if ( stageMeasure != null ) {
+
+                stageMeasure.done();
+
+            }
 
             _unpackedGroup = rval == null ? Optional.empty() : rval;
 
@@ -415,7 +459,7 @@ public class StdGowingUnPacker implements GowingUnPacker {
             throws IOException, GowingUnPackerParsingException {
 
         StdGowingTokenizer.GowingToken2 typeIdToken = _tokenizer.getNextToken( false, StdGowingTokenizer.TokenType.LONG );
-        @SuppressWarnings("UnusedAssignment") StdGowingTokenizer.GowingToken2 atSignToken =
+        @SuppressWarnings({ "UnusedAssignment", "unused" }) StdGowingTokenizer.GowingToken2 atSignToken =
                 _tokenizer.getNextToken( false, StdGowingTokenizer.TokenType.AT_SIGN );
         StdGowingTokenizer.GowingToken2 typeNameToken = _tokenizer.getNextToken(
                 false,
@@ -443,9 +487,9 @@ public class StdGowingUnPacker implements GowingUnPacker {
 
         }
 
-        @SuppressWarnings("UnusedAssignment") StdGowingTokenizer.GowingToken2 equalSignToken =
+        @SuppressWarnings({ "UnusedAssignment", "unused" }) StdGowingTokenizer.GowingToken2 equalSignToken =
                 _tokenizer.getNextToken( false, StdGowingTokenizer.TokenType.EQUAL_SIGN );
-        @SuppressWarnings("UnusedAssignment") StdGowingTokenizer.GowingToken2 leftParenToken =
+        @SuppressWarnings({ "UnusedAssignment", "unused" }) StdGowingTokenizer.GowingToken2 leftParenToken =
                 _tokenizer.getNextToken( false, StdGowingTokenizer.TokenType.LEFT_PAREN );
 
         Optional<EntityTypeName> maybeEntityTypeName =
@@ -598,7 +642,7 @@ public class StdGowingUnPacker implements GowingUnPacker {
                 true,
                 StdGowingTokenizer.TokenType.IDENTIFIER
         );
-        @SuppressWarnings("UnusedAssignment") StdGowingTokenizer.GowingToken2 equalSignToken =
+        @SuppressWarnings({ "UnusedAssignment", "unused" }) StdGowingTokenizer.GowingToken2 equalSignToken =
                 _tokenizer.getNextToken( false, StdGowingTokenizer.TokenType.EQUAL_SIGN );
         StdGowingTokenizer.GowingToken2 valueToken = _tokenizer.getNextToken( false );
 
@@ -623,7 +667,8 @@ public class StdGowingUnPacker implements GowingUnPacker {
 
     }
 
-    private String describeType( final StdGowingTokenizer.GowingToken2 valueToken ) {
+    @SuppressWarnings("unused")
+    public static String describeType( final StdGowingTokenizer.GowingToken2 valueToken ) {
 
         if ( valueToken.type() == StdGowingTokenizer.TokenType.PRIMITIVE_ARRAY ) {
 

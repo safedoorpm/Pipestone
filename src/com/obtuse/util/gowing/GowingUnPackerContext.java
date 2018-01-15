@@ -26,7 +26,7 @@ public interface GowingUnPackerContext {
 
     int getTypeReferenceId( EntityTypeName typeName );
 
-    boolean isEntityKnown( GowingEntityReference er );
+    boolean isEntityKnown( @NotNull GowingEntityReference er );
 
     GowingPackable recallPackableEntity( @NotNull GowingEntityReference er );
 

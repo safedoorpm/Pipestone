@@ -17,6 +17,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.LinkedList;
 
 /*
  * Copyright © 2015 Obtuse Systems Corporation
@@ -722,11 +724,21 @@ public class LinearLayoutUtil {
 
     public static void showStructure( final Container start ) {
 
-        int depth = 0;
+        java.util.List<Container> nest = new LinkedList<>();
         for ( Container c = start; c != null; c = c.getParent() ) {
+            nest.add( 0, c );
+        }
 
+        int depth = 0;
+
+//        for ( Container c = start; c != null; c = c.getParent() ) {
+        for ( Container c : nest ) {
+
+//            Logger.logMsg( "depth=" + depth );
             Logger.logMsg(
-                    ObtuseUtil.replicate( "    ", depth ) + c.getClass().getName() + ":  " + toString( c ) //  c.getName(), c.getComponents() )
+                    ObtuseUtil.replicate( "    ", depth ) +
+                    c.getClass().getName() + ":  " +
+                    toString( c ) //  c.getName(), c.getComponents() )
             );
 
             depth += 1;
@@ -765,7 +777,7 @@ public class LinearLayoutUtil {
 
         for ( Component c : container.getComponents() ) {
 
-            if ( comma.length() == 0 ) {
+            if ( comma.isEmpty() ) {
 
                 sb.append( ' ' );
 
@@ -780,7 +792,7 @@ public class LinearLayoutUtil {
 
         }
 
-        if ( comma.length() > 0 ) {
+        if ( !comma.isEmpty() ) {
 
             sb.append( ' ' );
 
@@ -789,6 +801,7 @@ public class LinearLayoutUtil {
         sb.append( '}' );
 
         return "" +
+               ObtuseUtil.fInsets( container.getInsets() ) + " ~ " +
                container.getClass().getSimpleName() +
                "( \"" +
                container.getName() +
@@ -799,6 +812,35 @@ public class LinearLayoutUtil {
                ", " +
                sb +
                " )";
+
+    }
+
+    public static void rePackWindow( final Container container ) {
+
+        Container c = container;
+        while ( c != null ) {
+
+            if ( c instanceof Window ) {
+
+                Container cx = c;
+
+                SwingUtilities.invokeLater(
+                        () -> {
+
+                            ((Window)cx).pack();
+
+                            Logger.logMsg( cx.getClass().getCanonicalName() + " re-packed" );
+
+                        }
+                );
+
+                return;
+
+            }
+
+            c = c.getParent();
+
+        }
 
     }
 

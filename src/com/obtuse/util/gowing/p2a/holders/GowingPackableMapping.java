@@ -21,7 +21,7 @@ import java.util.Map;
 
 public class GowingPackableMapping<K, V> implements GowingPackable {
 
-    private static final EntityTypeName ENTITY_TYPE_NAME = new EntityTypeName( GowingPackableMapping.class.getCanonicalName() );
+    private static final EntityTypeName ENTITY_TYPE_NAME = new EntityTypeName( GowingPackableMapping.class );
 
     @SuppressWarnings("FieldCanBeLocal")
     private static final int VERSION = 1;
@@ -94,7 +94,11 @@ public class GowingPackableMapping<K, V> implements GowingPackable {
 
     }
 
-    public GowingPackableMapping( final GowingUnPacker unPacker, final GowingPackedEntityBundle bundle, final GowingEntityReference er ) {
+    public GowingPackableMapping(
+            @SuppressWarnings("unused") @NotNull final GowingUnPacker unPacker,
+            @NotNull final GowingPackedEntityBundle bundle,
+            @SuppressWarnings("unused") @NotNull final GowingEntityReference er
+    ) {
 
         super();
 
@@ -197,6 +201,28 @@ public class GowingPackableMapping<K, V> implements GowingPackable {
         }
 
         return bundle;
+
+    }
+
+    public String toString() {
+
+        return "GowingPackableMapping( size=" +
+               (
+                       _keyValuePairs == null ?
+                               ( _kvpReferences == null ? "null" : _kvpReferences.size() )
+                               :
+                               (
+                                       _kvpReferences == null ? _keyValuePairs.size() :
+                                               (
+                                                       _keyValuePairs.isEmpty()
+                                                               ?
+                                                               _kvpReferences.size()
+                                                               :
+                                                               _keyValuePairs.size()
+                                               )
+                               )
+               ) +
+               " )";
 
     }
 

@@ -125,7 +125,7 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
 
     public static final int THUMBNAIL_EDGE_LENGTH = 128;
 
-    private static final EntityTypeName ENTITY_TYPE_NAME = new EntityTypeName( ObtuseImageFile.class.getCanonicalName() );
+    private static final EntityTypeName ENTITY_TYPE_NAME = new EntityTypeName( ObtuseImageFile.class );
 
     private static final int VERSION = 1;
 
@@ -151,8 +151,7 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
                 @NotNull final GowingUnPacker unPacker,
                 @NotNull final GowingPackedEntityBundle bundle,
                 final GowingEntityReference er
-        )
-                throws GowingUnPackerParsingException {
+        ) {
 
             return new ObtuseImageFile( unPacker, bundle );
 

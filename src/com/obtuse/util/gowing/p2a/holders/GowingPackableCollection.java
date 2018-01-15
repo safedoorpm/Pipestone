@@ -60,7 +60,7 @@ import java.util.List;
 @SuppressWarnings("unchecked")
 public class GowingPackableCollection<E> extends LinkedList<E> implements GowingPackable {
 
-    private static final EntityTypeName ENTITY_TYPE_NAME = new EntityTypeName( GowingPackableCollection.class.getCanonicalName() );
+    private static final EntityTypeName ENTITY_TYPE_NAME = new EntityTypeName( GowingPackableCollection.class );
 
     @SuppressWarnings("FieldCanBeLocal")
     private static final int VERSION = 1;

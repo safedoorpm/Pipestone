@@ -14,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
 
 public abstract class GowingAbstractPackableEntity implements GowingPackable {
 
-    private static final EntityTypeName ENTITY_TYPE_NAME = new EntityTypeName( GowingAbstractPackableEntity.class.getCanonicalName() );
+    private static final EntityTypeName ENTITY_TYPE_NAME = new EntityTypeName( GowingAbstractPackableEntity.class );
 
     private static final int VERSION = 1;
 

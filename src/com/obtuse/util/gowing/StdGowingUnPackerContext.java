@@ -53,7 +53,7 @@ public class StdGowingUnPackerContext implements GowingUnPackerContext {
             throws GowingUnPackerParsingException {
 
         int typeReferenceId = typeIdToken.intValue();
-        EntityTypeName typeName = new EntityTypeName( typeNameToken.stringValue() );
+        EntityTypeName typeName = new EntityTypeName( typeNameToken );
 
         if ( findTypeByTypeReferenceId( typeReferenceId ).isPresent() ) {
 
@@ -205,7 +205,7 @@ public class StdGowingUnPackerContext implements GowingUnPackerContext {
     }
 
     @Override
-    public boolean isEntityKnown( final GowingEntityReference er ) {
+    public boolean isEntityKnown( @NotNull final GowingEntityReference er ) {
 
         return _seenInstanceIds.containsKey( er );
 
@@ -214,7 +214,7 @@ public class StdGowingUnPackerContext implements GowingUnPackerContext {
     @Override
     public GowingPackable recallPackableEntity( @NotNull final GowingEntityReference er ) {
 
-        GowingPackable packable2 = _seenInstanceIds.get( er );
+        @SuppressWarnings("UnnecessaryLocalVariable") GowingPackable packable2 = _seenInstanceIds.get( er );
 
         return packable2;
 

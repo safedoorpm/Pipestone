@@ -4,6 +4,8 @@
 
 package com.obtuse.util;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.PrintStream;
 import java.util.*;
 
@@ -272,7 +274,7 @@ public class Measure {
 
     }
 
-    public Measure( final String categoryName ) {
+    public Measure( @NotNull final String categoryName ) {
 
         super();
 
@@ -303,7 +305,35 @@ public class Measure {
 
     }
 
+    public String getCategoryName() {
+
+        return _categoryName;
+
+    }
+
+    /**
+     Record the completion of this event.
+     @return the duration of this event in milliseconds.
+     */
+
     public long done() {
+
+        return done( _categoryName );
+
+    }
+
+    /**
+     Record the completion of an event (possibly overriding the event's category name in the flat measurement bucketing).
+     <p>This is primarily intended to facilitate the separate measurement of success cases and failure cases of events.
+     Overriding the category name only affects which flat measurement category the time for this event lands in.
+     The nested call stack accounting uses the event's category name as specified when this instance was created (because
+     the stack accounting scheme cannot handle changing event names).
+     </p>
+     @param categoryName the category under which this event should be 'filed'.
+     @return the duration of the event in milliseconds.
+     */
+
+    public long done( @NotNull final String categoryName ) {
 
         if ( !_initialized ) {
 
@@ -324,7 +354,7 @@ public class Measure {
 
             long innerNow = System.currentTimeMillis();
 
-            recordData( Measure.s_stats, delta );
+            recordData( categoryName, Measure.s_stats, delta );
 //            Stats stats = Measure.s_stats.get( _categoryName );
 //            if ( stats == null ) {
 //
@@ -347,12 +377,12 @@ public class Measure {
             Stack<StackLevelInfo> ourStack = Measure.s_threadStacks.get( threadId );
             if ( ourStack == null || ourStack != _ourStack ) {
 
-                recordData( Measure.s_crossThreadStats, delta );
+                recordData( _categoryName, Measure.s_crossThreadStats, delta );
 
             } else if ( ourStack.isEmpty() || !ourStack.peek().getLevelName().equals( _categoryName ) ) {
 
                 ourStack.clear();
-                recordData( Measure.s_stackErrorStats, delta );
+                recordData( _categoryName, Measure.s_stackErrorStats, delta );
 
             } else {
 
@@ -436,11 +466,11 @@ public class Measure {
 
     }
 
-    private void recordData( final SortedMap<String, Stats> map, final long delta ) {
+    private void recordData( final String overrideCategoryName, final SortedMap<String, Stats> map, final long delta ) {
 
-        Measure.recordData( map, _categoryName, delta );
+        Measure.recordData( map, overrideCategoryName, delta );
 
-        Measure.s_maxCategoryNameLength = Math.max( _categoryName.length(), Measure.s_maxCategoryNameLength );
+        Measure.s_maxCategoryNameLength = Math.max( overrideCategoryName.length(), Measure.s_maxCategoryNameLength );
 
     }
 

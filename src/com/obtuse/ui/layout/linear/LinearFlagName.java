@@ -21,31 +21,34 @@ import java.util.TreeMap;
 
 public class LinearFlagName extends GowingPackableName {
 
-    private static final EntityTypeName ENTITY_TYPE_NAME = new EntityTypeName( LinearFlagName.class.getCanonicalName() );
+    private static final EntityTypeName ENTITY_TYPE_NAME = new EntityTypeName( LinearFlagName.class );
     private static final int VERSION = 1;
 
     public static final GowingEntityFactory FACTORY = new GowingEntityFactory( ENTITY_TYPE_NAME ) {
 
-	@Override
-	public int getOldestSupportedVersion() {
+        @Override
+        public int getOldestSupportedVersion() {
 
-	    return VERSION;
-	}
+            return VERSION;
+        }
 
-	@Override
-	public int getNewestSupportedVersion() {
+        @Override
+        public int getNewestSupportedVersion() {
 
-	    return VERSION;
-	}
+            return VERSION;
+        }
 
-	@Override
-	@NotNull
-	public GowingPackable createEntity( @NotNull final GowingUnPacker unPacker, @NotNull final GowingPackedEntityBundle bundle, final GowingEntityReference er )
-		throws GowingUnPackerParsingException {
+        @Override
+        @NotNull
+        public GowingPackable createEntity(
+                @NotNull final GowingUnPacker unPacker,
+                @NotNull final GowingPackedEntityBundle bundle,
+                final GowingEntityReference er
+        ) {
 
-	    return new LinearFlagName( unPacker, bundle );
+            return new LinearFlagName( unPacker, bundle );
 
-	}
+        }
 
     };
 
@@ -59,105 +62,107 @@ public class LinearFlagName extends GowingPackableName {
 
 //    private final String _name;
 
-    private static final SortedMap<String,LinearFlagName> s_knownFlags;
+    private static final SortedMap<String, LinearFlagName> s_knownFlags;
 
     static {
 
-	s_knownFlags = new TreeMap<>();
+        s_knownFlags = new TreeMap<>();
 
-	LEFT_JUSTIFIED = new LinearFlagName( "left_justified" );
+        LEFT_JUSTIFIED = new LinearFlagName( "left_justified" );
 
-	RIGHT_JUSTIFIED = new LinearFlagName( "right_justified" );
+        RIGHT_JUSTIFIED = new LinearFlagName( "right_justified" );
 
-	TOP_JUSTIFIED = new LinearFlagName( "top_justified" );
+        TOP_JUSTIFIED = new LinearFlagName( "top_justified" );
 
-	BOTTOM_JUSTIFIED = new LinearFlagName( "bottom_justified" );
+        BOTTOM_JUSTIFIED = new LinearFlagName( "bottom_justified" );
 
     }
 
     private LinearFlagName( final String name ) {
-	super( name );
 
-	synchronized ( s_knownFlags ) {
+        super( name );
 
-	    if ( !s_knownFlags.containsKey( name ) )
-	    s_knownFlags.put( name, this );
+        synchronized ( s_knownFlags ) {
 
-	}
+            if ( !s_knownFlags.containsKey( name ) ) {
+                s_knownFlags.put( name, this );
+            }
+
+        }
 
     }
 
-    public LinearFlagName( final GowingUnPacker unPacker, final GowingPackedEntityBundle bundle )
-	    throws GowingUnPackerParsingException {
-	super(
-		unPacker,
-		bundle.getSuperBundle()
-	);
+    public LinearFlagName( final GowingUnPacker unPacker, final GowingPackedEntityBundle bundle ) {
+
+        super(
+                unPacker,
+                bundle.getSuperBundle()
+        );
 
     }
 
     @NotNull
     public GowingPackedEntityBundle bundleThyself( final boolean isPackingSuper, @NotNull final GowingPacker packer ) {
 
-	@SuppressWarnings("UnnecessaryLocalVariable")
-	GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
-		LinearFlagName.ENTITY_TYPE_NAME,
-		LinearFlagName.VERSION,
-		super.bundleThyself( true, packer ),
-		packer.getPackingContext()
-	);
+        @SuppressWarnings("UnnecessaryLocalVariable")
+        GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
+                LinearFlagName.ENTITY_TYPE_NAME,
+                LinearFlagName.VERSION,
+                super.bundleThyself( true, packer ),
+                packer.getPackingContext()
+        );
 
-	return bundle;
+        return bundle;
 
     }
 
     public boolean equals( final Object rhs ) {
 
-	return rhs instanceof LinearFlagName && super.equals( rhs );
+        return rhs instanceof LinearFlagName && super.equals( rhs );
 
     }
 
     public static String describe( @NotNull final Collection<LinearFlagNameValue> flags ) {
 
-	synchronized ( s_knownFlags ) {
+        synchronized ( s_knownFlags ) {
 
-	    StringBuilder sb = new StringBuilder();
-	    String comma = "{ ";
+            StringBuilder sb = new StringBuilder();
+            String comma = "{ ";
 
-	    for ( LinearFlagNameValue linearFlagNameValue : flags ) {
+            for ( LinearFlagNameValue linearFlagNameValue : flags ) {
 
-		sb.append( comma ).append( linearFlagNameValue );
+                sb.append( comma ).append( linearFlagNameValue );
 
-		comma = ", ";
+                comma = ", ";
 
-	    }
+            }
 
-	    if ( sb.length() == 0 ) {
+            if ( sb.length() == 0 ) {
 
-		return "{}";
+                return "{}";
 
-	    } else {
+            } else {
 
-		return sb.append( " }" ).toString();
+                return sb.append( " }" ).toString();
 
-	    }
+            }
 
-	}
+        }
 
     }
 
     public static void main( final String[] args ) {
 
-	BasicProgramConfigInfo.init( "Obtuse", "Pipestone", "testing", null );
+        BasicProgramConfigInfo.init( "Obtuse", "Pipestone", "testing", null );
 
-	if ( s_knownFlags.isEmpty() ) {
+        if ( s_knownFlags.isEmpty() ) {
 
-	    Logger.logMsg( "no known LinearFlags" );
+            Logger.logMsg( "no known LinearFlags" );
 
-	    //noinspection UnnecessaryReturnStatement
-	    return;
+            //noinspection UnnecessaryReturnStatement
+            return;
 
-	}
+        }
 
 //	int mask = 0;
 //	for ( Set<LinearFlagName> flags : new PowerSet<LinearFlagName>( s_knownFlags ) ) {

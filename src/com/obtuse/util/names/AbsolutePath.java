@@ -21,7 +21,7 @@ import java.util.Collection;
 
 public class AbsolutePath extends RelativePath {
 
-    private static final EntityTypeName ENTITY_TYPE_NAME = new EntityTypeName( AbsolutePath.class.getCanonicalName() );
+    private static final EntityTypeName ENTITY_TYPE_NAME = new EntityTypeName( AbsolutePath.class );
 
     private static final int VERSION = 1;
 
@@ -92,7 +92,7 @@ public class AbsolutePath extends RelativePath {
             final boolean isPackingSuper, @NotNull final GowingPacker packer
     ) {
 
-        GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
+        @SuppressWarnings("UnnecessaryLocalVariable") GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
                 ENTITY_TYPE_NAME,
                 VERSION,
                 super.bundleThyself( true, packer ),

@@ -24,7 +24,7 @@ import java.util.TreeSet;
 
 public class SortedSetExample extends GowingAbstractPackableEntity implements GowingPackable {
 
-    private static final EntityTypeName ENTITY_TYPE_NAME = new EntityTypeName( SortedSetExample.class.getCanonicalName() );
+    private static final EntityTypeName ENTITY_TYPE_NAME = new EntityTypeName( SortedSetExample.class );
 
     private static final int VERSION = 1;
 

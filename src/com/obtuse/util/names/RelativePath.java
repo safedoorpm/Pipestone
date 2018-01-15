@@ -29,7 +29,7 @@ import java.util.function.Supplier;
 @SuppressWarnings("unused")
 public class RelativePath extends GowingAbstractPackableEntity implements Iterable<SegmentName>, Comparable<RelativePath> {
 
-    private static final EntityTypeName ENTITY_TYPE_NAME = new EntityTypeName( RelativePath.class.getCanonicalName() );
+    private static final EntityTypeName ENTITY_TYPE_NAME = new EntityTypeName( RelativePath.class );
 
     private static final int VERSION = 1;
 
@@ -501,7 +501,7 @@ public class RelativePath extends GowingAbstractPackableEntity implements Iterab
 
     }
 
-    private static void msgTime( @NotNull final String what, String msg, Throwable e ) {
+    private static void msgTime( @NotNull final String what, final String msg, final Throwable e ) {
 
         if ( what.startsWith( "!" ) ) {
 
@@ -823,7 +823,6 @@ public class RelativePath extends GowingAbstractPackableEntity implements Iterab
     public String getDelimitedPathString( @NotNull final String rootString, @NotNull final String separator ) {
 
         StringBuilder sb = new StringBuilder();
-        boolean firstSegment = true;
         boolean firstNonRootSegment = true;
         for ( SegmentName sn : getNames() ) {
 
@@ -837,8 +836,6 @@ public class RelativePath extends GowingAbstractPackableEntity implements Iterab
                 firstNonRootSegment = false;
 
             }
-
-            firstSegment = false;
 
         }
 

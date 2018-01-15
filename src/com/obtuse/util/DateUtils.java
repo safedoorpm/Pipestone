@@ -1011,7 +1011,7 @@ public class DateUtils {
             } else {
 
                 rval += spacing + ObtuseUtil.lpad( millis / (double) Timer.ONE_SECOND, 0, digits ) +
-                        ( shortForm ? "s " : ( " second" + ( seconds == 1L ? "" : "s" ) ) );
+                        ( shortForm ? "s " : ( " second" + ( millis == 1000L ? "" : "s" ) ) );
 
             }
 

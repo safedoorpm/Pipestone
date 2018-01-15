@@ -16,7 +16,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class LinearFlagNameValue extends GowingPackableAttribute {
 
-    private static final EntityTypeName ENTITY_TYPE_NAME = new EntityTypeName( LinearFlagNameValue.class.getCanonicalName() );
+    private static final EntityTypeName ENTITY_TYPE_NAME = new EntityTypeName( LinearFlagNameValue.class );
     private static final int VERSION = 1;
 
     public static final GowingEntityFactory FACTORY = new GowingEntityFactory( ENTITY_TYPE_NAME ) {
@@ -39,8 +39,7 @@ public class LinearFlagNameValue extends GowingPackableAttribute {
                 @NotNull final GowingUnPacker unPacker,
                 @NotNull final GowingPackedEntityBundle bundle,
                 final GowingEntityReference er
-        )
-                throws GowingUnPackerParsingException {
+        ) {
 
             return new LinearFlagNameValue( unPacker, bundle );
 
@@ -54,8 +53,7 @@ public class LinearFlagNameValue extends GowingPackableAttribute {
 
     }
 
-    public LinearFlagNameValue( final GowingUnPacker unPacker, final GowingPackedEntityBundle bundle )
-            throws GowingUnPackerParsingException {
+    public LinearFlagNameValue( final GowingUnPacker unPacker, final GowingPackedEntityBundle bundle ) {
 
         super( unPacker, bundle.getSuperBundle() );
 
