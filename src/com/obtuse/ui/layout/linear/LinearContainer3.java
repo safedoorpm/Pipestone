@@ -20,7 +20,7 @@ import java.util.LinkedList;
 
 public class LinearContainer3 extends JPanel implements LinearContainer {
 
-    private static final java.util.List<LinearContainer3> _watchedContainers = new LinkedList<>();
+    private static final java.util.List<LinearContainer> _watchedContainers = new LinkedList<>();
 
 //    private ConstraintTuple _breadthConstraints;
 //    private ConstraintTuple _lengthConstraints;
@@ -63,7 +63,7 @@ public class LinearContainer3 extends JPanel implements LinearContainer {
 
     }
 
-    public static void watch( @NotNull final LinearContainer3 watched ) {
+    public static void watch( @NotNull final LinearContainer watched ) {
 
         if ( !_watchedContainers.contains( watched ) ) {
 
@@ -81,18 +81,26 @@ public class LinearContainer3 extends JPanel implements LinearContainer {
 
     }
 
-    public static void unWatch( @NotNull final LinearContainer3 watched ) {
+    public static void unWatch( @NotNull final LinearContainer watched ) {
 
         _watchedContainers.remove( watched );
 
     }
 
-    public static java.util.List<LinearContainer3> getWatched() {
+    public static java.util.List<LinearContainer> getWatched() {
 
         return Collections.unmodifiableList( _watchedContainers );
 
     }
 
+    @Override
+    public void watch() {
+
+        watch( this );
+
+    }
+
+    @Override
     public boolean isWatched() {
 
         return _watchedContainers.contains( this );

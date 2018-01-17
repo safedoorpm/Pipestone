@@ -22,6 +22,8 @@ public class StdGowingPackerContext implements GowingPackerContext {
     private final SortedSet<Integer> _seenTypeIds = new TreeSet<>();
     private final SortedSet<Integer> _newTypeIds = new TreeSet<>();
 
+    private SortedSet<Integer> _topTypeIds = new TreeSet<>();
+
     private final TreeMap<GowingInstanceId, EntityNames> _seenInstanceIds = new TreeMap<>();
 
     private int _nextTypeReferenceId = 1;
@@ -100,16 +102,39 @@ public class StdGowingPackerContext implements GowingPackerContext {
     }
 
     @Override
-    @NotNull
-    public Collection<GowingInstanceId> getSeenInstanceIds() {
+    public void rememberTopTypeId( int topTypeId ) {
 
-        return Collections.unmodifiableCollection( _seenInstanceIds.keySet() );
+        _topTypeIds.add( topTypeId );
 
     }
 
     @Override
     @NotNull
-    public Collection<Integer> getNewTypeIds() {
+    public Set<Integer> getTopTypeIds() {
+
+        return Collections.unmodifiableSet( _topTypeIds );
+
+    }
+
+    @Override
+    @NotNull
+    public Set<Integer> getSeenTypeIds() {
+
+        return Collections.unmodifiableSortedSet( _seenTypeIds );
+
+    }
+
+    @Override
+    @NotNull
+    public Set<GowingInstanceId> getSeenInstanceIds() {
+
+        return Collections.unmodifiableSet( _seenInstanceIds.keySet() );
+
+    }
+
+    @Override
+    @NotNull
+    public List<Integer> getAndResetNewTypeIds() {
 
         LinkedList<Integer> rval = new LinkedList<>( _newTypeIds );
         _newTypeIds.clear();

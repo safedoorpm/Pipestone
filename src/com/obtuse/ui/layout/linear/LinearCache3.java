@@ -22,13 +22,7 @@ import java.util.Vector;
  Encapsulate the cached sizing data about our target container.
  */
 
-public class LinearCache3 implements LayoutImplCache {
-
-//    private final boolean _trace;
-//
-//    private final LinearOrientation _orientation;
-//
-//    private final LinearContainer2 _container;
+public class LinearCache3 implements LinearLayoutManagerCache {
 
     private final ComponentSizeRequirements[] _breadthSizes;
     private final ComponentSizeRequirements[] _lengthSizes;
@@ -51,11 +45,9 @@ public class LinearCache3 implements LayoutImplCache {
 
     private boolean[] _trackParentBreadths;
 
-//    private Insets _insets;
-
     public LinearCache3(
-            final LinearLayoutManager3 linearLayoutManager,
-            final LinearContainer3 target,
+            @NotNull final LinearLayoutManager3 linearLayoutManager,
+            @NotNull final LinearContainer3 target,
             @NotNull final Hashtable<Component, LinearLayoutManager3.ConstraintsTable> allConstraints
     ) {
 
@@ -66,6 +58,13 @@ public class LinearCache3 implements LayoutImplCache {
         _target = target;
 
         boolean tracingContainer = LinearLayoutUtil.isContainerOnWatchlist( target );
+
+        if ( target.isWatched() ) {
+
+            Logger.logMsg( "LinearCache3:  caching " + target );
+
+        }
+
         //noinspection EmptyFinallyBlock
         try {
 
@@ -102,7 +101,10 @@ public class LinearCache3 implements LayoutImplCache {
             @SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
             LinearLayoutManager3.ConstraintsTable emptyConstraintsTable = new LinearLayoutManager3.ConstraintsTable();
             LinearLayoutManager3.SimpleConstraint disabledTrackParentsBreadthConstraint =
-                    new LinearLayoutManager3.SimpleConstraint( LinearLayoutManager3.TRACK_PARENTS_BREADTH_CONSTRAINT_TITLE, false );
+                    new LinearLayoutManager3.SimpleConstraint(
+                            LinearLayoutManager3.TRACK_PARENTS_BREADTH_CONSTRAINT_TITLE,
+                            false
+                    );
 
             // Find the space sponge (where extra length space comes from).
             // If there's more than one, we'll use the last one (we'll get extra space on a shared basis some day).
@@ -127,7 +129,10 @@ public class LinearCache3 implements LayoutImplCache {
 
                 }
 
-                LinearLayoutManager3.ConstraintsTable componentConstraints = allConstraints.getOrDefault( c, emptyConstraintsTable );
+                LinearLayoutManager3.ConstraintsTable componentConstraints = allConstraints.getOrDefault(
+                        c,
+                        emptyConstraintsTable
+                );
                 LinearLayoutManager3.Constraint trackParentsBreadthConstraint = componentConstraints.getOrDefault(
                         LinearLayoutManager3.TRACK_PARENTS_BREADTH_CONSTRAINT_TITLE,
                         disabledTrackParentsBreadthConstraint
@@ -143,19 +148,6 @@ public class LinearCache3 implements LayoutImplCache {
                 Dimension min = c.getMinimumSize();
                 Dimension pref = c.getPreferredSize();
                 Dimension max = c.getMaximumSize();
-
-//                ObtuseUtil.report( "LC3@" + c + ":  min=" + min + ", pref=" + pref + ", max=" + max );
-//
-//                if ( componentTrackParentsBreadth ) {
-//
-//                    ObtuseUtil.report(
-//                            "*** track parent's breadth:  " +
-//                            ObtuseUtil.fDim( "min", min ) + ", " +
-//                            ObtuseUtil.fDim( "pref", pref ) + ", " +
-//                            ObtuseUtil.fDim( "max", max )
-//                    );
-//
-//                }
 
                 if ( c instanceof LinearContainer ) {
 
@@ -215,14 +207,22 @@ public class LinearCache3 implements LayoutImplCache {
                         c,
                         min.width,
                         pref.width,
-                        ( isHorizontal() && hasSpaceSponge && !( c instanceof LinearLayoutUtil.SpaceSponge ) ? pref.width : max.width ),
+                        (
+                                isHorizontal() && hasSpaceSponge && !( c instanceof LinearLayoutUtil.SpaceSponge ) ?
+                                        pref.width :
+                                        max.width
+                        ),
                         0f
                 );
                 ComponentSizeRequirements yReq = new ComponentSizeRequirements(
                         c,
                         min.height,
                         pref.height,
-                        ( isVertical() && hasSpaceSponge && !( c instanceof LinearLayoutUtil.SpaceSponge ) ? pref.height : max.height ),
+                        (
+                                isVertical() && hasSpaceSponge && !( c instanceof LinearLayoutUtil.SpaceSponge ) ?
+                                        pref.height :
+                                        max.height
+                        ),
                         0f
                 );
 
@@ -263,7 +263,6 @@ public class LinearCache3 implements LayoutImplCache {
             if ( LinearLayoutUtil.isContainerOnWatchlist( target ) ) {
 
                 boolean forced = ObtuseUtil.never();
-//		logIfWatched( "_breadthTotal alignment is " + _breadthTotal.alignment + ", _lengthTotal alignment is " + _lengthTotal.alignment + ( forced ? " both FORCED to 0" : "" ));
 
                 if ( forced ) {
 
@@ -275,14 +274,6 @@ public class LinearCache3 implements LayoutImplCache {
             }
 
         } finally {
-
-//	    if ( tracingContainer ) {
-//
-//		Logger.popNestingLevel( "inner cache" );
-//
-//		Logger.popNestingLevel( "cache constructor" );
-//
-//	    }
 
         }
 
@@ -315,8 +306,6 @@ public class LinearCache3 implements LayoutImplCache {
             @SuppressWarnings({ "SameParameterValue", "unused" }) final String what,
             @SuppressWarnings("unused") final Component c
     ) {
-
-//	logIfWatched( "working on " + LinearLayoutUtil.fullName( c ) );
 
     }
 
@@ -377,7 +366,10 @@ public class LinearCache3 implements LayoutImplCache {
                 ?
                 new Dimension( _target.applyBreadthConstraints( size.width ), _target.applyLengthConstraints( size.height ) )
                 :
-                new Dimension( _target.applyLengthConstraints( size.width ), _target.applyBreadthConstraints( size.height ) );
+                new Dimension(
+                        _target.applyLengthConstraints( size.width ),
+                        _target.applyBreadthConstraints( size.height )
+                );
 
         return size;
 
@@ -395,7 +387,10 @@ public class LinearCache3 implements LayoutImplCache {
                 ?
                 new Dimension( _target.applyBreadthConstraints( size.width ), _target.applyLengthConstraints( size.height ) )
                 :
-                new Dimension( _target.applyLengthConstraints( size.width ), _target.applyBreadthConstraints( size.height ) );
+                new Dimension(
+                        _target.applyLengthConstraints( size.width ),
+                        _target.applyBreadthConstraints( size.height )
+                );
 
         return size;
 
@@ -413,41 +408,14 @@ public class LinearCache3 implements LayoutImplCache {
                 ?
                 new Dimension( _target.applyBreadthConstraints( size.width ), _target.applyLengthConstraints( size.height ) )
                 :
-                new Dimension( _target.applyLengthConstraints( size.width ), _target.applyBreadthConstraints( size.height ) );
+                new Dimension(
+                        _target.applyLengthConstraints( size.width ),
+                        _target.applyBreadthConstraints( size.height )
+                );
 
         return size;
 
     }
-
-//    public Dimension getMinimumSize() {
-//
-//	Dimension size = isVertical() ? new Dimension( _breadthTotal.minimum, _lengthTotal.minimum ) : new Dimension( _lengthTotal.minimum, _breadthTotal.minimum );
-//
-//	addInsets( size );
-//
-//	return size;
-//
-//    }
-//
-//    public Dimension getPreferredSize() {
-//
-//	Dimension size = isVertical() ? new Dimension( _breadthTotal.preferred, _lengthTotal.preferred ) : new Dimension( _lengthTotal.preferred, _breadthTotal.preferred );
-//
-//	addInsets( size );
-//
-//	return size;
-//
-//    }
-//
-//    public Dimension getMaximumSize() {
-//
-//	Dimension size = isVertical() ? new Dimension( _breadthTotal.maximum, _lengthTotal.maximum ) : new Dimension( _lengthTotal.maximum, _breadthTotal.maximum );
-//
-//	addInsets( size );
-//
-//	return size;
-//
-//    }
 
     private void addInsets( final Dimension size ) {
 
@@ -489,10 +457,6 @@ public class LinearCache3 implements LayoutImplCache {
         Insets in = _target.getInsets();
 
         Dimension adjSpace = new Dimension( space.width - ( in.left + in.right ), space.height - ( in.top + in.bottom ) );
-//	logIfWatched( "space=" + ObtuseUtil.fDim( space ) + ", insets=" + ObtuseUtil.fInsets( in ) + ", adjSpace=" + ObtuseUtil.fDim( adjSpace ) );
-
-//	space.width -= in.left + in.right;
-//	space.height -= in.top + in.bottom;
 
         if ( isWatched() ) {
 
@@ -500,31 +464,7 @@ public class LinearCache3 implements LayoutImplCache {
 
         }
 
-//	if ( ObtuseUtil.always() || LinearLayoutUtil.isContainerOnWatchlist( _target ) ) {
-//
-//	    logIfWatched(
-//	    	( isVertical() ? "compute vertical positions(" : "compute horizontal positions(" ) + LinearLayoutUtil.fullName( _target ) + "):" +
-//		"  space=" + ObtuseUtil.fDim( space ) +
-//		", insets=" + ObtuseUtil.fInsets( in ) +
-//		", adjSpace=" + ObtuseUtil.fDim( adjSpace )
-//	    );
-//
-//	    for ( int i = 0; i < _breadthSizes.length; i += 1 ) {
-//
-//		logIfWatched( "    bS[" + i + "] = " + _breadthSizes[i] );
-//		logIfWatched( "    lS[" + i + "] = " + _lengthSizes[i] );
-//
-//	    }
-//
-//	}
-
-//	String levelName = "adjusting " + getTarget().getName();
-
         try {
-
-//	    Logger.pushNesting( levelName );
-
-//	    Logger.logMsg( getTarget().getName() + "'s adjSpace is " + ObtuseUtil.fDim( adjSpace ) );
 
             if ( isVertical() ) {
 
@@ -578,21 +518,7 @@ public class LinearCache3 implements LayoutImplCache {
 
         } finally {
 
-//	    Logger.popNestingLevel( levelName );
-
         }
-
-//	if ( ObtuseUtil.always() || LinearLayoutUtil.isContainerOnWatchlist( _target ) ) {
-//
-//	    for ( int ix = 0; ix < n; ix += 1 ) {
-//
-//		Rectangle r = computeComponentBoundingRectangle( ix );
-//
-//		logIfWatched( "L3C.computePositions:  [" + ix + "] " + LinearLayoutUtil.fullName( _target, _breadthSizes[ix].component ) + " will be at " + ObtuseUtil.fBounds( r ) );
-//
-//	    }
-//
-//	}
 
     }
 
@@ -608,29 +534,33 @@ public class LinearCache3 implements LayoutImplCache {
 
         if ( isWatched() ) {
 
+            Logger.logMsg( "calculating aligned positions for " + _target.getName() );
             ObtuseUtil.doNothing();
 
         }
 
-//	logIfWatched( "calculateAlignedPositions( " + allocated + ", " + total + ", " + ( children == _breadthSizes ? "_breadthSizes" : ( children == _lengthSizes ? "_lengthSizes" : "?" ) ) + " ... )" );
         float totalAlignment = normal ? total.alignment : 1.0f - total.alignment;
 
         int totalAscent = (int)( allocated * totalAlignment );
 
         int totalDescent = allocated - totalAscent;
 
-//	logIfWatched( "total alignment=" + totalAlignment + ", totalAscent=" + totalAscent + ", totalDescent=" + totalDescent );
-        for ( int i = 0; i < children.length; i++ ) {
+        if ( isWatched() ) {
 
-//	    if ( trackParentBreadth[i] ) {
-//
-//	        Logger.logMsg( "track parent's breadth" );
-//
-//	    } else {
-//
-//	        Logger.logMsg( "ignore parent's breadth" );
-//
-//	    }
+            logIfWatched( "total alignment=" +
+                          totalAlignment +
+                          ", totalAscent=" +
+                          totalAscent +
+                          ", totalDescent=" +
+                          totalDescent + " " +
+                          LinearLayoutUtil.describeContainer( _target )
+            );
+
+            ObtuseUtil.doNothing();
+
+        }
+
+        for ( int i = 0; i < children.length; i++ ) {
 
             SizeRequirements req = children[i];
             float alignment = normal ? req.alignment : 1.0f - req.alignment;
@@ -653,7 +583,23 @@ public class LinearCache3 implements LayoutImplCache {
                 }
 
             }
-//	    logIfWatched( "  [" + i + "]  alignment=" + alignment + ", maxAscent=" + maxAscent + ", maxDescent=" + maxDescent + ", ascent=" + ascent + ", descent=" + descent + ", offset=" + offsets[i] + ", span=" + spans[i] );
+
+            logIfWatched( "  [" +
+                          i +
+                          "]  alignment=" +
+                          alignment +
+                          ", maxAscent=" +
+                          maxAscent +
+                          ", maxDescent=" +
+                          maxDescent +
+                          ", ascent=" +
+                          ascent +
+                          ", descent=" +
+                          descent +
+                          ", offset=" +
+                          offsets[i] +
+                          ", span=" +
+                          spans[i] );
 
         }
 
@@ -674,22 +620,35 @@ public class LinearCache3 implements LayoutImplCache {
 
         }
 
-//	logIfWatched( "calculateTiledPositions( " + total + ", " + children.length + " children, forward = " + forward + " )" );
+        logIfWatched( "calculateTiledPositions( " +
+                      total +
+                      ", " +
+                      children.length +
+                      " children, forward = " +
+                      forward +
+                      " )" );
 
         // The total argument turns out to be a bad idea since the
         // total of all the children can overflow the integer used to
         // hold the total.  The total must therefore be calculated and
         // stored in long variables.
+
         long min = 0;
         long pref = 0;
         long max = 0;
-//	StringBuilder buf = new StringBuilder();
-//	String comma = "";
+
+        StringBuilder buf = new StringBuilder();
+        String comma = "";
 
         for ( SizeRequirements child : children ) {
 
-//	    buf.append( comma ).append( children[i].minimum ).append( '/' ).append( children[i].preferred ).append( '/' ).append( children[i].maximum );
-//	    comma = ", ";
+            buf.append( comma )
+               .append( child.minimum )
+               .append( '/' )
+               .append( child.preferred )
+               .append( '/' )
+               .append( child.maximum );
+            comma = ", ";
 
             min += child.minimum;
             pref += child.preferred;
@@ -697,14 +656,14 @@ public class LinearCache3 implements LayoutImplCache {
 
         }
 
-//	logIfWatched( buf.toString() );
+        logIfWatched( buf.toString() );
 
-//	String levelName = "adjusting " + getTarget().getName() + " - allocated=" + allocated + ", pref=" + pref;
-//	Logger.pushNesting( levelName );
+        String levelName = "adjusting " + getTarget().getName() + " - allocated=" + allocated + ", pref=" + pref;
+        Logger.pushNesting( levelName );
 
         try {
 
-//	    Logger.logMsg( "allocated=" + allocated + ", pref=" + pref );
+            logIfWatched( "allocated=" + allocated + ", pref=" + pref );
 
             if ( allocated >= pref ) {
 
@@ -718,7 +677,7 @@ public class LinearCache3 implements LayoutImplCache {
 
         } finally {
 
-//	    Logger.popNestingLevel( levelName );
+            Logger.popNestingLevel( levelName );
 
         }
 
@@ -836,12 +795,6 @@ public class LinearCache3 implements LayoutImplCache {
 
             Component c = _breadthSizes[ix].component;
 
-//	    if ( ObtuseUtil.always() || c instanceof Container && LinearLayoutUtil.isContainerOnWatchlist( (Container)c ) ) {
-//
-//		logIfWatched( "L3C.setComponentBounds:  about to compute bounds of " + LinearLayoutUtil.fullName( _target, c ) );
-//
-//	    }
-
             if ( _target.isWatched() ) {
 
                 ObtuseUtil.doNothing();
@@ -850,27 +803,13 @@ public class LinearCache3 implements LayoutImplCache {
 
             Rectangle r = computeComponentBoundingRectangle( ix );
 
-//	    if ( ObtuseUtil.always() || c instanceof Container && LinearLayoutUtil.isContainerOnWatchlist( (Container)c ) ) {
-//
-//		logIfWatched( "L3C.setComponentBounds: bounds of " + LinearLayoutUtil.fullName( _target, c ) + " set to " + ObtuseUtil.fBounds( r ) );
-//
-//	    }
-
-//	    Logger.logMsg( "setComponentBounds on " + c.getName() + ObtuseUtil.fBounds( r ) + "<<<" );
-
             try {
-
-//	        Logger.pushNesting( "setComponentBounds on " + c.getName() + ObtuseUtil.fBounds( r ) );
 
                 c.setBounds( r );
 
             } finally {
 
-//	        Logger.popNestingLevel( "setComponentBounds on " + c.getName() + ObtuseUtil.fBounds( r ) );
-
             }
-
-//	    Logger.logMsg( "setComponentBounds on " + c.getName() + ObtuseUtil.fBounds( r ) + ">>>" );
 
         }
 
@@ -886,6 +825,12 @@ public class LinearCache3 implements LayoutImplCache {
                 _xSpans[ix],
                 _ySpans[ix]
         );
+
+    }
+
+    public String toString() {
+
+        return "LinearCache3( target name=" + _target.getName() + " )";
 
     }
 

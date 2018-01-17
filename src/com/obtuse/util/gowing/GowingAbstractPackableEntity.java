@@ -98,7 +98,6 @@ public abstract class GowingAbstractPackableEntity implements GowingPackable {
             @SuppressWarnings("unused") @NotNull final GowingUnPacker unPacker,
             @NotNull final GowingPackedEntityBundle bundle
     ) {
-
         super();
 
         _gowingThing = new GowingNameMarkerThing( bundle.getNotNullField( GOWING_NAME ).StringValue() );

@@ -75,6 +75,8 @@ public interface GowingUnPackerContext {
     @SuppressWarnings("UnusedReturnValue")
     EntityTypeInfo registerFactory( GowingEntityFactory factory );
 
+    int registerFactories( GowingEntityFactory[] factories );
+
     void saveTypeAlias( StdGowingTokenizer.GowingToken2 typeIdToken, StdGowingTokenizer.GowingToken2 typeNameToken )
 	    throws GowingUnPackerParsingException;
 

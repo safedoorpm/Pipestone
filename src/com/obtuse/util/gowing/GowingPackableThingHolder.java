@@ -4,6 +4,9 @@ package com.obtuse.util.gowing;
  * Copyright © 2015 Obtuse Systems Corporation
  */
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 /**
  Pack a single named thing (int, String, user-defined Glorble, etc).
  */
@@ -54,6 +57,8 @@ public interface GowingPackableThingHolder extends Comparable<GowingPackableThin
 
     Object getObjectValue();
 
+    boolean hasObjectValue();
+
     boolean isNull();
 
     /**
@@ -74,6 +79,7 @@ public interface GowingPackableThingHolder extends Comparable<GowingPackableThin
      @throws ClassCastException if this instance's object is not actually a {@link Character} instance.
      */
 
+    @Nullable
     Character CharacterValue();
 
     /**
@@ -84,7 +90,21 @@ public interface GowingPackableThingHolder extends Comparable<GowingPackableThin
      @throws ClassCastException if this instance's object is not actually a {@link String} instance.
      */
 
+    @Nullable
     String StringValue();
+
+    /**
+     Return this instance's object after casting it to a {@link String}.
+     <p/>This method is exactly equivalent to <blockquote><code>(String)(this.getObjectValue())</code></blockquote>
+     except that it throws an {@link IllegalArgumentException} if {@code this.getObjectValue()} returns {@code null}.
+
+     @return this instance's object after casting it to a {@link String}.
+     @throws ClassCastException if this instance's object is not actually a {@link String} instance.
+     @throws IllegalArgumentException if {@code this.getObjectValue()} returns {@code null}.
+     */
+
+    @NotNull
+    String MandatoryStringValue();
 
     /**
      Cast this instance's object to a {@link Boolean} and return its <code>boolean</code> value.
@@ -104,6 +124,7 @@ public interface GowingPackableThingHolder extends Comparable<GowingPackableThin
      @throws ClassCastException if this instance's object is not actually a {@link Boolean} instance.
      */
 
+    @Nullable
     Boolean BooleanValue();
 
     /**
@@ -124,6 +145,7 @@ public interface GowingPackableThingHolder extends Comparable<GowingPackableThin
      @throws ClassCastException if this instance's object is not actually a {@link Byte} instance.
      */
 
+    @Nullable
     Byte ByteValue();
 
     /**
@@ -144,6 +166,7 @@ public interface GowingPackableThingHolder extends Comparable<GowingPackableThin
      @throws ClassCastException if this instance's object is not actually a {@link Short} instance.
      */
 
+    @Nullable
     Short ShortValue();
 
     /**
@@ -164,6 +187,7 @@ public interface GowingPackableThingHolder extends Comparable<GowingPackableThin
      @throws ClassCastException if this instance's object is not actually a {@link Integer} instance.
      */
 
+    @Nullable
     Integer IntegerValue();
 
     /**
@@ -184,6 +208,7 @@ public interface GowingPackableThingHolder extends Comparable<GowingPackableThin
      @throws ClassCastException if this instance's object is not actually a {@link Long} instance.
      */
 
+    @Nullable
     Long LongValue();
 
     /**
@@ -204,6 +229,7 @@ public interface GowingPackableThingHolder extends Comparable<GowingPackableThin
      @throws ClassCastException if this instance's object is not actually a {@link Float} instance.
      */
 
+    @Nullable
     Float FloatValue();
 
     /**
@@ -224,6 +250,7 @@ public interface GowingPackableThingHolder extends Comparable<GowingPackableThin
      @throws ClassCastException if this instance's object is not actually a {@link Double} instance.
      */
 
+    @Nullable
     Double DoubleValue();
 
     /**
@@ -234,6 +261,7 @@ public interface GowingPackableThingHolder extends Comparable<GowingPackableThin
      @throws ClassCastException if this instance's object is not actually a {@link Number} instance.
      */
 
+    @Nullable
     Number NumberValue();
 
     /**

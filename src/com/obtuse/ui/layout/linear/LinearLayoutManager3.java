@@ -97,51 +97,7 @@ public class LinearLayoutManager3 implements LayoutManager2 {
 
     public static class ConstraintsTable extends TreeMap<String, Constraint> {
 
-//	public static final ConstraintsTable EMPTY;
-//
-//	static {
-//
-//	    EMPTY = new ConstraintsTable() {
-//
-//		public void putAll(Map<? extends String, ? extends Constraint> map) {
-//		    throw new IllegalArgumentException( "EMPTY is immutable" );
-//		}
-//
-//		public Constraint put( String key, Constraint constraint ) {
-//		    throw new IllegalArgumentException( "EMPTY is immutable" );
-//		}
-//
-//		public Constraint remove( Object v ) {
-//		    throw new IllegalArgumentException( "EMPTY is immutable" );
-//		}
-//
-//		public void clear() {
-//		    throw new IllegalArgumentException( "EMPTY is immutable" );
-//		}
-//
-//		public NavigableSet<String> navigableKeySet() {
-//		    return Collections.unmodifiableNavigableSet( super.navigableKeySet() );
-//		}
-//
-//		public Set<String> keySet() {
-//		    return navigableKeySet();
-//		}
-//
-//		public NavigableSet<String> descendingKeySet() {
-//		    return Collections.unmodifiableNavigableSet( descendingMap().navigableKeySet() );
-//		}
-//
-//		public Collection<Constraint> values() {
-//		    return Collections.unmodifiableCollection( super.values() );
-//		}
-//
-//
-//
-//	    };
-//
-//	}
-
-        public ConstraintsTable() {
+      public ConstraintsTable() {
 
             super();
 
@@ -163,26 +119,24 @@ public class LinearLayoutManager3 implements LayoutManager2 {
 
     private final Hashtable<Component, ConstraintsTable> _constraints = new Hashtable<>();
 
-    private LayoutImplCache _cache;
+    private LinearLayoutManagerCache _cache;
 
     public LinearLayoutManager3(
             @NotNull final LinearOrientation orientation,
-            @NotNull final LinearContainer3 linearContainer3
+            @NotNull final LinearContainer3 target
     ) {
 
         super();
 
         _orientation = orientation;
 
-        _target = linearContainer3;
+        _target = target;
 
         preLoadCacheIfNecessary();
     }
 
     @Override
     public synchronized void addLayoutComponent( final Component comp, final Object xConstraints ) {
-
-//	Logger.maybeLogMsg( () -> "addLayoutComponent( " + comp + ", " + xConstraints + " )" );
 
         implicitInvalidateLayout( "addLayoutComponent", _target );
 
@@ -192,7 +146,7 @@ public class LinearLayoutManager3 implements LayoutManager2 {
 
         }
 
-        ConstraintsTable oldConstraints = _constraints.remove( comp );
+        _constraints.remove( comp );
         ConstraintsTable constraints;
 
         if ( xConstraints == null ) {
@@ -218,7 +172,6 @@ public class LinearLayoutManager3 implements LayoutManager2 {
 
         }
 
-//	SortedMap<Object, Object> original = (SortedMap<Object, Object>) constraints;
         ConstraintsTable copy = new ConstraintsTable();
         for ( Object keyObject : constraints.keySet() ) {
 
@@ -247,30 +200,9 @@ public class LinearLayoutManager3 implements LayoutManager2 {
 
             }
 
-//	    if ( !( value instanceof Constraint ) ) {
-//
-//		throw new IllegalArgumentException(
-//			"LinearLayoutManager3.addLayoutComponent( Component, Object ):  constraint named \"" + key +
-//			"\" is not a " + Constraint.class.getCanonicalName() + " (it is a " +
-//			value.getClass().getCanonicalName() + ")" );
-//
-//	    }
-
-//	    Constraint value = (Constraint) value;
-
             copy.put( key, value );
 
         }
-
-//	if ( oldConstraints == null ) {
-//
-//	    Logger.logMsg( "constraints for " + comp + " set to " + copy );
-//
-//	} else {
-//
-//	    Logger.logMsg( "constraints for " + comp + " changed from " + oldConstraints + " to " + copy );
-//
-//	}
 
         _constraints.put( comp, copy );
 
@@ -323,33 +255,13 @@ public class LinearLayoutManager3 implements LayoutManager2 {
 
     private synchronized void implicitInvalidateLayout( final String requester, final LinearContainer3 target ) {
 
-//        if ( _target != null && _target.isWatched() && _cache != null ) {
-//
-//            ObtuseUtil.doNothing();
-//
-//	}
-
         if ( _cache != null && LinearLayoutUtil.isContainerOnWatchlist( _target ) ) {
 
             Logger.logMsg( "layout invalidated by " + requester + " (target is " + target + ")" );
 
         }
 
-        boolean needValidation = _cache != null;
-
         _cache = null;
-
-//	if ( needValidation ) {
-//
-//	    for ( int i = 0; i < _target.getComponentCount(); i += 1 ) {
-//
-//		Component component = _target.getComponent( i );
-//		Logger.logMsg( "forcing revalidation of " + component.getName() );
-//		component.invalidate();
-//
-//	    }
-//
-//	}
 
     }
 
@@ -367,8 +279,6 @@ public class LinearLayoutManager3 implements LayoutManager2 {
 
         }
 
-//        Logger.logMsg( getTarget().getName() + "'s preferred size is " + ObtuseUtil.fDim( size ) );
-
         return size;
 
     }
@@ -381,16 +291,6 @@ public class LinearLayoutManager3 implements LayoutManager2 {
 
         @SuppressWarnings("UnnecessaryLocalVariable")
         Dimension size = _cache.getMinimumSize();
-
-//	if ( getOrientation() == LinearOrientation.HORIZONTAL ) {
-//
-//	    size = new Dimension( target.applyLengthConstraints( size.width ), target.applyBreadthConstraints( size.height ) );
-//
-//	} else {
-//
-//	    size = new Dimension( target.applyBreadthConstraints( size.width ), target.applyLengthConstraints( size.height ) );
-//
-//	}
 
         return size;
 
@@ -430,8 +330,6 @@ public class LinearLayoutManager3 implements LayoutManager2 {
     @Override
     public synchronized void removeLayoutComponent( final Component comp ) {
 
-//	Logger.logMsg( "removeLayoutComponent( " + comp + " )" );
-
         implicitInvalidateLayout( "removeLayoutComponent", _target );
 
         if ( comp == null ) {
@@ -449,29 +347,9 @@ public class LinearLayoutManager3 implements LayoutManager2 {
     @Override
     public void layoutContainer( final Container parent ) {
 
-        LayoutImplCache cache;
+        LinearLayoutManagerCache cache;
 
         synchronized ( this ) {
-
-//	    String levelName = "XXX layoutContainer(" + parent + ")";
-//	    try {
-
-//		Logger.pushNesting( levelName );
-
-//		if ( _target.isWatched() ) {
-//
-////		    Logger.logMsg( "laying out " + parent );
-//
-//		    for ( int i = 0; i < parent.getComponentCount(); i += 1 ) {
-//
-//			Component component = parent.getComponent( i );
-//			Logger.logMsg( "parent[" + i + "] is " + component );
-//
-//		    }
-//
-//		    Logger.pushNesting( "inner" );
-//
-//		}
 
             if ( LinearLayoutUtil.isContainerOnWatchlist( parent ) ) {
 
@@ -480,7 +358,6 @@ public class LinearLayoutManager3 implements LayoutManager2 {
             }
 
             checkContainer( "layoutContainer", parent );
-//	        implicitInvalidateLayout( "layoutContainer", _target );
 
             preLoadCacheIfNecessary();
 
@@ -507,18 +384,6 @@ public class LinearLayoutManager3 implements LayoutManager2 {
 
             }
 
-//	    } finally {
-//
-//		if ( _target.isWatched() ) {
-//
-//		    Logger.popNestingLevel( "inner" );
-//
-//		}
-//
-//		Logger.popNestingLevel( levelName );
-//
-//	    }
-
         }
 
         cache.setComponentBounds();
@@ -535,12 +400,6 @@ public class LinearLayoutManager3 implements LayoutManager2 {
 
         }
 
-//        Logger.logMsg(
-//                "====================================== container " + getTarget().getName() +
-//                " should be " + containerWidth + 'x' + containerHeight +
-//                " and is " + ObtuseUtil.fBounds( getTarget().getBounds() )
-//        );
-
     }
 
     public LinearOrientation getOrientation() {
@@ -555,51 +414,9 @@ public class LinearLayoutManager3 implements LayoutManager2 {
 
     }
 
-    private static Thread s_quietThread;
-    private static int s_quietCountdown = 0;
-    private static final Long s_qLock = 0L;
-
-    private static void startQuietPeriod() {
-
-        synchronized ( s_qLock ) {
-
-            s_quietCountdown = 3;
-
-        }
-
-    }
-
     public static void main( final String[] args ) {
 
         BasicProgramConfigInfo.init( "Obtuse", "LinearLayoutManager3", "testing", null );
-
-//        s_quietThread = new Thread( "quiet thread" ) {
-//
-//            public void run() {
-//
-//                while ( true ) {
-//
-//                    synchronized ( s_qLock ) {
-//
-//                        if ( s_quietCountdown > 0 ) {
-//
-//                            s_quietCountdown -= 1;
-//
-//			} else {
-//
-//			    Logger.logMsg( "<><><><><>" );
-//
-//			}
-//
-//		    }
-//
-//		    ObtuseUtil.safeSleepMillis( 1000L );
-//
-//		}
-//
-//	    }
-//	};
-//        s_quietThread.start();
 
         JFrame frame = new JFrame( "test simple linear layouts" );
         LinearContainer inner = LinearLayoutUtil.getLinearContainer3( "inner", LinearOrientation.VERTICAL, true );
@@ -635,8 +452,6 @@ public class LinearLayoutManager3 implements LayoutManager2 {
         );
         inner.add( jb2 );
 
-//	inner.setMaximumSize( new Dimension( 300, 300 ) );
-
         LinearContainer outer = LinearLayoutUtil.getLinearContainer3( "outer", LinearOrientation.HORIZONTAL, true );
         outer.setBorder( BorderFactory.createLineBorder( Color.RED ) );
         outer.add( inner.getAsContainer() );
@@ -666,7 +481,6 @@ public class LinearLayoutManager3 implements LayoutManager2 {
         outer.add( inner2 );
         inner2.add( jb3 );
         inner2.setBorder( BorderFactory.createEtchedBorder( Color.GREEN, Color.WHITE ) );
-//	outer.add( jb3 );
 
         frame.setContentPane( outer.getAsContainer() );
         frame.pack();
@@ -704,7 +518,6 @@ public class LinearLayoutManager3 implements LayoutManager2 {
                 new Component[]{ makeTestFiller( "blorf" ), scrollPane },
                 new ConstraintTuple( 300, 600 )
         );
-//	main.add( scrollPane );
 
         Box b = new Box( BoxLayout.X_AXIS );
         b.add( main );
@@ -712,18 +525,6 @@ public class LinearLayoutManager3 implements LayoutManager2 {
         frame.setContentPane( b );
         frame.pack();
         frame.setVisible( true );
-
-//	JFrame frame2 = new JFrame( "BoxLayout" );
-//	main = makeMainContainer( false );
-//	frame2.setContentPane( main );
-//	frame2.pack();
-//	frame2.setVisible( true );
-//
-//	JFrame frame3 = new JFrame( "naked JPanel" );
-//	JPanel filler = makeTestFiller( "just a filler" );
-//	frame3.setContentPane( filler );
-//	frame3.pack();
-//	frame3.setVisible( true );
 
     }
 
@@ -795,7 +596,6 @@ public class LinearLayoutManager3 implements LayoutManager2 {
         filler = makeTestFiller( label );
         filler.setDoubleBuffered( false );
 
-//	filler.setBorder( BorderFactory.createLineBorder( Color.PINK ) );
         filler.setName( "filler" );
         LinearLayoutUtil.addLocationTracer( filler );
         main.add( filler );
@@ -833,49 +633,22 @@ public class LinearLayoutManager3 implements LayoutManager2 {
                              insets.bottom -
                              1;    // subtracting 1 accounts for fact that last pixel in a n pixel wide space is at location n-1
 
-//		g2d.drawLine( left, top, right, bottom );
-//		g2d.drawLine( left, bottom, right, top );
-//		String l1msg = LinearLayoutUtil.myDrawLine( "filler1", g2d, left, top, right, bottom );
-//		String l2msg = LinearLayoutUtil.myDrawLine( "filler2", g2d, left, bottom, right, top );
-//		java.util.List<Integer> increasing = new FormattingLinkedList<>();
-//		java.util.List<Integer> decreasing = new FormattingLinkedList<>();
-//		for ( int y = top; y <= bottom; y += 1 ) {
-//
-//		    increasing.add( y );
-//		    decreasing.add( 0, y );
-//
-//		}
-//		for ( int y : decreasing ) {
-//
-//		    float v = ( (float) ( y - top ) ) / ( bottom - top );
-//		    Logger.logMsg( "v=" + v );
-//		    g2d.setColor( new Color( v, v, v ) );
-//
-//		    LinearLayoutUtil.myDrawLine( "filler@" + y, g2d, left, y, right, bottom );
-//
-//		}
                 String l1msg = LinearLayoutUtil.myDrawLine( "filler1", g2d, left, top, right, bottom );
-//		String l3msg = LinearLayoutUtil.myDrawLine( "filler3", g2d, left, bottom - 1, right, ( top + bottom ) / 2 );
                 String l2msg = LinearLayoutUtil.myDrawLine( "filler2", g2d, left, bottom, right, 1 );
-//		String l2msg = LinearLayoutUtil.myDrawLine( "filler2", g2d, right - 10, 1, left, bottom );
-//		String l4msg = LinearLayoutUtil.myDrawLine( "filler4", g2d, right - 10, top + 10, right, top );
-
-                Logger.logMsg(
-                        label + " main painted:  w=" + getWidth() + ", h=" + getHeight() + ", insets=" + ObtuseUtil.fInsets( insets ) // +
-//			", l1=" + l1msg +
-//			", l2=" + l2msg
-                );
 
                 ObtuseUtil.doNothing();
-
-//		g2d.drawLine( insets.left, insets.top, getWidth() - insets.right, getHeight() - insets.bottom );
-//		g2d.drawLine( insets.left, getHeight() - insets.bottom, getWidth() - insets.right, insets.top );
 
             }
 
         };
 
         return filler;
+
+    }
+
+    public String toString() {
+
+        return "LinearLayoutManager3( orientation=" + getOrientation() + ", container=" + getTarget() + " )";
 
     }
 

@@ -8,9 +8,10 @@ package com.obtuse.ui.layout.linear;
 import java.awt.*;
 
 /**
- %%% Something clever goes here.
+ Describe how a LLM's cache behaves.
  */
-public interface LayoutImplCache {
+
+public interface LinearLayoutManagerCache {
 
     float getLayoutAlignmentX();
 

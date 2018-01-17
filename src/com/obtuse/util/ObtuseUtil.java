@@ -6,10 +6,12 @@ package com.obtuse.util;
 
 import com.obtuse.db.PostgresConnection;
 import com.obtuse.exceptions.HowDidWeGetHereError;
-import com.obtuse.util.gowing.EntityName;
-import com.obtuse.util.gowing.GowingPackable;
-import com.obtuse.util.gowing.GowingPacker;
+import com.obtuse.util.gowing.*;
+import com.obtuse.util.gowing.p2a.GowingUnPackedEntityGroup;
 import com.obtuse.util.gowing.p2a.StdGowingPacker;
+import com.obtuse.util.gowing.p2a.StdGowingUnPacker;
+import com.obtuse.util.gowing.p2a.TracingGowingMetaDataHandler;
+import com.obtuse.util.gowing.p2a.examples.SortedSetExample;
 import com.obtuse.util.gowing.p2a.holders.GowingPackableCollection;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -3151,38 +3153,116 @@ public class ObtuseUtil {
 
     }
 
-    public static void quietGowingSave(
+    public static boolean quietGowingSave(
             @NotNull final EntityName groupName,
-            @NotNull final GowingPackable item,
-            @NotNull final File outputFile
+            @NotNull final GowingPackable[] items,
+            @NotNull final File outputFile,
+            boolean verbose
     ) {
 
-        try {
+        boolean worked = true;
+        try ( GowingPacker packer = new StdGowingPacker( groupName, outputFile, verbose ) ) {
 
-            GowingPacker packer = new StdGowingPacker( groupName, outputFile );
-            packer.queuePackableEntity( groupName, item );
+            for ( GowingPackable item : items ) {
+
+                packer.queuePackableEntity( groupName, item );
+
+            }
             packer.finish();
-            packer.close();
+//            packer.getPackingContext().get`
 
         } catch ( FileNotFoundException e ) {
 
+            worked = false;
             Logger.logErr( "unable to create output file " + outputFile, e );
 
             ObtuseUtil.doNothing();
 
         } catch ( IOException e ) {
 
+            worked = false;
             Logger.logErr( "I/O error writing to " + outputFile, e );
 
             ObtuseUtil.doNothing();
 
         } catch ( Throwable e ) {
 
+            worked = false;
             Logger.logErr( "Unexpected throwable writing to " + outputFile, e );
 
             ObtuseUtil.doNothing();
 
         }
+
+        return worked;
+
+    }
+
+    public static boolean quietGowingSave(
+            @NotNull final EntityName groupName,
+            @NotNull final GowingPackable item,
+            @NotNull final File outputFile,
+            boolean verbose
+    ) {
+
+        return quietGowingSave( groupName, new GowingPackable[]{ item }, outputFile, verbose );
+
+    }
+
+    public static Optional<GowingUnPackedEntityGroup> quietGowingUnPack(
+            @NotNull final File inputFile,
+            @NotNull final GowingEntityFactory[] gowingEntityFactories
+    ) {
+
+        Optional<GowingUnPackedEntityGroup> rval = Optional.empty();
+        try {
+
+            rval = gowingUnPack( inputFile, gowingEntityFactories );
+
+        } catch ( IOException e ) {
+
+            Logger.logErr( "ObtuseUtil.quietGowingSave( " + inputFile + " )", e );
+
+        }
+
+        return rval;
+
+    }
+
+    public static Optional<GowingUnPackedEntityGroup> gowingUnPack(
+            @NotNull final File inputFile,
+            @NotNull final GowingEntityFactory[] gowingEntityFactories
+    ) throws IOException {
+
+        Optional<GowingUnPackedEntityGroup> maybeResult = Optional.empty();
+        try (
+                GowingUnPacker unPacker = new StdGowingUnPacker(
+                        new GowingTypeIndex( "test unpacker" ),
+                        inputFile
+                )
+        ) {
+
+            unPacker.getUnPackerContext().registerFactories( gowingEntityFactories );
+
+            maybeResult = unPacker.unPack();
+
+            if ( maybeResult.isPresent() ) {
+
+                GowingUnPackedEntityGroup result = maybeResult.get();
+
+                for ( GowingPackable entity : result.getAllEntities() ) {
+
+                    Logger.logMsg( "got " + entity.getClass().getCanonicalName() + " " + entity );
+
+                }
+
+            }
+
+            ObtuseUtil.doNothing();
+
+        }
+
+        return maybeResult;
 
     }
 

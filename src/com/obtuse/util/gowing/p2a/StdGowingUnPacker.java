@@ -701,12 +701,13 @@ public class StdGowingUnPacker implements GowingUnPacker {
 
         BasicProgramConfigInfo.init( "Obtuse", "Packer", "testing", null );
 
-        try {
+        try (
+                GowingUnPacker unPacker = new StdGowingUnPacker(
+                        new GowingTypeIndex( "test unpacker" ),
+                        new File( "test1.p2a" )
+                )
+        ) {
 
-            GowingUnPacker unPacker = new StdGowingUnPacker(
-                    new GowingTypeIndex( "test unpacker" ),
-                    new File( "test1.p2a" )
-            );
             unPacker.registerMetaDataHandler(
                     new TracingGowingMetaDataHandler()
             );

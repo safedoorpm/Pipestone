@@ -558,6 +558,51 @@ public class LinearLayoutUtil {
 
     }
 
+    public static String describeContainer( @NotNull final Container target ) {
+
+        StringBuilder sb = new StringBuilder( ObtuseUtil.enquoteToJavaString( target.getName() ) ).append( "(" );
+        String comma = " ";
+        boolean gotAtLeastOne = false;
+        for ( Component c : target.getComponents() ) {
+
+            sb.append( comma ).append( describeComponent( c ) );
+            comma = ", ";
+
+            gotAtLeastOne = true;
+
+        }
+
+        sb.append( gotAtLeastOne ? " " : "" ).append( ")" );
+
+        return sb.toString();
+
+    }
+
+    public static String describeComponent( @NotNull final Component c ) {
+
+        StringBuilder sb = new StringBuilder();
+        if ( c instanceof LinearContainer ) {
+
+            sb.append( "{" ).append( c.getName() ).append( "}" );
+
+        } else if ( c instanceof JButton ) {
+
+            sb.append( "button \"" ).append( ( (JButton)c).getText() ).append( "\"" );
+
+        } else if ( c instanceof JLabel ) {
+
+            sb.append( "label " ).append( ObtuseUtil.enquoteToJavaString(((JLabel)c).getText() ) );
+
+        } else {
+
+            sb.append( c.getClass().getCanonicalName() );
+
+        }
+
+        return sb.toString();
+
+    }
+
     public void setReportShapeChanges( final boolean report ) {
 
         LinearLayoutUtil._reportShapeChanges = report;

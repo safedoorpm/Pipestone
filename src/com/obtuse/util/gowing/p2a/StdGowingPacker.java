@@ -277,6 +277,16 @@ public class StdGowingPacker implements GowingPacker {
 
         }
 
+        Logger.logMsg( "pack encountered the following type ids and their associated types:" );
+        for ( int typeId : _packingContext.getSeenTypeIds() ) {
+
+            Logger.logMsg(
+                    ( _packingContext.getTopTypeIds().contains( typeId ) ? "* " : "  " ) +
+                    "typeId " + ObtuseUtil.lpad( typeId, 5 ) + " = " + GowingInstanceId.lookupTypeName( typeId )
+            );
+
+        }
+
         return entityCount;
 
     }
@@ -298,9 +308,10 @@ public class StdGowingPacker implements GowingPacker {
 
         if ( _verbose ) Logger.logMsg( "@@@ actually packing " + instanceId );
         EntityNames entityNames = _packingContext.getEntityNames( instanceId );
+        _packingContext.rememberTopTypeId( entityNames.getEntity().getInstanceId().getTypeId() );
         GowingPackedEntityBundle bundle = entityNames.getEntity().bundleThyself( false, this );
 
-        Collection<Integer> newTypeIds = _packingContext.getNewTypeIds();
+        Collection<Integer> newTypeIds = _packingContext.getAndResetNewTypeIds();
         if ( !newTypeIds.isEmpty() ) {
 
             for ( Integer newTypeId : newTypeIds ) {
@@ -1006,9 +1017,8 @@ public class StdGowingPacker implements GowingPacker {
 
         BasicProgramConfigInfo.init( "Obtuse", "GowingPacker", "test", null );
 
-        try {
+        try ( StdGowingPacker p2a = new StdGowingPacker( new EntityName( "test group name" ), new File( "test1.p2a" ) ) ) {
 
-            StdGowingPacker p2a = new StdGowingPacker( new EntityName( "test group name" ), new File( "test1.p2a" ) );
             p2a.emitMetaData( GowingConstants.METADATA_NEXT_ID, 12345654321L );
             p2a.emitMetaData( "TEST_DOUBLE", Math.PI );
             p2a.emitMetaData( "TEST_NAN", Double.NaN );
@@ -1060,8 +1070,6 @@ public class StdGowingPacker implements GowingPacker {
             p2a.queuePackableEntity( ObtuseApproximateCalendarDate.parseQuietly( "October 4, 1957" ) );
 
             p2a.finish();
-
-            p2a.close();
 
             ObtuseUtil.doNothing();
 

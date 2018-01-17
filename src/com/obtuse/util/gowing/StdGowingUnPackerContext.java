@@ -355,6 +355,25 @@ public class StdGowingUnPackerContext implements GowingUnPackerContext {
     }
 
     @Override
+    public int registerFactories( final GowingEntityFactory[] factories ) {
+
+        int count = 0;
+        for ( GowingEntityFactory factory : factories ) {
+
+            if ( !isTypeNameKnown( factory.getTypeName() ) ) {
+
+                registerFactory( factory );
+                count += 1;
+
+            }
+
+        }
+
+        return count;
+
+    }
+
+    @Override
     public boolean isTypeNameKnown( final EntityTypeName typeName ) {
 
         return findTypeInfo( typeName ).isPresent();

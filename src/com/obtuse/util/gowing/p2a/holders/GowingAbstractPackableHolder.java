@@ -90,7 +90,14 @@ public abstract class GowingAbstractPackableHolder implements GowingPackableThin
     @Override
     public boolean booleanValue() {
 
-        return BooleanValue().booleanValue();
+        Boolean booleanValue = BooleanValue();
+        if ( booleanValue == null ) {
+
+            throw new IllegalArgumentException( "null value" );
+
+        }
+
+        return booleanValue.booleanValue();
 
     }
 
@@ -118,7 +125,14 @@ public abstract class GowingAbstractPackableHolder implements GowingPackableThin
     @Override
     public byte byteValue() {
 
-        return ByteValue().byteValue();
+        Byte byteValue = ByteValue();
+        if ( byteValue == null ) {
+
+            throw new IllegalArgumentException( "null value" );
+
+        }
+
+        return byteValue.byteValue();
 
     }
 
@@ -132,7 +146,15 @@ public abstract class GowingAbstractPackableHolder implements GowingPackableThin
     @Override
     public short shortValue() {
 
-        return ShortValue().shortValue();
+        Short shortValue = ShortValue();
+        if ( shortValue == null ) {
+
+            throw new IllegalArgumentException( "null value" );
+
+        }
+
+
+        return shortValue.shortValue();
 
     }
 
@@ -160,7 +182,14 @@ public abstract class GowingAbstractPackableHolder implements GowingPackableThin
     @Override
     public int intValue() {
 
-        return IntegerValue().intValue();
+        Integer intValue = IntegerValue();
+        if ( intValue == null ) {
+
+            throw new IllegalArgumentException( "null value" );
+
+        }
+
+        return intValue.intValue();
 
     }
 
@@ -174,7 +203,14 @@ public abstract class GowingAbstractPackableHolder implements GowingPackableThin
     @Override
     public long longValue() {
 
-        return LongValue().longValue();
+        Long longValue = LongValue();
+        if ( longValue == null ) {
+
+            throw new IllegalArgumentException( "null value" );
+
+        }
+
+        return longValue.longValue();
 
     }
 
@@ -188,7 +224,14 @@ public abstract class GowingAbstractPackableHolder implements GowingPackableThin
     @Override
     public float floatValue() {
 
-        return FloatValue().floatValue();
+        Float floatValue = FloatValue();
+        if ( floatValue == null ) {
+
+            throw new IllegalArgumentException( "null value" );
+
+        }
+
+        return floatValue.floatValue();
 
     }
 
@@ -202,7 +245,14 @@ public abstract class GowingAbstractPackableHolder implements GowingPackableThin
     @Override
     public double doubleValue() {
 
-        return DoubleValue().doubleValue();
+        Double doubleValue = DoubleValue();
+        if ( doubleValue == null ) {
+
+            throw new IllegalArgumentException( "null value" );
+
+        }
+
+        return doubleValue.doubleValue();
 
     }
 
@@ -231,7 +281,14 @@ public abstract class GowingAbstractPackableHolder implements GowingPackableThin
     @Override
     public char charValue() {
 
-        return CharacterValue().charValue();
+        Character charValue = CharacterValue();
+        if ( charValue == null ) {
+
+            throw new IllegalArgumentException( "null value" );
+
+        }
+
+        return charValue.charValue();
 
     }
 
@@ -260,6 +317,21 @@ public abstract class GowingAbstractPackableHolder implements GowingPackableThin
     public String StringValue() {
 
         return (String)getObjectValue();
+
+    }
+
+    @Override
+    @NotNull
+    public String MandatoryStringValue() {
+
+        String rval = (String)getObjectValue();
+        if ( rval == null ) {
+
+            throw new IllegalArgumentException( "null value" );
+
+        }
+
+        return rval;
 
     }
 
@@ -354,6 +426,7 @@ public abstract class GowingAbstractPackableHolder implements GowingPackableThin
 
     }
 
+    @SuppressWarnings("unused")
     public char getTag() {
 
         return _tag;
@@ -363,6 +436,12 @@ public abstract class GowingAbstractPackableHolder implements GowingPackableThin
     public Object getObjectValue() {
 
         return _objectValue;
+
+    }
+
+    public boolean hasObjectValue() {
+
+        return _objectValue != null;
 
     }
 

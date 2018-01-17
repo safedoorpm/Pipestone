@@ -2,7 +2,7 @@ package com.obtuse.util.gowing;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Collection;
+import java.util.*;
 
 /*
  * Copyright © 2015 Obtuse Systems Corporation
@@ -21,14 +21,22 @@ public interface GowingPackerContext {
     EntityNames getEntityNames( GowingInstanceId instanceId );
 
     @NotNull
-    Collection<Integer> getNewTypeIds();
+    List<Integer> getAndResetNewTypeIds();
 
-    Collection<GowingInstanceId> getSeenInstanceIds();
+    @NotNull
+    Set<Integer> getSeenTypeIds();
+
+    @NotNull
+    Set<GowingInstanceId> getSeenInstanceIds();
 
     int rememberTypeName( EntityTypeName typeName );
 
     void setRequestorContext( GowingRequestorContext requestorContext );
 
     GowingRequestorContext getRequestorContext();
+
+    void rememberTopTypeId( int typeId );
+
+    Set<Integer> getTopTypeIds();
 
 }

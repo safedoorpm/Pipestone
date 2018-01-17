@@ -178,6 +178,19 @@ public interface LinearContainer {
     }
 
     /**
+     Add this container to the container watch list.
+     */
+
+    void watch();
+
+    /**
+     Determine if this container is on the LinearContainer watchlist.
+     @return {code true} if this container is being watched; {@code false} otherwise.
+     */
+
+    boolean isWatched();
+
+    /**
      Get this linear container's orientation.
 
      @return this linear container's orientation.

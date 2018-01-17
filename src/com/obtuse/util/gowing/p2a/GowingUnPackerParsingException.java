@@ -67,7 +67,7 @@ public class GowingUnPackerParsingException extends Exception {
 
     public String toString() {
 
-        return "UnPacker2ParseError( \"" + getMessage() + "\", causeToken = " + _causeToken + " )";
+        return "GowingUnPackerParsingException( \"" + getMessage() + "\", causeToken = " + _causeToken + " )";
 
     }
 

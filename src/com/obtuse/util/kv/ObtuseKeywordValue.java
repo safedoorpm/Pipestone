@@ -6,6 +6,10 @@
 package com.obtuse.util.kv;
 
 import com.obtuse.util.ObtuseUtil;
+import com.obtuse.util.gowing.*;
+import com.obtuse.util.gowing.p2a.GowingEntityReference;
+import com.obtuse.util.gowing.p2a.GowingUnPackerParsingException;
+import com.obtuse.util.gowing.p2a.holders.GowingStringHolder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -16,6 +20,39 @@ import org.jetbrains.annotations.Nullable;
  */
 
 public class ObtuseKeywordValue extends ObtuseKeywordInfo {
+
+    private static final EntityTypeName ENTITY_TYPE_NAME = new EntityTypeName( ObtuseKeywordValue.class );
+    private static final int VERSION = 1;
+
+    private static final EntityName VALUE = new EntityName( "_v" );
+
+    public static final GowingEntityFactory FACTORY = new GowingEntityFactory( ENTITY_TYPE_NAME ) {
+
+        @Override
+        public int getOldestSupportedVersion() {
+
+            return VERSION;
+        }
+
+        @Override
+        public int getNewestSupportedVersion() {
+
+            return VERSION;
+        }
+
+        @SuppressWarnings("RedundantThrows")
+        @NotNull
+        @Override
+        public GowingPackable createEntity(
+                @NotNull final GowingUnPacker unPacker, @NotNull final GowingPackedEntityBundle bundle, final GowingEntityReference er
+        )
+                throws GowingUnPackerParsingException {
+
+            return new ObtuseKeywordValue( unPacker, bundle );
+
+        }
+
+    };
 
 //    private final ObtuseKeywordInfo _keywordInfo;
     private final String _value;
@@ -44,6 +81,42 @@ public class ObtuseKeywordValue extends ObtuseKeywordInfo {
         super( keywordInfo );
 
         _value = value;
+
+    }
+
+    public ObtuseKeywordValue(
+            @SuppressWarnings("unused") @NotNull final GowingUnPacker unPacker,
+            @NotNull final GowingPackedEntityBundle bundle
+    ) {
+
+        super( unPacker, bundle.getSuperBundle() );
+
+        _value = bundle.getNotNullField( VALUE ).StringValue();
+
+    }
+
+    @Override
+    public @NotNull GowingPackedEntityBundle bundleThyself(
+            final boolean isPackingSuper, @NotNull final GowingPacker packer
+    ) {
+
+        GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
+                ENTITY_TYPE_NAME,
+                VERSION,
+                super.bundleThyself( true, packer ),
+                packer.getPackingContext()
+        );
+
+        bundle.addHolder( new GowingStringHolder( VALUE, _value, true ) );
+
+        return bundle;
+
+    }
+
+    @Override
+    public boolean finishUnpacking( @NotNull final GowingUnPacker unPacker ) {
+
+        return true;
 
     }
 
