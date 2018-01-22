@@ -10,12 +10,15 @@ import org.jetbrains.annotations.Nullable;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.Objects;
 import java.util.Set;
+import java.util.function.Function;
 
 /**
  * Describe how a three dimensional sorted map behaves.
  */
 
+@SuppressWarnings("unused")
 public interface ThreeDimensionalSortedMap<T1,T2,T3,V> extends Iterable<V>, Serializable {
 
     /**
@@ -26,7 +29,7 @@ public interface ThreeDimensionalSortedMap<T1,T2,T3,V> extends Iterable<V>, Seri
      * @param value the value.
      */
 
-    void put( @NotNull T1 key1, @NotNull T2 key2, @NotNull T3 key3, @Nullable V value );
+    V put( @NotNull T1 key1, @NotNull T2 key2, @NotNull T3 key3, @Nullable V value );
 
     /**
      * Get a particular inner map.
@@ -109,6 +112,23 @@ public interface ThreeDimensionalSortedMap<T1,T2,T3,V> extends Iterable<V>, Seri
     Collection<TwoDimensionalSortedMap<T2,T3,V>> innerMaps();
 
     /**
+     Determine if a value has ever been associated with the specified keys.
+     <p>Note that the return value of this method generally becomes meaningless if {@link #removeInnerMap(Object)}
+     has ever been invoked on this instance or if {@link TwoDimensionalSortedMap#removeInnerMap(Object)} has ever
+     been invoked on the return value of {@link #getInnerMap(Object, boolean)} or {@link #getNotNullInnerMap(Object)}.</p>
+     @param key1 the first key.
+     @param key2 the second key.
+     @param key3 the third key.
+     @return generally meaningless if {@link #removeInnerMap(Object)}
+     has ever been invoked on this instance or if {@link TwoDimensionalSortedMap#removeInnerMap(Object)} has ever
+     been invoked on the return value of {@link #getInnerMap(Object, boolean)} or {@link #getNotNullInnerMap(Object)};
+     otherwise, {@code true} if a (possibly {@code null})
+     value has ever been associated with the specified keys; otherwise, {@code false}.
+     */
+
+    boolean containsKeys( T1 key1, T2 key2, T3 key3 );
+
+    /**
      * Get an iterator that iterates across all the values in the tree.
      * Values are returned sorted by the T1 key and then by the T2 key and finally by the T3 key.
      * @return an iterator that iterates across all the values in the tree.
@@ -116,6 +136,85 @@ public interface ThreeDimensionalSortedMap<T1,T2,T3,V> extends Iterable<V>, Seri
 
     @NotNull
     Iterator<V> iterator();
+
+    /**
+     If the specified keys are not already associated with a non-null value, associate the specified keys with the specified {@code newValue}.
+     <p>See {@link java.util.Map#putIfAbsent(Object, Object)} for more information
+     (obviously, {@link java.util.Map#putIfAbsent(Object, Object)} deals with only one key and this method
+     deals with three keys but this and the {@link java.util.Map#putIfAbsent(Object, Object)} methods accomplish conceptually the same thing).</p>
+     @param key1 the first key (where {@code T1} is the first 'type' parameter to this class).
+     @param key2 the second key (where {@code T2} is the second 'type' parameter to this class).
+     @param newValue the new value to be associated with the keys if they are not already associated with a non-null value.
+     @return the value associated with the three keys prior to this method 'doing its thing'.
+     If the keys were already associated with a non-null value then this return value will be that non-null value.
+     Otherwise, this return value will be {@code null}.
+     */
+
+    default V putIfAbsent( final T1 key1, final T2 key2, final T3 key3, final V newValue ) {
+
+        V previousValue = get( key1, key2, key3 );
+        if ( previousValue == null ) {
+            previousValue = put( key1, key2, key3, newValue );
+        }
+
+        return previousValue;
+
+    }
+
+    /**
+     A variant of {@link java.util.function.Function} that takes three arguments.
+     @param <K1> the type of the first input to the function.
+     @param <K2> the type of the second input to the function.
+     @param <K3> the type of the third input to the function.
+     @param <R> the type of the result of the function.
+     */
+
+    interface Function3<K1, K2, K3, R> {
+
+        /**
+         Applies this function to the specified arguments.
+         @param key1 the first argument.
+         @param key2 the second argument.
+         @param key3 the third argument.
+         @return the return value.
+         */
+        R apply( K1 key1, K2 key2, K3 key3 );
+
+    }
+
+    /**
+     If the specified keys are not already associated with a non-null value, invoke the specified mapping function and
+     associate its return value with the specified keys.
+     <p>See {@link java.util.Map#computeIfAbsent(Object, Function)} for more information
+     (obviously, {@link java.util.Map#computeIfAbsent(Object, Function)} deals with only one key and this method
+     deals with three keys but the two accomplish essentially the same thing).</p>
+     @param key1 the first key (where {@code T1} is the first 'type' parameter to this class).
+     @param key2 the second key (where {@code T2} is the second 'type' parameter to this class).
+     @param key3 the third key (where {@code T3} is the third 'type' parameter to this class).
+     @param mappingFunction the mapping function.
+     @return the non-null value associated with the three keys (either the non-null value that was 'there' before this
+     method was called or the non-null value that invoking the specified mapping function yielded and is now 'there').
+     */
+
+    default V computeIfAbsent(
+            final T1 key1,
+            final T2 key2,
+            final T3 key3,
+            final Function3<? super T1, ? super T2, ? super T3, ? extends V> mappingFunction
+    ) {
+
+        Objects.requireNonNull( mappingFunction );
+        V v;
+        if ( ( v = get( key1, key2, key3 ) ) == null ) {
+            V newValue;
+            if ( ( newValue = mappingFunction.apply( key1, key2, key3 ) ) != null ) {
+                put( key1, key2, key3, newValue );
+                return newValue;
+            }
+        }
+
+        return v;
+    }
 
     /**
      * Return the number of values in this map.

@@ -40,11 +40,13 @@ public class TwoDimensionalTreeMap<T1,T2,V> implements Serializable, TwoDimensio
     }
 
     @Override
-    public void put( final T1 key1, final T2 key2, final V value ) {
+    public V put( final T1 key1, final T2 key2, final V value ) {
 
         SortedMap<T2,V> innerMap = getNotNullInnerMap( key1 );
 
-        innerMap.put( key2, value );
+        @SuppressWarnings("UnnecessaryLocalVariable") V rval = innerMap.put( key2, value );
+
+        return rval;
 
     }
 
@@ -68,7 +70,7 @@ public class TwoDimensionalTreeMap<T1,T2,V> implements Serializable, TwoDimensio
     @NotNull
     public SortedMap<T2,V> getNotNullInnerMap( final T1 key1 ) {
 
-        SortedMap<T2, V> innerMap = _map.computeIfAbsent( key1, k -> new TreeMap<>() );
+        @SuppressWarnings("UnnecessaryLocalVariable") SortedMap<T2, V> innerMap = _map.computeIfAbsent( key1, k -> new TreeMap<>() );
 
         return innerMap;
 
@@ -170,6 +172,25 @@ public class TwoDimensionalTreeMap<T1,T2,V> implements Serializable, TwoDimensio
     public Collection<SortedMap<T2,V>> innerMaps() {
 
         return _map.values();
+
+    }
+
+    @Override
+    public boolean containsKeys( final T1 key1, final T2 key2 ) {
+
+        if ( _map.containsKey( key1 ) ) {
+
+            @Nullable SortedMap<T2, V> innerMap = getInnerMap( key1, false );
+            //noinspection RedundantIfStatement
+            if ( innerMap != null && innerMap.containsKey( key2 ) ) {
+
+                return true;
+
+            }
+
+        }
+
+        return false;
 
     }
 

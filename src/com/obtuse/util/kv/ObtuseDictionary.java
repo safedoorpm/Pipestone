@@ -18,14 +18,14 @@ import java.util.function.Consumer;
 
 public class ObtuseDictionary implements Iterable<ObtuseKeywordValue> {
 
-    private final SortedMap<ObtuseKeywordInfo, ObtuseKeywordValue> _dictionary = new TreeMap<>();
-    private final SortedMap<String, ObtuseKeywordInfo> _keywordStringMapping = new TreeMap<>();
+    private final SortedMap<ObtuseKeyword, ObtuseKeywordValue> _dictionary = new TreeMap<>();
+    private final SortedMap<String, ObtuseKeyword> _keywordStringMapping = new TreeMap<>();
 
     /**
      Create a dictionary of keyword-value pairs.
      See {@link #ObtuseDictionary(Set, Collection)} for a constructor that only accepts keywords from caller-specified set of keywords.
      @param keywordValues the keyword-value pairs which are to populate this dictionary.
-     @throws IllegalArgumentException if a keyword has the wrong syntax (see {@link ObtuseKeywordInfo#VALID_KEYWORD_PATTERN}
+     @throws IllegalArgumentException if a keyword has the wrong syntax (see {@link ObtuseKeyword#VALID_KEYWORD_PATTERN}
      for more info).
      */
 
@@ -41,7 +41,7 @@ public class ObtuseDictionary implements Iterable<ObtuseKeywordValue> {
      Attempts to add a keyword that is not in this set will earn you an {@link IllegalArgumentException} badge.
      Note that if {@code validKeywords} refers to an empty set then NO keywords are valid.
      @param keywordValues the keyword-value pairs which are to populate this dictionary.
-     @throws IllegalArgumentException if a keyword has the wrong syntax (see {@link ObtuseKeywordInfo#VALID_KEYWORD_PATTERN}
+     @throws IllegalArgumentException if a keyword has the wrong syntax (see {@link ObtuseKeyword#VALID_KEYWORD_PATTERN}
      for more info).
      */
 
@@ -59,7 +59,7 @@ public class ObtuseDictionary implements Iterable<ObtuseKeywordValue> {
 
                 }
 
-                _dictionary.put( new ObtuseKeywordInfo( keywordValue.getKeywordName() ), keywordValue );
+                _dictionary.put( new ObtuseKeyword( keywordValue.getKeywordName() ), keywordValue );
                 _keywordStringMapping.put(
                         keywordValue.getKeywordName(),
                         keywordValue
@@ -106,7 +106,7 @@ public class ObtuseDictionary implements Iterable<ObtuseKeywordValue> {
     @SuppressWarnings("unused")
     public String getValue( @NotNull final String keywordString ) {
 
-        ObtuseKeywordInfo keywordInfo = _keywordStringMapping.get( keywordString );
+        ObtuseKeyword keywordInfo = _keywordStringMapping.get( keywordString );
         return getValue( keywordInfo );
 
     }
@@ -119,7 +119,7 @@ public class ObtuseDictionary implements Iterable<ObtuseKeywordValue> {
      if there is no keyword-value pair corresponding to the requested keyword in this map.
      */
 
-    public String getValue( @Nullable final ObtuseKeywordInfo keywordInfo ) {
+    public String getValue( @Nullable final ObtuseKeyword keywordInfo ) {
 
         ObtuseKeywordValue keywordValue = _dictionary.get( keywordInfo );
         if ( keywordValue == null ) {

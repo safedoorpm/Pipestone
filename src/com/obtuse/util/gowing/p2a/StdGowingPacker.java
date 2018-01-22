@@ -309,6 +309,17 @@ public class StdGowingPacker implements GowingPacker {
         if ( _verbose ) Logger.logMsg( "@@@ actually packing " + instanceId );
         EntityNames entityNames = _packingContext.getEntityNames( instanceId );
         _packingContext.rememberTopTypeId( entityNames.getEntity().getInstanceId().getTypeId() );
+
+        if ( !GowingUtil.isActuallyPackable( entityNames.getEntity() ) ) {
+
+            GowingUtil.verifyActuallyPackable(
+                    "StdGowingPackerContext.actuallyPackEntity " + entityNames.getPrintableDescription(),
+                    null,
+                    entityNames.getEntity()
+            );
+
+        }
+
         GowingPackedEntityBundle bundle = entityNames.getEntity().bundleThyself( false, this );
 
         Collection<Integer> newTypeIds = _packingContext.getAndResetNewTypeIds();
@@ -500,7 +511,7 @@ public class StdGowingPacker implements GowingPacker {
     }
 
     @Override
-    public void emit( final Double@NotNull[] v ) {
+    public void emit( @Nullable final Double@NotNull[] v ) {
 
         _writer.print( GowingConstants.TAG_CONTAINER_ARRAY );
         _writer.print( v.length );

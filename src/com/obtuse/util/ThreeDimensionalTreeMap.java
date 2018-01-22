@@ -26,17 +26,23 @@ public class ThreeDimensionalTreeMap<T1,T2,T3,V> implements Serializable, ThreeD
         for ( T1 t1 : map.outerKeys() ) {
 
             TwoDimensionalSortedMap<T2,T3,V> innerMap = map.getInnerMap( t1, false );
-            _map.put( t1, new TwoDimensionalTreeMap<>( innerMap ) );
+            if ( innerMap != null ) {
+
+                _map.put( t1, new TwoDimensionalTreeMap<>( innerMap ) );
+
+            }
 
         }
 
     }
 
-    public void put( @NotNull final T1 key1, @NotNull final T2 key2, @NotNull final T3 key3, @Nullable final V value ) {
+    public V put( @NotNull final T1 key1, @NotNull final T2 key2, @NotNull final T3 key3, @Nullable final V value ) {
 
         TwoDimensionalSortedMap<T2,T3,V> innerMap = getNotNullInnerMap( key1 );
 
-        innerMap.put( key2, key3, value );
+        @SuppressWarnings("UnnecessaryLocalVariable") V rval = innerMap.put( key2, key3, value );
+
+        return rval;
 
     }
 
@@ -169,6 +175,24 @@ public class ThreeDimensionalTreeMap<T1,T2,T3,V> implements Serializable, ThreeD
 
         return _map.values();
 
+    }
+
+    @Override
+    public boolean containsKeys( final T1 key1, final T2 key2, final T3 key3 ) {
+
+        if ( _map.containsKey( key1 ) ) {
+
+            @Nullable TwoDimensionalSortedMap<T2,T3,V> innerMap = getInnerMap( key1, false );
+            //noinspection RedundantIfStatement
+            if ( innerMap != null && innerMap.containsKeys( key2, key3 ) ) {
+
+                return true;
+
+            }
+
+        }
+
+        return false;
     }
 
     @Override

@@ -1,7 +1,6 @@
 package com.obtuse.util.gowing.p2a.holders;
 
 import com.obtuse.util.FormattingLinkedList;
-import com.obtuse.util.Logger;
 import com.obtuse.util.ObtuseUtil;
 import com.obtuse.util.gowing.*;
 import com.obtuse.util.gowing.p2a.GowingEntityReference;
@@ -144,6 +143,30 @@ public class GowingPackableCollection<E> extends LinkedList<E> implements Gowing
         }
 
         ObtuseUtil.doNothing();
+
+    }
+
+    /**
+     Copy a {@link GowingPackableCollection} into a {@link Collection}.
+     @param dest the destination {@link Collection}.
+     @param unPacker the {@link GowingUnPacker} that is driving the car right now.
+     @param src the {@link GowingEntityReference} to the source {@link GowingPackableCollection}
+     (must be <em>finished</em> in the sense that {@code unPacker.isEntityFinished(src)} returns {@code true}).
+     @param <T> the kind of thing that the two collections contain
+     (in theory, this is implied by how the caller provided {@code dest} is declared;
+     in practise, it doesn't matter at all for this method although something is likely to explode with a
+     {@link ClassCastException} if what is in {@code src} does not match what has been declared to be in {@code dest}).
+     @return {@code true} if {@code dest} has changed as a result of this call; {@code false} otherwise.
+     */
+
+    public static <T> boolean addAll(
+            @NotNull final Collection<? super T> dest,
+            @NotNull final GowingUnPacker unPacker,
+            @NotNull final GowingEntityReference src
+    ) {
+
+        @SuppressWarnings("unchecked") GowingPackableCollection<T> tmp = (GowingPackableCollection<T>)unPacker.resolveReference( src );
+        return dest.addAll( tmp );
 
     }
 

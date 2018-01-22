@@ -72,6 +72,12 @@ public class EntityNames {
 
     }
 
+    public String getPrintableDescription() {
+
+        return "" + ( getEntityNames().isEmpty() ? "unknown" : getEntityNames() );
+
+    }
+
     public String toString() {
 
         return "EntityNames( names=" + getEntityNames() + ", entity=" + getEntity() + " )";

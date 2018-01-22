@@ -1,8 +1,10 @@
 package com.obtuse.util.gowing;
 
 import com.obtuse.util.Accumulator;
+import com.obtuse.util.Logger;
 import com.obtuse.util.TreeAccumulator;
 import com.obtuse.util.gowing.p2a.GowingEntityReference;
+import com.obtuse.util.gowing.p2a.GowingUtil;
 import com.obtuse.util.gowing.p2a.holders.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -59,7 +61,11 @@ public class StdGowingPackerContext implements GowingPackerContext {
     }
 
     @Override
-    public void rememberPackableEntity( final EntityName entityName, final GowingPackable entity ) {
+    public void rememberPackableEntity( @Nullable final EntityName entityName, @NotNull final GowingPackable entity ) {
+
+        Logger.logMsg( "rememberPackableEntity( " + entityName + ", " + entity + " )" );
+
+        GowingUtil.verifyActuallyPackable( "StdGowingPackerContext.rememberPackableEntity", entityName, entity );
 
         @SuppressWarnings("UnusedAssignment")
         int typeReferenceId = GowingInstanceId.allocateTypeId( entity.getInstanceId().getTypeName() );
@@ -102,7 +108,7 @@ public class StdGowingPackerContext implements GowingPackerContext {
     }
 
     @Override
-    public void rememberTopTypeId( int topTypeId ) {
+    public void rememberTopTypeId( final int topTypeId ) {
 
         _topTypeIds.add( topTypeId );
 

@@ -8,8 +8,6 @@ package com.obtuse.util.kv;
 import com.obtuse.util.gowing.*;
 import com.obtuse.util.gowing.p2a.GowingEntityReference;
 import com.obtuse.util.gowing.p2a.GowingUnPackerParsingException;
-import com.obtuse.util.gowing.p2a.holders.GowingPackableCollection;
-import com.obtuse.util.gowing.p2a.holders.GowingPackableEntityHolder;
 import com.obtuse.util.gowing.p2a.holders.GowingStringHolder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -22,9 +20,9 @@ import java.util.regex.Pattern;
  <p>Instances of this class are immutable.</p>
  */
 
-public class ObtuseKeywordInfo extends GowingAbstractPackableEntity implements Comparable<ObtuseKeywordInfo> {
+public class ObtuseKeyword extends GowingAbstractPackableEntity implements Comparable<ObtuseKeyword> {
 
-    private static final EntityTypeName ENTITY_TYPE_NAME = new EntityTypeName( ObtuseKeywordInfo.class );
+    private static final EntityTypeName ENTITY_TYPE_NAME = new EntityTypeName( ObtuseKeyword.class );
     private static final int VERSION = 1;
 
     private static final EntityName KEYWORD_STRING = new EntityName( "_ks" );
@@ -51,7 +49,7 @@ public class ObtuseKeywordInfo extends GowingAbstractPackableEntity implements C
         )
                 throws GowingUnPackerParsingException {
 
-            return new ObtuseKeywordInfo( unPacker, bundle );
+            return new ObtuseKeyword( unPacker, bundle );
 
         }
 
@@ -67,7 +65,7 @@ public class ObtuseKeywordInfo extends GowingAbstractPackableEntity implements C
      </ol>
      </p>
      */
-    public static Pattern VALID_KEYWORD_PATTERN = Pattern.compile( "[A-Z][A-Z_]*[A-Z]" );
+    public static Pattern VALID_KEYWORD_PATTERN = Pattern.compile( "[A-Z][A-Z0-9_]*[A-Z0-9]" );
 
     private final String _keywordString;
 
@@ -75,7 +73,7 @@ public class ObtuseKeywordInfo extends GowingAbstractPackableEntity implements C
      Create a clone of an existing keyword description.
      */
 
-    public ObtuseKeywordInfo( @NotNull final ObtuseKeywordInfo rValue ) {
+    public ObtuseKeyword( @NotNull final ObtuseKeyword rValue ) {
         this( rValue.getKeywordName() );
 
     }
@@ -87,7 +85,7 @@ public class ObtuseKeywordInfo extends GowingAbstractPackableEntity implements C
      @throws IllegalArgumentException if the keyword is not matched by {@link #VALID_KEYWORD_PATTERN}.
      */
 
-    public ObtuseKeywordInfo( @NotNull final String keywordString ) {
+    public ObtuseKeyword( @NotNull final String keywordString ) {
         super( new GowingNameMarkerThing() );
 
         Matcher m = VALID_KEYWORD_PATTERN.matcher( keywordString );
@@ -98,13 +96,13 @@ public class ObtuseKeywordInfo extends GowingAbstractPackableEntity implements C
 
         } else {
 
-            throw new IllegalArgumentException( "ObtuseKeywordInfo:  invalid keyword \"" + keywordString + "\"" );
+            throw new IllegalArgumentException( "ObtuseKeyword:  invalid keyword \"" + keywordString + "\"" );
 
         }
 
     }
 
-    public ObtuseKeywordInfo(
+    public ObtuseKeyword(
     @SuppressWarnings("unused") @NotNull final GowingUnPacker unPacker,
     @NotNull final GowingPackedEntityBundle bundle
     ) {
@@ -172,7 +170,7 @@ public class ObtuseKeywordInfo extends GowingAbstractPackableEntity implements C
     }
 
     @Override
-    public int compareTo( @NotNull final ObtuseKeywordInfo rhs ) {
+    public int compareTo( @NotNull final ObtuseKeyword rhs ) {
 
         return getKeywordName().compareTo( rhs.getKeywordName() );
 
@@ -188,7 +186,7 @@ public class ObtuseKeywordInfo extends GowingAbstractPackableEntity implements C
     @Override
     public boolean equals( @Nullable final Object rhs ) {
 
-        return rhs instanceof ObtuseKeywordInfo && getKeywordName().equals( ( (ObtuseKeywordInfo)rhs ).getKeywordName() );
+        return rhs instanceof ObtuseKeyword && getKeywordName().compareTo( ( (ObtuseKeyword)rhs ).getKeywordName() ) == 0;
 
     }
 

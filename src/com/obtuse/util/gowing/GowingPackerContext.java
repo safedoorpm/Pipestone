@@ -1,8 +1,10 @@
 package com.obtuse.util.gowing;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.List;
+import java.util.Set;
 
 /*
  * Copyright © 2015 Obtuse Systems Corporation
@@ -15,7 +17,7 @@ import java.util.*;
 
 public interface GowingPackerContext {
 
-    void rememberPackableEntity( EntityName entityName, GowingPackable entity );
+    void rememberPackableEntity( @Nullable EntityName entityName, @NotNull GowingPackable entity );
 
     @NotNull
     EntityNames getEntityNames( GowingInstanceId instanceId );

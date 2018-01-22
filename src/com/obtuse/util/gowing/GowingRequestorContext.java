@@ -13,6 +13,6 @@ package com.obtuse.util.gowing;
  be changed once it has been set (in other words, plan ahead).
  */
 
-public class GowingRequestorContext {
+public interface GowingRequestorContext {
 
 }

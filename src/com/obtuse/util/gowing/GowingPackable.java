@@ -62,4 +62,15 @@ public interface GowingPackable {
 
     boolean finishUnpacking( @NotNull GowingUnPacker unPacker );
 
+// This seems too fragile. See {@link GowingUtil#isActuallyPackable()} for a better way to do this.
+//    /**
+//     A quick way to determine if this instance is actually packable.
+//     <p>See {@link GowingNotPackable} for more information.</p>
+//     @return {@code true} if this instance is packable (not an instance of {@link GowingNotPackable}); {@code false} otherwise.
+//     Note that since anyone could override this method, all compliant {@link GowingPacker} implementations are expected/required
+//     to use an explicit {@code xxx instanceof GowingNotPackable} test to check if an instance is actually packable.
+//     */
+//
+//    default boolean isActuallyPackable() { return !(this instanceof GowingNotPackable); }
+
 }

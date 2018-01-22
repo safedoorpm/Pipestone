@@ -5,6 +5,7 @@ import com.obtuse.util.gowing.GowingInstanceId;
 import com.obtuse.util.gowing.GowingPackable;
 import com.obtuse.util.gowing.GowingPacker;
 import com.obtuse.util.gowing.p2a.GowingConstants;
+import com.obtuse.util.gowing.p2a.GowingUtil;
 import org.jetbrains.annotations.NotNull;
 
 /*
@@ -28,6 +29,8 @@ public class GowingPackableEntityHolder extends GowingAbstractPackableHolder {
 
         super( name, GowingConstants.TAG_ENTITY_REFERENCE, v, mandatory );
 
+        GowingUtil.verifyActuallyPackable( "GowingPackableEntityHolder", name, v );
+
         _instanceId = packer.queuePackableEntity( v );
 
     }
@@ -49,6 +52,12 @@ public class GowingPackableEntityHolder extends GowingAbstractPackableHolder {
     public GowingInstanceId getInstanceId() {
 
         return _instanceId;
+
+    }
+
+    public String toString() {
+
+        return "GowingPackableEntityHolder( instanceId=" + getInstanceId() + " )";
 
     }
 

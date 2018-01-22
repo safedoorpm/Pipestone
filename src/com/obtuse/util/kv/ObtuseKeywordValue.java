@@ -15,11 +15,11 @@ import org.jetbrains.annotations.Nullable;
 
 /**
  Describe a keyword-value pair.
- <p>Note that instances of this class are also instances of the {@link ObtuseKeywordInfo} class because this class is derived from that class.</p>
+ <p>Note that instances of this class are also instances of the {@link ObtuseKeyword} class because this class is derived from that class.</p>
  <p>Instances of this class are immutable.</p>
  */
 
-public class ObtuseKeywordValue extends ObtuseKeywordInfo {
+public class ObtuseKeywordValue extends ObtuseKeyword {
 
     private static final EntityTypeName ENTITY_TYPE_NAME = new EntityTypeName( ObtuseKeywordValue.class );
     private static final int VERSION = 1;
@@ -54,7 +54,7 @@ public class ObtuseKeywordValue extends ObtuseKeywordInfo {
 
     };
 
-//    private final ObtuseKeywordInfo _keywordInfo;
+//    private final ObtuseKeyword _keywordInfo;
     private final String _value;
 
     /**
@@ -77,7 +77,7 @@ public class ObtuseKeywordValue extends ObtuseKeywordInfo {
      @param value       its value.
      */
 
-    public ObtuseKeywordValue( @NotNull final ObtuseKeywordInfo keywordInfo, @Nullable final String value ) {
+    public ObtuseKeywordValue( @NotNull final ObtuseKeyword keywordInfo, @Nullable final String value ) {
         super( keywordInfo );
 
         _value = value;
@@ -127,7 +127,7 @@ public class ObtuseKeywordValue extends ObtuseKeywordInfo {
 //     */
 //
 //    @NotNull
-//    public ObtuseKeywordInfo getKeywordInfo() {
+//    public ObtuseKeyword getKeywordInfo() {
 //
 //        return _keywordInfo;
 //
