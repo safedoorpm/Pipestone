@@ -183,7 +183,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
     private static final EntityName PRECISION_NAME = new EntityName( "_pr" );
 
-    public static GowingEntityFactory FACTORY = new GowingEntityFactory( ENTITY_TYPE_NAME ) {
+    public static final GowingEntityFactory FACTORY = new GowingEntityFactory( ENTITY_TYPE_NAME ) {
 
         @Override
         public int getOldestSupportedVersion() {

@@ -20,7 +20,7 @@ Danny
  */
 
 @SuppressWarnings("unchecked")
-public class SortedPanel<E> extends JPanel {
+public class SortedPanel<K extends Comparable<K>,E extends SortableEntity> extends JPanel {
 
 //    private String _name;
 
@@ -168,7 +168,7 @@ public class SortedPanel<E> extends JPanel {
 
     }
 
-    public SortedPanelModel getModel() {
+    public SortedPanelModel<K,E> getModel() {
 
         return _model;
 
@@ -290,7 +290,7 @@ public class SortedPanel<E> extends JPanel {
 
         JFrame frame = new JFrame( "Testing one two three" );
         Box topPanel = new Box( BoxLayout.Y_AXIS );
-        final SortedPanel<MyButtonEntity> panel = new SortedPanel<>( "panel" );
+        final SortedPanel<String,MyButtonEntity> panel = new SortedPanel<>( "panel" );
         panel.setLayout( new BoxLayout( panel, BoxLayout.X_AXIS ) );
         final SortedPanelModel<String, MyButtonEntity> model = new SortedPanelModel<>( sks, "model" );
         panel.setModel( model );

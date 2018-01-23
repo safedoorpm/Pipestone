@@ -5,7 +5,6 @@ package com.obtuse.ui.entitySorter;
  */
 
 import com.obtuse.exceptions.HowDidWeGetHereError;
-import com.obtuse.util.ObtuseUtil;
 import com.obtuse.util.Trace;
 import com.obtuse.util.TreeSorter;
 import org.jetbrains.annotations.NotNull;
@@ -27,7 +26,7 @@ public class SortedPanelModel<K extends Comparable<K>, E extends SortableEntity>
 
     final SortableKeySpace _keySpace;
 
-    private SortedPanel<E> _owner = null;
+    private SortedPanel<K,E> _owner = null;
 
     /**
      Create a sorted panel model with an initial set of entities.
@@ -277,7 +276,7 @@ public class SortedPanelModel<K extends Comparable<K>, E extends SortableEntity>
      Avoid this by calling this method with a <tt>null</tt> owner and then again with the new owner.
      */
 
-    void adoptSortedPanel( final SortedPanel<E> owner ) {
+    void adoptSortedPanel( final SortedPanel<K,E> owner ) {
 
         Trace.event( "                                                                                                                            " +
                      this +

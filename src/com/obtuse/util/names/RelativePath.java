@@ -7,11 +7,9 @@ package com.obtuse.util.names;
 
 import com.obtuse.util.BasicProgramConfigInfo;
 import com.obtuse.util.Logger;
-import com.obtuse.util.ObtuseApproximateCalendarDate;
 import com.obtuse.util.ObtuseUtil;
 import com.obtuse.util.gowing.*;
 import com.obtuse.util.gowing.p2a.GowingEntityReference;
-import com.obtuse.util.gowing.p2a.examples.SortedSetExample;
 import com.obtuse.util.gowing.p2a.holders.GowingPackableCollection;
 import com.obtuse.util.gowing.p2a.holders.GowingPackableEntityHolder;
 import com.obtuse.util.gowing.p2a.holders.GowingStringHolder;
@@ -36,7 +34,7 @@ public class RelativePath extends GowingAbstractPackableEntity implements Iterab
     private static final EntityName SEGMENTS = new EntityName( "_s" );
     private static final EntityName COMPARE_VALUE = new EntityName( "_cv" );
 
-    public static GowingEntityFactory FACTORY = new GowingEntityFactory( ENTITY_TYPE_NAME ) {
+    public static final GowingEntityFactory FACTORY = new GowingEntityFactory( ENTITY_TYPE_NAME ) {
 
         @Override
         public int getOldestSupportedVersion() {

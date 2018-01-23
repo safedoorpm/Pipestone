@@ -39,7 +39,7 @@ public class SortedSetExample extends GowingAbstractPackableEntity implements Go
     private static final EntityName DESCRIPTION_NAME = new EntityName( "_d" );
     private String _description;
 
-    public static GowingEntityFactory FACTORY = new GowingEntityFactory( ENTITY_TYPE_NAME ) {
+    public static final GowingEntityFactory FACTORY = new GowingEntityFactory( ENTITY_TYPE_NAME ) {
 
         @Override
         public int getOldestSupportedVersion() {

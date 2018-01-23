@@ -17,7 +17,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 /*
@@ -639,7 +638,9 @@ public class LinearLayoutUtil {
 
         String formattedComponentName = fullName( component );
         Logger.logMsg(
-                ObtuseUtil.replicate( "  ", depth ) + formattedComponentName + ObtuseUtil.fBounds( component.getBounds() ) +
+                ObtuseUtil.replicate( "  ", depth ) +
+                formattedComponentName + ObtuseUtil.fBounds( component.getBounds() ) +
+                ( component instanceof JComponent ? ((JComponent)component).getInsets().toString() : "" ) +
                 ":  " + component
 //		name
 //		+ " is " + ObtuseUtil.fBounds( component.getBounds() ) +

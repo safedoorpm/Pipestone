@@ -1,7 +1,6 @@
 package com.obtuse.util.gowing;
 
 import com.obtuse.util.Accumulator;
-import com.obtuse.util.Logger;
 import com.obtuse.util.TreeAccumulator;
 import com.obtuse.util.gowing.p2a.GowingEntityReference;
 import com.obtuse.util.gowing.p2a.GowingUtil;
@@ -63,7 +62,7 @@ public class StdGowingPackerContext implements GowingPackerContext {
     @Override
     public void rememberPackableEntity( @Nullable final EntityName entityName, @NotNull final GowingPackable entity ) {
 
-        Logger.logMsg( "rememberPackableEntity( " + entityName + ", " + entity + " )" );
+//        Logger.logMsg( "rememberPackableEntity( " + entityName + ", " + entity + " )" );
 
         GowingUtil.verifyActuallyPackable( "StdGowingPackerContext.rememberPackableEntity", entityName, entity );
 
@@ -279,7 +278,7 @@ public class StdGowingPackerContext implements GowingPackerContext {
 
         private static final int VERSION = 42;
 
-        public static GowingEntityFactory FACTORY = new GowingEntityFactory( ENTITY_TYPE_NAME ) {
+        public static final GowingEntityFactory FACTORY = new GowingEntityFactory( ENTITY_TYPE_NAME ) {
 
             @Override
             public int getOldestSupportedVersion() {

@@ -23,7 +23,7 @@ public class FormattedImmutableDate extends ImmutableDate implements GowingPacka
 
     private static final int VERSION = 1;
 
-    public static GowingEntityFactory FACTORY = new GowingEntityFactory( ENTITY_TYPE_NAME ) {
+    public static final GowingEntityFactory FACTORY = new GowingEntityFactory( ENTITY_TYPE_NAME ) {
 
         @Override
         public int getOldestSupportedVersion() {

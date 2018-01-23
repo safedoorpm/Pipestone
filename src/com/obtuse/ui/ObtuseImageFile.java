@@ -11,16 +11,16 @@ import com.obtuse.util.Logger;
 import com.obtuse.util.Measure;
 import com.obtuse.util.ObtuseUtil;
 import com.obtuse.util.gowing.*;
-import com.obtuse.util.gowing.p2a.*;
+import com.obtuse.util.gowing.p2a.GowingEntityReference;
+import com.obtuse.util.gowing.p2a.GowingUnPackedEntityGroup;
+import com.obtuse.util.gowing.p2a.StdGowingPacker;
+import com.obtuse.util.gowing.p2a.StdGowingUnPacker;
 import com.obtuse.util.gowing.p2a.holders.GowingByteHolder;
 import com.obtuse.util.gowing.p2a.holders.GowingIntegerHolder;
 import com.obtuse.util.gowing.p2a.holders.GowingLongHolder;
 import com.obtuse.util.gowing.p2a.holders.GowingStringHolder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-//import xyz.kenosee.burke2.util.BurkeFiles;
-//import xyz.kenosee.burke2.util.BurkeGowingPacker;
-//import xyz.kenosee.burke2.util.BurkeGowingUnPacker;
 
 import javax.imageio.ImageIO;
 import javax.imageio.ImageReader;
@@ -38,6 +38,10 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+//import xyz.kenosee.burke2.util.BurkeFiles;
+//import xyz.kenosee.burke2.util.BurkeGowingPacker;
+//import xyz.kenosee.burke2.util.BurkeGowingUnPacker;
 
 /**
  Manage a user-provided image.
@@ -172,30 +176,6 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
         }
 
     }
-
-// What the heck was this for?
-//
-//    public static GowingTypeIndex replaceGowingTypeIndex( GowingTypeIndex newTypeIndex ) {
-//
-//        GowingTypeIndex oldTypeIndex = s_gowingTypeIndex;
-//        s_gowingTypeIndex = newTypeIndex;
-//        return oldTypeIndex;
-//
-//    }
-
-//    /**
-//     Add a factory to the type index that we use to recover image files.
-//     @param factory the factory to be added. Note that this factory is only added if there isn't already a factory for this factory's type.
-//     @return the newly added factory.
-//     */
-//
-//    @NotNull
-//    public static EntityTypeInfo registerFactory( GowingEntityFactory factory ) {
-//
-//        Optional<EntityTypeInfo> rval = s_gowingTypeIndex.findTypeInfo( factory.getTypeName() );
-//        return rval.orElseGet( () -> s_gowingTypeIndex.addFactory( factory ) );
-//
-//    }
 
     public enum ImageState {
 

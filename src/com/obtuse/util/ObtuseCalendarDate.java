@@ -50,7 +50,7 @@ public class ObtuseCalendarDate extends GowingAbstractPackableEntity implements 
 
     private static final EntityName DATE_STRING = new EntityName( "_ds" );
 
-    public static GowingEntityFactory FACTORY = new GowingEntityFactory( ENTITY_TYPE_NAME ) {
+    public static final GowingEntityFactory FACTORY = new GowingEntityFactory( ENTITY_TYPE_NAME ) {
 
         @Override
         public int getOldestSupportedVersion() {

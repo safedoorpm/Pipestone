@@ -7,7 +7,6 @@ package com.obtuse.util.names;
 
 import com.obtuse.exceptions.HowDidWeGetHereError;
 import com.obtuse.util.Logger;
-import com.obtuse.util.ObtuseUtil;
 import com.obtuse.util.gowing.*;
 import com.obtuse.util.gowing.p2a.GowingEntityReference;
 import org.jetbrains.annotations.NotNull;
@@ -25,7 +24,7 @@ public class AbsolutePath extends RelativePath {
 
     private static final int VERSION = 1;
 
-    public static GowingEntityFactory FACTORY = new GowingEntityFactory( ENTITY_TYPE_NAME ) {
+    public static final GowingEntityFactory FACTORY = new GowingEntityFactory( ENTITY_TYPE_NAME ) {
 
         @Override
         public int getOldestSupportedVersion() {

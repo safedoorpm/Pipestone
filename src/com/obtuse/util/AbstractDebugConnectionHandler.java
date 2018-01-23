@@ -15,7 +15,7 @@ import java.net.*;
  * Respond when something connects on a port.
  */
 
-@SuppressWarnings("UnusedDeclaration")
+@SuppressWarnings({ "UnusedDeclaration", "ClassHasNoToStringMethod" })
 public abstract class AbstractDebugConnectionHandler extends Thread {
 
     public static final String NEWLINE = System.getProperty( "line.separator" );
@@ -26,14 +26,6 @@ public abstract class AbstractDebugConnectionHandler extends Thread {
     private final InetAddress _ourHost;
 
     private boolean _terminate = false;
-//    private String _magicString;
-
-//    public static interface DebugConnectionHandlerFactory {
-//
-//        AbstractDebugConnectionHandler createHandler( Logger logger )
-//                throws UnknownHostException;
-//
-//    }
 
     protected AbstractDebugConnectionHandler( @Nullable final Logger logger, final String handlerName )
             throws UnknownHostException {

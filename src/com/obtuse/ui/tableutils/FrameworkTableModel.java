@@ -638,13 +638,43 @@ public class FrameworkTableModel<D extends CheckBoxRowWrapper.RowData> extends C
 
     }
 
-    public void removeRows( final SortedSet<Integer> requestedRows ) {
+    /**
+     Remove a particular row.
+     @param row the row to be removed.
+     */
 
-        Logger.logMsg( "removing " + requestedRows );
+    public void removeRow( final int row ) {
+
+        List<Integer> rows = new ArrayList<>();
+        rows.add( row );
+
+        removeRows( rows );
+
+    }
+
+    /**
+     Remove a set of rows.
+     Removes and (if necessary) de-selects a list of rows.
+     @param rows a list of the rows to be deleted.
+     The rows can be in any order and the same row can appear more than once
+     (needless to say, each specified row is only actually deleted once).
+     */
+
+    public void removeRows( final Collection<Integer> rows ) {
+
+        // This algorithm only works correctly if the rows are sorted in increasing order without duplicates.
+        // See the bit at the end of this method where we actually delete the rows to see why (pay particular
+        // attention to the {@code adjustment} variable).
+        //
+        // Consequently, while we are flexible about what is provided to us, we must work with a sorted list of row indices.
+
+        SortedSet<Integer> sortedRows = new TreeSet<>( rows );
+
+        Logger.logMsg( "removing " + sortedRows );
 
         // Clear the selection on any of the rows which are being removed.
 
-        for ( int requestedRow : requestedRows ) {
+        for ( int requestedRow : sortedRows ) {
 
             CheckBoxRowWrapper<D> victimRow = _data.get( requestedRow );
             if ( victimRow.isSelected() ) {
@@ -661,7 +691,7 @@ public class FrameworkTableModel<D extends CheckBoxRowWrapper.RowData> extends C
         // the rows we remove are the ones that the user actually requested to be removed.
 
         int adjustment = 0;
-        for ( int requestedRow : requestedRows ) {
+        for ( int requestedRow : sortedRows ) {
 
             int actualRequestedRow = requestedRow - adjustment;
 //	    CheckBoxRowWrapper<D> victimRow = _data.get( actualRequestedRow );
@@ -674,16 +704,16 @@ public class FrameworkTableModel<D extends CheckBoxRowWrapper.RowData> extends C
                            adjustment +
                            ")" );
 
-            removeRow( actualRequestedRow );
+            actuallyRemoveRow( actualRequestedRow );
             adjustment += 1;
 
         }
 
-        Logger.logMsg( "done removing " + requestedRows );
+        Logger.logMsg( "done removing " + sortedRows );
 
     }
 
-    public void removeRow( final int row ) {
+    private void actuallyRemoveRow( final int row ) {
 
         _data.removeElementAt( row );
 
