@@ -440,9 +440,9 @@ public class FrameworkTableModel<D extends CheckBoxRowWrapper.RowData> extends C
 
     }
 
-    public Collection<CheckBoxRowWrapper<D>> getWrappedRowsInRowOrder() {
+    public List<CheckBoxRowWrapper<D>> getWrappedRowsInRowOrder() {
 
-        return Collections.unmodifiableCollection( _data );
+        return Collections.unmodifiableList( _data );
 
     }
 
@@ -698,6 +698,8 @@ public class FrameworkTableModel<D extends CheckBoxRowWrapper.RowData> extends C
 
             Logger.logMsg( "removing actual row " +
                            actualRequestedRow +
+                           " of " +
+                           _data.size() +
                            " (requested row " +
                            requestedRow +
                            ", adjustment is currently " +

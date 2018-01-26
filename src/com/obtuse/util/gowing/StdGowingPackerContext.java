@@ -218,7 +218,7 @@ public class StdGowingPackerContext implements GowingPackerContext {
 
             }
 
-            _payload = bundle.getNotNullField( new EntityName( "_payload" ) ).StringValue();
+            _payload = bundle.MandatoryStringValue( new EntityName( "_payload" ) );
 
             _simpleReference = bundle.getOptionalEntityReference( new EntityName( "_simple" ) );
 
@@ -332,7 +332,7 @@ public class StdGowingPackerContext implements GowingPackerContext {
 
             }
 
-            _payload = bundle.getNotNullField( new EntityName( "_thing" ) ).StringValue();
+            _payload = bundle.MandatoryStringValue( new EntityName( "_thing" ) );
 
 
         }

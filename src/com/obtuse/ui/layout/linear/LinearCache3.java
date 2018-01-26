@@ -44,6 +44,7 @@ public class LinearCache3 implements LinearLayoutManagerCache {
     private int[] _ySpans;
 
     private boolean[] _trackParentBreadths;
+    private boolean _trackAdjusting = false;
 
     public LinearCache3(
             @NotNull final LinearLayoutManager3 linearLayoutManager,
@@ -276,6 +277,18 @@ public class LinearCache3 implements LinearLayoutManagerCache {
         } finally {
 
         }
+
+    }
+
+    public void setTrackAdjusting( final boolean trackAdjusting ) {
+
+        _trackAdjusting = trackAdjusting;
+
+    }
+
+    public boolean trackAdjusting() {
+
+        return _trackAdjusting;
 
     }
 
@@ -659,7 +672,11 @@ public class LinearCache3 implements LinearLayoutManagerCache {
         logIfWatched( buf.toString() );
 
         String levelName = "adjusting " + getTarget().getName() + " - allocated=" + allocated + ", pref=" + pref;
-        Logger.pushNesting( levelName );
+        if ( _trackAdjusting ) {
+
+            Logger.pushNesting( levelName );
+
+        }
 
         try {
 
@@ -677,7 +694,11 @@ public class LinearCache3 implements LinearLayoutManagerCache {
 
         } finally {
 
-            Logger.popNestingLevel( levelName );
+            if ( _trackAdjusting ) {
+
+                Logger.popNestingLevel( levelName );
+
+            }
 
         }
 

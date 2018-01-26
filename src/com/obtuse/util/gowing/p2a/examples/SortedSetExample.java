@@ -91,7 +91,7 @@ public class SortedSetExample extends GowingAbstractPackableEntity implements Go
         super( unPacker, bundle.getSuperBundle() );
 
         _dataCollectionReference = bundle.getMandatoryEntityReference( DATA_COLLECTION_NAME );
-        _name = bundle.getNotNullField( NAME_NAME ).StringValue();
+        _name = bundle.MandatoryStringValue( NAME_NAME );
         _description = bundle.getNullableField( DESCRIPTION_NAME ).StringValue();
 
         Logger.logMsg(

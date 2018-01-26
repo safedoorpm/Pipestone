@@ -704,7 +704,7 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
 
         super( unPacker, bundle.getSuperBundle() );
 
-        _imageState = ImageState.valueOf( bundle.StringValue( IMAGE_STATE_NAME ) );
+        _imageState = ImageState.valueOf( bundle.MandatoryStringValue( IMAGE_STATE_NAME ) );
         _originalURI = bundle.recoverURI( ORIGINAL_URI_GTAG );
         _originalURL = bundle.recoverURL( ORIGINAL_URI_GTAG );
         _originalFile = bundle.recoverFile( ORIGINAL_FILE_GTAG );

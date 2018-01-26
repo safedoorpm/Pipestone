@@ -172,7 +172,7 @@ public class RelativePath extends GowingAbstractPackableEntity implements Iterab
         super( unPacker, bundle.getSuperBundle() );
 
         _segmentsEntityReference = bundle.getMandatoryEntityReference( SEGMENTS );
-        _compareValue = bundle.getNotNullField( COMPARE_VALUE ).StringValue();
+        _compareValue = bundle.MandatoryStringValue( COMPARE_VALUE );
 
         ObtuseUtil.doNothing();
 

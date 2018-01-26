@@ -64,7 +64,7 @@ public class GowingPackableName implements GowingPackable, Comparable<GowingPack
 
     public GowingPackableName( final GowingUnPacker unPacker, final GowingPackedEntityBundle bundle ) {
 
-        this( bundle.getNotNullField( NAME_NAME ).StringValue() );
+        this( bundle.MandatoryStringValue( NAME_NAME ) );
 
     }
 
@@ -124,6 +124,12 @@ public class GowingPackableName implements GowingPackable, Comparable<GowingPack
     public boolean finishUnpacking( @NotNull final GowingUnPacker unPacker ) {
 
         return true;
+
+    }
+
+    public String toString() {
+
+        return getName();
 
     }
 

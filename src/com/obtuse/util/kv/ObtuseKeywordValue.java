@@ -91,7 +91,7 @@ public class ObtuseKeywordValue extends ObtuseKeyword {
 
         super( unPacker, bundle.getSuperBundle() );
 
-        _value = bundle.getNotNullField( VALUE ).StringValue();
+        _value = bundle.MandatoryStringValue( VALUE );
 
     }
 

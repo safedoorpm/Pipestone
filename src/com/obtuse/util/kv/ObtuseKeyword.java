@@ -109,7 +109,7 @@ public class ObtuseKeyword extends GowingAbstractPackableEntity implements Compa
 
         super( unPacker, bundle.getSuperBundle() );
 
-        _keywordString = bundle.getNotNullField( KEYWORD_STRING ).StringValue();
+        _keywordString = bundle.MandatoryStringValue( KEYWORD_STRING );
 
     }
 

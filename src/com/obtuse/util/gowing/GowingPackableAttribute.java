@@ -100,7 +100,7 @@ public class GowingPackableAttribute implements GowingPackable {
     protected GowingPackableAttribute( final GowingUnPacker unPacker, final GowingPackedEntityBundle bundle ) {
 
         this(
-                new GowingPackableName( bundle.getNotNullField( GowingPackableAttribute.N_NAME ).StringValue() ),
+                new GowingPackableName( bundle.MandatoryStringValue( GowingPackableAttribute.N_NAME ) ),
                 null,
                 GowingPackableType.valueOf( bundle.getNotNullField( GowingPackableAttribute.ATTRIBUTE_TYPE_NAME )
                                                   .StringValue() ),

@@ -100,7 +100,7 @@ public abstract class GowingAbstractPackableEntity implements GowingPackable {
     ) {
         super();
 
-        _gowingThing = new GowingNameMarkerThing( bundle.getNotNullField( GOWING_NAME ).StringValue() );
+        _gowingThing = new GowingNameMarkerThing( bundle.MandatoryStringValue( GOWING_NAME ) );
 
     }
 

@@ -136,6 +136,12 @@ public final class GowingInstanceId implements Comparable<GowingInstanceId> {
 
     }
 
+    public String shortForm() {
+
+        return "" + _typeId + ":" + _entityId;
+
+    }
+
     public String toString() {
 
         return "GowingInstanceId( " + _typeName + ", " + _entityId + " )";

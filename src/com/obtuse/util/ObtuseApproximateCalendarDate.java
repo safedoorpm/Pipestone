@@ -362,7 +362,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
         try {
 
-            return new ObtuseCalendarDate( bundle.getNotNullField( whichDate ).StringValue() );
+            return new ObtuseCalendarDate( bundle.MandatoryStringValue( whichDate ) );
 
         } catch ( com.obtuse.util.exceptions.ParsingException e ) {
 
@@ -376,7 +376,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
         try {
 
-            return DatePrecision.valueOf( bundle.getNotNullField( ObtuseApproximateCalendarDate.PRECISION_NAME ).StringValue() );
+            return DatePrecision.valueOf( bundle.MandatoryStringValue( ObtuseApproximateCalendarDate.PRECISION_NAME ) );
 
         } catch ( IllegalArgumentException e ) {
 

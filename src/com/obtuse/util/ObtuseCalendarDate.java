@@ -73,7 +73,7 @@ public class ObtuseCalendarDate extends GowingAbstractPackableEntity implements 
         )
                 throws GowingUnPackerParsingException {
 
-            String dateString = bundle.getNotNullField( DATE_STRING ).StringValue();
+            String dateString = bundle.MandatoryStringValue( DATE_STRING );
 
             try {
 

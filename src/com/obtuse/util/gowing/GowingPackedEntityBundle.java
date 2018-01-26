@@ -242,7 +242,7 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName, GowingPackable
     }
 
     /**
-     Get a field which must exist and have a non-null value.
+     Get a field which must exist and must have a non-null value.
 
      @param name the name of the desired field.
      @return the holder containing the field.
