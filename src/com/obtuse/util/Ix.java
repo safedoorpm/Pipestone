@@ -10,55 +10,62 @@ import org.jetbrains.annotations.NotNull;
 import java.util.*;
 
 /**
- Turn an ordered array or {@link Collection<T>} of values into an ordered collection of wrapped values where
+ Turn an ordered array or {@link Collection}{@code <T>} of values into an ordered collection of wrapped values where
  each wrapper knows the zero-origin index position on the original list.
  */
 
 @SuppressWarnings("unused")
-public class Ix<T> {
+public class Ix<T> implements IxInterface<T> {
 
-    public static class C<U extends Comparable<U>> extends Ix<U> implements Comparable<Ix.C<U>> {
+    /**
+     A factory that creates Ix instances.
+     */
 
-        public final U item;
+    public interface IxFactory<U> {
 
-        public C( final int ix, final U item ) {
-            super(ix, item );
 
-            this.item = item;
-
-        }
-
-        @Override
-        public int compareTo( @NotNull final Ix.C<U> o ) {
-
-            return item.compareTo( o.item );
-
-        }
-
-        public String toString() {
-
-            return super.toString();
-
-        }
+        IxInterface<U> createInstance( final int ix, @NotNull final U item );
 
     }
 
     /**
-     The index of this item in the original array or {@link Collection<T>}.
+     An example IxFactory that creates wrapped String instances.
+     */
+
+    public static IxFactory<String> IxStringFactory = ( ix, item ) -> new Ix<>( ix, item );
+
+    /**
+     A factory that creates IxC instances.
+     */
+
+    public interface CxFactory<U> {
+
+        IxCInterface<U> createInstance( final int ix, @NotNull final U item );
+
+    }
+
+    /**
+     An example CxFactory that creates wrapped String instances.
+     */
+
+    public static IxFactory<String> CxStringFactory = ( ix, item ) -> new IxC<>( ix, item );
+
+    /**
+     The index of this item in the original array or {@link Collection}{@code <T>}.
      */
 
     public final int ix;
 
     /**
-     The item at index {@code ix} in the original array or {@link Collection<T>}.
-     <p>Will be {@code null} if the corresponding item in the original array or {@link Collection<T>} was {@code null}.</p>
+     The item at index {@code ix} in the original array or {@link Collection}{@code <T>}.
+     <p>Will be {@code null} if the corresponding item in the original array or {@link Collection}{@code <T>} was {@code null}.</p>
      */
 
     public final T item;
 
     /**
-     Create a wrapper containing the position of an item in some original array or {@link Collection<T>} and the item itself.
-     @param ix the index of this item in the origianl array or {@link Collection<T>}.
+     Create a wrapper containing the position of an item in some original array or {@link Collection}{@code <T>} and the item itself.
+     @param ix the index of this item in the original array or {@link Collection}{@code <T>}.
      @param item the item at index {@code ix} in the original array or {@link Collection<T>}.
      */
 
@@ -71,10 +78,47 @@ public class Ix<T> {
 
     }
 
+    @Override
+    public int ix() {
+
+        return this.ix;
+
+    }
+
+    @Override
+    public T item() {
+
+        return this.item;
+
+    }
+
+    /**
+     Wrap an array of items into an {@code ArrayList<IxInterface<W>>}.
+     @param items the array of items (any of which might be {@code null}).
+     @param factory a factory that creates the wrappers for each item in {@code items}.
+     @return an {@code ArrayList<IxInterface<W>>} of the wrapped items from the original array in the same order that they appeared in the original array.
+     */
+
+    public static <W> ArrayList<? extends IxInterface<W>> arrayList( @NotNull final W@NotNull[] items, @NotNull final IxFactory<W> factory ) {
+
+        ArrayList<IxInterface<W>> rval = new ArrayList<>();
+
+        int ix = 0;
+        for ( W item : items ) {
+
+            rval.add( factory.createInstance( ix, item ) );
+
+            ix += 1;
+
+        }
+
+        return rval;
+
+    }
+
     /**
      Wrap an array of items into an {@code ArrayList<Ix<W>>}.
      @param items the array of items (any of which might be {@code null}).
-     @param <W> the type of each item in the array.
      @return an {@code ArrayList<Ix<W>>} of the wrapped items from the original array in the same order that they appeared in the original array.
      */
 
@@ -96,9 +140,32 @@ public class Ix<T> {
     }
 
     /**
+     Wrap a {@link Collection<W>} of items into an {@code ArrayList<IxInterface<W>>}.
+     @param items the collection of items (any of which might be {@code null}).
+     @param factory a factory that creates the wrappers for each item in {@code items}.
+     @return an {@code ArrayList<IxInterface<W>>} of the wrapped items from the original collection in the same order that they appeared in the original collection.
+     */
+
+    public static <W> ArrayList<? extends IxInterface<W>> arrayList( @NotNull final Collection<W> items, @NotNull final IxFactory<W> factory ) {
+
+        ArrayList<IxInterface<W>> rval = new ArrayList<>();
+
+        int ix = 0;
+        for ( W item : items ) {
+
+            rval.add( factory.createInstance( ix, item ) );
+
+            ix += 1;
+
+        }
+
+        return rval;
+
+    }
+
+    /**
      Wrap a {@link Collection<W>} of items into an {@code ArrayList<Ix<W>>}.
      @param items the collection of items (any of which might be {@code null}).
-     @param <W> the type of each item in the collection.
      @return an {@code ArrayList<Ix<W>>} of the wrapped items from the original collection in the same order that they appeared in the original collection.
      */
 
@@ -120,9 +187,32 @@ public class Ix<T> {
     }
 
     /**
+     Wrap an array of items into a {@code LinkedList<IxInterface<W>>}.
+     @param items the array of items (any of which might be {@code null}).
+     @param factory a factory that creates the wrappers for each item in {@code items}.
+     @return an {@code LinkedList<IxInterface<W>>} of the wrapped items from the original array in the same order that they appeared in the original array.
+     */
+
+    public static <W> LinkedList<? extends IxInterface<W>> linkedList( @NotNull final W@NotNull[] items, @NotNull final IxFactory<W> factory ) {
+
+        LinkedList<IxInterface<W>> rval = new LinkedList<>();
+
+        int ix = 0;
+        for ( W item : items ) {
+
+            rval.add( factory.createInstance( ix, item ) );
+
+            ix += 1;
+
+        }
+
+        return rval;
+
+    }
+
+    /**
      Wrap an array of items into a {@code LinkedList<Ix<W>>}.
      @param items the array of items (any of which might be {@code null}).
-     @param <W> the type of each item in the array.
      @return an {@code LinkedList<Ix<W>>} of the wrapped items from the original array in the same order that they appeared in the original array.
      */
 
@@ -144,9 +234,32 @@ public class Ix<T> {
     }
 
     /**
+     Wrap a {@link Collection<W>} of items into a {@code LinkedList<IxInterface<W>>}.
+     @param items the collection of items (any of which might be {@code null}).
+     @param factory a factory that creates the wrappers for each item in {@code items}.
+     @return an {@code ArrayList<IxInterface<W>>} of the wrapped items from the original collection in the same order that they appeared in the original collection.
+     */
+
+    public static <W> LinkedList<? extends IxInterface<W>> linkedList( @NotNull final Collection<W> items, @NotNull final IxFactory<W> factory ) {
+
+        LinkedList<IxInterface<W>> rval = new LinkedList<>();
+
+        int ix = 0;
+        for ( W item : items ) {
+
+            rval.add( factory.createInstance( ix, item ) );
+
+            ix += 1;
+
+        }
+
+        return rval;
+
+    }
+
+    /**
      Wrap a {@link Collection<W>} of items into a {@code LinkedList<Ix<W>>}.
      @param items the collection of items (any of which might be {@code null}).
-     @param <W> the type of each item in the collection.
      @return an {@code ArrayList<Ix<W>>} of the wrapped items from the original collection in the same order that they appeared in the original collection.
      */
 
@@ -168,10 +281,10 @@ public class Ix<T> {
     }
 
     /**
-     Wrap an array of items into a {@code TreeSet<Ix.C<W>>}.
+     Wrap an array of items into a {@code TreeSet<IxC<W>>}.
      @param items the array of items (any of which might be {@code null}).
-     @param <W> the type of each item in the array.
-     @return an {@code TreeSet<Ix.C<W>>} of the wrapped items from the original array in the order that the
+     @param factory a factory that creates the wrappers for each item in {@code items}.
+     @return an {@code TreeSet<IxC<W>>} of the wrapped items from the original array in the order that the
      {@link Comparable#compareTo(Object)} method associated with the {@code W} class implements.
      <p>For example, if the array passed to this method is an {@link Integer}[] then the elements in the returned
      sorted set will be in the order implied by {@link Integer#compareTo(Integer)} (i.e. the usual ascending order
@@ -179,10 +292,10 @@ public class Ix<T> {
      <p>Similarly, if the array passed to this method is an {@code Xyz[]} array then the {@code Xyz} class must
      implement the {@code Comparable<Xyz>} interface.</p>
      <p>Also note that the {@code TreeSet} instance returned by this method will be
-     populated with instances of the {@link Ix.C}{@code <W>} class.
-     The {@link Ix.C} class is a derivative of this {@link Ix}{@code <T>} class which provides
+     populated with instances of the {@link IxC}{@code <W>} class.
+     The {@link IxC} class is a derivative of this {@link Ix}{@code }{@code <T>} class which provides
      a {@code compareTo()} method that compares that compares
-     Ix.C instances by comparing their {@code item} fields.</p>
+     IxC instances by comparing their {@code item} fields.</p>
      <p>That's all getting a bit technical. Here's a slightly short version:
      <ul>
      <li>this method requires an array who's elements implement the {@link Comparable} interface.</li>
@@ -196,7 +309,7 @@ public class Ix<T> {
      (you <b>WILL</b> get a {@link NullPointerException} thrown at you if there is).</li>
      <li>what you get back from this method will behave like a {@code TreeSet} containing {@link Ix}
      instances (the fact that they are actually
-     {@link Ix.C} instances is really only apparent when their implementation of the
+     {@link IxC} instances is really only apparent when their implementation of the
      {@link Comparable}{@code <T>} interface matters (i.e. when they are being sorted
      by classes like {@link TreeSet})).</li>
      <li>You cannot pass an array of primitive types to this method.
@@ -208,14 +321,14 @@ public class Ix<T> {
      </p>
      */
 
-    public static <W extends Comparable<W>> TreeSet<C<W>> sortedSet( @NotNull final W@NotNull[] items ) {
+    public static <W extends Comparable<W>> TreeSet<? extends IxCInterface<W>> sortedSet( @NotNull final W@NotNull[] items, @NotNull final CxFactory<W> factory ) {
 
-        TreeSet<C<W>> rval = new TreeSet<>();
+        TreeSet<IxCInterface<W>> rval = new TreeSet<>();
 
         int ix = 0;
         for ( W item : items ) {
 
-            rval.add( new C<>( ix, item ) );
+            rval.add( factory.createInstance( ix, item ) );
 
             ix += 1;
 
@@ -226,10 +339,35 @@ public class Ix<T> {
     }
 
     /**
-     Wrap a collection of items into a {@code TreeSet<Ix.C<W>>}.
+     Wrap an array of items into a {@code TreeSet<IxC<W>>}.
+     <p>See {@link #sortedSet(Comparable[], CxFactory)} for more info.</p>
+     @param items the array of items (any of which might be {@code null}).
+     @return an {@code TreeSet<IxC<W>>} of the wrapped items from the original array in the order that the
+     {@link Comparable#compareTo(Object)} method associated with the {@code W} class implements.
+     */
+
+     public static <W extends Comparable<W>> TreeSet<IxC<W>> sortedSet( @NotNull final W@NotNull[] items ) {
+
+        TreeSet<IxC<W>> rval = new TreeSet<>();
+
+        int ix = 0;
+        for ( W item : items ) {
+
+            rval.add( new IxC<>( ix, item ) );
+
+            ix += 1;
+
+        }
+
+        return rval;
+
+    }
+
+    /**
+     Wrap a collection of items into a {@code TreeSet<IxC<W>>}.
      @param items the collection of items (any of which might be {@code null}).
-     @param <W> the type of each item in the collection.
-     @return an {@code TreeSet<Ix<W>>} of the wrapped items from the original collection in the order that the
+     @param factory a factory that creates the wrappers for each item in {@code items}.
+     @return an {@code TreeSet<IxInterface<W>>} of the wrapped items from the original collection in the order that the
      {@link Comparable#compareTo(Object)} associated with the {@code W} class implements.
      <p>For example, if the collection passed to this method contains {@link Integer} instances then the elements
      in the returned sorted set will be in the order implied by {@link Integer#compareTo(Integer)}
@@ -237,10 +375,10 @@ public class Ix<T> {
      <p>Similarly, if the collection passed to this method contains {@code Xyz[]} instances then the {@code Xyz} class must
      implement the {@code Comparable<Xyz>} interface.</p>
      <p>Also note that the {@code TreeSet} instance returned by this method will be
-     populated with instances of the {@link Ix.C}{@code <W>} class.
+     populated with instances of the {@link IxC}{@code <W>} class.
      This class is a derivative of this {@link Ix}{@code <T>} class which provides
      a {@code compareTo()} method that compares that compares
-     Ix.C instances by comparing their {@code item} fields.</p>
+     IxC instances by comparing their {@code item} fields.</p>
      <p>That's all getting a bit technical. Here's a slightly short version:
      <ul>
      <li>this method requires a collection who's elements implement the {@link Comparable} interface.</li>
@@ -254,7 +392,7 @@ public class Ix<T> {
      (you <b>WILL</b> get a {@link NullPointerException} thrown at you if there is).</li>
      <li>what you get back from this method will behave like a {@code TreeSet} containing {@link Ix}
      instances (the fact that they are actually
-     {@link Ix.C} instances is really only apparent when their implementation of the
+     {@link IxC} instances is really only apparent when their implementation of the
      {@link Comparable}{@code <T>} interface matters (i.e. when they are being sorted
      by classes like {@link TreeSet})).</li>
      <li>Since it is impossible to create a collection of primitive types, I don't have to tell you that you
@@ -267,14 +405,14 @@ public class Ix<T> {
      </p>
      */
 
-    public static <W extends Comparable<W>> TreeSet<C<W>> sortedSet( @NotNull final Collection<W> items ) {
+    public static <W extends Comparable<W>> TreeSet<? extends IxCInterface<W>> sortedSet( @NotNull final Collection<W> items, @NotNull final CxFactory<W> factory ) {
 
-        TreeSet<C<W>> rval = new TreeSet<>();
+        TreeSet<IxCInterface<W>> rval = new TreeSet<>();
 
         int ix = 0;
         for ( W item : items ) {
 
-            rval.add( new C<>( ix, item ) );
+            rval.add( factory.createInstance( ix, item ) );
 
             ix += 1;
 
@@ -285,10 +423,61 @@ public class Ix<T> {
     }
 
     /**
-     Wrap an array of items into a {@code HashSet<Ix.C<W>>}.
+     Wrap a collection of items into a {@code TreeSet<IxC<W>>}.
+     <p>See {@link #sortedSet(Collection, CxFactory)} for more info.</p>
+     @param items the collection of items (any of which might be {@code null}).
+     @return an {@code TreeSet<IxInterface<W>>} of the wrapped items from the original collection in the order that the
+     {@link Comparable#compareTo(Object)} associated with the {@code W} class implements.
+     */
+
+     public static <W extends Comparable<W>> TreeSet<IxC<W>> sortedSet( @NotNull final Collection<W> items ) {
+
+        TreeSet<IxC<W>> rval = new TreeSet<>();
+
+        int ix = 0;
+        for ( W item : items ) {
+
+            rval.add( new IxC<>( ix, item ) );
+
+            ix += 1;
+
+        }
+
+        return rval;
+
+    }
+
+    /**
+     Wrap an array of items into a {@code HashSet<IxInterface<W>>}.
      @param items the array of items (none of which can be {@code null} unless you really like {@link NullPointerException}s being thrown at you).
-     @param <W> the type of each item in the array.
-     @return a {@code HashSet<Ix.C<W>>} of the wrapped items from the original array.
+     @param factory a factory that creates the wrappers for each item in {@code items}.
+     @return a {@code HashSet<IxInterface<W>>} of the wrapped items from the original array.
+     Note that the hashing is performed using the {@link Object#hashCode()} and {@link Object#equals(Object)} methods implemented by
+     the {@code W} class (i.e. the class of each of the elements that fill the array).
+     @throws NullPointerException if any of the elements in the array are {@code null}.
+     */
+
+    public static <W> HashSet<? extends IxInterface<W>> hashSet( @NotNull final W@NotNull[] items, @NotNull final IxFactory<W> factory ) {
+
+        HashSet<IxInterface<W>> rval = new HashSet<>();
+
+        int ix = 0;
+        for ( W item : items ) {
+
+            rval.add( factory.createInstance( ix, item ) );
+
+            ix += 1;
+
+        }
+
+        return rval;
+
+    }
+
+    /**
+     Wrap an array of items into a {@code HashSet<IxC<W>>}.
+     @param items the array of items (none of which can be {@code null} unless you really like {@link NullPointerException}s being thrown at you).
+     @return a {@code HashSet<IxC<W>>} of the wrapped items from the original array.
      Note that the hashing is performed using the {@link Object#hashCode()} and {@link Object#equals(Object)} methods implemented by
      the {@code W} class (i.e. the class of each of the elements that fill the array).
      @throws NullPointerException if any of the elements in the array are {@code null}.
@@ -312,10 +501,36 @@ public class Ix<T> {
     }
 
     /**
-     Wrap a collection of items into a {@code HashSet<Ix.C<W>>}.
+     Wrap a collection of items into a {@code HashSet<IxInterface<W>>}.
      @param items the collection of items (none of which can be {@code null} unless you really like {@link NullPointerException}s being thrown at you).
-     @param <W> the type of each item in the collection.
-     @return a {@code HashSet<Ix.C<W>>} of the wrapped items from the original collection.
+     @param factory a factory that creates the wrappers for each item in {@code items}.
+     @return a {@code HashSet<IxInterface<W>>} of the wrapped items from the original collection.
+     Note that the hashing is performed using the {@link Object#hashCode()} and {@link Object#equals(Object)} methods implemented by
+     the {@code W} class (i.e. the class of items in the collection).
+     @throws NullPointerException if any of the elements in the collection are {@code null}.
+     */
+
+    public static <W> HashSet<? extends IxInterface<W>> hashSet( @NotNull final Collection<W> items, @NotNull final IxFactory<W> factory ) {
+
+        HashSet<IxInterface<W>> rval = new HashSet<>();
+
+        int ix = 0;
+        for ( W item : items ) {
+
+            rval.add( factory.createInstance( ix, item ) );
+
+            ix += 1;
+
+        }
+
+        return rval;
+
+    }
+
+    /**
+     Wrap a collection of items into a {@code HashSet<Ix<W>>}.
+     @param items the collection of items (none of which can be {@code null} unless you really like {@link NullPointerException}s being thrown at you).
+     @return a {@code HashSet<Ix<W>>} of the wrapped items from the original collection.
      Note that the hashing is performed using the {@link Object#hashCode()} and {@link Object#equals(Object)} methods implemented by
      the {@code W} class (i.e. the class of items in the collection).
      @throws NullPointerException if any of the elements in the collection are {@code null}.
@@ -339,13 +554,36 @@ public class Ix<T> {
     }
 
     /**
+     Wrap an array of items into a {@code Vector<IxInterface<W>>}.
+     @param items the array of items (any of which might be {@code null}).
+     @param factory a factory that creates the wrappers for each item in {@code items}.
+     @return an {@code Vector<IxInterface<W>>} of the wrapped items from the original array in the same order that they appeared in the original array.
+     */
+
+    public static <W> Vector<? extends IxInterface<W>> vector( @NotNull final W@NotNull[] items, @NotNull final IxFactory<W> factory ) {
+
+        Vector<IxInterface<W>> rval = new Vector<>();
+
+        int ix = 0;
+        for ( W item : items ) {
+
+            rval.add( factory.createInstance( ix, item ) );
+
+            ix += 1;
+
+        }
+
+        return rval;
+
+    }
+
+    /**
      Wrap an array of items into a {@code Vector<Ix<W>>}.
      @param items the array of items (any of which might be {@code null}).
-     @param <W> the type of each item in the array.
      @return an {@code Vector<Ix<W>>} of the wrapped items from the original array in the same order that they appeared in the original array.
      */
 
-    public static <W> Vector<Ix<W>> vector( @NotNull W@NotNull[] items ) {
+    public static <W> Vector<Ix<W>> vector( @NotNull final W@NotNull[] items ) {
 
         Vector<Ix<W>> rval = new Vector<>();
 
@@ -363,9 +601,32 @@ public class Ix<T> {
     }
 
     /**
+     Wrap an array of items into a {@code Vector<IxInterface<W>>}.
+     @param items the array of items (any of which might be {@code null}).
+     @param factory a factory that creates the wrappers for each item in {@code items}.
+     @return an {@code Vector<IxInterface<W>>} of the wrapped items from the original array in the same order that they appeared in the original array.
+     */
+
+    public static <W> Vector<? extends IxInterface<W>> vector( @NotNull final Collection<W> items, @NotNull final IxFactory<W> factory ) {
+
+        Vector<IxInterface<W>> rval = new Vector<>();
+
+        int ix = 0;
+        for ( W item : items ) {
+
+            rval.add( factory.createInstance( ix, item ) );
+
+            ix += 1;
+
+        }
+
+        return rval;
+
+    }
+
+    /**
      Wrap an array of items into a {@code Vector<Ix<W>>}.
      @param items the array of items (any of which might be {@code null}).
-     @param <W> the type of each item in the array.
      @return an {@code Vector<Ix<W>>} of the wrapped items from the original array in the same order that they appeared in the original array.
      */
 
@@ -399,12 +660,6 @@ public class Ix<T> {
         return "" + ix + ':' + item;
 
     }
-
-//    public int compareTo( @NotNull final Ix<T> rhs ) {
-//
-//        return ((Comparable<T>)item).compareTo( rhs.item );
-//
-//    }
 
     /**
      Return {@code this.item.hashCode()}.
