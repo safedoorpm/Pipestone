@@ -19,297 +19,297 @@ import java.io.File;
 @SuppressWarnings("InstanceMethodNamingConvention")
 public class ObtuseUtilTest {
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
 
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
 
     }
 
     @Test
-    public void testGetSerializedVersion() throws Exception {
+    public void testGetSerializedVersion() {
 
     }
 
     @Test
-    public void testWriteSerializableObjectToFile_Serializable_File_boolean() throws Exception {
+    public void testWriteSerializableObjectToFile_Serializable_File_boolean() {
 
     }
 
     @Test
-    public void testWriteSerializableObjectToFile_Serializable_File() throws Exception {
+    public void testWriteSerializableObjectToFile_Serializable_File() {
 
     }
 
     @Test
-    public void testRecoverSerializedVersion_File() throws Exception {
+    public void testRecoverSerializedVersion_File() {
 
     }
 
     @Test
-    public void testRecoverSerializedVersion_File_boolean() throws Exception {
+    public void testRecoverSerializedVersion_File_boolean() {
 
     }
 
     @Test
-    public void testRecoverSerializedVersion_byteArray() throws Exception {
+    public void testRecoverSerializedVersion_byteArray() {
 
     }
 
     @Test
-    public void testRecoverSerializedVersion_InputStream() throws Exception {
+    public void testRecoverSerializedVersion_InputStream() {
 
     }
 
     @Test
-    public void testRecoverSerializedVersion_byteArray_boolean() throws Exception {
+    public void testRecoverSerializedVersion_byteArray_boolean() {
 
     }
 
     @Test
-    public void testReadEntireFile_String_int_boolean() throws Exception {
+    public void testReadEntireFile_String_int_boolean() {
 
     }
 
     @Test
-    public void testReadEntireFile_File_int_boolean() throws Exception {
+    public void testReadEntireFile_File_int_boolean() {
 
     }
 
     @Test
-    public void testReadEntireStream() throws Exception {
+    public void testReadEntireStream() {
 
     }
 
     @Test
-    public void testWriteBytesToFile_byteArray_String_boolean() throws Exception {
+    public void testWriteBytesToFile_byteArray_String_boolean() {
 
     }
 
     @Test
-    public void testWriteBytesToFile_byteArray_File_boolean() throws Exception {
+    public void testWriteBytesToFile_byteArray_File_boolean() {
 
     }
 
     @Test
-    public void testWriteBytesToStream() throws Exception {
+    public void testWriteBytesToStream() {
 
     }
 
     @Test
-    public void testGetSerializedSize() throws Exception {
+    public void testGetSerializedSize() {
 
     }
 
     @Test
-    public void testValidateArgs() throws Exception {
+    public void testValidateArgs() {
 
     }
 
     @Test
-    public void testReadable_long() throws Exception {
+    public void testReadable_long() {
 
     }
 
     @Test
-    public void testLpadReadable_long_int() throws Exception {
+    public void testLpadReadable_long_int() {
 
     }
 
     @Test
-    public void testLpadReadable_float_int_int() throws Exception {
+    public void testLpadReadable_float_int_int() {
 
     }
 
     @Test
-    public void testLpadReadable_double_int_int() throws Exception {
+    public void testLpadReadable_double_int_int() {
 
     }
 
     @Test
-    public void testRpadReadable_long_int() throws Exception {
+    public void testRpadReadable_long_int() {
 
     }
 
     @Test
-    public void testRpadReadable_float_int_int() throws Exception {
+    public void testRpadReadable_float_int_int() {
 
     }
 
     @Test
-    public void testRpadReadable_double_int_int() throws Exception {
+    public void testRpadReadable_double_int_int() {
 
     }
 
     @Test
-    public void testLpadReadable0_float_int_int() throws Exception {
+    public void testLpadReadable0_float_int_int() {
 
     }
 
     @Test
-    public void testLpadReadable0_double_int_int() throws Exception {
+    public void testLpadReadable0_double_int_int() {
 
     }
 
     @Test
-    public void testRpadReadable0_float_int_int() throws Exception {
+    public void testRpadReadable0_float_int_int() {
 
     }
 
     @Test
-    public void testRpadReadable0_double_int_int() throws Exception {
+    public void testRpadReadable0_double_int_int() {
 
     }
 
     @Test
-    public void testLpad_float_int_int() throws Exception {
+    public void testLpad_float_int_int() {
 
     }
 
     @Test
-    public void testLpad_double_int_int() throws Exception {
+    public void testLpad_double_int_int() {
 
     }
 
     @Test
-    public void testLpad0_double_int_int() throws Exception {
+    public void testLpad0_double_int_int() {
 
     }
 
     @Test
-    public void testLpad_String_int_int() throws Exception {
+    public void testLpad_String_int_int() {
 
     }
 
     @Test
-    public void testGeneratePaddingString() throws Exception {
+    public void testGeneratePaddingString() {
 
     }
 
     @Test
-    public void testLpad_String_int() throws Exception {
+    public void testLpad_String_int() {
 
     }
 
     @Test
-    public void testLpad_long_int_char() throws Exception {
+    public void testLpad_long_int_char() {
 
     }
 
     @Test
-    public void testLpad_long_int() throws Exception {
+    public void testLpad_long_int() {
 
     }
 
     @Test
-    public void testRpad_String_int_char() throws Exception {
+    public void testRpad_String_int_char() {
 
     }
 
     @Test
-    public void testRpad_String_int() throws Exception {
+    public void testRpad_String_int() {
 
     }
 
     @Test
-    public void testRpad_long_int_char() throws Exception {
+    public void testRpad_long_int_char() {
 
     }
 
     @Test
-    public void testRpad_long_int() throws Exception {
+    public void testRpad_long_int() {
 
     }
 
     @Test
-    public void testReplicate_String_count() throws Exception {
+    public void testReplicate_String_count() {
 
     }
 
     @Test
-    public void testHexvalue_long() throws Exception {
+    public void testHexvalue_long() {
 
     }
 
     @Test
-    public void testHexvalue_int() throws Exception {
+    public void testHexvalue_int() {
 
     }
 
     @Test
-    public void testHexvalue_byte() throws Exception {
+    public void testHexvalue_byte() {
 
     }
 
     @Test
-    public void testHexvalue_byteArray() throws Exception {
+    public void testHexvalue_byteArray() {
 
     }
 
     @Test
-    public void testSafeSleepMillis() throws Exception {
+    public void testSafeSleepMillis() {
 
     }
 
     @Test
-    public void testDump() throws Exception {
+    public void testDump() {
 
     }
 
     @Test
-    public void testHtmlEscape() throws Exception {
+    public void testHtmlEscape() {
 
     }
 
     @Test
-    public void testCloseQuietly_Closeable() throws Exception {
+    public void testCloseQuietly_Closeable() {
 
     }
 
     @Test
-    public void testCloseQuietly_ServerSocket() throws Exception {
+    public void testCloseQuietly_ServerSocket() {
 
     }
 
     @Test
-    public void testCloseQuietly_Socket() throws Exception {
+    public void testCloseQuietly_Socket() {
 
     }
 
     @Test
-    public void testCloseQuietly_ZipFile() throws Exception {
+    public void testCloseQuietly_ZipFile() {
 
     }
 
     @Test
-    public void testCloseQuietly_ResultSet() throws Exception {
+    public void testCloseQuietly_ResultSet() {
 
     }
 
     @Test
-    public void testCloseQuietly_PreparedStatement() throws Exception {
+    public void testCloseQuietly_PreparedStatement() {
 
     }
 
     @Test
-    public void testCloseQuietly_PostgresConnection() throws Exception {
+    public void testCloseQuietly_PostgresConnection() {
 
     }
 
     @Test
-    public void testDoNothing() throws Exception {
+    public void testDoNothing() {
 
     }
 
     @Test
-    public void testEnquoteForCSV() throws Exception {
+    public void testEnquoteForCSV() {
 
     }
 
     @Test
-    public void testenquoteJavaString() throws Exception {
+    public void testenquoteJavaString() {
 
     }
 
@@ -361,7 +361,7 @@ public class ObtuseUtilTest {
     }
 
     @Test
-    public void testSafeDivide_int_int() throws Exception {
+    public void testSafeDivide_int_int() {
 
         // Verify that dividing by 0 yields the default replacement value of 0
 
@@ -374,7 +374,7 @@ public class ObtuseUtilTest {
     }
 
     @Test
-    public void testSafeDivide_int_int_int() throws Exception {
+    public void testSafeDivide_int_int_int() {
 
         // Verify that dividing by 0 yields our replacement value 2
 
@@ -387,7 +387,7 @@ public class ObtuseUtilTest {
     }
 
     @Test
-    public void testSafeDivide_long_long() throws Exception {
+    public void testSafeDivide_long_long() {
 
         // Verify that dividing by 0L yields the default replacement value of 0L
 
@@ -400,7 +400,7 @@ public class ObtuseUtilTest {
     }
 
     @Test
-    public void testSafeDivide_long_long_long() throws Exception {
+    public void testSafeDivide_long_long_long() {
 
         // Verify that dividing by 0L yields our replacement value 2L
 
@@ -413,7 +413,7 @@ public class ObtuseUtilTest {
     }
 
     @Test
-    public void testSafeDivide_double_double() throws Exception {
+    public void testSafeDivide_double_double() {
 
         // We can expect exact results when the denominator is 0 because the replacement value is 0.0
 
@@ -427,7 +427,7 @@ public class ObtuseUtilTest {
     }
 
     @Test
-    public void testSafeDivide_double_double_double() throws Exception {
+    public void testSafeDivide_double_double_double() {
 
         // We can expect exact results when the denominator is 0 because we provide the replacement values
 
@@ -440,7 +440,7 @@ public class ObtuseUtilTest {
     }
 
     @Test
-    public void testAddAll() throws Exception {
+    public void testAddAll() {
 
     }
 

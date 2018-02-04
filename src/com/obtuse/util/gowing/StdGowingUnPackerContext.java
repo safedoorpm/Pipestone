@@ -1,10 +1,8 @@
 package com.obtuse.util.gowing;
 
 import com.obtuse.exceptions.HowDidWeGetHereError;
-import com.obtuse.util.Logger;
 import com.obtuse.util.gowing.p2a.GowingEntityReference;
-import com.obtuse.util.gowing.p2a.GowingUnPackerParsingException;
-import com.obtuse.util.gowing.p2a.GowingUtil;
+import com.obtuse.util.gowing.p2a.GowingUnpackingException;
 import com.obtuse.util.gowing.p2a.StdGowingTokenizer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -50,14 +48,14 @@ public class StdGowingUnPackerContext implements GowingUnPackerContext {
 
     @Override
     public void saveTypeAlias( final StdGowingTokenizer.GowingToken2 typeIdToken, final StdGowingTokenizer.GowingToken2 typeNameToken )
-            throws GowingUnPackerParsingException {
+            throws GowingUnpackingException {
 
         int typeReferenceId = typeIdToken.intValue();
         EntityTypeName typeName = new EntityTypeName( typeNameToken );
 
         if ( findTypeByTypeReferenceId( typeReferenceId ).isPresent() ) {
 
-            throw new GowingUnPackerParsingException(
+            throw new GowingUnpackingException(
                     "type reference id " + typeReferenceId + " already defined in type alias definition",
                     typeIdToken
             );
@@ -67,7 +65,7 @@ public class StdGowingUnPackerContext implements GowingUnPackerContext {
         Optional<Integer> maybeExistingTypeReferenceId = findTypeReferenceId( typeName );
         if ( maybeExistingTypeReferenceId.isPresent() ) {
 
-            throw new GowingUnPackerParsingException(
+            throw new GowingUnpackingException(
                     "type \"" + typeName + "\" already has type id " + maybeExistingTypeReferenceId.get()
                     + ", cannot associate it with type id " + typeReferenceId,
                     typeNameToken

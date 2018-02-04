@@ -190,11 +190,24 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName, GowingPackable
 
     }
 
-    public GowingPackedEntityBundle addHolder( final GowingPackableThingHolder holder ) {
+    public GowingPackedEntityBundle addHolder( @NotNull final GowingPackableThingHolder holder ) {
+
+        if ( containsKey( holder.getName() ) ) {
+
+            throw new IllegalArgumentException( "GowingPackedEntityBundle.addHolder:  duplicate key " + ObtuseUtil.enquoteToJavaString( holder.getName().toString() ) );
+
+        }
 
         put( holder.getName(), holder );
 
         return this;
+
+    }
+
+    @Nullable
+    public GowingPackableThingHolder removeHolderByName( @NotNull final EntityName holderName ) {
+
+        return remove( holderName );
 
     }
 

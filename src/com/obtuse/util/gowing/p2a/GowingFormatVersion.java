@@ -20,7 +20,7 @@ public class GowingFormatVersion {
     private final EntityName _groupName;
 
     public GowingFormatVersion( final StdGowingTokenizer.GowingToken2 token, final EntityName groupName )
-	    throws GowingUnPackerParsingException {
+            throws GowingUnpackingException {
 	super();
 
 	if ( token.isError() ) {
@@ -40,13 +40,13 @@ public class GowingFormatVersion {
 
 	    if ( longMajorVersion <= 0 || longMajorVersion > Integer.MAX_VALUE ) {
 
-		throw new GowingUnPackerParsingException( "invalid version (" + longVersion + ") - major version (" + longMajorVersion + ") out of range", token );
+		throw new GowingUnpackingException( "invalid version (" + longVersion + ") - major version (" + longMajorVersion + ") out of range", token );
 
 	    }
 
 	    if ( longMinorVersion <= 0 || longMinorVersion > Integer.MAX_VALUE ) {
 
-		throw new GowingUnPackerParsingException( "invalid version (" + longVersion + ") - minor version (" + longMajorVersion + ") out of range", token );
+		throw new GowingUnpackingException( "invalid version (" + longVersion + ") - minor version (" + longMajorVersion + ") out of range", token );
 
 	    }
 

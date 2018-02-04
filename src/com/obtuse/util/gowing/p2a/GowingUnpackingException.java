@@ -10,29 +10,29 @@ import org.jetbrains.annotations.Nullable;
  Something when wrong unpacking a packed 'lump'.
  */
 
-public class GowingUnPackerParsingException extends Exception {
+public class GowingUnpackingException extends Exception {
 
     private StdGowingTokenizer.GowingToken2 _causeToken;
 
-    public GowingUnPackerParsingException( final String msg ) {
+    public GowingUnpackingException( final String msg ) {
 
         this( msg, null, null );
 
     }
 
-    public GowingUnPackerParsingException( final String msg, @Nullable final StdGowingTokenizer.GowingToken2 causeToken ) {
+    public GowingUnpackingException( final String msg, @Nullable final StdGowingTokenizer.GowingToken2 causeToken ) {
 
         this( msg, causeToken, null );
 
     }
 
-    public GowingUnPackerParsingException( final String msg, @Nullable final Throwable cause ) {
+    public GowingUnpackingException( final String msg, @Nullable final Throwable cause ) {
 
         this( msg, null, cause );
 
     }
 
-    public GowingUnPackerParsingException(
+    public GowingUnpackingException(
             final String msg,
             @Nullable final StdGowingTokenizer.GowingToken2 causeToken,
             @Nullable final Throwable cause
@@ -67,7 +67,7 @@ public class GowingUnPackerParsingException extends Exception {
 
     public String toString() {
 
-        return "GowingUnPackerParsingException( \"" + getMessage() + "\", causeToken = " + _causeToken + " )";
+        return "GowingUnpackingException( \"" + getMessage() + "\", causeToken = " + _causeToken + " )";
 
     }
 

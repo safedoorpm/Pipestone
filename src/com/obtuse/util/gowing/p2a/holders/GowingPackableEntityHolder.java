@@ -7,6 +7,7 @@ import com.obtuse.util.gowing.GowingPacker;
 import com.obtuse.util.gowing.p2a.GowingConstants;
 import com.obtuse.util.gowing.p2a.GowingUtil;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /*
  * Copyright © 2015 Obtuse Systems Corporation
@@ -22,14 +23,18 @@ public class GowingPackableEntityHolder extends GowingAbstractPackableHolder {
 
     public GowingPackableEntityHolder(
             @NotNull final EntityName name,
-            final GowingPackable v,
-            final GowingPacker packer,
+            @Nullable final GowingPackable v,
+            @NotNull final GowingPacker packer,
             @SuppressWarnings("SameParameterValue") final boolean mandatory
     ) {
 
         super( name, GowingConstants.TAG_ENTITY_REFERENCE, v, mandatory );
 
-        GowingUtil.verifyActuallyPackable( "GowingPackableEntityHolder", name, v );
+        if ( v != null ) {
+
+            GowingUtil.verifyActuallyPackable( "GowingPackableEntityHolder", name, v );
+
+        }
 
         _instanceId = packer.queuePackableEntity( v );
 

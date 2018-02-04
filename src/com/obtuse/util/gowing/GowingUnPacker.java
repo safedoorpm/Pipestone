@@ -2,10 +2,13 @@ package com.obtuse.util.gowing;
 
 import com.obtuse.util.gowing.p2a.GowingUnPackedEntityGroup;
 import com.obtuse.util.gowing.p2a.GowingEntityReference;
+import com.obtuse.util.gowing.p2a.GowingUnpackingException;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.Closeable;
+import java.io.IOException;
+import java.util.Collection;
 import java.util.Optional;
 
 /*
@@ -31,7 +34,7 @@ public interface GowingUnPacker extends Closeable {
     GowingEntityReference getCurrentEntityReference();
 
     @NotNull
-    Optional<GowingUnPackedEntityGroup> unPack();
+    Optional<GowingUnPackedEntityGroup> unPack() throws GowingUnpackingException, IOException;
 
     void registerMetaDataHandler( @NotNull GowingMetaDataHandler handler );
 
@@ -47,5 +50,8 @@ public interface GowingUnPacker extends Closeable {
      */
 
     boolean isEntityFinished( @Nullable GowingEntityReference entityReference );
+
+    boolean areEntitiesAllFinished( @Nullable GowingEntityReference@NotNull[] entityReferences );
+    boolean areEntitiesAllFinished( @NotNull Collection<GowingEntityReference> entityReferences );
 
 }

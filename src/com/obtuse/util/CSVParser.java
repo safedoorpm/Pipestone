@@ -394,7 +394,7 @@ public class CSVParser implements Closeable {
 
             } else {
 
-                rval.append( (char)ch );
+                rval.append( ch );
 
             }
 

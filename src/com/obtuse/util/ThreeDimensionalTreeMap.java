@@ -4,24 +4,75 @@
 
 package com.obtuse.util;
 
+import com.obtuse.util.gowing.*;
+import com.obtuse.util.gowing.p2a.GowingEntityReference;
+import com.obtuse.util.gowing.p2a.GowingUtil;
+import com.obtuse.util.gowing.p2a.holders.GowingBooleanHolder;
+import com.obtuse.util.gowing.p2a.holders.GowingPackableEntityHolder;
+import com.obtuse.util.gowing.p2a.holders.GowingPackableMapping;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.Serializable;
 import java.util.*;
 
-public class ThreeDimensionalTreeMap<T1,T2,T3,V> implements Serializable, ThreeDimensionalSortedMap<T1,T2,T3,V> {
+public class ThreeDimensionalTreeMap<T1,T2,T3,V> extends GowingAbstractPackableEntity implements Serializable, ThreeDimensionalSortedMap<T1,T2,T3,V> {
+
+    private static final EntityTypeName ENTITY_TYPE_NAME = new EntityTypeName( ThreeDimensionalTreeMap.class );
+    private static final int VERSION = 1;
+
+    private static final EntityName OUTER_MAP = new EntityName( "_om" );
+    private static final EntityName READONLY = new EntityName( "_um" );
+
+    public static final GowingEntityFactory FACTORY = new GowingEntityFactory( ENTITY_TYPE_NAME ) {
+
+        @Override
+        public int getOldestSupportedVersion() {
+
+            return VERSION;
+
+        }
+
+        @Override
+        public int getNewestSupportedVersion() {
+
+            return VERSION;
+
+        }
+
+        @Override
+        @NotNull
+        public GowingPackable createEntity(
+                @NotNull final GowingUnPacker unPacker,
+                @NotNull final GowingPackedEntityBundle bundle,
+                @NotNull final GowingEntityReference er
+        ) {
+
+            return new ThreeDimensionalTreeMap<>( unPacker, bundle );
+
+        }
+
+    };
+
+    @SuppressWarnings("unused") public static final ThreeDimensionalSortedMap<?,?,?,?> EMPTY_MAP3D =
+            new ThreeDimensionalTreeMap<>( new ThreeDimensionalTreeMap<>(), true );
+
+    private GowingEntityReference _outerMapReference;
+
+    public final boolean _readonly;
 
     private SortedMap<T1,TwoDimensionalSortedMap<T2,T3,V>> _map = new TreeMap<>();
 
     public ThreeDimensionalTreeMap() {
-        super();
+        super( new GowingNameMarkerThing() );
+
+        _readonly = false;
 
     }
 
     @SuppressWarnings("UnusedDeclaration")
-    public ThreeDimensionalTreeMap( @NotNull final ThreeDimensionalSortedMap<T1,T2,T3,V> map ) {
-        super();
+    public ThreeDimensionalTreeMap( @NotNull final ThreeDimensionalSortedMap<T1,T2,T3,V> map, final boolean makeReadonly ) {
+        super( new GowingNameMarkerThing() );
 
         for ( T1 t1 : map.outerKeys() ) {
 
@@ -33,6 +84,118 @@ public class ThreeDimensionalTreeMap<T1,T2,T3,V> implements Serializable, ThreeD
             }
 
         }
+
+        if ( makeReadonly ) {
+
+            for ( T1 t1 : _map.keySet() ) {
+
+                _map.put( t1, new TwoDimensionalTreeMap<>( _map.get( t1 ), true ) );
+
+            }
+
+            _map = Collections.unmodifiableSortedMap( _map );
+
+        }
+
+        _readonly = makeReadonly;
+
+    }
+
+    @SuppressWarnings("unused")
+    public ThreeDimensionalTreeMap( @NotNull final ThreeDimensionalSortedMap<T1,T2,T3,V> map ) {
+        this( map, false );
+
+    }
+
+    private ThreeDimensionalTreeMap( @NotNull final GowingUnPacker unPacker, @NotNull final GowingPackedEntityBundle bundle ) {
+
+        super( unPacker, bundle.getSuperBundle() );
+
+        _outerMapReference = bundle.getMandatoryEntityReference( OUTER_MAP );
+        _readonly = bundle.booleanValue( READONLY );
+
+    }
+
+    @Override
+    public @NotNull GowingPackedEntityBundle bundleThyself(
+            final boolean isPackingSuper, @NotNull final GowingPacker packer
+    ) {
+
+        GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
+                ENTITY_TYPE_NAME,
+                VERSION,
+                super.bundleRoot( packer ),
+                packer.getPackingContext()
+        );
+
+        GowingPackableMapping<T1,TwoDimensionalSortedMap<T2,T3,V>> packedMapping = new GowingPackableMapping<>( _map );
+
+        bundle.addHolder( new GowingPackableEntityHolder( OUTER_MAP, packedMapping, packer, true ) );
+        bundle.addHolder( new GowingBooleanHolder( READONLY, _readonly, true ) );
+
+        return bundle;
+
+    }
+
+    @Override
+    public boolean finishUnpacking( @NotNull final GowingUnPacker unPacker ) {
+
+        // Our parent class has no finishUnpacking method so we skip the step of letting it finish unpacking.
+
+        // Check if our outer map's instance is ready for use.
+
+        if ( !unPacker.isEntityFinished( _outerMapReference ) ) {
+
+            return false;
+
+        }
+
+        GowingPackable packable = unPacker.resolveReference( _outerMapReference );
+        if ( ( packable instanceof GowingPackableMapping ) ) {
+
+            // The temporary variable is required in order to make this assignment a declaration which allows
+            // the @SuppressWarnings("unchecked") annotation (the annotation is not allowed on a simple assignment statement).
+            @SuppressWarnings("unchecked")
+            TreeMap<T1, TwoDimensionalSortedMap<T2, T3, V>> tmap =
+                    ( (GowingPackableMapping<T1,TwoDimensionalSortedMap<T2,T3,V>>)packable ).rebuildMap( new TreeMap<>() );
+            _map = tmap;
+
+//            @SuppressWarnings("unchecked")
+//            GowingPackableMapping<T1,TwoDimensionalSortedMap<T2,T3,V>> packedMapping =
+//                    (GowingPackableMapping<T1, TwoDimensionalSortedMap<T2,T3,V>>)packable;
+//
+//            for ( GowingPackableKeyValuePair<T1, TwoDimensionalSortedMap<T2, T3, V>> mappings : packedMapping.getMappings() ) {
+//
+//                _map.put( mappings.getKey(), mappings.getValue() );
+//
+//            }
+
+            if ( _readonly ) {
+
+                for ( T1 t1 : _map.keySet() ) {
+
+                    _map.put( t1, new TwoDimensionalTreeMap<>( _map.get( t1 ), true ) );
+
+                }
+
+                _map = Collections.unmodifiableSortedMap( _map );
+
+            }
+
+        } else {
+
+            GowingUtil.getGrumpy( "ThreeDimensionalTreeMap", "outer map", GowingPackableMapping.class, packable );
+
+        }
+
+        return true;
+
+    }
+
+    @Override
+    public boolean isReadonly() {
+
+        return _readonly;
 
     }
 
@@ -271,6 +434,13 @@ public class ThreeDimensionalTreeMap<T1,T2,T3,V> implements Serializable, ThreeD
             }
 
         };
+
+    }
+
+    @Override
+    public void clear() {
+
+        _map.clear();
 
     }
 

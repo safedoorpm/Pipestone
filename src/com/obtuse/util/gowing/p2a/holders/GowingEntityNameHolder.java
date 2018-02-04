@@ -27,7 +27,7 @@ public class GowingEntityNameHolder extends GowingAbstractPackableHolder {
 
         if ( isMandatory() || value != null ) {
 
-            packer2.emit( ( (EntityName)value ).getName() );
+            packer2.emitUsersEntityName( (EntityName)value );
 
         } else {
 

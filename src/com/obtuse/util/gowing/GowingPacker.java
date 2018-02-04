@@ -28,6 +28,8 @@ public interface GowingPacker extends Closeable {
 
     void emitName( @NotNull EntityName name );
 
+    void emitUsersEntityName( @NotNull EntityName name );
+
     void emitEntityReference( int typeId, long entityId );
 
     void emit( @Nullable GowingInstanceId instanceId );

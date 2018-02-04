@@ -4,6 +4,7 @@ package com.obtuse.util.gowing.p2a;
  * Copyright © 2015 Obtuse Systems Corporation
  */
 
+import com.obtuse.util.ObtuseUtil;
 import com.obtuse.util.gowing.EntityName;
 import com.obtuse.util.gowing.GowingNotPackable;
 import com.obtuse.util.gowing.GowingPackable;
@@ -95,11 +96,36 @@ public class GowingUtil {
 
     }
 
+    public static void getGrumpy(
+            @NotNull final String methodName,
+            @NotNull final String entityColloquialName,
+            @NotNull final Class<?> expectedClass,
+            @Nullable final Object entity
+    ) {
+
+        ObtuseUtil.getGrumpy( methodName, "finish unpacking", entityColloquialName, expectedClass, entity );
+
+    }
+
     public static void verifyActuallyPackable( @NotNull final String who, @Nullable final EntityName what, @NotNull final GowingPackable entity ) {
 
         if ( !isActuallyPackable( entity ) ) {
 
             throw new IllegalArgumentException( who + ":  " + what + " is not actually packable - " + entity );
+
+        }
+
+    }
+
+    public static String describeClassInstance( final Object obj ) {
+
+        if ( obj == null ) {
+
+            return "null";
+
+        } else {
+
+            return obj.getClass().getCanonicalName();
 
         }
 

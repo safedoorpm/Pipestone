@@ -24,7 +24,7 @@ public class ThreeDimensionalTreeMapTest {
     private ThreeDimensionalTreeMap<Integer, Integer, Integer, String> _map;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
 
         _map = new ThreeDimensionalTreeMap<>();
 
@@ -37,14 +37,14 @@ public class ThreeDimensionalTreeMapTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
 
         _map = null;
 
     }
 
     @Test
-    public void testConstructor() throws Exception {
+    public void testConstructor() {
 
         // Newly constructed classes must start out empty and return null when asked for something
 
@@ -57,7 +57,7 @@ public class ThreeDimensionalTreeMapTest {
     }
 
     @Test
-    public void testGetPut() throws Exception {
+    public void testGetPut() {
 
         // Put something into the map
 
@@ -103,7 +103,7 @@ public class ThreeDimensionalTreeMapTest {
     }
 
     @Test
-    public void testGetInnerMap() throws Exception {
+    public void testGetInnerMap() {
 
         // Verify that the inner map is not created by a call to getInnerMap with the second parameter false
 
@@ -226,7 +226,7 @@ public class ThreeDimensionalTreeMapTest {
     }
 
     @Test
-    public void testRemoveInner() throws Exception {
+    public void testRemoveInner() {
 
         // Add an empty inner map
 
@@ -305,7 +305,7 @@ public class ThreeDimensionalTreeMapTest {
     }
 
     @Test
-    public void testRemove() throws Exception {
+    public void testRemove() {
 
         // Verify that removing something that isn't there yields null and that the map is still empty
 
@@ -427,7 +427,7 @@ public class ThreeDimensionalTreeMapTest {
     }
 
     @Test
-    public void testSize() throws Exception {
+    public void testSize() {
 
         // Verify that the map is empty (this is done above but let's be complete here)
 
@@ -484,7 +484,7 @@ public class ThreeDimensionalTreeMapTest {
     }
 
     @Test
-    public void testIsEmpty() throws Exception {
+    public void testIsEmpty() {
 
         // Verify that the map is empty (this is done above but let's be complete here)
 
@@ -541,7 +541,7 @@ public class ThreeDimensionalTreeMapTest {
     }
 
     @Test
-    public void testOuterKeys() throws Exception {
+    public void testOuterKeys() {
 
         // Verify that there are no outer keys
 
@@ -677,7 +677,7 @@ public class ThreeDimensionalTreeMapTest {
     }
 
     @Test
-    public void testInnerMaps() throws Exception {
+    public void testInnerMaps() {
 
         // Verify that there are no inner maps
 
@@ -776,7 +776,7 @@ public class ThreeDimensionalTreeMapTest {
     }
 
     @Test
-    public void testIterator() throws Exception {
+    public void testIterator() {
 
         // A place to hold things that we find via an iterator
 
@@ -870,7 +870,7 @@ public class ThreeDimensionalTreeMapTest {
     }
 
     @Test
-    public void testToString() throws Exception {
+    public void testToString() {
 
         // Check the empty map case
 

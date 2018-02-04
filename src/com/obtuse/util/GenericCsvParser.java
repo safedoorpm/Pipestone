@@ -54,8 +54,7 @@ public class GenericCsvParser extends CSVParser implements Iterable<SortedMap<St
     }
 
     @SuppressWarnings("WeakerAccess")
-    public GenericCsvParser( final String description, final BufferedReader input, Collection<String> titles )
-            throws SyntaxErrorException {
+    public GenericCsvParser( final String description, final BufferedReader input, Collection<String> titles ) {
 
         super( input );
 

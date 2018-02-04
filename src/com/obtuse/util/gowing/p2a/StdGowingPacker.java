@@ -310,7 +310,7 @@ public class StdGowingPacker implements GowingPacker {
         EntityNames entityNames = _packingContext.getEntityNames( instanceId );
         _packingContext.rememberTopTypeId( entityNames.getEntity().getInstanceId().getTypeId() );
 
-        if ( !GowingUtil.isActuallyPackable( entityNames.getEntity() ) ) {
+//        if ( !GowingUtil.isActuallyPackable( entityNames.getEntity() ) ) {
 
             GowingUtil.verifyActuallyPackable(
                     "StdGowingPackerContext.actuallyPackEntity " + entityNames.getPrintableDescription(),
@@ -318,7 +318,7 @@ public class StdGowingPacker implements GowingPacker {
                     entityNames.getEntity()
             );
 
-        }
+//        }
 
         GowingPackedEntityBundle bundle = entityNames.getEntity().bundleThyself( false, this );
 
@@ -394,6 +394,14 @@ public class StdGowingPacker implements GowingPacker {
     public void emitName( @NotNull final EntityName name ) {
 
         _writer.print( name.getName() );
+
+    }
+
+    @Override
+    public void emitUsersEntityName( @NotNull final EntityName name ) {
+
+        _writer.print( GowingConstants.TAG_ENTITY_NAME );
+        _writer.print( name );
 
     }
 
@@ -631,7 +639,7 @@ public class StdGowingPacker implements GowingPacker {
     }
 
     @Override
-    public void emit( final Long@NotNull[] v ) {
+    public void emit( @Nullable final Long@NotNull[] v ) {
 
         _writer.print( GowingConstants.TAG_CONTAINER_ARRAY );
         _writer.print( v.length );
@@ -1075,8 +1083,6 @@ public class StdGowingPacker implements GowingPacker {
             p2a.queuePackableEntity( new EntityName( "betty" ), p2Collection );
             p2a.queuePackableEntity( new EntityName( "wilma" ), p2Collection );
             p2a.queuePackableEntity( new EntityName( "betty" ), p2Collection );
-            SortedSetExample sse = new SortedSetExample( "testSortedSet", null, new String[]{ "alpha", "beta", "gamma" } );
-            p2a.queuePackableEntity( sse );
             p2a.queuePackableEntity( ObtuseCalendarDate.parseCalendarDate( "1957-10-04" ) );
             p2a.queuePackableEntity( ObtuseApproximateCalendarDate.parseQuietly( "October 4, 1957" ) );
 

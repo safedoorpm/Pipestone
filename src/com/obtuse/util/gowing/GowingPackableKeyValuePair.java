@@ -51,7 +51,7 @@ public class GowingPackableKeyValuePair<K, V> extends GowingAbstractPackableEnti
         public GowingPackable createEntity(
                 @NotNull final GowingUnPacker unPacker,
                 @NotNull final GowingPackedEntityBundle bundle,
-                final GowingEntityReference er
+                @NotNull final GowingEntityReference er
         ) {
 
             return new GowingPackableKeyValuePair( unPacker, bundle, er );
@@ -88,7 +88,7 @@ public class GowingPackableKeyValuePair<K, V> extends GowingAbstractPackableEnti
 
         super( unPacker, bundle.getSuperBundle() );
 
-        Logger.logMsg( "reconstructing KVP " + er );
+//        Logger.logMsg( "reconstructing KVP " + er );
 
         _keyReference = bundle.getNotNullField( KEY_FIELD_NAME ).getObjectValue();
         _valueReference = bundle.getNotNullField( VALUE_FIELD_NAME ).getObjectValue();
@@ -180,51 +180,51 @@ public class GowingPackableKeyValuePair<K, V> extends GowingAbstractPackableEnti
 
     }
 
-    private static SortedMap<String, HolderFactory> _factories = new TreeMap<>();
+    private static SortedMap<String, HolderFactory> s_factories = new TreeMap<>();
 
     static {
 
-        _factories.put(
+        s_factories.put(
                 String.class.getCanonicalName(),
                 ( name, obj, packer ) -> new GowingStringHolder( name, (String)obj, true )
         );
 
-        _factories.put(
+        s_factories.put(
                 Byte.class.getCanonicalName(),
                 ( name, obj, packer ) -> new GowingByteHolder( name, (Byte)obj, true )
         );
 
-        _factories.put(
+        s_factories.put(
                 Short.class.getCanonicalName(),
                 ( name, obj, packer ) -> new GowingShortHolder( name, (Short)obj, true )
         );
 
-        _factories.put(
+        s_factories.put(
                 Integer.class.getCanonicalName(),
                 ( name, obj, packer ) -> new GowingIntegerHolder( name, (Integer)obj, true )
         );
 
-        _factories.put(
+        s_factories.put(
                 Long.class.getCanonicalName(),
                 ( name, obj, packer ) -> new GowingLongHolder( name, (Long)obj, true )
         );
 
-        _factories.put(
+        s_factories.put(
                 Float.class.getCanonicalName(),
                 ( name, obj, packer ) -> new GowingFloatHolder( name, (Float)obj, true )
         );
 
-        _factories.put(
+        s_factories.put(
                 Double.class.getCanonicalName(),
                 ( name, obj, packer ) -> new GowingDoubleHolder( name, (Double)obj, true )
         );
 
-        _factories.put(
+        s_factories.put(
                 Boolean.class.getCanonicalName(),
                 ( name, obj, packer ) -> new GowingBooleanHolder( name, (Boolean)obj, true )
         );
 
-        _factories.put(
+        s_factories.put(
                 EntityName.class.getCanonicalName(),
                 ( name, obj, packer ) -> new GowingEntityNameHolder( name, (EntityName)obj, true )
         );
@@ -253,7 +253,7 @@ public class GowingPackableKeyValuePair<K, V> extends GowingAbstractPackableEnti
 
     public static boolean isClassSupported( @NotNull final Class entityClass ) {
 
-        @SuppressWarnings("UnnecessaryLocalVariable") boolean rval = _factories.containsKey( entityClass.getCanonicalName() );
+        @SuppressWarnings("UnnecessaryLocalVariable") boolean rval = s_factories.containsKey( entityClass.getCanonicalName() );
 
         return rval;
 
@@ -284,7 +284,7 @@ public class GowingPackableKeyValuePair<K, V> extends GowingAbstractPackableEnti
         } else {
 
             String className = obj.getClass().getCanonicalName();
-            HolderFactory factory = _factories.get( className );
+            HolderFactory factory = s_factories.get( className );
 
             if ( factory == null ) {
 

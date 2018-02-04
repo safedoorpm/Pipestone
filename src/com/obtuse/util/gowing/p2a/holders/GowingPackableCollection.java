@@ -6,6 +6,7 @@ import com.obtuse.util.gowing.*;
 import com.obtuse.util.gowing.p2a.GowingEntityReference;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
@@ -57,7 +58,7 @@ import java.util.List;
  */
 
 @SuppressWarnings("unchecked")
-public class GowingPackableCollection<E> extends LinkedList<E> implements GowingPackable {
+public class GowingPackableCollection<E> extends ArrayList<E> implements GowingPackable {
 
     private static final EntityTypeName ENTITY_TYPE_NAME = new EntityTypeName( GowingPackableCollection.class );
 
@@ -84,7 +85,7 @@ public class GowingPackableCollection<E> extends LinkedList<E> implements Gowing
 
         @Override
         @NotNull
-        public GowingPackable createEntity( @NotNull final GowingUnPacker unPacker, @NotNull final GowingPackedEntityBundle bundle, final GowingEntityReference er ) {
+        public GowingPackable createEntity( @NotNull final GowingUnPacker unPacker, @NotNull final GowingPackedEntityBundle bundle, @NotNull final GowingEntityReference er ) {
 
             return new GowingPackableCollection( unPacker, bundle );
 
@@ -169,6 +170,15 @@ public class GowingPackableCollection<E> extends LinkedList<E> implements Gowing
         return dest.addAll( tmp );
 
     }
+
+    /**
+     Finish unpacking.
+     <p>VERY IMPORTANT POINT: we're not finished until every single {@link GowingPackable} instance that we refer to is finished.
+     Violating this rule will result in all sorts of chaos because those who reference this instance will expect to be able to
+     use our {@link GowingPackable} instances to finish themselves.</p>
+     @param unPacker the {@link GowingUnPacker} that running this circus.
+     @return {@code true} if we are finished; {@code false} otherwise.
+     */
 
     @Override
     public boolean finishUnpacking( @NotNull final GowingUnPacker unPacker ) {

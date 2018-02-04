@@ -4,23 +4,74 @@
 
 package com.obtuse.util;
 
+import com.obtuse.util.gowing.*;
+import com.obtuse.util.gowing.p2a.GowingEntityReference;
+import com.obtuse.util.gowing.p2a.GowingUtil;
+import com.obtuse.util.gowing.p2a.holders.GowingBooleanHolder;
+import com.obtuse.util.gowing.p2a.holders.GowingPackableEntityHolder;
+import com.obtuse.util.gowing.p2a.holders.GowingPackableMapping;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.Serializable;
 import java.util.*;
 
-public class TwoDimensionalTreeMap<T1,T2,V> implements Serializable, TwoDimensionalSortedMap<T1,T2,V> {
+public class TwoDimensionalTreeMap<T1,T2,V> extends GowingAbstractPackableEntity implements Serializable, TwoDimensionalSortedMap<T1,T2,V> {
+
+    private static final EntityTypeName ENTITY_TYPE_NAME = new EntityTypeName( TwoDimensionalTreeMap.class );
+    private static final int VERSION = 1;
+
+    private static final EntityName OUTER_MAP = new EntityName( "_om" );
+    private static final EntityName READONLY = new EntityName( "_um" );
+
+    public static final GowingEntityFactory FACTORY = new GowingEntityFactory( ENTITY_TYPE_NAME ) {
+
+        @Override
+        public int getOldestSupportedVersion() {
+
+            return VERSION;
+
+        }
+
+        @Override
+        public int getNewestSupportedVersion() {
+
+            return VERSION;
+
+        }
+
+        @Override
+        @NotNull
+        public GowingPackable createEntity(
+                @NotNull final GowingUnPacker unPacker,
+                @NotNull final GowingPackedEntityBundle bundle,
+                @NotNull final GowingEntityReference er
+        ) {
+
+            return new TwoDimensionalTreeMap( unPacker, bundle );
+
+        }
+
+    };
+
+    @SuppressWarnings("unused") public static final TwoDimensionalSortedMap<?,?,?> EMPTY_MAP2D =
+            new TwoDimensionalTreeMap<>( new TwoDimensionalTreeMap<>(), true );
+
+    private GowingEntityReference _outerMapReference;
+
+    private final boolean _readonly;
 
     private SortedMap<T1,SortedMap<T2,V>> _map = new TreeMap<>();
 
     public TwoDimensionalTreeMap() {
-        super();
+        super( new GowingNameMarkerThing() );
+
+        _readonly = false;
 
     }
 
-    public TwoDimensionalTreeMap( final TwoDimensionalSortedMap<T1,T2,V> map ) {
-        super();
+    public TwoDimensionalTreeMap( @NotNull final TwoDimensionalSortedMap<T1,T2,V> map, final boolean makeReadonly ) {
+        super( new GowingNameMarkerThing() );
 
         for ( T1 t1 : map.outerKeys() ) {
 
@@ -37,7 +88,255 @@ public class TwoDimensionalTreeMap<T1,T2,V> implements Serializable, TwoDimensio
 
         }
 
+        if ( makeReadonly ) {
+
+            for ( T1 t1 : _map.keySet() ) {
+
+                _map.put( t1, Collections.unmodifiableSortedMap( _map.get( t1 ) ) );
+
+            }
+
+            _map = Collections.unmodifiableSortedMap( _map );
+
+        }
+
+        _readonly = makeReadonly;
+
     }
+
+    public TwoDimensionalTreeMap( final @NotNull TwoDimensionalSortedMap<T1,T2,V> map ) {
+        this( map, false );
+
+    }
+
+    private TwoDimensionalTreeMap( @NotNull final GowingUnPacker unPacker, @NotNull final GowingPackedEntityBundle bundle ) {
+
+        super( unPacker, bundle.getSuperBundle() );
+
+        _outerMapReference = bundle.getMandatoryEntityReference( OUTER_MAP );
+
+        _readonly = bundle.booleanValue( READONLY );
+
+    }
+
+    @Override
+    public @NotNull GowingPackedEntityBundle bundleThyself(
+            final boolean isPackingSuper, @NotNull final GowingPacker packer
+    ) {
+
+        GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
+                ENTITY_TYPE_NAME,
+                VERSION,
+                super.bundleRoot( packer ),
+                packer.getPackingContext()
+        );
+
+        TreeMap<T1,GowingPackableMapping<T2,V>> fullMapping = new TreeMap<>();
+        for ( T1 key1 : _map.keySet() ) {
+
+            SortedMap<T2, V> inner = _map.get( key1 );
+            if ( !inner.isEmpty() ) {
+
+                SortedMap<T2,V> condensedInner = new TreeMap<>();
+                for ( T2 key2 : inner.keySet() ) {
+
+                    V value = inner.get( key2 );
+                    if ( value != null ) {
+
+                        condensedInner.put( key2, value );
+
+                    }
+
+                }
+
+                if ( !condensedInner.isEmpty() ) {
+
+                    GowingPackableMapping<T2, V> packedInner = new GowingPackableMapping<>( condensedInner );
+                    fullMapping.put( key1, packedInner );
+
+                }
+
+            }
+
+        }
+
+        GowingPackableMapping<T1,GowingPackableMapping<T2,V>> packedMapping = new GowingPackableMapping<>( fullMapping );
+
+        bundle.addHolder( new GowingPackableEntityHolder( OUTER_MAP, packedMapping, packer, true ) );
+        bundle.addHolder( new GowingBooleanHolder( READONLY, _readonly, true ) );
+
+        return bundle;
+
+    }
+
+    @Override
+    public boolean finishUnpacking( @NotNull final GowingUnPacker unPacker ) {
+
+        // Our parent class has no finishUnpacking method so we skip the step of letting it finish unpacking.
+
+        // Check if our outer map's instance is ready for use.
+
+        if ( !unPacker.isEntityFinished( _outerMapReference ) ) {
+
+            return false;
+
+        }
+
+        GowingPackable packable = unPacker.resolveReference( _outerMapReference );
+        if ( ( packable instanceof GowingPackableMapping ) ) {
+
+            // The temporary variable is required in order to make this assignment a declaration which allows
+            // the @SuppressWarnings("unchecked") annotation (the annotation is not allowed on a simple assignment statement).
+            @SuppressWarnings("unchecked")
+            TreeMap<T1, SortedMap<T2, V>> tmap = ( (GowingPackableMapping<T1, SortedMap<T2, V>>)packable ).rebuildMap( new TreeMap<>() );
+            _map = tmap;
+
+//            @SuppressWarnings("unchecked")
+//            GowingPackableMapping<T1,GowingPackableMapping<T2,V>> packedMapping =
+//                    (GowingPackableMapping<T1, GowingPackableMapping<T2,V>>)packable;
+//
+//            _map =
+//            for ( GowingPackableKeyValuePair<T1, GowingPackableMapping<T2,V>> outerPair : packedMapping.getMappings() ) {
+//
+//                GowingPackableMapping<T2,V> outerMap = outerPair.getValue();
+//
+//                for ( GowingPackableKeyValuePair<T2,V> innerMap : outerMap.getMappings() ) {
+//
+//                    put( outerPair.getKey(), innerMap.getKey(), innerMap.getValue() );
+//
+//                }
+//
+//            }
+
+            if ( _readonly ) {
+
+                for ( T1 t1 : _map.keySet() ) {
+
+                    _map.put( t1, Collections.unmodifiableSortedMap( _map.get( t1 ) ) );
+
+                }
+
+                _map = Collections.unmodifiableSortedMap( _map );
+
+            }
+
+        } else {
+
+            GowingUtil.getGrumpy( "TwoDimensionalTreeMap", "outer map", GowingPackableMapping.class, packable );
+
+        }
+
+        return true;
+
+    }
+
+    @Override
+    public boolean isReadonly() {
+
+        return _readonly;
+
+    }
+
+//    @Override
+//    public @NotNull GowingPackedEntityBundle bundleThyself(
+//            final boolean isPackingSuper, @NotNull final GowingPacker packer
+//    ) {
+//
+//        GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
+//                ENTITY_TYPE_NAME,
+//                VERSION,
+//                super.bundleRoot( packer ),
+//                packer.getPackingContext()
+//        );
+//
+//        GowingPackableCollection<GowingPackableKeyValuePair<T1, GowingPackableCollection<GowingPackableKeyValuePair<T2,V>>>> packedMapping =
+//                new GowingPackableCollection<>();
+//        for ( T1 key1 : _map.keySet() ) {
+//
+//            SortedMap<T2, V> outerMapping = _map.get( key1 );
+//            if ( outerMapping != null ) {
+//
+//                GowingPackableCollection<GowingPackableKeyValuePair<T2,V>> innerMap = new GowingPackableCollection<>();
+//                for ( T2 key2 : outerMapping.keySet() ) {
+//
+//                    V value = outerMapping.get( key2 );
+//                    if ( value != null ) {
+//
+//                        GowingPackableKeyValuePair<T2,V> innerPair = new GowingPackableKeyValuePair<>( key2, value );
+//                        innerMap.add( innerPair );
+//
+//                    }
+//
+//                }
+//
+//                if ( !innerMap.isEmpty() ) {
+//
+//                    GowingPackableKeyValuePair<
+//                            T1,
+//                            GowingPackableCollection<GowingPackableKeyValuePair<T2, V>>
+//                    > outerPair = new GowingPackableKeyValuePair<>(
+//                            key1,
+//                            innerMap
+//                    );
+//
+//                    packedMapping.add( outerPair );
+//
+//                }
+//
+//            }
+//
+//        }
+//
+//        bundle.addHolder( new GowingPackableEntityHolder( OUTER_MAP, packedMapping, packer, true ) );
+//
+//        return bundle;
+//
+//    }
+//
+//    @Override
+//    public boolean finishUnpacking( @NotNull final GowingUnPacker unPacker ) {
+//
+//        // Our parent class has no finishUnpacking method so we skip the step of letting it finish unpacking.
+//
+//        // Check if our outer map's instance is ready for use.
+//
+//        if ( !unPacker.isEntityFinished( _outerMapReference ) ) {
+//
+//            return false;
+//
+//        }
+//
+//        GowingPackable packable = unPacker.resolveReference( _outerMapReference );
+//        if ( !( packable instanceof GowingPackableCollection ) ) {
+//
+//            throw new IllegalArgumentException(
+//                    "TwoDimensionalTreeMap(Gowing):  expected a GowingPackableCollection but found a " +
+//                    ( packable == null ? null : packable.getClass().getCanonicalName() )
+//            );
+//
+//        } else {
+//
+//            @SuppressWarnings("unchecked")
+//            GowingPackableCollection<GowingPackableKeyValuePair<T1, GowingPackableCollection<GowingPackableKeyValuePair<T2, V>>>> packedMapping =
+//                    (GowingPackableCollection<GowingPackableKeyValuePair<T1, GowingPackableCollection<GowingPackableKeyValuePair<T2, V>>>>)packable;
+//
+//            for ( GowingPackableKeyValuePair<T1, GowingPackableCollection<GowingPackableKeyValuePair<T2, V>>> outerPair : packedMapping ) {
+//
+//                GowingPackableCollection<GowingPackableKeyValuePair<T2, V>> outerMap = outerPair.getValue();
+//
+//                for ( GowingPackableKeyValuePair<T2, V> innerMap : outerMap ) {
+//
+//                    put( outerPair.getKey(), innerMap.getKey(), innerMap.getValue() );
+//
+//                }
+//
+//            }
+//
+//        }
+//
+//        return true;
+//
+//    }
 
     @Override
     public V put( final T1 key1, final T2 key2, final V value ) {
@@ -269,6 +568,13 @@ public class TwoDimensionalTreeMap<T1,T2,V> implements Serializable, TwoDimensio
             }
 
         };
+
+    }
+
+    @Override
+    public void clear() {
+
+        _map.clear();
 
     }
 

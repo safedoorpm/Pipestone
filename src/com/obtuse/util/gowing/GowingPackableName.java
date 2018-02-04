@@ -41,7 +41,7 @@ public class GowingPackableName implements GowingPackable, Comparable<GowingPack
         public GowingPackable createEntity(
                 @NotNull final GowingUnPacker unPacker,
                 @NotNull final GowingPackedEntityBundle bundle,
-                final GowingEntityReference er
+                @NotNull final GowingEntityReference er
         ) {
 
             return new GowingPackableName( unPacker, bundle );

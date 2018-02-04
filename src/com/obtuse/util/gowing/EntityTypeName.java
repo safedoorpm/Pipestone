@@ -22,13 +22,29 @@ public final class EntityTypeName implements Comparable<EntityTypeName> {
 
     /**
      Encapsulate the name of a {@link GowingPackable} type.
-     @param className the {@link GowingPackable} type to be encapsulated.
+     @param classInstance the {@link GowingPackable} class to be encapsulated.
      */
 
-    public EntityTypeName( final Class<? extends GowingPackable> className ) {
+    public EntityTypeName( @NotNull final Class<? extends GowingPackable> classInstance ) {
         super();
 
-        _name = className.getCanonicalName();
+        _name = classInstance.getCanonicalName();
+
+    }
+
+    /**
+     Encapsulate the name of a {@link GowingPackable} type.
+     <p>It is almost surely safer to use the {@link #EntityTypeName(Class)} as it is much more difficult to introduce a typo into the game.
+     This constructor exists to cover those rare situations where there is not actually a Java class with the name that an instance of
+     this class is needed to specify (note sure when that situation might arise but there seems little harm in providing this constructor
+     even if it is somewhat like a knife that is sharp at both ends).</p>
+     @param canonicalClassName the {@link String} canonical name of the class which is to be encapsulated.
+     */
+
+    public EntityTypeName( @NotNull final String canonicalClassName ) {
+        super();
+
+        _name = canonicalClassName;
 
     }
 
@@ -36,7 +52,7 @@ public final class EntityTypeName implements Comparable<EntityTypeName> {
      Encapsulate the name of a {@link GowingPackable} type's {@link String} name.
      <p>This constructor is intended to be used internally by Gowing (specifically, Gowing unpackers).
      Using this constructor anywhere else is likely to lead to a somewhat painful "learning opportunity".</p>
-     @param typeNameToken the {@link String} name of a {@link GowingPackable} type.
+     @param typeNameToken a {@link StdGowingTokenizer.GowingToken2} instance containing the name of a {@link GowingPackable} type.
      */
 
     public EntityTypeName( final StdGowingTokenizer.GowingToken2 typeNameToken ) {
@@ -46,11 +62,21 @@ public final class EntityTypeName implements Comparable<EntityTypeName> {
 
     }
 
+    /**
+     Get the {@link String} name of the {@link GowingPackable} class for which this factory is responsible.
+     @return the {@link String} name of the class that this factory is responsible for.
+     */
+
     public String getTypeName() {
 
         return _name;
 
     }
+
+    /**
+     The proverbial {@link Object#toString()} method.
+     @return the {@link String} name of the class that this factory is responsible for.
+     */
 
     public String toString() {
 
@@ -58,16 +84,17 @@ public final class EntityTypeName implements Comparable<EntityTypeName> {
 
     }
 
-    public int length() {
-
-        return _name.length();
-
-    }
+    /**
+     The proverbial {@link Comparable#compareTo(Object)} method.
+     @param rhs the other {@code EntityTypeName} instance.
+     @return the result of comparing this instance's name with the other instance's name using
+     the standard {@link String#compareTo(String)} method which is equivalent to {@code this.getName().compareTo( rhs.getName() )}
+     */
 
     @Override
-    public int compareTo( @NotNull final EntityTypeName typeName2 ) {
+    public int compareTo( @NotNull final EntityTypeName rhs ) {
 
-        return _name.compareTo( typeName2._name );
+        return _name.compareTo( rhs._name );
 
     }
 

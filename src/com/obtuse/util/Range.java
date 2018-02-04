@@ -72,8 +72,7 @@ public class Range<T extends Comparable<T>> implements Serializable {
      * derived classes' implementations of this method to detect who knows what sort of inconsistencies.
      */
 
-    public boolean completelyContains( final Range<T> rhs )
-            throws RejectRangeException {
+    public boolean completelyContains( final Range<T> rhs ) {
 
         //noinspection RedundantIfStatement
         if ( _startValue.compareTo( rhs.getStartValue() ) <= 0 && rhs.getEndValue().compareTo( _endValue ) <= 0 ) {
@@ -114,8 +113,7 @@ public class Range<T extends Comparable<T>> implements Serializable {
      * derived classes' implementations of this method to detect who knows what sort of inconsistencies.
      */
 
-    public boolean overlaps( final Range rhs )
-            throws RejectRangeException {
+    public boolean overlaps( final Range rhs ) {
 
 //        Logger.logMsg( "ls=" + getLongStartValue() + ", le=" + getLongEndValue() + ", rhs.ls=" + rhs.getLongStartValue() + ", rhs.le=" + rhs.getLongEndValue() );
         if ( getLongStartValue() <= rhs.getLongStartValue() ) {
@@ -139,8 +137,7 @@ public class Range<T extends Comparable<T>> implements Serializable {
      * derived classes' implementations of this method to detect who knows what sort of inconsistencies.
      */
 
-    public boolean touches( final Range rhs )
-            throws RejectRangeException {
+    public boolean touches( final Range rhs ) {
 
         return _longEndValue + 1L == rhs.getLongStartValue() || _longStartValue - 1L == rhs.getLongEndValue();
 

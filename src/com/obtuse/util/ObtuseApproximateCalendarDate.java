@@ -7,7 +7,7 @@ package com.obtuse.util;
 import com.obtuse.exceptions.HowDidWeGetHereError;
 import com.obtuse.util.gowing.*;
 import com.obtuse.util.gowing.p2a.GowingEntityReference;
-import com.obtuse.util.gowing.p2a.GowingUnPackerParsingException;
+import com.obtuse.util.gowing.p2a.GowingUnpackingException;
 import com.obtuse.util.gowing.p2a.holders.GowingStringHolder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -199,8 +199,8 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
         @NotNull
         @Override
-        public GowingPackable createEntity( @NotNull final GowingUnPacker unPacker, @NotNull final GowingPackedEntityBundle bundle, final GowingEntityReference er )
-                throws GowingUnPackerParsingException {
+        public GowingPackable createEntity( @NotNull final GowingUnPacker unPacker, @NotNull final GowingPackedEntityBundle bundle, @NotNull final GowingEntityReference er )
+                throws GowingUnpackingException {
 
             return new ObtuseApproximateCalendarDate( unPacker, bundle );
 
@@ -320,7 +320,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
     public ObtuseApproximateCalendarDate(
             final GowingUnPacker unPacker,
             final GowingPackedEntityBundle bundle
-    ) throws GowingUnPackerParsingException {
+    ) throws GowingUnpackingException {
 
         super( unPacker, bundle.getSuperBundle() );
 
@@ -358,7 +358,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
     }
 
     private static ObtuseCalendarDate makeCalendarDate( final GowingPackedEntityBundle bundle, final EntityName whichDate )
-            throws GowingUnPackerParsingException {
+            throws GowingUnpackingException {
 
         try {
 
@@ -366,13 +366,13 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
         } catch ( com.obtuse.util.exceptions.ParsingException e ) {
 
-            throw new GowingUnPackerParsingException( e + " recovering date string", e );
+            throw new GowingUnpackingException( e + " recovering date string", e );
 
         }
 
     }
 
-    private static DatePrecision makePrecision( final GowingPackedEntityBundle bundle ) throws GowingUnPackerParsingException {
+    private static DatePrecision makePrecision( final GowingPackedEntityBundle bundle ) throws GowingUnpackingException {
 
         try {
 
@@ -380,7 +380,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
         } catch ( IllegalArgumentException e ) {
 
-            throw new GowingUnPackerParsingException( e + " recovering precision", e );
+            throw new GowingUnpackingException( e + " recovering precision", e );
 
         }
 
@@ -595,15 +595,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
         // No. Are we completely after the other date?
 
-        if ( getEarliestPossibleDate().compareTo( otherApproximateDate.getLatestPossibleDate() ) > 0 ) {
-
-            return false;
-
-        }
-
-        // No. We must overlap the other date.
-
-        return true;
+        return getEarliestPossibleDate().compareTo( otherApproximateDate.getLatestPossibleDate() ) <= 0;
 
     }
 

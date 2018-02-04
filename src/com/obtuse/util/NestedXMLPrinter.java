@@ -288,8 +288,7 @@ public class NestedXMLPrinter implements Closeable {
 
     }
 
-    public void close()
-            throws IOException {
+    public void close() {
 
         _ps.close();
 

@@ -4,6 +4,7 @@
 
 package com.obtuse.util;
 
+import com.obtuse.util.gowing.GowingPackable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -19,7 +20,7 @@ import java.util.function.Function;
  */
 
 @SuppressWarnings("unused")
-public interface ThreeDimensionalSortedMap<T1,T2,T3,V> extends Iterable<V>, Serializable {
+public interface ThreeDimensionalSortedMap<T1,T2,T3,V> extends Iterable<V>, Serializable, GowingPackable {
 
     /**
      * Put a value into the map.
@@ -57,6 +58,19 @@ public interface ThreeDimensionalSortedMap<T1,T2,T3,V> extends Iterable<V>, Seri
 
     @NotNull
     TwoDimensionalSortedMap<T2,T3,V> getNotNullInnerMap( @NotNull T1 key1 );
+
+    /**
+     Determine if this map is readonly.
+     @return {@code true} if it is readonly; {@code false} if it modifiable.
+     */
+
+    boolean isReadonly();
+
+    /**
+     Empty the map.
+     */
+
+    void clear();
 
     /**
      * Remove a particular inner map.

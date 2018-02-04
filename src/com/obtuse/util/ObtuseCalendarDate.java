@@ -8,7 +8,7 @@ import com.obtuse.exceptions.HowDidWeGetHereError;
 import com.obtuse.util.exceptions.ParsingException;
 import com.obtuse.util.gowing.*;
 import com.obtuse.util.gowing.p2a.GowingEntityReference;
-import com.obtuse.util.gowing.p2a.GowingUnPackerParsingException;
+import com.obtuse.util.gowing.p2a.GowingUnpackingException;
 import com.obtuse.util.gowing.p2a.holders.GowingStringHolder;
 import org.jetbrains.annotations.NotNull;
 
@@ -69,9 +69,9 @@ public class ObtuseCalendarDate extends GowingAbstractPackableEntity implements 
         public GowingPackable createEntity(
                 @NotNull final GowingUnPacker unPacker,
                 @NotNull final GowingPackedEntityBundle bundle,
-                final GowingEntityReference er
+                @NotNull final GowingEntityReference er
         )
-                throws GowingUnPackerParsingException {
+                throws GowingUnpackingException {
 
             String dateString = bundle.MandatoryStringValue( DATE_STRING );
 
@@ -81,7 +81,7 @@ public class ObtuseCalendarDate extends GowingAbstractPackableEntity implements 
 
             } catch ( com.obtuse.util.exceptions.ParsingException e ) {
 
-                throw new GowingUnPackerParsingException( e + " recovering date string", e );
+                throw new GowingUnpackingException( e + " recovering date string", e );
 
             }
 

@@ -11,10 +11,7 @@ import com.obtuse.util.Logger;
 import com.obtuse.util.Measure;
 import com.obtuse.util.ObtuseUtil;
 import com.obtuse.util.gowing.*;
-import com.obtuse.util.gowing.p2a.GowingEntityReference;
-import com.obtuse.util.gowing.p2a.GowingUnPackedEntityGroup;
-import com.obtuse.util.gowing.p2a.StdGowingPacker;
-import com.obtuse.util.gowing.p2a.StdGowingUnPacker;
+import com.obtuse.util.gowing.p2a.*;
 import com.obtuse.util.gowing.p2a.holders.GowingByteHolder;
 import com.obtuse.util.gowing.p2a.holders.GowingIntegerHolder;
 import com.obtuse.util.gowing.p2a.holders.GowingLongHolder;
@@ -154,7 +151,7 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
         public GowingPackable createEntity(
                 @NotNull final GowingUnPacker unPacker,
                 @NotNull final GowingPackedEntityBundle bundle,
-                final GowingEntityReference er
+                @NotNull final GowingEntityReference er
         ) {
 
             return new ObtuseImageFile( unPacker, bundle );
@@ -513,7 +510,7 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
      */
 
     public static ObtuseImageFile recoverBurkeImageFile( final File burkeImageFileFile )
-            throws IOException {
+            throws IOException, GowingUnpackingException {
 
         Measure m = new Measure( "recover BIF" );
         boolean oldLoggingEnabled = Logger.setLoggingEnabled( s_loadLoggingEnabled );
@@ -595,9 +592,15 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
 
                 }
 
-            } catch ( IOException e ) {
+            } catch ( Throwable e ) {
 
                 e.printStackTrace();
+
+                if ( e instanceof  HowDidWeGetHereError ) {
+
+                    throw (HowDidWeGetHereError)e;
+
+                }
 
             } finally {
 

@@ -7,7 +7,6 @@ package com.obtuse.ui.layout.linear;
 
 import com.obtuse.util.gowing.*;
 import com.obtuse.util.gowing.p2a.GowingEntityReference;
-import com.obtuse.util.gowing.p2a.GowingUnPackerParsingException;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -38,7 +37,7 @@ public class LinearFlagNameValue extends GowingPackableAttribute {
         public GowingPackable createEntity(
                 @NotNull final GowingUnPacker unPacker,
                 @NotNull final GowingPackedEntityBundle bundle,
-                final GowingEntityReference er
+                @NotNull final GowingEntityReference er
         ) {
 
             return new LinearFlagNameValue( unPacker, bundle );

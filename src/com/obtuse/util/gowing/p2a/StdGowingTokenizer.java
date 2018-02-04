@@ -71,6 +71,12 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
                 return true;
             }
         },
+        USERS_ENTITY_NAME {
+            public boolean isScalarType() {
+
+                return true;
+            }
+        },
         CHAR {
             public boolean isScalarType() {
 
@@ -420,7 +426,7 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
         @SuppressWarnings("RedundantThrows")
         @NotNull
         public GowingPackableThingHolder createHolder( final EntityName entityName, final GowingToken2 valueToken )
-                throws GowingUnPackerParsingException {
+                throws GowingUnpackingException {
 
             GowingPackableThingHolder holder;
             TokenType tokenType = valueToken.type();
@@ -764,7 +770,7 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
     @Override
     @NotNull
     public GowingToken2 getNextToken( final boolean identifierAllowed, @NotNull final TokenType requiredType )
-            throws IOException, GowingUnPackerParsingException {
+            throws IOException, GowingUnpackingException {
 
         try {
 
@@ -786,7 +792,7 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
                                           _lnum,
                                           _offset
                         );
-                throw new GowingUnPackerParsingException( errorToken.stringValue(), errorToken );
+                throw new GowingUnpackingException( errorToken.stringValue(), errorToken );
 
 
             }
@@ -838,7 +844,7 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
     @Override
     @NotNull
     public GowingToken2 getNextToken( final boolean identifierAllowed )
-            throws IOException, GowingUnPackerParsingException {
+            throws IOException, GowingUnpackingException {
 
         if ( _putBackToken != null ) {
 
@@ -1334,7 +1340,7 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
             throws IOException {
 
         int ch;
-        Logger.maybeLogMsg( () -> "parsing " + ( primitive ? "primitive" : "container" ) + " array" );
+//        Logger.maybeLogMsg( () -> "parsing " + ( primitive ? "primitive" : "container" ) + " array" );
 
         int length = 0;
         ch = nextCh();
@@ -1521,6 +1527,45 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
 
                 break;
 
+            case GowingConstants.TAG_ENTITY_NAME:
+
+                elementType = TokenType.USERS_ENTITY_NAME;
+                array = primitive ? new EntityName[length] : new Long[length];
+                what = "UsersEntityName";
+                elementParser = new ElementParser() {
+
+                    @Override
+                    public Object parse( final int index )
+                            throws IOException {
+
+                        GowingToken2 usersEntityNameStringToken = collectString();
+                        if ( usersEntityNameStringToken.type() == TokenType.STRING ) {
+
+                            return new EntityName( usersEntityNameStringToken.stringValue() );
+
+                        } else {
+
+                            return new GowingToken2(
+                                    usersEntityNameStringToken._value + " looking for user's EntityName string",
+                                    usersEntityNameStringToken._lnum,
+                                    usersEntityNameStringToken._offset
+                            );
+
+                        }
+
+                    }
+
+                    @Override
+                    public String toString() {
+
+                        return "UsersEntityName ElementParser";
+
+                    }
+
+                };
+
+                break;
+
             case GowingConstants.TAG_LONG:
 
                 elementType = TokenType.LONG;
@@ -1655,13 +1700,13 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
 
                     // Just swallow the comma.
 
-                    Logger.logMsg( "swallowed a comma prior to index " +
-                                   ix +
-                                   " in " +
-                                   elementType +
-                                   " " +
-                                   ( primitive ? "primitive" : "container" ) +
-                                   "array" );
+//                    Logger.logMsg( "swallowed a comma prior to index " +
+//                                   ix +
+//                                   " in " +
+//                                   elementType +
+//                                   " " +
+//                                   ( primitive ? "primitive" : "container" ) +
+//                                   "array" );
 
                 }
 
@@ -1751,7 +1796,7 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
             @SuppressWarnings("unused") final GowingUnPackerContext unPackerContext,
             final int typeId
     )
-            throws IOException, GowingUnPackerParsingException {
+            throws IOException, GowingUnpackingException {
 
         GowingToken2 entityIdToken = parseNumeric(
                 TokenType.LONG,
@@ -1782,7 +1827,7 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
             version = entityVersionToken.intValue();
             if ( version.intValue() <= 0 ) {
 
-                throw new GowingUnPackerParsingException( "version number is not positive (" + version + ")", entityVersionToken );
+                throw new GowingUnpackingException( "version number is not positive (" + version + ")", entityVersionToken );
 
             }
 
@@ -1823,15 +1868,15 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
 
                     } else {
 
-                        throw new GowingUnPackerParsingException( "entity name string missing in entity name clause", entityNameClauseMarker );
+                        throw new GowingUnpackingException( "entity name string missing in entity name clause", entityNameClauseMarker );
 
                     }
 
                 } else {
 
-                    throw new GowingUnPackerParsingException( "entity name clause marker ('" +
-                                                              GowingConstants.ENTITY_NAME_CLAUSE_MARKER +
-                                                              "') not allowed in this context", entityNameClauseMarker );
+                    throw new GowingUnpackingException( "entity name clause marker ('" +
+                                                        GowingConstants.ENTITY_NAME_CLAUSE_MARKER +
+                                                        "') not allowed in this context", entityNameClauseMarker );
 
                 }
 
@@ -2066,7 +2111,7 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
 
             }
 
-        } catch ( IOException | GowingUnPackerParsingException e ) {
+        } catch ( IOException | GowingUnpackingException e ) {
 
             e.printStackTrace();
 

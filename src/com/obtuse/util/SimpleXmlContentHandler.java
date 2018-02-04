@@ -31,8 +31,7 @@ public class SimpleXmlContentHandler extends DefaultHandler {
 
     }
 
-    public void startDocument()
-            throws SAXException {
+    public void startDocument() {
 
         if ( _logActivity ) {
 
@@ -42,8 +41,7 @@ public class SimpleXmlContentHandler extends DefaultHandler {
 
     }
 
-    public void endDocument()
-            throws SAXException {
+    public void endDocument() {
 
         if ( _logActivity ) {
 
@@ -53,8 +51,7 @@ public class SimpleXmlContentHandler extends DefaultHandler {
 
     }
 
-    public void startElement( final String uri, final String localName, final String qName, final Attributes attributes )
-            throws SAXException {
+    public void startElement( final String uri, final String localName, final String qName, final Attributes attributes ) {
 
         _nesting.push( qName );
 
@@ -128,8 +125,7 @@ public class SimpleXmlContentHandler extends DefaultHandler {
 
     }
 
-    public void characters( final char@NotNull[] chars, final int start, final int length )
-            throws SAXException {
+    public void characters( final char@NotNull[] chars, final int start, final int length ) {
 
         if ( _logActivity ) {
 
@@ -139,8 +135,7 @@ public class SimpleXmlContentHandler extends DefaultHandler {
 
     }
 
-    public void ignorableWhitespace( final char@NotNull[] chars, final int start, final int length )
-            throws SAXException {
+    public void ignorableWhitespace( final char@NotNull[] chars, final int start, final int length ) {
 
         if ( _logActivity ) {
 
@@ -150,13 +145,11 @@ public class SimpleXmlContentHandler extends DefaultHandler {
 
     }
 
-    public void processingInstruction( final String s, final String s1 )
-            throws SAXException {
+    public void processingInstruction( final String s, final String s1 ) {
 
     }
 
-    public void skippedEntity( final String s )
-            throws SAXException {
+    public void skippedEntity( final String s ) {
 
     }
 

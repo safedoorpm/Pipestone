@@ -134,7 +134,7 @@ public class StdGowingUnPacker implements GowingUnPacker {
 
     @NotNull
     private GowingFormatVersion parseVersion()
-            throws IOException, GowingUnPackerParsingException {
+            throws IOException, GowingUnpackingException {
 
         StdGowingTokenizer.GowingToken2 versionToken = _tokenizer.getNextToken(
                 false,
@@ -174,7 +174,7 @@ public class StdGowingUnPacker implements GowingUnPacker {
 
     @Override
     @NotNull
-    public Optional<GowingUnPackedEntityGroup> unPack() {
+    public Optional<GowingUnPackedEntityGroup> unPack() throws GowingUnpackingException, IOException {
 
         checkClosed( "unPack()" );
 
@@ -233,7 +233,7 @@ public class StdGowingUnPacker implements GowingUnPacker {
 
                 } else {
 
-                    throw new GowingUnPackerParsingException( "unexpected token " + token, token );
+                    throw new GowingUnpackingException( "unexpected token " + token, token );
 
                 }
 
@@ -306,6 +306,12 @@ public class StdGowingUnPacker implements GowingUnPacker {
 
                 if ( !finishedSomething ) {
 
+                    for ( GowingEntityReference er : unFinishedEntities ) {
+
+                        Logger.logMsg( "Gowing.unPack:  unable to finish " + er + " - " + GowingUtil.describeClassInstance( resolveReference( er ) ) );
+
+                    }
+
                     throw new HowDidWeGetHereError( "nothing left that can be finished (" +
                                                     unFinishedEntities.size() +
                                                     " unfinished " +
@@ -318,17 +324,25 @@ public class StdGowingUnPacker implements GowingUnPacker {
 
             rval = Optional.of( group );
 
-        } catch ( GowingUnPackerParsingException e ) {
+        } catch ( GowingUnpackingException e ) {
 
-            Logger.logErr( "error parsing packed entity - " + e.getMessage() + " (" + e.getCauseToken() + ")", e );
+            Logger.logErr( "error parsing packed entity - " + e.getMessage() + " { " + e.getCauseToken() + " }", e );
 
-            rval = Optional.empty();
+            throw e;
+//            rval = Optional.empty();
 
         } catch ( IOException e ) {
 
             Logger.logErr( "I/O error parsing packed entity", e );
 
-            rval = Optional.empty();
+            throw e;
+//            rval = Optional.empty();
+
+        } catch ( RuntimeException e ) {
+
+            Logger.logErr( "Unexpected runtime error parsing packed entity", e );
+
+            throw e;
 
         } finally {
 
@@ -348,17 +362,17 @@ public class StdGowingUnPacker implements GowingUnPacker {
 
     @NotNull
     private GowingPackable constructEntity(
-            final GowingEntityReference er,
-            final StdGowingTokenizer.GowingToken2 token,
+            @NotNull final GowingEntityReference er,
+            @NotNull final StdGowingTokenizer.GowingToken2 token,
             @NotNull final GowingPackedEntityBundle bundle
     )
-            throws GowingUnPackerParsingException {
+            throws GowingUnpackingException {
 
         if ( _unPackerContext.isEntityKnown( er ) ) {
 
-            throw new GowingUnPackerParsingException( "entity with er " +
-                                                      er +
-                                                      " already unpacked during this unpacking session", token );
+            throw new GowingUnpackingException( "entity with er " +
+                                                er +
+                                                " already unpacked during this unpacking session", token );
 
         }
 
@@ -375,7 +389,7 @@ public class StdGowingUnPacker implements GowingUnPacker {
 
 		/*
         Create the entity.
-		If something goes wrong, augment the GowingUnPackerParsingException with the current token unless the exception
+		If something goes wrong, augment the GowingUnpackingException with the current token unless the exception
 		already specifies a token.
 		In either case, rethrow the exception.
 		 */
@@ -383,15 +397,43 @@ public class StdGowingUnPacker implements GowingUnPacker {
                 GowingPackable entity;
                 try {
 
+                    if ( bundle.getVersion() < factory.getOldestSupportedVersion() ) {
+
+                        throw new GowingUnpackingException(
+                                "entity " + er + "'s version of " + bundle.getVersion() +
+                                " is older than the oldest supported version of " + factory.getOldestSupportedVersion() +
+                                " (maybe your factory needs to be more flexible)",
+                                token
+                        );
+
+                    } else if ( bundle.getVersion() > factory.getNewestSupportedVersion() ) {
+
+                        throw new GowingUnpackingException(
+                                "entity " + er + "'s version of " + bundle.getVersion() +
+                                " is newer than the newest supported version of " + factory.getNewestSupportedVersion() +
+                                " (maybe your factory needs to be more flexible)",
+                                token
+
+                        );
+
+
+                    }
+
                     entity = factory.createEntity( this, bundle, er );
 
-                } catch ( GowingUnPackerParsingException e ) {
+                } catch ( GowingUnpackingException e ) {
 
                     if ( e.getCauseToken() == null ) {
 
                         e.setCauseToken( token );
 
                     }
+
+                    throw e;
+
+                } catch ( IllegalArgumentException e ) {
+
+                    Logger.logErr( "maybe you should throw a GowingUnpackingException or something like that", e );
 
                     throw e;
 
@@ -409,7 +451,7 @@ public class StdGowingUnPacker implements GowingUnPacker {
                              _unPackerContext.findTypeByTypeReferenceId( er.getTypeId() ) +
                              ")";
 
-                throw new GowingUnPackerParsingException(
+                throw new GowingUnpackingException(
                         msg,
                         token
                 );
@@ -418,7 +460,7 @@ public class StdGowingUnPacker implements GowingUnPacker {
 
         } else {
 
-            throw new GowingUnPackerParsingException(
+            throw new GowingUnpackingException(
                     "type id " + er.getTypeId() + " not previously defined in data stream",
                     token
             );
@@ -455,8 +497,40 @@ public class StdGowingUnPacker implements GowingUnPacker {
 
     }
 
+    public boolean areEntitiesAllFinished( @Nullable final GowingEntityReference@NotNull[] entityReferences ) {
+
+        for ( GowingEntityReference er : entityReferences ) {
+
+            if ( !isEntityFinished( er ) ) {
+
+                return false;
+
+            }
+
+        }
+
+        return true;
+
+    }
+
+    public boolean areEntitiesAllFinished( @NotNull final Collection<GowingEntityReference> entityReferences ) {
+
+        for ( GowingEntityReference er : entityReferences ) {
+
+            if ( !isEntityFinished( er ) ) {
+
+                return false;
+
+            }
+
+        }
+
+        return true;
+
+    }
+
     private void collectTypeAlias()
-            throws IOException, GowingUnPackerParsingException {
+            throws IOException, GowingUnpackingException {
 
         StdGowingTokenizer.GowingToken2 typeIdToken = _tokenizer.getNextToken( false, StdGowingTokenizer.TokenType.LONG );
         @SuppressWarnings({ "UnusedAssignment", "unused" }) StdGowingTokenizer.GowingToken2 atSignToken =
@@ -472,7 +546,7 @@ public class StdGowingUnPacker implements GowingUnPacker {
 
     @NotNull
     private GowingPackedEntityBundle collectEntityDefinitionClause( final boolean parsingSuperClause )
-            throws IOException, GowingUnPackerParsingException {
+            throws IOException, GowingUnpackingException {
 
         StdGowingTokenizer.GowingToken2 ourEntityReferenceToken = _tokenizer.getNextToken(
                 false,
@@ -480,7 +554,7 @@ public class StdGowingUnPacker implements GowingUnPacker {
         );
         if ( ourEntityReferenceToken.entityReference().getVersion() == null ) {
 
-            throw new GowingUnPackerParsingException(
+            throw new GowingUnpackingException(
                     "entity references in entity definitions and super clause definitions must have version ids",
                     ourEntityReferenceToken
             );
@@ -500,14 +574,14 @@ public class StdGowingUnPacker implements GowingUnPacker {
 
             if ( !parsingSuperClause && ourEntityReferenceToken.entityReference().getEntityId() == 0 ) {
 
-                throw new GowingUnPackerParsingException(
+                throw new GowingUnpackingException(
                         "entity id may only be zero in super clauses",
                         ourEntityReferenceToken
                 );
 
             } else if ( parsingSuperClause && ourEntityReferenceToken.entityReference().getEntityId() != 0 ) {
 
-                throw new GowingUnPackerParsingException(
+                throw new GowingUnpackingException(
                         "entity id must be zero in super clauses",
                         ourEntityReferenceToken
                 );
@@ -526,7 +600,7 @@ public class StdGowingUnPacker implements GowingUnPacker {
                     {
                         if ( bundle != null ) {
 
-                            throw new GowingUnPackerParsingException(
+                            throw new GowingUnpackingException(
                                     "super clause must be the first clause in an entity definition clause",
                                     token
                             );
@@ -627,16 +701,16 @@ public class StdGowingUnPacker implements GowingUnPacker {
 
         } else {
 
-            throw new GowingUnPackerParsingException( "unknown type id " +
-                                                      ourEntityReferenceToken.entityReference().getTypeId() +
-                                                      " in LHS of entity definition clause", ourEntityReferenceToken );
+            throw new GowingUnpackingException( "unknown type id " +
+                                                ourEntityReferenceToken.entityReference().getTypeId() +
+                                                " in LHS of entity definition clause", ourEntityReferenceToken );
 
         }
 
     }
 
     private void collectFieldDefinitionClause( final GowingPackedEntityBundle bundle )
-            throws IOException, GowingUnPackerParsingException {
+            throws IOException, GowingUnpackingException {
 
         StdGowingTokenizer.GowingToken2 identifierToken = _tokenizer.getNextToken(
                 true,
@@ -649,7 +723,7 @@ public class StdGowingUnPacker implements GowingUnPacker {
         if ( valueToken.type() == StdGowingTokenizer.TokenType.ENTITY_REFERENCE &&
              valueToken.entityReference().getVersion() != null ) {
 
-            throw new GowingUnPackerParsingException( "entity reference values must not have version numbers", valueToken );
+            throw new GowingUnpackingException( "entity reference values must not have version numbers", valueToken );
 
         }
 
@@ -657,9 +731,9 @@ public class StdGowingUnPacker implements GowingUnPacker {
 
         if ( bundle.containsKey( holder.getName() ) ) {
 
-            throw new GowingUnPackerParsingException( "more than one field named \"" +
-                                                      identifierToken.identifierValue() +
-                                                      "\"", identifierToken );
+            throw new GowingUnpackingException( "more than one field named \"" +
+                                                identifierToken.identifierValue() +
+                                                "\"", identifierToken );
 
         }
 
@@ -736,7 +810,15 @@ public class StdGowingUnPacker implements GowingUnPacker {
 
         } catch ( IOException e ) {
 
-            Logger.logErr( "unable to create StdGowingUnPacker instance", e );
+            Logger.logErr( "I/O exception trying to unpack StdGowingUnPacker instance", e );
+
+        } catch ( RuntimeException e ) {
+
+            Logger.logErr( "runtime error trying to unpack StdGowingUnPacker instance", e );
+
+        } catch ( Throwable e ) {
+
+            Logger.logErr( "Throwable caught trying to unpack StdGowingUnPacker instance", e );
 
         }
 

@@ -533,7 +533,7 @@ public class GoldenRatioLayoutManager implements LayoutManager {
 
     private static int round( final double d ) {
 
-        return (int)Math.floor( (double)( d + 0.5F ) );
+        return (int)Math.floor( d + 0.5F );
 
     }
 

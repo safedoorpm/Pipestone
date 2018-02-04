@@ -20,11 +20,11 @@ public interface GowingTokenizer extends Closeable {
 
     @NotNull
     StdGowingTokenizer.GowingToken2 getNextToken( boolean identifierAllowed, @NotNull StdGowingTokenizer.TokenType requiredType )
-	    throws IOException, GowingUnPackerParsingException;
+	    throws IOException, GowingUnpackingException;
 
     @NotNull
     StdGowingTokenizer.GowingToken2 getNextToken( boolean identifierAllowed )
-	    throws IOException, GowingUnPackerParsingException;
+	    throws IOException, GowingUnpackingException;
 
     /**
      Register a metadata handler.

@@ -45,7 +45,7 @@ public class AbsolutePath extends RelativePath {
         public GowingPackable createEntity(
                 @NotNull final GowingUnPacker unPacker,
                 @NotNull final GowingPackedEntityBundle bundle,
-                final GowingEntityReference er
+                @NotNull final GowingEntityReference er
         ) {
 
             return new AbsolutePath( unPacker, bundle );

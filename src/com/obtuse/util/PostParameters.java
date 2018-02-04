@@ -226,9 +226,7 @@ public class PostParameters implements Serializable {
      * @throws InterruptedException if the operation needs to be aborted due to an error.
      */
 
-    public static void decodeParms( final String parms, final PostParameters p )
-            throws
-            InterruptedException {
+    public static void decodeParms( final String parms, final PostParameters p ) {
 
         if ( parms == null ) {
             return;

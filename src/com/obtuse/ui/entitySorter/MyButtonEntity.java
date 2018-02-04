@@ -34,7 +34,7 @@ public class MyButtonEntity implements SortableEntity {
     @NotNull
     public SortableEntityView createEntityView( final String key ) {
 
-	return new MyButtonView( this, _myModel, _word, (String)key );
+	return new MyButtonView( this, _myModel, _word, key );
 
     }
 

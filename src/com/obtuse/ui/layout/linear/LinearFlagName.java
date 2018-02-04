@@ -9,7 +9,6 @@ import com.obtuse.util.BasicProgramConfigInfo;
 import com.obtuse.util.Logger;
 import com.obtuse.util.gowing.*;
 import com.obtuse.util.gowing.p2a.GowingEntityReference;
-import com.obtuse.util.gowing.p2a.GowingUnPackerParsingException;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
@@ -43,7 +42,7 @@ public class LinearFlagName extends GowingPackableName {
         public GowingPackable createEntity(
                 @NotNull final GowingUnPacker unPacker,
                 @NotNull final GowingPackedEntityBundle bundle,
-                final GowingEntityReference er
+                @NotNull final GowingEntityReference er
         ) {
 
             return new LinearFlagName( unPacker, bundle );

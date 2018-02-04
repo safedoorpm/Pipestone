@@ -44,7 +44,7 @@ public class GowingPackableAttribute implements GowingPackable {
         public GowingPackable createEntity(
                 @NotNull final GowingUnPacker unPacker,
                 @NotNull final GowingPackedEntityBundle bundle,
-                final GowingEntityReference er
+                @NotNull final GowingEntityReference er
         ) {
 
             return new GowingPackableAttribute( unPacker, bundle );

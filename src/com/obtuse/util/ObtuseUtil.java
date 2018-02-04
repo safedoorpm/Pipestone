@@ -7,12 +7,7 @@ package com.obtuse.util;
 import com.obtuse.db.PostgresConnection;
 import com.obtuse.exceptions.HowDidWeGetHereError;
 import com.obtuse.util.gowing.*;
-import com.obtuse.util.gowing.p2a.GowingUnPackedEntityGroup;
-import com.obtuse.util.gowing.p2a.StdGowingPacker;
-import com.obtuse.util.gowing.p2a.StdGowingUnPacker;
-import com.obtuse.util.gowing.p2a.TracingGowingMetaDataHandler;
-import com.obtuse.util.gowing.p2a.examples.SortedSetExample;
-import com.obtuse.util.gowing.p2a.holders.GowingPackableCollection;
+import com.obtuse.util.gowing.p2a.*;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -23,8 +18,6 @@ import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.PreparedStatement;
@@ -369,6 +362,42 @@ public class ObtuseUtil {
     public static String formatCount( final int count ) {
 
         return formatCount( count, "element", "elements" );
+
+    }
+
+    public static void getGrumpy(
+            @NotNull final String methodName,
+            @NotNull final String taskColloquialName,
+            @NotNull final String entityColloquialName,
+            @NotNull final Class<?> expectedClass,
+            @Nullable final Object entity
+    ) {
+
+        String whatItIs =
+                entity == null ? "null" : "a " + entity.getClass().getCanonicalName();
+
+        throw new IllegalArgumentException(
+                methodName + ":  unable to " + taskColloquialName + " - " +
+                entityColloquialName + " is supposed to be a " + expectedClass.getCanonicalName() + " but it is " + whatItIs
+        );
+
+    }
+
+    public static void mumbleQuietly(
+            @NotNull final String methodName,
+            @NotNull final String taskColloquialName,
+            @NotNull final String entityColloquialName,
+            @NotNull final Class<?> expectedClass,
+            @Nullable final Object entity
+    ) {
+
+        String whatItIs =
+                entity == null ? "null" : "a " + entity.getClass().getCanonicalName();
+
+        Logger.logErr(
+                methodName + ":  unable to " + taskColloquialName + " - " +
+                entityColloquialName + " is supposed to be a " + expectedClass.getCanonicalName() + " but it is " + whatItIs
+        );
 
     }
 
@@ -3219,7 +3248,7 @@ public class ObtuseUtil {
 
             rval = gowingUnPack( inputFile, gowingEntityFactories );
 
-        } catch ( IOException e ) {
+        } catch ( IOException | GowingUnpackingException e ) {
 
             Logger.logErr( "ObtuseUtil.quietGowingSave( " + inputFile + " )", e );
 
@@ -3232,7 +3261,7 @@ public class ObtuseUtil {
     public static Optional<GowingUnPackedEntityGroup> gowingUnPack(
             @NotNull final File inputFile,
             @NotNull final GowingEntityFactory[] gowingEntityFactories
-    ) throws IOException {
+    ) throws IOException, GowingUnpackingException {
 
         Optional<GowingUnPackedEntityGroup> maybeResult = Optional.empty();
         try (

@@ -6,7 +6,7 @@ package com.obtuse.util;
 
 import com.obtuse.util.gowing.*;
 import com.obtuse.util.gowing.p2a.GowingEntityReference;
-import com.obtuse.util.gowing.p2a.GowingUnPackerParsingException;
+import com.obtuse.util.gowing.p2a.GowingUnpackingException;
 import com.obtuse.util.gowing.p2a.holders.GowingLongHolder;
 import org.jetbrains.annotations.NotNull;
 
@@ -42,9 +42,9 @@ public class FormattedImmutableDate extends ImmutableDate implements GowingPacka
         public GowingPackable createEntity(
                 @NotNull final GowingUnPacker unPacker,
                 @NotNull final GowingPackedEntityBundle bundle,
-                final GowingEntityReference er
+                @NotNull final GowingEntityReference er
         )
-                throws GowingUnPackerParsingException {
+                throws GowingUnpackingException {
 
             return new FormattedImmutableDate( unPacker, bundle );
 
@@ -98,14 +98,13 @@ public class FormattedImmutableDate extends ImmutableDate implements GowingPacka
 
      @param unPacker the active Gowing unpacker.
      @param bundle   the bundle representing the instance to be recovered.
-     @throws GowingUnPackerParsingException if something goes wrong.
+     @throws GowingUnpackingException if something goes wrong.
      */
 
     public FormattedImmutableDate(
             final GowingUnPacker unPacker,
             final GowingPackedEntityBundle bundle
-    )
-            throws GowingUnPackerParsingException {
+    ) {
 
         this( bundle.getNotNullField( ImmutableDate.TIME_MS_NAME ).longValue() );
 

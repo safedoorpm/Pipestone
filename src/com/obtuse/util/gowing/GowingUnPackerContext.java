@@ -1,8 +1,8 @@
 package com.obtuse.util.gowing;
 
 import com.obtuse.util.gowing.p2a.GowingEntityReference;
+import com.obtuse.util.gowing.p2a.GowingUnpackingException;
 import com.obtuse.util.gowing.p2a.StdGowingTokenizer;
-import com.obtuse.util.gowing.p2a.GowingUnPackerParsingException;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -78,7 +78,7 @@ public interface GowingUnPackerContext {
     int registerFactories( GowingEntityFactory[] factories );
 
     void saveTypeAlias( StdGowingTokenizer.GowingToken2 typeIdToken, StdGowingTokenizer.GowingToken2 typeNameToken )
-	    throws GowingUnPackerParsingException;
+            throws GowingUnpackingException;
 
     void setInputFile( File inputFile );
 

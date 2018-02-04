@@ -6,7 +6,6 @@ package com.obtuse.util;
 
 import com.obtuse.util.gowing.*;
 import com.obtuse.util.gowing.p2a.GowingEntityReference;
-import com.obtuse.util.gowing.p2a.GowingUnPackerParsingException;
 import com.obtuse.util.gowing.p2a.holders.GowingLongHolder;
 import org.jetbrains.annotations.NotNull;
 
@@ -49,8 +48,7 @@ public class ImmutableDate extends Date implements GowingPackable {
             final GowingUnPacker unPacker,
             final GowingPackedEntityBundle bundle,
             final GowingEntityReference er
-    )
-            throws GowingUnPackerParsingException {
+    ) {
 
         this( bundle.getNotNullField( ImmutableDate.TIME_MS_NAME ).longValue() );
 

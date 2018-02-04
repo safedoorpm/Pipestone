@@ -4,6 +4,7 @@
 
 package com.obtuse.util;
 
+import com.obtuse.util.gowing.GowingPackable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -16,7 +17,7 @@ import java.util.function.BiFunction;
  */
 
 @SuppressWarnings("unused")
-public interface TwoDimensionalSortedMap<T1, T2, V> extends Iterable<V>, Serializable {
+public interface TwoDimensionalSortedMap<T1, T2, V> extends Iterable<V>, GowingPackable, Serializable {
 
     /**
      Put a value into the map.
@@ -58,6 +59,19 @@ public interface TwoDimensionalSortedMap<T1, T2, V> extends Iterable<V>, Seriali
     SortedMap<T2, V> getNotNullInnerMap( final T1 key1 );
 
     /**
+     Determine if this map is readonly.
+     @return {@code true} if it is readonly; {@code false} if it modifiable.
+     */
+
+    boolean isReadonly();
+
+    /**
+     Empty the map.
+     */
+
+    void clear();
+
+    /**
      Get a particular value.
 
      @param key1 the first key dimension's value.
@@ -65,6 +79,7 @@ public interface TwoDimensionalSortedMap<T1, T2, V> extends Iterable<V>, Seriali
      @return the requested value (will be null if this combination of key values leads to a null value or does not
      correspond to a value in the tree).
      */
+
 
     @Nullable
     V get( T1 key1, T2 key2 );
@@ -182,16 +197,23 @@ public interface TwoDimensionalSortedMap<T1, T2, V> extends Iterable<V>, Seriali
     ) {
 
         Objects.requireNonNull( mappingFunction );
-        V v;
-        if ( ( v = get( key1, key2 ) ) == null ) {
+        V existingValue;
+
+        if ( ( existingValue = get( key1, key2 ) ) == null ) {
+
             V newValue;
             if ( ( newValue = mappingFunction.apply( key1, key2 ) ) != null ) {
+
                 put( key1, key2, newValue );
+
                 return newValue;
+
             }
+
         }
 
-        return v;
+        return existingValue;
+
     }
 
     int size();

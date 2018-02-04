@@ -175,7 +175,7 @@ public class StdGowingPackerContext implements GowingPackerContext {
             public GowingPackable createEntity(
                     @NotNull final GowingUnPacker unPacker,
                     @NotNull final GowingPackedEntityBundle bundle,
-                    final GowingEntityReference er
+                    @NotNull final GowingEntityReference er
             ) {
 
                 return new TestPackableClass( unPacker, bundle, er );
@@ -187,6 +187,7 @@ public class StdGowingPackerContext implements GowingPackerContext {
         private final String _payload;
         private SimplePackableClass _simple;
         private GowingEntityReference _simpleReference;
+        private GowingEntityReference _entityNameReference;
 
         private final int _iValue;
 
@@ -226,6 +227,8 @@ public class StdGowingPackerContext implements GowingPackerContext {
 
             _innerReference = bundle.getOptionalEntityReference( new EntityName( "_inner" ) );
 
+            _entityNameReference = bundle.getMandatoryEntityReference( new EntityName( "_entityName" ) );
+
         }
 
         @NotNull
@@ -259,6 +262,9 @@ public class StdGowingPackerContext implements GowingPackerContext {
 
             _simple = (SimplePackableClass)unPacker.resolveReference( _simpleReference );
             _inner = (TestPackableClass)unPacker.resolveReference( _innerReference );
+
+            // This went in as an EntityName. I am certain that it will come back as a String.
+            Object unpackedEntityName = unPacker.resolveReference( _entityNameReference );
 
             return true;
 
@@ -299,7 +305,7 @@ public class StdGowingPackerContext implements GowingPackerContext {
             public GowingPackable createEntity(
                     @NotNull final GowingUnPacker unPacker,
                     @NotNull final GowingPackedEntityBundle bundle,
-                    final GowingEntityReference er
+                    @NotNull final GowingEntityReference er
             ) {
 
                 return new SimplePackableClass( unPacker, bundle, er );

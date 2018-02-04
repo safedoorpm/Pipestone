@@ -55,7 +55,7 @@ public class RelativePath extends GowingAbstractPackableEntity implements Iterab
         public GowingPackable createEntity(
                 @NotNull final GowingUnPacker unPacker,
                 @NotNull final GowingPackedEntityBundle bundle,
-                final GowingEntityReference er
+                @NotNull final GowingEntityReference er
         ) {
 
             return new RelativePath( unPacker, bundle );
@@ -844,7 +844,8 @@ public class RelativePath extends GowingAbstractPackableEntity implements Iterab
     @NotNull
     @Override
     public GowingPackedEntityBundle bundleThyself(
-            final boolean isPackingSuper, @NotNull final GowingPacker packer
+            final boolean isPackingSuper,
+            @NotNull final GowingPacker packer
     ) {
 
         GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
@@ -857,6 +858,7 @@ public class RelativePath extends GowingAbstractPackableEntity implements Iterab
         GowingPackableCollection<String> segments = new GowingPackableCollection<>();
         Collections.addAll( segments, getStringPathArray() );
 
+        Logger.logMsg( "RelativePath:  bundling " + SEGMENTS + "=" + segments );
         bundle.addHolder( new GowingPackableEntityHolder( SEGMENTS, segments, packer, true ) );
         bundle.addHolder( new GowingStringHolder( COMPARE_VALUE, _compareValue, true ) );
 
