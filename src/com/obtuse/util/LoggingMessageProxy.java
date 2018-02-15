@@ -62,7 +62,7 @@ public class LoggingMessageProxy implements MessageProxy {
     }
 
     @Override
-    public void fatal( @NotNull final String msg ) {
+    public void fatal( final @NotNull String msg ) {
 
         if ( _passThroughMessageProxy == null ) {
 
@@ -78,7 +78,7 @@ public class LoggingMessageProxy implements MessageProxy {
     }
 
     @Override
-    public void fatal( @NotNull final String msg, @Nullable final String appendix ) {
+    public void fatal( final @NotNull String msg, @Nullable final String appendix ) {
 
         if ( _passThroughMessageProxy == null ) {
 
@@ -100,7 +100,7 @@ public class LoggingMessageProxy implements MessageProxy {
     }
 
     @Override
-    public void fatal( @NotNull final String msg, @Nullable final Throwable e ) {
+    public void fatal( final @NotNull String msg, @Nullable final Throwable e ) {
 
         if ( _passThroughMessageProxy == null ) {
 
@@ -117,7 +117,7 @@ public class LoggingMessageProxy implements MessageProxy {
     }
 
     @Override
-    public void fatal( @NotNull final String msg, @Nullable final String appendix, @Nullable final String contextName ) {
+    public void fatal( final @NotNull String msg, @Nullable final String appendix, @Nullable final String contextName ) {
 
         if ( _passThroughMessageProxy == null ) {
 
@@ -134,7 +134,7 @@ public class LoggingMessageProxy implements MessageProxy {
     }
 
     @Override
-    public void error( @NotNull final String msg ) {
+    public void error( final @NotNull String msg ) {
 
         if ( _passThroughMessageProxy == null ) {
 
@@ -151,7 +151,7 @@ public class LoggingMessageProxy implements MessageProxy {
     }
 
     @Override
-    public void error( @NotNull final String msg, @Nullable final String appendix ) {
+    public void error( final @NotNull String msg, @Nullable final String appendix ) {
 
         if ( _passThroughMessageProxy == null ) {
 
@@ -173,7 +173,7 @@ public class LoggingMessageProxy implements MessageProxy {
     }
 
     @Override
-    public void error( @NotNull final String msg, @Nullable final Throwable e ) {
+    public void error( final @NotNull String msg, @Nullable final Throwable e ) {
 
         if ( _passThroughMessageProxy == null ) {
 
@@ -190,7 +190,7 @@ public class LoggingMessageProxy implements MessageProxy {
     }
 
     @Override
-    public void error( @NotNull final String msg, @Nullable final String appendix, @Nullable final String contextName ) {
+    public void error( final @NotNull String msg, @Nullable final String appendix, @Nullable final String contextName ) {
 
         if ( _passThroughMessageProxy == null ) {
 
@@ -207,7 +207,7 @@ public class LoggingMessageProxy implements MessageProxy {
     }
 
     @Override
-    public void info( @NotNull final String msg ) {
+    public void info( final @NotNull String msg ) {
 
         if ( _passThroughMessageProxy == null ) {
 
@@ -225,7 +225,7 @@ public class LoggingMessageProxy implements MessageProxy {
     }
 
     @Override
-    public void info( @NotNull final String msg, @Nullable final String appendix ) {
+    public void info( final @NotNull String msg, @Nullable final String appendix ) {
 
         if ( _passThroughMessageProxy == null ) {
 
@@ -249,7 +249,7 @@ public class LoggingMessageProxy implements MessageProxy {
     }
 
     @Override
-    public void info( @NotNull final String msg, @Nullable final String appendix, @Nullable final String contextName ) {
+    public void info( final @NotNull String msg, @Nullable final String appendix, @Nullable final String contextName ) {
 
         if ( _passThroughMessageProxy == null ) {
 

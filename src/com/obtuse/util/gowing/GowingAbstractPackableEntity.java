@@ -73,7 +73,7 @@ public abstract class GowingAbstractPackableEntity implements GowingPackable {
      when unpacking and this constructor when creating an instance in other contexts.</p>
      */
 
-    protected GowingAbstractPackableEntity( @NotNull final GowingNameMarkerThing gowingThing ) {
+    protected GowingAbstractPackableEntity( final @NotNull GowingNameMarkerThing gowingThing ) {
 
         super();
 
@@ -95,8 +95,8 @@ public abstract class GowingAbstractPackableEntity implements GowingPackable {
      */
 
     protected GowingAbstractPackableEntity(
-            @SuppressWarnings("unused") @NotNull final GowingUnPacker unPacker,
-            @NotNull final GowingPackedEntityBundle bundle
+            @SuppressWarnings("unused") final @NotNull GowingUnPacker unPacker,
+            final @NotNull GowingPackedEntityBundle bundle
     ) {
         super();
 

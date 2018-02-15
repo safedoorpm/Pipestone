@@ -27,12 +27,12 @@ public class WindowWithMenus extends TrackedWindow {
         private JMenuItem _pasteMenuItem;
         private JMenuItem _selectAllMenuItem;
 
-        public BasicEditMenu( @NotNull final String menuName ) {
+        public BasicEditMenu( final @NotNull String menuName ) {
             super( menuName );
 
         }
 
-//        public BasicEditMenu( @NotNull final String menuName, @Nullable final JMenuItem cutMenuItem, @Nullable final JMenuItem copyMenuItem, @Nullable final JMenuItem pasteMenuItem ) {
+//        public BasicEditMenu( final @NotNull String menuName, @Nullable final JMenuItem cutMenuItem, @Nullable final JMenuItem copyMenuItem, @Nullable final JMenuItem pasteMenuItem ) {
 //            super( menuName );
 //
 //            _cutMenuItem = cutMenuItem;

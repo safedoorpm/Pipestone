@@ -115,7 +115,7 @@ public class GowingEntityReference implements Comparable<GowingEntityReference> 
 
     }
 
-    public int compareTo( @NotNull final GowingEntityReference rhs ) {
+    public int compareTo( final @NotNull GowingEntityReference rhs ) {
 
         int rval = _typeId.compareTo( rhs._typeId );
         if ( rval == 0 ) {

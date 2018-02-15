@@ -187,7 +187,7 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
          @param offset    the offset within the line that we found it at.
          */
 
-        public GowingToken2( @NotNull final TokenType tokenType, final Object value, final int lnum, final int offset ) {
+        public GowingToken2( final @NotNull TokenType tokenType, final Object value, final int lnum, final int offset ) {
 
             super();
 
@@ -209,7 +209,7 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
          @param offset      the offset within the line that we found it at.
          */
 
-        public GowingToken2( @NotNull final TokenType tokenType, @NotNull final TokenType elementType, final Object value, final int lnum, final int offset ) {
+        public GowingToken2( final @NotNull TokenType tokenType, final @NotNull TokenType elementType, final Object value, final int lnum, final int offset ) {
 
             super();
 
@@ -580,7 +580,7 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
 
     }
 
-    public StdGowingTokenizer( @NotNull final GowingUnPackerContext unPackerContext, @NotNull final LineNumberReader lineNumberReader ) {
+    public StdGowingTokenizer( final @NotNull GowingUnPackerContext unPackerContext, final @NotNull LineNumberReader lineNumberReader ) {
 
         super();
 
@@ -769,7 +769,7 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
 
     @Override
     @NotNull
-    public GowingToken2 getNextToken( final boolean identifierAllowed, @NotNull final TokenType requiredType )
+    public GowingToken2 getNextToken( final boolean identifierAllowed, final @NotNull TokenType requiredType )
             throws IOException, GowingUnpackingException {
 
         try {
@@ -1203,13 +1203,13 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
     private List<GowingMetaDataHandler> s_metadataHandlers = new ArrayList<>();
 
     @Override
-    public void registerMetaDataHandler( @NotNull final GowingMetaDataHandler handler ) {
+    public void registerMetaDataHandler( final @NotNull GowingMetaDataHandler handler ) {
 
         s_metadataHandlers.add( handler );
 
     }
 
-    private String notifyMetaDataHandlers( @NotNull final String metaDataLine ) {
+    private String notifyMetaDataHandlers( final @NotNull String metaDataLine ) {
 
         String trimmed = metaDataLine.trim();
 //        Logger.logMsg( "got metadata line:  " + trimmed );
@@ -2030,7 +2030,7 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
 
     }
 
-    private String collectNumericString( @SuppressWarnings("SameParameterValue") @NotNull final String starter )
+    private String collectNumericString( @SuppressWarnings("SameParameterValue") final @NotNull String starter )
             throws IOException {
 
         StringBuilder buf = new StringBuilder( starter );

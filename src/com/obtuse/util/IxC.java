@@ -24,7 +24,7 @@ public class IxC<U extends Comparable<U>> extends Ix<U> implements Comparable<Ix
     }
 
     @Override
-    public int compareTo( @NotNull final com.obtuse.util.IxC<U> o ) {
+    public int compareTo( final @NotNull com.obtuse.util.IxC<U> o ) {
 
         return item.compareTo( o.item );
 

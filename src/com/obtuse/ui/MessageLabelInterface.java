@@ -8,11 +8,14 @@ package com.obtuse.ui;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.awt.*;
+import java.util.Optional;
+
 /**
  Created by danny on 2018/01/05.
  */
 
-public interface MessageLabelInterface {
+public interface MessageLabelInterface extends ImmutableMessageLabelInterface {
 
     void clear();
 
@@ -22,19 +25,22 @@ public interface MessageLabelInterface {
 
     void setExtraInfo( @Nullable final String extraInfo );
 
-    default void setMessage( @NotNull final Exception e ) {
+    void setMessage( final @NotNull Exception e );
 
-        if ( e instanceof MessageLabel.AugmentedIllegalArgumentException ) {
+//    {
+//
+//        if ( e instanceof ObtuseMessageLabel.AugmentedIllegalArgumentException ) {
+//
+//            ObtuseMessageLabel.AugmentedIllegalArgumentException ae = (ObtuseMessageLabel.AugmentedIllegalArgumentException)e;
+//
+//            setMessage( ae.getMessage(), ae.getExtraInfo() );
+//
+//        } else {
+//
+//            setMessage( e.getMessage() );
+//
+//        }
+//
+//    }
 
-            MessageLabel.AugmentedIllegalArgumentException ae = (MessageLabel.AugmentedIllegalArgumentException)e;
-
-            setMessage( ae.getMessage(), ae.getExtraInfo() );
-
-        } else {
-
-            setMessage( e.getMessage() );
-
-        }
-
-    }
 }

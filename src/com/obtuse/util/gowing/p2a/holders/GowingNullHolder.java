@@ -15,7 +15,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class GowingNullHolder extends GowingAbstractPackableHolder {
 
-    public GowingNullHolder( @NotNull final EntityName name ) {
+    public GowingNullHolder( final @NotNull EntityName name ) {
 
         super( name, GowingConstants.NULL_VALUE, null, false );
 

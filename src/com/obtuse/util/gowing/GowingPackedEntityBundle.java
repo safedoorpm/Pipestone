@@ -36,10 +36,10 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName, GowingPackable
     private final int _typeId;
 
     public GowingPackedEntityBundle(
-            @NotNull final EntityTypeName typeName,
+            final @NotNull EntityTypeName typeName,
             final int version,
-            @NotNull final GowingPackedEntityBundle superBundle,
-            @NotNull final GowingPackerContext packerContext
+            final @NotNull GowingPackedEntityBundle superBundle,
+            final @NotNull GowingPackerContext packerContext
     ) {
 
         super();
@@ -58,9 +58,9 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName, GowingPackable
     }
 
     public GowingPackedEntityBundle(
-            @NotNull final EntityTypeName typeName,
+            final @NotNull EntityTypeName typeName,
             final int version,
-            @NotNull final GowingPackerContext packerContext
+            final @NotNull GowingPackerContext packerContext
     ) {
 
         super();
@@ -79,11 +79,11 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName, GowingPackable
     }
 
     public GowingPackedEntityBundle(
-            @NotNull final EntityTypeName typeName,
+            final @NotNull EntityTypeName typeName,
             final int typeId,
-            @NotNull final GowingPackedEntityBundle superBundle,
+            final @NotNull GowingPackedEntityBundle superBundle,
             final int version,
-            @NotNull final GowingUnPackerContext unPackerContext
+            final @NotNull GowingUnPackerContext unPackerContext
     ) {
         super();
 
@@ -190,7 +190,7 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName, GowingPackable
 
     }
 
-    public GowingPackedEntityBundle addHolder( @NotNull final GowingPackableThingHolder holder ) {
+    public GowingPackedEntityBundle addHolder( final @NotNull GowingPackableThingHolder holder ) {
 
         if ( containsKey( holder.getName() ) ) {
 
@@ -205,7 +205,7 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName, GowingPackable
     }
 
     @Nullable
-    public GowingPackableThingHolder removeHolderByName( @NotNull final EntityName holderName ) {
+    public GowingPackableThingHolder removeHolderByName( final @NotNull EntityName holderName ) {
 
         return remove( holderName );
 
@@ -220,7 +220,7 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName, GowingPackable
      */
 
     @Nullable
-    public GowingEntityReference getOptionalEntityReference( @NotNull final EntityName name ) {
+    public GowingEntityReference getOptionalEntityReference( final @NotNull EntityName name ) {
 
         GowingPackableThingHolder ref = getNullableField( name );
         if ( ref == null ) {
@@ -246,7 +246,7 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName, GowingPackable
      */
 
     @NotNull
-    public GowingEntityReference getMandatoryEntityReference( @NotNull final EntityName name ) {
+    public GowingEntityReference getMandatoryEntityReference( final @NotNull EntityName name ) {
 
         GowingPackableThingHolder ref = getNotNullField( name );
 

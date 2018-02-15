@@ -192,7 +192,7 @@ public class SortedPanel<K extends Comparable<K>,E extends SortableEntity> exten
 
     }
 
-    private static void testSetModel( final String label, @NotNull final SortedPanel sp, @Nullable final SortedPanelModel model ) {
+    private static void testSetModel( final String label, final @NotNull SortedPanel sp, @Nullable final SortedPanelModel model ) {
 
         SortedPanelModel oldModel = sp.getModel();
 
@@ -206,7 +206,7 @@ public class SortedPanel<K extends Comparable<K>,E extends SortableEntity> exten
 
     }
 
-    private static void testAdoptSortedPanel( final String label, @NotNull final SortedPanelModel model, @Nullable final SortedPanel sp ) {
+    private static void testAdoptSortedPanel( final String label, final @NotNull SortedPanelModel model, @Nullable final SortedPanel sp ) {
 
         SortedPanel oldSp = model.getOwner();
 
@@ -372,7 +372,7 @@ public class SortedPanel<K extends Comparable<K>,E extends SortableEntity> exten
 
     }
 
-    public <K extends Comparable<K>> void verifyConsistency( @NotNull final TreeSorter<K, ?> treeSorter ) {
+    public <K extends Comparable<K>> void verifyConsistency( final @NotNull TreeSorter<K, ?> treeSorter ) {
 
         if ( treeSorter.size() == getComponentCount() ) {
 

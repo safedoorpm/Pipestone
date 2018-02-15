@@ -48,7 +48,7 @@ public class StdGowingUnPacker implements GowingUnPacker {
      @throws IOException if something bad happens in I/O-land.
      */
 
-    public StdGowingUnPacker( final GowingTypeIndex typeIndex, @NotNull final File inputFile )
+    public StdGowingUnPacker( final GowingTypeIndex typeIndex, final @NotNull File inputFile )
             throws IOException {
 
         this( inputFile, new LineNumberReader( new FileReader( inputFile ) ), new StdGowingUnPackerContext( typeIndex ) );
@@ -73,9 +73,9 @@ public class StdGowingUnPacker implements GowingUnPacker {
 
     @SuppressWarnings("unused")
     public StdGowingUnPacker(
-            @NotNull final GowingTypeIndex typeIndex,
-            @NotNull final File inputFile,
-            @NotNull final Reader reader
+            final @NotNull GowingTypeIndex typeIndex,
+            final @NotNull File inputFile,
+            final @NotNull Reader reader
     )
             throws IOException {
 
@@ -103,8 +103,8 @@ public class StdGowingUnPacker implements GowingUnPacker {
     @SuppressWarnings({ "WeakerAccess", "RedundantThrows" })
     public StdGowingUnPacker(
             @Nullable final File inputFile,
-            @NotNull final LineNumberReader reader,
-            @NotNull final GowingUnPackerContext unPackerContext
+            final @NotNull LineNumberReader reader,
+            final @NotNull GowingUnPackerContext unPackerContext
     )
             throws IOException {
 
@@ -155,7 +155,7 @@ public class StdGowingUnPacker implements GowingUnPacker {
 
     }
 
-    private void checkClosed( @NotNull final String who ) {
+    private void checkClosed( final @NotNull String who ) {
 
         if ( isClosed() ) {
 
@@ -362,9 +362,9 @@ public class StdGowingUnPacker implements GowingUnPacker {
 
     @NotNull
     private GowingPackable constructEntity(
-            @NotNull final GowingEntityReference er,
-            @NotNull final StdGowingTokenizer.GowingToken2 token,
-            @NotNull final GowingPackedEntityBundle bundle
+            final @NotNull GowingEntityReference er,
+            final @NotNull StdGowingTokenizer.GowingToken2 token,
+            final @NotNull GowingPackedEntityBundle bundle
     )
             throws GowingUnpackingException {
 
@@ -470,7 +470,7 @@ public class StdGowingUnPacker implements GowingUnPacker {
     }
 
     @Override
-    public void registerMetaDataHandler( @NotNull final GowingMetaDataHandler handler ) {
+    public void registerMetaDataHandler( final @NotNull GowingMetaDataHandler handler ) {
 
         checkClosed( "registerMetaDataHandler( " + handler + " )" );
 
@@ -513,7 +513,7 @@ public class StdGowingUnPacker implements GowingUnPacker {
 
     }
 
-    public boolean areEntitiesAllFinished( @NotNull final Collection<GowingEntityReference> entityReferences ) {
+    public boolean areEntitiesAllFinished( final @NotNull Collection<GowingEntityReference> entityReferences ) {
 
         for ( GowingEntityReference er : entityReferences ) {
 

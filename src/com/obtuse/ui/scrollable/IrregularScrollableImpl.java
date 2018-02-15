@@ -35,7 +35,7 @@ public class IrregularScrollableImpl implements Scrollable {
 
     private final boolean _containerIsVertical;
 
-    public IrregularScrollableImpl( @NotNull final Container container, final boolean containerIsVertical ) {
+    public IrregularScrollableImpl( final @NotNull Container container, final boolean containerIsVertical ) {
 
         super();
 

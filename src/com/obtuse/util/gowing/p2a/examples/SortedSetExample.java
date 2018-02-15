@@ -109,9 +109,9 @@ public class SortedSetExample extends GowingAbstractPackableEntity implements Go
         @Override
         @NotNull
         public GowingPackable createEntity(
-                @NotNull final GowingUnPacker unPacker,
-                @NotNull final GowingPackedEntityBundle bundle,
-                @NotNull final GowingEntityReference er
+                final @NotNull GowingUnPacker unPacker,
+                final @NotNull GowingPackedEntityBundle bundle,
+                final @NotNull GowingEntityReference er
         ) {
 
             return new SortedSetExample( unPacker, bundle );
@@ -120,7 +120,7 @@ public class SortedSetExample extends GowingAbstractPackableEntity implements Go
 
     };
 
-    public SortedSetExample( @NotNull final String name, @Nullable final String description, final @NotNull String@NotNull[] contents ) {
+    public SortedSetExample( final @NotNull String name, @Nullable final String description, final @NotNull String@NotNull[] contents ) {
         super( new GowingNameMarkerThing() );
 
         _name = name;
@@ -234,7 +234,7 @@ public class SortedSetExample extends GowingAbstractPackableEntity implements Go
 
     @NotNull
     @Override
-    public GowingPackedEntityBundle bundleThyself( final boolean isPackingSuper, @NotNull final GowingPacker packer ) {
+    public GowingPackedEntityBundle bundleThyself( final boolean isPackingSuper, final @NotNull GowingPacker packer ) {
 
         GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
                 ENTITY_TYPE_NAME,
@@ -366,7 +366,7 @@ public class SortedSetExample extends GowingAbstractPackableEntity implements Go
     }
 
     @Override
-    public boolean finishUnpacking( @NotNull final GowingUnPacker unPacker ) {
+    public boolean finishUnpacking( final @NotNull GowingUnPacker unPacker ) {
 
         List<GowingEntityReference> entityReferences = new ArrayList<>();
         entityReferences.add( _dataCollectionReference );

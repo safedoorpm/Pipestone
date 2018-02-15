@@ -47,8 +47,8 @@ public class TeeOutputStream extends OutputStream {
      */
 
     public TeeOutputStream(
-            @NotNull final String sessionName,
-            @NotNull final OutputStream outputStream,
+            final @NotNull String sessionName,
+            final @NotNull OutputStream outputStream,
             final boolean buffered
     )
             throws IOException {
@@ -96,9 +96,9 @@ public class TeeOutputStream extends OutputStream {
      */
 
     public TeeOutputStream(
-            @NotNull final SocketAddress remoteSocketAddress,
-            @NotNull final SocketAddress localSocketAddress,
-            @NotNull final OutputStream socketOutputStream,
+            final @NotNull SocketAddress remoteSocketAddress,
+            final @NotNull SocketAddress localSocketAddress,
+            final @NotNull OutputStream socketOutputStream,
             final boolean buffered
     )
             throws IOException {
@@ -146,7 +146,7 @@ public class TeeOutputStream extends OutputStream {
      */
 
     @NotNull
-    public static String constructTag( @NotNull final SocketAddress sa ) {
+    public static String constructTag( final @NotNull SocketAddress sa ) {
 
         if ( sa instanceof InetSocketAddress ) {
 
@@ -163,8 +163,8 @@ public class TeeOutputStream extends OutputStream {
 
 //    @NotNull
 //    public static File constructLogFile(
-//            @NotNull final SocketAddress remoteSocketAddress,
-//            @NotNull final SocketAddress localSocketAddress
+//            final @NotNull SocketAddress remoteSocketAddress,
+//            final @NotNull SocketAddress localSocketAddress
 //    ) throws IOException {
 //
 //        return constructLogFile( remoteSocketAddress, localSocketAddress, null );
@@ -173,8 +173,8 @@ public class TeeOutputStream extends OutputStream {
 
 //    @NotNull
 //    public static File constructLogFile(
-//            @NotNull final SocketAddress remoteSocketAddress,
-//            @NotNull final SocketAddress localSocketAddress,
+//            final @NotNull SocketAddress remoteSocketAddress,
+//            final @NotNull SocketAddress localSocketAddress,
 //            @Nullable final Consumer<String> rememberSessionName
 //    )
 //            throws IOException {
@@ -199,7 +199,7 @@ public class TeeOutputStream extends OutputStream {
      */
 
     @NotNull
-    public static File constructLogFile( @Nullable final File dir, @NotNull final String sessionName ) throws IOException {
+    public static File constructLogFile( @Nullable final File dir, final @NotNull String sessionName ) throws IOException {
 
         long now = System.currentTimeMillis();
         while ( true ) {
@@ -226,7 +226,7 @@ public class TeeOutputStream extends OutputStream {
      */
 
     @NotNull
-    public static File constructLogFile( @NotNull final String sessionName ) throws IOException {
+    public static File constructLogFile( final @NotNull String sessionName ) throws IOException {
 
         return constructLogFile( null, sessionName );
 
@@ -315,7 +315,7 @@ public class TeeOutputStream extends OutputStream {
      @see        java.io.OutputStream#write(byte[])
      */
     @Override
-    public void write( @NotNull final byte@NotNull[] b ) throws IOException {
+    public void write( final @NotNull byte@NotNull[] b ) throws IOException {
 
         _outputStream.write( b );
         try {
@@ -343,7 +343,7 @@ public class TeeOutputStream extends OutputStream {
      @see        java.io.OutputStream#write(byte[],int,int)
      */
     @Override
-    public void write( @NotNull final byte@NotNull[] b, final int off, final int len ) throws IOException {
+    public void write( final @NotNull byte@NotNull[] b, final int off, final int len ) throws IOException {
 
         _outputStream.write( b, off, len );
 

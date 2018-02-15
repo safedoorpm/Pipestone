@@ -41,7 +41,7 @@ public abstract class GowingEntityFactory implements Comparable<GowingEntityFact
      */
 
     @SuppressWarnings("WeakerAccess")
-    protected GowingEntityFactory( @NotNull final EntityTypeName entityTypeName ) {
+    protected GowingEntityFactory( final @NotNull EntityTypeName entityTypeName ) {
 
         super();
 
@@ -73,7 +73,7 @@ public abstract class GowingEntityFactory implements Comparable<GowingEntityFact
 
     }
 
-    public final int compareTo( @NotNull final GowingEntityFactory rhs ) {
+    public final int compareTo( final @NotNull GowingEntityFactory rhs ) {
 
         return _entityTypeName.compareTo( rhs._entityTypeName );
 

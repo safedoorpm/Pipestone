@@ -40,38 +40,38 @@ public class LinearLayoutUtil {
 
     }
 
-    public static boolean isContainerOnWatchlist( @NotNull final Container c ) {
+    public static boolean isContainerOnWatchlist( final @NotNull Container c ) {
 
         return s_containerWatchlist.isEntityOnWatchList( c );
 
     }
 
-    public static int addContainerToWatchList( @NotNull final Container c ) {
+    public static int addContainerToWatchList( final @NotNull Container c ) {
 
         return s_containerWatchlist.addEntityToWatchList( c );
 
     }
 
-    public static int removeContainerFromWatchList( @NotNull final Container c ) {
+    public static int removeContainerFromWatchList( final @NotNull Container c ) {
 
         return s_containerWatchlist.removeEntityFromWatchList( c );
 
     }
 
-    public static boolean isComponentOnWatchlist( @NotNull final Component c ) {
+    public static boolean isComponentOnWatchlist( final @NotNull Component c ) {
 
         return s_componentWatchlist.isEntityOnWatchList( c );
 
     }
 
     @SuppressWarnings("UnusedReturnValue")
-    public static int addComponentToWatchList( @NotNull final Component c ) {
+    public static int addComponentToWatchList( final @NotNull Component c ) {
 
         return s_componentWatchlist.addEntityToWatchList( c );
 
     }
 
-    public static int removeComponentFromWatchList( @NotNull final Component c ) {
+    public static int removeComponentFromWatchList( final @NotNull Component c ) {
 
         return s_componentWatchlist.removeEntityFromWatchList( c );
 
@@ -184,7 +184,7 @@ public class LinearLayoutUtil {
 
     @NotNull
     public static LinearContainer createPanel3(
-            @NotNull final String name,
+            final @NotNull String name,
             final LinearOrientation orientation,
             @SuppressWarnings("SameParameterValue") final ContainerConstraints containerConstraints,
             @SuppressWarnings("SameParameterValue") final ComponentConstraints componentConstraints
@@ -235,7 +235,7 @@ public class LinearLayoutUtil {
 
     @NotNull
     public static JComponent makeThing(
-            @NotNull final String label,
+            final @NotNull String label,
             @Nullable final Dimension minSize,
             @Nullable final Dimension prefSize,
             @Nullable final Dimension maxSize
@@ -557,7 +557,7 @@ public class LinearLayoutUtil {
 
     }
 
-    public static String describeContainer( @NotNull final Container target ) {
+    public static String describeContainer( final @NotNull Container target ) {
 
         StringBuilder sb = new StringBuilder( ObtuseUtil.enquoteToJavaString( target.getName() ) ).append( "(" );
         String comma = " ";
@@ -577,7 +577,7 @@ public class LinearLayoutUtil {
 
     }
 
-    public static String describeComponent( @NotNull final Component c ) {
+    public static String describeComponent( final @NotNull Component c ) {
 
         StringBuilder sb = new StringBuilder();
         if ( c instanceof LinearContainer ) {
@@ -1029,7 +1029,7 @@ public class LinearLayoutUtil {
 
         private final float _weight;
 
-        public WeightedSimpleFiller( @NotNull final String name, final float weight ) {
+        public WeightedSimpleFiller( final @NotNull String name, final float weight ) {
 
             super();
 
@@ -1140,7 +1140,7 @@ public class LinearLayoutUtil {
 
     public static class SimpleFiller extends JPanel /*implements LinearMagic*/ {
 
-        public SimpleFiller( @NotNull final String name ) {
+        public SimpleFiller( final @NotNull String name ) {
 
             super();
 

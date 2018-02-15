@@ -53,9 +53,9 @@ public class RelativePath extends GowingAbstractPackableEntity implements Iterab
         @Override
         @NotNull
         public GowingPackable createEntity(
-                @NotNull final GowingUnPacker unPacker,
-                @NotNull final GowingPackedEntityBundle bundle,
-                @NotNull final GowingEntityReference er
+                final @NotNull GowingUnPacker unPacker,
+                final @NotNull GowingPackedEntityBundle bundle,
+                final @NotNull GowingEntityReference er
         ) {
 
             return new RelativePath( unPacker, bundle );
@@ -82,7 +82,7 @@ public class RelativePath extends GowingAbstractPackableEntity implements Iterab
      the {@code segments} array contains any occurrences of the {@link SegmentName#ROOT_SEGMENT} segment.
      */
 
-    public RelativePath( @NotNull final SegmentName@NotNull[] segments ) {
+    public RelativePath( final @NotNull SegmentName@NotNull[] segments ) {
         super( new GowingNameMarkerThing() );
 
         _compareValue = finishConstructor( this instanceof AbsolutePath, segments );
@@ -168,7 +168,7 @@ public class RelativePath extends GowingAbstractPackableEntity implements Iterab
 
     }
 
-    protected RelativePath( @NotNull final GowingUnPacker unPacker, @NotNull final GowingPackedEntityBundle bundle ) {
+    protected RelativePath( final @NotNull GowingUnPacker unPacker, final @NotNull GowingPackedEntityBundle bundle ) {
         super( unPacker, bundle.getSuperBundle() );
 
         _segmentsEntityReference = bundle.getMandatoryEntityReference( SEGMENTS );
@@ -190,7 +190,7 @@ public class RelativePath extends GowingAbstractPackableEntity implements Iterab
      or (except when this constructor is invoked by the {@link AbsolutePath} class)
      the {@code segments} collection contains any occurrences of the {@link SegmentName#ROOT_SEGMENT} segment.
      */
-    public RelativePath( @NotNull final Collection<SegmentName> segments ) {
+    public RelativePath( final @NotNull Collection<SegmentName> segments ) {
         this( segments.toArray( new SegmentName[segments.size()] ) );
 
     }
@@ -207,7 +207,7 @@ public class RelativePath extends GowingAbstractPackableEntity implements Iterab
      {@code segmentName} is the {@link SegmentName#ROOT_SEGMENT} segment.
      */
 
-    public RelativePath( @NotNull final SegmentName segmentName ) {
+    public RelativePath( final @NotNull SegmentName segmentName ) {
         this( new SegmentName[] { segmentName } );
 
     }
@@ -224,7 +224,7 @@ public class RelativePath extends GowingAbstractPackableEntity implements Iterab
      {@code segmentName} is the {@link SegmentName#ROOT_SEGMENT} segment.
      */
 
-    public RelativePath( @NotNull final String segmentName ) {
+    public RelativePath( final @NotNull String segmentName ) {
         this( new SegmentName[] { new SegmentName( segmentName ) } );
 
     }
@@ -333,7 +333,7 @@ public class RelativePath extends GowingAbstractPackableEntity implements Iterab
      */
 
     @NotNull
-    public static RelativePath concat( @NotNull final RelativePath primary, @NotNull final SegmentName segmentName ) {
+    public static RelativePath concat( final @NotNull RelativePath primary, final @NotNull SegmentName segmentName ) {
 
         SegmentName[] prefix = new SegmentName[ primary.size() + 1 ];
         int ix = 0;
@@ -358,7 +358,7 @@ public class RelativePath extends GowingAbstractPackableEntity implements Iterab
      */
 
     @NotNull
-    public static RelativePath concat( @NotNull final RelativePath head, @NotNull final RelativePath tail ) {
+    public static RelativePath concat( final @NotNull RelativePath head, final @NotNull RelativePath tail ) {
 
         SegmentName[] prefix = new SegmentName[ head.size() + tail.size() ];
         int ix = 0;
@@ -401,7 +401,7 @@ public class RelativePath extends GowingAbstractPackableEntity implements Iterab
      @return an array of the concatenation of segments.
      */
 
-    public static SegmentName[] concat( @NotNull final Collection<SegmentName> head, @NotNull final Collection<SegmentName> tail ) {
+    public static SegmentName[] concat( final @NotNull Collection<SegmentName> head, final @NotNull Collection<SegmentName> tail ) {
 
         return concat( head.toArray( new SegmentName[head.size()]), tail.toArray( new SegmentName[tail.size()] ) );
 
@@ -414,7 +414,7 @@ public class RelativePath extends GowingAbstractPackableEntity implements Iterab
      @return an array of the concatenation of segments.
      */
 
-    public static SegmentName[] concat( @NotNull final Collection<SegmentName> head, @NotNull final SegmentName@NotNull[] tail ) {
+    public static SegmentName[] concat( final @NotNull Collection<SegmentName> head, final @NotNull SegmentName@NotNull[] tail ) {
 
         return concat( head.toArray( new SegmentName[head.size()]), tail );
 
@@ -427,7 +427,7 @@ public class RelativePath extends GowingAbstractPackableEntity implements Iterab
      @return an array of the concatenation of segments.
      */
 
-    public static SegmentName[] concat( @NotNull final SegmentName@NotNull[] head, @NotNull final Collection<SegmentName> tail ) {
+    public static SegmentName[] concat( final @NotNull SegmentName@NotNull[] head, final @NotNull Collection<SegmentName> tail ) {
 
         return concat( head, tail.toArray( new SegmentName[tail.size()] ) );
 
@@ -440,7 +440,7 @@ public class RelativePath extends GowingAbstractPackableEntity implements Iterab
      @return an array of the concatenation of segments.
      */
 
-    public static SegmentName[] concat( @NotNull final SegmentName@NotNull[] head, @NotNull final SegmentName@NotNull[] tail ) {
+    public static SegmentName[] concat( final @NotNull SegmentName@NotNull[] head, final @NotNull SegmentName@NotNull[] tail ) {
 
         SegmentName[] combined = new SegmentName[ head.length + tail.length ];
         int ix = 0;
@@ -469,7 +469,7 @@ public class RelativePath extends GowingAbstractPackableEntity implements Iterab
      rely on the current implementation of this method and on the current implementation of {@link #getCanonicalForm()} at your own risk).
      */
 
-    public int compareTo( @NotNull final RelativePath rhs ) {
+    public int compareTo( final @NotNull RelativePath rhs ) {
 
         return _compareValue.compareTo( rhs._compareValue );
 
@@ -499,7 +499,7 @@ public class RelativePath extends GowingAbstractPackableEntity implements Iterab
 
     }
 
-    private static void msgTime( @NotNull final String what, final String msg, final Throwable e ) {
+    private static void msgTime( final @NotNull String what, final String msg, final Throwable e ) {
 
         if ( what.startsWith( "!" ) ) {
 
@@ -529,13 +529,13 @@ public class RelativePath extends GowingAbstractPackableEntity implements Iterab
 
     }
 
-    private static void doit( @NotNull final String what, @NotNull final RelativePath rn ) {
+    private static void doit( final @NotNull String what, final @NotNull RelativePath rn ) {
 
         msgTime( what, "yielded \"" + rn + "\"", null );
 
     }
 
-    private static void doit( @NotNull final String what, @NotNull final RelativePath rn1, @NotNull final RelativePath rn2 ) {
+    private static void doit( final @NotNull String what, final @NotNull RelativePath rn1, final @NotNull RelativePath rn2 ) {
 
         try {
 
@@ -560,7 +560,7 @@ public class RelativePath extends GowingAbstractPackableEntity implements Iterab
 
     }
 
-    private static void doit( @NotNull final String what, @NotNull final Supplier<RelativePath> fn1 ) {
+    private static void doit( final @NotNull String what, final @NotNull Supplier<RelativePath> fn1 ) {
 
         RelativePath rn1 = null;
         boolean getDone = false;
@@ -589,7 +589,7 @@ public class RelativePath extends GowingAbstractPackableEntity implements Iterab
 
     }
 
-    private static void doit( @NotNull final String what, @NotNull final Supplier<RelativePath> fn1, @NotNull final Supplier<RelativePath> fn2 ) {
+    private static void doit( final @NotNull String what, final @NotNull Supplier<RelativePath> fn1, final @NotNull Supplier<RelativePath> fn2 ) {
 
         RelativePath rn1 = null;
         RelativePath rn2 = null;
@@ -689,7 +689,7 @@ public class RelativePath extends GowingAbstractPackableEntity implements Iterab
      @return {@code true} if any of the this path's segments contain the specified String; {@code false} otherwise.
      */
 
-    public boolean hasSegmentContainingString( @NotNull final String string ) {
+    public boolean hasSegmentContainingString( final @NotNull String string ) {
 
         for ( SegmentName sn : getNames() ) {
 
@@ -714,7 +714,7 @@ public class RelativePath extends GowingAbstractPackableEntity implements Iterab
      @return {@code true} if any of the this path's segments contain any of the specified string; {@code false} otherwise.
      */
 
-    public boolean hasSegmentContainingString( @NotNull final String@NotNull[] strings ) {
+    public boolean hasSegmentContainingString( final @NotNull String@NotNull[] strings ) {
 
         for ( SegmentName sn : getNames() ) {
 
@@ -744,7 +744,7 @@ public class RelativePath extends GowingAbstractPackableEntity implements Iterab
      @return {@code true} if any of the this path's segments contain any of the specified string; {@code false} otherwise.
      */
 
-    public boolean hasSegmentContainingString( @NotNull final Collection<String> strings ) {
+    public boolean hasSegmentContainingString( final @NotNull Collection<String> strings ) {
 
         for ( SegmentName sn : getNames() ) {
 
@@ -791,7 +791,7 @@ public class RelativePath extends GowingAbstractPackableEntity implements Iterab
      */
 
     @NotNull
-    public String getDelimitedPathString( @NotNull final String delimiter ) {
+    public String getDelimitedPathString( final @NotNull String delimiter ) {
 
         return getDelimitedPathString( delimiter, delimiter );
 
@@ -818,7 +818,7 @@ public class RelativePath extends GowingAbstractPackableEntity implements Iterab
      */
 
     @NotNull
-    public String getDelimitedPathString( @NotNull final String rootString, @NotNull final String separator ) {
+    public String getDelimitedPathString( final @NotNull String rootString, final @NotNull String separator ) {
 
         StringBuilder sb = new StringBuilder();
         boolean firstNonRootSegment = true;
@@ -845,7 +845,7 @@ public class RelativePath extends GowingAbstractPackableEntity implements Iterab
     @Override
     public GowingPackedEntityBundle bundleThyself(
             final boolean isPackingSuper,
-            @NotNull final GowingPacker packer
+            final @NotNull GowingPacker packer
     ) {
 
         GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
@@ -867,7 +867,7 @@ public class RelativePath extends GowingAbstractPackableEntity implements Iterab
     }
 
     @Override
-    public boolean finishUnpacking( @NotNull final GowingUnPacker unPacker ) {
+    public boolean finishUnpacking( final @NotNull GowingUnPacker unPacker ) {
 
         if ( !unPacker.isEntityFinished( _segmentsEntityReference ) ) {
 

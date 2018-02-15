@@ -43,9 +43,9 @@ public class AbsolutePath extends RelativePath {
         @Override
         @NotNull
         public GowingPackable createEntity(
-                @NotNull final GowingUnPacker unPacker,
-                @NotNull final GowingPackedEntityBundle bundle,
-                @NotNull final GowingEntityReference er
+                final @NotNull GowingUnPacker unPacker,
+                final @NotNull GowingPackedEntityBundle bundle,
+                final @NotNull GowingEntityReference er
         ) {
 
             return new AbsolutePath( unPacker, bundle );
@@ -56,21 +56,21 @@ public class AbsolutePath extends RelativePath {
 
     public static final AbsolutePath ABSOLUTE_ROOT_PATH = new AbsolutePath();
 
-    public AbsolutePath( @NotNull final SegmentName@NotNull[] segments ) {
+    public AbsolutePath( final @NotNull SegmentName@NotNull[] segments ) {
         super( segments );
     }
 
-    public AbsolutePath( @NotNull final Collection<SegmentName> segments ) {
+    public AbsolutePath( final @NotNull Collection<SegmentName> segments ) {
         super( segments.toArray( new SegmentName[segments.size()] ) );
 
     }
 
-    public AbsolutePath( @NotNull final SegmentName segmentName ) {
+    public AbsolutePath( final @NotNull SegmentName segmentName ) {
         super( new SegmentName[] { segmentName } );
 
     }
 
-    public AbsolutePath( @NotNull final String segmentName ) {
+    public AbsolutePath( final @NotNull String segmentName ) {
         super( new SegmentName[] { new SegmentName( segmentName ) } );
 
     }
@@ -80,7 +80,7 @@ public class AbsolutePath extends RelativePath {
 
     }
 
-    private AbsolutePath( @NotNull final GowingUnPacker unPacker, @NotNull final GowingPackedEntityBundle bundle ) {
+    private AbsolutePath( final @NotNull GowingUnPacker unPacker, final @NotNull GowingPackedEntityBundle bundle ) {
         super( unPacker, bundle.getSuperBundle() );
 
     }
@@ -88,7 +88,7 @@ public class AbsolutePath extends RelativePath {
     @NotNull
     @Override
     public GowingPackedEntityBundle bundleThyself(
-            final boolean isPackingSuper, @NotNull final GowingPacker packer
+            final boolean isPackingSuper, final @NotNull GowingPacker packer
     ) {
 
         @SuppressWarnings("UnnecessaryLocalVariable") GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
@@ -102,7 +102,7 @@ public class AbsolutePath extends RelativePath {
 
     }
 
-    public boolean finishUnpacking( @NotNull final GowingUnPacker unPacker ) {
+    public boolean finishUnpacking( final @NotNull GowingUnPacker unPacker ) {
 
         if ( super.finishUnpacking( unPacker ) ) {
 
@@ -120,13 +120,13 @@ public class AbsolutePath extends RelativePath {
 
     }
 
-    public static AbsolutePath concat( @NotNull final AbsolutePath head, @NotNull final SegmentName tail ) {
+    public static AbsolutePath concat( final @NotNull AbsolutePath head, final @NotNull SegmentName tail ) {
 
         return concat( head, new RelativePath( tail ) );
 
     }
 
-    public static AbsolutePath concat( @NotNull final AbsolutePath head, @NotNull final RelativePath tail ) {
+    public static AbsolutePath concat( final @NotNull AbsolutePath head, final @NotNull RelativePath tail ) {
 
         RelativePath rval = concat( (RelativePath)head, tail );
 

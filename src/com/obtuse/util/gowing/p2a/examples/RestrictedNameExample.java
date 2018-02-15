@@ -74,9 +74,9 @@ public class RestrictedNameExample extends ObtuseKeyword {
         @Override
         @NotNull
         public GowingPackable createEntity(
-                @NotNull final GowingUnPacker unPacker,
-                @NotNull final GowingPackedEntityBundle bundle,
-                @NotNull final GowingEntityReference er
+                final @NotNull GowingUnPacker unPacker,
+                final @NotNull GowingPackedEntityBundle bundle,
+                final @NotNull GowingEntityReference er
         ) {
 
             // Get the intended name.
@@ -150,7 +150,7 @@ public class RestrictedNameExample extends ObtuseKeyword {
     @Override
     public @NotNull GowingPackedEntityBundle bundleThyself(
             final boolean isPackingSuper,
-            @NotNull final GowingPacker packer
+            final @NotNull GowingPacker packer
     ) {
 
         GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
@@ -172,7 +172,7 @@ public class RestrictedNameExample extends ObtuseKeyword {
      */
 
     @Override
-    public boolean finishUnpacking( @NotNull final GowingUnPacker unPacker ) {
+    public boolean finishUnpacking( final @NotNull GowingUnPacker unPacker ) {
 
         return true;
 
@@ -198,7 +198,7 @@ public class RestrictedNameExample extends ObtuseKeyword {
      {@link Optional#empty()} if no such instance exists.
      */
 
-    public static Optional<RestrictedNameExample> findByName( @NotNull final String name ) {
+    public static Optional<RestrictedNameExample> findByName( final @NotNull String name ) {
 
         synchronized ( s_knownDataInstanceNames ) {
 
@@ -216,7 +216,7 @@ public class RestrictedNameExample extends ObtuseKeyword {
      @return the instance with the specified name.
      */
 
-    public static RestrictedNameExample getInstanceByName( @NotNull final String name ) {
+    public static RestrictedNameExample getInstanceByName( final @NotNull String name ) {
 
         synchronized ( s_knownDataInstanceNames ) {
 
@@ -246,7 +246,7 @@ public class RestrictedNameExample extends ObtuseKeyword {
      that our parent class uses.
      */
 
-    public final int compareTo( @NotNull final RestrictedNameExample rhs ) {
+    public final int compareTo( final @NotNull RestrictedNameExample rhs ) {
 
         return super.compareTo( rhs );
 

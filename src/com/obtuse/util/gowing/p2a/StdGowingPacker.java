@@ -113,7 +113,7 @@ public class StdGowingPacker implements GowingPacker {
     private boolean _verbose = false;
 
     @SuppressWarnings("unused")
-    public StdGowingPacker( @NotNull final EntityName groupName, @NotNull final File outputFile, final boolean verbose )
+    public StdGowingPacker( final @NotNull EntityName groupName, final @NotNull File outputFile, final boolean verbose )
             throws FileNotFoundException {
 
         this( groupName, outputFile, new PrintWriter( outputFile ), new StdGowingPackerContext(), verbose );
@@ -122,9 +122,9 @@ public class StdGowingPacker implements GowingPacker {
 
     @SuppressWarnings({ "RedundantThrows", "unused" })
     public StdGowingPacker(
-            @NotNull final EntityName groupName,
-            @NotNull final File outputFile,
-            @NotNull final OutputStream outputStream,
+            final @NotNull EntityName groupName,
+            final @NotNull File outputFile,
+            final @NotNull OutputStream outputStream,
             final boolean verbose
     ) throws FileNotFoundException {
 
@@ -132,7 +132,7 @@ public class StdGowingPacker implements GowingPacker {
 
     }
 
-    public StdGowingPacker( @NotNull final EntityName groupName, @NotNull final File outputFile )
+    public StdGowingPacker( final @NotNull EntityName groupName, final @NotNull File outputFile )
             throws FileNotFoundException {
 
         this( groupName, outputFile, new PrintWriter( outputFile ), new StdGowingPackerContext(), false );
@@ -141,9 +141,9 @@ public class StdGowingPacker implements GowingPacker {
 
     @SuppressWarnings("RedundantThrows")
     public StdGowingPacker(
-            @NotNull final EntityName groupName,
-            @NotNull final File outputFile,
-            @NotNull final OutputStream outputStream
+            final @NotNull EntityName groupName,
+            final @NotNull File outputFile,
+            final @NotNull OutputStream outputStream
     ) throws FileNotFoundException {
 
         this( groupName, outputFile, new PrintWriter( outputStream, true ), new StdGowingPackerContext(), false );
@@ -151,10 +151,10 @@ public class StdGowingPacker implements GowingPacker {
     }
 
     private StdGowingPacker(
-            @NotNull final EntityName groupName,
-            @NotNull final File outputFile,
-            @NotNull final PrintWriter writer,
-            @NotNull final GowingPackerContext packingContext,
+            final @NotNull EntityName groupName,
+            final @NotNull File outputFile,
+            final @NotNull PrintWriter writer,
+            final @NotNull GowingPackerContext packingContext,
             final boolean verbose
     ) {
         super();
@@ -304,7 +304,7 @@ public class StdGowingPacker implements GowingPacker {
 
     }
 
-    private void actuallyPackEntity( @NotNull final GowingInstanceId instanceId ) {
+    private void actuallyPackEntity( final @NotNull GowingInstanceId instanceId ) {
 
         if ( _verbose ) Logger.logMsg( "@@@ actually packing " + instanceId );
         EntityNames entityNames = _packingContext.getEntityNames( instanceId );
@@ -350,7 +350,7 @@ public class StdGowingPacker implements GowingPacker {
 
     }
 
-    private void actuallyPackEntityBody( @NotNull final GowingPackedEntityBundle bundle ) {
+    private void actuallyPackEntityBody( final @NotNull GowingPackedEntityBundle bundle ) {
 
         _writer.print( "(" );
         String comma = " ";
@@ -391,14 +391,14 @@ public class StdGowingPacker implements GowingPacker {
     }
 
     @Override
-    public void emitName( @NotNull final EntityName name ) {
+    public void emitName( final @NotNull EntityName name ) {
 
         _writer.print( name.getName() );
 
     }
 
     @Override
-    public void emitUsersEntityName( @NotNull final EntityName name ) {
+    public void emitUsersEntityName( final @NotNull EntityName name ) {
 
         _writer.print( GowingConstants.TAG_ENTITY_NAME );
         _writer.print( name );
@@ -497,7 +497,7 @@ public class StdGowingPacker implements GowingPacker {
     }
 
     @Override
-    public void emit( @NotNull final double[] v ) {
+    public void emit( final @NotNull double[] v ) {
 
         _writer.print( GowingConstants.TAG_PRIMITIVE_ARRAY );
         _writer.print( v.length );
@@ -557,7 +557,7 @@ public class StdGowingPacker implements GowingPacker {
     }
 
     @Override
-    public void emit( @NotNull final float[] v ) {
+    public void emit( final @NotNull float[] v ) {
 
         _writer.print( GowingConstants.TAG_PRIMITIVE_ARRAY );
         _writer.print( v.length );
@@ -617,7 +617,7 @@ public class StdGowingPacker implements GowingPacker {
     }
 
     @Override
-    public void emit( @NotNull final long[] v ) {
+    public void emit( final @NotNull long[] v ) {
 
         _writer.print( GowingConstants.TAG_PRIMITIVE_ARRAY );
         _writer.print( v.length );
@@ -677,7 +677,7 @@ public class StdGowingPacker implements GowingPacker {
     }
 
     @Override
-    public void emit( @NotNull final int[] v ) {
+    public void emit( final @NotNull int[] v ) {
 
         _writer.print( GowingConstants.TAG_PRIMITIVE_ARRAY );
         _writer.print( v.length );
@@ -737,7 +737,7 @@ public class StdGowingPacker implements GowingPacker {
     }
 
     @Override
-    public void emit( @NotNull final short[] v ) {
+    public void emit( final @NotNull short[] v ) {
 
         _writer.print( GowingConstants.TAG_PRIMITIVE_ARRAY );
         _writer.print( v.length );
@@ -799,7 +799,7 @@ public class StdGowingPacker implements GowingPacker {
     private static final char[] HEX_CHARS = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' };
 
     @Override
-    public void emit( @NotNull final byte[] v ) {
+    public void emit( final @NotNull byte[] v ) {
 
         _writer.print( GowingConstants.TAG_PRIMITIVE_ARRAY );
         _writer.print( v.length );
@@ -928,7 +928,7 @@ public class StdGowingPacker implements GowingPacker {
 
     private static final Pattern s_validMetaDataKeywordPattern = Pattern.compile( "[A-Z_]+" );
 
-    private void checkOutboundMetaDataKeyword( @NotNull final String keyword, @Nullable final Object value ) {
+    private void checkOutboundMetaDataKeyword( final @NotNull String keyword, @Nullable final Object value ) {
 
         String errmsg = isValidMetaDataKeyword( keyword );
         if ( errmsg != null ) {
@@ -990,7 +990,7 @@ public class StdGowingPacker implements GowingPacker {
     }
 
     @Override
-    public void emitMetaData( @NotNull final String name, @NotNull final String value ) {
+    public void emitMetaData( final @NotNull String name, final @NotNull String value ) {
 
         checkOutboundMetaDataKeyword( name, value );
 
@@ -999,7 +999,7 @@ public class StdGowingPacker implements GowingPacker {
     }
 
     @Override
-    public void emitMetaData( @NotNull final String name, final long value ) {
+    public void emitMetaData( final @NotNull String name, final long value ) {
 
         checkOutboundMetaDataKeyword( name, value );
 
@@ -1008,7 +1008,7 @@ public class StdGowingPacker implements GowingPacker {
     }
 
     @Override
-    public void emitMetaData( @NotNull final String name, final boolean value ) {
+    public void emitMetaData( final @NotNull String name, final boolean value ) {
 
         checkOutboundMetaDataKeyword( name, value );
 
@@ -1017,7 +1017,7 @@ public class StdGowingPacker implements GowingPacker {
     }
 
     @Override
-    public void emitMetaData( @NotNull final String name, final double value ) {
+    public void emitMetaData( final @NotNull String name, final double value ) {
 
         checkOutboundMetaDataKeyword( name, value );
 

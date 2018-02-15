@@ -39,9 +39,9 @@ public class GowingPackableName implements GowingPackable, Comparable<GowingPack
         @NotNull
         @Override
         public GowingPackable createEntity(
-                @NotNull final GowingUnPacker unPacker,
-                @NotNull final GowingPackedEntityBundle bundle,
-                @NotNull final GowingEntityReference er
+                final @NotNull GowingUnPacker unPacker,
+                final @NotNull GowingPackedEntityBundle bundle,
+                final @NotNull GowingEntityReference er
         ) {
 
             return new GowingPackableName( unPacker, bundle );
@@ -54,7 +54,7 @@ public class GowingPackableName implements GowingPackable, Comparable<GowingPack
     private final GowingInstanceId _instanceId = new GowingInstanceId( getClass() );
     private String _name;
 
-    public GowingPackableName( @NotNull final String name ) {
+    public GowingPackableName( final @NotNull String name ) {
 
         super();
 
@@ -76,7 +76,7 @@ public class GowingPackableName implements GowingPackable, Comparable<GowingPack
     }
 
     @Override
-    public int compareTo( @NotNull final GowingPackableName rhs ) {
+    public int compareTo( final @NotNull GowingPackableName rhs ) {
 
         return getName().compareTo( rhs.getName() );
 
@@ -106,7 +106,7 @@ public class GowingPackableName implements GowingPackable, Comparable<GowingPack
 
     @NotNull
     @Override
-    public GowingPackedEntityBundle bundleThyself( final boolean isPackingSuper, @NotNull final GowingPacker packer ) {
+    public GowingPackedEntityBundle bundleThyself( final boolean isPackingSuper, final @NotNull GowingPacker packer ) {
 
         GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
                 ENTITY_TYPE_NAME,
@@ -121,7 +121,7 @@ public class GowingPackableName implements GowingPackable, Comparable<GowingPack
     }
 
     @Override
-    public boolean finishUnpacking( @NotNull final GowingUnPacker unPacker ) {
+    public boolean finishUnpacking( final @NotNull GowingUnPacker unPacker ) {
 
         return true;
 

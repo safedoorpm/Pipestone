@@ -33,7 +33,7 @@ public class AcceleratedPopupMenu2 extends JDialog {
     }
 
     @SuppressWarnings("unchecked")
-    public AcceleratedPopupMenu2( @NotNull final String@NotNull [] words ) {
+    public AcceleratedPopupMenu2( final @NotNull String@NotNull [] words ) {
         super();
 
         _words = words;

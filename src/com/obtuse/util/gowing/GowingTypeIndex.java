@@ -43,7 +43,7 @@ public class GowingTypeIndex {
      */
 
     @NotNull
-    public EntityTypeInfo addFactory( @NotNull final GowingEntityFactory newFactory ) {
+    public EntityTypeInfo addFactory( final @NotNull GowingEntityFactory newFactory ) {
 
 	Optional<EntityTypeInfo> maybeTypeInfo = findTypeInfo( newFactory.getEntityTypeName() );
 	//noinspection OptionalIsPresent
@@ -83,7 +83,7 @@ public class GowingTypeIndex {
      */
 
     @NotNull
-    public Optional<EntityTypeInfo> findTypeInfo( @NotNull final EntityTypeName typeName ) {
+    public Optional<EntityTypeInfo> findTypeInfo( final @NotNull EntityTypeName typeName ) {
 
 	return Optional.ofNullable( _typeNameToTypeInfoMapping.get( typeName ) );
 
@@ -95,7 +95,7 @@ public class GowingTypeIndex {
      @return <tt>true</tt> if we have type info for the specified type; <tt>false</tt> otherwise.
      */
 
-    public boolean hasTypeInfo( @NotNull final EntityTypeName typeName ) {
+    public boolean hasTypeInfo( final @NotNull EntityTypeName typeName ) {
 
         return _typeNameToTypeInfoMapping.containsKey( typeName );
 
@@ -109,7 +109,7 @@ public class GowingTypeIndex {
      */
 
     @NotNull
-    public EntityTypeInfo getTypeInfo( @NotNull final EntityTypeName typeName ) {
+    public EntityTypeInfo getTypeInfo( final @NotNull EntityTypeName typeName ) {
 
         Optional<EntityTypeInfo> maybeEntityFactory = findTypeInfo( typeName );
 	return maybeEntityFactory.orElseThrow( ()->new IllegalArgumentException( "no type info found for type named \"" + typeName + "\"" ) );

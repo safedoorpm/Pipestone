@@ -32,7 +32,7 @@ public class WatchList<T extends Component> implements NamedEntity {
 
     }
 
-    public synchronized int addEntityToWatchList( @NotNull final T c ) {
+    public synchronized int addEntityToWatchList( final @NotNull T c ) {
 
 	Logger.logMsg( "adding " + LinearLayoutUtil.fullName( c ) + " to watchlist" );
 
@@ -50,7 +50,7 @@ public class WatchList<T extends Component> implements NamedEntity {
 
     }
 
-    public synchronized int removeEntityFromWatchList( @NotNull final T c ) {
+    public synchronized int removeEntityFromWatchList( final @NotNull T c ) {
 
 	Integer count = _watchList.get( c );
 	if ( count == null ) {
@@ -80,7 +80,7 @@ public class WatchList<T extends Component> implements NamedEntity {
 
     }
 
-    public synchronized boolean isEntityOnWatchList( @NotNull final T c ) {
+    public synchronized boolean isEntityOnWatchList( final @NotNull T c ) {
 
 	return _watchList.containsKey( c );
 

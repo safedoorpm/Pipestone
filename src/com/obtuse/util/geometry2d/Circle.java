@@ -557,7 +557,7 @@ public class Circle {
 
     @SuppressWarnings("unused")
     @NotNull
-    public IntersectionInfo intersects( @NotNull final Circle other ) {
+    public IntersectionInfo intersects( final @NotNull Circle other ) {
 
         if ( exactlyAtOrigin() ) {
 
@@ -596,7 +596,7 @@ public class Circle {
      @throws java.lang.IllegalArgumentException if our circle is not <b>exactly</b> centered at the origin.
      */
 
-    public IntersectionInfo originCircleIntersects( @NotNull final Circle other ) {
+    public IntersectionInfo originCircleIntersects( final @NotNull Circle other ) {
 
         if ( !exactlyAtOrigin() ) {
 
@@ -663,7 +663,7 @@ public class Circle {
 
     }
 
-    private IntersectionInfo computeTwoIntersections( @NotNull final Circle other ) {
+    private IntersectionInfo computeTwoIntersections( final @NotNull Circle other ) {
 
         if ( !exactlyAtOrigin() ) {
 
@@ -706,7 +706,7 @@ public class Circle {
 
     }
 
-    private IntersectionInfo computeRotatedIntersections( @NotNull final Circle other ) {
+    private IntersectionInfo computeRotatedIntersections( final @NotNull Circle other ) {
 
         if ( !exactlyAtOrigin() ) {
 
@@ -1286,9 +1286,9 @@ public class Circle {
      */
 
     private static void doRotations(
-            @NotNull final Circle circle1,
-            @NotNull final Circle circle2,
-            @NotNull final MyPoint @Nullable[] correctIntersections
+            final @NotNull Circle circle1,
+            final @NotNull Circle circle2,
+            final @NotNull MyPoint @Nullable[] correctIntersections
     ) {
 
         double[] rotationsTheta = { 0, .3467834678, 0.5 * Math.PI, Math.PI, 1.5 * Math.PI, 2.0 * Math.PI, 17.777 * Math.PI };
@@ -1310,9 +1310,9 @@ public class Circle {
      */
 
     private static void doMoves(
-            @NotNull final Circle circle1,
-            @NotNull final Circle circle2,
-            @NotNull final MyPoint @Nullable[] correctIntersections
+            final @NotNull Circle circle1,
+            final @NotNull Circle circle2,
+            final @NotNull MyPoint @Nullable[] correctIntersections
     ) {
 
         double[] adjustments = { 0, Math.sqrt( 2 ), Math.sqrt( 3 ), Math.PI };
@@ -1356,7 +1356,7 @@ public class Circle {
      */
 
     private static @NotNull MyPoint @Nullable[] moveIntersections(
-            @NotNull final MyPoint @Nullable[] correctIntersections,
+            final @NotNull MyPoint @Nullable[] correctIntersections,
             final double adjX,
             final double adjY
     ) {
@@ -1390,7 +1390,7 @@ public class Circle {
 
     @SuppressWarnings("unused")
     private static @NotNull MyPoint @Nullable[] rotateIntersectionsDegrees(
-            @NotNull final MyPoint @Nullable[] correctIntersections,
+            final @NotNull MyPoint @Nullable[] correctIntersections,
             final double degrees
     ) {
 
@@ -1409,7 +1409,7 @@ public class Circle {
      */
 
     private static @NotNull MyPoint @Nullable[] rotateIntersectionsTheta(
-            @NotNull final MyPoint @Nullable[] correctIntersections,
+            final @NotNull MyPoint @Nullable[] correctIntersections,
             final double theta
     ) {
 
@@ -1440,9 +1440,9 @@ public class Circle {
      */
 
     private static void doOneSet(
-            @NotNull final Circle circle1,
-            @NotNull final Circle circle2,
-            @NotNull final MyPoint @Nullable[] correctIntersections
+            final @NotNull Circle circle1,
+            final @NotNull Circle circle2,
+            final @NotNull MyPoint @Nullable[] correctIntersections
     ) {
 
         validate( circle1, circle2, circle1.computeCircleCircleIntersection( circle2, true ), correctIntersections );
@@ -1451,10 +1451,10 @@ public class Circle {
 
     @SuppressWarnings("UnnecessaryReturnStatement")
     private static void validate(
-            @NotNull final Circle circle1,
-            @NotNull final Circle circle2,
-            @NotNull final IntersectionInfo info,
-            @NotNull final MyPoint @Nullable[] correctIntersections
+            final @NotNull Circle circle1,
+            final @NotNull Circle circle2,
+            final @NotNull IntersectionInfo info,
+            final @NotNull MyPoint @Nullable[] correctIntersections
     ) {
 
         if ( !info.infiniteIntersections() &&

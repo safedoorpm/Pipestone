@@ -24,7 +24,7 @@ public class Ix<T> implements IxInterface<T> {
     public interface IxFactory<U> {
 
 
-        IxInterface<U> createInstance( final int ix, @NotNull final U item );
+        IxInterface<U> createInstance( final int ix, final @NotNull U item );
 
     }
 
@@ -40,7 +40,7 @@ public class Ix<T> implements IxInterface<T> {
 
     public interface CxFactory<U> {
 
-        IxCInterface<U> createInstance( final int ix, @NotNull final U item );
+        IxCInterface<U> createInstance( final int ix, final @NotNull U item );
 
     }
 
@@ -99,7 +99,7 @@ public class Ix<T> implements IxInterface<T> {
      @return an {@code ArrayList<IxInterface<W>>} of the wrapped items from the original array in the same order that they appeared in the original array.
      */
 
-    public static <W> ArrayList<? extends IxInterface<W>> arrayList( @NotNull final W@NotNull[] items, @NotNull final IxFactory<W> factory ) {
+    public static <W> ArrayList<? extends IxInterface<W>> arrayList( final @NotNull W@NotNull[] items, final @NotNull IxFactory<W> factory ) {
 
         ArrayList<IxInterface<W>> rval = new ArrayList<>();
 
@@ -122,7 +122,7 @@ public class Ix<T> implements IxInterface<T> {
      @return an {@code ArrayList<Ix<W>>} of the wrapped items from the original array in the same order that they appeared in the original array.
      */
 
-    public static <W> ArrayList<Ix<W>> arrayList( @NotNull final W@NotNull[] items ) {
+    public static <W> ArrayList<Ix<W>> arrayList( final @NotNull W@NotNull[] items ) {
 
         ArrayList<Ix<W>> rval = new ArrayList<>();
 
@@ -146,7 +146,7 @@ public class Ix<T> implements IxInterface<T> {
      @return an {@code ArrayList<IxInterface<W>>} of the wrapped items from the original collection in the same order that they appeared in the original collection.
      */
 
-    public static <W> ArrayList<? extends IxInterface<W>> arrayList( @NotNull final Collection<W> items, @NotNull final IxFactory<W> factory ) {
+    public static <W> ArrayList<? extends IxInterface<W>> arrayList( final @NotNull Collection<W> items, final @NotNull IxFactory<W> factory ) {
 
         ArrayList<IxInterface<W>> rval = new ArrayList<>();
 
@@ -169,7 +169,7 @@ public class Ix<T> implements IxInterface<T> {
      @return an {@code ArrayList<Ix<W>>} of the wrapped items from the original collection in the same order that they appeared in the original collection.
      */
 
-    public static <W> ArrayList<Ix<W>> arrayList( @NotNull final Collection<W> items ) {
+    public static <W> ArrayList<Ix<W>> arrayList( final @NotNull Collection<W> items ) {
 
         ArrayList<Ix<W>> rval = new ArrayList<>();
 
@@ -193,7 +193,7 @@ public class Ix<T> implements IxInterface<T> {
      @return an {@code LinkedList<IxInterface<W>>} of the wrapped items from the original array in the same order that they appeared in the original array.
      */
 
-    public static <W> LinkedList<? extends IxInterface<W>> linkedList( @NotNull final W@NotNull[] items, @NotNull final IxFactory<W> factory ) {
+    public static <W> LinkedList<? extends IxInterface<W>> linkedList( final @NotNull W@NotNull[] items, final @NotNull IxFactory<W> factory ) {
 
         LinkedList<IxInterface<W>> rval = new LinkedList<>();
 
@@ -216,7 +216,7 @@ public class Ix<T> implements IxInterface<T> {
      @return an {@code LinkedList<Ix<W>>} of the wrapped items from the original array in the same order that they appeared in the original array.
      */
 
-    public static <W> LinkedList<Ix<W>> linkedList( @NotNull final W@NotNull[] items ) {
+    public static <W> LinkedList<Ix<W>> linkedList( final @NotNull W@NotNull[] items ) {
 
         LinkedList<Ix<W>> rval = new LinkedList<>();
 
@@ -240,7 +240,7 @@ public class Ix<T> implements IxInterface<T> {
      @return an {@code ArrayList<IxInterface<W>>} of the wrapped items from the original collection in the same order that they appeared in the original collection.
      */
 
-    public static <W> LinkedList<? extends IxInterface<W>> linkedList( @NotNull final Collection<W> items, @NotNull final IxFactory<W> factory ) {
+    public static <W> LinkedList<? extends IxInterface<W>> linkedList( final @NotNull Collection<W> items, final @NotNull IxFactory<W> factory ) {
 
         LinkedList<IxInterface<W>> rval = new LinkedList<>();
 
@@ -263,7 +263,7 @@ public class Ix<T> implements IxInterface<T> {
      @return an {@code ArrayList<Ix<W>>} of the wrapped items from the original collection in the same order that they appeared in the original collection.
      */
 
-    public static <W> LinkedList<Ix<W>> linkedList( @NotNull final Collection<W> items ) {
+    public static <W> LinkedList<Ix<W>> linkedList( final @NotNull Collection<W> items ) {
 
         LinkedList<Ix<W>> rval = new LinkedList<>();
 
@@ -321,7 +321,7 @@ public class Ix<T> implements IxInterface<T> {
      </p>
      */
 
-    public static <W extends Comparable<W>> TreeSet<? extends IxCInterface<W>> sortedSet( @NotNull final W@NotNull[] items, @NotNull final CxFactory<W> factory ) {
+    public static <W extends Comparable<W>> TreeSet<? extends IxCInterface<W>> sortedSet( final @NotNull W@NotNull[] items, final @NotNull CxFactory<W> factory ) {
 
         TreeSet<IxCInterface<W>> rval = new TreeSet<>();
 
@@ -346,7 +346,7 @@ public class Ix<T> implements IxInterface<T> {
      {@link Comparable#compareTo(Object)} method associated with the {@code W} class implements.
      */
 
-     public static <W extends Comparable<W>> TreeSet<IxC<W>> sortedSet( @NotNull final W@NotNull[] items ) {
+     public static <W extends Comparable<W>> TreeSet<IxC<W>> sortedSet( final @NotNull W@NotNull[] items ) {
 
         TreeSet<IxC<W>> rval = new TreeSet<>();
 
@@ -405,7 +405,7 @@ public class Ix<T> implements IxInterface<T> {
      </p>
      */
 
-    public static <W extends Comparable<W>> TreeSet<? extends IxCInterface<W>> sortedSet( @NotNull final Collection<W> items, @NotNull final CxFactory<W> factory ) {
+    public static <W extends Comparable<W>> TreeSet<? extends IxCInterface<W>> sortedSet( final @NotNull Collection<W> items, final @NotNull CxFactory<W> factory ) {
 
         TreeSet<IxCInterface<W>> rval = new TreeSet<>();
 
@@ -430,7 +430,7 @@ public class Ix<T> implements IxInterface<T> {
      {@link Comparable#compareTo(Object)} associated with the {@code W} class implements.
      */
 
-     public static <W extends Comparable<W>> TreeSet<IxC<W>> sortedSet( @NotNull final Collection<W> items ) {
+     public static <W extends Comparable<W>> TreeSet<IxC<W>> sortedSet( final @NotNull Collection<W> items ) {
 
         TreeSet<IxC<W>> rval = new TreeSet<>();
 
@@ -457,7 +457,7 @@ public class Ix<T> implements IxInterface<T> {
      @throws NullPointerException if any of the elements in the array are {@code null}.
      */
 
-    public static <W> HashSet<? extends IxInterface<W>> hashSet( @NotNull final W@NotNull[] items, @NotNull final IxFactory<W> factory ) {
+    public static <W> HashSet<? extends IxInterface<W>> hashSet( final @NotNull W@NotNull[] items, final @NotNull IxFactory<W> factory ) {
 
         HashSet<IxInterface<W>> rval = new HashSet<>();
 
@@ -483,7 +483,7 @@ public class Ix<T> implements IxInterface<T> {
      @throws NullPointerException if any of the elements in the array are {@code null}.
      */
 
-    public static <W> HashSet<Ix<W>> hashSet( @NotNull final W@NotNull[] items ) {
+    public static <W> HashSet<Ix<W>> hashSet( final @NotNull W@NotNull[] items ) {
 
         HashSet<Ix<W>> rval = new HashSet<>();
 
@@ -510,7 +510,7 @@ public class Ix<T> implements IxInterface<T> {
      @throws NullPointerException if any of the elements in the collection are {@code null}.
      */
 
-    public static <W> HashSet<? extends IxInterface<W>> hashSet( @NotNull final Collection<W> items, @NotNull final IxFactory<W> factory ) {
+    public static <W> HashSet<? extends IxInterface<W>> hashSet( final @NotNull Collection<W> items, final @NotNull IxFactory<W> factory ) {
 
         HashSet<IxInterface<W>> rval = new HashSet<>();
 
@@ -536,7 +536,7 @@ public class Ix<T> implements IxInterface<T> {
      @throws NullPointerException if any of the elements in the collection are {@code null}.
      */
 
-    public static <W> HashSet<Ix<W>> hashSet( @NotNull final Collection<W> items ) {
+    public static <W> HashSet<Ix<W>> hashSet( final @NotNull Collection<W> items ) {
 
         HashSet<Ix<W>> rval = new HashSet<>();
 
@@ -560,7 +560,7 @@ public class Ix<T> implements IxInterface<T> {
      @return an {@code Vector<IxInterface<W>>} of the wrapped items from the original array in the same order that they appeared in the original array.
      */
 
-    public static <W> Vector<? extends IxInterface<W>> vector( @NotNull final W@NotNull[] items, @NotNull final IxFactory<W> factory ) {
+    public static <W> Vector<? extends IxInterface<W>> vector( final @NotNull W@NotNull[] items, final @NotNull IxFactory<W> factory ) {
 
         Vector<IxInterface<W>> rval = new Vector<>();
 
@@ -583,7 +583,7 @@ public class Ix<T> implements IxInterface<T> {
      @return an {@code Vector<Ix<W>>} of the wrapped items from the original array in the same order that they appeared in the original array.
      */
 
-    public static <W> Vector<Ix<W>> vector( @NotNull final W@NotNull[] items ) {
+    public static <W> Vector<Ix<W>> vector( final @NotNull W@NotNull[] items ) {
 
         Vector<Ix<W>> rval = new Vector<>();
 
@@ -607,7 +607,7 @@ public class Ix<T> implements IxInterface<T> {
      @return an {@code Vector<IxInterface<W>>} of the wrapped items from the original array in the same order that they appeared in the original array.
      */
 
-    public static <W> Vector<? extends IxInterface<W>> vector( @NotNull final Collection<W> items, @NotNull final IxFactory<W> factory ) {
+    public static <W> Vector<? extends IxInterface<W>> vector( final @NotNull Collection<W> items, final @NotNull IxFactory<W> factory ) {
 
         Vector<IxInterface<W>> rval = new Vector<>();
 
@@ -630,7 +630,7 @@ public class Ix<T> implements IxInterface<T> {
      @return an {@code Vector<Ix<W>>} of the wrapped items from the original array in the same order that they appeared in the original array.
      */
 
-    public static <W> Vector<Ix<W>> vector( @NotNull final Collection<W> items ) {
+    public static <W> Vector<Ix<W>> vector( final @NotNull Collection<W> items ) {
 
         Vector<Ix<W>> rval = new Vector<>();
 

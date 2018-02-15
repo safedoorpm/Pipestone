@@ -45,7 +45,7 @@ public class NestedXMLPrinter implements Closeable {
 
     }
 
-    public void emitOpenTag( final String tagName, @NotNull final String@NotNull[] attributes ) {
+    public void emitOpenTag( final String tagName, final @NotNull String@NotNull[] attributes ) {
 
         emitTag( tagName, attributes, true );
 
@@ -118,7 +118,7 @@ public class NestedXMLPrinter implements Closeable {
 
     }
 
-    public void emitTag( @NotNull final String tagName ) {
+    public void emitTag( final @NotNull String tagName ) {
 
         emitTag( tagName, (String[])null );
 
@@ -143,7 +143,7 @@ public class NestedXMLPrinter implements Closeable {
 
     }
 
-    public void emitArray( @NotNull final String arrayName, final double@NotNull[] values, final int precision ) {
+    public void emitArray( final @NotNull String arrayName, final double@NotNull[] values, final int precision ) {
 
         emitOpenTag( arrayName );
         for ( double v : values ) {
@@ -155,7 +155,7 @@ public class NestedXMLPrinter implements Closeable {
 
     }
 
-    public void emitArray( @NotNull final String arrayName, final double@NotNull[] values ) {
+    public void emitArray( final @NotNull String arrayName, final double@NotNull[] values ) {
 
         emitOpenTag( arrayName );
         for ( double v : values ) {
@@ -167,7 +167,7 @@ public class NestedXMLPrinter implements Closeable {
 
     }
 
-    public void emitArray( @NotNull final String arrayName, final long@NotNull[] values ) {
+    public void emitArray( final @NotNull String arrayName, final long@NotNull[] values ) {
 
         emitOpenTag( arrayName );
         for ( long v : values ) {
@@ -179,7 +179,7 @@ public class NestedXMLPrinter implements Closeable {
 
     }
 
-    public void emitArray( @NotNull final String arrayName, final int@NotNull[] values ) {
+    public void emitArray( final @NotNull String arrayName, final int@NotNull[] values ) {
 
         emitOpenTag( arrayName );
         for ( int v : values ) {
@@ -203,7 +203,7 @@ public class NestedXMLPrinter implements Closeable {
 
     }
 
-    public void emitArray( @NotNull final String arrayName, @NotNull final Object@NotNull[] values ) {
+    public void emitArray( final @NotNull String arrayName, final @NotNull Object@NotNull[] values ) {
 
         emitOpenTag( arrayName );
         for ( Object v : values ) {
@@ -215,7 +215,7 @@ public class NestedXMLPrinter implements Closeable {
 
     }
 
-    public void nest( @NotNull final String tag ) {
+    public void nest( final @NotNull String tag ) {
 
         _nestingLevel += 1;
         _tagStack.push( tag );
@@ -229,7 +229,7 @@ public class NestedXMLPrinter implements Closeable {
 
     }
 
-    public void unNest( @NotNull final String tagName ) {
+    public void unNest( final @NotNull String tagName ) {
 
         String expectedTag = _tagStack.pop();
         if ( expectedTag.equals( tagName ) ) {
@@ -251,14 +251,14 @@ public class NestedXMLPrinter implements Closeable {
 
     }
 
-    public void print( @NotNull final String text ) {
+    public void print( final @NotNull String text ) {
 
         doIndent();
         _ps.print( text );
 
     }
 
-    public void println( @NotNull final String text ) {
+    public void println( final @NotNull String text ) {
 
         if ( !text.isEmpty() ) {
 

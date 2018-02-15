@@ -32,7 +32,7 @@ public class ImmutableDate extends Date implements GowingPackable {
 
     }
 
-    public ImmutableDate( @NotNull final Date date ) {
+    public ImmutableDate( final @NotNull Date date ) {
 
         super( date.getTime() );
 
@@ -57,7 +57,7 @@ public class ImmutableDate extends Date implements GowingPackable {
     @NotNull
     @Override
     public GowingPackedEntityBundle bundleThyself(
-            final boolean isPackingSuper, @NotNull final GowingPacker packer
+            final boolean isPackingSuper, final @NotNull GowingPacker packer
     ) {
 
         GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
@@ -74,7 +74,7 @@ public class ImmutableDate extends Date implements GowingPackable {
     }
 
     @Override
-    public boolean finishUnpacking( @NotNull final GowingUnPacker unPacker ) {
+    public boolean finishUnpacking( final @NotNull GowingUnPacker unPacker ) {
 
         return true;
 

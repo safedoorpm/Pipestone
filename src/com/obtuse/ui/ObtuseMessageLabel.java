@@ -6,6 +6,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Optional;
@@ -18,7 +19,14 @@ import java.util.Optional;
  A JLabel which might provide more information when it is clicked (depends on whether or not more information is actually available).
  */
 
-public class MessageLabel extends JLabel implements MessageLabelInterface {
+@SuppressWarnings("unused")
+public class ObtuseMessageLabel extends JLabel implements MessageLabelInterface {
+
+    @NotNull
+    public Container getAsContainer() {
+        return (Container)this;
+
+    }
 
     public static class AugmentedIllegalArgumentException extends IllegalArgumentException {
 
@@ -54,7 +62,6 @@ public class MessageLabel extends JLabel implements MessageLabelInterface {
 
         }
 
-        @SuppressWarnings("unused")
         public AugmentedIllegalArgumentException( final IllegalArgumentException iae ) {
 
             this( iae.getMessage(), null, iae.getCause() );
@@ -123,7 +130,7 @@ public class MessageLabel extends JLabel implements MessageLabelInterface {
      Create a blank message label.
      */
 
-    public MessageLabel() {
+    public ObtuseMessageLabel() {
         this( null, null );
 
         addMouseListener(
@@ -157,7 +164,7 @@ public class MessageLabel extends JLabel implements MessageLabelInterface {
      @param extraInfo (optional) extra information which is available to whoever is using this instance.
      */
 
-    public MessageLabel( @Nullable final String message, @Nullable final String extraInfo ) {
+    public ObtuseMessageLabel( @Nullable final String message, @Nullable final String extraInfo ) {
         super();
 
         setMessage( message, extraInfo );
@@ -169,7 +176,7 @@ public class MessageLabel extends JLabel implements MessageLabelInterface {
      @param message the (optional) message which will become the text in the JLabel.
      */
 
-    public MessageLabel( @Nullable final String message ) {
+    public ObtuseMessageLabel( @Nullable final String message ) {
 
         this( message, null );
 
@@ -179,6 +186,7 @@ public class MessageLabel extends JLabel implements MessageLabelInterface {
      Replace this instance's message with {@code ""} and this instance's extra info with {@code null}.
      */
 
+    @Override
     public void clear() {
 
         setMessage( "", null );
@@ -190,6 +198,7 @@ public class MessageLabel extends JLabel implements MessageLabelInterface {
      @param message the new message for this instance.
      */
 
+    @Override
     public void setMessage( @Nullable final String message ) {
 
         setMessage( message, null );
@@ -198,16 +207,17 @@ public class MessageLabel extends JLabel implements MessageLabelInterface {
 
     /**
      Set this instance's message and extra info based on a provided exception's information.
-     @param e the exception. The exception's message ({@code e.getMessage()}) becomes this {@link MessageLabel} instance's message.
-     If the exception is a {@link AugmentedIllegalArgumentException} then the exception's extra info ({@code ((MessageLabel.AugmentedIllegalArgumentException)e).getExtraInfo()})
-     become's this {@link MessageLabel} instance's extra info.
+     @param e the exception. The exception's message ({@code e.getMessage()}) becomes this {@link ObtuseMessageLabel} instance's message.
+     If the exception is a {@link AugmentedIllegalArgumentException} then the exception's extra info ({@code ((ObtuseMessageLabel.AugmentedIllegalArgumentException)e).getExtraInfo()})
+     become's this {@link ObtuseMessageLabel} instance's extra info.
      */
 
-    public void setMessage( @NotNull final Exception e ) {
+    @Override
+    public void setMessage( final @NotNull Exception e ) {
 
         if ( e instanceof AugmentedIllegalArgumentException ) {
 
-            MessageLabel.AugmentedIllegalArgumentException ae = (MessageLabel.AugmentedIllegalArgumentException)e;
+            ObtuseMessageLabel.AugmentedIllegalArgumentException ae = (ObtuseMessageLabel.AugmentedIllegalArgumentException)e;
 
             setMessage( ae.getMessage(), ae.getExtraInfo() );
 
@@ -226,6 +236,7 @@ public class MessageLabel extends JLabel implements MessageLabelInterface {
      @param extraInfo what is to become this instance's extra info (saved as {@code ""} if {@code null}. Otherwise, saved as-is.
      */
 
+    @Override
     public void setMessage( @Nullable final String message, @Nullable final String extraInfo ) {
 
         setText( message == null ? "null" : message.startsWith( "<html>" ) ? message : "<html>" + message + "</html>" );
@@ -239,6 +250,7 @@ public class MessageLabel extends JLabel implements MessageLabelInterface {
      @param extraInfo what is to become this instance's extra info (saved as {@code ""} if {@code null}. Otherwise, saved as-is.
      */
 
+    @Override
     public void setExtraInfo( @Nullable final String extraInfo ) {
 
         _extraInfo = extraInfo == null ? "" : extraInfo;
@@ -251,10 +263,25 @@ public class MessageLabel extends JLabel implements MessageLabelInterface {
      Get this instance's extra info.
      @return this instance's extra info ({@code null} if the extra info is {@code null} or {@code ""}).
      */
-    @SuppressWarnings("unused")
+
+    @NotNull
     public Optional<String> getExtraInfo() {
 
         return Optional.ofNullable (( _extraInfo == null || _extraInfo.isEmpty() ) ? null : _extraInfo );
+
+    }
+
+    /**
+     Get this instance's text as an {@link Optional}{@code <String>}.
+     @return this instance's text ({@code null} if the text is {@code null} or {@code ""}).
+     */
+
+    @NotNull
+    public Optional<String> getOptionalText() {
+
+        String txt = getText();
+
+        return Optional.ofNullable (( txt == null || txt.isEmpty() ) ? null : txt );
 
     }
 

@@ -39,9 +39,9 @@ public class SortedPanelModel<K extends Comparable<K>, E extends SortableEntity>
      */
 
     public SortedPanelModel(
-            @NotNull final SortableKeySpace keySpace,
-            @NotNull final String name,
-            @NotNull final TreeSorter<K, E> initialEntities
+            final @NotNull SortableKeySpace keySpace,
+            final @NotNull String name,
+            final @NotNull TreeSorter<K, E> initialEntities
     ) {
 
         super();
@@ -69,7 +69,7 @@ public class SortedPanelModel<K extends Comparable<K>, E extends SortableEntity>
      @param name     the name of the model (required although only used in diagnostic messages and thrown exceptions).
      */
 
-    public SortedPanelModel( @NotNull final SortableKeySpace keySpace, @NotNull final String name ) {
+    public SortedPanelModel( final @NotNull SortableKeySpace keySpace, final @NotNull String name ) {
 
         this( keySpace, name, new TreeSorter<>() );
 
@@ -104,13 +104,13 @@ public class SortedPanelModel<K extends Comparable<K>, E extends SortableEntity>
      @throws NullPointerException if the entity's {@link SortableEntityReference#createEntityView} method returns a <tt>null</tt> value.
      */
 
-    public int reAddEntity( @NotNull final K key, @NotNull final E entity, @Nullable final SortableEntityView<K, E> view ) {
+    public int reAddEntity( final @NotNull K key, final @NotNull E entity, @Nullable final SortableEntityView<K, E> view ) {
 
         return reAddEntity( new SortableEntityReference<>( this, key, entity ), view );
 
     }
 
-    public int reAddEntity( @NotNull final SortableEntityReference<K, E> entityReference, @Nullable final SortableEntityView<K, E> view ) {
+    public int reAddEntity( final @NotNull SortableEntityReference<K, E> entityReference, @Nullable final SortableEntityView<K, E> view ) {
 
         String what = "reAddEntity( " + entityReference.getActiveKey() + ", " + entityReference.getValue() + ", " + view + " )";
         verifyConsistency( "start of " + what );
@@ -160,13 +160,13 @@ public class SortedPanelModel<K extends Comparable<K>, E extends SortableEntity>
 
     }
 
-    public int addEntity( @NotNull final SortableEntityReference<K, E> entityReference ) {
+    public int addEntity( final @NotNull SortableEntityReference<K, E> entityReference ) {
 
         return this.reAddEntity( entityReference, null );
 
     }
 
-    public int addEntity( @NotNull final K key, @NotNull final E entity ) {
+    public int addEntity( final @NotNull K key, final @NotNull E entity ) {
 
         return addEntity( new SortableEntityReference<>( this, key, entity ) );
 
@@ -240,7 +240,7 @@ public class SortedPanelModel<K extends Comparable<K>, E extends SortableEntity>
     }
 
     @NotNull
-    private SortableEntityView<K, ? extends SortableEntity> createEntityView( @NotNull final SortableEntityReference<K, E> entityReference ) {
+    private SortableEntityView<K, ? extends SortableEntity> createEntityView( final @NotNull SortableEntityReference<K, E> entityReference ) {
 
         SortableEntityView<K, ? extends SortableEntity> entityView = entityReference.createEntityView();
 

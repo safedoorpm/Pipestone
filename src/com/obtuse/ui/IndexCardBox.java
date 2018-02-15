@@ -39,7 +39,7 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
 
     private final Consumer<IndexCardBox<E>> _doubleClickOnImageConsumer;
 
-    public IndexCardBox( final String name, final LinearOrientation linearOrientation, @NotNull final Consumer<IndexCardBox<E>> doubleClickOnImageConsumer ) {
+    public IndexCardBox( final String name, final LinearOrientation linearOrientation, final @NotNull Consumer<IndexCardBox<E>> doubleClickOnImageConsumer ) {
 
         super( name, linearOrientation );
 
@@ -157,7 +157,7 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
 
     }
 
-    public void doMouseClick( @NotNull final SelectableIndexCard indexCard, @NotNull final MouseEvent mEvent ) {
+    public void doMouseClick( final @NotNull SelectableIndexCard indexCard, final @NotNull MouseEvent mEvent ) {
 
         if ( mEvent.getID() == MouseEvent.MOUSE_CLICKED ) {
 
@@ -168,13 +168,13 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
 
             } else {
 
-                throw new MessageLabel.AugmentedIllegalArgumentException( "IndexCardBox:  SIC not found in our list of components:  " + indexCard );
+                throw new ObtuseMessageLabel.AugmentedIllegalArgumentException( "IndexCardBox:  SIC not found in our list of components:  " + indexCard );
 
             }
 
         } else {
 
-            throw new MessageLabel.AugmentedIllegalArgumentException( "IndexCardBox:  mouse event is not a mouse click (id=" + mEvent.getID() + ")" );
+            throw new ObtuseMessageLabel.AugmentedIllegalArgumentException( "IndexCardBox:  mouse event is not a mouse click (id=" + mEvent.getID() + ")" );
 
         }
 
@@ -198,7 +198,7 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
 
     }
 
-    private void doMouseClick( final int ix, @NotNull final SelectableIndexCard indexCard, @NotNull final MouseEvent mEvent ) {
+    private void doMouseClick( final int ix, final @NotNull SelectableIndexCard indexCard, final @NotNull MouseEvent mEvent ) {
 
         switch ( mEvent.getClickCount() ) {
 
@@ -831,7 +831,7 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
 
     }
 
-    private void verifySelectable( @NotNull final Component comp ) {
+    private void verifySelectable( final @NotNull Component comp ) {
 
         if ( !( comp instanceof SelectableIndexCard ) ) {
 
@@ -846,17 +846,17 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
 
     /**
      Add a component to the box.
-     Throws an {@link com.obtuse.ui.MessageLabel.AugmentedIllegalArgumentException}
+     Throws an {@link ObtuseMessageLabel.AugmentedIllegalArgumentException}
      if the component does not implement the {@link SelectableIndexCard} interface.
      Otherwise equivalent to {@link Container#add(Component comp)} (see that method for more authoritative info).
 
      @param comp the component to be added.
      @return the added component.
-     @throws com.obtuse.ui.MessageLabel.AugmentedIllegalArgumentException if {@code comp} is {@code null}
+     @throws ObtuseMessageLabel.AugmentedIllegalArgumentException if {@code comp} is {@code null}
      or does not implement the {@link SelectableIndexCard} interface.
      */
 
-    public Component add( @NotNull final Component comp ) {
+    public Component add( final @NotNull Component comp ) {
 
         verifySelectable( comp );
 
@@ -866,18 +866,18 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
 
     /**
      Add a component to the box.
-     Throws an {@link com.obtuse.ui.MessageLabel.AugmentedIllegalArgumentException}
+     Throws an {@link ObtuseMessageLabel.AugmentedIllegalArgumentException}
      if the component does not implement the {@link SelectableIndexCard} interface.
      Otherwise equivalent to {@link Container#add(String name, Component comp)} (see that method for more authoritative info).
      <p/>According to Sun/Oracle, this method is obsolete as of 1.1.  Please use the method <code>add(Component, Object)</code> instead.
 
      @param comp the component to be added.
      @return the added component.
-     @throws com.obtuse.ui.MessageLabel.AugmentedIllegalArgumentException if {@code comp} is {@code null}
+     @throws ObtuseMessageLabel.AugmentedIllegalArgumentException if {@code comp} is {@code null}
      or does not implement the {@link SelectableIndexCard} interface.
      */
 
-    public Component add( @NotNull final String name, final Component comp ) {
+    public Component add( final @NotNull String name, final Component comp ) {
 
         verifySelectable( comp );
 
@@ -887,7 +887,7 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
 
     /**
      Add a component to the box.
-     Throws an {@link com.obtuse.ui.MessageLabel.AugmentedIllegalArgumentException}
+     Throws an {@link ObtuseMessageLabel.AugmentedIllegalArgumentException}
      if the component does not implement the {@link SelectableIndexCard} interface.
      Otherwise equivalent to {@link Container#add(Component comp, int ix)} (see that method for more authoritative info).
 
@@ -895,11 +895,11 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
      @param ix   the position in the container's list at which to insert
      the component; <code>-1</code> means insert at the end component
      @return the added component.
-     @throws com.obtuse.ui.MessageLabel.AugmentedIllegalArgumentException if {@code comp} is {@code null}
+     @throws ObtuseMessageLabel.AugmentedIllegalArgumentException if {@code comp} is {@code null}
      or does not implement the {@link SelectableIndexCard} interface.
      */
 
-    public Component add( @NotNull final Component comp, final int ix ) {
+    public Component add( final @NotNull Component comp, final int ix ) {
 
         verifySelectable( comp );
 
@@ -909,17 +909,17 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
 
     /**
      Add a component to the box.
-     Throws an {@link com.obtuse.ui.MessageLabel.AugmentedIllegalArgumentException}
+     Throws an {@link ObtuseMessageLabel.AugmentedIllegalArgumentException}
      if the component does not implement the {@link SelectableIndexCard} interface.
      Otherwise equivalent to {@link Container#add(Component comp, Object constraints)} (see that method for more authoritative info).
 
      @param comp        the component to be added.
      @param constraints an object expressing layout constraints for this component.
-     @throws com.obtuse.ui.MessageLabel.AugmentedIllegalArgumentException if {@code comp} is {@code null}
+     @throws ObtuseMessageLabel.AugmentedIllegalArgumentException if {@code comp} is {@code null}
      or does not implement the {@link SelectableIndexCard} interface.
      */
 
-    public void add( @NotNull final Component comp, final Object constraints ) {
+    public void add( final @NotNull Component comp, final Object constraints ) {
 
         verifySelectable( comp );
 
@@ -929,7 +929,7 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
 
     /**
      Add a component to the box.
-     Throws an {@link com.obtuse.ui.MessageLabel.AugmentedIllegalArgumentException}
+     Throws an {@link ObtuseMessageLabel.AugmentedIllegalArgumentException}
      if the component does not implement the {@link SelectableIndexCard} interface.
      Otherwise equivalent to {@link Container#add(Component comp, Object constraints, int index)} (see that method for more authoritative info).
 
@@ -937,11 +937,11 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
      @param constraints an object expressing layout constraints for this component.
      @param index       the position in the container's list at which to insert
      the component; <code>-1</code> means insert at the end component
-     @throws com.obtuse.ui.MessageLabel.AugmentedIllegalArgumentException if {@code comp} is {@code null}
+     @throws ObtuseMessageLabel.AugmentedIllegalArgumentException if {@code comp} is {@code null}
      or does not implement the {@link SelectableIndexCard} interface.
      */
 
-    public void add( @NotNull final Component comp, final Object constraints, final int index ) {
+    public void add( final @NotNull Component comp, final Object constraints, final int index ) {
 
         verifySelectable( comp );
 

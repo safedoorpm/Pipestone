@@ -40,9 +40,9 @@ public class FormattedImmutableDate extends ImmutableDate implements GowingPacka
         @NotNull
         @Override
         public GowingPackable createEntity(
-                @NotNull final GowingUnPacker unPacker,
-                @NotNull final GowingPackedEntityBundle bundle,
-                @NotNull final GowingEntityReference er
+                final @NotNull GowingUnPacker unPacker,
+                final @NotNull GowingPackedEntityBundle bundle,
+                final @NotNull GowingEntityReference er
         )
                 throws GowingUnpackingException {
 
@@ -75,7 +75,7 @@ public class FormattedImmutableDate extends ImmutableDate implements GowingPacka
      @throws IllegalArgumentException if <code>date</code> is <code>null</code>.
      */
 
-    public FormattedImmutableDate( @NotNull final Date date ) {
+    public FormattedImmutableDate( final @NotNull Date date ) {
 
         super( date );
 
@@ -113,7 +113,7 @@ public class FormattedImmutableDate extends ImmutableDate implements GowingPacka
     @NotNull
     @Override
     public GowingPackedEntityBundle bundleThyself(
-            final boolean isPackingSuper, @NotNull final GowingPacker packer
+            final boolean isPackingSuper, final @NotNull GowingPacker packer
     ) {
 
         GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
@@ -130,7 +130,7 @@ public class FormattedImmutableDate extends ImmutableDate implements GowingPacka
     }
 
     @Override
-    public boolean finishUnpacking( @NotNull final GowingUnPacker unPacker ) {
+    public boolean finishUnpacking( final @NotNull GowingUnPacker unPacker ) {
 
         return true;
 

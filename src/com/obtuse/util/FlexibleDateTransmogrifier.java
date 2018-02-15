@@ -69,7 +69,7 @@ public class FlexibleDateTransmogrifier {
 
         }
 
-        private TestData( @NotNull final String@NotNull[] inputs, final String output ) {
+        private TestData( final @NotNull String@NotNull[] inputs, final String output ) {
             super();
 
             this.input = new String[inputs.length];
@@ -84,7 +84,7 @@ public class FlexibleDateTransmogrifier {
 
         }
 
-        public TestData( @NotNull final String@NotNull[] inputs ) {
+        public TestData( final @NotNull String@NotNull[] inputs ) {
 
             this.input = new String[inputs.length];
             System.arraycopy( inputs, 0, this.input, 0, inputs.length );

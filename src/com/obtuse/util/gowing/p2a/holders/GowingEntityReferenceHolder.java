@@ -17,7 +17,7 @@ import org.jetbrains.annotations.NotNull;
 public class GowingEntityReferenceHolder extends GowingAbstractPackableHolder {
 
     public GowingEntityReferenceHolder(
-            @NotNull final EntityName name,
+            final @NotNull EntityName name,
             final GowingEntityReference v,
             @SuppressWarnings("SameParameterValue") final boolean mandatory
     ) {

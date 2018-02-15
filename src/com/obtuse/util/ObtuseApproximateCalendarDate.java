@@ -131,7 +131,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
         }
 
-        public DateParsingException( final Reason reason, @NotNull final String msg ) {
+        public DateParsingException( final Reason reason, final @NotNull String msg ) {
 
             super( msg );
 
@@ -139,7 +139,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
         }
 
-        public DateParsingException( final Reason reason, @NotNull final String msg, @Nullable final Throwable cause ) {
+        public DateParsingException( final Reason reason, final @NotNull String msg, @Nullable final Throwable cause ) {
 
             super( msg, cause );
 
@@ -147,7 +147,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
         }
 
-        public DateParsingException( final Reason reason, @NotNull final Throwable cause ) {
+        public DateParsingException( final Reason reason, final @NotNull Throwable cause ) {
 
             super( "unknown error", cause );
 
@@ -199,7 +199,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
         @NotNull
         @Override
-        public GowingPackable createEntity( @NotNull final GowingUnPacker unPacker, @NotNull final GowingPackedEntityBundle bundle, @NotNull final GowingEntityReference er )
+        public GowingPackable createEntity( final @NotNull GowingUnPacker unPacker, final @NotNull GowingPackedEntityBundle bundle, final @NotNull GowingEntityReference er )
                 throws GowingUnpackingException {
 
             return new ObtuseApproximateCalendarDate( unPacker, bundle );
@@ -263,8 +263,8 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
     }
 
     public ObtuseApproximateCalendarDate(
-            @NotNull final ObtuseCalendarDate nominalCalendarDate,
-            @NotNull final DatePrecision precision
+            final @NotNull ObtuseCalendarDate nominalCalendarDate,
+            final @NotNull DatePrecision precision
     ) {
 
         super( new GowingNameMarkerThing() );
@@ -389,7 +389,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
     @NotNull
     @Override
     public GowingPackedEntityBundle bundleThyself(
-            final boolean isPackingSuper, @NotNull final GowingPacker packer
+            final boolean isPackingSuper, final @NotNull GowingPacker packer
     ) {
 
         GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
@@ -429,7 +429,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
     }
 
     @Override
-    public boolean finishUnpacking( @NotNull final GowingUnPacker unPacker ) {
+    public boolean finishUnpacking( final @NotNull GowingUnPacker unPacker ) {
 
         return true;
 
@@ -683,7 +683,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
      @return -1, 0 or 1 depending on whether this instance is less than, equal to or greater than the other instance.
      */
 
-    public int compareTo( @NotNull final ObtuseApproximateCalendarDate rhs ) {
+    public int compareTo( final @NotNull ObtuseApproximateCalendarDate rhs ) {
 
         int rval = getEarliestPossibleDate().compareTo( rhs.getEarliestPossibleDate() );
         if ( rval == 0 ) {
@@ -707,7 +707,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
      Determine if two instances are equivalent (same earliest possible date and same latest possible date).
      */
 
-    public boolean equivalent( @NotNull final ObtuseApproximateCalendarDate rhs ) {
+    public boolean equivalent( final @NotNull ObtuseApproximateCalendarDate rhs ) {
 
         return getEarliestPossibleDate().equals( rhs.getEarliestPossibleDate() ) &&
                getLatestPossibleDate().equals( rhs.getLatestPossibleDate() );
@@ -746,7 +746,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
      <p>Note that unlike {@link #parse(String)}, this helper method does not throw an exception if parsing fails.</p>
      */
     public static Optional<ObtuseApproximateCalendarDate> parse(
-            @SuppressWarnings("OptionalUsedAsFieldOrParameterType") @NotNull final Optional<String> optDateString
+            @SuppressWarnings("OptionalUsedAsFieldOrParameterType") final @NotNull Optional<String> optDateString
     ) {
 
         if ( optDateString.isPresent() ) {
@@ -780,7 +780,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
      */
 
     @NotNull
-    public static ObtuseApproximateCalendarDate parseQuietly( @NotNull final String dateString ) {
+    public static ObtuseApproximateCalendarDate parseQuietly( final @NotNull String dateString ) {
 
         try {
 
@@ -810,7 +810,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
      */
 
     @NotNull
-    public static ObtuseApproximateCalendarDate parse( @NotNull final String dateString )
+    public static ObtuseApproximateCalendarDate parse( final @NotNull String dateString )
             throws DateParsingException {
 
         try {
@@ -843,7 +843,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
     private static final Pattern OACD_MONTH_PATTERN = Pattern.compile( "(\\d\\d\\d\\d)\\s*-\\s*(\\d\\d)" );
 
     @NotNull
-    private static ObtuseApproximateCalendarDate internalParse( @NotNull final String providedDateString, @NotNull final String cleanedDateString )
+    private static ObtuseApproximateCalendarDate internalParse( final @NotNull String providedDateString, final @NotNull String cleanedDateString )
             throws DateParsingException {
 
         String trimmedCleanedDateString = cleanedDateString.trim();
@@ -1361,7 +1361,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
     }
 
-    private static void checkParsing( @NotNull final String dateString, @Nullable final ObtuseApproximateCalendarDate expectedDate ) {
+    private static void checkParsing( final @NotNull String dateString, @Nullable final ObtuseApproximateCalendarDate expectedDate ) {
 
         try {
 

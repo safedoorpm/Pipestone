@@ -64,7 +64,7 @@ public class OrderedEntity<T> implements Comparable<OrderedEntity<T>> {
 
     }
 
-    public int compareTo( @NotNull final OrderedEntity<T> rhs ) {
+    public int compareTo( final @NotNull OrderedEntity<T> rhs ) {
 
         return _ordering.compareTo( rhs.getOrdering() );
 

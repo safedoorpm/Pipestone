@@ -13,14 +13,14 @@ import org.jetbrains.annotations.NotNull;
 
 public class LinearContainerImpl extends LinearContainer3 {
 
-    public LinearContainerImpl( @NotNull final String name, final LinearOrientation orientation ) {
+    public LinearContainerImpl( final @NotNull String name, final LinearOrientation orientation ) {
 
         this( name, orientation, null, null );
 
     }
 
     public LinearContainerImpl(
-            @NotNull final String name,
+            final @NotNull String name,
             final LinearOrientation orientation,
             @SuppressWarnings("SameParameterValue") final ContainerConstraints containerConstraints,
             @SuppressWarnings("SameParameterValue") final ComponentConstraints componentConstraints

@@ -22,9 +22,9 @@ public class GowingPackableEntityHolder extends GowingAbstractPackableHolder {
     private final GowingInstanceId _instanceId;
 
     public GowingPackableEntityHolder(
-            @NotNull final EntityName name,
+            final @NotNull EntityName name,
             @Nullable final GowingPackable v,
-            @NotNull final GowingPacker packer,
+            final @NotNull GowingPacker packer,
             @SuppressWarnings("SameParameterValue") final boolean mandatory
     ) {
 

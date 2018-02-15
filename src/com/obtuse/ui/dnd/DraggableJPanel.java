@@ -114,7 +114,7 @@ public class DraggableJPanel extends SelectableImage implements MouseListener, F
 
         AbstractDataFlavorHandler[] _dataFlavorHandlers;
 
-        public OurTransferHandler( final int supportedActions, @NotNull final AbstractDataFlavorHandler@Nullable[] dataFlavorHandlers ) {
+        public OurTransferHandler( final int supportedActions, final @NotNull AbstractDataFlavorHandler@Nullable[] dataFlavorHandlers ) {
 
             _supportedActions = supportedActions;
 

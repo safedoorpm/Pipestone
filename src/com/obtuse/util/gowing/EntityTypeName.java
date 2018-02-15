@@ -25,7 +25,7 @@ public final class EntityTypeName implements Comparable<EntityTypeName> {
      @param classInstance the {@link GowingPackable} class to be encapsulated.
      */
 
-    public EntityTypeName( @NotNull final Class<? extends GowingPackable> classInstance ) {
+    public EntityTypeName( final @NotNull Class<? extends GowingPackable> classInstance ) {
         super();
 
         _name = classInstance.getCanonicalName();
@@ -41,7 +41,7 @@ public final class EntityTypeName implements Comparable<EntityTypeName> {
      @param canonicalClassName the {@link String} canonical name of the class which is to be encapsulated.
      */
 
-    public EntityTypeName( @NotNull final String canonicalClassName ) {
+    public EntityTypeName( final @NotNull String canonicalClassName ) {
         super();
 
         _name = canonicalClassName;
@@ -92,7 +92,7 @@ public final class EntityTypeName implements Comparable<EntityTypeName> {
      */
 
     @Override
-    public int compareTo( @NotNull final EntityTypeName rhs ) {
+    public int compareTo( final @NotNull EntityTypeName rhs ) {
 
         return _name.compareTo( rhs._name );
 

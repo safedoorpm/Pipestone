@@ -43,9 +43,9 @@ public class ThreeDimensionalTreeMap<T1,T2,T3,V> extends GowingAbstractPackableE
         @Override
         @NotNull
         public GowingPackable createEntity(
-                @NotNull final GowingUnPacker unPacker,
-                @NotNull final GowingPackedEntityBundle bundle,
-                @NotNull final GowingEntityReference er
+                final @NotNull GowingUnPacker unPacker,
+                final @NotNull GowingPackedEntityBundle bundle,
+                final @NotNull GowingEntityReference er
         ) {
 
             return new ThreeDimensionalTreeMap<>( unPacker, bundle );
@@ -71,7 +71,7 @@ public class ThreeDimensionalTreeMap<T1,T2,T3,V> extends GowingAbstractPackableE
     }
 
     @SuppressWarnings("UnusedDeclaration")
-    public ThreeDimensionalTreeMap( @NotNull final ThreeDimensionalSortedMap<T1,T2,T3,V> map, final boolean makeReadonly ) {
+    public ThreeDimensionalTreeMap( final @NotNull ThreeDimensionalSortedMap<T1,T2,T3,V> map, final boolean makeReadonly ) {
         super( new GowingNameMarkerThing() );
 
         for ( T1 t1 : map.outerKeys() ) {
@@ -102,12 +102,12 @@ public class ThreeDimensionalTreeMap<T1,T2,T3,V> extends GowingAbstractPackableE
     }
 
     @SuppressWarnings("unused")
-    public ThreeDimensionalTreeMap( @NotNull final ThreeDimensionalSortedMap<T1,T2,T3,V> map ) {
+    public ThreeDimensionalTreeMap( final @NotNull ThreeDimensionalSortedMap<T1,T2,T3,V> map ) {
         this( map, false );
 
     }
 
-    private ThreeDimensionalTreeMap( @NotNull final GowingUnPacker unPacker, @NotNull final GowingPackedEntityBundle bundle ) {
+    private ThreeDimensionalTreeMap( final @NotNull GowingUnPacker unPacker, final @NotNull GowingPackedEntityBundle bundle ) {
 
         super( unPacker, bundle.getSuperBundle() );
 
@@ -118,7 +118,7 @@ public class ThreeDimensionalTreeMap<T1,T2,T3,V> extends GowingAbstractPackableE
 
     @Override
     public @NotNull GowingPackedEntityBundle bundleThyself(
-            final boolean isPackingSuper, @NotNull final GowingPacker packer
+            final boolean isPackingSuper, final @NotNull GowingPacker packer
     ) {
 
         GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
@@ -138,7 +138,7 @@ public class ThreeDimensionalTreeMap<T1,T2,T3,V> extends GowingAbstractPackableE
     }
 
     @Override
-    public boolean finishUnpacking( @NotNull final GowingUnPacker unPacker ) {
+    public boolean finishUnpacking( final @NotNull GowingUnPacker unPacker ) {
 
         // Our parent class has no finishUnpacking method so we skip the step of letting it finish unpacking.
 
@@ -199,7 +199,7 @@ public class ThreeDimensionalTreeMap<T1,T2,T3,V> extends GowingAbstractPackableE
 
     }
 
-    public V put( @NotNull final T1 key1, @NotNull final T2 key2, @NotNull final T3 key3, @Nullable final V value ) {
+    public V put( final @NotNull T1 key1, final @NotNull T2 key2, final @NotNull T3 key3, @Nullable final V value ) {
 
         TwoDimensionalSortedMap<T2,T3,V> innerMap = getNotNullInnerMap( key1 );
 
@@ -211,7 +211,7 @@ public class ThreeDimensionalTreeMap<T1,T2,T3,V> extends GowingAbstractPackableE
 
     @Override
     @NotNull
-    public TwoDimensionalSortedMap<T2,T3,V> getNotNullInnerMap( @NotNull final T1 key1 ) {
+    public TwoDimensionalSortedMap<T2,T3,V> getNotNullInnerMap( final @NotNull T1 key1 ) {
 
         TwoDimensionalSortedMap<T2,T3,V> innerMap = _map.get( key1 );
         if ( innerMap == null ) {
@@ -227,7 +227,7 @@ public class ThreeDimensionalTreeMap<T1,T2,T3,V> extends GowingAbstractPackableE
 
     @Override
     @Nullable
-    public TwoDimensionalSortedMap<T2,T3,V> getInnerMap( @NotNull final T1 key1, final boolean forceCreate ) {
+    public TwoDimensionalSortedMap<T2,T3,V> getInnerMap( final @NotNull T1 key1, final boolean forceCreate ) {
 
         TwoDimensionalSortedMap<T2,T3,V> innerMap = _map.get( key1 );
         if ( innerMap == null && forceCreate ) {
@@ -243,7 +243,7 @@ public class ThreeDimensionalTreeMap<T1,T2,T3,V> extends GowingAbstractPackableE
 
     @Override
     @Nullable
-    public TwoDimensionalSortedMap<T2,T3,V> removeInnerMap( @NotNull final T1 key ) {
+    public TwoDimensionalSortedMap<T2,T3,V> removeInnerMap( final @NotNull T1 key ) {
 
         return _map.remove( key );
 
@@ -251,7 +251,7 @@ public class ThreeDimensionalTreeMap<T1,T2,T3,V> extends GowingAbstractPackableE
 
     @Override
     @Nullable
-    public V get( @NotNull final T1 key1, @NotNull final T2 key2, @NotNull final T3 key3 ) {
+    public V get( final @NotNull T1 key1, final @NotNull T2 key2, final @NotNull T3 key3 ) {
 
         TwoDimensionalSortedMap<T2,T3,V> innerMap = _map.get( key1 );
         if ( innerMap == null ) {
@@ -266,7 +266,7 @@ public class ThreeDimensionalTreeMap<T1,T2,T3,V> extends GowingAbstractPackableE
 
     @Override
     @Nullable
-    public V remove( @NotNull final T1 key1, @NotNull final T2 key2, @NotNull final T3 key3 ) {
+    public V remove( final @NotNull T1 key1, final @NotNull T2 key2, final @NotNull T3 key3 ) {
 
         V rval = null;
 

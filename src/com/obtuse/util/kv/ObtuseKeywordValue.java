@@ -44,7 +44,7 @@ public class ObtuseKeywordValue extends ObtuseKeyword {
         @NotNull
         @Override
         public GowingPackable createEntity(
-                @NotNull final GowingUnPacker unPacker, @NotNull final GowingPackedEntityBundle bundle, @NotNull final GowingEntityReference er
+                final @NotNull GowingUnPacker unPacker, final @NotNull GowingPackedEntityBundle bundle, final @NotNull GowingEntityReference er
         )
                 throws GowingUnpackingException {
 
@@ -63,7 +63,7 @@ public class ObtuseKeywordValue extends ObtuseKeyword {
      @param keywordValue the keyword-value pair to be cloned.
      */
 
-    public ObtuseKeywordValue( @NotNull final ObtuseKeywordValue keywordValue ) {
+    public ObtuseKeywordValue( final @NotNull ObtuseKeywordValue keywordValue ) {
         super( keywordValue );
 
         _value = keywordValue.getValue();
@@ -77,7 +77,7 @@ public class ObtuseKeywordValue extends ObtuseKeyword {
      @param value       its value.
      */
 
-    public ObtuseKeywordValue( @NotNull final ObtuseKeyword keywordInfo, @Nullable final String value ) {
+    public ObtuseKeywordValue( final @NotNull ObtuseKeyword keywordInfo, @Nullable final String value ) {
         super( keywordInfo );
 
         _value = value;
@@ -85,8 +85,8 @@ public class ObtuseKeywordValue extends ObtuseKeyword {
     }
 
     public ObtuseKeywordValue(
-            @SuppressWarnings("unused") @NotNull final GowingUnPacker unPacker,
-            @NotNull final GowingPackedEntityBundle bundle
+            @SuppressWarnings("unused") final @NotNull GowingUnPacker unPacker,
+            final @NotNull GowingPackedEntityBundle bundle
     ) {
 
         super( unPacker, bundle.getSuperBundle() );
@@ -97,7 +97,7 @@ public class ObtuseKeywordValue extends ObtuseKeyword {
 
     @Override
     public @NotNull GowingPackedEntityBundle bundleThyself(
-            final boolean isPackingSuper, @NotNull final GowingPacker packer
+            final boolean isPackingSuper, final @NotNull GowingPacker packer
     ) {
 
         GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
@@ -114,7 +114,7 @@ public class ObtuseKeywordValue extends ObtuseKeyword {
     }
 
     @Override
-    public boolean finishUnpacking( @NotNull final GowingUnPacker unPacker ) {
+    public boolean finishUnpacking( final @NotNull GowingUnPacker unPacker ) {
 
         return true;
 

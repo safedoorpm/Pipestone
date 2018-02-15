@@ -59,9 +59,9 @@ public class BasicProgramConfigInfo {
      */
 
     public static void init(
-            @SuppressWarnings("SameParameterValue") @NotNull final String vendorName,
-            @SuppressWarnings("SameParameterValue") @NotNull final String applicationName,
-            @SuppressWarnings("SameParameterValue") @NotNull final String componentName,
+            @SuppressWarnings("SameParameterValue") final @NotNull String vendorName,
+            @SuppressWarnings("SameParameterValue") final @NotNull String applicationName,
+            @SuppressWarnings("SameParameterValue") final @NotNull String componentName,
             @SuppressWarnings("SameParameterValue") @Nullable final Preferences preferences
     ) {
 

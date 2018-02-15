@@ -42,9 +42,9 @@ public class GowingPackableAttribute implements GowingPackable {
         @NotNull
         @Override
         public GowingPackable createEntity(
-                @NotNull final GowingUnPacker unPacker,
-                @NotNull final GowingPackedEntityBundle bundle,
-                @NotNull final GowingEntityReference er
+                final @NotNull GowingUnPacker unPacker,
+                final @NotNull GowingPackedEntityBundle bundle,
+                final @NotNull GowingEntityReference er
         ) {
 
             return new GowingPackableAttribute( unPacker, bundle );
@@ -188,7 +188,7 @@ public class GowingPackableAttribute implements GowingPackable {
 
     @NotNull
     @Override
-    public GowingPackedEntityBundle bundleThyself( final boolean isPackingSuper, @NotNull final GowingPacker packer ) {
+    public GowingPackedEntityBundle bundleThyself( final boolean isPackingSuper, final @NotNull GowingPacker packer ) {
 
         GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
                 GowingPackableAttribute.ENTITY_TYPE_NAME,
@@ -217,7 +217,7 @@ public class GowingPackableAttribute implements GowingPackable {
     }
 
     @Override
-    public boolean finishUnpacking( @NotNull final GowingUnPacker unPacker ) {
+    public boolean finishUnpacking( final @NotNull GowingUnPacker unPacker ) {
 
         if ( _valueHolder == null ) {
 

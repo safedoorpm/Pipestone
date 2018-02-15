@@ -21,7 +21,7 @@ public class SingleLineMessageBoard implements MessageBoardInterface {
 
     private int _nextIdNumber = 0;
 
-    public SingleLineMessageBoard( @NotNull final JTextComponent textComponent ) {
+    public SingleLineMessageBoard( final @NotNull JTextComponent textComponent ) {
 
         super();
 
@@ -30,7 +30,7 @@ public class SingleLineMessageBoard implements MessageBoardInterface {
 
     }
 
-    public SingleLineMessageBoard( @NotNull final JLabel jLabel ) {
+    public SingleLineMessageBoard( final @NotNull JLabel jLabel ) {
 
         super();
 
@@ -52,7 +52,7 @@ public class SingleLineMessageBoard implements MessageBoardInterface {
     }
 
     @Override
-    public int postMessage( @NotNull final String msg ) {
+    public int postMessage( final @NotNull String msg ) {
 
         setTextValue( msg );
 
@@ -61,7 +61,7 @@ public class SingleLineMessageBoard implements MessageBoardInterface {
 
     }
 
-    private void setTextValue( @NotNull final String msg ) {
+    private void setTextValue( final @NotNull String msg ) {
 
         if ( _jLabel == null ) {
 

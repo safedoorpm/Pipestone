@@ -30,7 +30,7 @@ public class PopupJTableEditor extends DefaultCellEditor {
 
     private JTextField _editorComponent;
 
-    public PopupJTableEditor( @NotNull final String popupWindowTitle ) {
+    public PopupJTableEditor( final @NotNull String popupWindowTitle ) {
 
         super( new JTextField() );
 
@@ -91,7 +91,7 @@ public class PopupJTableEditor extends DefaultCellEditor {
 
         private JTextArea textArea;
 
-        public PopupDialog( @NotNull final String popupWindowTitle ) {
+        public PopupDialog( final @NotNull String popupWindowTitle ) {
 
             super( (Frame)null, popupWindowTitle, true );
 

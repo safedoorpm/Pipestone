@@ -45,7 +45,7 @@ public class ObtuseKeyword extends GowingAbstractPackableEntity implements Compa
         @NotNull
         @Override
         public GowingPackable createEntity(
-                @NotNull final GowingUnPacker unPacker, @NotNull final GowingPackedEntityBundle bundle, @NotNull final GowingEntityReference er
+                final @NotNull GowingUnPacker unPacker, final @NotNull GowingPackedEntityBundle bundle, final @NotNull GowingEntityReference er
         )
                 throws GowingUnpackingException {
 
@@ -73,7 +73,7 @@ public class ObtuseKeyword extends GowingAbstractPackableEntity implements Compa
      Create a clone of an existing keyword description.
      */
 
-    public ObtuseKeyword( @NotNull final ObtuseKeyword rValue ) {
+    public ObtuseKeyword( final @NotNull ObtuseKeyword rValue ) {
         this( rValue.getKeywordName() );
 
     }
@@ -85,7 +85,7 @@ public class ObtuseKeyword extends GowingAbstractPackableEntity implements Compa
      @throws IllegalArgumentException if the keyword is not matched by {@link #VALID_KEYWORD_PATTERN}.
      */
 
-    public ObtuseKeyword( @NotNull final String keywordString ) {
+    public ObtuseKeyword( final @NotNull String keywordString ) {
         super( new GowingNameMarkerThing() );
 
         Matcher m = VALID_KEYWORD_PATTERN.matcher( keywordString );
@@ -103,8 +103,8 @@ public class ObtuseKeyword extends GowingAbstractPackableEntity implements Compa
     }
 
     public ObtuseKeyword(
-    @SuppressWarnings("unused") @NotNull final GowingUnPacker unPacker,
-    @NotNull final GowingPackedEntityBundle bundle
+    @SuppressWarnings("unused") final @NotNull GowingUnPacker unPacker,
+    final @NotNull GowingPackedEntityBundle bundle
     ) {
 
         super( unPacker, bundle.getSuperBundle() );
@@ -115,7 +115,7 @@ public class ObtuseKeyword extends GowingAbstractPackableEntity implements Compa
 
     @Override
     public @NotNull GowingPackedEntityBundle bundleThyself(
-            final boolean isPackingSuper, @NotNull final GowingPacker packer
+            final boolean isPackingSuper, final @NotNull GowingPacker packer
     ) {
 
         GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
@@ -132,7 +132,7 @@ public class ObtuseKeyword extends GowingAbstractPackableEntity implements Compa
     }
 
     @Override
-    public boolean finishUnpacking( @NotNull final GowingUnPacker unPacker ) {
+    public boolean finishUnpacking( final @NotNull GowingUnPacker unPacker ) {
 
         return true;
 
@@ -170,7 +170,7 @@ public class ObtuseKeyword extends GowingAbstractPackableEntity implements Compa
     }
 
     @Override
-    public int compareTo( @NotNull final ObtuseKeyword rhs ) {
+    public int compareTo( final @NotNull ObtuseKeyword rhs ) {
 
         return getKeywordName().compareTo( rhs.getKeywordName() );
 

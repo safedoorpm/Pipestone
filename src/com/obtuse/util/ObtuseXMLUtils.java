@@ -536,7 +536,7 @@ public class ObtuseXMLUtils {
 
     public static Collection<InstanceFromXML> getInstancesFromXML(
             final MessageProxy messageProxy,
-            @NotNull final Node parentNode,
+            final @NotNull Node parentNode,
             final String targetNodeName,
             final String elementNodeName,
             final Class<? extends InstanceFromXML> elementClass

@@ -32,7 +32,7 @@ public class ScrollableEntitiesManager {
     private final ArrayList<Component> _visibleComponents = new ArrayList<>();
     private final boolean _scrollingVertical;
 
-    public ScrollableEntitiesManager( @NotNull final IrregularScrollableImpl msi, final Rectangle visibleRectangle, final int orientation, final int direction ) {
+    public ScrollableEntitiesManager( final @NotNull IrregularScrollableImpl msi, final Rectangle visibleRectangle, final int orientation, final int direction ) {
 
         super();
 

@@ -274,7 +274,7 @@ public class Measure {
 
     }
 
-    public Measure( @NotNull final String categoryName ) {
+    public Measure( final @NotNull String categoryName ) {
 
         super();
 
@@ -333,7 +333,7 @@ public class Measure {
      @return the duration of the event in milliseconds.
      */
 
-    public long done( @NotNull final String categoryName ) {
+    public long done( final @NotNull String categoryName ) {
 
         if ( !_initialized ) {
 

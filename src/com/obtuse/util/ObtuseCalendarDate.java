@@ -67,9 +67,9 @@ public class ObtuseCalendarDate extends GowingAbstractPackableEntity implements 
         @NotNull
         @Override
         public GowingPackable createEntity(
-                @NotNull final GowingUnPacker unPacker,
-                @NotNull final GowingPackedEntityBundle bundle,
-                @NotNull final GowingEntityReference er
+                final @NotNull GowingUnPacker unPacker,
+                final @NotNull GowingPackedEntityBundle bundle,
+                final @NotNull GowingEntityReference er
         )
                 throws GowingUnpackingException {
 
@@ -120,7 +120,7 @@ public class ObtuseCalendarDate extends GowingAbstractPackableEntity implements 
     @NotNull
     @Override
     public GowingPackedEntityBundle bundleThyself(
-            final boolean isPackingSuper, @NotNull final GowingPacker packer
+            final boolean isPackingSuper, final @NotNull GowingPacker packer
     ) {
 
         GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
@@ -137,7 +137,7 @@ public class ObtuseCalendarDate extends GowingAbstractPackableEntity implements 
     }
 
     @Override
-    public boolean finishUnpacking( @NotNull final GowingUnPacker unPacker ) {
+    public boolean finishUnpacking( final @NotNull GowingUnPacker unPacker ) {
 
         return true;
 
@@ -629,7 +629,7 @@ public class ObtuseCalendarDate extends GowingAbstractPackableEntity implements 
      a value greater than 0 if this instance's calendar date is after the <code>rhs</code> instance's calendar date.
      */
 
-    public int compareTo( @NotNull final ObtuseCalendarDate rhs ) {
+    public int compareTo( final @NotNull ObtuseCalendarDate rhs ) {
 
         return _dateString.compareTo( rhs._dateString );
 

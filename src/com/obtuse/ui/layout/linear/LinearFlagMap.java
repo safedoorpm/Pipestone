@@ -47,7 +47,7 @@ public class LinearFlagMap extends ImmutableSortedMap<LinearFlagName,LinearFlagN
      @return a {@link LinearFlagMap} containing only the specified flag.
      */
 
-    public static LinearFlagMap createSingletonSet( @NotNull final LinearFlagNameValue flag ) {
+    public static LinearFlagMap createSingletonSet( final @NotNull LinearFlagNameValue flag ) {
 
 	return createCleanedMap( new LinearFlagNameValue[] { flag } );
 

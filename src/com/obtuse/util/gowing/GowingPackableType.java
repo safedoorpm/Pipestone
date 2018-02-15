@@ -41,7 +41,7 @@ public enum GowingPackableType {
 
         }
 
-        public String validate( @NotNull final String s ) {
+        public String validate( final @NotNull String s ) {
 
             return "validation of collections not support (yet?)";
 
@@ -70,7 +70,7 @@ public enum GowingPackableType {
 
         }
 
-        public String validate( @NotNull final String s ) {
+        public String validate( final @NotNull String s ) {
 
             try {
 
@@ -110,7 +110,7 @@ public enum GowingPackableType {
 
         }
 
-        public String validate( @NotNull final String s ) {
+        public String validate( final @NotNull String s ) {
 
             try {
 
@@ -150,7 +150,7 @@ public enum GowingPackableType {
 
         }
 
-        public String validate( @NotNull final String s ) {
+        public String validate( final @NotNull String s ) {
 
             return "approximate dates are not (yet) supported";
 
@@ -179,7 +179,7 @@ public enum GowingPackableType {
 
         }
 
-        public String validate( @NotNull final String s ) {
+        public String validate( final @NotNull String s ) {
 
             try {
 
@@ -218,7 +218,7 @@ public enum GowingPackableType {
 
         }
 
-        public String validate( @NotNull final String s ) {
+        public String validate( final @NotNull String s ) {
 
             String strUC = s.toUpperCase();
 
@@ -264,7 +264,7 @@ public enum GowingPackableType {
 
         }
 
-        public String validate( @NotNull final String s ) {
+        public String validate( final @NotNull String s ) {
 
             return null;
 
@@ -293,7 +293,7 @@ public enum GowingPackableType {
 
         }
 
-        public String validate( @NotNull final String s ) {
+        public String validate( final @NotNull String s ) {
 
             return null;
 
@@ -322,7 +322,7 @@ public enum GowingPackableType {
 
         }
 
-        public String validate( @NotNull final String s ) {
+        public String validate( final @NotNull String s ) {
 
             try {
 
@@ -363,7 +363,7 @@ public enum GowingPackableType {
 
         private final String[] s_validImageFileSuffixes = { ".jpg", ".jpeg", ".gif", ".png" };
 
-        public String validate( @NotNull final String s ) {
+        public String validate( final @NotNull String s ) {
 
             String rval = GowingPackableType.URL.validate( s );
             if ( rval == null ) {
@@ -413,7 +413,7 @@ public enum GowingPackableType {
 
         }
 
-        public String validate( @NotNull final String s ) {
+        public String validate( final @NotNull String s ) {
 
             return null;
 

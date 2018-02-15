@@ -30,7 +30,7 @@ public class FrameworkTableModel<D extends CheckBoxRowWrapper.RowData> extends C
 
         private final String _name;
 
-        public TCName( @NotNull final String name ) {
+        public TCName( final @NotNull String name ) {
 
             super();
 
@@ -58,7 +58,7 @@ public class FrameworkTableModel<D extends CheckBoxRowWrapper.RowData> extends C
 
         }
 
-        public int compareTo( @NotNull final TCName rhs ) {
+        public int compareTo( final @NotNull TCName rhs ) {
 
             return _name.compareTo( rhs.getName() );
 
@@ -86,7 +86,7 @@ public class FrameworkTableModel<D extends CheckBoxRowWrapper.RowData> extends C
 
         private TableCellEditor _customTableCellEditor;
 
-        public CManager( @NotNull final TCName columnName, @NotNull final ThingNameFactory thingNameFactory ) {
+        public CManager( final @NotNull TCName columnName, final @NotNull ThingNameFactory thingNameFactory ) {
             super();
 
             _columnName = columnName;
@@ -95,7 +95,7 @@ public class FrameworkTableModel<D extends CheckBoxRowWrapper.RowData> extends C
 
         }
 
-        public CManager( @NotNull final TCName columnName, @NotNull final Class defaultCellClass ) {
+        public CManager( final @NotNull TCName columnName, final @NotNull Class defaultCellClass ) {
             super();
 
             _defaultCellClass = defaultCellClass;
@@ -183,7 +183,7 @@ public class FrameworkTableModel<D extends CheckBoxRowWrapper.RowData> extends C
     private final SortedMap<TCName, Boolean> _readOnlyByColumnNameOverride = new TreeMap<>();
 
     public FrameworkTableModel(
-            @NotNull final D[] rowWrappers,
+            final @NotNull D[] rowWrappers,
             final boolean singleSelectionMode,
             final boolean readOnly
     ) {
@@ -192,7 +192,7 @@ public class FrameworkTableModel<D extends CheckBoxRowWrapper.RowData> extends C
     }
 
     public FrameworkTableModel(
-            @NotNull final Collection<D> data,
+            final @NotNull Collection<D> data,
             final boolean singleSelectionMode,
             final boolean readOnly
     ) {

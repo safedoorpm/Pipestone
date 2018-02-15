@@ -38,7 +38,7 @@ public class StdGowingUnPackerContext implements GowingUnPackerContext {
 
     private GowingRequestorContext _requestorContext;
 
-    public StdGowingUnPackerContext( @NotNull final GowingTypeIndex typeIndex ) {
+    public StdGowingUnPackerContext( final @NotNull GowingTypeIndex typeIndex ) {
 
         super();
 
@@ -203,14 +203,14 @@ public class StdGowingUnPackerContext implements GowingUnPackerContext {
     }
 
     @Override
-    public boolean isEntityKnown( @NotNull final GowingEntityReference er ) {
+    public boolean isEntityKnown( final @NotNull GowingEntityReference er ) {
 
         return _seenInstanceIds.containsKey( er );
 
     }
 
     @Override
-    public GowingPackable recallPackableEntity( @NotNull final GowingEntityReference er ) {
+    public GowingPackable recallPackableEntity( final @NotNull GowingEntityReference er ) {
 
         @SuppressWarnings("UnnecessaryLocalVariable") GowingPackable packable2 = _seenInstanceIds.get( er );
 
@@ -266,7 +266,7 @@ public class StdGowingUnPackerContext implements GowingUnPackerContext {
 
     @Override
     @NotNull
-    public Optional<EntityTypeInfo> findTypeInfo( @NotNull final EntityTypeName typeName ) {
+    public Optional<EntityTypeInfo> findTypeInfo( final @NotNull EntityTypeName typeName ) {
 
         return _typeIndex.findTypeInfo( typeName );
 
@@ -282,7 +282,7 @@ public class StdGowingUnPackerContext implements GowingUnPackerContext {
 
     @Override
     @NotNull
-    public EntityTypeInfo getTypeInfo( @NotNull final EntityTypeName typeName ) {
+    public EntityTypeInfo getTypeInfo( final @NotNull EntityTypeName typeName ) {
 
         Optional<EntityTypeInfo> maybeRval = findTypeInfo( typeName );
         return maybeRval.orElseThrow( () -> new IllegalArgumentException( "unknown type \"" + typeName + "\"" ) );

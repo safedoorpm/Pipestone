@@ -40,7 +40,7 @@ public class StackedGaussianDistributionsDrawing extends JPanel {
 //    }
 
     public StackedGaussianDistributionsDrawing(
-            @NotNull final WeightedGaussianDistribution@NotNull[] gds,
+            final @NotNull WeightedGaussianDistribution@NotNull[] gds,
             final double from,
             final double to
     ) {
@@ -165,7 +165,7 @@ public class StackedGaussianDistributionsDrawing extends JPanel {
 
     }
 
-    public void setDistributions( @NotNull final WeightedGaussianDistribution@NotNull[] gds ) {
+    public void setDistributions( final @NotNull WeightedGaussianDistribution@NotNull[] gds ) {
 
         _gds = Arrays.copyOf( gds, gds.length );
         repaint();

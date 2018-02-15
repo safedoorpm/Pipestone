@@ -29,7 +29,7 @@ public class ObtuseDictionary implements Iterable<ObtuseKeywordValue> {
      for more info).
      */
 
-    public ObtuseDictionary( @NotNull final Collection<ObtuseKeywordValue> keywordValues ) {
+    public ObtuseDictionary( final @NotNull Collection<ObtuseKeywordValue> keywordValues ) {
         this( null, keywordValues );
     }
 
@@ -45,7 +45,7 @@ public class ObtuseDictionary implements Iterable<ObtuseKeywordValue> {
      for more info).
      */
 
-    public ObtuseDictionary( @Nullable final Set<String> validKeywords, @NotNull final Collection<ObtuseKeywordValue> keywordValues ) {
+    public ObtuseDictionary( @Nullable final Set<String> validKeywords, final @NotNull Collection<ObtuseKeywordValue> keywordValues ) {
 
         super();
 
@@ -104,7 +104,7 @@ public class ObtuseDictionary implements Iterable<ObtuseKeywordValue> {
     }
 
     @SuppressWarnings("unused")
-    public String getValue( @NotNull final String keywordString ) {
+    public String getValue( final @NotNull String keywordString ) {
 
         ObtuseKeyword keywordInfo = _keywordStringMapping.get( keywordString );
         return getValue( keywordInfo );

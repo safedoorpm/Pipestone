@@ -16,19 +16,19 @@ import org.jetbrains.annotations.Nullable;
 
 public class GowingByteHolder extends GowingAbstractPackableHolder {
 
-    public GowingByteHolder( @NotNull final EntityName name, @Nullable final Byte v, @SuppressWarnings("SameParameterValue") final boolean mandatory ) {
+    public GowingByteHolder( final @NotNull EntityName name, @Nullable final Byte v, @SuppressWarnings("SameParameterValue") final boolean mandatory ) {
 
         super( name, GowingConstants.TAG_BYTE, v, mandatory );
 
     }
 
-    public GowingByteHolder( @NotNull final EntityName name, final byte@NotNull[] v, @SuppressWarnings("SameParameterValue") final boolean mandatory ) {
+    public GowingByteHolder( final @NotNull EntityName name, final byte@NotNull[] v, @SuppressWarnings("SameParameterValue") final boolean mandatory ) {
 
         super( name, GowingConstants.TAG_BYTE, v, mandatory, true );
 
     }
 
-    public GowingByteHolder( @NotNull final EntityName name, @Nullable final Byte@NotNull[] v, @SuppressWarnings("SameParameterValue") final boolean mandatory ) {
+    public GowingByteHolder( final @NotNull EntityName name, @Nullable final Byte@NotNull[] v, @SuppressWarnings("SameParameterValue") final boolean mandatory ) {
 
         super( name, GowingConstants.TAG_BYTE, v, mandatory, false );
 

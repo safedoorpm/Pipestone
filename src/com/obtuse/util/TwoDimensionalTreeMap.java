@@ -43,9 +43,9 @@ public class TwoDimensionalTreeMap<T1,T2,V> extends GowingAbstractPackableEntity
         @Override
         @NotNull
         public GowingPackable createEntity(
-                @NotNull final GowingUnPacker unPacker,
-                @NotNull final GowingPackedEntityBundle bundle,
-                @NotNull final GowingEntityReference er
+                final @NotNull GowingUnPacker unPacker,
+                final @NotNull GowingPackedEntityBundle bundle,
+                final @NotNull GowingEntityReference er
         ) {
 
             return new TwoDimensionalTreeMap( unPacker, bundle );
@@ -70,7 +70,7 @@ public class TwoDimensionalTreeMap<T1,T2,V> extends GowingAbstractPackableEntity
 
     }
 
-    public TwoDimensionalTreeMap( @NotNull final TwoDimensionalSortedMap<T1,T2,V> map, final boolean makeReadonly ) {
+    public TwoDimensionalTreeMap( final @NotNull TwoDimensionalSortedMap<T1,T2,V> map, final boolean makeReadonly ) {
         super( new GowingNameMarkerThing() );
 
         for ( T1 t1 : map.outerKeys() ) {
@@ -109,7 +109,7 @@ public class TwoDimensionalTreeMap<T1,T2,V> extends GowingAbstractPackableEntity
 
     }
 
-    private TwoDimensionalTreeMap( @NotNull final GowingUnPacker unPacker, @NotNull final GowingPackedEntityBundle bundle ) {
+    private TwoDimensionalTreeMap( final @NotNull GowingUnPacker unPacker, final @NotNull GowingPackedEntityBundle bundle ) {
 
         super( unPacker, bundle.getSuperBundle() );
 
@@ -121,7 +121,7 @@ public class TwoDimensionalTreeMap<T1,T2,V> extends GowingAbstractPackableEntity
 
     @Override
     public @NotNull GowingPackedEntityBundle bundleThyself(
-            final boolean isPackingSuper, @NotNull final GowingPacker packer
+            final boolean isPackingSuper, final @NotNull GowingPacker packer
     ) {
 
         GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
@@ -170,7 +170,7 @@ public class TwoDimensionalTreeMap<T1,T2,V> extends GowingAbstractPackableEntity
     }
 
     @Override
-    public boolean finishUnpacking( @NotNull final GowingUnPacker unPacker ) {
+    public boolean finishUnpacking( final @NotNull GowingUnPacker unPacker ) {
 
         // Our parent class has no finishUnpacking method so we skip the step of letting it finish unpacking.
 
@@ -239,7 +239,7 @@ public class TwoDimensionalTreeMap<T1,T2,V> extends GowingAbstractPackableEntity
 
 //    @Override
 //    public @NotNull GowingPackedEntityBundle bundleThyself(
-//            final boolean isPackingSuper, @NotNull final GowingPacker packer
+//            final boolean isPackingSuper, final @NotNull GowingPacker packer
 //    ) {
 //
 //        GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
@@ -294,7 +294,7 @@ public class TwoDimensionalTreeMap<T1,T2,V> extends GowingAbstractPackableEntity
 //    }
 //
 //    @Override
-//    public boolean finishUnpacking( @NotNull final GowingUnPacker unPacker ) {
+//    public boolean finishUnpacking( final @NotNull GowingUnPacker unPacker ) {
 //
 //        // Our parent class has no finishUnpacking method so we skip the step of letting it finish unpacking.
 //

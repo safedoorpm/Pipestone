@@ -5,7 +5,7 @@
 
 package com.obtuse.ui.tableutils;
 
-import com.obtuse.ui.MessageLabel;
+import com.obtuse.ui.ObtuseMessageLabel;
 import com.obtuse.ui.MessageLabelInterface;
 import com.obtuse.util.*;
 import com.obtuse.util.things.ThingInfo;
@@ -34,10 +34,10 @@ public class UniqueThingTableCellEditor<T extends ThingInfo> extends Customizabl
     private final ThingNameFactory _nameFactory;
 
     public UniqueThingTableCellEditor(
-            @NotNull final FrameworkTableModel<T> tm,
+            final @NotNull FrameworkTableModel<T> tm,
             final int row,
             final int col,
-            @NotNull final ThingNameFactory nameFactory,
+            final @NotNull ThingNameFactory nameFactory,
             @Nullable final MessageLabelInterface jMessage
     ) {
 
@@ -90,10 +90,10 @@ public class UniqueThingTableCellEditor<T extends ThingInfo> extends Customizabl
 //	String text = ((JTextField) input).getText();
         Logger.logMsg( "Verifying " + ObtuseUtil.enquoteToJavaString( newNameString ) );
 
-        Optional<MessageLabel.AugmentedMessage> optMessage = _nameFactory.validateNameSyntax( newNameString );
+        Optional<ObtuseMessageLabel.AugmentedMessage> optMessage = _nameFactory.validateNameSyntax( newNameString );
         if ( optMessage.isPresent() ) {
 
-            throw new MessageLabel.AugmentedIllegalArgumentException( optMessage.get() );
+            throw new ObtuseMessageLabel.AugmentedIllegalArgumentException( optMessage.get() );
 
         }
 
@@ -114,7 +114,7 @@ public class UniqueThingTableCellEditor<T extends ThingInfo> extends Customizabl
 
                 if ( existingName.equals( newName ) ) {
 
-                    optMessage = Optional.of( new MessageLabel.AugmentedMessage( "there is already a project named " + existingName.enquote() ) );
+                    optMessage = Optional.of( new ObtuseMessageLabel.AugmentedMessage( "there is already a project named " + existingName.enquote() ) );
 
                     break;
 
@@ -132,7 +132,7 @@ public class UniqueThingTableCellEditor<T extends ThingInfo> extends Customizabl
 
         if ( optMessage.isPresent() ) {
 
-            throw new MessageLabel.AugmentedIllegalArgumentException( optMessage.get() );
+            throw new ObtuseMessageLabel.AugmentedIllegalArgumentException( optMessage.get() );
 
         }
 

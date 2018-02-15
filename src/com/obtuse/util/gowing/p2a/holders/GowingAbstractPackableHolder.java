@@ -461,7 +461,7 @@ public abstract class GowingAbstractPackableHolder implements GowingPackableThin
 
     }
 
-    public int compareTo( @NotNull final GowingPackableThingHolder rhs ) {
+    public int compareTo( final @NotNull GowingPackableThingHolder rhs ) {
 
         return _name.compareTo( rhs.getName() );
 

@@ -49,9 +49,9 @@ public class GowingPackableKeyValuePair<K, V> extends GowingAbstractPackableEnti
         @Override
         @NotNull
         public GowingPackable createEntity(
-                @NotNull final GowingUnPacker unPacker,
-                @NotNull final GowingPackedEntityBundle bundle,
-                @NotNull final GowingEntityReference er
+                final @NotNull GowingUnPacker unPacker,
+                final @NotNull GowingPackedEntityBundle bundle,
+                final @NotNull GowingEntityReference er
         ) {
 
             return new GowingPackableKeyValuePair( unPacker, bundle, er );
@@ -82,7 +82,7 @@ public class GowingPackableKeyValuePair<K, V> extends GowingAbstractPackableEnti
 
     public GowingPackableKeyValuePair(
             final GowingUnPacker unPacker,
-            @NotNull final GowingPackedEntityBundle bundle,
+            final @NotNull GowingPackedEntityBundle bundle,
             final GowingEntityReference er
     ) {
 
@@ -109,7 +109,7 @@ public class GowingPackableKeyValuePair<K, V> extends GowingAbstractPackableEnti
 
     @NotNull
     @Override
-    public GowingPackedEntityBundle bundleThyself( final boolean isPackingSuper, @NotNull final GowingPacker packer ) {
+    public GowingPackedEntityBundle bundleThyself( final boolean isPackingSuper, final @NotNull GowingPacker packer ) {
 
         GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
                 ENTITY_TYPE_NAME,
@@ -127,7 +127,7 @@ public class GowingPackableKeyValuePair<K, V> extends GowingAbstractPackableEnti
     }
 
     @Override
-    public boolean finishUnpacking( @NotNull final GowingUnPacker unPacker ) {
+    public boolean finishUnpacking( final @NotNull GowingUnPacker unPacker ) {
 
         if ( _keyReference instanceof GowingEntityReference && !unPacker.isEntityFinished( (GowingEntityReference)_keyReference ) ) {
 
@@ -251,7 +251,7 @@ public class GowingPackableKeyValuePair<K, V> extends GowingAbstractPackableEnti
 
     }
 
-    public static boolean isClassSupported( @NotNull final Class entityClass ) {
+    public static boolean isClassSupported( final @NotNull Class entityClass ) {
 
         @SuppressWarnings("UnnecessaryLocalVariable") boolean rval = s_factories.containsKey( entityClass.getCanonicalName() );
 

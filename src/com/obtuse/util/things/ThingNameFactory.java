@@ -5,7 +5,7 @@
 
 package com.obtuse.util.things;
 
-import com.obtuse.ui.MessageLabel;
+import com.obtuse.ui.ObtuseMessageLabel;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
@@ -34,7 +34,7 @@ public interface ThingNameFactory {
      */
 
     @NotNull
-    Optional<MessageLabel.AugmentedMessage> validateNameSyntax( String proposedName );
+    Optional<ObtuseMessageLabel.AugmentedMessage> validateNameSyntax( String proposedName );
 
     /**
      Get the name of the type of thing that this factory deals with.

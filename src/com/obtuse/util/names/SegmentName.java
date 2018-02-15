@@ -63,7 +63,7 @@ public class SegmentName implements Comparable<SegmentName> {
      </ul>
      */
 
-    public SegmentName( @NotNull final String segmentName ) {
+    public SegmentName( final @NotNull String segmentName ) {
         super();
 
         String trimmedSegmentName = segmentName.trim();
@@ -165,7 +165,7 @@ public class SegmentName implements Comparable<SegmentName> {
      This method returns 0 if-and-only-if {@code equals( rhs )} would return true.
      */
 
-    public int compareTo( @NotNull final SegmentName rhs ) {
+    public int compareTo( final @NotNull SegmentName rhs ) {
 
         return _segmentName.compareTo( rhs._segmentName );
 

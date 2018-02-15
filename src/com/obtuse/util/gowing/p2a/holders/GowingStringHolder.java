@@ -15,7 +15,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class GowingStringHolder extends GowingAbstractPackableHolder {
 
-    public GowingStringHolder( @NotNull final EntityName name, final String v, final boolean mandatory ) {
+    public GowingStringHolder( final @NotNull EntityName name, final String v, final boolean mandatory ) {
 
         super( name, GowingConstants.TAG_STRING, v, mandatory );
 

@@ -20,7 +20,7 @@ public class EntityNames {
 
     private final GowingPackable _entity;
 
-    public EntityNames( @NotNull final Collection<EntityName> entityNames, @NotNull final GowingPackable entity ) {
+    public EntityNames( final @NotNull Collection<EntityName> entityNames, final @NotNull GowingPackable entity ) {
 
         super();
 

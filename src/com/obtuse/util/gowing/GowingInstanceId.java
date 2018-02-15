@@ -111,7 +111,7 @@ public final class GowingInstanceId implements Comparable<GowingInstanceId> {
 
     }
 
-    public int compareTo( @NotNull final GowingInstanceId rhs ) {
+    public int compareTo( final @NotNull GowingInstanceId rhs ) {
 
         int rval = _typeName.compareTo( rhs._typeName );
         if ( rval == 0 ) {

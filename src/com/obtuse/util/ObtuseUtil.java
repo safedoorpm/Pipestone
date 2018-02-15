@@ -341,7 +341,7 @@ public class ObtuseUtil {
     @Contract(pure = true)
     @NotNull
     public static String formatCount(
-            final int count, @NotNull final String singular, @NotNull final String
+            final int count, final @NotNull String singular, final @NotNull String
             plural
     ) {
 
@@ -366,10 +366,10 @@ public class ObtuseUtil {
     }
 
     public static void getGrumpy(
-            @NotNull final String methodName,
-            @NotNull final String taskColloquialName,
-            @NotNull final String entityColloquialName,
-            @NotNull final Class<?> expectedClass,
+            final @NotNull String methodName,
+            final @NotNull String taskColloquialName,
+            final @NotNull String entityColloquialName,
+            final @NotNull Class<?> expectedClass,
             @Nullable final Object entity
     ) {
 
@@ -384,10 +384,10 @@ public class ObtuseUtil {
     }
 
     public static void mumbleQuietly(
-            @NotNull final String methodName,
-            @NotNull final String taskColloquialName,
-            @NotNull final String entityColloquialName,
-            @NotNull final Class<?> expectedClass,
+            final @NotNull String methodName,
+            final @NotNull String taskColloquialName,
+            final @NotNull String entityColloquialName,
+            final @NotNull Class<?> expectedClass,
             @Nullable final Object entity
     ) {
 
@@ -1049,7 +1049,7 @@ public class ObtuseUtil {
      */
 
     @SuppressWarnings({ "BooleanMethodNameMustStartWithQuestion" })
-    public static boolean appendBytesToFile( final byte@NotNull[] bytes, @NotNull final File file, final boolean printStackTraceOnError ) {
+    public static boolean appendBytesToFile( final byte@NotNull[] bytes, final @NotNull File file, final boolean printStackTraceOnError ) {
 
         FileOutputStream fs = null;
         try {
@@ -1126,7 +1126,7 @@ public class ObtuseUtil {
      @return {@code true} if it worked; {@code false} if it failed.
      */
 
-    public static boolean copyFile( @NotNull final File inputFile, @NotNull final File outputFile, final boolean tracebackOnError ) {
+    public static boolean copyFile( final @NotNull File inputFile, final @NotNull File outputFile, final boolean tracebackOnError ) {
 
         InputStream is = null;
         OutputStream os = null;
@@ -1882,7 +1882,7 @@ public class ObtuseUtil {
      Decode a string of hex digits as a byte array.
      */
 
-    public static @NotNull byte[] decodeHexAsByteArray( @NotNull final String hexString ) {
+    public static @NotNull byte[] decodeHexAsByteArray( final @NotNull String hexString ) {
 
         String hex = hexString.toLowerCase();
 
@@ -1945,7 +1945,7 @@ public class ObtuseUtil {
      @throws IndexOutOfBoundsException if the string is empty.
      */
 
-    public static String capitalize( @NotNull final String str ) {
+    public static String capitalize( final @NotNull String str ) {
 
         return str.substring( 0, 1 ).toUpperCase() + str.substring( 1 );
 
@@ -2536,7 +2536,7 @@ public class ObtuseUtil {
     }
 
     @Nullable
-    public static String parseJavaString( @NotNull final String javaString ) {
+    public static String parseJavaString( final @NotNull String javaString ) {
 
         if ( "null".equals( javaString ) ) {
 
@@ -2559,7 +2559,7 @@ public class ObtuseUtil {
     }
 
     @NotNull
-    public static String parseNakedJavaString( @NotNull final String nakedJavaString ) {
+    public static String parseNakedJavaString( final @NotNull String nakedJavaString ) {
 
         StringBuilder sb = new StringBuilder();
         int totalLength = nakedJavaString.length();
@@ -2663,7 +2663,7 @@ public class ObtuseUtil {
 
     }
 
-    public static @NotNull String computeMD5( @NotNull final byte data@NotNull[] ) {
+    public static @NotNull String computeMD5( final @NotNull byte data@NotNull[] ) {
 
         MessageDigest md5Algorithm;
         md5Algorithm = getMD5MessageDigest();
@@ -3013,7 +3013,7 @@ public class ObtuseUtil {
 
     }
 
-    public static @NotNull String fDim( @NotNull final String name, final Dimension d ) {
+    public static @NotNull String fDim( final @NotNull String name, final Dimension d ) {
 
         return name + "=" + ObtuseUtil.fDim( d );
 
@@ -3183,9 +3183,9 @@ public class ObtuseUtil {
     }
 
     public static boolean quietGowingSave(
-            @NotNull final EntityName groupName,
-            @NotNull final GowingPackable[] items,
-            @NotNull final File outputFile,
+            final @NotNull EntityName groupName,
+            final @NotNull GowingPackable[] items,
+            final @NotNull File outputFile,
             boolean verbose
     ) {
 
@@ -3228,9 +3228,9 @@ public class ObtuseUtil {
     }
 
     public static boolean quietGowingSave(
-            @NotNull final EntityName groupName,
-            @NotNull final GowingPackable item,
-            @NotNull final File outputFile,
+            final @NotNull EntityName groupName,
+            final @NotNull GowingPackable item,
+            final @NotNull File outputFile,
             boolean verbose
     ) {
 
@@ -3239,8 +3239,8 @@ public class ObtuseUtil {
     }
 
     public static Optional<GowingUnPackedEntityGroup> quietGowingUnPack(
-            @NotNull final File inputFile,
-            @NotNull final GowingEntityFactory[] gowingEntityFactories
+            final @NotNull File inputFile,
+            final @NotNull GowingEntityFactory[] gowingEntityFactories
     ) {
 
         Optional<GowingUnPackedEntityGroup> rval = Optional.empty();
@@ -3259,8 +3259,8 @@ public class ObtuseUtil {
     }
 
     public static Optional<GowingUnPackedEntityGroup> gowingUnPack(
-            @NotNull final File inputFile,
-            @NotNull final GowingEntityFactory[] gowingEntityFactories
+            final @NotNull File inputFile,
+            final @NotNull GowingEntityFactory[] gowingEntityFactories
     ) throws IOException, GowingUnpackingException {
 
         Optional<GowingUnPackedEntityGroup> maybeResult = Optional.empty();

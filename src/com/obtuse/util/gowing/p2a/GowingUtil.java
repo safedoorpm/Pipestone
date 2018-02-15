@@ -28,7 +28,7 @@ public class GowingUtil {
     }
 
     @SuppressWarnings("BooleanMethodIsAlwaysInverted")
-    public static boolean isActuallyPackable( @NotNull final GowingPackable entity ) {
+    public static boolean isActuallyPackable( final @NotNull GowingPackable entity ) {
 
         return !(entity instanceof GowingNotPackable);
 
@@ -96,10 +96,37 @@ public class GowingUtil {
 
     }
 
+    public static <T> T mustBe(
+            final @NotNull String methodName,
+            final @NotNull String entityColloquialName,
+            final @NotNull Class<T> expectedClass,
+            @Nullable final Object entity
+    ) {
+
+        if ( entity == null ) {
+
+            return null;
+
+        }
+
+        if ( expectedClass.isAssignableFrom( entity.getClass() ) ) {
+
+            @SuppressWarnings("unchecked") T rval = (T)entity;
+
+            return rval;
+
+        }
+
+        getGrumpy( methodName, entityColloquialName, expectedClass, entity );
+
+        return null;
+
+    }
+
     public static void getGrumpy(
-            @NotNull final String methodName,
-            @NotNull final String entityColloquialName,
-            @NotNull final Class<?> expectedClass,
+            final @NotNull String methodName,
+            final @NotNull String entityColloquialName,
+            final @NotNull Class<?> expectedClass,
             @Nullable final Object entity
     ) {
 
@@ -107,7 +134,7 @@ public class GowingUtil {
 
     }
 
-    public static void verifyActuallyPackable( @NotNull final String who, @Nullable final EntityName what, @NotNull final GowingPackable entity ) {
+    public static void verifyActuallyPackable( final @NotNull String who, @Nullable final EntityName what, final @NotNull GowingPackable entity ) {
 
         if ( !isActuallyPackable( entity ) ) {
 

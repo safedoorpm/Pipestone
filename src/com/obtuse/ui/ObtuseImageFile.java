@@ -149,9 +149,9 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
         @NotNull
         @Override
         public GowingPackable createEntity(
-                @NotNull final GowingUnPacker unPacker,
-                @NotNull final GowingPackedEntityBundle bundle,
-                @NotNull final GowingEntityReference er
+                final @NotNull GowingUnPacker unPacker,
+                final @NotNull GowingPackedEntityBundle bundle,
+                final @NotNull GowingEntityReference er
         ) {
 
             return new ObtuseImageFile( unPacker, bundle );
@@ -335,21 +335,21 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
 
     }
 
-    public ObtuseImageFile( @NotNull final File f )
+    public ObtuseImageFile( final @NotNull File f )
             throws BurkeImageFileInstanceCreationFailed {
 
         this( "ObtuseImageFile( File )", null, f, null );
 
     }
 
-    public ObtuseImageFile( @NotNull final ImageIcon imageIcon )
+    public ObtuseImageFile( final @NotNull ImageIcon imageIcon )
             throws BurkeImageFileInstanceCreationFailed {
 
         this( "ObtuseImageFile( ImageIcon )", null, null, imageIcon );
 
     }
 
-    public ObtuseImageFile( @NotNull final URL originalURL )
+    public ObtuseImageFile( final @NotNull URL originalURL )
             throws BurkeImageFileInstanceCreationFailed {
 
         this( "ObtuseImageFile( URL )", originalURL, null, null );
@@ -573,11 +573,11 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
 
      @param binfoFiles a {@link SortedMap}{@code <Integer,ObtuseImageFile>} containing what was recoverable from the provided array of {@code .binfo} files.
      @return an array of the BurkeImageFiles which were recoverable from the provided {@code .binfo} files.
-     @throws MessageLabel.AugmentedIllegalArgumentException if {@code dir} is not actually a directory.
+     @throws ObtuseMessageLabel.AugmentedIllegalArgumentException if {@code dir} is not actually a directory.
      */
 
     @NotNull
-    public static SortedMap<Integer, ObtuseImageFile> getSpecifiedBurkeInfoFiles( @NotNull final File@NotNull[] binfoFiles ) {
+    public static SortedMap<Integer, ObtuseImageFile> getSpecifiedBurkeInfoFiles( final @NotNull File@NotNull[] binfoFiles ) {
 
         SortedMap<Integer, ObtuseImageFile> rval = new TreeMap<>();
         for ( File f : binfoFiles ) {
@@ -792,7 +792,7 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
 
     }
 
-    private void setImageState( @NotNull final ImageState newState ) {
+    private void setImageState( final @NotNull ImageState newState ) {
 
         if ( _imageState == ImageState.BROKEN && newState != ImageState.BROKEN ) {
 
@@ -822,7 +822,7 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
         if ( _ourSerialNumber <= 0 ) {
 
             setImageState( ImageState.BROKEN );
-            throw new MessageLabel.AugmentedIllegalArgumentException(
+            throw new ObtuseMessageLabel.AugmentedIllegalArgumentException(
                     "too early to copy the image file to the cache - we haven't decided where it goes yet",
                     "need to call actuallyWriteImageInfoFile() method first"
             );
@@ -870,7 +870,7 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
                 if ( image == null ) {
 
                     setImageState( ImageState.BROKEN );
-                    throw new MessageLabel.AugmentedIllegalArgumentException(
+                    throw new ObtuseMessageLabel.AugmentedIllegalArgumentException(
                             "ObtuseImageFile#copyImageFileToCache:  didn't get an image from the File handling path",
                             "Tell Danny."
                     );
@@ -924,7 +924,7 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
                             if ( image == null ) {
 
                                 setImageState( ImageState.BROKEN );
-                                throw new MessageLabel.AugmentedIllegalArgumentException(
+                                throw new ObtuseMessageLabel.AugmentedIllegalArgumentException(
                                         "ObtuseImageFile#copyImageFileToCache:  didn't get an image from the URL handling path",
                                         "Tell Danny."
                                 );
@@ -942,7 +942,7 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
                     } else {
 
                         setImageState( ImageState.BROKEN );
-                        throw new MessageLabel.AugmentedIllegalArgumentException(
+                        throw new ObtuseMessageLabel.AugmentedIllegalArgumentException(
                                 "unable to load an image obtained via \"" + _originalURL + "\"" );
 
                     }
@@ -1455,7 +1455,7 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
 
     @NotNull
     private ImageIcon maybeRegenerateThumbnail(
-            @NotNull final ImageIcon originalImageIcon,
+            final @NotNull ImageIcon originalImageIcon,
             @SuppressWarnings("SameParameterValue") @Nullable final ImageIcon scaledImageIcon
     ) {
 
@@ -1584,7 +1584,7 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
 
     @NotNull
     @Override
-    public GowingPackedEntityBundle bundleThyself( final boolean isPackingSuper, @NotNull final GowingPacker packer ) {
+    public GowingPackedEntityBundle bundleThyself( final boolean isPackingSuper, final @NotNull GowingPacker packer ) {
 
         GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
                 ENTITY_TYPE_NAME,
@@ -1617,7 +1617,7 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
     }
 
     @Override
-    public boolean finishUnpacking( @NotNull final GowingUnPacker unPacker ) {
+    public boolean finishUnpacking( final @NotNull GowingUnPacker unPacker ) {
 
         return true;
 
@@ -1655,7 +1655,7 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
             }
 
             public void paintImage(
-                    @NotNull final Graphics origGraphics,
+                    final @NotNull Graphics origGraphics,
                     @Nullable final ObtuseImageFile bif,
                     final JPanel panel,
                     final Image image

@@ -34,14 +34,14 @@ public class LinearContainer3 extends JPanel implements LinearContainer {
 
     private boolean _trackParentBreadth;
 
-    public LinearContainer3( @NotNull final String name, final LinearOrientation orientation ) {
+    public LinearContainer3( final @NotNull String name, final LinearOrientation orientation ) {
 
         this( name, orientation, null, null );
 
     }
 
     LinearContainer3(
-            @NotNull final String name,
+            final @NotNull String name,
             final LinearOrientation orientation,
             @SuppressWarnings("SameParameterValue") final ContainerConstraints containerConstraints,
             @SuppressWarnings("SameParameterValue") final ComponentConstraints componentConstraints
@@ -63,7 +63,7 @@ public class LinearContainer3 extends JPanel implements LinearContainer {
 
     }
 
-    public static void watch( @NotNull final LinearContainer watched ) {
+    public static void watch( final @NotNull LinearContainer watched ) {
 
         if ( !_watchedContainers.contains( watched ) ) {
 
@@ -81,7 +81,7 @@ public class LinearContainer3 extends JPanel implements LinearContainer {
 
     }
 
-    public static void unWatch( @NotNull final LinearContainer watched ) {
+    public static void unWatch( final @NotNull LinearContainer watched ) {
 
         _watchedContainers.remove( watched );
 

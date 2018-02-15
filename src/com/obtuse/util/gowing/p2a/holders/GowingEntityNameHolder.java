@@ -15,7 +15,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class GowingEntityNameHolder extends GowingAbstractPackableHolder {
 
-    public GowingEntityNameHolder( @NotNull final EntityName name, final EntityName v, @SuppressWarnings("SameParameterValue") final boolean mandatory ) {
+    public GowingEntityNameHolder( final @NotNull EntityName name, final EntityName v, @SuppressWarnings("SameParameterValue") final boolean mandatory ) {
 
         super( name, GowingConstants.TAG_ENTITY_NAME, v, mandatory );
 

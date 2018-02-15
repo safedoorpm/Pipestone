@@ -16,19 +16,19 @@ import org.jetbrains.annotations.Nullable;
 
 public class GowingDoubleHolder extends GowingAbstractPackableHolder {
 
-    public GowingDoubleHolder( @NotNull final EntityName name, @Nullable final Double v, final boolean mandatory ) {
+    public GowingDoubleHolder( final @NotNull EntityName name, @Nullable final Double v, final boolean mandatory ) {
 
         super( name, GowingConstants.TAG_DOUBLE, v, mandatory );
 
     }
 
-    public GowingDoubleHolder( @NotNull final EntityName name, final double@NotNull[] v, @SuppressWarnings("SameParameterValue") final boolean mandatory ) {
+    public GowingDoubleHolder( final @NotNull EntityName name, final double@NotNull[] v, @SuppressWarnings("SameParameterValue") final boolean mandatory ) {
 
         super( name, GowingConstants.TAG_DOUBLE, v, mandatory, true );
 
     }
 
-    public GowingDoubleHolder( @NotNull final EntityName name, @Nullable final Double@NotNull[] v, @SuppressWarnings("SameParameterValue") final boolean mandatory ) {
+    public GowingDoubleHolder( final @NotNull EntityName name, @Nullable final Double@NotNull[] v, @SuppressWarnings("SameParameterValue") final boolean mandatory ) {
 
         super( name, GowingConstants.TAG_DOUBLE, v, mandatory, false );
 

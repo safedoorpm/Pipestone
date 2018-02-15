@@ -47,9 +47,9 @@ public class LinearCache3 implements LinearLayoutManagerCache {
     private boolean _trackAdjusting = false;
 
     public LinearCache3(
-            @NotNull final LinearLayoutManager3 linearLayoutManager,
-            @NotNull final LinearContainer3 target,
-            @NotNull final Hashtable<Component, LinearLayoutManager3.ConstraintsTable> allConstraints
+            final @NotNull LinearLayoutManager3 linearLayoutManager,
+            final @NotNull LinearContainer3 target,
+            final @NotNull Hashtable<Component, LinearLayoutManager3.ConstraintsTable> allConstraints
     ) {
 
         super();

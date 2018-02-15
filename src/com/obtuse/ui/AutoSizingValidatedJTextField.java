@@ -98,7 +98,7 @@ public abstract class AutoSizingValidatedJTextField extends ValidatedJTextField 
      */
 
     @SuppressWarnings({"unused","UnusedReturnValue"})
-    public static <T extends JTextField> T configureAutoSizeAdjustingJTextField( @NotNull final T jtf, final int minWidth, final int maxWidth ) {
+    public static <T extends JTextField> T configureAutoSizeAdjustingJTextField( final @NotNull T jtf, final int minWidth, final int maxWidth ) {
 
         jtf.setMinimumSize( new Dimension( minWidth, jtf.getMinimumSize().height ) );
         jtf.setMaximumSize( new Dimension( maxWidth, jtf.getMaximumSize().height ) );
@@ -118,7 +118,7 @@ public abstract class AutoSizingValidatedJTextField extends ValidatedJTextField 
      */
 
     @SuppressWarnings({"unused","UnusedReturnValue"})
-    public static <T extends JTextField> T configureAutoSizeAdjustingJTextField( @NotNull final T jtf ) {
+    public static <T extends JTextField> T configureAutoSizeAdjustingJTextField( final @NotNull T jtf ) {
 
         jtf.getDocument().addDocumentListener( new AutoAdjustingTextFieldWidthListener( jtf ) );
 

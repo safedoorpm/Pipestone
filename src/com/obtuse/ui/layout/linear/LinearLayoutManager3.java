@@ -47,7 +47,7 @@ public class LinearLayoutManager3 implements LayoutManager2 {
 
         private final boolean _enabled;
 
-        public SimpleConstraint( @SuppressWarnings("SameParameterValue") @NotNull final String name, final boolean enabled ) {
+        public SimpleConstraint( @SuppressWarnings("SameParameterValue") final @NotNull String name, final boolean enabled ) {
 
             super();
 
@@ -122,8 +122,8 @@ public class LinearLayoutManager3 implements LayoutManager2 {
     private LinearLayoutManagerCache _cache;
 
     public LinearLayoutManager3(
-            @NotNull final LinearOrientation orientation,
-            @NotNull final LinearContainer3 target
+            final @NotNull LinearOrientation orientation,
+            final @NotNull LinearContainer3 target
     ) {
 
         super();

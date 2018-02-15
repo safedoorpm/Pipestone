@@ -40,9 +40,9 @@ public class LinearFlagName extends GowingPackableName {
         @Override
         @NotNull
         public GowingPackable createEntity(
-                @NotNull final GowingUnPacker unPacker,
-                @NotNull final GowingPackedEntityBundle bundle,
-                @NotNull final GowingEntityReference er
+                final @NotNull GowingUnPacker unPacker,
+                final @NotNull GowingPackedEntityBundle bundle,
+                final @NotNull GowingEntityReference er
         ) {
 
             return new LinearFlagName( unPacker, bundle );
@@ -101,7 +101,7 @@ public class LinearFlagName extends GowingPackableName {
     }
 
     @NotNull
-    public GowingPackedEntityBundle bundleThyself( final boolean isPackingSuper, @NotNull final GowingPacker packer ) {
+    public GowingPackedEntityBundle bundleThyself( final boolean isPackingSuper, final @NotNull GowingPacker packer ) {
 
         @SuppressWarnings("UnnecessaryLocalVariable")
         GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
@@ -121,7 +121,7 @@ public class LinearFlagName extends GowingPackableName {
 
     }
 
-    public static String describe( @NotNull final Collection<LinearFlagNameValue> flags ) {
+    public static String describe( final @NotNull Collection<LinearFlagNameValue> flags ) {
 
         synchronized ( s_knownFlags ) {
 

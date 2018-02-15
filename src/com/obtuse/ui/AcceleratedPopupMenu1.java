@@ -30,7 +30,7 @@ public class AcceleratedPopupMenu1 extends JPopupMenu {
     private JMenuItem _secondMenuItem;
     private List<JMenuItem> _wordMenuItems;
 
-    public AcceleratedPopupMenu1( @NotNull final String@NotNull [] words ) {
+    public AcceleratedPopupMenu1( final @NotNull String@NotNull [] words ) {
         super();
 
         _frame.setContentPane( _panel );

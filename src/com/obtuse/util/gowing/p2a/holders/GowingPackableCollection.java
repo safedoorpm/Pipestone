@@ -85,7 +85,7 @@ public class GowingPackableCollection<E> extends ArrayList<E> implements GowingP
 
         @Override
         @NotNull
-        public GowingPackable createEntity( @NotNull final GowingUnPacker unPacker, @NotNull final GowingPackedEntityBundle bundle, @NotNull final GowingEntityReference er ) {
+        public GowingPackable createEntity( final @NotNull GowingUnPacker unPacker, final @NotNull GowingPackedEntityBundle bundle, final @NotNull GowingEntityReference er ) {
 
             return new GowingPackableCollection( unPacker, bundle );
 
@@ -161,9 +161,9 @@ public class GowingPackableCollection<E> extends ArrayList<E> implements GowingP
      */
 
     public static <T> boolean addAll(
-            @NotNull final Collection<? super T> dest,
-            @NotNull final GowingUnPacker unPacker,
-            @NotNull final GowingEntityReference src
+            final @NotNull Collection<? super T> dest,
+            final @NotNull GowingUnPacker unPacker,
+            final @NotNull GowingEntityReference src
     ) {
 
         @SuppressWarnings("unchecked") GowingPackableCollection<T> tmp = (GowingPackableCollection<T>)unPacker.resolveReference( src );
@@ -181,7 +181,7 @@ public class GowingPackableCollection<E> extends ArrayList<E> implements GowingP
      */
 
     @Override
-    public boolean finishUnpacking( @NotNull final GowingUnPacker unPacker ) {
+    public boolean finishUnpacking( final @NotNull GowingUnPacker unPacker ) {
 
 //        Logger.logMsg( "GowingPackableCollection.finishUnpacking:  unpacking " + unPacker.getCurrentEntityReference() );
 
@@ -239,7 +239,7 @@ public class GowingPackableCollection<E> extends ArrayList<E> implements GowingP
 
     @NotNull
     @Override
-    public GowingPackedEntityBundle bundleThyself( final boolean isPackingSuper, @NotNull final GowingPacker packer ) {
+    public GowingPackedEntityBundle bundleThyself( final boolean isPackingSuper, final @NotNull GowingPacker packer ) {
 
         GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
                 ENTITY_TYPE_NAME,

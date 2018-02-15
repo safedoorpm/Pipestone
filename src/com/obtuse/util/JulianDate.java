@@ -92,7 +92,7 @@ public class JulianDate {
      * @return the Julian day for the specified {@link java.util.Date}.
      */
 
-    public static synchronized long toJulian( @NotNull final Date date ) {
+    public static synchronized long toJulian( final @NotNull Date date ) {
 
         JulianDate.s_gregorianCalendar.setTime( date );
         int yy = JulianDate.s_gregorianCalendar.get( Calendar.YEAR );

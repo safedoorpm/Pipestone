@@ -145,7 +145,7 @@ public class Logger {
 
     }
 
-    public static void maybeLogMsg( @NotNull final Supplier<String> composeLoggingMsg ) {
+    public static void maybeLogMsg( final @NotNull Supplier<String> composeLoggingMsg ) {
 
         if ( Logger.s_loggingEnabled ) {
 
@@ -156,7 +156,7 @@ public class Logger {
 
     }
 
-    public static void maybeLogErr( @NotNull final Supplier<String> composeLoggingMsg ) {
+    public static void maybeLogErr( final @NotNull Supplier<String> composeLoggingMsg ) {
 
         if ( Logger.s_loggingEnabled ) {
 
@@ -167,7 +167,7 @@ public class Logger {
 
     }
 
-    public static int pushNesting( @NotNull final String levelName ) {
+    public static int pushNesting( final @NotNull String levelName ) {
 
         Logger.logMsg( "{ " + levelName );
 
@@ -191,7 +191,7 @@ public class Logger {
 
     }
 
-    public static int popNestingLevel( @NotNull final String levelName ) {
+    public static int popNestingLevel( final @NotNull String levelName ) {
 
         synchronized ( _nestingLevelLock ) {
 
@@ -513,7 +513,7 @@ public class Logger {
      <p/>Expect bad things to happen if from within a call to the {@link Function}{@code <String,Boolean>} instance's {@code Boolean apply( String targetString )} method, you try to log something which is matched by your vetoer or attempt to add or remove a vetoer.
      */
 
-    public synchronized void addLogLineVetoer( @NotNull final String targetString, @NotNull final Function<String, Boolean> vetoer ) {
+    public synchronized void addLogLineVetoer( final @NotNull String targetString, final @NotNull Function<String, Boolean> vetoer ) {
 
         synchronized ( s_interestingStuff ) {
 
@@ -537,7 +537,7 @@ public class Logger {
      @param vetoer       the {@link Function}{@code <String,Boolean>} instance previously added for the specified target string.
      */
 
-    public synchronized void cancelLineFilter( @NotNull final String targetString, @NotNull final Function<String, Boolean> vetoer ) {
+    public synchronized void cancelLineFilter( final @NotNull String targetString, final @NotNull Function<String, Boolean> vetoer ) {
 
         // Get rid of any existing instances of the specified matcher for the specified key.
 
@@ -563,7 +563,7 @@ public class Logger {
      @param vetoer a {@link Function}{@code <String,Boolean>} to be used to identify vetoers which are to be deleted.
      */
 
-    public synchronized void cancelLineFilters( @NotNull final Function<String, Boolean> vetoer ) {
+    public synchronized void cancelLineFilters( final @NotNull Function<String, Boolean> vetoer ) {
 
         // Get rid of any existing instances of the specified matcher for the specified key.
 
@@ -795,7 +795,7 @@ public class Logger {
 
     }
 
-    public static void logMsgs( @NotNull final String@NotNull[] lines ) {
+    public static void logMsgs( final @NotNull String@NotNull[] lines ) {
 
         for ( String line : lines ) {
 

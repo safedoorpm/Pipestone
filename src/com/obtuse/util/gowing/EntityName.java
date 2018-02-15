@@ -21,7 +21,7 @@ public final class EntityName implements Comparable<EntityName> {
 
     private final String _name;
 
-    public EntityName( @NotNull final String name ) {
+    public EntityName( final @NotNull String name ) {
 
         super();
 
@@ -55,7 +55,7 @@ public final class EntityName implements Comparable<EntityName> {
     }
 
     @Override
-    public int compareTo( @NotNull final EntityName entityName ) {
+    public int compareTo( final @NotNull EntityName entityName ) {
 
         return _name.compareTo( entityName._name );
 
