@@ -13,11 +13,13 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
+import javax.swing.text.JTextComponent;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.LinkedList;
+import java.util.Optional;
 
 /*
  * Copyright © 2015 Obtuse Systems Corporation
@@ -582,19 +584,28 @@ public class LinearLayoutUtil {
         StringBuilder sb = new StringBuilder();
         if ( c instanceof LinearContainer ) {
 
-            sb.append( "{" ).append( c.getName() ).append( "}" );
+            sb.append( "{ name=" ).append( ObtuseUtil.enquoteToJavaString( c.getName() ) ).append( " }" );
 
-        } else if ( c instanceof JButton ) {
+        } else if ( c instanceof AbstractButton ) {
 
-            sb.append( "button \"" ).append( ( (JButton)c).getText() ).append( "\"" );
+            sb.append( c.getClass().getCanonicalName() )
+              .append( "( label=" )
+              .append( ObtuseUtil.enquoteToJavaString( ( (AbstractButton)c).getText() ) )
+              .append( " )" );
 
         } else if ( c instanceof JLabel ) {
 
-            sb.append( "label " ).append( ObtuseUtil.enquoteToJavaString(((JLabel)c).getText() ) );
+            sb.append( c.getClass().getCanonicalName() )
+              .append( "( label=" )
+              .append( ObtuseUtil.enquoteToJavaString( ((JLabel)c).getText() ) )
+              .append( " )" );
 
         } else {
 
-            sb.append( c.getClass().getCanonicalName() );
+            sb.append( c.getClass().getCanonicalName() )
+              .append( "( name=" )
+              .append( ObtuseUtil.enquoteToJavaString( c.getName() ) )
+              .append( " )" );
 
         }
 
@@ -614,9 +625,182 @@ public class LinearLayoutUtil {
 
     }
 
-    public static void describeGuiEntity( final String why, final Container container ) {
+    public static String showIt( final @Nullable Component component ) {
 
-        Logger.logMsg( ( why == null ? "" : why + ":  " ) +
+        if ( component == null ) {
+
+            return "component is null";
+
+        } else if ( component instanceof JTextComponent ) {
+
+            return component.getClass().getCanonicalName() + "( " + ObtuseUtil.enquoteToJavaString( ((JTextComponent)component).getText() ) + " )";
+
+        } else if ( component instanceof JLabel ) {
+
+            return component.getClass().getCanonicalName() + "( " + ObtuseUtil.enquoteToJavaString( ((JLabel)component).getText() ) + " )";
+
+        } else if ( component instanceof AbstractButton ) {
+
+            return component.getClass().getCanonicalName() +"( " + ObtuseUtil.enquoteToJavaString( ((AbstractButton)component).getText() ) + " )";
+
+        } else {
+
+            return "{ " + component + " }";
+
+        }
+
+    }
+
+    public static boolean isShowable( final @Nullable Component component ) {
+
+        return !showIt( component ).startsWith( "{" );
+
+    }
+
+    public static void describeFullyContainerContents( final @NotNull String why, final @Nullable Component component ) {
+
+        Logger.logMsg( "~>~>~>~>~>~>~>~>~>~>~>~>~>~>~>" );
+        try {
+
+            if ( component == null ) {
+
+                Logger.logMsg( why + " - component is null" );
+
+                return;
+
+            } else { // if ( isShowable( component ) ) {
+
+                Logger.logMsg( why + " - " + ( component.isVisible() ? "visible" : ( "invisible " + component.getName() ) ) + " " + showIt( component ) );
+
+    //            return;
+
+            }
+
+//        Logger.logMsg(
+//                why + " - " +
+//                ( component.isVisible() ? "visible" : ( "invisible " + component.getName() ) ) + " " +
+//                component.getClass().getCanonicalName() +
+//                "[[["
+//        );
+            describeFullyContainerContents( 1, why, component );
+//        Logger.logMsg( "]]]" );
+
+        } finally {
+
+            Logger.logMsg( "<~<~<~<~<~<~<~<~<~<~<~<~<~<~<~" );
+
+        }
+
+    }
+
+    public static void describeFullyContainerContents( final int depth, final @NotNull String why, final @Nullable Component component ) {
+
+        doitDescribeFullyContainerContents( depth, "", why, component );
+
+        ObtuseUtil.doNothing();
+
+    }
+
+    private static void doitDescribeFullyContainerContents( final int depth, final @NotNull String cBlConstraint, final @NotNull String why, final @Nullable Component component ) {
+
+        if ( component == null ) {
+
+            Logger.logMsg( ObtuseUtil.replicate( "  ", depth ) + cBlConstraint + "component is null" );
+
+        } else {
+
+            String description;
+            String formattedComponentName = fullName( component );
+
+            description = ( component.isVisible() ? "visible" : ( "invisible " + component.getName() ) ) + " " +
+                          formattedComponentName + ObtuseUtil.fBounds( component.getBounds() ) +
+                          ( component instanceof JComponent ? ( (JComponent)component).getInsets().toString() : "" ) +
+                          ":  " + component;
+
+            Logger.logMsg( ObtuseUtil.replicate( "  ", depth ) + cBlConstraint + "[[[ " + description );
+
+            if ( component instanceof Container ) {
+                LayoutManager lm = ((Container)component).getLayout();
+                BorderLayout bl = lm instanceof BorderLayout ? (BorderLayout)lm : null;
+
+                for ( Component c : ((Container)component).getComponents() ) {
+
+                    String blConstraint = getBorderLayoutConstraint( bl, c );
+
+                    if ( c instanceof Container ) {
+
+                        if ( isShowable( c ) ) {
+
+                            Logger.logMsg( ObtuseUtil.replicate( "  ", depth + 1 ) + blConstraint + showIt( c ) );
+
+                        } else {
+
+                            doitDescribeFullyContainerContents( depth + 1, blConstraint, why, c );
+
+                        }
+
+                    } else {
+
+                        Logger.logMsg( ObtuseUtil.replicate( "  ", depth ) + blConstraint + "component " );
+
+                    }
+
+                }
+            }
+
+            Logger.logMsg( ObtuseUtil.replicate( "  ", depth ) + "]]]" );
+
+        }
+    }
+
+    @NotNull
+    private static String getBorderLayoutConstraint( final BorderLayout bl, final Component c ) {
+
+        String blConstraint;
+        if ( bl == null ) {
+
+            blConstraint = "";
+
+        } else {
+
+            Object objConstraints = bl.getConstraints( c );
+            if ( objConstraints == null ) {
+
+                blConstraint = "null" + " ";
+
+            } else {
+
+                blConstraint = "" + objConstraints + " ";
+
+            }
+
+        }
+        return blConstraint;
+    }
+
+    public static void describeQuicklyGuiEntity( final String why, final @Nullable Container container ) {
+
+        describeGuiEntity( why, container, false, false );
+
+    }
+
+    public static void describeFullyGuiEntity( final String why, final @Nullable Container container ) {
+
+        describeGuiEntity( why, container, true, true );
+
+    }
+
+    public static void describeGuiEntity( final String why, final @Nullable Container container, final boolean recurse, final boolean showContents ) {
+
+        if ( container == null ) {
+
+            Logger.logMsg( "=== " + ( why == null ? "" : why ) + ":  container is null" );
+
+            return;
+
+        }
+
+        Logger.logMsg( "<<<" + ( ( why == null ? "" : why ) + ":  " ) +
                        "structure of container \"" +
                        container.getName() +
                        "\" is " +
@@ -626,9 +810,11 @@ public class LinearLayoutUtil {
 
         for ( Component c : container.getComponents() ) {
 
-            describeGuiEntity( 0, c, false, false );
+            describeGuiEntity( 1, c, recurse, showContents );
 
         }
+
+        Logger.logMsg( ">>>" );
 
         Logger.logMsg( "" );
 
@@ -637,11 +823,20 @@ public class LinearLayoutUtil {
     public static void describeGuiEntity( final int depth, final Component component, final boolean recurse, final boolean showContents ) {
 
         String formattedComponentName = fullName( component );
+        String description;
+        if ( component instanceof Container && isShowable( (Container)component ) ) {
+
+            description = showIt( (Container)component ); // "JLabel( " + ObtuseUtil.enquoteToJavaString( ((JLabel)component).getText() ) + " )";
+
+        } else {
+
+            description = formattedComponentName + ObtuseUtil.fBounds( component.getBounds() ) +
+                          ( component instanceof JComponent ? ((JComponent)component).getInsets().toString() : "" ) +
+                          ":  " + component;
+        }
         Logger.logMsg(
                 ObtuseUtil.replicate( "  ", depth ) +
-                formattedComponentName + ObtuseUtil.fBounds( component.getBounds() ) +
-                ( component instanceof JComponent ? ((JComponent)component).getInsets().toString() : "" ) +
-                ":  " + component
+                description
 //		name
 //		+ " is " + ObtuseUtil.fBounds( component.getBounds() ) +
 //		", min=" + ObtuseUtil.fDim( component.getMinimumSize() ) +
@@ -887,6 +1082,26 @@ public class LinearLayoutUtil {
             c = c.getParent();
 
         }
+
+    }
+
+    @NotNull
+    public static Optional<Window> findOurWindow( final Component component ) {
+
+        Component c = component;
+        for ( int i = 0; i < 1000; i += 1 ) {
+
+            if ( c instanceof Window ) {
+
+                return Optional.of((Window)c);
+
+            }
+
+            c = c.getParent();
+
+        }
+
+        return Optional.empty();
 
     }
 

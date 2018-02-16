@@ -6,6 +6,7 @@
 package com.obtuse.ui.selectors;
 
 import com.obtuse.ui.MyActionListener;
+import com.obtuse.util.UniqueEntity;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -34,7 +35,6 @@ public class ComboBoxSelectorPanel<E,C extends Container> extends SelectorPanel<
 
     @SuppressWarnings("FieldCanBeLocal") private final Box _comboBoxSelectorPanel = new Box( BoxLayout.X_AXIS );
 
-    private final JPanel _postSelectionPanel;
     @SuppressWarnings("FieldCanBeLocal") private final JLabel _selectorLabel;
 //    @SuppressWarnings("FieldCanBeLocal") private final BoxLayout _boxLayout;
 //    private final Function<E, C> _comboBoxComponentGetter;
@@ -63,7 +63,7 @@ public class ComboBoxSelectorPanel<E,C extends Container> extends SelectorPanel<
             final @NotNull Function<E,C> componentGetter,
             final boolean cacheSelections
     ) {
-        super( firstSelection != null, cacheSelections, componentGetter );
+        super( "comboBox selector panel " + UniqueEntity.getDefaultIdGenerator().getUniqueId(), firstSelection != null, cacheSelections, componentGetter );
 
         setLayout( new BorderLayout() );
 
@@ -82,12 +82,12 @@ public class ComboBoxSelectorPanel<E,C extends Container> extends SelectorPanel<
                     @Override
                     protected void myActionPerformed( final ActionEvent actionEvent ) {
 
-                        _postSelectionPanel.removeAll();
+                        clearPostSelectionPanelContents();
 
                         E key = _selectorComboBox.getItemAt( _selectorComboBox.getSelectedIndex() );
 
                         Optional<C> optComponent = getSelectedComponent( key );
-                        optComponent.ifPresent( c -> _postSelectionPanel.add( c, BorderLayout.CENTER ) );
+                        optComponent.ifPresent( c -> setPostSelectionPanelContents( c ) );
 
                         revalidate();
 
@@ -100,8 +100,7 @@ public class ComboBoxSelectorPanel<E,C extends Container> extends SelectorPanel<
         add( _comboBoxSelectorPanel, BorderLayout.NORTH );
 
 //        _borderLayout = new BorderLayout();
-        _postSelectionPanel = new JPanel( new BorderLayout() );
-        add( _postSelectionPanel, BorderLayout.CENTER );
+
         if ( isZeroASelection() ) {
 
             cacheSelection( _selectorComboBox.getItemAt( _selectorComboBox.getSelectedIndex() ), firstSelection );
@@ -112,12 +111,12 @@ public class ComboBoxSelectorPanel<E,C extends Container> extends SelectorPanel<
 //
 //            }
 
-            _postSelectionPanel.setVisible( true );
-            _postSelectionPanel.add( firstSelection );
+//            _postSelectionPanel.setVisible( true );
+            setPostSelectionPanelContents( firstSelection );
 
         }
 
-        add( _postSelectionPanel );
+//        add( _postSelectionPanel );
 
     }
 

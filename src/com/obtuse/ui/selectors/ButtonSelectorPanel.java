@@ -6,6 +6,9 @@
 package com.obtuse.ui.selectors;
 
 import com.obtuse.ui.MyActionListener;
+import com.obtuse.ui.layout.linear.LinearLayoutUtil;
+import com.obtuse.util.ObtuseUtil;
+import com.obtuse.util.UniqueEntity;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -31,11 +34,11 @@ public class ButtonSelectorPanel<C extends Container> extends SelectorPanel<Abst
     private final ButtonGroup _buttonGroup;
     private final JPanel _buttonPanel;
 //    private final Function<E, C> _componentGetter;
-    @SuppressWarnings("FieldCanBeLocal") private final BorderLayout _borderLayout;
+//    @SuppressWarnings("FieldCanBeLocal") private final BorderLayout _borderLayout;
 
 //    private final Box _comboBoxSelectorPanel = new Box( BoxLayout.X_AXIS );
 
-    private final JPanel _postSelectionPanel;
+//    private final JPanel _postSelectionPanel;
 //    private final JLabel _selectorLabel;
 //    private final BoxLayout _boxLayout;
 //    private final Function<String, C> _comboBoxComponentGetter;
@@ -122,15 +125,15 @@ public class ButtonSelectorPanel<C extends Container> extends SelectorPanel<Abst
             final @NotNull Function<AbstractButton,C> componentGetter,
             final boolean cacheSelections
     ) {
-        super( firstSelection != null, cacheSelections, componentGetter );
+        super( name + "(BSP #" + UniqueEntity.getDefaultIdGenerator().getUniqueId() + ")", firstSelection != null, cacheSelections, componentGetter );
 
 //        _selectionCache = cacheSelections ? new TreeMap<>() : null;
 
-        setLayout( new BorderLayout() );
+//        setLayout( new BorderLayout() );
 
 //        _buttonComponentGetter = componentGetter;
 
-        setName( name );
+        setName( getOurName() );
 
 //        _boxLayout = null;
 //        _comboBoxSelectorPanel.setLayout( _boxLayout );
@@ -138,6 +141,12 @@ public class ButtonSelectorPanel<C extends Container> extends SelectorPanel<Abst
 //        _comboBoxSelectorPanel.add( _selectorLabel );
 
         _buttonPanel = buttonPanel;
+        if ( _buttonPanel.getName() == null ) {
+
+            _buttonPanel.setName( "_buttonPanel" );
+
+        }
+
         _buttonGroup = buttonGroup;
 
         Enumeration<AbstractButton> enumeration = _buttonGroup.getElements();
@@ -150,14 +159,51 @@ public class ButtonSelectorPanel<C extends Container> extends SelectorPanel<Abst
                         @Override
                         protected void myActionPerformed( final ActionEvent actionEvent ) {
 
-                            _postSelectionPanel.removeAll();
+                            LinearLayoutUtil.describeFullyContainerContents(
+                                    "************ action( " + LinearLayoutUtil.describeComponent( ab ) + " )",
+                                    ButtonSelectorPanel.this
+                            );
+
+//                            LinearLayoutUtil.describeFullyContainerContents( "about to mark invisible in ButtonSelectorPanel", _postSelectionPanel );
+//                            for ( Component c : _postSelectionPanel.getComponents() ) {
+//
+//                                c.setVisible( false );
+//
+//                            }
+
+                            clearPostSelectionPanelContents();
+//                            _postSelectionPanel.setVisible( false );
+//                            _postSelectionPanel.revalidate();
+//
+//                            _postSelectionPanel.removeAll();
 
 //                            String key = ab.getText();
                             Optional<C> optComponent = getSelectedComponent( ab );
 
-                            optComponent.ifPresent( c -> _postSelectionPanel.add( c, BorderLayout.CENTER ) );
+                            if ( optComponent.isPresent() ) {
 
-                            revalidate();
+//                            }
+//                            optComponent.ifPresent( c -> {
+                                setPostSelectionPanelContents( optComponent.get() );
+//                                _postSelectionPanel.add( optComponent.get(), BorderLayout.CENTER );
+                                LinearLayoutUtil.describeFullyContainerContents( "ButtonSelectorPanel panel c", optComponent.get() );
+                                LinearLayoutUtil.describeFullyContainerContents( "ButtonSelectorPanel post panel", getPostSelectionPanel() );
+                                LinearLayoutUtil.describeFullyContainerContents( "sigh", ButtonSelectorPanel.this );
+                                ButtonSelectorPanel.this.invalidate();
+                                optComponent.get().invalidate();
+//                                optComponent.get().setVisible( true );
+//                                optComponent.get().validate();
+//                            } );
+
+                            } else {
+
+                                LinearLayoutUtil.describeFullyContainerContents( "ButtonSelectorPanel no panel inserted", getPostSelectionPanel() );
+
+                            }
+
+//                            _postSelectionPanel.setVisible( true );
+
+//                            _postSelectionPanel.revalidate();
 //
 //                            _postSelectionPanel.removeAll();
 //
@@ -233,14 +279,15 @@ public class ButtonSelectorPanel<C extends Container> extends SelectorPanel<Abst
 
         add( _buttonPanel, BorderLayout.NORTH );
 
-        _borderLayout = new BorderLayout();
-        _postSelectionPanel = new JPanel( _borderLayout );
-        add( _postSelectionPanel, BorderLayout.CENTER );
+//        _borderLayout = new BorderLayout();
+//        _postSelectionPanel = new JPanel( _borderLayout );
+//        add( _postSelectionPanel, BorderLayout.CENTER );
 
         if ( isZeroASelection() ) {
 
-            _postSelectionPanel.setVisible( true );
-            _postSelectionPanel.add( firstSelection );
+            setPostSelectionPanelContents( firstSelection );
+//            _postSelectionPanel.setVisible( true );
+//            _postSelectionPanel.add( firstSelection );
 
         }
 
@@ -249,6 +296,12 @@ public class ButtonSelectorPanel<C extends Container> extends SelectorPanel<Abst
 //        _selectorLabel = null;
 //        _comboBoxComponentGetter = null;
 
+        LinearLayoutUtil.describeFullyContainerContents(
+                "************ completely ready( " + getName() + " )",
+                ButtonSelectorPanel.this
+        );
+
+        ObtuseUtil.doNothing();
 
     }
 

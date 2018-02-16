@@ -5,12 +5,14 @@
 
 package com.obtuse.ui.selectors;
 
+import com.obtuse.ui.layout.linear.LinearLayoutUtil;
 import com.obtuse.util.Logger;
 import com.obtuse.util.ObtuseUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.util.Vector;
 import java.util.function.Function;
@@ -23,6 +25,11 @@ import java.util.function.Function;
 
 public class WrappedComboBoxSelectorPanel<CHOICE, PANEL extends JPanel> extends JPanel {
 
+    public enum DegenerateCase {
+        NO_ENTITIES,
+        ONE_ENTITY
+    }
+
     public interface CController<CCCHOICE,CCPANEL> {
 
         CCPANEL getPanel( @NotNull CCCHOICE choice );
@@ -34,6 +41,8 @@ public class WrappedComboBoxSelectorPanel<CHOICE, PANEL extends JPanel> extends 
         Vector<CCCHOICE> getUnspecifiedAndActualRepositories();
 
         String getPanelName();
+
+        String getDegenerateCaseMessage( DegenerateCase degenerateCase );
 
         String getPickListPrompt();
 
@@ -83,7 +92,7 @@ public class WrappedComboBoxSelectorPanel<CHOICE, PANEL extends JPanel> extends 
 
             if ( actualRepositories.isEmpty() ) {
 
-                _panel = new JLabel( "Nothing to choose from in " + _cController.getPanelName() );
+                _panel = new JLabel( _cController.getDegenerateCaseMessage( DegenerateCase.NO_ENTITIES ) ); // "Nothing to choose from in " + _cController.getPanelName() );
 
             } else {
 
@@ -105,9 +114,17 @@ public class WrappedComboBoxSelectorPanel<CHOICE, PANEL extends JPanel> extends 
 
         add( _panel, BorderLayout.CENTER );
 
+        LinearLayoutUtil.describeFullyGuiEntity( "WCBSP(container)", this );
+
     }
 
     public WrappedComboBoxSelectorPanel( final @NotNull Container container ) {
+
+        if ( container instanceof JLabel ) {
+
+            Logger.logMsg( "WCBSP:  container is JLabel( " + ObtuseUtil.enquoteToJavaString( ((JLabel)container).getText() ) + " )" );
+
+        }
 
         _degenerateCase = true;
         _panel = container;
@@ -117,6 +134,7 @@ public class WrappedComboBoxSelectorPanel<CHOICE, PANEL extends JPanel> extends 
 
         setLayout( new BorderLayout() );
         add( container, BorderLayout.CENTER );
+        LinearLayoutUtil.describeFullyGuiEntity( "WCBSP(container)", this );
 
     }
 
@@ -124,6 +142,29 @@ public class WrappedComboBoxSelectorPanel<CHOICE, PANEL extends JPanel> extends 
 
         return _degenerateCase;
 
+    }
+
+    public boolean setSubsidiaryPanelBorder( Border border ){
+
+        if ( _comboPanel != null ) {
+
+            _comboPanel.setSubsidiaryPanelBorder( border );
+
+            return true;
+
+        } else if ( _panel != null ) {
+
+            if ( _panel instanceof JComponent ) {
+
+                ( (JComponent)_panel ).setBorder( border );
+
+                return true;
+
+            }
+
+        }
+
+        return false;
     }
 
     public class InnerWrappedComboBoxSelectorPanel // <ICHOICE, IPANEL extends JPanel>
