@@ -5,12 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/selectors/BorderLayoutPanel.java" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/selectors/ButtonSelectorPanel.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/selectors/ButtonSelectorPanel.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/selectors/ComboBoxSelectorPanel.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/selectors/ComboBoxSelectorPanel.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/selectors/SelectorPanel.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/selectors/SelectorPanel.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/selectors/WrappedComboBoxSelectorPanel.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/selectors/WrappedComboBoxSelectorPanel.java" />
     </list>
     <ignored path="Pipestone.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -1451,14 +1446,7 @@
       <workItem from="1515051511079" duration="2024000" />
       <workItem from="1518684577942" duration="413000" />
       <workItem from="1518806158298" duration="4330000" />
-      <workItem from="1518852593888" duration="747000" />
-    </task>
-    <task id="LOCAL-00003" summary="Changes to workspace.xml file as a result of using this project's src directories as content roots in other IntelliJ projects.">
-      <created>1370818276346</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1370818276346</updated>
+      <workItem from="1518852593888" duration="1074000" />
     </task>
     <task id="LOCAL-00004" summary="Implement a ValidatedJTextField class that makes it easier to manage the validation of JTextField values.">
       <created>1371722617036</created>
@@ -1796,11 +1784,18 @@
       <option name="project" value="LOCAL" />
       <updated>1518806819941</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="Lots of cleanup of the selector panels.&#10;Implement a new BorderLayoutPanel class that assigns itself a BorderLayout instance and then refuses to let anyone change its layout manager. This avoids some very strange behaviour that can result if one is not careful about when BorderLayout instances are assigned to a panel that is intended to use that layout manager. See the new BorderLayoutPanel class' Javadocs for more info.">
+      <created>1518855320668</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1518855320668</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="798625000" />
+    <option name="totallyTimeSpent" value="798952000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1936,7 +1931,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Cleanup of the sorted JPanel facility (not really ready for primetime yet)." />
     <MESSAGE value="A sorted JPanel mechanism which keeps its components in sorted order.&#10;&#10;Various enhancements to the TreeSorter class inspired by the needs of the sorted JPanel mechanism." />
     <MESSAGE value="Reasonably robust sorted panels.&#10;Considerable cleanup, testing and even some bug fixing of ObtuseCalendarDate and ObtuseApproximateCalendarDate." />
     <MESSAGE value="Experimenting with Java 8's Optional mechanism and incorporating into a few places (most notably, the Gowing facility)." />
@@ -1961,7 +1955,8 @@
     <MESSAGE value="Make more classes Gowing-compatible.&#10;Fix a defect in Gowing where empty objects would get a version number of -1 during restoration instead of their actual version number.&#10;Specify the nullability of arrays separately from their contents in all sorts of places.&#10;Ensure that RelativePath instances appear to have an empty list of path instances during construction (this ensures that RelativePath.toString doesn't explode if used during construction).&#10;Lots of cleanup in a wide array of classes." />
     <MESSAGE value="Add lots and lots of final, @NotNull, and @Nullable attributes.&#10;&#10;Implement reasonably easy to use button and combo-box based selector panels.&#10;&#10;The usual mountain of cleanup." />
     <MESSAGE value="Basic sanity returns in my button and combo-box wrapping classes.&#10;&#10;The ButtonSelectorPanel class and the ComboBoxSelectorPanel class both derive from the SelectorPanel class which itself derives from the JPanel class. I had the SelectorPanel constructor setting its layout manager to a BorderLayout instance and then add a couple of things to its super-class (i.e. to the JPanel). I had also at some point recently, had the ButtonSelectorPanel constructor set its layout manager to a different BorderLayout instance and then add a couple of things to the JPanel (i.e. its super-super-class).&#10;&#10;The result was that when the JPanel was rendered, the things that the SelectorPanel class added to the JPanel did not appear. When I listed out the contents of the JPanel and found that the now invisible things were actually in the JPanel, things got just a bit mysterious.&#10;&#10;Well . . . it turns out that the BorderLayout manager keeps track of what it is supposed to layout as things are added to the Container instance that it is responsible for. This means that when you assign a BorderLayout instance as the layout manager for a Container, anything already in the Container before said assignment is ignored by the BorderLayout instance. The result is that things which are actually in the Container don't get laid out and thus don't get rendered.&#10;&#10;Sigh.&#10;&#10;Moral of this story is that one should assign the BorderLayout manager to a Container BEFORE one puts anything in the Container (unless one is looking for an roughly three day long &quot;learning opportunity&quot; like the one that I just went through).&#10;&#10;P.S. This commit also adds some not all that well thought out &quot;tell me about this container and its contents&quot; utility methods to the LinearLayoutManager class. These will (hopefully) get cleaned up soon to the point where they are actually useful." />
-    <option name="LAST_COMMIT_MESSAGE" value="Basic sanity returns in my button and combo-box wrapping classes.&#10;&#10;The ButtonSelectorPanel class and the ComboBoxSelectorPanel class both derive from the SelectorPanel class which itself derives from the JPanel class. I had the SelectorPanel constructor setting its layout manager to a BorderLayout instance and then add a couple of things to its super-class (i.e. to the JPanel). I had also at some point recently, had the ButtonSelectorPanel constructor set its layout manager to a different BorderLayout instance and then add a couple of things to the JPanel (i.e. its super-super-class).&#10;&#10;The result was that when the JPanel was rendered, the things that the SelectorPanel class added to the JPanel did not appear. When I listed out the contents of the JPanel and found that the now invisible things were actually in the JPanel, things got just a bit mysterious.&#10;&#10;Well . . . it turns out that the BorderLayout manager keeps track of what it is supposed to layout as things are added to the Container instance that it is responsible for. This means that when you assign a BorderLayout instance as the layout manager for a Container, anything already in the Container before said assignment is ignored by the BorderLayout instance. The result is that things which are actually in the Container don't get laid out and thus don't get rendered.&#10;&#10;Sigh.&#10;&#10;Moral of this story is that one should assign the BorderLayout manager to a Container BEFORE one puts anything in the Container (unless one is looking for an roughly three day long &quot;learning opportunity&quot; like the one that I just went through).&#10;&#10;P.S. This commit also adds some not all that well thought out &quot;tell me about this container and its contents&quot; utility methods to the LinearLayoutManager class. These will (hopefully) get cleaned up soon to the point where they are actually useful." />
+    <MESSAGE value="Lots of cleanup of the selector panels.&#10;Implement a new BorderLayoutPanel class that assigns itself a BorderLayout instance and then refuses to let anyone change its layout manager. This avoids some very strange behaviour that can result if one is not careful about when BorderLayout instances are assigned to a panel that is intended to use that layout manager. See the new BorderLayoutPanel class' Javadocs for more info." />
+    <option name="LAST_COMMIT_MESSAGE" value="Lots of cleanup of the selector panels.&#10;Implement a new BorderLayoutPanel class that assigns itself a BorderLayout instance and then refuses to let anyone change its layout manager. This avoids some very strange behaviour that can result if one is not careful about when BorderLayout instances are assigned to a panel that is intended to use that layout manager. See the new BorderLayoutPanel class' Javadocs for more info." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -2486,6 +2481,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="424">
           <caret line="193" column="0" lean-forward="false" selection-start-line="193" selection-start-column="0" selection-end-line="193" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2543,6 +2539,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2557,6 +2554,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="912">
           <caret line="51" column="31" lean-forward="false" selection-start-line="51" selection-start-column="31" selection-end-line="51" selection-end-column="31" />
+          <folding />
         </state>
       </provider>
     </entry>
