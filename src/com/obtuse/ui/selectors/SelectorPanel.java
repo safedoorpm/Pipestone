@@ -21,7 +21,7 @@ import java.util.function.Function;
  Provide a unified view of the button and combo-box selectors.
  */
 
-public abstract class SelectorPanel<E,C extends Container> extends JPanel {
+public abstract class SelectorPanel<E,C extends Container> extends BorderLayoutPanel {
 
     private final Function<E, C> _componentGetter;
     private boolean _isZeroASelection;
@@ -31,8 +31,6 @@ public abstract class SelectorPanel<E,C extends Container> extends JPanel {
     private final Map<E,C> _selectionCache;
 
     private final String _ourName;
-
-    private LayoutManager _ourLayoutManager = null;
 
     protected SelectorPanel(
             final @NotNull String ourName,
@@ -55,8 +53,8 @@ public abstract class SelectorPanel<E,C extends Container> extends JPanel {
         _postSelectionPanel = new JPanel( new BorderLayout() );
         _postSelectionPanel.setName( ourName + " postSelectionPanel" );
         add( _postSelectionPanel, BorderLayout.CENTER );
-        add( new JLabel( "post south" ), BorderLayout.SOUTH );
-        _postSelectionPanel.add( new JLabel( "North" ), BorderLayout.NORTH );
+//        add( new JLabel( "post south" ), BorderLayout.SOUTH );
+//        _postSelectionPanel.add( new JLabel( "North" ), BorderLayout.NORTH );
 
         ObtuseUtil.doNothing();
 
@@ -69,78 +67,29 @@ public abstract class SelectorPanel<E,C extends Container> extends JPanel {
 
     }
 
-    /**
-     This method throws an {@link IllegalArgumentException} if an attempt is made to set
-     our layout manager once it has been set to be a {@link BorderLayout} instance.
-     <p>This intercept method exists because we spent about a day and a half discovering that we had
-     set our layout manager to our intended {@code BorderLayout} layout manager, added some components in specified places,
-     set out layout manager to a second {@code BorderLayout} layout manager instance, added more components in specified places.
-     The symptom was that the components added before we assigned ourselves our second {@code BorderLayout} manager instance
-     simply and silently disappeared (probably because the {@code BorderLayout} manager keeps track of its components itself
-     so if you change to a different {@code BorderLayout} manager instance halfway through the ball game then you simply lose
-     the components added before the change.</p>
-     <p>Double drat rat fooey!!!</p>
-     <p>-Danny</p>
-     @param mgr the layout manager that we should use.
-     @throws IllegalArgumentException if an attempt is made to set our layout manager after it has been set to be a {@code BorderLayout} manager.
-     */
-
-    public void setLayout( final LayoutManager mgr ) {
-
-        if ( _ourLayoutManager != null && _ourLayoutManager instanceof BorderLayout ) {
-
-            throw new IllegalArgumentException( "SelectorPanel:  really bad idea to change layout manager once we've given ourselves a BorderLayout manager - bye!" );
-
-        }
-
-        if ( _ourLayoutManager == null ) {
-
-            Logger.logMsg(
-                    "SelectorPanel.setLayout:  setting LayoutManager to " +
-                    ( mgr == null ? "null" : mgr.getClass().getCanonicalName() )
-            );
-
-        } else {
-
-            Logger.logMsg(
-                    "SelectorPanel.setLayout:  replacing LayoutManager " + _ourLayoutManager.getClass().getCanonicalName() +
-                    " with " +
-                    ( mgr == null ? "null" : mgr.getClass().getCanonicalName() )
-            );
-
-        }
-
-        super.setLayout( mgr );
-
-        _ourLayoutManager = mgr;
-
-        ObtuseUtil.doNothing();
-
-    }
-
     public void add(
             final @NotNull Component component,
             final @Nullable Object constraints
     ) {
 
-        Logger.logMsg(
-                getOurName() + ":  add( " +
-                LinearLayoutUtil.describeComponent( component ) +
-//                component.getClass().getCanonicalName() +
-//                "( " +
-//                ObtuseUtil.enquoteToJavaString( component.getName() ) +
-//                " )" +
-                ", " +
-                ObtuseUtil.enquoteJavaObject( constraints ) +
-                " )"
-        );
+//        Logger.logMsg(
+//                getOurName() + ":  add( " +
+//                LinearLayoutUtil.describeComponent( component ) +
+////                component.getClass().getCanonicalName() +
+////                "( " +
+////                ObtuseUtil.enquoteToJavaString( component.getName() ) +
+////                " )" +
+//                ", " +
+//                ObtuseUtil.enquoteJavaObject( constraints ) +
+//                " )"
+//        );
 
         super.add( component, constraints );
 
-        LinearLayoutUtil.describeFullyContainerContents(
-                "************ at end of add( " + getName() + " )",
-                this
-        );
+//        LinearLayoutUtil.describeFullyContainerContents(
+//                "************ at end of add( " + getName() + " )",
+//                this
+//        );
 
         ObtuseUtil.doNothing();
 
@@ -165,13 +114,13 @@ public abstract class SelectorPanel<E,C extends Container> extends JPanel {
             _postSelectionPanel.setVisible( true );
             c.revalidate();
 
-            Logger.logMsg( "postSelectionPanel name is " + _postSelectionPanel.getName() );
-            Logger.logMsg( "visible visible visible visible visible visible visible visible visible visible visible visible visible visible visible " );
-            Logger.logMsg( "visible visible visible visible visible visible visible visible visible visible visible visible visible visible visible " );
-            Logger.logMsg( "visible visible visible visible visible visible visible visible visible visible visible visible visible visible visible " );
-            Logger.logMsg( "visible visible visible visible visible visible visible visible visible visible visible visible visible visible visible " );
-            Logger.logMsg( "visible visible visible visible visible visible visible visible visible visible visible visible visible visible visible " );
-            Logger.logMsg( "visible visible visible visible visible visible visible visible visible visible visible visible visible visible visible " );
+//            Logger.logMsg( "postSelectionPanel name is " + _postSelectionPanel.getName() );
+//            Logger.logMsg( "visible visible visible visible visible visible visible visible visible visible visible visible visible visible visible " );
+//            Logger.logMsg( "visible visible visible visible visible visible visible visible visible visible visible visible visible visible visible " );
+//            Logger.logMsg( "visible visible visible visible visible visible visible visible visible visible visible visible visible visible visible " );
+//            Logger.logMsg( "visible visible visible visible visible visible visible visible visible visible visible visible visible visible visible " );
+//            Logger.logMsg( "visible visible visible visible visible visible visible visible visible visible visible visible visible visible visible " );
+//            Logger.logMsg( "visible visible visible visible visible visible visible visible visible visible visible visible visible visible visible " );
         }
 
     }
@@ -182,13 +131,13 @@ public abstract class SelectorPanel<E,C extends Container> extends JPanel {
         _postSelectionPanel.revalidate();
         _postSelectionPanel.removeAll();
 
-        Logger.logMsg( "postSelectionPanel name is " + _postSelectionPanel.getName() );
-        Logger.logMsg( "INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE ");
-        Logger.logMsg( "INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE ");
-        Logger.logMsg( "INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE ");
-        Logger.logMsg( "INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE ");
-        Logger.logMsg( "INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE ");
-        Logger.logMsg( "INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE ");
+//        Logger.logMsg( "postSelectionPanel name is " + _postSelectionPanel.getName() );
+//        Logger.logMsg( "INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE ");
+//        Logger.logMsg( "INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE ");
+//        Logger.logMsg( "INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE ");
+//        Logger.logMsg( "INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE ");
+//        Logger.logMsg( "INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE ");
+//        Logger.logMsg( "INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE ");
 
     }
 
@@ -234,13 +183,13 @@ public abstract class SelectorPanel<E,C extends Container> extends JPanel {
 
             if ( component == null ) {
 
-                Logger.logMsg( "SelectorPanel.getSelectedComponent:  no component returned for " + key + " - showing no selection panel" );
+//                Logger.logMsg( "SelectorPanel.getSelectedComponent:  no component returned for " + key + " - showing no selection panel" );
 
                 return Optional.empty();
 
             }
 
-            LinearLayoutUtil.describeFullyContainerContents( "got back from _componentGetter.apply( " + key + " )", component );
+//            LinearLayoutUtil.describeFullyContainerContents( "got back from _componentGetter.apply( " + key + " )", component );
 
         }
 

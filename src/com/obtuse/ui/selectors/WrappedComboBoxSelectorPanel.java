@@ -114,7 +114,7 @@ public class WrappedComboBoxSelectorPanel<CHOICE, PANEL extends JPanel> extends 
 
         add( _panel, BorderLayout.CENTER );
 
-        LinearLayoutUtil.describeFullyGuiEntity( "WCBSP(container)", this );
+//        LinearLayoutUtil.describeFullyGuiEntity( "WCBSP(container)", this );
 
     }
 
@@ -134,7 +134,7 @@ public class WrappedComboBoxSelectorPanel<CHOICE, PANEL extends JPanel> extends 
 
         setLayout( new BorderLayout() );
         add( container, BorderLayout.CENTER );
-        LinearLayoutUtil.describeFullyGuiEntity( "WCBSP(container)", this );
+//        LinearLayoutUtil.describeFullyGuiEntity( "WCBSP(container)", this );
 
     }
 
