@@ -51,15 +51,7 @@ public class SortableKeySpace implements Comparable<SortableKeySpace> {
     @NotNull
     public static synchronized SortableKeySpace getKey( final @NotNull String keyName ) {
 
-        SortableKeySpace key = s_knownKeys.get( keyName );
-
-        if ( key == null ) {
-
-            key = new SortableKeySpace( keyName );
-
-            s_knownKeys.put( keyName, key );
-
-        }
+        SortableKeySpace key = s_knownKeys.computeIfAbsent( keyName, SortableKeySpace::new );
 
         return key;
 

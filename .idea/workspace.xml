@@ -6,6 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/entitySorter/SortableKeySpace.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/entitySorter/SortableKeySpace.java" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/layout/ComponentSizeRequirements.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/layout/ComponentSizeRequirements.java" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/selectors/WrappedComboBoxSelectorPanel.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/selectors/WrappedComboBoxSelectorPanel.java" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/Measure.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/Measure.java" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/ThreeDimensionalTreeMap.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ThreeDimensionalTreeMap.java" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/junit/ThreeDimensionalTreeMapTest.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/junit/ThreeDimensionalTreeMapTest.java" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/junit/TwoDimensionalTreeMapTest.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/junit/TwoDimensionalTreeMapTest.java" />
     </list>
     <ignored path="Pipestone.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -1446,7 +1453,7 @@
       <workItem from="1515051511079" duration="2024000" />
       <workItem from="1518684577942" duration="413000" />
       <workItem from="1518806158298" duration="4330000" />
-      <workItem from="1518852593888" duration="1074000" />
+      <workItem from="1518852593888" duration="1643000" />
     </task>
     <task id="LOCAL-00004" summary="Implement a ValidatedJTextField class that makes it easier to manage the validation of JTextField values.">
       <created>1371722617036</created>
@@ -1795,7 +1802,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="798952000" />
+    <option name="totallyTimeSpent" value="799521000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -2437,6 +2444,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="209">
           <caret line="11" column="31" lean-forward="true" selection-start-line="11" selection-start-column="31" selection-end-line="11" selection-end-column="31" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2547,6 +2555,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="14421">
           <caret line="768" column="0" lean-forward="false" selection-start-line="768" selection-start-column="0" selection-end-line="768" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>

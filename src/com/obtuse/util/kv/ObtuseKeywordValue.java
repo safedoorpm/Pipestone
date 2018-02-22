@@ -145,6 +145,17 @@ public class ObtuseKeywordValue extends ObtuseKeyword {
     }
 
     /**
+     Determine if this instance has a null value.
+     @return the opposite of {@link #hasNonNullValue()}.
+     */
+
+    public boolean hasNullValue() {
+
+        return _value == null;
+
+    }
+
+    /**
      Get this instance's value.
 
      @return this instance's value (could be {code null}).

@@ -213,13 +213,7 @@ public class ThreeDimensionalTreeMap<T1,T2,T3,V> extends GowingAbstractPackableE
     @NotNull
     public TwoDimensionalSortedMap<T2,T3,V> getNotNullInnerMap( final @NotNull T1 key1 ) {
 
-        TwoDimensionalSortedMap<T2,T3,V> innerMap = _map.get( key1 );
-        if ( innerMap == null ) {
-
-            innerMap = new TwoDimensionalTreeMap<>();
-            _map.put( key1, innerMap );
-
-        }
+        TwoDimensionalSortedMap<T2, T3, V> innerMap = _map.computeIfAbsent( key1, k -> new TwoDimensionalTreeMap<>() );
 
         return innerMap;
 

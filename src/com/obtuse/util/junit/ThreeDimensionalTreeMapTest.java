@@ -891,9 +891,9 @@ public class ThreeDimensionalTreeMapTest {
 
         Vector<String> values = new Vector<>();
 
-        for ( Iterator<String> iter = map.iterator(); iter.hasNext(); ) {
+        for ( String aMap : map ) {
 
-            values.add( iter.next() );
+            values.add( aMap );
 
         }
 
@@ -908,9 +908,9 @@ public class ThreeDimensionalTreeMapTest {
 
         int i = 0;
 
-        for ( Iterator<String> iter = map.iterator(); iter.hasNext(); ) {
+        for ( String aMap : map ) {
 
-            values.put( i, iter.next() );
+            values.put( i, aMap );
 
             i += 1;
 
@@ -924,9 +924,9 @@ public class ThreeDimensionalTreeMapTest {
 
         TreeCounter<String> values = new TreeCounter<>();
 
-        for ( Iterator<String> iter = map.iterator(); iter.hasNext(); ) {
+        for ( String aMap : map ) {
 
-            values.count( iter.next() );
+            values.count( aMap );
 
         }
 

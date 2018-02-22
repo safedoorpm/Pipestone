@@ -165,14 +165,7 @@ public class Measure {
                 List<String> relativePathCopy = new LinkedList<>( relativePath );
                 String nextChildName = relativePathCopy.remove( /*relativePathCopy.size() - 1*/ 0 );
 
-                StackLevelStats childNode = _ourChildren.get( nextChildName );
-
-                if ( childNode == null ) {
-
-                    childNode = new StackLevelStats( nextChildName, this );
-                    _ourChildren.put( nextChildName, childNode );
-
-                }
+                StackLevelStats childNode = _ourChildren.computeIfAbsent( nextChildName, n -> new StackLevelStats( n, this ) );
 
                 childNode.datum( relativePathCopy, delta );
 

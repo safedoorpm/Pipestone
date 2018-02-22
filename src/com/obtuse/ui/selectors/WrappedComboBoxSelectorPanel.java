@@ -104,7 +104,7 @@ public class WrappedComboBoxSelectorPanel<CHOICE, PANEL extends JPanel> extends 
 
             _degenerateCase = false;
 
-            _comboBoxModel = new DefaultComboBoxModel<CHOICE>( cController.getUnspecifiedAndActualRepositories() );
+            _comboBoxModel = new DefaultComboBoxModel<>( cController.getUnspecifiedAndActualRepositories() );
 
             _comboPanel = new InnerWrappedComboBoxSelectorPanel( _comboBoxModel );
 

@@ -46,28 +46,30 @@ public class ComponentSizeRequirements extends SizeRequirements {
 
         SizeRequirements totalAscent = new SizeRequirements();
         SizeRequirements totalDescent = new SizeRequirements();
-        for ( int i = 0; i < children.length; i++ ) {
+        for ( SizeRequirements req : children ) {
 
-            SizeRequirements req = children[i];
-//	    Logger.logMsg( "req=" + req );
+            //	    Logger.logMsg( "req=" + req );
 
             int ascent = (int)( req.alignment * req.minimum );
             int descent = req.minimum - ascent;
             totalAscent.minimum = Math.max( ascent, totalAscent.minimum );
             totalDescent.minimum = Math.max( descent, totalDescent.minimum );
-//	    Logger.logMsg( "[" + i + "]:  ascent=" + ascent + ", descent=" + descent + ", totalAscent.minimum=" + totalAscent.minimum + ", totalDescent.minimum=" + totalDescent.minimum );
+//	    Logger.logMsg( "[" + i + "]:  ascent=" + ascent + ", descent=" + descent + ", totalAscent.minimum=" + totalAscent.minimum + ", totalDescent
+// .minimum=" + totalDescent.minimum );
 
             ascent = (int)( req.alignment * req.preferred );
             descent = req.preferred - ascent;
             totalAscent.preferred = Math.max( ascent, totalAscent.preferred );
             totalDescent.preferred = Math.max( descent, totalDescent.preferred );
-//	    Logger.logMsg( "[" + i + "]:  ascent=" + ascent + ", descent=" + descent + ", totalAscent.preferred=" + totalAscent.preferred + ", totalDescent.preferred=" + totalDescent.preferred );
+//	    Logger.logMsg( "[" + i + "]:  ascent=" + ascent + ", descent=" + descent + ", totalAscent.preferred=" + totalAscent.preferred + ",
+// totalDescent.preferred=" + totalDescent.preferred );
 
             ascent = (int)( req.alignment * req.maximum );
             descent = req.maximum - ascent;
             totalAscent.maximum = Math.max( ascent, totalAscent.maximum );
             totalDescent.maximum = Math.max( descent, totalDescent.maximum );
-//	    Logger.logMsg( "[" + i + "]:  ascent=" + ascent + ", descent=" + descent + ", totalAscent.maximum=" + totalAscent.maximum + ", totalDescent.maximum=" + totalDescent.maximum );
+//	    Logger.logMsg( "[" + i + "]:  ascent=" + ascent + ", descent=" + descent + ", totalAscent.maximum=" + totalAscent.maximum + ", totalDescent
+// .maximum=" + totalDescent.maximum );
 
         }
 
