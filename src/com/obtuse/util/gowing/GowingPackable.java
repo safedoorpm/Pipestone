@@ -60,6 +60,12 @@ public interface GowingPackable {
     @NotNull
     GowingPackedEntityBundle bundleThyself( boolean isPackingSuper, @NotNull GowingPacker packer );
 
+    /**
+     Finish unpacking ourselves.
+     @param unPacker the {@link GowingPacker} responsible for this circus.
+     @return {@code true} when we're done and don't want to be called again; {@code false} when we're not done and do want to be called again.
+     */
+
     boolean finishUnpacking( @NotNull GowingUnPacker unPacker );
 
 // This seems too fragile. See {@link GowingUtil#isActuallyPackable()} for a better way to do this.

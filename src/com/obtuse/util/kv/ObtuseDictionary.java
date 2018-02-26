@@ -6,6 +6,7 @@
 package com.obtuse.util.kv;
 
 import com.obtuse.util.ObtuseUtil;
+import com.obtuse.util.UniqueEntity;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -17,7 +18,7 @@ import java.util.function.Consumer;
  <p>Instances of this class are immutable.</p>
  */
 
-public class ObtuseDictionary implements Iterable<ObtuseKeywordValue> {
+public class ObtuseDictionary extends UniqueEntity implements Iterable<ObtuseKeywordValue> {
 
     /**
      An unmodifiable mapping of {@link ObtuseKeyword}s to {@link ObtuseKeywordValue}s.

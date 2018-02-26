@@ -7,7 +7,7 @@ package com.obtuse.util;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Make it possible to apply a strict ordering to arbitrary instances of some class.
+ * Make it possible to apply a strict if somewhat meaningless ordering to arbitrary instances of some class.
  */
 
 @SuppressWarnings("UnusedDeclaration")

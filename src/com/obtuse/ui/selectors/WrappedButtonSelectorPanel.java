@@ -22,7 +22,7 @@ import java.util.function.Function;
  A helper class that wraps either a {@link ButtonSelectorPanel}{@code <C>} or a JPanel(?).
  */
 
-public class WrappedButtonSelectorPanel<CHOICE, PANEL extends JPanel> extends JPanel {
+public class WrappedButtonSelectorPanel<CHOICE, PANEL extends JPanel> extends WrappedSelectorPanel<CHOICE> {
 
     public interface IController<ICCHOICE,ICPANEL> {
 
@@ -109,18 +109,6 @@ public class WrappedButtonSelectorPanel<CHOICE, PANEL extends JPanel> extends JP
 
         }
 
-//        public Optional<ErrorMessage> checkReadyStatus() {
-//
-//            return Optional.of( new ErrorMessage( ErrorMessage.Priority.ERROR, "InnerWrappedButtonSelectorPanel.checkReadyStatus:  not implemented" ) );
-//
-//        }
-//
-//        public Optional<DataRepositoryConfigInfo> getOptDataRepositoryConfigInfo() {
-//
-//            return Optional.empty();
-//
-//        }
-
         /**
          Switch to a new button.
 
@@ -172,6 +160,7 @@ public class WrappedButtonSelectorPanel<CHOICE, PANEL extends JPanel> extends JP
 
     }
 
+    @Override
     public boolean notifyCurrentChildChange(
             final @Nullable CHOICE oldChoice,
             final @NotNull CHOICE newChoice
