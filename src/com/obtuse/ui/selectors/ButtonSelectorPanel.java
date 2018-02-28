@@ -6,7 +6,6 @@
 package com.obtuse.ui.selectors;
 
 import com.obtuse.ui.MyActionListener;
-import com.obtuse.ui.layout.linear.LinearLayoutUtil;
 import com.obtuse.util.ObtuseUtil;
 import com.obtuse.util.UniqueEntity;
 import org.jetbrains.annotations.NotNull;
@@ -74,7 +73,7 @@ public class ButtonSelectorPanel<C extends Container> extends SelectorPanel<Abst
 
                             if ( optComponent.isPresent() ) {
 
-                                setPostSelectionPanelContents( optComponent.get() );
+                                setPostSelectionPanelContents( "ButtonSelectorPanel.actionListener", optComponent.get() );
 
 //                                LinearLayoutUtil.describeFullyContainerContents( "ButtonSelectorPanel panel c", optComponent.get() );
 //                                LinearLayoutUtil.describeFullyContainerContents( "ButtonSelectorPanel post panel", getPostSelectionPanel() );
@@ -100,7 +99,7 @@ public class ButtonSelectorPanel<C extends Container> extends SelectorPanel<Abst
 
         if ( isZeroASelection() ) {
 
-            setPostSelectionPanelContents( firstSelection );
+            setPostSelectionPanelContents( "ButtonSelectorPanel.isZeroASelection", firstSelection );
 
         }
 

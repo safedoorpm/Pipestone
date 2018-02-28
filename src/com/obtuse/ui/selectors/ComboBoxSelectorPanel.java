@@ -14,6 +14,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.Optional;
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 /*
@@ -62,7 +63,7 @@ public class ComboBoxSelectorPanel<E,C extends Container> extends SelectorPanel<
 
         _comboBoxModel = model;
 
-        _selectorLabel = new JLabel( selectorLabel );
+        _selectorLabel = new JLabel( selectorLabel + "  " );
         _comboBoxSelectorPanel.add( _selectorLabel );
 
         _selectorComboBox = new JComboBox<>( _comboBoxModel );
@@ -76,7 +77,17 @@ public class ComboBoxSelectorPanel<E,C extends Container> extends SelectorPanel<
                         E key = _selectorComboBox.getItemAt( _selectorComboBox.getSelectedIndex() );
 
                         Optional<C> optComponent = getSelectedComponent( key );
-                        optComponent.ifPresent( c -> setPostSelectionPanelContents( c ) );
+                        optComponent.ifPresent(
+                                new Consumer<C>() {
+                                    @Override
+                                    public void accept( final C c ) {
+
+                                        setPostSelectionPanelContents( "ComboBoxSelectorPanel.actionListener", c );
+
+                                    }
+
+                                }
+                        );
 
                         revalidate();
 
@@ -84,6 +95,7 @@ public class ComboBoxSelectorPanel<E,C extends Container> extends SelectorPanel<
 
                 }
         );
+
         _comboBoxSelectorPanel.add( _selectorComboBox );
 
         add( _comboBoxSelectorPanel, BorderLayout.NORTH );
@@ -92,7 +104,7 @@ public class ComboBoxSelectorPanel<E,C extends Container> extends SelectorPanel<
 
             cacheSelection( _selectorComboBox.getItemAt( _selectorComboBox.getSelectedIndex() ), firstSelection );
 
-            setPostSelectionPanelContents( firstSelection );
+            setPostSelectionPanelContents( "ComboBoxSelectorPanel.isZeroASelection", firstSelection );
 
         }
 

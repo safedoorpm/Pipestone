@@ -12,6 +12,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.util.List;
 import java.util.SortedMap;
@@ -25,6 +26,9 @@ import java.util.function.Function;
 public class WrappedButtonSelectorPanel<CHOICE, PANEL extends JPanel> extends WrappedSelectorPanel<CHOICE> {
 
     public interface IController<ICCHOICE,ICPANEL> {
+
+        @NotNull
+        String getPanelName();
 
         /**
          Given the selection of a CHOICE by the human, get the panel that we're supposed to show them.
@@ -40,6 +44,7 @@ public class WrappedButtonSelectorPanel<CHOICE, PANEL extends JPanel> extends Wr
          @return the choices in selection order.
          */
 
+        @NotNull
         List<ICCHOICE> getChoicesInSelectionOrder();
 
     }
@@ -60,7 +65,7 @@ public class WrappedButtonSelectorPanel<CHOICE, PANEL extends JPanel> extends Wr
         ) {
 
             super(
-                    "data category selection panel",
+                    iController.getPanelName(),
                     buttonGroup,
                     buttonPanel,
                     null,
@@ -260,6 +265,29 @@ public class WrappedButtonSelectorPanel<CHOICE, PANEL extends JPanel> extends Wr
         setLayout( new BorderLayout() );
         add( _buttonPanel, BorderLayout.CENTER );
 
+    }
+
+    public boolean setSubsidiaryPanelBorder( Border border ){
+
+        if ( _buttonPanel != null ) {
+
+            _buttonPanel.setSubsidiaryPanelBorder( border );
+
+            return true;
+
+//        } else if ( _panel != null ) {
+//
+//            if ( _panel instanceof JComponent ) {
+//
+//                ( (JComponent)_panel ).setBorder( border );
+//
+//                return true;
+//
+//            }
+
+        }
+
+        return false;
     }
 
     public String toString() {

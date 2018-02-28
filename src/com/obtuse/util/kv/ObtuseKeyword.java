@@ -26,6 +26,7 @@ public class ObtuseKeyword extends GowingAbstractPackableEntity implements Compa
     private static final int VERSION = 1;
 
     private static final EntityName KEYWORD_STRING = new EntityName( "_ks" );
+    private static final EntityName TO_STRING = new EntityName( "_ts" );
 
     public static final GowingEntityFactory FACTORY = new GowingEntityFactory( ENTITY_TYPE_NAME ) {
 
@@ -69,12 +70,14 @@ public class ObtuseKeyword extends GowingAbstractPackableEntity implements Compa
 
     private final String _keywordString;
 
+    private final String _toString;
+
     /**
      Create a clone of an existing keyword description.
      */
 
     public ObtuseKeyword( final @NotNull ObtuseKeyword rValue ) {
-        this( rValue.getKeywordName() );
+        this( null, rValue.getKeywordName() );
 
     }
 
@@ -85,8 +88,10 @@ public class ObtuseKeyword extends GowingAbstractPackableEntity implements Compa
      @throws IllegalArgumentException if the keyword is not matched by {@link #VALID_KEYWORD_PATTERN}.
      */
 
-    public ObtuseKeyword( final @NotNull String keywordString ) {
+    public ObtuseKeyword( final @Nullable String toString, final @NotNull String keywordString ) {
         super( new GowingNameMarkerThing() );
+
+        _toString = toString;
 
         Matcher m = VALID_KEYWORD_PATTERN.matcher( keywordString );
 
@@ -102,6 +107,10 @@ public class ObtuseKeyword extends GowingAbstractPackableEntity implements Compa
 
     }
 
+    public ObtuseKeyword( final @NotNull String keywordString ) {
+        this( keywordString, keywordString );
+    }
+
     public ObtuseKeyword(
     @SuppressWarnings("unused") final @NotNull GowingUnPacker unPacker,
     final @NotNull GowingPackedEntityBundle bundle
@@ -109,7 +118,14 @@ public class ObtuseKeyword extends GowingAbstractPackableEntity implements Compa
 
         super( unPacker, bundle.getSuperBundle() );
 
+        _toString = bundle.MandatoryStringValue( TO_STRING );
         _keywordString = bundle.MandatoryStringValue( KEYWORD_STRING );
+
+    }
+
+    public ObtuseKeyword self() {
+
+        return this;
 
     }
 
@@ -125,6 +141,7 @@ public class ObtuseKeyword extends GowingAbstractPackableEntity implements Compa
                 packer.getPackingContext()
         );
 
+        bundle.addHolder( new GowingStringHolder( TO_STRING, _toString, true ) );
         bundle.addHolder( new GowingStringHolder( KEYWORD_STRING, _keywordString, true ) );
 
         return bundle;
@@ -165,7 +182,7 @@ public class ObtuseKeyword extends GowingAbstractPackableEntity implements Compa
     @Override
     public String toString() {
 
-        return getKeywordName();
+        return _toString == null ? getKeywordName() : _toString;
 
     }
 

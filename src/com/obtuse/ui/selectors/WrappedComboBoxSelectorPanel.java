@@ -41,6 +41,7 @@ public class WrappedComboBoxSelectorPanel<CHOICE, PANEL extends JPanel> extends 
 
         String getPanelName();
 
+        @Nullable
         String getDegenerateCaseMessage( DegenerateCase degenerateCase );
 
         String getPickListPrompt();
@@ -72,9 +73,29 @@ public class WrappedComboBoxSelectorPanel<CHOICE, PANEL extends JPanel> extends 
 
             if ( actualChoices.isEmpty() ) {
 
-                _panel = new JLabel( _cController.getDegenerateCaseMessage( DegenerateCase.NO_ENTITIES ) ); // "Nothing to choose from in " + _cController.getPanelName() );
+                String msg = _cController.getDegenerateCaseMessage( DegenerateCase.NO_ENTITIES );
+                if ( msg == null ) {
+
+                    _panel = new JPanel();
+
+                } else {
+
+                    _panel = new JLabel( _cController.getDegenerateCaseMessage( DegenerateCase.NO_ENTITIES ) ); // "Nothing to choose from in " + _cController.getPanelName() );
+
+                }
 
             } else {
+
+                Box comboBoxSelectorPanel = new Box( BoxLayout.X_AXIS );
+
+                comboBoxSelectorPanel.add( new JLabel( cController.getPickListPrompt() + "  " ) );
+
+                JComboBox<CHOICE> comboBox = new JComboBox<>( new DefaultComboBoxModel<>( actualChoices ) );
+
+                comboBoxSelectorPanel.add( comboBox );
+
+                add( comboBoxSelectorPanel, BorderLayout.NORTH );
+//                add( new JLabel( "ONLY CHOICE IS " + actualChoices.get( 0 ).toString() ), BorderLayout.NORTH );
 
                 _panel = _cController.getPanel( actualChoices.firstElement(), true );
 

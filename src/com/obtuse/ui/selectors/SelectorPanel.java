@@ -101,7 +101,7 @@ public abstract class SelectorPanel<E,C extends Container> extends BorderLayoutP
 
     }
 
-    protected void setPostSelectionPanelContents( final @Nullable Component c ) {
+    protected void setPostSelectionPanelContents( final String who, final @Nullable Component c ) {
 
         if ( c == null ) {
 
@@ -109,10 +109,22 @@ public abstract class SelectorPanel<E,C extends Container> extends BorderLayoutP
 
         } else {
 
+            if ( _postSelectionPanel.getComponentCount() != 0 ) {
+
+                Logger.logMsg( "there is something in the post selection panel: " + Arrays.toString( _postSelectionPanel.getComponents() ) );
+
+                ObtuseUtil.doNothing();
+
+            }
+
             _postSelectionPanel.add( c, BorderLayout.CENTER );
             c.setVisible( true );
             _postSelectionPanel.setVisible( true );
             c.revalidate();
+
+            LinearLayoutUtil.describeFullyContainerContents( who, _postSelectionPanel );
+
+            ObtuseUtil.doNothing();
 
 //            Logger.logMsg( "postSelectionPanel name is " + _postSelectionPanel.getName() );
 //            Logger.logMsg( "visible visible visible visible visible visible visible visible visible visible visible visible visible visible visible " );
