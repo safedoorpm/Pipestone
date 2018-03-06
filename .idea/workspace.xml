@@ -5,7 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" name="Default" comment="">
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingString.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingUnpackingDeadlockedException.java" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/selectors/WrappedComboBoxSelectorPanel.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/selectors/WrappedComboBoxSelectorPanel.java" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/Gowing.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/Gowing.java" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingInstanceId.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingInstanceId.java" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackedEntityBundle.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackedEntityBundle.java" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPacker.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPacker.java" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingUnPacker.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingUnPacker.java" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingUnPackerContext.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingUnPackerContext.java" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/StdGowingUnPackerContext.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/StdGowingUnPackerContext.java" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingEntityReference.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingEntityReference.java" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingFormatVersion.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingFormatVersion.java" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingPacker.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingPacker.java" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingUnPacker.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingUnPacker.java" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/TracingGowingMetaDataHandler.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/TracingGowingMetaDataHandler.java" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/examples/SortedSetExample.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/examples/SortedSetExample.java" />
     </list>
     <ignored path="Pipestone.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -153,7 +169,7 @@
       <file leaf-file-name="ComboBoxSelectorPanel.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/selectors/ComboBoxSelectorPanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1957">
+            <state relative-caret-position="2109">
               <caret line="124" column="0" lean-forward="false" selection-start-line="124" selection-start-column="0" selection-end-line="124" selection-end-column="0" />
               <folding />
             </state>
@@ -206,6 +222,16 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="GowingUnpackingDeadlockedException.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingUnpackingDeadlockedException.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="549">
+              <caret line="96" column="5" lean-forward="true" selection-start-line="96" selection-start-column="5" selection-end-line="96" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="WrappedSelectorPanel.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/selectors/WrappedSelectorPanel.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -214,16 +240,6 @@
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="KeywordSetEditorConfig2.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/../Burke2/BurkeBioEditor/src/xyz/kenosee/burke2/bioGenerator/util/keywordConfigurators/KeywordSetEditorConfig2.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="27" column="13" lean-forward="false" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -343,8 +359,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingBooleanHolder.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingByteHolder.java" />
         <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingDoubleHolder.java" />
         <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingEntityNameHolder.java" />
         <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingEntityReferenceHolder.java" />
@@ -394,6 +408,8 @@
         <option value="$PROJECT_DIR$/src/com/obtuse/util/ObtuseCollections.java" />
         <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackable.java" />
         <option value="$PROJECT_DIR$/src/com/obtuse/ui/selectors/WrappedSelectorPanel.java" />
+        <option value="$PROJECT_DIR$/../Burke2/BurkeBioEditor/src/xyz/kenosee/burke2/bioGenerator/util/keywordConfigurators/KeywordSetEditorConfig2.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingUnpackingDeadlockedException.java" />
       </list>
     </option>
   </component>
@@ -562,8 +578,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="AndroidView" />
       <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
@@ -929,7 +945,7 @@
           <select />
         </subPane>
       </pane>
-      <pane id="AndroidView" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1452,7 +1468,8 @@
       <workItem from="1518806158298" duration="4330000" />
       <workItem from="1518852593888" duration="1643000" />
       <workItem from="1519659432824" duration="2288000" />
-      <workItem from="1519802065173" duration="340000" />
+      <workItem from="1519802065173" duration="1394000" />
+      <workItem from="1520350385675" duration="620000" />
     </task>
     <task id="LOCAL-00006" summary="Lots of cleanup.">
       <created>1418159496081</created>
@@ -1801,7 +1818,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="802149000" />
+    <option name="totallyTimeSpent" value="803823000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1817,17 +1834,18 @@
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.118644066" sideWeight="0.67289025" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30076924" sideWeight="0.9753381" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32997844" sideWeight="0.50277776" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32960624" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32806054" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.42045453" sideWeight="0.4985938" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.41969696" sideWeight="0.4985938" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32956952" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30640435" sideWeight="0.5269953" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30975303" sideWeight="0.5269953" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17557251" sideWeight="0.43055555" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1847,7 +1865,6 @@
       <window_info id="Duplicates" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32952926" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32997844" sideWeight="0.49722221" order="15" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32457292" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30076924" sideWeight="0.9753381" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39985272" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32960624" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -2325,13 +2342,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/Gowing.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingAbstractPackableEntity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2470">
@@ -2531,6 +2541,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="912">
           <caret line="51" column="31" lean-forward="false" selection-start-line="51" selection-start-column="31" selection-end-line="51" selection-end-column="31" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2545,6 +2556,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="95">
           <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2552,6 +2564,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
           <caret line="15" column="13" lean-forward="false" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2641,7 +2654,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/selectors/ComboBoxSelectorPanel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1957">
+        <state relative-caret-position="2109">
           <caret line="124" column="0" lean-forward="false" selection-start-line="124" selection-start-column="0" selection-end-line="124" selection-end-column="0" />
           <folding />
         </state>
@@ -2685,11 +2698,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackable.java">
+    <entry file="file://$PROJECT_DIR$/../Burke2/BurkeBioEditor/src/xyz/kenosee/burke2/bioGenerator/util/keywordConfigurators/KeywordSetEditorConfig2.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="12" column="17" lean-forward="false" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
-          <folding />
+        <state relative-caret-position="190">
+          <caret line="24" column="13" lean-forward="false" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -2703,10 +2715,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../Burke2/BurkeBioEditor/src/xyz/kenosee/burke2/bioGenerator/util/keywordConfigurators/KeywordSetEditorConfig2.java">
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackable.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="27" column="13" lean-forward="false" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
+        <state relative-caret-position="228">
+          <caret line="12" column="17" lean-forward="false" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingUnpackingDeadlockedException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="549">
+          <caret line="96" column="5" lean-forward="true" selection-start-line="96" selection-start-column="5" selection-end-line="96" selection-end-column="5" />
           <folding />
         </state>
       </provider>

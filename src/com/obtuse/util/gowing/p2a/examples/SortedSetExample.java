@@ -492,38 +492,16 @@ public class SortedSetExample extends GowingAbstractPackableEntity implements Go
 
         BasicProgramConfigInfo.init( "Obtuse", "Experimenting", "Misc", null );
 
-//        String[] words = new String[100];
-//        for ( int i = 0; i < words.length; i += 1 ) {
-//
-//            words[i] = NounsList.pickNoun();
-//
-//        }
-
         SortedSetExample sse = new SortedSetExample(
                 "testSortedSet",
                 null,
-//                words
                 new String[]{
                         "alpha",
                         "beta",
                         "gamma",
                         "fred",
                         "wilma",
-                        "barney",
-//                        "fish",
-//                        "dragons",
-//                        "rabbits",
-//                        "doughnuts",
-//                        "carrots",
-//                        "ice cream",
-//                        "brussels sprouts",
-//                        "Edmonton",
-//                        "Calgary",
-//                        "Regina",
-//                        "Halifax",
-//                        "Yulara",
-//                        "Munich",
-//                        "Lisboa"
+                        "barney"
                 }
         );
 
@@ -558,15 +536,15 @@ public class SortedSetExample extends GowingAbstractPackableEntity implements Go
                 )
         ) {
 
+            unPacker.setVerbose( true );
+
+            // Arrange to print out the (relatively limited) metadata in the packed file.
+
             unPacker.registerMetaDataHandler(
                     new TracingGowingMetaDataHandler()
             );
 
-            unPacker.getUnPackerContext().registerFactory( StdGowingPackerContext.TestPackableClass.FACTORY );
-            unPacker.getUnPackerContext().registerFactory( StdGowingPackerContext.SimplePackableClass.FACTORY );
             unPacker.getUnPackerContext().registerFactory( SortedSetExample.FACTORY );
-            unPacker.getUnPackerContext().registerFactory( ObtuseApproximateCalendarDate.FACTORY );
-            unPacker.getUnPackerContext().registerFactory( ObtuseCalendarDate.FACTORY );
 
             Optional<GowingUnPackedEntityGroup> maybeResult = unPacker.unPack();
 
@@ -593,4 +571,5 @@ public class SortedSetExample extends GowingAbstractPackableEntity implements Go
         Logger.logMsg( "main is done" );
 
     }
+
 }

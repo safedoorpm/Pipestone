@@ -1,7 +1,9 @@
 package com.obtuse.util.gowing.p2a;
 
 import com.obtuse.exceptions.HowDidWeGetHereError;
+import com.obtuse.util.ObtuseUtil;
 import com.obtuse.util.gowing.EntityName;
+import org.jetbrains.annotations.NotNull;
 
 /*
  * Copyright © 2015 Obtuse Systems Corporation
@@ -15,75 +17,101 @@ public class GowingFormatVersion {
 
     private final int _majorVersion;
 
-    private final int  _minorVersion;
+    private final int _minorVersion;
+
+    private final boolean _textFormat;
 
     private final EntityName _groupName;
 
-    public GowingFormatVersion( final StdGowingTokenizer.GowingToken2 token, final EntityName groupName )
+    public GowingFormatVersion( final StdGowingTokenizer.GowingToken2 fileFormatToken, final EntityName groupName )
             throws GowingUnpackingException {
-	super();
 
-	if ( token.isError() ) {
+        super();
 
-	    throw new HowDidWeGetHereError( "error token passed to GowingFormatVersion constructor - " + token );
+        _textFormat = true;
 
-	}
+        if ( fileFormatToken.isError() ) {
 
-	_groupName = groupName;
+            throw new HowDidWeGetHereError( "error token passed to GowingFormatVersion constructor - " + fileFormatToken );
 
-	if ( token.type() == StdGowingTokenizer.TokenType.FORMAT_VERSION ) {
+        }
 
-	    long longVersion = token.longValue();
+        _groupName = groupName;
 
-	    long longMajorVersion = longVersion / GowingConstants.FORMAT_VERSION_MULTIPLIER;
-	    long longMinorVersion = longVersion % GowingConstants.FORMAT_VERSION_MULTIPLIER;
+        if ( fileFormatToken.type() == StdGowingTokenizer.TokenType.FORMAT_VERSION ) {
 
-	    if ( longMajorVersion <= 0 || longMajorVersion > Integer.MAX_VALUE ) {
+            long longVersion = fileFormatToken.longValue();
 
-		throw new GowingUnpackingException( "invalid version (" + longVersion + ") - major version (" + longMajorVersion + ") out of range", token );
+            long longMajorVersion = longVersion / GowingConstants.FORMAT_VERSION_MULTIPLIER;
+            long longMinorVersion = longVersion % GowingConstants.FORMAT_VERSION_MULTIPLIER;
 
-	    }
+            if ( longMajorVersion <= 0 || longMajorVersion > Integer.MAX_VALUE ) {
 
-	    if ( longMinorVersion <= 0 || longMinorVersion > Integer.MAX_VALUE ) {
+                throw new GowingUnpackingException(
+                        "invalid version (" + longVersion + ") - major version (" + longMajorVersion + ") out of range",
+                        fileFormatToken
+                );
 
-		throw new GowingUnpackingException( "invalid version (" + longVersion + ") - minor version (" + longMajorVersion + ") out of range", token );
+            }
 
-	    }
+            if ( longMinorVersion <= 0 || longMinorVersion > Integer.MAX_VALUE ) {
 
-	    _majorVersion = (int) longMajorVersion;
-	    _minorVersion = (int) longMinorVersion;
+                throw new GowingUnpackingException(
+                        "invalid version (" + longVersion + ") - minor version (" + longMajorVersion + ") out of range",
+                        fileFormatToken
+                );
 
-	} else {
+            }
 
-	    throw new HowDidWeGetHereError( "token passed to GowingFormatVersion constructor is not a format version token - " + token );
+            _majorVersion = (int)longMajorVersion;
+            _minorVersion = (int)longMinorVersion;
 
-	}
+        } else {
+
+            throw new HowDidWeGetHereError( "token passed to GowingFormatVersion constructor is not a format version token - " + fileFormatToken );
+
+        }
 
     }
 
-    @SuppressWarnings("WeakerAccess")
+    public boolean isTextFormat() {
+
+        return _textFormat;
+
+    }
+
     public int getMajorVersion() {
 
-	return _majorVersion;
+        return _majorVersion;
 
     }
 
-    @SuppressWarnings("WeakerAccess")
     public int getMinorVersion() {
 
-	return _minorVersion;
+        return _minorVersion;
 
     }
 
     public EntityName getGroupName() {
 
-	return _groupName;
+        return _groupName;
 
     }
 
     public String toString() {
 
-	return "GowingFormatVersion( " + getMajorVersion() + "." + getMinorVersion() + ", " + getGroupName() + " )";
+        return "GowingFormatVersion( " + getVersionAsString() + " )";
+
+    }
+
+    @NotNull
+    public String getVersionAsString() {
+
+        return "[[Gowing " +
+               ( isTextFormat() ? "text" : "binary" ) +
+               " format=v" + getMajorVersion() + "." + getMinorVersion() + "," +
+               " file-level-group=" + ObtuseUtil.enquoteJavaObject( getGroupName() ) +
+               "]]";
 
     }
 

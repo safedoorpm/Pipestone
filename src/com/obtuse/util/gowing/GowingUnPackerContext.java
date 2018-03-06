@@ -9,6 +9,8 @@ import org.jetbrains.annotations.Nullable;
 import java.io.File;
 import java.util.Collection;
 import java.util.Optional;
+import java.util.SortedMap;
+import java.util.SortedSet;
 
 /*
  * Copyright © 2015 Obtuse Systems Corporation
@@ -32,6 +34,8 @@ public interface GowingUnPackerContext {
 
     Collection<GowingEntityReference> getSeenEntityReferences();
 
+    SortedMap<GowingEntityReference, GowingPackable> getSeenEntitiesMap();
+
     void rememberPackableEntity( StdGowingTokenizer.GowingToken2 token, GowingEntityReference etr, GowingPackable entity );
 
     @NotNull
@@ -42,15 +46,21 @@ public interface GowingUnPackerContext {
 
     void clearUnFinishedEntities();
 
-    Collection<GowingEntityReference> getUnfinishedEntities();
+    /**
+     Get a sorted set containing all currently unfinished entities.
+     @return an unmodifiable {@link SortedSet}{@code <}{@link GowingEntityReference}{@code >} set containing all currently unfinished entities.
+     The set will be empty if the unpacking process is finished.
+     */
 
-    void markEntitiesUnfinished( Collection<GowingEntityReference> unFinishedEntities );
+    SortedSet<GowingEntityReference> getUnfinishedEntityReferences();
+
+    void markEntitiesUnfinished( Collection<GowingEntityReference> unFinishedEntityReferences );
 
     boolean isEntityFinished( @Nullable GowingEntityReference er );
 
     void markEntityFinished( GowingEntityReference er );
 
-    void addUnfinishedEntities( Collection<GowingEntityReference> collection );
+//    void addUnfinishedEntities( Collection<GowingEntityReference> collection );
 
     @NotNull
     Optional<EntityTypeName> findTypeByTypeReferenceId( int typeReferenceId );

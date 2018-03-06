@@ -21,6 +21,44 @@ import java.util.Optional;
 
 public interface GowingUnPacker extends Closeable {
 
+    /**
+     Enable or disable super verbose mode.
+     @param superVerbose if {@code true} then both regular verbose mode and super verbose mode are enabled.
+     If {@code false} then super verbose mode is turned off but regular verbose mode is left unaffected.
+     While super verbose mode is enabled, at least one message will be logged as each unpacked entity is extracted from the
+     pack file) and at least one message will be logged each time an attempt is made to finish an entity (this message will report whether or not the
+     attempt to finish the entity actually did finish the entity).
+     <p>super verbose mode is intended to be quite comprehensive. Consequently, it can be a lot like drinking from a fire-hose in that you get
+     very wet but remain thirsty. If you are using this for diagnostic purposes then you might want to try using {@link #setVerbose(boolean)}
+     to enable just the regular verbose mode first. If that doesn't yield enough information, try the unpack again with super verbose mode enabled.</p>
+     */
+
+    void setSuperVerbose( boolean superVerbose );
+
+    /*
+    Determine if super verbose mode is enabled.
+    @return {@code true} if super verbose mode is enabled; {@code false} otherwise.
+    Note that super verbose mode being enabled implies that regular verbose mode is also enabled.
+     */
+
+    boolean isSuperVerbose();
+
+    /**
+     Enable or disable regular verbose mode.
+     @param verbose if {@code true} then regular verbose mode is enabled and super verbose mode is disabled.
+     if {@code false} then both regular verbose mode and super verbose mode are disabled.
+     <p>Unlike the fire-hose effect of enabling super verbose mode, regular verbose mode is intended to be informative without being overwhelming.</p>
+     */
+
+    void setVerbose( boolean verbose );
+
+    /**
+     Determine if regular verbose mode is enabled.
+     @return {@code true} if regular verbose mode is enabled; {@code false otherwise}.
+     Note that regular verbose mode being disabled implies that super verbose mode is also disabled.
+     */
+    boolean isVerbose();
+
     boolean isClosed();
 
     /**
@@ -35,6 +73,12 @@ public interface GowingUnPacker extends Closeable {
 
     @NotNull
     Optional<GowingUnPackedEntityGroup> unPack() throws GowingUnpackingException, IOException;
+
+    @NotNull String describeEntity( GowingEntityReference er );
+
+    @NotNull String describeEntity( GowingPackable entity );
+
+    @NotNull String describeInstanceId( GowingInstanceId instanceId );
 
     void registerMetaDataHandler( @NotNull GowingMetaDataHandler handler );
 
@@ -51,7 +95,7 @@ public interface GowingUnPacker extends Closeable {
 
     boolean isEntityFinished( @Nullable GowingEntityReference entityReference );
 
-    boolean areEntitiesAllFinished( @Nullable GowingEntityReference@NotNull[] entityReferences );
+    boolean areEntitiesAllFinished( @Nullable GowingEntityReference @NotNull [] entityReferences );
     boolean areEntitiesAllFinished( @NotNull Collection<GowingEntityReference> entityReferences );
 
 }

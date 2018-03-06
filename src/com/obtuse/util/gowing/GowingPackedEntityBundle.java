@@ -215,21 +215,29 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName, GowingPackable
      Helper method to get an optional entity reference field.
 
      @param name the name of the optional entity reference field.
-     @return the entity reference specified by the field, or null if the field does not exist within this bundle or exists but is null.
-     @throws ClassCastException if the specified field exists but is not a GowingEntityReference value.
+     @return the entity reference specified by the field, or {@code null} if the field does not exist within this bundle or exists but is {@code null}.
+     @throws ClassCastException if the specified field exists but is not a {@link GowingEntityReference} value.
      */
 
     @Nullable
     public GowingEntityReference getOptionalEntityReference( final @NotNull EntityName name ) {
 
-        GowingPackableThingHolder ref = getNullableField( name );
-        if ( ref == null ) {
+        if ( doesFieldExist( name ) ) {
 
-            return null;
+            GowingPackableThingHolder ref = getNullableField( name );
+            if ( ref == null ) {
+
+                return null;
+
+            } else {
+
+                return ( (GowingAbstractPackableHolder)ref ).EntityTypeReference();
+
+            }
 
         } else {
 
-            return ((GowingAbstractPackableHolder)ref).EntityTypeReference();
+            return null;
 
         }
 

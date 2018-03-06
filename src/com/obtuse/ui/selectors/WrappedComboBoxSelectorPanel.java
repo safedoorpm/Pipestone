@@ -33,10 +33,12 @@ public class WrappedComboBoxSelectorPanel<CHOICE, PANEL extends JPanel> extends 
 
         CCPANEL getPanel( @NotNull CCCHOICE choice, final boolean degeneratePanel );
 
+        @NotNull
         Vector<CCCHOICE> getActualChoices();
 
         boolean handleZeroAndOneCaseSpecially();
 
+        @NotNull
         Vector<CCCHOICE> getUnspecifiedAndActualChoices();
 
         String getPanelName();
@@ -76,7 +78,7 @@ public class WrappedComboBoxSelectorPanel<CHOICE, PANEL extends JPanel> extends 
                 String msg = _cController.getDegenerateCaseMessage( DegenerateCase.NO_ENTITIES );
                 if ( msg == null ) {
 
-                    _panel = new JPanel();
+                    _panel = new BorderLayoutPanel();
 
                 } else {
 
@@ -225,9 +227,10 @@ public class WrappedComboBoxSelectorPanel<CHOICE, PANEL extends JPanel> extends 
                         " to " + newChoice + "@" + newChoiceIndex + " when that's already our currently selected button"
                 );
 
-                return false;
+//                return false;
 
-            } else {
+            }
+//            else {
 
                 _comboBoxModel.setSelectedItem( newChoice );
 
@@ -235,7 +238,7 @@ public class WrappedComboBoxSelectorPanel<CHOICE, PANEL extends JPanel> extends 
 
                 return true;
 
-            }
+//            }
 
         }
 
@@ -258,7 +261,12 @@ public class WrappedComboBoxSelectorPanel<CHOICE, PANEL extends JPanel> extends 
 
     public String toString() {
 
-        return "WrappedComboBoxSelectorPanel( " + _comboPanel + " )";
+        String toString = "WrappedComboBoxSelectorPanel( panel=" +
+                   _panel +
+                   ", comboBoxPanel=" +
+                   ( _panel == _comboPanel && _panel != null ? "<same as panel>" : _comboPanel ) +
+                   " )";
+        return toString;
 
     }
 

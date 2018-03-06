@@ -3,6 +3,7 @@ package com.obtuse.util.gowing;
 import com.obtuse.util.SimpleUniqueIntegerIdGenerator;
 import com.obtuse.util.SimpleUniqueLongIdGenerator;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.SortedMap;
 import java.util.TreeMap;
@@ -38,14 +39,13 @@ public final class GowingInstanceId implements Comparable<GowingInstanceId> {
 
     private final String _typeName;
 
-    public GowingInstanceId( final EntityTypeName typeName ) {
+    public GowingInstanceId( final @NotNull EntityTypeName typeName ) {
 
         this( typeName.getTypeName() );
 
     }
 
-    public GowingInstanceId( final String typeName ) {
-
+    public GowingInstanceId( final @NotNull String typeName ) {
         super();
 
         _typeId = allocateTypeId( typeName );
@@ -55,13 +55,13 @@ public final class GowingInstanceId implements Comparable<GowingInstanceId> {
 
     }
 
-    public GowingInstanceId( final Class<? extends GowingPackable> classObject ) {
+    public GowingInstanceId( final @NotNull Class<? extends GowingPackable> classObject ) {
 
         this( classObject.getCanonicalName() );
 
     }
 
-    public static int allocateTypeId( final String typeName ) {
+    public static int allocateTypeId( final @NotNull String typeName ) {
 
         synchronized ( s_typeNamesToTypeIds ) {
 
@@ -80,6 +80,7 @@ public final class GowingInstanceId implements Comparable<GowingInstanceId> {
 
     }
 
+    @Nullable
     public static String lookupTypeName( final int typeId ) {
 
         return s_typeIdsToTypeNames.get( typeId );
@@ -87,7 +88,8 @@ public final class GowingInstanceId implements Comparable<GowingInstanceId> {
     }
 
     @SuppressWarnings("WeakerAccess")
-    public static Integer lookupTypeId( final String typeName ) {
+    @Nullable
+    public static Integer lookupTypeId( final @NotNull String typeName ) {
 
         return s_typeNamesToTypeIds.get( typeName );
 
@@ -105,6 +107,7 @@ public final class GowingInstanceId implements Comparable<GowingInstanceId> {
 
     }
 
+    @NotNull
     public String getTypeName() {
 
         return _typeName;
@@ -136,12 +139,14 @@ public final class GowingInstanceId implements Comparable<GowingInstanceId> {
 
     }
 
+    @NotNull
     public String shortForm() {
 
-        return "" + _typeId + ":" + _entityId;
+        return "GII( " + _typeId + ":" + _entityId + " )";
 
     }
 
+    @NotNull
     public String toString() {
 
         return "GowingInstanceId( " + _typeName + ", " + _entityId + " )";

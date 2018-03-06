@@ -21,6 +21,10 @@ public interface GowingPacker extends Closeable {
 
     GowingInstanceId queuePackableEntity( EntityName entityName, GowingPackable entity );
 
+    boolean isVerbose();
+
+    void setVerbose( boolean verbose );
+
     @NotNull
     GowingPackerContext getPackingContext();
 
@@ -119,4 +123,5 @@ public interface GowingPacker extends Closeable {
     File getOutputFile();
 
     EntityName getGroupName();
+
 }

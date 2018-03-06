@@ -122,9 +122,9 @@ public class StdGowingUnPackerContext implements GowingUnPackerContext {
     }
 
     @Override
-    public Collection<GowingEntityReference> getUnfinishedEntities() {
+    public SortedSet<GowingEntityReference> getUnfinishedEntityReferences() {
 
-        return new TreeSet<>( _unFinishedEntities );
+        return Collections.unmodifiableSortedSet( new TreeSet<>( _unFinishedEntities ) );
 
     }
 
@@ -155,12 +155,12 @@ public class StdGowingUnPackerContext implements GowingUnPackerContext {
 
     }
 
-    @Override
-    public void addUnfinishedEntities( final Collection<GowingEntityReference> collection ) {
-
-        collection.addAll( _unFinishedEntities );
-
-    }
+//    @Override
+//    public void addUnfinishedEntities( final Collection<GowingEntityReference> collection ) {
+//%%%
+//        collection.addAll( _unFinishedEntities );
+//
+//    }
 
     @Override
     @NotNull
@@ -203,6 +203,13 @@ public class StdGowingUnPackerContext implements GowingUnPackerContext {
     }
 
     @Override
+    public SortedMap<GowingEntityReference, GowingPackable> getSeenEntitiesMap() {
+
+        return new TreeMap<>( _seenInstanceIds );
+
+    }
+
+    @Override
     public boolean isEntityKnown( final @NotNull GowingEntityReference er ) {
 
         return _seenInstanceIds.containsKey( er );
@@ -219,9 +226,9 @@ public class StdGowingUnPackerContext implements GowingUnPackerContext {
     }
 
     @Override
-    public Collection<GowingEntityReference> getSeenEntityReferences() {
+    public SortedSet<GowingEntityReference> getSeenEntityReferences() {
 
-        return new LinkedList<>( _seenInstanceIds.keySet() );
+        return new TreeSet<>( _seenInstanceIds.keySet() );
 
     }
 

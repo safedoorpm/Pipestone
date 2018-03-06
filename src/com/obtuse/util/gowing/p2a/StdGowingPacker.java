@@ -132,7 +132,9 @@ public class StdGowingPacker implements GowingPacker {
 
     }
 
-    public StdGowingPacker( final @NotNull EntityName groupName, final @NotNull File outputFile )
+    public
+
+    StdGowingPacker( final @NotNull EntityName groupName, final @NotNull File outputFile )
             throws FileNotFoundException {
 
         this( groupName, outputFile, new PrintWriter( outputFile ), new StdGowingPackerContext(), false );
@@ -150,7 +152,7 @@ public class StdGowingPacker implements GowingPacker {
 
     }
 
-    private StdGowingPacker(
+    public StdGowingPacker(
             final @NotNull EntityName groupName,
             final @NotNull File outputFile,
             final @NotNull PrintWriter writer,
@@ -182,6 +184,20 @@ public class StdGowingPacker implements GowingPacker {
 
     }
 
+    @Override
+    public boolean isVerbose() {
+
+        return _verbose;
+
+    }
+
+    @Override
+    public void setVerbose( final boolean verbose ) {
+
+        _verbose = verbose;
+
+    }
+
     public void close() {
 
         _writer.close();
@@ -204,7 +220,7 @@ public class StdGowingPacker implements GowingPacker {
 
         }
 
-        if ( _verbose ) Logger.logMsg( "queuing " + entity.getInstanceId() + " / " + entity.getInstanceId().getTypeName() );
+        if ( isVerbose() ) Logger.logMsg( "queuing " + entity.getInstanceId() + " / " + entity.getInstanceId().getTypeName() );
 
         _packingContext.rememberPackableEntity( null, entity );
 
@@ -220,7 +236,7 @@ public class StdGowingPacker implements GowingPacker {
 
         }
 
-        if ( _verbose ) Logger.logMsg( "queuing " + entity.getInstanceId() + " / " + entity.getInstanceId().getTypeName() + " == " + entityName );
+        if ( isVerbose() ) Logger.logMsg( "queuing " + entity.getInstanceId() + " / " + entity.getInstanceId().getTypeName() + " == " + entityName );
 
         _packingContext.rememberPackableEntity( entityName, entity );
 
@@ -247,7 +263,7 @@ public class StdGowingPacker implements GowingPacker {
 
                 if ( !_previouslyPackedEntities.contains( instanceId ) ) {
 
-                    if ( _verbose ) Logger.logMsg( "will pack " + instanceId + " on next pass" );
+                    if ( isVerbose() ) Logger.logMsg( "will pack " + instanceId + " on next pass" );
 
                     notPackedEntities.add( instanceId );
 
@@ -263,12 +279,12 @@ public class StdGowingPacker implements GowingPacker {
 
             }
 
-            if ( _verbose ) Logger.logMsg( "starting packing pass " + pass + " with " + notPackedEntities.size() + " yet to be packed entities" );
+            if ( isVerbose() ) Logger.logMsg( "starting packing pass " + pass + " with " + notPackedEntities.size() + " yet to be packed entities" );
 
             for ( GowingInstanceId instanceId : notPackedEntities ) {
 
                 EntityNames names = _packingContext.getEntityNames( instanceId );
-                if ( _verbose ) Logger.logMsg( "packing " + instanceId + " / " + names );
+                if ( isVerbose() ) Logger.logMsg( "packing " + instanceId + " / " + names );
                 actuallyPackEntity( instanceId );
                 entityCount += 1;
                 _previouslyPackedEntities.add( instanceId );
@@ -306,7 +322,7 @@ public class StdGowingPacker implements GowingPacker {
 
     private void actuallyPackEntity( final @NotNull GowingInstanceId instanceId ) {
 
-        if ( _verbose ) Logger.logMsg( "@@@ actually packing " + instanceId );
+        if ( isVerbose() ) Logger.logMsg( "@@@ actually packing " + instanceId );
         EntityNames entityNames = _packingContext.getEntityNames( instanceId );
         _packingContext.rememberTopTypeId( entityNames.getEntity().getInstanceId().getTypeId() );
 
@@ -329,7 +345,7 @@ public class StdGowingPacker implements GowingPacker {
 
                 String typeName = GowingInstanceId.lookupTypeName( newTypeId.intValue() );
 
-                if ( _verbose ) Logger.logMsg( "recording class " + typeName );
+                if ( isVerbose() ) Logger.logMsg( "recording class " + typeName );
 
                 _writer.print( newTypeId );
                 _writer.print( '@' );

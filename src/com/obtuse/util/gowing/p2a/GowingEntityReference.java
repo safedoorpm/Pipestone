@@ -61,12 +61,7 @@ public class GowingEntityReference implements Comparable<GowingEntityReference> 
 
         _version = version;
 
-        _entityReferenceNames = new TreeSet<>();
-        if ( entityReferenceNames != null ) {
-
-            _entityReferenceNames.addAll( entityReferenceNames );
-
-        }
+        _entityReferenceNames = Collections.unmodifiableSortedSet( entityReferenceNames == null ? new TreeSet<>() : new TreeSet<>( entityReferenceNames ) );
 
     }
 
@@ -92,7 +87,7 @@ public class GowingEntityReference implements Comparable<GowingEntityReference> 
     @NotNull
     public SortedSet<EntityName> getEntityReferenceNames() {
 
-        return Collections.unmodifiableSortedSet( _entityReferenceNames );
+        return _entityReferenceNames;
 
     }
 
@@ -142,7 +137,7 @@ public class GowingEntityReference implements Comparable<GowingEntityReference> 
 
     public String toString() {
 
-        return "ER( " + format() + " )";
+        return "GER( " + format() + " )";
 
     }
 

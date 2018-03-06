@@ -6,6 +6,14 @@ package com.obtuse.util.gowing;
 
 /**
  Document and demonstrate how to use the Gowing facility.
+ <p>Progress on documenting and demonstrating how to use the Gowing facility is not exactly progressing rapidly.
+ A few places to look for useful information are:
+ <ul>
+ <li>{@link com.obtuse.util.gowing.p2a.examples.SortedSetExample}</li>
+ <li>{@link com.obtuse.util.gowing.p2a.examples.RestrictedNameExample}</li>
+ <li>{@link com.obtuse.util.gowing.p2a.GowingUnpackingDeadlockedException}</li>
+ </ul>
+ </p>
  */
 
 public class Gowing {
