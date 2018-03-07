@@ -1,8 +1,8 @@
 package com.obtuse.util.gowing;
 
 import com.obtuse.exceptions.HowDidWeGetHereError;
-import com.obtuse.util.Logger;
 import com.obtuse.util.gowing.p2a.GowingEntityReference;
+import com.obtuse.util.gowing.p2a.GowingUtil;
 import com.obtuse.util.gowing.p2a.holders.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -31,6 +31,8 @@ public class GowingPackableKeyValuePair<K, V> extends GowingAbstractPackableEnti
     private Object _keyReference;
     private V _value;
     private Object _valueReference;
+
+    private boolean _keyAndValueResolved = false;
 
     public static final GowingEntityFactory FACTORY = new GowingEntityFactory( ENTITY_TYPE_NAME ) {
 
@@ -129,48 +131,72 @@ public class GowingPackableKeyValuePair<K, V> extends GowingAbstractPackableEnti
     @Override
     public boolean finishUnpacking( final @NotNull GowingUnPacker unPacker ) {
 
+        // A bit of careful processing of the value reference.
+        // If _valueReference is null then either
+        // (1) the value is null and we can just leave _value as null or
+        // (2) we have already dealt with the value reference and set _valueReference to null below
+        //
+        // Consequently, we can use the nullity of _valueReference as a safe gate into the code that
+        // actually ensures that _value has the correct value.
+
+        // Our ability to resolve either _key or _value does not depend upon either _keyReference or _valueReference being finished.
+        //
+        // Once both _key and _value have been resolved, we can declare ourselves finished as soon as our key is finished since
+        // a finished _key is all that is needed to rebuild a table of key->value mappings.
+        //
+        // Lastly, our ability to handle circular references relies on us not needing our _value to be finished before we declare
+        // ourselves finished.
+
+        // So . . .
+
+        // Step one is to resolve _key and _value (we only do this on the first call to this method).
+
+        if ( !_keyAndValueResolved ) {
+
+            _key = (K)GowingUtil.fetchActualValue( unPacker, _keyReference );
+            _value = (V)GowingUtil.fetchActualValue( unPacker, _valueReference );
+
+            _keyAndValueResolved = true;
+
+        }
+
+        // Step two is to decide if we are finished. We decide that entirely by checking if _keyReference is finished.
+        // See longer comment above for why this is a necessary check and must be a sufficient check.
+
+        //noinspection RedundantIfStatement
         if ( _keyReference instanceof GowingEntityReference && !unPacker.isEntityFinished( (GowingEntityReference)_keyReference ) ) {
 
             return false;
 
         }
 
-        if ( _valueReference instanceof GowingEntityReference && !unPacker.isEntityFinished( (GowingEntityReference)_valueReference ) ) {
-
-            return false;
-
-        }
-
-        _key = (K)fetchActualValue( unPacker, _keyReference );
-        _value = (V)fetchActualValue( unPacker, _valueReference );
-
-        _keyReference = null;
-        _valueReference = null;
-
         return true;
 
-    }
-
-    /**
-     If an object is a {@link GowingEntityReference} then use {@link GowingUnPacker#resolveReference(GowingEntityReference)} to get the entity; otherwise, return the object.
-     <p/>This may seem like a rather specialized operation but the use case actually comes up fairly often.
-
-     @param unPacker the unpacker that can resolve {@link GowingEntityReference}s.
-     @param value    the object in question.
-     @return the object of interest.
-     */
-
-    public static Object fetchActualValue( final GowingUnPacker unPacker, final Object value ) {
-
-        if ( value instanceof GowingEntityReference ) {
-
-            return unPacker.resolveReference( (GowingEntityReference)value );
-
-        } else {
-
-            return value;
-
-        }
+//        if ( _valueReference != null ) {
+//
+//            if ( _valueReference instanceof GowingEntityReference && !unPacker.isEntityFinished( (GowingEntityReference)_valueReference ) ) {
+//
+//                return false;
+//
+//            } else {
+//
+//                _valueReference = null;
+//
+//            }
+//
+//        }
+//
+//        if ( _keyReference instanceof GowingEntityReference && !unPacker.isEntityFinished( (GowingEntityReference)_keyReference ) ) {
+//
+//            return false;
+//
+//        }
+//
+//        _key = (K)fetchActualValue( unPacker, _keyReference );
+//
+//        _keyReference = null;
+//
+//        return true;
 
     }
 

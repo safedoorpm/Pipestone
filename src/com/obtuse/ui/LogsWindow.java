@@ -8,6 +8,7 @@ import com.obtuse.util.BasicProgramConfigInfo;
 import com.obtuse.util.Logger;
 import com.obtuse.util.ObtuseUtil;
 import com.obtuse.util.Trace;
+import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.awt.*;
@@ -135,13 +136,13 @@ public class LogsWindow extends WindowWithMenus {
     }
 
     @SuppressWarnings({ "UnusedDeclaration" })
-    public static void addMessage( final String msg ) {
+    public static void addMessage( final @NotNull String msg ) {
 
         LogsWindow.addMessage( new Date(), msg );
 
     }
 
-    public static void addMessage( final Date when, final String msg ) {
+    public static void addMessage( final @NotNull Date when, final @NotNull String msg ) {
 
         final String timeStampedMessage = LogsWindow.s_dateFormatter.format( when ) + ":  " + msg;
         if ( SwingUtilities.isEventDispatchThread() ) {

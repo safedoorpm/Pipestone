@@ -47,6 +47,8 @@ public class WrappedButtonSelectorPanel<CHOICE, PANEL extends JPanel> extends Wr
         @NotNull
         List<ICCHOICE> getChoicesInSelectionOrder();
 
+        ICCHOICE getInitialChoice();
+
     }
 
     private final InnerWrappedButtonSelectorPanel _buttonPanel;
@@ -74,7 +76,7 @@ public class WrappedButtonSelectorPanel<CHOICE, PANEL extends JPanel> extends Wr
                         public PANEL apply( final AbstractButton ab ) {
 
                             CHOICE choice = lookupChoice( ab, buttonMap );
-                            PANEL panel = iController.getPanel( choice );
+                            @SuppressWarnings("UnnecessaryLocalVariable") PANEL panel = iController.getPanel( choice );
 
                             return panel;
 
@@ -93,6 +95,44 @@ public class WrappedButtonSelectorPanel<CHOICE, PANEL extends JPanel> extends Wr
         public IController getChoice() {
 
             return _iController;
+
+        }
+
+        public CHOICE getSelected() {
+
+            for ( CHOICE choice : _buttonMap.keySet() ) {
+
+                if ( _buttonMap.get( choice ).isSelected() ) {
+
+                    return choice;
+
+                }
+
+            }
+
+            return null;
+
+        }
+
+        public void setSelected( final @NotNull CHOICE choice ) {
+
+            JRadioButton targetButton = _buttonMap.get( choice );
+            if ( targetButton == null ) {
+
+                throw new IllegalArgumentException( "WrappedButtonSelectorPanel.setSelected:  no button labeled " + ObtuseUtil.enquoteJavaObject( choice ) );
+
+            }
+
+//            targetButton.setSelected( true );
+//            ButtonModel targetButtonModel = targetButton.getModel();
+//            getButtonGroup().setSelected( targetButtonModel, true );
+            Logger.logMsg(
+                    "clicking on button labeled " + ObtuseUtil.enquoteJavaObject( choice ) +
+                    " == " + ObtuseUtil.enquoteJavaObject( targetButton.getText() ) + ":  " +
+                    targetButton
+            );
+
+            targetButton.doClick();
 
         }
 
@@ -210,6 +250,7 @@ public class WrappedButtonSelectorPanel<CHOICE, PANEL extends JPanel> extends Wr
         ButtonGroup buttonGroup = new ButtonGroup();
 
         List<CHOICE> allChoices = iController.getChoicesInSelectionOrder();
+        CHOICE initialChoice = iController.getInitialChoice();
 
         // Pick the number of columns (3 or 4) that fills up the most of the last row.
 
@@ -235,23 +276,49 @@ public class WrappedButtonSelectorPanel<CHOICE, PANEL extends JPanel> extends Wr
         // the data categories panel in the GUI in the order that they came out of the previous step.
 
         SortedMap<CHOICE, JRadioButton> buttonMap = new TreeMap<>();
+        boolean choiceFound = false;
+        CHOICE firstButton = null;
         for ( Ix<CHOICE> choice : Ix.arrayList( allChoices ) ) {
 
             JRadioButton jrb = new JRadioButton( "" + choice.item );
             jrb.setName( "" + choice.item );
             buttonMap.put( choice.item, jrb );
-            if ( choice.ix == 0 ) {
+            if ( firstButton == null ) {
 
-                jrb.setSelected( true );
-
-            } else {
-
-                jrb.setSelected( false );
+                firstButton = choice.item;
 
             }
 
+            jrb.setSelected( false );
+            choiceFound = choiceFound || choice.item.equals( initialChoice );
+
+////            if ( choice.ix == 0 ) {
+//            if ( choice.item.equals( initialChoice ) ) {
+//
+//                jrb.setSelected( true );
+//                choiceFound = true;
+//
+//            } else {
+//
+//                jrb.setSelected( false );
+//
+//            }
+
             buttonGroup.add( jrb );
             buttonPanel.add( jrb );
+
+        }
+
+        if ( firstButton == null ) {
+
+            throw new IllegalArgumentException( "WrappedButtonSelectorPanel:  no choices provided" );
+
+        }
+
+        if ( !choiceFound ) {
+
+            initialChoice = buttonMap.firstKey();
+//            buttonMap.get( firstButton ).setSelected( true );
 
         }
 
@@ -261,6 +328,8 @@ public class WrappedButtonSelectorPanel<CHOICE, PANEL extends JPanel> extends Wr
                 buttonMap,
                 iController
         );
+
+        _buttonPanel.setSelected( initialChoice );
 
         setLayout( new BorderLayout() );
         add( _buttonPanel, BorderLayout.CENTER );

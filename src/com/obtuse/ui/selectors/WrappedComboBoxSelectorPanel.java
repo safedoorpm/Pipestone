@@ -48,6 +48,9 @@ public class WrappedComboBoxSelectorPanel<CHOICE, PANEL extends JPanel> extends 
 
         String getPickListPrompt();
 
+        @Nullable
+        CCCHOICE getInitialChoice();
+
     }
 
     private final CController<CHOICE,PANEL> _cController;
@@ -99,7 +102,12 @@ public class WrappedComboBoxSelectorPanel<CHOICE, PANEL extends JPanel> extends 
                 add( comboBoxSelectorPanel, BorderLayout.NORTH );
 //                add( new JLabel( "ONLY CHOICE IS " + actualChoices.get( 0 ).toString() ), BorderLayout.NORTH );
 
-                _panel = _cController.getPanel( actualChoices.firstElement(), true );
+//                _panel = _cController.getPanel( actualChoices.firstElement(), true );
+                CHOICE initialChoice = _cController.getInitialChoice();
+                _panel = _cController.getPanel(
+                        initialChoice == null ? actualChoices.firstElement() : initialChoice,
+                        true
+                );
 
             }
 
@@ -197,6 +205,9 @@ public class WrappedComboBoxSelectorPanel<CHOICE, PANEL extends JPanel> extends 
                     false
 
             );
+
+            CHOICE initialChoice = _cController.getInitialChoice();
+            getComboBoxModel().setSelectedItem( initialChoice == null ? getComboBoxModel().getElementAt( 0 ) : initialChoice );
 
         }
 

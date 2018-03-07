@@ -10,10 +10,53 @@ import com.obtuse.util.gowing.p2a.holders.GowingStringHolder;
 import org.jetbrains.annotations.NotNull;
 
 /**
- A String that is {@link GowingPackable}.
- <p>While it is almost always simplest to store a string directly, I have found a few situations where wrapping a string
- inside of something that is {@link GowingPackable} is useful.
- <p>For example, you might be packing an abstract generic class where one of the fields is actually an {@link Object}
+ A generalization of the {@link GowingString} class.
+ Definitely a work in progress. Not sure when it will get finished.
+ <p>
+ A {@link GowingPackable} that can carry any of the basic Java scalar container
+ ({@link Boolean},
+ {@link Byte},
+ {@link Character},
+ {@link Short},
+ {@link Integer},
+ {@link Long},
+ {@link Float},
+ {@link Double},
+ or {@link String}) instances.</p>
+ <p>While it is almost always simplest to store Java scalar values directly, I have found a few situations where being able to
+ wrap a Java scalar value inside of something that is {@link GowingPackable} is useful.
+ <p>For example, consider the following class:
+ <blockquote>
+ <tt>public class Doodle&lt;T&gt {<blockquote>
+ private T _tThing;<br>
+ private Class&lt;?&gt; _tClass;
+ .<br>
+ .<br>
+ .<br>
+ public Doodle( final @Nullable T thing, Class<?> tThingClass</?>, <i>other parameters go here</i> ) {<blockquote>
+ super();<br>
+ <br>
+ _tThing = thing;<br>
+ _tThingClass = tThingClass;<br>
+ .<br>
+ .<br>
+ .</blockquote>
+ }<br>
+ <br>
+ public Doodle( final @NotNull T thing, <i>other parameters go here</i> ) {<blockquote>
+ super();<br>
+ <br>
+ _tThing = thing;<br>
+ _tThingClass = thing.getClass();<br>
+ .<br>
+ .<br>
+ .</blockquote>
+ }</blockquote>
+ }
+ </tt>
+ </blockquote>
+ you might be packing a parameterized class where one of the fields can be of any type.
+ is actually an {@link Object}
  because the generic declaration is very broad. You happen to know that the class is only implemented in a very controlled
  situation where you <b><u>KNOW</u></b> that it is always either a string or some {@code GowingPackable} class.
  Being able to pack it as a {@code GowingPackable} instance simplifies unpacking.</p>
@@ -25,13 +68,13 @@ import org.jetbrains.annotations.NotNull;
  {@code long}, and {@code Long}.
  I, Danny, want to gain some experience with this class first to make sure that I get this family of classes right the first time (famous last words).
  </p>
- <p>Instances of this class are immutable. This class' {@link #hashCode()}, {@link #equals(Object)}, and {@link #compareTo(GowingString)} methods are
+ <p>Instances of this class are immutable. This class' {@link #hashCode()}, {@link #equals(Object)}, and {@link #compareTo(GowingScalar)} methods are
  consistent with each other.</p>
  */
 
-public class GowingString implements GowingPackable, Comparable<GowingString> {
+public class GowingScalar implements GowingPackable, Comparable<GowingScalar> {
 
-    private static final EntityTypeName ENTITY_TYPE_NAME = new EntityTypeName( GowingString.class );
+    private static final EntityTypeName ENTITY_TYPE_NAME = new EntityTypeName( GowingScalar.class );
 
     private static final int VERSION = 1;
 
@@ -60,7 +103,7 @@ public class GowingString implements GowingPackable, Comparable<GowingString> {
         )
                 throws GowingUnpackingException {
 
-            return new GowingString( bundle.MandatoryStringValue( G_STRING ) );
+            return new GowingScalar( bundle.MandatoryStringValue( G_STRING ) );
 
         }
 
@@ -71,7 +114,7 @@ public class GowingString implements GowingPackable, Comparable<GowingString> {
     @NotNull
     public final String string;
 
-    public GowingString( final @NotNull String string ) {
+    public GowingScalar( final @NotNull String string ) {
 
         super();
 
@@ -99,8 +142,8 @@ public class GowingString implements GowingPackable, Comparable<GowingString> {
     ) {
 
         GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
-                GowingString.ENTITY_TYPE_NAME,
-                GowingString.VERSION,
+                GowingScalar.ENTITY_TYPE_NAME,
+                GowingScalar.VERSION,
                 packer.getPackingContext()
         );
 
@@ -124,7 +167,7 @@ public class GowingString implements GowingPackable, Comparable<GowingString> {
     }
 
     @Override
-    public int compareTo( final @NotNull GowingString rhs ) {
+    public int compareTo( final @NotNull GowingScalar rhs ) {
 
         return string.compareTo( rhs.string );
 
@@ -133,7 +176,7 @@ public class GowingString implements GowingPackable, Comparable<GowingString> {
     @Override
     public boolean equals( final Object rhs ) {
 
-        return rhs instanceof GowingString && compareTo( (GowingString)rhs ) == 0;
+        return rhs instanceof GowingScalar && compareTo( (GowingScalar)rhs ) == 0;
 
     }
 
