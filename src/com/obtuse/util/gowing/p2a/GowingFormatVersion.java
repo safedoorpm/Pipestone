@@ -21,9 +21,9 @@ public class GowingFormatVersion {
 
     private final boolean _textFormat;
 
-    private final EntityName _groupName;
+    private final @NotNull EntityName _groupName;
 
-    public GowingFormatVersion( final StdGowingTokenizer.GowingToken2 fileFormatToken, final EntityName groupName )
+    public GowingFormatVersion( final StdGowingTokenizer.GowingToken2 fileFormatToken, final @NotNull EntityName groupName )
             throws GowingUnpackingException {
 
         super();
@@ -92,6 +92,7 @@ public class GowingFormatVersion {
 
     }
 
+    @NotNull
     public EntityName getGroupName() {
 
         return _groupName;

@@ -164,7 +164,7 @@ public abstract class AutoSizingValidatedJTextField extends ValidatedJTextField 
          @param textField the text field to be managed.
          */
 
-        public AutoAdjustingTextFieldWidthListener( final JTextField textField ) {
+        public AutoAdjustingTextFieldWidthListener( final @NotNull JTextField textField ) {
             super();
 
             _textField = textField;
@@ -175,56 +175,14 @@ public abstract class AutoSizingValidatedJTextField extends ValidatedJTextField 
         @Override
         public void insertUpdate( final DocumentEvent e ) {
 
-            int textWidth = _textField.getGraphics().getFontMetrics().stringWidth( _textField.getText() );
-            Dimension curPreferredSize = new Dimension( _textField.getPreferredSize() );
-            Dimension maxSize = _textField.getMaximumSize();
-            boolean changed = false;
-            while ( textWidth > curPreferredSize.width - 25 && curPreferredSize.width < maxSize.width ) {
-
-                curPreferredSize.width += 25;
-                changed = true;
-
-            }
-
-            if ( changed ) {
-
-                _textField.setPreferredSize( curPreferredSize );
-
-                if ( _textField.getParent() instanceof JPanel ) {
-
-                    _textField.getParent().revalidate();
-
-                }
-
-            }
+            maybeGrowTextField( _textField );
 
         }
 
         @Override
         public void removeUpdate( final DocumentEvent e ) {
 
-            int textWidth = _textField.getGraphics().getFontMetrics().stringWidth( _textField.getText() );
-            Dimension curPreferredSize = new Dimension( _textField.getPreferredSize() );
-            Dimension minSize = _textField.getMinimumSize();
-            boolean changed = false;
-            while ( textWidth < curPreferredSize.width - 50 && curPreferredSize.width > minSize.width ) {
-
-                curPreferredSize.width -= 25;
-                changed = true;
-
-            }
-
-            if ( changed ) {
-
-                _textField.setPreferredSize( curPreferredSize );
-
-                if ( _textField.getParent() instanceof JPanel ) {
-
-                    _textField.getParent().revalidate();
-
-                }
-
-            }
+            maybeShrinkTextField( _textField );
 
         }
 
@@ -247,4 +205,75 @@ public abstract class AutoSizingValidatedJTextField extends ValidatedJTextField 
         }
 
     }
+
+    public static void maybeGrowTextField( final @NotNull JTextField tf ) {
+
+        Graphics graphics = tf.getGraphics();
+        if ( graphics == null ) {
+
+            return;
+
+        }
+
+        FontMetrics fontMetrics = graphics.getFontMetrics();
+        int textWidth = fontMetrics.stringWidth( tf.getText() );
+        Dimension curPreferredSize = new Dimension( tf.getPreferredSize() );
+        Dimension maxSize = tf.getMaximumSize();
+        boolean changed = false;
+        while ( textWidth > curPreferredSize.width - 25 && curPreferredSize.width < maxSize.width ) {
+
+            curPreferredSize.width += 25;
+            changed = true;
+
+        }
+
+        if ( changed ) {
+
+            tf.setPreferredSize( curPreferredSize );
+
+            if ( tf.getParent() instanceof JPanel ) {
+
+                tf.getParent().revalidate();
+
+            }
+
+        }
+
+    }
+
+    public static void maybeShrinkTextField( final JTextField tf ) {
+
+        Graphics graphics = tf.getGraphics();
+        if ( graphics == null ) {
+
+            return;
+
+        }
+
+        FontMetrics fontMetrics = graphics.getFontMetrics();
+        int textWidth = fontMetrics.stringWidth( tf.getText() );
+        Dimension curPreferredSize = new Dimension( tf.getPreferredSize() );
+        Dimension minSize = tf.getMinimumSize();
+        boolean changed = false;
+        while ( textWidth < curPreferredSize.width - 50 && curPreferredSize.width > minSize.width ) {
+
+            curPreferredSize.width -= 25;
+            changed = true;
+
+        }
+
+        if ( changed ) {
+
+            tf.setPreferredSize( curPreferredSize );
+
+            if ( tf.getParent() instanceof JPanel ) {
+
+                tf.getParent().revalidate();
+
+            }
+
+        }
+
+    }
+
 }

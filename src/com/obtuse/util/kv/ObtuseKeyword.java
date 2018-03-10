@@ -70,28 +70,34 @@ public class ObtuseKeyword extends GowingAbstractPackableEntity implements Compa
 
     private final String _keywordString;
 
-    private final String _toString;
+    private final @NotNull String _toString;
 
     /**
      Create a clone of an existing keyword description.
+     The clone will have the same keyword string and will have the same keyword string name and
+     will provide the same string result from its {@link #toString()} method as the original.
+     <p>This constructor essentially exists to be used by the {@link ObtuseKeywordValue#ObtuseKeywordValue(ObtuseKeyword, String)} constructor.
+     It is probably not all that useful elsewhere considering that instances of this class are immutable.
+     It is public as that just seems like the polite thing to do even if calling it directly seems truly pointless.</p>
+     @param original the keyword to be cloned.
      */
 
-    public ObtuseKeyword( final @NotNull ObtuseKeyword rValue ) {
-        this( null, rValue.getKeywordName() );
+    public ObtuseKeyword( final @NotNull ObtuseKeyword original ) {
+        this( original.toString(), original.getKeywordName() );
 
     }
 
     /**
      Create a keyword description.
-
+     @param toString what this instance's {@link #toString()} method should return (overrides the default of the keyword's string name).
      @param keywordString the keyword's string name.
-     @throws IllegalArgumentException if the keyword is not matched by {@link #VALID_KEYWORD_PATTERN}.
+     @throws IllegalArgumentException if the keyword's string name is not matched by {@link #VALID_KEYWORD_PATTERN}.
      */
 
     public ObtuseKeyword( final @Nullable String toString, final @NotNull String keywordString ) {
         super( new GowingNameMarkerThing() );
 
-        _toString = toString;
+        _toString = toString == null ? keywordString : toString;
 
         Matcher m = VALID_KEYWORD_PATTERN.matcher( keywordString );
 
@@ -107,6 +113,12 @@ public class ObtuseKeyword extends GowingAbstractPackableEntity implements Compa
 
     }
 
+    /**
+     Create a keyword definition.
+     @param keywordString the keyword's string name.
+     @throws IllegalArgumentException if the keyword's string name is not matched by {@link #VALID_KEYWORD_PATTERN}.
+     */
+
     public ObtuseKeyword( final @NotNull String keywordString ) {
         this( keywordString, keywordString );
     }
@@ -115,17 +127,7 @@ public class ObtuseKeyword extends GowingAbstractPackableEntity implements Compa
     @SuppressWarnings("unused") final @NotNull GowingUnPacker unPacker,
     final @NotNull GowingPackedEntityBundle bundle
     ) {
-
-        super( unPacker, bundle.getSuperBundle() );
-
-        _toString = bundle.MandatoryStringValue( TO_STRING );
-        _keywordString = bundle.MandatoryStringValue( KEYWORD_STRING );
-
-    }
-
-    public ObtuseKeyword self() {
-
-        return this;
+        this( bundle.StringValue( TO_STRING ), bundle.MandatoryStringValue( KEYWORD_STRING ) );
 
     }
 
@@ -168,7 +170,7 @@ public class ObtuseKeyword extends GowingAbstractPackableEntity implements Compa
     }
 
     /**
-     Get the proper form of a reference to this keyword.
+     Get a canonical form of a reference to this keyword.
 
      @return returns {@code "$(" + getKeywordName() + ")"}
      */
@@ -182,7 +184,7 @@ public class ObtuseKeyword extends GowingAbstractPackableEntity implements Compa
     @Override
     public String toString() {
 
-        return _toString == null ? getKeywordName() : _toString;
+        return _toString;
 
     }
 

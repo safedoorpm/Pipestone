@@ -42,7 +42,7 @@ public abstract class GowingAbstractPackableHolder implements GowingPackableThin
 
         if ( _mandatory && _objectValue == null ) {
 
-            throw new IllegalArgumentException( "mandatory " + name + " value is null" );
+            throw new IllegalArgumentException( "GowingAbstractPackableHolder(scalar):  mandatory " + name + " value is null" );
 
         }
 
@@ -61,7 +61,7 @@ public abstract class GowingAbstractPackableHolder implements GowingPackableThin
 
         if ( _mandatory && _objectValue == null ) {
 
-            throw new IllegalArgumentException( "mandatory " + name + " value is null" );
+            throw new IllegalArgumentException( "GowingAbstractPackableHolder(" + _arrayKind + "):  mandatory " + name + " value is null" );
 
         }
 

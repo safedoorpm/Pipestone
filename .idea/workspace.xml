@@ -4,19 +4,13 @@
     <option name="SCOPE_TYPE" value="3" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingScalar.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingTrace.java" />
+    <list default="true" id="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" name="Default" comment="Minor reorganization of AutoSizingValidatedJTextField.java.&#10;&#10;Not much more than minor cleanup elsewhere.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/LogsWindow.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/LogsWindow.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/selectors/ContextualToString.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/selectors/ContextualToString.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/selectors/WrappedButtonSelectorPanel.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/selectors/WrappedButtonSelectorPanel.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/selectors/WrappedComboBoxSelectorPanel.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/selectors/WrappedComboBoxSelectorPanel.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackableKeyValuePair.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackableKeyValuePair.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingUnPacker.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingUnPacker.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingString.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingString.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingUtil.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingUtil.java" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/AutoSizingValidatedJTextField.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/AutoSizingValidatedJTextField.java" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingFormatVersion.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingFormatVersion.java" />
       <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingUnPacker.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingUnPacker.java" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingAbstractPackableHolder.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingAbstractPackableHolder.java" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/kv/ObtuseKeyword.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/kv/ObtuseKeyword.java" />
     </list>
     <ignored path="Pipestone.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -137,40 +131,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="TeeOutputStream.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/TeeOutputStream.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4066">
-              <caret line="214" column="21" lean-forward="false" selection-start-line="214" selection-start-column="21" selection-end-line="214" selection-end-column="21" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ButtonSelectorPanel.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/selectors/ButtonSelectorPanel.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="817">
-              <caret line="57" column="58" lean-forward="false" selection-start-line="57" selection-start-column="58" selection-end-line="57" selection-end-column="58" />
-              <folding>
-                <element signature="e#0#4187#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ComboBoxSelectorPanel.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/selectors/ComboBoxSelectorPanel.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2109">
-              <caret line="124" column="0" lean-forward="false" selection-start-line="124" selection-start-column="0" selection-end-line="124" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="SelectorPanel.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/selectors/SelectorPanel.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -217,11 +177,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GowingUnpackingDeadlockedException.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="GowingUnpackingDeadlockedException.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingUnpackingDeadlockedException.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="85" column="58" lean-forward="false" selection-start-line="85" selection-start-column="58" selection-end-line="85" selection-end-column="58" />
+            <state relative-caret-position="378">
+              <caret line="87" column="60" lean-forward="false" selection-start-line="87" selection-start-column="60" selection-end-line="87" selection-end-column="60" />
               <folding />
             </state>
           </provider>
@@ -230,7 +190,7 @@
       <file leaf-file-name="WrappedSelectorPanel.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/selectors/WrappedSelectorPanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="171">
+            <state relative-caret-position="152">
               <caret line="12" column="37" lean-forward="false" selection-start-line="12" selection-start-column="37" selection-end-line="12" selection-end-column="37" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -239,11 +199,43 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="StdGowingPacker.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingPacker.java">
+      <file leaf-file-name="ObtuseKeyword.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/kv/ObtuseKeyword.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1539">
-              <caret line="95" column="0" lean-forward="false" selection-start-line="95" selection-start-column="0" selection-end-line="95" selection-end-column="0" />
+            <state relative-caret-position="411">
+              <caret line="175" column="7" lean-forward="false" selection-start-line="175" selection-start-column="7" selection-end-line="175" selection-end-column="7" />
+              <folding>
+                <element signature="e#0#6153#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GowingFormatVersion.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingFormatVersion.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="291">
+              <caret line="94" column="12" lean-forward="false" selection-start-line="94" selection-start-column="12" selection-end-line="94" selection-end-column="12" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="StdGowingUnPacker.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingUnPacker.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="239">
+              <caret line="678" column="5" lean-forward="true" selection-start-line="678" selection-start-column="5" selection-end-line="678" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GowingUnPacker.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingUnPacker.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="671">
+              <caret line="97" column="12" lean-forward="false" selection-start-line="97" selection-start-column="12" selection-end-line="97" selection-end-column="12" />
               <folding />
             </state>
           </provider>
@@ -354,10 +346,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingDoubleHolder.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingEntityNameHolder.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingEntityReferenceHolder.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingFloatHolder.java" />
         <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingIntegerHolder.java" />
         <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingLongHolder.java" />
         <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingNullHolder.java" />
@@ -405,6 +393,10 @@
         <option value="$PROJECT_DIR$/src/com/obtuse/ui/selectors/WrappedSelectorPanel.java" />
         <option value="$PROJECT_DIR$/../Burke2/BurkeBioEditor/src/xyz/kenosee/burke2/bioGenerator/util/keywordConfigurators/KeywordSetEditorConfig2.java" />
         <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingUnpackingDeadlockedException.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/util/kv/ObtuseKeyword.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingFormatVersion.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingUnPacker.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingUnPacker.java" />
       </list>
     </option>
   </component>
@@ -574,8 +566,9 @@
     </navigator>
     <panes>
       <pane id="AndroidView" />
-      <pane id="Scratches" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -769,6 +762,15 @@
               <item name="com" type="462c0819:PsiDirectoryNode" />
               <item name="obtuse" type="462c0819:PsiDirectoryNode" />
               <item name="util" type="462c0819:PsiDirectoryNode" />
+              <item name="kv" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Pipestone" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Pipestone" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="obtuse" type="462c0819:PsiDirectoryNode" />
+              <item name="util" type="462c0819:PsiDirectoryNode" />
               <item name="names" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -940,7 +942,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1464,14 +1465,8 @@
       <workItem from="1518852593888" duration="1643000" />
       <workItem from="1519659432824" duration="2288000" />
       <workItem from="1519802065173" duration="1394000" />
-      <workItem from="1520350385675" duration="2881000" />
-    </task>
-    <task id="LOCAL-00007" summary="Preserve ExploreSSL as MyExploreSSL">
-      <created>1418160071880</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1418160071880</updated>
+      <workItem from="1520350385675" duration="4801000" />
+      <workItem from="1520531405745" duration="1297000" />
     </task>
     <task id="LOCAL-00008" summary="Various cleanup.&#10;Update copyrights.">
       <created>1418426007613</created>
@@ -1809,11 +1804,18 @@
       <option name="project" value="LOCAL" />
       <updated>1520351414404</updated>
     </task>
-    <option name="localTasksCounter" value="56" />
+    <task id="LOCAL-00056" summary="Implement the ability to construct/initialize a WrappedButtonSelectorPanel with a particular button pre-selected and a WrappedComboBoxSelectorPanel with a particular choice pre-selected.&#10;&#10;Fix a subtle bugin GowingPackableKeyValuePair where its ability to finish an instance was incorrectly dependent upon its value field being finished. This created an unbreakable finish-dependency loop during an unpacking operation.&#10;&#10;Cleanup.">
+      <created>1520444293639</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1520444293639</updated>
+    </task>
+    <option name="localTasksCounter" value="57" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="806084000" />
+    <option name="totallyTimeSpent" value="809301000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1826,28 +1828,28 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="2627" y="31" width="2443" height="1494" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.118644066" sideWeight="0.67289025" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30076924" sideWeight="0.9753381" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3007576" sideWeight="0.9753381" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32997844" sideWeight="0.50277776" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32960624" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32806054" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.41969696" sideWeight="0.4985938" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4212121" sideWeight="0.4985938" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32956952" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30975303" sideWeight="0.5269953" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3131017" sideWeight="0.5269953" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3037879" sideWeight="0.4985938" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17557251" sideWeight="0.43055555" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329475" sideWeight="0.67289025" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31439394" sideWeight="0.9995866" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31439394" sideWeight="0.9995866" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17571372" sideWeight="0.4730047" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1866,6 +1868,7 @@
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Problems" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3037879" sideWeight="0.4985938" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.118644066" sideWeight="0.67289025" order="5" side_tool="false" content_ui="tabs" />
@@ -1949,8 +1952,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Various cleanup and adding a few new methods to ObtuseUtil." />
-    <MESSAGE value="Implement auto-indenting of logging messages in com.util.Logger.&#10;Add a method to ObtuseUtil to detect if the running JVM is under the control of the Java debugger.&#10;Add a couple of methods to ObtuseUtil to do centering of text (much like lpad and rpad but they add spaces on both sides to 'center' the text).&#10;Clarify who is responsible for what in class-level Javadoc comment in the UniquelyNamedEntity class." />
     <MESSAGE value="Mostly minor cleanup." />
     <MESSAGE value="Fix the merge screwup where changes were make on Niepce and not pushed for about a year (sigh)." />
     <MESSAGE value="Implementation of a relatively easy to use JPanel which can be the target of drag-and-drop operations.&#10;&#10;Gowing support for serializing and deserializing arrays of primitives and arrays of Java container classes (e.g. Integer, Double, String, etc). Still missing support for arrays of GowingPackable objects. Considerable cleanup.&#10;&#10;Start the process of turning the SortedSetExample.java class into a reasonable Gowing-aware example." />
@@ -1974,7 +1975,9 @@
     <MESSAGE value="Birth of the ObtuseCollections class (more to come later).&#10;Otherwise, mostly cleanup." />
     <MESSAGE value="Major cleanup in the wrapped selector panels stuff.&#10;Advent of the ContextualToString class which facilitates providing different toString results depending on the context.&#10;Provide some basic support for customized toString results from ObtuseKeyword instances (note that this is customized toString results like providing mixed case keyword names; it is not contextual customized toString - each ObtuseKeyword instance will produce the exact same toString result although the developer gets to decide what that result will be when the ObtuseKeyword instance is created)." />
     <MESSAGE value="Add fairly basic &quot;regular verbose&quot; and &quot;super verbose&quot; mechanism to make it a bit easier to figure out why the &quot;finish unpacking&quot; phase of a Gowing unpack operation is failing.&#10;&#10;Add an unchecked GowingUnpackingDeadlockedException which is thrown when the &quot;finish unpacking&quot; phase of a Gowing unpack operation reaches a point where a round of finishing doesn't reduce the number of unfinished unpackables. This is usually because two packables are waiting for each other to finish (generally if not always because one or both of the packables have a &quot;cannot finish until the other is finished&quot; dependency that doesn't really need to be there, or the finishing strategy being used is flawed - roughly speaking, if it was possible to build the data structure one step-at-a-time in the first place then there must be a way to unpack it while finishing it one-step-at-a-time).&#10;&#10;Cleanup of various aspects of the Gowing facility and elsewhere." />
-    <option name="LAST_COMMIT_MESSAGE" value="Add fairly basic &quot;regular verbose&quot; and &quot;super verbose&quot; mechanism to make it a bit easier to figure out why the &quot;finish unpacking&quot; phase of a Gowing unpack operation is failing.&#10;&#10;Add an unchecked GowingUnpackingDeadlockedException which is thrown when the &quot;finish unpacking&quot; phase of a Gowing unpack operation reaches a point where a round of finishing doesn't reduce the number of unfinished unpackables. This is usually because two packables are waiting for each other to finish (generally if not always because one or both of the packables have a &quot;cannot finish until the other is finished&quot; dependency that doesn't really need to be there, or the finishing strategy being used is flawed - roughly speaking, if it was possible to build the data structure one step-at-a-time in the first place then there must be a way to unpack it while finishing it one-step-at-a-time).&#10;&#10;Cleanup of various aspects of the Gowing facility and elsewhere." />
+    <MESSAGE value="Implement the ability to construct/initialize a WrappedButtonSelectorPanel with a particular button pre-selected and a WrappedComboBoxSelectorPanel with a particular choice pre-selected.&#10;&#10;Fix a subtle bugin GowingPackableKeyValuePair where its ability to finish an instance was incorrectly dependent upon its value field being finished. This created an unbreakable finish-dependency loop during an unpacking operation.&#10;&#10;Cleanup." />
+    <MESSAGE value="Minor reorganization of AutoSizingValidatedJTextField.java.&#10;&#10;Not much more than minor cleanup elsewhere." />
+    <option name="LAST_COMMIT_MESSAGE" value="Minor reorganization of AutoSizingValidatedJTextField.java.&#10;&#10;Not much more than minor cleanup elsewhere." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -2325,34 +2328,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingAbstractPackableEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2470">
-          <caret line="132" column="0" lean-forward="false" selection-start-line="132" selection-start-column="0" selection-end-line="132" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingEntityFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="21" column="22" lean-forward="false" selection-start-line="21" selection-start-column="22" selection-end-line="21" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingInstanceId.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1530">
-          <caret line="24" column="19" lean-forward="false" selection-start-line="24" selection-start-column="19" selection-end-line="24" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingMetaDataHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="9" column="3" lean-forward="false" selection-start-line="9" selection-start-column="3" selection-end-line="9" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackableAttribute.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="275">
@@ -2524,7 +2499,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="912">
           <caret line="51" column="31" lean-forward="false" selection-start-line="51" selection-start-column="31" selection-end-line="51" selection-end-column="31" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2539,7 +2513,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="95">
           <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2637,7 +2610,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/selectors/ComboBoxSelectorPanel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2109">
+        <state relative-caret-position="1957">
           <caret line="124" column="0" lean-forward="false" selection-start-line="124" selection-start-column="0" selection-end-line="124" selection-end-column="0" />
           <folding />
         </state>
@@ -2691,7 +2664,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/selectors/WrappedSelectorPanel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
+        <state relative-caret-position="152">
           <caret line="12" column="37" lean-forward="false" selection-start-line="12" selection-start-column="37" selection-end-line="12" selection-end-column="37" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -2709,8 +2682,42 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingUnpackingDeadlockedException.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="85" column="58" lean-forward="false" selection-start-line="85" selection-start-column="58" selection-end-line="85" selection-end-column="58" />
+        <state relative-caret-position="378">
+          <caret line="87" column="60" lean-forward="false" selection-start-line="87" selection-start-column="60" selection-end-line="87" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/kv/ObtuseKeyword.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="411">
+          <caret line="175" column="7" lean-forward="false" selection-start-line="175" selection-start-column="7" selection-end-line="175" selection-end-column="7" />
+          <folding>
+            <element signature="e#0#6153#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingFormatVersion.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="291">
+          <caret line="94" column="12" lean-forward="false" selection-start-line="94" selection-start-column="12" selection-end-line="94" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingUnPacker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="671">
+          <caret line="97" column="12" lean-forward="false" selection-start-line="97" selection-start-column="12" selection-end-line="97" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingUnPacker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="239">
+          <caret line="678" column="5" lean-forward="true" selection-start-line="678" selection-start-column="5" selection-end-line="678" selection-end-column="5" />
           <folding />
         </state>
       </provider>

@@ -522,23 +522,23 @@ public class StdGowingUnPacker implements GowingUnPacker {
 
         }
 
-        Optional<EntityTypeName> maybeTypeName = _unPackerContext.findTypeByTypeReferenceId( er.getTypeId() );
-        if ( maybeTypeName.isPresent() ) {
+        Optional<EntityTypeName> optTypeName = _unPackerContext.findTypeByTypeReferenceId( er.getTypeId() );
+        if ( optTypeName.isPresent() ) {
 
-            EntityTypeName typeName = maybeTypeName.get();
+            EntityTypeName typeName = optTypeName.get();
 
-            Optional<EntityTypeInfo> maybeTypeInfo = _unPackerContext.findTypeInfo( typeName );
-            if ( maybeTypeInfo.isPresent() ) {
+            Optional<EntityTypeInfo> optTypeInfo = _unPackerContext.findTypeInfo( typeName );
+            if ( optTypeInfo.isPresent() ) {
 
-                EntityTypeInfo typeInfo = maybeTypeInfo.get();
+                EntityTypeInfo typeInfo = optTypeInfo.get();
                 GowingEntityFactory factory = typeInfo.getFactory();
 
-		/*
-        Create the entity.
-		If something goes wrong, augment the GowingUnpackingException with the current token unless the exception
-		already specifies a token.
-		In either case, rethrow the exception.
-		 */
+                /*
+                Create the entity.
+                If something goes wrong, augment the GowingUnpackingException with the current token unless the exception
+                already specifies a token.
+                In either case, rethrow the exception.
+                 */
 
                 GowingPackable entity;
                 try {
@@ -594,7 +594,8 @@ public class StdGowingUnPacker implements GowingUnPacker {
                 String msg = "no factory for type id " +
                              er.getTypeId() +
                              " (" +
-                             _unPackerContext.findTypeByTypeReferenceId( er.getTypeId() ) +
+                             typeName +
+//                             _unPackerContext.findTypeByTypeReferenceId( er.getTypeId() ) +
                              ")";
 
                 throw new GowingUnpackingException(
@@ -762,11 +763,11 @@ public class StdGowingUnPacker implements GowingUnPacker {
         @SuppressWarnings({ "UnusedAssignment", "unused" }) StdGowingTokenizer.GowingToken2 leftParenToken =
                 _tokenizer.getNextToken( false, StdGowingTokenizer.TokenType.LEFT_PAREN );
 
-        Optional<EntityTypeName> maybeEntityTypeName =
+        Optional<EntityTypeName> optEntityTypeName =
                 _unPackerContext.findTypeByTypeReferenceId( ourEntityReferenceToken.entityReference().getTypeId() );
-        if ( maybeEntityTypeName.isPresent() ) {
+        if ( optEntityTypeName.isPresent() ) {
 
-            EntityTypeName entityTypeName = maybeEntityTypeName.get();
+            EntityTypeName entityTypeName = optEntityTypeName.get();
 
             if ( !parsingSuperClause && ourEntityReferenceToken.entityReference().getEntityId() == 0 ) {
 
@@ -963,11 +964,11 @@ public class StdGowingUnPacker implements GowingUnPacker {
             unPacker.getUnPackerContext().registerFactory( StdGowingPackerContext.SimplePackableClass.FACTORY );
             unPacker.getUnPackerContext().registerFactory( SortedSetExample.FACTORY );
 
-            Optional<GowingUnPackedEntityGroup> maybeResult = unPacker.unPack();
+            Optional<GowingUnPackedEntityGroup> optResult = unPacker.unPack();
 
-            if ( maybeResult.isPresent() ) {
+            if ( optResult.isPresent() ) {
 
-                GowingUnPackedEntityGroup result = maybeResult.get();
+                GowingUnPackedEntityGroup result = optResult.get();
 
                 for ( GowingPackable entity : result.getAllEntities() ) {
 
