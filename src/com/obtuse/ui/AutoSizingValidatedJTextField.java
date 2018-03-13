@@ -67,7 +67,7 @@ public abstract class AutoSizingValidatedJTextField extends ValidatedJTextField 
     /*
     Some possibly useful words for future reference.
 
-     <p>The equivalent auto-width adjusting functionality can be associated with an JTextField as follows:</p>
+     <p>The equivalent auto-width adjusting functionality can be associated with a JTextField as follows:</p>
      <blockquote>
      <pre>
      JTextField jtf = new JTextField();

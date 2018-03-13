@@ -17,6 +17,8 @@
 
 package org.apache.commons.text.similarity;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Arrays;
 
 /**
@@ -41,11 +43,13 @@ public class LevenshteinDistance implements EditDistance<Integer> {
     /**
      * Default instance.
      */
+
     private static final LevenshteinDistance DEFAULT_INSTANCE = new LevenshteinDistance();
 
     /**
      * Threshold.
      */
+
     private final Integer threshold;
 
     /**
@@ -56,6 +60,7 @@ public class LevenshteinDistance implements EditDistance<Integer> {
      *
      * @see LevenshteinDistance#getDefaultInstance()
      */
+
     public LevenshteinDistance() {
         this(null);
     }
@@ -70,6 +75,7 @@ public class LevenshteinDistance implements EditDistance<Integer> {
      *        If this is null then distances calculations will not be limited.
      *        This may not be negative.
      */
+
     public LevenshteinDistance(final Integer threshold) {
         if (threshold != null && threshold.intValue() < 0) {
             throw new IllegalArgumentException("Threshold must not be negative");
@@ -109,7 +115,9 @@ public class LevenshteinDistance implements EditDistance<Integer> {
      * @return result distance, or -1
      * @throws IllegalArgumentException if either String input {@code null}
      */
+
     @Override
+    @NotNull
     public Integer apply(final CharSequence left, final CharSequence right) {
         if (threshold != null) {
             return limitedCompare( left, right, threshold.intValue() );
@@ -122,6 +130,7 @@ public class LevenshteinDistance implements EditDistance<Integer> {
      *
      * @return the default instace
      */
+
     public static LevenshteinDistance getDefaultInstance() {
         return DEFAULT_INSTANCE;
     }
@@ -131,6 +140,7 @@ public class LevenshteinDistance implements EditDistance<Integer> {
      *
      * @return the distance threshold
      */
+
     public Integer getThreshold() {
         return threshold;
     }
@@ -166,6 +176,7 @@ public class LevenshteinDistance implements EditDistance<Integer> {
      * @param threshold the target threshold, must not be negative
      * @return result distance, or -1
      */
+
     private static int limitedCompare(CharSequence left, CharSequence right, final int threshold) { // NOPMD
         if (left == null || right == null) {
             throw new IllegalArgumentException("Strings must not be null");
@@ -336,6 +347,7 @@ public class LevenshteinDistance implements EditDistance<Integer> {
      * @return result distance, or -1
      * @throws IllegalArgumentException if either String input {@code null}
      */
+
     private static int unlimitedCompare(CharSequence left, CharSequence right) {
         if (left == null || right == null) {
             throw new IllegalArgumentException("Strings must not be null");

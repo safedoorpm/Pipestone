@@ -289,6 +289,7 @@ public class Ranges<T extends Comparable<T>> implements Iterable<Range<T>>, Seri
     @SuppressWarnings( { "MagicNumber", "UseOfSystemOutOrSystemErr" } )
     public static void main( final String[] args ) {
 
+        BasicProgramConfigInfo.init( "Obtuse", "Ranges", "testing", null );
         @SuppressWarnings( { "ClassWithoutToString" } )
         RangeFactory<Integer> rangeFactory = new RangeFactory<Integer>() {
 
