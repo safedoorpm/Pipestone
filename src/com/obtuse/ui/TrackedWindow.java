@@ -14,8 +14,6 @@ import java.awt.event.ComponentListener;
 
 public class TrackedWindow extends JFrame {
 
-//    private final String _appName;
-
     private final String _windowPrefsName;
 
     private final String _windowGeometryPrefsKey;
@@ -25,7 +23,6 @@ public class TrackedWindow extends JFrame {
     public TrackedWindow( final String windowPrefsName ) {
         super();
 
-//        _appName = appName;
         _windowPrefsName = windowPrefsName;
         _windowGeometryPrefsKey = _windowPrefsName + ".geometry";
 
@@ -56,8 +53,6 @@ public class TrackedWindow extends JFrame {
                 }
         );
 
-//        restoreWindowGeometry();
-
     }
 
     @SuppressWarnings({ "BooleanMethodNameMustStartWithQuestion" })
@@ -70,7 +65,6 @@ public class TrackedWindow extends JFrame {
 
     private void saveWindowGeometry( final Rectangle windowGeometry ) {
 
-//        Logger.logMsg( _windowGeometryPrefsKey + ":  saving window geometry \"" + windowGeometry + "\"" );
         if ( BasicProgramConfigInfo.getPreferences() != null ) {
 
             BasicProgramConfigInfo.getPreferences().putByteArray(
@@ -87,7 +81,6 @@ public class TrackedWindow extends JFrame {
 
         Rectangle windowGeometry = getSavedGeometry();
         Point windowLocation = new Point( windowGeometry.x, windowGeometry.y );
-//        Logger.logMsg( _windowGeometryPrefsKey + ":  restoring window location \"" + windowLocation + "\"" );
         setLocation( windowLocation );
 
     }
@@ -141,13 +134,6 @@ public class TrackedWindow extends JFrame {
                 saveWindowGeometry( savedGeometry );
 
             }
-
-        }
-
-        //noinspection StatementWithEmptyBody
-        if ( !_inToString ) {
-
-//            Logger.logMsg( _windowGeometryPrefsKey + ":  fetching window geometry " + savedGeometry + "\"" );
 
         }
 

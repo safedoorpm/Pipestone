@@ -34,7 +34,6 @@ import java.util.TreeMap;
  Consequently, we are going to simply ignore the fact that {@code ObtuseKeyword} is {code GowingPackable}.</p>
  */
 
-//@SuppressWarnings("unused")
 public class RestrictedNameExample extends ObtuseKeyword {
 
     private static final EntityTypeName ENTITY_TYPE_NAME = new EntityTypeName( RestrictedNameExample.class );

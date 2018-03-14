@@ -42,8 +42,6 @@ public class MpsTest2 extends JFrame {
 
         setContentPane( _panel1 );
 
-//        BasicProgramConfigInfo.init( "Obtuse", "MultiPointSlider", "MpsTest2", null );
-
         MultiPointSlider slider = new MultiPointSlider( "s3", 0, 10 );
         slider.setPaintLabels( false );
         slider.setPaintTicks( true );
@@ -55,7 +53,6 @@ public class MpsTest2 extends JFrame {
         _slider1 = slider;
         _slider1panel.setLayout( new BoxLayout( _slider1panel, BoxLayout.X_AXIS ) );
         _slider1panel.add( _slider1 );
-//        _slider1panel.add( new JButton( "Hello" ) );
 
         slider = new MultiPointSlider( "s7", 0, 10 );
         slider.setPaintLabels( false );
@@ -102,35 +99,6 @@ public class MpsTest2 extends JFrame {
         _multiPointSlider1.setMaximumSize( _multiPointSlider1.computeMinimumSize() );
         _multiPointSlider1.setPreferredSize( _multiPointSlider1.computeMinimumSize() );
         _multiPointSlider1.setKnobSize( MpsKnobSize.SIZE_5x5 );
-//        MultiPointSlider slider;
-//
-//        slider = new MultiPointSlider( "s3", 0, 10 );
-//        slider.setDrawLabels( false );
-//        slider.setMinimumSize( slider.computeMinimumSize() );
-//        slider.setMaximumSize( slider.computeMinimumSize() );
-//        slider.setPreferredSize( slider.computeMinimumSize() );
-//        slider.setDrawTickMarks( true );
-//        slider.setMinorTickSpacing( 1 );
-//        slider.setMajorTickSpacing( 2 );
-//        _slider1 = slider;
-//        _slider1panel.setLayout( new BoxLayout( _slider1panel, BoxLayout.X_AXIS ) );
-//        _slider1panel.add( _slider1 );
-//        _slider1panel.add( new JButton( "Hello" ) );
-//
-//        slider = new MultiPointSlider( "s7", 0, 10 );
-//        slider.setDrawLabels( false );
-//        slider.setMinimumSize( slider.computeMinimumSize() );
-//        slider.setMaximumSize( slider.computeMinimumSize() );
-//        slider.setPreferredSize( slider.computeMinimumSize() );
-//        slider.setPositionOnLine( MultiPointSlider.PositionOnLine.BELOW );
-//        slider.setDrawTickMarks( false );
-//        slider.setMinorTickSpacing( 1 );
-//        slider.setMajorTickSpacing( 2 );
-//        _slider2 = slider;
-//        _zzz.setLayout( new BoxLayout( _zzz, BoxLayout.X_AXIS ) );
-//        _zzz.add( _slider2 );
-//
-//        pack();
 
     }
 

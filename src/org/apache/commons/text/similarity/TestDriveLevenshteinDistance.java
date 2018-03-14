@@ -24,21 +24,10 @@ public class TestDriveLevenshteinDistance {
         for ( String w1 : words ) {
 
             TreeSorter<Double, String> results = new TreeSorter<>();
-//                    new Comparator<Double>() {
-//                        @Override
-//                        public int compare( final Double o1, final Double o2 ) {
-//
-//                            return Double.compare( o2.doubleValue(), o1.doubleValue() );
-//
-//                        }
-//                    }
-//            );
 
             for ( String w2 : words ) {
 
                 double measure = ld.apply( w1, w2 ).doubleValue();
-//                Logger.logMsg( "computeSimilarityMeasure( " + enquoteToJavaString( w1 ) + ", " + enquoteToJavaString( w2 ) + ":  " +
-//                               measure );
                 results.add( measure, w1 + "<>" + w2 );
 
             }

@@ -154,11 +154,11 @@ import java.util.Random;
  @version 16
  */
 
-// Note: this class is hard-inlined in all of its methods.  This makes some of
-// the methods well-nigh unreadable in their complexity.  In fact, the Mersenne
-// Twister is fairly easy code to understand: if you're trying to get a handle
-// on the code, I strongly suggest looking at MersenneTwister.java first.
-// -- Sean
+    // Note: this class is hard-inlined in all of its methods.  This makes some of
+    // the methods well-nigh unreadable in their complexity.  In fact, the Mersenne
+    // Twister is fairly easy code to understand: if you're trying to get a handle
+    // on the code, I strongly suggest looking at MersenneTwister.java first.
+    // -- Sean
 
 @SuppressWarnings({ "ALL" })
 public strictfp class MersenneTwisterFast implements Serializable, Cloneable {

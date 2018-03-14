@@ -4,6 +4,7 @@ package com.obtuse.ui.entitySorter;
  * Copyright © 2015 Obtuse Systems Corporation
  */
 
+import com.obtuse.exceptions.HowDidWeGetHereError;
 import com.obtuse.ui.MyActionListener;
 import com.obtuse.util.*;
 import org.jetbrains.annotations.NotNull;
@@ -22,8 +23,6 @@ Danny
 @SuppressWarnings("unchecked")
 public class SortedPanel<K extends Comparable<K>,E extends SortableEntity> extends JPanel {
 
-//    private String _name;
-
     private SortedPanelModel _model;
 
     public SortedPanel() {
@@ -37,7 +36,6 @@ public class SortedPanel<K extends Comparable<K>,E extends SortableEntity> exten
         super();
 
         setName( name );
-//	_name = name;
 
     }
 
@@ -58,13 +56,6 @@ public class SortedPanel<K extends Comparable<K>,E extends SortableEntity> exten
         }
 
     }
-
-//    @Override
-//    public String getName() {
-//
-//	return _name;
-//
-//    }
 
     public void setModel( @Nullable final SortedPanelModel model ) {
 
@@ -220,18 +211,6 @@ public class SortedPanel<K extends Comparable<K>,E extends SortableEntity> exten
 
     }
 
-//    private static void testAdoptSortedModel( SortedPanel sp, @NotNull SortedPanelModel model ) {
-//
-//	Trace.event( "<<<" );
-//	Trace.event( "" + model + ":  adopting " + sp );
-//
-//	model.adoptSortedPanel( sp );
-//
-//	Trace.event( "result is " + model );
-//	Trace.event( ">>>" );
-//
-//    }
-
     public static void main( final String[] args ) {
 
         BasicProgramConfigInfo.init( "Obtuse", "Pipestone", "entitySorter", null );
@@ -245,23 +224,13 @@ public class SortedPanel<K extends Comparable<K>,E extends SortableEntity> exten
 
         testSetModel( "a1", p1, new SortedPanelModel( sks, "p1model" ) );
 
-//	Trace.event( "p1 with model=" + p1 );
-
         testSetModel( "a2", p1, null );
-
-//	Trace.event( "p1 with model removed=" + p1 );
 
         testSetModel( "a3", p1, new SortedPanelModel( sks, "p2model" ) );
 
-//	Trace.event( "p1 with a new model=" + p1 );
-
         testSetModel( "a4", p1, p1.getModel() );
 
-//	Trace.event( "p1 with the same model after it was reassigned=" + p1 );
-
         testSetModel( "a5", p1, new SortedPanelModel( sks, "p3model" ) );
-
-//	Trace.event( "p1 with another new model=" + p1 );
 
         Trace.event( "preparing to test SortedPanelModel.adoptSortedPanel" );
 
@@ -308,7 +277,6 @@ public class SortedPanel<K extends Comparable<K>,E extends SortableEntity> exten
                     public void myActionPerformed( final ActionEvent e ) {
 
                         double v = rng.nextDouble();
-//			Logger.logMsg( "v = " + v );
 
                         String newKey = v < .1 ? "DUPLICATE" : NounsList.pickNoun();
                         Trace.event( "adding new button \"" + newKey + "\"" );
@@ -380,9 +348,14 @@ public class SortedPanel<K extends Comparable<K>,E extends SortableEntity> exten
             int index = 0;
             for ( K key : treeSorter.keySet() ) {
 
+                if ( ObtuseUtil.always() ) {
+
+                    throw new HowDidWeGetHereError( "how on earth does this work:  the indexing variable is never used!!" );
+
+                }
+
                 for ( Object entity : treeSorter.getValues( key ) ) {
 
-//		    Trace.event( "SortedPanel.verifyConsistency:  key = " + key + ", index = " + index );
                     if ( prev == null ) {
 
                         prev = getEntityView( 0 );

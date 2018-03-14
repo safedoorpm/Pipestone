@@ -393,8 +393,6 @@ public class StdGowingUnPacker implements GowingUnPacker {
                             Measure typeMeasure = new Measure( "StdGowingUnPacker - finish " + entity.getInstanceId().getTypeName() );
                             if ( entity.finishUnpacking( this ) ) {
 
-//                                if ( _superVerbose || ( isVerbose() && finishingPass > 0 ) ) {
-
                                 if ( isVerbose() ) {
 
                                     // The spaces after 'finished' line up this GER reference with the one above.
@@ -409,11 +407,11 @@ public class StdGowingUnPacker implements GowingUnPacker {
 
                             } else {
 
-//                                if ( _superVerbose || ( isVerbose() && finishingPass > 0 ) ) {
+                                if ( _superVerbose || ( isVerbose() && finishingPass > 0 ) ) {
 
                                     _t.verboseTrace( "did not finish", er );
 
-//                                }
+                                }
 
                             }
 
@@ -595,7 +593,6 @@ public class StdGowingUnPacker implements GowingUnPacker {
                              er.getTypeId() +
                              " (" +
                              typeName +
-//                             _unPackerContext.findTypeByTypeReferenceId( er.getTypeId() ) +
                              ")";
 
                 throw new GowingUnpackingException(
@@ -645,9 +642,6 @@ public class StdGowingUnPacker implements GowingUnPacker {
             if ( _superVerbose ) {
 
                 _t.verboseTrace( "is finished", _currentEntityReference, er );
-//                verboseTrace(
-//                        ( _currentEntityReference == null ? "unknown GER" : describeEntity( _currentEntityReference ) ) + " told that " +
-//                        describeEntity( er ) + " is ready" );
 
             } else {
 
@@ -662,9 +656,6 @@ public class StdGowingUnPacker implements GowingUnPacker {
             if ( isVerbose() ) {
 
                 _t.verboseTrace( "not finished", _currentEntityReference, er );
-//                verboseTrace(
-//                        ( _currentEntityReference == null ? "unknown GER" : describeEntity( _currentEntityReference ) ) + " told that " +
-//                        describeEntity( er ) + " is not ready" );
 
             } else {
 
@@ -682,12 +673,6 @@ public class StdGowingUnPacker implements GowingUnPacker {
 
         int ix = 0;
         for ( GowingEntityReference er : entityReferences ) {
-
-//            if ( er == null && !nullsOk ) {
-//
-//                throw new IllegalArgumentException( "StdGowingUnPacker.areEntitiesAllFinished:  array @ ix=" + ix + " is null" );
-//
-//            }
 
             if ( !isEntityFinished( er ) ) {
 
@@ -707,12 +692,6 @@ public class StdGowingUnPacker implements GowingUnPacker {
 
         int ix = 0;
         for ( GowingEntityReference er : entityReferences ) {
-
-//            if ( er == null && !nullsOk ) {
-//
-//                throw new IllegalArgumentException( "StdGowingUnPacker.areEntitiesAllFinished:  collection @ ix=" + ix + " is null" );
-//
-//            }
 
             if ( !isEntityFinished( er ) ) {
 
@@ -879,7 +858,6 @@ public class StdGowingUnPacker implements GowingUnPacker {
                                     entityTypeName,
                                     ourEntityReferenceToken.entityReference().getTypeId(),
                                     version.intValue()
-//                                    -1
                             );
 
                         }

@@ -62,8 +62,6 @@ public class StdGowingPackerContext implements GowingPackerContext {
     @Override
     public void rememberPackableEntity( @Nullable final EntityName entityName, final @NotNull GowingPackable entity ) {
 
-//        Logger.logMsg( "rememberPackableEntity( " + entityName + ", " + entity + " )" );
-
         GowingUtil.verifyActuallyPackable( "StdGowingPackerContext.rememberPackableEntity", entityName, entity );
 
         @SuppressWarnings("UnusedAssignment")

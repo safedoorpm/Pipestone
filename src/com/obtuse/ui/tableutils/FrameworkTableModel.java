@@ -294,15 +294,10 @@ public class FrameworkTableModel<D extends CheckBoxRowWrapper.RowData> extends C
         }
 
         _fieldNameIndex.put( columnName, nextColumnNumber );
-//        Logger.logMsg( "field name index is " + _fieldNameIndex );
 
         _columnsByNumber.put( nextColumnNumber, cManager );
 
-//        Logger.logMsg( "adding column " + columnName + " with readOnlyOverride set to " + readOnlyOverride );
-
         _readOnlyByColumnNameOverride.put( columnName, readOnlyOverride );
-
-//        Logger.logMsg( "columns by Number are " + _columnsByNumber );
 
     }
 
@@ -445,12 +440,6 @@ public class FrameworkTableModel<D extends CheckBoxRowWrapper.RowData> extends C
         return Collections.unmodifiableList( _data );
 
     }
-
-//    public CheckBoxRowWrapper<D> getWrapper( int row ) {
-//
-//	return _data.get( row );
-//
-//    }
 
     public String getColumnName( final int col ) {
 
@@ -694,7 +683,6 @@ public class FrameworkTableModel<D extends CheckBoxRowWrapper.RowData> extends C
         for ( int requestedRow : sortedRows ) {
 
             int actualRequestedRow = requestedRow - adjustment;
-//	    CheckBoxRowWrapper<D> victimRow = _data.get( actualRequestedRow );
 
             Logger.logMsg( "removing actual row " +
                            actualRequestedRow +

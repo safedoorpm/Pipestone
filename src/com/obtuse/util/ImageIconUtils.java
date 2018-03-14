@@ -18,30 +18,6 @@ public class ImageIconUtils {
 
     private static String s_resourcesBaseDirectory = ".";
 
-//    static {
-//
-//        String resourceBaseURLString = "file:.";
-//        try {
-//
-//            _resourcesBaseURL = new URL( resourceBaseURLString );
-//
-//        } catch ( MalformedURLException e ) {
-//
-//            if ( BasicProgramConfigInfo.isInitialized() ) {
-//
-//                Logger.logErr( "unable to set default resources Base URL in ImageIconUtils", e );
-//
-//            } else {
-//
-//                System.err.println( "unable to set default resources Base URL in ImageIconUtils" );
-//                e.printStackTrace();
-//
-//            }
-//
-//        }
-//
-//    }
-
     private ImageIconUtils() {
 
         super();

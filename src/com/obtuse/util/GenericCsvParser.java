@@ -145,14 +145,6 @@ public class GenericCsvParser extends CSVParser implements Iterable<SortedMap<St
             pushback( ch );
             List<String> fields = parseRawLine();
 
-//            int ix = 0;
-//            for ( String f : fields ) {
-//
-//                Logger.logMsg( "field " + ix + ":  " + f );
-//                ix += 1;
-//
-//            }
-
             Iterator<String> titleIter = _titles.iterator();
             Iterator<String> fieldIter = fields.iterator();
 
@@ -204,7 +196,6 @@ public class GenericCsvParser extends CSVParser implements Iterable<SortedMap<St
             fields.add( field );
 
             iCh = nextCh();
-//            ch = (char)iCh;
             if ( iCh == '\n' || iCh == '\r' || iCh == -1 ) {
 
                 return fields;

@@ -19,97 +19,6 @@ public class SSLUtilities {
     private static final Map<SSLContextWrapper, SSLContextWrapper> _sslContexts =
 	    new HashMap<>();
 
-//    private static class MyTrustManager implements X509TrustManager {
-//
-//        private final X509TrustManager _realTrustManager;
-//
-//        private X509Certificate[] _certChain;
-//
-//        private String _authType;
-//
-//        private MyTrustManager( X509TrustManager realTrustManager ) {
-//            super();
-//
-//            _realTrustManager = realTrustManager;
-//
-//        }
-//
-//        public X509Certificate[] getAcceptedIssuers() {
-//
-//            throw new UnsupportedOperationException( "we don't support getting the accepted issuers" );
-//
-//        }
-//
-//        public void checkClientTrusted( X509Certificate[] certChain, String authType ) {
-//
-//            throw new UnsupportedOperationException( "we don't support checking if the client is trustworthy" );
-//
-//        }
-//
-//        public void checkServerTrusted( X509Certificate[] certChain, String authType )
-//                throws CertificateException {
-//
-//            _certChain = certChain;
-//            _authType = authType;
-//
-//            X509Certificate[] certs = _certChain;
-//            if ( certs == null ) {
-//
-//                Logger.logErr( "no certs captured" );
-//
-//            } else {
-//
-//                try {
-//
-//                    MessageDigest sha1 = MessageDigest.getInstance( "SHA1" );
-//                    MessageDigest md5 = MessageDigest.getInstance( "MD5" );
-//
-//                    Logger.logMsg( "here are the certs:" );
-//                    Logger.logMsg( "" );
-//
-//                    for ( X509Certificate cert : certs ) {
-//
-//                        Logger.logMsg( "Subject:        " + cert.getSubjectX500Principal() );
-//                        Logger.logMsg( "Issuer:         " + cert.getIssuerX500Principal() );
-//                        Logger.logMsg(
-//                                "effective:      from " + cert.getNotBefore() + " through " + cert.getNotAfter()
-//                        );
-//                        Logger.logMsg( "serial number:  " + cert.getSerialNumber() );
-//                        Logger.logMsg( "sig algorithm:  " + cert.getSigAlgName() );
-//                        Logger.logMsg( "version:        " + cert.getVersion() );
-//
-//                        sha1.update( cert.getEncoded() );
-//                        Logger.logMsg( "SHA1:     " + ObtuseUtilx.hexvalue( sha1.digest() ) );
-//
-//                        md5.update( cert.getEncoded() );
-//                        Logger.logMsg( "MD5:      " + ObtuseUtilx.hexvalue( md5.digest() ) );
-//
-//                        Logger.logMsg( "serialized form is " + ObtuseUtilx.getSerializedSize( cert ) + " bytes long" );
-//                        Logger.logMsg( "encoded form is " + cert.getEncoded().length + " bytes long" );
-//                        Logger.logMsg( "cert's class is " + cert.getClass() );
-//
-////                    _myIx += 1;
-////                    ks.setCertificateEntry( "balzac-" + _myIx, cert );
-//
-////                    Logger.logMsg( "added to trusted certs" );
-////                    Logger.logMsg( "" );
-//
-//                    }
-//
-//                } catch ( NoSuchAlgorithmException e ) {
-//
-//                    Logger.logErr( "got a NoSuchAlgorithmException looking for SHA1 or MD5 algorithm", e );
-//
-//                }
-//
-//            }
-//
-//            _realTrustManager.checkServerTrusted( certChain, authType );
-//
-//        }
-//
-//    }
-
     /**
      * Carry an {@link javax.net.ssl.SSLContext} around in a package that identifies it by the keystore that was used to create it.
      * This allows us to avoid having dozens of different {@link javax.net.ssl.SSLContext}s which all reference the same keystores.
@@ -234,12 +143,9 @@ public class SSLUtilities {
             SSLContextWrapper tmp = new SSLContextWrapper( clientMode, keystoreFileName, keystorePassword );
             if ( SSLUtilities._sslContexts.containsKey( tmp ) ) {
 
-//                Logger.logMsg( "reusing SSL cert(s) from " + keystoreFileName );
                 return SSLUtilities._sslContexts.get( tmp ).getSSLContext();
 
             } else {
-
-//                Logger.logMsg( "loading SSL cert(s) from " + keystoreFileName );
 
                 tmp.setSSLContext(
                         SSLUtilities.createWrappedSSLContext(
@@ -258,41 +164,6 @@ public class SSLUtilities {
         }
 
     }
-
-//    /**
-//     * Get or create an {@link javax.net.ssl.SSLContext} associated with a specified keystore file and password.
-//     *
-//     * @param clientMode          true if we want a client-mode context, false otherwise.
-//     * @param keystoreFile       the keystore file.
-//     * @param keystorePassword    its password.
-//     * @param keyPassword         optional key password.
-//     * @return the SSL context associated with the keystore file and password.
-//     * @throws com.obtuse.mcluhan.exceptions.McLuhanSSLChannelCreationFailedException
-//     *          if the attempt fails.
-//     */
-//
-//    public static SSLContext getSSLContext(
-//            boolean clientMode,
-//            File keystoreFile,
-//            char[] keystorePassword,
-//            char[] keyPassword
-//    )
-//            throws
-//            McLuhanSSLChannelCreationFailedException, FileNotFoundException {
-//
-//        FileInputStream keystoreInputStream = null;
-//        try {
-//
-//            keystoreInputStream = new FileInputStream( keystoreFile );
-//            return getSSLContext( clientMode, keystoreFile, keystoreInputStream, keystorePassword, keyPassword );
-//
-//        } finally {
-//
-//            ObtuseUtil.closeQuietly( keystoreInputStream );
-//
-//        }
-//
-//    }
 
     public static SSLContext getOurClientSSLContext()
             throws PipestoneSSLException, IOException {
@@ -329,17 +200,6 @@ public class SSLUtilities {
 
         if ( clientMode ) {
 
-//            TrustManagerFactory tmf = TrustManagerFactory.getInstance( "SunX509" );
-//            tmf.init( keyStore );
-//            TrustManager[] tms = tmf.getTrustManagers();
-//            for ( TrustManager tm : tms ) {
-//                Logger.logMsg( "got trust manager " + tm );
-//            }
-//
-//            MyTrustManager myTrustManager = new MyTrustManager( (X509TrustManager)tms[0] );
-//
-//            sslContext.init( null, new TrustManager[] { myTrustManager }, null );
-
             TrustManagerFactory tmf = TrustManagerFactory.getInstance( "SunX509" );
             tmf.init( keyStore );
             sslContext.init( null, tmf.getTrustManagers(), null );
@@ -355,40 +215,6 @@ public class SSLUtilities {
         return sslContext;
 
     }
-
-//    public static SSLContext findOrCreateSslContext(
-//            boolean clientMode,
-//            File keystoreFile,
-//            char[] keystorePassword,
-//            char[] keyPassword
-//    )
-//            throws McLuhanInvalidCharacterException, McLuhanSSLChannelCreationFailedException, FileNotFoundException {
-//
-//        synchronized ( _knownSslContexts ) {
-//
-//            byte[] obfuscatedKeystorePassword = UserUtilities.obfuscate( keystorePassword );
-//            byte[] obfuscatedKeyPassword = UserUtilities.obfuscate( keyPassword );
-//            String key =
-//                    "" + clientMode + ";" + keystoreFile + ";" + ObtuseUtil.hexvalue( obfuscatedKeystorePassword ) +
-//                    ";" + ObtuseUtil.hexvalue( obfuscatedKeyPassword );
-//
-//            SSLContext sslContext = _knownSslContexts.get( key );
-//            if ( sslContext == null ) {
-//
-//                sslContext = SSLUtilities.createWrappedSSLContext(
-//                        clientMode,
-//                        keystoreFile,
-//                        keystorePassword,
-//                        keyPassword
-//                );
-//
-//            }
-//
-//            return sslContext;
-//
-//        }
-//
-//    }
 
     @SuppressWarnings("UnusedDeclaration")
     public static SSLContext createWrappedSSLContext(

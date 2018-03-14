@@ -199,16 +199,6 @@ public class SelectableImage extends JPanel
                 _image == null ? height - 1 : _image.getHeight( this )
         );
 
-//        if ( isFocusOwner() ) {
-//
-//            g.setColor( new JList().getSelectionForeground() ); // SystemColor.textHighlightText );
-//
-//        } else {
-//
-//            g.setColor( Color.BLACK );
-//
-//        }
-
         g.drawLine( tlX, tlY, width, height );
 
         g.dispose();

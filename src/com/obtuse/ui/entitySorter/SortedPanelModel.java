@@ -114,19 +114,12 @@ public class SortedPanelModel<K extends Comparable<K>, E extends SortableEntity>
 
         String what = "reAddEntity( " + entityReference.getActiveKey() + ", " + entityReference.getValue() + ", " + view + " )";
         verifyConsistency( "start of " + what );
-//	for ( SortableEntityReference<K, E> ent : _treeSorter.getAllValues() ) {
-//
-//	    Logger.logMsg( "\"" + ent.getActiveKey() + "\" -> {" + ent.getValue() + "}" );
-//
-//	}
 
         // Figure out where this entity is going to land.
 
         int valuesBeforeKey = _treeSorter.countValuesBeforeKey( entityReference.getActiveKey() );
         int valuesAtKey = _treeSorter.countValues( entityReference.getActiveKey() );
         int index = valuesBeforeKey + valuesAtKey;
-
-//	Logger.logMsg( "index = " + index + " ( " + valuesBeforeKey + ", " + valuesAtKey + " )" + " when looking for \"" + entityReference.getActiveKey() + "\" in " + _treeSorter );
 
         // Actually add the value.
 
@@ -174,8 +167,6 @@ public class SortedPanelModel<K extends Comparable<K>, E extends SortableEntity>
 
     public void verifyConsistency( final String when ) {
 
-//        Logger.logMsg( "verifying consistency when " + when );
-
         if ( !_treeSorter.isEmpty() ) {
 
             K previousKey = null;
@@ -200,8 +191,6 @@ public class SortedPanelModel<K extends Comparable<K>, E extends SortableEntity>
                         index = 1;
 
                     } else {
-
-//		        Trace.event( "[" + ( index - 1 ) + "] = \"" + previousKey + "\", [" + index + "] = \"" + key + "\"" );
 
                         if ( previousKey.compareTo( key ) > 0 ) {
 
@@ -365,15 +354,6 @@ public class SortedPanelModel<K extends Comparable<K>, E extends SortableEntity>
                 target -> {
 
                     boolean rval = target.getValue() == myEntity;
-//		    if ( rval ) {
-//
-//			Logger.logMsg( "found {" + myEntity + "}: entry is {" + target.getValue() + "}" );
-//
-//		    } else {
-//
-//			Logger.logMsg( "looking for {" + myEntity + "}: entry is {" + target.getValue() + "}" );
-//
-//		    }
 
                     return rval;
                 }

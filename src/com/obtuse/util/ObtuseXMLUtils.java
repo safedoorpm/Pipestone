@@ -68,8 +68,6 @@ public class ObtuseXMLUtils {
             //noinspection StatementWithEmptyBody
             if ( node.getTextContent().trim().isEmpty() ) {
 
-//                ps.println( ObtuseUtil.replicate( "   ", depth ) + "node is \"" + node.getNodeName() + "\" (whitespace)" );
-
             } else {
 
                 ps.println(
@@ -148,7 +146,7 @@ public class ObtuseXMLUtils {
             if ( "item".equals( element.getNodeName() ) ) {
 
                 String elementString = element.getFirstChild().getNodeValue();
-//                Logger.logMsg( "got an element \"" + elementString + "\"" );
+
                 try {
 
                     rval[elementIx] = Double.parseDouble( elementString );
@@ -193,7 +191,7 @@ public class ObtuseXMLUtils {
             if ( "item".equals( element.getNodeName() ) ) {
 
                 String elementString = element.getFirstChild().getNodeValue();
-//                Logger.logMsg( "got an element \"" + elementString + "\"" );
+
                 try {
 
                     rval[elementIx] = Integer.parseInt( elementString );
@@ -341,17 +339,6 @@ public class ObtuseXMLUtils {
 
         }
 
-//        if ( "true".equalsIgnoreCase( attributeValue ) || "T".equalsIgnoreCase( attributeValue ) ) {
-//
-//            return true;
-//
-//        }
-//        if ( "false".equalsIgnoreCase( attributeValue ) || "false".equalsIgnoreCase( attributeValue ) ) {
-//
-//            return false;
-//
-//        }
-
         throw new ObtuseXmlNodeException(
                 "attribute " + attributeName + "'s value \"" + attributeValue + "\" in " +
                         node.getNodeName() + " node cannot be parsed as a boolean (must be " +
@@ -493,47 +480,6 @@ public class ObtuseXMLUtils {
 
     }
 
-//    @NotNull
-//    public static Node findAttribute( Node node, String attributeName )
-//            throws ObtuseXmlNodeException {
-//
-//        if ( node.hasAttributes() ) {
-//
-//            NamedNodeMap nodeMap = node.getAttributes();
-//            if ( nodeMap == null ) {
-//
-//                throw new HowDidWeGetHereError(
-//                        "Attribute \"" + attributeName + "\" not found in node \"" + node.getNodeName() + "\" " +
-//                        "(found no attributes but node was supposed to have attributes)."
-//                );
-//
-//            } else {
-//
-//                for ( int ix = 0; ix < nodeMap.getLength(); ix += 1 ) {
-//
-//                    Node candidateItem = nodeMap.item( ix );
-//                    if ( attributeName.equals( candidateItem.getNodeName() ) ) {
-//
-//                        return candidateItem;
-//
-//                    }
-//
-//                }
-//
-//                throw new ObtuseXmlNodeException(
-//                        "Attribute \"" + attributeName + "\" not found in node \"" + node.getNodeName() + "\""
-//                );
-//
-//            }
-//
-//        }
-//
-//        throw new ObtuseXmlNodeException(
-//                "Attribute \"" + attributeName + "\" not found in node \"" + node.getNodeName() + "\" without attributes."
-//        );
-//
-//    }
-
     public static Collection<InstanceFromXML> getInstancesFromXML(
             final MessageProxy messageProxy,
             final @NotNull Node parentNode,
@@ -552,8 +498,6 @@ public class ObtuseXMLUtils {
             Node element = elements.item( ix );
             if ( elementNodeName.equals( element.getNodeName() ) ) {
 
-//                String elementString = element.getFirstChild().getNodeValue();
-//                Logger.logMsg( "got an element \"" + elementString + "\"" );
                 try {
 
                     rval.add(
@@ -688,9 +632,6 @@ public class ObtuseXMLUtils {
         InstanceFromXML configClassInstance = null;
         try {
 
-//            Class<?> targetClass = Class.forName(
-//                    expectedPackages.getName() + '.' + targetNodeName
-//            );
             Constructor<?> constructor;
             if ( parent == null ) {
 
@@ -799,26 +740,6 @@ public class ObtuseXMLUtils {
 
         return ObtuseXMLUtils.findNode( parentNode, targetClass.getSimpleName() );
 
-//        final String targetNodeName = targetClass.getSimpleName();
-//        return ObtuseXMLUtils.findNode(
-//                parentNode,
-//                new CheckNode() {
-//                    public boolean compare( String s1, String s2 ) {
-//
-//                        return targetNodeName.equals( s2 );
-//
-//                    }
-//
-//                    public String getDescription() {
-//
-//                        return targetNodeName;
-//
-//                    }
-//
-//                }
-//
-//        );
-
     }
 
     public static Node findNode( final Node parentNode, final String targetNodeName )
@@ -881,8 +802,6 @@ public class ObtuseXMLUtils {
         for ( int ix = 0; ix < nodes.getLength(); ix += 1 ) {
 
             Node candidateNode = nodes.item( ix );
-//            Logger.logMsg( "candidate node is \"" + candidateNode + "\"" );
-            // simpleClassName.equals( candidateNode.getNodeName() )
             if ( test.isThisTheNode( candidateNode ) ) {
 
                 return candidateNode;

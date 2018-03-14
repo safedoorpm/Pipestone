@@ -56,8 +56,6 @@ public class MacCustomization extends OSLevelCustomizations {
 
         }
 
-//        Logger.logMsg( "skipping laf" );
-
         Logger.logMsg( "Mac laf = " + laf );
 
         try {

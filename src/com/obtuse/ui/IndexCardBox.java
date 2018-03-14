@@ -737,7 +737,6 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
 
             int i, c;
 
-//	    ListModel<E> dm = getModel();
             for ( i = 0, c = getModelSize(); i < c; i++ ) {
 
                 if ( anObject.equals( getModelElementAt( i ) ) ) {

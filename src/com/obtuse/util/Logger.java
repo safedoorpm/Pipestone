@@ -244,12 +244,10 @@ public class Logger {
 
         } else {
 
-//	    Logger.logMsg( "stack trace has " + trace.length + " elements" );
             logMsg( "" + e );
             int ix = 0;
             for ( StackTraceElement element : trace ) {
 
-//		Logger.logMsg( "[" + ix + "] = " + element );
                 logMsg( "    at " + element );
 
                 ix += 1;
@@ -389,15 +387,11 @@ public class Logger {
 
         }
 
-//        Trace.event( "processing listeners" );
-
         for ( LoggerListener listener : tmpListeners ) {
 
             listener.logMessage( _messageStartTime, _currentMessage.toString() );
 
         }
-
-//        Trace.event( "done processing listeners" );
 
         _currentMessage = new StringBuffer();
         _messageStartTime = null;
@@ -736,17 +730,6 @@ public class Logger {
         return Logger.s_stderr;
 
     }
-
-//    public static void setProgramName( String programName ) {
-//
-//        _programName = programName;
-//
-//        _stderr = null;
-//        getStderr();
-//        _stdout = null;
-//        getStdout();
-//
-//    }
 
     /**
      Get the Logger intended to be used for 'user friendly' messages.

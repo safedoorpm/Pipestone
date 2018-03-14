@@ -41,7 +41,7 @@ public class OkPopupMessageWindow extends JDialog {
 
         setContentPane( _contentPane );
         setModal( true );
-//        setUndecorated( true );
+
         getRootPane().setDefaultButton( _okButton );
 
         _okButton.setText( buttonLabel );

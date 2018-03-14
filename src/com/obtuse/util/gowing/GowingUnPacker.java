@@ -74,12 +74,6 @@ public interface GowingUnPacker extends Closeable {
     @NotNull
     Optional<GowingUnPackedEntityGroup> unPack() throws GowingUnpackingException, IOException;
 
-//    @NotNull String describeEntity( GowingEntityReference er );
-//
-//    @NotNull String describeEntity( GowingPackable entity );
-//
-//    @NotNull String describeInstanceId( GowingInstanceId instanceId );
-
     void registerMetaDataHandler( @NotNull GowingMetaDataHandler handler );
 
     GowingPackable resolveReference( GowingEntityReference er );

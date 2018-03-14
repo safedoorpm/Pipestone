@@ -35,10 +35,6 @@ public class StackedGaussianDistributionsDrawing extends JPanel {
 
     }
 
-//    public StackedGaussianDistributionsDrawing( GaussianDistribution gd ) {
-//        this( gd, 0.0, 1.0 );
-//    }
-
     public StackedGaussianDistributionsDrawing(
             final @NotNull WeightedGaussianDistribution@NotNull[] gds,
             final double from,
@@ -61,20 +57,13 @@ public class StackedGaussianDistributionsDrawing extends JPanel {
     @SuppressWarnings("ConstantConditions")
     public void paint( final Graphics g ) {
 
-//        Graphics2D g2d = (Graphics2D)g;
-
-//        Logger.logMsg( "painting gaussian distribution " + _gd + " in (" + getWidth() + "," + getHeight() + ")" );
-
         ( (Graphics2D)g ).setRenderingHint(
                 RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON
         );
 
         g.setColor( getBackground() );
-//        g.setColor( Color.WHITE );
         g.fillRect( 0, 0, getWidth(), getHeight() );
-//        ( (Graphics2D)g ).scale( 0.1, 0.1 );
-//        ( (Graphics2D)g ).setStroke( new BasicStroke( 10f ) );
 
         double maxY = 0.0;
         for ( int pX = 0; pX < getWidth(); pX += 1 ) {
@@ -94,12 +83,6 @@ public class StackedGaussianDistributionsDrawing extends JPanel {
             }
 
         }
-
-//        for ( WeightedGaussianDistribution gd : _gds ) {
-//
-//            maxY += gd.getY( gd.getCenter() ) * gd.getWeight();
-//
-//        }
 
         if ( maxY == 0 ) {
 
@@ -121,12 +104,9 @@ public class StackedGaussianDistributionsDrawing extends JPanel {
                 rY += gd.getY( rX ) * gd.getWeight();
 
             }
-//            Logger.logMsg( "pX = " + pX + ", rX = " + rX + ", rY = " + rY + ", scaled to " + ( rY / maxY ) );
 
             x[pX] = pX;
             y[pX] = (int)( ( height - 1 ) * ( 1.0 - rY / maxY ) );
-
-//            g.drawLine( pX, 1 + (int)( height * ( rY / maxY ) ), pX, 1 + (int)( height * ( rY / maxY ) ) );
 
         }
 

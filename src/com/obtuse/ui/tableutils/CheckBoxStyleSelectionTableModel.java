@@ -54,8 +54,6 @@ public abstract class CheckBoxStyleSelectionTableModel<D extends CheckBoxRowWrap
 
     public void setColWidth( final TableColumnModel tcm, final FrameworkTableModel.TCName tcName, final int minWidth, final int maxWidth ) {
 
-//        Logger.logMsg( "setColWidth( tcm=" + tcm + ", tcName=" + tcName + ", minWidth=" + minWidth + ", maxWidth=" + maxWidth + " )" );
-
         if ( tcName == null ) {
 
             Logger.logMsg( "CBSSTM.setColWidth:  no column name - call ignored" );
@@ -153,8 +151,6 @@ public abstract class CheckBoxStyleSelectionTableModel<D extends CheckBoxRowWrap
                     _recursing = true;
 
                     for ( int row = 0; row < getRowCount(); row += 1 ) {
-
-//                        Logger.logMsg( "setting row " + row + " to " + ( row == changedRow ) );
 
                         setSelectedAtRow( row, row == changedRow );
 

@@ -86,8 +86,6 @@ public class UniqueThingTableCellEditor<T extends ThingInfo> extends Customizabl
 
     public void innerValidate( final String newNameString ) {
 
-
-//	String text = ((JTextField) input).getText();
         Logger.logMsg( "Verifying " + ObtuseUtil.enquoteToJavaString( newNameString ) );
 
         Optional<ObtuseMessageLabel.AugmentedMessage> optMessage = _nameFactory.validateNameSyntax( newNameString );

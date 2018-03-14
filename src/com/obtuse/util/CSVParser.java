@@ -363,7 +363,6 @@ public class CSVParser implements Closeable {
             if ( ch == (int)'\\' ) {
 
                 iCh = nextCh();
-//                ch = (char)iCh;
 
                 switch ( iCh ) {
 

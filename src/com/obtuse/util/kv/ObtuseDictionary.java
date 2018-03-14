@@ -120,99 +120,6 @@ public class ObtuseDictionary extends UniqueEntity implements Iterable<ObtuseKey
 
         return layerOver( who, requiredKeywords, ignoreOptionalKeywords, secondDictionary._dictionary );
 
-//        SortedMap<String,ObtuseKeywordValue> mergedKeywordMap = new TreeMap<>();
-//
-//        for ( ObtuseKeywordValue ourKeywordValue : _dictionary.values() ) {
-//
-//            // If we are to only include keywords in the required set then ignore any keywords that are not in the required set.
-//
-//            if ( ignoreOptionalKeywords && !requiredKeywords.contains( ourKeywordValue ) ) {
-//
-//                continue;
-//
-//            }
-//
-//            // Get the keyword's value.
-//            // Use this dictionary's value if it is non-null.
-//            // Otherwise, use the second dictionary's value if a keyword by the same name exists and is non-null.
-//            // Pretend that the keyword doesn't exist if neither this dictionary nor the second dictionary provide a non-null value.
-//
-//            String keywordValue = ourKeywordValue.getValue();
-//            if ( keywordValue == null ) {
-//
-//                @NotNull Optional<ObtuseKeywordValue> secondDictionarysKeyword = secondDictionary.getKeywordValue( ourKeywordValue );
-//                if ( secondDictionarysKeyword.isPresent() ) {
-//
-//                    ObtuseKeywordValue secondKeyword = secondDictionarysKeyword.get();
-//                    if ( secondKeyword.hasNullValue() ) {
-//
-//                        continue;
-//
-//                    }
-//
-//                    mergedKeywordMap.put( ourKeywordValue.getKeywordName(), secondKeyword );
-//
-//                }
-//
-//            } else {
-//
-//                mergedKeywordMap.put( ourKeywordValue.getKeywordName(), ourKeywordValue );
-//
-//            }
-//
-//        }
-//
-//        // Now we need to add any keywords from the second dictionary that aren't already in the merged map.
-//        // We continue to ignore optional keywords if we've been told to only include required keywords.
-//
-//        for ( ObtuseKeywordValue secondKeywordValue : secondDictionary.getDictionaryMap().values() ) {
-//
-//            // If we are to only include keywords in the required set then ignore any keywords that are not in the required set.
-//
-//            if ( ignoreOptionalKeywords && !requiredKeywords.contains( secondKeywordValue ) ) {
-//
-//                continue;
-//
-//            }
-//
-//            // Ignore any keywords that are already in our merged map.
-//
-//            if ( mergedKeywordMap.containsKey( secondKeywordValue.getKeywordName() ) ) {
-//
-//                continue;
-//
-//            }
-//
-//            // Get the keyword's value and put it into the merged map if it is non-null.
-//
-//            String keywordValue = secondKeywordValue.getValue();
-//            if ( keywordValue != null ) {
-//
-//                mergedKeywordMap.put( secondKeywordValue.getKeywordName(), secondKeywordValue );
-//
-//            }
-//
-//        }
-//
-//        // Make sure that we've got all of the required keywords.
-//
-//        for ( ObtuseKeyword requiredKeyword : requiredKeywords ) {
-//
-//            if ( !mergedKeywordMap.containsKey( requiredKeyword.getKeywordName() ) ) {
-//
-//                // Neither we or the second dictionary have a value for a required keyword (oops).
-//
-//                throw new IllegalArgumentException(
-//                        "ObtuseDictionary.layerOver(" + who + "):  required keyword " + ObtuseUtil.enquoteJavaObject( requiredKeyword.getKeywordName() ) +
-//                        " not found in either dictionary"
-//                );
-//
-//            }
-//
-//        }
-//
-//        return new ObtuseDictionary( mergedKeywordMap.values() );
-
     }
 
     /**
@@ -425,13 +332,6 @@ public class ObtuseDictionary extends UniqueEntity implements Iterable<ObtuseKey
 
     }
 
-//    @NotNull
-//    public Collection<ObtuseKeywordValue> getKeywordValues() {
-//
-//        return Collections.unmodifiableCollection( _dictionary.values() );
-//
-//    }
-
     /**
      Get the {@link String} value of a keyword.
      @param keywordString the keyword as a {@link String}.
@@ -482,10 +382,6 @@ public class ObtuseDictionary extends UniqueEntity implements Iterable<ObtuseKey
 
         return getKeywordValue( keyword );
 
-//        ObtuseKeywordValue rval = _dictionary.get( keyword );
-//
-//        return Optional.ofNullable( rval );
-
     }
 
     @NotNull
@@ -496,29 +392,6 @@ public class ObtuseDictionary extends UniqueEntity implements Iterable<ObtuseKey
         return Optional.ofNullable( rval );
 
     }
-
-//    /**
-//     Get the value of a particular keyword.
-//
-//     @param keywordInfo the keyword of interest.
-//     @return the value of the keyword or {@code "<<unknown>>"}
-//     if there is no keyword-value pair corresponding to the requested keyword in this map.
-//     */
-//
-//    public String getValue( @Nullable final ObtuseKeyword keywordInfo ) {
-//
-//        ObtuseKeywordValue keywordValue = _dictionary.get( keywordInfo );
-//        if ( keywordValue == null ) {
-//
-//            return "<<unknown>>";
-//
-//        } else {
-//
-//            return keywordValue.getValue();
-//
-//        }
-//
-//    }
 
     public String toString() {
 

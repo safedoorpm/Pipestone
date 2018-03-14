@@ -62,11 +62,6 @@ public class ButtonSelectorPanel<C extends Container> extends SelectorPanel<Abst
                         @Override
                         protected void myActionPerformed( final ActionEvent actionEvent ) {
 
-//                            LinearLayoutUtil.describeFullyContainerContents(
-//                                    "************ action( " + LinearLayoutUtil.describeComponent( ab ) + " )",
-//                                    ButtonSelectorPanel.this
-//                            );
-
                             clearPostSelectionPanelContents();
 
                             Optional<C> optComponent = getSelectedComponent( ab );
@@ -75,16 +70,8 @@ public class ButtonSelectorPanel<C extends Container> extends SelectorPanel<Abst
 
                                 setPostSelectionPanelContents( "ButtonSelectorPanel.actionListener", optComponent.get() );
 
-//                                LinearLayoutUtil.describeFullyContainerContents( "ButtonSelectorPanel panel c", optComponent.get() );
-//                                LinearLayoutUtil.describeFullyContainerContents( "ButtonSelectorPanel post panel", getPostSelectionPanel() );
-//                                LinearLayoutUtil.describeFullyContainerContents( "sigh", ButtonSelectorPanel.this );
-
                                 ButtonSelectorPanel.this.invalidate();
                                 optComponent.get().invalidate();
-
-//                            } else {
-//
-//                                LinearLayoutUtil.describeFullyContainerContents( "ButtonSelectorPanel no panel inserted", getPostSelectionPanel() );
 
                             }
 
@@ -102,11 +89,6 @@ public class ButtonSelectorPanel<C extends Container> extends SelectorPanel<Abst
             setPostSelectionPanelContents( "ButtonSelectorPanel.isZeroASelection", firstSelection );
 
         }
-
-//        LinearLayoutUtil.describeFullyContainerContents(
-//                "************ completely ready( " + getName() + " )",
-//                ButtonSelectorPanel.this
-//        );
 
         ObtuseUtil.doNothing();
 

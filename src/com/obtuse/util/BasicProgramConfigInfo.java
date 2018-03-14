@@ -213,14 +213,6 @@ public class BasicProgramConfigInfo {
 
     public static void doOsSpecificCustomizations( final String programName ) {
 
-        //        s_osLevelCustomizations = OSLevelCustomizations.getCustomizer( null );
-//        if ( s_osLevelCustomizations != null ) {
-//
-//            s_osLevelCustomizations.setDockIconImage( _pickleBarrelIcon.getImage() );
-//            s_osLevelCustomizations.setDockBadge( "M" );
-//
-//        }
-
         // Set the name of the application in case we are on a Mac (does nothing on other OSes).
         // Must be done BEFORE any other AWT or Swing classes are loaded.
 
@@ -230,11 +222,6 @@ public class BasicProgramConfigInfo {
         System.setProperty( "swing.aatext", "true" );
 
         Logger.logMsg( "" + System.getProperty( "sun.arch.data.model" ) + " bit JVM" );
-
-//        // Set the look and feel that's appropriate for our OS.
-//        // Must be done BEFORE any other AWT or Swing classes are loaded.
-//
-//        OSLevelCustomizations.setLookAndFeel();
 
         // Get ourselves an OS-specific customizer.
         // Must be done BEFORE any other AWT or Swing classes are loaded which means that the

@@ -39,7 +39,6 @@ import java.util.*;
 
 @SuppressWarnings({ "UnusedDeclaration" })
 public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<V>, Serializable {
-//public class TreeSorter<K, V> implements Iterable<V>, Serializable {
 
     private final SortedMap<K, Collection<V>> _sortedData;
 
@@ -625,18 +624,6 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
 
         }
 
-//	for ( V value : this ) {
-//
-//	    if ( value == targetValue ) {
-//
-//		indices.add( index );
-//
-//	    }
-//
-//	    index += 1;
-//
-//	}
-
         return indices;
 
     }
@@ -1038,21 +1025,7 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
 
     }
 
-//    /**
-//     * Returns a string which states the current size of this tree sorter.
-//     * <p/>The returned string is of the form
-//     * <pre>
-//     * size = <i>n</i>
-//     * </pre>
-//     * where <tt><i>n</i></tt> is the current size of this tree sorter.
-//     * This method calls {@link #size()} which means that it could be somewhat expensive if there are a lot of values in
-//     * this tree sorter.
-//     * @return a string which states the current size of this tree sorter.
-//     */
-
     public String toString() {
-
-//        return "size = " + size();
 
         return "TreeSorter( size = " + size() + ", contents = " + _sortedData + " )";
 

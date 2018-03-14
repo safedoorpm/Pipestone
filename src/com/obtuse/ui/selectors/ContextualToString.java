@@ -49,7 +49,6 @@ public class ContextualToString<T extends Comparable<T>> implements Comparable<C
                 throws GowingUnpackingException {
 
             return new ContextualToString( unPacker, bundle );
-//            return new ContextualToString( unPacker, bundle );
 
         }
 
@@ -144,7 +143,6 @@ public class ContextualToString<T extends Comparable<T>> implements Comparable<C
         GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
                 ContextualToString.ENTITY_TYPE_NAME,
                 ContextualToString.VERSION,
-//		null,
                 packer.getPackingContext()
         );
 

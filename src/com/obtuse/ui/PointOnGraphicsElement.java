@@ -11,8 +11,6 @@ public interface PointOnGraphicsElement {
 
     // Not at all clear that providing an index of the element in the larger entity is a good idea.
 
-//    int getElementIndex();
-
     GraphicsElement getGraphicsElement();
 
     Point2D getPoint();

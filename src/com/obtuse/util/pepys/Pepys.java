@@ -73,15 +73,6 @@ public class Pepys {
                 throw new IllegalArgumentException( "cannot create 'gone' events via this constructor" );
 
             }
-//	    if ( eventType == PepysEventType.CREATED ) {
-//
-//		if ( auxSource == null ) {
-//
-//		    throw new IllegalArgumentException( "'create' events must have an auxSource attribute" );
-//
-//		}
-//
-//	    }
 
             _eventType = eventType;
             _source = source;
@@ -400,12 +391,10 @@ public class Pepys {
                 PepysEventListener listener = listenerReference.get();
                 if ( listener == null ) {
 
-//		    Logger.logMsg( "" + what + ":  listener is gone" );
                     iterator.remove();
 
                 } else {
 
-//		    Logger.logMsg( "" + what + ":  listener exists" );
                     eligibleListeners.add( listener );
 
                 }
@@ -610,13 +599,6 @@ public class Pepys {
                     try {
 
                         while ( true ) {
-
-//			    Logger.logMsg( "checking phantom queue" );
-//			    for ( PepysSource ps : _sourceMap.keySet() ) {
-//
-//				Logger.logMsg( "saw " + ps );
-//
-//			    }
 
                             Reference<? extends PepysSource> phantomRef = _goneSources.remove( 1000L );
 

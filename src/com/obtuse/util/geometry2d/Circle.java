@@ -493,7 +493,6 @@ public class Circle {
 
         // Check for solvability.
 
-//	if ( d > ( r0 + r1 ) ) {
         if ( ( testMode ? d * 0.999999 : d ) > ( r0 + r1 ) ) {
 
             // no solution. circles do not intersect.
@@ -502,7 +501,6 @@ public class Circle {
 
         }
 
-//	if ( d < Math.abs( r0 - r1 ) ) {
         if ( d < ( testMode ? Math.abs( r0 - r1 ) * 0.999999 : Math.abs( r0 - r1 ) ) ) {
 
             // no solution. one circle is contained in the other.
@@ -604,12 +602,9 @@ public class Circle {
 
         }
 
-//	Logger.logMsg( "origin circle " + this + " vs " + other );
         double distanceSq = _center.distanceSq( other._center );        // distance between the two centers squared
         double sumRadiiSq = ( _radius + other._radius ) * ( _radius + other._radius );  // sum of the two radii squared
         double diffRadiiSq = ( _radius - other._radius ) * ( _radius - other._radius ); // difference of the two radii squared
-
-//	Logger.logMsg( "" + this + " vs " + other + ":  distanceSq=" + distanceSq + ", sumRadiiSq=" + sumRadiiSq + ", diffRadiiSq=" + diffRadiiSq );
 
         // Are the two circles too far apart or two close together to intersect?
 
@@ -621,13 +616,10 @@ public class Circle {
 
         // Do the two circles just barely touch with neither inside the other?
 
-//	if ( distanceSq == sumRadiiSq ) {
         if ( Util.nearlyEqual( distanceSq, sumRadiiSq, Math.max( distanceSq, sumRadiiSq ) / 1e8 ) ) {
 
             double f = _radius / ( _radius + other._radius );
             Point2D.Double intersect = new MyPoint( f * other._center.x, f * other._center.y );
-
-//	    Logger.logMsg( "circles externally touch:  f=" + f + ", intersect=" + intersect );
 
             return new IntersectionInfo( new Point2D.Double[]{ intersect } );
 
@@ -635,7 +627,6 @@ public class Circle {
 
         // Do the circles just barely touch with one inside the other?
 
-//	if ( distanceSq == diffRadiiSq ) {
         if ( Util.nearlyEqual( distanceSq, diffRadiiSq, Math.max( Math.abs( distanceSq ), Math.abs( diffRadiiSq ) ) / 1e5 ) ) {
 
             // Do the two circles coincide?
@@ -650,8 +641,6 @@ public class Circle {
 
             double f = _radius / ( _radius - other._radius );
             Point2D.Double intersect = new MyPoint( f * other._center.x, f * other._center.y );
-
-//	    Logger.logMsg( "circles internally touch:  f=" + f + ", intersect=" + intersect );
 
             return new IntersectionInfo( new Point2D.Double[]{ intersect } );
 
@@ -674,8 +663,6 @@ public class Circle {
         double a2 = _center.distance( other._center );
         double cosTheta = other._center.x / a2;
         double sinTheta = other._center.y / a2;
-
-//	Logger.logMsg( "cTT " + this + " vs " + other + ":  a2=" + a2 + ", cosTheta=" + cosTheta + ", sinTheta=" + sinTheta );
 
         IntersectionInfo info = computeRotatedIntersections( new Circle( new MyPoint( a2, 0.0 ), other._radius ) );
 
@@ -722,8 +709,6 @@ public class Circle {
 
         double xIntersection = ( other._center.x + ( _radius * _radius - other._radius * other._radius ) / other._center.x ) / 2.0;
         double yIntersection = Math.sqrt( _radius * _radius - xIntersection * xIntersection );
-
-//	Logger.logMsg( "cRI " + this + " vs " + other + ":  xI=" + xIntersection + ", yI=" + yIntersection );
 
         return new IntersectionInfo(
                 new Point2D.Double[]{
@@ -1039,8 +1024,6 @@ public class Circle {
 
     private static void doTangentScaling( final Circle c, final MyPoint p ) {
 
-//	Logger.logMsg( "" + s_trialCount + ":  " + c + " vs " + p );
-
         double[] scales = { 0.3, 1.0, 1.01, 7 };
 
         for ( double scale : scales ) {
@@ -1091,8 +1074,6 @@ public class Circle {
     }
 
     private static void doOneTangent( final Circle c, final MyPoint p ) {
-
-//	Logger.logMsg( "--- " + s_trialCount );
 
         boolean isInside = p.distanceSq( c.getCenter() ) <= c.getRadius() * c.getRadius();
 
@@ -1148,15 +1129,11 @@ public class Circle {
 
     private static boolean checkTangentPoint( final Circle c, final MyPoint p, final MyPoint tangentPoint ) {
 
-//	Logger.logMsg( "checking " + c + " vs " + p + " at " + tangentPoint );
-
         if ( Util.nearlyEqual( c.getCenter().distance( tangentPoint ), c.getRadius() ) ) {
 
             Line2D.Double pT = new Line2D.Double( p, tangentPoint );
             Line2D.Double oT = new Line2D.Double( c.getCenter(), tangentPoint );
             if ( Util.nearlyEqual( Util.dotProduct( pT, oT ), 0 ) ) {
-
-//		Logger.logMsg( "ok" );
 
                 return true;
 
@@ -1196,28 +1173,6 @@ public class Circle {
 
         s_trialCount = 0;
         s_errorCount = 0;
-
-//	doSet( uc.move( -1, -1 ).scale( 1.5 ), uc.move( 1, 1 ).scale( 2 ), null );
-
-//	Logger.logMsg( "" + uc + " vs " + uc.move( 1, 0 ) + " yielded " + uc.intersects( uc.move( 1, 0 ) ) );
-
-//	doSet(
-//		uc,
-//		uc.move( 1, 0 ),
-//		new MyPoint[]{ new MyPoint( 0.5, Math.sqrt( 1 - 0.5 * 0.5 ) ), new MyPoint( 0.5, -Math.sqrt( 1 - 0.5 * 0.5 ) ) }
-//	);
-
-//	Circle unitCircleAtx2 = new Circle( new MyPoint( 2.0, 0.0 ), 1.0 );
-
-//	doit( uc, uc.move( 2.0, 0.0 ), new MyPoint[]{ new MyPoint( 1.0, 0.0 ) } );
-
-//	System.exit( 0 );
-
-//	if ( System.currentTimeMillis() != 0 ) {
-//
-//	    return;
-//
-//	}
 
         // Two unit circles both centered at the origin.
         // These yield an infinite number of intersections.

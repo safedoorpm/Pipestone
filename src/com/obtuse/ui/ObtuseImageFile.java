@@ -36,10 +36,6 @@ import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-//import xyz.kenosee.burke2.util.BurkeFiles;
-//import xyz.kenosee.burke2.util.BurkeGowingPacker;
-//import xyz.kenosee.burke2.util.BurkeGowingUnPacker;
-
 /**
  Manage a user-provided image.
  */
@@ -516,12 +512,8 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
         boolean oldLoggingEnabled = Logger.setLoggingEnabled( s_loadLoggingEnabled );
         try {
 
-//            Logger.logMsg( "recovering BIF from " + ProjectName.enquote( burkeImageFileFile.getPath() ) );
-
             StdGowingUnPacker unPacker = new StdGowingUnPacker( s_gowingTypeIndex, burkeImageFileFile );
             Optional<GowingUnPackedEntityGroup> optionalResult = unPacker.unPack();
-
-//            long startTime = System.currentTimeMillis();
 
             ObtuseImageFile bif = null;
             if ( optionalResult.isPresent() ) {
@@ -550,8 +542,6 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
                 }
 
             }
-
-//            long endTime = System.currentTimeMillis();
 
             ObtuseUtil.doNothing();
 
@@ -1677,11 +1667,6 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
                     }
 
                     Graphics2D g2d = (Graphics2D)g;
-
-//                    int imgWidth;
-//                    int imgHeight;
-//                    imgWidth = image == null ? 25 : image.getWidth( panel );
-//                    imgHeight = image == null ? 25 : image.getHeight( panel );
 
                     if ( image == null ) {
 

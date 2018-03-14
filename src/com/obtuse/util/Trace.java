@@ -30,8 +30,6 @@ public class Trace {
 
     public static final DateFormat OUR_DATE_FORMAT = new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss.SSS" );
 
-//    public static final DateFormat YYMMDD_HHMMSS_FORMAT = new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss" );
-
     private static String s_supportContact;
 
     private static final Map<Integer, TraceHook> s_traceHooks = new TreeMap<>();
@@ -58,45 +56,6 @@ public class Trace {
         Trace.s_supportContact = supportContact;
 
     }
-
-//    private static Tracer _tracer = null;
-//
-//    public static void setTracer( Tracer tracer ) {
-//
-//        _tracer = tracer;
-//
-//    }
-//
-//    static {
-//
-//        //noinspection ClassWithoutToString
-//        Tracer tracer = new Tracer() {
-//
-//            public void event( String description ) {
-//                Trace.event( description );
-//            }
-//
-//            public void event( String description, Throwable e ) {
-//                Trace.event( description, e );
-//            }
-//
-//            public String emitTrace( String description ) {
-//                return Trace.emitTrace( description );
-//            }
-//
-//            public String emitTrace( String description, Throwable e ) {
-//                return Trace.emitTrace( description, e );
-//            }
-//
-//            public String emitTrace( Throwable e ) {
-//                return Trace.emitTrace( e );
-//            }
-//
-//        };
-//
-//        setTracer( tracer );
-//
-//    }
 
     private static class TraceEvent {
 
@@ -291,7 +250,6 @@ public class Trace {
 
         }
 
-//        System.out.println( "event( \"" + event + "\", " + e + " )" );
         Long threadId = Thread.currentThread().getId();
 
         synchronized ( Trace.s_exceptionsInProgress ) {
@@ -392,8 +350,9 @@ public class Trace {
                             "{" + info.getThreadId() + "}:" +
                             info.getThreadName() +
                             " (state = " + info.getThreadState() +
-// Java on Mac OS X sometimes crashes if the next line is uncommented!
-//                                 ", cpu = " + formatCpuTime(bean.getThreadCpuTime(info.getThreadId()) ) +
+    // (discovered in about 2010 - could be out of date)
+    // Java on Mac OS X sometimes crashes if the next line is uncommented!
+    //                                 ", cpu = " + formatCpuTime(bean.getThreadCpuTime(info.getThreadId()) ) +
                             ")"
                     );
 
@@ -431,7 +390,6 @@ public class Trace {
             for ( TraceEvent event : events ) {
 
                 event.emit( results );
-//                results.add( "    " + event );
 
             }
 
@@ -480,9 +438,6 @@ public class Trace {
 
         String rval = Trace.emitResults( why, results, where, true );
         System.out.println( "file emitted" );
-
-//        //noinspection MagicNumber
-//        ObtuseUtil.safeSleepMillis( javax.management.timer.Timer.ONE_SECOND * 3L );
 
         return rval;
 
@@ -772,7 +727,6 @@ public class Trace {
         } else {
 
             trace.add( "" + e.getClass().getName() + ": " + e.getLocalizedMessage() );
-//            trace.add( "\t" + e.getClass().getName() + ":" + e.getLocalizedMessage() );
             Trace.appendStackTrace( trace, e );
             trace.add( "Caused by: " + e.getCause().getClass().getName() + ": " + e.getCause().getLocalizedMessage() );
             Trace.appendStackTrace( trace, e.getCause() );

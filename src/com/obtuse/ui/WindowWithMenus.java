@@ -32,15 +32,6 @@ public class WindowWithMenus extends TrackedWindow {
 
         }
 
-//        public BasicEditMenu( final @NotNull String menuName, @Nullable final JMenuItem cutMenuItem, @Nullable final JMenuItem copyMenuItem, @Nullable final JMenuItem pasteMenuItem ) {
-//            super( menuName );
-//
-//            _cutMenuItem = cutMenuItem;
-//            _copyMenuItem = copyMenuItem;
-//            _pasteMenuItem = pasteMenuItem;
-//
-//        }
-
         public JMenuItem getCutMenuItem() {
 
             return _cutMenuItem;
@@ -151,17 +142,6 @@ public class WindowWithMenus extends TrackedWindow {
         _preferencesMenuItem = new JMenuItem( "Preferences" );
         OSLevelCustomizations osLevelCustomizations = OSLevelCustomizations.getCustomizer();
 
-//                new AboutWindowHandler() {
-//
-//                    public void makeVisible() {
-//
-//                        Logger.logMsg( "about window launch request ignored" );
-//
-//                    }
-//
-//                }
-//        );
-
         if ( osLevelCustomizations == null || OSLevelCustomizations.onWindows() ) {
 
             _fileMenu.add( _preferencesMenuItem );
@@ -170,10 +150,6 @@ public class WindowWithMenus extends TrackedWindow {
                             KeyEvent.VK_COMMA, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()
                     )
             );
-
-//        } else {
-//
-//            osLevelCustomizations.setPreferencesHandler( this );
 
         }
 
@@ -253,19 +229,7 @@ public class WindowWithMenus extends TrackedWindow {
 
         _menuBar.add( _editMenu );
 
-//        // Replace the coffee cup icon in Windows XP JFrames
-//
-////        Trace.event( "inserting logo into JFrames" );
-//
-//        ImageIcon icon = new ImageIcon( LoaLogo.LOA_LOGO_16x16 );
-//
-//        setIconImage( icon.getImage() );
-
-//        Trace.event( "setting the menu" );
-
         setJMenuBar( _menuBar );
-
-//        Trace.event( "constructed WindowWithMenus" );
 
     }
 
@@ -380,11 +344,6 @@ public class WindowWithMenus extends TrackedWindow {
         skeletalEditMenu.setPasteMenuItem( createMenuItem( "Paste", KeyEvent.VK_V ) );
 
         skeletalEditMenu.setSelectAllMenuItem( createMenuItem( "Select All", KeyEvent.VK_A ) );
-
-//        skeletalEditMenu.add( cutMenuItem );
-//        skeletalEditMenu.add( copyMenuItem );
-//        skeletalEditMenu.add( pasteMenuItem );
-//        skeletalEditMenu.add( selectAllMenuItem );
 
         return skeletalEditMenu;
 

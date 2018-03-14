@@ -326,15 +326,11 @@ public class StdGowingPacker implements GowingPacker {
         EntityNames entityNames = _packingContext.getEntityNames( instanceId );
         _packingContext.rememberTopTypeId( entityNames.getEntity().getInstanceId().getTypeId() );
 
-//        if ( !GowingUtil.isActuallyPackable( entityNames.getEntity() ) ) {
-
-            GowingUtil.verifyActuallyPackable(
-                    "StdGowingPackerContext.actuallyPackEntity " + entityNames.getPrintableDescription(),
-                    null,
-                    entityNames.getEntity()
-            );
-
-//        }
+        GowingUtil.verifyActuallyPackable(
+                "StdGowingPackerContext.actuallyPackEntity " + entityNames.getPrintableDescription(),
+                null,
+                entityNames.getEntity()
+        );
 
         GowingPackedEntityBundle bundle = entityNames.getEntity().bundleThyself( false, this );
 

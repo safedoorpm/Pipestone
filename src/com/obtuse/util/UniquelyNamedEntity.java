@@ -14,6 +14,4 @@ package com.obtuse.util;
 @SuppressWarnings("UnusedDeclaration")
 public interface UniquelyNamedEntity extends NamedEntity {
 
-//    public String getUniqueName();
-
 }

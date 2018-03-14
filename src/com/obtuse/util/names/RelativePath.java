@@ -569,7 +569,6 @@ public class RelativePath extends GowingAbstractPackableEntity implements Iterab
 
             rn1 = fn1.get();
             getDone = true;
-//            doit( what, rn1 );
 
             msgTime( what, "yielded \"" + rn1 + "\"", null );
 

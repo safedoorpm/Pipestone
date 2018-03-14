@@ -39,28 +39,7 @@ public abstract class AutoSizingValidatedJTextField extends ValidatedJTextField 
         _minWidth = minWidth < ABSOLUTE_MINIMUM_WIDTH ? ABSOLUTE_MINIMUM_WIDTH : minWidth;
         _maxWidth = maxWidth;
 
-//        Dimension minSize = getMinimumSize();
-//        Dimension newMinSize = new Dimension( _minWidth > minSize.width ? _minWidth : minSize.width, minSize.height );
-//        setMinimumSize( newMinSize );
-//
-//        Dimension maxSize = getMaximumSize();
-//        Dimension newMaxSize = new Dimension( _maxWidth < maxSize.width ? _maxWidth : maxSize.width, maxSize.height );
-//        setMaximumSize( newMaxSize );
-
-//        setMaximumSize( new Dimension( maxWidth, getMaximumSize().height ) );
-
-//        this.getDocument().addDocumentListener(
-//                new AutoAdjustingTextFieldWidthListener( this )
-//        );
-
-        //        this.setMinimumSize( new Dimension( minWidth, -1 ) );
-//        Dimension preferredSize = new Dimension( minWidth, -1 );
-
         configureAutoSizeAdjustingJTextField( this, minWidth, maxWidth );
-
-//        setMinimumSize( new Dimension( minWidth, getMinimumSize().height ) );
-//        setPreferredSize( new Dimension( minWidth, getPreferredSize().height ) );
-//        setMaximumSize( new Dimension( maxWidth, getMaximumSize().height ) );
 
     }
 

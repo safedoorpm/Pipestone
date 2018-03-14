@@ -961,8 +961,6 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
 
                             if ( isMetaData ) {
 
-//                                Logger.logMsg( "Found metadata comment:  " + ObtuseUtil.enquoteToJavaString( sb.toString() ) );
-
                                 String errmsg = notifyMetaDataHandlers( sb.toString() );
                                 if ( errmsg != null ) {
 
@@ -1212,7 +1210,6 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
     private String notifyMetaDataHandlers( final @NotNull String metaDataLine ) {
 
         String trimmed = metaDataLine.trim();
-//        Logger.logMsg( "got metadata line:  " + trimmed );
 
         if ( !trimmed.startsWith( String.valueOf( GowingConstants.LINE_METADATA_CHAR ) ) ) {
 
@@ -1340,7 +1337,6 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
             throws IOException {
 
         int ch;
-//        Logger.maybeLogMsg( () -> "parsing " + ( primitive ? "primitive" : "container" ) + " array" );
 
         int length = 0;
         ch = nextCh();
@@ -1699,14 +1695,6 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
                 } else {
 
                     // Just swallow the comma.
-
-//                    Logger.logMsg( "swallowed a comma prior to index " +
-//                                   ix +
-//                                   " in " +
-//                                   elementType +
-//                                   " " +
-//                                   ( primitive ? "primitive" : "container" ) +
-//                                   "array" );
 
                 }
 

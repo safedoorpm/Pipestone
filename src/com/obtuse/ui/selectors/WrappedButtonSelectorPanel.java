@@ -123,9 +123,6 @@ public class WrappedButtonSelectorPanel<CHOICE, PANEL extends JPanel> extends Wr
 
             }
 
-//            targetButton.setSelected( true );
-//            ButtonModel targetButtonModel = targetButton.getModel();
-//            getButtonGroup().setSelected( targetButtonModel, true );
             Logger.logMsg(
                     "clicking on button labeled " + ObtuseUtil.enquoteJavaObject( choice ) +
                     " == " + ObtuseUtil.enquoteJavaObject( targetButton.getText() ) + ":  " +
@@ -241,7 +238,6 @@ public class WrappedButtonSelectorPanel<CHOICE, PANEL extends JPanel> extends Wr
     }
 
     public WrappedButtonSelectorPanel(
-//            final @NotNull CHOICE referenceCard,
             final @NotNull IController<CHOICE,PANEL> iController
     ) {
         super();
@@ -292,18 +288,6 @@ public class WrappedButtonSelectorPanel<CHOICE, PANEL extends JPanel> extends Wr
             jrb.setSelected( false );
             choiceFound = choiceFound || choice.item.equals( initialChoice );
 
-////            if ( choice.ix == 0 ) {
-//            if ( choice.item.equals( initialChoice ) ) {
-//
-//                jrb.setSelected( true );
-//                choiceFound = true;
-//
-//            } else {
-//
-//                jrb.setSelected( false );
-//
-//            }
-
             buttonGroup.add( jrb );
             buttonPanel.add( jrb );
 
@@ -318,7 +302,6 @@ public class WrappedButtonSelectorPanel<CHOICE, PANEL extends JPanel> extends Wr
         if ( !choiceFound ) {
 
             initialChoice = buttonMap.firstKey();
-//            buttonMap.get( firstButton ).setSelected( true );
 
         }
 
@@ -343,16 +326,6 @@ public class WrappedButtonSelectorPanel<CHOICE, PANEL extends JPanel> extends Wr
             _buttonPanel.setSubsidiaryPanelBorder( border );
 
             return true;
-
-//        } else if ( _panel != null ) {
-//
-//            if ( _panel instanceof JComponent ) {
-//
-//                ( (JComponent)_panel ).setBorder( border );
-//
-//                return true;
-//
-//            }
 
         }
 

@@ -15,30 +15,13 @@ public abstract class UndoableBenoitEdit implements UndoableEdit {
     private boolean _alive = true;
     private boolean _hasBeenDone = false;
     private final String _presentationName;
-//    private final Runnable _undo;
-//    private final Runnable _redo;
 
     public UndoableBenoitEdit(
-            final String presentationName //,
-//            Runnable undo,
-//            Runnable redo
+            final String presentationName
     ) {
         super();
 
         _presentationName = presentationName;
-//        _undo = undo;
-//        _redo = redo;
-//
-//        if ( _undo == null ) {
-//
-//            throw new IllegalArgumentException( "undo is null (maybe you should just provide a Runnable that doesn't do anything)" );
-//
-//        }
-//
-//        if ( _redo == null ) {
-//
-//            throw new IllegalArg
-//        }
 
     }
 

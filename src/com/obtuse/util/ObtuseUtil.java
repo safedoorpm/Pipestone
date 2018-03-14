@@ -183,14 +183,12 @@ public class ObtuseUtil {
         if ( aStart > aEnd ) {
 
             throw new IllegalArgumentException( "ObtuseUtil.overlaps:  aStart=" + aStart + " is greater than aEnd=" + aEnd );
-//            return overlaps( aEnd, aStart, bStart, bEnd );
 
         }
 
         if ( bStart > bEnd ) {
 
             throw new IllegalArgumentException( "ObtuseUtil.overlaps:  bStart=" + bStart + " is greater than bEnd=" + bEnd );
-//            return overlaps( aStart, aEnd, bEnd, bStart );
 
         }
 
@@ -1444,41 +1442,6 @@ public class ObtuseUtil {
 
     }
 
-//    public static String lpad( double value, int width, int digits ) {
-//
-//        if ( value < 0.0 ) {
-//
-//            return lpad( "-" + lpad( -value, 0, digits ), width );
-//
-//        }
-//
-//        long mult = 1L;
-//        for ( int i = 0; i < digits; i += 1 ) {
-//
-//            //noinspection MagicNumber
-//            mult *= 10L;
-//
-//        }
-//
-//        long lv = Math.round( value * (double)mult );
-////        if ( lv == 0 ) {
-////
-////            return lpad( rpad( "0.", d + 2, '0' ), w );
-////
-////        }
-//        String rv = "" + lv;
-//        while ( rv.length() < digits + 1 ) {
-//
-//            rv = "0" + rv;
-//
-//        }
-//
-//        rv = rv.substring( 0, rv.length() - digits ) + '.' + rv.substring( rv.length() - digits );
-//
-//        return lpad( rv, width );
-//
-//    }
-
     /**
      Pad a string on the left to a specified width using a specified padding character.
 
@@ -1652,15 +1615,6 @@ public class ObtuseUtil {
 
         String str = s == null ? "null" : s;
         return str + ObtuseUtil.generatePaddingString( w, p, str );
-
-//        String rval = s == null ? "null" : s;
-//        while ( rval.length() < w ) {
-//
-//            rval += p;
-//
-//        }
-//
-//        return rval;
 
     }
 
@@ -2401,46 +2355,6 @@ public class ObtuseUtil {
 
         return enquoteJavaStringToNakedStringBuilder( string ).insert( 0, '"' ).append( '"' );
 
-//        StringBuilder rval = new StringBuilder( "\"" );
-//        for ( char c : string.toCharArray() ) {
-//
-//            rval.append( String.valueOf( c ) );
-//            switch ( c ) {
-//
-//                case '\b':
-//                    rval.append( "\\b" );
-//                    break;
-//
-//                case '\n':
-//                    rval.append( "\\n" );
-//                    break;
-//
-//                case '\r':
-//                    rval.append( "\\r" );
-//                    break;
-//
-//                case '\t':
-//                    rval.append( "\\t" );
-//                    break;
-//
-//                case '\\':
-//                    rval.append( "\\\\" );
-//                    break;
-//
-//                case '"':
-//                    rval.append( "\\\"" );
-//                    break;
-//
-//                default:
-//                    rval.append( c );
-//
-//            }
-//
-//        }
-//
-//        rval.append( '"' );
-//        return rval.toString();
-
     }
 
     public static class StringMapping {
@@ -2570,8 +2484,6 @@ public class ObtuseUtil {
             char mapped = nakedJavaString.charAt( off );
             String original = String.valueOf( mapped );
 
-//            String remaining = nakedJavaString.substring( off );
-//            int remainingLength = totalLength - off;
             for ( StringCharMapping scm : reverseJavaMappings ) {
 
                 if ( nakedJavaString.startsWith( scm.from, off ) ) {
@@ -2606,41 +2518,6 @@ public class ObtuseUtil {
     public static String enquoteToJavaCharacter( final char ch ) {
 
         return "'" + enquoteToNakedJavaCharacter( ch ) + "'";
-
-//        switch ( ch ) {
-//
-//            case '\b':
-//                rval.append( "\\b" );
-//                break;
-//
-//            case '\n':
-//                rval.append( "\\n" );
-//                break;
-//
-//            case '\r':
-//                rval.append( "\\r" );
-//                break;
-//
-//            case '\t':
-//                rval.append( "\\t" );
-//                break;
-//
-//            case '\\':
-//                rval.append( "\\\\" );
-//                break;
-//
-//            case '\'':
-//                rval.append( "\\\'" );
-//                break;
-//
-//            default:
-//                rval.append( ch );
-//
-//        }
-//
-//        rval.append( "'" );
-//
-//        return rval.toString();
 
     }
 
@@ -2793,26 +2670,6 @@ public class ObtuseUtil {
         return collection;
 
     }
-
-//    private static void doit( String s ) {
-//
-//        System.out.println( "<" + s + "> yielded <" + enquoteToCSV( s ) + ">" );
-//
-//    }
-//
-//    public static void main( String[] args ) {
-//
-//        doit( "hello world" );
-//        doit( "" );
-//        doit( "\"hello world\"" );
-//        doit( "hello,world" );
-//        doit( "\"\"\"\"" );
-//        doit( "\"hello,world\"" );
-//        doit( "\"hello world" );
-//        doit( "hello world\"" );
-//        System.exit( 0 );
-//
-//    }
 
     /**
      Returns an unmodifiable view of the specified hash table.
@@ -3149,35 +3006,11 @@ public class ObtuseUtil {
 
                 if ( s_maskExBits[bitIx] == null ) {
 
-//                    Logger.logMsg( "rememberBitName:  1 << " + bitIx + " is named \"" + name + "\"" );
-
                     s_maskExBits[bitIx] = name;
-
-//                } else {
-//
-//                    Logger.logMsg( "rememberBitName:  1 << " +
-//                                   bitIx +
-//                                   " is already called \"" +
-//                                   s_maskExBits[bitIx] +
-//                                   "\" when attempting to assign new name \"" +
-//                                   name +
-//                                   "\" - new name ignored" );
 
                 }
 
-//            } else {
-//
-//                Logger.logMsg( "rememberBitName:  bit mask " +
-//                               Integer.toBinaryString( maskValue ) +
-//                               " called \"" +
-//                               name +
-//                               "\" has more than one bit set - ignored" );
-
             }
-
-//        } else {
-//
-//            Logger.logMsg( "rememberBitName:  mask named \"" + name + "\" has value 0 - ignored" );
 
         }
 
@@ -3198,8 +3031,8 @@ public class ObtuseUtil {
                 packer.queuePackableEntity( groupName, item );
 
             }
+
             packer.finish();
-//            packer.getPackingContext().get`
 
         } catch ( FileNotFoundException e ) {
 

@@ -589,7 +589,6 @@ public class LinearCache3 implements LinearLayoutManagerCache {
                 if ( offsets[i] + spans[i] < allocated ) {
 
                     int newSpan = (int)Math.min( (long)allocated - offsets[i], totalAscent );
-//		    Logger.logMsg( "oldSpan=" + spans[i] + ", new span=" + newSpan );
 
                     ObtuseUtil.doNothing();
 

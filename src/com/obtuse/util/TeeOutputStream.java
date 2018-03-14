@@ -104,31 +104,6 @@ public class TeeOutputStream extends OutputStream {
             throws IOException {
         this( constructTag( remoteSocketAddress ) + "_" + constructTag( localSocketAddress ), socketOutputStream, buffered );
 
-//        super();
-//
-//        _outputStream = socketOutputStream;
-//
-//        OutputStream teeOutputStream;
-//        try {
-//
-//            _teeFile = constructLogFile( remoteSocketAddress, localSocketAddress );
-//            _buffered = buffered;
-//
-//            teeOutputStream = new FileOutputStream( _teeFile );
-//            if ( buffered ) {
-//
-//                teeOutputStream = new BufferedOutputStream( teeOutputStream );
-//
-//            }
-//
-//        } catch ( IOException e ) {
-//
-//            throw new IOException( "Tee-" + e.getMessage(), e );
-//
-//        }
-//
-//        _teeOutputStream = teeOutputStream;
-
     }
 
     /**
@@ -160,35 +135,6 @@ public class TeeOutputStream extends OutputStream {
         }
 
     }
-
-//    @NotNull
-//    public static File constructLogFile(
-//            final @NotNull SocketAddress remoteSocketAddress,
-//            final @NotNull SocketAddress localSocketAddress
-//    ) throws IOException {
-//
-//        return constructLogFile( remoteSocketAddress, localSocketAddress, null );
-//
-//    }
-
-//    @NotNull
-//    public static File constructLogFile(
-//            final @NotNull SocketAddress remoteSocketAddress,
-//            final @NotNull SocketAddress localSocketAddress,
-//            @Nullable final Consumer<String> rememberSessionName
-//    )
-//            throws IOException {
-//
-//        String sessionName = constructTag( remoteSocketAddress ) + "_" + constructTag( localSocketAddress );
-//        if ( rememberSessionName != null ) {
-//
-//            rememberSessionName.accept( sessionName );
-//
-//        }
-//
-//        return constructLogFile( sessionName );
-//
-//    }
 
     /**
      Construct a log file in an arbitrary directory.

@@ -100,9 +100,7 @@ public class WrappedComboBoxSelectorPanel<CHOICE, PANEL extends JPanel> extends 
                 comboBoxSelectorPanel.add( comboBox );
 
                 add( comboBoxSelectorPanel, BorderLayout.NORTH );
-//                add( new JLabel( "ONLY CHOICE IS " + actualChoices.get( 0 ).toString() ), BorderLayout.NORTH );
 
-//                _panel = _cController.getPanel( actualChoices.firstElement(), true );
                 CHOICE initialChoice = _cController.getInitialChoice();
                 _panel = _cController.getPanel(
                         initialChoice == null ? actualChoices.firstElement() : initialChoice,
@@ -125,8 +123,6 @@ public class WrappedComboBoxSelectorPanel<CHOICE, PANEL extends JPanel> extends 
 
         add( _panel, BorderLayout.CENTER );
 
-//        LinearLayoutUtil.describeFullyGuiEntity( "WCBSP(container)", this );
-
     }
 
     public WrappedComboBoxSelectorPanel( final @NotNull Container container ) {
@@ -145,8 +141,6 @@ public class WrappedComboBoxSelectorPanel<CHOICE, PANEL extends JPanel> extends 
 
         setLayout( new BorderLayout() );
         add( container, BorderLayout.CENTER );
-
-//        LinearLayoutUtil.describeFullyGuiEntity( "WCBSP(container)", this );
 
     }
 
@@ -238,18 +232,13 @@ public class WrappedComboBoxSelectorPanel<CHOICE, PANEL extends JPanel> extends 
                         " to " + newChoice + "@" + newChoiceIndex + " when that's already our currently selected button"
                 );
 
-//                return false;
-
             }
-//            else {
 
-                _comboBoxModel.setSelectedItem( newChoice );
+            _comboBoxModel.setSelectedItem( newChoice );
 
-                Logger.logMsg( "InnerWrappedComboBoxSelectorPanel.notifyCurrentChildChange:  from " + oldChoice + " to " + newChoice );
+            Logger.logMsg( "InnerWrappedComboBoxSelectorPanel.notifyCurrentChildChange:  from " + oldChoice + " to " + newChoice );
 
-                return true;
-
-//            }
+            return true;
 
         }
 

@@ -60,8 +60,6 @@ public interface GowingUnPackerContext {
 
     void markEntityFinished( GowingEntityReference er );
 
-//    void addUnfinishedEntities( Collection<GowingEntityReference> collection );
-
     @NotNull
     Optional<EntityTypeName> findTypeByTypeReferenceId( int typeReferenceId );
 
@@ -85,6 +83,7 @@ public interface GowingUnPackerContext {
     @SuppressWarnings("UnusedReturnValue")
     EntityTypeInfo registerFactory( GowingEntityFactory factory );
 
+    @SuppressWarnings("UnusedReturnValue")
     int registerFactories( GowingEntityFactory[] factories );
 
     void saveTypeAlias( StdGowingTokenizer.GowingToken2 typeIdToken, StdGowingTokenizer.GowingToken2 typeNameToken )

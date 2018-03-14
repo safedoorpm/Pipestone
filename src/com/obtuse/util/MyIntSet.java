@@ -11,18 +11,19 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**
- * A compact and fast set of longs.
- * Note that instances of this class are backed by a dynamically sized bitmap array of <code>long</code>.
- * This implementation assumes that the integers are relatively tightly clustered together.
- * Sets with huge gaps in the member values will result in considerably more memory being consumed than one might like.
+ A compact and fast set of longs.
+ Note that instances of this class are backed by a dynamically sized bitmap array of <code>long</code>.
+ This implementation assumes that the integers are relatively tightly clustered together.
+ Sets with huge gaps in the member values will result in considerably more memory being consumed than one might like.
  */
 
 public class MyIntSet implements Iterable<Long>, Serializable {
 
     private long[] _valueBits = null;
-    private long   _startValue = 0L;
+    private long _startValue = 0L;
 
     public MyIntSet() {
+
         super();
 
     }
@@ -34,6 +35,7 @@ public class MyIntSet implements Iterable<Long>, Serializable {
      added to this set.
      <p/>Note that while the array may grow as a result of a call to any of this class's <code>add*()</code> methods, the array never
      shrinks.
+
      @param value the long to be added.
      */
 
@@ -49,12 +51,7 @@ public class MyIntSet implements Iterable<Long>, Serializable {
             _startValue = value - 12 * Long.SIZE;
 
         }
-//        Logger.logMsg( "before adding " + value + ":  " + this );
 
-//        if ( value >= _startValue && value < _startValue + _valueBits.length * Long.SIZE ) {
-//
-//
-//        } else
         if ( value < _startValue ) {
 
             long newStartValue = _startValue - ( ( _startValue - value ) / Long.SIZE + 10 ) * Long.SIZE;
@@ -70,7 +67,6 @@ public class MyIntSet implements Iterable<Long>, Serializable {
 
             _valueBits = newArray;
             _startValue = newStartValue;
-//            Logger.logMsg( "after growing left:  " + this );
 
         } else if ( value >= _startValue + _valueBits.length * Long.SIZE ) {
 
@@ -80,64 +76,61 @@ public class MyIntSet implements Iterable<Long>, Serializable {
             System.arraycopy( _valueBits, 0, newArray, 0, _valueBits.length );
 
             _valueBits = newArray;
-//            Logger.logMsg( "after growing right:  " + this );
 
         }
 
         //noinspection UnnecessaryParentheses
         _valueBits[( (int)( value - _startValue ) / Long.SIZE )] |= 1L << ( ( value - _startValue ) & ( Long.SIZE - 1 ) );
 
-//        Logger.logMsg( "after adding " + value + ":  " + this );
-
     }
 
     public boolean contains( final long value ) {
 
-	if ( _valueBits == null ) {
+        if ( _valueBits == null ) {
 
-	    return false;
+            return false;
 
-	}
+        }
 
-	if ( value < _startValue ) {
+        if ( value < _startValue ) {
 
-	    return false;
+            return false;
 
-	} else if ( value >= _startValue + _valueBits.length * Long.SIZE ) {
+        } else if ( value >= _startValue + _valueBits.length * Long.SIZE ) {
 
-	    return false;
+            return false;
 
-	}
+        }
 
-	return ( _valueBits[(int)( ( value - _startValue ) / Long.SIZE )] & ( 1L << ( ( value - _startValue ) & ( Long.SIZE - 1 ) ) ) ) != 0;
+        return ( _valueBits[(int)( ( value - _startValue ) / Long.SIZE )] & ( 1L << ( ( value - _startValue ) & ( Long.SIZE - 1 ) ) ) ) != 0;
 
     }
 
     public boolean remove( final long value ) {
 
-	if ( _valueBits == null ) {
+        if ( _valueBits == null ) {
 
-	    return false;
+            return false;
 
-	}
+        }
 
-	if ( value < _startValue ) {
+        if ( value < _startValue ) {
 
-	    return false;
+            return false;
 
-	} else if ( value >= _startValue + _valueBits.length * Long.SIZE ) {
+        } else if ( value >= _startValue + _valueBits.length * Long.SIZE ) {
 
-	    return false;
+            return false;
 
-	}
+        }
 
-	int ix = (int) ( ( value - _startValue ) / Long.SIZE );
-	long element = _valueBits[ ix ];
-	long mask = ( 1L << ( ( value - _startValue ) & ( Long.SIZE - 1 ) ) );
-	boolean rval = ( element & mask ) != 0;
-	_valueBits[ ix ] &= ~mask;
+        int ix = (int)( ( value - _startValue ) / Long.SIZE );
+        long element = _valueBits[ix];
+        long mask = ( 1L << ( ( value - _startValue ) & ( Long.SIZE - 1 ) ) );
+        boolean rval = ( element & mask ) != 0;
+        _valueBits[ix] &= ~mask;
 
-	return rval;
+        return rval;
 
     }
 
@@ -244,29 +237,6 @@ public class MyIntSet implements Iterable<Long>, Serializable {
 
     }
 
-//    public String toString() {
-//
-//        StringBuilder rval = new StringBuilder();
-//        String comma = "";
-//        for ( int i = 0; i < _valueBits.length; i += 1 ) {
-//
-//            for ( int j = 0; j < Long.SIZE; j += 1 ) {
-//
-//                if ( ( _valueBits[i] & ( 1L << j ) ) != 0 ) {
-//
-//                    rval.append( comma ).append( _startValue + i * Long.SIZE + j );
-//                    comma = ", ";
-//
-//                }
-//
-//            }
-//
-//        }
-//
-//        return "MyIntSet( " + rval + " )";
-//
-//    }
-
     public String toString() {
 
         StringBuilder rval2 = new StringBuilder();
@@ -274,7 +244,8 @@ public class MyIntSet implements Iterable<Long>, Serializable {
         //noinspection ForLoopReplaceableByForEach,ForLoopWithMissingComponent
         for ( Iterator<Long> iter = iterator(); iter.hasNext(); ) {
 
-            rval2.append( comma ).append( iter.next() );
+            rval2.append( comma )
+                 .append( iter.next() );
             comma = ", ";
 
         }
@@ -283,86 +254,72 @@ public class MyIntSet implements Iterable<Long>, Serializable {
 
     }
 
-//    public void checkToString() {
-//
-//        String s1 = toString();
-//        String s2 = toString2();
-//        if ( !s1.equals( s2 ) ) {
-//
-//            Logger.logMsg( "iterator is broken (old = \"" + s1 + "\", new = \"" + s2 + "\")" );
-//
-//        }
-//
-//    }
-
     @SuppressWarnings("MagicNumber")
     public static void main( final String[] args ) {
 
-	BasicProgramConfigInfo.init( "Obtuse", "Pipestone", "MyIntSet", null );
-	LoggingMessageProxy mp = new LoggingMessageProxy();
+        BasicProgramConfigInfo.init( "Obtuse", "Pipestone", "MyIntSet", null );
+        LoggingMessageProxy mp = new LoggingMessageProxy();
 
         MyIntSet set = new MyIntSet();
 
         for ( int i = 0; i < 1000; i += 29 ) {
 
-//	    Logger.logMsg( "adding " + i );
+            if ( set.contains( i ) ) {
 
-	    if ( set.contains( i ) ) {
+                mp.error( "#1 i=" + i + " found in set when it should not be present" );
 
-		mp.error( "#1 i=" + i + " found in set when it should not be present" );
+            }
 
-	    }
+            set.add( i );
+            if ( !set.contains( i ) ) {
 
-	    set.add( i );
-	    if ( !set.contains( i ) ) {
+                mp.error( "#2 i=" + i + " not successfully added to the set" );
 
-		mp.error( "#2 i=" + i + " not successfully added to the set" );
+            }
 
-	    }
+            if ( set.contains( i + 1 ) ) {
 
-	    if ( set.contains( i + 1 ) ) {
+                mp.error( "#3 i=" + ( i + 1 ) + " found in set when it should not be present" );
 
-		mp.error( "#3 i=" + ( i + 1 ) + " found in set when it should not be present" );
-
-	    }
+            }
 
         }
 
         for ( int i = -23; i > -1000; i -= 23 ) {
 
-	    if ( set.contains( i ) ) {
+            if ( set.contains( i ) ) {
 
-		mp.error( "#4 i=" + i + " found in set when it should not be present" );
+                mp.error( "#4 i=" + i + " found in set when it should not be present" );
 
-	    }
+            }
 
-	    set.add( i );
-	    if ( !set.contains( i ) ) {
+            set.add( i );
+            if ( !set.contains( i ) ) {
 
-		mp.error( "#5 i=" + i + " not successfully added to the set" );
+                mp.error( "#5 i=" + i + " not successfully added to the set" );
 
-	    }
+            }
 
-	    if ( set.contains( i + 1 ) ) {
+            if ( set.contains( i + 1 ) ) {
 
-		mp.error( "#6 i=" + ( i + 1 ) + " found in set when it should not be present" );
+                mp.error( "#6 i=" + ( i + 1 ) + " found in set when it should not be present" );
 
-	    }
+            }
 
         }
 
-	if ( mp.hasLoggedErrors() || mp.hasLoggedInfos() ) {
+        if ( mp.hasLoggedErrors() || mp.hasLoggedInfos() ) {
 
-	    Logger.logErr( "### " + mp.getErrorCount() + " error and " + mp.getInfoCount() + " messages" );
-	    System.exit( 1 );
+            Logger.logErr( "### " + mp.getErrorCount() + " error and " + mp.getInfoCount() + " messages" );
+            System.exit( 1 );
 
-	} else {
+        } else {
 
-	    Logger.logMsg( "MyIntSet test passed" );
+            Logger.logMsg( "MyIntSet test passed" );
 
-	}
+        }
 
-	System.exit( 0 );
+        System.exit( 0 );
 
     }
 

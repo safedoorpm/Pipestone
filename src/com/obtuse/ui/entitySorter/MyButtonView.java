@@ -23,8 +23,6 @@ public class MyButtonView extends Box implements SortableEntityView<String,MyBut
 
     private MyButtonEntity _myEntity;
 
-//    private String _baseLabel;
-
     private String _key;
 
     private final String _word;
@@ -35,33 +33,14 @@ public class MyButtonView extends Box implements SortableEntityView<String,MyBut
             final String word,
             final String key
     ) {
-//	    super( NounsList.pickNoun() + " " + label + " #" + getNextCount() );
 	super( BoxLayout.X_AXIS );
 
-//	    _baseLabel = label;
 	_key = key;
 	_word = word;
 	_myModel = myModel;
 	_myEntity = myEntity;
 
 	_ourLabel = new JLabel( makeLabel( _key, word ) );
-//	    ourLabel.addActionListener(
-//		    new MyActionListener() {
-//
-//			@Override
-//			public void myActionPerformed( ActionEvent e ) {
-//
-//			    String newKey = NounsList.pickNoun();
-//			    Logger.logMsg( "adding new button \"" + newKey + "\"" );
-//			    myModel.addEntity(
-//				    newKey,
-//				    new MyButtonEntity( myModel, newKey )
-//			    );
-//
-//			}
-//
-//		    }
-//	    );
 
 	add( _ourLabel );
 
@@ -88,8 +67,8 @@ public class MyButtonView extends Box implements SortableEntityView<String,MyBut
 	String oldKey = _key;
 	String ourWord = _word;
 	String newKey = NounsList.pickNoun();
-//	Logger.logMsg( "######## moving word \"" + ourWord + "\" from \"" + oldKey + "\" to \"" + newKey + "\"" );
 	_ourLabel.setText( makeLabel( newKey, _word ) );
+
 	if ( newKey.equals( oldKey ) ) {
 
 	    throw new IllegalArgumentException( "attempt to move word to current location \"" + oldKey + "\"" );
@@ -102,8 +81,6 @@ public class MyButtonView extends Box implements SortableEntityView<String,MyBut
 	    throw new IllegalArgumentException( "\"" + _word + "\" should be at \"" + newKey + "\" but we are at \"" + _key + "\"" );
 
 	}
-
-//	Logger.logMsg( "######## moved word \"" + ourWord + "\" from \"" + oldKey + "\" to \"" + newKey + "\"" );
 
     }
 

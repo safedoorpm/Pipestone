@@ -57,9 +57,6 @@ public class Measure {
 
     }
 
-//    private static Stats s_outerDoneStats = new Stats();
-//    private static Stats s_innerDoneStats = new Stats();
-
     public static class StackLevelInfo {
 
         private final String _levelName;
@@ -348,23 +345,6 @@ public class Measure {
             long innerNow = System.currentTimeMillis();
 
             recordData( categoryName, Measure.s_stats, delta );
-//            Stats stats = Measure.s_stats.get( _categoryName );
-//            if ( stats == null ) {
-//
-//                stats = new Stats();
-//
-//                Measure.s_stats.put( _categoryName, stats );
-//
-//                if ( _categoryName.length() > Measure.s_maxCategoryNameLength ) {
-//
-//                    Measure.s_maxCategoryNameLength = _categoryName.length();
-//
-//                }
-//
-//            }
-//
-//            //noinspection MagicNumber
-//            stats.datum( (double)delta / 1e3 );
 
             long threadId = Thread.currentThread().getId();
             Stack<StackLevelInfo> ourStack = Measure.s_threadStacks.get( threadId );
@@ -382,17 +362,14 @@ public class Measure {
                 StackLevelInfo ourLevel = ourStack.pop();
                 String stackAboveUs = ourLevel.getStackTraceAboveUs();
                 Measure.s_stackStats.datum( ourLevel.getLevelNames(), delta );
-//                Measure.recordData( Measure.s_stackData, ourLevel.getLevelName(), delta );
 
             }
 
             Measure.recordData( Measure.s_stats, Measure.INNER_DONE_STATS, System.currentTimeMillis() - innerNow );
-//            Measure.s_innerDoneStats.datum( ( System.currentTimeMillis() - innerNow ) / 1e3 );
 
         }
 
         Measure.recordData( Measure.s_stats, Measure.OUTER_DONE_STATS, System.currentTimeMillis() - now );
-//        Measure.s_outerDoneStats.datum( ( System.currentTimeMillis() - now ) / 1e3 );
 
         _finished = true;
 
@@ -469,13 +446,9 @@ public class Measure {
 
     private static void recordData( final SortedMap<String, Stats> map, final String name, final long delta ) {
 
-//	synchronized ( Measure.LOCK ) {
-
         Stats stats = map.computeIfAbsent( name, k -> new Stats() );
 
         stats.datum( (double)delta / 1e3 );
-
-//	}
 
     }
 
@@ -505,14 +478,6 @@ public class Measure {
             Measure.s_stackStats.showStats( where, showTitle );
 
             TreeSorter<Double, String> sorted = new TreeSorter<>( Comparator.reverseOrder() );
-
-//        SortedMap<Double,String> sorted = new TreeMap<Double, String>(
-//                new Comparator<Double>() {
-//                    public int compare( Double lhs, Double rhs ) {
-//                        return rhs.compareTo( lhs );
-//                    }
-//                }
-//        );
 
             for ( String categoryName : Measure.s_stats.keySet() ) {
 
@@ -581,8 +546,6 @@ public class Measure {
                            " seconds" );
 
         }
-//        where.println( "Outer done stats are " + Measure.s_outerDoneStats );
-//        where.println( "Inner done stats are " + Measure.s_innerDoneStats );
 
     }
 

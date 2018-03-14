@@ -54,7 +54,6 @@ public class ObtuseKeywordValue extends ObtuseKeyword {
 
     };
 
-//    private final ObtuseKeyword _keywordInfo;
     private final String _value;
 
     /**
@@ -119,19 +118,6 @@ public class ObtuseKeywordValue extends ObtuseKeyword {
         return true;
 
     }
-
-//    /**
-//     Get this instance's keyword's info.
-//
-//     @return this instance's keyword's info.
-//     */
-//
-//    @NotNull
-//    public ObtuseKeyword getKeywordInfo() {
-//
-//        return _keywordInfo;
-//
-//    }
 
     /**
      Determine if this instance has a non-null value.

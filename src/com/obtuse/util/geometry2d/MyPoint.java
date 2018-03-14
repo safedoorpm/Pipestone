@@ -74,8 +74,6 @@ public class MyPoint extends Point2D.Double {
         double cosTheta = Math.cos( theta );
         double sinTheta = Math.sin( theta );
 
-//	    Logger.logMsg( "point theta = " + theta + ", cosTheta = " + cosTheta + ", sinTheta = " + sinTheta );
-
         @SuppressWarnings("UnnecessaryLocalVariable") MyPoint rotated = new MyPoint(
                 cosTheta * x - sinTheta * y,
                 sinTheta * x + cosTheta * y

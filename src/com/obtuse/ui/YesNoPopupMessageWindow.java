@@ -8,13 +8,14 @@ import com.obtuse.util.Logger;
 import com.obtuse.util.ObtuseUtil;
 
 import javax.swing.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 @SuppressWarnings({ "UnusedDeclaration" })
 public abstract class YesNoPopupMessageWindow
         extends JDialog {
-
-//    public static enum Choice { DEFAULT, ALTERNATIVE };
 
     private final String _line1;
     private final String _line2;
@@ -48,7 +49,6 @@ public abstract class YesNoPopupMessageWindow
 
         setContentPane( _contentPane );
         setModal( true );
-//        setUndecorated( true );
 
         getRootPane().setDefaultButton( _defaultButton );
 
@@ -97,7 +97,7 @@ public abstract class YesNoPopupMessageWindow
                 new WindowAdapter() {
 
                     public void windowClosing( final WindowEvent e ) {
-//                        onAlternativeChoice();
+
                     }
                 }
         );
@@ -107,8 +107,6 @@ public abstract class YesNoPopupMessageWindow
                 new MyActionListener() {
 
                     public void myActionPerformed( final ActionEvent e ) {
-
-//                        onAlternativeChoice();
 
                     }
 
@@ -135,25 +133,7 @@ public abstract class YesNoPopupMessageWindow
         _answer = false;
         _gotAnswer = false;
 
-//        Logger.logMsg( "we are " + ( SwingUtilities.isEventDispatchThread() ? "" : "not " ) + "the event queue" );
-
         setVisible( true );
-
-//        synchronized ( this ) {
-//            while ( !_gotAnswer ) {
-//                try {
-//                    wait();
-//                } catch ( InterruptedException e ) {
-//
-//                    // just ignore it
-//
-//                }
-//            }
-//
-//            dispose();
-//
-//            return _answer;
-//        }
 
         synchronized ( _answerLock ) {
 
@@ -229,9 +209,9 @@ public abstract class YesNoPopupMessageWindow
     }
 
     /**
-     * Determine if an answer has been selected yet.
-     *
-     * @return true if an answer has been selected, false otherwise.
+     Determine if an answer has been selected yet.
+
+     @return true if an answer has been selected, false otherwise.
      */
 
     public boolean hasAnswer() {
@@ -240,10 +220,10 @@ public abstract class YesNoPopupMessageWindow
     }
 
     /**
-     * Gets the answer to the question.
-     *
-     * @return true if the default was selected, false otherwise.
-     * @throws IllegalArgumentException if no answer has been selected yet (see {@link #hasAnswer}).
+     Gets the answer to the question.
+
+     @return true if the default was selected, false otherwise.
+     @throws IllegalArgumentException if no answer has been selected yet (see {@link #hasAnswer}).
      */
 
     public boolean getAnswer() {
@@ -266,11 +246,12 @@ public abstract class YesNoPopupMessageWindow
     /**
      Throw up a popup window and wait for a response.
      Note that this method does not return until after the human has clicked a button and the corresponding {@link Runnable} has been executed.
-     @param line1 the first and (generally?) most prominent line of the popup window.
-     @param line2 the second and (generally?) less prominent line of the popup window.
-     @param defaultLabel what should appear on the 'default' button (should generally be the safest choice).
-     @param alternativeLabel what should appear on the other button (should generally be the most dangerous choice).
-     @param defaultRunnable what to do if the human clicks the 'default' button.
+
+     @param line1               the first and (generally?) most prominent line of the popup window.
+     @param line2               the second and (generally?) less prominent line of the popup window.
+     @param defaultLabel        what should appear on the 'default' button (should generally be the safest choice).
+     @param alternativeLabel    what should appear on the other button (should generally be the most dangerous choice).
+     @param defaultRunnable     what to do if the human clicks the 'default' button.
      @param alternativeRunnable what to do if the human clicks the other button.
      @return {@code true} if the 'default' button is clicked; {@code false} otherwise.
      */
@@ -295,16 +276,12 @@ public abstract class YesNoPopupMessageWindow
 
             protected void defaultChoice() {
 
-//                        setChoice( DEFAULT );
-
                 if ( defaultRunnable != null ) {
                     defaultRunnable.run();
                 }
             }
 
             protected void alternativeChoice() {
-
-//                        setChoice( OTHER );
 
                 if ( alternativeRunnable != null ) {
                     alternativeRunnable.run();
@@ -350,10 +327,11 @@ public abstract class YesNoPopupMessageWindow
     /**
      Throw up a popup window and wait for a response.
      Note that this method does not return until after the human has clicked a button and the corresponding {@link Runnable} has been executed.
-     @param line1 the only line of the popup window.
-     @param defaultLabel what should appear on the 'default' button (should generally be the safest choice).
-     @param alternativeLabel what should appear on the other button (should generally be the most dangerous choice).
-     @param defaultRunnable what to do if the human clicks the 'default' button.
+
+     @param line1               the only line of the popup window.
+     @param defaultLabel        what should appear on the 'default' button (should generally be the safest choice).
+     @param alternativeLabel    what should appear on the other button (should generally be the most dangerous choice).
+     @param defaultRunnable     what to do if the human clicks the 'default' button.
      @param alternativeRunnable what to do if the human clicks the other button.
      @return {@code true} if the 'default' button is clicked; {@code false} otherwise.
      */
@@ -410,10 +388,10 @@ public abstract class YesNoPopupMessageWindow
         };
         //noinspection RefusedBequest
         new Thread( () -> {
-	    //noinspection MagicNumber
-	    ObtuseUtil.safeSleepMillis( javax.management.timer.Timer.ONE_SECOND * 50L );
-	    dialog.fakeAnswer( true );
-	} ).start();
+            //noinspection MagicNumber
+            ObtuseUtil.safeSleepMillis( javax.management.timer.Timer.ONE_SECOND * 50L );
+            dialog.fakeAnswer( true );
+        } ).start();
         dialog.go();
     }
 

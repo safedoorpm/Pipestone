@@ -119,7 +119,6 @@ public class FormattedImmutableDate extends ImmutableDate implements GowingPacka
         GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
                 FormattedImmutableDate.ENTITY_TYPE_NAME,
                 FormattedImmutableDate.VERSION,
-//                null,
                 packer.getPackingContext()
         );
 

@@ -19,13 +19,9 @@ public class ScrollableEntity {
 
     private final int _ix;
 
-//    private final boolean _vertical;
-
     private final Component _component;
 
     private final Container _container;
-
-//    private final boolean _crossCut;
 
     private final ScrollableEntitiesManager _sem;
 

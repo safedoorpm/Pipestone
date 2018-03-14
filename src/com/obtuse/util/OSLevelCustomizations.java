@@ -119,12 +119,6 @@ public abstract class OSLevelCustomizations {
 
             }
 
-//            } else if ( OSLevelCustomizations.onWindows() ) {
-//
-//                // We're on a Windows box!
-//
-//            }
-
             OSLevelCustomizations._gotOSLevelCustomizations = true;
 
         }

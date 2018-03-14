@@ -27,20 +27,4 @@ public interface MessageLabelInterface extends ImmutableMessageLabelInterface {
 
     void setMessage( final @NotNull Exception e );
 
-//    {
-//
-//        if ( e instanceof ObtuseMessageLabel.AugmentedIllegalArgumentException ) {
-//
-//            ObtuseMessageLabel.AugmentedIllegalArgumentException ae = (ObtuseMessageLabel.AugmentedIllegalArgumentException)e;
-//
-//            setMessage( ae.getMessage(), ae.getExtraInfo() );
-//
-//        } else {
-//
-//            setMessage( e.getMessage() );
-//
-//        }
-//
-//    }
-
 }

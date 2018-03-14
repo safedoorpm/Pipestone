@@ -48,26 +48,11 @@ public abstract class AbstractDebugConnectionHandler extends Thread {
     protected void launch( @Nullable final File workingDirectory, final int portNumber )
             throws IOException {
 
-//        try {
-
             _listenSocket = new ServerSocket( portNumber );
 
             _listenSocket.setSoTimeout( 1000 );
 
-//        } catch ( IOException e ) {
-//
-//            errmsg( "unable to create debug connection handler for " + getHandlerDescription() );
-//            throw e;
-//
-//        }
-
         _portNumber = _listenSocket.getLocalPort();
-
-//        Runtime runtime = Runtime.getRuntime();
-//        _magicString = ObtuseUtil.hexvalue(
-//                new MersenneTwister( runtime.freeMemory() & Integer.MAX_VALUE ).nextLong() ^
-//                new MersenneTwister( System.currentTimeMillis() & Integer.MAX_VALUE ).nextLong()
-//        );
 
         File cmdFile = workingDirectory == null ? new File( _handlerName + ".sh" ) : new File( workingDirectory, _handlerName + ".sh" );
         ObtuseUtil.writeBytesToFile(
@@ -75,10 +60,6 @@ public abstract class AbstractDebugConnectionHandler extends Thread {
                 cmdFile,
                 false
         );
-
-//        PrintStream fs = new PrintStream( _handlerName + ".sh" );
-//        fs.println( "telnet " + _ourHost.getHostName() + " " + portNumber );
-//        ObtuseUtil.closeQuietly( fs );
 
         start();
 
@@ -107,8 +88,6 @@ public abstract class AbstractDebugConnectionHandler extends Thread {
                     connectionReceived( _handlerName, clientSocket );
 
                 } catch ( SocketTimeoutException e ) {
-
-//                    errmsg( "socket timeout, spinning again" );
 
                 } catch ( IOException e ) {
 

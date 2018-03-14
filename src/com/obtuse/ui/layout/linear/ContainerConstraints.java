@@ -72,42 +72,4 @@ public class ContainerConstraints {
 
     }
 
-//    void setContainerFlags( int containerFlags );
-
-//    public boolean isDefaultLeftJustified() {
-//
-//	return ( getContainerFlags() & LinearFlagName.LEFT_JUSTIFIED.value ) != 0;
-//
-//    }
-//
-//    public boolean isDefaultRightJustified() {
-//
-//	return ( getContainerFlags() & LinearFlagName.RIGHT_JUSTIFIED.value ) != 0;
-//
-//    }
-//
-//    public boolean isDefaultTopJustified() {
-//
-//	return ( getContainerFlags() & LinearFlagName.TOP_JUSTIFIED.value ) != 0;
-//
-//    }
-//
-//    public boolean isDefaultBottomJustified() {
-//
-//	return ( getContainerFlags() & LinearFlagName.BOTTOM_JUSTIFIED.value ) != 0;
-//
-//    }
-//
-//    public boolean isDefaultHorizontallyJustified() {
-//
-//	return isDefaultLeftJustified() && isDefaultRightJustified();
-//
-//    }
-//
-//    public boolean isDefaultVerticallyJustified() {
-//
-//	return isDefaultTopJustified() && isDefaultBottomJustified();
-//
-//    }
-
 }

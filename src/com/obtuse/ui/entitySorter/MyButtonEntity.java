@@ -53,11 +53,4 @@ public class MyButtonEntity implements SortableEntity {
 
     }
 
-//    @Override
-//    public /* <K extends Comparable<K>, E extends SortableEntity> */ SortableEntityView<String, MyButtonEntity> createEntityView( String key ) {
-//
-//        return new
-//	return new MyButtonView( this, _myModel, _word, (String)key );
-//
-//    }
 }

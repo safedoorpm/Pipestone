@@ -441,15 +441,6 @@ public abstract class JListManager implements ButtonOwner {
                             JListManager.this,
                             _addButton,
                             JListManager.this::doAddButton,
-//                            new Runnable() {
-//
-//                                public void run() {
-//
-//                                    doAddButton();
-//
-//                                }
-//
-//                            },
                             _addButtonName,
                             _resourceBaseDirectory,
                             ButtonInfo.getDefaultDarkeningFactor()
@@ -596,7 +587,6 @@ public abstract class JListManager implements ButtonOwner {
                 if ( !firstButton ) {
 
                     add( Box.createHorizontalStrut( ButtonPanel.INTER_BUTTON_GAP ) );
-//                    firstButton = false;
 
                 }
 

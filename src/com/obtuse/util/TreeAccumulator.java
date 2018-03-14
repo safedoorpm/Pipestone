@@ -170,16 +170,6 @@ public class TreeAccumulator<K extends Comparable<K>> implements Accumulator<K>,
 
     }
 
-//    public void countBunch( K thing, int bunchSize ) {
-//
-//        for ( int i = 0; i < bunchSize; i += 1 ) {
-//
-//            count( thing );
-//
-//        }
-//
-//    }
-
     public void clear() {
 
         _accumulator.clear();

@@ -16,8 +16,6 @@ import java.util.*;
 @SuppressWarnings("UnusedDeclaration")
 public class DirectedGraph {
 
-//    private List<DirectedGraphVertex> _vertices = new LinkedList<DirectedGraphVertex>();
-
     /**
      * Perform a topological sort on a directed graph.
      * <p/>
@@ -70,13 +68,6 @@ public class DirectedGraph {
     ) {
 
         if ( temporarilyMarkedNodes.contains( node ) ) {
-
-//            Logger.logMsg( "found a loop - temporarily marked nodes:" );
-//            for ( DirectedGraphVertex group : temporarilyMarkedNodes ) {
-//
-//                Logger.logMsg( "    " + group );
-//
-//            }
 
             return false;
 

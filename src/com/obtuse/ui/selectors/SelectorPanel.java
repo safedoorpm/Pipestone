@@ -53,8 +53,6 @@ public abstract class SelectorPanel<E,C extends Container> extends BorderLayoutP
         _postSelectionPanel = new JPanel( new BorderLayout() );
         _postSelectionPanel.setName( ourName + " postSelectionPanel" );
         add( _postSelectionPanel, BorderLayout.CENTER );
-//        add( new JLabel( "post south" ), BorderLayout.SOUTH );
-//        _postSelectionPanel.add( new JLabel( "North" ), BorderLayout.NORTH );
 
         ObtuseUtil.doNothing();
 
@@ -72,24 +70,7 @@ public abstract class SelectorPanel<E,C extends Container> extends BorderLayoutP
             final @Nullable Object constraints
     ) {
 
-//        Logger.logMsg(
-//                getOurName() + ":  add( " +
-//                LinearLayoutUtil.describeComponent( component ) +
-////                component.getClass().getCanonicalName() +
-////                "( " +
-////                ObtuseUtil.enquoteToJavaString( component.getName() ) +
-////                " )" +
-//                ", " +
-//                ObtuseUtil.enquoteJavaObject( constraints ) +
-//                " )"
-//        );
-
         super.add( component, constraints );
-
-//        LinearLayoutUtil.describeFullyContainerContents(
-//                "************ at end of add( " + getName() + " )",
-//                this
-//        );
 
         ObtuseUtil.doNothing();
 
@@ -126,13 +107,6 @@ public abstract class SelectorPanel<E,C extends Container> extends BorderLayoutP
 
             ObtuseUtil.doNothing();
 
-//            Logger.logMsg( "postSelectionPanel name is " + _postSelectionPanel.getName() );
-//            Logger.logMsg( "visible visible visible visible visible visible visible visible visible visible visible visible visible visible visible " );
-//            Logger.logMsg( "visible visible visible visible visible visible visible visible visible visible visible visible visible visible visible " );
-//            Logger.logMsg( "visible visible visible visible visible visible visible visible visible visible visible visible visible visible visible " );
-//            Logger.logMsg( "visible visible visible visible visible visible visible visible visible visible visible visible visible visible visible " );
-//            Logger.logMsg( "visible visible visible visible visible visible visible visible visible visible visible visible visible visible visible " );
-//            Logger.logMsg( "visible visible visible visible visible visible visible visible visible visible visible visible visible visible visible " );
         }
 
     }
@@ -142,14 +116,6 @@ public abstract class SelectorPanel<E,C extends Container> extends BorderLayoutP
         _postSelectionPanel.setVisible( false );
         _postSelectionPanel.revalidate();
         _postSelectionPanel.removeAll();
-
-//        Logger.logMsg( "postSelectionPanel name is " + _postSelectionPanel.getName() );
-//        Logger.logMsg( "INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE ");
-//        Logger.logMsg( "INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE ");
-//        Logger.logMsg( "INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE ");
-//        Logger.logMsg( "INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE ");
-//        Logger.logMsg( "INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE ");
-//        Logger.logMsg( "INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE INVISIBLE ");
 
     }
 
@@ -195,13 +161,9 @@ public abstract class SelectorPanel<E,C extends Container> extends BorderLayoutP
 
             if ( component == null ) {
 
-//                Logger.logMsg( "SelectorPanel.getSelectedComponent:  no component returned for " + key + " - showing no selection panel" );
-
                 return Optional.empty();
 
             }
-
-//            LinearLayoutUtil.describeFullyContainerContents( "got back from _componentGetter.apply( " + key + " )", component );
 
         }
 

@@ -183,8 +183,6 @@ public class GowingPackableCollection<E> extends ArrayList<E> implements GowingP
     @Override
     public boolean finishUnpacking( final @NotNull GowingUnPacker unPacker ) {
 
-//        Logger.logMsg( "GowingPackableCollection.finishUnpacking:  unpacking " + unPacker.getCurrentEntityReference() );
-
         ObtuseUtil.doNothing();
 
         for ( Object obj : _things ) {
@@ -201,7 +199,6 @@ public class GowingPackableCollection<E> extends ArrayList<E> implements GowingP
 
         }
 
-//        Logger.logMsg( "GowingPackableCollection.finishUnpacking:  ready to unpack " + unPacker.getCurrentEntityReference() );
         ObtuseUtil.doNothing();
 
         for ( Object obj : _things ) {

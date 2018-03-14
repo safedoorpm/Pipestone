@@ -30,14 +30,6 @@ public class MpsTest extends JFrame {
     private JPanel _slider6panel;
     private JPanel _slider7panel;
     private JPanel _slider8panel;
-//    private JPanel _slider1;
-//    private JPanel _slider2;
-//    private JPanel _slider3;
-//    private JPanel _slider4;
-//    private JPanel _slider5;
-//    private JPanel _slider6;
-//    private JPanel _slider7;
-//    private JPanel _slider8;
 
     public MpsTest() {
         super();
@@ -45,14 +37,6 @@ public class MpsTest extends JFrame {
         setContentPane( _panel1 );
 
         pack();
-
-//        for ( JComponent slider : new JComponent[] { _slider1, _slider2, _slider3, _slider4, _slider5, _slider6, _slider7, _slider8 } ) {
-//
-//            MultiPointSlider mps = (MultiPointSlider)slider;
-//            mps.setMinimumSize( mps.computeMinimumSize() );
-//            mps.setPreferredSize( mps.computeMinimumSize() );
-//
-//        }
 
     }
 
@@ -126,9 +110,6 @@ public class MpsTest extends JFrame {
         _slider4panel.setLayout( new BoxLayout( _slider1panel, BoxLayout.X_AXIS ) );
         _slider4panel.add( slider );
 
-//        JPanel redPanel = new JPanel();
-//        redPanel.setLayout( new BoxLayout( redPanel, BoxLayout.X_AXIS ) );
-//        redPanel.setBackground( new Color( 255, 200, 200 ) );
         slider = new MultiPointSlider( "s5", 0, 10 );
         slider.setLabelTable( labels );
         slider.setMinorTickSpacing( 1 );

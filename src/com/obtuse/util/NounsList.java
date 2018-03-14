@@ -21,8 +21,6 @@ public class NounsList {
 
     private static int s_iteration = -1;
 
-//    private static String[] s_testVerbs = { "jump", "dance", "sing" };
-
     private static String[] s_nouns = {
             "account",
             "achiever",
@@ -1030,7 +1028,6 @@ public class NounsList {
 
     public static void main( final String[] args ) {
 
-//        s_nouns = s_testVerbs;
         for ( int i = 0; i < 20; i += 1 ) {
 
             System.out.println( pickNoun() );

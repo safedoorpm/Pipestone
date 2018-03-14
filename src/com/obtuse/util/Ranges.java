@@ -11,18 +11,18 @@ import java.io.Serializable;
 import java.util.*;
 
 /**
- * Keep track of ranges of values.
- * <p/>
- * Maintains a series of sorted ranges.  Ranges are combined when gaps between them are filled in.
+ Keep track of ranges of values.
+ <p/>
+ Maintains a series of sorted ranges.  Ranges are combined when gaps between them are filled in.
  */
 
 @SuppressWarnings("UnusedDeclaration")
 public class Ranges<T extends Comparable<T>> implements Iterable<Range<T>>, Serializable {
 
     /**
-     * Compare two T's according to how they are defined to compare.
-     * <p/>
-     * This class is a named class (as opposed to an anonymous class) so that we can specify that it implements Serializable.
+     Compare two T's according to how they are defined to compare.
+     <p/>
+     This class is a named class (as opposed to an anonymous class) so that we can specify that it implements Serializable.
      */
 
     private class RangeComparator implements Comparator<T>, Serializable {
@@ -35,16 +35,17 @@ public class Ranges<T extends Comparable<T>> implements Iterable<Range<T>>, Seri
 
     }
 
-    @SuppressWarnings( { "ClassWithoutToString" } )
-    private final SortedMap<T,Range<T>> _ranges = new TreeMap<>(
-	    new RangeComparator()
+    @SuppressWarnings({ "ClassWithoutToString" })
+    private final SortedMap<T, Range<T>> _ranges = new TreeMap<>(
+            new RangeComparator()
     );
 
-    @SuppressWarnings( { "ClassWithoutToString" } )
+    @SuppressWarnings({ "ClassWithoutToString" })
     private final RangeFactory<T> _rangeFactory;
 
     public Ranges( final Range<T> range, final RangeFactory<T> rangeFactory )
             throws RejectRangeException {
+
         super();
 
         _rangeFactory = rangeFactory;
@@ -53,6 +54,7 @@ public class Ranges<T extends Comparable<T>> implements Iterable<Range<T>>, Seri
     }
 
     public Ranges( final RangeFactory<T> rangeFactory ) {
+
         super();
 
         _rangeFactory = rangeFactory;
@@ -107,7 +109,7 @@ public class Ranges<T extends Comparable<T>> implements Iterable<Range<T>>, Seri
         Measure m = new Measure( "head map" );
         try {
 
-            SortedMap<T,Range<T>> headMap = _ranges.headMap( range.getStartValue() );
+            SortedMap<T, Range<T>> headMap = _ranges.headMap( range.getStartValue() );
             if ( !headMap.isEmpty() ) {
 
                 T key = headMap.lastKey();
@@ -131,14 +133,13 @@ public class Ranges<T extends Comparable<T>> implements Iterable<Range<T>>, Seri
         try {
 
             // IntelliJ complains that the values returned by keySet() are not necessarily T instances.
-	    // It is wrong. The _ranges map uses T instances as keys which means that a tail map of a
-	    // _ranges map uses T instances as keys which means that this call to keySet can only return T instances.
+            // It is wrong. The _ranges map uses T instances as keys which means that a tail map of a
+            // _ranges map uses T instances as keys which means that this call to keySet can only return T instances.
 
-	    //noinspection unchecked
-	    for ( T key : _ranges.tailMap( range.getStartValue() ).keySet() ) {
+            //noinspection unchecked
+            for ( T key : _ranges.tailMap( range.getStartValue() )
+                                 .keySet() ) {
 
-//                @SuppressWarnings("unchecked")
-//		T key = (T)keyObject;
                 Range<T> r = _ranges.get( key );
 
                 if ( r.overlaps( range ) ) {
@@ -168,10 +169,11 @@ public class Ranges<T extends Comparable<T>> implements Iterable<Range<T>>, Seri
     }
 
     /**
-     * Add a new range to this set of ranges, merging ranges as appropriate.
-     * @param newRange the to-be-added range.
-     * @return this set of ranges (to allow chained adds).
-     * @throws com.obtuse.util.exceptions.RejectRangeException thrown if this instance's DateRangeFactory throws this exception.
+     Add a new range to this set of ranges, merging ranges as appropriate.
+
+     @param newRange the to-be-added range.
+     @return this set of ranges (to allow chained adds).
+     @throws com.obtuse.util.exceptions.RejectRangeException thrown if this instance's DateRangeFactory throws this exception.
      */
 
     public Ranges<T> add( final Range<T> newRange )
@@ -204,7 +206,8 @@ public class Ranges<T extends Comparable<T>> implements Iterable<Range<T>>, Seri
     @NotNull
     public Iterator<Range<T>> iterator() {
 
-        return _ranges.values().iterator();
+        return _ranges.values()
+                      .iterator();
 
     }
 
@@ -219,11 +222,11 @@ public class Ranges<T extends Comparable<T>> implements Iterable<Range<T>>, Seri
 
         }
 
-        SortedMap<T,Range<T>> sortedByStartValue = new TreeMap<>();
-        SortedMap<T,Range<T>> sortedByEndValue = new TreeMap<>();
+        SortedMap<T, Range<T>> sortedByStartValue = new TreeMap<>();
+        SortedMap<T, Range<T>> sortedByEndValue = new TreeMap<>();
         sortedByStartValue.put( newRange.getStartValue(), newRange );
         sortedByEndValue.put( newRange.getEndValue(), newRange );
-        SortedMap<T,Range<T>> existingRecordsToReplace = new TreeMap<>();
+        SortedMap<T, Range<T>> existingRecordsToReplace = new TreeMap<>();
 
         for ( T startValue : _ranges.keySet() ) {
             Range<T> r = _ranges.get( startValue );
@@ -244,7 +247,8 @@ public class Ranges<T extends Comparable<T>> implements Iterable<Range<T>>, Seri
                 sortedByStartValue.put( r.getStartValue(), r );
                 sortedByEndValue.put( r.getEndValue(), r );
 
-            } else if ( r.getStartValue().compareTo( newRange.getEndValue() ) > 0 ) {
+            } else if ( r.getStartValue()
+                         .compareTo( newRange.getEndValue() ) > 0 ) {
 
                 // The current range does not touch the new range and the current range is completely after the new range.
                 // No more overlaps or touches are possible so we can bail out now.
@@ -277,7 +281,8 @@ public class Ranges<T extends Comparable<T>> implements Iterable<Range<T>>, Seri
 
         for ( Range<T> r : _ranges.values() ) {
 
-            rvalBuilder.append( comma ).append( r );
+            rvalBuilder.append( comma )
+                       .append( r );
             comma = ", ";
 
         }
@@ -286,11 +291,11 @@ public class Ranges<T extends Comparable<T>> implements Iterable<Range<T>>, Seri
 
     }
 
-    @SuppressWarnings( { "MagicNumber", "UseOfSystemOutOrSystemErr" } )
+    @SuppressWarnings({ "MagicNumber", "UseOfSystemOutOrSystemErr" })
     public static void main( final String[] args ) {
 
         BasicProgramConfigInfo.init( "Obtuse", "Ranges", "testing", null );
-        @SuppressWarnings( { "ClassWithoutToString" } )
+        @SuppressWarnings({ "ClassWithoutToString" })
         RangeFactory<Integer> rangeFactory = new RangeFactory<Integer>() {
 
             public Range<Integer> createRange( final Range<Integer> before, final Range<Integer> after ) {
@@ -342,11 +347,11 @@ public class Ranges<T extends Comparable<T>> implements Iterable<Range<T>>, Seri
 
     private static void doit( final Ranges<Integer> ranges, final int start, final int end ) {
 
-        Ranges.doit( ranges, new Range<>( start, end, (long) start, (long) end ) );
+        Ranges.doit( ranges, new Range<>( start, end, (long)start, (long)end ) );
 
     }
 
-    @SuppressWarnings( { "UseOfSystemOutOrSystemErr", "CallToPrintStackTrace" } )
+    @SuppressWarnings({ "UseOfSystemOutOrSystemErr", "CallToPrintStackTrace" })
     private static void doit( final Ranges<Integer> ranges, final Range<Integer> newRange ) {
 
         try {

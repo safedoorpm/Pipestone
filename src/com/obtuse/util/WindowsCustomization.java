@@ -18,8 +18,6 @@ import java.awt.*;
 @SuppressWarnings({ "ClassWithoutToString", "deprecation", "UnusedDeclaration" })
 public class WindowsCustomization extends OSLevelCustomizations {
 
-//    private final Application _app;
-
     private AboutWindowHandler _aboutWindowHandler;
 
     private QuitCatcher _quitCatcher;
@@ -41,10 +39,6 @@ public class WindowsCustomization extends OSLevelCustomizations {
 
         Trace.event( "doing Windows-specific customizations" );
 
-//        System.setProperty( "apple.laf.useScreenMenuBar", "true" );
-
-//        String laf = "apple.laf.AquaLookAndFeel";
-//        String laf = "javax.swing.plaf.metal.MetalLookAndFeel";
         String laf = "com.sun.java.swing.plaf.windows.WindowsLookAndFeel";
 
         if ( OSLevelCustomizations.s_forceLookAndFeel != null ) {
@@ -69,13 +63,9 @@ public class WindowsCustomization extends OSLevelCustomizations {
 
     public void setDockBadge( final String msg ) {
 
-//        _app.setDockIconBadge( msg );
-
     }
 
     public void setDockIconImage( final Image icon ) {
-
-//        _app.setDockIconImage( icon );
 
     }
 

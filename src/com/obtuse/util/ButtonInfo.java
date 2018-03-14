@@ -110,8 +110,6 @@ public class ButtonInfo {
         );
 
 
-//        ImageIcon pressedIcon = IconImageUtils.fetchIconImage( "button-" + buttonName + "-pressed.png" );
-
         return ButtonInfo.makeButtonLabel( buttonOwner, button, action, unpressedIcon, pressedIcon );
 
     }

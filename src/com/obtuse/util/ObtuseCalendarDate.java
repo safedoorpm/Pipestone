@@ -102,8 +102,6 @@ public class ObtuseCalendarDate extends GowingAbstractPackableEntity implements 
 
     public static final String LATEST_SUPPORTED_DATE_STRING = "9999-12-31";
 
-//    private static final Pattern OACD_DATE_PATTERN = Pattern.compile( "(\\d\\d\\d\\d)-(\\d\\d)-(\\d\\d)" );
-//    private static final Pattern OACD_DATE_PATTERN = Pattern.compile( "(\\d\\d\\d\\d)\\s*-\\s*(\\d\\d)\\s*-\\s*(\\d\\d)" );
     public static final Pattern OACD_DATE_PATTERN = Pattern.compile( "(\\d\\d\\d\\d)\\s*-\\s*(\\d\\d?)\\s*-\\s*(\\d\\d?)" );
 
     private static ObtuseCalendarDate s_earliestSupportedDate;
@@ -436,8 +434,6 @@ public class ObtuseCalendarDate extends GowingAbstractPackableEntity implements 
 
         @SuppressWarnings("UnnecessaryLocalVariable")
         int durationDays = 1 + (int)( durationMs / Timer.ONE_DAY );
-
-//        Logger.logMsg( "duration between " + this + " and " + rhs + " is " + computeDurationDays + " days" );
 
         return durationDays;
 

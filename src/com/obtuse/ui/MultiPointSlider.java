@@ -50,15 +50,8 @@ public class MultiPointSlider extends JComponent {
 
         public void stateChanged( final ChangeEvent changeEvent ) {
 
-//            Logger.logMsg( "repainting due to state change" );
             repaint();
             notifyListeners( changeEvent );
-
-//            _knob.setLocation(
-//                    new Point(
-//                            left + ( length * _brm.getValue() ) / ( _brm.getMaximum() - _brm.getMinimum() ) - 6, 10
-//                    )
-//            );
 
         }
 
@@ -158,16 +151,11 @@ public class MultiPointSlider extends JComponent {
                         //noinspection StatementWithEmptyBody
                         if ( _isSelected ) {
 
-//                            Logger.logMsg( "mouse released:  adjusting" );
                             adjustValue( mouseEvent.getPoint() );
 
                             _isSelected = false;
-//                            Logger.logMsg( "repainting because mouse released while selected" );
+
                             repaint();
-
-                        } else {
-
-//                            Logger.logMsg( "mouse released:  ignored" );
 
                         }
 
@@ -192,15 +180,7 @@ public class MultiPointSlider extends JComponent {
                         //noinspection StatementWithEmptyBody
                         if ( _isSelected ) {
 
-//                            Logger.logMsg( "mouse dragged:  adjusting" );
                             adjustValue( mouseEvent.getPoint() );
-
-//                            Logger.logMsg( "repainting because mouse dragged" );
-//                            repaint();
-
-                        } else {
-
-//                            Logger.logMsg( "mouse dragged:  ignored" );
 
                         }
 
@@ -608,7 +588,6 @@ public class MultiPointSlider extends JComponent {
             }
 
             breadth += MultiPointSlider.GAP_BETWEEN_TICK_MARKS_AND_LABELS + maxLabelBreadth;
-//            if ( isInteresting() ) Logger.logMsg( "breadth = " + breadth + " ( + GAP " + GAP_BETWEEN_TICK_MARKS_AND_LABELS + " + maxLB " + maxLabelBreadth + " )" );
 
             // Half of the first label and (sometimes) half of the knob protrude out before the start
             // of the line.  Similarly, half of the last label and (sometimes) half of the knob
@@ -911,9 +890,6 @@ public class MultiPointSlider extends JComponent {
         g.setColor( MultiPointSlider.FORCE_TEST_BACKGROUND_COLOR ? Color.WHITE : getBackground() );
         g.fillRect( 0, 0, getWidth(), getHeight() );
 
-//        g.setColor( Color.WHITE );
-//        g.fillRect( 0, 0, getWidth(), getHeight() );
-
         g.setColor( Color.BLACK );
 
         int ticSpace = 0;
@@ -1049,21 +1025,7 @@ public class MultiPointSlider extends JComponent {
 
         }
 
-//        Logger.logMsg( "slider drawn" );
-
     }
-
-//    private int drawLabel( Graphics2D g, String text, int x, int y ) {
-//
-//        MpsLabel label = new MpsLabel( text );
-//        BufferedImage labelImage = label.getGeneratedImage( g );
-//        g.drawImage( labelImage, x, y, this );
-//        g.drawRect( x - 1, y - 1, labelImage.getWidth() + 2, labelImage.getHeight() + 2 );
-//        Logger.logMsg( "bounding box of \"" + text + "\" is ( " + ( x - 1 ) + ", " + ( y - 1 ) + ", " + ( labelImage.getWidth() + 2 ) + ", " + ( labelImage.getHeight() + 2 ) + " )" );
-//
-//        return x + labelImage.getWidth() + 2;
-//
-//    }
 
     private int drawTickMarks( @Nullable final Graphics g, final int tickSpacing, final int tickLength ) {
 
@@ -1306,17 +1268,6 @@ public class MultiPointSlider extends JComponent {
         }
 
         _positionOnLine = positionOnLine;
-//        if ( _positionOnLine == PositionOnLine.ABOVE || _positionOnLine == PositionOnLine.BELOW ) {
-//
-//            setMinimumSize( new Dimension( 400, 80 ) );
-//            setPreferredSize( new Dimension( 400, 80 ) );
-//
-//        } else {
-//
-//            setMinimumSize( new Dimension( 80, 300 ) );
-//            setPreferredSize( new Dimension( 80, 300 ) );
-//
-//        }
 
         _minimumSize = null;
 

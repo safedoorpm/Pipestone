@@ -113,31 +113,6 @@ public class LinearLayoutUtil {
         return border.toString();
     }
 
-//    @NotNull
-//    static LinearContainer createPanel2( String name, LinearOrientation orientation, @Nullable Integer breadth ) {
-//
-//	LinearContainer rval = new LinearContainer2( name, orientation, breadth ) {
-//
-//	    public void setBounds( int x, int y, int w, int h ) {
-//
-//		super.setBounds( x, y, w, h );
-//		Logger.logMsg( "SSLM.createdPanel2( name=\"" + getName() + "\", count=" + getComponentCount() +
-//			       " ) setting container bounds to " + ObtuseUtil.fBounds( x, y, w, h ) );
-//
-//	    }
-//
-//	    public String toString() {
-//
-//		return "SSLM.createdPanel2( \"" + getName() + "\", " + super.toString() + ")"; // + '[' + paramString() + ']';
-//
-//	    }
-//
-//	};
-//
-//	return rval;
-//
-//    }
-
     @NotNull
     public static LinearContainer createPanel3( final String name, final LinearOrientation orientation ) {
 
@@ -147,12 +122,6 @@ public class LinearLayoutUtil {
             public void setBounds( final int x, final int y, final int w, final int h ) {
 
                 super.setBounds( x, y, w, h );
-//                Logger.logMsg( "SSLM.createdPanel3( name=\"" +
-//                               getName() +
-//                               "\", count=" +
-//                               getComponentCount() +
-//                               " ) setting container bounds to " +
-//                               ObtuseUtil.fBounds( x, y, w, h ) );
 
             }
 
@@ -164,15 +133,12 @@ public class LinearLayoutUtil {
                        getComponentCount() +
                        " ), bounds=" +
                        ObtuseUtil.fBounds( getBounds() );
-//                return "SSLM.createdPanel3( \"" + getName() + "\", " + super.toString() + ")"; // + '[' + paramString() + ']';
 
             }
 
             public void setLayout( final LayoutManager lm ) {
 
                 super.setLayout( lm );
-
-//                Logger.logMsg( "layout manager set to " + lm );
 
                 ObtuseUtil.doNothing();
 
@@ -198,12 +164,6 @@ public class LinearLayoutUtil {
             public void setBounds( final int x, final int y, final int w, final int h ) {
 
                 super.setBounds( x, y, w, h );
-//                Logger.logMsg( "SSLM.createdPanel3( name=\"" +
-//                               getName() +
-//                               "\", count=" +
-//                               getComponentCount() +
-//                               " ) setting container bounds to " +
-//                               ObtuseUtil.fBounds( x, y, w, h ) );
 
             }
 
@@ -215,7 +175,6 @@ public class LinearLayoutUtil {
                        getComponentCount() +
                        " ), bounds=" +
                        ObtuseUtil.fBounds( getBounds() );
-//                return "SSLM.createdPanel3( \"" + getName() + "\", " + super.toString() + ")"; // + '[' + paramString() + ']';
 
             }
 
@@ -335,8 +294,6 @@ public class LinearLayoutUtil {
                         ", l1=" + l1msg +
                         ", l2=" + l2msg
                 );
-//		g2d.drawLine( left, top, right, bottom );
-//		g2d.drawLine( left, bottom, right, top );
 
             }
 
@@ -446,19 +403,6 @@ public class LinearLayoutUtil {
 
         }
 
-//	JComponent thing1 = makeThing( "thing", new Dimension( 15, 30 ), new Dimension( 20, 40 ), new Dimension( 90, 90 ) );
-//	thing1.setAlignmentX( 0.0f );
-//	component.add( thing1 );
-
-//	JComponent thing2 = makeThing( "thing", new Dimension( 15, 30 ), new Dimension( 20, 40 ), new Dimension( 90, 90 ) );
-//	thing2.setAlignmentX( 1.0f );
-//	buttons.add( thing2 );
-//
-//	JComponent thing3 = makeThing( "thing", new Dimension( 15, 30 ), new Dimension( 20, 40 ), new Dimension( 90, 90 ) );
-//	thing3.setAlignmentX( Component.CENTER_ALIGNMENT );
-//	buttons.add( thing3 );
-
-//	addContainerToWatchList( buttons );
     }
 
     @NotNull
@@ -488,27 +432,21 @@ public class LinearLayoutUtil {
             public void invalidate() {
 
                 super.invalidate();
-//		Logger.logMsg( title + "'s invalidate method called" );
                 logIt( new IllegalArgumentException( title + "'s invalidate method called" ) );
-//		ObtuseUtil.safeSleepMillis( 500l );
 
             }
 
             public void validate() {
 
                 super.invalidate();
-//		Logger.logMsg( title + "'s validate method called" );
                 logIt( new IllegalArgumentException( title + "'s validate method called" ) );
-//		ObtuseUtil.safeSleepMillis( 500l );
 
             }
 
             public void revalidate() {
 
                 super.invalidate();
-//		Logger.logMsg( title + "'s revalidate method called" );
                 logIt( new IllegalArgumentException( title + "'s revalidate method called" ) );
-//		ObtuseUtil.safeSleepMillis( 500l );
 
             }
 
@@ -542,8 +480,6 @@ public class LinearLayoutUtil {
 
                 }
                 logIt( new IllegalArgumentException( title + "'s setBounds( " + ObtuseUtil.fBounds( x, y, w, h ) + " ) called" ) );
-
-//		Logger.logMsg( "SSLM.createdPanel3( name=\"" + getName() + "\", count=" + getComponentCount() + " ) setting container bounds to " + ObtuseUtil.fBounds( x, y, w, h ) );
 
             }
 
@@ -668,22 +604,13 @@ public class LinearLayoutUtil {
 
                 return;
 
-            } else { // if ( isShowable( component ) ) {
+            } else {
 
                 Logger.logMsg( why + " - " + ( component.isVisible() ? "visible" : ( "invisible " + component.getName() ) ) + " " + showIt( component ) );
 
-    //            return;
-
             }
 
-//        Logger.logMsg(
-//                why + " - " +
-//                ( component.isVisible() ? "visible" : ( "invisible " + component.getName() ) ) + " " +
-//                component.getClass().getCanonicalName() +
-//                "[[["
-//        );
             describeFullyContainerContents( 1, why, component );
-//        Logger.logMsg( "]]]" );
 
         } finally {
 
@@ -837,11 +764,6 @@ public class LinearLayoutUtil {
         Logger.logMsg(
                 ObtuseUtil.replicate( "  ", depth ) +
                 description
-//		name
-//		+ " is " + ObtuseUtil.fBounds( component.getBounds() ) +
-//		", min=" + ObtuseUtil.fDim( component.getMinimumSize() ) +
-//		", pref=" + ObtuseUtil.fDim( component.getPreferredSize() ) +
-//		", max=" + ObtuseUtil.fDim( component.getMaximumSize() )
         );
 
         if ( component instanceof Container && showContents ) {
@@ -934,35 +856,6 @@ public class LinearLayoutUtil {
 
     }
 
-//    public static void showWhereWeAre( Component start, ActionEvent e ) {
-//
-//	try {
-//
-//	    Logger.pushNesting( "showWhereWeAre" );
-//
-//	    String msg = "click count = " + e. getClickCount() + ", " +
-//			 "Click position :  ( " + e.getX() + ", " + e.getY() + " )";
-//
-//	    if ( e.getButton() == MouseEvent.NOBUTTON ) {
-//
-//		Logger.logMsg( "SF(\"" + start.getName() + "\"):  " + "No button clicked, " + msg );
-//
-//	    } else {
-//
-//		Logger.logMsg( "SF(\"" + start.getName() + "\"):  " + "Button #" + e.getButton() + " clicked, " + msg );
-//
-//	    }
-//
-//	    describeGuiEntity( 0, start, true, false );
-//
-//	} finally {
-//
-//	    Logger.popNestingLevel( "showWhereWeAre" );
-//
-//	}
-//
-//    }
-
     public static void showStructure( final Container start ) {
 
         java.util.List<Container> nest = new LinkedList<>();
@@ -972,10 +865,8 @@ public class LinearLayoutUtil {
 
         int depth = 0;
 
-//        for ( Container c = start; c != null; c = c.getParent() ) {
         for ( Container c : nest ) {
 
-//            Logger.logMsg( "depth=" + depth );
             Logger.logMsg(
                     ObtuseUtil.replicate( "    ", depth ) +
                     c.getClass().getName() + ":  " +
@@ -1131,11 +1022,6 @@ public class LinearLayoutUtil {
         // might change their instance by directly changing the width and height fields.
         // Mutable information classes are, as a general rule, EVIL!!!
 
-//	public MyDimension( Dimension d ) {
-//            super( d.width, d.height );
-//
-//	}
-
         public String toString() {
 
             return ObtuseUtil.fDim( this );
@@ -1258,24 +1144,9 @@ public class LinearLayoutUtil {
 
             _weight = weight;
 
-//	    setBackground( Color.RED );
             setOpaque( false );
 
             addLocationTracer( this );
-//	    addMouseListener(
-//		new MouseAdapter() {
-//
-//		    public void mouseClicked( MouseEvent e ) {
-//
-//			showWhereWeAre( WeightedSimpleFiller.this, e );
-//
-//			ObtuseUtil.doNothing();
-//
-//		    }
-//
-//		}
-//
-//	    );
 
         }
 
@@ -1311,8 +1182,6 @@ public class LinearLayoutUtil {
 
             Graphics2D g2D = (Graphics2D)g.create();
 
-//	    Color oldColour = g2D.getColor();
-
             if ( isOpaque() ) {
 
                 g2D.setColor( getBackground() );
@@ -1334,8 +1203,6 @@ public class LinearLayoutUtil {
                 g2D.drawLine( 0, y, getWidth(), y );
 
             }
-
-//	    g2D.setColor( oldColour );
 
         }
 
@@ -1361,24 +1228,9 @@ public class LinearLayoutUtil {
 
             setName( name );
 
-//	    setBackground( Color.RED );
             setOpaque( false );
 
             addLocationTracer( this );
-//	    addMouseListener(
-//		new MouseAdapter() {
-//
-//		    public void mouseClicked( MouseEvent e ) {
-//
-//			showWhereWeAre( SimpleFiller.this, e );
-//
-//			ObtuseUtil.doNothing();
-//
-//		    }
-//
-//		}
-//
-//	    );
 
         }
 
@@ -1424,9 +1276,7 @@ public class LinearLayoutUtil {
             super.paintComponent( g );
 
             Graphics2D g2D = (Graphics2D)g.create();
-
-//	    Color oldColour = g2D.getColor();
-
+            
             if ( isOpaque() ) {
 
                 g2D.setColor( getBackground() );

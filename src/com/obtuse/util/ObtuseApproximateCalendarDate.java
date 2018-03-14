@@ -32,7 +32,6 @@ import static com.obtuse.util.ObtuseCalendarDate.parseCalendarDate;
 
 public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity implements Comparable<ObtuseApproximateCalendarDate> {
 
-//    private static boolean s_allowOldStyleDateRanges = false;
     private static final boolean s_requireNewStyleDateRanges = true;
 
     private final boolean _isUnknownApproximateDate;
@@ -454,7 +453,6 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
                     String monthRounded = ObtuseUtil.lpad( _nominalCalendarDate.getYear(), 4, '0' ) + '-' +
                                           ObtuseUtil.lpad( _nominalCalendarDate.getMonthOfYear() + 1, 2, '0' ) + '-' +
                                           "01";
-//		Logger.logMsg( "month rounded is \"" + monthRounded + "\"" );
 
                     _earliestPossibleDate = parseCalendarDate( monthRounded );
 
@@ -481,8 +479,6 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
                     _earliestPossibleDate = parseCalendarDate( ObtuseCalendarDate.EARLIEST_SUPPORTED_DATE_STRING );
 
                     break;
-
-//		    throw new HowDidWeGetHereError( "ObtuseApproximateCalendarDate:  attempt to compute earliest date for range precision date (should have been provide via constructor)" );
 
                 default:
                     throw new HowDidWeGetHereError( "ObtuseApproximateCalendarDate:  unsupported precision " + _precision );
@@ -511,8 +507,6 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
                 case MONTH:
 
-//	        try {
-
                     //noinspection SpellCheckingInspection
                     String yyyymmdd = ObtuseUtil.lpad( _nominalCalendarDate.getYear(), 4, '0' ) + '-' +
                                       ObtuseUtil.lpad( _nominalCalendarDate.getMonthOfYear() + 1, 2, '0' ) + '-' +
@@ -524,11 +518,6 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
                     _latestPossibleDate = parseCalendarDate( yyyymmdd );
 
                     break;
-
-//		}
-//		return parse(
-//
-//			"01" );
 
                 case YEAR:
 
@@ -550,7 +539,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
                     _latestPossibleDate = parseCalendarDate( ObtuseCalendarDate.LATEST_SUPPORTED_DATE_STRING );
 
-//		    throw new HowDidWeGetHereError( "ObtuseApproximateCalendarDate:  attempt to compute latest date for range precision date (should have been provide via constructor)" );
+    //		    throw new HowDidWeGetHereError( "ObtuseApproximateCalendarDate:  attempt to compute latest date for range precision date (should have been provide via constructor)" );
 
                 default:
                     throw new HowDidWeGetHereError( "ObtuseApproximateCalendarDate:  unsupported precision " + _precision );
@@ -837,7 +826,6 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
         }
     }
 
-//    private static final Pattern OACD_CENTURY_PATTERN = Pattern.compile( "(\\d\\d\\d\\d)\\s*[cC]" );
     private static final Pattern OACD_DECADE_PATTERN = Pattern.compile( "(\\d\\d\\d\\d)\\s*[sS]" );
     private static final Pattern OACD_YEAR_PATTERN = Pattern.compile( "(\\d\\d\\d\\d)" );
     private static final Pattern OACD_MONTH_PATTERN = Pattern.compile( "(\\d\\d\\d\\d)\\s*-\\s*(\\d\\d)" );
@@ -1176,76 +1164,6 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
         }
 
-//        if ( noSeparators ) {
-//
-//            if ( s_requireNewStyleDateRanges ) {
-//
-//                throw new ObtuseApproximateCalendarDate.DateParsingException(
-//                        Reason.RANGE_INVALID,
-//                        "no colon or semicolon in date range \"" +
-//                        trimmedDateString +
-//                        "\" (must be \"YYYY-MM-DD:YYYY-MM-DD\" or \"YYYY-MM-DD;YYYY-MM-DD\")"
-//                );
-//
-//            } else {
-//
-//                throw new ObtuseApproximateCalendarDate.DateParsingException(
-//                        Reason.RANGE_INVALID,
-//                        "comma in date range \"" +
-//                        trimmedDateString +
-//                        "\" (must be \"(YYYY-MM-DD,YYYY-MM-DD)\")"
-//                );
-//
-//            }
-//
-//        }
-//
-//        if ( tooManySeparators ) {
-//
-//            if ( s_requireNewStyleDateRanges ) {
-//
-//                throw new ObtuseApproximateCalendarDate.DateParsingException(
-//                        Reason.RANGE_INVALID,
-//                        "too many colons or semicolons in date range \"" +
-//                        trimmedDateString +
-//                        "\" (must be \"YYYY-MM-DD:YYYY-MM-DD\" or \"YYYY-MM-DD;YYYY-MM-DD\")"
-//                );
-//
-//            } else {
-//
-//                throw new ObtuseApproximateCalendarDate.DateParsingException(
-//                        Reason.RANGE_INVALID,
-//                        "too many commas in date range \"" +
-//                        trimmedDateString +
-//                        "\" (must be \"(YYYY-MM-DD,YYYY-MM-DD)\")"
-//                );
-//
-//            }
-//
-//        }
-
-//        firstDateString = trimmedDateString.substring( 1, trimmedDateString.indexOf( ',' ) );
-//        secondDateString = trimmedDateString.substring( trimmedDateString.indexOf( ',' ) + 1, trimmedDateString.length() - 1 );
-//        if ( s_allowOldStyleDateRanges && ( trimmedDateString.startsWith( "(" ) && trimmedDateString.indexOf( ',' ) >= 0 && trimmedDateString.endsWith( ")" ) ) ) {
-//
-//            firstDateString = trimmedDateString.substring( 1, trimmedDateString.indexOf( ',' ) );
-//            secondDateString = trimmedDateString.substring( trimmedDateString.indexOf( ',' ) + 1, trimmedDateString.length() - 1 );
-//
-//        }
-
-//        {
-
-//            if ( secondDateString.indexOf( ',' ) >= 0 ) {
-//
-//                throw new ObtuseApproximateCalendarDate.DateParsingException(
-//                        Reason.RANGE_INVALID,
-//                        "too many commas in date range \"" +
-//                        trimmedDateString +
-//                        "\" (must be \"(YYYY-MM-DD,YYYY-MM-DD)\")"
-//                );
-//
-//            }
-
         Matcher firstDateMatcher = OACD_DATE_PATTERN.matcher( firstDateString );
         Matcher secondDateMatcher = OACD_DATE_PATTERN.matcher( secondDateString );
 
@@ -1349,16 +1267,6 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
         }
 
-//        } else {
-//
-//            throw new ObtuseApproximateCalendarDate.DateParsingException(
-//                    Reason.RANGE_INVALID,
-//                    "invalid date range \"" + trimmedDateString + "\" " +
-//                    mustBe
-//            );
-//
-//        }
-
     }
 
     private static void checkParsing( final @NotNull String dateString, @Nullable final ObtuseApproximateCalendarDate expectedDate ) {
@@ -1460,26 +1368,26 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
                 true
         );
 
-// test the tester (verify that it correctly handles incorrect results)
-//
-//	equalsVsEquivalent(
-//		new ObtuseApproximateCalendarDate( parse( "2020-03-03" ), DatePrecision.MONTH ),
-//		new ObtuseApproximateCalendarDate( parse( "2020-03-01" ), parse( "2020-03-31" ) ),
-//		true,
-//		true
-//	);
-//	equalsVsEquivalent(
-//		new ObtuseApproximateCalendarDate( parse( "2020-03-03" ), DatePrecision.MONTH ),
-//		new ObtuseApproximateCalendarDate( parse( "2020-03-01" ), parse( "2020-03-31" ) ),
-//		false,
-//		false
-//	);
-//	equalsVsEquivalent(
-//		new ObtuseApproximateCalendarDate( parse( "2020-03-03" ), DatePrecision.MONTH ),
-//		new ObtuseApproximateCalendarDate( parse( "2020-03-01" ), parse( "2020-03-31" ) ),
-//		true,
-//		false
-//	);
+    // test the tester (verify that it correctly handles incorrect results)
+    //
+    //	equalsVsEquivalent(
+    //		new ObtuseApproximateCalendarDate( parse( "2020-03-03" ), DatePrecision.MONTH ),
+    //		new ObtuseApproximateCalendarDate( parse( "2020-03-01" ), parse( "2020-03-31" ) ),
+    //		true,
+    //		true
+    //	);
+    //	equalsVsEquivalent(
+    //		new ObtuseApproximateCalendarDate( parse( "2020-03-03" ), DatePrecision.MONTH ),
+    //		new ObtuseApproximateCalendarDate( parse( "2020-03-01" ), parse( "2020-03-31" ) ),
+    //		false,
+    //		false
+    //	);
+    //	equalsVsEquivalent(
+    //		new ObtuseApproximateCalendarDate( parse( "2020-03-03" ), DatePrecision.MONTH ),
+    //		new ObtuseApproximateCalendarDate( parse( "2020-03-01" ), parse( "2020-03-31" ) ),
+    //		true,
+    //		false
+    //	);
 
         Random rng = new Random( 12321421 );
         for ( DatePrecision precision : DatePrecision.values() ) {
@@ -1831,7 +1739,6 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
                 );
 
             }
-//		Logger.logMsg( "" + lhs.format() + " overlaps " + rhs.format() + " yielded correct " + result1 );
 
             return true;
 

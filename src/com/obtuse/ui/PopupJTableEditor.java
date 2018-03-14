@@ -34,17 +34,14 @@ public class PopupJTableEditor extends DefaultCellEditor {
 
         super( new JTextField() );
 
-//	setClickCountToStart( 1 );
-
         //  Use a JButton as the editor component
 
         _editorComponent = new JTextField();
         _editorComponent.setBackground( Color.white );
-//	_editorComponent.setBorderPainted( false );
-//	_editorComponent.setContentAreaFilled( false );
         _editorComponent.setHorizontalAlignment( SwingConstants.LEFT );
 
         // Make sure focus goes back to the table when the dialog is closed
+
         _editorComponent.setFocusable( false );
 
         //  Set up the dialog where we do the actual editing
@@ -65,7 +62,6 @@ public class PopupJTableEditor extends DefaultCellEditor {
                 () -> {
 
                     _popup.setText( _currentText );
-//              popup.setLocationRelativeTo( editorComponent );
                     Point p = _editorComponent.getLocationOnScreen();
                     _popup.setLocation( p.x, p.y + _editorComponent.getSize().height );
                     _popup.setVisible( true );

@@ -59,8 +59,6 @@ public class LinearFlagName extends GowingPackableName {
 
     public static final LinearFlagName BOTTOM_JUSTIFIED;
 
-//    private final String _name;
-
     private static final SortedMap<String, LinearFlagName> s_knownFlags;
 
     static {
@@ -162,19 +160,6 @@ public class LinearFlagName extends GowingPackableName {
             return;
 
         }
-
-//	int mask = 0;
-//	for ( Set<LinearFlagName> flags : new PowerSet<LinearFlagName>( s_knownFlags ) ) {
-////	int maxPower = s_knownFlags.lastKey().intValue();
-////	long maxFlagBits = ( 1L << ( maxPower + 1 ) ) - 1;
-//
-////	for ( long flagBits = 0; flagBits <= maxFlagBits; flagBits += 1 ) {
-//
-//	    Logger.logMsg( ObtuseUtil.lpad( Long.toString( mask, 2 ), 15 ) + ":  " + describe( flags.values() ) );
-//
-//	    mask += 1;
-//
-//	}
 
     }
 

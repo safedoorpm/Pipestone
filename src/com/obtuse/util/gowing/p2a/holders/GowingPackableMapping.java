@@ -241,7 +241,6 @@ public class GowingPackableMapping<K, V> implements GowingPackable {
 
             @SuppressWarnings("unchecked")
             GowingPackableKeyValuePair<K, V> kvp = (GowingPackableKeyValuePair<K, V>)unPacker.resolveReference( er );
-//            Logger.logMsg( "kvp = " + kvp );
             addMapping( kvp );
 
         }
@@ -310,27 +309,6 @@ public class GowingPackableMapping<K, V> implements GowingPackable {
                "kVP size is " + ( _keyValuePairs == null ? "null" : _keyValuePairs.size() ) + ", " +
                "kvpR size is " + ( _kvpReferences == null ? "null" : _kvpReferences.length ) +
                " )";
-
-//        return "GowingPackableMapping( size=" +
-//               (
-//                       _keyValuePairs == null ?
-//                               ( _kvpReferences == null ? "null" : "kvpR-len=" + _kvpReferences.length )
-//                               :
-//                               (
-//                                       _kvpReferences == null
-//                                               ?
-//                                               "kVP-size=" + _keyValuePairs.size()
-//                                               :
-//                                               (
-//                                                       _keyValuePairs.isEmpty()
-//                                                               ?
-//                                                               "kvpR-len=" + _kvpReferences.length
-//                                                               :
-//                                                               _keyValuePairs.size()
-//                                               )
-//                               )
-//               ) +
-//               " )";
 
     }
 

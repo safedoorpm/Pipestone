@@ -63,7 +63,6 @@ public class ImmutableDate extends Date implements GowingPackable {
         GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
                 ImmutableDate.ENTITY_TYPE_NAME,
                 ImmutableDate.VERSION,
-//		null,
                 packer.getPackingContext()
         );
 

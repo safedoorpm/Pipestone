@@ -90,8 +90,6 @@ public class GowingPackableKeyValuePair<K, V> extends GowingAbstractPackableEnti
 
         super( unPacker, bundle.getSuperBundle() );
 
-//        Logger.logMsg( "reconstructing KVP " + er );
-
         _keyReference = bundle.getNotNullField( KEY_FIELD_NAME ).getObjectValue();
         _valueReference = bundle.getNotNullField( VALUE_FIELD_NAME ).getObjectValue();
 
@@ -171,32 +169,6 @@ public class GowingPackableKeyValuePair<K, V> extends GowingAbstractPackableEnti
         }
 
         return true;
-
-//        if ( _valueReference != null ) {
-//
-//            if ( _valueReference instanceof GowingEntityReference && !unPacker.isEntityFinished( (GowingEntityReference)_valueReference ) ) {
-//
-//                return false;
-//
-//            } else {
-//
-//                _valueReference = null;
-//
-//            }
-//
-//        }
-//
-//        if ( _keyReference instanceof GowingEntityReference && !unPacker.isEntityFinished( (GowingEntityReference)_keyReference ) ) {
-//
-//            return false;
-//
-//        }
-//
-//        _key = (K)fetchActualValue( unPacker, _keyReference );
-//
-//        _keyReference = null;
-//
-//        return true;
 
     }
 

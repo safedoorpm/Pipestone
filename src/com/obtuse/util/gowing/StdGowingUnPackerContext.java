@@ -155,13 +155,6 @@ public class StdGowingUnPackerContext implements GowingUnPackerContext {
 
     }
 
-//    @Override
-//    public void addUnfinishedEntities( final Collection<GowingEntityReference> collection ) {
-//%%%
-//        collection.addAll( _unFinishedEntities );
-//
-//    }
-
     @Override
     @NotNull
     public Optional<EntityTypeName> findTypeByTypeReferenceId( final int typeReferenceId ) {

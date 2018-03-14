@@ -30,7 +30,7 @@ public class ComponentConstraints {
             @Nullable final ConstraintTuple widthConstraint,
             @Nullable final ConstraintTuple heightConstraint
     ) {
-//	this( componentFlags.toArray( new LinearFlagName[ componentFlags.size() ] ), widthConstraint, heightConstraint );
+        super();
 
         _componentFlags = componentFlags;
 

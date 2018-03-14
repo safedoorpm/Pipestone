@@ -22,9 +22,6 @@ public class LinearContainer3 extends JPanel implements LinearContainer {
 
     private static final java.util.List<LinearContainer> _watchedContainers = new LinkedList<>();
 
-//    private ConstraintTuple _breadthConstraints;
-//    private ConstraintTuple _lengthConstraints;
-
     private ContainerConstraints _containerConstraints;
     private final ComponentConstraints _componentConstraints;
 
@@ -51,15 +48,10 @@ public class LinearContainer3 extends JPanel implements LinearContainer {
 
         setName( name );
 
-//	LinearLayoutUtil.addLocationTracer( this );
-
         setLayout( new LinearLayoutManager3( orientation, this ) );
 
         _containerConstraints = containerConstraints;
         _componentConstraints = componentConstraints;
-
-//	getLayout();
-//	setBreadth( breadth );
 
     }
 
@@ -70,14 +62,6 @@ public class LinearContainer3 extends JPanel implements LinearContainer {
             _watchedContainers.add( watched );
 
         }
-
-//        if ( _watched != watched ) {
-//
-//            throw new IllegalArgumentException( "LinearCache3.watch:  already watching \"" + _watched.getName() + "\" when asked to watch \"" + watched.getName() + "\"" );
-//
-//	}
-//
-//        _watched = watched;
 
     }
 
@@ -188,18 +172,6 @@ public class LinearContainer3 extends JPanel implements LinearContainer {
 
     }
 
-//    public void setTrackParentBreadth( boolean trackParentBreadth ) {
-//
-//	_trackParentBreadth = trackParentBreadth;
-//
-//    }
-//
-//    public boolean trackParentBreadth() {
-//
-//        return _trackParentBreadth;
-//
-//    }
-
     @Override
     public ConstraintTuple getLengthConstraints() {
 
@@ -223,154 +195,6 @@ public class LinearContainer3 extends JPanel implements LinearContainer {
         setLengthConstraints( minLength, maxLength );
 
     }
-
-//    public int applyBreadthConstraints( int value ) {
-//
-//	int newValue = applyConstraints( _breadthConstraints, value );
-//
-//	return newValue;
-//
-//    }
-//
-//    public int applyLengthConstraints( int value ) {
-//
-//	int newValue = applyConstraints( _lengthConstraints, value );
-//
-//	return newValue;
-//
-//    }
-//
-//    public int applyConstraints( ConstraintTuple constraints, int value ) {
-//
-//	if ( constraints == null ) {
-//
-//	    return value;
-//
-//	} else {
-//
-//	    int newValue = Math.min( Math.max( value, constraints.getMinimum() ), constraints.getMaximum() );
-//
-//	    return newValue;
-//
-//	}
-//
-//    }
-
-//    public void setBreadth( Integer breadth ) {
-//
-//	if ( breadth == null ) {
-//
-//	    _breadthConstraints = null;
-//
-//	} else {
-//
-//	    _breadthConstraints = new ConstraintTuple( breadth.intValue(), breadth.intValue(), breadth.intValue() );
-//
-//	}
-//
-//    }
-
-//    public void setBreadthConstraints( int minBreadth, int prefBreadth, int maxBreadth ) {
-//
-//	_breadthConstraints = new ConstraintTuple( minBreadth, prefBreadth, maxBreadth );
-//
-//    }
-//
-//    public void setLengthConstraints( int minLength, int prefLength, int maxLength ) {
-//
-//	_lengthConstraints = new ConstraintTuple( minLength, prefLength, maxLength );
-//
-//    }
-
-//    public void setConstraints(
-//	    int minBreadth, int prefBreadth, int maxBreadth,
-//	    int minLength, int prefLength, int maxLength
-//    ) {
-//
-//	setBreadthConstraints( minBreadth, prefBreadth, maxBreadth );
-//	setLengthConstraints( minLength, prefLength, maxLength );
-//
-//    }
-//
-//    public ConstraintTuple getBreadthConstraints() {
-//
-//	return _breadthConstraints;
-//
-//    }
-//
-//    public ConstraintTuple getLengthConstraints() {
-//
-//	return _lengthConstraints;
-//
-//    }
-//
-//    public int applyBreadthConstraints( int value ) {
-//
-//	int newValue = applyConstraints( _breadthConstraints, value );
-//
-//	return newValue;
-//
-//    }
-//
-//    public int applyLengthConstraints( int value ) {
-//
-//	int newValue = applyConstraints( _lengthConstraints, value );
-//
-//	return newValue;
-//
-//    }
-//
-//    public int applyConstraints( ConstraintTuple constraints, int value ) {
-//
-//	if ( constraints == null ) {
-//
-//	    return value;
-//
-//	} else {
-//
-//	    int newValue = Math.min( Math.max( value, constraints.getMinimum() ), constraints.getMaximum() );
-//
-//	    return newValue;
-//
-//	}
-//
-//    }
-
-//    public int getMinimumBreadth() {
-//
-//	return _minimumBreadth;
-//
-//    }
-//
-//    public int getPreferredBreadth() {
-//
-//	return _preferredBreadth;
-//
-//    }
-//
-//    public int getMaximumBreadth() {
-//
-//	return _maximumBreadth;
-//
-//    }
-//
-//    public int getMinimumLength() {
-//
-//	return _minimumLength;
-//
-//    }
-//
-//    public int getPreferredLength() {
-//
-//	return _preferredLength;
-//
-//    }
-//
-//    public int getMaximumLength() {
-//
-//	return _maximumLength;
-//
-//    }
 
     public String toString() {
 
@@ -424,18 +248,5 @@ public class LinearContainer3 extends JPanel implements LinearContainer {
         return _componentConstraints;
 
     }
-
-//    public void setContainerFlags( long containerFlags ) {
-//
-//	_containerFlags = containerFlags;
-//
-//    }
-//
-//    @Override
-//    public long getComponentFlags() {
-//
-//	return _containerFlags;
-//
-//    }
 
 }

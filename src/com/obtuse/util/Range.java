@@ -115,7 +115,6 @@ public class Range<T extends Comparable<T>> implements Serializable {
 
     public boolean overlaps( final Range rhs ) {
 
-//        Logger.logMsg( "ls=" + getLongStartValue() + ", le=" + getLongEndValue() + ", rhs.ls=" + rhs.getLongStartValue() + ", rhs.le=" + rhs.getLongEndValue() );
         if ( getLongStartValue() <= rhs.getLongStartValue() ) {
 
             return getLongEndValue() >= rhs.getLongStartValue();

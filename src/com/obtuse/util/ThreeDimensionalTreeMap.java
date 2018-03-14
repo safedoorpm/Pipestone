@@ -160,16 +160,6 @@ public class ThreeDimensionalTreeMap<T1,T2,T3,V> extends GowingAbstractPackableE
                     ( (GowingPackableMapping<T1,TwoDimensionalSortedMap<T2,T3,V>>)packable ).rebuildMap( new TreeMap<>() );
             _map = tmap;
 
-//            @SuppressWarnings("unchecked")
-//            GowingPackableMapping<T1,TwoDimensionalSortedMap<T2,T3,V>> packedMapping =
-//                    (GowingPackableMapping<T1, TwoDimensionalSortedMap<T2,T3,V>>)packable;
-//
-//            for ( GowingPackableKeyValuePair<T1, TwoDimensionalSortedMap<T2, T3, V>> mappings : packedMapping.getMappings() ) {
-//
-//                _map.put( mappings.getKey(), mappings.getValue() );
-//
-//            }
-
             if ( _readonly ) {
 
                 for ( T1 t1 : _map.keySet() ) {

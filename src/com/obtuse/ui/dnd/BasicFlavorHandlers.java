@@ -123,9 +123,6 @@ public class BasicFlavorHandlers {
 
                 handleImage( ts, (Image)transferData );
 
-//		_draggableJPanel.setBackgroundImage( (Image) transferData );
-                //				    Logger.logMsg( "handling a file list:  " + Arrays.toString( files ) );
-
             } catch ( UnsupportedFlavorException | IOException e ) {
 
                 Logger.logErr( "unable to import data", e );
