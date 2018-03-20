@@ -20,9 +20,10 @@ import java.util.TreeMap;
 import java.util.function.Function;
 
 /**
- A helper class that wraps either a {@link ButtonSelectorPanel}{@code <C>} or a JPanel(?).
+ A helper class that wraps either a {@link ButtonSelectorPanel}{@code <C>} or a JPanel.
  */
 
+@SuppressWarnings("unused")
 public class WrappedButtonSelectorPanel<CHOICE, PANEL extends JPanel> extends WrappedSelectorPanel<CHOICE> {
 
     public interface IController<ICCHOICE,ICPANEL> {

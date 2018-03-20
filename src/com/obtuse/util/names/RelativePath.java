@@ -89,6 +89,34 @@ public class RelativePath extends GowingAbstractPackableEntity implements Iterab
 
     }
 
+    /**
+     Create a relative or an absolute path instance.
+     <p/>
+     This constructor is generally used to create a relative path.
+     Since the {@link AbsolutePath} class is derived from this class, this constructor is also used by the {@link AbsolutePath} class's constructor(s)
+     to create absolute paths. See the {@link AbsolutePath} class's documentation for more information.
+     <p/>
+     The rest of this documentation for this constructor assumes that it is NOT being used by the {@link AbsolutePath} class.
+     @param segmentNames an array of the String names which makeup the to-be-created path.
+     @throws IllegalArgumentException if the requested path has no segments, the {@code segmentNames} array has any {@code null} elements,
+     or (except when this constructor is invoked by the {@link AbsolutePath} class)
+     the {@code segments} array contains any occurrences of the {@link SegmentName#ROOT_SEGMENT} segment.
+     */
+
+    public RelativePath( final @NotNull String... segmentNames ) {
+        super( new GowingNameMarkerThing() );
+
+        SegmentName[] segments = new SegmentName[segmentNames.length];
+        for ( int ix = 0; ix < segmentNames.length; ix += 1 ) {
+
+            segments[ix] = new SegmentName( segmentNames[ix] );
+
+        }
+
+        _compareValue = finishConstructor( this instanceof AbsolutePath, segments );
+
+    }
+
     @NotNull
     private String finishConstructor( final boolean shouldBeAbsoluteInstance, @Nullable final SegmentName @NotNull [] segments ) {
 

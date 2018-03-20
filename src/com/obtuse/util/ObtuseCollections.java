@@ -122,4 +122,24 @@ public class ObtuseCollections {
 
     }
 
+    @SafeVarargs
+    public static <T extends Comparable> TreeSet<T> sortedSet( final @NotNull T... array ) {
+
+        TreeSet<T> rval = new TreeSet<T>();
+        Collections.addAll( rval, array );
+
+        return rval;
+
+    }
+
+    @SafeVarargs
+    public static <T extends Comparable> HashSet<T> hashSet( final @NotNull T... array ) {
+
+        HashSet<T> rval = new HashSet<T>();
+        Collections.addAll( rval, array );
+
+        return rval;
+
+    }
+
 }

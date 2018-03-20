@@ -4,100 +4,11 @@
     <option name="SCOPE_TYPE" value="3" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" name="Default" comment="Start on a utility class (LevensteinDistanceUtil) that uses the LevenshteinDistance metric to suggest alternative values in a JTextField.">
+    <list default="true" id="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" name="Default" comment="">
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/selectors/ChoiceVariant.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/selectors/SimpleComboBoxChoice.java" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/AutoSizingValidatedJTextField.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/AutoSizingValidatedJTextField.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/IndexCardBox.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/IndexCardBox.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/MessageLabelInterface.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/MessageLabelInterface.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/MultiPointSlider.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/MultiPointSlider.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/ObtuseImageFile.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/ObtuseImageFile.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/OkPopupMessageWindow.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/OkPopupMessageWindow.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/PointOnGraphicsElement.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/PointOnGraphicsElement.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/PopupJTableEditor.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/PopupJTableEditor.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/SelectableImage.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/SelectableImage.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/StackedGaussianDistributionsDrawing.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/StackedGaussianDistributionsDrawing.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/TrackedWindow.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/TrackedWindow.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/WindowWithMenus.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/WindowWithMenus.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/YesNoPopupMessageWindow.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/YesNoPopupMessageWindow.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/alpha/JListManager.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/alpha/JListManager.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/alpha/UndoableBenoitEdit.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/alpha/UndoableBenoitEdit.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/dnd/BasicFlavorHandlers.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/dnd/BasicFlavorHandlers.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/entitySorter/MyButtonEntity.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/entitySorter/MyButtonEntity.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/entitySorter/MyButtonView.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/entitySorter/MyButtonView.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/entitySorter/SortedPanel.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/entitySorter/SortedPanel.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/entitySorter/SortedPanelModel.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/entitySorter/SortedPanelModel.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/layout/ComponentSizeRequirements.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/layout/ComponentSizeRequirements.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/layout/linear/ComponentConstraints.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/layout/linear/ComponentConstraints.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/layout/linear/ContainerConstraints.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/layout/linear/ContainerConstraints.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/layout/linear/LinearCache3.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/layout/linear/LinearCache3.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/layout/linear/LinearContainer3.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/layout/linear/LinearContainer3.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/layout/linear/LinearFlagName.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/layout/linear/LinearFlagName.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/layout/linear/LinearLayoutUtil.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/layout/linear/LinearLayoutUtil.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/scrollable/ScrollableEntity.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/scrollable/ScrollableEntity.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/selectors/ButtonSelectorPanel.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/selectors/ButtonSelectorPanel.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/selectors/ContextualToString.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/selectors/ContextualToString.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/selectors/SelectorPanel.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/selectors/SelectorPanel.java" />
       <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/selectors/WrappedButtonSelectorPanel.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/selectors/WrappedButtonSelectorPanel.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/selectors/WrappedComboBoxSelectorPanel.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/selectors/WrappedComboBoxSelectorPanel.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/tableutils/CheckBoxStyleSelectionTableModel.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/tableutils/CheckBoxStyleSelectionTableModel.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/tableutils/FrameworkTableModel.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/tableutils/FrameworkTableModel.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/tableutils/UniqueThingTableCellEditor.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/tableutils/UniqueThingTableCellEditor.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/testanddemo/MpsTest.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/testanddemo/MpsTest.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/testanddemo/MpsTest2.java" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/testanddemo/MpsTest2.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/AbstractDebugConnectionHandler.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/AbstractDebugConnectionHandler.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/BasicProgramConfigInfo.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/BasicProgramConfigInfo.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/ButtonInfo.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ButtonInfo.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/CSVParser.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/CSVParser.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/DateUtils.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/DateUtils.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/FormattedImmutableDate.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/FormattedImmutableDate.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/GenericCsvParser.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/GenericCsvParser.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/ImageIconUtils.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ImageIconUtils.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/ImmutableDate.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ImmutableDate.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/Logger.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/Logger.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/MacCustomization.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/MacCustomization.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/Measure.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/Measure.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/MyIntSet.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/MyIntSet.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/NounsList.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/NounsList.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/OSLevelCustomizations.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/OSLevelCustomizations.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/ObtuseApproximateCalendarDate.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ObtuseApproximateCalendarDate.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/ObtuseCalendarDate.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ObtuseCalendarDate.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/ObtuseUtil.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ObtuseUtil.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/ObtuseXMLUtils.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ObtuseXMLUtils.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/PostParameters.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/PostParameters.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/Range.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/Range.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/Ranges.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/Ranges.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/SSLUtilities.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/SSLUtilities.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/TeeOutputStream.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/TeeOutputStream.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/ThreeDimensionalTreeMap.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ThreeDimensionalTreeMap.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/Trace.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/Trace.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/TreeAccumulator.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/TreeAccumulator.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/TreeSorter.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/TreeSorter.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/TwoDimensionalTreeMap.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/TwoDimensionalTreeMap.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/UniquelyNamedEntity.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/UniquelyNamedEntity.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/VerbsList.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/VerbsList.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/WindowsCustomization.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/WindowsCustomization.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/geometry2d/Circle.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/geometry2d/Circle.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/geometry2d/MyPoint.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/geometry2d/MyPoint.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackable.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackable.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackableKeyValuePair.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackableKeyValuePair.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingUnPacker.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingUnPacker.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingUnPackerContext.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingUnPackerContext.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/StdGowingPackerContext.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/StdGowingPackerContext.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/StdGowingUnPackerContext.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/StdGowingUnPackerContext.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingPacker.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingPacker.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingTokenizer.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingTokenizer.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingUnPacker.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingUnPacker.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/examples/RestrictedNameExample.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/examples/RestrictedNameExample.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingPackableCollection.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingPackableCollection.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingPackableMapping.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingPackableMapping.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/graph/DirectedGraph.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/graph/DirectedGraph.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/kv/ObtuseDictionary.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/kv/ObtuseDictionary.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/kv/ObtuseKeywordValue.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/kv/ObtuseKeywordValue.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/names/RelativePath.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/names/RelativePath.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/pepys/Pepys.java" afterPath="$PROJECT_DIR$/src/com/obtuse/util/pepys/Pepys.java" />
-      <change beforePath="$PROJECT_DIR$/src/ec/util/MersenneTwisterFast.java" afterPath="$PROJECT_DIR$/src/ec/util/MersenneTwisterFast.java" />
-      <change beforePath="$PROJECT_DIR$/src/hep/wired/heprep/util/NearestPoint.java" afterPath="$PROJECT_DIR$/src/hep/wired/heprep/util/NearestPoint.java" />
-      <change beforePath="$PROJECT_DIR$/src/org/apache/commons/text/similarity/TestDriveLevenshteinDistance.java" afterPath="$PROJECT_DIR$/src/org/apache/commons/text/similarity/TestDriveLevenshteinDistance.java" />
     </list>
     <ignored path="Pipestone.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -218,32 +129,35 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ButtonSelectorPanel.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/selectors/ButtonSelectorPanel.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="817">
-              <caret line="57" column="58" lean-forward="false" selection-start-line="57" selection-start-column="58" selection-end-line="57" selection-end-column="58" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="WrappedButtonSelectorPanel.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="WrappedButtonSelectorPanel.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/selectors/WrappedButtonSelectorPanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="25" column="13" lean-forward="false" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
+            <state relative-caret-position="627">
+              <caret line="48" column="34" lean-forward="false" selection-start-line="48" selection-start-column="34" selection-end-line="48" selection-end-column="34" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SelectorPanel.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/selectors/SelectorPanel.java">
+      <file leaf-file-name="BorderLayoutPanel.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/selectors/BorderLayoutPanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="23" column="22" lean-forward="false" selection-start-line="23" selection-start-column="22" selection-end-line="23" selection-end-column="22" />
+            <state relative-caret-position="3154">
+              <caret line="174" column="0" lean-forward="false" selection-start-line="174" selection-start-column="0" selection-end-line="174" selection-end-column="0" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SimpleComboBoxChoice.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/selectors/SimpleComboBoxChoice.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="247">
+              <caret line="24" column="13" lean-forward="false" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
+              <folding>
+                <element signature="e#4895#4896#0" expanded="true" />
+                <element signature="e#4942#4943#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -271,7 +185,7 @@
       <file leaf-file-name="WrappedSelectorPanel.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/selectors/WrappedSelectorPanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="152">
+            <state relative-caret-position="171">
               <caret line="12" column="37" lean-forward="false" selection-start-line="12" selection-start-column="37" selection-end-line="12" selection-end-column="37" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -283,7 +197,7 @@
       <file leaf-file-name="ObtuseKeyword.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/kv/ObtuseKeyword.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3078">
+            <state relative-caret-position="3135">
               <caret line="175" column="7" lean-forward="false" selection-start-line="175" selection-start-column="7" selection-end-line="175" selection-end-column="7" />
               <folding>
                 <element signature="e#0#6153#0" expanded="true" />
@@ -335,7 +249,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>register</find>
       <find>testpacka</find>
       <find>bundlethy</find>
       <find>unpack</find>
@@ -365,6 +278,7 @@
       <find>algorithm</find>
       <find>documentlistener</find>
       <find>documentlis</find>
+      <find>simplecom</find>
     </findStrings>
     <replaceStrings>
       <replace>byte</replace>
@@ -427,7 +341,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingConstants.java" />
         <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingEntityReference.java" />
         <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingUnPackedEntityGroup.java" />
         <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingUtil.java" />
@@ -478,6 +391,7 @@
         <option value="$PROJECT_DIR$/src/org/apache/commons/text/similarity/LevenshteinDistance.java" />
         <option value="$PROJECT_DIR$/src/com/obtuse/util/LevenshteinDistanceUtil.java" />
         <option value="$PROJECT_DIR$/src/com/obtuse/ui/selectors/WrappedButtonSelectorPanel.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/ui/selectors/SimpleComboBoxChoice.java" />
       </list>
     </option>
   </component>
@@ -646,9 +560,6 @@
     </navigator>
     <panes>
       <pane id="AndroidView" />
-      <pane id="PackagesPane" />
-      <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -1022,6 +933,9 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="Scratches" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1547,14 +1461,8 @@
       <workItem from="1519802065173" duration="1394000" />
       <workItem from="1520350385675" duration="4801000" />
       <workItem from="1520531405745" duration="1297000" />
-      <workItem from="1521018024329" duration="647000" />
-    </task>
-    <task id="LOCAL-00008" summary="Various cleanup.&#10;Update copyrights.">
-      <created>1418426007613</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1418426007613</updated>
+      <workItem from="1521018024329" duration="3304000" />
+      <workItem from="1521130249191" duration="599000" />
     </task>
     <task id="LOCAL-00009" summary="Commit and post an irrelevant change to ...MyExploreSSL.&#10;The real purpose of this is to make sure that I didn't screw anything up in my attempts to create a new project that referenced this project.">
       <created>1419032698333</created>
@@ -1892,11 +1800,18 @@
       <option name="project" value="LOCAL" />
       <updated>1520444293639</updated>
     </task>
-    <option name="localTasksCounter" value="57" />
+    <task id="LOCAL-00057" summary="Massive cleanup of commented out dead software (about 2,500 lines across almost 100 source files).">
+      <created>1521053821444</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1521053821444</updated>
+    </task>
+    <option name="localTasksCounter" value="58" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="810638000" />
+    <option name="totallyTimeSpent" value="813894000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1913,25 +1828,24 @@
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.118644066" sideWeight="0.67289025" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29986432" sideWeight="0.9753381" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.42062417" sideWeight="0.5078684" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32960624" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4222689" sideWeight="0.49213162" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32806054" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.42366946" sideWeight="0.49213162" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32956952" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32960895" sideWeight="0.5269953" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33280128" sideWeight="0.5269953" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17557251" sideWeight="0.43055555" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329475" sideWeight="0.67289025" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17571372" sideWeight="0.4730047" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31343284" sideWeight="0.9995866" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17571372" sideWeight="0.4730047" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1944,6 +1858,7 @@
       <window_info id="Duplicates" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32952926" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32997844" sideWeight="0.49722221" order="15" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32457292" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29986432" sideWeight="0.9753381" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39985272" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32960624" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -2033,7 +1948,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Mostly minor cleanup." />
     <MESSAGE value="Fix the merge screwup where changes were make on Niepce and not pushed for about a year (sigh)." />
     <MESSAGE value="Implementation of a relatively easy to use JPanel which can be the target of drag-and-drop operations.&#10;&#10;Gowing support for serializing and deserializing arrays of primitives and arrays of Java container classes (e.g. Integer, Double, String, etc). Still missing support for arrays of GowingPackable objects. Considerable cleanup.&#10;&#10;Start the process of turning the SortedSetExample.java class into a reasonable Gowing-aware example." />
     <MESSAGE value="Simplified flavor handler facility provided by AbstractDataFlavorHandler and BasicFlavorHandlers (avoids a lot of repetitive typing when implementing drag-and-drop stuff.&#10;&#10;Lots of xxxValue helper methods in GowingPackedEntityBundle.java to avoid need to invoke getNullableField and getNotNullField in order to get to its xxxValue methods.&#10;&#10;Lots of cleanup in Gowing and elsewhere.&#10;&#10;Avoid a common Gowing bug by making failing to collect a super class's bundle much more likely to provoke a fatal error in Gowing (mostly involves broader use of @NotNull for parameters that pass bundles around)." />
@@ -2058,7 +1972,8 @@
     <MESSAGE value="Add fairly basic &quot;regular verbose&quot; and &quot;super verbose&quot; mechanism to make it a bit easier to figure out why the &quot;finish unpacking&quot; phase of a Gowing unpack operation is failing.&#10;&#10;Add an unchecked GowingUnpackingDeadlockedException which is thrown when the &quot;finish unpacking&quot; phase of a Gowing unpack operation reaches a point where a round of finishing doesn't reduce the number of unfinished unpackables. This is usually because two packables are waiting for each other to finish (generally if not always because one or both of the packables have a &quot;cannot finish until the other is finished&quot; dependency that doesn't really need to be there, or the finishing strategy being used is flawed - roughly speaking, if it was possible to build the data structure one step-at-a-time in the first place then there must be a way to unpack it while finishing it one-step-at-a-time).&#10;&#10;Cleanup of various aspects of the Gowing facility and elsewhere." />
     <MESSAGE value="Implement the ability to construct/initialize a WrappedButtonSelectorPanel with a particular button pre-selected and a WrappedComboBoxSelectorPanel with a particular choice pre-selected.&#10;&#10;Fix a subtle bugin GowingPackableKeyValuePair where its ability to finish an instance was incorrectly dependent upon its value field being finished. This created an unbreakable finish-dependency loop during an unpacking operation.&#10;&#10;Cleanup." />
     <MESSAGE value="Minor reorganization of AutoSizingValidatedJTextField.java.&#10;&#10;Not much more than minor cleanup elsewhere." />
-    <option name="LAST_COMMIT_MESSAGE" value="Minor reorganization of AutoSizingValidatedJTextField.java.&#10;&#10;Not much more than minor cleanup elsewhere." />
+    <MESSAGE value="Massive cleanup of commented out dead software (about 2,500 lines across almost 100 source files)." />
+    <option name="LAST_COMMIT_MESSAGE" value="Massive cleanup of commented out dead software (about 2,500 lines across almost 100 source files)." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -2385,20 +2300,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingPackableEntityHolder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="750">
-          <caret line="54" column="0" lean-forward="false" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingPackableMapping.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="565">
-          <caret line="193" column="0" lean-forward="false" selection-start-line="193" selection-start-column="0" selection-end-line="193" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingShortHolder.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="248">
@@ -2524,13 +2425,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/selectors/BorderLayoutPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3154">
-          <caret line="174" column="0" lean-forward="false" selection-start-line="174" selection-start-column="0" selection-end-line="174" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/ObtuseCollections.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="209">
@@ -2541,7 +2435,7 @@
     <entry file="file://$PROJECT_DIR$/../Burke2/BurkeBioEditor/src/xyz/kenosee/burke2/bioGenerator/util/keywordConfigurators/KeywordSetEditorConfig2.java" />
     <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/selectors/WrappedSelectorPanel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
+        <state relative-caret-position="171">
           <caret line="12" column="37" lean-forward="false" selection-start-line="12" selection-start-column="37" selection-end-line="12" selection-end-column="37" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -2567,7 +2461,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/kv/ObtuseKeyword.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3078">
+        <state relative-caret-position="3135">
           <caret line="175" column="7" lean-forward="false" selection-start-line="175" selection-start-column="7" selection-end-line="175" selection-end-column="7" />
           <folding>
             <element signature="e#0#6153#0" expanded="true" />
@@ -2654,7 +2548,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
           <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2696,8 +2589,32 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
           <caret line="89" column="12" lean-forward="false" selection-start-line="89" selection-start-column="12" selection-end-line="89" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/selectors/BorderLayoutPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3154">
+          <caret line="174" column="0" lean-forward="false" selection-start-line="174" selection-start-column="0" selection-end-line="174" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/selectors/WrappedButtonSelectorPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="627">
+          <caret line="48" column="34" lean-forward="false" selection-start-line="48" selection-start-column="34" selection-end-line="48" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/selectors/SimpleComboBoxChoice.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="24" column="13" lean-forward="false" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
           <folding>
-            <element signature="imports" expanded="false" />
+            <element signature="e#4895#4896#0" expanded="true" />
+            <element signature="e#4942#4943#0" expanded="true" />
           </folding>
         </state>
       </provider>
