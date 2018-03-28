@@ -53,6 +53,7 @@ public class DateUtils {
     private static final SimpleDateFormat HH_MM_SS_24_EEE_MMM_DD  = new SimpleDateFormat( "HH:mm:ss EEE MMM dd" );
     private static final SimpleDateFormat STANDARD                = new SimpleDateFormat( "yyyy-MM-dd'T'HH:mm:ssZ" );
     private static final SimpleDateFormat STANDARD_MS             = new SimpleDateFormat( "yyyy-MM-dd'T'HH:mm:ss.SSSZ" );
+    private static final SimpleDateFormat DD_MMM_YYYY             = new SimpleDateFormat( "d MMM, yyyy" );
 
     /**
      * Make it impossible to instantiate this class.
@@ -848,6 +849,25 @@ public class DateUtils {
 
             DateUtils.MMMM_D_YYYY.setTimeZone( TimeZone.getDefault() );
             String s = DateUtils.MMMM_D_YYYY.format( dateTime );
+            return s;
+
+        }
+
+    }
+
+    /**
+     * Format a date string in our local time.
+     *
+     * @param dateTime the date to be formatted.
+     * @return the formatted date string (e.g. {@code "1, July, 1867"}.
+     */
+
+    public static String formatD_MMM_YYYY( final Date dateTime ) {
+
+        synchronized ( DateUtils.DD_MMM_YYYY ) {
+
+            DateUtils.DD_MMM_YYYY.setTimeZone( TimeZone.getDefault() );
+            String s = DateUtils.DD_MMM_YYYY.format( dateTime );
             return s;
 
         }

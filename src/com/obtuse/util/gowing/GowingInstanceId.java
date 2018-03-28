@@ -45,9 +45,14 @@ public final class GowingInstanceId implements Comparable<GowingInstanceId> {
 
     }
 
-    public GowingInstanceId( final @NotNull String typeName ) {
+    public GowingInstanceId( final @Nullable String typeName ) {
         super();
 
+        if ( typeName == null ) {
+
+            throw new IllegalArgumentException( "GowingInstanceId:  no typeName specified" );
+
+        }
         _typeId = allocateTypeId( typeName );
 
         _typeName = typeName;

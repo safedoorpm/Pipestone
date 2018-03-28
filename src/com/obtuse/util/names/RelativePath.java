@@ -68,6 +68,8 @@ public class RelativePath extends GowingAbstractPackableEntity implements Iterab
     private final String _compareValue;
     private GowingEntityReference _segmentsEntityReference;
 
+    private String _canonicalFormString;
+
     /**
      Create a relative or an absolute path instance.
      <p/>
@@ -282,7 +284,25 @@ public class RelativePath extends GowingAbstractPackableEntity implements Iterab
     @NotNull
     public String getCanonicalForm() {
 
-        return _compareValue;
+        if ( _canonicalFormString == null ) {
+
+            StringBuilder sb = new StringBuilder();
+
+            String arrow = "";
+
+            for ( SegmentName segmentName : _segments ) {
+
+                sb.append( arrow ).append( segmentName.getSegmentName() );
+
+                arrow = "->";
+
+            }
+
+            _canonicalFormString = sb.toString();
+
+        }
+
+        return _canonicalFormString;
 
     }
 
@@ -499,7 +519,7 @@ public class RelativePath extends GowingAbstractPackableEntity implements Iterab
 
     public int compareTo( final @NotNull RelativePath rhs ) {
 
-        return _compareValue.compareTo( rhs._compareValue );
+        return getCanonicalForm().compareTo( rhs.getCanonicalForm() );
 
     }
 

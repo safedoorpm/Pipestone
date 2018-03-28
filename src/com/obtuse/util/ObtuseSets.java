@@ -14,80 +14,100 @@ import java.util.*;
 public class ObtuseSets {
 
     /**
-     Return a newly created {@link TreeSet} which is the intersection of a {@code SortedSet} of things and a {@link Collection} of things.
+     Return a newly created {@link TreeSet} which is the intersection of a {@code SortedSet} of things and zero or more {@link Collection}s of things.
      @param set the {@link SortedSet}{@code <T>} of things.
-     @param collection the {@code Collection} of things.
-     @param <T> the type of things in the {@code SortedSet} and in the {@code Collection} of things.
-     @return the intersection of a {@code SortedSet} of things and a {@code Collection} of things.
+     @param collections zero or more {@code Collection}s of things.
+     @param <T> the type of things in the {@code SortedSet} and in the {@code Collection}s of things.
+     @return a {@link TreeSet}{@code <T>} containing the intersection of a {@code SortedSet} of things and a {@code Collection}s of things.
      */
 
+    @SafeVarargs
     public static <T extends Comparable> TreeSet<T> intersection(
             final SortedSet<T> set,
-            final Collection<T> collection
+            final Collection<T>... collections
     ) {
 
         TreeSet<T> rval = new TreeSet<>( set );
-        rval.retainAll( collection );
+        for ( Collection<T> collection : collections ) {
+
+            rval.retainAll( collection );
+
+        }
 
         return rval;
 
     }
 
     /**
-     Return a new {@link Set} which is the intersection of a {@code Set} of things and a {@link Collection} of things.
+     Return a new {@link Set} which is the intersection of a {@code Set} of things and zero or more {@link Collection}s of things.
      @param set the {@link Set}{@code <T>} of things.
-     @param collection the {@code Collection} of things.
-     @param <T> the type of things in the {@code Set} and in the {@code Collection} of things.
-     @return the intersection of a {@code Set} of things and a {@code Collection} of things.
+     @param collections zero or more {@code Collection} of things.
+     @param <T> the type of things in the {@code Set} and in the {@code Collection}s of things.
+     @return a {@link HashSet}{@code <T>} containing the intersection of a {@code Set} of things and the {@code Collection}s of things.
      */
 
+    @SafeVarargs
     public static <T> HashSet<T> intersection(
             final Set<T> set,
-            final Collection<T> collection
+            final Collection<T>... collections
     ) {
 
         HashSet<T> rval = new HashSet<>( set );
-        rval.retainAll( collection );
+        for ( Collection<T> collection : collections ) {
+
+            rval.retainAll( collection );
+
+        }
 
         return rval;
 
     }
 
     /**
-     Return a newly created {@link TreeSet} which is the union of a {@code SortedSet} of things and a {@link Collection} of things.
+     Return a newly created {@link TreeSet} which is the union of a {@code SortedSet} of things and zero or more {@link Collection}s of things.
      @param set the {@link SortedSet}{@code <T>} of things.
-     @param collection the {@code Collection} of things.
-     @param <T> the type of things in the {@code SortedSet} and in the {@code Collection} of things.
-     @return the union of a {@code SortedSet} of things and a {@code Collection} of things.
+     @param collections zero or more {@code Collection}s of things.
+     @param <T> the type of things in the {@code SortedSet} and in the {@code Collection}s of things.
+     @return a {@link TreeSet}{@code <T>} containing the union of a {@code SortedSet} of things and the {@code Collection}s of things.
      */
 
+    @SafeVarargs
     public static <T extends Comparable> TreeSet<T> union(
             final SortedSet<T> set,
-            final Collection<T> collection
+            final Collection<T>... collections
     ) {
 
         TreeSet<T> rval = new TreeSet<>( set );
-        rval.addAll( collection );
+        for ( Collection<T> collection : collections ) {
+
+            rval.addAll( collection );
+
+        }
 
         return rval;
 
     }
 
     /**
-     Return a new {@link Set} which is the union of a {@code Set} of things and a {@link Collection} of things.
+     Return a new {@link Set} which is the union of a {@code Set} of things and zero or more {@link Collection}s of things.
      @param set the {@link Set}{@code <T>} of things.
-     @param collection the {@code Collection} of things.
-     @param <T> the type of things in the {@code Set} and in the {@code Collection} of things.
-     @return the union of a {@code Set} of things and a {@code Collection} of things.
+     @param collections zero or more {@code Collection}s of things.
+     @param <T> the type of things in the {@code Set} and in the {@code Collection}s of things.
+     @return a {@link HashSet}{@code <T>} containing the union of a {@code Set} of things and the {@code Collection}s of things.
      */
 
+    @SafeVarargs
     public static <T> HashSet<T> union(
             final Set<T> set,
-            final Collection<T> collection
+            final Collection<T>... collections
     ) {
 
         HashSet<T> rval = new HashSet<>( set );
-        rval.addAll( collection );
+        for ( Collection<T> collection : collections ) {
+
+            rval.addAll( collection );
+
+        }
 
         return rval;
 

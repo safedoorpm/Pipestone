@@ -665,6 +665,45 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
     }
 
+    public String formatDDMMMYYYY() {
+
+        switch ( _precision ) {
+
+            case DATE:
+                return getNominalCalendarDate().getDateString();
+
+            case MONTH:
+                return getNominalCalendarDate().getDateString().substring( 0, 7 );
+
+            case YEAR:
+                return getNominalCalendarDate().getDateString().substring( 0, 4 );
+
+            case DECADE:
+                return getNominalCalendarDate().getDateString().substring( 0, 3 ) + "0s";
+
+            case RANGE:
+                if ( isUnknownApproximateDate() ) {
+
+                    return FORMATTED_UNKNOWN_APPROXIMATE_DATE;
+
+                }
+
+                if ( s_requireNewStyleDateRanges ) {
+
+                    return getEarliestPossibleDate().getDateString() + ":" + getLatestPossibleDate().getDateString();
+
+                } else {
+
+                    return "(" + getEarliestPossibleDate().getDateString() + "," + getLatestPossibleDate().getDateString() + ")";
+
+                }
+
+            default:
+                return getNominalCalendarDate().getDateString();
+
+        }
+    }
+
     /**
      Compare two instances primarily based on their earliest possible date, secondarily on their latest possible date, and tertiarily on the specified precisions.
 
