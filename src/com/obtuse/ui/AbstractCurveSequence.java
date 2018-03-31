@@ -167,7 +167,7 @@ public abstract class AbstractCurveSequence implements GraphicsElement {
 
     public @NotNull AbstractCurveListener@NotNull[] getChangeListeners() {
 
-        return _listeners.toArray( new AbstractCurveListener[_listeners.size()] );
+        return _listeners.toArray( new AbstractCurveListener[0] );
 
     }
 

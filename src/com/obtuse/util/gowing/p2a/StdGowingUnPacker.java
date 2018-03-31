@@ -669,7 +669,7 @@ public class StdGowingUnPacker implements GowingUnPacker {
 
     }
 
-    public boolean areEntitiesAllFinished( @Nullable final GowingEntityReference @NotNull [] entityReferences ) {
+    public boolean areEntitiesAllFinished( final GowingEntityReference... entityReferences ) { //} @Nullable final GowingEntityReference @NotNull [] entityReferences ) {
 
         int ix = 0;
         for ( GowingEntityReference er : entityReferences ) {

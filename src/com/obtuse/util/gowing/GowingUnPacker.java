@@ -89,7 +89,7 @@ public interface GowingUnPacker extends Closeable {
 
     boolean isEntityFinished( @Nullable GowingEntityReference entityReference );
 
-    boolean areEntitiesAllFinished( @Nullable GowingEntityReference @NotNull [] entityReferences );
+    boolean areEntitiesAllFinished( GowingEntityReference... entityReferences );
     boolean areEntitiesAllFinished( @NotNull Collection<GowingEntityReference> entityReferences );
 
 }

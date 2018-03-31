@@ -171,7 +171,7 @@ public class AcceleratedPopupMenu1 extends JPopupMenu {
     }
 
     public AcceleratedPopupMenu1( final Collection<String> words ) {
-        this( words.toArray( new String[words.size()] ) );
+        this( words.toArray( new String[0] ) );
     }
 
     public static void main( final String[] args ) {

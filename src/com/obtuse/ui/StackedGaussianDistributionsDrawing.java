@@ -139,7 +139,7 @@ public class StackedGaussianDistributionsDrawing extends JPanel {
     public void setDistributions( final Collection<WeightedGaussianDistribution> gds ) {
 
         _gds =
-                gds.toArray( new WeightedGaussianDistribution[gds.size()] );
+                gds.toArray( new WeightedGaussianDistribution[0] );
 
         repaint();
 

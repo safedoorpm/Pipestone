@@ -188,11 +188,11 @@ public class RelativePath extends GowingAbstractPackableEntity implements Iterab
 
         sb.append( "}" );
 
-        if ( isEmpty() ) {
-
-            throw new IllegalArgumentException( ourName + ":  paths must not be empty" );
-
-        }
+//        if ( isEmpty() ) {
+//
+//            throw new IllegalArgumentException( ourName + ":  paths must not be empty" );
+//
+//        }
 
         return sb.toString();
 
@@ -212,7 +212,7 @@ public class RelativePath extends GowingAbstractPackableEntity implements Iterab
      Create a relative or an absolute path instance.
      <p/>This constructor is exactly equivalent to
      <blockquote>
-     {@code new RelativePath( segments.toArray( new SegmentName[segments.size()] ) )}
+     {@code new RelativePath( segments.toArray( new SegmentName[0] ) )}
      </blockquote>
      See {@link #RelativePath(SegmentName[])} for more information.
      @param segments a collection of the names which makeup the to-be-created path.
@@ -221,7 +221,7 @@ public class RelativePath extends GowingAbstractPackableEntity implements Iterab
      the {@code segments} collection contains any occurrences of the {@link SegmentName#ROOT_SEGMENT} segment.
      */
     public RelativePath( final @NotNull Collection<SegmentName> segments ) {
-        this( segments.toArray( new SegmentName[segments.size()] ) );
+        this( segments.toArray( new SegmentName[0] ) );
 
     }
 
@@ -374,18 +374,85 @@ public class RelativePath extends GowingAbstractPackableEntity implements Iterab
 
     /**
      Create a new path which consists of a specified path with the specified segment appended on the end.
-     @param primary the specified path.
+     @param head the specified path.
      @param segmentName the segment which is to be appended to the end of the being created path.
-     @return an {@link AbsolutePath} containing the longer-by-one path if the specified path was an instance of the AbsolutePath class;
-     otherwise, a {@link RelativePath} containing the longer-by-one path if the specified path.
+     @return  a {@link RelativePath} consisting of a single {@link SegmentName} named {@code segmentName} if {@code head} is {@code null};
+     an {@link AbsolutePath} containing the longer-by-one path if {@code head} is an {@link AbsolutePath};
+     otherwise, a {@link RelativePath} containing the longer-by-one path.
      */
 
     @NotNull
-    public static RelativePath concat( final @NotNull RelativePath primary, final @NotNull SegmentName segmentName ) {
+    public static RelativePath concat( final @Nullable RelativePath head, final @NotNull String segmentName ) {
 
-        SegmentName[] prefix = new SegmentName[ primary.size() + 1 ];
+        if ( head == null ) {
+
+            return new RelativePath( segmentName );
+
+        }
+
+        SegmentName[] prefix = new SegmentName[ head.size() + 1 ];
         int ix = 0;
-        for ( SegmentName sn : primary.getNames() ) {
+        for ( SegmentName sn : head.getNames() ) {
+
+            prefix[ix] = sn;
+            ix += 1;
+
+        }
+
+        prefix[ix] = new SegmentName( segmentName );
+
+        return head instanceof AbsolutePath ? new AbsolutePath( prefix ) : new RelativePath( prefix );
+
+    }
+
+    /**
+     Create a new path which consists of a specified path with the specified segment appended on the end.
+     @param head the specified path.
+     @param segmentName the segment which is to be appended to the end of the being created path.
+     @return  a {@link RelativePath} consisting of a single {@link SegmentName} named {@code segmentName} if {@code head} is {@code null};
+     an {@link AbsolutePath} containing the longer-by-one path if {@code head} is an {@link AbsolutePath};
+     otherwise, a {@link RelativePath} containing the longer-by-one path.
+     */
+
+    @NotNull
+    public static AbsolutePath concat( final @NotNull AbsolutePath head, final @NotNull String segmentName ) {
+
+        SegmentName[] prefix = new SegmentName[ head.size() + 1 ];
+        int ix = 0;
+        for ( SegmentName sn : head.getNames() ) {
+
+            prefix[ix] = sn;
+            ix += 1;
+
+        }
+
+        prefix[ix] = new SegmentName( segmentName );
+
+        return new AbsolutePath( prefix );
+
+    }
+
+    /**
+     Create a new path which consists of a specified path with the specified segment appended on the end.
+     @param head the specified path.
+     @param segmentName the segment which is to be appended to the end of the being created path.
+     @return a {@link RelativePath} consisting of the single {@link SegmentName} {@code segmentName} if {@code head} is {@code null};
+     an {@link AbsolutePath} containing the longer-by-one path if {@code head} is an {@link AbsolutePath};
+     otherwise, a {@link RelativePath} containing the longer-by-one path.
+     */
+
+    @NotNull
+    public static RelativePath concat( final @Nullable RelativePath head, final @NotNull SegmentName segmentName ) {
+
+        if ( head == null ) {
+
+            return new RelativePath( segmentName );
+
+        }
+
+        SegmentName[] prefix = new SegmentName[ head.size() + 1 ];
+        int ix = 0;
+        for ( SegmentName sn : head.getNames() ) {
 
             prefix[ix] = sn;
             ix += 1;
@@ -393,7 +460,7 @@ public class RelativePath extends GowingAbstractPackableEntity implements Iterab
         }
         prefix[ix] = segmentName;
 
-        return primary instanceof AbsolutePath ? new AbsolutePath( prefix ) : new RelativePath( prefix );
+        return head instanceof AbsolutePath ? new AbsolutePath( prefix ) : new RelativePath( prefix );
 
     }
 
@@ -401,12 +468,19 @@ public class RelativePath extends GowingAbstractPackableEntity implements Iterab
      Create a new path which consists of a specified head path concatenated with a specified tail path.
      @param head the specified head path.
      @param tail the specified tail path.
-     @return an {@link AbsolutePath} containing the concatenated paths if the specified head path was an instance of the AbsolutePath class;
+     @return {@code tail} if {@code head} is {@code null};
+     an {@link AbsolutePath} containing the concatenated paths if {@code head} is an {@link AbsolutePath};
      otherwise, a {@link RelativePath} containing the concatenation of the two paths.
      */
 
     @NotNull
-    public static RelativePath concat( final @NotNull RelativePath head, final @NotNull RelativePath tail ) {
+    public static RelativePath concat( final @Nullable RelativePath head, final @NotNull RelativePath tail ) {
+
+        if ( head == null ) {
+
+            return tail;
+
+        }
 
         SegmentName[] prefix = new SegmentName[ head.size() + tail.size() ];
         int ix = 0;
@@ -451,7 +525,7 @@ public class RelativePath extends GowingAbstractPackableEntity implements Iterab
 
     public static SegmentName[] concat( final @NotNull Collection<SegmentName> head, final @NotNull Collection<SegmentName> tail ) {
 
-        return concat( head.toArray( new SegmentName[head.size()]), tail.toArray( new SegmentName[tail.size()] ) );
+        return concat( head.toArray( new SegmentName[0] ), tail.toArray( new SegmentName[0] ) );
 
     }
 
@@ -464,7 +538,7 @@ public class RelativePath extends GowingAbstractPackableEntity implements Iterab
 
     public static SegmentName[] concat( final @NotNull Collection<SegmentName> head, final @NotNull SegmentName@NotNull[] tail ) {
 
-        return concat( head.toArray( new SegmentName[head.size()]), tail );
+        return concat( head.toArray( new SegmentName[0] ), tail );
 
     }
 
@@ -477,7 +551,7 @@ public class RelativePath extends GowingAbstractPackableEntity implements Iterab
 
     public static SegmentName[] concat( final @NotNull SegmentName@NotNull[] head, final @NotNull Collection<SegmentName> tail ) {
 
-        return concat( head, tail.toArray( new SegmentName[tail.size()] ) );
+        return concat( head, tail.toArray( new SegmentName[0] ) );
 
     }
 
@@ -511,15 +585,123 @@ public class RelativePath extends GowingAbstractPackableEntity implements Iterab
 
     /**
      Compare this instance to a specified instance of this class.
+     <p>Firstly, absolute paths are less than relative paths regardless of how long the paths are or the values of their respective segments.</p>
+     <p>If both paths are absolute paths or both paths are relative paths then
+     this method does a segment by segment pairwise comparison of this instance's segments to the other instance's segments.
+     If a pairwise difference is found (i.e. segment <em>n</em> in one path is different than segment <em>n</em> in the other path)
+     then the result of this method is
+     <blockquote>
+     {@code segment[}<em>n</em>{@code ].compareTo( rhs.segment[}<em>n</em>{@code ] )}
+     </blockquote>
+     Otherwise, there are a few cases of interest:
+     <ul>
+     <li>if this path and the other path are the same length and the segments in this path and the segments in the other path are pairwise equal
+     then this path is equal to the other path - we return 0.</li>
+     <li>if this path is shorter than the other path and the two paths are equal up to the end of this path then this path is
+     less than the other path - we return a negative value.</li>
+     <li>if this path is longer than the other path and the two paths are equal up to the end of the other path then this path is
+     greater than the other path - we return a positive value.</li>
+     </ul>
+     </p>
      @param rhs the specified instance.
-     @return the result of comparing the value returned by {@link #getCanonicalForm()} on this instance with the value returned by {@link #getCanonicalForm()}
-     on the specified instance (I might make this ordering more sophisticated or I might change how {@link #getCanonicalForm()} works in the future;
-     rely on the current implementation of this method and on the current implementation of {@link #getCanonicalForm()} at your own risk).
+     @return the result of this path to the other path (see above for a detailed explanation of how the comparison is done).
      */
 
+    @SuppressWarnings("CompareToUsesNonFinalVariable")
     public int compareTo( final @NotNull RelativePath rhs ) {
 
-        return getCanonicalForm().compareTo( rhs.getCanonicalForm() );
+        // Deal with the case where exactly one of the two paths are absolute paths.
+
+        if ( this instanceof AbsolutePath && !( rhs instanceof AbsolutePath ) ) {
+
+            return 1;
+
+        } else if ( !(this instanceof AbsolutePath) && rhs instanceof AbsolutePath ) {
+
+            return -1;
+
+        }
+
+        // Compare the two paths according to the rules described in the Javadocs above.
+
+        int ix = 0;
+        int leftSize = _segments.size();
+        int rightSize = rhs._segments.size();
+
+        while ( ix < leftSize && ix < rightSize ) {
+
+            SegmentName left = _segments.get( ix );
+            SegmentName right = rhs._segments.get( ix );
+
+            int rval = left.compareTo( right );
+            if ( rval != 0 ) {
+
+                return rval;
+
+            }
+
+            ix += 1;
+
+        }
+
+        return leftSize - rightSize;
+
+//        if ( leftSize == rightSize ) {
+//
+//            return 0;
+//
+//        } else if ( leftSize < rightSize ) {
+//
+//            return -1;
+//
+//        } else {
+//
+//            return 1;
+//
+//        }
+
+//        ListIterator<SegmentName> leftIter = _segments.listIterator();
+//        ListIterator<SegmentName> rightIter = rhs._segments.listIterator();
+//        while ( leftIter.hasNext() ) {
+//
+//            if ( rightIter.hasNext() ) {
+//
+//                SegmentName left = leftIter.next();
+//                SegmentName right = rightIter.next();
+//
+//                int rval = left.compareTo( right );
+//                if ( rval != 0 ) {
+//
+//                    return rval;
+//
+//                }
+//
+//            } else {
+//
+//                // We are equal up to the point where the RHS ends.
+//                // Since we still have at least one segment, we are greater than they are.
+//
+//                return 1;
+//
+//            }
+//
+//        }
+//
+//        // We've run out of segments in ourselves.
+//        // If there's anything left in the RHS then we are less than they are.
+//        // Otherwise, we are equal to them.
+//
+//        if ( rightIter.hasNext() ) {
+//
+//            return -1;
+//
+//        } else {
+//
+//            return 0;
+//
+//        }
+
+//        return getCanonicalForm().compareTo( rhs.getCanonicalForm() );
 
     }
 
@@ -538,8 +720,25 @@ public class RelativePath extends GowingAbstractPackableEntity implements Iterab
 
     /**
      Compute a hashcode on this instance.
-     @return exactly equivalent to {@code toString().hashCode()}.
+     @return a hashcode intended to be different if two paths have the same segments but in a different order.
      */
+
+    @Override
+    public int hashCode() {
+
+        int hc = 0;
+        int offset = 0;
+        //noinspection NonFinalFieldReferencedInHashCode
+        for ( SegmentName sn : _segments ) {
+
+            hc ^= Integer.rotateLeft( sn.hashCode(), offset );
+            offset += ( hc & 3 ) + 1;
+
+        }
+
+        return hc;
+
+    }
 
     public String toString() {
 
@@ -569,7 +768,7 @@ public class RelativePath extends GowingAbstractPackableEntity implements Iterab
 
             } else {
 
-                Logger.logMsg( "ERROR - " + what + " - " + msg + " " + e );
+                Logger.logErr( "ERROR - " + what + " - " + msg + " " + e, e );
 
             }
 
@@ -693,16 +892,17 @@ public class RelativePath extends GowingAbstractPackableEntity implements Iterab
         doit( "one segment via array", () -> new RelativePath( new SegmentName[] { new SegmentName( "one_segment_array" ) } ) );
         doit( "two segments via array", () -> new RelativePath( new SegmentName[] { new SegmentName( "two_segment_array" ), new SegmentName( "second_element" ) } ) );
 
-        doit( "one segment absolute root", new AbsolutePath( SegmentName.ROOT_SEGMENT ) );
+        doit( "one segment absolute root", () -> new AbsolutePath( SegmentName.ROOT_SEGMENT ) );
         doit( "!relative starting with root",
                 () -> new RelativePath( "" ),
                 () -> new RelativePath( SegmentName.ROOT_SEGMENT )
         );
+        doit( "turn root path into relative path", () -> new AbsolutePath( "hello", "there", "world" ).makeRelative() );
         doit( "path with just an empty segment", () -> new RelativePath( new SegmentName( "" ) ) );
-        doit( "!relative path with no segments", () -> new RelativePath( new SegmentName[0] ) );
-        doit( "absolute path with no segments", () -> new AbsolutePath( new SegmentName[0] ) );
+        doit( "relative path with no segments", () -> new RelativePath( new SegmentName[0] ) );
+        doit( "absolute path with one segments", () -> new AbsolutePath( new SegmentName( "hello" ) ) );
         doit( "absolute path via default constructor", () -> new AbsolutePath() );
-        doit( "absolute starting with root", new AbsolutePath( new SegmentName[] { SegmentName.ROOT_SEGMENT } ) );
+        doit( "absolute starting with root", () -> new AbsolutePath( new SegmentName[] { SegmentName.ROOT_SEGMENT } ) );
         doit( "absolute starting with root and two empty segments", new AbsolutePath( new SegmentName[] { SegmentName.ROOT_SEGMENT, SegmentName.EMPTY_NAME, SegmentName.EMPTY_NAME } ) );
         doit( "!relative starting with two roots", () -> new RelativePath( new SegmentName[] { SegmentName.ROOT_SEGMENT, SegmentName.ROOT_SEGMENT } ) );
         doit( "absolute starting with two roots", () -> new AbsolutePath( new SegmentName[] { SegmentName.ROOT_SEGMENT, SegmentName.ROOT_SEGMENT } ) );
@@ -711,13 +911,52 @@ public class RelativePath extends GowingAbstractPackableEntity implements Iterab
         doit( "!concat two non-trival absolutes", () -> new AbsolutePath( new SegmentName[] { SegmentName.ROOT_SEGMENT, new SegmentName( "barney" ) } ), () -> new AbsolutePath( new SegmentName[] { SegmentName.ROOT_SEGMENT, new SegmentName( "fred" ) } ) );
         doit( "concat non-trival absolute after trivial absolute", () -> new AbsolutePath( new SegmentName[] { SegmentName.ROOT_SEGMENT } ), () -> new AbsolutePath( new SegmentName[] { SegmentName.ROOT_SEGMENT, new SegmentName( "fred" ) } ) );
 
-        doit( "try to create a relative path with a root node via the back door", () -> SegmentName.ROOT_SEGMENT.asRelativePath() );
+        doit( "concat empty path with non-empty path", () -> concat( new RelativePath( new SegmentName[0] ), new RelativePath( "stuff" ) ) );
+        doit( "concat empty path with longer non-empty path", () -> concat( new RelativePath( new SegmentName[0] ), new RelativePath( "more", "stuff" ) ) );
+        doit( "concat two relative paths with no segments", () -> concat( new RelativePath( new SegmentName[0] ), new RelativePath( new SegmentName[0] ) ) );
+
+        doit( "!try to create a relative path with a root node via the back door", () -> SegmentName.ROOT_SEGMENT.asRelativePath() );
         doit( "one string absolute w/ no explicit root", () -> new AbsolutePath( "one_segment_string" ) );
         doit( "one segment name absolute w/ no explicit root", () -> new AbsolutePath( new SegmentName( "one_segment_name" ) ) );
         doit( "one segment array absolute w/ no explicit root", () -> new AbsolutePath( new SegmentName[] { new SegmentName( "one_segment_array" ) } ) );
         doit( "two segment array absolute w/ no explicit root", () -> new AbsolutePath( new SegmentName[] { new SegmentName( "two_segment_array" ), new SegmentName( "second_element" ) } ) );
 
         doit( "absolute fed into absolute construct w/ no explicit root", () -> new AbsolutePath( new AbsolutePath( new SegmentName[] { new SegmentName( "recycled_one_segment_array" ) } ).getNames() ) );
+
+        doit( "compare short to long paths", new RelativePath( "equal" ), new RelativePath( "equal", "extra" ), -1 );
+        doit( "compare long to short paths", new RelativePath( "equal", "extra" ), new RelativePath( "equal" ), 1 );
+        doit( "compare equal short paths", new RelativePath( "equal" ), new RelativePath( "equal" ), 0 );
+        doit( "compare equal long paths", new RelativePath( "equal", "extra" ), new RelativePath( "equal", "extra" ), 0 );
+        doit( "compare first segment differs paths", new RelativePath( "less" ), new RelativePath( "than" ), -1 );
+        doit( "compare first segment differs paths", new RelativePath( "than" ), new RelativePath( "less" ), 1 );
+        doit( "compare second segment differs paths", new RelativePath( "same", "less" ), new RelativePath( "same", "than" ), -1 );
+        doit( "compare second segment differs paths", new RelativePath( "same", "than" ), new RelativePath( "same", "less" ), 1 );
+        doit( "compare abs otherwise equal paths (gt)", new AbsolutePath( "same", "than" ), new RelativePath( "same", "than" ), 1 );
+        doit( "compare abs otherwise equal paths (lt)", new RelativePath( "same", "than" ), new AbsolutePath( "same", "than" ), -1 );
+
+    }
+
+    private static void doit( final @NotNull String what, final @NotNull RelativePath left, final @NotNull RelativePath right, final int expectedValue ) {
+
+        boolean worked;
+        int rval = 0;
+        try {
+            rval = left.compareTo( right );
+            if ( expectedValue == 0 && rval == 0 ) {
+                worked = true;
+            } else if ( expectedValue < 0 && rval < 0 ) {
+                worked = true;
+            } else if ( expectedValue > 0 && rval > 0 ) {
+                worked = true;
+            } else {
+                worked = false;
+            }
+        } catch ( Throwable e ) {
+            e.printStackTrace();
+            worked = false;
+        }
+
+        msgTime( what, "comparison of \"" + left + "\" with \"" + right + "\" yielded \"" + rval + "\"", worked ? null : new IllegalArgumentException() );
 
     }
 

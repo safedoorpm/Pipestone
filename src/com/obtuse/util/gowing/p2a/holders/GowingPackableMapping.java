@@ -198,7 +198,7 @@ public class GowingPackableMapping<K, V> implements GowingPackable {
 
         }
 
-        _kvpReferences = tmpKvpReferences.toArray( new GowingEntityReference[tmpKvpReferences.size()] );
+        _kvpReferences = tmpKvpReferences.toArray( new GowingEntityReference[0] );
 
         ObtuseUtil.doNothing();
 

@@ -209,7 +209,7 @@ public class BezierCurveSequence extends AbstractCurveSequence {
 
         Vector<Point2D> pointsVector = getDistinctPoints( getScale() );
 
-        Point2D[] points = pointsVector.toArray( new Point2D[pointsVector.size()] );
+        Point2D[] points = pointsVector.toArray( new Point2D[0] );
 
         if ( points.length <= 1 ) {
 
@@ -386,7 +386,7 @@ public class BezierCurveSequence extends AbstractCurveSequence {
 
         Vector<Point2D> pointsVector = getDistinctPoints( 1.0 );
 
-        Point2D[] points = pointsVector.toArray( new Point2D[pointsVector.size()] );
+        Point2D[] points = pointsVector.toArray( new Point2D[0] );
 
         for ( int ix = 0; ix < points.length; ix += 1 ) {
 

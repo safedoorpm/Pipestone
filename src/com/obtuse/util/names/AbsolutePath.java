@@ -11,7 +11,9 @@ import com.obtuse.util.gowing.*;
 import com.obtuse.util.gowing.p2a.GowingEntityReference;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 /**
  Represent an absolute path/name.
@@ -61,7 +63,7 @@ public class AbsolutePath extends RelativePath {
     }
 
     public AbsolutePath( final @NotNull Collection<SegmentName> segments ) {
-        super( segments.toArray( new SegmentName[segments.size()] ) );
+        super( segments.toArray( new SegmentName[0] ) );
 
     }
 
@@ -70,8 +72,9 @@ public class AbsolutePath extends RelativePath {
 
     }
 
-    public AbsolutePath( final @NotNull String segmentName ) {
-        super( new SegmentName[] { new SegmentName( segmentName ) } );
+    public AbsolutePath( final @NotNull String... segmentName ) {
+        super( segmentName );
+//        super( new SegmentName[] { new SegmentName( segmentName ) } );
 
     }
 
@@ -115,6 +118,56 @@ public class AbsolutePath extends RelativePath {
             Logger.logMsg( "NOT done unpacking absolute path (too dangerous to invoke toString())" );
 
             return false;
+
+        }
+
+    }
+
+    /**
+     Yield a relative path that has the same segments as this absolute path minus the root segment that starts all absolute paths.
+
+     @return a relative path equivalent to this path but without the starting root node.
+     */
+    public RelativePath makeRelative() {
+
+        List<SegmentName> segments = getNames();
+        if ( segments.isEmpty() ) {
+
+            throw new HowDidWeGetHereError( "AbsolutePath.makeRelative:  absolute paths cannot be empty (they start with a root segment) - " + this );
+
+        }
+
+        if ( SegmentName.ROOT_SEGMENT.equals( segments.get(0) ) ) {
+
+            List<SegmentName> relativeSegments = new ArrayList<>();
+            for ( int ix = 1; ix < segments.size(); ix += 1 ) {
+
+                relativeSegments.add( segments.get( ix ) );
+
+            }
+
+            RelativePath relativePath = new RelativePath( relativeSegments );
+
+            AbsolutePath newRootPath = concat( ABSOLUTE_ROOT_PATH, relativePath );
+            if ( newRootPath.equals( this ) ) {
+
+                Logger.logMsg( "AbsolutePath.makeRelative:  turning " + this + " into a relative path yielded apparently correct result " + relativePath );
+
+                return relativePath;
+
+            } else {
+
+                throw new HowDidWeGetHereError(
+                        "AbsolutePath.makeRelative:  path " + this + " yielded path " + relativePath +
+                        " that is not equal to this path after concatenating it to an otherwise empty root path" +
+                        " (instead, we got " + newRootPath + ")"
+                );
+
+            }
+
+        } else {
+
+            throw new HowDidWeGetHereError( "AbsolutePath.makeRelative:  absolute paths most start with a root segment) - " + this );
 
         }
 

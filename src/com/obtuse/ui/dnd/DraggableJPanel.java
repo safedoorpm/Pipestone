@@ -250,7 +250,7 @@ public class DraggableJPanel extends SelectableImage implements MouseListener, F
 
             }
 
-            Logger.logMsg( "available flavours are " + Arrays.toString( uniqueMimeTypes.toArray( new String[uniqueMimeTypes.size()] ) ) );
+            Logger.logMsg( "available flavours are " + Arrays.toString( uniqueMimeTypes.toArray( new String[0] ) ) );
         }
 
         public boolean importData( final TransferSupport support ) {

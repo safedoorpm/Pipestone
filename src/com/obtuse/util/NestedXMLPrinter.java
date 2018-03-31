@@ -102,7 +102,7 @@ public class NestedXMLPrinter implements Closeable {
 
     public void emitTag( final String tagName, final Collection<String> attributes, final boolean leaveOpen ) {
 
-        emitTag( tagName, attributes == null ? null : attributes.toArray( new String[attributes.size()] ), leaveOpen );
+        emitTag( tagName, attributes == null ? null : attributes.toArray( new String[0] ), leaveOpen );
 
     }
 

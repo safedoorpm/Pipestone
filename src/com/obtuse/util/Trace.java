@@ -733,7 +733,7 @@ public class Trace {
 
         }
 
-        return trace.toArray( new String[ trace.size() ] );
+        return trace.toArray( new String[0] );
 
     }
 

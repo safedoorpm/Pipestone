@@ -29,7 +29,7 @@ public class AcceleratedPopupMenu2 extends JDialog {
     private final StringBuilder _accelerator = new StringBuilder();
 
     public AcceleratedPopupMenu2( final Collection<String> words ) {
-        this( words.toArray( new String[words.size()] ) );
+        this( words.toArray( new String[0] ) );
     }
 
     @SuppressWarnings("unchecked")

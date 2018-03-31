@@ -786,7 +786,7 @@ public class Pepys {
 
         if ( events != null ) {
 
-            fireEvents( events.toArray( new PepysEvent[ events.size() ] ) );
+            fireEvents( events.toArray( new PepysEvent[0] ) );
 
         }
 

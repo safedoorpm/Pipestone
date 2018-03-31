@@ -190,12 +190,6 @@ public class SimpleComboBoxChoice implements Comparable<SimpleComboBoxChoice>, G
 
     }
 
-//    public static SimpleComboBoxChoice maybeCreateChoice( final @NotNull SimpleComboBoxChoice.ChoiceVariant choiceVariant, final @NotNull String name ) {
-//
-//        return maybeCreateChoice( choiceVariant, name, name );
-//
-//    }
-
     /**
      Get this instance's variant.
      @return this instance's {@code ChoiceVariant}.

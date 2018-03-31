@@ -556,7 +556,7 @@ public class CSVParser implements Closeable {
 
         }
 
-        Integer[] iArray = v.toArray( new Integer[v.size()] );
+        Integer[] iArray = v.toArray( new Integer[0] );
         int[] rval = new int[iArray.length];
         for ( int i = 0; i < iArray.length; i += 1 ) {
 
@@ -610,7 +610,7 @@ public class CSVParser implements Closeable {
 
         }
 
-        Double[] dArray = v.toArray( new Double[v.size()] );
+        Double[] dArray = v.toArray( new Double[0] );
         double[] rval = new double[dArray.length];
         for ( int i = 0; i < dArray.length; i += 1 ) {
 

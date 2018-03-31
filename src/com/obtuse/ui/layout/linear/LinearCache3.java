@@ -234,13 +234,13 @@ public class LinearCache3 implements LinearLayoutManagerCache {
 
             if ( isVertical() ) {
 
-                _breadthSizes = xSizes.toArray( new ComponentSizeRequirements[xSizes.size()] );
-                _lengthSizes = ySizes.toArray( new ComponentSizeRequirements[ySizes.size()] );
+                _breadthSizes = xSizes.toArray( new ComponentSizeRequirements[0] );
+                _lengthSizes = ySizes.toArray( new ComponentSizeRequirements[0] );
 
             } else {
 
-                _breadthSizes = ySizes.toArray( new ComponentSizeRequirements[ySizes.size()] );
-                _lengthSizes = xSizes.toArray( new ComponentSizeRequirements[xSizes.size()] );
+                _breadthSizes = ySizes.toArray( new ComponentSizeRequirements[0] );
+                _lengthSizes = xSizes.toArray( new ComponentSizeRequirements[0] );
 
             }
 
