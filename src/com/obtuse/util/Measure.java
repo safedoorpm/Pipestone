@@ -501,6 +501,8 @@ public class Measure {
                         ObtuseUtil.lpad( "stdev", 14 )
                         + "   " +
                         ObtuseUtil.lpad( "total", 16 )
+                        + "   " +
+                        ObtuseUtil.lpad( "events/sec", 14 )
                 );
 
             }
@@ -519,6 +521,8 @@ public class Measure {
                         String.format( "%14.9f", stats.populationStdev() )
                         + " : " +
                         String.format( "%16.9f", stats.sum() )
+                        + " : " +
+                        String.format( "%14.3f/s", (stats.mean() == 0 ? Double.POSITIVE_INFINITY : 1 / stats.mean() ) )
                 );
 
                 where.println(
@@ -531,6 +535,8 @@ public class Measure {
                         ObtuseUtil.lpad( "", 14 )
                         + " * " +
                         String.format( "%16.9f", Measure.adjustSum( categoryName, stats.sum(), stats.n() ) )
+                        + " * " +
+                        String.format( "%14.3f/s", ( Measure.adjustMean( categoryName, stats.mean() ) == 0 ? Double.POSITIVE_INFINITY : 1 / Measure.adjustMean( categoryName, stats.mean() ) ) )
                 );
 
 

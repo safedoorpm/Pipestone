@@ -79,6 +79,7 @@ public class ComponentSizeRequirements extends SizeRequirements {
         SizeRequirements rval = new SizeRequirements( min, pref, max, alignment );
 
         return rval;
+
     }
 
     public String toString() {

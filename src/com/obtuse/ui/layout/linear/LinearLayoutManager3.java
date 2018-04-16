@@ -133,6 +133,7 @@ public class LinearLayoutManager3 implements LayoutManager2 {
         _target = target;
 
         preLoadCacheIfNecessary();
+
     }
 
     @Override
@@ -173,25 +174,9 @@ public class LinearLayoutManager3 implements LayoutManager2 {
         }
 
         ConstraintsTable copy = new ConstraintsTable();
-        for ( Object keyObject : constraints.keySet() ) {
+        for ( String key : constraints.keySet() ) {
 
-            if ( !( keyObject instanceof String ) ) {
-
-                if ( keyObject == null ) {
-
-                    throw new IllegalArgumentException(
-                            "LinearLayoutManager3.addLayoutComponent( Component, Object ):  constraint has null key" );
-
-                }
-
-                throw new IllegalArgumentException(
-                        "LinearLayoutManager3.addLayoutComponent( Component, Object ):  constraint object has key that is not a String" +
-                        " (it is a " + keyObject.getClass().getCanonicalName() + ")" );
-
-            }
-
-            Constraint value = constraints.get( keyObject );
-            String key = (String)keyObject;
+            Constraint value = constraints.get( key );
 
             if ( value == null ) {
 
@@ -265,6 +250,7 @@ public class LinearLayoutManager3 implements LayoutManager2 {
 
     }
 
+    @SuppressWarnings("Duplicates")
     @Override
     public synchronized Dimension preferredLayoutSize( final Container target ) {
 
@@ -344,6 +330,7 @@ public class LinearLayoutManager3 implements LayoutManager2 {
 
     }
 
+    @SuppressWarnings("Duplicates")
     @Override
     public void layoutContainer( final Container parent ) {
 
