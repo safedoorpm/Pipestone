@@ -10,7 +10,10 @@ import com.obtuse.util.gowing.GowingUnPacker;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.SortedMap;
+import java.util.SortedSet;
+import java.util.TreeMap;
+import java.util.TreeSet;
 
 /**
  Thrown when an unpacking operation fails because it became impossible to finish any of the remaining-to-be-finished entities.

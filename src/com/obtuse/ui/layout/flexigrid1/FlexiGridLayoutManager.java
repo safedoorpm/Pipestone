@@ -4,6 +4,8 @@
 
 package com.obtuse.ui.layout.flexigrid1;
 
+import com.obtuse.exceptions.HowDidWeGetHereError;
+import com.obtuse.ui.layout.flexigrid1.model.FlexiGridPanelModel;
 import com.obtuse.ui.layout.flexigrid1.util.FlexiGridBasicConstraint;
 import com.obtuse.ui.layout.flexigrid1.util.FlexiGridConstraint;
 import com.obtuse.ui.layout.flexigrid1.util.FlexiGridConstraintCategory;
@@ -35,6 +37,7 @@ public class FlexiGridLayoutManager implements LayoutManager2 {
     private FlexiGridCache1 _cache;
 
     private final FlexiGridItemInfo.FlexiItemInfoFactory _itemInfoFactory;
+    private FlexiGridPanelModel _flexiGridPanelModel = null;
 
     public FlexiGridLayoutManager(
             final @NotNull String name,
@@ -69,6 +72,8 @@ public class FlexiGridLayoutManager implements LayoutManager2 {
             throw new IllegalArgumentException( "FlexiGridLayoutManager.addLayoutComponent( Component, Object ):  component is null" );
 
         }
+
+        logMaybe( "addLayoutComponent:  removing constraint for " + LinearLayoutUtil.describeComponent( comp ) + " - " + _constraints.get( comp ) );
 
         _constraints.remove( comp );
         FlexiGridConstraintsTable componentConstraints;
@@ -114,6 +119,8 @@ public class FlexiGridLayoutManager implements LayoutManager2 {
 
         }
 
+        logMaybe( "addLayoutComponent:    adding constraint for " + LinearLayoutUtil.describeComponent( comp ) + " - " + copy );
+
         _constraints.put( comp, copy );
 
     }
@@ -152,15 +159,35 @@ public class FlexiGridLayoutManager implements LayoutManager2 {
 
     }
 
-    public FlexiGridConstraintsTable getConstraints( Component component ) {
+    @NotNull
+    public FlexiGridConstraintsTable getConstraints( final @NotNull Component component ) {
 
-        return _constraints.get( component );
+        FlexiGridConstraintsTable rval = _constraints.get( component );
+        if ( rval == null ) {
+
+            for ( Component cc : _constraints.keySet() ) {
+
+                logMaybe( "cc=" + LinearLayoutUtil.describeComponent( cc ) + " = " + _constraints.get( cc ) );
+
+            }
+
+            throw new HowDidWeGetHereError( "FlexiGridConstraintsTable.getConstraints:  component " + LinearLayoutUtil.describeComponent( component ) + " not found" );
+
+        }
+
+        return rval;
 
     }
 
-    public FlexiGridBasicConstraint getMandatoryBasicConstraint( Component component ) {
+    public FlexiGridBasicConstraint getMandatoryBasicConstraint( final @NotNull Component component ) {
 
         FlexiGridConstraintsTable constraintsTable = getConstraints( component );
+//        if ( constraintsTable == null ) {
+//
+//            throw new HowDidWeGetHereError( "FlexiGridLayoutManager.getMandatoryBasicConstraint:  no constraints table for " + component );
+//
+//        }
+
         FlexiGridConstraint constraint = constraintsTable.get( FlexiGridConstraintCategory.BASIC );
         if ( constraint instanceof FlexiGridBasicConstraint ) {
 
@@ -244,7 +271,7 @@ public class FlexiGridLayoutManager implements LayoutManager2 {
 
         if ( _cache != null && LinearLayoutUtil.isContainerOnWatchlist( _target ) ) {
 
-            Logger.logMsg( "layout invalidated by " + requester + " (target is " + target + ")" );
+            logMaybe( "layout invalidated by " + requester + " (target is " + target + ")" );
 
         }
 
@@ -266,6 +293,7 @@ public class FlexiGridLayoutManager implements LayoutManager2 {
         preLoadCacheIfNecessary();
 
         Dimension size = _cache.getPreferredSize();
+        logMaybe( "FlexiGridLayoutManager.preferredLayoutSize:  " + size );
 
         if ( "outer".equals( getTarget().getName() ) ) {
 
@@ -285,6 +313,7 @@ public class FlexiGridLayoutManager implements LayoutManager2 {
 
         @SuppressWarnings("UnnecessaryLocalVariable")
         Dimension size = _cache.getMinimumSize();
+        logMaybe( "FlexiGridLayoutManager.minimumLayoutSize:  " + size );
 
         return size;
 
@@ -298,6 +327,7 @@ public class FlexiGridLayoutManager implements LayoutManager2 {
 
         @SuppressWarnings("UnnecessaryLocalVariable")
         Dimension size = _cache.getMaximumSize();
+        logMaybe( "FlexiGridLayoutManager.maximumLayoutSize:  " + size );
 
         return size;
 
@@ -315,7 +345,7 @@ public class FlexiGridLayoutManager implements LayoutManager2 {
     @Override
     public void addLayoutComponent( final String name, final Component comp ) {
 
-        Logger.logMsg( "addLayoutComponent( " + ObtuseUtil.enquoteToJavaString( name ) + ", " + comp + " )" );
+        logMaybe( "addLayoutComponent( " + ObtuseUtil.enquoteToJavaString( name ) + ", " + comp + " )" );
 
         flushCache( "addLayoutComponent", _target );
 
@@ -332,6 +362,8 @@ public class FlexiGridLayoutManager implements LayoutManager2 {
 
         } else {
 
+            logMaybe( "removeLayoutComponent:  removing constraint for " + LinearLayoutUtil.describeComponent( comp ) + " - " + _constraints.get( comp ) );
+
             _constraints.remove( comp );
 
         }
@@ -341,6 +373,19 @@ public class FlexiGridLayoutManager implements LayoutManager2 {
     @SuppressWarnings("Duplicates")
     @Override
     public void layoutContainer( final Container parent ) {
+
+        if ( parent != _target.getAsContainer() ) {
+
+            throw new IllegalArgumentException(
+                    "FlexiGridLayoutManager.layoutContainer:  " +
+                    "parent(" + LinearLayoutUtil.describeComponent( parent ) + ") " +
+                    "is not our target container " +
+                    "(" + LinearLayoutUtil.describeComponent( _target ) + ")"
+            );
+
+        }
+
+        logMaybe( "FlexiGridLayoutManager.layoutContainer( " + LinearLayoutUtil.describeComponent( parent ) + " ):  it begins" );
 
         FlexiGridCache1 cache;
 
@@ -360,7 +405,19 @@ public class FlexiGridLayoutManager implements LayoutManager2 {
 
         }
 
+//        cache.setComponentBounds();
         cache.setComponentBounds();
+
+        Dimension targetMinimumSize = _target.getMinimumSize();
+        Dimension targetPreferredSize = _target.getPreferredSize();
+        Dimension targetMaximumSize = _target.getMaximumSize();
+
+        logMaybe(
+                "FlexiGridLayoutManager.layoutContainer:  " +
+                "min=" + ObtuseUtil.fDim( targetMinimumSize ) + ", " +
+                "pref=" + ObtuseUtil.fDim( targetPreferredSize ) + ", " +
+                "max=" + ObtuseUtil.fDim( targetMaximumSize )
+        );
 
         int containerWidth = 0;
         int containerHeight = 0;
@@ -374,14 +431,30 @@ public class FlexiGridLayoutManager implements LayoutManager2 {
 
         }
 
-        if ( isTraceMode() ) {
+//        if ( isMsgTraceMode() ) {
 
-            Rectangle bounds = new Rectangle( 0, 0, containerWidth, containerHeight );
-            Logger.logMsg( "FlexiGridLayoutManager.layoutContainer:  container will be " + ObtuseUtil.fBounds( bounds ) );
+        Rectangle bounds = new Rectangle( 0, 0, containerWidth, containerHeight );
+        logMaybe( "FlexiGridLayoutManager.layoutContainer:  container will be " + ObtuseUtil.fBounds( bounds ) + ", insets=" + _target.getInsets() );
 
-        }
+        Dimension dimensions = new Dimension( containerWidth, containerHeight );
+        cache.addInsets( dimensions );
+        logMaybe( "FlexiGridLayoutManager.layoutContainer:  dimensions including insets will be " + ObtuseUtil.fDim( dimensions ) );
+
+        logMaybe( "FlexiGridLayoutManager.layoutContainer:  dimensions actually are " + ObtuseUtil.fBounds( _target.getBounds() ) );
+
+//        }
 
         ObtuseUtil.doNothing();
+
+    }
+
+    /* package private */ void logMaybe( final String msg ) {
+
+        if ( isTraceMode() ) {
+
+            Logger.logMsg( msg );
+
+        }
 
     }
 
@@ -407,6 +480,25 @@ public class FlexiGridLayoutManager implements LayoutManager2 {
     public String toString() {
 
         return "FlexiGridLayoutManager( container=" + getTarget() + " )";
+
+    }
+
+    public void setFlexiGridPanelModel( final @NotNull FlexiGridPanelModel flexiGridPanelModel ) {
+
+        if ( _flexiGridPanelModel != null && _flexiGridPanelModel != flexiGridPanelModel ) {
+
+            throw new IllegalArgumentException( "FlexiGridLayoutManager.setFlexiGridPanelModel:  model cannot be changed once set" );
+
+        }
+
+        _flexiGridPanelModel = flexiGridPanelModel;
+
+    }
+
+    @NotNull
+    public Optional<FlexiGridPanelModel> getFlexiGridPanelModel() {
+
+        return Optional.ofNullable( _flexiGridPanelModel );
 
     }
 

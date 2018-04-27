@@ -4,7 +4,9 @@
 
 package com.obtuse.ui;
 
-import com.obtuse.util.*;
+import com.obtuse.util.ImageIconUtils;
+import com.obtuse.util.ThreeDimensionalSortedMap;
+import com.obtuse.util.ThreeDimensionalTreeMap;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

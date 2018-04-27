@@ -7,7 +7,10 @@ package com.obtuse.util;
 import com.obtuse.db.PostgresConnection;
 import com.obtuse.exceptions.HowDidWeGetHereError;
 import com.obtuse.util.gowing.*;
-import com.obtuse.util.gowing.p2a.*;
+import com.obtuse.util.gowing.p2a.GowingUnPackedEntityGroup;
+import com.obtuse.util.gowing.p2a.GowingUnpackingException;
+import com.obtuse.util.gowing.p2a.StdGowingPacker;
+import com.obtuse.util.gowing.p2a.StdGowingUnPacker;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -25,7 +28,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.util.*;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.zip.ZipFile;
@@ -2841,33 +2843,37 @@ public class ObtuseUtil {
      this method fails on your platform.
      */
 
-    public static int getPid() {
+    public static long getPid() {
 
-        if ( ObtuseUtil.s_pid == null ) {
+        return ProcessHandle.current().pid();
 
-            ObtuseUtil.s_pid = -1;
-            try {
+        // How to do this pre-Java 9:
 
-                java.lang.management.RuntimeMXBean runtime =
-                        java.lang.management.ManagementFactory.getRuntimeMXBean();
-                @SuppressWarnings("JavaReflectionMemberAccess")
-                java.lang.reflect.Field jvm = runtime.getClass().getDeclaredField( "jvm" );
-                jvm.setAccessible( true );
-                sun.management.VMManagement mgmt =
-                        (sun.management.VMManagement)jvm.get( runtime );
-                @SuppressWarnings("JavaReflectionMemberAccess")
-                java.lang.reflect.Method pidMethod = mgmt.getClass().getDeclaredMethod( "getProcessId" );
-                pidMethod.setAccessible( true );
-
-                ObtuseUtil.s_pid = (Integer)pidMethod.invoke( mgmt );
-
-            } catch ( InvocationTargetException | NoSuchMethodException | NoSuchFieldException | IllegalAccessException e ) {
-                // we did our best
-            }
-
-        }
-
-        return ObtuseUtil.s_pid.intValue();
+//        if ( ObtuseUtil.s_pid == null ) {
+//
+//            ObtuseUtil.s_pid = -1;
+//            try {
+//
+//                java.lang.management.RuntimeMXBean runtime =
+//                        java.lang.management.ManagementFactory.getRuntimeMXBean();
+//                @SuppressWarnings("JavaReflectionMemberAccess")
+//                java.lang.reflect.Field jvm = runtime.getClass().getDeclaredField( "jvm" );
+//                jvm.setAccessible( true );
+//                sun.management.VMManagement mgmt =
+//                        (sun.management.VMManagement)jvm.get( runtime );
+//                @SuppressWarnings("JavaReflectionMemberAccess")
+//                java.lang.reflect.Method pidMethod = mgmt.getClass().getDeclaredMethod( "getProcessId" );
+//                pidMethod.setAccessible( true );
+//
+//                ObtuseUtil.s_pid = (Integer)pidMethod.invoke( mgmt );
+//
+//            } catch ( InvocationTargetException | NoSuchMethodException | NoSuchFieldException | IllegalAccessException e ) {
+//                // we did our best
+//            }
+//
+//        }
+//
+//        return ObtuseUtil.s_pid.intValue();
 
     }
 

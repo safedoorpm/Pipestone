@@ -11,7 +11,6 @@ import com.obtuse.util.BasicProgramConfigInfo;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * Try out MPS class again.

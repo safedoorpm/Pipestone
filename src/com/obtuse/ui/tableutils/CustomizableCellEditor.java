@@ -5,12 +5,10 @@
 
 package com.obtuse.ui.tableutils;
 
-import sun.reflect.misc.ReflectUtil;
-import sun.swing.SwingUtilities2;
-
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.lang.reflect.Modifier;
 
 /**
  A customizable table cell editor.
@@ -97,7 +95,7 @@ public abstract class CustomizableCellEditor extends DefaultCellEditor {
             // Before we do that, verify that we are allowed to call the constructor for the cell's {@code class} (we don't want to expose
             // any package-private constructors in our package to software that isn't from our package).
 
-            SwingUtilities2.checkAccess( constructor.getModifiers() );
+            checkAccess( constructor.getModifiers() );
 
             // Create a result value for the edit session which is of the correct {@code class} for the cell.
 
@@ -113,6 +111,47 @@ public abstract class CustomizableCellEditor extends DefaultCellEditor {
         }
 
         return super.stopCellEditing();
+
+    }
+
+    /**
+     * Utility method that throws SecurityException if SecurityManager is set
+     * and modifiers are not public.
+     * <p>'Borrowed' from the old {@code sun.swing.SwingUtilities2} class.</p>
+     * @param modifiers a set of modifiers
+     */
+
+    public static void checkAccess(int modifiers) {
+
+        if (System.getSecurityManager() != null
+            && !Modifier.isPublic( modifiers)) {
+            throw new SecurityException("Resource is not accessible");
+
+        }
+    }
+
+    /**
+     * Checks package access on the given classname.
+     * This method is typically called when the Class instance is not
+     * available and the caller attempts to load a class on behalf
+     * the true caller (application).
+     * <p>'Borrowed' from the old {@code sun.reflect.misc.ReflectUtil} class.</p>
+     */
+    public static void checkPackageAccess(String name) {
+        SecurityManager s = System.getSecurityManager();
+        if (s != null) {
+            String cname = name.replace('/', '.');
+            if (cname.startsWith("[")) {
+                int b = cname.lastIndexOf('[') + 2;
+                if (b > 1 && b < cname.length()) {
+                    cname = cname.substring(b);
+                }
+            }
+            int i = cname.lastIndexOf('.');
+            if (i != -1) {
+                s.checkPackageAccess(cname.substring(0, i));
+            }
+        }
     }
 
     public Component getTableCellEditorComponent(
@@ -139,8 +178,16 @@ public abstract class CustomizableCellEditor extends DefaultCellEditor {
 
             }
 
-            ReflectUtil.checkPackageAccess( type );
-            SwingUtilities2.checkAccess( type.getModifiers() );
+            // This was re-worked to avoid using the sun.reflect.misc.ReflectUtil} class
+            // which went behind an invisible shield with the advent of Java 9 (maybe Java 10).
+            // The old line read
+            //
+            // ReflectUtil.checkPackageAccess( type );
+            //
+            // It probably needs debuggin'.
+
+            checkPackageAccess( type.getCanonicalName() );
+            checkAccess( type.getModifiers() );
             constructor = type.getConstructor( argTypes );
 
         } catch ( Exception e ) {

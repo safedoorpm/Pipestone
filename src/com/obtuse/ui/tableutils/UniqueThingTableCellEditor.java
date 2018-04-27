@@ -5,9 +5,10 @@
 
 package com.obtuse.ui.tableutils;
 
-import com.obtuse.ui.ObtuseMessageLabel;
 import com.obtuse.ui.MessageLabelInterface;
-import com.obtuse.util.*;
+import com.obtuse.ui.ObtuseMessageLabel;
+import com.obtuse.util.Logger;
+import com.obtuse.util.ObtuseUtil;
 import com.obtuse.util.things.ThingInfo;
 import com.obtuse.util.things.ThingName;
 import com.obtuse.util.things.ThingNameFactory;

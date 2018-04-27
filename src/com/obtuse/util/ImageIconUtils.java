@@ -6,7 +6,10 @@ package com.obtuse.util;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.*;
+import java.awt.image.BufferedImage;
+import java.awt.image.ColorModel;
+import java.awt.image.PixelGrabber;
+import java.awt.image.RescaleOp;
 import java.net.URL;
 
 /**

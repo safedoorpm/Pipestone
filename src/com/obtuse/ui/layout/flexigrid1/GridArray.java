@@ -80,7 +80,9 @@ public class GridArray<T extends GridArray.ItemInfo> {
         public String toString() {
 
             return "ItemInfo( " + row() + ", " + column() + ", " +
-                   ( component() == null ? "null" : component().getName() + "=" + component().getClass().getCanonicalName() ) +
+                   ( component() == null ? "null" :
+                             ( component().getName() + "=" + component().getClass().getCanonicalName() )
+                   ) +
                    ( component() instanceof JLabel ? ( " " + ( (JLabel)component()).getText() ) : "" ) +
                    " )";
 
@@ -105,7 +107,7 @@ public class GridArray<T extends GridArray.ItemInfo> {
 
     private void validateGridCell( String who, int row, int col ) {
 
-        if ( row < 0 ) {
+        if ( row < -1 ) {
 
             throw new IllegalArgumentException( who + ":  row (" + row + ") must not be negative" );
 

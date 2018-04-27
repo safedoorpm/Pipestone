@@ -4,9 +4,11 @@
 
 package com.obtuse.ui.layout.flexigrid1;
 
+import com.obtuse.ui.layout.flexigrid1.model.FlexiGridPanelModel;
 import com.obtuse.ui.layout.flexigrid1.util.FlexiGridBasicConstraint;
 import com.obtuse.ui.layout.flexigrid1.util.FlexiGridConstraintsTable;
 import com.obtuse.ui.layout.flexigrid1.util.FlexiGridSliceSizes;
+import com.obtuse.ui.layout.linear.LinearLayoutUtil;
 import com.obtuse.util.Logger;
 import com.obtuse.util.ObtuseUtil;
 import com.obtuse.util.SimpleUniqueLongIdGenerator;
@@ -63,11 +65,15 @@ public class FlexiGridCache1 implements FlexiGridLayoutManagerCache {
 
         super();
 
+        // This has to happen before any logging is attempted.
+
+        _flexiGridLayoutManager = flexiGridLayoutManager;
+
+        logMaybe( "================================= creating FlexiGridCache1" );
+
         _name = name;
 
         _grid = new GridArray<>( name );
-
-        _flexiGridLayoutManager = flexiGridLayoutManager;
 
         _target = target;
 
@@ -95,6 +101,12 @@ public class FlexiGridCache1 implements FlexiGridLayoutManagerCache {
         computePositions();
 
         ObtuseUtil.doNothing();
+
+    }
+
+    private void logMaybe( final String msg ) {
+
+        _flexiGridLayoutManager.logMaybe( msg );
 
     }
 
@@ -137,7 +149,7 @@ public class FlexiGridCache1 implements FlexiGridLayoutManagerCache {
 
 //                    } else {
 //
-//                        Logger.logMsg( "no visible components instance provided" );
+//                        logMaybe( "no visible components instance provided" );
 
                     }
 
@@ -147,11 +159,16 @@ public class FlexiGridCache1 implements FlexiGridLayoutManagerCache {
                     Dimension prefDim = ii.component().getPreferredSize();
                     Dimension maxDim = ii.component().getMaximumSize();
 
-                    sliceSizes.consume( ii, getValue.apply( minDim ), getValue.apply( prefDim ), getValue.apply( maxDim ) );
+                    sliceSizes.consume(
+                            ii,
+                            getValue.apply( minDim ).intValue(),
+                            getValue.apply( prefDim ).intValue(),
+                            getValue.apply( maxDim ).intValue()
+                    );
 
                 } else {
 
-                    Logger.logMsg( "FlexiGridCache1.collectSizes:  ignoring invisible component " + ii.component() );
+                    logMaybe( "FlexiGridCache1.collectSizes:  ignoring invisible component " + ii.component() );
 
                 }
 
@@ -180,6 +197,9 @@ public class FlexiGridCache1 implements FlexiGridLayoutManagerCache {
             final FlexiGridItemInfo.FlexiItemInfoFactory itemInfoFactory
     ) {
 
+        @NotNull Optional<FlexiGridPanelModel> optModel = _flexiGridLayoutManager.getFlexiGridPanelModel();
+        optModel.ifPresent( flexiGridPanelModel -> flexiGridPanelModel.renumber( "FlexiGridCache1.loadGrid", false ) );
+
         for ( Component c : target.getComponents() ) {
 
             FlexiGridConstraintsTable constraint = allConstraints.get( c );
@@ -201,15 +221,30 @@ public class FlexiGridCache1 implements FlexiGridLayoutManagerCache {
                 FlexiGridBasicConstraint bc = _flexiGridLayoutManager.getMandatoryBasicConstraint( component );
 //                    FlexiGridBasicConstraint bc = (FlexiGridBasicConstraint)constraint;
 
-//                Logger.logMsg( "FlexiGridCache1.loadGrid:  remembering " + bc.locationString() );
+//                logMaybe( "FlexiGridCache1.loadGrid:  remembering " + bc.locationString() );
+
+//                if ( optModel.isPresent() ) {
+//
+//                    FlexiGridPanelModel model = optModel.get();
+//                    if ( !model.isSliceVisible( bc.getRow(), bc.getCol() ) ) {
+//
+//                        continue;
+//
+//                    }
+//
+//                }
 
                 FlexiGridConstraintsTable constraintsTable = allConstraints.get( component );
                 FlexiGridItemInfo ii = itemInfoFactory.createInstance( bc.getRow(), bc.getCol(), component, constraintsTable );
                 _grid.put( ii, false );
 
+//                Logger.logMsg( "" + LinearLayoutUtil.describeComponent( component ) + " is at " + bc );
+
+                ObtuseUtil.doNothing();
+
 //            } else {
 //
-//                Logger.logMsg( "FlexiGridCache1.loadGrid:  ignoring invisible component " + component );
+//                logMaybe( "FlexiGridCache1.loadGrid:  ignoring invisible component " + component );
 
             }
 
@@ -290,7 +325,7 @@ public class FlexiGridCache1 implements FlexiGridLayoutManagerCache {
 
     }
 
-    private void addInsets( final Dimension size ) {
+    public void addInsets( final Dimension size ) {
 
         Insets insets = _target.getInsets();
 
@@ -354,7 +389,7 @@ public class FlexiGridCache1 implements FlexiGridLayoutManagerCache {
             FlexiGridSliceSizes columnSizes = _columnSizes.get( col );
             if ( columnSizes == null ) {
 
-                Logger.logMsg( "FlexiGridCache1.computePositions:  no _columnSizes @ " + col );
+                logMaybe( "FlexiGridCache1.computePositions:  no _columnSizes @ " + col );
 
             }
 
@@ -363,7 +398,7 @@ public class FlexiGridCache1 implements FlexiGridLayoutManagerCache {
                 FlexiGridSliceSizes rowSizes = _rowSizes.get( row );
                 if ( rowSizes == null ) {
 
-                    Logger.logMsg( "FlexiGridCache1.computePositions:  no _rowSizes @ " + row );
+                    logMaybe( "FlexiGridCache1.computePositions:  no _rowSizes @ " + row );
 
                 }
 
@@ -390,12 +425,12 @@ public class FlexiGridCache1 implements FlexiGridLayoutManagerCache {
 
             FlexiGridSliceSizes minPrefMaxSizes = sliceSizesMap.get( ix );
 
-//            Logger.logMsg( "FlexiGridCache1.computeLocationsAndSizes(" + direction + "): " + minPrefMaxSizes );
+//            logMaybe( "FlexiGridCache1.computeLocationsAndSizes(" + direction + "): " + minPrefMaxSizes );
 
             //noinspection StatementWithEmptyBody
             if ( minPrefMaxSizes == null ) {
 
-//                Logger.logMsg( "FlexiGridCache1.computeLocationsAndSizes(" + direction + "):  no minPrefMaxSizes for ix=" + ix );
+//                logMaybe( "FlexiGridCache1.computeLocationsAndSizes(" + direction + "):  no minPrefMaxSizes for ix=" + ix );
 
             } else {
 
@@ -432,7 +467,7 @@ public class FlexiGridCache1 implements FlexiGridLayoutManagerCache {
             Integer nominalHeight = _yHeights.get( row );
             if ( nominalHeight == null ) {
 
-                Logger.logMsg( "FlexiGridCache1.setComponentBounds:  nominal height is null" );
+                logMaybe( "FlexiGridCache1.setComponentBounds:  nominal height is null" );
 
             } else {
 
@@ -444,7 +479,7 @@ public class FlexiGridCache1 implements FlexiGridLayoutManagerCache {
                     Integer nominalWidth = _xWidths.get( col );
                     if ( nominalWidth == null ) {
 
-                        Logger.logMsg( "FlexiGridCache1.setComponentBounds:  nominal width is null" );
+                        logMaybe( "FlexiGridCache1.setComponentBounds:  nominal width is null" );
 
                     } else {
 
@@ -489,7 +524,7 @@ public class FlexiGridCache1 implements FlexiGridLayoutManagerCache {
 
                         Component component = element.component();
                         Dimension preferredSize = component.getPreferredSize();
-//                        Logger.logMsg( "nominalHeight is " + nominalHeight + ", component is " + component + ", preferredSize is " + preferredSize );
+//                        logMaybe( "nominalHeight is " + nominalHeight + ", component is " + component + ", preferredSize is " + preferredSize );
 
 
                         int extraVSpace = nominalHeight - preferredSize.height;
@@ -540,7 +575,7 @@ public class FlexiGridCache1 implements FlexiGridLayoutManagerCache {
                                 )
                         );
 
-                        //                Logger.logMsg( "component " + element + " @ [" + element.row() + "," + element.column() + "] has bounding box " + ObtuseUtil.fBounds( boundingRectangle ) );
+                        //                logMaybe( "component " + element + " @ [" + element.row() + "," + element.column() + "] has bounding box " + ObtuseUtil.fBounds( boundingRectangle ) );
 
                         element.component().setBounds( boundingRectangle );
 

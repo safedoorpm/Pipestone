@@ -14,6 +14,7 @@ import java.util.*;
  */
 
 @SuppressWarnings("UnusedDeclaration")
+@Deprecated
 public class DirectedGraph {
 
     /**

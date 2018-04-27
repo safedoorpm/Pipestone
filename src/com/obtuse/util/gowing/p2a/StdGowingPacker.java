@@ -2,7 +2,6 @@ package com.obtuse.util.gowing.p2a;
 
 import com.obtuse.util.*;
 import com.obtuse.util.gowing.*;
-import com.obtuse.util.gowing.p2a.examples.SortedSetExample;
 import com.obtuse.util.gowing.p2a.holders.GowingPackableCollection;
 import com.obtuse.util.gowing.p2a.holders.GowingPackableMapping;
 import org.jetbrains.annotations.NotNull;

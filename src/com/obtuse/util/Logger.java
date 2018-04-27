@@ -68,8 +68,7 @@ public class Logger {
     private static Stack<String> _nestingLevelNames = new Stack<>();
     private static String _nestingString = "";
 
-    @SuppressWarnings("UnnecessaryBoxing")
-    private static final Long _nestingLevelLock = new Long( 0L );
+    private static final Long _nestingLevelLock = 0L;
 
     static {
 

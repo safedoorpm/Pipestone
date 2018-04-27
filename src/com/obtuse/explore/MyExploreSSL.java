@@ -4,14 +4,18 @@
 
 package com.obtuse.explore;
 
+import com.obtuse.util.BasicProgramConfigInfo;
+import com.obtuse.util.Logger;
+import com.obtuse.util.ObtuseUtil;
 import com.obtuse.util.SSLUtilities;
-import com.obtuse.util.*;
 import com.obtuse.util.exceptions.PipestoneSSLException;
 
 import javax.net.ssl.*;
 import java.io.IOException;
 import java.security.*;
-import java.security.cert.*;
+import java.security.cert.CertificateEncodingException;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
 
 /**
  * Explore what we can do with SSL sockets.

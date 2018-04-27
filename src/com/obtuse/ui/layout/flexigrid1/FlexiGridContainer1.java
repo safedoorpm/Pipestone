@@ -4,7 +4,12 @@
 
 package com.obtuse.ui.layout.flexigrid1;
 
+import com.obtuse.exceptions.HowDidWeGetHereError;
+import com.obtuse.ui.layout.layoutTracer.LayoutTracer;
+import com.obtuse.util.Logger;
+import com.obtuse.util.ObtuseUtil;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,42 +27,80 @@ public class FlexiGridContainer1 extends JPanel implements FlexiGridContainer {
     private final boolean _initialized;
 
     private final long _modelKey;
+    private final boolean _msgTraceMode;
+    private final boolean _useLayoutTracer;
+
+    private int _temporaryPass = 0;
 
     @SuppressWarnings("unused")
-    public FlexiGridContainer1( final @NotNull String name ) {
-        this( true, name );
+    public FlexiGridContainer1(
+            final @NotNull String name,
+            final boolean msgTraceMode,
+            final boolean useLayoutTracer
+    ) {
+        this( true, name, msgTraceMode, useLayoutTracer );
 
     }
 
-    public FlexiGridContainer1( final boolean doubleBuffered, final @NotNull String name ) {
-        this( doubleBuffered, name, 0L );
+    public FlexiGridContainer1(
+            final boolean doubleBuffered,
+            final @NotNull String name,
+            final boolean msgTraceMode,
+            final boolean useLayoutTracer
+    ) {
+        this( doubleBuffered, name, 0L, msgTraceMode, useLayoutTracer );
 
     }
 
-    public FlexiGridContainer1( boolean doubleBuffered, final @NotNull String name, final long modelKey ) {
+    public FlexiGridContainer1(
+            final boolean doubleBuffered,
+            final @NotNull String name,
+            final long modelKey,
+            final boolean msgTraceMode,
+            final boolean useLayoutTracer
+    ) {
         super( doubleBuffered );
+
+        _msgTraceMode = msgTraceMode;
+        _useLayoutTracer = useLayoutTracer;
+
+        setOpaque( false );
 
         setName( name );
 
         _modelKey = modelKey;
 
-        super.setLayout(
-                new FlexiGridLayoutManager(
-                        name,
-                        this,
-                        ( row, col, component, constraintsTable ) -> new FlexiGridItemInfo( row, col, component, constraintsTable )
-                )
+        FlexiGridLayoutManager mgr = new FlexiGridLayoutManager(
+                name,
+                this,
+                ( row, col, component, constraintsTable ) -> new FlexiGridItemInfo( row, col, component, constraintsTable )
         );
+
+        super.setLayout( useLayoutTracer() ? new LayoutTracer( mgr ) : mgr );
 
         _initialized = true;
 
     }
 
-    public void setLayout(LayoutManager mgr) {
+    public void paint( Graphics g ) {
+
+        super.paint( g );
+
+    }
+
+    public void setLayout( final LayoutManager mgr ) {
 
         if ( mgr == null || mgr instanceof FlexiGridLayoutManager || !_initialized ) {
 
-            super.setLayout( mgr );
+            if ( mgr instanceof FlexiGridLayoutManager && useLayoutTracer() ) {
+
+                super.setLayout( new LayoutTracer( (FlexiGridLayoutManager)mgr ) );
+
+            } else {
+
+                super.setLayout( mgr );
+
+            }
 
         } else {
 
@@ -67,13 +110,13 @@ public class FlexiGridContainer1 extends JPanel implements FlexiGridContainer {
 
     }
 
-    public Component add( final @NotNull Component component ) {
+    public Component add( @SuppressWarnings("NullableProblems") final @NotNull Component component ) {
 
         return add( component, null, -1, 0L );
 
     }
 
-    public Component add( final String name, final @NotNull Component component ) {
+    public Component add( final String name, @SuppressWarnings("NullableProblems") final @NotNull Component component ) {
 
         return add( component, name, -1, 0L );
 
@@ -85,26 +128,26 @@ public class FlexiGridContainer1 extends JPanel implements FlexiGridContainer {
 //
 //    }
 
-    public Component add( final @NotNull Component component, final int index ) {
+    public Component add( @SuppressWarnings("NullableProblems") final @NotNull Component component, final int index ) {
 
         return add( component, null, index, 0L );
 
     }
 
-    public void add( final @NotNull Component component, Object constraint ) {
+    public void add( @SuppressWarnings("NullableProblems") final @NotNull Component component, final @Nullable Object constraint ) {
 
         add( component, constraint, 0, 0L );
 
     }
 
-    public void add( final @NotNull Component component, final Object constraints, int index ) {
+    public void add( @SuppressWarnings("NullableProblems") final @NotNull Component component, final Object constraints, final int index ) {
 
         add( component, constraints, index, 0L );
 
     }
 
     @Override
-    public Component add( final @NotNull Component component, Object constraints, int index, long key ) {
+    public Component add( final @NotNull Component component, final @Nullable Object constraints, final int index, final long key ) {
 
         checkKey( key, "add", "to" );
 
@@ -114,6 +157,7 @@ public class FlexiGridContainer1 extends JPanel implements FlexiGridContainer {
 
     }
 
+    @Override
     public void removeAll( final long key ) {
 
         checkKey( key, "remove", "from" );
@@ -122,12 +166,14 @@ public class FlexiGridContainer1 extends JPanel implements FlexiGridContainer {
 
     }
 
+    @Override
     public void removeAll() {
 
         removeAll( 0L );
 
     }
 
+    @Override
     public void remove( final int index, final long key ) {
 
         checkKey( key, "remove", "from" );
@@ -136,29 +182,69 @@ public class FlexiGridContainer1 extends JPanel implements FlexiGridContainer {
 
     }
 
+    @Override
     public void remove( final int index ) {
 
         remove( index, 0L );
 
     }
 
-    public void remove( Component component, long key ) {
+    @Override
+    public FlexiGridLayoutManager getFlexiGridLayoutManager() {
 
-        checkKey( key, "remove", "from" );
+        LayoutManager lm = getLayout();
+        if ( useLayoutTracer() && lm instanceof LayoutTracer ) {
 
-        super.remove( component );
+            return (FlexiGridLayoutManager)((LayoutTracer)lm).getWrappedLayoutManager2();
+
+        } else if ( lm instanceof FlexiGridLayoutManager ) {
+
+            return (FlexiGridLayoutManager)lm;
+
+        } else {
+
+            throw new HowDidWeGetHereError( "FlexiGridContainer1.getFlexiGridLayoutManager:  we're not using a FGLM (yet?)" );
+
+        }
 
     }
 
-    public void remove( Component component ) {
+    @Override
+    public void remove( final Component component, final long key ) {
+
+        checkKey( key, "remove", "from" );
+
+        try {
+
+            _temporaryPass += 1;
+
+            super.remove( component );
+
+        } finally {
+
+            if ( _temporaryPass <= 0 ) {
+
+                //noinspection ThrowFromFinallyBlock
+                throw new HowDidWeGetHereError( "FlexiGridContainer1: temporary pass handling error - attempt to decrement pass into negative range" );
+
+            }
+
+            _temporaryPass -= 1;
+
+        }
+
+    }
+
+    @Override
+    public void remove( @SuppressWarnings("NullableProblems") final @NotNull Component component ) {
 
         remove( component, 0L );
 
     }
 
-    public void checkKey( final long key, String action, String direction ) {
+    public void checkKey( final long key, final @NotNull String action, final @NotNull String direction ) {
 
-        if ( _modelKey != 0 && _modelKey != key ) {
+        if ( _temporaryPass == 0 && _modelKey != 0 && _modelKey != key ) {
 
             throw new IllegalArgumentException(
                     "FlexiGridContainer1." + action +
@@ -203,6 +289,24 @@ public class FlexiGridContainer1 extends JPanel implements FlexiGridContainer {
 
     @SuppressWarnings({ "EmptyMethod", "unused" })
     public void doneLayout() {
+
+    }
+
+    public String toString() {
+
+        return "FlexiGridContainer1()";
+
+    }
+
+    public boolean isMsgTraceMode() {
+
+        return _msgTraceMode;
+
+    }
+
+    public boolean useLayoutTracer() {
+
+        return _useLayoutTracer;
 
     }
 

@@ -4,7 +4,10 @@ package com.obtuse.util.gowing.p2a;
  * Copyright © 2015 Obtuse Systems Corporation
  */
 
-import java.util.*;
+import java.util.Collections;
+import java.util.Date;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 /**
  Configuration constants.

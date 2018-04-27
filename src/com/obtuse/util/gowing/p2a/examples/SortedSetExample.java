@@ -1,6 +1,8 @@
 package com.obtuse.util.gowing.p2a.examples;
 
-import com.obtuse.util.*;
+import com.obtuse.util.BasicProgramConfigInfo;
+import com.obtuse.util.Logger;
+import com.obtuse.util.ObtuseUtil;
 import com.obtuse.util.gowing.*;
 import com.obtuse.util.gowing.p2a.*;
 import com.obtuse.util.gowing.p2a.holders.*;

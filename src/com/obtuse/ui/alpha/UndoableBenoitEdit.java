@@ -4,7 +4,9 @@
 
 package com.obtuse.ui.alpha;
 
-import javax.swing.undo.*;
+import javax.swing.undo.CannotRedoException;
+import javax.swing.undo.CannotUndoException;
+import javax.swing.undo.UndoableEdit;
 
 /**
  * Describe something which can be undone and/or redone.

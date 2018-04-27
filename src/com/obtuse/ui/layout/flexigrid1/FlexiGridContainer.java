@@ -4,6 +4,7 @@
 
 package com.obtuse.ui.layout.flexigrid1;
 
+import com.obtuse.ui.layout.layoutTracer.LayoutTracer;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
@@ -114,12 +115,13 @@ public interface FlexiGridContainer {
 
     Component add( @NotNull Component component, Object constraints, int index, long key );
 
-    /**
-     Swing/AWT method.
-     <p/> {@link JComponent#remove(int)} for more info.
-     */
+    void removeAll( long key );
 
-    void remove( int ix );
+    void removeAll();
+
+    void remove( int index, long key );
+
+    abstract void remove( int index );
 
     /**
      Swing/AWT method.
@@ -151,6 +153,20 @@ public interface FlexiGridContainer {
 
     /**
      Swing/AWT method.
+     <p/> {@link JComponent#invalidate()} for more info.
+     */
+
+    void invalidate();
+
+    /**
+     Swing/AWT method.
+     <p/> {@link JComponent#validate()} for more info.
+     */
+
+    void validate();
+
+    /**
+     Swing/AWT method.
      <p/> {@link JComponent#isVisible()} for more info.
      */
 
@@ -176,6 +192,12 @@ public interface FlexiGridContainer {
     }
 
     /**
+     Get our layout manager (possibly after unwrapping it from a {@link LayoutTracer}).
+     */
+
+    FlexiGridLayoutManager getFlexiGridLayoutManager();
+
+    /**
      Return this instance as a {@link JComponent}.
 
      @return this instance cast as a {@link JComponent}.
@@ -187,4 +209,7 @@ public interface FlexiGridContainer {
 
     }
 
-    }
+    void remove( Component component, long key );
+
+    void remove( Component component );
+}

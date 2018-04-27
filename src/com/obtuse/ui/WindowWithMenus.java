@@ -8,7 +8,6 @@ import com.obtuse.util.OSLevelCustomizations;
 import com.obtuse.util.PreferencesHandler;
 import com.obtuse.util.Trace;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.awt.*;

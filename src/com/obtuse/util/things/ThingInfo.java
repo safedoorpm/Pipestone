@@ -5,8 +5,8 @@
 
 package com.obtuse.util.things;
 
-import org.jetbrains.annotations.NotNull;
 import com.obtuse.ui.tableutils.CheckBoxRowWrapper;
+import org.jetbrains.annotations.NotNull;
 
 /**
  Created by danny on 2017/10/07.

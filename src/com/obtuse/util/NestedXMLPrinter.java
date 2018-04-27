@@ -6,7 +6,8 @@ package com.obtuse.util;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.io.*;
+import java.io.Closeable;
+import java.io.PrintStream;
 import java.util.Collection;
 import java.util.Stack;
 

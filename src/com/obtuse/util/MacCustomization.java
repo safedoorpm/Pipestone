@@ -4,7 +4,8 @@
 
 package com.obtuse.util;
 
-import com.apple.eawt.*;
+import com.apple.eawt.Application;
+import com.apple.eawt.ApplicationAdapter;
 
 import javax.swing.*;
 import java.awt.*;

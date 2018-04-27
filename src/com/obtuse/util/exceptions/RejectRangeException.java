@@ -4,8 +4,8 @@
 
 package com.obtuse.util.exceptions;
 
-import com.obtuse.util.Ranges;
 import com.obtuse.util.Range;
+import com.obtuse.util.Ranges;
 
 /**
  * Thrown by {@link Ranges} if a {@link Range} passed to add() ultimately proves to be unacceptable.

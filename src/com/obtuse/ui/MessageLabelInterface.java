@@ -8,9 +8,6 @@ package com.obtuse.ui;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.awt.*;
-import java.util.Optional;
-
 /**
  Created by danny on 2018/01/05.
  */

@@ -1,7 +1,6 @@
 package com.obtuse.ui.entitySorter;
 
 import com.obtuse.ui.MyActionListener;
-import com.obtuse.util.Logger;
 import com.obtuse.util.NounsList;
 
 import javax.swing.*;

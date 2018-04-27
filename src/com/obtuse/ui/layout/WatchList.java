@@ -13,8 +13,6 @@ import org.jetbrains.annotations.NotNull;
 import java.awt.*;
 import java.util.WeakHashMap;
 
-import static com.obtuse.ui.layout.linear.LinearLayoutUtil.fullName;
-
 /**
  Manage a watchlist.
  */

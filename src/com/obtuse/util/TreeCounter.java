@@ -5,7 +5,9 @@
 package com.obtuse.util;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.Set;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 /**
  * Count occurrences of things using a sorted mapping.

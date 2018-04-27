@@ -6,6 +6,8 @@ package com.obtuse.util;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.Closeable;
+import java.io.IOException;
 import java.io.PrintStream;
 import java.util.*;
 
@@ -14,7 +16,7 @@ import java.util.*;
  */
 
 @SuppressWarnings("UnusedDeclaration")
-public class Measure {
+public class Measure implements Closeable {
 
     private static final String OUTER_DONE_STATS = "<outerDoneStats>";
 
@@ -301,6 +303,13 @@ public class Measure {
 
     }
 
+    @Override
+    public void close() {
+
+        done();
+
+    }
+
     /**
      Record the completion of this event.
      @return the duration of this event in milliseconds.
@@ -333,7 +342,7 @@ public class Measure {
 
         if ( _finished ) {
 
-            return 0;
+            return _finishedDelta;
 
         }
 
@@ -372,6 +381,7 @@ public class Measure {
         Measure.recordData( Measure.s_stats, Measure.OUTER_DONE_STATS, System.currentTimeMillis() - now );
 
         _finished = true;
+        _finishedDelta = delta;
 
         return delta;
 
@@ -563,6 +573,20 @@ public class Measure {
 
     }
 
+    /**
+     A (relatively) easy way to measure a block of code.
+     @param categoryName the name of the category being measured.
+     @param runnable the code to be measured.
+     @return the delta for this invocation.
+     @deprecated Switch to the at least arguably cleaner and definitely more flexible
+     <blockquote>
+     <code>try ( Measure m = new Measure( __category_name__ ) ) {
+     <blockquote>... the code to be measured ...</blockquote>
+     }</code>
+     </blockquote>
+     */
+
+    @Deprecated
     public static long measure( final String categoryName, final Runnable runnable ) {
 
         Measure measure = new Measure( categoryName );

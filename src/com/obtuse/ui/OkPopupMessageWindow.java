@@ -110,11 +110,12 @@ public class OkPopupMessageWindow extends JDialog {
 
     }
 
-    public void finalize() {
-
-        Logger.logMsg( "OkPopupMessageWindow.finalize:  toodles!" );
-
-    }
+// Note that finalize() has been deprecated since Java 9.
+//    public void finalize() {
+//
+//        Logger.logMsg( "OkPopupMessageWindow.finalize:  toodles!" );
+//
+//    }
 
     private void onOK() {
 

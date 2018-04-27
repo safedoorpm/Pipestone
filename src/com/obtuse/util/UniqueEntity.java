@@ -39,11 +39,12 @@ public class UniqueEntity implements UniqueWithId {
      * @param uniqueLongIdGenerator the unique id generator to be used to compute this newly created instance's id value.
      */
 
+    @SuppressWarnings("WeakerAccess")
     public UniqueEntity( final UniqueLongIdGenerator uniqueLongIdGenerator ) {
         super();
 
         _id = uniqueLongIdGenerator.getUniqueId();
-        _hashCode = new Long( _id ).hashCode();
+        _hashCode = Long.valueOf( _id ).hashCode();
 
     }
 
@@ -74,7 +75,7 @@ public class UniqueEntity implements UniqueWithId {
     /**
      * Returns a hash code for the object.
      * <p/>
-     * This method returns precisely what <tt>new Long( this.getId() ).hashCode()</tt> would return.
+     * This method returns precisely what <tt>Long.valueOf( this.getId() ).hashCode()</tt> would return.
      * This method satisfies the hashCode contract specified by the {@link Object#hashCode} method.
      * <p/>
      * Note that the hash code value for each newly created instance is pre-computed when the instance is created.

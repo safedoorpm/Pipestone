@@ -7,7 +7,9 @@ package com.obtuse.util;
 import com.obtuse.util.exceptions.PipestoneSSLException;
 import org.jetbrains.annotations.Nullable;
 
-import javax.net.ssl.*;
+import javax.net.ssl.KeyManagerFactory;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManagerFactory;
 import java.io.*;
 import java.security.*;
 import java.security.cert.CertificateException;
@@ -57,7 +59,7 @@ public class SSLUtilities {
 
         public int hashCode() {
 
-            return _keystoreFname.hashCode() ^ new Integer( _keystorePassword.length ).hashCode();
+            return _keystoreFname.hashCode() ^ Integer.hashCode( _keystorePassword.length );
 
         }
 

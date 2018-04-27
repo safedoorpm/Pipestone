@@ -33,7 +33,7 @@ public abstract class YesNoPopupMessageWindow
 
     private boolean _gotAnswer;
 
-    private final Long _answerLock = new Long( 0L );
+    private final Long _answerLock = 0L;
 
     protected YesNoPopupMessageWindow(
             final String line1,

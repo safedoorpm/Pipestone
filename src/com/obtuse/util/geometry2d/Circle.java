@@ -241,7 +241,7 @@ public class Circle {
         _center = new MyPoint( center.x, center.y );
         _radius = radius;
 
-        _hashCode = new Double( _center.x + _center.y + _radius ).hashCode();
+        _hashCode = Double.hashCode( _center.x + _center.y + _radius );
 
     }
 

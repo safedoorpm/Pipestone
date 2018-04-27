@@ -4,8 +4,6 @@ package com.obtuse.ui.entitySorter;
  * Copyright © 2015 Obtuse Systems Corporation
  */
 
-import javax.swing.*;
-
 /**
  A {@link javax.swing.JComponent} capable of living within a {@link SortedPanel}.
  <p/>

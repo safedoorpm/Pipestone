@@ -3,7 +3,6 @@ package com.obtuse.ui;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 /**
  * Compute Bresenham lines.

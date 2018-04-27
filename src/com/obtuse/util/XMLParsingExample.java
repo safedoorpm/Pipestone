@@ -5,7 +5,10 @@
 package com.obtuse.util;
 
 import org.w3c.dom.Document;
-import org.xml.sax.*;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
+import org.xml.sax.XMLReader;
 
 import javax.xml.parsers.*;
 import java.io.*;

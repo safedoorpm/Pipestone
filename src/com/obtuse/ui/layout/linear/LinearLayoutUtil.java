@@ -515,7 +515,13 @@ public class LinearLayoutUtil {
 
     }
 
-    public static String describeComponent( final @NotNull Component c ) {
+    public static String describeComponent( final @Nullable Component c ) {
+
+        if ( c == null ) {
+
+            return "null";
+
+        }
 
         StringBuilder sb = new StringBuilder();
         if ( c instanceof LinearContainer ) {

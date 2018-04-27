@@ -2,7 +2,6 @@ package com.obtuse.util.gowing.p2a.holders;
 
 import com.obtuse.util.FormattingLinkedList;
 import com.obtuse.util.Ix;
-import com.obtuse.util.Logger;
 import com.obtuse.util.ObtuseUtil;
 import com.obtuse.util.gowing.*;
 import com.obtuse.util.gowing.p2a.GowingEntityReference;

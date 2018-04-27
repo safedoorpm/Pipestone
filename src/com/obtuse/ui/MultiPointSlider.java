@@ -4,16 +4,24 @@
 
 package com.obtuse.ui;
 
-import com.obtuse.util.*;
+import com.obtuse.util.BasicProgramConfigInfo;
+import com.obtuse.util.ImageIconUtils;
+import com.obtuse.util.Logger;
+import com.obtuse.util.ObtuseUtil;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
-import java.util.*;
+import java.util.Collection;
+import java.util.Dictionary;
+import java.util.Hashtable;
+import java.util.LinkedList;
 
 /**
  * Along the lines of {@link javax.swing.JSlider} but capable of being configured to use

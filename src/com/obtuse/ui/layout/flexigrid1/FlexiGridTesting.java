@@ -15,6 +15,7 @@ import org.jetbrains.annotations.NotNull;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.util.List;
 import java.util.Optional;
 import java.util.SortedMap;
 import java.util.TreeMap;
@@ -27,19 +28,21 @@ public class FlexiGridTesting {
 
     public static final int NROWS = 5;
 
-    public static void main( String[] args ) {
+    public static void main( final String[] args ) {
 
         BasicProgramConfigInfo.init( "Kenosee", "BiSheng", "FlexiGridLayoutManager", null );
 
-        launchSimpleTestFrame();
+        launchSimpleTestFrame( false, true );
 
-        launchModelTestFrame();
+        launchModelTestFrame( false, true );
 
     }
 
-    private static void launchSimpleTestFrame() {
+    @SuppressWarnings("SameParameterValue")
+    private static void launchSimpleTestFrame( final boolean msgTraceMode, final boolean useLayoutTracer ) {
 
-        FlexiGridContainer fgc = new FlexiGridContainer1( "test1" );
+        FlexiGridContainer fgc = new FlexiGridContainer1( "test1", msgTraceMode, useLayoutTracer );
+        fgc.setBorder( BorderFactory.createLineBorder( Color.BLUE ) );
 
         for ( int row = 0; row < NROWS; row += 1 ) {
 
@@ -139,7 +142,8 @@ public class FlexiGridTesting {
 
             } else if ( row == 2 ) {
 
-                FlexiGridContainer f2 = new FlexiGridContainer1( "f2" );
+                FlexiGridContainer f2 = new FlexiGridContainer1( "f2", msgTraceMode, useLayoutTracer );
+                f2.setBorder( BorderFactory.createLineBorder( Color.BLUE ) );
                 f2.setPreferredSize( new Dimension( 500, 45 ) );
                 for ( int cc = 0; cc < 10; cc += 1 ) {
 
@@ -206,60 +210,18 @@ public class FlexiGridTesting {
         jf.pack();
         jf.setVisible( true );
 
-//        Logger.logMsg( "done - FlexiGrid test frame should be visible" );
-
     }
 
-//    private static class XActionListener extends MyActionListener {
-//
-//        private final String _word;
-//        private final FlexiGridPanelModel _model;
-//        private FlexiGridModelSlice _slice;
-//
-//        private XActionListener( final @NotNull String word, final @NotNull FlexiGridPanelModel model ) {
-//            super();
-//
-//            _word = word;
-//            _model = model;
-//
-//        }
-//
-//        protected void myActionPerformed( final ActionEvent actionEvent ) {
-//
-//            int offset = ( actionEvent.getModifiers() & ActionEvent.CTRL_MASK ) == 0 ? 0 : 1;
-//
-//            FlexiGridModelSlice _slice = makeButtonSlice(
-//                    "Add here",
-//                    FlexiGridPanelModel.Orientation.ROWS,
-//                    _model,
-//                    this
-//            );
-//            Optional<Integer> optCurrentIndex = _slice.getOptCurrentIndex();
-//            if ( optCurrentIndex.isPresent() ) {
-//
-//                Logger.logMsg( "modifiers=" + actionEvent.getModifiers() + ", ctrl_mask=" + ActionEvent.CTRL_MASK + ", index=" + optCurrentIndex.get() );
-//                int index = optCurrentIndex.get() + offset;
-//                _model.add( theButtonSlice, index );
-//
-//            } else {
-//
-//                throw new IllegalArgumentException( "myActionListener:  we don't have a current index" );
-//
-//            }
-//
-//        }
-//
-//    }
-
+    @SuppressWarnings("ClassHasNoToStringMethod")
     private static class MyButtonActionListener extends MyActionListener {
 
-        private final FlexiGridPanelModel _model;
+        private final FlexiGridPanelModel<FlexiGridModelSlice> _model;
         private final FlexiGridModelSlice _slice;
         private final JButton _button;
         private final boolean _markerMode;
 
         public MyButtonActionListener(
-                final @NotNull FlexiGridPanelModel model,
+                final @NotNull FlexiGridPanelModel<FlexiGridModelSlice> model,
                 final @NotNull FlexiGridModelSlice slice,
                 final @NotNull JButton button,
                 final boolean markerMode
@@ -271,21 +233,7 @@ public class FlexiGridTesting {
             _button = button;
             _markerMode = markerMode;
 
-//            _slice = slice;
-
         }
-
-//        public void setSlice( FlexiGridModelSlice slice ) {
-//
-//            _slice = slice;
-//
-//        }
-//
-//        public void setButton( JButton button ) {
-//
-//            _button = button;
-//
-//        }
 
         @Override
         protected void myActionPerformed( final ActionEvent actionEvent ) {
@@ -323,7 +271,8 @@ public class FlexiGridTesting {
                 } else {
 
                     int offset = ( actionEvent.getModifiers() & ActionEvent.CTRL_MASK ) == 0 ? 0 : 1;
-                    int index = optCurrentIndex.get() + offset;
+                    int index = optCurrentIndex.get()
+                                               .intValue() + offset;
                     _model.add( theButtonSlice, index );
 
                 }
@@ -341,9 +290,10 @@ public class FlexiGridTesting {
     private static FlexiGridModelSlice _alpha;
     private static FlexiGridModelSlice _beta;
 
-    private static void launchModelTestFrame() {
+    @SuppressWarnings("SameParameterValue")
+    private static void launchModelTestFrame( final boolean msgTraceMode, final boolean useLayoutTracer ) {
 
-        FlexiGridPanelModel model = new FlexiGridPanelModel( "model test", FlexiGridPanelModel.Orientation.ROWS );
+        FlexiGridPanelModel<FlexiGridModelSlice> model = new FlexiGridPanelModel<>( "model test", FlexiGridPanelModel.Orientation.ROWS, msgTraceMode, useLayoutTracer );
 
         _alpha = makeMarkedLabelSlice(
                 FlexiGridPanelModel.Orientation.ROWS,
@@ -367,27 +317,87 @@ public class FlexiGridTesting {
         );
         model.add( _beta );
 
+        for ( FlexiGridModelSlice slice : model.getSlicesInOrder() ) {
+
+            Logger.logMsg( "FGT slice:  " + slice );
+
+        }
+
+        for ( Component c : model.getFlexiGridContainer().getAsContainer().getComponents() ) {
+
+            Logger.logMsg( "FGT component is " + ( c.isVisible() ? "visible" : "invisible" ) + " - " + c );
+
+        }
+
+        JButton flipInvisibilityButton = new JButton( "make something invisible" );
+        flipInvisibilityButton.addActionListener(
+                new MyActionListener() {
+                    FlexiGridModelSlice _invisibleSlice = null;
+
+                    @Override
+                    protected void myActionPerformed( final ActionEvent actionEvent ) {
+
+                        if ( _invisibleSlice == null ) {
+
+                            List<FlexiGridModelSlice> slices = model.getSlicesInOrder();
+                            int ix = RandomCentral.nextInt( slices.size() );
+                            _invisibleSlice = slices.get( ix );
+                            Logger.logMsg( "### making slice " + ix + " invisible - " + _invisibleSlice );
+                            _invisibleSlice.setVisible( false );
+
+                            flipInvisibilityButton.setText( "make something visible" );
+
+                        } else {
+
+                            Logger.logMsg( "### making slice visible - " + _invisibleSlice );
+                            _invisibleSlice.setVisible( true );
+                            _invisibleSlice = null;
+
+                            flipInvisibilityButton.setText( "make something invisible" );
+
+                        }
+
+                    }
+
+                }
+        );
+
+        JButton redoLayoutButton = new JButton( "Redo Layout" );
+        redoLayoutButton.addActionListener(
+                new MyActionListener() {
+                    @Override
+                    protected void myActionPerformed( final ActionEvent actionEvent ) {
+
+                        Logger.logMsg( "forcing Redo Layout" );
+                        model.getFlexiGridContainer().revalidate();
+
+                    }
+
+                }
+        );
+
         JFrame jf = new JFrame( "FlexiGridPanelModel testing" );
-        jf.setContentPane( model.getFlexiGridContainer().getAsContainer() );
+        JPanel jp = new JPanel();
+        jp.setLayout( new BorderLayout() );
+        jp.add( flipInvisibilityButton, BorderLayout.NORTH );
+        jp.add( model.getFlexiGridContainer().getAsContainer(), BorderLayout.CENTER );
+        jp.add( redoLayoutButton, BorderLayout.SOUTH );
+
+        jf.getRootPane().setOpaque( true );
+        jf.setContentPane( jp );
         jf.setMinimumSize( new Dimension( 300, 400 ) );
         jf.pack();
         jf.setVisible( true );
 
-//        Logger.logMsg( "done - FlexiGrid test frame should be visible" );
-
     }
-
-//    private static final HashMap<JButton,FlexiGridModelSlice> _buttonToSliceMap = new HashMap<>();
 
     private static FlexiGridModelSlice makeButtonSlice(
             final @NotNull String name,
-            final @NotNull FlexiGridPanelModel.Orientation orientation,
-            final @NotNull FlexiGridPanelModel model
+            @SuppressWarnings("SameParameterValue") final @NotNull FlexiGridPanelModel.Orientation orientation,
+            final @NotNull FlexiGridPanelModel<FlexiGridModelSlice> model
     ) {
 
         JButton button = new JButton();
-//        button.addActionListener( myActionListener );
-
         FlexiGridModelSlice rval = makeSimpleSlice(
                 orientation,
                 model,
@@ -399,43 +409,34 @@ public class FlexiGridTesting {
 
         button.setText( name + " #" + rval.getId() );
 
-//        _buttonToSliceMap.put( button, rval );
-
         return rval;
 
     }
 
     private static FlexiGridModelSlice makeMarkedLabelSlice(
-            final @NotNull FlexiGridPanelModel.Orientation orientation,
+            @SuppressWarnings("SameParameterValue") final @NotNull FlexiGridPanelModel.Orientation orientation,
             final @NotNull FlexiGridPanelModel model,
             final @NotNull String marker
     ) {
 
         JLabel label = new JLabel();
-//        label.addActionListener( myActionListener );
-
         FlexiGridModelSlice rval = makeSimpleSlice(
                 orientation,
                 model,
                 new Component[]{ label }
         );
 
-//        MyButtonActionListener myActionListener = new MyButtonActionListener( model, rval, label );
-//        label.addActionListener( myActionListener );
-
         label.setText( marker );
         rval.setMarkerTag( marker );
-
-//        _buttonToSliceMap.put( label, rval );
 
         return rval;
 
     }
 
     private static FlexiGridModelSlice makeSimpleSlice(
-            FlexiGridPanelModel.Orientation orientation,
+            final @NotNull FlexiGridPanelModel.Orientation orientation,
             final FlexiGridPanelModel model,
-            Component[] components
+            final @NotNull Component[] components
     ) {
 
         SortedMap<Integer,FlexiGridItemInfo> dataMap = new TreeMap<>();
@@ -459,7 +460,7 @@ public class FlexiGridTesting {
 
         FlexiGridModelSlice newSlice = new FlexiGridModelSlice(
                 "control row",
-                model,
+                orientation,
                 dataMap
         );
 
