@@ -5,32 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/model/FlexiGridDivider.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/model/SpecialSlice.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/obtuse/ui/selectors/Selector.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/EventUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/EventUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/IndexCardBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/IndexCardBox.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/LogsWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/LogsWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/ValidatedJTextField.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/ValidatedJTextField.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/WindowWithMenus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/WindowWithMenus.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/FlexiGridCache1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/FlexiGridCache1.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/FlexiGridLayoutManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/FlexiGridLayoutManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/FlexiGridTesting.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/FlexiGridTesting.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/GridArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/GridArray.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/model/FlexiGridModelSlice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/model/FlexiGridModelSlice.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/model/FlexiGridModelTesting.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/model/FlexiGridModelTesting.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/model/FlexiGridPanelModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/model/FlexiGridPanelModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/util/FlexiGridBasicConstraint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/util/FlexiGridBasicConstraint.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/util/FlexiGridConstraint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/util/FlexiGridConstraint.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/util/FlexiGridConstraintCategory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/util/FlexiGridConstraintCategory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/util/FlexiGridConstraintsTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/util/FlexiGridConstraintsTable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/util/FlexiGridSimpleConstraint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/util/FlexiGridSimpleConstraint.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/selectors/ChoiceVariant.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/selectors/ContextualToString.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ContextualToString.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/selectors/SimpleComboBoxChoice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/selectors/Alternative.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/ObtuseUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ObtuseUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingUnPacker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingUnPacker.java" afterDir="false" />
     </list>
     <ignored path="Pipestone.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -154,7 +129,7 @@
       <file leaf-file-name="FlexiGridPanelModel.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/model/FlexiGridPanelModel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="692">
+            <state relative-caret-position="10963">
               <caret line="580" selection-start-line="580" selection-end-line="580" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -166,7 +141,7 @@
       <file leaf-file-name="FlexiGridModelSlice.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/model/FlexiGridModelSlice.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="401">
+            <state relative-caret-position="1064">
               <caret line="75" selection-start-line="75" selection-end-line="75" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -178,8 +153,8 @@
       <file leaf-file-name="FlexiGridCache1.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/FlexiGridCache1.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="71" column="57" lean-forward="true" selection-start-line="71" selection-start-column="57" selection-end-line="71" selection-end-column="57" />
+            <state relative-caret-position="1026">
+              <caret line="71" column="57" selection-start-line="71" selection-start-column="57" selection-end-line="71" selection-end-column="57" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -190,8 +165,8 @@
       <file leaf-file-name="FlexiGridLayoutManager.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/FlexiGridLayoutManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="538">
-              <caret line="432" column="75" lean-forward="true" selection-start-line="432" selection-start-column="75" selection-end-line="432" selection-end-column="75" />
+            <state relative-caret-position="7904">
+              <caret line="432" column="75" selection-start-line="432" selection-start-column="75" selection-end-line="432" selection-end-column="75" />
             </state>
           </provider>
         </entry>
@@ -199,12 +174,10 @@
       <file leaf-file-name="SpecialSlice.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/model/SpecialSlice.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="249">
+            <state relative-caret-position="3002">
               <caret line="171" column="32" selection-start-line="171" selection-start-column="32" selection-end-line="171" selection-end-column="32" />
               <folding>
-                <element signature="e#0#472#0" expanded="true" />
                 <element signature="imports" expanded="true" />
-                <element signature="e#5762#5801#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -222,7 +195,7 @@
       <file leaf-file-name="FlexiGridSimpleConstraint.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/util/FlexiGridSimpleConstraint.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
+            <state relative-caret-position="646">
               <caret line="36" column="12" selection-start-line="36" selection-start-column="12" selection-end-line="36" selection-end-column="12" />
             </state>
           </provider>
@@ -231,7 +204,7 @@
       <file leaf-file-name="FlexiGridBasicConstraint.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/util/FlexiGridBasicConstraint.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="404">
+            <state relative-caret-position="1083">
               <caret line="62" column="13" selection-start-line="62" selection-start-column="13" selection-end-line="62" selection-end-column="13" />
             </state>
           </provider>
@@ -244,6 +217,15 @@
               <caret line="179" column="81" selection-start-line="179" selection-start-column="81" selection-end-line="179" selection-end-column="81" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#1120#1159#0" expanded="true" />
+                <element signature="e#6253#6577#0" expanded="true" />
+                <element signature="e#6576#6577#0" expanded="true" />
+                <element signature="e#9107#9152#0" expanded="true" />
+                <element signature="e#11841#11880#0" expanded="true" />
+                <element signature="e#14512#14829#0" expanded="true" />
+                <element signature="e#14828#14829#0" expanded="true" />
+                <element signature="e#15490#15529#0" expanded="true" />
+                <element signature="e#16190#16229#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -437,7 +419,7 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="155" />
+    <option name="x" value="2715" />
     <option name="y" value="27" />
     <option name="width" value="2405" />
     <option name="height" value="1538" />
@@ -577,6 +559,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -910,9 +893,8 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
       <pane id="AndroidView" />
-      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1389,13 +1371,7 @@
       <workItem from="1524532307485" duration="9371000" />
       <workItem from="1524860850856" duration="2620000" />
       <workItem from="1525066711224" duration="6464000" />
-    </task>
-    <task id="LOCAL-00013" summary="Early check-in of packers modules (not ready for prime time).&#10;First commit and push of Pepys (event mechanism that uses Java's strong, weak and zombie references to assist in managing the lifecycle of event listeners).&#10;Minor cleanup elsewhere.">
-      <created>1439585069976</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1439585069976</updated>
+      <workItem from="1525449242494" duration="904000" />
     </task>
     <task id="LOCAL-00014" summary="Snapshot time. Working mostly on the v2 unpacker. Still trying to get the distinction between instance ids and packing ids exactly right.">
       <created>1441743053772</created>
@@ -1733,11 +1709,18 @@
       <option name="project" value="LOCAL" />
       <updated>1524860964803</updated>
     </task>
-    <option name="localTasksCounter" value="62" />
+    <task id="LOCAL-00062" summary="Stop using various APIs that were deprecated in Java 9 (mostly AWT APIs).&#10;&#10;Implement the FlexiGridDivider class which provides a way to include &quot;divider lines&quot; in components being managed by the FlexiGridLayoutManager (strictly speaking, this is intended for use with the FlexiGridPanelModel although the actual support for it is in the layout manager part of the flexi-grid facility).&#10;&#10;Various cleanup including a bit of reorganizing of classes and methods.">
+      <created>1525449547339</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1525449547340</updated>
+    </task>
+    <option name="localTasksCounter" value="63" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="912744000" />
+    <option name="totallyTimeSpent" value="913648000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1754,28 +1737,25 @@
     <layout>
       <window_info anchor="right" id="Palette" order="5" sideWeight="0.67289025" weight="0.118644066" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.9753381" weight="0.29955947" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info id="Image Layers" order="2" />
       <window_info anchor="right" id="Capture Analysis" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5078684" side_tool="true" weight="0.42062417" />
       <window_info anchor="right" id="Maven Projects" order="8" weight="0.32960624" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="8" sideWeight="0.49213162" visible="true" weight="0.2804699" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.3277126" />
-      <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49213162" weight="0.2804699" />
       <window_info anchor="bottom" id="Terminal" order="14" weight="0.32956952" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="4" />
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.5269953" visible="true" weight="0.3049766" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.5269953" visible="true" weight="0.3083794" />
       <window_info anchor="right" id="Database" order="6" />
-      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.4985938" weight="0.30323055" />
       <window_info id="Structure" order="1" sideWeight="0.43055555" side_tool="true" weight="0.17557251" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="2" sideWeight="0.67289025" weight="0.329475" />
       <window_info anchor="right" id="Theme Preview" order="6" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.9995866" weight="0.35462555" />
       <window_info id="Favorites" order="3" sideWeight="0.4730047" side_tool="true" weight="0.17571372" />
-      <window_info anchor="right" id="Properties" order="6" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.9995866" weight="0.35462555" />
       <window_info anchor="bottom" id="Inspection Results" order="15" sideWeight="0.49722221" weight="0.32966226" />
       <window_info anchor="right" id="Coverage" order="7" side_tool="true" visible="true" weight="0.32960624" />
       <window_info anchor="bottom" id="Changes" order="9" visible="true" weight="0.32457292" />
@@ -1786,22 +1766,25 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.2498858" />
       <window_info anchor="bottom" id="Problems" order="13" />
       <window_info id="Nl-Palette" order="2" />
+      <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.9753381" weight="0.29955947" />
       <window_info anchor="bottom" id="Application Servers" order="12" />
-      <window_info anchor="right" id="IDEtalk" order="7" />
+      <window_info anchor="right" id="Properties" order="6" />
+      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.4985938" weight="0.30323055" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Memory View" order="9" weight="0.22361112" />
       <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="right" id="IDEtalk" order="7" />
       <window_info anchor="bottom" id="IDEtalk Messages" order="11" />
     </layout>
     <layout-to-restore>
       <window_info anchor="right" id="Memory View" order="13" weight="0.22361112" />
       <window_info id="Designer" order="7" />
-      <window_info anchor="right" id="Palette" order="5" sideWeight="0.67289025" weight="0.118644066" />
-      <window_info id="Image Layers" order="5" />
+      <window_info anchor="right" id="IDEtalk" order="10" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32806054" />
       <window_info anchor="right" id="JetGradle" order="4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Changes" order="9" visible="true" weight="0.32457292" />
+      <window_info anchor="right" id="Palette" order="5" sideWeight="0.67289025" weight="0.118644066" />
       <window_info id="UI Designer" order="4" sideWeight="0.67289025" weight="0.329475" />
       <window_info anchor="right" id="Properties" order="6" />
       <window_info anchor="bottom" id="Terminal" order="14" weight="0.32956952" />
@@ -1810,21 +1793,21 @@
       <window_info anchor="bottom" id="Inspection Results" order="15" sideWeight="0.49722221" weight="0.32997844" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.50277776" side_tool="true" weight="0.32997844" />
-      <window_info anchor="bottom" id="IDEtalk Messages" order="11" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.2498858" />
+      <window_info anchor="bottom" id="IDEtalk Messages" order="11" />
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.5269953" visible="true" weight="0.2433665" />
       <window_info anchor="right" id="Database" order="7" />
       <window_info anchor="bottom" id="Problems" order="13" />
       <window_info anchor="bottom" id="Application Servers" order="12" />
       <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.4985938" weight="0.33238232" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info id="Nl-Palette" order="2" />
       <window_info anchor="right" id="Maven Projects" order="12" weight="0.32960624" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.39985272" />
-      <window_info anchor="right" id="IDEtalk" order="10" />
       <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.9753381" weight="0.30180806" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info id="Image Layers" order="5" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info id="Favorites" order="6" sideWeight="0.4730047" side_tool="true" weight="0.17571372" />
       <window_info id="Structure" order="1" sideWeight="0.43055555" side_tool="true" weight="0.17557251" />
@@ -1875,7 +1858,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Implement a mechanism for filtering out certain log lines in the Logger facility.&#10;&#10;Implement a method in ObtuseUtil which returns the name of a specified InputEvent modifier key mask bit.&#10;&#10;Fix a typo in the TreeSorter class's Javadocs and use the new computeIfAbsent mechanism when adding a new value." />
     <MESSAGE value="Lots of cleanup based on code analysis." />
     <MESSAGE value="Get rid of some IntelliJ warnings in the Ranges class." />
     <MESSAGE value="Move the linear layout manager facility from the Burke2 project to the Pipestone project." />
@@ -1900,7 +1882,8 @@
     <MESSAGE value="Move away from providing a sized array to the Collection.toArray() methods (no longer faster than just providing a zero-length array of the correct type).&#10;&#10;Add a makeRelative method to the AbsolutePath class that returns a RelativePath containing all the segments in the AbsolutePath minus the first root node segment.&#10;&#10;Major cleanup in the RelativePath class:&#10;&#10;    - cleanup the various concat methods to provide better orthogonality&#10;    - implement a segment-by-segment compareTo method (eliminates the need for a string&#10;      representation of the path although we're going to keep that representation at least&#10;      for now)&#10;    - add tests for the new compareTo method and a few previously missed unrelated cases" />
     <MESSAGE value="Implement the FlexiGridLayoutManager which lays out components in a grid where the width and column of each grid cell is sized based on the space actually required by the components in that cell's row and column (in contrast, the GridLayout manager forces each cell's width to be the same and each cell's height to be the same). Each component is added to the underlying FlexiGridContainer with a constraint object which specifies the component's row and column within the grid as well as how the component should be justified within its cell should it's size be smaller than the space available (top, center, bottom and left, center, right).&#10;&#10;Also implement the FlexiGridPanelModel which provides a somewhat high level interface to the FlexiGridLayoutManager. In particular, the FlexiGridPanelModel allows the easy insertion of new rows or new columns, depending on the FlexiGridPanelModel instance's orientation, either before or after specific rows or columns.&#10;&#10;Taken together, these classes provide a relatively easy way to manage a rectangular grid of components.&#10;&#10;The current version of the FlexiGridLayoutManager only takes each component's preferred width and height into account. This results in the width of each column being the maximum of the preferred widths of the elements in the column and the height of each column being the maximum of the preferred heights of the elements in each row. A future version with also take each component's minimum and maximum width and heights into account.&#10;&#10;Minor changes to the Measure class to improve the formatting of its output.&#10;&#10;Provide a way to specify if the default instance of the RandomCentral class should be a SecureRandom instance or 'merely' a Random instance. The default is to use a SecureRandom instance." />
     <MESSAGE value="A considerably cleaned up and somewhat improved FlexiGridPanelModel.&#10;&#10;Lots and lots of textual cleanup." />
-    <option name="LAST_COMMIT_MESSAGE" value="A considerably cleaned up and somewhat improved FlexiGridPanelModel.&#10;&#10;Lots and lots of textual cleanup." />
+    <MESSAGE value="Stop using various APIs that were deprecated in Java 9 (mostly AWT APIs).&#10;&#10;Implement the FlexiGridDivider class which provides a way to include &quot;divider lines&quot; in components being managed by the FlexiGridLayoutManager (strictly speaking, this is intended for use with the FlexiGridPanelModel although the actual support for it is in the layout manager part of the flexi-grid facility).&#10;&#10;Various cleanup including a bit of reorganizing of classes and methods." />
+    <option name="LAST_COMMIT_MESSAGE" value="Stop using various APIs that were deprecated in Java 9 (mostly AWT APIs).&#10;&#10;Implement the FlexiGridDivider class which provides a way to include &quot;divider lines&quot; in components being managed by the FlexiGridLayoutManager (strictly speaking, this is intended for use with the FlexiGridPanelModel although the actual support for it is in the layout manager part of the flexi-grid facility).&#10;&#10;Various cleanup including a bit of reorganizing of classes and methods." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -2679,26 +2662,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/util/FlexiGridSimpleConstraint.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
+        <state relative-caret-position="646">
           <caret line="36" column="12" selection-start-line="36" selection-start-column="12" selection-end-line="36" selection-end-column="12" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/model/SpecialSlice.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="249">
+        <state relative-caret-position="3002">
           <caret line="171" column="32" selection-start-line="171" selection-start-column="32" selection-end-line="171" selection-end-column="32" />
           <folding>
-            <element signature="e#0#472#0" expanded="true" />
             <element signature="imports" expanded="true" />
-            <element signature="e#5762#5801#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/model/FlexiGridModelSlice.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="401">
+        <state relative-caret-position="1064">
           <caret line="75" selection-start-line="75" selection-end-line="75" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -2708,8 +2689,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/FlexiGridCache1.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="71" column="57" lean-forward="true" selection-start-line="71" selection-start-column="57" selection-end-line="71" selection-end-column="57" />
+        <state relative-caret-position="1026">
+          <caret line="71" column="57" selection-start-line="71" selection-start-column="57" selection-end-line="71" selection-end-column="57" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -2718,14 +2699,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/FlexiGridLayoutManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="538">
-          <caret line="432" column="75" lean-forward="true" selection-start-line="432" selection-start-column="75" selection-end-line="432" selection-end-column="75" />
+        <state relative-caret-position="7904">
+          <caret line="432" column="75" selection-start-line="432" selection-start-column="75" selection-end-line="432" selection-end-column="75" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/model/FlexiGridPanelModel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="692">
+        <state relative-caret-position="10963">
           <caret line="580" selection-start-line="580" selection-end-line="580" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -2735,7 +2716,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/util/FlexiGridBasicConstraint.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="404">
+        <state relative-caret-position="1083">
           <caret line="62" column="13" selection-start-line="62" selection-start-column="13" selection-end-line="62" selection-end-column="13" />
         </state>
       </provider>
@@ -2746,6 +2727,15 @@
           <caret line="179" column="81" selection-start-line="179" selection-start-column="81" selection-end-line="179" selection-end-column="81" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#1120#1159#0" expanded="true" />
+            <element signature="e#6253#6577#0" expanded="true" />
+            <element signature="e#6576#6577#0" expanded="true" />
+            <element signature="e#9107#9152#0" expanded="true" />
+            <element signature="e#11841#11880#0" expanded="true" />
+            <element signature="e#14512#14829#0" expanded="true" />
+            <element signature="e#14828#14829#0" expanded="true" />
+            <element signature="e#15490#15529#0" expanded="true" />
+            <element signature="e#16190#16229#0" expanded="true" />
           </folding>
         </state>
       </provider>
