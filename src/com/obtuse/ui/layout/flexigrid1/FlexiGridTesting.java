@@ -5,6 +5,7 @@
 package com.obtuse.ui.layout.flexigrid1;
 
 import com.obtuse.ui.MyActionListener;
+import com.obtuse.ui.layout.flexigrid1.model.FlexiGridDivider;
 import com.obtuse.ui.layout.flexigrid1.model.FlexiGridModelSlice;
 import com.obtuse.ui.layout.flexigrid1.model.FlexiGridPanelModel;
 import com.obtuse.ui.layout.flexigrid1.util.FlexiGridBasicConstraint;
@@ -142,12 +143,14 @@ public class FlexiGridTesting {
 
             } else if ( row == 2 ) {
 
+                boolean diagonally = ObtuseUtil.never();
                 FlexiGridContainer f2 = new FlexiGridContainer1( "f2", msgTraceMode, useLayoutTracer );
                 f2.setBorder( BorderFactory.createLineBorder( Color.BLUE ) );
-                f2.setPreferredSize( new Dimension( 500, 45 ) );
-                for ( int cc = 0; cc < 10; cc += 1 ) {
+//                f2.setPreferredSize( new Dimension( 500, 45 ) );
+                for ( int cc = 0; cc < 20; cc += 2 ) {
 
                     Component thing = cc == 0 ? new JButton( "Button" ) : new JLabel( VerbsList.pickVerb() );
+
                     if ( thing instanceof JButton && "Button".equals( ((JButton)thing).getText() ) ) {
 
                         ((JButton)thing).addActionListener(
@@ -162,13 +165,32 @@ public class FlexiGridTesting {
                                 }
                         );
                     }
+
+                    FlexiGridBasicConstraint wordConstraints = new FlexiGridBasicConstraint(
+                            "f2." + cc,
+                            diagonally ? cc : 0,
+                            cc
+                    ).setVerticalJustification( FlexiGridBasicConstraint.VJustification.values()[cc % 3] );
                     f2.add(
                             thing,
-                            new FlexiGridBasicConstraint(
-                                    "f2." + cc,
-                                    0,
-                                    cc
-                            ).setVerticalJustification( FlexiGridBasicConstraint.VJustification.values()[cc % 3] )
+                            wordConstraints
+                    );
+
+                    FlexiGridDivider divider = new FlexiGridDivider(
+                            cc == 6 ? FlexiGridDivider.DividerStyle.DOUBLE_LINE : FlexiGridDivider.DividerStyle.SINGLE_LINE,
+                            FlexiGridPanelModel.Orientation.COLUMN,
+                            cc + 1,
+                            cc == 6
+//                            cc == 0 ? cc + 1 : -1
+//                            cc + 1
+                    );
+
+                    divider.setForeground( cc == 6 ? Color.RED : Color.BLUE );
+
+                    FlexiGridBasicConstraint dividerConstraint = divider.generateConstraint( diagonally ? cc : 0 /*cc == 0 ? -1 : cc*/ );
+                    f2.add(
+                            divider,
+                            dividerConstraint
                     );
 
                 }
@@ -253,7 +275,7 @@ public class FlexiGridTesting {
 
             FlexiGridModelSlice theButtonSlice = makeButtonSlice(
                     "Add here",
-                    FlexiGridPanelModel.Orientation.ROWS,
+                    FlexiGridPanelModel.Orientation.ROW,
                     _model
             );
 
@@ -293,10 +315,10 @@ public class FlexiGridTesting {
     @SuppressWarnings("SameParameterValue")
     private static void launchModelTestFrame( final boolean msgTraceMode, final boolean useLayoutTracer ) {
 
-        FlexiGridPanelModel<FlexiGridModelSlice> model = new FlexiGridPanelModel<>( "model test", FlexiGridPanelModel.Orientation.ROWS, msgTraceMode, useLayoutTracer );
+        FlexiGridPanelModel<FlexiGridModelSlice> model = new FlexiGridPanelModel<>( "model test", FlexiGridPanelModel.Orientation.ROW, msgTraceMode, useLayoutTracer );
 
         _alpha = makeMarkedLabelSlice(
-                FlexiGridPanelModel.Orientation.ROWS,
+                FlexiGridPanelModel.Orientation.ROW,
                 model,
                 "alpha"
         );
@@ -304,14 +326,14 @@ public class FlexiGridTesting {
 
         FlexiGridModelSlice one = makeButtonSlice(
                 "Add Here",
-                FlexiGridPanelModel.Orientation.ROWS,
+                FlexiGridPanelModel.Orientation.ROW,
                 model
         );
 
         model.add( one );
 
         _beta = makeMarkedLabelSlice(
-                FlexiGridPanelModel.Orientation.ROWS,
+                FlexiGridPanelModel.Orientation.ROW,
                 model,
                 "beta"
         );
@@ -441,7 +463,7 @@ public class FlexiGridTesting {
 
         SortedMap<Integer,FlexiGridItemInfo> dataMap = new TreeMap<>();
         int ix = 0;
-        boolean rowOrientation = orientation == FlexiGridPanelModel.Orientation.ROWS;
+        boolean rowOrientation = orientation.isRowOrientation();
         String namePrefix = NounsList.pickNoun();
         for ( Component component : components ) {
 

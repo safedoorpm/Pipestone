@@ -421,13 +421,15 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
 
     static boolean isMenuShortcutKeyDown( final InputEvent event) {
 
-        int modifiers = event.getModifiers();
-        int menuShortcutKeyMask = Toolkit.getDefaultToolkit().getMenuShortcutKeyMask();
+        // %%% make sure that this still works (switched to the ...Ex family of methods on 2018/04/28
+        
+        int modifiers = event.getModifiersEx();
+        int menuShortcutKeyMask = Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx();
 
         Logger.logMsg(
-                "modifiers = " + modifiers + " == { " + MouseEvent.getMouseModifiersText( modifiers ) + " }" +
-                ", mask = " + menuShortcutKeyMask + " == { " + MouseEvent.getMouseModifiersText( menuShortcutKeyMask ) + " }" +
-                ", anded = " + ( modifiers & menuShortcutKeyMask ) + " == { " + MouseEvent.getMouseModifiersText( modifiers & menuShortcutKeyMask ) + " }"
+                "modifiers = " + modifiers + " == { " + InputEvent.getModifiersExText( modifiers ) + " }" +
+                ", mask = " + menuShortcutKeyMask + " == { " + InputEvent.getModifiersExText( menuShortcutKeyMask ) + " }" +
+                ", anded = " + ( modifiers & menuShortcutKeyMask ) + " == { " + InputEvent.getModifiersExText( modifiers & menuShortcutKeyMask ) + " }"
         );
 
         return ( modifiers & menuShortcutKeyMask ) != 0;

@@ -53,9 +53,11 @@ public abstract class ValidatedJTextField extends JTextField implements EditValu
 
                     }
 
-                    public boolean shouldYieldFocus( final JComponent jComponent ) {
+                    public boolean shouldYieldFocus( final JComponent source, final JComponent target ) {
 
-                        if ( verify( jComponent ) ) {
+                        // %%% verify that this still works after switch from shouldYieldFocus( JComponent )
+
+                        if ( super.shouldYieldFocus( source, target ) ) {
 
                             storeNewValue( getText(), false );
 

@@ -33,6 +33,8 @@ public class FlexiGridSimpleConstraint implements FlexiGridConstraint {
 
     }
 
+    @Override
+    @NotNull
     public String getName() {
 
         return _name;

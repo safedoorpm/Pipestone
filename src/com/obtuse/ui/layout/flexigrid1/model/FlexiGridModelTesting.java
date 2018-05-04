@@ -31,7 +31,7 @@ public class FlexiGridModelTesting extends JFrame {
     public FlexiGridModelTesting() {
         super( "FlexiGridModelTesting" );
 
-        _model = new FlexiGridPanelModel<>( "fg1", FlexiGridPanelModel.Orientation.ROWS, false, true );
+        _model = new FlexiGridPanelModel<>( "fg1", FlexiGridPanelModel.Orientation.ROW, false, true );
         _container = _model.getFlexiGridLayoutManager()
                            .getTarget();
 
@@ -94,7 +94,7 @@ public class FlexiGridModelTesting extends JFrame {
 
     public void addRow( final int ix ) {
 
-        FlexiGridModelSlice slice = new FlexiGridModelSlice( "s" + ix, FlexiGridPanelModel.Orientation.ROWS );
+        FlexiGridModelSlice slice = new FlexiGridModelSlice( "s" + ix, FlexiGridPanelModel.Orientation.ROW );
         FlexiGridConstraintsTable constraintsTable = new FlexiGridConstraintsTable(
                 new FlexiGridBasicConstraint( "s" + ix + " @ " + 1, -1, 1 )
         );

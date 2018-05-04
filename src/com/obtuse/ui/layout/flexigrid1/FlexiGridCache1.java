@@ -4,6 +4,8 @@
 
 package com.obtuse.ui.layout.flexigrid1;
 
+import com.obtuse.exceptions.HowDidWeGetHereError;
+import com.obtuse.ui.layout.flexigrid1.model.FlexiGridDivider;
 import com.obtuse.ui.layout.flexigrid1.model.FlexiGridPanelModel;
 import com.obtuse.ui.layout.flexigrid1.util.FlexiGridBasicConstraint;
 import com.obtuse.ui.layout.flexigrid1.util.FlexiGridConstraintsTable;
@@ -147,10 +149,6 @@ public class FlexiGridCache1 implements FlexiGridLayoutManagerCache {
 
                         visibleComponents.add( ii.component() );
 
-//                    } else {
-//
-//                        logMaybe( "no visible components instance provided" );
-
                     }
 
                     FlexiGridSliceSizes sliceSizes = sizes.computeIfAbsent( i2, integer -> new FlexiGridSliceSizes() );
@@ -213,46 +211,19 @@ public class FlexiGridCache1 implements FlexiGridLayoutManagerCache {
 
         for ( Component component : target.getComponents() ) {
 
-//            FlexiGridConstraint constraint = constraintsTable.get( FlexiGridConstraintCategory.BASIC );
-//            if ( constraint instanceof FlexiGridBasicConstraint ) {
-
             if ( component.isVisible() ) {
 
                 FlexiGridBasicConstraint bc = _flexiGridLayoutManager.getMandatoryBasicConstraint( component );
-//                    FlexiGridBasicConstraint bc = (FlexiGridBasicConstraint)constraint;
 
-//                logMaybe( "FlexiGridCache1.loadGrid:  remembering " + bc.locationString() );
-
-//                if ( optModel.isPresent() ) {
-//
-//                    FlexiGridPanelModel model = optModel.get();
-//                    if ( !model.isSliceVisible( bc.getRow(), bc.getCol() ) ) {
-//
-//                        continue;
-//
-//                    }
-//
-//                }
+                Logger.logMsg( "constraint for " + LinearLayoutUtil.describeComponent( component ) + " is " + bc );
 
                 FlexiGridConstraintsTable constraintsTable = allConstraints.get( component );
                 FlexiGridItemInfo ii = itemInfoFactory.createInstance( bc.getRow(), bc.getCol(), component, constraintsTable );
                 _grid.put( ii, false );
 
-//                Logger.logMsg( "" + LinearLayoutUtil.describeComponent( component ) + " is at " + bc );
-
                 ObtuseUtil.doNothing();
 
-//            } else {
-//
-//                logMaybe( "FlexiGridCache1.loadGrid:  ignoring invisible component " + component );
-
             }
-
-//            } else {
-//
-//                throw new IllegalArgumentException( "FlexiGridCache1.loadGrid:  component " + component.getName() + " does not have the mandatory FlexiGridBasicConstraint" );
-//
-//            }
 
         }
 
@@ -354,12 +325,10 @@ public class FlexiGridCache1 implements FlexiGridLayoutManagerCache {
 
     public void computePositions() {
 
-//        Insets insets = _target.getInsets();
-
-        _xLocs = new TreeMap<>(); // int[_grid.getDimension().width];
-        _xWidths = new TreeMap<>(); // new int[_grid.getDimension().width];
-        _yLocs = new TreeMap<>(); // new int[_grid.getDimension().height];
-        _yHeights = new TreeMap<>(); // new int[_grid.getDimension().height];
+        _xLocs = new TreeMap<>();
+        _xWidths = new TreeMap<>();
+        _yLocs = new TreeMap<>();
+        _yHeights = new TreeMap<>();
         _totalWidthLessInsets = computeLocationsAndSizes(
                 0,
                 _xLocs,
@@ -380,7 +349,7 @@ public class FlexiGridCache1 implements FlexiGridLayoutManagerCache {
 
         _haveTotalWidthAndHeight = true;
 
-        // Go through the columns that exist
+        // Go through the columns that exist.
 
         for ( int col : _grid.getColumnSet() ) {
 
@@ -416,7 +385,7 @@ public class FlexiGridCache1 implements FlexiGridLayoutManagerCache {
             final SortedMap<Integer,Integer> sizes,
             final SortedSet<Integer> indexSet,
             final SortedMap<Integer, FlexiGridSliceSizes> sliceSizesMap,
-            boolean horizontal
+            final boolean horizontal
     ) {
 
         String direction = horizontal ? "horizontal" : "vertical";
@@ -460,128 +429,250 @@ public class FlexiGridCache1 implements FlexiGridLayoutManagerCache {
 
         Insets insets = _target.getInsets();
 
-        for ( int row : _grid.getRowSet() ) {
+        SortedSet<Integer> rowSet = _grid.getRowSet();
+        SortedSet<Integer> columnSet = _grid.getColumnSet();
+
+        for ( int row : rowSet ) {
 
             SortedMap<Integer, FlexiGridItemInfo> rowMap = _grid.getRow( row );
 
-            Integer nominalHeight = _yHeights.get( row );
-            if ( nominalHeight == null ) {
+            Integer xNominalHeight = _yHeights.get( row );
+            if ( xNominalHeight == null ) {
 
-                logMaybe( "FlexiGridCache1.setComponentBounds:  nominal height is null" );
+                throw new HowDidWeGetHereError( "FlexiGridCache1.setComponentBounds:  nominal height is null" );
 
-            } else {
+            }
 
-                Integer nominalY = _yLocs.get( row );
-                for ( FlexiGridItemInfo element : rowMap.values() ) {
+            int nominalHeight = xNominalHeight.intValue();
 
-                    int col = element.column();
+            int nominalY = _yLocs.get( row ).intValue();
 
-                    Integer nominalWidth = _xWidths.get( col );
-                    if ( nominalWidth == null ) {
+            for ( FlexiGridItemInfo element : rowMap.values() ) {
 
-                        logMaybe( "FlexiGridCache1.setComponentBounds:  nominal width is null" );
+                int col = element.column();
+
+                SortedMap<Integer, FlexiGridItemInfo> columnMap = _grid.getColumn( col );
+                if ( columnMap == null ) {
+
+                    throw new HowDidWeGetHereError( "FlexiGridCache1.setComponentBounds:  no column map for column " + col );
+
+                }
+
+                Component component = element.component();
+                Dimension preferredSize = component.getPreferredSize();
+                int preferredWidth = preferredSize.width;
+                int preferredHeight = preferredSize.height;
+
+                Integer xNominalWidth = _xWidths.get( col );
+                if ( xNominalWidth == null ) {
+
+                    throw new HowDidWeGetHereError( "FlexiGridCache1.setComponentBounds:  nominal width is null" );
+
+                }
+
+                int nominalWidth = xNominalWidth.intValue();
+
+                int nominalX = _xLocs.get( col ).intValue();
+
+                FlexiGridConstraintsTable constraintsTable = element.getInfo();
+
+                // If we're dealing with a divider then pretend that its preferred width/height is the nominal width/height of its orientation.
+                // For example, if it is row-oriented then its preferred width is forced to be the planned width for this column
+                // but if it is column-oriented then its preferred height is forced to be the planned height for this row.
+
+                boolean isFullWidth = false;
+                boolean isFullHeight = false;
+
+                Rectangle boundingRectangle = null;
+                if ( component instanceof FlexiGridDivider  ) {
+
+                    FlexiGridDivider divider = (FlexiGridDivider)component;
+                    if ( divider.getOrientation().isRowOrientation() ) {
+
+                        // Row oriented full length dividers must be alone in their row.
+
+                        if ( ObtuseUtil.always() && divider.isFullLength() ) {
+
+                            if ( rowMap.values().size() > 1 ) {
+
+                                throw new IllegalArgumentException( "FlexiGridCache1.setComponentBounds:  row-oriented divider @row=" + row + " is not alone in its row" );
+
+                            }
+
+                            isFullWidth = true;
+                            preferredWidth = _totalWidthLessInsets - 2;
+                            preferredHeight = divider.getPreferredSize().height;
+                            boundingRectangle = new Rectangle(
+                                    insets.left + 1,
+                                    insets.top + nominalY + element.getInfo().getMargins().top,
+                                    preferredWidth,
+                                    preferredHeight
+                            );
+
+                            ObtuseUtil.doNothing();
+
+                        } else {
+
+                            preferredWidth = nominalWidth;
+
+                        }
 
                     } else {
 
-                        Integer nominalX = _xLocs.get( col );
+                        // Column-oriented full length dividers must be alone in their column.
 
-                        FlexiGridConstraintsTable constraintsTable = element.getInfo();
+                        if ( ObtuseUtil.always() && divider.isFullLength() ) {
 
-                        int extraHSpace = nominalWidth - element.component().getPreferredSize().width;
-                        if ( extraHSpace > nominalWidth ) {
+                            if ( columnMap.values().size() > 1 ) {
 
-                            extraHSpace = nominalWidth;
+                                throw new IllegalArgumentException( "FlexiGridCache1.setComponentBounds:  column-oriented divider @column=" + col + " is not alone in its column" );
 
-                        } else if ( extraHSpace > 0 ) {
+                            }
 
-                            ObtuseUtil.doNothing();
+                            isFullHeight = true;
+                            preferredHeight = _totalHeightLessInsets - 2;
+                            preferredWidth = divider.getPreferredSize().width;
 
-                        }
-
-                        int leftIndent = 0;
-
-                        switch ( constraintsTable.getHorizontalJustification() ) {
-
-                            case LEFT:
-
-                                // nothing to be done
-
-                                break;
-
-                            case CENTER:
-
-                                leftIndent = extraHSpace / 2;
-
-                                break;
-
-                            case RIGHT:
-
-                                leftIndent = extraHSpace;
-
-                                break;
-
-                        }
-
-                        Component component = element.component();
-                        Dimension preferredSize = component.getPreferredSize();
-//                        logMaybe( "nominalHeight is " + nominalHeight + ", component is " + component + ", preferredSize is " + preferredSize );
-
-
-                        int extraVSpace = nominalHeight - preferredSize.height;
-                        if ( extraVSpace > nominalHeight ) {
-
-                            extraVSpace = nominalHeight;
-
-                        } else if ( extraVSpace > 0 ) {
+                            boundingRectangle = new Rectangle(
+                                    insets.left + nominalX + element.getInfo().getMargins().left,
+                                    insets.top + 1,
+                                    preferredWidth,
+                                    preferredHeight
+                            );
 
                             ObtuseUtil.doNothing();
 
-                        }
+                        } else {
 
-                        int topIndent = 0;
-
-                        switch ( constraintsTable.getVerticalJustification() ) {
-
-                            case TOP:
-
-                                // nothing to be done
-
-                                break;
-
-                            case CENTER:
-
-                                topIndent = extraVSpace / 2;
-
-                                break;
-
-                            case BOTTOM:
-
-                                topIndent = extraVSpace;
-
-                                break;
+                            preferredHeight = nominalHeight;
 
                         }
-
-                        Rectangle boundingRectangle = new Rectangle(
-                                (int)Math.min( ( (long)insets.left + leftIndent + nominalX + element.getInfo().getMargins().left ), Integer.MAX_VALUE ),
-                                (int)Math.min( ( (long)insets.top + topIndent + nominalY + element.getInfo().getMargins().top ), Integer.MAX_VALUE ),
-                                Math.min( nominalWidth,
-                                          element.component()
-                                                 .getPreferredSize().width
-                                ),
-                                Math.min( nominalHeight,
-                                          element.component()
-                                                 .getPreferredSize().height
-                                )
-                        );
-
-                        //                logMaybe( "component " + element + " @ [" + element.row() + "," + element.column() + "] has bounding box " + ObtuseUtil.fBounds( boundingRectangle ) );
-
-                        element.component().setBounds( boundingRectangle );
 
                     }
 
                 }
+
+                int extraHSpace = nominalWidth - preferredWidth;
+                if ( extraHSpace > nominalWidth ) {
+
+                    extraHSpace = nominalWidth;
+
+                } else if ( extraHSpace > 0 ) {
+
+                    ObtuseUtil.doNothing();
+
+                }
+
+                int leftIndent = 0;
+
+                switch ( constraintsTable.getHorizontalJustification() ) {
+
+                    case LEFT:
+
+                        // nothing to be done.
+
+                        break;
+
+                    case CENTER:
+
+                        leftIndent = extraHSpace / 2;
+
+                        break;
+
+                    case RIGHT:
+
+                        leftIndent = extraHSpace;
+
+                        break;
+
+                }
+
+                int extraVSpace = nominalHeight - preferredHeight;
+                if ( extraVSpace > nominalHeight ) {
+
+                    extraVSpace = nominalHeight;
+
+                } else if ( extraVSpace > 0 ) {
+
+                    ObtuseUtil.doNothing();
+
+                }
+
+                int topIndent = 0;
+
+                switch ( constraintsTable.getVerticalJustification() ) {
+
+                    case TOP:
+
+                        // nothing to be done.
+
+                        break;
+
+                    case CENTER:
+
+                        topIndent = extraVSpace / 2;
+
+                        break;
+
+                    case BOTTOM:
+
+                        topIndent = extraVSpace;
+
+                        break;
+
+                }
+
+                if ( isFullWidth ) {
+
+                    Logger.logMsg(
+                            "FlexiGridCache1.setComponentBounds(" + row + "," + col + "):  " +
+                            "full width yields bb=" + ObtuseUtil.fBounds( boundingRectangle )
+                    );
+
+                    ObtuseUtil.doNothing();
+
+                } else if ( isFullHeight ) {
+
+                    Logger.logMsg(
+                            "FlexiGridCache1.setComponentBounds(" + row + "," + col + "):  " +
+                            "full height yields bb=" + ObtuseUtil.fBounds( boundingRectangle )
+                    );
+
+                    ObtuseUtil.doNothing();
+
+                } else {
+
+                    boundingRectangle = new Rectangle(
+                            (int)Math.min(
+                                    ( (long)insets.left + leftIndent + nominalX + element.getInfo().getMargins().left ),
+                                    Integer.MAX_VALUE
+                            ),
+                            (int)Math.min(
+                                    ( (long)insets.top + topIndent + nominalY + element.getInfo().getMargins().top ),
+                                    Integer.MAX_VALUE
+                            ),
+                            Math.min(
+                                    nominalWidth,
+                                    preferredWidth
+                            ),
+                            Math.min(
+                                    nominalHeight,
+                                    preferredHeight
+                            )
+                    );
+
+                    Logger.logMsg(
+                            "FlexiGridCache1.setComponentBounds(" + row + "," + col + "):  " +
+                            "normal height yields bb=" + ObtuseUtil.fBounds( boundingRectangle )
+                    );
+
+                    ObtuseUtil.doNothing();
+
+                }
+
+                //                logMaybe( "component " + element + " @ [" + element.row() + "," + element.column() + "] has bounding box " + ObtuseUtil.fBounds( boundingRectangle ) );
+
+                element.component().setBounds( boundingRectangle );
 
             }
 

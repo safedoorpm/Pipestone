@@ -342,19 +342,21 @@ public class LogsWindow extends WindowWithMenus {
                 }
         );
 
+        //noinspection MagicConstant
         selectAllMenuItem.setAccelerator(
 
                 KeyStroke.getKeyStroke(
-                        KeyEvent.VK_A, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()
+                        KeyEvent.VK_A, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()
                 )
 
         );
 
         JMenuItem cutMenuItem = new JMenuItem( "Cut" );
 
+        //noinspection MagicConstant
         cutMenuItem.setAccelerator(
                 KeyStroke.getKeyStroke(
-                        KeyEvent.VK_X, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()
+                        KeyEvent.VK_X, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()
                 )
         );
 
@@ -398,17 +400,19 @@ public class LogsWindow extends WindowWithMenus {
 
         );
 
+        //noinspection MagicConstant
         copyMenuItem.setAccelerator(
                 KeyStroke.getKeyStroke(
-                        KeyEvent.VK_C, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()
+                        KeyEvent.VK_C, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()
                 )
         );
 
         JMenuItem pasteMenuItem = new JMenuItem( "Paste" );
 
+        //noinspection MagicConstant
         pasteMenuItem.setAccelerator(
                 KeyStroke.getKeyStroke(
-                        KeyEvent.VK_V, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()
+                        KeyEvent.VK_V, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()
                 )
         );
 

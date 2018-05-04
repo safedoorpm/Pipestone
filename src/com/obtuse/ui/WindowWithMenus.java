@@ -144,9 +144,10 @@ public class WindowWithMenus extends TrackedWindow {
         if ( osLevelCustomizations == null || OSLevelCustomizations.onWindows() ) {
 
             _fileMenu.add( _preferencesMenuItem );
+            //noinspection MagicConstant
             _preferencesMenuItem.setAccelerator(
                     KeyStroke.getKeyStroke(
-                            KeyEvent.VK_COMMA, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()
+                            KeyEvent.VK_COMMA, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()
                     )
             );
 
@@ -193,9 +194,10 @@ public class WindowWithMenus extends TrackedWindow {
             _showLogsMenuItem.setState( WindowWithMenus.s_showLogsMode );
 
             _fileMenu.add( _showLogsMenuItem );
+            //noinspection MagicConstant
             _showLogsMenuItem.setAccelerator(
                     KeyStroke.getKeyStroke(
-                            KeyEvent.VK_L, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()
+                            KeyEvent.VK_L, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()
                     )
             );
 
@@ -353,9 +355,10 @@ public class WindowWithMenus extends TrackedWindow {
 
         JMenuItem menuItem = new JMenuItem( operationName );
         setMenuEnabled( "WWM:dEM", menuItem, false );
+        //noinspection MagicConstant
         menuItem.setAccelerator(
                 KeyStroke.getKeyStroke(
-                        keyEvent, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()
+                        keyEvent, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()
                 )
         );
 

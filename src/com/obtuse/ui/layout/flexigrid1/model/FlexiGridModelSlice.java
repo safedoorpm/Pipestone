@@ -12,7 +12,6 @@ import com.obtuse.ui.layout.flexigrid1.util.FlexiGridBasicConstraint;
 import com.obtuse.ui.layout.flexigrid1.util.FlexiGridConstraintsTable;
 import com.obtuse.ui.layout.linear.LinearLayoutUtil;
 import com.obtuse.util.FormattingVector;
-import com.obtuse.util.Logger;
 import com.obtuse.util.ObtuseUtil;
 import com.obtuse.util.SimpleUniqueIntegerIdGenerator;
 import org.jetbrains.annotations.NotNull;
@@ -182,7 +181,7 @@ public class FlexiGridModelSlice implements Comparable<FlexiGridModelSlice> {
 
         }
 
-        boolean rowOrientation = getOrientation() == FlexiGridPanelModel.Orientation.ROWS;
+        boolean rowOrientation = getOrientation().isRowOrientation();
 
         int row = rowOrientation ? _currentIndex : ix;
         int col = rowOrientation ? ix : _currentIndex;
@@ -426,7 +425,7 @@ public class FlexiGridModelSlice implements Comparable<FlexiGridModelSlice> {
                ( hasOwner() ? ( "within " + _owner.getName() ) : "***ORPHAN***" ) +
                ", currentIndex=" + ( optCurrentIndex.isPresent() ? optCurrentIndex.get() : "unassigned" ) +
                ", markerTag=" + _markerTag + ( _markerTagCrystallized ? " (crystallized)" : " (not crystallized)" ) +
-               ", orientation=" + ( hasOwner() ? _owner.getOrientation() : "unknown" ) +
+               ", orientation=" + getOrientation() +
                " )";
 
     }

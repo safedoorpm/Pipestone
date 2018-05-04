@@ -1,9 +1,4 @@
-/*
- * Copyright © 2018 Daniel Boulet
- * All rights reserved.
- */
-
-package com.obtuse.ui.selectors;
+package com.obtuse.util;
 
 import com.obtuse.util.gowing.*;
 import com.obtuse.util.gowing.p2a.GowingEntityReference;
@@ -12,6 +7,10 @@ import com.obtuse.util.gowing.p2a.holders.GowingPackableEntityHolder;
 import com.obtuse.util.gowing.p2a.holders.GowingStringHolder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+/*
+ * Copyright © 2018 Obtuse Systems Corporation
+ */
 
 /**
  Provide an easy way to wrap something with a customized {@code toString()} value.

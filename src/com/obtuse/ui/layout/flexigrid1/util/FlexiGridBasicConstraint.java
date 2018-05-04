@@ -4,6 +4,7 @@
 
 package com.obtuse.ui.layout.flexigrid1.util;
 
+import com.obtuse.util.ObtuseUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
@@ -32,7 +33,7 @@ public class FlexiGridBasicConstraint implements FlexiGridConstraint {
     private final String _name;
     private int _row;
     private int _col;
-    private final FlexiGridConstraintCategory _constraintCategory;
+//    private final FlexiGridConstraintCategory _constraintCategory;
 
     private HJustification _horizontalJustification = null;
     private VJustification _verticalJustification = null;
@@ -47,13 +48,19 @@ public class FlexiGridBasicConstraint implements FlexiGridConstraint {
 
         super();
 
+        if ( row < 0 || col < 0 ) {
+
+            ObtuseUtil.doNothing();
+
+        }
+
         _name = name;
         _row = row;
         _col = col;
-        _constraintCategory = FlexiGridConstraintCategory.BASIC;
 
     }
 
+    @Override
     @NotNull
     public String getName() {
 
@@ -209,7 +216,7 @@ public class FlexiGridBasicConstraint implements FlexiGridConstraint {
     @NotNull
     public FlexiGridConstraintCategory getConstraintCategory() {
 
-        return _constraintCategory;
+        return FlexiGridConstraintCategory.BASIC;
 
     }
 
@@ -222,6 +229,12 @@ public class FlexiGridBasicConstraint implements FlexiGridConstraint {
 
     @NotNull
     public static String locationString( int r, int c ) {
+
+        if ( r < 0 || c < 0 ) {
+
+            ObtuseUtil.doNothing();
+
+        }
 
         return "[" + r + "," + c + "]";
 
@@ -236,7 +249,7 @@ public class FlexiGridBasicConstraint implements FlexiGridConstraint {
 //               _name + ", [" +
 //               _row + "," +
 //               _col + "]," +
-               ", category=" + _constraintCategory +
+               ", category=" + getConstraintCategory() +
                ", hJust=" + getHorizontalJustification() +
                ", vJust=" + getVerticalJustification() +
                " )";

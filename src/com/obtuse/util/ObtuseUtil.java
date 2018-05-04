@@ -2949,14 +2949,14 @@ public class ObtuseUtil {
 
     static {
 
-        rememberBitName( InputEvent.SHIFT_MASK, "Shift" );
-        rememberBitName( InputEvent.CTRL_MASK, "Ctrl" );
-        rememberBitName( InputEvent.META_MASK, "Meta" );
-        rememberBitName( InputEvent.ALT_MASK, "Alt" );
-        rememberBitName( InputEvent.ALT_GRAPH_MASK, "AltGraph" );
-        rememberBitName( InputEvent.BUTTON1_MASK, "Button_1" );
-        rememberBitName( InputEvent.BUTTON2_MASK, "Button_2" );
-        rememberBitName( InputEvent.BUTTON3_MASK, "Button_3" );
+//        rememberBitName( InputEvent.SHIFT_DOWN_MASK, "Shift" );
+//        rememberBitName( InputEvent.CTRL_DOWN_MASK, "Ctrl" );
+//        rememberBitName( InputEvent.META_DOWN_MASK, "Meta" );
+//        rememberBitName( InputEvent.ALT_DOWN_MASK, "Alt" );
+//        rememberBitName( InputEvent.ALT_GRAPH_DOWN_MASK, "AltGraph" );
+//        rememberBitName( InputEvent.BUTTON1_DOWN_MASK, "Button_1" );
+//        rememberBitName( InputEvent.BUTTON2_DOWN_MASK, "Button_2" );
+//        rememberBitName( InputEvent.BUTTON3_DOWN_MASK, "Button_3" );
         rememberBitName( InputEvent.SHIFT_DOWN_MASK, "ShiftDown" );
         rememberBitName( InputEvent.CTRL_DOWN_MASK, "CtrlDown" );
         rememberBitName( InputEvent.META_DOWN_MASK, "MetaDown" );
@@ -3014,7 +3014,15 @@ public class ObtuseUtil {
 
                     s_maskExBits[bitIx] = name;
 
+                } else {
+
+//                    System.out.println( "duplicate mask " + name + " and " + s_maskExBits[bitIx] );
+
                 }
+
+            } else {
+
+//                System.out.println( "more than one bit set for " + name );
 
             }
 

@@ -160,7 +160,7 @@ public class FlexiGridLayoutManager implements LayoutManager2 {
     }
 
     @NotNull
-    public FlexiGridConstraintsTable getConstraints( final @NotNull Component component ) {
+    public FlexiGridConstraintsTable getMandatoryConstraints( final @NotNull Component component ) {
 
         FlexiGridConstraintsTable rval = _constraints.get( component );
         if ( rval == null ) {
@@ -171,7 +171,7 @@ public class FlexiGridLayoutManager implements LayoutManager2 {
 
             }
 
-            throw new HowDidWeGetHereError( "FlexiGridConstraintsTable.getConstraints:  component " + LinearLayoutUtil.describeComponent( component ) + " not found" );
+            throw new HowDidWeGetHereError( "FlexiGridConstraintsTable.getMandatoryConstraints:  component " + LinearLayoutUtil.describeComponent( component ) + " not found" );
 
         }
 
@@ -181,12 +181,7 @@ public class FlexiGridLayoutManager implements LayoutManager2 {
 
     public FlexiGridBasicConstraint getMandatoryBasicConstraint( final @NotNull Component component ) {
 
-        FlexiGridConstraintsTable constraintsTable = getConstraints( component );
-//        if ( constraintsTable == null ) {
-//
-//            throw new HowDidWeGetHereError( "FlexiGridLayoutManager.getMandatoryBasicConstraint:  no constraints table for " + component );
-//
-//        }
+        FlexiGridConstraintsTable constraintsTable = getMandatoryConstraints( component );
 
         FlexiGridConstraint constraint = constraintsTable.get( FlexiGridConstraintCategory.BASIC );
         if ( constraint instanceof FlexiGridBasicConstraint ) {
@@ -405,7 +400,6 @@ public class FlexiGridLayoutManager implements LayoutManager2 {
 
         }
 
-//        cache.setComponentBounds();
         cache.setComponentBounds();
 
         Dimension targetMinimumSize = _target.getMinimumSize();

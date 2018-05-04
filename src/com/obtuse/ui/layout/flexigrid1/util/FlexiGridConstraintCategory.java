@@ -11,5 +11,7 @@ package com.obtuse.ui.layout.flexigrid1.util;
  */
 
 public enum FlexiGridConstraintCategory {
-    BASIC
+    BASIC,
+    SIMPLE,
+    DIVIDER_SEGMENT
 }

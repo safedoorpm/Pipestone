@@ -47,7 +47,7 @@ public class EventUtils {
 	String msg = where + ":  " +
 		     "mouse event:  " + eventType +
 		     ", button " + event.getButton() +
-		     ", mod " + MouseEvent.getMouseModifiersText( event.getModifiers() ).trim() +
+//		     ", mod " + MouseEvent.getMouseModifiersText( event.getModifiers() ).trim() +
 		     ", modEx " + MouseEvent.getModifiersExText( event.getModifiersEx() ).trim() +
 		     ", clickCount " + event.getClickCount() +
 		     ", point (" + event.getPoint().x + "," + event.getPoint().y + ")" +

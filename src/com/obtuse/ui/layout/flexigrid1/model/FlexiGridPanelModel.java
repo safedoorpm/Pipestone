@@ -24,8 +24,12 @@ import java.util.List;
 public class FlexiGridPanelModel<SLICE extends FlexiGridModelSlice> {
 
     public enum Orientation {
-        ROWS,
-        COLUMNS
+        ROW { public boolean isRowOrientation() { return true; } public boolean isColumnOrientation() { return false; } },
+        COLUMN { public boolean isRowOrientation() { return false; } public boolean isColumnOrientation() { return true; } };
+
+        public abstract boolean isRowOrientation();
+        public abstract boolean isColumnOrientation();
+
     }
 
     public enum OwnershipExpectation {
@@ -708,7 +712,7 @@ public class FlexiGridPanelModel<SLICE extends FlexiGridModelSlice> {
 
         try {
 
-            FlexiGridModelSlice slice = _slices.get( _orientation == Orientation.ROWS ? row : column );
+            FlexiGridModelSlice slice = _slices.get( _orientation.isRowOrientation() ? row : column );
 
             return slice.isVisible();
 
@@ -781,7 +785,7 @@ public class FlexiGridPanelModel<SLICE extends FlexiGridModelSlice> {
         verify( "renumber@" + who, "/start" );
 
         int newIx = 0;
-        boolean rowOrientation = getOrientation() == Orientation.ROWS;
+        boolean rowOrientation = getOrientation().isRowOrientation();
 
         for ( FlexiGridModelSlice slice : _slices ) {
 
@@ -825,7 +829,7 @@ public class FlexiGridPanelModel<SLICE extends FlexiGridModelSlice> {
 
     /**
      Get this model's orientation as specified when this instance was created.
-     @return {@link Orientation#ROWS} or {@link Orientation#COLUMNS} as appropriate.
+     @return {@link Orientation#ROW} or {@link Orientation#COLUMN} as appropriate.
      */
 
     public Orientation getOrientation() {

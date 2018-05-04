@@ -4,7 +4,7 @@ import com.obtuse.exceptions.HowDidWeGetHereError;
 import com.obtuse.ui.ObtuseImageFile;
 import com.obtuse.ui.layout.linear.LinearFlagName;
 import com.obtuse.ui.layout.linear.LinearFlagNameValue;
-import com.obtuse.ui.selectors.ContextualToString;
+import com.obtuse.util.ContextualToString;
 import com.obtuse.util.*;
 import com.obtuse.util.gowing.*;
 import com.obtuse.util.gowing.p2a.examples.SortedSetExample;

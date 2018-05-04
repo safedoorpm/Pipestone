@@ -113,7 +113,7 @@ public class GridArray<T extends GridArray.ItemInfo> {
 
         }
 
-        if ( col < 0 ) {
+        if ( col < -1 ) {
 
             throw new IllegalArgumentException( who + ":  col (" + col + ") must not be negative" );
 
@@ -273,9 +273,9 @@ public class GridArray<T extends GridArray.ItemInfo> {
 
         if ( !replaceOk && gridRow.containsKey( ii.column() ) ) {
 
-            throw new IllegalArgumentException(
-                    "GridArray.put:  there is already something at [" + ii.row() + "," + ii.column() + "]"
-            );
+            String msg = "GridArray.put:  there is already something at [" + ii.row() + "," + ii.column() + "] " + ii;
+
+            throw new IllegalArgumentException( msg );
 
         }
 

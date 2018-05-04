@@ -18,18 +18,18 @@ import java.util.TreeMap;
  */
 
 /**
- Something simple yet structured to put into a combo-box.
+ A simple yet structured alternative to put into a {@link Selector} and eventually into a combo-box.
  <p>Instances of this class are immutable.</p>
  */
 
-public class SimpleComboBoxChoice implements Comparable<SimpleComboBoxChoice>, GowingPackable {
+public class Alternative implements Comparable<Alternative>, GowingPackable {
 
-    private static final SortedMap<String, SimpleComboBoxChoice> s_availableChoices = new TreeMap<>();
+    private static final SortedMap<String, Alternative> s_availableChoices = new TreeMap<>();
 
-    private static final EntityTypeName ENTITY_TYPE_NAME = new EntityTypeName( SimpleComboBoxChoice.class );
+    private static final EntityTypeName ENTITY_TYPE_NAME = new EntityTypeName( Alternative.class );
     private static final int VERSION = 1;
 
-    private static final EntityName G_VARIANT_TAG = new EntityName( "_vt" );
+    private static final EntityName G_SELECTOR_TAG = new EntityName( "_vt" );
     private static final EntityName G_TO_STRING = new EntityName( "_ts" );
     private static final EntityName G_CHOICE_TAG = new EntityName( "_n" );
 
@@ -58,21 +58,21 @@ public class SimpleComboBoxChoice implements Comparable<SimpleComboBoxChoice>, G
         )
                 throws GowingUnpackingException {
 
-            String variantTag = bundle.MandatoryStringValue( G_VARIANT_TAG );
-            Optional<ChoiceVariant> optVariant = ChoiceVariant.findVariant( variantTag );
-            if ( !optVariant.isPresent() ) {
+            String selectorTag = bundle.MandatoryStringValue( G_SELECTOR_TAG );
+            Optional<Selector> optSelector = Selector.findSelector( selectorTag );
+            if ( !optSelector.isPresent() ) {
 
                 throw new IllegalArgumentException(
-                        "SimpleComboBoxChoice.factory.createEntity:  unknown variant " + ObtuseUtil.enquoteToJavaString( variantTag )
+                        "Alternative.factory.createEntity:  unknown selector " + ObtuseUtil.enquoteToJavaString( selectorTag )
                 );
 
             }
 
             String choiceTag = bundle.MandatoryStringValue( G_CHOICE_TAG );
-            ChoiceVariant choiceVariant = optVariant.get();
-            String uniqueKey = makeUniqueKey( choiceVariant, choiceTag );
+            Selector selector = optSelector.get();
+            String uniqueKey = makeUniqueKey( selector, choiceTag );
 
-            Optional<SimpleComboBoxChoice> optChoice = findChoice( choiceVariant, choiceTag );
+            Optional<Alternative> optChoice = findChoice( selector, choiceTag );
 
             if ( optChoice.isPresent() ) {
 
@@ -80,7 +80,7 @@ public class SimpleComboBoxChoice implements Comparable<SimpleComboBoxChoice>, G
 
             } else {
 
-                throw new IllegalArgumentException( "SimpleComboBoxChoice.createEntity:  unknown unique key " + ObtuseUtil.enquoteToJavaString( uniqueKey ) );
+                throw new IllegalArgumentException( "Alternative.createEntity:  unknown unique key " + ObtuseUtil.enquoteToJavaString( uniqueKey ) );
 
             }
 
@@ -89,7 +89,7 @@ public class SimpleComboBoxChoice implements Comparable<SimpleComboBoxChoice>, G
     };
 
     private final GowingInstanceId _instanceId = new GowingInstanceId( GowingPackable.class );
-    private final ChoiceVariant _choiceVariant;
+    private final Selector _selector;
     private final String _toString;
     private final String _tag;
     private final String _uniqueKey;
@@ -97,32 +97,32 @@ public class SimpleComboBoxChoice implements Comparable<SimpleComboBoxChoice>, G
     private boolean _unspecifiedChoice = false;
 
     /**
-     Create an instance which has a name which is equal to its {@link #toString()} value.
-     @param choiceVariant the instance's {@link ChoiceVariant}.
-     @param tag the instance's name.
-     @param toString the value returned by this instance's {@code toString()} method.
+     Create an instance which has a tag which might be different than its {@link #toString()} value.
+     @param selector the instance's {@link Selector}.
+     @param tag the instance's tag.
+     @param toString the value to be returned by this instance's {@code toString()} method.
      @throws IllegalArgumentException if this JVM already has an instance of this class with the specified {@code name} and {@code toString} values.
      */
 
-    private SimpleComboBoxChoice( final @NotNull ChoiceVariant choiceVariant, final @NotNull String tag, final @NotNull String toString ) {
+    public Alternative( final @NotNull Selector selector, final @NotNull String tag, final @NotNull String toString ) {
         super();
 
-        _choiceVariant = choiceVariant;
+        _selector = selector;
         _tag = tag;
         _toString = toString;
-        _uniqueKey = makeUniqueKey( choiceVariant, tag );
+        _uniqueKey = makeUniqueKey( selector, tag );
 
         if ( findChoice( _uniqueKey ).isPresent() ) {
 
             throw new IllegalArgumentException(
-                    "SimpleComboBoxChoice:  choice with unique key " + ObtuseUtil.enquoteToJavaString( _uniqueKey ) + " already exists"
+                    "Alternative:  choice with unique key " + ObtuseUtil.enquoteToJavaString( _uniqueKey ) + " already exists"
             );
 
         }
 
         s_availableChoices.put( _uniqueKey, this );
 
-        Logger.logMsg( "SimpleComboBoxChoice:  created " + describeInstance( _uniqueKey, this ) );
+        Logger.logMsg( "Alternative:  created " + describeInstance( _uniqueKey, this ) );
 
         ObtuseUtil.doNothing();
 
@@ -130,36 +130,36 @@ public class SimpleComboBoxChoice implements Comparable<SimpleComboBoxChoice>, G
 
     /**
      Create an instance which has a name which is equal to its {@link #toString()} value.
-     @param choiceVariant the instance's {@link ChoiceVariant}.
-     @param tag the instance's name and the value returned by its {@code toString()} method.
+     @param selector the instance's {@link Selector}.
+     @param tag the instance's tag and the value returned by its {@code toString()} method.
      @throws IllegalArgumentException if this JVM already has an instance of this class with
      a name and {@code toString()} value equal to the specified {@code name}.
      */
 
-    public SimpleComboBoxChoice( final @NotNull ChoiceVariant choiceVariant, final @NotNull String tag ) {
-        this( choiceVariant, tag, tag );
+    public Alternative( final @NotNull Selector selector, final @NotNull String tag ) {
+        this( selector, tag, tag );
     }
 
-    public static Optional<SimpleComboBoxChoice> findChoice( final @NotNull ChoiceVariant choiceVariant, final @NotNull String name ) {
+    public static Optional<Alternative> findChoice( final @NotNull Selector selector, final @NotNull String name ) {
 
-        return findChoice( makeUniqueKey( choiceVariant, name ) );
+        return findChoice( makeUniqueKey( selector, name ) );
 
     }
 
-    public static Optional<SimpleComboBoxChoice> findChoice( final @NotNull String uniqueKey ) {
+    public static Optional<Alternative> findChoice( final @NotNull String uniqueKey ) {
 
-        Logger.logMsg( "SimpleComboBoxChoice.findChoice:  looking for " + ObtuseUtil.enquoteToJavaString( uniqueKey ) );
+        Logger.logMsg( "Alternative.findChoice:  looking for " + ObtuseUtil.enquoteToJavaString( uniqueKey ) );
 
-        SimpleComboBoxChoice choice = s_availableChoices.get( uniqueKey );
+        Alternative choice = s_availableChoices.get( uniqueKey );
 
-        Optional<SimpleComboBoxChoice> rval = Optional.ofNullable( choice );
+        Optional<Alternative> rval = Optional.ofNullable( choice );
 
         if ( !rval.isPresent() ) {
 
-            Logger.logMsg( "SimpleComboBoxChoice.findChoice:  did not find " + ObtuseUtil.enquoteToJavaString( uniqueKey ) );
+            Logger.logMsg( "Alternative.findChoice:  did not find " + ObtuseUtil.enquoteToJavaString( uniqueKey ) );
             for ( String key : s_availableChoices.keySet() ) {
 
-                SimpleComboBoxChoice tmpChoice = s_availableChoices.get( key );
+                Alternative tmpChoice = s_availableChoices.get( key );
                 Logger.logMsg(
                         describeInstance( key, tmpChoice )
                 );
@@ -175,38 +175,43 @@ public class SimpleComboBoxChoice implements Comparable<SimpleComboBoxChoice>, G
     }
 
     @NotNull
-    private static String describeInstance( final String key, final SimpleComboBoxChoice tmpChoice ) {
+    private static String describeInstance( final String key, final Alternative tmpChoice ) {
 
-        return "    variant=" + ObtuseUtil.enquoteJavaObject( tmpChoice.getChoiceVariant() ) +
+        return "    selector=" + ObtuseUtil.enquoteJavaObject( tmpChoice.getSelector() ) +
                ", key=" + ObtuseUtil.enquoteToJavaString( key ) +
                ", uKey=" + ObtuseUtil.enquoteToJavaString( tmpChoice.getUniqueKey() ) +
                ", toString=" + ObtuseUtil.enquoteToJavaString( tmpChoice.toString() );
+
     }
 
-    public static SimpleComboBoxChoice maybeCreateChoice( final @NotNull ChoiceVariant choiceVariant, final @NotNull String tag, final @NotNull String toString ) {
+    public static Alternative maybeCreateChoice(
+            final @NotNull Selector selector,
+            final @NotNull String tag,
+            final @NotNull String toString
+    ) {
 
-        Optional<SimpleComboBoxChoice> optChoice = findChoice( choiceVariant, tag );
-        return optChoice.orElseGet( () -> new SimpleComboBoxChoice( choiceVariant, tag, toString ) );
+        Optional<Alternative> optChoice = findChoice( selector, tag );
+        return optChoice.orElseGet( () -> new Alternative( selector, tag, toString ) );
 
     }
 
     /**
-     Get this instance's variant.
-     @return this instance's {@code ChoiceVariant}.
+     Get this instance's selector.
+     @return this instance's {@code Selector}.
      */
 
     @NotNull
-    public ChoiceVariant getChoiceVariant() {
+    public Selector getSelector() {
 
-        return _choiceVariant;
+        return _selector;
 
     }
 
-    public SimpleComboBoxChoice markAsUnspecifiedChoice() {
+    public Alternative markAsUnspecifiedChoice() {
 
         if ( _unspecifiedChoice ) {
 
-            throw new IllegalArgumentException( "SimpleComboBoxChoice.markUnspecifiedChoice:  instance already marked as the unspecified choice" );
+            throw new IllegalArgumentException( "Alternative.markUnspecifiedChoice:  instance already marked as the unspecified choice" );
 
         }
 
@@ -225,20 +230,20 @@ public class SimpleComboBoxChoice implements Comparable<SimpleComboBoxChoice>, G
     @NotNull
     public String getTag() {
 
-        return _tag == null ? "<<unknown SimpleComboBoxChoice name>>" : _tag;
+        return _tag == null ? "<<unknown Alternative name>>" : _tag;
 
     }
 
     public String toString() {
 
-        return _toString == null ? "<<unknown SimpleComboBoxChoice toString>>" : _toString;
+        return _toString == null ? "<<unknown Alternative toString>>" : _toString;
 
     }
 
     /**
      Get this instance's unique key.
      <p/>Each instance has a unique key which is equal to
-     <blockquote>{@code "" + this.}{@link #getChoiceVariant()}{@code  + ":" + this.}{@link #getTag()}</blockquote>
+     <blockquote>{@code "" + this.}{@link #getSelector()}{@code  + ":" + this.}{@link #getTag()}</blockquote>
      @return this instance's unique key.
      */
 
@@ -249,18 +254,18 @@ public class SimpleComboBoxChoice implements Comparable<SimpleComboBoxChoice>, G
     }
 
     /**
-     Construct a unique key which sorts by a ChoiceVariant name and then by a String name.
-     @param choiceVariant the {@link ChoiceVariant}.
+     Construct a unique key which sorts by a Selector name and then by a String name.
+     @param selector the {@link Selector}.
      @param name the {@link String name}.
      @return the unique key resulting from
      <blockquote>
-     {@code "" + choiceVariant.name() + ":" + name}
+     {@code "" + selector.name() + ":" + name}
      </blockquote>
      */
 
-    public static String makeUniqueKey( final @NotNull ChoiceVariant choiceVariant, final @NotNull String name ) {
+    public static String makeUniqueKey( final @NotNull Selector selector, final @NotNull String name ) {
 
-        return choiceVariant.variantTag + ":" + name;
+        return selector.selectorTag + ":" + name;
 
     }
 
@@ -299,7 +304,7 @@ public class SimpleComboBoxChoice implements Comparable<SimpleComboBoxChoice>, G
                 packer.getPackingContext()
         );
 
-        bundle.addHolder( new GowingStringHolder( G_VARIANT_TAG, _choiceVariant.variantTag, true ) );
+        bundle.addHolder( new GowingStringHolder( G_SELECTOR_TAG, _selector.selectorTag, true ) );
         bundle.addHolder( new GowingStringHolder( G_TO_STRING, _toString, true ) );
         bundle.addHolder( new GowingStringHolder( G_CHOICE_TAG, _tag, true ) );
 
@@ -315,7 +320,7 @@ public class SimpleComboBoxChoice implements Comparable<SimpleComboBoxChoice>, G
     }
 
     @Override
-    public int compareTo( @NotNull final SimpleComboBoxChoice rhs ) {
+    public int compareTo( @NotNull final Alternative rhs ) {
 
         return _uniqueKey.compareTo( rhs.getUniqueKey() );
 
@@ -329,7 +334,7 @@ public class SimpleComboBoxChoice implements Comparable<SimpleComboBoxChoice>, G
 
     @Override public boolean equals( final Object rhs ) {
 
-        return rhs instanceof SimpleComboBoxChoice && compareTo( (SimpleComboBoxChoice)rhs ) == 0;
+        return rhs instanceof Alternative && compareTo( (Alternative)rhs ) == 0;
 
     }
 
