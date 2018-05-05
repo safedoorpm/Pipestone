@@ -210,11 +210,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FlexiGridTesting.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="FlexiGridTesting.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/FlexiGridTesting.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="244">
-              <caret line="179" column="81" selection-start-line="179" selection-start-column="81" selection-end-line="179" selection-end-column="81" />
+            <state relative-caret-position="396">
+              <caret line="187" column="58" lean-forward="true" selection-start-line="187" selection-start-column="58" selection-end-line="187" selection-end-column="58" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1120#1159#0" expanded="true" />
@@ -231,11 +231,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FlexiGridConstraintCategory.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/util/FlexiGridConstraintCategory.java">
+      <file leaf-file-name="ObtuseCollections.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/ObtuseCollections.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="12" column="12" selection-start-line="12" selection-start-column="12" selection-end-line="12" selection-end-column="12" />
+            <state relative-caret-position="329">
+              <caret line="144" column="38" selection-start-line="144" selection-start-column="38" selection-end-line="144" selection-end-column="38" />
             </state>
           </provider>
         </entry>
@@ -346,7 +346,6 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/com/obtuse/ui/selectors/BorderLayoutPanel.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/util/ObtuseCollections.java" />
         <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackable.java" />
         <option value="$PROJECT_DIR$/src/com/obtuse/ui/selectors/WrappedSelectorPanel.java" />
         <option value="$PROJECT_DIR$/../Burke2/BurkeBioEditor/src/xyz/kenosee/burke2/bioGenerator/util/keywordConfigurators/KeywordSetEditorConfig2.java" />
@@ -396,6 +395,7 @@
         <option value="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/FlexiGridCache1.java" />
         <option value="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/FlexiGridLayoutManager.java" />
         <option value="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/FlexiGridTesting.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/util/ObtuseCollections.java" />
       </list>
     </option>
   </component>
@@ -418,7 +418,7 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="1">
     <option name="x" value="2715" />
     <option name="y" value="27" />
     <option name="width" value="2405" />
@@ -1371,14 +1371,7 @@
       <workItem from="1524532307485" duration="9371000" />
       <workItem from="1524860850856" duration="2620000" />
       <workItem from="1525066711224" duration="6464000" />
-      <workItem from="1525449242494" duration="904000" />
-    </task>
-    <task id="LOCAL-00014" summary="Snapshot time. Working mostly on the v2 unpacker. Still trying to get the distinction between instance ids and packing ids exactly right.">
-      <created>1441743053772</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1441743053772</updated>
+      <workItem from="1525449242494" duration="1175000" />
     </task>
     <task id="LOCAL-00015" summary="Packer2 family exhibits basic sanity.">
       <created>1442120231465</created>
@@ -1716,11 +1709,18 @@
       <option name="project" value="LOCAL" />
       <updated>1525449547340</updated>
     </task>
-    <option name="localTasksCounter" value="63" />
+    <task id="LOCAL-00063" summary="Rework the ObtuseCollections class.&#10;&#10;Update FlexiGridPanelModel and LevenshteinDistanceUtil to work with the updated ObtuseCollections class.">
+      <created>1525558829167</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1525558829167</updated>
+    </task>
+    <option name="localTasksCounter" value="64" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="913648000" />
+    <option name="totallyTimeSpent" value="913919000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1737,13 +1737,14 @@
     <layout>
       <window_info anchor="right" id="Palette" order="5" sideWeight="0.67289025" weight="0.118644066" />
       <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info active="true" anchor="bottom" id="Messages" order="10" sideWeight="0.9753381" visible="true" weight="0.29955947" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info id="Image Layers" order="2" />
       <window_info anchor="right" id="Capture Analysis" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5078684" side_tool="true" weight="0.42062417" />
       <window_info anchor="right" id="Maven Projects" order="8" weight="0.32960624" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Version Control" order="8" sideWeight="0.49213162" visible="true" weight="0.2804699" />
+      <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49213162" weight="0.2804699" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.3277126" />
       <window_info anchor="bottom" id="Terminal" order="14" weight="0.32956952" />
       <window_info id="Capture Tool" order="2" />
@@ -1766,7 +1767,6 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.2498858" />
       <window_info anchor="bottom" id="Problems" order="13" />
       <window_info id="Nl-Palette" order="2" />
-      <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.9753381" weight="0.29955947" />
       <window_info anchor="bottom" id="Application Servers" order="12" />
       <window_info anchor="right" id="Properties" order="6" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.4985938" weight="0.30323055" />
@@ -1858,7 +1858,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Lots of cleanup based on code analysis." />
     <MESSAGE value="Get rid of some IntelliJ warnings in the Ranges class." />
     <MESSAGE value="Move the linear layout manager facility from the Burke2 project to the Pipestone project." />
     <MESSAGE value="Lots of cleanup.&#10;&#10;Temporary kludge to make things work on non-Mac operating systems (declare hollow versions of the various Apple classes)." />
@@ -1883,7 +1882,8 @@
     <MESSAGE value="Implement the FlexiGridLayoutManager which lays out components in a grid where the width and column of each grid cell is sized based on the space actually required by the components in that cell's row and column (in contrast, the GridLayout manager forces each cell's width to be the same and each cell's height to be the same). Each component is added to the underlying FlexiGridContainer with a constraint object which specifies the component's row and column within the grid as well as how the component should be justified within its cell should it's size be smaller than the space available (top, center, bottom and left, center, right).&#10;&#10;Also implement the FlexiGridPanelModel which provides a somewhat high level interface to the FlexiGridLayoutManager. In particular, the FlexiGridPanelModel allows the easy insertion of new rows or new columns, depending on the FlexiGridPanelModel instance's orientation, either before or after specific rows or columns.&#10;&#10;Taken together, these classes provide a relatively easy way to manage a rectangular grid of components.&#10;&#10;The current version of the FlexiGridLayoutManager only takes each component's preferred width and height into account. This results in the width of each column being the maximum of the preferred widths of the elements in the column and the height of each column being the maximum of the preferred heights of the elements in each row. A future version with also take each component's minimum and maximum width and heights into account.&#10;&#10;Minor changes to the Measure class to improve the formatting of its output.&#10;&#10;Provide a way to specify if the default instance of the RandomCentral class should be a SecureRandom instance or 'merely' a Random instance. The default is to use a SecureRandom instance." />
     <MESSAGE value="A considerably cleaned up and somewhat improved FlexiGridPanelModel.&#10;&#10;Lots and lots of textual cleanup." />
     <MESSAGE value="Stop using various APIs that were deprecated in Java 9 (mostly AWT APIs).&#10;&#10;Implement the FlexiGridDivider class which provides a way to include &quot;divider lines&quot; in components being managed by the FlexiGridLayoutManager (strictly speaking, this is intended for use with the FlexiGridPanelModel although the actual support for it is in the layout manager part of the flexi-grid facility).&#10;&#10;Various cleanup including a bit of reorganizing of classes and methods." />
-    <option name="LAST_COMMIT_MESSAGE" value="Stop using various APIs that were deprecated in Java 9 (mostly AWT APIs).&#10;&#10;Implement the FlexiGridDivider class which provides a way to include &quot;divider lines&quot; in components being managed by the FlexiGridLayoutManager (strictly speaking, this is intended for use with the FlexiGridPanelModel although the actual support for it is in the layout manager part of the flexi-grid facility).&#10;&#10;Various cleanup including a bit of reorganizing of classes and methods." />
+    <MESSAGE value="Rework the ObtuseCollections class.&#10;&#10;Update FlexiGridPanelModel and LevenshteinDistanceUtil to work with the updated ObtuseCollections class." />
+    <option name="LAST_COMMIT_MESSAGE" value="Rework the ObtuseCollections class.&#10;&#10;Update FlexiGridPanelModel and LevenshteinDistanceUtil to work with the updated ObtuseCollections class." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -2377,13 +2377,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/ObtuseCollections.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="329">
-          <caret line="120" selection-start-line="120" selection-end-line="120" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/FlexiGridItemInfo.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="171">
@@ -2723,8 +2716,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/FlexiGridTesting.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="244">
-          <caret line="179" column="81" selection-start-line="179" selection-start-column="81" selection-end-line="179" selection-end-column="81" />
+        <state relative-caret-position="396">
+          <caret line="187" column="58" lean-forward="true" selection-start-line="187" selection-start-column="58" selection-end-line="187" selection-end-column="58" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1120#1159#0" expanded="true" />
@@ -2737,6 +2730,13 @@
             <element signature="e#15490#15529#0" expanded="true" />
             <element signature="e#16190#16229#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/ObtuseCollections.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="329">
+          <caret line="144" column="38" selection-start-line="144" selection-start-column="38" selection-end-line="144" selection-end-column="38" />
         </state>
       </provider>
     </entry>
