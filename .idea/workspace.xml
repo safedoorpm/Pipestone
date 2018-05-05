@@ -1371,7 +1371,7 @@
       <workItem from="1524532307485" duration="9371000" />
       <workItem from="1524860850856" duration="2620000" />
       <workItem from="1525066711224" duration="6464000" />
-      <workItem from="1525449242494" duration="1175000" />
+      <workItem from="1525449242494" duration="1471000" />
     </task>
     <task id="LOCAL-00015" summary="Packer2 family exhibits basic sanity.">
       <created>1442120231465</created>
@@ -1720,7 +1720,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="913919000" />
+    <option name="totallyTimeSpent" value="914215000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1732,8 +1732,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="2715" y="27" width="2405" height="1538" extended-state="0" />
-    <editor active="true" />
+    <frame x="2715" y="27" width="2405" height="1538" extended-state="1" />
     <layout>
       <window_info anchor="right" id="Palette" order="5" sideWeight="0.67289025" weight="0.118644066" />
       <window_info anchor="bottom" id="TODO" order="6" />
