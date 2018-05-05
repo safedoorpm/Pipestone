@@ -12,7 +12,6 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.JTextComponent;
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -27,9 +26,22 @@ public class LevenshteinDistanceUtil {
 
     }
 
-    public static <T extends JTextComponent> T configureLevensteinDistanceDocument( T jtc, final @NotNull String @NotNull [] possibleWords, final int maxChoices, final int threshold, boolean trim ) {
+    public static <T extends JTextComponent> T configureLevensteinDistanceDocument(
+            T jtc,
+            final @NotNull String @NotNull [] possibleWords,
+            final int maxChoices,
+            final int threshold,
+            boolean trim
+    ) {
 
-        jtc.getDocument().addDocumentListener( new LeventsteinDistanceUtilListener<>( jtc, ObtuseCollections.addThings( new ArrayList<>(), possibleWords ), maxChoices, threshold, trim ) );
+        jtc.getDocument()
+           .addDocumentListener( new LeventsteinDistanceUtilListener<>(
+                   jtc,
+                   ObtuseCollections.arrayList( possibleWords ),
+                   maxChoices,
+                   threshold,
+                   trim
+           ) );
 
         return jtc;
 

@@ -202,7 +202,7 @@ public class FlexiGridPanelModel<SLICE extends FlexiGridModelSlice> {
 
     public void add( final @NotNull SLICE slice ) {
 
-        bulkAdd( "FGPM.add(slice)", ObtuseCollections.addThings( new ArrayList<>(), slice ), -1 );
+        bulkAdd( "FGPM.add(slice)", ObtuseCollections.arrayList( slice ), -1 );
 
     }
 
@@ -214,9 +214,9 @@ public class FlexiGridPanelModel<SLICE extends FlexiGridModelSlice> {
      @throws IndexOutOfBoundsException if there are not at least {@code index} slices already in this instance's slices.
      */
 
-    public void add( final @NotNull SLICE slice, int index ) {
+    public void add( final @NotNull SLICE slice, final int index ) {
 
-        bulkAdd( "FGPM.add(slice),index", ObtuseCollections.addThings( new ArrayList<>(), slice ), index );
+        bulkAdd( "FGPM.add(slice),index", ObtuseCollections.arrayList( slice ), index );
 
     }
 
@@ -230,7 +230,7 @@ public class FlexiGridPanelModel<SLICE extends FlexiGridModelSlice> {
 
         return bulkAdd(
                 "FGPM.addAll(slice[])",
-                ObtuseCollections.addThings( new ArrayList<>(), slices ),
+                ObtuseCollections.arrayList( slices ),
                 -1
         );
 
@@ -249,11 +249,11 @@ public class FlexiGridPanelModel<SLICE extends FlexiGridModelSlice> {
      @throws IndexOutOfBoundsException if there are not at least {@code index} slices already in this instance's slices.
      */
 
-    public boolean addAll( final @NotNull SLICE @NotNull [] slices, int index ) {
+    public boolean addAll( final @NotNull SLICE @NotNull [] slices, final int index ) {
 
         return bulkAdd(
                 "FGPM.addAll(slice[],index)",
-                ObtuseCollections.addThings( new ArrayList<>(), slices ),
+                ObtuseCollections.arrayList( slices ),
                 index
         );
 
@@ -288,7 +288,7 @@ public class FlexiGridPanelModel<SLICE extends FlexiGridModelSlice> {
      @throws IndexOutOfBoundsException if there are not at least {@code index} slices already in this instance's slices.
      */
 
-    public boolean addAll( final @NotNull Collection<SLICE> slices, int index ) {
+    public boolean addAll( final @NotNull Collection<SLICE> slices, final int index ) {
 
         return bulkAdd(
                 "FGPM.addAll(Collection(slices),index)",
@@ -309,7 +309,7 @@ public class FlexiGridPanelModel<SLICE extends FlexiGridModelSlice> {
      There may be other situations which result in an IllegalArgumentException being thrown (sorry but there's a lot of code involved).
      */
 
-    private boolean bulkAdd( final @NotNull String who, final @NotNull Collection<SLICE> slices, int index ) {
+    private boolean bulkAdd( final @NotNull String who, final @NotNull Collection<SLICE> slices, final int index ) {
 
         if ( slices.isEmpty() ) {
 
@@ -489,8 +489,8 @@ public class FlexiGridPanelModel<SLICE extends FlexiGridModelSlice> {
 
         Component[] components = _fgContainer.getAsContainer().getComponents();
 
-        Set<Component> allComponentsSet = Collections.unmodifiableSet( ObtuseCollections.addThings( new HashSet<Component>(), components ) );
-        Set<Component> unseenComponentsSet = ObtuseCollections.addThings( new HashSet<Component>(), components );
+        Set<Component> allComponentsSet = Collections.unmodifiableSet( ObtuseCollections.hashSet( components ) );
+        Set<Component> unseenComponentsSet = ObtuseCollections.hashSet( components );
 
         Map<Component,FlexiGridModelSlice> componentSlice = new HashMap<>();
 
@@ -600,7 +600,7 @@ public class FlexiGridPanelModel<SLICE extends FlexiGridModelSlice> {
             final @NotNull OwnershipExpectation ownershipExpectation
     ) {
 
-        return checkOwnership( who, ObtuseCollections.addThings( new ArrayList<>(), slice ), boomOnError, ownershipExpectation );
+        return checkOwnership( who, ObtuseCollections.arrayList( slice ), boomOnError, ownershipExpectation );
 
     }
 
@@ -780,7 +780,7 @@ public class FlexiGridPanelModel<SLICE extends FlexiGridModelSlice> {
      @throws IllegalArgumentException if something goes wrong (sorry but there's a lot of code involved).
      */
 
-    public void renumber( final @NotNull String who, boolean invalidate ) {
+    public void renumber( final @NotNull String who, final boolean invalidate ) {
 
         verify( "renumber@" + who, "/start" );
 

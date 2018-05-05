@@ -26,8 +26,8 @@ public class ObtuseCollections {
      is the only real advantage of this method over {@link java.util.Collections#addAll}.
      */
 
-    public static <T extends Comparable> SortedSet<T> addThings(
-            final SortedSet<T> things,
+    public static <T extends Comparable,E extends SortedSet<T>> E addThings(
+            final E things,
             final @NotNull T@NotNull[] additionalThings
     ) {
 
@@ -47,8 +47,8 @@ public class ObtuseCollections {
      is the only real advantage of this method over {@link java.util.Collections#addAll}.
      */
 
-    public static <T> Set<T> addThings(
-            final Set<T> things,
+    public static <T,E extends Set<T>> E addThings(
+            final E things,
             final @NotNull T@NotNull[] additionalThings
     ) {
 
@@ -62,7 +62,7 @@ public class ObtuseCollections {
      Add new things to a list and return the list.
      @param things the existing {@link List}{@code <T>} of things.
      @param additionalThings the array of things to be added to the list.
-     Things in this array which are already in the list <b><u>are not added again</u></b> (use {@link #addThings(List, T[])}
+     Things in this array which are already in the list <b><u>are not added again</u></b> (use {@link #addThings(Collection, T[])}
      if you want things which are already in the list to be added again).
      <p>This method first constructs a {@link Set}{@code <T>} containing all the things in the list.
      It then uses that set to avoid adding duplicate additional things to the list.
@@ -77,8 +77,8 @@ public class ObtuseCollections {
      */
 
     @SafeVarargs
-    public static <T> List<T> addNewThings(
-            final List<T> things,
+    public static <T,E extends Collection<T>> E addNewThings(
+            final E things,
             final @NotNull T... additionalThings
     ) {
 
@@ -99,10 +99,20 @@ public class ObtuseCollections {
     }
 
     /**
-     Add things to a list and return the list.
-     @param things the existing {@link List}{@code <T>} of things.
-     @param additionalThings the array of things to be added to the list.
-     Things in this array which are already in the list <b><u>are added again</u></b> (use {@link #addNewThings(List, T[])}
+     Add things to a {@link Collection} and return the {@code Collection}.
+     <p>The 'magic' of Java generics allows this class to be used in any context where the developer wants to add things
+     to a {@code Collection} and get the collection as the correctly typed return value.
+     For example, both of these add values to different types of {@code Collection} without needing to cast the return value
+     of this method:
+     <blockquote><code>
+     ArrayList&lt;String> aList = ObtuseCollections.addThings( new ArrayList<>(), "Hello", "There", "World" );
+     ArrayList&lt;String> aList = ObtuseCollections.addThings( new ArrayList<>(), "Hello", "There", "World" );
+     </code>
+     </blockquote>
+     </p>
+     @param things the existing {@code Collection <T>} of things.
+     @param additionalThings the array of things to be added to the {@code Collection}.
+     Things in this array which are already in the {@code Collection} <b><u>are added again</u></b> (use {@link #addNewThings(Collection, T[])}
      if you want things which are already in the list to not be added again).
      @param <T> the type of things in the existing list and in the array of things to be added to the set.
      @return the list passed in as {@code things}.
@@ -111,8 +121,8 @@ public class ObtuseCollections {
      */
 
     @SafeVarargs
-    public static <T> List<T> addThings(
-            final List<T> things,
+    public static <T,E extends Collection<T>> E addThings(
+            final E things,
             final @NotNull T... additionalThings
     ) {
 
@@ -122,10 +132,17 @@ public class ObtuseCollections {
 
     }
 
+    public static void xxx() {
+
+        ArrayList<String> aList = ObtuseCollections.addThings( new ArrayList<>(), "Hello", "There", "World" );
+        SortedSet<String> sSet = ObtuseCollections.addThings( new TreeSet<>(), "Hello", "There", "World" );
+
+    }
+
     @SafeVarargs
     public static <T extends Comparable> TreeSet<T> sortedSet( final @NotNull T... array ) {
 
-        TreeSet<T> rval = new TreeSet<T>();
+        TreeSet<T> rval = new TreeSet<>();
         Collections.addAll( rval, array );
 
         return rval;
@@ -133,10 +150,50 @@ public class ObtuseCollections {
     }
 
     @SafeVarargs
-    public static <T extends Comparable> HashSet<T> hashSet( final @NotNull T... array ) {
+    public static <T> ArrayList<T> arrayList( final @NotNull T... things ) {
 
-        HashSet<T> rval = new HashSet<T>();
-        Collections.addAll( rval, array );
+        ArrayList<T> rval = new ArrayList<>();
+        Collections.addAll( rval, things );
+
+        return rval;
+
+    }
+
+    @SafeVarargs
+    public static <T> LinkedList<T> linkedList( final @NotNull T... things ) {
+
+        LinkedList<T> rval = new LinkedList<>();
+        Collections.addAll( rval, things );
+
+        return rval;
+
+    }
+
+    @SafeVarargs
+    public static <T> Vector<T> vector( final @NotNull T... things ) {
+
+        Vector<T> rval = new Vector<>();
+        Collections.addAll( rval, things );
+
+        return rval;
+
+    }
+
+    @SafeVarargs
+    public static <T extends Comparable> TreeSet<T> treeSet( final @NotNull T... things ) {
+
+        TreeSet<T> rval = new TreeSet<>();
+        Collections.addAll( rval, things );
+
+        return rval;
+
+    }
+
+    @SafeVarargs
+    public static <T> HashSet<T> hashSet( final @NotNull T... things ) {
+
+        HashSet<T> rval = new HashSet<>();
+        Collections.addAll( rval, things );
 
         return rval;
 
