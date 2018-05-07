@@ -6,6 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/EditValueAdvocate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/EditValueAdvocate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/FlexiGridCache1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/FlexiGridCache1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/FlexibleDateTransmogrifier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/FlexibleDateTransmogrifier.java" afterDir="false" />
     </list>
     <ignored path="Pipestone.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -129,7 +132,7 @@
       <file leaf-file-name="FlexiGridPanelModel.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/model/FlexiGridPanelModel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="10963">
+            <state relative-caret-position="10773">
               <caret line="580" selection-start-line="580" selection-end-line="580" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -183,15 +186,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FlexiGridConstraint.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/util/FlexiGridConstraint.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="228">
-              <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="FlexiGridSimpleConstraint.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/util/FlexiGridSimpleConstraint.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -213,29 +207,35 @@
       <file leaf-file-name="FlexiGridTesting.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/FlexiGridTesting.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="396">
-              <caret line="187" column="58" lean-forward="true" selection-start-line="187" selection-start-column="58" selection-end-line="187" selection-end-column="58" />
+            <state relative-caret-position="3230">
+              <caret line="187" column="58" selection-start-line="187" selection-start-column="58" selection-end-line="187" selection-end-column="58" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1120#1159#0" expanded="true" />
-                <element signature="e#6253#6577#0" expanded="true" />
-                <element signature="e#6576#6577#0" expanded="true" />
-                <element signature="e#9107#9152#0" expanded="true" />
-                <element signature="e#11841#11880#0" expanded="true" />
-                <element signature="e#14512#14829#0" expanded="true" />
-                <element signature="e#14828#14829#0" expanded="true" />
-                <element signature="e#15490#15529#0" expanded="true" />
-                <element signature="e#16190#16229#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ObtuseCollections.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ObtuseCollections.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/ObtuseCollections.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="329">
+            <state relative-caret-position="1013">
               <caret line="144" column="38" selection-start-line="144" selection-start-column="38" selection-end-line="144" selection-end-column="38" />
+              <folding>
+                <element signature="e#219#246#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="EditValueAdvocate.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/EditValueAdvocate.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="342">
+              <caret line="18" column="31" lean-forward="true" selection-start-line="18" selection-start-column="31" selection-end-line="18" selection-end-column="31" />
+              <folding>
+                <element signature="e#0#1514#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -345,7 +345,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/com/obtuse/ui/selectors/BorderLayoutPanel.java" />
         <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackable.java" />
         <option value="$PROJECT_DIR$/src/com/obtuse/ui/selectors/WrappedSelectorPanel.java" />
         <option value="$PROJECT_DIR$/../Burke2/BurkeBioEditor/src/xyz/kenosee/burke2/bioGenerator/util/keywordConfigurators/KeywordSetEditorConfig2.java" />
@@ -396,6 +395,7 @@
         <option value="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/FlexiGridLayoutManager.java" />
         <option value="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/FlexiGridTesting.java" />
         <option value="$PROJECT_DIR$/src/com/obtuse/util/ObtuseCollections.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/ui/EditValueAdvocate.java" />
       </list>
     </option>
   </component>
@@ -418,7 +418,7 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
+  <component name="ProjectFrameBounds">
     <option name="x" value="2715" />
     <option name="y" value="27" />
     <option name="width" value="2405" />
@@ -560,6 +560,7 @@
     </navigator>
     <panes>
       <pane id="Scope" />
+      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -893,7 +894,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="AndroidView" />
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -1371,7 +1371,8 @@
       <workItem from="1524532307485" duration="9371000" />
       <workItem from="1524860850856" duration="2620000" />
       <workItem from="1525066711224" duration="6464000" />
-      <workItem from="1525449242494" duration="1471000" />
+      <workItem from="1525449242494" duration="1783000" />
+      <workItem from="1525559738156" duration="763000" />
     </task>
     <task id="LOCAL-00015" summary="Packer2 family exhibits basic sanity.">
       <created>1442120231465</created>
@@ -1720,7 +1721,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="914215000" />
+    <option name="totallyTimeSpent" value="915290000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1732,23 +1733,23 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="2715" y="27" width="2405" height="1538" extended-state="1" />
+    <frame x="2715" y="27" width="2405" height="1538" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="5" sideWeight="0.67289025" weight="0.118644066" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info active="true" anchor="bottom" id="Messages" order="10" sideWeight="0.9753381" visible="true" weight="0.29955947" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info id="Image Layers" order="2" />
       <window_info anchor="right" id="Capture Analysis" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5078684" side_tool="true" weight="0.42062417" />
       <window_info anchor="right" id="Maven Projects" order="8" weight="0.32960624" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49213162" weight="0.2804699" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="8" sideWeight="0.49213162" visible="true" weight="0.2804699" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.3277126" />
       <window_info anchor="bottom" id="Terminal" order="14" weight="0.32956952" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="4" />
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.5269953" visible="true" weight="0.3083794" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.5269953" visible="true" weight="0.3117822" />
       <window_info anchor="right" id="Database" order="6" />
       <window_info id="Structure" order="1" sideWeight="0.43055555" side_tool="true" weight="0.17557251" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -1756,6 +1757,7 @@
       <window_info anchor="right" id="Theme Preview" order="6" />
       <window_info id="Favorites" order="3" sideWeight="0.4730047" side_tool="true" weight="0.17571372" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.9995866" weight="0.35462555" />
+      <window_info anchor="right" id="Properties" order="6" />
       <window_info anchor="bottom" id="Inspection Results" order="15" sideWeight="0.49722221" weight="0.32966226" />
       <window_info anchor="right" id="Coverage" order="7" side_tool="true" visible="true" weight="0.32960624" />
       <window_info anchor="bottom" id="Changes" order="9" visible="true" weight="0.32457292" />
@@ -1766,24 +1768,24 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.2498858" />
       <window_info anchor="bottom" id="Problems" order="13" />
       <window_info id="Nl-Palette" order="2" />
+      <window_info active="true" anchor="bottom" id="Messages" order="10" sideWeight="0.9753381" visible="true" weight="0.29955947" />
       <window_info anchor="bottom" id="Application Servers" order="12" />
-      <window_info anchor="right" id="Properties" order="6" />
+      <window_info anchor="right" id="IDEtalk" order="7" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.4985938" weight="0.30323055" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Memory View" order="9" weight="0.22361112" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="right" id="IDEtalk" order="7" />
       <window_info anchor="bottom" id="IDEtalk Messages" order="11" />
     </layout>
     <layout-to-restore>
       <window_info anchor="right" id="Memory View" order="13" weight="0.22361112" />
       <window_info id="Designer" order="7" />
-      <window_info anchor="right" id="IDEtalk" order="10" />
+      <window_info anchor="right" id="Palette" order="5" sideWeight="0.67289025" weight="0.118644066" />
+      <window_info id="Image Layers" order="5" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32806054" />
       <window_info anchor="right" id="JetGradle" order="4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Changes" order="9" visible="true" weight="0.32457292" />
-      <window_info anchor="right" id="Palette" order="5" sideWeight="0.67289025" weight="0.118644066" />
       <window_info id="UI Designer" order="4" sideWeight="0.67289025" weight="0.329475" />
       <window_info anchor="right" id="Properties" order="6" />
       <window_info anchor="bottom" id="Terminal" order="14" weight="0.32956952" />
@@ -1792,21 +1794,21 @@
       <window_info anchor="bottom" id="Inspection Results" order="15" sideWeight="0.49722221" weight="0.32997844" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.50277776" side_tool="true" weight="0.32997844" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.2498858" />
       <window_info anchor="bottom" id="IDEtalk Messages" order="11" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.2498858" />
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.5269953" visible="true" weight="0.2433665" />
       <window_info anchor="right" id="Database" order="7" />
       <window_info anchor="bottom" id="Problems" order="13" />
       <window_info anchor="bottom" id="Application Servers" order="12" />
       <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.4985938" weight="0.33238232" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info id="Nl-Palette" order="2" />
       <window_info anchor="right" id="Maven Projects" order="12" weight="0.32960624" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.39985272" />
+      <window_info anchor="right" id="IDEtalk" order="10" />
       <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.9753381" weight="0.30180806" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info id="Image Layers" order="5" />
+      <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info id="Favorites" order="6" sideWeight="0.4730047" side_tool="true" weight="0.17571372" />
       <window_info id="Structure" order="1" sideWeight="0.43055555" side_tool="true" weight="0.17557251" />
@@ -2355,13 +2357,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingInstanceId.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="28" column="116" lean-forward="true" selection-start-line="27" selection-start-column="4" selection-end-line="28" selection-end-column="116" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/SimpleUniqueLongIdGenerator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2451">
@@ -2698,7 +2693,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/model/FlexiGridPanelModel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="10963">
+        <state relative-caret-position="10773">
           <caret line="580" selection-start-line="580" selection-end-line="580" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -2715,27 +2710,31 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/FlexiGridTesting.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="187" column="58" lean-forward="true" selection-start-line="187" selection-start-column="58" selection-end-line="187" selection-end-column="58" />
+        <state relative-caret-position="3230">
+          <caret line="187" column="58" selection-start-line="187" selection-start-column="58" selection-end-line="187" selection-end-column="58" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1120#1159#0" expanded="true" />
-            <element signature="e#6253#6577#0" expanded="true" />
-            <element signature="e#6576#6577#0" expanded="true" />
-            <element signature="e#9107#9152#0" expanded="true" />
-            <element signature="e#11841#11880#0" expanded="true" />
-            <element signature="e#14512#14829#0" expanded="true" />
-            <element signature="e#14828#14829#0" expanded="true" />
-            <element signature="e#15490#15529#0" expanded="true" />
-            <element signature="e#16190#16229#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/ObtuseCollections.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="329">
+        <state relative-caret-position="1013">
           <caret line="144" column="38" selection-start-line="144" selection-start-column="38" selection-end-line="144" selection-end-column="38" />
+          <folding>
+            <element signature="e#219#246#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/EditValueAdvocate.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="18" column="31" lean-forward="true" selection-start-line="18" selection-start-column="31" selection-end-line="18" selection-end-column="31" />
+          <folding>
+            <element signature="e#0#1514#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

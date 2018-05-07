@@ -624,19 +624,19 @@ public class FlexiGridCache1 implements FlexiGridLayoutManagerCache {
 
                 if ( isFullWidth ) {
 
-                    Logger.logMsg(
-                            "FlexiGridCache1.setComponentBounds(" + row + "," + col + "):  " +
-                            "full width yields bb=" + ObtuseUtil.fBounds( boundingRectangle )
-                    );
+//                    Logger.logMsg(
+//                            "FlexiGridCache1.setComponentBounds(" + row + "," + col + "):  " +
+//                            "full width yields bb=" + ObtuseUtil.fBounds( boundingRectangle )
+//                    );
 
                     ObtuseUtil.doNothing();
 
                 } else if ( isFullHeight ) {
 
-                    Logger.logMsg(
-                            "FlexiGridCache1.setComponentBounds(" + row + "," + col + "):  " +
-                            "full height yields bb=" + ObtuseUtil.fBounds( boundingRectangle )
-                    );
+//                    Logger.logMsg(
+//                            "FlexiGridCache1.setComponentBounds(" + row + "," + col + "):  " +
+//                            "full height yields bb=" + ObtuseUtil.fBounds( boundingRectangle )
+//                    );
 
                     ObtuseUtil.doNothing();
 
@@ -661,10 +661,10 @@ public class FlexiGridCache1 implements FlexiGridLayoutManagerCache {
                             )
                     );
 
-                    Logger.logMsg(
-                            "FlexiGridCache1.setComponentBounds(" + row + "," + col + "):  " +
-                            "normal height yields bb=" + ObtuseUtil.fBounds( boundingRectangle )
-                    );
+//                    Logger.logMsg(
+//                            "FlexiGridCache1.setComponentBounds(" + row + "," + col + "):  " +
+//                            "normal height yields bb=" + ObtuseUtil.fBounds( boundingRectangle )
+//                    );
 
                     ObtuseUtil.doNothing();
 

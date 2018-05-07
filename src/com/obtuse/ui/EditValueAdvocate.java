@@ -14,7 +14,9 @@ public interface EditValueAdvocate<T> {
     /**
      * Vet a candidate value as a pre-condition to storing this value as the model's new stored value.
      * @param candidateValue the value to be validated.
-     * @return true if the candidate value is acceptable (will always result in {@link #storeNewValue} being called with this same candidate value); false otherwise.
+     * @return {@code true} if the candidate value is acceptable
+     * (will always result in {@link #storeNewValue} being called with this same candidate value);
+     * {@code false} otherwise.
      */
 
     boolean isValueValid( T candidateValue );

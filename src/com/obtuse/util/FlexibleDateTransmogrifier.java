@@ -358,6 +358,7 @@ public class FlexibleDateTransmogrifier {
      See {@link FlexibleDateTransmogrifier} JavaDocs for more information.
      */
 
+    @NotNull
     public static Optional<String> transmogrify( final String dateString ) {
 
         if ( ObtuseApproximateCalendarDate.FORMATTED_UNKNOWN_APPROXIMATE_DATE.equalsIgnoreCase( dateString.trim() ) ) {
