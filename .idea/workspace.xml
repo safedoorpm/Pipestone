@@ -6,9 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/EditValueAdvocate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/EditValueAdvocate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/FlexiGridCache1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/FlexiGridCache1.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/FlexibleDateTransmogrifier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/FlexibleDateTransmogrifier.java" afterDir="false" />
     </list>
     <ignored path="Pipestone.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -231,8 +228,8 @@
       <file leaf-file-name="EditValueAdvocate.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/EditValueAdvocate.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="18" column="31" lean-forward="true" selection-start-line="18" selection-start-column="31" selection-end-line="18" selection-end-column="31" />
+            <state relative-caret-position="399">
+              <caret line="21" column="45" lean-forward="true" selection-start-line="21" selection-start-column="45" selection-end-line="21" selection-end-column="45" />
               <folding>
                 <element signature="e#0#1514#0" expanded="true" />
               </folding>
@@ -1372,14 +1369,7 @@
       <workItem from="1524860850856" duration="2620000" />
       <workItem from="1525066711224" duration="6464000" />
       <workItem from="1525449242494" duration="1783000" />
-      <workItem from="1525559738156" duration="763000" />
-    </task>
-    <task id="LOCAL-00015" summary="Packer2 family exhibits basic sanity.">
-      <created>1442120231465</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1442120231465</updated>
+      <workItem from="1525559738156" duration="1110000" />
     </task>
     <task id="LOCAL-00016" summary="Lots of cleanup.">
       <created>1442122690274</created>
@@ -1717,11 +1707,18 @@
       <option name="project" value="LOCAL" />
       <updated>1525558829167</updated>
     </task>
-    <option name="localTasksCounter" value="64" />
+    <task id="LOCAL-00064" summary="A tiny bit of minor cleanup.&#10;Committing to keep in sync with Burke.">
+      <created>1525675829812</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1525675829814</updated>
+    </task>
+    <option name="localTasksCounter" value="65" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="915290000" />
+    <option name="totallyTimeSpent" value="915637000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1859,7 +1856,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Get rid of some IntelliJ warnings in the Ranges class." />
     <MESSAGE value="Move the linear layout manager facility from the Burke2 project to the Pipestone project." />
     <MESSAGE value="Lots of cleanup.&#10;&#10;Temporary kludge to make things work on non-Mac operating systems (declare hollow versions of the various Apple classes)." />
     <MESSAGE value="Implement a Scrollable which handles entities of differing sizes while seeking to ensure but not guarantee that the first visible entity starts at the top of the view.&#10;&#10;Add some of the Apache text edit distance classes.&#10;&#10;Various cleanup." />
@@ -1884,7 +1880,8 @@
     <MESSAGE value="A considerably cleaned up and somewhat improved FlexiGridPanelModel.&#10;&#10;Lots and lots of textual cleanup." />
     <MESSAGE value="Stop using various APIs that were deprecated in Java 9 (mostly AWT APIs).&#10;&#10;Implement the FlexiGridDivider class which provides a way to include &quot;divider lines&quot; in components being managed by the FlexiGridLayoutManager (strictly speaking, this is intended for use with the FlexiGridPanelModel although the actual support for it is in the layout manager part of the flexi-grid facility).&#10;&#10;Various cleanup including a bit of reorganizing of classes and methods." />
     <MESSAGE value="Rework the ObtuseCollections class.&#10;&#10;Update FlexiGridPanelModel and LevenshteinDistanceUtil to work with the updated ObtuseCollections class." />
-    <option name="LAST_COMMIT_MESSAGE" value="Rework the ObtuseCollections class.&#10;&#10;Update FlexiGridPanelModel and LevenshteinDistanceUtil to work with the updated ObtuseCollections class." />
+    <MESSAGE value="A tiny bit of minor cleanup.&#10;Committing to keep in sync with Burke." />
+    <option name="LAST_COMMIT_MESSAGE" value="A tiny bit of minor cleanup.&#10;Committing to keep in sync with Burke." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -2730,8 +2727,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/EditValueAdvocate.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="18" column="31" lean-forward="true" selection-start-line="18" selection-start-column="31" selection-end-line="18" selection-end-column="31" />
+        <state relative-caret-position="399">
+          <caret line="21" column="45" lean-forward="true" selection-start-line="21" selection-start-column="45" selection-end-line="21" selection-end-column="45" />
           <folding>
             <element signature="e#0#1514#0" expanded="true" />
           </folding>
