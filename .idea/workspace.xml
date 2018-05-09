@@ -6,23 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/FlexiGridCache1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/FlexiGridCache1.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/FlexiGridLayoutManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/FlexiGridLayoutManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/model/FlexiGridDivider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/model/FlexiGridDivider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/selectors/Alternative.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/selectors/Alternative.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/selectors/Selector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/selectors/Selector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/tableutils/FrameworkTableModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/tableutils/FrameworkTableModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/ObtuseUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ObtuseUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackableThingHolder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackableThingHolder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackedEntityBundle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackedEntityBundle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPacker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPacker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/StdGowingPackerContext.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/StdGowingPackerContext.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingPacker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingPacker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingTokenizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingTokenizer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/examples/SortedSetExample.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/examples/SortedSetExample.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingAbstractPackableHolder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingAbstractPackableHolder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingStringHolder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingStringHolder.java" afterDir="false" />
     </list>
     <ignored path="Pipestone.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -245,8 +228,8 @@
       <file leaf-file-name="EditValueAdvocate.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/EditValueAdvocate.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="266">
-              <caret line="14" column="28" lean-forward="true" selection-start-line="14" selection-start-column="28" selection-end-line="14" selection-end-column="28" />
+            <state relative-caret-position="380">
+              <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
               <folding>
                 <element signature="e#0#1514#0" expanded="true" />
               </folding>
@@ -1386,14 +1369,7 @@
       <workItem from="1524860850856" duration="2620000" />
       <workItem from="1525066711224" duration="6464000" />
       <workItem from="1525449242494" duration="1783000" />
-      <workItem from="1525559738156" duration="1980000" />
-    </task>
-    <task id="LOCAL-00016" summary="Lots of cleanup.">
-      <created>1442122690274</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1442122690274</updated>
+      <workItem from="1525559738156" duration="2860000" />
     </task>
     <task id="LOCAL-00017" summary="Basic sanity for the Packer2 facility.&#10;&#10;Supports packing and unpacking of all of the primitive Java types (byte, short, int, long, float, double and boolean) and their related container classes (Byte, Short, Integer, Long, Float, Double, Boolean and String), a collection class named Packable2Collection which can be used to pack and unpack arrays, sets, lists, etc, and a mapping class named Packable2Mapping which can be used to pack and unpack hashmaps and sorted maps and the like.&#10;&#10;The software still needs a lot of cleanup. Significant API and file format changes are also still quite likely.">
       <created>1442271214408</created>
@@ -1731,11 +1707,18 @@
       <option name="project" value="LOCAL" />
       <updated>1525675829814</updated>
     </task>
-    <option name="localTasksCounter" value="65" />
+    <task id="LOCAL-00065" summary="In Gowing, fix totally broken support for EntityNames and implement and cleanup support for String and EntityName arrays.&#10;&#10;Make the Selector and Alternative classes a more complete 'model' of a combo-box.&#10;&#10;Comment out a bunch of Logger.log{Msg,Err} calls.">
+      <created>1525853895521</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1525853895521</updated>
+    </task>
+    <option name="localTasksCounter" value="66" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="916507000" />
+    <option name="totallyTimeSpent" value="917387000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1873,7 +1856,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Move the linear layout manager facility from the Burke2 project to the Pipestone project." />
     <MESSAGE value="Lots of cleanup.&#10;&#10;Temporary kludge to make things work on non-Mac operating systems (declare hollow versions of the various Apple classes)." />
     <MESSAGE value="Implement a Scrollable which handles entities of differing sizes while seeking to ensure but not guarantee that the first visible entity starts at the top of the view.&#10;&#10;Add some of the Apache text edit distance classes.&#10;&#10;Various cleanup." />
     <MESSAGE value="Almost entirely cleanup." />
@@ -1898,7 +1880,8 @@
     <MESSAGE value="Stop using various APIs that were deprecated in Java 9 (mostly AWT APIs).&#10;&#10;Implement the FlexiGridDivider class which provides a way to include &quot;divider lines&quot; in components being managed by the FlexiGridLayoutManager (strictly speaking, this is intended for use with the FlexiGridPanelModel although the actual support for it is in the layout manager part of the flexi-grid facility).&#10;&#10;Various cleanup including a bit of reorganizing of classes and methods." />
     <MESSAGE value="Rework the ObtuseCollections class.&#10;&#10;Update FlexiGridPanelModel and LevenshteinDistanceUtil to work with the updated ObtuseCollections class." />
     <MESSAGE value="A tiny bit of minor cleanup.&#10;Committing to keep in sync with Burke." />
-    <option name="LAST_COMMIT_MESSAGE" value="A tiny bit of minor cleanup.&#10;Committing to keep in sync with Burke." />
+    <MESSAGE value="In Gowing, fix totally broken support for EntityNames and implement and cleanup support for String and EntityName arrays.&#10;&#10;Make the Selector and Alternative classes a more complete 'model' of a combo-box.&#10;&#10;Comment out a bunch of Logger.log{Msg,Err} calls." />
+    <option name="LAST_COMMIT_MESSAGE" value="In Gowing, fix totally broken support for EntityNames and implement and cleanup support for String and EntityName arrays.&#10;&#10;Make the Selector and Alternative classes a more complete 'model' of a combo-box.&#10;&#10;Comment out a bunch of Logger.log{Msg,Err} calls." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -2744,8 +2727,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/EditValueAdvocate.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="14" column="28" lean-forward="true" selection-start-line="14" selection-start-column="28" selection-end-line="14" selection-end-column="28" />
+        <state relative-caret-position="380">
+          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
           <folding>
             <element signature="e#0#1514#0" expanded="true" />
           </folding>
