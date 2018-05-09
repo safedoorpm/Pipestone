@@ -1,5 +1,6 @@
 package com.obtuse.util.gowing;
 
+import com.obtuse.util.gowing.p2a.GowingUnpackingException;
 import org.jetbrains.annotations.NotNull;
 
 /*
@@ -66,6 +67,6 @@ public interface GowingPackable {
      @return {@code true} when we're done and don't want to be called again; {@code false} when we're not done and do want to be called again.
      */
 
-    boolean finishUnpacking( @NotNull GowingUnPacker unPacker );
+    boolean finishUnpacking( @NotNull GowingUnPacker unPacker ) throws GowingUnpackingException;
 
 }

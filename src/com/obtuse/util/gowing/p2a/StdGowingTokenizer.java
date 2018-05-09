@@ -119,6 +119,12 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
                 return true;
             }
         },
+        ENTITY_NAME {
+            public boolean isScalarType() {
+
+                return true;
+            }
+        },
         ENTITY_REFERENCE {
             public boolean isScalarType() {
 
@@ -521,6 +527,10 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
 
                         switch ( elementType ) {
 
+                            case STRING:
+                                holder = new GowingStringHolder( entityName, (String[])valueToken.getObjectValue(), true );
+                                break;
+
                             case BOOLEAN:
                                 holder = new GowingBooleanHolder( entityName, (Boolean[])valueToken.getObjectValue(), true );
                                 break;
@@ -550,7 +560,7 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
                                 break;
 
                             default:
-                                throw new HowDidWeGetHereError( "unsupported primitive array type " + elementType );
+                                throw new HowDidWeGetHereError( "unsupported container array type " + elementType );
 
                         }
 
@@ -561,6 +571,11 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
 
                     }
 
+                    break;
+
+                case ENTITY_NAME:
+
+                    holder = new GowingEntityNameHolder( entityName, new EntityName( valueToken.stringValue() ), true );
                     break;
 
                 case ENTITY_REFERENCE:
@@ -932,6 +947,12 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
 
                     GowingToken2 rval;
 
+                    if ( ch == 'e' ) {
+
+                        Logger.logMsg( "found an unexpected 'e'" );
+
+                    }
+
                     switch ( ch ) {
 
                         case GowingConstants.TAG_PRIMITIVE_ARRAY:
@@ -996,7 +1017,13 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
 
                             putBackChar();
 
-                            rval = collectString();
+                            rval = collectString( TokenType.STRING );
+
+                            return rval;
+
+                        case GowingConstants.TAG_ENTITY_NAME:
+
+                            rval = collectString( TokenType.ENTITY_NAME );
 
                             return rval;
 
@@ -1534,8 +1561,8 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
                     public Object parse( final int index )
                             throws IOException {
 
-                        GowingToken2 usersEntityNameStringToken = collectString();
-                        if ( usersEntityNameStringToken.type() == TokenType.STRING ) {
+                        GowingToken2 usersEntityNameStringToken = collectString( TokenType.ENTITY_NAME );
+                        if ( usersEntityNameStringToken.type() == TokenType.ENTITY_NAME ) {
 
                             return new EntityName( usersEntityNameStringToken.stringValue() );
 
@@ -1556,6 +1583,42 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
 
                         return "UsersEntityName ElementParser";
 
+                    }
+
+                };
+
+                break;
+
+            case GowingConstants.TAG_STRING:
+
+                elementType = TokenType.STRING;
+                array = new String[length];
+                what = "String";
+                elementParser = new ElementParser() {
+                    @Override
+                    public Object parse( final int index ) throws IOException, NumberFormatException {
+
+                        GowingToken2 stringToken = collectString( TokenType.STRING );
+                        if ( stringToken.type() == TokenType.STRING ) {
+
+                            return stringToken.stringValue();
+
+                        } else {
+
+                            return new GowingToken2(
+                                    stringToken._value + " looking for user's string",
+                                    stringToken._lnum,
+                                    stringToken._offset
+                            );
+
+                        }
+
+                    }
+
+                    @Override
+                    public String toString() {
+
+                        return "String ElementParser";
                     }
 
                 };
@@ -1850,7 +1913,7 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
 
                         putBackChar();
 
-                        GowingToken2 entityNameToken = collectString();
+                        GowingToken2 entityNameToken = collectString( TokenType.ENTITY_NAME );
 
                         entityNames.add( entityNameToken.identifierValue() );
 
@@ -1903,7 +1966,7 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
         }
     }
 
-    private GowingToken2 collectString()
+    private GowingToken2 collectString( final @NotNull TokenType tt )
             throws IOException {
 
         StringBuilder rval = new StringBuilder();
@@ -1944,6 +2007,11 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
                             ch = '\\';
                             break;
 
+                        case '\'':
+
+                            ch = '\'';
+                            break;
+
                         case '"':
 
                             ch = '"';
@@ -1969,7 +2037,7 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
 
         if ( ch == delimiter ) {
 
-            return new GowingToken2( TokenType.STRING, rval.toString(), _lnum, _offset );
+            return new GowingToken2( tt, rval.toString(), _lnum, _offset );
 
         } else {
 

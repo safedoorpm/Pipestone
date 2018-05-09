@@ -2445,6 +2445,9 @@ public class ObtuseUtil {
             case '\'':
                 return "\\\'";
 
+            case '"':
+                return "\\\"";
+
             default:
                 return String.valueOf( ch );
 

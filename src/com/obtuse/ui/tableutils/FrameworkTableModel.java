@@ -577,7 +577,7 @@ public class FrameworkTableModel<D extends CheckBoxRowWrapper.RowData> extends C
 
         }
 
-        Logger.logMsg( "cell(" + row + "," + col + ") is " + ( rval ? "" : "not " ) + "editable because " + how );
+//        Logger.logMsg( "cell(" + row + "," + col + ") is " + ( rval ? "" : "not " ) + "editable because " + how );
 
         return rval;
 

@@ -73,7 +73,7 @@ public class FlexiGridLayoutManager implements LayoutManager2 {
 
         }
 
-        logMaybe( "addLayoutComponent:  removing constraint for " + LinearLayoutUtil.describeComponent( comp ) + " - " + _constraints.get( comp ) );
+//        logMaybe( "addLayoutComponent:  removing constraint for " + LinearLayoutUtil.describeComponent( comp ) + " - " + _constraints.get( comp ) );
 
         _constraints.remove( comp );
         FlexiGridConstraintsTable componentConstraints;
@@ -119,7 +119,7 @@ public class FlexiGridLayoutManager implements LayoutManager2 {
 
         }
 
-        logMaybe( "addLayoutComponent:    adding constraint for " + LinearLayoutUtil.describeComponent( comp ) + " - " + copy );
+//        logMaybe( "addLayoutComponent:    adding constraint for " + LinearLayoutUtil.describeComponent( comp ) + " - " + copy );
 
         _constraints.put( comp, copy );
 
@@ -357,7 +357,7 @@ public class FlexiGridLayoutManager implements LayoutManager2 {
 
         } else {
 
-            logMaybe( "removeLayoutComponent:  removing constraint for " + LinearLayoutUtil.describeComponent( comp ) + " - " + _constraints.get( comp ) );
+//            logMaybe( "removeLayoutComponent:  removing constraint for " + LinearLayoutUtil.describeComponent( comp ) + " - " + _constraints.get( comp ) );
 
             _constraints.remove( comp );
 

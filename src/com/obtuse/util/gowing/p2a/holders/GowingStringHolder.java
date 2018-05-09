@@ -1,9 +1,12 @@
 package com.obtuse.util.gowing.p2a.holders;
 
+import com.obtuse.util.Logger;
+import com.obtuse.util.ObtuseUtil;
 import com.obtuse.util.gowing.EntityName;
 import com.obtuse.util.gowing.GowingPacker;
 import com.obtuse.util.gowing.p2a.GowingConstants;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /*
  * Copyright © 2015 Obtuse Systems Corporation
@@ -21,12 +24,30 @@ public class GowingStringHolder extends GowingAbstractPackableHolder {
 
     }
 
+    public GowingStringHolder( final @NotNull EntityName name, @Nullable final String@NotNull[] v, @SuppressWarnings("SameParameterValue") final boolean mandatory ) {
+
+        super( name, GowingConstants.TAG_STRING, v, mandatory, false );
+
+    }
+
     public void emitRepresentation( final GowingPacker packer2 ) {
 
         Object value = getObjectValue();
         if ( isMandatory() || value != null ) {
 
-            packer2.emit( (String)value );
+            switch ( getKind() ) {
+
+                case SCALAR:
+                    packer2.emit( (String)value );
+                    break;
+
+                case CONTAINER_ARRAY:
+                    packer2.emit( ( (String[])value ) );
+                    break;
+
+            }
+
+//            packer2.emit( (String)value );
 
         } else {
 

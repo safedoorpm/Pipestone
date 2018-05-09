@@ -413,6 +413,34 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName, GowingPackable
 
     }
 
+    @Nullable
+    public EntityName EntityNameValue( final EntityName gtag ) {
+
+        return getNullableField( gtag ).EntityNameValue();
+
+    }
+
+    @NotNull
+    public EntityName MandatoryEntityNameValue( final EntityName gtag ) {
+
+        return getNotNullField( gtag ).MandatoryEntityNameValue();
+
+    }
+
+    @Nullable
+    public EntityName[] EntityNameArrayValue( final EntityName gtag ) {
+
+        return getNullableField( gtag ).EntityNameArrayValue();
+
+    }
+
+    @NotNull
+    public EntityName[] MandatoryEntityNameArrayValue( final EntityName gtag ) {
+
+        return getNotNullField( gtag ).EntityNameArrayValue();
+
+    }
+
     public byte byteValue( final EntityName gtag ) {
 
         return getNotNullField( gtag ).byteValue();

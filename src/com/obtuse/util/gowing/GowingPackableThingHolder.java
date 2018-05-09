@@ -51,6 +51,8 @@ public interface GowingPackableThingHolder extends Comparable<GowingPackableThin
 
     String[] StringArrayValue();
 
+    EntityName[] EntityNameArrayValue();
+
     GowingPackable[] PackableArrayValue();
 
     EntityName getName();
@@ -105,6 +107,30 @@ public interface GowingPackableThingHolder extends Comparable<GowingPackableThin
 
     @NotNull
     String MandatoryStringValue();
+
+    /**
+     Return this instance's object after casting it to a {@link String}.
+     <p/>This method is exactly equivalent to <blockquote><code>(String)(this.getObjectValue())</code></blockquote>
+
+     @return this instance's object after casting it to a {@link String}.
+     @throws ClassCastException if this instance's object is not actually a {@link String} instance.
+     */
+
+    @Nullable
+    EntityName EntityNameValue();
+
+    /**
+     Return this instance's object after casting it to a {@link EntityName}.
+     <p/>This method is exactly equivalent to <blockquote><code>(EntityName)(this.getObjectValue())</code></blockquote>
+     except that it throws an {@link IllegalArgumentException} if {@code this.getObjectValue()} returns {@code null}.
+
+     @return this instance's object after casting it to a {@link EntityName}.
+     @throws ClassCastException if this instance's object is not actually a {@link EntityName} instance.
+     @throws IllegalArgumentException if {@code this.getObjectValue()} returns {@code null}.
+     */
+
+    @NotNull
+    EntityName MandatoryEntityNameValue();
 
     /**
      Cast this instance's object to a {@link Boolean} and return its <code>boolean</code> value.

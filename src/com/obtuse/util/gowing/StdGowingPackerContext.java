@@ -249,7 +249,7 @@ public class StdGowingPackerContext implements GowingPackerContext {
             bundle.addHolder( new GowingFloatHolder( new EntityName( "_floatValue" ), 1.1f, true ) );
             bundle.addHolder( new GowingShortHolder( new EntityName( "_shortValue" ), (short)15, false ) );
             bundle.addHolder( new GowingLongHolder( new EntityName( "_longValue" ), 123L, true ) );
-            bundle.addHolder( new GowingEntityNameHolder( new EntityName( "_entityName" ), new EntityName( "froz botnick" ), true ) );
+            bundle.addHolder( new GowingEntityNameHolder( new EntityName( "_entityName" ), new EntityName( "froz_botnick" ), true ) );
 
             return bundle;
 

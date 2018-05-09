@@ -67,7 +67,7 @@ public class FlexiGridDivider extends JPanel {
                     ).setHorizontalJustification( FlexiGridBasicConstraint.HJustification.CENTER )
              .setVerticalJustification( FlexiGridBasicConstraint.VJustification.CENTER );
 
-            Logger.logMsg( "" + this + " has row-oriented constraint " + rval );
+//            Logger.logMsg( "" + this + " has row-oriented constraint " + rval );
 
         } else {
 
@@ -78,7 +78,7 @@ public class FlexiGridDivider extends JPanel {
                     ).setHorizontalJustification( FlexiGridBasicConstraint.HJustification.CENTER )
              .setVerticalJustification( FlexiGridBasicConstraint.VJustification.CENTER );
 
-            Logger.logMsg( "" + this + " has column-oriented constraint " + rval );
+//            Logger.logMsg( "" + this + " has column-oriented constraint " + rval );
 
         }
 
@@ -151,14 +151,14 @@ public class FlexiGridDivider extends JPanel {
 
         }
 
-        Logger.logMsg( "drawing divider " + this );
+//        Logger.logMsg( "drawing divider " + this );
 
         Graphics gCopy = g.create();
 
         if ( isOpaque() ) {
 
             Color background = getBackground();
-            Logger.logMsg( "background is " + background );
+//            Logger.logMsg( "background is " + background );
             gCopy.setColor( background );
             gCopy.fillRect( 0, 0, getWidth(), getHeight() );
 
@@ -166,7 +166,7 @@ public class FlexiGridDivider extends JPanel {
 
 //        Color foreground = isFullLength() ? Color.CYAN : getForeground();
         Color foreground = getForeground();
-        Logger.logMsg( "foreground is " + foreground );
+//        Logger.logMsg( "foreground is " + foreground );
         gCopy.setColor( foreground );
         switch ( getDividerStyle() ) {
 
@@ -266,7 +266,7 @@ public class FlexiGridDivider extends JPanel {
 
         super.setBounds( x, y, w, h );
 
-        Logger.logMsg( "" + this + generateConstraint( 0 ) + " is " + ObtuseUtil.fBounds( x, y, w, h ) );
+//        Logger.logMsg( "" + this + generateConstraint( 0 ) + " is " + ObtuseUtil.fBounds( x, y, w, h ) );
 
         ObtuseUtil.doNothing();
 

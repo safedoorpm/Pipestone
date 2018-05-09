@@ -40,6 +40,8 @@ public interface GowingPacker extends Closeable {
 
     void emit( @Nullable String s );
 
+    void emit( @Nullable String@NotNull[] v );
+
     void emit( char c );
 
     void emit( long l );

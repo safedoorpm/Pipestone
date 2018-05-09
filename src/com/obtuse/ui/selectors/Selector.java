@@ -7,13 +7,13 @@ package com.obtuse.ui.selectors;
 
 import com.obtuse.util.ObtuseUtil;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.Optional;
-import java.util.SortedMap;
-import java.util.TreeMap;
+import java.util.*;
 
 /**
- Created by danny on 2018/03/15.
+ Describe a combo-box's choices.
+ <p>Instances of this class MUST be immutable.</p>
  */
 
 public class Selector implements Comparable<Selector> {
@@ -22,6 +22,9 @@ public class Selector implements Comparable<Selector> {
 
     public final String selectorName;
     public final String selectorTag;
+
+    private final List<Alternative> _knownChoicesList = new ArrayList<>();
+    private final SortedMap<String,Alternative> _knownChoicesMap = new TreeMap<>();
 
     public Selector( final @NotNull String selectorName, final @NotNull String selectorTag ) {
 
@@ -37,6 +40,78 @@ public class Selector implements Comparable<Selector> {
         this.selectorTag = selectorTag;
 
         s_allKnownSelectors.put( selectorTag, this );
+
+    }
+
+    public void addChoice( final @NotNull Alternative choice ) {
+
+        if ( _knownChoicesMap.containsKey( choice.getUniqueKey() ) ) {
+
+            throw new IllegalArgumentException( "Selector.addChoice(" + choice.getUniqueKey() + ") already exists" );
+
+        }
+
+        _knownChoicesList.add( choice );
+        _knownChoicesMap.put( choice.getUniqueKey(), choice );
+
+    }
+
+    public SortedMap<String,Alternative> getChoicesMap() {
+
+        return Collections.unmodifiableSortedMap( _knownChoicesMap );
+
+    }
+
+    public List<Alternative> getChoices() {
+
+        return Collections.unmodifiableList( _knownChoicesList );
+
+    }
+
+    @NotNull
+    public Optional<Alternative> findUnspecifiedChoice() {
+
+        if ( _knownChoicesList.isEmpty() ) {
+
+            throw new IllegalArgumentException( "Selector.findUnspecifiedChoice:  no choices provided" );
+
+        }
+
+        Alternative unspecifiedChoice = null;
+
+        for ( Alternative choice : _knownChoicesList ) {
+
+            if ( choice.isUnspecifiedChoice() ) {
+
+                if ( unspecifiedChoice == null ) {
+
+                    unspecifiedChoice = choice;
+
+                } else {
+
+                    throw new IllegalArgumentException( "WikiTreeDbComboBoxSelector.findUnspecifiedChoice:  more than one unspecified choice" );
+
+                }
+
+            }
+
+        }
+
+        return Optional.ofNullable( unspecifiedChoice );
+
+    }
+
+    @NotNull
+    public Alternative getInitialChoice() {
+
+        if ( _knownChoicesList.isEmpty() ) {
+
+            throw new IllegalArgumentException( "Selector.findInitialChoice:  no choices provided" );
+
+        }
+
+        Optional<Alternative> optUnspecifiedChoice = findUnspecifiedChoice();
+        return optUnspecifiedChoice.orElseGet( () -> _knownChoicesList.get( 0 ) );
 
     }
 

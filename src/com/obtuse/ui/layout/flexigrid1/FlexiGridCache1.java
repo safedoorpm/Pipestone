@@ -215,7 +215,7 @@ public class FlexiGridCache1 implements FlexiGridLayoutManagerCache {
 
                 FlexiGridBasicConstraint bc = _flexiGridLayoutManager.getMandatoryBasicConstraint( component );
 
-                Logger.logMsg( "constraint for " + LinearLayoutUtil.describeComponent( component ) + " is " + bc );
+//                Logger.logMsg( "constraint for " + LinearLayoutUtil.describeComponent( component ) + " is " + bc );
 
                 FlexiGridConstraintsTable constraintsTable = allConstraints.get( component );
                 FlexiGridItemInfo ii = itemInfoFactory.createInstance( bc.getRow(), bc.getCol(), component, constraintsTable );

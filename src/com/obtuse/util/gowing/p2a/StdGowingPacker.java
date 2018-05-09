@@ -412,7 +412,10 @@ public class StdGowingPacker implements GowingPacker {
     public void emitUsersEntityName( final @NotNull EntityName name ) {
 
         _writer.print( GowingConstants.TAG_ENTITY_NAME );
-        _writer.print( name );
+        emit( name.getName() );
+
+        ObtuseUtil.doNothing();;
+//        _writer.print( name );
 
     }
 
@@ -488,6 +491,36 @@ public class StdGowingPacker implements GowingPacker {
             _writer.print( ObtuseUtil.enquoteToJavaString( s ) );
 
         }
+
+    }
+
+    @Override
+    public void emit( @Nullable final String@NotNull[] v ) {
+
+        _writer.print( GowingConstants.TAG_CONTAINER_ARRAY );
+        _writer.print( v.length );
+        _writer.print( GowingConstants.TAG_STRING );
+        _writer.print( '[' );
+
+        String comma = "";
+        for ( String s : v ) {
+
+            _writer.print( comma );
+            if ( s == null ) {
+
+                _writer.print( GowingConstants.NULL_VALUE );
+
+            } else {
+
+                _writer.print( ObtuseUtil.enquoteToJavaString( s ) );
+
+            }
+
+            comma = ",";
+
+        }
+
+        _writer.print( ']' );
 
     }
 
@@ -1087,7 +1120,7 @@ public class StdGowingPacker implements GowingPacker {
             p2Collection.add( "Hello" );
             p2Collection.add( "There" );
             GowingPackableCollection<String> p2C2 = new GowingPackableCollection<>();
-            p2C2.addAll( Arrays.asList( "Mercury", "Venus", "Mars", "Jupiter" ) );
+            p2C2.addAll( Arrays.asList( "Mercury", "Venus", "Mars", "Jupiter", "\b\n\r\t\\\'\"" ) );
             p2Collection.add( p2C2 );
             p2a.queuePackableEntity( new EntityName( "fred" ), p2Collection );
             p2a.queuePackableEntity( new EntityName( "barney" ), p2Collection );

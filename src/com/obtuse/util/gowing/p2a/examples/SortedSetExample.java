@@ -20,7 +20,7 @@ import java.util.*;
  */
 
 /**
- A simple example of a class that uses Gowing for packing and unpacking instances.
+ A simple but long example of a class that uses Gowing for packing and unpacking instances.
  */
 
 @SuppressWarnings("FieldCanBeLocal")
@@ -59,6 +59,8 @@ public class SortedSetExample extends GowingAbstractPackableEntity implements Go
     private static final EntityName PRIMITIVE_DOUBLE = new EntityName( "_double" );
     private static final EntityName DOUBLE = new EntityName( "_Double" );
     private static final EntityName DATA_COLLECTION_NAME = new EntityName( "_dc" );
+
+    private static final EntityName STRING_ARRAY = new EntityName( "_stringCA" );
 
     private static final EntityName SORTED_SET = new EntityName( "_sSet" );
     private static final EntityName HASH_SET = new EntityName( "_hSet" );
@@ -158,6 +160,10 @@ public class SortedSetExample extends GowingAbstractPackableEntity implements Go
                 ObtuseUtil.enquoteToJavaString( _description ) + ", dataCollectionReference=" + _dataCollectionReference
         );
 
+        String[] stringArray = bundle.MandatoryStringArrayValue( STRING_ARRAY );
+
+        Logger.logMsg( "unpacked strings:  " + _name + ", " + _description + ", " + Arrays.toString( stringArray ) );
+
         boolean[] pBoolArray = bundle.MandatoryPrimitiveBooleanArrayValue( PRIMITIVE_BOOLEAN_ARRAY );
         Boolean[] BoolArray = bundle.BooleanArrayValue( BOOLEAN_ARRAY );
         boolean bool = bundle.booleanValue( PRIMITIVE_BOOLEAN );
@@ -247,6 +253,7 @@ public class SortedSetExample extends GowingAbstractPackableEntity implements Go
 
         bundle.addHolder( new GowingStringHolder( NAME_NAME, _name, true ) );
         bundle.addHolder( new GowingStringHolder( DESCRIPTION_NAME, _description, false ) );
+        bundle.addHolder( new GowingStringHolder( STRING_ARRAY, new String[] {"alpha", "beta", "gamma" }, true ) );
 
         bundle.addHolder( new GowingBooleanHolder( PRIMITIVE_BOOLEAN_ARRAY, new boolean[]{ true, false, true, false }, true ) );
         bundle.addHolder( new GowingBooleanHolder( BOOLEAN_ARRAY, new Boolean[]{ true, false, null, false }, true ) );
@@ -511,15 +518,15 @@ public class SortedSetExample extends GowingAbstractPackableEntity implements Go
 
             p2a.queuePackableEntity( sse );
 
-            int[] primitive = new int[3];
-            Integer[] container = new Integer[3];
-
-            for ( int i = 0; i < 3; i += 1 ) {
-
-                Array.set( primitive, i, i );
-                Array.set( container, i, -i );
-
-            }
+//            int[] primitive = new int[3];
+//            Integer[] container = new Integer[3];
+//
+//            for ( int i = 0; i < 3; i += 1 ) {
+//
+//                Array.set( primitive, i, i );
+//                Array.set( container, i, -i );
+//
+//            }
 
             p2a.finish();
 

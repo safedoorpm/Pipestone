@@ -122,7 +122,9 @@ public class Alternative implements Comparable<Alternative>, GowingPackable {
 
         s_availableChoices.put( _uniqueKey, this );
 
-        Logger.logMsg( "Alternative:  created " + describeInstance( _uniqueKey, this ) );
+        selector.addChoice( this );
+
+//        Logger.logMsg( "Alternative:  created " + describeInstance( _uniqueKey, this ) );
 
         ObtuseUtil.doNothing();
 
@@ -148,7 +150,7 @@ public class Alternative implements Comparable<Alternative>, GowingPackable {
 
     public static Optional<Alternative> findChoice( final @NotNull String uniqueKey ) {
 
-        Logger.logMsg( "Alternative.findChoice:  looking for " + ObtuseUtil.enquoteToJavaString( uniqueKey ) );
+//        Logger.logMsg( "Alternative.findChoice:  looking for " + ObtuseUtil.enquoteToJavaString( uniqueKey ) );
 
         Alternative choice = s_availableChoices.get( uniqueKey );
 
@@ -156,15 +158,13 @@ public class Alternative implements Comparable<Alternative>, GowingPackable {
 
         if ( !rval.isPresent() ) {
 
-            Logger.logMsg( "Alternative.findChoice:  did not find " + ObtuseUtil.enquoteToJavaString( uniqueKey ) );
-            for ( String key : s_availableChoices.keySet() ) {
-
-                Alternative tmpChoice = s_availableChoices.get( key );
-                Logger.logMsg(
-                        describeInstance( key, tmpChoice )
-                );
-
-            }
+//            Logger.logMsg( "Alternative.findChoice:  did not find " + ObtuseUtil.enquoteToJavaString( uniqueKey ) );
+//            for ( String key : s_availableChoices.keySet() ) {
+//
+//                Alternative tmpChoice = s_availableChoices.get( key );
+//                Logger.logMsg( describeInstance( key, tmpChoice ) );
+//
+//            }
 
             ObtuseUtil.doNothing();
 
@@ -192,6 +192,20 @@ public class Alternative implements Comparable<Alternative>, GowingPackable {
 
         Optional<Alternative> optChoice = findChoice( selector, tag );
         return optChoice.orElseGet( () -> new Alternative( selector, tag, toString ) );
+
+    }
+
+    public static void showKeys( final String who ) {
+
+        Logger.logMsg( who + ":  showing Alternative keys" );
+
+        for ( String key : s_availableChoices.keySet() ) {
+
+            Logger.logMsg( key + "->" + s_availableChoices.get( key ) );
+
+        }
+
+        ObtuseUtil.doNothing();
 
     }
 

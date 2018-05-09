@@ -336,6 +336,28 @@ public abstract class GowingAbstractPackableHolder implements GowingPackableThin
     }
 
     @Override
+    public EntityName EntityNameValue() {
+
+        return (EntityName)getObjectValue();
+
+    }
+
+    @Override
+    @NotNull
+    public EntityName MandatoryEntityNameValue() {
+
+        EntityName rval = (EntityName)getObjectValue();
+        if ( rval == null ) {
+
+            throw new IllegalArgumentException( "null value" );
+
+        }
+
+        return rval;
+
+    }
+
+    @Override
     public byte[] PrimitiveByteArrayValue() {
 
         return (byte[])getObjectValue();
@@ -409,6 +431,13 @@ public abstract class GowingAbstractPackableHolder implements GowingPackableThin
     public String[] StringArrayValue() {
 
         return (String[])getObjectValue();
+
+    }
+
+    @Override
+    public EntityName[] EntityNameArrayValue() {
+
+        return (EntityName[])getObjectValue();
 
     }
 
