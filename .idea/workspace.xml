@@ -4,43 +4,7 @@
     <option name="SCOPE_TYPE" value="3" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/AboutBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/AboutBox.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/EventUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/EventUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/LogsWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/LogsWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/TrackedWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/TrackedWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/dnd/BasicFlavorHandlers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/dnd/BasicFlavorHandlers.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/FlexiGridCache1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/FlexiGridCache1.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/FlexiGridContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/FlexiGridContainer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/model/FlexiGridModelTesting.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/model/FlexiGridModelTesting.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/util/FlexiGridBasicConstraint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/util/FlexiGridBasicConstraint.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/scrollable/IrregularScrollableImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/scrollable/IrregularScrollableImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/selectors/Alternative.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/selectors/Alternative.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/selectors/BorderLayoutPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/selectors/BorderLayoutPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/tableutils/CheckBoxRowWrapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/tableutils/CheckBoxRowWrapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/tableutils/CheckBoxStyleSelectionTableModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/tableutils/CheckBoxStyleSelectionTableModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/tableutils/FrameworkTableModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/tableutils/FrameworkTableModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/Arg.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/Arg.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/ArgInt.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ArgInt.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/ArgLong.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ArgLong.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/ArgParserExample.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ArgParserExample.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/ArgYYYY_MM_DD_CalendarDate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ArgYYYY_MM_DD_CalendarDate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/ArgYYYY_MM_DD_Date.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ArgYYYY_MM_DD_Date.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/ArgYesNo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ArgYesNo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/ObtuseApproximateCalendarDate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ObtuseApproximateCalendarDate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingInstanceId.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingInstanceId.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackableThingHolder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackableThingHolder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPacker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPacker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackerContext.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackerContext.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/StdGowingPackerContext.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/StdGowingPackerContext.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingFormatVersion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingFormatVersion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingPacker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingPacker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingAbstractPackableHolder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingAbstractPackableHolder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingEntityReferenceHolder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingEntityReferenceHolder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/names/RelativePath.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/names/RelativePath.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/things/ThingInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/things/ThingInfo.java" afterDir="false" />
-    </list>
+    <list default="true" id="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" name="Default" comment="" />
     <ignored path="Pipestone.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -429,8 +393,8 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="2642" />
-    <option name="y" value="37" />
+    <option name="x" value="2627" />
+    <option name="y" value="50" />
     <option name="width" value="2405" />
     <option name="height" value="1538" />
   </component>
@@ -1288,14 +1252,7 @@
       <workItem from="1525559738156" duration="2981000" />
       <workItem from="1525854152757" duration="1226000" />
       <workItem from="1525944249246" duration="630000" />
-      <workItem from="1526403426164" duration="6473000" />
-    </task>
-    <task id="LOCAL-00017" summary="Basic sanity for the Packer2 facility.&#10;&#10;Supports packing and unpacking of all of the primitive Java types (byte, short, int, long, float, double and boolean) and their related container classes (Byte, Short, Integer, Long, Float, Double, Boolean and String), a collection class named Packable2Collection which can be used to pack and unpack arrays, sets, lists, etc, and a mapping class named Packable2Mapping which can be used to pack and unpack hashmaps and sorted maps and the like.&#10;&#10;The software still needs a lot of cleanup. Significant API and file format changes are also still quite likely.">
-      <created>1442271214408</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1442271214408</updated>
+      <workItem from="1526403426164" duration="7714000" />
     </task>
     <task id="LOCAL-00018" summary="Rename the new packing facility as the Gowing packing facility.&#10;&#10;Also a checkpoint commit before trying out idea of generating Gowing instance ids on an on-demand basis.">
       <created>1445199689539</created>
@@ -1633,11 +1590,18 @@
       <option name="project" value="LOCAL" />
       <updated>1525853895521</updated>
     </task>
-    <option name="localTasksCounter" value="66" />
+    <task id="LOCAL-00066" summary="Fix the handling of row selection in the tableutils classes. Selecting rows by calling CheckBoxRowWrapper.setSelected(boolean) now works in the sense that checkmarks are updated, the notifications occur, etc.&#10;&#10;Make sure that logging messages sent to a LogsWindow are shown in the exact order that they are passed to the window.&#10;&#10;Fix the EntityName de-serialization facility in Gowing.&#10;&#10;Remap entity ids when packing via Gowing. This ensures that two requests to pack the same collection of objects will yield precisely the same save file (ignoring timestamps) if the objects being saved and their values have not changed. This makes it fairly easy to avoid saving a whole series of equivalent auto-save files.">
+      <created>1526652972995</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1526652972996</updated>
+    </task>
+    <option name="localTasksCounter" value="67" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="925837000" />
+    <option name="totallyTimeSpent" value="927078000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1649,8 +1613,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="2642" y="37" width="2405" height="1538" extended-state="0" />
-    <editor active="true" />
+    <frame x="2627" y="50" width="2405" height="1538" extended-state="0" />
     <layout>
       <window_info anchor="right" id="Palette" order="5" sideWeight="0.67289025" weight="0.118644066" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -1661,7 +1624,7 @@
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5078684" side_tool="true" weight="0.42062417" />
       <window_info anchor="right" id="Maven Projects" order="8" weight="0.32960624" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49213162" weight="0.27976626" />
+      <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49213162" weight="0.27933764" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.3277126" />
       <window_info anchor="bottom" id="Terminal" order="14" weight="0.32956952" />
       <window_info id="Capture Tool" order="2" />
@@ -1775,7 +1738,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Lots of cleanup.&#10;&#10;Temporary kludge to make things work on non-Mac operating systems (declare hollow versions of the various Apple classes)." />
     <MESSAGE value="Implement a Scrollable which handles entities of differing sizes while seeking to ensure but not guarantee that the first visible entity starts at the top of the view.&#10;&#10;Add some of the Apache text edit distance classes.&#10;&#10;Various cleanup." />
     <MESSAGE value="Almost entirely cleanup." />
     <MESSAGE value="Rework the various ObtuseUtil.enquote... methods.&#10;&#10;Cleanup." />
@@ -1800,7 +1762,8 @@
     <MESSAGE value="Rework the ObtuseCollections class.&#10;&#10;Update FlexiGridPanelModel and LevenshteinDistanceUtil to work with the updated ObtuseCollections class." />
     <MESSAGE value="A tiny bit of minor cleanup.&#10;Committing to keep in sync with Burke." />
     <MESSAGE value="In Gowing, fix totally broken support for EntityNames and implement and cleanup support for String and EntityName arrays.&#10;&#10;Make the Selector and Alternative classes a more complete 'model' of a combo-box.&#10;&#10;Comment out a bunch of Logger.log{Msg,Err} calls." />
-    <option name="LAST_COMMIT_MESSAGE" value="In Gowing, fix totally broken support for EntityNames and implement and cleanup support for String and EntityName arrays.&#10;&#10;Make the Selector and Alternative classes a more complete 'model' of a combo-box.&#10;&#10;Comment out a bunch of Logger.log{Msg,Err} calls." />
+    <MESSAGE value="Fix the handling of row selection in the tableutils classes. Selecting rows by calling CheckBoxRowWrapper.setSelected(boolean) now works in the sense that checkmarks are updated, the notifications occur, etc.&#10;&#10;Make sure that logging messages sent to a LogsWindow are shown in the exact order that they are passed to the window.&#10;&#10;Fix the EntityName de-serialization facility in Gowing.&#10;&#10;Remap entity ids when packing via Gowing. This ensures that two requests to pack the same collection of objects will yield precisely the same save file (ignoring timestamps) if the objects being saved and their values have not changed. This makes it fairly easy to avoid saving a whole series of equivalent auto-save files." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix the handling of row selection in the tableutils classes. Selecting rows by calling CheckBoxRowWrapper.setSelected(boolean) now works in the sense that checkmarks are updated, the notifications occur, etc.&#10;&#10;Make sure that logging messages sent to a LogsWindow are shown in the exact order that they are passed to the window.&#10;&#10;Fix the EntityName de-serialization facility in Gowing.&#10;&#10;Remap entity ids when packing via Gowing. This ensures that two requests to pack the same collection of objects will yield precisely the same save file (ignoring timestamps) if the objects being saved and their values have not changed. This makes it fairly easy to avoid saving a whole series of equivalent auto-save files." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
