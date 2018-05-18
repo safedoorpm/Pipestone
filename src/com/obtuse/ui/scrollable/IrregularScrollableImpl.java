@@ -67,7 +67,6 @@ public class IrregularScrollableImpl implements Scrollable {
     @Override
     public int getScrollableUnitIncrement( final Rectangle visibleRect, final int orientation, final int direction ) {
 
-
         int rval = 0;
 
         try {
@@ -76,7 +75,6 @@ public class IrregularScrollableImpl implements Scrollable {
 
             if ( isEmpty() ) {
 
-                rval = 0;
                 return rval;
 
             }

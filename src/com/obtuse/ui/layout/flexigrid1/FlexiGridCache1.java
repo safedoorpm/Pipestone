@@ -59,10 +59,10 @@ public class FlexiGridCache1 implements FlexiGridLayoutManagerCache {
 
     public FlexiGridCache1(
             final @NotNull String name,
-            final FlexiGridLayoutManager flexiGridLayoutManager,
+            final @NotNull FlexiGridLayoutManager flexiGridLayoutManager,
             final @NotNull FlexiGridContainer1 target,
-            Hashtable<Component, FlexiGridConstraintsTable> allConstraints,
-            FlexiGridItemInfo.FlexiItemInfoFactory itemInfoFactory
+            final @NotNull Hashtable<Component, FlexiGridConstraintsTable> allConstraints,
+            final @NotNull FlexiGridItemInfo.FlexiItemInfoFactory itemInfoFactory
     ) {
 
         super();
@@ -86,7 +86,7 @@ public class FlexiGridCache1 implements FlexiGridLayoutManagerCache {
         _visibleComponents = new Vector<>();
         _columnSizes = collectSizes(
                 _grid.getRowSet(),
-                row -> _grid.getRow( row ),
+                row -> _grid.getRow( row.intValue() ),
                 dim -> dim.width,
                 _visibleComponents
         );
@@ -95,7 +95,7 @@ public class FlexiGridCache1 implements FlexiGridLayoutManagerCache {
 
         _rowSizes = collectSizes(
                 _grid.getColumnSet(),
-                row -> _grid.getColumn( row ),
+                row -> _grid.getColumn( row.intValue() ),
                 dim -> dim.height,
                 null
         );
@@ -290,7 +290,7 @@ public class FlexiGridCache1 implements FlexiGridLayoutManagerCache {
 
         }
 
-        Dimension size = new Dimension( Short.MAX_VALUE, Short.MAX_VALUE );
+        @SuppressWarnings("UnnecessaryLocalVariable") Dimension size = new Dimension( Short.MAX_VALUE, Short.MAX_VALUE );
 
         return size;
 
@@ -388,7 +388,7 @@ public class FlexiGridCache1 implements FlexiGridLayoutManagerCache {
             final boolean horizontal
     ) {
 
-        String direction = horizontal ? "horizontal" : "vertical";
+//        String direction = horizontal ? "horizontal" : "vertical";
 
         for ( int ix : indexSet ) {
 
@@ -408,6 +408,11 @@ public class FlexiGridCache1 implements FlexiGridLayoutManagerCache {
                 Insets margins = minPrefMaxSizes.getItemInfo()
                                                 .getInfo()
                                                 .getMargins();
+                if ( margins.top > 0 || margins.bottom > 0 ) {
+
+                    ObtuseUtil.doNothing();
+
+                }
                 startOffset += minPrefMaxSizes.pref() +
                                (
                                        horizontal
@@ -430,7 +435,7 @@ public class FlexiGridCache1 implements FlexiGridLayoutManagerCache {
         Insets insets = _target.getInsets();
 
         SortedSet<Integer> rowSet = _grid.getRowSet();
-        SortedSet<Integer> columnSet = _grid.getColumnSet();
+//        SortedSet<Integer> columnSet = _grid.getColumnSet();
 
         for ( int row : rowSet ) {
 

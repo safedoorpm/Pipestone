@@ -26,122 +26,152 @@ public class EventUtils {
      */
 
     private EventUtils() {
-	super();
+
+        super();
     }
 
     public static void event( final String where, final MouseEvent event ) {
 
-	String eventType;
-	switch ( event.getID() ) {
+        String eventType;
+        switch ( event.getID() ) {
 
-	    case MouseEvent.MOUSE_CLICKED: eventType = "clicked"; break;
-	    case MouseEvent.MOUSE_PRESSED: eventType = "pressed"; break;
-	    case MouseEvent.MOUSE_RELEASED: eventType = "released"; break;
-	    case MouseEvent.MOUSE_MOVED: eventType = "moved"; break;
-	    case MouseEvent.MOUSE_ENTERED: eventType = "entered"; break;
-	    case MouseEvent.MOUSE_EXITED: eventType = "exited"; break;
-	    case MouseEvent.MOUSE_DRAGGED: eventType = "dragged"; break;
-	    case MouseEvent.MOUSE_WHEEL: eventType = "wheel"; break;
-	    default: eventType = "id=" + event.getID();
-	}
-	String msg = where + ":  " +
-		     "mouse event:  " + eventType +
-		     ", button " + event.getButton() +
+            case MouseEvent.MOUSE_CLICKED:
+                eventType = "clicked";
+                break;
+            case MouseEvent.MOUSE_PRESSED:
+                eventType = "pressed";
+                break;
+            case MouseEvent.MOUSE_RELEASED:
+                eventType = "released";
+                break;
+            case MouseEvent.MOUSE_MOVED:
+                eventType = "moved";
+                break;
+            case MouseEvent.MOUSE_ENTERED:
+                eventType = "entered";
+                break;
+            case MouseEvent.MOUSE_EXITED:
+                eventType = "exited";
+                break;
+            case MouseEvent.MOUSE_DRAGGED:
+                eventType = "dragged";
+                break;
+            case MouseEvent.MOUSE_WHEEL:
+                eventType = "wheel";
+                break;
+            default:
+                eventType = "id=" + event.getID();
+        }
+        String msg = where +
+                     ":  " +
+                     "mouse event:  " +
+                     eventType +
+                     ", button " +
+                     event.getButton() +
 //		     ", mod " + MouseEvent.getMouseModifiersText( event.getModifiers() ).trim() +
-		     ", modEx " + MouseEvent.getModifiersExText( event.getModifiersEx() ).trim() +
-		     ", clickCount " + event.getClickCount() +
-		     ", point (" + event.getPoint().x + "," + event.getPoint().y + ")" +
-		     ", " + getTopParent( (Component)event.getSource() );
-	Trace.event( msg );
+                     ", modEx " +
+                     MouseEvent.getModifiersExText( event.getModifiersEx() )
+                               .trim() +
+                     ", clickCount " +
+                     event.getClickCount() +
+                     ", point (" +
+                     event.getPoint().x +
+                     "," +
+                     event.getPoint().y +
+                     ")" +
+                     ", " +
+                     getTopParent( (Component)event.getSource() );
+        Trace.event( msg );
 
     }
 
     public static void event( final String why, final PopupMenuEvent event ) {
 
-	String msg = "popup menu event:  " + why + " in " + getTopParent( (Component)event.getSource() );
-	maybeLog( msg );
+        String msg = "popup menu event:  " + why + " in " + getTopParent( (Component)event.getSource() );
+        maybeLog( msg );
 
     }
 
     public static void event( final String why, final ActionEvent event ) {
 
-	Object source = event.getSource();
-	if ( source instanceof JMenuItem ) {
+        Object source = event.getSource();
+        if ( source instanceof JMenuItem ) {
 
-	    JMenuItem menuItem = (JMenuItem)source;
-	    String msg = why + ":  menu item \"" + menuItem.getText() + "\" clicked in " + getTopParent( menuItem );
+            JMenuItem menuItem = (JMenuItem)source;
+            String msg = why + ":  menu item \"" + menuItem.getText() + "\" clicked in " + getTopParent( menuItem );
 
-	    maybeLog( msg );
+            maybeLog( msg );
 
-	} else if ( source instanceof JButton ) {
+        } else if ( source instanceof JButton ) {
 
-	    JButton button = (JButton)source;
-	    String msg = why + ":  button \"" + button.getText() + "\" clicked in " + getTopParent( button );
+            JButton button = (JButton)source;
+            String msg = why + ":  button \"" + button.getText() + "\" clicked in " + getTopParent( button );
 
-	    maybeLog( msg );
+            maybeLog( msg );
 
-	} else {
+        } else {
 
-	    maybeLog( why + ":  EventObject:  " + event );
+            maybeLog( why + ":  EventObject:  " + event );
 
-	}
+        }
 
     }
 
-    public static void maybeLog( final String msg ) {
+    private static void maybeLog( final String msg ) {
 
-	if ( _logEvents ) {
+        if ( _logEvents ) {
 
-	    Logger.logMsg( "msg:  " + msg );
+            Logger.logMsg( "msg:  " + msg );
 
-	} else {
+        } else {
 
-	    Trace.event( msg );
+            Trace.event( msg );
 
-	}
+        }
 
     }
 
     public static Object getTopParent( final Component xComponent ) {
 
-	String in = "";
+        String in = "";
 
-	Component component = xComponent;
-	do {
+        Component component = xComponent;
+        do {
 
-	    if ( component instanceof JFrame ) {
+            if ( component instanceof JFrame ) {
 
-		return in + "JFrame \"" + ((JFrame)component).getTitle() + "\"";
+                return in + "JFrame \"" + ( (JFrame)component ).getTitle() + "\"";
 
-	    }
+            }
 
-	    if ( component instanceof JDialog ) {
+            if ( component instanceof JDialog ) {
 
-		return in + "JDialog \"" + ((JDialog)component).getTitle() + "\"";
+                return in + "JDialog \"" + ( (JDialog)component ).getTitle() + "\"";
 
-	    }
+            }
 
-	    if ( component.getParent() instanceof JTabbedPane ) {
+            if ( component.getParent() instanceof JTabbedPane ) {
 
-		JTabbedPane jTabbedPane = (JTabbedPane) component.getParent();
-		for ( int tabIndex = 0; tabIndex < jTabbedPane.getTabCount(); tabIndex += 1 ) {
+                JTabbedPane jTabbedPane = (JTabbedPane)component.getParent();
+                for ( int tabIndex = 0; tabIndex < jTabbedPane.getTabCount(); tabIndex += 1 ) {
 
-		    if ( jTabbedPane.getComponentAt( tabIndex ).equals( component ) ) {
+                    if ( jTabbedPane.getComponentAt( tabIndex )
+                                    .equals( component ) ) {
 
-			in = "tab \"" + jTabbedPane.getTitleAt( tabIndex ) + "\" in ";
-			break;
+                        in = "tab \"" + jTabbedPane.getTitleAt( tabIndex ) + "\" in ";
+                        break;
 
-		    }
+                    }
 
-		}
+                }
 
-	    }
+            }
 
-	    component = component.getParent();
+            component = component.getParent();
 
-	} while ( component != null );
+        } while ( component != null );
 
-	return in + "Component " + xComponent;
+        return in + "Component " + xComponent;
 
     }
 

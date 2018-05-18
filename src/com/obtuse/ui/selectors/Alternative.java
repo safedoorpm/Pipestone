@@ -24,6 +24,22 @@ import java.util.TreeMap;
 
 public class Alternative implements Comparable<Alternative>, GowingPackable {
 
+    public abstract static class AlternativeFactory<K extends Alternative> {
+
+        public abstract K createInstance(
+                final @NotNull Selector selector,
+                final @NotNull String tag,
+                final @NotNull String toString
+        );
+
+        public K createInstance( final @NotNull Selector selector, final @NotNull String tag ) {
+
+            return createInstance( selector, tag, tag );
+
+        }
+
+    }
+
     private static final SortedMap<String, Alternative> s_availableChoices = new TreeMap<>();
 
     private static final EntityTypeName ENTITY_TYPE_NAME = new EntityTypeName( Alternative.class );
@@ -192,6 +208,28 @@ public class Alternative implements Comparable<Alternative>, GowingPackable {
 
         Optional<Alternative> optChoice = findChoice( selector, tag );
         return optChoice.orElseGet( () -> new Alternative( selector, tag, toString ) );
+
+    }
+
+    public static <K extends Alternative> K maybeCreateChoice(
+            final @NotNull Selector selector,
+            final @NotNull String tag,
+            final @NotNull String toString,
+            final @NotNull AlternativeFactory<K> factory
+    ) {
+
+        Optional<Alternative> optChoice = findChoice( selector, tag );
+        if ( optChoice.isPresent() ) {
+
+            @SuppressWarnings("unchecked") K newInstance = (K)optChoice.get();
+            return newInstance;
+
+        } else {
+
+            @SuppressWarnings("UnnecessaryLocalVariable") K newInstance = factory.createInstance( selector, tag, toString );
+            return newInstance;
+
+        }
 
     }
 

@@ -1,5 +1,7 @@
 package com.obtuse.ui;
 
+import org.jetbrains.annotations.Nullable;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -10,6 +12,7 @@ import java.awt.event.WindowEvent;
  A simple About box.
  */
 
+@SuppressWarnings("ClassHasNoToStringMethod")
 public class AboutBox extends JDialog {
 
     private JPanel _contentPane;
@@ -21,7 +24,7 @@ public class AboutBox extends JDialog {
     private static final char COPYRIGHT_SYMBOL = (char)169;
 
     @SuppressWarnings({ "SameParameterValue" })
-    public AboutBox( JFrame owner ) {
+    public AboutBox( final @Nullable JFrame owner ) {
 
         super( owner, true );
 
@@ -46,7 +49,7 @@ public class AboutBox extends JDialog {
         addWindowListener(
                 new WindowAdapter() {
 
-                    public void windowClosing( WindowEvent e ) {
+                    public void windowClosing( final WindowEvent e ) {
 
                         onCancel();
 
@@ -80,7 +83,7 @@ public class AboutBox extends JDialog {
 
     }
 
-    public static void main( String[] args ) {
+    public static void main( final String[] args ) {
 
         launch();
 

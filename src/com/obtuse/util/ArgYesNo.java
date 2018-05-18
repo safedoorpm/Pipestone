@@ -4,6 +4,8 @@
 
 package com.obtuse.util;
 
+import org.jetbrains.annotations.NotNull;
+
 /**
  * A yes/no {@link com.obtuse.util.ArgParser} argument.
  * <p/>Valid values are:
@@ -24,7 +26,7 @@ public abstract class ArgYesNo extends Arg {
 
     }
 
-    public final void process( final String keyword, final String arg ) {
+    public final void process( @NotNull final String keyword, @NotNull final String arg ) {
 
         if ( "yes".equalsIgnoreCase( arg ) || "y".equalsIgnoreCase( arg ) ) {
 

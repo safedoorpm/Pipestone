@@ -946,7 +946,8 @@ public class RelativePath extends GowingAbstractPackableEntity implements Iterab
                 worked = true;
             } else if ( expectedValue < 0 && rval < 0 ) {
                 worked = true;
-            } else if ( expectedValue > 0 && rval > 0 ) {
+            } else //noinspection RedundantIfStatement
+                if ( expectedValue > 0 && rval > 0 ) {
                 worked = true;
             } else {
                 worked = false;

@@ -64,6 +64,7 @@ static class B extends A {
  </blockquote>
  */
 
+@SuppressWarnings("ClassHasNoToStringMethod")
 public class BorderLayoutPanel extends JPanel {
 
     /**
@@ -104,7 +105,7 @@ public class BorderLayoutPanel extends JPanel {
 
         }
 
-        public static void main( String[] args ) {
+        public static void main( final String[] args ) {
 
             JFrame jf = new JFrame( "BorderLayout Issue Demo" );
 
@@ -135,7 +136,7 @@ public class BorderLayoutPanel extends JPanel {
      updates
      */
 
-    public BorderLayoutPanel( boolean isDoubleBuffered ) {
+    public BorderLayoutPanel( final boolean isDoubleBuffered ) {
         super( new BorderLayout(), isDoubleBuffered );
     }
 
@@ -166,7 +167,7 @@ public class BorderLayoutPanel extends JPanel {
 
     public void setLayout( final LayoutManager mgr ) {
 
-        if ( _ourLayoutManager != null && _ourLayoutManager instanceof BorderLayout ) {
+        if ( _ourLayoutManager instanceof BorderLayout ) {
 
             throw new IllegalArgumentException( "SelectorPanel:  BorderLayoutPanel does not support changing/setting the layout manager - bye!" );
 

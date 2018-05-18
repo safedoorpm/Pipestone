@@ -54,6 +54,7 @@ public class GowingFormatVersion {
 
             }
 
+            //noinspection ConstantConditions
             if ( longMinorVersion <= 0 || longMinorVersion > Integer.MAX_VALUE ) {
 
                 throw new GowingUnpackingException(

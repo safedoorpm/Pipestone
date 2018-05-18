@@ -18,8 +18,6 @@ public class TrackedWindow extends JFrame {
 
     private final String _windowGeometryPrefsKey;
 
-    private boolean _inToString = false;
-
     public TrackedWindow( final String windowPrefsName ) {
         super();
 
@@ -158,9 +156,7 @@ public class TrackedWindow extends JFrame {
     @SuppressWarnings( { "RefusedBequest" } )
     public String toString() {
 
-        _inToString = true;
-        String rval = "TrackedWindow( " + _windowPrefsName + ", " + getSavedGeometry() + " )";
-        _inToString = false;
+        @SuppressWarnings("UnnecessaryLocalVariable") String rval = "TrackedWindow( " + _windowPrefsName + ", " + getSavedGeometry() + " )";
 
         return rval;
 

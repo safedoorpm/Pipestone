@@ -1,7 +1,7 @@
 package com.obtuse.util.gowing;
 
-import com.obtuse.util.Accumulator;
-import com.obtuse.util.TreeAccumulator;
+import com.obtuse.exceptions.HowDidWeGetHereError;
+import com.obtuse.util.*;
 import com.obtuse.util.gowing.p2a.GowingEntityReference;
 import com.obtuse.util.gowing.p2a.GowingUtil;
 import com.obtuse.util.gowing.p2a.holders.*;
@@ -9,6 +9,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
+import java.util.function.BiFunction;
 
 /*
  * Copyright © 2015 Obtuse Systems Corporation
@@ -119,6 +120,45 @@ public class StdGowingPackerContext implements GowingPackerContext {
 
     }
 
+    private TwoDimensionalSortedMap<Integer,Long,Long> _entityIdMap = new TwoDimensionalTreeMap<>();
+    private final SimpleUniqueLongIdGenerator _entityIdRemapperGenerator =
+            new SimpleUniqueLongIdGenerator( GowingInstanceId.class.getCanonicalName() + " - entity id remapper generator" );
+
+    private boolean _doRemap = true;
+
+    @Override
+    public long remapEntityId( final int typeId, final long entityId ) {
+
+        // Don't mess with entity ids equal to 0 since they mark super-bundle entities.
+
+        if ( entityId == 0L ) {
+
+            return entityId;
+
+        }
+
+        Long remappedEntityId = _entityIdMap.computeIfAbsent(
+                typeId,
+                entityId,
+                ( typeId1, entityId1 ) -> {
+
+                    long remappedId = _doRemap ? _entityIdRemapperGenerator.getUniqueId() : entityId1;
+
+                    if ( remappedId == 0 ) {
+
+                        throw new HowDidWeGetHereError( "StdGowingPackerContext.remapEntityId:  entity id of 0 generated - violates assumption that 0 marks a super-bundle entity" );
+
+                    }
+
+                    return remappedId;
+
+                }
+        );
+
+        return remappedEntityId;
+
+    }
+
     @Override
     @NotNull
     public Set<Integer> getSeenTypeIds() {
@@ -185,7 +225,7 @@ public class StdGowingPackerContext implements GowingPackerContext {
         private final String _payload;
         private SimplePackableClass _simple;
         private GowingEntityReference _simpleReference;
-        private GowingEntityReference _entityNameReference;
+//        private GowingEntityReference _entityNameReference;
 
         private final int _iValue;
 
@@ -225,7 +265,10 @@ public class StdGowingPackerContext implements GowingPackerContext {
 
             _innerReference = bundle.getOptionalEntityReference( new EntityName( "_inner" ) );
 
-            _entityNameReference = bundle.getMandatoryEntityReference( new EntityName( "_entityName" ) );
+            @Nullable EntityName froz = bundle.EntityNameValue( new EntityName( "_entityName" ) );
+//            _entityNameReference = bundle.getMandatoryEntityReference( new EntityName( "_entityName" ) );
+
+            ObtuseUtil.doNothing();
 
         }
 
@@ -260,9 +303,6 @@ public class StdGowingPackerContext implements GowingPackerContext {
 
             _simple = (SimplePackableClass)unPacker.resolveReference( _simpleReference );
             _inner = (TestPackableClass)unPacker.resolveReference( _innerReference );
-
-            // This went in as an EntityName. I am certain that it will come back as a String.
-            Object unpackedEntityName = unPacker.resolveReference( _entityNameReference );
 
             return true;
 

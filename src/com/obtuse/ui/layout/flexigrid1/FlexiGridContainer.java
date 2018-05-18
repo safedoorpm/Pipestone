@@ -121,7 +121,7 @@ public interface FlexiGridContainer {
 
     void remove( int index, long key );
 
-    abstract void remove( int index );
+    void remove( int index );
 
     /**
      Swing/AWT method.

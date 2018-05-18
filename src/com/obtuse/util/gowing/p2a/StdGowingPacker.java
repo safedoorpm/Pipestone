@@ -213,17 +213,18 @@ public class StdGowingPacker implements GowingPacker {
     @Override
     public GowingInstanceId queuePackableEntity( @Nullable final GowingPackable entity ) {
 
-        if ( entity == null ) {
-
-            return null;
-
-        }
-
-        if ( isVerbose() ) Logger.logMsg( "queuing " + entity.getInstanceId() + " / " + entity.getInstanceId().getTypeName() );
-
-        _packingContext.rememberPackableEntity( null, entity );
-
-        return entity.getInstanceId();
+        return queuePackableEntity( null, entity );
+//        if ( entity == null ) {
+//
+//            return null;
+//
+//        }
+//
+//        if ( isVerbose() ) Logger.logMsg( "queuing " + entity.getInstanceId() + " / " + entity.getInstanceId().getTypeName() );
+//
+//        _packingContext.rememberPackableEntity( null, entity );
+//
+//        return entity.getInstanceId();
 
     }
 
@@ -414,7 +415,7 @@ public class StdGowingPacker implements GowingPacker {
         _writer.print( GowingConstants.TAG_ENTITY_NAME );
         emit( name.getName() );
 
-        ObtuseUtil.doNothing();;
+        ObtuseUtil.doNothing();
 //        _writer.print( name );
 
     }
@@ -443,11 +444,13 @@ public class StdGowingPacker implements GowingPacker {
 
     private void emitEntityReference( final int typeId, final long entityId, @Nullable final Integer version, @Nullable final Collection<EntityName> entityNames ) {
 
+        long mappedEntityId = getPackingContext().remapEntityId( typeId, entityId );
+
         _writer.print( GowingConstants.TAG_ENTITY_REFERENCE );
         _writer.print( typeId );
         _writer.print( ':' );
 
-        _writer.print( entityId );
+        _writer.print( mappedEntityId );
         if ( version != null ) {
 
             _writer.print( 'v' );

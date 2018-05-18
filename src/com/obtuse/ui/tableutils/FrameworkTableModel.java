@@ -8,6 +8,7 @@ package com.obtuse.ui.tableutils;
 import com.obtuse.exceptions.HowDidWeGetHereError;
 import com.obtuse.util.Logger;
 import com.obtuse.util.SimpleUniqueIntegerIdGenerator;
+import com.obtuse.util.Trace;
 import com.obtuse.util.things.ThingNameFactory;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -128,6 +129,7 @@ public class FrameworkTableModel<D extends CheckBoxRowWrapper.RowData> extends C
 
         }
 
+        @SuppressWarnings("unused")
         public final Class getCellClass( final int row, final int col ) {
 
             return _defaultCellClass;
@@ -144,6 +146,7 @@ public class FrameworkTableModel<D extends CheckBoxRowWrapper.RowData> extends C
 
         }
 
+        @SuppressWarnings("unused")
         public boolean isActive() {
 
             return true;
@@ -162,6 +165,7 @@ public class FrameworkTableModel<D extends CheckBoxRowWrapper.RowData> extends C
 
         }
 
+        @SuppressWarnings("unused")
         public void setCustomTableCellEditor( final TableCellEditor customTableCellEditor ) {
 
             _customTableCellEditor = customTableCellEditor;
@@ -171,6 +175,8 @@ public class FrameworkTableModel<D extends CheckBoxRowWrapper.RowData> extends C
     }
 
     private final boolean _readOnly;
+
+    private boolean _traceMode = false;
 
     private int _selectionColumnNumber = -1;
 
@@ -182,6 +188,7 @@ public class FrameworkTableModel<D extends CheckBoxRowWrapper.RowData> extends C
     private final SortedMap<TCName, Integer> _fieldNameIndex = new TreeMap<>();
     private final SortedMap<TCName, Boolean> _readOnlyByColumnNameOverride = new TreeMap<>();
 
+    @SuppressWarnings("unused")
     public FrameworkTableModel(
             final @NotNull D[] rowWrappers,
             final boolean singleSelectionMode,
@@ -209,6 +216,33 @@ public class FrameworkTableModel<D extends CheckBoxRowWrapper.RowData> extends C
         }
 
         addRowWrappers( wrappers );
+
+    }
+
+    public boolean isTraceMode() {
+
+        return _traceMode;
+
+    }
+
+    private void maybeLog( final @NotNull String msg ) {
+
+        if ( isTraceMode() ) {
+
+            Logger.logMsg( msg );
+
+        } else {
+
+            Trace.event( msg );
+
+        }
+
+    }
+
+    @SuppressWarnings("unused")
+    public void setTraceMode( final boolean traceMode ) {
+
+        _traceMode = traceMode;
 
     }
 
@@ -319,6 +353,7 @@ public class FrameworkTableModel<D extends CheckBoxRowWrapper.RowData> extends C
 
     }
 
+    @SuppressWarnings("unused")
     public void rowDataChanged( @Nullable final CheckBoxRowWrapper<D> changedRowWrapper ) {
 
         if ( changedRowWrapper == null ) {
@@ -462,17 +497,40 @@ public class FrameworkTableModel<D extends CheckBoxRowWrapper.RowData> extends C
 
     }
 
+    public boolean hasSelectionColumn() {
+
+        return _selectionColumnNumber >= 0;
+
+    }
+
+//    /**
+//     If this table has a selection column, set it for a specified row.
+//     <p>This method silently ignores requests to set the selection column for tables that don't have selection columns.</p>
+//     @param row the row of interest.
+//     @param isSelected the new selection value for the row of interest.
+//     */
+//
+//    public void setSelectionColumn( final int row, final boolean isSelected ) {
+//
+//        if ( _selectionColumnNumber >= 0 ) {
+//
+//            setValueAt( isSelected, row, _selectionColumnNumber );
+//
+//        }
+//
+//    }
+
     public void setValueAt( final Object value, final int row, final int col ) {
 
-        Logger.logMsg( "setting row " + row + " col " + col + " to " + value );
+        maybeLog( "setting row " + row + " col " + col + " to " + value );
 
         if ( !isFrozen() ) {
 
-            throw new IllegalArgumentException( "FTM.setValueAt():  attempt to set a value at (" +
-                                                row +
-                                                "," +
-                                                col +
-                                                ") when table structure is not frozen" );
+            throw new IllegalArgumentException(
+                    "FTM.setValueAt():  attempt to set a value at " +
+                    "(" + row + "," + col + ")" +
+                    " when table structure is not frozen"
+            );
 
         }
 
@@ -480,12 +538,21 @@ public class FrameworkTableModel<D extends CheckBoxRowWrapper.RowData> extends C
 
         try {
 
-            Logger.logMsg( "setting cell at (" +
-                           row +
-                           "," +
-                           col +
-                           ") to " +
-                           ( value == null ? null : ( value.getClass().getSimpleName() + " instance = (" + value + ")" ) ) );
+            maybeLog(
+                    "setting cell at (" +
+                    row +
+                    "," +
+                    col +
+                    ") to " +
+                    (
+                            value == null ?
+                                    null :
+                                    (
+                                            value.getClass()
+                                                 .getSimpleName() + " instance = (" + value + ")"
+                                    )
+                    )
+            );
 
             if ( col == _selectionColumnNumber ) {
 
@@ -498,7 +565,9 @@ public class FrameworkTableModel<D extends CheckBoxRowWrapper.RowData> extends C
 
             }
 
+            maybeLog( "FrameworkTableModel.setValueAt:  firing table cell updated for (" + row + "," + col + ")" );
             fireTableCellUpdated( row, col );
+            maybeLog( "FrameworkTableModel.setValueAt:  firing our selection changed for " + row );
             fireOurSelectionChanged( row );
 
         } catch ( Throwable e ) {
@@ -519,8 +588,15 @@ public class FrameworkTableModel<D extends CheckBoxRowWrapper.RowData> extends C
 
     public void setSelectedAtRow( final int row, final boolean selected ) {
 
+        maybeLog( "FrameworkTableModel.setSelectedAtRow:  setting selection for row " + row + " to " + selected );
+
         CheckBoxRowWrapper<D> rowData = _data.get( row );
         rowData.setSelected( selected );
+        if ( _selectionColumnNumber >= 0 ) {
+
+            setValueAt( selected, row, _selectionColumnNumber );
+
+        }
 
     }
 
@@ -577,7 +653,7 @@ public class FrameworkTableModel<D extends CheckBoxRowWrapper.RowData> extends C
 
         }
 
-//        Logger.logMsg( "cell(" + row + "," + col + ") is " + ( rval ? "" : "not " ) + "editable because " + how );
+        maybeLog( "cell(" + row + "," + col + ") is " + ( rval ? "" : "not " ) + "editable because " + how );
 
         return rval;
 
@@ -605,6 +681,7 @@ public class FrameworkTableModel<D extends CheckBoxRowWrapper.RowData> extends C
 
     }
 
+    @SuppressWarnings("unused")
     public void addRowDatums( final Collection<D> rows ) {
 
         Collection<CheckBoxRowWrapper<D>> wrappers = new LinkedList<>();
@@ -618,6 +695,7 @@ public class FrameworkTableModel<D extends CheckBoxRowWrapper.RowData> extends C
 
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public CheckBoxRowWrapper<D> addRowDatum( final D rowData ) {
 
         CheckBoxRowWrapper<D> newRowWrapper = new CheckBoxRowWrapper<>( this, rowData );
@@ -659,7 +737,7 @@ public class FrameworkTableModel<D extends CheckBoxRowWrapper.RowData> extends C
 
         SortedSet<Integer> sortedRows = new TreeSet<>( rows );
 
-        Logger.logMsg( "removing " + sortedRows );
+        maybeLog( "removing " + sortedRows );
 
         // Clear the selection on any of the rows which are being removed.
 
@@ -668,7 +746,7 @@ public class FrameworkTableModel<D extends CheckBoxRowWrapper.RowData> extends C
             CheckBoxRowWrapper<D> victimRow = _data.get( requestedRow );
             if ( victimRow.isSelected() ) {
 
-                Logger.logMsg( "deselecting selected row " + requestedRow + " (requested row " + requestedRow + ")" );
+                maybeLog( "deselecting selected row " + requestedRow + " (requested row " + requestedRow + ")" );
 
                 setValueAt( false, requestedRow, _selectionColumnNumber );
 
@@ -684,22 +762,17 @@ public class FrameworkTableModel<D extends CheckBoxRowWrapper.RowData> extends C
 
             int actualRequestedRow = requestedRow - adjustment;
 
-            Logger.logMsg( "removing actual row " +
-                           actualRequestedRow +
-                           " of " +
-                           _data.size() +
-                           " (requested row " +
-                           requestedRow +
-                           ", adjustment is currently " +
-                           adjustment +
-                           ")" );
+            maybeLog(
+                    "removing actual row " + actualRequestedRow + " of " + _data.size() +
+                    " (requested row " + requestedRow + ", adjustment is currently " + adjustment + ")"
+            );
 
             actuallyRemoveRow( actualRequestedRow );
             adjustment += 1;
 
         }
 
-        Logger.logMsg( "done removing " + sortedRows );
+        maybeLog( "done removing " + sortedRows );
 
     }
 
@@ -711,14 +784,15 @@ public class FrameworkTableModel<D extends CheckBoxRowWrapper.RowData> extends C
 
     }
 
-    public int findTypeDefinitionRow( final D actualData ) {
+    @NotNull
+    public Optional<Integer> findTypeDefinitionRow( final D actualData ) {
 
         int row = 0;
         for ( CheckBoxRowWrapper<D> wrapper : _data ) {
 
             if ( wrapper.getRowData().equals( actualData ) ) {
 
-                return row;
+                return Optional.of( row );
 
             }
 
@@ -726,7 +800,7 @@ public class FrameworkTableModel<D extends CheckBoxRowWrapper.RowData> extends C
 
         }
 
-        return -1;
+        return Optional.empty();
 
     }
 

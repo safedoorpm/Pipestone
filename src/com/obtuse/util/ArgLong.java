@@ -4,6 +4,8 @@
 
 package com.obtuse.util;
 
+import org.jetbrains.annotations.NotNull;
+
 /**
  * A long {@link ArgParser} argument.
  */
@@ -11,12 +13,12 @@ package com.obtuse.util;
 @SuppressWarnings("UnusedDeclaration")
 public abstract class ArgLong extends Arg {
 
-    protected ArgLong( String keyword ) {
+    protected ArgLong( final @NotNull String keyword ) {
         super( keyword );
 
     }
 
-    public final void process( String keyword, String arg ) {
+    public final void process( final @NotNull String keyword, final @NotNull String arg ) {
 
         try {
 

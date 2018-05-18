@@ -4,6 +4,7 @@
 
 package com.obtuse.ui;
 
+import com.obtuse.exceptions.HowDidWeGetHereError;
 import com.obtuse.util.BasicProgramConfigInfo;
 import com.obtuse.util.Logger;
 import com.obtuse.util.ObtuseUtil;
@@ -22,11 +23,50 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @SuppressWarnings({ "ClassWithoutToString", "UnusedDeclaration", "unchecked" })
 public class LogsWindow extends WindowWithMenus {
+
+    private static final DateFormat s_dateFormatter = new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss" );
+
+    public static class TimestampedMessage {
+
+        private final Date timestamp;
+        private final String message;
+
+        public TimestampedMessage( final @NotNull String message ) {
+            super();
+
+            this.timestamp = new Date();
+            this.message = message;
+
+        }
+
+        public TimestampedMessage( final Date timestamp, final @NotNull String message ) {
+            super();
+
+            this.timestamp = timestamp;
+            this.message = message;
+
+        }
+
+        public String toString() {
+
+            return "TimestampedMessage( " + LogsWindow.format( timestamp, message ) + " )";
+
+        }
+
+        @NotNull
+        public String format() {
+
+            return LogsWindow.format( this.timestamp, this.message );
+
+        }
+
+    }
 
     private JPanel _contentPane;
 
@@ -44,9 +84,10 @@ public class LogsWindow extends WindowWithMenus {
     @SuppressWarnings({ "FieldAccessedSynchronizedAndUnsynchronized" })
     private static LogsWindow s_logsWindow = null;
 
-    private static DateFormat s_dateFormatter = new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss" );
-
     private static boolean s_useHTML = false;
+
+    private static final List<TimestampedMessage> s_asyncMessages = new ArrayList<>();
+    private static Runnable s_backgroundMessageProcessor = null;
 
     public static final int MAX_LINES_IN_MESSAGE_WINDOW = 1000;
 
@@ -86,6 +127,7 @@ public class LogsWindow extends WindowWithMenus {
                     public void windowClosing( final WindowEvent e ) {
 
                         WindowWithMenus.setAllShowLogsModeInMenu( false );
+
                     }
                 }
         );
@@ -135,44 +177,146 @@ public class LogsWindow extends WindowWithMenus {
 
     }
 
-    @SuppressWarnings({ "UnusedDeclaration" })
-    public static void addMessage( final @NotNull String msg ) {
+    @NotNull
+    public static String format( final Date timestamp, final String message ) {
 
-        LogsWindow.addMessage( new Date(), msg );
+        synchronized ( LogsWindow.s_dateFormatter ) {
 
-    }
+            @SuppressWarnings("UnnecessaryLocalVariable") String rval = LogsWindow.s_dateFormatter.format( timestamp ) +
+                                                                        " " +
+                                                                        ObtuseUtil.enquoteToJavaString( message );
 
-    public static void addMessage( final @NotNull Date when, final @NotNull String msg ) {
-
-        final String timeStampedMessage = LogsWindow.s_dateFormatter.format( when ) + ":  " + msg;
-        if ( SwingUtilities.isEventDispatchThread() ) {
-
-            LogsWindow.getInstance().insertMessageAtEnd( timeStampedMessage );
-
-        } else {
-
-            //noinspection ClassWithoutToString
-            SwingUtilities.invokeLater(
-
-                    () -> {
-
-                        try {
-
-                            LogsWindow.getInstance().insertMessageAtEnd( timeStampedMessage );
-
-                        } catch ( RuntimeException e ) {
-
-                            Logger.logErr( "unable to insert message \"" + msg + "\" into log messages", e );
-
-                        }
-
-                    }
-
-            );
+            return rval;
 
         }
 
     }
+
+    private static void processAsyncMessages() {
+
+        synchronized ( s_asyncMessages ) {
+
+            if ( SwingUtilities.isEventDispatchThread() ) {
+
+                for ( TimestampedMessage msg : s_asyncMessages ) {
+
+                    try {
+
+                        LogsWindow.getInstance()
+                                  .insertMessageAtEnd( msg.format() );
+
+                    } catch ( RuntimeException e ) {
+
+                        Logger.logErr( "unable to insert message " + msg + " into log messages", e );
+
+                    }
+
+                }
+
+                s_asyncMessages.clear();
+
+            } else {
+
+                throw new HowDidWeGetHereError( "LogsWindow.processAsyncMessages:  must be called on event thread" );
+
+            }
+
+            s_backgroundMessageProcessor = null;
+
+        }
+
+    }
+
+    /**
+     Timestamp and queue a message.
+     <p>Messages are guaranteed to appear in the log window in the order in which this method timestamps them.</p>
+     @param msg the message.
+     */
+
+    public static void addMessage( final @NotNull String msg ) {
+
+        synchronized ( s_asyncMessages ) {
+
+            final TimestampedMessage timestampedMessage = new TimestampedMessage( msg );
+
+            s_asyncMessages.add( timestampedMessage );
+
+            if ( SwingUtilities.isEventDispatchThread() ) {
+
+                processAsyncMessages();
+
+            } else if ( s_backgroundMessageProcessor == null ) {
+
+                s_backgroundMessageProcessor = () -> processAsyncMessages();
+
+                SwingUtilities.invokeLater( s_backgroundMessageProcessor );
+
+            }
+
+        }
+
+    }
+
+//    @SuppressWarnings({ "UnusedDeclaration" })
+//    public static void addMessage( final @NotNull String msg ) {
+//
+//        queueMessage( msg );
+//
+//    }
+
+////        LogsWindow.addMessage( new Date(), msg );
+////
+////    }
+////
+////    public static void addMessage( final @NotNull Date when, final @NotNull String msg ) {
+//
+//        synchronized ( s_asyncMessages ) {
+//
+//            queueMessage( msg );
+//
+//        }
+//
+////            final String timeStampedMessage = LogsWindow.s_dateFormatter.format( when ) + ":  " + msg;
+//
+//            if ( SwingUtilities.isEventDispatchThread() ) {
+//
+//                synchronized ( s_asyncMessages ) {
+//
+//                    queueMessage( timestampedMessage );
+//                    processAsynMessages();
+//
+//                    LogsWindow.getInstance()
+//                              .insertMessageAtEnd( timeStampedMessage );
+//
+//                }
+//
+//            } else {
+//
+//                //noinspection ClassWithoutToString
+//                SwingUtilities.invokeLater(
+//
+//                        () -> {
+//
+//                            try {
+//
+//                                LogsWindow.getInstance()
+//                                          .insertMessageAtEnd( timeStampedMessage );
+//
+//                            } catch ( RuntimeException e ) {
+//
+//                                Logger.logErr( "unable to insert message \"" + msg + "\" into log messages", e );
+//
+//                            }
+//
+//                        }
+//
+//                );
+//
+//            }
+//
+//        }
+//
+//    }
 
     /**
      Utility method to trace the setting of a button's enabled state.

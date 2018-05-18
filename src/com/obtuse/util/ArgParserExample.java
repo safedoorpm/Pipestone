@@ -4,6 +4,8 @@
 
 package com.obtuse.util;
 
+import org.jetbrains.annotations.NotNull;
+
 public class ArgParserExample {
 
     @SuppressWarnings({ "ClassWithoutToString", "AssignmentToStaticFieldFromInstanceMethod" })
@@ -42,7 +44,7 @@ public class ArgParserExample {
 
                             new ArgString( "-deployment" ) {
 
-                                public void process( final String keyword, final String arg ) {
+                                public void process( @NotNull final String keyword, @NotNull final String arg ) {
 
                                     ExampleArgParser.s_deploymentName = arg;
 
@@ -82,7 +84,7 @@ public class ArgParserExample {
 
                             new ArgString( "-supportEmailAddress" ) {
 
-                                public void process( final String keyword, final String arg ) {
+                                public void process( @NotNull final String keyword, @NotNull final String arg ) {
 
                                     s_supportEmailAddress = arg;
 
@@ -92,7 +94,7 @@ public class ArgParserExample {
 
                             new ArgString( "-callbackHostname" ) {
 
-                                public void process( final String keyword, final String arg ) {
+                                public void process( @NotNull final String keyword, @NotNull final String arg ) {
 
                                     ExampleArgParser.s_callbackHostname = arg;
 

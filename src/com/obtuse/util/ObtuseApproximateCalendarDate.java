@@ -1088,11 +1088,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
             }
 
-            if ( semiColonOffset >= 0 && colonOffset >= 0 ) {
-
-                tooManySeparators = true;
-
-            } else if ( semiColonOffset >= 0 ) {
+            if ( semiColonOffset >= 0 ) {
 
                 separatorOffset = semiColonOffset;
 

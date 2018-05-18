@@ -1,5 +1,6 @@
 package com.obtuse.util.gowing.p2a.holders;
 
+import com.obtuse.util.Logger;
 import com.obtuse.util.gowing.EntityName;
 import com.obtuse.util.gowing.GowingPackable;
 import com.obtuse.util.gowing.GowingPackableThingHolder;
@@ -83,7 +84,17 @@ public abstract class GowingAbstractPackableHolder implements GowingPackableThin
 
     public GowingEntityReference EntityTypeReference() {
 
-        return (GowingEntityReference)getObjectValue();
+        try {
+
+            return (GowingEntityReference)getObjectValue();
+
+        } catch ( Exception e ) {
+
+            Logger.logErr( "GowingAbstractPackableHolder.EntityTypeReference:  object value is not an entity reference (it is a " + getObjectValue().getClass().getCanonicalName() + ")", e );
+
+            throw e;
+
+        }
 
     }
 

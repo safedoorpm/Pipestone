@@ -1,5 +1,6 @@
 package com.obtuse.util.gowing;
 
+import com.obtuse.exceptions.HowDidWeGetHereError;
 import com.obtuse.util.SimpleUniqueIntegerIdGenerator;
 import com.obtuse.util.SimpleUniqueLongIdGenerator;
 import org.jetbrains.annotations.NotNull;
@@ -57,6 +58,12 @@ public final class GowingInstanceId implements Comparable<GowingInstanceId> {
 
         _typeName = typeName;
         _entityId = s_idGenerator.getUniqueId();
+
+        if ( _entityId == 0 ) {
+
+            throw new HowDidWeGetHereError( "GowingInstanceId:  entity id of 0 generated - violates assumption that 0 marks a super-bundle entity" );
+
+        }
 
     }
 

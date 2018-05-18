@@ -119,7 +119,7 @@ public class BasicFlavorHandlers {
             try {
 
                 Object transferData = ts.getTransferable().getTransferData( DataFlavor.imageFlavor );
-                Logger.logMsg( "transferData is " + ( transferData == null ? "<<null>>" : transferData.toString() ) );
+                Logger.logMsg( "transferData is " + transferData.toString() );
 
                 handleImage( ts, (Image)transferData );
 

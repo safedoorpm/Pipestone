@@ -41,4 +41,6 @@ public interface GowingPackerContext {
 
     Set<Integer> getTopTypeIds();
 
+    long remapEntityId( int typeId, long entityId );
+
 }

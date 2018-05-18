@@ -46,7 +46,7 @@ public abstract class CheckBoxStyleSelectionTableModel<D extends CheckBoxRowWrap
      @param selectedRows which rows are currently selected.
      */
 
-    public void selectionChanged( final Collection<Integer> selectedRows ) {
+    public void selectionChanged( final @NotNull Collection<Integer> selectedRows ) {
 
         // can be overridden by implementations that care.
 
@@ -94,6 +94,7 @@ public abstract class CheckBoxStyleSelectionTableModel<D extends CheckBoxRowWrap
      Determine if a particular row is selected.
      */
 
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     protected abstract boolean getSelectedAtRow( int row );
 
     /**

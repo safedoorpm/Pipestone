@@ -16,7 +16,7 @@ import java.awt.*;
 @SuppressWarnings("unused")
 public class FlexiGridBasicConstraint implements FlexiGridConstraint {
 
-    public static final int DEFAULT_MARGIN = 5;
+    public static final int DEFAULT_MARGIN = 1;
 
     public enum HJustification {
         LEFT,
@@ -118,7 +118,7 @@ public class FlexiGridBasicConstraint implements FlexiGridConstraint {
     }
 
     @NotNull
-    public FlexiGridBasicConstraint setMargins( int top, int left, int bottom, int right ) {
+    public FlexiGridBasicConstraint setMargins( final int top, final int left, final int bottom, final int right ) {
 
         if ( _margins == null ) {
 

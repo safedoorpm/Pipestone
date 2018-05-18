@@ -4,6 +4,8 @@
 
 package com.obtuse.util;
 
+import org.jetbrains.annotations.NotNull;
+
 /**
  * An integer {@link ArgParser} argument.
  */
@@ -15,7 +17,7 @@ public abstract class ArgInt extends Arg {
 
     }
 
-    public final void process( final String keyword, final String arg ) {
+    public final void process( @NotNull final String keyword, @NotNull final String arg ) {
 
         try {
 

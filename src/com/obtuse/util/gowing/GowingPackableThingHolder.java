@@ -109,11 +109,11 @@ public interface GowingPackableThingHolder extends Comparable<GowingPackableThin
     String MandatoryStringValue();
 
     /**
-     Return this instance's object after casting it to a {@link String}.
-     <p/>This method is exactly equivalent to <blockquote><code>(String)(this.getObjectValue())</code></blockquote>
+     Return this instance's object after casting it to an {@link EntityName}.
+     <p/>This method is exactly equivalent to <blockquote><code>(EntityName)(this.getObjectValue())</code></blockquote>
 
-     @return this instance's object after casting it to a {@link String}.
-     @throws ClassCastException if this instance's object is not actually a {@link String} instance.
+     @return this instance's object after casting it to an {@link EntityName}.
+     @throws ClassCastException if this instance's object is not actually an {@link EntityName} instance.
      */
 
     @Nullable

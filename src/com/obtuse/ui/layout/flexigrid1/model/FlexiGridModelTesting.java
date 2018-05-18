@@ -14,17 +14,16 @@ import com.obtuse.util.Logger;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
- Created by danny on 2018/04/19.
+ Take the FlexiGridModel thing out for a test drive.
  */
 
+@SuppressWarnings("ClassHasNoToStringMethod")
 public class FlexiGridModelTesting extends JFrame {
 
     private FlexiGridPanelModel<FlexiGridModelSlice> _model;
-    private FlexiGridContainer1 _container;
+    @SuppressWarnings("FieldCanBeLocal") private FlexiGridContainer1 _container;
     private int _nextIx;
     private FlexiGridModelSlice _target = null;
 
@@ -39,38 +38,24 @@ public class FlexiGridModelTesting extends JFrame {
         xx.setLayout( new BorderLayout() );
         JButton addOneButton = new JButton( "Add one" );
         addOneButton.addActionListener(
-                new ActionListener() {
-
-                    @Override
-                    public void actionPerformed( final ActionEvent e ) {
-
-                        addRow( _nextIx++ );
-
-                    }
-
-                }
+                e -> addRow( _nextIx++ )
         );
         xx.add( addOneButton, BorderLayout.NORTH );
         JButton flipVisibilityButton = new JButton( "Flip one" );
         flipVisibilityButton.addActionListener(
-                new ActionListener() {
+                e -> {
 
-                    @Override
-                    public void actionPerformed( final ActionEvent e ) {
+                    if ( _target.isVisible() ) {
 
-                        if ( _target.isVisible() ) {
+                        Logger.logMsg( "making invisible" );
 
-                            Logger.logMsg( "making invisible" );
+                        _target.setVisible( false );
 
-                            _target.setVisible( false );
+                    } else {
 
-                        } else {
+                        Logger.logMsg( "making visible" );
 
-                            Logger.logMsg( "making visible" );
-
-                            _target.setVisible( true );
-
-                        }
+                        _target.setVisible( true );
 
                     }
 
@@ -119,7 +104,7 @@ public class FlexiGridModelTesting extends JFrame {
 
     }
 
-    public static void main( String[] args ) {
+    public static void main( final String[] args ) {
 
         BasicProgramConfigInfo.init( "Kenosee", "Pipestone", "FlexiGridPanelModel - testing", null );
 

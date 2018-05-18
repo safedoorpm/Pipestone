@@ -5,6 +5,7 @@
 package com.obtuse.util;
 
 import com.obtuse.util.exceptions.ParsingException;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * A date {@link ArgParser} argument.
@@ -20,7 +21,7 @@ public abstract class ArgYYYY_MM_DD_CalendarDate extends Arg {
 
     }
 
-    public final void process( final String keyword, final String arg ) {
+    public final void process( @NotNull final String keyword, @NotNull final String arg ) {
 
         try {
 

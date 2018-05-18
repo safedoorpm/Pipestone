@@ -4,6 +4,8 @@
 
 package com.obtuse.util;
 
+import org.jetbrains.annotations.NotNull;
+
 /**
  * An argument managed by {@link ArgParser}.
  */
@@ -18,7 +20,7 @@ public abstract class Arg {
         _keyword = keyword;
     }
 
-    public abstract void process( String keyword, String arg );
+    public abstract void process( final @NotNull String keyword, final @NotNull String arg );
 
     public String getKeyword() {
 
