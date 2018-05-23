@@ -5,6 +5,8 @@
 
 package com.obtuse.ui;
 
+import org.jetbrains.annotations.NotNull;
+
 /**
  Something that validates and manages an editable value.
  */
@@ -35,7 +37,8 @@ public interface EditValueAdvocate<T> {
      * @param rollbackValue the value that this instance should provide when it is asked for its rollback value (see {@link #getRollbackValue()} for more info).
      */
 
-    void setRollbackValue( T rollbackValue );
+    @SuppressWarnings("unused")
+    void setRollbackValue( @NotNull T rollbackValue );
 
     /**
      * Called when the user has clicked the ESC key to obtain the value to roll the JTextField back to.

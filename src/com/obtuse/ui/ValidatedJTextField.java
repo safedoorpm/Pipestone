@@ -5,6 +5,7 @@
 package com.obtuse.ui;
 
 import com.obtuse.util.ObtuseUtil;
+import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -107,6 +108,12 @@ public abstract class ValidatedJTextField extends JTextField implements EditValu
 
                 }
         );
+
+    }
+
+    public void setRollbackValue( final @NotNull String rollbackValue ) {
+
+        throw new IllegalArgumentException( "ValidatedJTextField.setRollbackValue:  not implemented" );
 
     }
 
