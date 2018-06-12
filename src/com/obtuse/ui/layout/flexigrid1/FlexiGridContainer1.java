@@ -5,9 +5,7 @@
 package com.obtuse.ui.layout.flexigrid1;
 
 import com.obtuse.exceptions.HowDidWeGetHereError;
-import com.obtuse.ui.layout.layoutTracer.LayoutTracer;
-import com.obtuse.util.Logger;
-import com.obtuse.util.ObtuseUtil;
+import com.obtuse.ui.layout.layoutTracer.TracingLayoutManager;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -76,7 +74,7 @@ public class FlexiGridContainer1 extends JPanel implements FlexiGridContainer {
                 ( row, col, component, constraintsTable ) -> new FlexiGridItemInfo( row, col, component, constraintsTable )
         );
 
-        super.setLayout( useLayoutTracer() ? new LayoutTracer( mgr ) : mgr );
+        super.setLayout( useLayoutTracer() ? new TracingLayoutManager( mgr ) : mgr );
 
         _initialized = true;
 
@@ -94,7 +92,7 @@ public class FlexiGridContainer1 extends JPanel implements FlexiGridContainer {
 
             if ( mgr instanceof FlexiGridLayoutManager && useLayoutTracer() ) {
 
-                super.setLayout( new LayoutTracer( (FlexiGridLayoutManager)mgr ) );
+                super.setLayout( new TracingLayoutManager( (FlexiGridLayoutManager)mgr ) );
 
             } else {
 
@@ -193,9 +191,9 @@ public class FlexiGridContainer1 extends JPanel implements FlexiGridContainer {
     public FlexiGridLayoutManager getFlexiGridLayoutManager() {
 
         LayoutManager lm = getLayout();
-        if ( useLayoutTracer() && lm instanceof LayoutTracer ) {
+        if ( useLayoutTracer() && lm instanceof TracingLayoutManager ) {
 
-            return (FlexiGridLayoutManager)((LayoutTracer)lm).getWrappedLayoutManager2();
+            return (FlexiGridLayoutManager)((TracingLayoutManager)lm).getWrappedLayoutManager2();
 
         } else if ( lm instanceof FlexiGridLayoutManager ) {
 

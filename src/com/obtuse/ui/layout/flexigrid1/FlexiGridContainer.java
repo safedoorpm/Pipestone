@@ -4,7 +4,7 @@
 
 package com.obtuse.ui.layout.flexigrid1;
 
-import com.obtuse.ui.layout.layoutTracer.LayoutTracer;
+import com.obtuse.ui.layout.layoutTracer.TracingLayoutManager;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
@@ -192,7 +192,7 @@ public interface FlexiGridContainer {
     }
 
     /**
-     Get our layout manager (possibly after unwrapping it from a {@link LayoutTracer}).
+     Get our layout manager (possibly after unwrapping it from a {@link TracingLayoutManager}).
      */
 
     FlexiGridLayoutManager getFlexiGridLayoutManager();
