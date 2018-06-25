@@ -225,7 +225,6 @@ public class StdGowingPackerContext implements GowingPackerContext {
         private final String _payload;
         private SimplePackableClass _simple;
         private GowingEntityReference _simpleReference;
-//        private GowingEntityReference _entityNameReference;
 
         private final int _iValue;
 
@@ -266,7 +265,6 @@ public class StdGowingPackerContext implements GowingPackerContext {
             _innerReference = bundle.getOptionalEntityReference( new EntityName( "_inner" ) );
 
             @Nullable EntityName froz = bundle.EntityNameValue( new EntityName( "_entityName" ) );
-//            _entityNameReference = bundle.getMandatoryEntityReference( new EntityName( "_entityName" ) );
 
             ObtuseUtil.doNothing();
 
@@ -377,7 +375,6 @@ public class StdGowingPackerContext implements GowingPackerContext {
             }
 
             _payload = bundle.MandatoryStringValue( new EntityName( "_thing" ) );
-
 
         }
 

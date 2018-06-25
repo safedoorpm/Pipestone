@@ -276,7 +276,6 @@ public class FlexibleDateTransmogrifier {
             return _mmIx;
         }
 
-
         public int getDdIx() {
 
             return _ddIx;
@@ -488,7 +487,6 @@ public class FlexibleDateTransmogrifier {
 
                 }
                 if ( ddIx <= 0 ) {
-
 
                     return Optional.of( yearString + "-" + ObtuseUtil.lpad( month, 2, '0' ) );
 

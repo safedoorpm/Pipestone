@@ -68,7 +68,6 @@ public class EventUtils {
                      eventType +
                      ", button " +
                      event.getButton() +
-//		     ", mod " + MouseEvent.getMouseModifiersText( event.getModifiers() ).trim() +
                      ", modEx " +
                      MouseEvent.getModifiersExText( event.getModifiersEx() )
                                .trim() +

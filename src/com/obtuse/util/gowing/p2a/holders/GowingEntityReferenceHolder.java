@@ -34,7 +34,6 @@ public class GowingEntityReferenceHolder extends GowingAbstractPackableHolder {
             GowingEntityReference ger = (GowingEntityReference)value;
             long mappedEntityId = packer2.getPackingContext().remapEntityId( ger.getTypeId(), ger.getEntityId() );
 
-//            packer2.emitEntityReference( ( (GowingEntityReference)value ).getTypeId(), ( (GowingEntityReference)value ).getEntityId() );
             packer2.emitEntityReference( ger.getTypeId(), mappedEntityId );
 
         } else {

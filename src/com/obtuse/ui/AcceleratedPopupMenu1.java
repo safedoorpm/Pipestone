@@ -190,7 +190,6 @@ public class AcceleratedPopupMenu1 extends JPopupMenu {
 
         }
 
-
         @SuppressWarnings("UnusedDeclaration")
         AcceleratedPopupMenu1 apm = new AcceleratedPopupMenu1( words );
 

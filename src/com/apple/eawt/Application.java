@@ -4,6 +4,8 @@ package com.apple.eawt;
  * Copyright © 2015 Obtuse Systems Corporation
  */
 
+import com.obtuse.util.ObtuseUtil;
+
 import java.awt.*;
 
 /**
@@ -17,23 +19,33 @@ public class Application {
 
     }
 
-    public void addApplicationListener( final ApplicationAdapter basicAdapter) {
+    public void addApplicationListener( final ApplicationAdapter basicAdapter ) {
+
+        ObtuseUtil.doNothing();
 
     }
 
     public void addAboutMenuItem() {
 
-    }
-
-    public void setDockIconBadge( final String msg) {
+        ObtuseUtil.doNothing();
 
     }
 
-    public void setDockIconImage( final Image icon) {
+    public void setDockIconBadge( final String msg ) {
+
+        ObtuseUtil.doNothing();
 
     }
 
-    public void setEnabledPreferencesMenu( final boolean b) {
+    public void setDockIconImage( final Image icon ) {
+
+        ObtuseUtil.doNothing();
+
+    }
+
+    public void setEnabledPreferencesMenu( final boolean b ) {
+
+        ObtuseUtil.doNothing();
 
     }
 

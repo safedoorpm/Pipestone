@@ -809,7 +809,6 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
                         );
                 throw new GowingUnpackingException( errorToken.stringValue(), errorToken );
 
-
             }
 
         } finally {
@@ -1641,7 +1640,6 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
 
                     }
 
-
                     @Override
                     public String toString() {
 
@@ -1668,7 +1666,6 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
                         return Float.parseFloat( numericString );
 
                     }
-
 
                     @Override
                     public String toString() {
@@ -1725,7 +1722,6 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
             return new GowingToken2( "unexpected character " + cleanupChar( ch ) + " (expected '[')", _lnum, _offset );
 
         }
-
 
         for ( int ix = 0; ix < length; ix += 1 ) {
 

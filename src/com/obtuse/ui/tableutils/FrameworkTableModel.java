@@ -503,23 +503,6 @@ public class FrameworkTableModel<D extends CheckBoxRowWrapper.RowData> extends C
 
     }
 
-//    /**
-//     If this table has a selection column, set it for a specified row.
-//     <p>This method silently ignores requests to set the selection column for tables that don't have selection columns.</p>
-//     @param row the row of interest.
-//     @param isSelected the new selection value for the row of interest.
-//     */
-//
-//    public void setSelectionColumn( final int row, final boolean isSelected ) {
-//
-//        if ( _selectionColumnNumber >= 0 ) {
-//
-//            setValueAt( isSelected, row, _selectionColumnNumber );
-//
-//        }
-//
-//    }
-
     public void setValueAt( final Object value, final int row, final int col ) {
 
         maybeLog( "setting row " + row + " col " + col + " to " + value );

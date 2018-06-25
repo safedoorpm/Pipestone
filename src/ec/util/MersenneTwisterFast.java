@@ -172,7 +172,6 @@ public strictfp class MersenneTwisterFast implements Serializable, Cloneable {
     private static final int UPPER_MASK = 0x80000000; // most significant w-r bits
     private static final int LOWER_MASK = 0x7fffffff; // least significant r bits
 
-
     // Tempering parameters
     private static final int TEMPERING_MASK_B = 0x9d2c5680;
     private static final int TEMPERING_MASK_C = 0xefc60000;
@@ -275,7 +274,6 @@ public strictfp class MersenneTwisterFast implements Serializable, Cloneable {
         setSeed( seed );
     }
 
-
     /**
      * Constructor using an array of integers as seed.
      * Your array must have a non-zero length.  Only the first 624 integers
@@ -285,7 +283,6 @@ public strictfp class MersenneTwisterFast implements Serializable, Cloneable {
     public MersenneTwisterFast( final int[] array ) {
         setSeed( array );
     }
-
 
     /**
      * Initalize the pseudo random number generator.  Don't
@@ -316,7 +313,6 @@ public strictfp class MersenneTwisterFast implements Serializable, Cloneable {
             /* for >32 bit machines */
         }
     }
-
 
     /**
      * Sets the seed of the MersenneTwister using an array of integers.
@@ -359,7 +355,6 @@ public strictfp class MersenneTwisterFast implements Serializable, Cloneable {
         mt[0] = 0x80000000; /* MSB is 1; assuring non-zero initial array */
     }
 
-
     public final int nextInt() {
         int y;
 
@@ -391,7 +386,6 @@ public strictfp class MersenneTwisterFast implements Serializable, Cloneable {
 
         return y;
     }
-
 
     public final short nextShort() {
         int y;
@@ -425,7 +419,6 @@ public strictfp class MersenneTwisterFast implements Serializable, Cloneable {
         return (short)( y >>> 16 );
     }
 
-
     public final char nextChar() {
         int y;
 
@@ -458,7 +451,6 @@ public strictfp class MersenneTwisterFast implements Serializable, Cloneable {
         return (char)( y >>> 16 );
     }
 
-
     public final boolean nextBoolean() {
         int y;
 
@@ -490,7 +482,6 @@ public strictfp class MersenneTwisterFast implements Serializable, Cloneable {
 
         return (boolean)( ( y >>> 31 ) != 0 );
     }
-
 
     /** This generates a coin flip with a probability <tt>probability</tt>
      of returning true, else returning false.  <tt>probability</tt> must
@@ -537,7 +528,6 @@ public strictfp class MersenneTwisterFast implements Serializable, Cloneable {
 
         return ( y >>> 8 ) / ( (float)( 1 << 24 ) ) < probability;
     }
-
 
     /** This generates a coin flip with a probability <tt>probability</tt>
      of returning true, else returning false.  <tt>probability</tt> must
@@ -611,7 +601,6 @@ public strictfp class MersenneTwisterFast implements Serializable, Cloneable {
         return ( ( ( (long)( y >>> 6 ) ) << 27 ) + ( z >>> 5 ) ) / (double)( 1L << 53 ) < probability;
     }
 
-
     public final byte nextByte() {
         int y;
 
@@ -643,7 +632,6 @@ public strictfp class MersenneTwisterFast implements Serializable, Cloneable {
 
         return (byte)( y >>> 24 );
     }
-
 
     public final void nextBytes( byte[] bytes ) {
         int y;
@@ -678,7 +666,6 @@ public strictfp class MersenneTwisterFast implements Serializable, Cloneable {
             bytes[x] = (byte)( y >>> 24 );
         }
     }
-
 
     public final long nextLong() {
         int y;
@@ -738,7 +725,6 @@ public strictfp class MersenneTwisterFast implements Serializable, Cloneable {
 
         return ( ( (long)y ) << 32 ) + (long)z;
     }
-
 
     /** Returns a long drawn uniformly from 0 to n-1.  Suffice it to say,
      n must be > 0, or an IllegalArgumentException is raised. */
@@ -872,7 +858,6 @@ public strictfp class MersenneTwisterFast implements Serializable, Cloneable {
         return ( ( ( (long)( y >>> 6 ) ) << 27 ) + ( z >>> 5 ) ) / (double)( 1L << 53 );
     }
 
-
     public final double nextGaussian() {
         if ( __haveNextNextGaussian ) {
             __haveNextNextGaussian = false;
@@ -1004,7 +989,6 @@ public strictfp class MersenneTwisterFast implements Serializable, Cloneable {
         }
     }
 
-
     /** Returns a random float in the half-open range from [0.0f,1.0f).  Thus 0.0f is a valid
      result but 1.0f is not. */
     public final float nextFloat() {
@@ -1038,7 +1022,6 @@ public strictfp class MersenneTwisterFast implements Serializable, Cloneable {
 
         return ( y >>> 8 ) / ( (float)( 1 << 24 ) );
     }
-
 
     /** Returns an integer drawn uniformly from 0 to n-1.  Suffice it to say,
      n must be > 0, or an IllegalArgumentException is raised. */
@@ -1115,7 +1098,6 @@ public strictfp class MersenneTwisterFast implements Serializable, Cloneable {
         } while ( bits - val + ( n - 1 ) < 0 );
         return val;
     }
-
 
     /**
      * Tests the code.

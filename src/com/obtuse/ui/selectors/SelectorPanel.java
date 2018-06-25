@@ -170,7 +170,6 @@ public abstract class SelectorPanel<E,C extends Container> extends BorderLayoutP
 
         }
 
-
         if ( _selectionCache != null && !_selectionCache.containsKey( key ) ) {
 
             cacheSelection( key, component );

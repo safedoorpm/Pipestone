@@ -109,7 +109,6 @@ public class ButtonInfo {
                 ImageIconUtils.changeImageBrightness( unpressedIcon.getImage(), darkeningFactor )
         );
 
-
         return ButtonInfo.makeButtonLabel( buttonOwner, button, action, unpressedIcon, pressedIcon );
 
     }

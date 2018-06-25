@@ -4,13 +4,7 @@
     <option name="SCOPE_TYPE" value="3" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pipestone.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Pipestone.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/FlexiGridContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/FlexiGridContainer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/FlexiGridContainer1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/FlexiGridContainer1.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/layout/layoutTracer/LayoutTracer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/layout/layoutTracer/TracingLayoutManager.java" afterDir="false" />
-    </list>
+    <list default="true" id="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" name="Default" comment="" />
     <ignored path="Pipestone.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -190,8 +184,8 @@
       <file leaf-file-name="JMenuItem.java" pinned="false" current-in-tab="true">
         <entry file="jar:///usr/lib/jvm/java-10-oracle/lib/src.zip!/java.desktop/javax/swing/JMenuItem.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="114">
-              <caret line="42" column="78" selection-start-line="42" selection-start-column="78" selection-end-line="42" selection-end-column="78" />
+            <state relative-caret-position="399">
+              <caret line="57" column="5" lean-forward="true" selection-start-line="57" selection-start-column="5" selection-end-line="57" selection-end-column="5" />
               <folding>
                 <element signature="e#2478#2505#0" expanded="true" />
                 <element signature="e#12294#12326#0" expanded="true" />
@@ -411,8 +405,8 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="119" />
-    <option name="y" value="23" />
+    <option name="x" value="2678" />
+    <option name="y" value="55" />
     <option name="width" value="2405" />
     <option name="height" value="1538" />
   </component>
@@ -1282,14 +1276,7 @@
       <workItem from="1526403426164" duration="10871000" />
       <workItem from="1528306011820" duration="1533000" />
       <workItem from="1528487866669" duration="2747000" />
-      <workItem from="1528782838525" duration="620000" />
-    </task>
-    <task id="LOCAL-00018" summary="Rename the new packing facility as the Gowing packing facility.&#10;&#10;Also a checkpoint commit before trying out idea of generating Gowing instance ids on an on-demand basis.">
-      <created>1445199689539</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1445199689539</updated>
+      <workItem from="1528782838525" duration="1318000" />
     </task>
     <task id="LOCAL-00019" summary="Cleaned up Gowing facility (better Javadocs, old commented out removed, etc).&#10;Marginal but useful cleanup on TreeSorter.java class.&#10;New first cut at generalizing the handling of messages (heading towards generalizing the logging window stuff).">
       <created>1446020494935</created>
@@ -1627,11 +1614,18 @@
       <option name="project" value="LOCAL" />
       <updated>1526652972996</updated>
     </task>
-    <option name="localTasksCounter" value="67" />
+    <task id="LOCAL-00067" summary="Rename the LayoutTracer as the TracingLayoutManager.&#10;Minor cleanup.">
+      <created>1528784328131</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1528784328131</updated>
+    </task>
+    <option name="localTasksCounter" value="68" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="935135000" />
+    <option name="totallyTimeSpent" value="935833000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1654,12 +1648,12 @@
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5078684" side_tool="true" weight="0.42062417" />
       <window_info anchor="right" id="Maven Projects" order="8" weight="0.32960624" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49213162" weight="0.2786533" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="8" sideWeight="0.49213162" visible="true" weight="0.2786177" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.3277126" />
       <window_info anchor="bottom" id="Terminal" order="14" weight="0.32956952" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="4" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.5269953" visible="true" weight="0.3114345" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.5269953" visible="true" weight="0.3114345" />
       <window_info anchor="right" id="Database" order="6" />
       <window_info id="Structure" order="1" sideWeight="0.43055555" side_tool="true" weight="0.17557251" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -1769,7 +1763,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Implement a Scrollable which handles entities of differing sizes while seeking to ensure but not guarantee that the first visible entity starts at the top of the view.&#10;&#10;Add some of the Apache text edit distance classes.&#10;&#10;Various cleanup." />
     <MESSAGE value="Almost entirely cleanup." />
     <MESSAGE value="Rework the various ObtuseUtil.enquote... methods.&#10;&#10;Cleanup." />
     <MESSAGE value="More cleanup than I should admit to needing to do (sigh)." />
@@ -1794,7 +1787,8 @@
     <MESSAGE value="A tiny bit of minor cleanup.&#10;Committing to keep in sync with Burke." />
     <MESSAGE value="In Gowing, fix totally broken support for EntityNames and implement and cleanup support for String and EntityName arrays.&#10;&#10;Make the Selector and Alternative classes a more complete 'model' of a combo-box.&#10;&#10;Comment out a bunch of Logger.log{Msg,Err} calls." />
     <MESSAGE value="Fix the handling of row selection in the tableutils classes. Selecting rows by calling CheckBoxRowWrapper.setSelected(boolean) now works in the sense that checkmarks are updated, the notifications occur, etc.&#10;&#10;Make sure that logging messages sent to a LogsWindow are shown in the exact order that they are passed to the window.&#10;&#10;Fix the EntityName de-serialization facility in Gowing.&#10;&#10;Remap entity ids when packing via Gowing. This ensures that two requests to pack the same collection of objects will yield precisely the same save file (ignoring timestamps) if the objects being saved and their values have not changed. This makes it fairly easy to avoid saving a whole series of equivalent auto-save files." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix the handling of row selection in the tableutils classes. Selecting rows by calling CheckBoxRowWrapper.setSelected(boolean) now works in the sense that checkmarks are updated, the notifications occur, etc.&#10;&#10;Make sure that logging messages sent to a LogsWindow are shown in the exact order that they are passed to the window.&#10;&#10;Fix the EntityName de-serialization facility in Gowing.&#10;&#10;Remap entity ids when packing via Gowing. This ensures that two requests to pack the same collection of objects will yield precisely the same save file (ignoring timestamps) if the objects being saved and their values have not changed. This makes it fairly easy to avoid saving a whole series of equivalent auto-save files." />
+    <MESSAGE value="Rename the LayoutTracer as the TracingLayoutManager.&#10;Minor cleanup." />
+    <option name="LAST_COMMIT_MESSAGE" value="Rename the LayoutTracer as the TracingLayoutManager.&#10;Minor cleanup." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -2628,8 +2622,8 @@
     </entry>
     <entry file="jar:///usr/lib/jvm/java-10-oracle/lib/src.zip!/java.desktop/javax/swing/JMenuItem.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="42" column="78" selection-start-line="42" selection-start-column="78" selection-end-line="42" selection-end-column="78" />
+        <state relative-caret-position="399">
+          <caret line="57" column="5" lean-forward="true" selection-start-line="57" selection-start-column="5" selection-end-line="57" selection-end-column="5" />
           <folding>
             <element signature="e#2478#2505#0" expanded="true" />
             <element signature="e#12294#12326#0" expanded="true" />

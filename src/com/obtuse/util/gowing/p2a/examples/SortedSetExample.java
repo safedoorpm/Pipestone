@@ -518,16 +518,6 @@ public class SortedSetExample extends GowingAbstractPackableEntity implements Go
 
             p2a.queuePackableEntity( sse );
 
-//            int[] primitive = new int[3];
-//            Integer[] container = new Integer[3];
-//
-//            for ( int i = 0; i < 3; i += 1 ) {
-//
-//                Array.set( primitive, i, i );
-//                Array.set( container, i, -i );
-//
-//            }
-
             p2a.finish();
 
         } catch ( FileNotFoundException e ) {

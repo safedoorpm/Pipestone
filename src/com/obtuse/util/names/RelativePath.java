@@ -188,12 +188,6 @@ public class RelativePath extends GowingAbstractPackableEntity implements Iterab
 
         sb.append( "}" );
 
-//        if ( isEmpty() ) {
-//
-//            throw new IllegalArgumentException( ourName + ":  paths must not be empty" );
-//
-//        }
-
         return sb.toString();
 
     }
@@ -645,63 +639,6 @@ public class RelativePath extends GowingAbstractPackableEntity implements Iterab
         }
 
         return leftSize - rightSize;
-
-//        if ( leftSize == rightSize ) {
-//
-//            return 0;
-//
-//        } else if ( leftSize < rightSize ) {
-//
-//            return -1;
-//
-//        } else {
-//
-//            return 1;
-//
-//        }
-
-//        ListIterator<SegmentName> leftIter = _segments.listIterator();
-//        ListIterator<SegmentName> rightIter = rhs._segments.listIterator();
-//        while ( leftIter.hasNext() ) {
-//
-//            if ( rightIter.hasNext() ) {
-//
-//                SegmentName left = leftIter.next();
-//                SegmentName right = rightIter.next();
-//
-//                int rval = left.compareTo( right );
-//                if ( rval != 0 ) {
-//
-//                    return rval;
-//
-//                }
-//
-//            } else {
-//
-//                // We are equal up to the point where the RHS ends.
-//                // Since we still have at least one segment, we are greater than they are.
-//
-//                return 1;
-//
-//            }
-//
-//        }
-//
-//        // We've run out of segments in ourselves.
-//        // If there's anything left in the RHS then we are less than they are.
-//        // Otherwise, we are equal to them.
-//
-//        if ( rightIter.hasNext() ) {
-//
-//            return -1;
-//
-//        } else {
-//
-//            return 0;
-//
-//        }
-
-//        return getCanonicalForm().compareTo( rhs.getCanonicalForm() );
 
     }
 

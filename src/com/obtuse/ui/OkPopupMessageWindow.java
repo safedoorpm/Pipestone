@@ -110,13 +110,6 @@ public class OkPopupMessageWindow extends JDialog {
 
     }
 
-// Note that finalize() has been deprecated since Java 9.
-//    public void finalize() {
-//
-//        Logger.logMsg( "OkPopupMessageWindow.finalize:  toodles!" );
-//
-//    }
-
     private void onOK() {
 
         dispose();
@@ -126,14 +119,18 @@ public class OkPopupMessageWindow extends JDialog {
     }
 
     /**
-     * Called as the last thing an instance of this class does after someone clicks the ok button.
-     * In particular, this instance will have already invoked ({@link java.awt.Window#dispose()} on itself).
-     * This method is provided so that users of this class can deal with
-     * clicks of the ok button themselves. The default implementation of this method does nothing.
+     Called as the last thing an instance of this class does after someone clicks the ok button.
+     In particular, this instance will have already invoked ({@link java.awt.Window#dispose()} on itself).
+     This method is provided so that users of this class can deal with
+     clicks of the ok button themselves. The default implementation of this method does nothing.
      */
 
     @SuppressWarnings({ "InstanceMethodNamingConvention" })
-    protected void ok() {}
+    protected void ok() {
+
+        ObtuseUtil.doNothing();
+
+    }
 
     /**
      * Wait for the human to click the button or otherwise dispose of the window.

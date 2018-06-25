@@ -794,7 +794,6 @@ public class ThreeDimensionalTreeMapTest {
 
         _map.put( 1, 2, 3, "Hello" );
 
-
         // Verify that map now contains one value and that it is the correct value
 
         values = ThreeDimensionalTreeMapTest.getContents( _map );

@@ -150,7 +150,6 @@ public abstract class AutoSizingValidatedJTextField extends ValidatedJTextField 
 
         }
 
-
         @Override
         public void insertUpdate( final DocumentEvent e ) {
 

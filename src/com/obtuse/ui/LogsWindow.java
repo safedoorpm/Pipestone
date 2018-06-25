@@ -257,67 +257,6 @@ public class LogsWindow extends WindowWithMenus {
 
     }
 
-//    @SuppressWarnings({ "UnusedDeclaration" })
-//    public static void addMessage( final @NotNull String msg ) {
-//
-//        queueMessage( msg );
-//
-//    }
-
-////        LogsWindow.addMessage( new Date(), msg );
-////
-////    }
-////
-////    public static void addMessage( final @NotNull Date when, final @NotNull String msg ) {
-//
-//        synchronized ( s_asyncMessages ) {
-//
-//            queueMessage( msg );
-//
-//        }
-//
-////            final String timeStampedMessage = LogsWindow.s_dateFormatter.format( when ) + ":  " + msg;
-//
-//            if ( SwingUtilities.isEventDispatchThread() ) {
-//
-//                synchronized ( s_asyncMessages ) {
-//
-//                    queueMessage( timestampedMessage );
-//                    processAsynMessages();
-//
-//                    LogsWindow.getInstance()
-//                              .insertMessageAtEnd( timeStampedMessage );
-//
-//                }
-//
-//            } else {
-//
-//                //noinspection ClassWithoutToString
-//                SwingUtilities.invokeLater(
-//
-//                        () -> {
-//
-//                            try {
-//
-//                                LogsWindow.getInstance()
-//                                          .insertMessageAtEnd( timeStampedMessage );
-//
-//                            } catch ( RuntimeException e ) {
-//
-//                                Logger.logErr( "unable to insert message \"" + msg + "\" into log messages", e );
-//
-//                            }
-//
-//                        }
-//
-//                );
-//
-//            }
-//
-//        }
-//
-//    }
-
     /**
      Utility method to trace the setting of a button's enabled state.
      <p/>This method lives in this class instead of say the Trace class because adding this method to the

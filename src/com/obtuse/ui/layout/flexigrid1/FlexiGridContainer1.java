@@ -6,6 +6,7 @@ package com.obtuse.ui.layout.flexigrid1;
 
 import com.obtuse.exceptions.HowDidWeGetHereError;
 import com.obtuse.ui.layout.layoutTracer.TracingLayoutManager;
+import com.obtuse.util.ObtuseUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -119,12 +120,6 @@ public class FlexiGridContainer1 extends JPanel implements FlexiGridContainer {
         return add( component, name, -1, 0L );
 
     }
-
-//    public Component add( final @NotNull Component component, final Object constraints ) {
-//
-//        add( component, constraints, -1, 0L );
-//
-//    }
 
     public Component add( @SuppressWarnings("NullableProblems") final @NotNull Component component, final int index ) {
 
@@ -279,6 +274,8 @@ public class FlexiGridContainer1 extends JPanel implements FlexiGridContainer {
     @SuppressWarnings({ "EmptyMethod", "unused" })
     public void doingLayout() {
 
+        ObtuseUtil.doNothing();
+
     }
 
     /**
@@ -287,6 +284,8 @@ public class FlexiGridContainer1 extends JPanel implements FlexiGridContainer {
 
     @SuppressWarnings({ "EmptyMethod", "unused" })
     public void doneLayout() {
+
+        ObtuseUtil.doNothing();
 
     }
 

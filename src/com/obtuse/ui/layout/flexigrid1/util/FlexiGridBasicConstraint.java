@@ -33,7 +33,6 @@ public class FlexiGridBasicConstraint implements FlexiGridConstraint {
     private final String _name;
     private int _row;
     private int _col;
-//    private final FlexiGridConstraintCategory _constraintCategory;
 
     private HJustification _horizontalJustification = null;
     private VJustification _verticalJustification = null;
@@ -246,9 +245,6 @@ public class FlexiGridBasicConstraint implements FlexiGridConstraint {
         return "FlexiGridBasicConstraint( " +
                _name +
                ", " + locationString() +
-//               _name + ", [" +
-//               _row + "," +
-//               _col + "]," +
                ", category=" + getConstraintCategory() +
                ", hJust=" + getHorizontalJustification() +
                ", vJust=" + getVerticalJustification() +

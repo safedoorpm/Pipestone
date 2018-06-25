@@ -126,6 +126,8 @@ public class MultiPointSlider extends JComponent {
 
                     public void mouseClicked( final MouseEvent mouseEvent ) {
 
+                        ObtuseUtil.doNothing();
+
                     }
 
                     public void mousePressed( final MouseEvent mouseEvent ) {
@@ -171,9 +173,13 @@ public class MultiPointSlider extends JComponent {
 
                     public void mouseEntered( final MouseEvent mouseEvent ) {
 
+                        ObtuseUtil.doNothing();
+
                     }
 
                     public void mouseExited( final MouseEvent mouseEvent ) {
+
+                        ObtuseUtil.doNothing();
 
                     }
 
@@ -195,6 +201,8 @@ public class MultiPointSlider extends JComponent {
                     }
 
                     public void mouseMoved( final MouseEvent mouseEvent ) {
+
+                        ObtuseUtil.doNothing();
 
                     }
 

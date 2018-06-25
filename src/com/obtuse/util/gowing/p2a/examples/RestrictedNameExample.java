@@ -257,8 +257,6 @@ public class RestrictedNameExample extends ObtuseKeyword {
 
     public static void main( final String[] args ) {
 
-
-
     }
 
     // Fini.

@@ -140,8 +140,6 @@ public class Alternative implements Comparable<Alternative>, GowingPackable {
 
         selector.addChoice( this );
 
-//        Logger.logMsg( "Alternative:  created " + describeInstance( _uniqueKey, this ) );
-
         ObtuseUtil.doNothing();
 
     }
@@ -166,23 +164,13 @@ public class Alternative implements Comparable<Alternative>, GowingPackable {
 
     public static Optional<Alternative> findChoice( final @NotNull String uniqueKey ) {
 
-//        Logger.logMsg( "Alternative.findChoice:  looking for " + ObtuseUtil.enquoteToJavaString( uniqueKey ) );
-
         Alternative choice = s_availableChoices.get( uniqueKey );
 
         Optional<Alternative> rval = Optional.ofNullable( choice );
 
         if ( !rval.isPresent() ) {
 
-//            Logger.logMsg( "Alternative.findChoice:  did not find " + ObtuseUtil.enquoteToJavaString( uniqueKey ) );
-//            for ( String key : s_availableChoices.keySet() ) {
-//
-//                Alternative tmpChoice = s_availableChoices.get( key );
-//                Logger.logMsg( describeInstance( key, tmpChoice ) );
-//
-//            }
-
-            ObtuseUtil.doNothing();
+          ObtuseUtil.doNothing();
 
         }
 

@@ -183,7 +183,6 @@ public class StdGowingUnPackerContext implements GowingUnPackerContext {
     @Override
     public int getTypeReferenceId( final EntityTypeName typeName ) {
 
-
         Integer typeReferenceId = _seenTypeNames.get( typeName );
         if ( typeReferenceId == null ) {
 

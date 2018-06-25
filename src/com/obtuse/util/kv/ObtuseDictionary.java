@@ -363,7 +363,6 @@ public class ObtuseDictionary extends UniqueEntity implements Iterable<ObtuseKey
 
             return Optional.ofNullable( keywordValue.getValue() );
 
-
         }
 
         return Optional.empty();

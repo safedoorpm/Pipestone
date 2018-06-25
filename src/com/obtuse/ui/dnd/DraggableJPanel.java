@@ -39,17 +39,25 @@ public class DraggableJPanel extends SelectableImage implements MouseListener, F
 
     public void mouseEntered( final MouseEvent e ) {
 
+        ObtuseUtil.doNothing();
+
     }
 
     public void mouseExited( final MouseEvent e ) {
+
+        ObtuseUtil.doNothing();
 
     }
 
     public void mousePressed( final MouseEvent e ) {
 
+        ObtuseUtil.doNothing();
+
     }
 
     public void mouseReleased( final MouseEvent e ) {
+
+        ObtuseUtil.doNothing();
 
     }
 

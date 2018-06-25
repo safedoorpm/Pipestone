@@ -5,6 +5,8 @@
 
 package com.obtuse.ui.selectors;
 
+import com.obtuse.util.ObtuseUtil;
+
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 
@@ -27,5 +29,8 @@ public abstract class WrappedSelectorPanel<CHOICE> extends JPanel {
 
     public void setSubsidiaryPanelBorder( final TitledBorder subsidiary_panel_dataCategoryStateNode ) {
 
+        ObtuseUtil.doNothing();
+
     }
+
 }

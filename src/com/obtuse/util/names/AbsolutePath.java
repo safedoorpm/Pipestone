@@ -74,7 +74,6 @@ public class AbsolutePath extends RelativePath {
 
     public AbsolutePath( final @NotNull String... segmentName ) {
         super( segmentName );
-//        super( new SegmentName[] { new SegmentName( segmentName ) } );
 
     }
 

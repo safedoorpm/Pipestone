@@ -232,7 +232,6 @@ public class MyIntSet implements Iterable<Long>, Serializable {
 
             }
 
-
         };
 
     }

@@ -80,7 +80,6 @@ public interface TwoDimensionalSortedMap<T1, T2, V> extends Iterable<V>, GowingP
      correspond to a value in the tree).
      */
 
-
     @Nullable
     V get( T1 key1, T2 key2 );
 

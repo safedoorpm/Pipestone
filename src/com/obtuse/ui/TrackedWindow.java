@@ -42,9 +42,13 @@ public class TrackedWindow extends JFrame {
 
                     public void componentShown( final ComponentEvent componentEvent ) {
 
+                        ObtuseUtil.doNothing();
+
                     }
 
                     public void componentHidden( final ComponentEvent componentEvent ) {
+
+                        ObtuseUtil.doNothing();
 
                     }
 

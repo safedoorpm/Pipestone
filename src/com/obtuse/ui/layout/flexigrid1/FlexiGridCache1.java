@@ -174,7 +174,6 @@ public class FlexiGridCache1 implements FlexiGridLayoutManagerCache {
 
             }
 
-
             ObtuseUtil.doNothing();
 
         }
@@ -214,8 +213,6 @@ public class FlexiGridCache1 implements FlexiGridLayoutManagerCache {
             if ( component.isVisible() ) {
 
                 FlexiGridBasicConstraint bc = _flexiGridLayoutManager.getMandatoryBasicConstraint( component );
-
-//                Logger.logMsg( "constraint for " + LinearLayoutUtil.describeComponent( component ) + " is " + bc );
 
                 FlexiGridConstraintsTable constraintsTable = allConstraints.get( component );
                 FlexiGridItemInfo ii = itemInfoFactory.createInstance( bc.getRow(), bc.getCol(), component, constraintsTable );
@@ -388,20 +385,11 @@ public class FlexiGridCache1 implements FlexiGridLayoutManagerCache {
             final boolean horizontal
     ) {
 
-//        String direction = horizontal ? "horizontal" : "vertical";
-
         for ( int ix : indexSet ) {
 
             FlexiGridSliceSizes minPrefMaxSizes = sliceSizesMap.get( ix );
 
-//            logMaybe( "FlexiGridCache1.computeLocationsAndSizes(" + direction + "): " + minPrefMaxSizes );
-
-            //noinspection StatementWithEmptyBody
-            if ( minPrefMaxSizes == null ) {
-
-//                logMaybe( "FlexiGridCache1.computeLocationsAndSizes(" + direction + "):  no minPrefMaxSizes for ix=" + ix );
-
-            } else {
+            if ( minPrefMaxSizes != null ) {
 
                 locations.put( ix, startOffset );
                 sizes.put( ix, minPrefMaxSizes.pref() );
@@ -435,7 +423,6 @@ public class FlexiGridCache1 implements FlexiGridLayoutManagerCache {
         Insets insets = _target.getInsets();
 
         SortedSet<Integer> rowSet = _grid.getRowSet();
-//        SortedSet<Integer> columnSet = _grid.getColumnSet();
 
         for ( int row : rowSet ) {
 
@@ -629,19 +616,9 @@ public class FlexiGridCache1 implements FlexiGridLayoutManagerCache {
 
                 if ( isFullWidth ) {
 
-//                    Logger.logMsg(
-//                            "FlexiGridCache1.setComponentBounds(" + row + "," + col + "):  " +
-//                            "full width yields bb=" + ObtuseUtil.fBounds( boundingRectangle )
-//                    );
-
                     ObtuseUtil.doNothing();
 
                 } else if ( isFullHeight ) {
-
-//                    Logger.logMsg(
-//                            "FlexiGridCache1.setComponentBounds(" + row + "," + col + "):  " +
-//                            "full height yields bb=" + ObtuseUtil.fBounds( boundingRectangle )
-//                    );
 
                     ObtuseUtil.doNothing();
 
@@ -665,11 +642,6 @@ public class FlexiGridCache1 implements FlexiGridLayoutManagerCache {
                                     preferredHeight
                             )
                     );
-
-//                    Logger.logMsg(
-//                            "FlexiGridCache1.setComponentBounds(" + row + "," + col + "):  " +
-//                            "normal height yields bb=" + ObtuseUtil.fBounds( boundingRectangle )
-//                    );
 
                     ObtuseUtil.doNothing();
 

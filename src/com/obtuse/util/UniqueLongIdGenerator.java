@@ -55,5 +55,4 @@ public interface UniqueLongIdGenerator {
 
     long getUniqueId();
 
-
 }

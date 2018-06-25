@@ -81,7 +81,6 @@ public class HelpWindow extends JDialog {
 
         _helpTextPane.setCaretPosition( 0 );
 
-
         _okButton.addActionListener(
                 new MyActionListener() {
 

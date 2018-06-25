@@ -93,7 +93,6 @@ public class FlexiGridModelSlice implements Comparable<FlexiGridModelSlice> {
 
         } else {
 
-
             if ( hasOwner() ) {
 
                 verifySlice( ".setVisible( " + visible + ")", ( visible ? "visible" : "invisible" ) + "/before" );
@@ -178,7 +177,6 @@ public class FlexiGridModelSlice implements Comparable<FlexiGridModelSlice> {
 
             return;
 
-
         }
 
         boolean rowOrientation = getOrientation().isRowOrientation();
@@ -215,7 +213,6 @@ public class FlexiGridModelSlice implements Comparable<FlexiGridModelSlice> {
 
         if ( itemInfo == null ) {
 
-//            Logger.logMsg( "FlexiGridModelSlice.setComponent(" + ix + "," + itemInfo + "):  removing " + LinearLayoutUtil.describeComponent( oldItemInfo.component() ) + "@" + getWhere( oldItemInfo ) );
             changed = _dataMap.remove( ix ) != null;
 
         } else {

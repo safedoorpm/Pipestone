@@ -89,6 +89,8 @@ public abstract class AbstractDebugConnectionHandler extends Thread {
 
                 } catch ( SocketTimeoutException e ) {
 
+                    // ignore timeouts
+
                 } catch ( IOException e ) {
 
                     errmsg( "IOException accepting connection on debug connection handler " + getHandlerDescription() + " (waiting five seconds)" );

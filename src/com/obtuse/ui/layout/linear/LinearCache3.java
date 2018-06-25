@@ -275,6 +275,7 @@ public class LinearCache3 implements LinearLayoutManagerCache {
             }
 
         } finally {
+            ObtuseUtil.doNothing();
 
         }
 
@@ -319,6 +320,8 @@ public class LinearCache3 implements LinearLayoutManagerCache {
             @SuppressWarnings({ "SameParameterValue", "unused" }) final String what,
             @SuppressWarnings("unused") final Component c
     ) {
+
+        ObtuseUtil.doNothing();
 
     }
 
@@ -530,6 +533,8 @@ public class LinearCache3 implements LinearLayoutManagerCache {
             }
 
         } finally {
+
+            ObtuseUtil.doNothing();
 
         }
 
@@ -828,6 +833,8 @@ public class LinearCache3 implements LinearLayoutManagerCache {
                 c.setBounds( r );
 
             } finally {
+
+                ObtuseUtil.doNothing();
 
             }
 

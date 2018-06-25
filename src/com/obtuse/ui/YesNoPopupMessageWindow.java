@@ -98,6 +98,8 @@ public abstract class YesNoPopupMessageWindow
 
                     public void windowClosing( final WindowEvent e ) {
 
+                        ObtuseUtil.doNothing();
+
                     }
                 }
         );
@@ -107,6 +109,8 @@ public abstract class YesNoPopupMessageWindow
                 new MyActionListener() {
 
                     public void myActionPerformed( final ActionEvent e ) {
+
+                        ObtuseUtil.doNothing();
 
                     }
 
@@ -293,7 +297,6 @@ public abstract class YesNoPopupMessageWindow
 
             @Override
             public void run() {
-
 
                 maybe.go();
 

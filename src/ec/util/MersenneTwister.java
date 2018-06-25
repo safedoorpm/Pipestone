@@ -255,7 +255,6 @@ public strictfp class MersenneTwister extends java.util.Random implements Serial
         stream.writeBoolean( __haveNextNextGaussian );
     }
 
-
     /**
      * Constructor using the default seed.
      */
@@ -316,7 +315,6 @@ public strictfp class MersenneTwister extends java.util.Random implements Serial
         }
     }
 
-
     /**
      * Sets the seed of the MersenneTwister using an array of integers.
      * Your array must have a non-zero length.  Only the first 624 integers
@@ -357,7 +355,6 @@ public strictfp class MersenneTwister extends java.util.Random implements Serial
         }
         mt[0] = 0x80000000; /* MSB is 1; assuring non-zero initial array */
     }
-
 
     /**
      * Returns an integer with <i>bits</i> bits filled with a random number.
@@ -488,7 +485,6 @@ public strictfp class MersenneTwister extends java.util.Random implements Serial
         return val;
     }
 
-
     /** A bug fix for versions of JDK 1.1 and below.  JDK 1.2 fixes
      this for us, but what the heck. */
     public double nextDouble() {
@@ -531,7 +527,6 @@ public strictfp class MersenneTwister extends java.util.Random implements Serial
     public byte nextByte() {
         return (byte)( next( 8 ) );
     }
-
 
     /** A bug fix for all JDK code including 1.2.  nextGaussian can theoretically
      ask for the log of 0 and divide it by 0! See Java bug
@@ -609,7 +604,6 @@ public strictfp class MersenneTwister extends java.util.Random implements Serial
 
         // TEST TO COMPARE TYPE CONVERSION BETWEEN
         // MersenneTwisterFast.java AND MersenneTwister.java
-
 
         System.out.println( "\nGrab the first 1000 booleans" );
         r = new MersenneTwister( SEED );

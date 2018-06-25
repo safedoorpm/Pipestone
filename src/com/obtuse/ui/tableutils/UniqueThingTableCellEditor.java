@@ -70,7 +70,6 @@ public class UniqueThingTableCellEditor<T extends ThingInfo> extends Customizabl
 
             }
 
-
         } catch ( Exception e ) {
 
             if ( _jMessage != null ) {

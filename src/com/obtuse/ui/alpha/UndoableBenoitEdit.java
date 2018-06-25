@@ -43,7 +43,6 @@ public abstract class UndoableBenoitEdit implements UndoableEdit {
 
     public abstract void doUndo();
 
-
     public boolean canUndo() {
 
         return _alive && _hasBeenDone;

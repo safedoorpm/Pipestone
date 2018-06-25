@@ -39,13 +39,13 @@ package com.obtuse.ui;
  */
 
 import com.obtuse.util.BasicProgramConfigInfo;
+import com.obtuse.util.ObtuseUtil;
 import org.jetbrains.annotations.Nullable;
 
 import javax.accessibility.Accessible;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-
 
 public class SelectableImage extends JPanel
         implements MouseListener,
@@ -124,17 +124,25 @@ public class SelectableImage extends JPanel
 
     public void mouseEntered( final MouseEvent e ) {
 
+        ObtuseUtil.doNothing();
+
     }
 
     public void mouseExited( final MouseEvent e ) {
+
+        ObtuseUtil.doNothing();
 
     }
 
     public void mousePressed( final MouseEvent e ) {
 
+        ObtuseUtil.doNothing();
+
     }
 
     public void mouseReleased( final MouseEvent e ) {
+
+        ObtuseUtil.doNothing();
 
     }
 

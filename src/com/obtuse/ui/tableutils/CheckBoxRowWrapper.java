@@ -52,7 +52,6 @@ public class CheckBoxRowWrapper<D extends CheckBoxRowWrapper.RowData> {
 
         }
 
-
         _tableModel = tableModel;
 
         _rowData = rowData;

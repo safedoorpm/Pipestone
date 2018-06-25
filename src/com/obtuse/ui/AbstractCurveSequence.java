@@ -136,7 +136,6 @@ public abstract class AbstractCurveSequence implements GraphicsElement {
 
     }
 
-
     /**
      * Tell anyone who cares that something has changed.
      *

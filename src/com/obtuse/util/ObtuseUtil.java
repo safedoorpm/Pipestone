@@ -2852,31 +2852,31 @@ public class ObtuseUtil {
 
         // How to do this pre-Java 9:
 
-//        if ( ObtuseUtil.s_pid == null ) {
-//
-//            ObtuseUtil.s_pid = -1;
-//            try {
-//
-//                java.lang.management.RuntimeMXBean runtime =
-//                        java.lang.management.ManagementFactory.getRuntimeMXBean();
-//                @SuppressWarnings("JavaReflectionMemberAccess")
-//                java.lang.reflect.Field jvm = runtime.getClass().getDeclaredField( "jvm" );
-//                jvm.setAccessible( true );
-//                sun.management.VMManagement mgmt =
-//                        (sun.management.VMManagement)jvm.get( runtime );
-//                @SuppressWarnings("JavaReflectionMemberAccess")
-//                java.lang.reflect.Method pidMethod = mgmt.getClass().getDeclaredMethod( "getProcessId" );
-//                pidMethod.setAccessible( true );
-//
-//                ObtuseUtil.s_pid = (Integer)pidMethod.invoke( mgmt );
-//
-//            } catch ( InvocationTargetException | NoSuchMethodException | NoSuchFieldException | IllegalAccessException e ) {
-//                // we did our best
-//            }
-//
-//        }
-//
-//        return ObtuseUtil.s_pid.intValue();
+        //        if ( ObtuseUtil.s_pid == null ) {
+        //
+        //            ObtuseUtil.s_pid = -1;
+        //            try {
+        //
+        //                java.lang.management.RuntimeMXBean runtime =
+        //                        java.lang.management.ManagementFactory.getRuntimeMXBean();
+        //                @SuppressWarnings("JavaReflectionMemberAccess")
+        //                java.lang.reflect.Field jvm = runtime.getClass().getDeclaredField( "jvm" );
+        //                jvm.setAccessible( true );
+        //                sun.management.VMManagement mgmt =
+        //                        (sun.management.VMManagement)jvm.get( runtime );
+        //                @SuppressWarnings("JavaReflectionMemberAccess")
+        //                java.lang.reflect.Method pidMethod = mgmt.getClass().getDeclaredMethod( "getProcessId" );
+        //                pidMethod.setAccessible( true );
+        //
+        //                ObtuseUtil.s_pid = (Integer)pidMethod.invoke( mgmt );
+        //
+        //            } catch ( InvocationTargetException | NoSuchMethodException | NoSuchFieldException | IllegalAccessException e ) {
+        //                // we did our best
+        //            }
+        //
+        //        }
+        //
+        //        return ObtuseUtil.s_pid.intValue();
 
     }
 
@@ -2889,7 +2889,6 @@ public class ObtuseUtil {
     public static @NotNull String fDim( final Dimension d ) {
 
         return d == null ? "null" : ObtuseUtil.fDim( d.width, d.height );
-
 
     }
 
@@ -2908,7 +2907,6 @@ public class ObtuseUtil {
     public static @NotNull String fBounds( final Rectangle r ) {
 
         return r == null ? "null" : ObtuseUtil.fBounds( r.x, r.y, r.width, r.height );
-
 
     }
 
@@ -2952,14 +2950,6 @@ public class ObtuseUtil {
 
     static {
 
-//        rememberBitName( InputEvent.SHIFT_DOWN_MASK, "Shift" );
-//        rememberBitName( InputEvent.CTRL_DOWN_MASK, "Ctrl" );
-//        rememberBitName( InputEvent.META_DOWN_MASK, "Meta" );
-//        rememberBitName( InputEvent.ALT_DOWN_MASK, "Alt" );
-//        rememberBitName( InputEvent.ALT_GRAPH_DOWN_MASK, "AltGraph" );
-//        rememberBitName( InputEvent.BUTTON1_DOWN_MASK, "Button_1" );
-//        rememberBitName( InputEvent.BUTTON2_DOWN_MASK, "Button_2" );
-//        rememberBitName( InputEvent.BUTTON3_DOWN_MASK, "Button_3" );
         rememberBitName( InputEvent.SHIFT_DOWN_MASK, "ShiftDown" );
         rememberBitName( InputEvent.CTRL_DOWN_MASK, "CtrlDown" );
         rememberBitName( InputEvent.META_DOWN_MASK, "MetaDown" );
@@ -3017,15 +3007,7 @@ public class ObtuseUtil {
 
                     s_maskExBits[bitIx] = name;
 
-                } else {
-
-//                    System.out.println( "duplicate mask " + name + " and " + s_maskExBits[bitIx] );
-
                 }
-
-            } else {
-
-//                System.out.println( "more than one bit set for " + name );
 
             }
 

@@ -520,7 +520,6 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
 
                 GowingUnPackedEntityGroup result = optionalResult.get();
 
-
                 for ( GowingPackable entity : result.getAllEntities() ) {
 
                     if ( entity instanceof ObtuseImageFile ) {
@@ -872,7 +871,6 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
                 m.done();
 
             }
-
 
         } else {
 

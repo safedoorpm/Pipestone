@@ -10,6 +10,7 @@ import com.obtuse.ui.layout.flexigrid1.util.FlexiGridBasicConstraint;
 import com.obtuse.ui.layout.flexigrid1.util.FlexiGridConstraint;
 import com.obtuse.ui.layout.flexigrid1.util.FlexiGridConstraintCategory;
 import com.obtuse.ui.layout.flexigrid1.util.FlexiGridConstraintsTable;
+import com.obtuse.util.ObtuseUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -27,28 +28,6 @@ public abstract class SpecialSlice extends FlexiGridModelSlice {
     }
 
     private boolean _ready = false;
-
-//    public static class DividerSegmentConstraint implements FlexiGridConstraint {
-//
-//        private final String _name;
-//        private final DividerStyle _dividerStyle;
-//
-//        public DividerSegmentConstraint( final @NotNull String name, final @NotNull DividerStyle dividerStyle ) {
-//            super();
-//
-//            _name = name;
-//
-//            _dividerStyle = dividerStyle;
-//
-//        }
-//
-//        public DividerStyle getDividerStyle() {
-//
-//            return _dividerStyle;
-//
-//        }
-//
-//    }
 
     public static class DividerSegment extends JPanel implements FlexiGridConstraint {
 
@@ -150,43 +129,7 @@ public abstract class SpecialSlice extends FlexiGridModelSlice {
 
         public void setDivider( final @NotNull DividerSegment dividerSegment ) {
 
-////            if ( isFullBreadth() && ix != 0 ) {
-////
-////                throw new IllegalArgumentException(
-////                        "SpecialSlice.Divider.setDivider:  ix=" + ix + " is invalid (full breadth dividers must specify ix=0)"
-////                );
-////
-////            }
-////
-////            if ( ix < 0 ) {
-////
-////                throw new IllegalArgumentException(
-////                        "SpecialSlice.Divider.setDivider:  ix=" + ix + " is invalid (must be non-negative)"
-////                );
-////
-////            }
-//
-//            _segmentMap.put( dividerSegment.getIx(), dividerSegment );
-//
-//            FlexiGridConstraintsTable constraintsTable = new FlexiGridConstraintsTable(
-//                    getOrientation().isRowOrientation()
-//                    ?
-//                    new FlexiGridBasicConstraint( "rd" + dividerSegment.getIx(), -1, dividerSegment.getIx() )
-//                            :
-//                    new FlexiGridBasicConstraint( "cd" + dividerSegment.getIx(), dividerSegment.getIx(), -1 ),
-//                    dividerSegment
-//            );
-//
-//            setComponent(
-//                    0,
-//                    new FlexiGridItemInfo(
-//                            "s" + ix + "c1",
-//                            -1,
-//                            0,
-//                            new JLabel( "s" + ix + "c1" ),
-//                            constraintsTable
-//                    )
-//            );
+            ObtuseUtil.doNothing();
 
         }
 

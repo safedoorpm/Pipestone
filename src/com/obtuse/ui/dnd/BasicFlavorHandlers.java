@@ -103,7 +103,6 @@ public class BasicFlavorHandlers {
 
     }
 
-
     public abstract static class SimpleImageDataFlavorHandler extends AbstractDataFlavorHandler {
 
         public SimpleImageDataFlavorHandler() {

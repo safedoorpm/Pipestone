@@ -7,6 +7,7 @@ package com.obtuse.ui.layout.linear;
 
 import com.obtuse.ui.layout.ConstraintTuple;
 import com.obtuse.ui.layout.LinearOrientation;
+import com.obtuse.util.ObtuseUtil;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
@@ -97,6 +98,8 @@ public class LinearContainer3 extends JPanel implements LinearContainer {
 
     public void doingLayout() {
 
+        ObtuseUtil.doNothing();
+
     }
 
     /**
@@ -104,6 +107,8 @@ public class LinearContainer3 extends JPanel implements LinearContainer {
      */
 
     public void doneLayout() {
+
+        ObtuseUtil.doNothing();
 
     }
 

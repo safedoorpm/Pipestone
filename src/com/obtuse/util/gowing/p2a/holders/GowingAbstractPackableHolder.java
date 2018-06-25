@@ -164,7 +164,6 @@ public abstract class GowingAbstractPackableHolder implements GowingPackableThin
 
         }
 
-
         return shortValue.shortValue();
 
     }

@@ -20,7 +20,6 @@ import java.awt.*;
 
 public class FlexiGridDivider extends JPanel {
 
-
     private final DividerStyle _dividerStyle;
     private final FlexiGridPanelModel.Orientation _orientation;
     private final int _slotIndex;
@@ -67,8 +66,6 @@ public class FlexiGridDivider extends JPanel {
                     ).setHorizontalJustification( FlexiGridBasicConstraint.HJustification.CENTER )
              .setVerticalJustification( FlexiGridBasicConstraint.VJustification.CENTER );
 
-//            Logger.logMsg( "" + this + " has row-oriented constraint " + rval );
-
         } else {
 
             rval = new FlexiGridBasicConstraint(
@@ -77,8 +74,6 @@ public class FlexiGridDivider extends JPanel {
                     getSlotIndex()
                     ).setHorizontalJustification( FlexiGridBasicConstraint.HJustification.CENTER )
              .setVerticalJustification( FlexiGridBasicConstraint.VJustification.CENTER );
-
-//            Logger.logMsg( "" + this + " has column-oriented constraint " + rval );
 
         }
 
@@ -102,8 +97,6 @@ public class FlexiGridDivider extends JPanel {
 
     public int getSlotIndex() {
 
-//        return _slotIndex < 0 ? 0 : _slotIndex;
-
         return _slotIndex;
 
     }
@@ -125,7 +118,6 @@ public class FlexiGridDivider extends JPanel {
                 breadth = 1;
 
                 break;
-
 
             case DOUBLE_LINE:
 
@@ -151,22 +143,17 @@ public class FlexiGridDivider extends JPanel {
 
         }
 
-//        Logger.logMsg( "drawing divider " + this );
-
         Graphics gCopy = g.create();
 
         if ( isOpaque() ) {
 
             Color background = getBackground();
-//            Logger.logMsg( "background is " + background );
             gCopy.setColor( background );
             gCopy.fillRect( 0, 0, getWidth(), getHeight() );
 
         }
 
-//        Color foreground = isFullLength() ? Color.CYAN : getForeground();
         Color foreground = getForeground();
-//        Logger.logMsg( "foreground is " + foreground );
         gCopy.setColor( foreground );
         switch ( getDividerStyle() ) {
 
@@ -265,8 +252,6 @@ public class FlexiGridDivider extends JPanel {
     public void setBounds( int x, int y, int w, int h ) {
 
         super.setBounds( x, y, w, h );
-
-//        Logger.logMsg( "" + this + generateConstraint( 0 ) + " is " + ObtuseUtil.fBounds( x, y, w, h ) );
 
         ObtuseUtil.doNothing();
 

@@ -73,8 +73,6 @@ public class FlexiGridLayoutManager implements LayoutManager2 {
 
         }
 
-//        logMaybe( "addLayoutComponent:  removing constraint for " + LinearLayoutUtil.describeComponent( comp ) + " - " + _constraints.get( comp ) );
-
         _constraints.remove( comp );
         FlexiGridConstraintsTable componentConstraints;
 
@@ -118,8 +116,6 @@ public class FlexiGridLayoutManager implements LayoutManager2 {
             copy.put( key, value );
 
         }
-
-//        logMaybe( "addLayoutComponent:    adding constraint for " + LinearLayoutUtil.describeComponent( comp ) + " - " + copy );
 
         _constraints.put( comp, copy );
 
@@ -357,8 +353,6 @@ public class FlexiGridLayoutManager implements LayoutManager2 {
 
         } else {
 
-//            logMaybe( "removeLayoutComponent:  removing constraint for " + LinearLayoutUtil.describeComponent( comp ) + " - " + _constraints.get( comp ) );
-
             _constraints.remove( comp );
 
         }
@@ -425,8 +419,6 @@ public class FlexiGridLayoutManager implements LayoutManager2 {
 
         }
 
-//        if ( isMsgTraceMode() ) {
-
         Rectangle bounds = new Rectangle( 0, 0, containerWidth, containerHeight );
         logMaybe( "FlexiGridLayoutManager.layoutContainer:  container will be " + ObtuseUtil.fBounds( bounds ) + ", insets=" + _target.getInsets() );
 
@@ -435,8 +427,6 @@ public class FlexiGridLayoutManager implements LayoutManager2 {
         logMaybe( "FlexiGridLayoutManager.layoutContainer:  dimensions including insets will be " + ObtuseUtil.fDim( dimensions ) );
 
         logMaybe( "FlexiGridLayoutManager.layoutContainer:  dimensions actually are " + ObtuseUtil.fBounds( _target.getBounds() ) );
-
-//        }
 
         ObtuseUtil.doNothing();
 

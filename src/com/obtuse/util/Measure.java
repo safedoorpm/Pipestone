@@ -417,7 +417,6 @@ public class Measure implements Closeable {
 
     }
 
-
     public static double adjustMean( final String categoryName, final double mean ) {
 
         if ( !Measure.s_globallyEnabled || categoryName.startsWith( "<" ) ) {
@@ -548,7 +547,6 @@ public class Measure implements Closeable {
                         + " * " +
                         String.format( "%14.3f/s", ( Measure.adjustMean( categoryName, stats.mean() ) == 0 ? Double.POSITIVE_INFINITY : 1 / Measure.adjustMean( categoryName, stats.mean() ) ) )
                 );
-
 
             }
 

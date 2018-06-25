@@ -214,17 +214,6 @@ public class StdGowingPacker implements GowingPacker {
     public GowingInstanceId queuePackableEntity( @Nullable final GowingPackable entity ) {
 
         return queuePackableEntity( null, entity );
-//        if ( entity == null ) {
-//
-//            return null;
-//
-//        }
-//
-//        if ( isVerbose() ) Logger.logMsg( "queuing " + entity.getInstanceId() + " / " + entity.getInstanceId().getTypeName() );
-//
-//        _packingContext.rememberPackableEntity( null, entity );
-//
-//        return entity.getInstanceId();
 
     }
 
@@ -416,7 +405,6 @@ public class StdGowingPacker implements GowingPacker {
         emit( name.getName() );
 
         ObtuseUtil.doNothing();
-//        _writer.print( name );
 
     }
 

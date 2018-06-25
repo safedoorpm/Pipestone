@@ -23,7 +23,6 @@ public class Ix<T> implements IxInterface<T> {
 
     public interface IxFactory<U> {
 
-
         IxInterface<U> createInstance( final int ix, final @NotNull U item );
 
     }

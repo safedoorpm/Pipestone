@@ -297,7 +297,6 @@ public class TeeOutputStream extends OutputStream {
 
             _teeOutputStream.write( b, off, len );
 
-
         } catch ( IOException e ) {
 
             throw new IOException( "Tee-" + e.getMessage(), e );
@@ -320,7 +319,6 @@ public class TeeOutputStream extends OutputStream {
         try {
 
             _teeOutputStream.close();
-
 
         } catch ( IOException e ) {
 

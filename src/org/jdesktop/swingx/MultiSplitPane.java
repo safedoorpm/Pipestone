@@ -346,7 +346,6 @@ public class MultiSplitPane extends JPanel {
         setCursor( Cursor.getPredefinedCursor( cursorID ) );
     }
 
-
     private class InputHandler extends MouseInputAdapter implements KeyListener {
 
         public void mouseEntered( MouseEvent e ) {

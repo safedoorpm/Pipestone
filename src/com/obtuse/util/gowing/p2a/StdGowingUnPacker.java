@@ -560,7 +560,6 @@ public class StdGowingUnPacker implements GowingUnPacker {
 
                         );
 
-
                     }
 
                     entity = factory.createEntity( this, bundle, er );

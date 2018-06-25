@@ -47,8 +47,6 @@ public class GowingStringHolder extends GowingAbstractPackableHolder {
 
             }
 
-//            packer2.emit( (String)value );
-
         } else {
 
             packer2.emitNull();

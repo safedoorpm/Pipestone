@@ -258,6 +258,8 @@ public class GenericCsvParser extends CSVParser implements Iterable<SortedMap<St
     @Override
     public void forEach( final Consumer<? super SortedMap<String, String>> action ) {
 
+        ObtuseUtil.doNothing();
+
     }
 
     @Override

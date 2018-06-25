@@ -146,7 +146,6 @@ public class FlexiGridTesting {
                 boolean diagonally = ObtuseUtil.never();
                 FlexiGridContainer f2 = new FlexiGridContainer1( "f2", msgTraceMode, useLayoutTracer );
                 f2.setBorder( BorderFactory.createLineBorder( Color.BLUE ) );
-//                f2.setPreferredSize( new Dimension( 500, 45 ) );
                 for ( int cc = 0; cc < 20; cc += 2 ) {
 
                     Component thing = cc == 0 ? new JButton( "Button" ) : new JLabel( VerbsList.pickVerb() );
@@ -181,8 +180,6 @@ public class FlexiGridTesting {
                             FlexiGridPanelModel.Orientation.COLUMN,
                             cc + 1,
                             cc == 6
-//                            cc == 0 ? cc + 1 : -1
-//                            cc + 1
                     );
 
                     divider.setForeground( cc == 6 ? Color.RED : Color.BLUE );
@@ -271,7 +268,6 @@ public class FlexiGridTesting {
                 throw new IllegalArgumentException( "FlexiGridTesting.MyButtonActionListener.myActionPerformed:  button not set" );
 
             }
-
 
             FlexiGridModelSlice theButtonSlice = makeButtonSlice(
                     "Add here",

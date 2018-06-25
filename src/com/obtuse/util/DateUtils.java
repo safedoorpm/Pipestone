@@ -594,7 +594,6 @@ public class DateUtils {
 
     }
 
-
     public static String formatYYYY_MM_DD_HH_MM( final ImmutableDate dateTime ) {
 
         return DateUtils.formatYYYY_MM_DD_HH_MM( (Date)dateTime );
