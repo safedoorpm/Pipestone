@@ -5,8 +5,11 @@
 
 package com.obtuse.ui;
 
+import com.obtuse.exceptions.HowDidWeGetHereError;
+import com.obtuse.util.Logger;
 import com.obtuse.util.ObtuseUtil;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
@@ -23,6 +26,8 @@ import java.awt.*;
 public abstract class AutoSizingValidatedJTextField extends ValidatedJTextField {
 
     public static final int ABSOLUTE_MINIMUM_WIDTH = 25;
+
+    private static JTextField s_interestingField = null;
 
     private final int _minWidth;
     private final int _maxWidth;
@@ -63,7 +68,7 @@ public abstract class AutoSizingValidatedJTextField extends ValidatedJTextField 
 
     /**
      Configure an arbitrary existing {@link JTextField} to do the auto-size adjusting trick.
-     <p>This variant of {@link #configureAutoSizeAdjustingJTextField(JTextField)} uses the specified {@code minWidth} and {@code maxWidth}
+     <p>This variant of {@code configureAutoSizeAdjustingJTextField} uses the specified {@code minWidth} and {@code maxWidth}
      parameters to constrain the text field's minimum, preferred and maximum widths as follows:</p>
      <ul>
      <li>the text field's minimum width will be the specified {@code minWidth} value.</li>
@@ -79,6 +84,12 @@ public abstract class AutoSizingValidatedJTextField extends ValidatedJTextField 
     @SuppressWarnings({"unused","UnusedReturnValue"})
     public static <T extends JTextField> T configureAutoSizeAdjustingJTextField( final @NotNull T jtf, final int minWidth, final int maxWidth ) {
 
+        if ( s_interestingField == jtf ) {
+
+            ObtuseUtil.doNothing();
+
+        }
+
         jtf.setMinimumSize( new Dimension( minWidth, jtf.getMinimumSize().height ) );
         jtf.setMaximumSize( new Dimension( maxWidth, jtf.getMaximumSize().height ) );
         jtf.setPreferredSize( new Dimension( Math.min( Math.max( minWidth, jtf.getPreferredSize().width ), maxWidth ), jtf.getPreferredSize().height ) );
@@ -91,13 +102,19 @@ public abstract class AutoSizingValidatedJTextField extends ValidatedJTextField 
 
     /**
      Configure an arbitrary existing {@link JTextField} to do the auto-size adjusting trick.
-     <p>This variant of {@link #configureAutoSizeAdjustingJTextField(JTextField,int,int)} uses the text field's
+     <p>This variant of {@code configureAutoSizeAdjustingJTextField} uses the text field's
      minimum size's width and maximum size's width to determine the minimum and maximum width that the text field should be constrained to.</p>
      @param jtf the textfield to teach the auto-size adjusting trick to.
      */
 
     @SuppressWarnings({"unused","UnusedReturnValue"})
     public static <T extends JTextField> T configureAutoSizeAdjustingJTextField( final @NotNull T jtf ) {
+
+        if ( s_interestingField == jtf ) {
+
+            ObtuseUtil.doNothing();
+
+        }
 
         jtf.getDocument().addDocumentListener( new AutoAdjustingTextFieldWidthListener( jtf ) );
 
@@ -120,6 +137,31 @@ public abstract class AutoSizingValidatedJTextField extends ValidatedJTextField 
     public String toString() {
 
         return "AutoSizingValidatedJTextField( minWidth=" + getMinWidth() + ", maxWidth=" + getMaxWidth() + " )";
+
+    }
+
+    public static void setInterestingField( final @Nullable JTextField interestingField ) {
+
+        if ( s_interestingField != null ) {
+
+            throw new HowDidWeGetHereError( "AutoSizingValidatedJTextField.setInterestingField:  a field is already interesting - " + s_interestingField );
+
+        }
+
+        s_interestingField = interestingField;
+
+    }
+
+    @Nullable
+    public static JTextField getInterestingField() {
+
+        return s_interestingField;
+
+    }
+
+    public static boolean hasInterestingField() {
+
+        return s_interestingField != null;
 
     }
 
@@ -186,6 +228,12 @@ public abstract class AutoSizingValidatedJTextField extends ValidatedJTextField 
 
     public static void maybeGrowTextField( final @NotNull JTextField tf ) {
 
+        if ( s_interestingField == tf ) {
+
+            ObtuseUtil.doNothing();
+
+        }
+
         Graphics graphics = tf.getGraphics();
         if ( graphics == null ) {
 
@@ -193,12 +241,19 @@ public abstract class AutoSizingValidatedJTextField extends ValidatedJTextField 
 
         }
 
+        if ( s_interestingField == tf ) {
+
+            ObtuseUtil.doNothing();
+
+        }
+
         FontMetrics fontMetrics = graphics.getFontMetrics();
         int textWidth = fontMetrics.stringWidth( tf.getText() );
+
         Dimension curPreferredSize = new Dimension( tf.getPreferredSize() );
         Dimension maxSize = tf.getMaximumSize();
         boolean changed = false;
-        while ( textWidth > curPreferredSize.width - 25 && curPreferredSize.width < maxSize.width ) {
+        while ( textWidth > curPreferredSize.width - 25 && curPreferredSize.width <= maxSize.width ) {
 
             curPreferredSize.width += 25;
             changed = true;
@@ -207,19 +262,27 @@ public abstract class AutoSizingValidatedJTextField extends ValidatedJTextField 
 
         if ( changed ) {
 
+            Logger.logMsg( "grew to " + ObtuseUtil.fDim( curPreferredSize ) );
+
             tf.setPreferredSize( curPreferredSize );
 
-            if ( tf.getParent() instanceof JPanel ) {
+//            if ( !( tf.getParent() instanceof JPanel ) ) {
 
                 tf.getParent().revalidate();
 
-            }
+//            }
 
         }
 
     }
 
     public static void maybeShrinkTextField( final JTextField tf ) {
+
+        if ( s_interestingField == tf ) {
+
+            ObtuseUtil.doNothing();
+
+        }
 
         Graphics graphics = tf.getGraphics();
         if ( graphics == null ) {
@@ -233,7 +296,7 @@ public abstract class AutoSizingValidatedJTextField extends ValidatedJTextField 
         Dimension curPreferredSize = new Dimension( tf.getPreferredSize() );
         Dimension minSize = tf.getMinimumSize();
         boolean changed = false;
-        while ( textWidth < curPreferredSize.width - 50 && curPreferredSize.width > minSize.width ) {
+        while ( textWidth <= curPreferredSize.width - 25 && curPreferredSize.width - 25 >= minSize.width ) {
 
             curPreferredSize.width -= 25;
             changed = true;
@@ -242,13 +305,15 @@ public abstract class AutoSizingValidatedJTextField extends ValidatedJTextField 
 
         if ( changed ) {
 
+            Logger.logMsg( "shrank to " + ObtuseUtil.fDim( curPreferredSize ) );
+
             tf.setPreferredSize( curPreferredSize );
 
-            if ( tf.getParent() instanceof JPanel ) {
+//            if ( !( tf.getParent() instanceof JPanel ) ) {
 
                 tf.getParent().revalidate();
 
-            }
+//            }
 
         }
 

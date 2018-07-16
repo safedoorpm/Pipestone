@@ -15,16 +15,16 @@ import java.awt.event.MouseListener;
  */
 
 @SuppressWarnings( { "UnusedDeclaration" } )
-public class ButtonInfo {
+public class ImageButton {
 
     private final JLabel _button;
     private final ImageIcon _pressedIcon;
     private final ImageIcon _unpressedIcon;
     private final Runnable _action;
     private static final float DEFAULT_DARKENING_FACTOR = 0.8f;
-    private static float s_defaultDarkeningFactor = ButtonInfo.DEFAULT_DARKENING_FACTOR;
+    private static float s_defaultDarkeningFactor = ImageButton.DEFAULT_DARKENING_FACTOR;
 
-    private ButtonInfo( final JLabel button, final ImageIcon pressedIcon, final ImageIcon unpressedIcon, final Runnable action ) {
+    private ImageButton( final JLabel button, final ImageIcon pressedIcon, final ImageIcon unpressedIcon, final Runnable action ) {
         super();
 
         _button = button;
@@ -36,13 +36,13 @@ public class ButtonInfo {
 
     public static void setDefaultDarkeningFactor( final float factor ) {
 
-        ButtonInfo.s_defaultDarkeningFactor = factor;
+        ImageButton.s_defaultDarkeningFactor = factor;
 
     }
 
     public static float getDefaultDarkeningFactor() {
 
-        return ButtonInfo.s_defaultDarkeningFactor;
+        return ImageButton.s_defaultDarkeningFactor;
 
     }
 
@@ -70,26 +70,26 @@ public class ButtonInfo {
 
     }
 
-    public static ButtonInfo makeButtonLabel(
-            final ButtonOwner buttonOwner,
+    public static ImageButton makeImageButton(
+            final ImageButtonOwner imageButtonOwner,
             final JLabel button,
             final Runnable action,
             final String buttonName
     ) {
 
-        return ButtonInfo.makeButtonLabel(
-                buttonOwner,
+        return ImageButton.makeImageButton(
+                imageButtonOwner,
                 button,
                 action,
                 buttonName,
                 ImageIconUtils.getDefaultResourceBaseDirectory(),
-                ButtonInfo.s_defaultDarkeningFactor
+                ImageButton.s_defaultDarkeningFactor
         );
 
     }
 
-    public static ButtonInfo makeButtonLabel(
-            final ButtonOwner buttonOwner,
+    public static ImageButton makeImageButton(
+            final ImageButtonOwner imageButtonOwner,
             final JLabel button,
             final Runnable action,
             final String buttonName,
@@ -109,12 +109,12 @@ public class ButtonInfo {
                 ImageIconUtils.changeImageBrightness( unpressedIcon.getImage(), darkeningFactor )
         );
 
-        return ButtonInfo.makeButtonLabel( buttonOwner, button, action, unpressedIcon, pressedIcon );
+        return ImageButton.makeImageButton( imageButtonOwner, button, action, unpressedIcon, pressedIcon );
 
     }
 
-    public static ButtonInfo makeButtonLabel(
-            final ButtonOwner buttonOwner,
+    public static ImageButton makeImageButton(
+            final ImageButtonOwner imageButtonOwner,
             final JLabel button,
             final Runnable action,
             final ImageIcon unpressedIcon,
@@ -124,7 +124,7 @@ public class ButtonInfo {
         int width = Math.max( pressedIcon.getIconWidth(), unpressedIcon.getIconWidth() );
         int height = Math.max( pressedIcon.getIconHeight(), unpressedIcon.getIconHeight() );
 
-        final ButtonInfo bi = new ButtonInfo( button, pressedIcon, unpressedIcon, action );
+        final ImageButton bi = new ImageButton( button, pressedIcon, unpressedIcon, action );
 
         button.addMouseListener(
                 new MouseListener() {
@@ -133,7 +133,7 @@ public class ButtonInfo {
                         if ( bi.getButton().isEnabled() ) {
 
                             bi.getAction().run();
-                            buttonOwner.setButtonStates();
+                            imageButtonOwner.setButtonStates();
 
                         }
 
@@ -163,7 +163,7 @@ public class ButtonInfo {
 
                         if ( bi.getButton().isEnabled() ) {
 
-                            buttonOwner.setCursor( Cursor.getPredefinedCursor( Cursor.HAND_CURSOR ) );
+                            imageButtonOwner.setCursor( Cursor.getPredefinedCursor( Cursor.HAND_CURSOR ) );
 
                         }
 
@@ -174,7 +174,7 @@ public class ButtonInfo {
                         if ( bi.getButton().isEnabled() ) {
 
                             bi.getButton().setIcon( bi.getUnpressedIcon() );
-                            buttonOwner.setCursor( Cursor.getDefaultCursor() );
+                            imageButtonOwner.setCursor( Cursor.getDefaultCursor() );
 
                         }
 
@@ -189,6 +189,7 @@ public class ButtonInfo {
         button.setMaximumSize( new Dimension( width, height ) );
 
         return bi;
+
     }
 
 }

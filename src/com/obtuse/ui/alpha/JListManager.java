@@ -5,8 +5,8 @@
 package com.obtuse.ui.alpha;
 
 import com.obtuse.ui.LogsWindow;
-import com.obtuse.util.ButtonInfo;
-import com.obtuse.util.ButtonOwner;
+import com.obtuse.util.ImageButton;
+import com.obtuse.util.ImageButtonOwner;
 import com.obtuse.util.Logger;
 
 import javax.swing.*;
@@ -25,7 +25,7 @@ import java.util.List;
  */
 
 @SuppressWarnings({ "UnusedDeclaration", "unchecked" })
-public abstract class JListManager implements ButtonOwner {
+public abstract class JListManager implements ImageButtonOwner {
 
     public interface ListElementFactory {
 
@@ -366,27 +366,27 @@ public abstract class JListManager implements ButtonOwner {
         private boolean _addButtonIncluded = true;
         private JLabel     _addButton = null;
         private String     _addButtonName = null;
-        private ButtonInfo _addButtonInfo = null;
+        private ImageButton _addImageButton = null;
 
         private boolean _deleteButtonIncluded = true;
         private JLabel     _deleteButton = null;
         private String     _deleteButtonName = null;
-        private ButtonInfo _deleteButtonInfo = null;
+        private ImageButton _deleteImageButton = null;
 
         private boolean _moveUpButtonIncluded = true;
         private JLabel _moveUpButton = null;
         private String _moveUpButtonName = null;
-        private ButtonInfo _moveUpButtonInfo = null;
+        private ImageButton _moveUpImageButton = null;
 
         private boolean _moveDownButtonIncluded = true;
         private JLabel _moveDownButton = null;
         private String _moveDownButtonName = null;
-        private ButtonInfo _moveDownButtonInfo = null;
+        private ImageButton _moveDownImageButton = null;
 
         private boolean _duplicateButtonIncluded = true;
         private JLabel     _duplicateButton = null;
         private String     _duplicateButtonName = null;
-        private ButtonInfo _duplicateButtonInfo = null;
+        private ImageButton _duplicateImageButton = null;
 
         private boolean _multipleDeleteAllowed    = false;
         private boolean _multipleDuplicateAllowed = false;
@@ -443,13 +443,13 @@ public abstract class JListManager implements ButtonOwner {
                     }
 
                     _addButton = new JLabel();
-                    _addButtonInfo = ButtonInfo.makeButtonLabel(
+                    _addImageButton = ImageButton.makeImageButton(
                             JListManager.this,
                             _addButton,
                             JListManager.this::doAddButton,
                             _addButtonName,
                             _resourceBaseDirectory,
-                            ButtonInfo.getDefaultDarkeningFactor()
+                            ImageButton.getDefaultDarkeningFactor()
                     );
 
                 }
@@ -472,13 +472,13 @@ public abstract class JListManager implements ButtonOwner {
                     }
 
                     _deleteButton = new JLabel();
-                    _deleteButtonInfo = ButtonInfo.makeButtonLabel(
+                    _deleteImageButton = ImageButton.makeImageButton(
                             JListManager.this,
                             _deleteButton,
-			    JListManager.this::doDeleteButton,
+                            JListManager.this::doDeleteButton,
                             _deleteButtonName,
                             _resourceBaseDirectory,
-                            ButtonInfo.getDefaultDarkeningFactor()
+                            ImageButton.getDefaultDarkeningFactor()
                     );
 
                 }
@@ -505,13 +505,13 @@ public abstract class JListManager implements ButtonOwner {
                     }
 
                     _moveUpButton = new JLabel();
-                    _moveUpButtonInfo = ButtonInfo.makeButtonLabel(
+                    _moveUpImageButton = ImageButton.makeImageButton(
                             JListManager.this,
                             _moveUpButton,
-			    JListManager.this::doMoveUpButton,
+                            JListManager.this::doMoveUpButton,
                             _moveUpButtonName,
                             _resourceBaseDirectory,
-                            ButtonInfo.getDefaultDarkeningFactor()
+                            ImageButton.getDefaultDarkeningFactor()
                     );
 
                 }
@@ -538,13 +538,13 @@ public abstract class JListManager implements ButtonOwner {
                     }
 
                     _moveDownButton = new JLabel();
-                    _moveDownButtonInfo = ButtonInfo.makeButtonLabel(
+                    _moveDownImageButton = ImageButton.makeImageButton(
                             JListManager.this,
                             _moveDownButton,
-			    JListManager.this::doMoveDownButton,
+                            JListManager.this::doMoveDownButton,
                             _moveDownButtonName,
                             _resourceBaseDirectory,
-                            ButtonInfo.getDefaultDarkeningFactor()
+                            ImageButton.getDefaultDarkeningFactor()
                     );
 
                 }
@@ -579,13 +579,13 @@ public abstract class JListManager implements ButtonOwner {
                     }
 
                     _duplicateButton = new JLabel();
-                    _duplicateButtonInfo = ButtonInfo.makeButtonLabel(
+                    _duplicateImageButton = ImageButton.makeImageButton(
                             JListManager.this,
                             _duplicateButton,
-			    JListManager.this::doDuplicateButton,
+                            JListManager.this::doDuplicateButton,
                             _duplicateButtonName,
                             _resourceBaseDirectory,
-                            ButtonInfo.getDefaultDarkeningFactor()
+                            ImageButton.getDefaultDarkeningFactor()
                     );
 
                 }
@@ -931,13 +931,13 @@ public abstract class JListManager implements ButtonOwner {
         }
 
         /**
-         * Get the 'add' button's {@link com.obtuse.util.ButtonInfo} instance.
-         * @return the 'add' button's {@link com.obtuse.util.ButtonInfo} instance.
+         * Get the 'add' button's {@link ImageButton} instance.
+         * @return the 'add' button's {@link ImageButton} instance.
          */
 
-        public ButtonInfo getAddButtonInfo() {
+        public ImageButton getAddImageButton() {
 
-            return _addButtonInfo;
+            return _addImageButton;
 
         }
 
@@ -962,13 +962,13 @@ public abstract class JListManager implements ButtonOwner {
         }
 
         /**
-         * Get the 'delete' button's {@link com.obtuse.util.ButtonInfo} instance.
-         * @return the 'delete' button's {@link com.obtuse.util.ButtonInfo} instance.
+         * Get the 'delete' button's {@link ImageButton} instance.
+         * @return the 'delete' button's {@link ImageButton} instance.
          */
 
-        public ButtonInfo getDeleteButtonInfo() {
+        public ImageButton getDeleteImageButton() {
 
-            return _deleteButtonInfo;
+            return _deleteImageButton;
 
         }
 
@@ -993,13 +993,13 @@ public abstract class JListManager implements ButtonOwner {
         }
 
         /**
-         * Get the 'move up' button's {@link com.obtuse.util.ButtonInfo} instance.
-         * @return the 'move up' button's {@link com.obtuse.util.ButtonInfo} instance.
+         * Get the 'move up' button's {@link ImageButton} instance.
+         * @return the 'move up' button's {@link ImageButton} instance.
          */
 
-        public ButtonInfo getMoveUpButtonInfo() {
+        public ImageButton getMoveUpImageButton() {
 
-            return _moveUpButtonInfo;
+            return _moveUpImageButton;
 
         }
 
@@ -1024,13 +1024,13 @@ public abstract class JListManager implements ButtonOwner {
         }
 
         /**
-         * Get the 'move down' button's {@link com.obtuse.util.ButtonInfo} instance.
-         * @return the 'move down' button's {@link com.obtuse.util.ButtonInfo} instance.
+         * Get the 'move down' button's {@link ImageButton} instance.
+         * @return the 'move down' button's {@link ImageButton} instance.
          */
 
-        public ButtonInfo getMoveDownButtonInfo() {
+        public ImageButton getMoveDownImageButton() {
 
-            return _moveDownButtonInfo;
+            return _moveDownImageButton;
 
         }
 
@@ -1055,13 +1055,13 @@ public abstract class JListManager implements ButtonOwner {
         }
 
         /**
-         * Get the 'duplicate' button's {@link com.obtuse.util.ButtonInfo} instance.
-         * @return the 'duplicate' button's {@link com.obtuse.util.ButtonInfo} instance.
+         * Get the 'duplicate' button's {@link ImageButton} instance.
+         * @return the 'duplicate' button's {@link ImageButton} instance.
          */
 
-        public ButtonInfo getDuplicateButtonInfo() {
+        public ImageButton getDuplicateImageButton() {
 
-            return _duplicateButtonInfo;
+            return _duplicateImageButton;
 
         }
 

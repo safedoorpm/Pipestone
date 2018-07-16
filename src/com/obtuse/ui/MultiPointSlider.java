@@ -25,7 +25,7 @@ import java.util.LinkedList;
 
 /**
  * Along the lines of {@link javax.swing.JSlider} but capable of being configured to use
- * considerably less screen real estate and supports more than one slider point.
+ * considerably less screen real estate and (may eventually) support more than one slider point.
  */
 
 @SuppressWarnings("UnusedDeclaration")

@@ -579,7 +579,33 @@ public class LinearLayoutUtil {
 
         } else if ( component instanceof JLabel ) {
 
-            return component.getClass().getCanonicalName() + "( " + ObtuseUtil.enquoteToJavaString( ((JLabel)component).getText() ) + " )";
+            String text = ( (JLabel)component ).getText();
+            Icon icon = ( (JLabel)component ).getIcon();
+            StringBuilder sb = new StringBuilder();
+            sb.append( component.getClass().getCanonicalName() ).append( "(" );
+            String comma = "";
+            if ( text != null ) {
+
+                sb.append( comma )
+                  .append( " text=" )
+                  .append( ObtuseUtil.enquoteToJavaString( text ) );
+                comma = ",";
+
+            }
+            if ( icon != null ) {
+
+                sb.append( comma )
+                  .append( " icon=" )
+                  .append( ObtuseUtil.enquoteJavaObject( icon ) );
+                comma = ",";
+
+            }
+
+            sb.append( " )" );
+
+            return sb.toString();
+
+//            return component.getClass().getCanonicalName() + "( " + ObtuseUtil.enquoteToJavaString( text ) + " )";
 
         } else if ( component instanceof AbstractButton ) {
 
@@ -679,11 +705,13 @@ public class LinearLayoutUtil {
                     }
 
                 }
+
             }
 
             Logger.logMsg( ObtuseUtil.replicate( "  ", depth ) + "]]]" );
 
         }
+
     }
 
     @NotNull
@@ -708,7 +736,9 @@ public class LinearLayoutUtil {
             }
 
         }
+
         return blConstraint;
+
     }
 
     public static void describeQuicklyGuiEntity( final String why, final @Nullable Container container ) {

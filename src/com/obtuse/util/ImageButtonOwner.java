@@ -7,15 +7,15 @@ package com.obtuse.util;
 import java.awt.*;
 
 /**
- * Something that owns a button created using {@link com.obtuse.util.ButtonInfo}.
+ * Something that owns a button created using {@link ImageButton}.
  * <p/>
  */
 
-public interface ButtonOwner {
+public interface ImageButtonOwner {
 
     /**
      * Make sure that the buttons are enabled/disabled as appropriate.
-     * Called by {@link com.obtuse.util.ButtonInfo} after the 'run()' method invocation in response to a button being clicked.
+     * Called by {@link ImageButton} after the 'run()' method invocation in response to a button being clicked.
      */
 
     void setButtonStates();

@@ -5,6 +5,8 @@
 
 package com.obtuse.ui;
 
+import com.obtuse.util.Logger;
+import com.obtuse.util.ObtuseUtil;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -30,7 +32,11 @@ public interface EditValueAdvocate<T> {
      * @param causedByReturnKey true if this store is being triggered by an ActionListener.actionPerformed call; false otherwise.
      */
 
-    void storeNewValue( T newValue, boolean causedByReturnKey );
+    default void storeNewValue( final @NotNull T newValue, final boolean causedByReturnKey ) {
+
+        Logger.logMsg( "call to default storeNewValue( " + ObtuseUtil.enquoteJavaObject( newValue ) + ", " + causedByReturnKey +" ) in instance of " + getClass().getCanonicalName() );
+
+    }
 
     /**
      * Specify the rollback value that this instance should provide upon request.

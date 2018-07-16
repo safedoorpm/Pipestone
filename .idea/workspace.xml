@@ -4,7 +4,16 @@
     <option name="SCOPE_TYPE" value="3" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" name="Default" comment="" />
+    <list default="true" id="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/AutoSizingValidatedJTextField.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/AutoSizingValidatedJTextField.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/EditValueAdvocate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/EditValueAdvocate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/MultiPointSlider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/MultiPointSlider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/alpha/JListManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/alpha/JListManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/layout/linear/LinearLayoutUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/layout/linear/LinearLayoutUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/ButtonInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ImageButton.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/ButtonOwner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ImageButtonOwner.java" afterDir="false" />
+    </list>
     <ignored path="Pipestone.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -124,36 +133,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="StdGowingPackerContext.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/StdGowingPackerContext.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5415">
-              <caret line="294" column="112" selection-start-line="294" selection-start-column="108" selection-end-line="294" selection-end-column="112" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EditValueAdvocate.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/EditValueAdvocate.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="684">
-              <caret line="39" column="19" selection-start-line="39" selection-start-column="19" selection-end-line="39" selection-end-column="19" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ValidatedJTextField.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/ValidatedJTextField.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="380">
-              <caret line="28" column="22" selection-start-line="28" selection-start-column="22" selection-end-line="28" selection-end-column="22" />
-              <folding>
-                <element signature="e#0#3724#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="TracingLayoutManager.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/layout/layoutTracer/TracingLayoutManager.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -175,22 +154,63 @@
       <file leaf-file-name="LogsWindow.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/LogsWindow.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="10127">
-              <caret line="556" column="31" selection-start-line="556" selection-start-column="31" selection-end-line="556" selection-end-column="31" />
+            <state relative-caret-position="9424">
+              <caret line="519" selection-start-line="519" selection-end-line="519" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="JMenuItem.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="JMenuItem.java" pinned="false" current-in-tab="false">
         <entry file="jar:///usr/lib/jvm/java-10-oracle/lib/src.zip!/java.desktop/javax/swing/JMenuItem.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="399">
-              <caret line="57" column="5" lean-forward="true" selection-start-line="57" selection-start-column="5" selection-end-line="57" selection-end-column="5" />
+            <state relative-caret-position="1026">
+              <caret line="90" column="23" selection-start-line="90" selection-start-column="23" selection-end-line="90" selection-end-column="23" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="slider_knob2_13x13.png" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/resources/slider_knob2_13x13.png">
+          <provider selected="true" editor-type-id="images" />
+        </entry>
+      </file>
+      <file leaf-file-name="MultiPointSlider.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/MultiPointSlider.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1121">
+              <caret line="78" column="34" selection-start-line="78" selection-start-column="34" selection-end-line="78" selection-end-column="34" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ImageButton.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/ImageButton.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="119">
+              <caret line="139" column="21" lean-forward="true" selection-start-line="139" selection-start-column="21" selection-end-line="139" selection-end-column="21" />
               <folding>
-                <element signature="e#2478#2505#0" expanded="true" />
-                <element signature="e#12294#12326#0" expanded="true" />
-                <element signature="e#13417#13449#0" expanded="true" />
-                <element signature="e#27431#27458#0" expanded="true" />
+                <element signature="e#276#320#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ImageButtonOwner.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/ImageButtonOwner.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="475">
+              <caret line="27" column="9" selection-start-line="27" selection-start-column="9" selection-end-line="27" selection-end-column="9" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="JListManager.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/alpha/JListManager.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="228">
+              <caret line="27" column="50" selection-start-line="27" selection-start-column="50" selection-end-line="27" selection-end-column="50" />
+              <folding>
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -199,29 +219,11 @@
       <file leaf-file-name="FlexiGridContainer1.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/FlexiGridContainer1.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3496">
-              <caret line="193" column="48" selection-start-line="193" selection-start-column="48" selection-end-line="193" selection-end-column="48" />
+            <state relative-caret-position="3477">
+              <caret line="193" selection-start-line="193" selection-end-line="193" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FlexiGridContainer.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/FlexiGridContainer.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="76">
-              <caret line="6" column="41" selection-start-line="6" selection-start-column="41" selection-end-line="6" selection-end-column="41" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PopupJTableEditor.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/PopupJTableEditor.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="24" column="13" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -239,11 +241,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>target.set</find>
-      <find>logmsg</find>
-      <find>_lm</find>
-      <find>no error</find>
-      <find>no errors</find>
       <find>Logger.logMsg</find>
       <find>error</find>
       <find>fgt</find>
@@ -269,6 +266,11 @@
       <find>finish</find>
       <find>froz</find>
       <find>copy</find>
+      <find>slider_</find>
+      <find>buttonown</find>
+      <find>imagebut</find>
+      <find>setbuttonst</find>
+      <find>setcurs</find>
     </findStrings>
     <replaceStrings>
       <replace>int</replace>
@@ -331,9 +333,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/org/apache/commons/text/similarity/LevenshteinDistance.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/util/LevenshteinDistanceUtil.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/ui/selectors/WrappedButtonSelectorPanel.java" />
         <option value="$PROJECT_DIR$/src/com/obtuse/ui/selectors/SimpleComboBoxChoice.java" />
         <option value="$PROJECT_DIR$/src/com/obtuse/ui/AboutBox.form" />
         <option value="$PROJECT_DIR$/src/com/obtuse/ui/AboutBox.java" />
@@ -382,6 +381,9 @@
         <option value="$PROJECT_DIR$/src/com/obtuse/ui/EditValueAdvocate.java" />
         <option value="$PROJECT_DIR$/src/com/obtuse/ui/layout/layoutTracer/LayoutTracer.java" />
         <option value="$PROJECT_DIR$/src/com/obtuse/ui/layout/layoutTracer/TracingLayoutManager.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/ui/MultiPointSlider.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/util/ImageButtonOwner.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/util/ImageButton.java" />
       </list>
     </option>
   </component>
@@ -405,8 +407,8 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="2678" />
-    <option name="y" value="55" />
+    <option name="x" value="118" />
+    <option name="y" value="62" />
     <option name="width" value="2405" />
     <option name="height" value="1538" />
   </component>
@@ -545,9 +547,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="AndroidView" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -588,6 +587,15 @@
               <item name="com" type="462c0819:PsiDirectoryNode" />
               <item name="obtuse" type="462c0819:PsiDirectoryNode" />
               <item name="ui" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Pipestone" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Pipestone" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="obtuse" type="462c0819:PsiDirectoryNode" />
+              <item name="ui" type="462c0819:PsiDirectoryNode" />
+              <item name="alpha" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Pipestone" type="b2602c69:ProjectViewProjectNode" />
@@ -706,6 +714,15 @@
               <item name="com" type="462c0819:PsiDirectoryNode" />
               <item name="obtuse" type="462c0819:PsiDirectoryNode" />
               <item name="ui" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Pipestone" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Pipestone" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="obtuse" type="462c0819:PsiDirectoryNode" />
+              <item name="ui" type="462c0819:PsiDirectoryNode" />
               <item name="scrollable" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -725,15 +742,6 @@
               <item name="obtuse" type="462c0819:PsiDirectoryNode" />
               <item name="ui" type="462c0819:PsiDirectoryNode" />
               <item name="tableutils" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Pipestone" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Pipestone" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="obtuse" type="462c0819:PsiDirectoryNode" />
-              <item name="ui" type="462c0819:PsiDirectoryNode" />
-              <item name="LogsWindow" type="e9f4de52:FormNode" />
             </path>
             <path>
               <item name="Pipestone" type="b2602c69:ProjectViewProjectNode" />
@@ -890,6 +898,9 @@
           <select />
         </subPane>
       </pane>
+      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1118,8 +1129,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.StdGowingUnPacker" />
         <item itemvalue="Application.StdGowingPacker" />
+        <item itemvalue="Application.StdGowingUnPacker" />
         <item itemvalue="Application.FlexiGridTesting" />
         <item itemvalue="Application.FlexiGridModelTesting" />
         <item itemvalue="Application.RandomCentral" />
@@ -1277,13 +1288,10 @@
       <workItem from="1528306011820" duration="1533000" />
       <workItem from="1528487866669" duration="2747000" />
       <workItem from="1528782838525" duration="1318000" />
-    </task>
-    <task id="LOCAL-00019" summary="Cleaned up Gowing facility (better Javadocs, old commented out removed, etc).&#10;Marginal but useful cleanup on TreeSorter.java class.&#10;New first cut at generalizing the handling of messages (heading towards generalizing the logging window stuff).">
-      <created>1446020494935</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1446020494935</updated>
+      <workItem from="1529903629886" duration="465000" />
+      <workItem from="1530172404888" duration="3754000" />
+      <workItem from="1530302548345" duration="1974000" />
+      <workItem from="1531458814293" duration="1876000" />
     </task>
     <task id="LOCAL-00020" summary="Checkpoint commit prior to doing some experimenting on Niepce.">
       <created>1446354712072</created>
@@ -1621,11 +1629,18 @@
       <option name="project" value="LOCAL" />
       <updated>1528784328131</updated>
     </task>
-    <option name="localTasksCounter" value="68" />
+    <task id="LOCAL-00068" summary="Get rid of essentially all commented out lines.&#10;Cleanup some empty methods (generally, add a call to ObtuseUtil.doNothing()).">
+      <created>1529903768031</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1529903768032</updated>
+    </task>
+    <option name="localTasksCounter" value="69" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="935833000" />
+    <option name="totallyTimeSpent" value="943902000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1637,18 +1652,19 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="119" y="23" width="2405" height="1538" extended-state="0" />
+    <frame x="118" y="62" width="2405" height="1538" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="5" sideWeight="0.67289025" weight="0.118644066" />
       <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.9753381" weight="0.29955947" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info id="Image Layers" order="2" />
       <window_info anchor="right" id="Capture Analysis" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5078684" side_tool="true" weight="0.42062417" />
       <window_info anchor="right" id="Maven Projects" order="8" weight="0.32960624" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Version Control" order="8" sideWeight="0.49213162" visible="true" weight="0.2786177" />
+      <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49213162" weight="0.2800576" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.3277126" />
       <window_info anchor="bottom" id="Terminal" order="14" weight="0.32956952" />
       <window_info id="Capture Tool" order="2" />
@@ -1672,10 +1688,9 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.2498858" />
       <window_info anchor="bottom" id="Problems" order="13" />
       <window_info id="Nl-Palette" order="2" />
-      <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.9753381" weight="0.29955947" />
       <window_info anchor="bottom" id="Application Servers" order="12" />
       <window_info anchor="right" id="IDEtalk" order="7" />
-      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.4985938" weight="0.30309576" />
+      <window_info active="true" anchor="bottom" id="Find" order="1" sideWeight="0.4985938" visible="true" weight="0.30309576" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Memory View" order="9" weight="0.22361112" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -1763,7 +1778,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Almost entirely cleanup." />
     <MESSAGE value="Rework the various ObtuseUtil.enquote... methods.&#10;&#10;Cleanup." />
     <MESSAGE value="More cleanup than I should admit to needing to do (sigh)." />
     <MESSAGE value="Add parsing for more date formats in FlexibleDateTransmogrifier.&#10;Rework the parse method in ObtuseApproximateCalendarDate to use FlexibleDateTransmogrifier for most styles of dates (date ranges don't use it yet).&#10;Cleanup." />
@@ -1788,7 +1802,8 @@
     <MESSAGE value="In Gowing, fix totally broken support for EntityNames and implement and cleanup support for String and EntityName arrays.&#10;&#10;Make the Selector and Alternative classes a more complete 'model' of a combo-box.&#10;&#10;Comment out a bunch of Logger.log{Msg,Err} calls." />
     <MESSAGE value="Fix the handling of row selection in the tableutils classes. Selecting rows by calling CheckBoxRowWrapper.setSelected(boolean) now works in the sense that checkmarks are updated, the notifications occur, etc.&#10;&#10;Make sure that logging messages sent to a LogsWindow are shown in the exact order that they are passed to the window.&#10;&#10;Fix the EntityName de-serialization facility in Gowing.&#10;&#10;Remap entity ids when packing via Gowing. This ensures that two requests to pack the same collection of objects will yield precisely the same save file (ignoring timestamps) if the objects being saved and their values have not changed. This makes it fairly easy to avoid saving a whole series of equivalent auto-save files." />
     <MESSAGE value="Rename the LayoutTracer as the TracingLayoutManager.&#10;Minor cleanup." />
-    <option name="LAST_COMMIT_MESSAGE" value="Rename the LayoutTracer as the TracingLayoutManager.&#10;Minor cleanup." />
+    <MESSAGE value="Get rid of essentially all commented out lines.&#10;Cleanup some empty methods (generally, add a call to ObtuseUtil.doNothing())." />
+    <option name="LAST_COMMIT_MESSAGE" value="Get rid of essentially all commented out lines.&#10;Cleanup some empty methods (generally, add a call to ObtuseUtil.doNothing())." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -2041,19 +2056,19 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/obtuse/ui/layout/linear/LinearLayoutUtil.java</url>
-          <line>617</line>
+          <line>643</line>
           <properties />
           <option name="timeStamp" value="361" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/obtuse/ui/layout/linear/LinearLayoutUtil.java</url>
-          <line>623</line>
+          <line>649</line>
           <properties />
           <option name="timeStamp" value="362" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/obtuse/ui/layout/linear/LinearLayoutUtil.java</url>
-          <line>629</line>
+          <line>655</line>
           <properties />
           <option name="timeStamp" value="363" />
         </line-breakpoint>
@@ -2261,48 +2276,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar:///usr/lib/jvm/java-10-oracle/lib/src.zip!/java.base/java/lang/Class.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="69">
-          <caret line="1543" column="18" selection-start-line="1543" selection-start-column="18" selection-end-line="1543" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/tableutils/CustomizableCellEditor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="596">
-          <caret line="183" column="14" selection-start-line="183" selection-start-column="14" selection-end-line="183" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///usr/lib/jvm/java-10-oracle/lib/src.zip!/java.base/java/lang/ProcessHandle.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="307">
-          <caret line="106" column="12" selection-start-line="106" selection-start-column="12" selection-end-line="106" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/GridArray.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="376">
-          <caret line="76" selection-start-line="76" selection-end-line="76" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///usr/lib/jvm/java-10-oracle/lib/src.zip!/java.desktop/java/awt/event/InputEvent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="307">
-          <caret line="69" column="28" selection-start-line="69" selection-start-column="28" selection-end-line="69" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///usr/lib/jvm/java-10-oracle/lib/src.zip!/java.desktop/javax/swing/BoxLayout.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-5123">
-          <caret line="140" column="13" selection-start-line="140" selection-start-column="13" selection-end-line="140" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///usr/lib/jvm/java-10-oracle/lib/src.zip!/java.desktop/java/awt/Graphics.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1881">
@@ -2554,7 +2527,7 @@
     <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/StdGowingPackerContext.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="5415">
-          <caret line="294" column="112" selection-start-line="294" selection-start-column="108" selection-end-line="294" selection-end-column="112" />
+          <caret line="294" column="26" selection-start-line="294" selection-start-column="26" selection-end-line="294" selection-end-column="26" />
         </state>
       </provider>
     </entry>
@@ -2574,7 +2547,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/ValidatedJTextField.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
+        <state relative-caret-position="418">
           <caret line="28" column="22" selection-start-line="28" selection-start-column="22" selection-end-line="28" selection-end-column="22" />
           <folding>
             <element signature="e#0#3724#0" expanded="true" />
@@ -2591,8 +2564,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/FlexiGridContainer1.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3496">
-          <caret line="193" column="48" selection-start-line="193" selection-start-column="48" selection-end-line="193" selection-end-column="48" />
+        <state relative-caret-position="3477">
+          <caret line="193" selection-start-line="193" selection-end-line="193" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -2615,20 +2588,52 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/LogsWindow.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="10127">
-          <caret line="556" column="31" selection-start-line="556" selection-start-column="31" selection-end-line="556" selection-end-column="31" />
+        <state relative-caret-position="9424">
+          <caret line="519" selection-start-line="519" selection-end-line="519" />
         </state>
       </provider>
     </entry>
     <entry file="jar:///usr/lib/jvm/java-10-oracle/lib/src.zip!/java.desktop/javax/swing/JMenuItem.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="57" column="5" lean-forward="true" selection-start-line="57" selection-start-column="5" selection-end-line="57" selection-end-column="5" />
+        <state relative-caret-position="1026">
+          <caret line="90" column="23" selection-start-line="90" selection-start-column="23" selection-end-line="90" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/resources/Go_back_20x20.png" />
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/resources/slider_knob2_13x13.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/MultiPointSlider.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1121">
+          <caret line="78" column="34" selection-start-line="78" selection-start-column="34" selection-end-line="78" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/alpha/JListManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="27" column="50" selection-start-line="27" selection-start-column="50" selection-end-line="27" selection-end-column="50" />
           <folding>
-            <element signature="e#2478#2505#0" expanded="true" />
-            <element signature="e#12294#12326#0" expanded="true" />
-            <element signature="e#13417#13449#0" expanded="true" />
-            <element signature="e#27431#27458#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/ImageButtonOwner.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="475">
+          <caret line="27" column="9" selection-start-line="27" selection-start-column="9" selection-end-line="27" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/ImageButton.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="139" column="21" lean-forward="true" selection-start-line="139" selection-start-column="21" selection-end-line="139" selection-end-column="21" />
+          <folding>
+            <element signature="e#276#320#0" expanded="true" />
           </folding>
         </state>
       </provider>
