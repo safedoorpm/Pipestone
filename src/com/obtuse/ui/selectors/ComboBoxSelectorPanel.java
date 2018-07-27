@@ -6,6 +6,7 @@
 package com.obtuse.ui.selectors;
 
 import com.obtuse.ui.MyActionListener;
+import com.obtuse.util.ObtuseUtil;
 import com.obtuse.util.UniqueEntity;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -36,8 +37,7 @@ public class ComboBoxSelectorPanel<E,C extends Container> extends SelectorPanel<
     @SuppressWarnings("FieldCanBeLocal") private final JLabel _selectorLabel;
 
     /**
-     @param name the name of this selector panel (becomes the name of the JPanel that we are derived from; intended to be used for debugging purposes).
-     @param selectorLabel the label in front of the {@link JComboBox}{@code <E>}.
+     @param cController this instance's controller.
      @param model the {@link JComboBox}'s {@link DefaultComboBoxModel}{@code <E>}.
      @param firstSelection the {@link Container} that is the initial selection.
      If {@code null} then the first item in the specified {@code model} is assumed to have no {@code Container} associated with it.
@@ -50,8 +50,9 @@ public class ComboBoxSelectorPanel<E,C extends Container> extends SelectorPanel<
      */
 
     public ComboBoxSelectorPanel(
-            final @NotNull String name,
-            final @NotNull String selectorLabel,
+            final @NotNull WrappedComboBoxSelectorPanel.CController<E,C> cController,
+//            final @NotNull String name,
+//            final @NotNull String selectorLabel,
             final @NotNull DefaultComboBoxModel<E> model,
             @Nullable final C firstSelection,
             final @NotNull Function<E,C> componentGetter,
@@ -59,11 +60,11 @@ public class ComboBoxSelectorPanel<E,C extends Container> extends SelectorPanel<
     ) {
         super( "comboBox selector panel " + UniqueEntity.getDefaultIdGenerator().getUniqueId(), firstSelection != null, cacheSelections, componentGetter );
 
-        setName( name );
+        setName( cController.getPanelName() );
 
         _comboBoxModel = model;
 
-        _selectorLabel = new JLabel( selectorLabel + "  " );
+        _selectorLabel = new JLabel( cController.getPickListPrompt() + "  " );
         _comboBoxSelectorPanel.add( _selectorLabel );
 
         _selectorComboBox = new JComboBox<>( _comboBoxModel );
@@ -78,16 +79,24 @@ public class ComboBoxSelectorPanel<E,C extends Container> extends SelectorPanel<
 
                         Optional<C> optComponent = getSelectedComponent( key );
                         optComponent.ifPresent(
-                                new Consumer<C>() {
-                                    @Override
-                                    public void accept( final C c ) {
-
-                                        setPostSelectionPanelContents( "ComboBoxSelectorPanel.actionListener", c );
-
-                                    }
-
-                                }
+                                c -> setPostSelectionPanelContents( "ComboBoxSelectorPanel.actionListener", c )
                         );
+
+//                        // Tell the controller that a choice has been made.
+//                        // This happens after the invocation of the accept function to allow the controller to
+//                        // assume that the choice selection has been completed.
+//
+//                        cController.reportChoice( key );
+
+                        // Tell our listeners.
+
+                        fireSelectionChangedListeners(
+                                "ComboBoxSelectorPanel",
+                                "selection changed to " + ObtuseUtil.enquoteJavaObject( key ),
+                                key
+                        );
+
+//                        fireSelectionChange( "ComboBoxSelectorPanel", key );
 
                         revalidate();
 

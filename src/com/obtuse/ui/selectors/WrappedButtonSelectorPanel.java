@@ -26,7 +26,7 @@ import java.util.function.Function;
 @SuppressWarnings("unused")
 public class WrappedButtonSelectorPanel<CHOICE, PANEL extends JPanel> extends WrappedSelectorPanel<CHOICE> {
 
-    public interface IController<ICCHOICE,ICPANEL> {
+    public interface IController<ICCHOICE,ICPANEL extends JPanel> {
 
         @NotNull
         String getPanelName();
@@ -50,11 +50,13 @@ public class WrappedButtonSelectorPanel<CHOICE, PANEL extends JPanel> extends Wr
 
         ICCHOICE getInitialChoice();
 
+        void reportChoice( @NotNull ICCHOICE choice );
+
     }
 
     private final InnerWrappedButtonSelectorPanel _buttonPanel;
 
-    public class InnerWrappedButtonSelectorPanel extends ButtonSelectorPanel<PANEL> {
+    public class InnerWrappedButtonSelectorPanel extends ButtonSelectorPanel<CHOICE,PANEL> {
 
         private final IController<CHOICE,PANEL> _iController;
 
@@ -68,20 +70,19 @@ public class WrappedButtonSelectorPanel<CHOICE, PANEL extends JPanel> extends Wr
         ) {
 
             super(
-                    iController.getPanelName(),
+                    iController,
+//                    iController.getPanelName(),
                     buttonGroup,
                     buttonPanel,
+                    buttonMap,
                     null,
-                    new Function<AbstractButton, PANEL>() {
-                        @Override
-                        public PANEL apply( final AbstractButton ab ) {
+                    choice -> {
 
-                            CHOICE choice = lookupChoice( ab, buttonMap );
-                            @SuppressWarnings("UnnecessaryLocalVariable") PANEL panel = iController.getPanel( choice );
+//                            @SuppressWarnings("unchecked") CHOICE choice =
+//                                    (CHOICE)ButtonSelectorPanel.lookupChoice( ab, buttonMap );
+                        @SuppressWarnings("UnnecessaryLocalVariable") PANEL panel = iController.getPanel( choice );
 
-                            return panel;
-
-                        }
+                        return panel;
 
                     },
                     false
@@ -210,31 +211,6 @@ public class WrappedButtonSelectorPanel<CHOICE, PANEL extends JPanel> extends Wr
     ) {
 
         return _buttonPanel.notifyCurrentChildChange( oldChoice, newChoice );
-
-    }
-
-    private CHOICE lookupChoice( final AbstractButton ab, final @NotNull SortedMap<CHOICE, JRadioButton> buttonMap ) {
-
-        CHOICE correctChoice = null;
-        for ( CHOICE choice : buttonMap.keySet() ) {
-
-            JRadioButton button = buttonMap.get( choice );
-            if ( button.equals( ab ) ) {
-
-                correctChoice = choice;
-                break;
-
-            }
-
-        }
-
-        if ( correctChoice == null ) {
-
-            throw new IllegalArgumentException( "WrappedButtonSelectorPanel.apply:  cannot find button " + ab + " in the button map" );
-
-        }
-
-        return correctChoice;
 
     }
 

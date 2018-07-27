@@ -16,6 +16,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.Enumeration;
 import java.util.Optional;
+import java.util.SortedMap;
 import java.util.function.Function;
 
 /*
@@ -26,20 +27,28 @@ import java.util.function.Function;
  @param <C> The type of {@link Container} that will appear in the post-selection panel.
  */
 
-public class ButtonSelectorPanel<C extends Container> extends SelectorPanel<AbstractButton,C> {
+public class ButtonSelectorPanel<CHOICE,C extends JPanel> extends SelectorPanel<CHOICE,C> {
 
     private final ButtonGroup _buttonGroup;
     private final JPanel _buttonPanel;
 
     public ButtonSelectorPanel(
-            final @NotNull String name,
+//            final @NotNull String name,
+            final WrappedButtonSelectorPanel.IController<CHOICE,C> iController,
             final @NotNull ButtonGroup buttonGroup,
             final @NotNull JPanel buttonPanel,
-            @Nullable final JComponent firstSelection,
-            final @NotNull Function<AbstractButton,C> componentGetter,
+            final @NotNull SortedMap<CHOICE, JRadioButton> buttonMap,
+            final @Nullable JComponent firstSelection,
+            final @NotNull Function<CHOICE,C> componentGetter,
             final boolean cacheSelections
     ) {
-        super( name + "(BSP #" + UniqueEntity.getDefaultIdGenerator().getUniqueId() + ")", firstSelection != null, cacheSelections, componentGetter );
+        super(
+                iController.getPanelName() +
+                "(BSP #" + UniqueEntity.getDefaultIdGenerator().getUniqueId() + ")",
+                firstSelection != null,
+                cacheSelections,
+                componentGetter
+        );
 
         setName( getOurName() );
 
@@ -63,8 +72,10 @@ public class ButtonSelectorPanel<C extends Container> extends SelectorPanel<Abst
                         protected void myActionPerformed( final ActionEvent actionEvent ) {
 
                             clearPostSelectionPanelContents();
-
-                            Optional<C> optComponent = getSelectedComponent( ab );
+                            @SuppressWarnings("unchecked") CHOICE choice =
+                                    (CHOICE)ButtonSelectorPanel.lookupChoice( ab, buttonMap );
+//                            iController.reportChoice( choice );
+                            Optional<C> optComponent = getSelectedComponent( choice );
 
                             if ( optComponent.isPresent() ) {
 
@@ -74,6 +85,12 @@ public class ButtonSelectorPanel<C extends Container> extends SelectorPanel<Abst
                                 optComponent.get().invalidate();
 
                             }
+
+                            fireSelectionChangedListeners(
+                                    "ButtonSelectorPanel",
+                                    "selection changed to " + ObtuseUtil.enquoteJavaObject( choice ),
+                                    choice
+                            );
 
                         }
 
@@ -105,6 +122,32 @@ public class ButtonSelectorPanel<C extends Container> extends SelectorPanel<Abst
     public JPanel getButtonPanel() {
 
         return _buttonPanel;
+
+    }
+
+    public static Object lookupChoice( final AbstractButton ab, final @NotNull SortedMap<?, JRadioButton> buttonMap ) {
+
+        Object correctChoice = null;
+        for ( Object choice : buttonMap.keySet() ) {
+
+            JRadioButton button = buttonMap.get( choice );
+            if ( button.equals( ab ) ) {
+
+                correctChoice = choice;
+
+                break;
+
+            }
+
+        }
+
+        if ( correctChoice == null ) {
+
+            throw new IllegalArgumentException( "WrappedButtonSelectorPanel.apply:  cannot find button " + ab + " in the button map" );
+
+        }
+
+        return correctChoice;
 
     }
 

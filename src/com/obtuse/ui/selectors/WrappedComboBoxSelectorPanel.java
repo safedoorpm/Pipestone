@@ -13,6 +13,8 @@ import org.jetbrains.annotations.Nullable;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.util.List;
+import java.util.Optional;
 import java.util.Vector;
 import java.util.function.Function;
 
@@ -22,7 +24,8 @@ import java.util.function.Function;
  handle the degenerate cases where there are zero or one alternatives for the human to choose from.</p>
  */
 
-public class WrappedComboBoxSelectorPanel<CHOICE, PANEL extends JPanel> extends WrappedSelectorPanel<CHOICE> {
+public class WrappedComboBoxSelectorPanel<CHOICE, PANEL extends JPanel> extends WrappedSelectorPanel<CHOICE> implements
+                                                                                                             ObtuseListenerProxy<CHOICE> {
 
     public enum DegenerateCase {
         NO_ENTITIES,
@@ -48,8 +51,12 @@ public class WrappedComboBoxSelectorPanel<CHOICE, PANEL extends JPanel> extends 
 
         String getPickListPrompt();
 
+//        void reportChoice( CCCHOICE choice, int w );
+
         @Nullable
         CCCHOICE getInitialChoice();
+
+        boolean isUnspecifiedChoice( final @NotNull CCCHOICE choice );
 
     }
 
@@ -126,6 +133,7 @@ public class WrappedComboBoxSelectorPanel<CHOICE, PANEL extends JPanel> extends 
     }
 
     public WrappedComboBoxSelectorPanel( final @NotNull Container container ) {
+        super();
 
         if ( container instanceof JLabel ) {
 
@@ -150,7 +158,7 @@ public class WrappedComboBoxSelectorPanel<CHOICE, PANEL extends JPanel> extends 
 
     }
 
-    public boolean setSubsidiaryPanelBorder( Border border ){
+    public boolean setSubsidiaryPanelBorder( final Border border ){
 
         if ( _comboPanel != null ) {
 
@@ -171,6 +179,7 @@ public class WrappedComboBoxSelectorPanel<CHOICE, PANEL extends JPanel> extends 
         }
 
         return false;
+
     }
 
     public class InnerWrappedComboBoxSelectorPanel // <ICHOICE, IPANEL extends JPanel>
@@ -181,19 +190,16 @@ public class WrappedComboBoxSelectorPanel<CHOICE, PANEL extends JPanel> extends 
         ) {
 
             super(
-                    _cController.getPanelName() ,
-                    _cController.getPickListPrompt(),
+//                    _cController.getPanelName(),
+//                    _cController.getPickListPrompt(),
+                    _cController,
                     comboBoxModel,
                     null,
-                    new Function<CHOICE, PANEL>() {
-                        @Override
-                        public PANEL apply( final CHOICE choice ) {
+                    choice -> {
 
-                            PANEL panel = _cController.getPanel( choice, false );
+                        PANEL panel = _cController.getPanel( choice, false );
 
-                            return panel;
-
-                        }
+                        return panel;
 
                     },
                     false
@@ -250,6 +256,14 @@ public class WrappedComboBoxSelectorPanel<CHOICE, PANEL extends JPanel> extends 
 
     }
 
+    public CHOICE getCurrentChoice() {
+
+        @SuppressWarnings("unchecked") CHOICE rval = (CHOICE)_comboBoxModel.getSelectedItem();
+
+        return rval;
+
+    }
+
     public boolean notifyCurrentChildChange(
             final @Nullable CHOICE oldChoice,
             final @NotNull CHOICE newChoice
@@ -258,6 +272,61 @@ public class WrappedComboBoxSelectorPanel<CHOICE, PANEL extends JPanel> extends 
         return _comboPanel.notifyCurrentChildChange( oldChoice, newChoice );
 
     }
+
+//    @Override
+//    public void fireListeners( final String who, final CHOICE item ) {
+//
+//        if ( _comboPanel != null ) {
+//
+//            _comboPanel.fireSelectionChangedListeners( who, item );
+//
+//        }
+//
+//    }
+
+    @Override
+    public @NotNull List<SimpleObtuseListenerManager.ListenerInfo> getAllListeners() {
+
+        return _comboPanel == null ? new Vector<>() : _comboPanel.getAllListeners();
+    }
+
+    @Override
+    public @NotNull Optional<SimpleObtuseListenerManager.ListenerInfo> findListenerByName( @NotNull final String name ) {
+
+        return _comboPanel == null ? Optional.empty() : _comboPanel.findListenerByName( name );
+    }
+
+    @Override
+    public boolean removeByName( @NotNull final String name ) {
+
+        return _comboPanel != null && _comboPanel.removeByName( name );
+    }
+
+    public void addSelectionChangedListener(
+            @NotNull final String name,
+            @NotNull final SelectorPanel.SelectionChangedListener actionListener
+    ) {
+
+        if ( _comboPanel != null ) {
+
+            _comboPanel.addSelectionChangedListener( name, actionListener );
+
+        }
+
+    }
+
+//    public void addVetSelectionListener(
+//            @NotNull final String name,
+//            @NotNull final SelectorPanel.VetSelectionListener actionListener
+//    ) {
+//
+//        if ( _comboPanel != null ) {
+//
+//            _comboPanel.addVetSelectionListener( name, actionListener );
+//
+//        }
+//
+//    }
 
     public String toString() {
 

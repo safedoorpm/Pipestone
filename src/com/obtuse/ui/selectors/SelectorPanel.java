@@ -16,6 +16,7 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
@@ -24,9 +25,34 @@ import java.util.function.Function;
  Provide a unified view of the button and combo-box selectors.
  */
 
-public abstract class SelectorPanel<E,C extends Container> extends BorderLayoutPanel {
+public abstract class SelectorPanel<E,C extends Container> extends BorderLayoutPanel implements ObtuseListenerProxy<E> {
+
+    public abstract static class SelectionChangedListener<T> extends ObtuseListener<T> {
+
+        @Override
+        public abstract void myActionPerformed(
+                final @NotNull String who,
+                final @NotNull String why,
+                final @NotNull T dataSource
+        );
+
+    }
+
+//    public abstract static class VetSelectionListener<T> extends ObtuseListener<T> {
+//
+//        @Override
+//        public abstract void myActionPerformed(
+//                final @NotNull String who,
+//                final @NotNull String why,
+//                final @NotNull T dataSource
+//        );
+//
+//    }
+
+    private final SimpleObtuseListenerManager<E> _listenerManager = new SimpleObtuseListenerManager<>();
 
     private final Function<E, C> _componentGetter;
+
     private boolean _isZeroASelection;
 
     private final JPanel _postSelectionPanel;
@@ -180,6 +206,59 @@ public abstract class SelectorPanel<E,C extends Container> extends BorderLayoutP
 
     }
 
+//    protected void fireSelectionChange( final @NotNull String who, final @NotNull E choice ) {
+//
+//        Logger.logMsg( who + ":  selected " + ObtuseUtil.enquoteJavaObject( choice ) );
+//
+//        ObtuseUtil.doNothing();
+//
+//    }
+
     public abstract String toString();
+
+    public void fireSelectionChangedListeners( final String who, final @NotNull String why, final @NotNull E item ) {
+
+        _listenerManager.fireListeners( who, why, item, SelectionChangedListener.class );
+
+    }
+
+    @Override
+    public @NotNull List<SimpleObtuseListenerManager.ListenerInfo> getAllListeners() {
+
+        return _listenerManager.getAllListeners();
+
+    }
+
+    @Override
+    public @NotNull Optional<SimpleObtuseListenerManager.ListenerInfo> findListenerByName( @NotNull final String name ) {
+
+        return _listenerManager.findListenerByName( name );
+
+    }
+
+    @Override
+    public boolean removeByName( @NotNull final String name ) {
+
+        return _listenerManager.removeByName( name );
+
+    }
+
+//    public void addVetSelectionListener(
+//            @NotNull final String name, @NotNull final VetSelectionListener actionListener
+//    ) {
+//
+//        @SuppressWarnings("unchecked") ObtuseListener<E> listener = (ObtuseListener<E>)actionListener;
+//        _listenerManager.addObtuseListener( name, listener );
+//
+//    }
+
+    public void addSelectionChangedListener(
+            @NotNull final String name, @NotNull final SelectionChangedListener actionListener
+    ) {
+
+        @SuppressWarnings("unchecked") ObtuseListener<E> listener = (ObtuseListener<E>)actionListener;
+        _listenerManager.addObtuseListener( name, listener );
+
+    }
 
 }

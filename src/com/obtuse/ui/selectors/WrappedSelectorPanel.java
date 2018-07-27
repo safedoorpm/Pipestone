@@ -6,6 +6,8 @@
 package com.obtuse.ui.selectors;
 
 import com.obtuse.util.ObtuseUtil;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
@@ -18,13 +20,14 @@ import javax.swing.border.TitledBorder;
 public abstract class WrappedSelectorPanel<CHOICE> extends JPanel {
 
     public WrappedSelectorPanel() {
+
         super();
 
     }
 
     public abstract boolean notifyCurrentChildChange(
-            CHOICE oldChoice,
-            CHOICE newChoice
+            final @Nullable CHOICE oldChoice,
+            final @NotNull CHOICE newChoice
     );
 
     public void setSubsidiaryPanelBorder( final TitledBorder subsidiary_panel_dataCategoryStateNode ) {
