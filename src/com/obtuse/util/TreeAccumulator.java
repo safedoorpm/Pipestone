@@ -8,20 +8,21 @@ import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 /**
- * An enhanced version of the {@link TreeCounter} class that uses long values to accumulate possibly quite large values.
- * <p/>
- * Instances of this class are serializable if the key objects used to create the instance are serializable.
- * <p/>
- * Copyright © 2014 Obtuse Systems Corporation
+ An enhanced version of the {@link TreeCounter} class that uses long values to accumulate possibly quite large values.
+ <p/>
+ Instances of this class are serializable if the key objects used to create the instance are serializable.
+ <p/>
+ Copyright © 2014 Obtuse Systems Corporation
  */
 
 public class TreeAccumulator<K extends Comparable<K>> implements Accumulator<K>, Serializable {
 
-    private final SortedMap<K,Long> _accumulator;
+    private final SortedMap<K, Long> _accumulator;
 
     private long _grandTotal = 0;
 
     public TreeAccumulator() {
+
         super();
 
         _accumulator = new TreeMap<>();
@@ -30,6 +31,7 @@ public class TreeAccumulator<K extends Comparable<K>> implements Accumulator<K>,
 
     @SuppressWarnings("UnusedDeclaration")
     public TreeAccumulator( final Accumulator<K> accumulator ) {
+
         this();
 
         for ( K key : accumulator.keySet() ) {
@@ -40,7 +42,9 @@ public class TreeAccumulator<K extends Comparable<K>> implements Accumulator<K>,
 
     }
 
+    @SuppressWarnings("unused")
     public TreeAccumulator( final Counter<K> counter ) {
+
         this();
 
         for ( K key : counter.keySet() ) {
@@ -53,113 +57,127 @@ public class TreeAccumulator<K extends Comparable<K>> implements Accumulator<K>,
 
     /**
      Force a thing's count to have a certain value.
-     <p/>This method properly adjusts the grand total for this accumulator to ensure that it still reflects the sum of all the counts.
+     <p/>This method properly adjusts the grand total for this accumulator to ensure that it still reflects the sum
+     of all the counts.
      This method also deletes the entry for the specified thing if it exists and the new count is 0.
-     @param thing which thing's count is to be forced.
+
+     @param thing    which thing's count is to be forced.
      @param newCount the count that the specified thing is to now have.
      @return the thing's old count (zero if the thing was previously unknown).
-     @throws IllegalArgumentException if the specified <code>newCount</code> is negative (the state of this instance does not
+     @throws IllegalArgumentException if the specified <code>newCount</code> is negative (the state of this instance
+     does not
      change if this exception gets thrown).
      */
 
     @Override
     public long forceCount( final K thing, final long newCount ) throws IllegalArgumentException {
 
-	if ( newCount < 0 ) {
+        if ( newCount < 0 ) {
 
-	    throw new IllegalArgumentException( "specified new count for thing \"" + thing + "\" is negative (" + newCount + ")" );
+            throw new IllegalArgumentException( "specified new count for thing \"" +
+                                                thing +
+                                                "\" is negative (" +
+                                                newCount +
+                                                ")" );
 
-	}
+        }
 
-	long oldCount = 0;
-	if ( _accumulator.containsKey( thing ) ) {
+        long oldCount = 0;
+        if ( _accumulator.containsKey( thing ) ) {
 
-	    oldCount = _accumulator.get( thing ).longValue();
-	    _grandTotal += newCount - oldCount;
+            oldCount = _accumulator.get( thing )
+                                   .longValue();
+            _grandTotal += newCount - oldCount;
 
-	    if ( newCount == 0 ) {
+            if ( newCount == 0 ) {
 
-		_accumulator.remove( thing );
+                _accumulator.remove( thing );
 
-	    } else {
+            } else {
 
-		_accumulator.put( thing, newCount );
+                _accumulator.put( thing, newCount );
 
-	    }
+            }
 
-	} else if ( newCount != 0 ) {
+        } else if ( newCount != 0 ) {
 
-	    _grandTotal += newCount;
-	    _accumulator.put( thing, newCount );
+            _grandTotal += newCount;
+            _accumulator.put( thing, newCount );
 
-	}
+        }
 
-	return oldCount;
+        return oldCount;
 
     }
 
     /**
      Adjust a thing's count by the specified delta.
      The delta can be any value which does not cause the thing's count to drop below zero.
-     If a call to this method causes an overflow of a thing's count then the behaviour of this method is explicitly undefined
+     If a call to this method causes an overflow of a thing's count then the behaviour of this method is explicitly
+     undefined
      (things are likely to get ugly rather quickly).
+
      @param thing the thing whose count is to be adjusted.
      @param delta the amount by which the specified thing's count is to be adjusted.
      @return the new count for the specified thing.
-     @throws IllegalArgumentException if the request would result in a negative count for the thing (the state of this instance does not
+     @throws IllegalArgumentException if the request would result in a negative count for the thing (the state of
+     this instance does not
      change if this exception gets thrown).
      */
 
     @Override
     public long accumulate( final K thing, final long delta ) throws IllegalArgumentException {
 
-	long newCount;
+        long newCount;
         if ( _accumulator.containsKey( thing ) ) {
 
-	    newCount = _accumulator.get( thing ).longValue() + delta;
-	    if ( newCount < 0 ) {
+            newCount = _accumulator.get( thing )
+                                   .longValue() + delta;
+            if ( newCount < 0 ) {
 
-		throw new IllegalArgumentException( "adjusted count for thing \"" + thing + "\" is negative (" + newCount + ")" );
+                throw new IllegalArgumentException( "adjusted count for thing \"" +
+                                                    thing +
+                                                    "\" is negative (" +
+                                                    newCount +
+                                                    ")" );
 
-	    }
+            }
 
-	    _grandTotal += delta;
+            _grandTotal += delta;
 
-	    if ( newCount == 0 ) {
+            if ( newCount == 0 ) {
 
-		_accumulator.remove( thing );
+                _accumulator.remove( thing );
 
-	    } else {
+            } else {
 
-		_accumulator.put( thing, newCount );
+                _accumulator.put( thing, newCount );
 
-	    }
-
-	    return newCount;
+            }
 
         } else {
 
-	    newCount = delta;
-	    if ( newCount > 0 ) {
+            newCount = delta;
+            if ( newCount > 0 ) {
 
-		_grandTotal += newCount;
-		_accumulator.put( thing, newCount );
+                _grandTotal += newCount;
+                _accumulator.put( thing, newCount );
 
-		return newCount;
+                return newCount;
 
-	    } else if ( newCount < 0 ) {
+            } else if ( newCount < 0 ) {
 
-		throw new IllegalArgumentException( "adjusted count for first thing \"" + thing + "\" would be negative (" + delta + ")" );
+                throw new IllegalArgumentException( "adjusted count for first thing \"" +
+                                                    thing +
+                                                    "\" would be negative (" +
+                                                    delta +
+                                                    ")" );
 
-	    } else {
+            }
 
-		newCount = 0;
+        }
 
-	    }
-
-	}
-
-	return newCount;
+        return newCount;
 
     }
 
@@ -222,7 +240,7 @@ public class TreeAccumulator<K extends Comparable<K>> implements Accumulator<K>,
 
     public String toString() {
 
-        String rval = _accumulator
+        @SuppressWarnings("unused") String rval = _accumulator
                 .keySet()
                 .stream()
                 .map( String::valueOf )
@@ -232,12 +250,16 @@ public class TreeAccumulator<K extends Comparable<K>> implements Accumulator<K>,
 
         for ( K key : _accumulator.keySet() ) {
 
-            counts.append( comma ).append( key ).append( '=' ).append( getCount( key ) );
+            counts.append( comma )
+                  .append( key )
+                  .append( '=' )
+                  .append( getCount( key ) );
             comma = ", ";
 
         }
 
-        return counts.append( " )" ).toString();
+        return counts.append( " )" )
+                     .toString();
 
     }
 
@@ -247,15 +269,15 @@ public class TreeAccumulator<K extends Comparable<K>> implements Accumulator<K>,
 
     }
 
-    public TreeSorter<Long,K> getSortedSums() {
+    public TreeSorter<Long, K> getSortedSums() {
 
         return getSortedCounts( null );
 
     }
 
-    public TreeSorter<Long,K> getSortedCounts( final Comparator<Long> comparator ) {
+    public TreeSorter<Long, K> getSortedCounts( final Comparator<Long> comparator ) {
 
-        TreeSorter<Long,K> sortedCounts = comparator == null ? new TreeSorter<>() : new TreeSorter<>( comparator );
+        TreeSorter<Long, K> sortedCounts = comparator == null ? new TreeSorter<>() : new TreeSorter<>( comparator );
         for ( K key : _accumulator.keySet() ) {
 
             sortedCounts.add( _accumulator.get( key ), key );

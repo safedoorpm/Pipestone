@@ -82,6 +82,7 @@ public class ObtuseKeyword extends GowingAbstractPackableEntity implements Compa
      @param original the keyword to be cloned.
      */
 
+    @SuppressWarnings("CopyConstructorMissesField")
     public ObtuseKeyword( final @NotNull ObtuseKeyword original ) {
         this( original.toString(), original.getKeywordName() );
 

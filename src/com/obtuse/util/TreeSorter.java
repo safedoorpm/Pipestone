@@ -197,6 +197,7 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
      @throws IllegalArgumentException if <code>sorter</code> is <code>null</code>.
      */
 
+    @SuppressWarnings("CopyConstructorMissesField")
     public TreeSorter( final TreeSorter<K, V> sorter ) {
 
         this();

@@ -100,6 +100,7 @@ public class FlexibleDateTransmogrifier {
 
     }
 
+    @SuppressWarnings("SpellCheckingInspection")
     private static TestData[] s_testData = {
             new TestData(
                     new String[] {
@@ -404,6 +405,7 @@ public class FlexibleDateTransmogrifier {
 
     }
 
+    @SuppressWarnings("unused")
     public static void setTraceAllCalls( final boolean traceAllCalls ) {
 
         s_traceAllCalls = traceAllCalls;
@@ -419,7 +421,7 @@ public class FlexibleDateTransmogrifier {
      @param yyIx which group in a successful matcher (1-origin) contains the year (if the match works).
      @param mmIx which group in a successful matcher (1-origin) contains the month (if the match works).
      @param ddIx which group in a successful matcher (1-origin) contains the month (if the match works).
-     @return an Optional containingthe date in yyyy-mm-dd format if the parse worked; empty otherwise.
+     @return an Optional containing the date in yyyy-mm-dd format if the parse worked; empty otherwise.
      */
 
     public static Optional<String> doit( final int ix, final Pattern p, final boolean numericMonth, final String dateString, final int yyIx, final int mmIx, final int ddIx ) {

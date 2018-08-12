@@ -210,6 +210,7 @@ public class IrregularScrollableImpl implements Scrollable {
 
             if ( isEmpty() ) {
 
+                //noinspection ConstantConditions
                 rval = 0;
                 return rval;
 
@@ -247,8 +248,8 @@ public class IrregularScrollableImpl implements Scrollable {
 
         int committedDelta = 0;
 
-        final int topOfOriginalWindow = sem.getWindowStart();
-        int curTopOfWindow = topOfOriginalWindow;
+        @SuppressWarnings("UnnecessaryLocalVariable") final int topOfOriginalWindow = sem.getWindowStart();
+        @SuppressWarnings("unused") int curTopOfWindow = topOfOriginalWindow;
 
         int nominalScrollAmount = 0;
 

@@ -27,6 +27,7 @@ import java.util.function.Consumer;
  Manage a list of {@link SelectableIndexCard}s.
  */
 
+@SuppressWarnings("unused")
 public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrollableLinearContainer3 {
 
     private final IrregularScrollableImpl _irregularScrollableImpl = new IrregularScrollableImpl( this, isVertical() );
@@ -103,20 +104,23 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
         if ( mEvent.getID() == MouseEvent.MOUSE_CLICKED | mEvent.getID() == MouseEvent.MOUSE_PRESSED ||
              mEvent.getID() == MouseEvent.MOUSE_RELEASED ) {
 
-            @SuppressWarnings("unused") String kind;
+            String kind;
             switch ( mEvent.getID() ) {
 
                 case MouseEvent.MOUSE_CLICKED:
+
                     //noinspection UnusedAssignment
                     kind = "click";
                     break;
 
                 case MouseEvent.MOUSE_PRESSED:
+
                     //noinspection UnusedAssignment
                     kind = "press";
                     break;
 
                 case MouseEvent.MOUSE_RELEASED:
+
                     //noinspection UnusedAssignment
                     kind = "release";
                     break;
@@ -235,6 +239,8 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
             if ( ( mEvent.getModifiersEx() & ( 1 << i ) ) != 0 ) {
 
                 Logger.logMsg( "modifiersEx:  1 << " + i + " is set" );
+
+                //noinspection UnusedAssignment
                 gotOne = true;
 
             }
@@ -328,7 +334,8 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
      @param e the mouse event that got us here.
      */
 
-    private void adjustSelection( final int row, final MouseEvent e, final boolean isFileList ) {
+    @SuppressWarnings("SpellCheckingInspection")
+    private void adjustSelection( final int row, final MouseEvent e, @SuppressWarnings("SameParameterValue") final boolean isFileList ) {
 
         if ( row < 0 ) {
 
@@ -789,7 +796,7 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
 
         E c = getModelElementAt( index );
 
-        Rectangle bounds = c.getBounds();
+        @SuppressWarnings("UnnecessaryLocalVariable") Rectangle bounds = c.getBounds();
 
         return bounds;
 
@@ -857,7 +864,7 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
      or does not implement the {@link SelectableIndexCard} interface.
      */
 
-    public Component add( final @NotNull Component comp ) {
+    public Component add( @SuppressWarnings("NullableProblems") final @NotNull Component comp ) {
 
         verifySelectable( comp );
 
@@ -878,7 +885,7 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
      or does not implement the {@link SelectableIndexCard} interface.
      */
 
-    public Component add( final @NotNull String name, final Component comp ) {
+    public Component add( @SuppressWarnings("NullableProblems") final @NotNull String name, final Component comp ) {
 
         verifySelectable( comp );
 
@@ -900,7 +907,7 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
      or does not implement the {@link SelectableIndexCard} interface.
      */
 
-    public Component add( final @NotNull Component comp, final int ix ) {
+    public Component add( @SuppressWarnings("NullableProblems") final @NotNull Component comp, final int ix ) {
 
         verifySelectable( comp );
 
@@ -920,7 +927,7 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
      or does not implement the {@link SelectableIndexCard} interface.
      */
 
-    public void add( final @NotNull Component comp, final Object constraints ) {
+    public void add( @SuppressWarnings("NullableProblems") final @NotNull Component comp, final Object constraints ) {
 
         verifySelectable( comp );
 
@@ -942,7 +949,7 @@ public class IndexCardBox<E extends SelectableIndexCard> extends AbstractScrolla
      or does not implement the {@link SelectableIndexCard} interface.
      */
 
-    public void add( final @NotNull Component comp, final Object constraints, final int index ) {
+    public void add( @SuppressWarnings("NullableProblems") final @NotNull Component comp, final Object constraints, final int index ) {
 
         verifySelectable( comp );
 

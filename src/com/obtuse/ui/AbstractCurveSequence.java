@@ -372,4 +372,10 @@ public abstract class AbstractCurveSequence implements GraphicsElement {
 
     }
 
+    public String toString() {
+
+        return "AbstractCurveSequence( " + ObtuseUtil.pluralize( _points.size(), "point" ) + " )";
+
+    }
+
 }

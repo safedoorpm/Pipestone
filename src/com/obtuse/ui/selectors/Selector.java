@@ -5,91 +5,216 @@
 
 package com.obtuse.ui.selectors;
 
+import com.obtuse.exceptions.HowDidWeGetHereError;
+import com.obtuse.util.GenericTag;
 import com.obtuse.util.ObtuseUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import javax.swing.*;
 import java.util.*;
+import java.util.function.Consumer;
 
 /**
- Describe a combo-box's choices.
- <p>Instances of this class MUST be immutable.</p>
+ Describe a combo-box's alternatives (choices).
+ <p>Instances of this class are immutable if frozen.
+ An instance of this class cannot be used to create a {@link JComboBox}{@code <}{@link Alternative}{@code >}
+ until either {@link #freeze()} or {@link #keepMutable(boolean)} has been called.</p>
  */
 
-public class Selector implements Comparable<Selector> {
+public class Selector implements Comparable<Selector>, Iterable<Alternative> {
+
+//    private static final GenericTag SELECTOR_TAGS_CATEGORY = GenericTag.createNewTagCategory( Selector.class.getCanonicalName() );
 
     private static final SortedMap<String, Selector> s_allKnownSelectors = new TreeMap<>();
 
-    public final String selectorName;
-    public final String selectorTag;
+    private final String _selectorsLabel;
+    private final GenericTag.GenericTagCategory _selectorsTagCategory;
 
-    private final List<Alternative> _knownChoicesList = new ArrayList<>();
-    private final SortedMap<String,Alternative> _knownChoicesMap = new TreeMap<>();
+    private final List<Alternative> _knownAlternativesList = new ArrayList<>();
+    private final SortedMap<GenericTag,Alternative> _knownAlternativesByTagMap = new TreeMap<>();
+    private final SortedMap<String,Alternative> _knownAlternativesByLabelMap = new TreeMap<>();
 
-    public Selector( final @NotNull String selectorName, final @NotNull String selectorTag ) {
+    private boolean _mutable;
+    private boolean _mutabilityEstablished = false;
 
+    /**
+     Create a new selector.
+     @param selectorsLabel the label that should appear when this selector is presented to the human.
+     @param thisSelectorsName this selector's name.
+     The name must match the {@link GenericTag#VALID_CATEGORY_TAG} pattern.
+     @throws IllegalArgumentException if there is already a selector with the specified name or if the
+     specified name does not match the {@link GenericTag#VALID_CATEGORY_TAG} pattern.
+     */
+
+    public Selector( final @NotNull String selectorsLabel, final @NotNull String thisSelectorsName ) {
         super();
 
-        if ( s_allKnownSelectors.containsKey( selectorTag ) ) {
+        if ( s_allKnownSelectors.containsKey( thisSelectorsName ) ) {
 
-            throw new IllegalArgumentException( "Selector:  duplicate selector tag " + ObtuseUtil.enquoteToJavaString( selectorTag ) );
-
-        }
-
-        this.selectorName = selectorName;
-        this.selectorTag = selectorTag;
-
-        s_allKnownSelectors.put( selectorTag, this );
-
-    }
-
-    public void addChoice( final @NotNull Alternative choice ) {
-
-        if ( _knownChoicesMap.containsKey( choice.getUniqueKey() ) ) {
-
-            throw new IllegalArgumentException( "Selector.addChoice(" + choice.getUniqueKey() + ") already exists" );
+            throw new IllegalArgumentException(
+                    "Selector:  duplicate selector tag category name " +
+                    ObtuseUtil.enquoteToJavaString( thisSelectorsName )
+            );
 
         }
 
-        _knownChoicesList.add( choice );
-        _knownChoicesMap.put( choice.getUniqueKey(), choice );
+        _selectorsTagCategory = GenericTag.maybeAllocTagCategory( thisSelectorsName );
+
+        this._selectorsLabel = selectorsLabel;
+//        this._selectorsTagName = thisSelectorsName;
+
+        s_allKnownSelectors.put( thisSelectorsName, this );
 
     }
 
-    public SortedMap<String,Alternative> getChoicesMap() {
+    public void freeze() {
 
-        return Collections.unmodifiableSortedMap( _knownChoicesMap );
+        keepMutable( "freeze()", false );
 
     }
 
-    public List<Alternative> getChoices() {
+    public void keepMutable( final boolean mutable ) {
 
-        return Collections.unmodifiableList( _knownChoicesList );
+        keepMutable( "keepMutable( " + mutable + " )", mutable );
+
+    }
+
+    public void keepMutable( final @NotNull String toString, final boolean mutable ) {
+
+        if ( _mutabilityEstablished ) {
+
+            throw new IllegalArgumentException(
+                    "Selector." + toString + ":  " +
+                    "mutability cannot be changed once established " +
+                    "(we are already established as " + getMutabilityString() + ")"
+            );
+
+        }
+
+        _mutable = mutable;
+        _mutabilityEstablished = true;
 
     }
 
     @NotNull
-    public Optional<Alternative> findUnspecifiedChoice() {
+    public String getMutabilityString() {
 
-        if ( _knownChoicesList.isEmpty() ) {
+        return _mutable ? "mutable" : "frozen";
 
-            throw new IllegalArgumentException( "Selector.findUnspecifiedChoice:  no choices provided" );
+    }
+
+    public boolean isMutable() {
+
+        return _mutable;
+
+    }
+
+    public boolean isFrozen() {
+
+        return !_mutable;
+
+    }
+
+    public boolean isMutabilityEstablished() {
+
+        return _mutabilityEstablished;
+
+    }
+
+    @NotNull
+    public GenericTag.GenericTagCategory getSelectorsTagCategory() {
+
+        return _selectorsTagCategory;
+
+    }
+
+    @NotNull
+    public String getSelectorsTagName() {
+
+        return _selectorsTagCategory.getTagName();
+
+    }
+
+    public Optional<Alternative> findAlternativeByTag( final @NotNull GenericTag tag ) {
+
+        return Alternative.findChoiceByKey( tag );
+
+    }
+
+//    public Optional<Alternative> findChoiceByLabel( final @NotNull String label ) {
+//
+//        return Alternative.findChoiceByKey( Alternative.makeUniqueKey( this, label ) );
+//
+//    }
+
+    public void addAlternative( final @NotNull Alternative alternative ) {
+
+        if ( _knownAlternativesByTagMap.containsKey( alternative.getTag() ) ) {
+
+            throw new IllegalArgumentException( "Selector.addAlternative(key=" + alternative.getTag() + ") already exists" );
 
         }
 
-        Alternative unspecifiedChoice = null;
+        if ( _knownAlternativesByLabelMap.containsKey( alternative.toString() ) ) {
 
-        for ( Alternative choice : _knownChoicesList ) {
+            throw new IllegalArgumentException( "Selector.addAlternative(label=" + ObtuseUtil.enquoteToJavaString( alternative.toString() ) + ") already exists" );
 
-            if ( choice.isUnspecifiedChoice() ) {
+        }
 
-                if ( unspecifiedChoice == null ) {
+        _knownAlternativesList.add( alternative );
+        _knownAlternativesByTagMap.put( alternative.getTag(), alternative );
+        _knownAlternativesByLabelMap.put( alternative.toString(), alternative );
 
-                    unspecifiedChoice = choice;
+    }
+
+    /**
+     Create and return a {@link Vector}{@code <Alternative>} containing this selector's alternatives.
+     <p>Note that each call to this method returns a newly created {@code Vector<Alternative>}</p> containing this selector's alternatives.
+     This allows the call to do whatever they like with the result including, in particular, use it to create a {@link ComboBoxModel <Alternative>}.
+     @return a newly created {@code Vector<Alternative>}</p> containing this selector's alternatives.
+     */
+
+    public Vector<Alternative> createAlternativesVector() {
+
+        return new Vector<>( _knownAlternativesList );
+
+    }
+
+    public SortedMap<GenericTag, Alternative> getAlternativesMap() {
+
+        return Collections.unmodifiableSortedMap( _knownAlternativesByTagMap );
+
+    }
+
+    public List<Alternative> getAlternatives() {
+
+        return Collections.unmodifiableList( _knownAlternativesList );
+
+    }
+
+    @NotNull
+    public Optional<Alternative> findUnspecifiedAlternative() {
+
+        if ( _knownAlternativesList.isEmpty() ) {
+
+            throw new IllegalArgumentException( "Selector.findUnspecifiedAlternative:  no alternatives provided" );
+
+        }
+
+        Alternative unspecifiedAlternative = null;
+
+        for ( Alternative alternative : _knownAlternativesList ) {
+
+            if ( alternative.isUnspecifiedAlternative() ) {
+
+                if ( unspecifiedAlternative == null ) {
+
+                    unspecifiedAlternative = alternative;
 
                 } else {
 
-                    throw new IllegalArgumentException( "WikiTreeDbComboBoxSelector.findUnspecifiedChoice:  more than one unspecified choice" );
+                    throw new IllegalArgumentException( "WikiTreeDbComboBoxSelector.findUnspecifiedAlternative:  more than one unspecified alternative" );
 
                 }
 
@@ -97,21 +222,39 @@ public class Selector implements Comparable<Selector> {
 
         }
 
-        return Optional.ofNullable( unspecifiedChoice );
+        return Optional.ofNullable( unspecifiedAlternative );
 
     }
 
     @NotNull
-    public Alternative getInitialChoice() {
+    public Alternative getUnspecifiedAlternative() {
 
-        if ( _knownChoicesList.isEmpty() ) {
+        @NotNull Optional<Alternative> optUnspecifiedAlternative = findUnspecifiedAlternative();
+        if ( optUnspecifiedAlternative.isPresent() ) {
 
-            throw new IllegalArgumentException( "Selector.findInitialChoice:  no choices provided" );
+            return optUnspecifiedAlternative.get();
+
+        } else {
+
+            throw new IllegalArgumentException(
+                    "WikiTreeDbComboBoxSelector.getUnspecifiedAlternative:  no unspecified alternative"
+            );
 
         }
 
-        Optional<Alternative> optUnspecifiedChoice = findUnspecifiedChoice();
-        return optUnspecifiedChoice.orElseGet( () -> _knownChoicesList.get( 0 ) );
+    }
+
+    @NotNull
+    public Alternative getInitialAlternative() {
+
+        if ( _knownAlternativesList.isEmpty() ) {
+
+            throw new IllegalArgumentException( "Selector.findInitialAlternative:  no alternatives provided" );
+
+        }
+
+        Optional<Alternative> optUnspecifiedAlternative = findUnspecifiedAlternative();
+        return optUnspecifiedAlternative.orElseGet( () -> _knownAlternativesList.get( 0 ) );
 
     }
 
@@ -123,23 +266,25 @@ public class Selector implements Comparable<Selector> {
 
     }
 
-    public static Selector maybeCreateSelector( final @NotNull String selectorName, final @NotNull String selectorTag ) {
+    public static Selector maybeCreateSelector( final @NotNull String selectorLabel, final @NotNull String selectorTag ) {
 
+        GenericTag.checkTagNameValid( "Selector.maybeCreateSelector", selectorTag );
         Optional<Selector> optSelector = findSelector( selectorTag );
 
-        return optSelector.orElseGet( () -> new Selector( selectorName, selectorTag ) );
+        return optSelector.orElseGet( () -> new Selector( selectorLabel, selectorTag ) );
 
     }
 
     public String toString() {
 
-        return this.selectorName;
+        String toString = this._selectorsLabel + " | tag=" + _selectorsTagCategory;
+        return toString;
 
     }
 
     public int compareTo( final @NotNull Selector rhs ) {
 
-        return this.selectorTag.compareTo( rhs.selectorTag );
+        return getSelectorsTagName().compareTo( rhs.getSelectorsTagName() );
 
     }
 
@@ -151,7 +296,119 @@ public class Selector implements Comparable<Selector> {
 
     public int hashCode() {
 
-        return this.selectorTag.hashCode();
+        return this.getSelectorsTagName().hashCode();
+
+    }
+
+    /**
+     Find an alternative within this selector's set of alternatives.
+     <p>This method is typically used to determine if an {@link Alternative} instance that the caller happens to have
+     a reference to is one of the {@code Alternative}s in this selector.</p>
+     @param alternative the {@link Alternative} in question.
+     @return {@code true} if the {@code alternative} parameter is non-null and references an {@code Alternative}
+     instance which is in this selector, {@code false} otherwise.
+     */
+
+    public boolean hasAlternative( final @Nullable Alternative alternative ) {
+
+        return alternative != null && findAlternativeByTag( alternative.getTag() ).isPresent();
+
+    }
+
+    @NotNull
+    public Optional<Alternative> findAlternativeByLabel( final @NotNull String label ) {
+
+        Optional<Alternative> optAlternative = Optional.ofNullable( _knownAlternativesByLabelMap.get( label ) );
+        return optAlternative;
+
+    }
+
+//    @NotNull
+//    public Optional<Alternative> findAlternativeByTag( final @NotNull GenericTag tag ) {
+//
+//        Optional<Alternative> optAlternative = Optional.ofNullable( _knownAlternativesByTagMap.get( tag ) );
+//        return optAlternative;
+//
+//    }
+
+    /**
+     Create a simple {@link JCheckBox}{@code <}{@link Alternative}{@code >} with its current selection
+     set to the first element.
+     The combo-box will be empty (have no alternatives) if this selector has no {@link Alternative} instances.
+     @return a possibly empty {@code JComboBox<Alternative>}.
+     */
+
+    @NotNull
+    public JComboBox<Alternative> createComboBox() {
+
+        return createComboBox( null );
+
+    }
+
+    /**
+     Create a simple {@link JComboBox}{@code <}{@link Alternative}{@code >}.
+     @param currentAlternative the alternative that should be the combo-box's current selection.
+     The first alternative is used if {@code currentAlternative} is {@code null} or if there are no alternatives.
+     @return the combo-box.
+     */
+
+    @NotNull
+    public JComboBox<Alternative> createComboBox( final @Nullable Alternative currentAlternative ) {
+
+        if ( isMutabilityEstablished() ) {
+
+            Vector<Alternative> alternativesVector = createAlternativesVector();
+            JComboBox<Alternative> comboBox = new JComboBox<>( alternativesVector );
+
+            if ( hasAlternative( currentAlternative ) ) {
+
+                comboBox.setSelectedItem( currentAlternative );
+
+            } else if ( !alternativesVector.isEmpty() ) {
+
+                comboBox.setSelectedIndex( 0 );
+
+            }
+
+            return comboBox;
+
+        }
+
+        throw new HowDidWeGetHereError(
+                "Selector(" + getSelectorsTagName() + "):  " +
+                "mutability must be established before a JComboBox is created"
+        );
+
+    }
+
+    /**
+     Get an iterator that goes through this instance's {@link Alternative} instances in the order that they
+     were added to this instance.
+     <p>The returned list iterator does not support removals or additions to the list
+     (you are iterating through an immutable copy of this instance's known alternatives).</p>
+     @return an iterator that goes through this instance's {@link Alternative} instances in the order that they
+     were added to this instance.
+     */
+
+    @NotNull
+    @Override
+    public Iterator<Alternative> iterator() {
+
+        return getAlternatives().iterator();
+
+    }
+
+    @Override
+    public void forEach( final Consumer<? super Alternative> action ) {
+
+        _knownAlternativesList.forEach( action );
+
+    }
+
+    @Override
+    public Spliterator<Alternative> spliterator() {
+
+        return _knownAlternativesList.spliterator();
 
     }
 

@@ -387,6 +387,18 @@ public class Measure implements Closeable {
 
     }
 
+    public long getStartTimeMillis() {
+
+        return _startTimeMillis;
+
+    }
+
+    public long deltaMillis() {
+
+        return System.currentTimeMillis() - _startTimeMillis;
+
+    }
+
     public boolean isInitialized() {
 
         return _initialized;

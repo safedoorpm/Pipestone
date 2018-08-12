@@ -172,6 +172,7 @@ public class AbsolutePath extends RelativePath {
 
     }
 
+    @SuppressWarnings("unused")
     public static AbsolutePath concat( final @NotNull AbsolutePath head, final @NotNull SegmentName tail ) {
 
         return concat( head, new RelativePath( tail ) );

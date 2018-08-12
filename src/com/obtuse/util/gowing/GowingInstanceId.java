@@ -34,7 +34,7 @@ public final class GowingInstanceId implements Comparable<GowingInstanceId> {
     private static final SortedMap<String, Integer> s_typeNamesToTypeIds = new TreeMap<>();
     private static final SortedMap<Integer, String> s_typeIdsToTypeNames = new TreeMap<>();
 
-    private final Long _entityId;
+    private final long _entityId;
 
     private final int _typeId;
 
@@ -109,7 +109,7 @@ public final class GowingInstanceId implements Comparable<GowingInstanceId> {
 
     public long getEntityId() {
 
-        return _entityId.longValue();
+        return _entityId;
 
     }
 
@@ -131,7 +131,7 @@ public final class GowingInstanceId implements Comparable<GowingInstanceId> {
         int rval = _typeName.compareTo( rhs._typeName );
         if ( rval == 0 ) {
 
-            rval = _entityId.compareTo( rhs._entityId );
+            rval = Long.compare( _entityId, rhs._entityId );
 
         }
 
@@ -147,7 +147,7 @@ public final class GowingInstanceId implements Comparable<GowingInstanceId> {
 
     public int hashCode() {
 
-        return _entityId.hashCode();
+        return Long.hashCode( _entityId );
 
     }
 

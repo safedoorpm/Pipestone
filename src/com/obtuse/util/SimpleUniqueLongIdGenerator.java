@@ -46,8 +46,10 @@ public class SimpleUniqueLongIdGenerator implements UniqueLongIdGenerator {
     /**
      Create a simple id generator that generates unique long positive values.
      <p/>The values start at 1L and increase until all positive long values have been generated.
-     Generators created via this constructor will never return the same value twice. The {@link #getUniqueId()} method will throw
-     an <code>IllegalArgumentException</code> if it runs out of unique positive long values).
+     Generators created via this constructor will never return the same value twice.
+     The {@link #getUniqueId()} method will throw an {@link }IllegalArgumentException if it runs out of
+     unique positive long values (something that will take about 292 years if your computer can request
+     new ids at a rate of 1,000,000,000 requests per second; I suggest that you pack a lunch).
 
      @param name the name of this generator (used in toString and possibly useful in your debug code).
      */
@@ -122,9 +124,17 @@ public class SimpleUniqueLongIdGenerator implements UniqueLongIdGenerator {
      </pre>
 
      @return the next value in the sequence 1L, 2L, 3L ... from the perspective of this instance.
-     This method will never return the same value twice if {@link #allowDuplicates()} return <code>false</code> for this instance.
-     This method will restart the sequence from 1L should it run out of unique positive long values if {@link #allowDuplicates()} returns <code>true</code> for this instance.
-     @throws IllegalArgumentException if all positive long ids have been generated and {@link #allowDuplicates()} returns <code>false</code> for this instance.
+     This method will throw an {@link IllegalArgumentException} if it runs out of unique long values
+     and {@link #allowDuplicates()} returns {@code false}.
+     Alternatively, it will start again at 1L if it runs out of unique long values and
+     {@link #allowDuplicates()} return {@code true}.
+     <p>In either event, this instance won't run out of unique long values for about 292 years
+     assuming that your computer is requesting new ids at a rate of 1,000,000,000 requests per second
+     (I suggest that you pack a lunch).
+     For what little it is worth, a single thread on my 2.5GHz Intel i7 (purchased in 2014)
+     can do about 550,000,000 calls to this method per second.</p>
+     @throws IllegalArgumentException if all positive long ids have been generated and
+     {@link #allowDuplicates()} returns <code>false</code> for this instance.
      */
 
     public synchronized long getUniqueId() {
@@ -168,7 +178,60 @@ public class SimpleUniqueLongIdGenerator implements UniqueLongIdGenerator {
 
         }
 
+        Measure m = new Measure( "measure getUniqueId call rate" );
+        long maxCount = 1000L * 1000L * 1000L;
+        for ( long xx = 0; xx < maxCount; xx += 1 ) {
+
+            outerGenerator.getUniqueId();
+
+        }
+
+        long delta = m.deltaMillis();
+        double callRate = maxCount / ( delta / 1000.0 );
+        System.out.println(
+                "" + maxCount + " calls took " + DateUtils.formatDuration( delta ) +
+                " for a rate of " + ObtuseUtil.lpadReadable( (long)callRate, 0 ) +
+                " calls per second"
+        );
+
+        double durationYears = getDurationYears( callRate );
+
+        System.out.println(
+                "It will take this computer about " + ObtuseUtil.lpadReadable( durationYears, 0, 1 ) +
+                " years to generate all possible long ids."
+        );
+
+        System.out.println(
+                "If your computer can manage 1,000,000,000 calls per second then it will take about " +
+                ObtuseUtil.lpadReadable( getDurationYears( 1000L * 1000L * 1000L ), 0, 1 ) +
+                " years to generate all possible long ids."
+        );
+
+//        strange();
+
+        ObtuseUtil.doNothing();
+
     }
+
+    public static double getDurationYears( final double callRate ) {
+
+        double durationSeconds = Long.MAX_VALUE / callRate;
+        return durationSeconds / ( 365.25 * 86400 );
+    }
+
+//    public static void strange() {
+//
+//        long maxCount = Integer.MAX_VALUE + 1L;
+//
+//        for ( long xx = 0; xx < maxCount; xx += 1 ) {
+//
+//            doSomethingQuick();
+//
+//        }
+//
+//    }
+//
+//    public static void doSomethingQuick() {}
 
     public String toString() {
 

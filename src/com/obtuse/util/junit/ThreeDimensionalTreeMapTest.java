@@ -18,6 +18,7 @@ import java.util.Vector;
  * Unit test the {@link com.obtuse.util.ThreeDimensionalTreeMap} class.
  */
 
+@SuppressWarnings("ClassHasNoToStringMethod")
 public class ThreeDimensionalTreeMapTest {
 
     private ThreeDimensionalTreeMap<Integer, Integer, Integer, String> _map;
@@ -278,6 +279,8 @@ public class ThreeDimensionalTreeMapTest {
 
         TwoDimensionalSortedMap<Integer, Integer, String> removedInnerMap1 = _map.removeInnerMap( 1 );
 
+        Assert.assertNotNull( removedInnerMap1 );
+
         // Verify that the removed map is the right map and that it and its contents are gone
 
         Assert.assertSame( removedInnerMap1, innerMap1 );
@@ -291,6 +294,8 @@ public class ThreeDimensionalTreeMapTest {
         // Remove the second inner map
 
         TwoDimensionalSortedMap<Integer, Integer, String> removedInnerMap2 = _map.removeInnerMap( 99 );
+
+        Assert.assertNotNull( removedInnerMap2 );
 
         // Verify that the removed map is the right map and that it and its contents are gone
 
@@ -330,6 +335,8 @@ public class ThreeDimensionalTreeMapTest {
 
         Assert.assertEquals( 1, _map.outerKeys().size() );
         Assert.assertSame( innerMap1, _map.getInnerMap( 1, false ) );
+
+        Assert.assertNotNull( innerMap1 );
 
         // Put two things in the map (one into the same inner map created above but in a different place, one in a different inner map)
 
@@ -403,7 +410,9 @@ public class ThreeDimensionalTreeMapTest {
         Assert.assertEquals( 0, innerMap1.size() );
         Assert.assertEquals( 1, innerMap2.size() );
         Assert.assertEquals( "There", _map.get( 99, 4, 5 ) );
-        Assert.assertEquals( "There", _map.getInnerMap( 99, false ).get( 4, 5 ) );
+        TwoDimensionalSortedMap<Integer, Integer, String> innerMap99a = _map.getInnerMap( 99, false );
+        Assert.assertNotNull( innerMap99a );
+        Assert.assertEquals( "There", innerMap99a.get( 4, 5 ) );
 
         // Remove the second of the two things
 

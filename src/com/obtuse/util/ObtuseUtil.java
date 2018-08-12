@@ -1170,6 +1170,7 @@ public class ObtuseUtil {
 
             if ( removeOutputFile ) {
 
+                //noinspection ResultOfMethodCallIgnored
                 outputFile.delete();
 
             }
@@ -1298,15 +1299,15 @@ public class ObtuseUtil {
 
     }
 
-    public static String lpadReadable( final float value, final int width, final int digits ) {
+    public static String lpadReadable( final float value, final int w, final int digits ) {
 
-        return ObtuseUtil.lpad( ObtuseUtil.readable( ObtuseUtil.lpad( value, 0, digits ) ), width );
+        return ObtuseUtil.lpad( ObtuseUtil.readable( ObtuseUtil.lpad( value, 0, digits ) ), w );
 
     }
 
-    public static String lpadReadable( final double value, final int width, final int digits ) {
+    public static String lpadReadable( final double value, final int w, final int digits ) {
 
-        return ObtuseUtil.lpad( ObtuseUtil.readable( ObtuseUtil.lpad( value, 0, digits ) ), width );
+        return ObtuseUtil.lpad( ObtuseUtil.readable( ObtuseUtil.lpad( value, 0, digits ) ), w );
 
     }
 
@@ -1316,45 +1317,45 @@ public class ObtuseUtil {
 
     }
 
-    public static String rpadReadable( final float value, final int width, final int digits ) {
+    public static String rpadReadable( final float value, final int w, final int digits ) {
 
-        return ObtuseUtil.rpad( ObtuseUtil.readable( ObtuseUtil.lpad( value, 0, digits ) ), width );
-
-    }
-
-    public static String rpadReadable( final double value, final int width, final int digits ) {
-
-        return ObtuseUtil.rpad( ObtuseUtil.readable( ObtuseUtil.lpad( value, 0, digits ) ), width );
+        return ObtuseUtil.rpad( ObtuseUtil.readable( ObtuseUtil.lpad( value, 0, digits ) ), w );
 
     }
 
-    public static String lpadReadable0( final float value, final int width, final int digits ) {
+    public static String rpadReadable( final double value, final int w, final int digits ) {
 
-        return ObtuseUtil.lpad( ObtuseUtil.readable( ObtuseUtil.lpad0( value, 0, digits ) ), width );
-
-    }
-
-    public static String lpadReadable0( final double value, final int width, final int digits ) {
-
-        return ObtuseUtil.lpad( ObtuseUtil.readable( ObtuseUtil.lpad0( value, 0, digits ) ), width );
+        return ObtuseUtil.rpad( ObtuseUtil.readable( ObtuseUtil.lpad( value, 0, digits ) ), w );
 
     }
 
-    public static String rpadReadable0( final float value, final int width, final int digits ) {
+    public static String lpadReadable0( final float value, final int w, final int digits ) {
 
-        return ObtuseUtil.rpad( ObtuseUtil.readable( ObtuseUtil.lpad0( value, 0, digits ) ), width );
-
-    }
-
-    public static String rpadReadable0( final double value, final int width, final int digits ) {
-
-        return ObtuseUtil.rpad( ObtuseUtil.readable( ObtuseUtil.lpad0( value, 0, digits ) ), width );
+        return ObtuseUtil.lpad( ObtuseUtil.readable( ObtuseUtil.lpad0( value, 0, digits ) ), w );
 
     }
 
-    public static String lpad( final float value, final int width, final int digits ) {
+    public static String lpadReadable0( final double value, final int w, final int digits ) {
 
-        return ObtuseUtil.lpad( (double)value, width, digits );
+        return ObtuseUtil.lpad( ObtuseUtil.readable( ObtuseUtil.lpad0( value, 0, digits ) ), w );
+
+    }
+
+    public static String rpadReadable0( final float value, final int w, final int digits ) {
+
+        return ObtuseUtil.rpad( ObtuseUtil.readable( ObtuseUtil.lpad0( value, 0, digits ) ), w );
+
+    }
+
+    public static String rpadReadable0( final double value, final int w, final int digits ) {
+
+        return ObtuseUtil.rpad( ObtuseUtil.readable( ObtuseUtil.lpad0( value, 0, digits ) ), w );
+
+    }
+
+    public static String lpad( final float value, final int w, final int digits ) {
+
+        return ObtuseUtil.lpad( (double)value, w, digits );
 
     }
 
@@ -2025,7 +2026,7 @@ public class ObtuseUtil {
 
             }
 
-            rvalBuilder.append( s.substring( 0, ix ) );
+            rvalBuilder.append( s, 0, ix );
             s = s.substring( ix );
             if ( s.startsWith( "&" ) ) {
 
@@ -2237,7 +2238,7 @@ public class ObtuseUtil {
 
             }
 
-            rval.append( string.substring( quoteOffset + 1, newQuoteOffset + 1 ) ).append( '"' );
+            rval.append( string, quoteOffset + 1, newQuoteOffset + 1 ).append( '"' );
 
             quoteOffset = newQuoteOffset;
 
@@ -3096,7 +3097,7 @@ public class ObtuseUtil {
             final @NotNull GowingEntityFactory[] gowingEntityFactories
     ) throws IOException, GowingUnpackingException {
 
-        Optional<GowingUnPackedEntityGroup> maybeResult = Optional.empty();
+        Optional<GowingUnPackedEntityGroup> maybeResult;
         try (
                 GowingUnPacker unPacker = new StdGowingUnPacker(
                         new GowingTypeIndex( "test unpacker" ),
@@ -3125,6 +3126,90 @@ public class ObtuseUtil {
         }
 
         return maybeResult;
+
+    }
+
+    /**
+     Pluralize a value and a noun.
+     <p>Examples:</p>
+     <blockquote>
+     {@code pluralize( 0, "joy", "bird", "birds" )} yields {@code "0 joy"}
+     <br>{@code pluralize( 1, "joy", "bird", "birds" )} yields {@code "1 bird"}
+     <br>{@code pluralize( 2, "joy", "bird", "birds" )} yields {@code "2 birds"}
+     </pre>
+     </blockquote>
+     @param value the value.
+     @param none the noun if {@code value} is 0.
+     @param one the noun if {@code value} is 1.
+     @param many the noun if {@code value} is neither 0 or 1.
+     @return the pluralized value and noun.
+     */
+
+    public static String pluralize( final long value, final @NotNull String none, final @NotNull String one, final @NotNull String many ) {
+
+        return value + " " + ( value == 1 ? one : value == 0 ? none : many );
+
+    }
+
+    /**
+     Pluralize a value and a noun.
+     <p>Examples:</p>
+     <blockquote>
+     {@code pluralize( 0, "bird", "birds" )} yields {@code "0 birds"}
+     <br>{@code pluralize( 1, "bird", "birds" )} yields {@code "1 bird"}
+     <br>{@code pluralize( 2, "bird", "birds" )} yields {@code "2 birds"}
+     </pre>
+     </blockquote>
+     @param value the value.
+     @param singular the noun if {@code value} is 1.
+     @param plural the noun if {@code value} is not 1.
+     @return the pluralized value and noun.
+     */
+
+    public static String pluralize( final long value, final @NotNull String singular, final @NotNull String plural ) {
+
+        return value + " " + ( value == 1 ? singular : plural );
+
+    }
+
+    /**
+     Pluralize a value and a noun where the plural form has an {@code "s"} suffix.
+     <p>Examples:</p>
+     <blockquote>
+     {@code pluralize( 0, "bird", "birds" )} yields {@code "0 birds"}
+     <br>{@code pluralize( 1, "bird", "birds" )} yields {@code "1 bird"}
+     <br>{@code pluralize( 2, "bird", "birds" )} yields {@code "2 birds"}
+     </pre>
+     </blockquote>
+     @param value the value.
+     @param noun the noun.
+     @return the pluralized value and noun (the noun will be suffixed by {@code "s"} if {@code value} is not {@code 1}).
+     */
+
+    public static String pluralize( final long value, final @NotNull String noun ) {
+
+        return pluralize( value, noun, noun + 's' );
+
+    }
+
+    /**
+     Pluralize a value and a noun where the plural form has an {@code "es"} suffix.
+     <p>Examples:</p>
+     <blockquote>
+     {@code pluralize( 0, "fish", "fishes" )} yields {@code "0 fishes"}
+     <br>{@code pluralize( 1, "fish", "fishes" )} yields {@code "1 fish"}
+     <br>{@code pluralize( 2, "fish", "fishes" )} yields {@code "2 fishes"}
+     </pre>
+     </blockquote>
+     <p>Note subtly different method name.</p>
+     @param value the value.
+     @param noun the noun.
+     @return the pluralized value and noun (the noun will be suffixed by {@code "es"} if {@code value} is not {@code 1}).
+     */
+
+    public static String pluralizes( final long value, final @NotNull String noun ) {
+
+        return pluralize( value, noun, noun + "es" ); // value + " " + what + ( value == 1 ? "" : "es" );
 
     }
 

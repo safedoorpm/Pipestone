@@ -182,8 +182,7 @@ public class WrappedComboBoxSelectorPanel<CHOICE, PANEL extends JPanel> extends 
 
     }
 
-    public class InnerWrappedComboBoxSelectorPanel // <ICHOICE, IPANEL extends JPanel>
-            extends ComboBoxSelectorPanel<CHOICE, PANEL> { //ComboBoxSelectorPanel<String, JPanel>> {
+    public class InnerWrappedComboBoxSelectorPanel extends ComboBoxSelectorPanel<CHOICE, PANEL> {
 
         private InnerWrappedComboBoxSelectorPanel(
                 final @NotNull DefaultComboBoxModel<CHOICE> comboBoxModel
