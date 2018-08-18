@@ -8,10 +8,10 @@ import com.obtuse.ui.LogsWindow;
 import com.obtuse.util.ImageButton;
 import com.obtuse.util.ImageButtonOwner;
 import com.obtuse.util.Logger;
+import com.obtuse.util.ObtuseUtil;
+import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.CannotUndoException;
 import javax.swing.undo.UndoManager;
@@ -393,9 +393,12 @@ public abstract class JListManager implements ImageButtonOwner {
 
         private boolean _panelReady = false;
 
-        public ButtonPanel() {
+        private final String _purpose;
 
+        public ButtonPanel( final @NotNull String purpose ) {
             super();
+
+            _purpose = purpose;
 
         }
 
@@ -445,6 +448,7 @@ public abstract class JListManager implements ImageButtonOwner {
                     _addButton = new JLabel();
                     _addImageButton = ImageButton.makeImageButton(
                             JListManager.this,
+                            "JListAddButton",
                             _addButton,
                             JListManager.this::doAddButton,
                             _addButtonName,
@@ -474,6 +478,7 @@ public abstract class JListManager implements ImageButtonOwner {
                     _deleteButton = new JLabel();
                     _deleteImageButton = ImageButton.makeImageButton(
                             JListManager.this,
+                            "JlistDeleteButton",
                             _deleteButton,
                             JListManager.this::doDeleteButton,
                             _deleteButtonName,
@@ -507,6 +512,7 @@ public abstract class JListManager implements ImageButtonOwner {
                     _moveUpButton = new JLabel();
                     _moveUpImageButton = ImageButton.makeImageButton(
                             JListManager.this,
+                            "JListMoveUpButton",
                             _moveUpButton,
                             JListManager.this::doMoveUpButton,
                             _moveUpButtonName,
@@ -540,6 +546,7 @@ public abstract class JListManager implements ImageButtonOwner {
                     _moveDownButton = new JLabel();
                     _moveDownImageButton = ImageButton.makeImageButton(
                             JListManager.this,
+                            "JListMoveDownButton",
                             _moveDownButton,
                             JListManager.this::doMoveDownButton,
                             _moveDownButtonName,
@@ -581,6 +588,7 @@ public abstract class JListManager implements ImageButtonOwner {
                     _duplicateButton = new JLabel();
                     _duplicateImageButton = ImageButton.makeImageButton(
                             JListManager.this,
+                            "JListDuplicateButton",
                             _duplicateButton,
                             JListManager.this::doDuplicateButton,
                             _duplicateButtonName,
@@ -1146,6 +1154,12 @@ public abstract class JListManager implements ImageButtonOwner {
 
         }
 
+        public String toString() {
+
+            return "ButtonPanel( " + ObtuseUtil.enquoteToJavaString( _purpose ) + " )";
+
+        }
+
     }
 
     private JList _jList;
@@ -1181,18 +1195,10 @@ public abstract class JListManager implements ImageButtonOwner {
         _jList = new JList( _listModel );
         _listSelectionModel = _jList.getSelectionModel();
         _jList.addListSelectionListener(
-                new ListSelectionListener() {
-
-                    public void valueChanged( final ListSelectionEvent listSelectionEvent ) {
-
-                        setButtonStates();
-
-                    }
-
-                }
+                listSelectionEvent -> setButtonStates()
         );
         _scrollPane = new JScrollPane( _jList );
-        _buttonPanel = new ButtonPanel();
+        _buttonPanel = new ButtonPanel( "panel for " + _name );
 
     }
 
@@ -2017,6 +2023,12 @@ public abstract class JListManager implements ImageButtonOwner {
             throw new IllegalArgumentException( methodName + " called after JlistManager's button panel is ready" );
 
         }
+
+    }
+
+    public String toString() {
+
+        return "JListManager( " + ObtuseUtil.enquoteToJavaString( _name ) + " )";
 
     }
 

@@ -32,6 +32,8 @@ public abstract class AutoSizingValidatedJTextField extends ValidatedJTextField 
     private final int _minWidth;
     private final int _maxWidth;
 
+    private static FontMetrics s_likelyFontMetrics = null;
+
     /**
      Create an auto-size adjusting {@link ValidatedJTextField}.
      @param minWidth the minimum width that the text field should be autosized to.
@@ -100,27 +102,37 @@ public abstract class AutoSizingValidatedJTextField extends ValidatedJTextField 
 
     }
 
-    /**
-     Configure an arbitrary existing {@link JTextField} to do the auto-size adjusting trick.
-     <p>This variant of {@code configureAutoSizeAdjustingJTextField} uses the text field's
-     minimum size's width and maximum size's width to determine the minimum and maximum width that the text field should be constrained to.</p>
-     @param jtf the textfield to teach the auto-size adjusting trick to.
-     */
+    public static void maybeCacheLikelyFontMetrics( final FontMetrics fontMetrics ) {
 
-    @SuppressWarnings({"unused","UnusedReturnValue"})
-    public static <T extends JTextField> T configureAutoSizeAdjustingJTextField( final @NotNull T jtf ) {
+        if ( s_likelyFontMetrics == null ) {
 
-        if ( s_interestingField == jtf ) {
-
-            ObtuseUtil.doNothing();
+            s_likelyFontMetrics = fontMetrics;
 
         }
 
-        jtf.getDocument().addDocumentListener( new AutoAdjustingTextFieldWidthListener( jtf ) );
-
-        return jtf;
-
     }
+
+//    /**
+//     Configure an arbitrary existing {@link JTextField} to do the auto-size adjusting trick.
+//     <p>This variant of {@code configureAutoSizeAdjustingJTextField} uses the text field's
+//     minimum size's width and maximum size's width to determine the minimum and maximum width that the text field should be constrained to.</p>
+//     @param jtf the textfield to teach the auto-size adjusting trick to.
+//     */
+//
+//    @SuppressWarnings({"unused","UnusedReturnValue"})
+//    public static <T extends JTextField> T configureAutoSizeAdjustingJTextField( final @NotNull T jtf ) {
+//
+//        if ( s_interestingField == jtf ) {
+//
+//            ObtuseUtil.doNothing();
+//
+//        }
+//
+//        jtf.getDocument().addDocumentListener( new AutoAdjustingTextFieldWidthListener( jtf ) );
+//
+//        return jtf;
+//
+//    }
 
     public int getMinWidth() {
 
@@ -159,6 +171,7 @@ public abstract class AutoSizingValidatedJTextField extends ValidatedJTextField 
 
     }
 
+    @SuppressWarnings("unused")
     public static boolean hasInterestingField() {
 
         return s_interestingField != null;
@@ -189,6 +202,8 @@ public abstract class AutoSizingValidatedJTextField extends ValidatedJTextField 
             super();
 
             _textField = textField;
+            _textField.setPreferredSize( new Dimension( _textField.getMinimumSize().width, _textField.getPreferredSize().height ) );
+            maybeGrowTextField( _textField );
 
         }
 
@@ -226,6 +241,27 @@ public abstract class AutoSizingValidatedJTextField extends ValidatedJTextField 
 
     }
 
+    @Nullable
+    public static FontMetrics getLikelyFontMetrics( final @NotNull JTextField tf ) {
+
+        Graphics graphics = tf.getGraphics();
+        FontMetrics fontMetrics;
+        if ( graphics == null ) {
+
+            fontMetrics = s_likelyFontMetrics;
+            Logger.logMsg( "likely font metrics are " + fontMetrics );
+
+        } else {
+
+            fontMetrics = graphics.getFontMetrics();
+            Logger.logMsg( "actual font metrics are " + fontMetrics );
+
+        }
+
+        return fontMetrics;
+
+    }
+
     public static void maybeGrowTextField( final @NotNull JTextField tf ) {
 
         if ( s_interestingField == tf ) {
@@ -234,8 +270,9 @@ public abstract class AutoSizingValidatedJTextField extends ValidatedJTextField 
 
         }
 
-        Graphics graphics = tf.getGraphics();
-        if ( graphics == null ) {
+        FontMetrics fontMetrics = getLikelyFontMetrics( tf );
+
+        if ( fontMetrics == null ) {
 
             return;
 
@@ -247,7 +284,6 @@ public abstract class AutoSizingValidatedJTextField extends ValidatedJTextField 
 
         }
 
-        FontMetrics fontMetrics = graphics.getFontMetrics();
         int textWidth = fontMetrics.stringWidth( tf.getText() );
 
         Dimension curPreferredSize = new Dimension( tf.getPreferredSize() );
@@ -266,17 +302,17 @@ public abstract class AutoSizingValidatedJTextField extends ValidatedJTextField 
 
             tf.setPreferredSize( curPreferredSize );
 
-//            if ( !( tf.getParent() instanceof JPanel ) ) {
+            if ( tf.getParent() != null ) {
 
                 tf.getParent().revalidate();
 
-//            }
+            }
 
         }
 
     }
 
-    public static void maybeShrinkTextField( final JTextField tf ) {
+    public static void maybeShrinkTextField( final @NotNull JTextField tf ) {
 
         if ( s_interestingField == tf ) {
 
@@ -284,15 +320,22 @@ public abstract class AutoSizingValidatedJTextField extends ValidatedJTextField 
 
         }
 
-        Graphics graphics = tf.getGraphics();
-        if ( graphics == null ) {
+        FontMetrics fontMetrics = getLikelyFontMetrics( tf );
+
+        if ( fontMetrics == null ) {
 
             return;
 
         }
 
-        FontMetrics fontMetrics = graphics.getFontMetrics();
+        if ( s_interestingField == tf ) {
+
+            ObtuseUtil.doNothing();
+
+        }
+
         int textWidth = fontMetrics.stringWidth( tf.getText() );
+
         Dimension curPreferredSize = new Dimension( tf.getPreferredSize() );
         Dimension minSize = tf.getMinimumSize();
         boolean changed = false;
@@ -309,11 +352,11 @@ public abstract class AutoSizingValidatedJTextField extends ValidatedJTextField 
 
             tf.setPreferredSize( curPreferredSize );
 
-//            if ( !( tf.getParent() instanceof JPanel ) ) {
+            if ( tf.getParent() != null ) {
 
                 tf.getParent().revalidate();
 
-//            }
+            }
 
         }
 

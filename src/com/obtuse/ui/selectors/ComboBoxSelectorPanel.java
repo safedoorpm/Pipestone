@@ -5,6 +5,7 @@
 
 package com.obtuse.ui.selectors;
 
+import com.obtuse.exceptions.HowDidWeGetHereError;
 import com.obtuse.ui.MyActionListener;
 import com.obtuse.util.ObtuseUtil;
 import com.obtuse.util.UniqueEntity;
@@ -75,7 +76,7 @@ public class ComboBoxSelectorPanel<E,C extends Container> extends SelectorPanel<
 
                         clearPostSelectionPanelContents();
 
-                        E key = _selectorComboBox.getItemAt( _selectorComboBox.getSelectedIndex() );
+                        E key = getMandatoryCurrentChoice();
 
                         Optional<C> optComponent = getSelectedComponent( key );
                         optComponent.ifPresent(
@@ -111,11 +112,33 @@ public class ComboBoxSelectorPanel<E,C extends Container> extends SelectorPanel<
 
         if ( isZeroASelection() ) {
 
-            cacheSelection( _selectorComboBox.getItemAt( _selectorComboBox.getSelectedIndex() ), firstSelection );
+            cacheSelection( getCurrentChoice(), firstSelection );
 
             setPostSelectionPanelContents( "ComboBoxSelectorPanel.isZeroASelection", firstSelection );
 
         }
+
+    }
+
+    @NotNull
+    public E getMandatoryCurrentChoice() {
+
+        E choice = getCurrentChoice();
+
+        if ( choice == null ) {
+
+            throw new HowDidWeGetHereError( "ComboBoxSelectorPanel.getMandatoryCurrentChoice:  no current choice to provide as demanded" );
+
+        }
+
+        return choice;
+
+    }
+
+    @Nullable
+    public E getCurrentChoice() {
+
+        return _selectorComboBox.getItemAt( _selectorComboBox.getSelectedIndex() );
 
     }
 

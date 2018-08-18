@@ -4,6 +4,8 @@
 
 package com.obtuse.util;
 
+import org.jetbrains.annotations.NotNull;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -20,16 +22,28 @@ public class ImageButton {
     private final JLabel _button;
     private final ImageIcon _pressedIcon;
     private final ImageIcon _unpressedIcon;
+//    private final ImageIcon _disabledIcon;
     private final Runnable _action;
+    private final String _purpose;
+
     private static final float DEFAULT_DARKENING_FACTOR = 0.8f;
     private static float s_defaultDarkeningFactor = ImageButton.DEFAULT_DARKENING_FACTOR;
 
-    private ImageButton( final JLabel button, final ImageIcon pressedIcon, final ImageIcon unpressedIcon, final Runnable action ) {
+    private ImageButton(
+            final @NotNull JLabel button,
+            final @NotNull String purpose,
+            final @NotNull ImageIcon pressedIcon,
+            final @NotNull ImageIcon unpressedIcon,
+//            final @NotNull ImageIcon disabledIcon,
+            final @NotNull Runnable action
+    ) {
         super();
 
         _button = button;
+        _purpose = purpose;
         _pressedIcon = pressedIcon;
         _unpressedIcon = unpressedIcon;
+//        _disabledIcon = disabledIcon;
         _action = action;
 
     }
@@ -46,42 +60,75 @@ public class ImageButton {
 
     }
 
+    @NotNull
     public Runnable getAction() {
 
         return _action;
 
     }
 
+    @NotNull
     public ImageIcon getPressedIcon() {
 
         return _pressedIcon;
 
     }
 
+    @NotNull
     public ImageIcon getUnpressedIcon() {
 
         return _unpressedIcon;
 
     }
 
+//    @NotNull
+//    public ImageIcon getDisabledIcon() {
+//
+//        return _disabledIcon;
+//
+//    }
+
+    @NotNull
+    public String getPurpose() {
+
+        return _purpose;
+
+    }
+
+    public void setEnabled( final boolean isEnabled ) {
+
+        _button.setEnabled( isEnabled );
+
+    }
+
+    public boolean isEnabled() {
+
+        return _button.isEnabled();
+
+    }
+
+    @NotNull
     public JLabel getButton() {
 
         return _button;
 
     }
 
+    @NotNull
     public static ImageButton makeImageButton(
-            final ImageButtonOwner imageButtonOwner,
-            final JLabel button,
-            final Runnable action,
-            final String buttonName
+            final @NotNull ImageButtonOwner imageButtonOwner,
+            final @NotNull String purpose,
+            final @NotNull JLabel button,
+            final @NotNull Runnable action,
+            final @NotNull String buttonFileName
     ) {
 
         return ImageButton.makeImageButton(
                 imageButtonOwner,
+                purpose,
                 button,
                 action,
-                buttonName,
+                buttonFileName,
                 ImageIconUtils.getDefaultResourceBaseDirectory(),
                 ImageButton.s_defaultDarkeningFactor
         );
@@ -89,42 +136,51 @@ public class ImageButton {
     }
 
     public static ImageButton makeImageButton(
-            final ImageButtonOwner imageButtonOwner,
-            final JLabel button,
-            final Runnable action,
-            final String buttonName,
-            final String resourceBaseDirectory,
+            final @NotNull ImageButtonOwner imageButtonOwner,
+            final @NotNull String purpose,
+            final @NotNull JLabel button,
+            final @NotNull Runnable action,
+            final @NotNull String buttonFileName,
+            final @NotNull String resourceBaseDirectory,
             final float darkeningFactor
     ) {
 
         ImageIcon unpressedIcon = ImageIconUtils.fetchIconImage(
-                "button-" + buttonName + ".png",
+                "button-" + buttonFileName + ".png",
                 0,
                 resourceBaseDirectory
         );
 
-        // Create a somewhat darker version of the unpressed icon.
+        // Create a somewhat darker icon for the pressed version.
 
         ImageIcon pressedIcon = new ImageIcon(
                 ImageIconUtils.changeImageBrightness( unpressedIcon.getImage(), darkeningFactor )
         );
 
-        return ImageButton.makeImageButton( imageButtonOwner, button, action, unpressedIcon, pressedIcon );
+//        // Create a somewhat brighter icon for the disabled version.
+//
+//
+//        ImageIcon disabledIcon = new ImageIcon(
+//                ImageIconUtils.changeImageBrightness( unpressedIcon.getImage(), 1F / darkeningFactor )
+//        );
+
+        return ImageButton.makeImageButton( imageButtonOwner, purpose, button, action, unpressedIcon, pressedIcon );
 
     }
 
     public static ImageButton makeImageButton(
             final ImageButtonOwner imageButtonOwner,
+            final String purpose,
             final JLabel button,
             final Runnable action,
-            final ImageIcon unpressedIcon,
-            final ImageIcon pressedIcon
+            final @NotNull ImageIcon unpressedIcon,
+            final @NotNull ImageIcon pressedIcon
     ) {
 
         int width = Math.max( pressedIcon.getIconWidth(), unpressedIcon.getIconWidth() );
         int height = Math.max( pressedIcon.getIconHeight(), unpressedIcon.getIconHeight() );
 
-        final ImageButton bi = new ImageButton( button, pressedIcon, unpressedIcon, action );
+        final ImageButton bi = new ImageButton( button, purpose, pressedIcon, unpressedIcon, action );
 
         button.addMouseListener(
                 new MouseListener() {
@@ -141,7 +197,7 @@ public class ImageButton {
 
                     public void mousePressed( final MouseEvent mouseEvent ) {
 
-                        if ( bi.getPressedIcon() != null && bi.getButton().isEnabled() ) {
+                        if ( bi.getButton().isEnabled() ) {
 
                             bi.getButton().setIcon( bi.getPressedIcon() );
 
@@ -189,6 +245,12 @@ public class ImageButton {
         button.setMaximumSize( new Dimension( width, height ) );
 
         return bi;
+
+    }
+
+    public String toString() {
+
+        return "ImageIcon( " + _purpose + " )";
 
     }
 
