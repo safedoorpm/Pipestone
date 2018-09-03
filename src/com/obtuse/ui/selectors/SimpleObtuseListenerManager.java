@@ -138,7 +138,7 @@ public class SimpleObtuseListenerManager<E> implements ObtuseListenerProxy<E> {
         Optional<ListenerInfo> optListener = findListenerByName( name );
         if ( optListener.isPresent() ) {
 
-            throw new HowDidWeGetHereError( "BasicBurkeDataSource.addCopierActionListener:  we already have a listener named " + ObtuseUtil.enquoteToJavaString( name ) );
+            throw new HowDidWeGetHereError( "CopierDataSource.addCopierActionListener:  we already have a listener named " + ObtuseUtil.enquoteToJavaString( name ) );
 
         }
 

@@ -1,5 +1,10 @@
 package com.obtuse.ui;
 
+import com.obtuse.util.AboutWindowHandler;
+import com.obtuse.util.BasicProgramConfigInfo;
+import com.obtuse.util.Logger;
+import com.obtuse.util.OSLevelCustomizations;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
@@ -18,13 +23,15 @@ public class AboutBox extends JDialog {
     private JPanel _contentPane;
     private JButton _buttonOK;
     private JLabel _copyrightLabel;
+    private JLabel _applicationNameLabel;
+    private JLabel _interestingStuffLabel;
 
     // Sneak a copyright symbol past the Java compiler on Windows
 
     private static final char COPYRIGHT_SYMBOL = (char)169;
 
     @SuppressWarnings({ "SameParameterValue" })
-    public AboutBox( final @Nullable JFrame owner ) {
+    public AboutBox( final @Nullable JFrame owner, boolean decorated ) {
 
         super( owner, true );
 
@@ -66,8 +73,57 @@ public class AboutBox extends JDialog {
 
         setResizable( false );
 
+        setUndecorated( !decorated );
+
         pack();
-        setVisible( true );
+
+    }
+
+    public AboutBox setCopyrightOwner( final @NotNull String years, final @NotNull String copyrightOwner ) {
+
+        return setCopyrightLabel(
+                "<html><small>Copyright " + AboutBox.COPYRIGHT_SYMBOL + " " + years + " " + copyrightOwner + "</small></html>"
+//                "<html><i>" + copyrightOwner + "</i></html>"
+        );
+
+    }
+
+    public AboutBox setCopyrightLabel(final @NotNull String copyrightLabel ) {
+
+        _copyrightLabel.setText( copyrightLabel );
+        return this;
+
+    }
+
+    public AboutBox setApplicationName( final @NotNull String applicationName ) {
+
+        return setApplicationLabel(
+                "<html><b>" + applicationName + "</b></html>"
+        );
+
+    }
+
+    public AboutBox setApplicationLabel( final @NotNull String applicationLabel ) {
+
+        _applicationNameLabel.setText( applicationLabel );
+
+        return this;
+
+    }
+
+    public AboutBox setInterestingStuff( final @NotNull String interestingStuff ) {
+
+        return setInterestingStuffLabel(
+                "<html><b>" + interestingStuff + "</b></html>"
+        );
+
+    }
+
+    public AboutBox setInterestingStuffLabel( final @NotNull String interestingStuffLabel ) {
+
+        _interestingStuffLabel.setText( interestingStuffLabel );
+
+        return this;
 
     }
 
@@ -91,8 +147,28 @@ public class AboutBox extends JDialog {
 
     public static void launch() {
 
+        BasicProgramConfigInfo.init( "Obtuse", "Pipestone","AboutBox", null );
+
+        JFrame jf = new JFrame( "test JFrame" );
+        JPanel jp = new JPanel();
+        JLabel jl = new JLabel( "Hi there" );
+        jp.setLayout( new BorderLayout() );
+        jp.add( jl );
+        jf.setContentPane( jp );
+        jf.pack();
+        jf.setVisible( true );
+
         @SuppressWarnings({ "UnusedDeclaration", "UnusedAssignment" })
-        AboutBox dialog = new AboutBox( null );
+        AboutBox dialog = new AboutBox( jf, false ).setApplicationName( "About Box Demo" ).setCopyrightOwner( "1867", "Example" ).setInterestingStuff( "Cool stuff!" );
+//        dialog.setUndecorated( true );
+
+//        dialog.setVisible( true );
+
+        OSLevelCustomizations.getCustomizer().setAboutWindowHandler(
+                () -> dialog.setVisible( true )
+        );
+
+        Logger.logMsg( "we're back!" );
 
     }
 

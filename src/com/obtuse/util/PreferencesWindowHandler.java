@@ -10,7 +10,7 @@ package com.obtuse.util;
  */
 
 @SuppressWarnings( { "UnusedDeclaration" } )
-public interface PreferencesHandler {
+public interface PreferencesWindowHandler {
 
     void handlePreferences();
 

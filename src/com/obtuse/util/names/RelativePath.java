@@ -819,7 +819,7 @@ public class RelativePath extends GowingAbstractPackableEntity implements Iterab
 
     public static void main( final String[] args ) {
 
-        BasicProgramConfigInfo.init( "Kenosee", "Burke2", "testing", null );
+        BasicProgramConfigInfo.init( "Kenosee", "Obtuse", "testing", null );
 
         Logger.logMsg( "our pid is " + ObtuseUtil.getPid() );
 

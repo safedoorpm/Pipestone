@@ -48,7 +48,7 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
 
     }
 
-    public static final String BURKE_IMAGE_INFO_FILENAME_SUFFIX = ".binfo";
+    public static final String OBTUSE_IMAGE_INFO_FILENAME_SUFFIX = ".binfo";
 
     public static final String GENERATED_IMAGE_FILE_PREFIX = "image_";
 
@@ -61,7 +61,7 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
         GENERATED_IMAGE_INFO_FILENAME_PATTERN = Pattern.compile(
                 GENERATED_IMAGE_FILE_PREFIX + '(' +
                 ObtuseUtil.replicate( "\\d", GENERATED_IMAGE_FILE_SN_LENGTH ) +
-                ')' + BURKE_IMAGE_INFO_FILENAME_SUFFIX
+                ')' + OBTUSE_IMAGE_INFO_FILENAME_SUFFIX
         );
 
         ObtuseUtil.doNothing();
@@ -69,24 +69,24 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
     }
 
     @SuppressWarnings("unused")
-    public static class BurkeImageFileInstanceCreationFailed extends Exception {
+    public static class ObtuseImageFileInstanceCreationFailed extends Exception {
 
-        public BurkeImageFileInstanceCreationFailed() {
+        public ObtuseImageFileInstanceCreationFailed() {
 
             super();
         }
 
-        public BurkeImageFileInstanceCreationFailed( final String message ) {
+        public ObtuseImageFileInstanceCreationFailed(final String message ) {
 
             super( message );
         }
 
-        public BurkeImageFileInstanceCreationFailed( final String message, final Throwable cause ) {
+        public ObtuseImageFileInstanceCreationFailed(final String message, final Throwable cause ) {
 
             super( message, cause );
         }
 
-        public BurkeImageFileInstanceCreationFailed( final Throwable cause ) {
+        public ObtuseImageFileInstanceCreationFailed(final Throwable cause ) {
 
             super( cause );
         }
@@ -94,24 +94,24 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
     }
 
     @SuppressWarnings("unused")
-    public static class BurkeImageFileCachedImageLoadFailed extends Exception {
+    public static class ObtuseImageFileCachedImageLoadFailed extends Exception {
 
-        public BurkeImageFileCachedImageLoadFailed() {
+        public ObtuseImageFileCachedImageLoadFailed() {
 
             super();
         }
 
-        public BurkeImageFileCachedImageLoadFailed( final String message ) {
+        public ObtuseImageFileCachedImageLoadFailed(final String message ) {
 
             super( message );
         }
 
-        public BurkeImageFileCachedImageLoadFailed( final String message, final Throwable cause ) {
+        public ObtuseImageFileCachedImageLoadFailed(final String message, final Throwable cause ) {
 
             super( message, cause );
         }
 
-        public BurkeImageFileCachedImageLoadFailed( final Throwable cause ) {
+        public ObtuseImageFileCachedImageLoadFailed(final Throwable cause ) {
 
             super( cause );
         }
@@ -160,7 +160,7 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
 
     static {
 
-        s_gowingTypeIndex = new GowingTypeIndex( "burke type index" );
+        s_gowingTypeIndex = new GowingTypeIndex( "obtuse type index" );
         Optional<EntityTypeInfo> rval = s_gowingTypeIndex.findTypeInfo( ObtuseImageFile.FACTORY.getTypeName() );
         if ( !rval.isPresent() ) {
 
@@ -273,7 +273,7 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
      Where we have decided to cache the image's info file (the serialization of this instance).
      <p/>The first time that we are asked to save ourselves to disk, this attribute will be {@code null}.
      Consequently, we pick a place for our info file and then serialize ourselves to that location.
-     Our info file will have a suffix as specified by {@link xyz.kenosee.burke2.util.BurkeFiles#BURKE_IMAGE_INFO_FILENAME_SUFFIX}.
+     Our info file will have a suffix as specified by {@link OBTUSE_IMAGE_INFO_FILENAME_SUFFIX}.
      We then convert our info file name into our cached image file's name by replacing the suffix of our info file with
      whatever suffix is appropriate for the format of our image file (if the image arrived at our door as an in-memory image then we'll
      save it as a ".jpg").
@@ -332,28 +332,28 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
     }
 
     public ObtuseImageFile( final @NotNull File f )
-            throws BurkeImageFileInstanceCreationFailed {
+            throws ObtuseImageFileInstanceCreationFailed {
 
         this( "ObtuseImageFile( File )", null, f, null );
 
     }
 
     public ObtuseImageFile( final @NotNull ImageIcon imageIcon )
-            throws BurkeImageFileInstanceCreationFailed {
+            throws ObtuseImageFileInstanceCreationFailed {
 
         this( "ObtuseImageFile( ImageIcon )", null, null, imageIcon );
 
     }
 
     public ObtuseImageFile( final @NotNull URL originalURL )
-            throws BurkeImageFileInstanceCreationFailed {
+            throws ObtuseImageFileInstanceCreationFailed {
 
         this( "ObtuseImageFile( URL )", originalURL, null, null );
 
     }
 
     private ObtuseImageFile( final String who, final URL originalURL, final File originalFile, final ImageIcon imageIcon )
-            throws BurkeImageFileInstanceCreationFailed {
+            throws ObtuseImageFileInstanceCreationFailed {
 
         super( new GowingNameMarkerThing() );
 
@@ -429,7 +429,7 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
 
         } catch ( URISyntaxException | IOException e ) {
 
-            throw new BurkeImageFileInstanceCreationFailed(
+            throw new ObtuseImageFileInstanceCreationFailed(
                     who + " initialization failed (using original URL=" + originalURL + "), " +
                     "original File( " + originalFile + "), " +
                     "or imageIcon(" + imageIcon + ") ",
@@ -505,14 +505,14 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
      Use Gowing to recover a ObtuseImageFile instance.
      */
 
-    public static ObtuseImageFile recoverBurkeImageFile( final File burkeImageFileFile )
+    public static ObtuseImageFile recoverObtuseImageFile(final File obtuseImageFileFile )
             throws IOException, GowingUnpackingException {
 
         Measure m = new Measure( "recover BIF" );
         boolean oldLoggingEnabled = Logger.setLoggingEnabled( s_loadLoggingEnabled );
         try {
 
-            StdGowingUnPacker unPacker = new StdGowingUnPacker( s_gowingTypeIndex, burkeImageFileFile );
+            StdGowingUnPacker unPacker = new StdGowingUnPacker( s_gowingTypeIndex, obtuseImageFileFile );
             Optional<GowingUnPackedEntityGroup> optionalResult = unPacker.unPack();
 
             ObtuseImageFile bif = null;
@@ -561,12 +561,12 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
      This method attempts to recover {@link ObtuseImageFile} instances for each of a specified array of {@link File} references to their {@code .binfo} files.
 
      @param binfoFiles a {@link SortedMap}{@code <Integer,ObtuseImageFile>} containing what was recoverable from the provided array of {@code .binfo} files.
-     @return an array of the BurkeImageFiles which were recoverable from the provided {@code .binfo} files.
+     @return an array of the ObtuseImageFiles which were recoverable from the provided {@code .binfo} files.
      @throws ObtuseMessageLabel.AugmentedIllegalArgumentException if {@code dir} is not actually a directory.
      */
 
     @NotNull
-    public static SortedMap<Integer, ObtuseImageFile> getSpecifiedBurkeInfoFiles( final @NotNull File@NotNull[] binfoFiles ) {
+    public static SortedMap<Integer, ObtuseImageFile> getSpecifiedObtuseInfoFiles(final @NotNull File@NotNull[] binfoFiles ) {
 
         SortedMap<Integer, ObtuseImageFile> rval = new TreeMap<>();
         for ( File f : binfoFiles ) {
@@ -574,7 +574,7 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
             Measure m = new Measure( "load a bif in bulk" );
             try {
 
-                ObtuseImageFile bif = recoverBurkeImageFile( f );
+                ObtuseImageFile bif = recoverObtuseImageFile( f );
                 if ( bif != null && !rval.containsKey( bif.getSerialNumber() ) ) {
 
                     rval.put( bif.getSerialNumber(), bif );
@@ -627,7 +627,7 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
 
         if ( binfoFiles == null ) {
 
-            Logger.logErr( "ObtuseImageFile.getAllBurkeInfoFiles:  no image repository" );
+            Logger.logErr( "ObtuseImageFile.getAllObtuseInfoFiles:  no image repository" );
 
             return null;
 
@@ -1116,7 +1116,7 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
 
             File candidateImageInfoFileObject = constructCachedImagRepositoryFileObject(
                     maxSn,
-                    ObtuseImageFile.BURKE_IMAGE_INFO_FILENAME_SUFFIX
+                    ObtuseImageFile.OBTUSE_IMAGE_INFO_FILENAME_SUFFIX
             );
 
             // Do we have a winner?
@@ -1215,7 +1215,7 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
     @NotNull
     public File getCachedImageInfoFileLocation() {
 
-        return constructCachedImagRepositoryFileObject( _ourSerialNumber, ObtuseImageFile.BURKE_IMAGE_INFO_FILENAME_SUFFIX );
+        return constructCachedImagRepositoryFileObject( _ourSerialNumber, ObtuseImageFile.OBTUSE_IMAGE_INFO_FILENAME_SUFFIX);
 
     }
 
@@ -1313,7 +1313,7 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
 
      @return the full size image.
      @throws IOException                         if an error occurs reading the cached image file.
-     @throws BurkeImageFileCachedImageLoadFailed if ImageIO.read returns {@code null} (documentation for ImageIO.read says that the method can
+     @throws ObtuseImageFileCachedImageLoadFailed if ImageIO.read returns {@code null} (documentation for ImageIO.read says that the method can
      return {@code null} but doesn't specify the circumstances under which it actually does return {@code null}). Sigh.
      <p/>The 'good news' is that the constructors for this class are designed to fail (by throwing an exception) if they are
      unable to create a thumbnail for the image and write/copy the image to our image cache/repository. Since creating the thumbnail
@@ -1323,7 +1323,7 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
 
     @NotNull
     public Image loadPrimaryImageFromCache()
-            throws IOException, BurkeImageFileCachedImageLoadFailed {
+            throws IOException, ObtuseImageFileCachedImageLoadFailed {
 
         Logger.logMsg( "loading primary image for " + this );
 
@@ -1336,7 +1336,7 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
 
             if ( image == null ) {
 
-                throw new BurkeImageFileCachedImageLoadFailed( "ObtuseImageFile.loadPrimaryImage:  image decoder returned null (no idea why - sorry)" );
+                throw new ObtuseImageFileCachedImageLoadFailed( "ObtuseImageFile.loadPrimaryImage:  image decoder returned null (no idea why - sorry)" );
 
             } else if ( _cachedImageWidth == -1 || _cachedImageHeight == -1 ) {
 
@@ -1613,7 +1613,7 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
 
     public static void main( final String[] args ) {
 
-        BasicProgramConfigInfo.init( "Kenosee", "Burke2", "testing", null );
+        BasicProgramConfigInfo.init( "Kenosee", "Obtuse", "testing", null );
 
         ObtuseImageFile bf = null;
         Image im = null;
@@ -1622,7 +1622,7 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
             bf = new ObtuseImageFile( new File( "testImage.jpg" ) );
             im = bf.loadPrimaryImageFromCache();
 
-        } catch ( BurkeImageFileInstanceCreationFailed | BurkeImageFileCachedImageLoadFailed | IOException e ) {
+        } catch ( ObtuseImageFileInstanceCreationFailed | ObtuseImageFileCachedImageLoadFailed | IOException e ) {
 
             e.printStackTrace();
 

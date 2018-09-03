@@ -5,7 +5,7 @@
 package com.obtuse.ui;
 
 import com.obtuse.util.OSLevelCustomizations;
-import com.obtuse.util.PreferencesHandler;
+import com.obtuse.util.PreferencesWindowHandler;
 import com.obtuse.util.Trace;
 import org.jetbrains.annotations.NotNull;
 
@@ -125,7 +125,7 @@ public class WindowWithMenus extends TrackedWindow {
 
     private JCheckBoxMenuItem _showLogsMenuItem;
 
-    private static PreferencesHandler s_preferencesHandler;
+    private static PreferencesWindowHandler s_preferencesWindowHandler;
 
     private static final Collection<WindowWithMenus> s_allWindowsWithLogsMenuItem = new LinkedList<>();
     private static boolean s_showLogsMode;
@@ -236,9 +236,9 @@ public class WindowWithMenus extends TrackedWindow {
 
     private void handlePreferences() {
 
-        if ( s_preferencesHandler != null ) {
+        if ( s_preferencesWindowHandler != null ) {
 
-            s_preferencesHandler.handlePreferences();
+            s_preferencesWindowHandler.handlePreferences();
 
         }
 
@@ -246,13 +246,13 @@ public class WindowWithMenus extends TrackedWindow {
 
     /**
      * Set the preferences handler.
-     * @param preferencesHandler the preferences handler (null if you don't want one).
+     * @param preferencesWindowHandler the preferences handler (null if you don't want one).
      */
 
     @SuppressWarnings("UnusedDeclaration")
-    public static void setPreferencesHandler( final PreferencesHandler preferencesHandler ) {
+    public static void setPreferencesHandler( final PreferencesWindowHandler preferencesWindowHandler) {
 
-        s_preferencesHandler = preferencesHandler;
+        s_preferencesWindowHandler = preferencesWindowHandler;
 
         // This is the Mac way to set the preferences handler.
         // The windows way was handled as best we could handle it in our constructor above.
@@ -266,7 +266,7 @@ public class WindowWithMenus extends TrackedWindow {
 
         if ( customizer != null ) {
 
-            customizer.setPreferencesHandler( preferencesHandler );
+            customizer.setPreferencesHandler(preferencesWindowHandler);
 
         }
 

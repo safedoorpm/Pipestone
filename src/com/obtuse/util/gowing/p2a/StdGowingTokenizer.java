@@ -1198,7 +1198,7 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
                             //
                             //		    return new GowingToken2( TokenType.BYTE, hexValue, _lnum, _offset );
 
-                            //		case Constants.TAG_SHORT:
+                            //		case GowingConstants.TAG_SHORT:
                             //
                             //		    GowingToken2 numericValue = getIntegralValue( TokenType.SHORT, new NumericStringParser);
                             //		    if ( numericString == null ) {
@@ -1312,7 +1312,7 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
 
             return null;
 
-        } else if ( rawValue.endsWith( "B" ) || rawValue.endsWith( "d" ) ) {
+        } else if ( rawValue.endsWith( "B" ) || rawValue.endsWith( "b" ) ) {
 
             boolean value;
             if ( "T".equals( rawValue.substring( 0, rawValue.length() -1 ) ) ) {
@@ -1733,6 +1733,7 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
                 // A comma is required here for all other kinds of arrays.
 
                 ch = nextCh();
+                //noinspection StatementWithEmptyBody
                 if ( ch != ',' ) {
 
                     if ( !primitive || !elementType.equals( TokenType.BYTE ) ) {

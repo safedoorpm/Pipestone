@@ -17,7 +17,7 @@ import org.jetbrains.annotations.NotNull;
 public abstract class UniqueWidget implements UniquelyNamedEntity, UniqueWithId {
 
     public static final SimpleUniqueIntegerIdGenerator
-            WIDGET_ID_GENERATOR = new SimpleUniqueIntegerIdGenerator( "BurkeWidget family's id generator" );
+            WIDGET_ID_GENERATOR = new SimpleUniqueIntegerIdGenerator( "CopierWidget family's id generator" );
 
     private final long _id;
     private final String _name;

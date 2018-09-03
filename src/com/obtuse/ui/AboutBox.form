@@ -100,7 +100,7 @@
                     </properties>
                     <border type="none"/>
                     <children>
-                      <component id="34a58" class="javax.swing.JLabel">
+                      <component id="34a58" class="javax.swing.JLabel" binding="_applicationNameLabel">
                         <constraints>
                           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                         </constraints>
@@ -111,12 +111,12 @@
                       </component>
                     </children>
                   </grid>
-                  <component id="f4e58" class="javax.swing.JLabel">
+                  <component id="f4e58" class="javax.swing.JLabel" binding="_interestingStuffLabel">
                     <constraints>
                       <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <text value="&lt;html&gt;&lt;center&gt;Interesting stuff goes here.&lt;/center&gt;&lt;/html&gt;"/>
+                      <text value="interesting stuff goes here"/>
                     </properties>
                   </component>
                 </children>

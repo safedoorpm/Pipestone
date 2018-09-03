@@ -4,25 +4,112 @@
 
 package com.obtuse.util;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.awt.*;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
+import java.awt.desktop.AboutEvent;
+import java.awt.desktop.AboutHandler;
+import java.awt.desktop.PreferencesEvent;
 
 /**
  * Describe something which does OS-specific customizations.
  */
 
 @SuppressWarnings({ "UnusedDeclaration" })
-public abstract class OSLevelCustomizations {
+public class OSLevelCustomizations {
 
-    private static boolean _gotOSLevelCustomizations = false;
+//    private static boolean _gotOSLevelCustomizations = false;
     private static OSLevelCustomizations s_osLevelCustomizations;
 
     public static boolean s_forceWindows = false;
 
     public static String s_forceLookAndFeel = null;
+    private static QuitCatcher _quitCatcher;
+    private final Desktop _desktop;
+    private final Taskbar _taskbar;
+    private AboutWindowHandler _aboutWindowHandler;
+    private PreferencesWindowHandler preferencesWindowHandler;
 
-    public abstract void setPreferencesHandler( PreferencesHandler prefsHandler );
+    private OSLevelCustomizations() {
+
+        super();
+
+        if ( Desktop.isDesktopSupported() ) {
+
+            _desktop = Desktop.getDesktop();
+
+            if ( supportsFeature( Desktop.Action.APP_ABOUT ) ) {
+
+                _desktop.setAboutHandler(
+                        e -> {
+
+                            if ( _aboutWindowHandler != null ) {
+
+                                _aboutWindowHandler.makeVisible();
+
+                            }
+
+                        }
+                );
+
+            }
+
+            if ( supportsFeature( Desktop.Action.APP_PREFERENCES ) ) {
+
+                _desktop.setPreferencesHandler(
+
+                        e -> {
+
+                            if ( preferencesWindowHandler != null ) {
+
+                                preferencesWindowHandler.handlePreferences();
+
+                            }
+
+                        }
+
+                );
+
+            }
+
+        } else {
+
+            _desktop = null;
+
+        }
+
+        if ( Taskbar.isTaskbarSupported() ) {
+
+            _taskbar = Taskbar.getTaskbar();
+
+        } else {
+
+            _taskbar = null;
+
+        }
+
+    }
+
+    public void setPreferencesHandler( final PreferencesWindowHandler prefsHandler ) {
+
+        preferencesWindowHandler = prefsHandler;
+
+//        if ( supportsFeature( Desktop.Action.APP_PREFERENCES ) ) {
+//
+//            _pref
+//            _desktop.setPreferencesHandler(
+//                    new java.awt.desktop.PreferencesWindowHandler() {
+//                        @Override
+//                        public void handlePreferences(PreferencesEvent e) {
+//
+//
+//                        }
+//                    }
+//            );
+//
+//        }
+
+    }
 
     public static boolean onMacOsX() {
 
@@ -55,76 +142,146 @@ public abstract class OSLevelCustomizations {
         return onWindows;
     }
 
-    public abstract void setQuitCatcher( QuitCatcher quitCatcher );
+    public void setQuitCatcher( final QuitCatcher quitCatcher ) {
 
-    public abstract QuitCatcher getQuitCatcher();
+        _quitCatcher = quitCatcher;
 
-    public abstract void setAboutWindowHandler( AboutWindowHandler aboutWindowHandler );
+    }
 
-    public abstract AboutWindowHandler getAboutWindowHandler();
+    public QuitCatcher getQuitCatcher() {
 
-    public abstract void setDockBadge( String msg );
+        return _quitCatcher;
 
-    public abstract void setDockIconImage( Image icon );
+    }
 
-    public static OSLevelCustomizations getCustomizer() {
+    public void setAboutWindowHandler( final AboutWindowHandler aboutWindowHandler ) {
 
-        if ( !OSLevelCustomizations._gotOSLevelCustomizations ) {
+        _aboutWindowHandler = aboutWindowHandler;
 
-            String osSpecificCustomizerClassName;
-            if ( OSLevelCustomizations.onMacOsX() ) {
+    }
 
-                osSpecificCustomizerClassName = "com.obtuse.util.MacCustomization";
+    public AboutWindowHandler getAboutWindowHandler() {
 
-            } else if ( OSLevelCustomizations.onWindows() ) {
+        return _aboutWindowHandler;
 
-                osSpecificCustomizerClassName = "com.obtuse.util.WindowsCustomization";
+    }
 
-            } else {
+    public boolean supportsFeature( final @NotNull Taskbar.Feature feature ) {
 
-                return null;
+        return _taskbar != null && _taskbar.isSupported( feature );
 
-            }
+    }
 
-            String methodName = null;
+    public boolean supportsFeature( final @NotNull Desktop.Action action ) {
 
-            try {
+        return _desktop != null && _desktop.isSupported( action );
 
-                //noinspection RawUseOfParameterizedType
-                Class macSpecificCode =
-                        OSLevelCustomizations.class.getClassLoader().loadClass( osSpecificCustomizerClassName );
-                methodName = "createInstance";
-                @SuppressWarnings("unchecked") Method createInstance = macSpecificCode.getDeclaredMethod( methodName );
-                createInstance.setAccessible( true );
-                //noinspection RedundantArrayCreation
-                OSLevelCustomizations.s_osLevelCustomizations = (OSLevelCustomizations)createInstance.invoke( null, new Object[] {} );
+    }
 
-            } catch ( ClassNotFoundException e ) {
+    public boolean setDockBadge(final String msg ) {
 
-                Logger.logErr( "unable to find " + osSpecificCustomizerClassName + " class - assuming customizations are not available" );
+        if ( supportsFeature( Taskbar.Feature.ICON_BADGE_TEXT ) ) {
 
-            } catch ( NoSuchMethodException e ) {
+            _taskbar.setIconBadge( msg );
 
-                Logger.logErr( "unable to find " + methodName + " method in " + osSpecificCustomizerClassName + " class - assuming customizations are not available" );
+            return true;
 
-            } catch ( IllegalAccessException e ) {
+        } else {
 
-                Logger.logErr( "unable to invoke " + methodName + " method in " + osSpecificCustomizerClassName + " class - assuming customizations are not available" );
-
-            } catch ( InvocationTargetException e ) {
-
-                Logger.logErr(
-                        "caught an exception while invoking " + methodName + " method in " + osSpecificCustomizerClassName + " class - assuming customizations are not available"
-                );
-
-            }
-
-            OSLevelCustomizations._gotOSLevelCustomizations = true;
+            return false;
 
         }
 
-        return OSLevelCustomizations.s_osLevelCustomizations;
+    }
+
+    public boolean setDockIconImage( final Image icon ) {
+
+        if ( supportsFeature( Taskbar.Feature.ICON_IMAGE ) ) {
+
+            _taskbar.setIconImage( icon );
+
+            return true;
+
+        } else {
+
+            return false;
+
+        }
 
     }
+
+    public static OSLevelCustomizations getCustomizer() {
+
+        if (s_osLevelCustomizations == null) {
+
+            s_osLevelCustomizations = new OSLevelCustomizations();
+
+        }
+
+        return s_osLevelCustomizations;
+
+    }
+
+    public String toString() {
+
+        return "OSLevelCustomizations( " + ( onMacOsX() ? "Mac OS X" : "MS Windows" ) + " )";
+
+    }
+
+//            String osSpecificCustomizerClassName;
+//            if ( OSLevelCustomizations.onMacOsX() ) {
+//
+//                osSpecificCustomizerClassName = "com.obtuse.util.MacCustomization";
+//
+//            } else if ( OSLevelCustomizations.onWindows() ) {
+//
+//                osSpecificCustomizerClassName = "com.obtuse.util.WindowsCustomization";
+//
+//            } else {
+//
+//                return null;
+//
+//            }
+//
+//            String methodName = null;
+//
+//            try {
+//
+//                //noinspection RawUseOfParameterizedType
+//                Class macSpecificCode =
+//                        OSLevelCustomizations.class.getClassLoader().loadClass( osSpecificCustomizerClassName );
+//                methodName = "createInstance";
+//                @SuppressWarnings("unchecked") Method createInstance = macSpecificCode.getDeclaredMethod( methodName );
+//                createInstance.setAccessible( true );
+//                //noinspection RedundantArrayCreation
+//                OSLevelCustomizations.s_osLevelCustomizations = (OSLevelCustomizations)createInstance.invoke( null, new Object[] {} );
+//
+//            } catch ( ClassNotFoundException e ) {
+//
+//                Logger.logErr( "unable to find " + osSpecificCustomizerClassName + " class - assuming customizations are not available" );
+//
+//            } catch ( NoSuchMethodException e ) {
+//
+//                Logger.logErr( "unable to find " + methodName + " method in " + osSpecificCustomizerClassName + " class - assuming customizations are not available" );
+//
+//            } catch ( IllegalAccessException e ) {
+//
+//                Logger.logErr( "unable to invoke " + methodName + " method in " + osSpecificCustomizerClassName + " class - assuming customizations are not available" );
+//
+//            } catch ( InvocationTargetException e ) {
+//
+//                Logger.logErr(
+//                        "caught an exception while invoking " + methodName + " method in " + osSpecificCustomizerClassName + " class - assuming customizations are not available"
+//                );
+//
+//            }
+//
+//            OSLevelCustomizations._gotOSLevelCustomizations = true;
+
+//        }
+//
+//        return OSLevelCustomizations.s_osLevelCustomizations;
+
+//    }
 
 }
