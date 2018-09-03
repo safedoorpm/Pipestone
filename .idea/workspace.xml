@@ -4,9 +4,7 @@
     <option name="SCOPE_TYPE" value="3" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" name="Default" comment="Move the CopierWidget class and other associated classes from the Burke project that it was implemented in to Pipestone where it is usable in various projects.&#10;Change the name of anything with a name or a string containing the word/name &quot;Burke&quot; to something else (usually &quot;Obtuse&quot; but it depends on the situation).&#10;Create an ObtuseConstants class as a centralized place for constants (out of a tiny acorn, an oak will (hopefully) take root and grow).&#10;Various cleanup.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" name="Default" comment="Move the CopierWidget class and other associated classes from the Burke project that it was implemented in to Pipestone where it is usable in various projects.&#10;Change the name of anything with a name or a string containing the word/name &quot;Burke&quot; to something else (usually &quot;Obtuse&quot; but it depends on the situation).&#10;Create an ObtuseConstants class as a centralized place for constants (out of a tiny acorn, an oak will (hopefully) take root and grow).&#10;Various cleanup." />
     <ignored path="Pipestone.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -1694,6 +1692,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="48" y="96" width="2405" height="1337" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.5269953" visible="true" weight="0.3559035" />
       <window_info id="Structure" order="1" sideWeight="0.43055555" side_tool="true" weight="0.17557251" />
