@@ -1330,7 +1330,7 @@
       <workItem from="1534928557856" duration="2286000" />
       <workItem from="1535153163594" duration="9000" />
       <workItem from="1535153183050" duration="1847000" />
-      <workItem from="1535248905982" duration="2885000" />
+      <workItem from="1535248905982" duration="3253000" />
     </task>
     <task id="LOCAL-00024" summary="Cleanup of the sorted JPanel facility (not really ready for primetime yet).">
       <created>1464983081342</created>
@@ -1679,7 +1679,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="963395000" />
+    <option name="totallyTimeSpent" value="963763000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
