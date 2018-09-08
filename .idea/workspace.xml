@@ -4,15 +4,7 @@
     <option name="SCOPE_TYPE" value="3" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" name="Default" comment="Minor cleanup and code reorganization.">
-      <change afterPath="$PROJECT_DIR$/src/com/obtuse/ui/ObtuseImageUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/obtuse/ui/exceptions/ObtuseImageLoadFailed.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/ObtuseImageFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/ObtuseImageFile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/model/FlexiGridPanelModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/model/FlexiGridPanelModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/ObtuseUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ObtuseUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingByteHolder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingByteHolder.java" afterDir="false" />
-    </list>
+    <list default="true" id="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" name="Default" comment="Minor cleanup and code reorganization." />
     <ignored path="Pipestone.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -1329,14 +1321,7 @@
       <workItem from="1535248905982" duration="3709000" />
       <workItem from="1535943172684" duration="32000" />
       <workItem from="1535954315285" duration="1286000" />
-      <workItem from="1536425332249" duration="260000" />
-    </task>
-    <task id="LOCAL-00024" summary="Cleanup of the sorted JPanel facility (not really ready for primetime yet).">
-      <created>1464983081342</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1464983081342</updated>
+      <workItem from="1536425332249" duration="568000" />
     </task>
     <task id="LOCAL-00025" summary="A sorted JPanel mechanism which keeps its components in sorted order.&#10;&#10;Various enhancements to the TreeSorter class inspired by the needs of the sorted JPanel mechanism.">
       <created>1469734858902</created>
@@ -1674,11 +1659,18 @@
       <option name="project" value="LOCAL" />
       <updated>1535937049551</updated>
     </task>
-    <option name="localTasksCounter" value="73" />
+    <task id="LOCAL-00073" summary="Minor cleanup and code reorganization.">
+      <created>1536425598487</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1536425598487</updated>
+    </task>
+    <option name="localTasksCounter" value="74" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="965797000" />
+    <option name="totallyTimeSpent" value="966105000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1691,7 +1683,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="48" y="96" width="2405" height="1337" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.5269953" visible="true" weight="0.36479053" />
       <window_info id="Structure" order="1" sideWeight="0.43055555" side_tool="true" weight="0.17557251" />
