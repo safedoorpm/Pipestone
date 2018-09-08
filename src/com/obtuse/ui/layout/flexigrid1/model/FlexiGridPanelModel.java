@@ -95,9 +95,9 @@ public class FlexiGridPanelModel<SLICE extends FlexiGridModelSlice> {
 
         _orientation = orientation;
 
-        JLabel component = new JLabel( "This is a test of this thing" );
-        _titleComponents.add( component );
-        _fgContainer.add( component, new FlexiGridBasicConstraint( "chumbly", -1, 0 ), -1, _key );
+//        JLabel component = new JLabel( "This is a test of this thing" );
+//        _titleComponents.add( component );
+//        _fgContainer.add( component, new FlexiGridBasicConstraint( "chumbly", -1, 0 ), -1, _key );
 
     }
 
@@ -126,6 +126,15 @@ public class FlexiGridPanelModel<SLICE extends FlexiGridModelSlice> {
     public void setTitleComponents( final @NotNull List<Component> titleComponents ) {
 
         setTitleComponents( titleComponents.toArray( new Component[0] ) );
+
+    }
+
+    public void clear() {
+
+        _fgContainer.removeAll( _key );
+        _titleComponents.clear();
+        _slices.clear();
+        _slicesSet.clear();
 
     }
 

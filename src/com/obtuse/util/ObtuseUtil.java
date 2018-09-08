@@ -1011,10 +1011,9 @@ public class ObtuseUtil {
     @SuppressWarnings({ "BooleanMethodNameMustStartWithQuestion" })
     public static boolean writeBytesToFile( final byte@NotNull[] bytes, final File file, final boolean printStackTraceOnError ) {
 
-        FileOutputStream fs = null;
-        try {
+        try ( FileOutputStream fs = new FileOutputStream( file ) ) {
 
-            fs = new FileOutputStream( file );
+//            fs = new FileOutputStream( file );
 
             //noinspection UnnecessaryLocalVariable
             boolean rval = ObtuseUtil.writeBytesToStream( bytes, fs, printStackTraceOnError );
@@ -1031,10 +1030,6 @@ public class ObtuseUtil {
             }
 
             return false;
-
-        } finally {
-
-            ObtuseUtil.closeQuietly( fs );
 
         }
 
@@ -1052,10 +1047,7 @@ public class ObtuseUtil {
     @SuppressWarnings({ "BooleanMethodNameMustStartWithQuestion" })
     public static boolean appendBytesToFile( final byte@NotNull[] bytes, final @NotNull File file, final boolean printStackTraceOnError ) {
 
-        FileOutputStream fs = null;
-        try {
-
-            fs = new FileOutputStream( file, true );
+        try ( FileOutputStream fs = new FileOutputStream( file, true ) ) {
 
             //noinspection UnnecessaryLocalVariable
             boolean rval = ObtuseUtil.writeBytesToStream( bytes, fs, printStackTraceOnError );
@@ -1072,10 +1064,6 @@ public class ObtuseUtil {
             }
 
             return false;
-
-        } finally {
-
-            ObtuseUtil.closeQuietly( fs );
 
         }
 

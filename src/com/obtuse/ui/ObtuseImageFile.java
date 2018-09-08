@@ -6,6 +6,7 @@
 package com.obtuse.ui;
 
 import com.obtuse.exceptions.HowDidWeGetHereError;
+import com.obtuse.ui.exceptions.ObtuseImageLoadFailed;
 import com.obtuse.util.BasicProgramConfigInfo;
 import com.obtuse.util.Logger;
 import com.obtuse.util.Measure;
@@ -87,31 +88,6 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
         }
 
         public ObtuseImageFileInstanceCreationFailed(final Throwable cause ) {
-
-            super( cause );
-        }
-
-    }
-
-    @SuppressWarnings("unused")
-    public static class ObtuseImageFileCachedImageLoadFailed extends Exception {
-
-        public ObtuseImageFileCachedImageLoadFailed() {
-
-            super();
-        }
-
-        public ObtuseImageFileCachedImageLoadFailed(final String message ) {
-
-            super( message );
-        }
-
-        public ObtuseImageFileCachedImageLoadFailed(final String message, final Throwable cause ) {
-
-            super( message, cause );
-        }
-
-        public ObtuseImageFileCachedImageLoadFailed(final Throwable cause ) {
 
             super( cause );
         }
@@ -440,7 +416,10 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
 
     }
 
-    public static synchronized void setImageRepositoryFile( final File imageRepositoryFile ) {
+    public static synchronized void setImageRepositoryFile(
+            final File imageRepositoryFile,
+            final boolean createIfNecessary
+    ) {
 
         if ( s_imageRepositoryFile == null ) {
 
@@ -449,6 +428,43 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
         } else {
 
             throw new IllegalArgumentException( "ObtuseImageFile.setImageRepositoryFile:  image repository file may only be set once" );
+
+        }
+
+        if ( imageRepositoryFile.isDirectory() ) {
+
+            //noinspection UnnecessaryReturnStatement
+            return;
+
+        } else if ( imageRepositoryFile.exists() ) {
+
+            throw new IllegalArgumentException(
+                    "ObtuseImageFile.setImageRepositoryFile:  " +
+                    "image repository " + ObtuseUtil.enquoteJavaObject( imageRepositoryFile ) +
+                    " exists but is not a directory"
+            );
+
+        } else if ( createIfNecessary ) {
+
+            Logger.logMsg(
+                    "ObtuseImageFile.setImageRepositoryFile:  " +
+                    "attempting to create image repository at/in " +
+                    ObtuseUtil.enquoteJavaObject( imageRepositoryFile )
+            );
+
+            if ( !imageRepositoryFile.mkdirs() ) {
+
+                throw new IllegalArgumentException(
+                        "ObtuseImageFile.setImageRepositoryFile:  " +
+                        "unable to create image repository " + ObtuseUtil.enquoteJavaObject( imageRepositoryFile )
+                );
+
+            }
+
+            Logger.logMsg(
+                    "ObtuseImageFile.setImageRepositoryFile:  " +
+                    "image repository " + ObtuseUtil.enquoteJavaObject( imageRepositoryFile ) + " created"
+            );
 
         }
 
@@ -665,6 +681,7 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
      Verify that this image has been saved in the repository.
      */
 
+    @SuppressWarnings("WeakerAccess")
     public boolean verifyImageIsReady() {
 
         //noinspection RedundantIfStatement
@@ -768,6 +785,7 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
 
     }
 
+    @SuppressWarnings("unused")
     @Nullable
     public URI getOriginalURI() {
 
@@ -775,6 +793,7 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
 
     }
 
+    @SuppressWarnings("WeakerAccess")
     public URL getOriginalURL() {
 
         return _originalURL;
@@ -975,7 +994,7 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
 
         _imageFileMD5 = ObtuseUtil.computeMD5( getCachedImageFileLocation() );
 
-        ImageIcon thumbnailImageIcon = maybeRegenerateThumbnail( new ImageIcon( image ), null );
+        ImageIcon thumbnailImageIcon = ObtuseImageUtils.maybeRegenerateThumbnail( new ImageIcon( image ), null, THUMBNAIL_EDGE_LENGTH );
         Optional<byte[]> thumbnailBytes = captureImageAsFile( thumbnailImageIcon.getImage(), "jpg", _title );
         if ( thumbnailBytes.isPresent() ) {
 
@@ -1313,7 +1332,7 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
 
      @return the full size image.
      @throws IOException                         if an error occurs reading the cached image file.
-     @throws ObtuseImageFileCachedImageLoadFailed if ImageIO.read returns {@code null} (documentation for ImageIO.read says that the method can
+     @throws ObtuseImageLoadFailed if ImageIO.read returns {@code null} (documentation for ImageIO.read says that the method can
      return {@code null} but doesn't specify the circumstances under which it actually does return {@code null}). Sigh.
      <p/>The 'good news' is that the constructors for this class are designed to fail (by throwing an exception) if they are
      unable to create a thumbnail for the image and write/copy the image to our image cache/repository. Since creating the thumbnail
@@ -1323,7 +1342,7 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
 
     @NotNull
     public Image loadPrimaryImageFromCache()
-            throws IOException, ObtuseImageFileCachedImageLoadFailed {
+            throws IOException, ObtuseImageLoadFailed {
 
         Logger.logMsg( "loading primary image for " + this );
 
@@ -1336,7 +1355,7 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
 
             if ( image == null ) {
 
-                throw new ObtuseImageFileCachedImageLoadFailed( "ObtuseImageFile.loadPrimaryImage:  image decoder returned null (no idea why - sorry)" );
+                throw new ObtuseImageLoadFailed( "ObtuseImageFile.loadPrimaryImage:  image decoder returned null (no idea why - sorry)" );
 
             } else if ( _cachedImageWidth == -1 || _cachedImageHeight == -1 ) {
 
@@ -1441,90 +1460,6 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
 
     }
 
-    @NotNull
-    private ImageIcon maybeRegenerateThumbnail(
-            final @NotNull ImageIcon originalImageIcon,
-            @SuppressWarnings("SameParameterValue") @Nullable final ImageIcon scaledImageIcon
-    ) {
-
-        int origW = originalImageIcon.getIconWidth();
-        int origH = originalImageIcon.getIconHeight();
-
-        // Just return the original if the thumbnail would be the same size or bigger than the original.
-
-        if ( THUMBNAIL_EDGE_LENGTH >= origW && THUMBNAIL_EDGE_LENGTH >= origH ) {
-
-            return originalImageIcon;
-
-        }
-
-        Dimension newSize = getMinimumScalingFactor( THUMBNAIL_EDGE_LENGTH, THUMBNAIL_EDGE_LENGTH, origW, origH );
-
-        ImageIcon rval = scaledImageIcon;
-
-        if ( rval == null || newSize.width != rval.getIconWidth() || newSize.height != rval.getIconHeight() ) {
-
-            Logger.logMsg(
-                    ( rval == null ? "" : "re" ) + "scaling (" + origW + 'x' + origH + ") to (" + newSize.width + 'x' + newSize.height +
-                    ")" );
-
-            rval = new ImageIcon(
-                    originalImageIcon.getImage().getScaledInstance(
-                            newSize.width,
-                            newSize.height,
-                            Image.SCALE_SMOOTH
-                    ),
-                    originalImageIcon.getDescription()
-            );
-
-        }
-
-        return rval;
-
-    }
-
-    private Dimension getMinimumScalingFactor( final int boxW, final int boxH, final int origW, final int origH ) {
-
-        // Compute the scaling factor which yields the desired width
-        // and the scaling factor which yields the desired height.
-
-        double sf1 = boxW / (double)origW;
-        double sf2 = boxH / (double)origH;
-
-        // The larger of the two could yield an image that doesn't fit in the box so we pick the smaller of the two if they aren't equal.
-
-        Dimension rval;
-        if ( sf1 < sf2 ) {
-
-            rval = new Dimension( boxW, (int)( origH * sf1 ) );
-            if ( rval.width != boxW && rval.height != boxH ) {
-
-                setImageState( ImageState.BROKEN );
-                String msg = "orig " + origW + 'x' + origH + " yielded width-based sf " + sf1 + " which yields scaled " + rval.width + 'x' +
-                             rval.height + " which is not exact for either width or height";
-                throw new HowDidWeGetHereError( msg );
-
-            }
-
-        } else {
-
-            rval = new Dimension( (int)( origW * sf2 ), boxH );
-            if ( rval.width != boxW && rval.height != boxH ) {
-
-                setImageState( ImageState.BROKEN );
-                String msg =
-                        "orig " + origW + 'x' + origH + " yielded height-based sf " + sf2 + " which yields scaled " + rval.width + 'x' +
-                        rval.height + " which is not exact for either width or height";
-                throw new HowDidWeGetHereError( msg );
-
-            }
-
-        }
-
-        return rval;
-
-    }
-
     @SuppressWarnings("unused")
     private double getGeometricScalingFactor( final int boxW, final int boxH, final int origW, final int origH ) {
 
@@ -1615,6 +1550,8 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
 
         BasicProgramConfigInfo.init( "Kenosee", "Obtuse", "testing", null );
 
+        setImageRepositoryFile( new File( "TestImageDirectory" ), true );
+
         ObtuseImageFile bf = null;
         Image im = null;
         try {
@@ -1622,7 +1559,7 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
             bf = new ObtuseImageFile( new File( "testImage.jpg" ) );
             im = bf.loadPrimaryImageFromCache();
 
-        } catch ( ObtuseImageFileInstanceCreationFailed | ObtuseImageFileCachedImageLoadFailed | IOException e ) {
+        } catch ( ObtuseImageFileInstanceCreationFailed | ObtuseImageLoadFailed | IOException e ) {
 
             e.printStackTrace();
 
