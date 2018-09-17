@@ -4,6 +4,7 @@
 
 package com.obtuse.util;
 
+import com.obtuse.exceptions.HowDidWeGetHereError;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -365,7 +366,60 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
 
         Collection<V> values = _sortedData.get( key );
 
-        return Collections.unmodifiableCollection( values == null ? new LinkedList<>() : values );
+        return Collections.unmodifiableCollection( values == null ? new FormattingLinkedList<>() : values );
+
+    }
+
+    @NotNull
+    public V getSingleValue( final @NotNull K key ) {
+
+        Collection<V> values = _sortedData.get( key );
+        if ( values == null || values.isEmpty() ) {
+
+            throw new IllegalArgumentException(
+                    "TreeSorter.getSingleValue:  key " +
+                    ObtuseUtil.enquoteJavaObject( key ) +
+                    " does not exist in this TreeSorter"
+            );
+
+        } else if ( values.size() > 1 ) {
+
+            throw new IllegalArgumentException(
+                    "TreeSorter.getSingleValue:  key " +
+                    ObtuseUtil.enquoteJavaObject( key ) +
+                    " does not have a unique value (it has " + values.size() +
+                    " values in this TreeSorter)"
+            );
+
+        } else {
+
+            if ( values instanceof List ) {
+
+//                Logger.logMsg( "It's a list" );
+
+                return ( (List<V>)values ).get( 0 );
+
+            } else {
+
+//                Logger.logMsg( "It's a " + values.getClass().getCanonicalName() );
+
+                Iterator<V> iter = values.iterator();
+                if ( iter.hasNext() ) {
+
+                    return iter.next();
+
+                }
+
+            }
+
+            throw new HowDidWeGetHereError(
+                    "TreeSorter.getSingleValue:  " +
+                    "it should be impossible to get here with key " +
+                    ObtuseUtil.enquoteJavaObject( key ) +
+                    " since there is supposedly exactly one value for that key)"
+            );
+
+        }
 
     }
 
@@ -402,7 +456,7 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
     @NotNull
     public Collection<V> getAllValues() {
 
-        Collection<V> allValues = new LinkedList<>();
+        Collection<V> allValues = new FormattingLinkedList<>();
         for ( K key : _sortedData.keySet() ) {
 
             allValues.addAll( getValues( key ) );
@@ -691,7 +745,7 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
 
         Collection<V> values;
         //noinspection UnusedAssignment
-        ( values = _sortedData.computeIfAbsent( key, k -> new LinkedList<>() ) ).add( value );
+        ( values = _sortedData.computeIfAbsent( key, k -> new FormattingLinkedList<>() ) ).add( value );
 
     }
 
@@ -856,7 +910,7 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
         Collection<V> rval = _sortedData.remove( key );
         if ( rval == null ) {
 
-            rval = new LinkedList<>();
+            rval = new FormattingLinkedList<>();
 
         }
 
@@ -1022,6 +1076,19 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
     public boolean isEmpty() {
 
         return _sortedData.isEmpty();
+
+    }
+
+    /**
+     Determine if a specified key has exactly one value associated with it in this tree sorter.
+     @return true if the key has exactly one value associated with it; false otherwise.
+     */
+
+    public boolean hasSingleValue( K key ) {
+
+        Collection<V> values = _sortedData.get( key );
+
+        return values != null && values.size() == 1;
 
     }
 

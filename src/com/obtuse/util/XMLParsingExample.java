@@ -26,67 +26,75 @@ public class XMLParsingExample {
 
         BasicProgramConfigInfo.init( "Obtuse", "XML", "ParsingExample", null );
 
+        Measure.setGloballyEnabled( true );
+
         XMLParsingExample.parseOnTheFly( XMLParsingExample.INPUT_FILENAME );
 
         XMLParsingExample.loadEntireDocument( XMLParsingExample.INPUT_FILENAME );
+
+        Measure.showStats();
 
     }
 
     @SuppressWarnings("SameParameterValue")
     private static void parseOnTheFly( final String inputFilename ) {
 
-        SAXParserFactory spf = SAXParserFactory.newInstance();
-        @SuppressWarnings("TooBroadScope")
-        SAXParser parser;
-        XMLReader xmlReader;
-        try {
+        try ( Measure m = new Measure( "entire on-the-fly" ) ) {
 
-            parser = spf.newSAXParser();
-            xmlReader = parser.getXMLReader();
+            SAXParserFactory spf = SAXParserFactory.newInstance();
+            @SuppressWarnings("TooBroadScope")
+            SAXParser parser;
+            XMLReader xmlReader;
+            try {
 
-        } catch ( ParserConfigurationException e ) {
+                parser = spf.newSAXParser();
+                xmlReader = parser.getXMLReader();
 
-            Logger.logErr( "parser configuration problem", e );
-            System.exit( 1 );
-            return;
+            } catch ( ParserConfigurationException e ) {
 
-        } catch ( SAXException e ) {
+                Logger.logErr( "parser configuration problem", e );
+                System.exit( 1 );
+                return;
 
-            Logger.logErr( "parser initialization problem", e );
-            System.exit( 1 );
-            return;
+            } catch ( SAXException e ) {
 
-        }
+                Logger.logErr( "parser initialization problem", e );
+                System.exit( 1 );
+                return;
 
-        try {
+            }
 
-            SimpleXmlContentHandler contentHandler = new SimpleXmlContentHandler( true );
-            xmlReader.setContentHandler( contentHandler );
-            xmlReader.parse(
-                    new InputSource( new BufferedInputStream( new FileInputStream( inputFilename ) ) )
-            );
+            try {
 
-        } catch ( SAXParseException e ) {
+                SimpleXmlContentHandler contentHandler = new SimpleXmlContentHandler( false );
+                xmlReader.setContentHandler( contentHandler );
+                xmlReader.parse(
+                        new InputSource( new BufferedInputStream( new FileInputStream( inputFilename ) ) )
+                );
 
-            Logger.logErr(
-                    inputFilename + " (" + e.getLineNumber() + "," + e.getColumnNumber() + "):  " + e.getMessage()
-            );
-            System.exit( 1 );
+            } catch ( SAXParseException e ) {
 
-        } catch ( SAXException e ) {
+                Logger.logErr(
+                        inputFilename + " (" + e.getLineNumber() + "," + e.getColumnNumber() + "):  " + e.getMessage()
+                );
+                System.exit( 1 );
 
-            Logger.logErr( "SAX exception caught parsing file", e );
-            System.exit( 1 );
+            } catch ( SAXException e ) {
 
-        } catch ( FileNotFoundException e ) {
+                Logger.logErr( "SAX exception caught parsing file", e );
+                System.exit( 1 );
 
-            Logger.logErr( "file not found", e );
-            System.exit( 1 );
+            } catch ( FileNotFoundException e ) {
 
-        } catch ( IOException e ) {
+                Logger.logErr( "file not found", e );
+                System.exit( 1 );
 
-            Logger.logErr( "I/O error", e );
-            System.exit( 1 );
+            } catch ( IOException e ) {
+
+                Logger.logErr( "I/O error", e );
+                System.exit( 1 );
+
+            }
 
         }
 
@@ -96,35 +104,43 @@ public class XMLParsingExample {
     private static void loadEntireDocument( final String inputFilename ) {
 
         Document doc;
-        try {
+        try ( Measure m = new Measure( "load-entire-document" ) ) {
 
-            DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
-            doc = docBuilder.parse( new File( inputFilename ) );
+            try {
 
-        } catch ( ParserConfigurationException e ) {
+                DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
+                DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
+                doc = docBuilder.parse( new File( inputFilename ) );
 
-            Logger.logErr( "Parser configuration error", e );
-            System.exit( 1 );
-            return;
+            } catch ( ParserConfigurationException e ) {
 
-        } catch ( SAXException e ) {
+                Logger.logErr( "Parser configuration error", e );
+                System.exit( 1 );
+                return;
 
-            Logger.logErr( "Parsing error", e );
-            System.exit( 1 );
-            return;
+            } catch ( SAXException e ) {
 
-        } catch ( IOException e ) {
+                Logger.logErr( "Parsing error", e );
+                System.exit( 1 );
+                return;
 
-            Logger.logErr( "I/O error", e );
-            System.exit( 1 );
-            return;
+            } catch ( IOException e ) {
+
+                Logger.logErr( "I/O error", e );
+                System.exit( 1 );
+                return;
+
+            }
 
         }
 
-        // Clean things up.
+        try ( Measure m = new Measure( "clean things up" ) ) {
 
-        doc.getDocumentElement().normalize();
+            // Clean things up.
+
+            doc.getDocumentElement().normalize();
+
+        }
 
         Logger.logMsg( "root element is " + doc.getDocumentElement().getNodeName() );
 
