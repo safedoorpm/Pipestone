@@ -4,6 +4,7 @@
 
 package com.obtuse.util;
 
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.Closeable;
@@ -417,6 +418,7 @@ public class Measure implements Closeable {
 
     }
 
+    @Contract(pure = true)
     public static boolean isGloballyEnabled() {
 
         return Measure.s_globallyEnabled;
@@ -465,7 +467,7 @@ public class Measure implements Closeable {
 
     }
 
-    private static void recordData( final SortedMap<String, Stats> map, final String name, final long delta ) {
+    private static void recordData( final @NotNull SortedMap<String, Stats> map, final String name, final long delta ) {
 
         Stats stats = map.computeIfAbsent( name, k -> new Stats() );
 

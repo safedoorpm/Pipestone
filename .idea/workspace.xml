@@ -4,10 +4,9 @@
     <option name="SCOPE_TYPE" value="3" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" name="Default" comment="Make it easier to work with TreeSorter keys that have exactly one value by implementing a getSingleValue( K key ) method to retrieve the single value (an IllegalArgumentException is thrown if the key has zero or more than one value associated with it) and a hasSingleValue( K key ) that can be used to easily determine if a key has exactly one value associated with it.">
+    <list default="true" id="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" name="Default" comment="Make it easier to work with TreeSorter keys that have exactly one value by implementing a getSingleValue( K key ) method to retrieve the single value (an IllegalArgumentException is thrown if the key has zero or more than one value associated with it) and a hasSingleValue( K key ) that can be used to easily determine if a key has exactly one value associated with it.&#10;&#10;Cleanup the event-driven style XMLParsingExample class.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/TreeSorter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/TreeSorter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/XMLParsingExample.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/XMLParsingExample.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/Measure.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/Measure.java" afterDir="false" />
     </list>
     <ignored path="Pipestone.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -162,7 +161,7 @@
     <session id="3551665">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="12" />
+          <entry key="project.closed" value="13" />
           <entry key="project.open.time.0" value="2" />
           <entry key="project.open.time.1" value="5" />
           <entry key="project.open.time.12" value="3" />
@@ -174,13 +173,13 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="java" value="520" />
-          <entry key="txt" value="1051" />
+          <entry key="txt" value="1130" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="JAVA" value="520" />
-          <entry key="PLAIN_TEXT" value="1051" />
+          <entry key="PLAIN_TEXT" value="1130" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -925,7 +924,7 @@
     <property name="MemberChooser.sorted" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1537217478937" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1537228404173" />
     <property name="dynamic.classpath" value="false" />
     <property name="extract.method.default.visibility" value="public" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -1327,14 +1326,7 @@
       <workItem from="1535943172684" duration="32000" />
       <workItem from="1535954315285" duration="1286000" />
       <workItem from="1536425332249" duration="833000" />
-      <workItem from="1537215574275" duration="1623000" />
-    </task>
-    <task id="LOCAL-00025" summary="A sorted JPanel mechanism which keeps its components in sorted order.&#10;&#10;Various enhancements to the TreeSorter class inspired by the needs of the sorted JPanel mechanism.">
-      <created>1469734858902</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1469734858902</updated>
+      <workItem from="1537215574275" duration="2269000" />
     </task>
     <task id="LOCAL-00026" summary="Reasonably robust sorted panels.&#10;Considerable cleanup, testing and even some bug fixing of ObtuseCalendarDate and ObtuseApproximateCalendarDate.">
       <created>1470849577157</created>
@@ -1672,11 +1664,18 @@
       <option name="project" value="LOCAL" />
       <updated>1536425598487</updated>
     </task>
-    <option name="localTasksCounter" value="74" />
+    <task id="LOCAL-00074" summary="Make it easier to work with TreeSorter keys that have exactly one value by implementing a getSingleValue( K key ) method to retrieve the single value (an IllegalArgumentException is thrown if the key has zero or more than one value associated with it) and a hasSingleValue( K key ) that can be used to easily determine if a key has exactly one value associated with it.&#10;&#10;Cleanup the event-driven style XMLParsingExample class.">
+      <created>1537217644267</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1537217644268</updated>
+    </task>
+    <option name="localTasksCounter" value="75" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="967993000" />
+    <option name="totallyTimeSpent" value="968639000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1689,7 +1688,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="48" y="96" width="2405" height="1337" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.5269953" visible="true" weight="0.36775285" />
       <window_info id="Structure" order="1" sideWeight="0.43055555" side_tool="true" weight="0.17557251" />
@@ -1814,7 +1812,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Add lots and lots of final, @NotNull, and @Nullable attributes.&#10;&#10;Implement reasonably easy to use button and combo-box based selector panels.&#10;&#10;The usual mountain of cleanup." />
     <MESSAGE value="Basic sanity returns in my button and combo-box wrapping classes.&#10;&#10;The ButtonSelectorPanel class and the ComboBoxSelectorPanel class both derive from the SelectorPanel class which itself derives from the JPanel class. I had the SelectorPanel constructor setting its layout manager to a BorderLayout instance and then add a couple of things to its super-class (i.e. to the JPanel). I had also at some point recently, had the ButtonSelectorPanel constructor set its layout manager to a different BorderLayout instance and then add a couple of things to the JPanel (i.e. its super-super-class).&#10;&#10;The result was that when the JPanel was rendered, the things that the SelectorPanel class added to the JPanel did not appear. When I listed out the contents of the JPanel and found that the now invisible things were actually in the JPanel, things got just a bit mysterious.&#10;&#10;Well . . . it turns out that the BorderLayout manager keeps track of what it is supposed to layout as things are added to the Container instance that it is responsible for. This means that when you assign a BorderLayout instance as the layout manager for a Container, anything already in the Container before said assignment is ignored by the BorderLayout instance. The result is that things which are actually in the Container don't get laid out and thus don't get rendered.&#10;&#10;Sigh.&#10;&#10;Moral of this story is that one should assign the BorderLayout manager to a Container BEFORE one puts anything in the Container (unless one is looking for an roughly three day long &quot;learning opportunity&quot; like the one that I just went through).&#10;&#10;P.S. This commit also adds some not all that well thought out &quot;tell me about this container and its contents&quot; utility methods to the LinearLayoutManager class. These will (hopefully) get cleaned up soon to the point where they are actually useful." />
     <MESSAGE value="Lots of cleanup of the selector panels.&#10;Implement a new BorderLayoutPanel class that assigns itself a BorderLayout instance and then refuses to let anyone change its layout manager. This avoids some very strange behaviour that can result if one is not careful about when BorderLayout instances are assigned to a panel that is intended to use that layout manager. See the new BorderLayoutPanel class' Javadocs for more info." />
     <MESSAGE value="Birth of the ObtuseCollections class (more to come later).&#10;Otherwise, mostly cleanup." />
@@ -1839,7 +1836,8 @@
     <MESSAGE value="Implement a new GenericTag class intended to be used to create tags that uniquely identify things.&#10;&#10;A major reworking of the Selector and Alternative classes. Each instance is now uniquely identified by a GenericTag instead of a string (makes the interface much more type-tight).&#10;&#10;Various minor changes to push back on the many irrelevant and not so irrelevant code analysis complaints." />
     <MESSAGE value="Move the CopierWidget class and other associated classes from the Burke project that it was implemented in to Pipestone where it is usable in various projects.&#10;Change the name of anything with a name or a string containing the word/name &quot;Burke&quot; to something else (usually &quot;Obtuse&quot; but it depends on the situation).&#10;Create an ObtuseConstants class as a centralized place for constants (out of a tiny acorn, an oak will (hopefully) take root and grow).&#10;Various cleanup." />
     <MESSAGE value="Minor cleanup and code reorganization." />
-    <option name="LAST_COMMIT_MESSAGE" value="Minor cleanup and code reorganization." />
+    <MESSAGE value="Make it easier to work with TreeSorter keys that have exactly one value by implementing a getSingleValue( K key ) method to retrieve the single value (an IllegalArgumentException is thrown if the key has zero or more than one value associated with it) and a hasSingleValue( K key ) that can be used to easily determine if a key has exactly one value associated with it.&#10;&#10;Cleanup the event-driven style XMLParsingExample class." />
+    <option name="LAST_COMMIT_MESSAGE" value="Make it easier to work with TreeSorter keys that have exactly one value by implementing a getSingleValue( K key ) method to retrieve the single value (an IllegalArgumentException is thrown if the key has zero or more than one value associated with it) and a hasSingleValue( K key ) that can be used to easily determine if a key has exactly one value associated with it.&#10;&#10;Cleanup the event-driven style XMLParsingExample class." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

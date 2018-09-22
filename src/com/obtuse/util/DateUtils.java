@@ -53,6 +53,7 @@ public class DateUtils {
     private static final SimpleDateFormat HH_MM_SS_24_EEE_MMM_DD  = new SimpleDateFormat( "HH:mm:ss EEE MMM dd" );
     private static final SimpleDateFormat STANDARD                = new SimpleDateFormat( "yyyy-MM-dd'T'HH:mm:ssZ" );
     private static final SimpleDateFormat STANDARD_MS             = new SimpleDateFormat( "yyyy-MM-dd'T'HH:mm:ss.SSSZ" );
+    private static final SimpleDateFormat MARKER_FORMAT           = new SimpleDateFormat( "yyyy-MM-dd_HH-mm-ss_SSS" );
     private static final SimpleDateFormat DD_MMM_YYYY             = new SimpleDateFormat( "d MMM, yyyy" );
 
     /**
@@ -232,6 +233,32 @@ public class DateUtils {
             DateUtils.STANDARD_MS.setTimeZone( TimeZone.getDefault() );
 
             String s = DateUtils.STANDARD_MS.format( dateTime );
+
+            return s;
+
+        }
+
+    }
+
+    /**
+     * Format a date string in a 'marker' format that could be used to create filenames and such.
+     * <p>The 'marker' format is</p>
+     * <blockquote><code>yyyy-MM-dd_HH-mm-ss-SSS</code></blockquote>
+     * For example, the date and time 2001-07-04 12:08:56.235 would be
+     * formatted as
+     * <blockquote><tt>2001-07-04_12-08-56-235</tt></blockquote>
+     * @param dateTime the date and time to be formatted.
+     * @return the specified date and time formatted using code which is equivalent to
+     * <blockquote><tt>new SimpleDateFormat( "yyyy-MM-dd'T'HH:mm:ss.SSSZ" ).format( dateTime );</tt></blockquote>
+     */
+
+    public static String formatMarker( final Date dateTime ) {
+
+        synchronized ( DateUtils.MARKER_FORMAT ) {
+
+            DateUtils.MARKER_FORMAT.setTimeZone( TimeZone.getDefault() );
+
+            String s = DateUtils.MARKER_FORMAT.format( dateTime );
 
             return s;
 
@@ -1012,8 +1039,10 @@ public class DateUtils {
 
     public static void main( final String[] args ) {
 
-        System.out.println( formatWWWW_MMMM_D_YYYY( new Date()) );
-        System.out.println( formatMMMM_D_YYYY( new Date() ) );
+        Date testDateTime = new Date();
+        System.out.println( formatWWWW_MMMM_D_YYYY( testDateTime ) );
+        System.out.println( formatMMMM_D_YYYY( testDateTime ) );
+        System.out.println( formatMarker( testDateTime ) );
         System.out.println( formatWWWW_MMMM_D_YYYY( new Date( ObtuseCalendarDate.parseCalendarDate( "1867-07-01" ).getDateStartTimeMs() ) ) );
         System.out.println( formatWWWW_MMMM_D_YYYY( new Date( ObtuseCalendarDate.parseCalendarDate( "1900-01-01" ).getDateStartTimeMs() ) ) );
 

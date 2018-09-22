@@ -83,7 +83,7 @@ public class PopupJTableEditor extends DefaultCellEditor {
 
     class PopupDialog extends JDialog implements ActionListener {
 
-        public static final String OK_BUTTON_LABEL = "Ok";
+        public static final String OK_BUTTON_LABEL = "OK";
 
         private JTextArea textArea;
 

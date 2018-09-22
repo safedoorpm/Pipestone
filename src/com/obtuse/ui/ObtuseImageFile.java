@@ -965,7 +965,7 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
                                                _originalImageFormat +
                                                "\" worked with \"" +
                                                _originalURL +
-                                               "\"", "Ok" );
+                                               "\"", "OK" );
 
                 }
 

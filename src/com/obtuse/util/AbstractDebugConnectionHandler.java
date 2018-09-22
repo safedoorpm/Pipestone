@@ -18,7 +18,6 @@ import java.net.*;
 @SuppressWarnings({ "UnusedDeclaration", "ClassHasNoToStringMethod" })
 public abstract class AbstractDebugConnectionHandler extends Thread {
 
-    public static final String NEWLINE = System.getProperty( "line.separator" );
     private ServerSocket _listenSocket;
     private final String _handlerName;
     private final Logger _logger;
@@ -56,7 +55,7 @@ public abstract class AbstractDebugConnectionHandler extends Thread {
 
         File cmdFile = workingDirectory == null ? new File( _handlerName + ".sh" ) : new File( workingDirectory, _handlerName + ".sh" );
         ObtuseUtil.writeBytesToFile(
-                ( "telnet " + _ourHost.getCanonicalHostName() + " " + _portNumber + AbstractDebugConnectionHandler.NEWLINE ).getBytes(),
+                ( "telnet " + _ourHost.getCanonicalHostName() + " " + _portNumber + UsefulValues.NEWLINE ).getBytes(),
                 cmdFile,
                 false
         );

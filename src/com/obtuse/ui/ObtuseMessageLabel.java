@@ -146,7 +146,7 @@ public class ObtuseMessageLabel extends JLabel implements MessageLabelInterface 
 
                             Logger.logMsg( "have extra info:  " + _extraInfo );
 
-                            OkPopupMessageWindow.doit( _extraInfo, "Ok" );
+                            OkPopupMessageWindow.doit( _extraInfo, "OK" );
 
                         }
 

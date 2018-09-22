@@ -860,7 +860,7 @@ public class ObtuseUtil {
      excess data is silently not returned).
      @param printStackTraceOnError specifies whether or not a stack trace is to be printed if an i/o error occurs.
      @return a byte array containing the data read from the file or null if the file could not be read for any reason.
-     A zero-length byte array is returned if the file exists but contains no data.
+     A zero-length byte array is returned if the file exists and is readable but contains no data.
      */
 
     public static byte[] readEntireFile( final String fname, final int maxLength, final boolean printStackTraceOnError ) {
@@ -883,7 +883,7 @@ public class ObtuseUtil {
      excess data is silently not returned).
      @param printStackTraceOnError specifies whether or not a stack trace is to be printed if an i/o error occurs.
      @return a byte array containing the data read from the file or null if the file could not be read for any reason.
-     A zero-length byte array is returned if the file exists but contains no data.
+     A zero-length byte array is returned if the file exists and is readable but contains no data.
      */
 
     public static byte[] readEntireFile( final File file, final int maxLength, final boolean printStackTraceOnError ) {

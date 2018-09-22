@@ -16,6 +16,7 @@ import javax.management.timer.Timer;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.TimeZone;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -242,6 +243,74 @@ public class ObtuseCalendarDate extends GowingAbstractPackableEntity implements 
         _dateStartTimeMs = cal.getTimeInMillis();
         cal.add( Calendar.DAY_OF_YEAR, 1 );
         _dateEndTimeMs = cal.getTimeInMillis() - 1;
+
+    }
+
+    /**
+     Get today's date (local time zone).
+     */
+
+    public static ObtuseCalendarDate todayLocal() {
+
+        Calendar cal = Calendar.getInstance();
+//        System.out.println( "current local time is " + cal.get( Calendar.HOUR ) + ":" + cal.get( Calendar.MINUTE ) + ":" + cal.get( Calendar.SECOND ) );
+
+        int year = cal.get( Calendar.YEAR );
+        int month = cal.get( Calendar.MONTH ) + 1;
+        int dayOfMonth = cal.get( Calendar.DAY_OF_MONTH );
+
+        String yyyymmdd = ObtuseUtil.lpad( year, 4, '0' ) + '-' +
+                          ObtuseUtil.lpad( month, 2, '0' ) + '-' +
+                          ObtuseUtil.lpad( dayOfMonth, 2, '0' );
+
+        return parseCalendarDate( yyyymmdd );
+
+    }
+
+    /**
+     Get today's date (UTC).
+     */
+
+    public static ObtuseCalendarDate todayUTC() {
+
+        Calendar cal = Calendar.getInstance( TimeZone.getTimeZone( "UTC" ) );
+//        System.out.println( "current UTC time is " + cal.get( Calendar.HOUR ) + ":" + cal.get( Calendar.MINUTE ) + ":" + cal.get( Calendar.SECOND ) );
+
+        int year = cal.get( Calendar.YEAR );
+        int month = cal.get( Calendar.MONTH ) + 1;
+        int dayOfMonth = cal.get( Calendar.DAY_OF_MONTH );
+
+        String yyyymmdd = ObtuseUtil.lpad( year, 4, '0' ) + '-' +
+                          ObtuseUtil.lpad( month, 2, '0' ) + '-' +
+                          ObtuseUtil.lpad( dayOfMonth, 2, '0' );
+
+        return parseCalendarDate( yyyymmdd );
+
+    }
+
+    /**
+     Today's date (UTC) via a method name that some folks might prefer.
+     <p>This method returns exactly the same result that {@link #todayUTC()} returns.
+     It is provided as a convenience for folks who prefer to use the term "UCT".</p>
+     <p>As far as I can tell, UTC is the 'official' acronym.</p>
+     */
+
+    public static ObtuseCalendarDate todayUCT() {
+
+        return todayUTC();
+
+    }
+
+    /**
+     Today's date (UTC) via a method name that some folks might prefer.
+     <p>This method returns exactly the same result that {@link #todayUTC()} returns.
+     It is provided as a convenience for folks who prefer to use the term "GMT".</p>
+     <p>As far as I can tell, UTC is the 'official' acronym.</p>
+     */
+
+    public static ObtuseCalendarDate todayGMT() {
+
+        return todayUTC();
 
     }
 
@@ -665,6 +734,9 @@ public class ObtuseCalendarDate extends GowingAbstractPackableEntity implements 
         BasicProgramConfigInfo.init( "Obtuse", "Shared", "ObtuseCalendarDate", null );
 
         try {
+
+            Logger.logMsg( "today (local timezone) is " + todayLocal() );
+            Logger.logMsg( "today (UTC) is " + todayUTC() + " and " + todayUCT() + " and " + todayGMT() );
 
             String[] testDateStrings =
                     { "1993-04-15", "0814-01-28", "0999-12-31", "1000-01-01", EARLIEST_SUPPORTED_DATE_STRING, LATEST_SUPPORTED_DATE_STRING };

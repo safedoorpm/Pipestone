@@ -24,8 +24,9 @@ import java.util.function.Function;
  handle the degenerate cases where there are zero or one alternatives for the human to choose from.</p>
  */
 
-public class WrappedComboBoxSelectorPanel<CHOICE, PANEL extends JPanel> extends WrappedSelectorPanel<CHOICE> implements
-                                                                                                             ObtuseListenerProxy<CHOICE> {
+public class WrappedComboBoxSelectorPanel<CHOICE, PANEL extends JPanel>
+        extends WrappedSelectorPanel<CHOICE>
+        implements ObtuseListenerProxy<CHOICE> {
 
     public enum DegenerateCase {
         NO_ENTITIES,
