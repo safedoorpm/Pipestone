@@ -7,6 +7,7 @@ import com.obtuse.util.gowing.p2a.holders.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Collection;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
@@ -236,8 +237,11 @@ public class GowingPackableKeyValuePair<K, V> extends GowingAbstractPackableEnti
 
             return true;
 
-        } else //noinspection SimplifiableIfStatement
-            if ( obj instanceof EntityName ) {
+        } else if ( obj instanceof EntityName ) {
+
+            return true;
+
+        } else if ( obj instanceof Collection ) {
 
             return true;
 
@@ -249,7 +253,7 @@ public class GowingPackableKeyValuePair<K, V> extends GowingAbstractPackableEnti
 
     }
 
-    public static boolean isClassSupported( final @NotNull Class entityClass ) {
+    private static boolean isClassSupported( final @NotNull Class entityClass ) {
 
         @SuppressWarnings("UnnecessaryLocalVariable") boolean rval = s_factories.containsKey( entityClass.getCanonicalName() );
 
@@ -278,6 +282,19 @@ public class GowingPackableKeyValuePair<K, V> extends GowingAbstractPackableEnti
         } else if ( obj instanceof GowingPackable ) {
 
             bundle.addHolder( new GowingPackableEntityHolder( entityName, (GowingPackable)obj, packer, true ) );
+
+        } else if ( obj instanceof Collection ) {
+
+            bundle.addHolder(
+                    new GowingPackableEntityHolder(
+                            entityName,
+                            new GowingPackableCollection<>(
+                                    (Collection)obj
+                            ),
+                            packer,
+                            true
+                    )
+            );
 
         } else {
 

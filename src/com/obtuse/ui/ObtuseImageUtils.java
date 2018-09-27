@@ -24,7 +24,8 @@ public class ObtuseImageUtils {
     public static ImageIcon maybeRegenerateThumbnail(
             final @NotNull ImageIcon originalImageIcon,
             @SuppressWarnings("SameParameterValue") @Nullable final ImageIcon scaledImageIcon,
-            int thumbnailSize
+            int thumbnailSize,
+            boolean verbose
     ) {
 
         int origW = originalImageIcon.getIconWidth();
@@ -44,7 +45,7 @@ public class ObtuseImageUtils {
 
         if ( rval == null || newSize.width != rval.getIconWidth() || newSize.height != rval.getIconHeight() ) {
 
-            Logger.logMsg(
+            if ( verbose ) Logger.logMsg(
                     ( rval == null ? "" : "re" ) + "scaling (" + origW + 'x' + origH + ") to (" + newSize.width + 'x' + newSize.height +
                     ")" );
 
@@ -107,10 +108,10 @@ public class ObtuseImageUtils {
     }
 
     @NotNull
-    public static BufferedImage loadImage( final @NotNull File imageLocation )
+    public static BufferedImage loadImage( final @NotNull File imageLocation, boolean verbose )
             throws IOException, ObtuseImageLoadFailed {
 
-        Logger.logMsg( "loading primary image from " + imageLocation );
+        if ( verbose ) Logger.logMsg( "loading primary image from " + imageLocation );
 
         Measure m = new Measure( "OIU.loadImage" );
 

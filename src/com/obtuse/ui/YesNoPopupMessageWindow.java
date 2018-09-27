@@ -6,6 +6,8 @@ package com.obtuse.ui;
 
 import com.obtuse.util.Logger;
 import com.obtuse.util.ObtuseUtil;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -262,12 +264,12 @@ public abstract class YesNoPopupMessageWindow
 
     @SuppressWarnings({ "SameParameterValue" })
     public static boolean doit(
-            final String line1,
-            final String line2,
-            final String defaultLabel,
-            final String alternativeLabel,
-            final Runnable defaultRunnable,
-            final Runnable alternativeRunnable
+            @NotNull final String line1,
+            @Nullable final String line2,
+            @NotNull final String defaultLabel,
+            @NotNull final String alternativeLabel,
+            @Nullable final Runnable defaultRunnable,
+            @Nullable final Runnable alternativeRunnable
     ) {
 
         //noinspection ClassWithoutToString
@@ -340,14 +342,22 @@ public abstract class YesNoPopupMessageWindow
      */
 
     public static boolean doit(
-            final String line1,
-            final String defaultLabel,
-            final String alternativeLabel,
-            final Runnable defaultRunnable,
-            final Runnable alternativeRunnable
+            @NotNull final String line1,
+            @NotNull final String defaultLabel,
+            @NotNull final String alternativeLabel,
+            @Nullable final Runnable defaultRunnable,
+            @Nullable final Runnable alternativeRunnable
     ) {
 
-        boolean answer = YesNoPopupMessageWindow.doit( line1, null, defaultLabel, alternativeLabel, defaultRunnable, alternativeRunnable );
+        @SuppressWarnings("UnnecessaryLocalVariable") boolean answer =
+                YesNoPopupMessageWindow.doit(
+                        line1,
+                        null,
+                        defaultLabel,
+                        alternativeLabel,
+                        defaultRunnable,
+                        alternativeRunnable
+                );
 
         return answer;
 

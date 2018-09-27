@@ -5,6 +5,12 @@
 package com.obtuse.util;
 
 import com.obtuse.exceptions.HowDidWeGetHereError;
+import com.obtuse.util.gowing.*;
+import com.obtuse.util.gowing.p2a.GowingEntityReference;
+import com.obtuse.util.gowing.p2a.GowingUnpackingException;
+import com.obtuse.util.gowing.p2a.GowingUtil;
+import com.obtuse.util.gowing.p2a.holders.GowingPackableEntityHolder;
+import com.obtuse.util.gowing.p2a.holders.GowingPackableMapping;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -39,9 +45,112 @@ import java.util.*;
  */
 
 @SuppressWarnings({ "UnusedDeclaration" })
-public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<V>, Serializable {
+public class TreeSorter<K extends Comparable<? super K>, V>
+        extends GowingAbstractPackableEntity
+        implements Iterable<V>, Serializable {
+
+    private static final EntityTypeName ENTITY_TYPE_NAME = new EntityTypeName( TreeSorter.class );
+
+    private static final int VERSION = 1;
+
+    private static final EntityName ELEMENTS_MAPPING_NAME = new EntityName( "_ec" );
+
+    private GowingEntityReference _elementsMappingReference;
+
+    private String _description;
+
+    public static final GowingEntityFactory FACTORY = new GowingEntityFactory( ENTITY_TYPE_NAME ) {
+
+        @Override
+        public int getOldestSupportedVersion() {
+
+            return VERSION;
+        }
+
+        @Override
+        public int getNewestSupportedVersion() {
+
+            return VERSION;
+        }
+
+        @NotNull
+        @Override
+        public GowingPackable createEntity(
+                final @NotNull GowingUnPacker unPacker,
+                final @NotNull GowingPackedEntityBundle bundle,
+                final @NotNull GowingEntityReference er
+        ) {
+
+            return new TreeSorter( unPacker, bundle );
+
+        }
+
+    };
 
     private final SortedMap<K, Collection<V>> _sortedData;
+
+    public TreeSorter( final @NotNull GowingUnPacker unPacker, final @NotNull GowingPackedEntityBundle bundle ) {
+
+        super( unPacker, bundle.getSuperBundle() );
+
+        _elementsMappingReference = bundle.getMandatoryEntityReference( ELEMENTS_MAPPING_NAME );
+
+        _sortedData = new TreeMap<>();
+
+    }
+
+
+    @Override
+    public @NotNull GowingPackedEntityBundle bundleThyself(
+            final boolean isPackingSuper, @NotNull final GowingPacker packer
+    ) {
+
+        GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
+                ENTITY_TYPE_NAME,
+                VERSION,
+                super.bundleRoot( packer ),
+                packer.getPackingContext()
+        );
+
+        GowingPackableMapping<K,Collection<V>> elementsMapping = new GowingPackableMapping<>( _sortedData );
+
+        bundle.addHolder( new GowingPackableEntityHolder( ELEMENTS_MAPPING_NAME, elementsMapping, packer, true ) );
+
+        return bundle;
+
+    }
+
+    @Override
+    public boolean finishUnpacking( @NotNull final GowingUnPacker unPacker ) throws GowingUnpackingException {
+
+        if ( !unPacker.isEntityFinished( _elementsMappingReference ) ) {
+
+            return false;
+
+        }
+
+        GowingPackable packable = unPacker.resolveReference( _elementsMappingReference );
+        if ( ( packable instanceof GowingPackableMapping ) ) {
+
+            // The temporary variable is required in order to make this assignment a declaration which allows
+            // the @SuppressWarnings("unchecked") annotation (the annotation is not allowed on a simple assignment statement).
+//            @SuppressWarnings("unchecked")
+//            TreeMap<T1, TwoDimensionalSortedMap<T2, T3, V>> tmap =
+//                    ( (GowingPackableMapping<T1,TwoDimensionalSortedMap<T2,T3,V>>)packable ).rebuildMap( new TreeMap<>() );
+//            _map = tmap;
+
+            @SuppressWarnings("unchecked")
+            TreeMap<K, Collection<V>> tmap = ( (GowingPackableMapping<K, Collection<V>>)packable ).rebuildMap( new TreeMap<>() );
+
+        } else {
+
+            GowingUtil.getGrumpy( "TreeSorter", "sorted map", GowingPackableMapping.class, packable );
+
+        }
+
+        return true;
+
+    }
 
     @SuppressWarnings("unchecked")
     private class TreeSorterIterator<VV> implements Iterator<VV> {
@@ -118,7 +227,7 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
 
     public TreeSorter() {
 
-        super();
+        super( new GowingNameMarkerThing() );
 
         _sortedData = new TreeMap<>();
 
@@ -134,7 +243,7 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
 
     public TreeSorter( final Comparator<? super K> comparator ) {
 
-        super();
+        super( new GowingNameMarkerThing() );
 
         _sortedData = new TreeMap<>( comparator );
 
@@ -150,7 +259,7 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
 
     public TreeSorter( final Map<K, V> map ) {
 
-        super();
+        super( new GowingNameMarkerThing() );
 
         _sortedData = new TreeMap<>();
         for ( K key : map.keySet() ) {
@@ -171,7 +280,7 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
 
     public TreeSorter( final SortedMap<K, V> map ) {
 
-        super();
+        super( new GowingNameMarkerThing() );
 
         _sortedData = new TreeMap<>( map.comparator() );
         for ( K key : map.keySet() ) {
@@ -224,7 +333,7 @@ public class TreeSorter<K extends Comparable<? super K>, V> implements Iterable<
 
     private TreeSorter( final SortedMap<K, Collection<V>> map, final int ignored ) {
 
-        super();
+        super( new GowingNameMarkerThing() );
 
         _sortedData = map;
 

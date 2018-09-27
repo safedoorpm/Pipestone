@@ -12,6 +12,7 @@ import javax.swing.filechooser.FileFilter;
 import java.awt.*;
 import java.io.File;
 import java.io.FilenameFilter;
+import java.util.Optional;
 
 /**
  * Some utility methods that make using Swing and AWT file selection dialogs a bit easier.
@@ -118,7 +119,7 @@ public class FileSelectors {
      * Sorry.</p>
      */
 
-    public static @Nullable File@NotNull[] swingSelectFile(
+    public static @NotNull Optional<@NotNull File@NotNull[]> swingSelectFile(
             final Component parent,
             final String title,
             final File startingDirectory,
@@ -132,6 +133,7 @@ public class FileSelectors {
         chooser.setDialogTitle( title );
         chooser.setApproveButtonText( title );
         chooser.setMultiSelectionEnabled( multiSelectionEnabled );
+        chooser.setCurrentDirectory( startingDirectory );
 
         if ( fileFilter != null ) {
 
@@ -179,11 +181,11 @@ public class FileSelectors {
         if ( chooserRval == JFileChooser.APPROVE_OPTION ) {
 
 //            return chooser.getSelectedFiles();
-            return ourRval;
+            return Optional.of( ourRval );
 
         } else {
 
-            return new File[0];
+            return Optional.empty();
 
         }
 

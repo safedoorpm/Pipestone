@@ -994,7 +994,12 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
 
         _imageFileMD5 = ObtuseUtil.computeMD5( getCachedImageFileLocation() );
 
-        ImageIcon thumbnailImageIcon = ObtuseImageUtils.maybeRegenerateThumbnail( new ImageIcon( image ), null, THUMBNAIL_EDGE_LENGTH );
+        ImageIcon thumbnailImageIcon = ObtuseImageUtils.maybeRegenerateThumbnail(
+                new ImageIcon( image ),
+                null,
+                THUMBNAIL_EDGE_LENGTH,
+                false
+        );
         Optional<byte[]> thumbnailBytes = captureImageAsFile( thumbnailImageIcon.getImage(), "jpg", _title );
         if ( thumbnailBytes.isPresent() ) {
 
