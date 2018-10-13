@@ -76,7 +76,23 @@ public interface GowingUnPacker extends Closeable {
 
     void registerMetaDataHandler( @NotNull GowingMetaDataHandler handler );
 
-    GowingPackable resolveReference( GowingEntityReference er );
+//    GowingPackable resolveReference( GowingEntityReference er );
+    Optional<GowingPackable> resolveReference( GowingEntityReference er );
+
+    @NotNull default GowingPackable resolveMandatoryReference( GowingEntityReference er ) {
+
+        Optional<GowingPackable> optPackable = resolveReference( er );
+        if ( optPackable.isPresent() ) {
+
+            return optPackable.get();
+
+        } else {
+
+            throw new NullPointerException( "GowingUnPacker.resolveMandatoryReference:  er refers to non-existent entity" );
+
+        }
+
+    }
 
     GowingUnPackerContext getUnPackerContext();
 

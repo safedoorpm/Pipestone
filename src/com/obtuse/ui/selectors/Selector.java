@@ -22,16 +22,16 @@ import java.util.function.Consumer;
  until either {@link #freeze()} or {@link #keepMutable(boolean)} has been called.</p>
  */
 
-public class Selector implements Comparable<Selector>, Iterable<Alternative> {
+public class Selector<K extends Alternative> implements Comparable<Selector>, Iterable<K> {
 
 //    private static final GenericTag SELECTOR_TAGS_CATEGORY = GenericTag.createNewTagCategory( Selector.class.getCanonicalName() );
 
-    private static final SortedMap<String, Selector> s_allKnownSelectors = new TreeMap<>();
+    private static final SortedMap<String, ? super Selector> s_allKnownSelectors = new TreeMap<>();
 
     private final String _selectorsLabel;
     private final GenericTag.GenericTagCategory _selectorsTagCategory;
 
-    private final List<Alternative> _knownAlternativesList = new ArrayList<>();
+    private final List<K> _knownAlternativesList = new ArrayList<>();
     private final SortedMap<GenericTag,Alternative> _knownAlternativesByTagMap = new TreeMap<>();
     private final SortedMap<String,Alternative> _knownAlternativesByLabelMap = new TreeMap<>();
 
@@ -148,7 +148,7 @@ public class Selector implements Comparable<Selector>, Iterable<Alternative> {
 //
 //    }
 
-    public void addAlternative( final @NotNull Alternative alternative ) {
+    public void addAlternative( final @NotNull K alternative ) {
 
         if ( _knownAlternativesByTagMap.containsKey( alternative.getTag() ) ) {
 
@@ -175,7 +175,7 @@ public class Selector implements Comparable<Selector>, Iterable<Alternative> {
      @return a newly created {@code Vector<Alternative>}</p> containing this selector's alternatives.
      */
 
-    public Vector<Alternative> createAlternativesVector() {
+    public Vector<K> createAlternativesVector() {
 
         return new Vector<>( _knownAlternativesList );
 
@@ -187,14 +187,14 @@ public class Selector implements Comparable<Selector>, Iterable<Alternative> {
 
     }
 
-    public List<Alternative> getAlternatives() {
+    public List<K> getAlternatives() {
 
         return Collections.unmodifiableList( _knownAlternativesList );
 
     }
 
     @NotNull
-    public Optional<Alternative> findUnspecifiedAlternative() {
+    public Optional<K> findUnspecifiedAlternative() {
 
         if ( _knownAlternativesList.isEmpty() ) {
 
@@ -202,9 +202,9 @@ public class Selector implements Comparable<Selector>, Iterable<Alternative> {
 
         }
 
-        Alternative unspecifiedAlternative = null;
+        K unspecifiedAlternative = null;
 
-        for ( Alternative alternative : _knownAlternativesList ) {
+        for ( K alternative : _knownAlternativesList ) {
 
             if ( alternative.isUnspecifiedAlternative() ) {
 
@@ -227,9 +227,9 @@ public class Selector implements Comparable<Selector>, Iterable<Alternative> {
     }
 
     @NotNull
-    public Alternative getUnspecifiedAlternative() {
+    public K getUnspecifiedAlternative() {
 
-        @NotNull Optional<Alternative> optUnspecifiedAlternative = findUnspecifiedAlternative();
+        @NotNull Optional<K> optUnspecifiedAlternative = findUnspecifiedAlternative();
         if ( optUnspecifiedAlternative.isPresent() ) {
 
             return optUnspecifiedAlternative.get();
@@ -245,7 +245,7 @@ public class Selector implements Comparable<Selector>, Iterable<Alternative> {
     }
 
     @NotNull
-    public Alternative getInitialAlternative() {
+    public K getInitialAlternative() {
 
         if ( _knownAlternativesList.isEmpty() ) {
 
@@ -253,25 +253,26 @@ public class Selector implements Comparable<Selector>, Iterable<Alternative> {
 
         }
 
-        Optional<Alternative> optUnspecifiedAlternative = findUnspecifiedAlternative();
+        Optional<K> optUnspecifiedAlternative = findUnspecifiedAlternative();
         return optUnspecifiedAlternative.orElseGet( () -> _knownAlternativesList.get( 0 ) );
 
     }
 
-    public static Optional<Selector> findSelector( final @NotNull String selectorTag ) {
+    public static Optional<Selector<Alternative>> findSelector( final @NotNull String selectorTag ) {
 
-        Selector selector = s_allKnownSelectors.get( selectorTag );
+        @SuppressWarnings( "unchecked" )
+        Selector<Alternative> selector = (Selector<Alternative>)s_allKnownSelectors.get( selectorTag );
 
         return Optional.ofNullable( selector );
 
     }
 
-    public static Selector maybeCreateSelector( final @NotNull String selectorLabel, final @NotNull String selectorTag ) {
+    public static Selector<? extends Alternative> maybeCreateSelector( final @NotNull String selectorLabel, final @NotNull String selectorTag ) {
 
         GenericTag.checkTagNameValid( "Selector.maybeCreateSelector", selectorTag );
-        Optional<Selector> optSelector = findSelector( selectorTag );
+        Optional<Selector<Alternative>> optSelector = findSelector( selectorTag );
 
-        return optSelector.orElseGet( () -> new Selector( selectorLabel, selectorTag ) );
+        return optSelector.orElseGet( () -> new Selector<>( selectorLabel, selectorTag ) );
 
     }
 
@@ -339,7 +340,7 @@ public class Selector implements Comparable<Selector>, Iterable<Alternative> {
      */
 
     @NotNull
-    public JComboBox<Alternative> createComboBox() {
+    public JComboBox<K> createComboBox() {
 
         return createComboBox( null );
 
@@ -353,12 +354,12 @@ public class Selector implements Comparable<Selector>, Iterable<Alternative> {
      */
 
     @NotNull
-    public JComboBox<Alternative> createComboBox( final @Nullable Alternative currentAlternative ) {
+    public JComboBox<K> createComboBox( final @Nullable Alternative currentAlternative ) {
 
         if ( isMutabilityEstablished() ) {
 
-            Vector<Alternative> alternativesVector = createAlternativesVector();
-            JComboBox<Alternative> comboBox = new JComboBox<>( alternativesVector );
+            Vector<K> alternativesVector = createAlternativesVector();
+            JComboBox<K> comboBox = new JComboBox<>( alternativesVector );
 
             if ( hasAlternative( currentAlternative ) ) {
 
@@ -392,21 +393,21 @@ public class Selector implements Comparable<Selector>, Iterable<Alternative> {
 
     @NotNull
     @Override
-    public Iterator<Alternative> iterator() {
+    public Iterator<K> iterator() {
 
         return getAlternatives().iterator();
 
     }
 
     @Override
-    public void forEach( final Consumer<? super Alternative> action ) {
+    public void forEach( final Consumer<? super K> action ) {
 
         _knownAlternativesList.forEach( action );
 
     }
 
     @Override
-    public Spliterator<Alternative> spliterator() {
+    public Spliterator<K> spliterator() {
 
         return _knownAlternativesList.spliterator();
 

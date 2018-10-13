@@ -36,7 +36,7 @@ public interface GowingUnPackerContext {
 
     SortedMap<GowingEntityReference, GowingPackable> getSeenEntitiesMap();
 
-    void rememberPackableEntity( StdGowingTokenizer.GowingToken2 token, GowingEntityReference etr, GowingPackable entity );
+    void rememberPackableEntity( StdGowingTokenizer.GowingToken2 token, GowingEntityReference er, GowingPackable entity );
 
     @NotNull
     Collection<EntityTypeName> getNewTypeNames();

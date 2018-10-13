@@ -1100,7 +1100,7 @@ public class RelativePath extends GowingAbstractPackableEntity implements Iterab
         }
 
         @SuppressWarnings("unchecked") GowingPackableCollection<String> segments =
-                (GowingPackableCollection<String>)unPacker.resolveReference( _segmentsEntityReference );
+                (GowingPackableCollection<String>)unPacker.resolveMandatoryReference( _segmentsEntityReference );
 
         SegmentName[] tmpSegments = new SegmentName[segments.size()];
         boolean isAbsolutePath = false;

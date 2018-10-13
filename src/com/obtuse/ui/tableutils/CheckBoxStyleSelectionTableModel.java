@@ -8,6 +8,7 @@ package com.obtuse.ui.tableutils;
 import com.obtuse.exceptions.HowDidWeGetHereError;
 import com.obtuse.ui.MyActionListener;
 import com.obtuse.util.Logger;
+import com.obtuse.util.things.ThingInfo;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
@@ -22,7 +23,7 @@ import java.util.TreeSet;
  Manage table row selection using a checkbox on each row.
  */
 
-public abstract class CheckBoxStyleSelectionTableModel<D extends CheckBoxRowWrapper.RowData> extends AbstractTableModel {
+public abstract class CheckBoxStyleSelectionTableModel<D extends ThingInfo> extends AbstractTableModel {
 
     private final boolean _singleSelectionMode;
 

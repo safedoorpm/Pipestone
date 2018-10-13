@@ -13,9 +13,9 @@ import org.jetbrains.annotations.Nullable;
  Created by danny on 2017/10/07.
  */
 
-public interface ThingInfo extends CheckBoxRowWrapper.RowData {
+public interface ThingInfo /*extends CheckBoxRowWrapper.RowData*/ {
 
-    String getName();
+//    String getName();
 
     ThingName getThingName();
 

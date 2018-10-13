@@ -131,7 +131,7 @@ public class ThreeDimensionalTreeMap<T1,T2,T3,V> extends GowingAbstractPackableE
         GowingPackableMapping<T1,TwoDimensionalSortedMap<T2,T3,V>> packedMapping = new GowingPackableMapping<>( _map );
 
         bundle.addHolder( new GowingPackableEntityHolder( OUTER_MAP, packedMapping, packer, true ) );
-        bundle.addHolder( new GowingBooleanHolder( READONLY, _readonly, true ) );
+        bundle.addHolder( new GowingBooleanHolder( READONLY, _readonly ) );
 
         return bundle;
 
@@ -150,7 +150,7 @@ public class ThreeDimensionalTreeMap<T1,T2,T3,V> extends GowingAbstractPackableE
 
         }
 
-        GowingPackable packable = unPacker.resolveReference( _outerMapReference );
+        GowingPackable packable = unPacker.resolveMandatoryReference( _outerMapReference );
         if ( ( packable instanceof GowingPackableMapping ) ) {
 
             // The temporary variable is required in order to make this assignment a declaration which allows
@@ -346,7 +346,7 @@ public class ThreeDimensionalTreeMap<T1,T2,T3,V> extends GowingAbstractPackableE
     @NotNull
     public Iterator<V> iterator() {
 
-        return new Iterator<V>() {
+        return new Iterator<>() {
 
             private final Iterator<T1> _outerIterator;
             private T1 _activeOuterKey;
@@ -354,7 +354,8 @@ public class ThreeDimensionalTreeMap<T1,T2,T3,V> extends GowingAbstractPackableE
 
             {
 
-                _outerIterator = _map.keySet().iterator();
+                _outerIterator = _map.keySet()
+                                     .iterator();
 
                 findNextNonEmptyInnerMap();
 
@@ -368,7 +369,7 @@ public class ThreeDimensionalTreeMap<T1,T2,T3,V> extends GowingAbstractPackableE
 
                     _activeOuterKey = _outerIterator.next();
 
-                    TwoDimensionalSortedMap<T2,T3,V> innerMap = getInnerMap( _activeOuterKey, false );
+                    TwoDimensionalSortedMap<T2, T3, V> innerMap = getInnerMap( _activeOuterKey, false );
                     //noinspection StatementWithEmptyBody
                     if ( innerMap == null || innerMap.isEmpty() ) {
 

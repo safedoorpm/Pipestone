@@ -40,8 +40,11 @@ public class ContextualToString<T extends Comparable<T>> implements Comparable<C
 
         @NotNull
         @Override
-        public GowingPackable createEntity( final @NotNull GowingUnPacker unPacker, final @NotNull GowingPackedEntityBundle bundle, final @NotNull GowingEntityReference er )
-                throws GowingUnpackingException {
+        public GowingPackable createEntity(
+                final @NotNull GowingUnPacker unPacker,
+                final @NotNull GowingPackedEntityBundle bundle,
+                final @NotNull GowingEntityReference er
+        ) {
 
             return new ContextualToString( unPacker, bundle );
 
@@ -150,7 +153,7 @@ public class ContextualToString<T extends Comparable<T>> implements Comparable<C
     @Override
     public boolean finishUnpacking( @NotNull final GowingUnPacker unPacker ) {
 
-        @SuppressWarnings("unchecked") T tmpItem = (T)unPacker.resolveReference( _itemReference );
+        @SuppressWarnings("unchecked") T tmpItem = (T)unPacker.resolveMandatoryReference( _itemReference );
         _item = tmpItem;
 
         return true;

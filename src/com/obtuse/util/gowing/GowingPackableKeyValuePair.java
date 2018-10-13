@@ -8,6 +8,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
+import java.util.Optional;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
@@ -69,6 +70,12 @@ public class GowingPackableKeyValuePair<K, V> extends GowingAbstractPackableEnti
 
         _key = key;
         _value = value;
+
+        if ( value instanceof Optional ) {
+
+            throw new HowDidWeGetHereError( "huh1?" );
+
+        }
 
         if ( !isObjectsClassSupported( key ) ) {
 
@@ -153,6 +160,11 @@ public class GowingPackableKeyValuePair<K, V> extends GowingAbstractPackableEnti
         if ( !_keyAndValueResolved ) {
 
             _key = (K)GowingUtil.fetchActualValue( unPacker, _keyReference );
+            if ( _valueReference instanceof Optional ) {
+
+                throw new HowDidWeGetHereError( "huh2?" );
+
+            }
             _value = (V)GowingUtil.fetchActualValue( unPacker, _valueReference );
 
             _keyAndValueResolved = true;

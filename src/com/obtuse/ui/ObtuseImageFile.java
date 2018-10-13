@@ -717,8 +717,8 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
         _originalURI = bundle.recoverURI( ORIGINAL_URI_GTAG );
         _originalURL = bundle.recoverURL( ORIGINAL_URI_GTAG );
         _originalFile = bundle.recoverFile( ORIGINAL_FILE_GTAG );
-        _originalImageFormat = bundle.StringValue( ORIGINAL_IMAGE_FORMAT_GTAG );
-        _cachedImageFormat = bundle.StringValue( CACHED_IMAGE_FORMAT_GTAG );
+        _originalImageFormat = bundle.optString( ORIGINAL_IMAGE_FORMAT_GTAG ).orElse( null );
+        _cachedImageFormat = bundle.optString( CACHED_IMAGE_FORMAT_GTAG ).orElse( null );
         _diagnosticCachedFilesBasename = bundle.recoverFile( CACHED_IMAGE_FILE_BASENAME_GTAG );
 
         if ( bundle.doesFieldExist( CACHED_IMAGE_WIDTH_GTAG ) ) {
@@ -734,11 +734,11 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
         }
 
         _ourSerialNumber = bundle.intValue( OUR_SERIAL_NUMBER_NAME );
-        _imageFileMD5 = bundle.StringValue( IMAGE_MD5_GTAG );
+        _imageFileMD5 = bundle.optString( IMAGE_MD5_GTAG ).orElse( null );
         _cachedImageFileSize = bundle.getNotNullField( CACHED_IMAGE_FILE_SIZE_GTAG ).longValue();
         _thumbnailImageBytes = bundle.getNullableField( THUMBNAIL_IMAGE_BYTES_NAME ).PrimitiveByteArrayValue();
 
-        _title = bundle.StringValue( TITLE_GTAG );
+        _title = bundle.optString( TITLE_GTAG ).orElse( null );
 
         ObtuseUtil.doNothing();
 

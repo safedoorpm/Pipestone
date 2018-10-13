@@ -14,6 +14,7 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.TreeMap;
 
 /*
@@ -118,7 +119,7 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName, GowingPackable
     }
 
     public GowingPackedEntityBundle(
-            final EntityTypeName typeName,
+            final @NotNull EntityTypeName typeName,
             final int typeId,
             final int version
     ) {
@@ -142,7 +143,7 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName, GowingPackable
 
         if ( _superBundle == null ) {
 
-            throw new HowDidWeGetHereError( "GowingPackedEntityBundle:  request for null super bundle" );
+            throw new HowDidWeGetHereError( _typeName + ".GowingPackedEntityBundle:  request for null super bundle" );
 
         }
 
@@ -194,7 +195,7 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName, GowingPackable
 
         if ( containsKey( holder.getName() ) ) {
 
-            throw new IllegalArgumentException( "GowingPackedEntityBundle.addHolder:  duplicate key " + ObtuseUtil.enquoteToJavaString( holder.getName().toString() ) );
+            throw new IllegalArgumentException( _typeName + ".addHolder:  " + "duplicate key " + ObtuseUtil.enquoteToJavaString( holder.getName().toString() ) );
 
         }
 
@@ -215,29 +216,32 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName, GowingPackable
      Helper method to get an optional entity reference field.
 
      @param name the name of the optional entity reference field.
-     @return the entity reference specified by the field, or {@code null} if the field does not exist within this bundle or exists but is {@code null}.
+     @return the entity reference specified by the field wrapped in an {@link Optional}
+     (it will be an {@link Optional#empty()} if the field does not exist within this bundle or exists but is {@code null}).
      @throws ClassCastException if the specified field exists but is not a {@link GowingEntityReference} value.
      */
 
-    @Nullable
-    public GowingEntityReference getOptionalEntityReference( final @NotNull EntityName name ) {
+    @NotNull
+    public Optional<GowingEntityReference> getOptionalEntityReference( final @NotNull EntityName name ) {
 
         if ( doesFieldExist( name ) ) {
 
             GowingPackableThingHolder ref = getNullableField( name );
             if ( ref == null ) {
 
-                return null;
+                return Optional.empty();
 
             } else {
 
-                return ( (GowingAbstractPackableHolder)ref ).EntityTypeReference();
+                // Note that just because there's a holder, that doesn't mean that it is actually holding anything.
+
+                return Optional.ofNullable( ( (GowingAbstractPackableHolder)ref ).EntityTypeReference() );
 
             }
 
         } else {
 
-            return null;
+            return Optional.empty();
 
         }
 
@@ -276,13 +280,13 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName, GowingPackable
         GowingPackableThingHolder holder = get( name );
         if ( holder == null ) {
 
-            throw new IllegalArgumentException( "required field \"" + name + "\" is missing" );
+            throw new IllegalArgumentException( _typeName + ".getNotNullField:  " + "required field \"" + name + "\" is missing" );
 
         }
 
         if ( holder.isNull() ) {
 
-            throw new NullPointerException( "field \"" + name + "\" is null" );
+            throw new NullPointerException( _typeName + ".getNotNullField:  field \"" + name + "\" is null" );
 
         }
 
@@ -302,7 +306,7 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName, GowingPackable
         GowingPackableThingHolder holder = get( name );
         if ( holder == null ) {
 
-            throw new IllegalArgumentException( "required field \"" + name + "\" is missing" );
+            throw new IllegalArgumentException( _typeName + ".getNullableField:  " + "required field \"" + name + "\" is missing" );
 
         }
 
@@ -339,7 +343,7 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName, GowingPackable
 
             } catch ( URISyntaxException e ) {
 
-                throw new HowDidWeGetHereError( "syntax error parsing URI " + ObtuseUtil.enquoteToJavaString( s ), e );
+                throw new HowDidWeGetHereError( _typeName + ".recoverURI:  " + "syntax error parsing URI " + ObtuseUtil.enquoteToJavaString( s ), e );
 
             }
 
@@ -362,7 +366,7 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName, GowingPackable
 
             } catch ( MalformedURLException e ) {
 
-                throw new HowDidWeGetHereError( "syntax error parsing URL " + ObtuseUtil.enquoteToJavaString( s ), e );
+                throw new HowDidWeGetHereError( _typeName + ".recoverURL:  " + "syntax error parsing URL " + ObtuseUtil.enquoteToJavaString( s ), e );
 
             }
 
@@ -385,10 +389,25 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName, GowingPackable
 
     }
 
-    @Nullable
-    public String StringValue( final EntityName gtag ) {
+//    @Nullable
+//    public String StringValue( final EntityName gtag ) {
+//
+//        return getNullableField( gtag ).StringValue();
+//
+//    }
 
-        return getNullableField( gtag ).StringValue();
+    @NotNull
+    public Optional<String> optString( final EntityName gtag ) {
+
+        return Optional.ofNullable( getNullableField( gtag ).StringValue() );
+
+    }
+
+    @NotNull
+    public Optional<File> optFile( final EntityName gtag ) {
+
+        Optional<String> optSval = optString( gtag );
+        return optSval.map( File::new );
 
     }
 

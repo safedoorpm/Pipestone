@@ -328,6 +328,12 @@ public class CSVParser implements Closeable {
 
     }
 
+    protected String getString() throws SyntaxErrorException {
+
+        return getString( -1 );
+
+    }
+
     /**
      * Parse a string that's enclosed in double quotes.
      * The basic C-style escape characters (\n, \r, \t, \b and \\) are treated as one would expect.
@@ -337,7 +343,7 @@ public class CSVParser implements Closeable {
      */
 
     @SuppressWarnings({ "ConstantConditions" })
-    protected String getString()
+    protected String getString( int lnum )
             throws SyntaxErrorException {
 
         int iDelim = nextCh();
@@ -351,7 +357,7 @@ public class CSVParser implements Closeable {
 
         if ( delim != (int)'"' ) {
 
-            throw new SyntaxErrorException( "missing opening quote" );
+            throw new SyntaxErrorException( ( lnum <= 0 ? "" : ( "line " + lnum + " has " ) ) + "missing opening quote" );
 
         }
 
@@ -386,8 +392,12 @@ public class CSVParser implements Closeable {
                         rval.append( '\\' );
                         break;
 
+                    case '"':
+                        rval.append( '"' );
+                        break;
+
                     default:
-                        throw new SyntaxErrorException( "illegal char after backslash" );
+                        throw new SyntaxErrorException( ( lnum <= 0 ? "" : ( "line " + lnum + " has " ) ) + "illegal char after backslash" );
 
                 }
 
@@ -405,7 +415,7 @@ public class CSVParser implements Closeable {
 
         }
 
-        throw new SyntaxErrorException( "missing closing string delimiter" );
+        throw new SyntaxErrorException( ( lnum <= 0 ? "" : ( "line " + lnum + " has " ) ) + "missing closing string delimiter" );
 
     }
 
@@ -498,17 +508,17 @@ public class CSVParser implements Closeable {
         } else {
 
             long lval = (long)val;
-            String rval = "";
+            StringBuilder rval = new StringBuilder();
             while ( lval != 0L ) {
 
                 //noinspection MagicNumber
-                rval = "" + "0123456789abcdef".charAt( (int)( lval & 0xfL ) ) + rval;
+                rval.insert( 0, "" + "0123456789abcdef".charAt( (int)( lval & 0xfL ) ) );
                 //noinspection MagicNumber
                 lval >>= 4L;
 
             }
 
-            return rval;
+            return rval.toString();
 
         }
 

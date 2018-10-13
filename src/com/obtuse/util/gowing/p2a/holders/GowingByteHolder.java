@@ -22,6 +22,12 @@ public class GowingByteHolder extends GowingAbstractPackableHolder {
 
     }
 
+    public GowingByteHolder( final @NotNull EntityName name, final byte v ) {
+
+        super( name, GowingConstants.TAG_BYTE, v, true );
+
+    }
+
     public GowingByteHolder( final @NotNull EntityName name, final byte@Nullable[] v, @SuppressWarnings("SameParameterValue") final boolean mandatory ) {
 
         super( name, GowingConstants.TAG_BYTE, v, mandatory, true );

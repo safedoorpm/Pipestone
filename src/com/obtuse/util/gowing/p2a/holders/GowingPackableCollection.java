@@ -8,6 +8,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 /*
@@ -67,6 +68,8 @@ public class GowingPackableCollection<E> extends ArrayList<E> implements GowingP
     private final GowingInstanceId _instanceId = new GowingInstanceId( getClass() );
 
     private List _things;
+
+    public static GowingPackableCollection EMPTY = new GowingPackableCollection<>( Collections.EMPTY_LIST );
 
     public static final GowingEntityFactory FACTORY = new GowingEntityFactory( ENTITY_TYPE_NAME ) {
 
@@ -165,8 +168,18 @@ public class GowingPackableCollection<E> extends ArrayList<E> implements GowingP
             final @NotNull GowingEntityReference src
     ) {
 
-        @SuppressWarnings("unchecked") GowingPackableCollection<T> tmp = (GowingPackableCollection<T>)unPacker.resolveReference( src );
-        return dest.addAll( tmp );
+        if ( unPacker.isEntityFinished( src ) ) {
+
+            @SuppressWarnings("unchecked") GowingPackableCollection<T> tmp =
+                    (GowingPackableCollection<T>)unPacker.resolveReference( src ).orElse( EMPTY );
+
+            return dest.addAll( tmp );
+
+        } else {
+
+            return false;
+
+        }
 
     }
 
@@ -208,7 +221,7 @@ public class GowingPackableCollection<E> extends ArrayList<E> implements GowingP
 
             } else if ( obj instanceof GowingEntityReference ) {
 
-                E value = (E)unPacker.resolveReference( (GowingEntityReference)obj );
+                E value = (E)unPacker.resolveReference( (GowingEntityReference)obj ).orElse( null );
                 add( value );
 
             } else {

@@ -11,6 +11,8 @@ import com.obtuse.util.gowing.p2a.holders.GowingPackableEntityHolder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Optional;
+
 /**
  %%% Something clever goes here.
  */
@@ -270,7 +272,7 @@ public class GowingUtil {
 
         @SuppressWarnings("unchecked") T rval = (T)unpackMaybeString( unPacker, er );
 
-        if ( rval == null || !idClass.getClass().isAssignableFrom( rval.getClass() ) ) {
+        if ( rval == null || !idClass.isAssignableFrom( rval.getClass() ) ) {
 
             return rval;
 
@@ -293,7 +295,13 @@ public class GowingUtil {
 
     public static Object unpackMaybeString( final @NotNull GowingUnPacker unPacker, final @Nullable GowingEntityReference er ) {
 
-        GowingPackable id = unPacker.resolveReference( er );
+        if ( er == null ) {
+
+            return null;
+
+        }
+
+        GowingPackable id = unPacker.resolveMandatoryReference( er );
         Object rval;
         if ( id instanceof GowingString ) {
 
@@ -325,7 +333,8 @@ public class GowingUtil {
 
         if ( value instanceof GowingEntityReference ) {
 
-            return unPacker.resolveReference( (GowingEntityReference)value );
+            Object rv1 = unPacker.resolveReference( (GowingEntityReference)value ).orElse( null );
+            return rv1;
 
         } else {
 

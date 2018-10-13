@@ -4,6 +4,7 @@
 
 package com.obtuse.ui;
 
+import com.obtuse.util.ObtuseCollections;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -15,13 +16,15 @@ import java.io.FilenameFilter;
 import java.util.Optional;
 
 /**
+ * These are obsolete - see {@link FileSelectors2}.
  * Some utility methods that make using Swing and AWT file selection dialogs a bit easier.
  * <p/>
  * Possibly of more interest, these also provide examples of how to use the file selection dialogs.
  */
 
+@Deprecated
 @SuppressWarnings("UnusedDeclaration")
-public class FileSelectors {
+class FileSelectors {
 
     private FileSelectors() {
         super();
@@ -149,14 +152,14 @@ public class FileSelectors {
             case JFileChooser.OPEN_DIALOG:
 
                 chooserRval = chooser.showOpenDialog( parent );
-                ourRval = getSelectedFilesArray( multiSelectionEnabled, chooser );
+                ourRval = FileSelectors2.getSelectedFilesArray( multiSelectionEnabled, chooser );
 
                 break;
 
             case JFileChooser.SAVE_DIALOG:
 
                 chooserRval = chooser.showSaveDialog( parent );
-                ourRval = getSelectedFilesArray( multiSelectionEnabled, chooser );
+                ourRval = FileSelectors2.getSelectedFilesArray( multiSelectionEnabled, chooser );
 
                 break;
 
@@ -191,51 +194,51 @@ public class FileSelectors {
 
     }
 
-    @NotNull
-    private static File[] getSelectedFilesArray( final boolean multiSelectionEnabled, final JFileChooser chooser ) {
-
-        File[] ourRval;
-        if ( multiSelectionEnabled ) {
-
-            File[] selectedFiles = chooser.getSelectedFiles();
-            if ( selectedFiles == null ) {
-
-                File singleFile = chooser.getSelectedFile();
-                if ( singleFile == null ) {
-
-                    ourRval = new File[0];
-
-                } else {
-
-                    ourRval = new File[1];
-                    ourRval[0] = singleFile;
-
-                }
-
-            } else {
-
-                ourRval = new File[selectedFiles.length];
-                System.arraycopy( selectedFiles, 0, ourRval, 0, selectedFiles.length );
-
-            }
-
-        } else {
-
-            File singleFile = chooser.getSelectedFile();
-            if ( singleFile == null ) {
-
-                ourRval = new File[0];
-
-            } else {
-
-                ourRval = new File[1];
-                ourRval[0] = singleFile;
-
-            }
-
-        }
-        return ourRval;
-    }
+//    @NotNull
+//    private static File[] getSelectedFilesArray( final boolean multiSelectionEnabled, final JFileChooser chooser ) {
+//
+//        File[] ourRval;
+//        if ( multiSelectionEnabled ) {
+//
+//            File[] selectedFiles = chooser.getSelectedFiles();
+//            if ( selectedFiles == null ) {
+//
+//                File singleFile = chooser.getSelectedFile();
+//                if ( singleFile == null ) {
+//
+//                    ourRval = new File[0];
+//
+//                } else {
+//
+//                    ourRval = new File[1];
+//                    ourRval[0] = singleFile;
+//
+//                }
+//
+//            } else {
+//
+//                ourRval = new File[selectedFiles.length];
+//                System.arraycopy( selectedFiles, 0, ourRval, 0, selectedFiles.length );
+//
+//            }
+//
+//        } else {
+//
+//            File singleFile = chooser.getSelectedFile();
+//            if ( singleFile == null ) {
+//
+//                ourRval = new File[0];
+//
+//            } else {
+//
+//                ourRval = new File[1];
+//                ourRval[0] = singleFile;
+//
+//            }
+//
+//        }
+//        return ourRval;
+//    }
 
     /**
      * Use the Swing {@link javax.swing.JFileChooser} to select a file using a custom button label.
@@ -348,32 +351,34 @@ public class FileSelectors {
             final FilenameFilter filenameFilter
     ) {
 
-        if ( filenameFilter != null ) {
+        return FileSelectors2.awtSelectFile( dialog, startingDirectory, filenameFilter );
 
-            dialog.setFilenameFilter( filenameFilter );
-
-        }
-
-        if ( startingDirectory != null ) {
-
-            dialog.setDirectory( startingDirectory.getAbsolutePath() );
-
-        }
-
-        dialog.setVisible( true );
-
-        String fileName = dialog.getFile();
-        if ( fileName == null ) {
-
-            return null;
-
-        } else {
-
-            String directory = dialog.getDirectory();
-
-            return new File( new File( directory ), fileName );
-
-        }
+//        if ( filenameFilter != null ) {
+//
+//            dialog.setFilenameFilter( filenameFilter );
+//
+//        }
+//
+//        if ( startingDirectory != null ) {
+//
+//            dialog.setDirectory( startingDirectory.getAbsolutePath() );
+//
+//        }
+//
+//        dialog.setVisible( true );
+//
+//        String fileName = dialog.getFile();
+//        if ( fileName == null ) {
+//
+//            return null;
+//
+//        } else {
+//
+//            String directory = dialog.getDirectory();
+//
+//            return new File( new File( directory ), fileName );
+//
+//        }
 
     }
 

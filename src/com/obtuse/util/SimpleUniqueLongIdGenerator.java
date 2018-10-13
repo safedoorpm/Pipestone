@@ -61,7 +61,7 @@ public class SimpleUniqueLongIdGenerator implements UniqueLongIdGenerator {
     }
 
     @Override
-    public void setLastId( final long lastId ) {
+    public SimpleUniqueLongIdGenerator setLastId( final long lastId ) {
 
         if ( _lastId != DEFAULT_INITIAL_LAST_ID ) {
 
@@ -70,6 +70,8 @@ public class SimpleUniqueLongIdGenerator implements UniqueLongIdGenerator {
         }
 
         _lastId = lastId;
+
+        return this;
 
     }
 

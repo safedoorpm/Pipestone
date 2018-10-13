@@ -109,7 +109,7 @@ public class StdGowingPacker implements GowingPacker {
 
     private SortedMap<String,Object> s_usedMetaDataKeywords = new TreeMap<>();
 
-    private boolean _verbose = false;
+    private boolean _verbose;
 
     @SuppressWarnings("unused")
     public StdGowingPacker( final @NotNull EntityName groupName, final @NotNull File outputFile, final boolean verbose )
@@ -131,9 +131,7 @@ public class StdGowingPacker implements GowingPacker {
 
     }
 
-    public
-
-    StdGowingPacker( final @NotNull EntityName groupName, final @NotNull File outputFile )
+    public StdGowingPacker( final @NotNull EntityName groupName, final @NotNull File outputFile )
             throws FileNotFoundException {
 
         this( groupName, outputFile, new PrintWriter( outputFile ), new StdGowingPackerContext(), false );
@@ -217,6 +215,7 @@ public class StdGowingPacker implements GowingPacker {
 
     }
 
+    @Override
     public GowingInstanceId queuePackableEntity( @Nullable final EntityName entityName, @Nullable final GowingPackable entity ) {
 
         if ( entity == null ) {
@@ -233,6 +232,7 @@ public class StdGowingPacker implements GowingPacker {
 
     }
 
+    @Override
     public int finish() {
 
         if ( _finished ) {

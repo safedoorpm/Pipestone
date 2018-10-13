@@ -239,7 +239,7 @@ public class GowingPackableMapping<K, V> implements GowingPackable {
             // The _kvpReferences list only contains GowingPackableKeyValuePair<K,V> instances so the following cast is actually quite safe.
 
             @SuppressWarnings("unchecked")
-            GowingPackableKeyValuePair<K, V> kvp = (GowingPackableKeyValuePair<K, V>)unPacker.resolveReference( er );
+            GowingPackableKeyValuePair<K, V> kvp = (GowingPackableKeyValuePair<K, V>)unPacker.resolveMandatoryReference( er );
             addMapping( kvp );
 
         }

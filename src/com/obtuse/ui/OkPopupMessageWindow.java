@@ -22,6 +22,8 @@ import java.awt.event.WindowEvent;
 
 public class OkPopupMessageWindow extends JDialog {
 
+    public static final String OK_BUTTON_LABEL = "OK";
+
     @SuppressWarnings({ "InstanceVariableNamingConvention" })
 
     private JPanel _contentPane;

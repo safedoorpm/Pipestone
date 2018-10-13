@@ -9,6 +9,7 @@ import com.obtuse.exceptions.HowDidWeGetHereError;
 import com.obtuse.util.Logger;
 import com.obtuse.util.SimpleUniqueIntegerIdGenerator;
 import com.obtuse.util.Trace;
+import com.obtuse.util.things.ThingInfo;
 import com.obtuse.util.things.ThingNameFactory;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -20,7 +21,7 @@ import java.util.*;
  Manage a table of datum types.
  */
 
-public class FrameworkTableModel<D extends CheckBoxRowWrapper.RowData> extends CheckBoxStyleSelectionTableModel<D> {
+public class FrameworkTableModel<D extends ThingInfo> extends CheckBoxStyleSelectionTableModel<D> {
 
     public static class TCName implements Comparable<TCName> {
 
@@ -79,7 +80,7 @@ public class FrameworkTableModel<D extends CheckBoxRowWrapper.RowData> extends C
 
     }
 
-    public abstract static class CManager<D extends CheckBoxRowWrapper.RowData> {
+    public abstract static class CManager<D extends ThingInfo> {
 
         private final Class _defaultCellClass;
         private final TCName _columnName;

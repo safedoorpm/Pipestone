@@ -66,7 +66,7 @@ public class SimpleUniqueIntegerIdGenerator implements UniqueIntegerIdGenerator 
      */
 
     @Override
-    public void setLastId( final int lastId ) {
+    public SimpleUniqueIntegerIdGenerator setLastId( final int lastId ) {
 
         if ( _lastId != DEFAULT_INITIAL_LAST_ID ) {
 
@@ -76,6 +76,8 @@ public class SimpleUniqueIntegerIdGenerator implements UniqueIntegerIdGenerator 
 
         _lastId = lastId;
 
+        return this;
+        
     }
 
     /**

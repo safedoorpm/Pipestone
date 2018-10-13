@@ -13,7 +13,7 @@ import java.text.DateFormat;
 import java.util.prefs.Preferences;
 
 /**
- * Fundamental program configuration information and such.
+ Fundamental program configuration information and such.
  */
 
 @SuppressWarnings({ "ClassNamingConvention", "UnusedDeclaration" })
@@ -36,32 +36,42 @@ public class BasicProgramConfigInfo {
     private static DateFormat s_dateFormat = null;
 
     /**
-     * Initialize this program's basic configuration info.
-     * <p/>
-     * Note that the three names passed to this method are used to determine file and/or directory names.
-     * Consequently, they may only contain characters allowed in file and directory names across whatever range
-     * of operating systems the calling application component is likely to run on.
-     * It is probably safest to restrict yourself to letters, digits, spaces, underscores and hyphens.
-     * Using non-printable ASCII characters or either forward or backward slashes would be a VERY bad idea.
-     * <p/>Note: spaces in the <tt>vendorName</tt>, <tt>applicationName</tt>, and <tt>componentName</tt> are turned into underscores
-     * to ensure that the generated file names do not contain spaces.
-     * <p/>Note: this method does not impose any rules on which characters may appear in the <tt>vendorName</tt>, <tt>applicationName</tt> or <tt>componentName</tt> parameters.
-     * Please keep in mind that if you ignore the above advice then either you or, more likely, your customers will suffer the consequences.
-     * As always, <i>caveat structor</i> (developer beware).
-     * <p/>
-     * This method MUST be called before using the {@link Logger} or the {@link Trace} facilities.
-     * @param vendorName the program's vendor's name (must not be null).
-     * @param applicationName the application's name (must not be null).
-     * @param componentName this component's name within the larger application (must not be null).
-     * @param preferences this application's preferences object (may be null if application has no use for preferences).
-     * This value may be <tt>null</tt> in which case the application name will generally be used.
-     * @throws java.lang.IllegalArgumentException if any of <tt>vendorName</tt>, <tt>applicationName</tt>, or <tt>componentName</tt> are null.
+     Initialize this program's basic configuration info.
+     <p/>
+     Note that the three names passed to this method are used to determine file and/or directory names.
+     Consequently, they may only contain characters allowed in file and directory names across whatever range
+     of operating systems the calling application component is likely to run on.
+     It is probably safest to restrict yourself to letters, digits, spaces, underscores and hyphens.
+     Using non-printable ASCII characters or either forward or backward slashes would be a VERY bad idea.
+     <p/>Note: spaces in the <tt>vendorName</tt>, <tt>applicationName</tt>, and <tt>componentName</tt> are turned
+     into underscores
+     to ensure that the generated file names do not contain spaces.
+     <p/>Note: this method does not impose any rules on which characters may appear in the <tt>vendorName</tt>,
+     <tt>applicationName</tt> or <tt>componentName</tt> parameters.
+     Please keep in mind that if you ignore the above advice then either you or, more likely, your customers will
+     suffer the consequences.
+     As always, <i>caveat structor</i> (developer beware).
+     <p/>
+     This method MUST be called before using the {@link Logger} or the {@link Trace} facilities.
+
+     @param vendorName      the program's vendor's name (must not be null).
+     @param applicationName the application's name (must not be null).
+     @param componentName   this component's name within the larger application (must not be null).
+     @param workingDirectory where the log files should go (avoids auto-generation of log file destination
+     based on vendor name and such).
+     @param preferences     this application's preferences object (may be null if application has no use for
+     preferences).
+     This value may be <tt>null</tt> in which case the application name will generally be used.
+     @throws java.lang.IllegalArgumentException if any of <tt>vendorName</tt>, <tt>applicationName</tt>, or
+     <tt>componentName</tt> are null.
      */
 
-    public static void init(
+    @SuppressWarnings("WeakerAccess")
+    public static void initIncludingWorkingDirectory(
             @SuppressWarnings("SameParameterValue") final @NotNull String vendorName,
             @SuppressWarnings("SameParameterValue") final @NotNull String applicationName,
             @SuppressWarnings("SameParameterValue") final @NotNull String componentName,
+            final @Nullable File workingDirectory,
             @SuppressWarnings("SameParameterValue") @Nullable final Preferences preferences
     ) {
 
@@ -79,33 +89,77 @@ public class BasicProgramConfigInfo {
         }
 
         String home = System.getProperty( "user.home" );
-        if ( home != null ) {
+        if ( workingDirectory == null ) {
 
-            // Mac OS has a convention as to where these sorts of things go.
-            // Follow the convention if we are running on the Mac OS.
+            if ( home != null ) {
 
-            if ( OSLevelCustomizations.onMacOsX() ) {
+                // Mac OS has a convention as to where these sorts of things go.
+                // Follow the convention if we are running on the Mac OS.
 
-                File dirLocation = new File( new File( new File( home, "Library" ), "Application Support" ), "ObtuseUtil" );
+                if ( OSLevelCustomizations.onMacOsX() ) {
 
-		BasicProgramConfigInfo.s_workingDirectory = new File( new File( new File( dirLocation, getVendorName() ), getApplicationName() ), getComponentName() );
+                    File dirLocation = new File(
+                            new File( new File( home, "Library" ), "Application Support" ),
+                            "ObtuseUtil"
+                    );
 
-	    } else {
+                    BasicProgramConfigInfo.s_workingDirectory = new File( new File( new File(
+                            dirLocation,
+                            getVendorName()
+                    ), getApplicationName() ), getComponentName() );
 
-                BasicProgramConfigInfo.s_workingDirectory = new File( new File( new File( new File( new File( home ), ".ObtuseUtil" ), getVendorName() ), getApplicationName() ), getComponentName() );
+                } else {
+
+                    BasicProgramConfigInfo.s_workingDirectory = new File( new File( new File( new File(
+                            new File( home ),
+                            ".ObtuseUtil"
+                    ), getVendorName() ), getApplicationName() ), getComponentName() );
+
+                }
+
+                //noinspection ResultOfMethodCallIgnored
+                BasicProgramConfigInfo.s_workingDirectory.mkdirs();
+
+            } else {
+
+                BasicProgramConfigInfo.s_workingDirectory = null;
 
             }
+
+        } else {
+
+            BasicProgramConfigInfo.s_workingDirectory = workingDirectory;
 
             //noinspection ResultOfMethodCallIgnored
             BasicProgramConfigInfo.s_workingDirectory.mkdirs();
 
-        } else {
-
-            BasicProgramConfigInfo.s_workingDirectory = null;
-
         }
 
         BasicProgramConfigInfo.s_initialized = true;
+
+    }
+
+    /**
+     A simpler and almost always preferred version of {@link #initIncludingWorkingDirectory(String, String, String, File, Preferences)}.
+     <p>See {@link #initIncludingWorkingDirectory(String, String, String, File, Preferences)} for important information.
+     Confusion is more than likely if both this method and {@code initIncludingWorkingDirectory} are both called
+     within the same JVM instance.</p>
+     @param vendorName      the program's vendor's name (must not be null).
+     @param applicationName the application's name (must not be null).
+     @param componentName   this component's name within the larger application (must not be null).
+     @param preferences     this application's preferences object (may be null if application has no use for
+     preferences).
+     This value may be <tt>null</tt> in which case the application name will generally be used.
+     */
+
+    public static void init(
+            @SuppressWarnings("SameParameterValue") final @NotNull String vendorName,
+            @SuppressWarnings("SameParameterValue") final @NotNull String applicationName,
+            @SuppressWarnings("SameParameterValue") final @NotNull String componentName,
+            @SuppressWarnings("SameParameterValue") @Nullable final Preferences preferences
+    ) {
+
+        initIncludingWorkingDirectory( vendorName, applicationName, componentName, null, null );
 
     }
 
@@ -117,6 +171,7 @@ public class BasicProgramConfigInfo {
     }
 
     private BasicProgramConfigInfo() {
+
         super();
 
     }
@@ -228,7 +283,7 @@ public class BasicProgramConfigInfo {
         // customizer class names must be given as strings rather than, for example,
         // invoking CustomizerClass.class.getCanonicalName().
 
-        @SuppressWarnings( { "UnusedDeclaration", "UnusedAssignment" })
+        @SuppressWarnings({ "UnusedDeclaration", "UnusedAssignment" })
         OSLevelCustomizations customizer = OSLevelCustomizations.getCustomizer();
 
     }

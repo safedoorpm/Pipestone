@@ -59,6 +59,13 @@ public interface TwoDimensionalSortedMap<T1, T2, V> extends Iterable<V>, GowingP
     SortedMap<T2, V> getNotNullInnerMap( final T1 key1 );
 
     /**
+     Add everything that is in a specified map into this map.
+     @param map the specified map.
+     */
+
+    void addAll( final @NotNull TwoDimensionalSortedMap<T1, T2, V> map );
+
+    /**
      Determine if this map is readonly.
      @return {@code true} if it is readonly; {@code false} if it modifiable.
      */

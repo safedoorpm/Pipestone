@@ -18,7 +18,6 @@ import org.jetbrains.annotations.Nullable;
 import java.awt.*;
 import java.awt.event.InputEvent;
 import java.io.*;
-import java.lang.reflect.InvocationTargetException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.security.MessageDigest;
@@ -2537,6 +2536,14 @@ public class ObtuseUtil {
 
     public static @NotNull String computeMD5( final @NotNull byte data@NotNull[] ) {
 
+        byte[] digest = computeMD5bytes( data );
+
+        return ObtuseUtil.hexvalue( digest );
+
+    }
+
+    public static byte[] computeMD5bytes( @NotNull final byte @NotNull [] data ) {
+
         MessageDigest md5Algorithm;
         md5Algorithm = getMD5MessageDigest();
 
@@ -2544,14 +2551,20 @@ public class ObtuseUtil {
 
         md5Algorithm.reset();
 
-        byte[] digest = md5Algorithm.digest( data );
-
-        return ObtuseUtil.hexvalue( digest );
+        return md5Algorithm.digest( data );
 
     }
 
     public static @NotNull String computeMD5( final InputStream is )
             throws IOException {
+
+        byte[] digest = computeMD5bytes( is );
+
+        return ObtuseUtil.hexvalue( digest );
+
+    }
+
+    public static byte[] computeMD5bytes( final InputStream is ) throws IOException {
 
         MessageDigest md5Algorithm;
         md5Algorithm = getMD5MessageDigest();
@@ -2578,15 +2591,15 @@ public class ObtuseUtil {
 
             }
 
-            byte[] digest = md5Algorithm.digest();
 
-            return ObtuseUtil.hexvalue( digest );
 
         } finally {
 
             ObtuseUtil.closeQuietly( fis );
 
         }
+
+        return md5Algorithm.digest();
 
     }
 
@@ -2924,9 +2937,9 @@ public class ObtuseUtil {
     }
 
     /**
-     Never returns true (avoids having to fool Java compiler when you want an always {@code false} value).
+     Always returns false (avoids having to fool Java compiler when you want an always {@code false} value).
 
-     @return {@code true}
+     @return {@code false}
      */
 
     public static boolean never() {
@@ -3004,7 +3017,7 @@ public class ObtuseUtil {
 
     }
 
-    public static boolean quietGowingSave(
+    public static boolean quietGowingPack(
             final @NotNull EntityName groupName,
             final @NotNull GowingPackable[] items,
             final @NotNull File outputFile,
@@ -3021,6 +3034,8 @@ public class ObtuseUtil {
             }
 
             packer.finish();
+
+            doNothing();
 
         } catch ( FileNotFoundException e ) {
 
@@ -3049,17 +3064,18 @@ public class ObtuseUtil {
 
     }
 
-    public static boolean quietGowingSave(
+    public static boolean quietGowingPack(
             final @NotNull EntityName groupName,
             final @NotNull GowingPackable item,
             final @NotNull File outputFile,
             boolean verbose
     ) {
 
-        return quietGowingSave( groupName, new GowingPackable[]{ item }, outputFile, verbose );
+        return quietGowingPack( groupName, new GowingPackable[]{ item }, outputFile, verbose );
 
     }
 
+    /*
     public static Optional<GowingUnPackedEntityGroup> quietGowingUnPack(
             final @NotNull File inputFile,
             final @NotNull GowingEntityFactory[] gowingEntityFactories
@@ -3072,13 +3088,14 @@ public class ObtuseUtil {
 
         } catch ( IOException | GowingUnpackingException e ) {
 
-            Logger.logErr( "ObtuseUtil.quietGowingSave( " + inputFile + " )", e );
+            Logger.logErr( "ObtuseUtil.quietGowingPack( " + inputFile + " )", e );
 
         }
 
         return rval;
 
     }
+    */
 
     public static Optional<GowingUnPackedEntityGroup> gowingUnPack(
             final @NotNull File inputFile,

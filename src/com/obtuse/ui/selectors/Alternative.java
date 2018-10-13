@@ -29,10 +29,10 @@ public class Alternative implements Comparable<Alternative>, GowingPackable {
 //    public static final GenericTag.GenericTagCategory ALTERNATIVE_TAG_CATEGORY =
 //            GenericTag.createNewTagCategory( Alternative.class.getCanonicalName() );
 
-    public abstract static class AlternativeFactory<K extends Alternative> {
+    public interface AlternativeFactory<K extends Alternative> {
 
-        public abstract K createInstance(
-                final @NotNull Selector selector,
+        K createInstance(
+                final @NotNull Selector<K> selector,
                 final @NotNull GenericTag tag,
                 final @NotNull String toString
         );
@@ -75,7 +75,7 @@ public class Alternative implements Comparable<Alternative>, GowingPackable {
                 throws GowingUnpackingException {
 
             String selectorTag = bundle.MandatoryStringValue( G_SELECTOR_TAG );
-            Optional<Selector> optSelector = Selector.findSelector( selectorTag );
+            Optional<Selector<Alternative>> optSelector = Selector.findSelector( selectorTag );
             if ( !optSelector.isPresent() ) {
 
                 throw new IllegalArgumentException(
@@ -118,13 +118,13 @@ public class Alternative implements Comparable<Alternative>, GowingPackable {
 
     /**
      Create an instance which has a tag which might be different than its {@link #toString()} value.
+     @throws IllegalArgumentException if this JVM already has an instance of this class with the specified {@code name} and {@code toString} values.
      @param selector the instance's {@link Selector}.
      @param tag the instance's tag.
      @param toString the value to be returned by this instance's {@code toString()} method.
-     @throws IllegalArgumentException if this JVM already has an instance of this class with the specified {@code name} and {@code toString} values.
      */
 
-    protected Alternative( final @NotNull Selector selector, final @NotNull GenericTag tag, final @NotNull String toString ) {
+    protected Alternative( final Selector<Alternative> selector, final @NotNull GenericTag tag, final @NotNull String toString ) {
         super();
 
         _selector = selector;
@@ -190,7 +190,26 @@ public class Alternative implements Comparable<Alternative>, GowingPackable {
     }
 
     public static Alternative maybeCreateChoice(
-            final @NotNull Selector selector,
+            final @NotNull Selector<Alternative> selector,
+            final @NotNull String toString
+    ) {
+
+        return maybeCreateChoice( selector, toString, toString );
+
+    }
+
+    public static <K extends Alternative> K maybeCreateChoice(
+            final @NotNull Selector<K> selector,
+            final @NotNull String toString,
+            final @NotNull AlternativeFactory<K> factory
+    ) {
+
+        return maybeCreateChoice( selector, toString, toString, factory );
+
+    }
+
+    public static Alternative maybeCreateChoice(
+            final @NotNull Selector<Alternative> selector,
             final @NotNull String stringTag,
             final @NotNull String toString
     ) {
@@ -201,8 +220,20 @@ public class Alternative implements Comparable<Alternative>, GowingPackable {
 
     }
 
+    public static Alternative maybeCreateChoice(
+            final @NotNull Selector<Alternative> selector,
+            final @NotNull GenericTag stringTag,
+            final @NotNull String toString
+    ) {
+
+        GenericTag tag = GenericTag.alloc( selector.getSelectorsTagCategory(), stringTag.getTagName() );
+        Optional<Alternative> optChoice = selector.findAlternativeByTag( tag );
+        return optChoice.orElseGet( () -> new Alternative( selector, tag, toString ) );
+
+    }
+
     public static <K extends Alternative> K maybeCreateChoice(
-            final @NotNull Selector selector,
+            final @NotNull Selector<K> selector,
             final @NotNull String stringTag,
             final @NotNull String toString,
             final @NotNull AlternativeFactory<K> factory

@@ -258,11 +258,11 @@ public class StdGowingPackerContext implements GowingPackerContext {
 
             _payload = bundle.MandatoryStringValue( new EntityName( "_payload" ) );
 
-            _simpleReference = bundle.getOptionalEntityReference( new EntityName( "_simple" ) );
+            _simpleReference = bundle.getOptionalEntityReference( new EntityName( "_simple" ) ).orElse( null );
 
             _iValue = bundle.getNotNullField( new EntityName( "_iValue" ) ).intValue();
 
-            _innerReference = bundle.getOptionalEntityReference( new EntityName( "_inner" ) );
+            _innerReference = bundle.getOptionalEntityReference( new EntityName( "_inner" ) ).orElse( null );
 
             @Nullable EntityName froz = bundle.EntityNameValue( new EntityName( "_entityName" ) );
 
@@ -285,11 +285,11 @@ public class StdGowingPackerContext implements GowingPackerContext {
             bundle.addHolder( new GowingPackableEntityHolder( new EntityName( "_inner" ), _inner, packer, false ) );
             bundle.addHolder( new GowingStringHolder( new EntityName( "_payload" ), _payload, true ) );
             bundle.addHolder( new GowingIntegerHolder( new EntityName( "_iValue" ), _iValue, false ) );
-            bundle.addHolder( new GowingBooleanHolder( new EntityName( "_booleanValue" ), true, true ) );
-            bundle.addHolder( new GowingDoubleHolder( new EntityName( "_doubleValue" ), Math.PI, false ) );
-            bundle.addHolder( new GowingFloatHolder( new EntityName( "_floatValue" ), 1.1f, true ) );
-            bundle.addHolder( new GowingShortHolder( new EntityName( "_shortValue" ), (short)15, false ) );
-            bundle.addHolder( new GowingLongHolder( new EntityName( "_longValue" ), 123L, true ) );
+            bundle.addHolder( new GowingBooleanHolder( new EntityName( "_booleanValue" ), true ) );
+            bundle.addHolder( new GowingDoubleHolder( new EntityName( "_doubleValue" ), Math.PI ) );
+            bundle.addHolder( new GowingFloatHolder( new EntityName( "_floatValue" ), 1.1f ) );
+            bundle.addHolder( new GowingShortHolder( new EntityName( "_shortValue" ), (short)15 ) );
+            bundle.addHolder( new GowingLongHolder( new EntityName( "_longValue" ), 123L ) );
             bundle.addHolder( new GowingEntityNameHolder( new EntityName( "_entityName" ), new EntityName( "froz_botnick" ), true ) );
 
             return bundle;
@@ -299,8 +299,8 @@ public class StdGowingPackerContext implements GowingPackerContext {
         @Override
         public boolean finishUnpacking( final @NotNull GowingUnPacker unPacker ) {
 
-            _simple = (SimplePackableClass)unPacker.resolveReference( _simpleReference );
-            _inner = (TestPackableClass)unPacker.resolveReference( _innerReference );
+            _simple = (SimplePackableClass)unPacker.resolveReference( _simpleReference ).orElse( null );
+            _inner = (TestPackableClass)unPacker.resolveReference( _innerReference ).orElse( null );
 
             return true;
 

@@ -225,7 +225,7 @@ public class StdGowingUnPackerContext implements GowingUnPackerContext {
     }
 
     @Override
-    public void rememberPackableEntity( final StdGowingTokenizer.GowingToken2 token, final GowingEntityReference er, final GowingPackable entity ) {
+    public void rememberPackableEntity( @NotNull final StdGowingTokenizer.GowingToken2 token, @NotNull final GowingEntityReference er, @NotNull final GowingPackable entity ) {
 
         if ( isEntityKnown( er ) ) {
 

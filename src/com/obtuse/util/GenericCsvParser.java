@@ -6,6 +6,7 @@ package com.obtuse.util;
 
 import com.obtuse.exceptions.HowDidWeGetHereError;
 import com.obtuse.util.exceptions.SyntaxErrorException;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -44,12 +45,12 @@ public class GenericCsvParser extends CSVParser implements Iterable<SortedMap<St
 
         _description = description;
 
-        _titles = parseRawLine();
+        _titles = parseRawLine( -1 );
 
     }
 
     public GenericCsvParser( final String description, final File file, Collection<String> titles )
-            throws SyntaxErrorException, FileNotFoundException {
+            throws FileNotFoundException {
         this( description, new BufferedReader( new FileReader( file ) ), titles );
     }
 
@@ -120,7 +121,21 @@ public class GenericCsvParser extends CSVParser implements Iterable<SortedMap<St
 
     }
 
-    public void parse()
+    public void parse() throws SyntaxErrorException {
+
+        try {
+
+            innerParse();
+
+        } catch ( SyntaxErrorException e ) {
+
+            throw new SyntaxErrorException( _description + " " + e.getMessage(), e );
+
+        }
+
+    }
+
+    private void innerParse()
             throws SyntaxErrorException {
 
         if ( _nextLnum > 0 ) {
@@ -143,7 +158,7 @@ public class GenericCsvParser extends CSVParser implements Iterable<SortedMap<St
             char ch = (char)iCh;
 
             pushback( ch );
-            List<String> fields = parseRawLine();
+            List<String> fields = parseRawLine( _nextLnum );
 
             Iterator<String> titleIter = _titles.iterator();
             Iterator<String> fieldIter = fields.iterator();
@@ -163,7 +178,7 @@ public class GenericCsvParser extends CSVParser implements Iterable<SortedMap<St
 
     }
 
-    private List<String> parseRawLine()
+    private List<String> parseRawLine( int lnum )
             throws SyntaxErrorException {
 
         List<String> fields = new LinkedList<>();
@@ -185,7 +200,7 @@ public class GenericCsvParser extends CSVParser implements Iterable<SortedMap<St
 
             if ( ch == (int)'\"' ) {
 
-                field = getString();
+                field = getString( lnum );
 
             } else {
 
@@ -250,9 +265,11 @@ public class GenericCsvParser extends CSVParser implements Iterable<SortedMap<St
     }
 
     @Override
+    @NotNull
     public Iterator<SortedMap<String, String>> iterator() {
 
         return _parsedData.innerMaps().iterator();
+
     }
 
     @Override
@@ -260,11 +277,14 @@ public class GenericCsvParser extends CSVParser implements Iterable<SortedMap<St
 
         ObtuseUtil.doNothing();
 
+
     }
 
     @Override
     public Spliterator<SortedMap<String, String>> spliterator() {
 
         return null;
+
     }
+
 }

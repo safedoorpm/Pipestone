@@ -22,6 +22,12 @@ public class GowingLongHolder extends GowingAbstractPackableHolder {
 
     }
 
+    public GowingLongHolder( final @NotNull EntityName name, final long v ) {
+
+        super( name, GowingConstants.TAG_LONG, v, true );
+
+    }
+
     public GowingLongHolder( final @NotNull EntityName name, final long@NotNull[] v, @SuppressWarnings("SameParameterValue") final boolean mandatory ) {
 
         super( name, GowingConstants.TAG_LONG, v, mandatory, true );

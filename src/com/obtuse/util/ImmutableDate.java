@@ -66,7 +66,7 @@ public class ImmutableDate extends Date implements GowingPackable {
                 packer.getPackingContext()
         );
 
-        bundle.addHolder( new GowingLongHolder( ImmutableDate.TIME_MS_NAME, getTime(), true ) );
+        bundle.addHolder( new GowingLongHolder( ImmutableDate.TIME_MS_NAME, getTime() ) );
 
         return bundle;
 

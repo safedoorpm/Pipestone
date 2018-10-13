@@ -111,7 +111,7 @@ public class GowingTrace {
 
             String erString = er.toString();
             _maxGerWidth = Math.max( _maxGerWidth, erString.length() );
-            return ObtuseUtil.rpad( "" + er, _maxGerWidth ) + " " + describeEntity( _unPacker.resolveReference( er ) );
+            return ObtuseUtil.rpad( "" + er, _maxGerWidth ) + " " + describeEntity( _unPacker.resolveReference( er ).orElse( null ) );
 
         }
 

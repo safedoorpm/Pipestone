@@ -18,7 +18,7 @@ public interface UniqueLongIdGenerator {
      has already been invoked).
      */
 
-    void setLastId( long lastId );
+    UniqueLongIdGenerator setLastId( long lastId );
 
     /**
      Determine if a call to {@link #getUniqueId()} on this instance can ever return an id that has already returned in a previous call to {@link #getUniqueId()} on this instance.

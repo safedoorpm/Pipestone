@@ -22,6 +22,12 @@ public class GowingBooleanHolder extends GowingAbstractPackableHolder {
 
     }
 
+    public GowingBooleanHolder( final @NotNull EntityName name, final boolean v ) {
+
+        super( name, GowingConstants.TAG_BOOLEAN, v, true );
+
+    }
+
     public GowingBooleanHolder( final @NotNull EntityName name, final boolean@NotNull[] v, @SuppressWarnings("SameParameterValue") final boolean mandatory ) {
 
         super( name, GowingConstants.TAG_BOOLEAN, v, mandatory, true );

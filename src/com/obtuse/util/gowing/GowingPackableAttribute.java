@@ -229,7 +229,7 @@ public class GowingPackableAttribute implements GowingPackable {
             if ( v instanceof GowingEntityReference ) {
 
                 GowingEntityReference er = (GowingEntityReference)v;
-                _value = unPacker.resolveReference( er );
+                _value = unPacker.resolveReference( er ).orElse( null );
 
             } else if ( getAttributeType() == GowingPackableType.PRECISE_DATE ) {
 

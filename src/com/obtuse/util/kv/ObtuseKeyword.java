@@ -128,7 +128,7 @@ public class ObtuseKeyword extends GowingAbstractPackableEntity implements Compa
     @SuppressWarnings("unused") final @NotNull GowingUnPacker unPacker,
     final @NotNull GowingPackedEntityBundle bundle
     ) {
-        this( bundle.StringValue( TO_STRING ), bundle.MandatoryStringValue( KEYWORD_STRING ) );
+        this( bundle.optString( TO_STRING ).orElse( null ), bundle.MandatoryStringValue( KEYWORD_STRING ) );
 
     }
 

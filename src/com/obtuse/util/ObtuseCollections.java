@@ -199,4 +199,52 @@ public class ObtuseCollections {
 
     }
 
+    public static @NotNull byte[] copyOf( @NotNull byte[] array ) {
+
+        return Arrays.copyOf( array, array.length );
+
+    }
+
+    public static @NotNull short[] copyOf( @NotNull short[] array ) {
+
+        return Arrays.copyOf( array, array.length );
+
+    }
+
+    public static @NotNull int[] copyOf( @NotNull int[] array ) {
+
+        return Arrays.copyOf( array, array.length );
+
+    }
+
+    public static @NotNull long[] copyOf( @NotNull long[] array ) {
+
+        return Arrays.copyOf( array, array.length );
+
+    }
+
+    public static @NotNull float[] copyOf( @NotNull float[] array ) {
+
+        return Arrays.copyOf( array, array.length );
+
+    }
+
+    public static @NotNull double[] copyOf( @NotNull double[] array ) {
+
+        return Arrays.copyOf( array, array.length );
+
+    }
+
+    public static @NotNull boolean[] copyOf( @NotNull boolean[] array ) {
+
+        return Arrays.copyOf( array, array.length );
+
+    }
+
+    public static <T> T[] copyOf( T[] array ) {
+
+        return Arrays.copyOf( array, array.length );
+
+    }
+
 }

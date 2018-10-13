@@ -8,6 +8,7 @@ package com.obtuse.ui.tableutils;
 import com.obtuse.exceptions.HowDidWeGetHereError;
 import com.obtuse.util.Logger;
 import com.obtuse.util.SimpleUniqueIntegerIdGenerator;
+import com.obtuse.util.things.ThingInfo;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
@@ -18,7 +19,7 @@ import java.util.Optional;
  This class includes support for marking rows as selected (or not) and as readonly (or not).
  */
 
-public class CheckBoxRowWrapper<D extends CheckBoxRowWrapper.RowData> {
+public class CheckBoxRowWrapper<D extends ThingInfo> {
 
     private static final SimpleUniqueIntegerIdGenerator s_snGenerator =
             new SimpleUniqueIntegerIdGenerator( "CheckBoxRowWrapper - sn generator" );
@@ -26,11 +27,11 @@ public class CheckBoxRowWrapper<D extends CheckBoxRowWrapper.RowData> {
     private final int _serialNumber = s_snGenerator.getUniqueId();
     private boolean _traceMode = false;
 
-    public interface RowData {
-
-        String getName();
-
-    }
+//    public interface RowData {
+//
+////        String getName();
+//
+//    }
 
     private final FrameworkTableModel<D> _tableModel;
 

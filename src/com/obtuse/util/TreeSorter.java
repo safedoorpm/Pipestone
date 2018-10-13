@@ -87,7 +87,7 @@ public class TreeSorter<K extends Comparable<? super K>, V>
 
     };
 
-    private final SortedMap<K, Collection<V>> _sortedData;
+    private final SortedMap<K, List<V>> _sortedData;
 
     public TreeSorter( final @NotNull GowingUnPacker unPacker, final @NotNull GowingPackedEntityBundle bundle ) {
 
@@ -121,7 +121,7 @@ public class TreeSorter<K extends Comparable<? super K>, V>
     }
 
     @Override
-    public boolean finishUnpacking( @NotNull final GowingUnPacker unPacker ) throws GowingUnpackingException {
+    public boolean finishUnpacking( @NotNull final GowingUnPacker unPacker ) {
 
         if ( !unPacker.isEntityFinished( _elementsMappingReference ) ) {
 
@@ -129,7 +129,7 @@ public class TreeSorter<K extends Comparable<? super K>, V>
 
         }
 
-        GowingPackable packable = unPacker.resolveReference( _elementsMappingReference );
+        GowingPackable packable = unPacker.resolveMandatoryReference( _elementsMappingReference );
         if ( ( packable instanceof GowingPackableMapping ) ) {
 
             // The temporary variable is required in order to make this assignment a declaration which allows
@@ -140,7 +140,8 @@ public class TreeSorter<K extends Comparable<? super K>, V>
 //            _map = tmap;
 
             @SuppressWarnings("unchecked")
-            TreeMap<K, Collection<V>> tmap = ( (GowingPackableMapping<K, Collection<V>>)packable ).rebuildMap( new TreeMap<>() );
+            TreeMap<K, List<V>> tmap = ( (GowingPackableMapping<K, List<V>>)packable ).rebuildMap( new TreeMap<>() );
+            _sortedData.putAll( tmap );
 
         } else {
 
@@ -331,7 +332,7 @@ public class TreeSorter<K extends Comparable<? super K>, V>
      that of one or more of the other publically available constructors.  This parameter is totally ignored.
      */
 
-    private TreeSorter( final SortedMap<K, Collection<V>> map, final int ignored ) {
+    private TreeSorter( final SortedMap<K, List<V>> map, final int ignored ) {
 
         super( new GowingNameMarkerThing() );
 
@@ -471,18 +472,18 @@ public class TreeSorter<K extends Comparable<? super K>, V>
      */
 
     @NotNull
-    public Collection<V> getValues( final @NotNull K key ) {
+    public List<V> getValues( final @NotNull K key ) {
 
-        Collection<V> values = _sortedData.get( key );
+        List<V> values = _sortedData.get( key );
 
-        return Collections.unmodifiableCollection( values == null ? new FormattingLinkedList<>() : values );
+        return Collections.unmodifiableList( values == null ? new FormattingLinkedList<>() : values );
 
     }
 
     @NotNull
     public V getSingleValue( final @NotNull K key ) {
 
-        Collection<V> values = _sortedData.get( key );
+        List<V> values = _sortedData.get( key );
         if ( values == null || values.isEmpty() ) {
 
             throw new IllegalArgumentException(
@@ -502,31 +503,32 @@ public class TreeSorter<K extends Comparable<? super K>, V>
 
         } else {
 
-            if ( values instanceof List ) {
+            return values.get( 0 );
 
-//                Logger.logMsg( "It's a list" );
+        }
 
-                return ( (List<V>)values ).get( 0 );
+    }
 
-            } else {
+    @NotNull
+    public Optional<V> getOptSingleValue( final @NotNull K key ) {
 
-//                Logger.logMsg( "It's a " + values.getClass().getCanonicalName() );
+        List<V> values = _sortedData.get( key );
+        if ( values == null || values.isEmpty() ) {
 
-                Iterator<V> iter = values.iterator();
-                if ( iter.hasNext() ) {
+            return Optional.empty();
 
-                    return iter.next();
+        } else if ( values.size() > 1 ) {
 
-                }
-
-            }
-
-            throw new HowDidWeGetHereError(
-                    "TreeSorter.getSingleValue:  " +
-                    "it should be impossible to get here with key " +
+            throw new IllegalArgumentException(
+                    "TreeSorter.getSingleValue:  key " +
                     ObtuseUtil.enquoteJavaObject( key ) +
-                    " since there is supposedly exactly one value for that key)"
+                    " does not have a unique value (it has " + values.size() +
+                    " values in this TreeSorter)"
             );
+
+        } else {
+
+            return Optional.of( values.get( 0 ) );
 
         }
 

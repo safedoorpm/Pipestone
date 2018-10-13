@@ -264,7 +264,7 @@ public class StdGowingUnPacker implements GowingUnPacker {
         checkClosed( "unPack()" );
 
         Optional<GowingUnPackedEntityGroup> rval = _unpackedGroup;
-        if ( rval != null ) {
+        if ( rval.isPresent() ) {
 
             if ( isVerbose() ) _t.verboseTrace( "returning result of previously completed unpack operation" );
 
@@ -381,7 +381,7 @@ public class StdGowingUnPacker implements GowingUnPacker {
 
                             }
 
-                            GowingPackable entity = resolveReference( er );
+                            GowingPackable entity = resolveMandatoryReference( er );
                             _currentEntityReference = er;
 
                             if ( isVerbose() ) {
@@ -496,7 +496,7 @@ public class StdGowingUnPacker implements GowingUnPacker {
 
             }
 
-            _unpackedGroup = rval == null ? Optional.empty() : rval;
+            _unpackedGroup = rval;
 
         }
 
@@ -622,15 +622,15 @@ public class StdGowingUnPacker implements GowingUnPacker {
     }
 
     @Override
-    public GowingPackable resolveReference( @Nullable final GowingEntityReference er ) {
+    public Optional<GowingPackable> resolveReference( @Nullable final GowingEntityReference er ) {
 
         if ( er == null ) {
 
-            return null;
+            return Optional.empty();
 
         }
 
-        return _unPackerContext.recallPackableEntity( er );
+        return Optional.ofNullable( _unPackerContext.recallPackableEntity( er ) );
 
     }
 

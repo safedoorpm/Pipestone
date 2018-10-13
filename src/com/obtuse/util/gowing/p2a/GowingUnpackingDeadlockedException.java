@@ -62,7 +62,10 @@ public class GowingUnpackingDeadlockedException extends RuntimeException {
         SortedMap<GowingEntityReference,GowingPackable> unfinishedEntitiesMap = new TreeMap<>();
         for ( GowingEntityReference er : _unfinishedEntityReferences ) {
 
-            GowingPackable packable = _unPacker.resolveReference( er );
+            // Note that the unfinished references are kept in a sorted set.
+            // Consequently, there is absolutely no chance that any of the elements could be null.
+            
+            GowingPackable packable = _unPacker.resolveMandatoryReference( er );
             unfinishedEntitiesMap.put( er, packable );
 
         }

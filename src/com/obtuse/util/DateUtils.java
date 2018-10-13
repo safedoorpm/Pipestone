@@ -30,31 +30,32 @@ public class DateUtils {
     // IMPORTANT:  keep these date formats private as we fiddle with their embedded timezone in methods within this
     // class.
 
-    private static final SimpleDateFormat HHMMSSS                 = new SimpleDateFormat( "hh:mm.SSS" );
-    private static final SimpleDateFormat MMDDYYYY                = new SimpleDateFormat( "MM/dd/yyyy" );
-    private static final SimpleDateFormat MMDDYYYY_HHMM           = new SimpleDateFormat( "MM/dd/yyyy hh:mmaa" );
+    private static final SimpleDateFormat HHMMSSS                    = new SimpleDateFormat( "hh:mm.SSS" );
+    private static final SimpleDateFormat MMDDYYYY                   = new SimpleDateFormat( "MM/dd/yyyy" );
+    private static final SimpleDateFormat MMDDYYYY_HHMM              = new SimpleDateFormat( "MM/dd/yyyy hh:mmaa" );
     //    private static final SimpleDateFormat HHMM                    = new SimpleDateFormat( "hh:mmaa" );
-    private static final SimpleDateFormat MM_DD_YYYY              = new SimpleDateFormat( "MM/dd/yyyy" );
-    private static final SimpleDateFormat MMMM_D_YYYY             = new SimpleDateFormat( "MMMM d, YYYY" );
-    private static final SimpleDateFormat MM_DD_YYYY_HH_MM        = new SimpleDateFormat( "MM/dd/yyyy hh:mmaa" );
-    private static final SimpleDateFormat YYYY_MM_DD_HH_MM        = new SimpleDateFormat( "yyyy-MM-dd HH:mm" );
-    private static final SimpleDateFormat YYYY_MM_DD_HH_MM_SS     = new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss" );
-    private static final SimpleDateFormat YYYY_MM_DD_HH_MM_SS_SSS = new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss.SSS" );
-    private static final SimpleDateFormat YYYY_MM_DD_HH_MM_ZZZ    = new SimpleDateFormat( "yyyy-MM-dd HH:mm zzz" );
-    private static final SimpleDateFormat HH_MM                   = new SimpleDateFormat( "hh:mmaa" );
-    private static final SimpleDateFormat HH_MM_SS_12             = new SimpleDateFormat( "hh:mm:ssaa" );
-    private static final SimpleDateFormat HH_MM_SS_24             = new SimpleDateFormat( "HH:mm:ss" );
-    private static final SimpleDateFormat WWW_MMM_DD_HHMMSS_YYYY  = new SimpleDateFormat( "EEE MMM dd HH:mm:ss yyyy" );
-    private static final SimpleDateFormat WWWW_MMMM_D_YYYY        = new SimpleDateFormat( "EEEE, MMMM d, yyyy" );
-    private static final SimpleDateFormat YYYY_MM_DD              = new SimpleDateFormat( "yyyy-MM-dd" );
-    private static final SimpleDateFormat YYYYMMDD                = new SimpleDateFormat( "yyyyMMdd" );
-    private static final SimpleDateFormat YYMMDD                  = new SimpleDateFormat( "yyMMdd" );
-    private static final SimpleDateFormat HH_MM_SS_12_EEE_MMM_DD  = new SimpleDateFormat( "hh:mm:ss EEE MMM dd" );
-    private static final SimpleDateFormat HH_MM_SS_24_EEE_MMM_DD  = new SimpleDateFormat( "HH:mm:ss EEE MMM dd" );
-    private static final SimpleDateFormat STANDARD                = new SimpleDateFormat( "yyyy-MM-dd'T'HH:mm:ssZ" );
-    private static final SimpleDateFormat STANDARD_MS             = new SimpleDateFormat( "yyyy-MM-dd'T'HH:mm:ss.SSSZ" );
-    private static final SimpleDateFormat MARKER_FORMAT           = new SimpleDateFormat( "yyyy-MM-dd_HH-mm-ss_SSS" );
-    private static final SimpleDateFormat DD_MMM_YYYY             = new SimpleDateFormat( "d MMM, yyyy" );
+    private static final SimpleDateFormat MM_DD_YYYY                 = new SimpleDateFormat( "MM/dd/yyyy" );
+    private static final SimpleDateFormat MMMM_D_YYYY                = new SimpleDateFormat( "MMMM d, YYYY" );
+    private static final SimpleDateFormat MM_DD_YYYY_HH_MM           = new SimpleDateFormat( "MM/dd/yyyy hh:mmaa" );
+    private static final SimpleDateFormat YYYY_MM_DD_HH_MM           = new SimpleDateFormat( "yyyy-MM-dd HH:mm" );
+    private static final SimpleDateFormat YYYY_MM_DD_HH_MM_SS        = new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss" );
+    private static final SimpleDateFormat YYYY_MM_DD_HH_MM_SS_COLONS = new SimpleDateFormat( "yyyy:MM:dd HH:mm:ss" );
+    private static final SimpleDateFormat YYYY_MM_DD_HH_MM_SS_SSS    = new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss.SSS" );
+    private static final SimpleDateFormat YYYY_MM_DD_HH_MM_ZZZ       = new SimpleDateFormat( "yyyy-MM-dd HH:mm zzz" );
+    private static final SimpleDateFormat HH_MM                      = new SimpleDateFormat( "hh:mmaa" );
+    private static final SimpleDateFormat HH_MM_SS_12                = new SimpleDateFormat( "hh:mm:ssaa" );
+    private static final SimpleDateFormat HH_MM_SS_24                = new SimpleDateFormat( "HH:mm:ss" );
+    private static final SimpleDateFormat WWW_MMM_DD_HHMMSS_YYYY     = new SimpleDateFormat( "EEE MMM dd HH:mm:ss yyyy" );
+    private static final SimpleDateFormat WWWW_MMMM_D_YYYY           = new SimpleDateFormat( "EEEE, MMMM d, yyyy" );
+    private static final SimpleDateFormat YYYY_MM_DD                 = new SimpleDateFormat( "yyyy-MM-dd" );
+    private static final SimpleDateFormat YYYYMMDD                   = new SimpleDateFormat( "yyyyMMdd" );
+    private static final SimpleDateFormat YYMMDD                     = new SimpleDateFormat( "yyMMdd" );
+    private static final SimpleDateFormat HH_MM_SS_12_EEE_MMM_DD     = new SimpleDateFormat( "hh:mm:ss EEE MMM dd" );
+    private static final SimpleDateFormat HH_MM_SS_24_EEE_MMM_DD     = new SimpleDateFormat( "HH:mm:ss EEE MMM dd" );
+    private static final SimpleDateFormat STANDARD                   = new SimpleDateFormat( "yyyy-MM-dd'T'HH:mm:ssZ" );
+    private static final SimpleDateFormat STANDARD_MS                = new SimpleDateFormat( "yyyy-MM-dd'T'HH:mm:ss.SSSZ" );
+    private static final SimpleDateFormat MARKER_FORMAT              = new SimpleDateFormat( "yyyy-MM-dd_HH-mm-ss_SSS" );
+    private static final SimpleDateFormat DD_MMM_YYYY                = new SimpleDateFormat( "d MMM, yyyy" );
 
     /**
      * Make it impossible to instantiate this class.
@@ -129,6 +130,31 @@ public class DateUtils {
 
             DateUtils.YYYY_MM_DD_HH_MM_SS.setTimeZone( TimeZone.getDefault() );
             ImmutableDate date = DateUtils.dateParse( DateUtils.YYYY_MM_DD_HH_MM_SS, token, lineNumber );
+            return date;
+
+        }
+
+    }
+
+    /**
+     * Parse an YYYY_MM_DD_HH_MM_SS_COLONS format date and time string.
+     * <p>This format seems to be used in EXIF data in certain common image file formats.</p>
+     *
+     * @param token      the date and time string.
+     * @param lineNumber where the date was found.
+     *
+     * @return the result in UTC.
+     *
+     * @throws ParsingException if the token does not contain a valid date and time string.
+     */
+
+    public static ImmutableDate parseYYYY_MM_DD_HH_MM_SS_COLONS( final String token, final int lineNumber )
+            throws ParsingException {
+
+        synchronized ( DateUtils.YYYY_MM_DD_HH_MM_SS_COLONS ) {
+
+            DateUtils.YYYY_MM_DD_HH_MM_SS_COLONS.setTimeZone( TimeZone.getDefault() );
+            ImmutableDate date = DateUtils.dateParse( DateUtils.YYYY_MM_DD_HH_MM_SS_COLONS, token, lineNumber );
             return date;
 
         }
@@ -674,6 +700,40 @@ public class DateUtils {
 
             DateUtils.YYYY_MM_DD_HH_MM_SS.setTimeZone( timeZone );
             String s = DateUtils.YYYY_MM_DD_HH_MM_SS.format( dateTime );
+            return s;
+
+        }
+
+    }
+
+    /**
+     * Format a date and time string in our local time with colons as separators.
+     *
+     * @param dateTime the date and time to be formatted.
+     * @return the formatted date and time string.
+     */
+
+    public static String formatYYYY_MM_DD_HH_MM_SS_COLONS( final Date dateTime ) {
+
+        return DateUtils.formatYYYY_MM_DD_HH_MM_SS_COLONS( dateTime, TimeZone.getDefault() );
+
+    }
+
+    /**
+     * Format a date and time string in a specified timezone with colons as separators.
+     * <p>This format seems to be used in EXIF data in certain common image file formats.</p>
+     *
+     * @param dateTime the date and time to be formatted.
+     * @param timeZone the timezone for which the date is to be formatted.
+     * @return the formatted date and time string.
+     */
+
+    public static String formatYYYY_MM_DD_HH_MM_SS_COLONS( final Date dateTime, final TimeZone timeZone ) {
+
+        synchronized ( DateUtils.YYYY_MM_DD_HH_MM_SS_COLONS ) {
+
+            DateUtils.YYYY_MM_DD_HH_MM_SS_COLONS.setTimeZone( timeZone );
+            String s = DateUtils.YYYY_MM_DD_HH_MM_SS_COLONS.format( dateTime );
             return s;
 
         }

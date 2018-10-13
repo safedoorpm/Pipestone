@@ -73,20 +73,7 @@ public class TwoDimensionalTreeMap<T1,T2,V> extends GowingAbstractPackableEntity
     public TwoDimensionalTreeMap( final @NotNull TwoDimensionalSortedMap<T1,T2,V> map, final boolean makeReadonly ) {
         super( new GowingNameMarkerThing() );
 
-        for ( T1 t1 : map.outerKeys() ) {
-
-            SortedMap<T2,V> innerMap = map.getInnerMap( t1, false );
-            if ( innerMap != null ) {
-
-                for ( T2 t2 : innerMap.keySet() ) {
-
-                    put( t1, t2, innerMap.get( t2 ) );
-
-                }
-
-            }
-
-        }
+        addAll( map );
 
         if ( makeReadonly ) {
 
@@ -101,6 +88,25 @@ public class TwoDimensionalTreeMap<T1,T2,V> extends GowingAbstractPackableEntity
         }
 
         _readonly = makeReadonly;
+
+    }
+
+    public void addAll( final @NotNull TwoDimensionalSortedMap<T1, T2, V> map ) {
+
+        for ( T1 t1 : map.outerKeys() ) {
+
+            SortedMap<T2,V> innerMap = map.getInnerMap( t1, false );
+            if ( innerMap != null ) {
+
+                for ( T2 t2 : innerMap.keySet() ) {
+
+                    put( t1, t2, innerMap.get( t2 ) );
+
+                }
+
+            }
+
+        }
 
     }
 
@@ -182,7 +188,7 @@ public class TwoDimensionalTreeMap<T1,T2,V> extends GowingAbstractPackableEntity
 
         }
 
-        GowingPackable packable = unPacker.resolveReference( _outerMapReference );
+        GowingPackable packable = unPacker.resolveMandatoryReference( _outerMapReference );
         if ( ( packable instanceof GowingPackableMapping ) ) {
 
             // The temporary variable is required in order to make this assignment a declaration which allows
@@ -379,7 +385,7 @@ public class TwoDimensionalTreeMap<T1,T2,V> extends GowingAbstractPackableEntity
     @NotNull
     public Iterator<V> iterator() {
 
-        return new Iterator<V>() {
+        return new Iterator<>() {
 
             private final Iterator<T1> _outerIterator;
             private T1 _activeOuterKey;
@@ -387,7 +393,8 @@ public class TwoDimensionalTreeMap<T1,T2,V> extends GowingAbstractPackableEntity
 
             {
 
-                _outerIterator = _map.keySet().iterator();
+                _outerIterator = _map.keySet()
+                                     .iterator();
 
                 findNextNonEmptyInnerMap();
 
@@ -401,7 +408,7 @@ public class TwoDimensionalTreeMap<T1,T2,V> extends GowingAbstractPackableEntity
 
                     _activeOuterKey = _outerIterator.next();
 
-                    SortedMap<T2,V> innerMap = getInnerMap( _activeOuterKey, false );
+                    SortedMap<T2, V> innerMap = getInnerMap( _activeOuterKey, false );
                     //noinspection StatementWithEmptyBody
                     if ( innerMap == null || innerMap.isEmpty() ) {
 
@@ -409,7 +416,8 @@ public class TwoDimensionalTreeMap<T1,T2,V> extends GowingAbstractPackableEntity
 
                     } else {
 
-                        _innerIterator = innerMap.values().iterator();
+                        _innerIterator = innerMap.values()
+                                                 .iterator();
                         break;
 
                     }
