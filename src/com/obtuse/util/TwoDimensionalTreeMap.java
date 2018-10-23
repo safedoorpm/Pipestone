@@ -4,8 +4,11 @@
 
 package com.obtuse.util;
 
+import com.obtuse.exceptions.HowDidWeGetHereError;
 import com.obtuse.util.gowing.*;
 import com.obtuse.util.gowing.p2a.GowingEntityReference;
+import com.obtuse.util.gowing.p2a.GowingUnPackedEntityGroup;
+import com.obtuse.util.gowing.p2a.GowingUnpackingException;
 import com.obtuse.util.gowing.p2a.GowingUtil;
 import com.obtuse.util.gowing.p2a.holders.GowingBooleanHolder;
 import com.obtuse.util.gowing.p2a.holders.GowingPackableEntityHolder;
@@ -13,6 +16,7 @@ import com.obtuse.util.gowing.p2a.holders.GowingPackableMapping;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.File;
 import java.io.Serializable;
 import java.util.*;
 
@@ -193,21 +197,38 @@ public class TwoDimensionalTreeMap<T1,T2,V> extends GowingAbstractPackableEntity
 
             // The temporary variable is required in order to make this assignment a declaration which allows
             // the @SuppressWarnings("unchecked") annotation (the annotation is not allowed on a simple assignment statement).
-            @SuppressWarnings("unchecked")
-            TreeMap<T1, SortedMap<T2, V>> tmap = ( (GowingPackableMapping<T1, SortedMap<T2, V>>)packable ).rebuildMap( new TreeMap<>() );
-            _map = tmap;
+            @SuppressWarnings("unchecked") GowingPackableMapping<T1, GowingPackableMapping<T2, V>> packable1 =
+                    (GowingPackableMapping<T1, GowingPackableMapping<T2, V>>)packable;
+            for ( GowingPackableKeyValuePair<T1, GowingPackableMapping<T2, V>> outer : packable1.getMappings() ) {
 
-            if ( _readonly ) {
+//                Logger.logMsg( "mm = " + outer );
+                ObtuseUtil.doNothing();
 
-                for ( T1 t1 : _map.keySet() ) {
+                for ( GowingPackableKeyValuePair<T2, V> inner : outer.getValue().getMappings() ) {
 
-                    _map.put( t1, Collections.unmodifiableSortedMap( _map.get( t1 ) ) );
+                    put( outer.getKey(), inner.getKey(), inner.getValue() );
+
+                    ObtuseUtil.doNothing();
 
                 }
 
-                _map = Collections.unmodifiableSortedMap( _map );
-
             }
+
+//            @SuppressWarnings("unchecked")
+//            TreeMap<T1, GowingPackableMapping<K,V>> tmap = packable1.rebuildMap( new TreeMap<>() );
+//            _map = tmap;
+//
+//            if ( _readonly ) {
+//
+//                for ( T1 t1 : _map.keySet() ) {
+//
+//                    _map.put( t1, Collections.unmodifiableSortedMap( _map.get( t1 ) ) );
+//
+//                }
+//
+//                _map = Collections.unmodifiableSortedMap( _map );
+//
+//            }
 
         } else {
 
@@ -472,6 +493,124 @@ public class TwoDimensionalTreeMap<T1,T2,V> extends GowingAbstractPackableEntity
     public String toString() {
 
         return "TwoDimensionalTreeMap( size = " + size() + " )";
+
+    }
+
+    public static void main( String[] args ) {
+
+        BasicProgramConfigInfo.init( "Kenosee", "ObtuseUtil", "testing", null );
+
+        TwoDimensionalSortedMap<Integer,String,String> originalMap = new TwoDimensionalTreeMap<>();
+        originalMap.put( 1, "hello", "1-hello" );
+        originalMap.put( 2, "hello", "2-hello" );
+        originalMap.put( 3, "hello", "3-hello" );
+        originalMap.put( 1, "world", "1-world" );
+        originalMap.put( 2, "world", "2-world" );
+
+        displayMap( "originalMap", originalMap );
+
+        EntityName en = new EntityName( "eName" );
+        File testFile = new File( "2dsortedMap-test.packed" );
+        ObtuseUtil.quietGowingPack( en, originalMap, testFile, false );
+        try {
+            GowingUnPackedEntityGroup unpackedEntities = ObtuseUtil.gowingUnPack(
+                    testFile,
+                    new GowingEntityFactory[0]
+            );
+
+            for ( EntityName entityName : unpackedEntities.getNamedClasses().keySet() ) {
+
+                for ( GowingPackable packable : unpackedEntities.getNamedClasses().getValues( entityName ) ) {
+
+                    Logger.logMsg( "" + entityName + ":  " + packable.getClass() );
+
+                    ObtuseUtil.doNothing();
+
+                }
+
+                ObtuseUtil.doNothing();
+
+            }
+
+            if ( !unpackedEntities.getNamedClasses().containsKey( en ) ) {
+
+                Logger.logMsg(
+                        "2dsortedMap-test(unpack):  " +
+                        "did not find a " + en + " in " + unpackedEntities
+                );
+
+            } else {
+
+                @NotNull List<GowingPackable> interestingStuff =
+                        unpackedEntities.getNamedClasses()
+                                        .getValues( en );
+
+                if ( interestingStuff.size() == 1 ) {
+
+                    GowingPackable first = interestingStuff.get( 0 );
+                    if ( first instanceof TwoDimensionalSortedMap ) {
+
+                        @SuppressWarnings("unchecked") TwoDimensionalTreeMap<Integer,String,String> recoveredMap =
+                                ( (TwoDimensionalTreeMap<Integer,String,String>)interestingStuff.get( 0 ) );
+
+                        displayMap( "recoveredMap", recoveredMap );
+
+                    } else {
+
+                        throw new HowDidWeGetHereError(
+                                "LancotMediaLibraryRoot.readImportBundle:  " +
+                                "read yielded a " +
+                                first.getClass()
+                                     .getCanonicalName() +
+                                " when we expected a " +
+                                TwoDimensionalSortedMap.class.getCanonicalName()
+                        );
+
+                    }
+
+                } else {
+
+                    throw new HowDidWeGetHereError(
+                            "LancotMediaLibraryRoot.readImportBundle:  read yielded " +
+                            ObtuseUtil.pluralize( interestingStuff.size(), "element", "elements" ) +
+                            " when we expected one element"
+                    );
+
+                }
+
+            }
+
+//        } catch ( IOException e ) {
+//
+//            Logger.logErr( "java.io.IOException caught", e );
+
+        } catch ( GowingUnpackingException e ) {
+
+            Logger.logErr( "com.obtuse.util.gowing.p2a.GowingUnpackingException caught", e );
+
+        }
+
+    }
+
+    private static void displayMap(
+            final String title,
+            final TwoDimensionalSortedMap map
+    ) {
+
+        Logger.logMsg( title );
+        for ( Object ixO : map.outerKeys() ) {
+
+            int ix = ((Integer)ixO).intValue();
+
+            //noinspection unchecked
+            SortedMap notNullInnerMap = map.getNotNullInnerMap( ix );
+            for ( Object sx : notNullInnerMap.keySet() ) {
+
+                Logger.logMsg( "    map(" + ix + "," + sx + ") = " + notNullInnerMap.get( sx ) );
+
+            }
+
+        }
 
     }
 

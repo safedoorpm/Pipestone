@@ -27,6 +27,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -124,7 +125,7 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
                 final @NotNull GowingUnPacker unPacker,
                 final @NotNull GowingPackedEntityBundle bundle,
                 final @NotNull GowingEntityReference er
-        ) {
+        ) throws GowingUnpackingException {
 
             return new ObtuseImageFile( unPacker, bundle );
 
@@ -524,31 +525,30 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
     public static ObtuseImageFile recoverObtuseImageFile(final File obtuseImageFileFile )
             throws IOException, GowingUnpackingException {
 
-        Measure m = new Measure( "recover BIF" );
         boolean oldLoggingEnabled = Logger.setLoggingEnabled( s_loadLoggingEnabled );
-        try {
+        try ( Measure ignored = new Measure( "recover BIF" ) ) {
 
             StdGowingUnPacker unPacker = new StdGowingUnPacker( s_gowingTypeIndex, obtuseImageFileFile );
-            Optional<GowingUnPackedEntityGroup> optionalResult = unPacker.unPack();
+            GowingUnPackedEntityGroup unPackResult = unPacker.unPack();
 
             ObtuseImageFile bif = null;
-            if ( optionalResult.isPresent() ) {
+//            if ( unPackResult.isPresent() ) {
 
-                GowingUnPackedEntityGroup result = optionalResult.get();
+//                GowingUnPackedEntityGroup result = unPackResult.get();
 
-                for ( GowingPackable entity : result.getAllEntities() ) {
+                for ( GowingPackable entity : unPackResult.getAllEntities() ) {
 
                     if ( entity instanceof ObtuseImageFile ) {
 
-                        if ( bif != null ) {
+                        if ( bif == null ) {
+
+                            bif = (ObtuseImageFile)entity;
+
+                        } else {
 
                             Logger.logMsg( "got more than one ObtuseImageFile with serial number " +
                                            bif.getSerialNumber() +
                                            " (ignoring all but the first)" );
-
-                        } else {
-
-                            bif = (ObtuseImageFile)entity;
 
                         }
 
@@ -556,15 +556,13 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
 
                 }
 
-            }
+//            }
 
             ObtuseUtil.doNothing();
 
             return bif;
 
         } finally {
-
-            m.done();
 
             Logger.setLoggingEnabled( oldLoggingEnabled );
 
@@ -587,8 +585,7 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
         SortedMap<Integer, ObtuseImageFile> rval = new TreeMap<>();
         for ( File f : binfoFiles ) {
 
-            Measure m = new Measure( "load a bif in bulk" );
-            try {
+            try ( Measure ignored = new Measure( "load a bif in bulk" ) ) {
 
                 ObtuseImageFile bif = recoverObtuseImageFile( f );
                 if ( bif != null && !rval.containsKey( bif.getSerialNumber() ) ) {
@@ -606,10 +603,6 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
                     throw (HowDidWeGetHereError)e;
 
                 }
-
-            } finally {
-
-                m.done();
 
             }
 
@@ -709,38 +702,59 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
 
     }
 
-    public ObtuseImageFile( @SuppressWarnings("unused") final GowingUnPacker unPacker, final GowingPackedEntityBundle bundle ) {
+    public ObtuseImageFile( @SuppressWarnings("unused") final GowingUnPacker unPacker, final GowingPackedEntityBundle bundle )
+            throws GowingUnpackingException {
 
         super( unPacker, bundle.getSuperBundle() );
 
-        _imageState = ImageState.valueOf( bundle.MandatoryStringValue( IMAGE_STATE_NAME ) );
-        _originalURI = bundle.recoverURI( ORIGINAL_URI_GTAG );
-        _originalURL = bundle.recoverURL( ORIGINAL_URI_GTAG );
-        _originalFile = bundle.recoverFile( ORIGINAL_FILE_GTAG );
-        _originalImageFormat = bundle.optString( ORIGINAL_IMAGE_FORMAT_GTAG ).orElse( null );
-        _cachedImageFormat = bundle.optString( CACHED_IMAGE_FORMAT_GTAG ).orElse( null );
-        _diagnosticCachedFilesBasename = bundle.recoverFile( CACHED_IMAGE_FILE_BASENAME_GTAG );
+        try {
 
-        if ( bundle.doesFieldExist( CACHED_IMAGE_WIDTH_GTAG ) ) {
+            _imageState = ImageState.valueOf( bundle.MandatoryStringValue( IMAGE_STATE_NAME ) );
+            _originalURI = bundle.recoverURI( ORIGINAL_URI_GTAG );
+            _originalURL = bundle.recoverURL( ORIGINAL_URL_GTAG );
+            _originalFile = bundle.recoverFile( ORIGINAL_FILE_GTAG );
+            _originalImageFormat = bundle.optString( ORIGINAL_IMAGE_FORMAT_GTAG ).orElse( null );
+            _cachedImageFormat = bundle.optString( CACHED_IMAGE_FORMAT_GTAG ).orElse( null );
+            _diagnosticCachedFilesBasename = bundle.recoverFile( CACHED_IMAGE_FILE_BASENAME_GTAG );
 
-            _cachedImageWidth = bundle.intValue( CACHED_IMAGE_WIDTH_GTAG );
-            _cachedImageHeight = bundle.intValue( CACHED_IMAGE_HEIGHT_GTAG );
+            if ( bundle.doesFieldExist( CACHED_IMAGE_WIDTH_GTAG ) ) {
 
-        } else {
+                _cachedImageWidth = bundle.intValue( CACHED_IMAGE_WIDTH_GTAG );
+                _cachedImageHeight = bundle.intValue( CACHED_IMAGE_HEIGHT_GTAG );
 
-            _cachedImageWidth = -1;
-            _cachedImageHeight = -1;
+            } else {
+
+                _cachedImageWidth = -1;
+                _cachedImageHeight = -1;
+
+            }
+
+            _ourSerialNumber = bundle.intValue( OUR_SERIAL_NUMBER_NAME );
+            _imageFileMD5 = bundle.optString( IMAGE_MD5_GTAG ).orElse( null );
+            _cachedImageFileSize = bundle.getNotNullField( CACHED_IMAGE_FILE_SIZE_GTAG ).longValue();
+            _thumbnailImageBytes = bundle.getNullableField( THUMBNAIL_IMAGE_BYTES_NAME ).PrimitiveByteArrayValue();
+
+            _title = bundle.optString( TITLE_GTAG ).orElse( null );
+
+            ObtuseUtil.doNothing();
+
+        } catch ( URISyntaxException e ) {
+
+            throw new GowingUnpackingException(
+                    "ObtuseImageFile:  unable to parse " +
+                            ObtuseUtil.enquoteToJavaString( bundle.MandatoryStringValue( ORIGINAL_URI_GTAG ) ),
+                    unPacker.curLoc()
+            );
+
+        } catch ( MalformedURLException e ) {
+
+            throw new GowingUnpackingException(
+                    "ObtuseImageFile:  unable to parse " +
+                            ObtuseUtil.enquoteToJavaString( bundle.MandatoryStringValue( ORIGINAL_URL_GTAG ) ),
+                    unPacker.curLoc()
+            );
 
         }
-
-        _ourSerialNumber = bundle.intValue( OUR_SERIAL_NUMBER_NAME );
-        _imageFileMD5 = bundle.optString( IMAGE_MD5_GTAG ).orElse( null );
-        _cachedImageFileSize = bundle.getNotNullField( CACHED_IMAGE_FILE_SIZE_GTAG ).longValue();
-        _thumbnailImageBytes = bundle.getNullableField( THUMBNAIL_IMAGE_BYTES_NAME ).PrimitiveByteArrayValue();
-
-        _title = bundle.optString( TITLE_GTAG ).orElse( null );
-
-        ObtuseUtil.doNothing();
 
     }
 
@@ -849,9 +863,7 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
 
             }
 
-            Measure m = new Measure( "caching from ImageIcon" );
-
-            try {
+            try ( Measure ignored = new Measure( "caching from ImageIcon" ) ) {
 
                 _originalImageFormat = null;
                 _cachedImageFormat = "jpg";
@@ -861,15 +873,9 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
 
                 }
 
-            } finally {
-
-                m.done();
-
             }
 
-            m = new Measure( "test loading image" );
-
-            try {
+            try ( Measure ignored = new Measure( "test loading image" ) ) {
 
                 // Make sure that we can load the image.
 
@@ -885,31 +891,19 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
 
                 }
 
-            } finally {
-
-                m.done();
-
             }
 
         } else {
 
-            Measure m = new Measure( "caching from " + ( _originalFile == null ? "net?" : "local file" ) + " URL" );
-
-            try {
+            try ( Measure ignored = new Measure( "caching from " + ( _originalFile == null ? "net?" : "local file" ) + " URL" ) ) {
 
                 // First step is to copy the image into our cache.
 
                 _cachedImageFileSize = copyURLContentsToFile( _originalURL, tmpFile );
 
-            } finally {
-
-                m.done();
-
             }
 
-            m = new Measure( "loading image and learning its format" );
-
-            try {
+            try ( Measure ignored = new Measure( "loading image and learning its format" ) ) {
 
                 // Second step is to load the image using a technique which reveals the image file's format.
                 // Since we end up with the image in memory, we also use that image to create this instance's
@@ -970,10 +964,6 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
                 }
 
                 _cachedImageFormat = cleanedFormat;
-
-            } finally {
-
-                m.done();
 
             }
 
@@ -1072,22 +1062,16 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
 
         }
 
-        Measure m = new Measure( "ImageIcon" );
-        try {
+        try ( Measure ignored = new Measure( "ImageIcon" ) ) {
 
             ImageIcon testImageIcon = new ImageIcon( _originalFile.getPath() );
-
-        } finally {
-
-            m.done();
 
         }
 
         Logger.logMsg( "We've got the image via a File reference" );
 
-        m = new Measure( "ImageIO" );
         BufferedImage image;
-        try {
+        try ( Measure ignored = new Measure( "ImageIO" ) ) {
 
             image = ImageIO.read( _originalURL );
 
@@ -1098,16 +1082,9 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
 
         }
 
-        m.done();
-
-        m = new Measure( "Image wrapped in ImageIcon" );
-        try {
+        try ( Measure ignored = new Measure( "Image wrapped in ImageIcon" ) ) {
 
             ImageIcon wrappedImage = new ImageIcon( image );
-
-        } finally {
-
-            m.done();
 
         }
 
@@ -1286,14 +1263,11 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
     private void actuallyWriteImageInfoFile()
             throws FileNotFoundException {
 
-        //		try {
-
-        Measure m = new Measure( "writing image info file" );
-
         int entityCount;
         ImageState statePriorToWrite = _imageState;
         boolean worked = false;
-        try {
+
+        try ( Measure ignored = new Measure( "writing image info file" ) ) {
 
             // If the recorded image state has not reached the point where the image info file has
             // been written BEFORE we write it this time then set the state to indicate that it has been written.
@@ -1323,8 +1297,6 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
 
             }
 
-            m.done();
-
         }
 
         Logger.logMsg( "wrote " + entityCount + " entities while saving image to " + getCachedImageInfoFileLocation() );
@@ -1351,9 +1323,7 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
 
         Logger.logMsg( "loading primary image for " + this );
 
-        Measure m = new Measure( "load primary image" );
-
-        try {
+        try ( Measure ignored = new Measure( "load primary image" ) ) {
 
             @SuppressWarnings("UnnecessaryLocalVariable")
             BufferedImage image = ImageIO.read( getCachedImageFileLocation() );
@@ -1370,10 +1340,6 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
             }
 
             return image;
-
-        } finally {
-
-            m.done();
 
         }
 

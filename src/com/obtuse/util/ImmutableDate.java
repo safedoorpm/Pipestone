@@ -5,6 +5,7 @@
 package com.obtuse.util;
 
 import com.obtuse.util.gowing.*;
+import com.obtuse.util.gowing.p2a.GowingBackReferenceable;
 import com.obtuse.util.gowing.p2a.GowingEntityReference;
 import com.obtuse.util.gowing.p2a.holders.GowingLongHolder;
 import org.jetbrains.annotations.NotNull;
@@ -19,7 +20,7 @@ import java.util.Date;
  */
 
 @SuppressWarnings({ "deprecation", "UnusedDeclaration" })
-public class ImmutableDate extends Date implements GowingPackable {
+public class ImmutableDate extends Date implements GowingBackReferenceable {
 
     protected static final EntityName TIME_MS_NAME = new EntityName( "_tms" );
     private static final EntityTypeName ENTITY_TYPE_NAME = new EntityTypeName( ImmutableDate.class );

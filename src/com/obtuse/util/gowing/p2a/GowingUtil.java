@@ -30,9 +30,49 @@ public class GowingUtil {
     }
 
     @SuppressWarnings("BooleanMethodIsAlwaysInverted")
+    public static Optional<String> checkActuallyPackable( final @NotNull GowingPackable entity ) {
+
+        if ( entity instanceof GowingNotPackable ) {
+
+            return Optional.of( "marked GowingNotPackable" );
+
+        }
+
+        return Optional.empty();
+
+    }
+
     public static boolean isActuallyPackable( final @NotNull GowingPackable entity ) {
 
-        return !(entity instanceof GowingNotPackable);
+        return !checkActuallyPackable( entity ).isPresent();
+
+    }
+
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
+    public static Optional<String> checkActuallyBackReferenceable( final @NotNull GowingPackable entity ) {
+
+        Optional<String> optReason = checkActuallyPackable( entity );
+        if ( optReason.isPresent() ) {
+
+            return optReason;
+
+        } else if ( !( entity instanceof GowingBackReferenceable ) ) {
+
+            return Optional.of( "not marked GowingBackReferenceable" );
+
+        } else if ( entity instanceof GowingNotBackReferenceable ) {
+
+            return Optional.of( "marked GowingNotBackReferenceable" );
+
+        }
+
+        return Optional.empty();
+
+    }
+
+    public static boolean isActuallyBackReferenceable( final @NotNull GowingPackable entity ) {
+
+        return !checkActuallyBackReferenceable( entity ).isPresent();
 
     }
 
@@ -138,9 +178,11 @@ public class GowingUtil {
 
     public static void verifyActuallyPackable( final @NotNull String who, @Nullable final EntityName what, final @NotNull GowingPackable entity ) {
 
-        if ( !isActuallyPackable( entity ) ) {
+        Optional<String> optReason = checkActuallyPackable( entity );
 
-            throw new IllegalArgumentException( who + ":  " + what + " is not actually packable - " + entity );
+        if ( optReason.isPresent() ) {
+
+            throw new IllegalArgumentException( who + "):  " + what + " is not actually packable - entity=" + entity + ", reason=" + optReason.get() );
 
         }
 

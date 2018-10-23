@@ -1,7 +1,9 @@
 package com.obtuse.util.gowing.p2a;
 
+import com.obtuse.exceptions.HowDidWeGetHereError;
 import com.obtuse.util.*;
 import com.obtuse.util.gowing.*;
+import com.obtuse.util.gowing.p2a.backref.GowingFile;
 import com.obtuse.util.gowing.p2a.holders.GowingPackableCollection;
 import com.obtuse.util.gowing.p2a.holders.GowingPackableMapping;
 import org.jetbrains.annotations.NotNull;
@@ -11,6 +13,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -107,13 +111,20 @@ public class StdGowingPacker implements GowingPacker {
 
     private boolean _finished = false;
 
+    private int _entityCount;
+
     private SortedMap<String,Object> s_usedMetaDataKeywords = new TreeMap<>();
 
     private boolean _verbose;
 
+    private final TreeSorter<GowingInstanceId,GowingInstanceId> _backReferenceDependencies = new TreeSorter<>();
+
     @SuppressWarnings("unused")
-    public StdGowingPacker( final @NotNull EntityName groupName, final @NotNull File outputFile, final boolean verbose )
-            throws FileNotFoundException {
+    public StdGowingPacker(
+            final @NotNull EntityName groupName,
+            final @NotNull File outputFile,
+            final boolean verbose
+    ) throws FileNotFoundException {
 
         this( groupName, outputFile, new PrintWriter( outputFile ), new StdGowingPackerContext(), verbose );
 
@@ -127,7 +138,13 @@ public class StdGowingPacker implements GowingPacker {
             final boolean verbose
     ) throws FileNotFoundException {
 
-        this( groupName, outputFile, new PrintWriter( outputStream, true ), new StdGowingPackerContext(), verbose );
+        this(
+                groupName,
+                outputFile,
+                new PrintWriter( outputStream, true ),
+                new StdGowingPackerContext(),
+                verbose
+        );
 
     }
 
@@ -145,7 +162,13 @@ public class StdGowingPacker implements GowingPacker {
             final @NotNull OutputStream outputStream
     ) throws FileNotFoundException {
 
-        this( groupName, outputFile, new PrintWriter( outputStream, true ), new StdGowingPackerContext(), false );
+        this(
+                groupName,
+                outputFile,
+                new PrintWriter( outputStream, true ),
+                new StdGowingPackerContext(),
+                false
+        );
 
     }
 
@@ -178,6 +201,16 @@ public class StdGowingPacker implements GowingPacker {
         emitMetaData( GowingConstants.METADATA_OUTPUT_RTS, now.toString() );
 
         _packingContext = packingContext;
+
+    }
+
+    private void vLog( @NotNull final String msg ) {
+
+        if ( isVerbose() ) {
+
+            Logger.logMsg( msg );
+
+        }
 
     }
 
@@ -216,7 +249,10 @@ public class StdGowingPacker implements GowingPacker {
     }
 
     @Override
-    public GowingInstanceId queuePackableEntity( @Nullable final EntityName entityName, @Nullable final GowingPackable entity ) {
+    public GowingInstanceId queuePackableEntity(
+            @Nullable final EntityName entityName,
+            @Nullable final GowingPackable entity
+    ) {
 
         if ( entity == null ) {
 
@@ -224,7 +260,10 @@ public class StdGowingPacker implements GowingPacker {
 
         }
 
-        if ( isVerbose() ) Logger.logMsg( "queuing " + entity.getInstanceId() + " / " + entity.getInstanceId().getTypeName() + " == " + entityName );
+        vLog(
+                "queuing " + entity.getInstanceId() + " / " + entity.getInstanceId().getTypeName() +
+                " == " + entityName
+        );
 
         _packingContext.rememberPackableEntity( entityName, entity );
 
@@ -242,45 +281,80 @@ public class StdGowingPacker implements GowingPacker {
         }
 
         _finished = true;
-        int entityCount = 0;
+        _entityCount = 0;
 
         for ( int pass = 1; true; pass += 1 ) {
 
-            SortedSet<GowingInstanceId> notPackedEntities = new TreeSet<>();
+            // The instance ids of packable entities that we've been asked to pack but have not yet packed.
+
+            SortedSet<GowingInstanceId> notYetPackedEntities = new TreeSet<>();
+
+            // Figure out which packable entities that we've been asked to pack have not yet been packed.
 
             for ( GowingInstanceId instanceId : _packingContext.getSeenInstanceIds() ) {
 
+                // If this instance id refers to an entity that is not previous packed
+                // then we need to pack it on this pass.
+
                 if ( !_previouslyPackedEntities.contains( instanceId ) ) {
 
-                    if ( isVerbose() ) Logger.logMsg( "will pack " + instanceId + " on next pass" );
+                    vLog( "will pack " + instanceId + " on the next pass" );
 
-                    notPackedEntities.add( instanceId );
+                    notYetPackedEntities.add( instanceId );
 
                 }
 
             }
 
-            if ( notPackedEntities.isEmpty() ) {
+            // Are we there yet?
 
-                Logger.logMsg( "Gowing is done packing global group " + _groupName + " (it took " + pass + " pass" + ( pass == 1 ? "" : "es" ) + " to pack " + entityCount + " entit" + ( entityCount == 1 ? "y" : "ies" ) + ")" );
+            if ( notYetPackedEntities.isEmpty() ) {
+
+                Logger.logMsg(
+                        "Gowing is done packing global group " + _groupName +
+                        " (it took " + ObtuseUtil.pluralize( pass, "pass", "passes" ) + " to pack " +
+                        ObtuseUtil.pluralize( _entityCount, "entity", "entities" ) + ")"
+                );
 
                 break;
 
             }
 
-            if ( isVerbose() ) Logger.logMsg( "starting packing pass " + pass + " with " + notPackedEntities.size() + " yet to be packed entities" );
+            vLog(
+                    "starting packing pass " + pass + " with " +
+                    notYetPackedEntities.size() + " yet to be packed entities"
+            );
 
-            for ( GowingInstanceId instanceId : notPackedEntities ) {
+            // Pack the entries that were queued at the start of this pass.
 
-                EntityNames names = _packingContext.getEntityNames( instanceId );
-                if ( isVerbose() ) Logger.logMsg( "packing " + instanceId + " / " + names );
-                actuallyPackEntity( instanceId );
-                entityCount += 1;
-                _previouslyPackedEntities.add( instanceId );
+            for ( GowingInstanceId instanceId : notYetPackedEntities ) {
+
+                maybeActuallyPackEntity( instanceId );
+//                if ( !_previouslyPackedEntities.contains( instanceId ) ) {
+//
+//                    EntityNames names = _packingContext.getEntityNames( instanceId );
+//                    vLog( "packing " + instanceId + " / " + names );
+//                    maybeActuallyPackEntity( instanceId );
+//                    _entityCount += 1;
+//                    _previouslyPackedEntities.add( instanceId );
+//
+//                }
 
             }
 
         }
+
+        if ( isVerbose() ) {
+
+            reportEncounteredTypes();
+
+        }
+
+        return _entityCount;
+
+    }
+
+    public void reportEncounteredTypes() {
 
         Logger.logMsg( "pack encountered the following type ids and their associated types:" );
         for ( int typeId : _packingContext.getSeenTypeIds() ) {
@@ -291,9 +365,6 @@ public class StdGowingPacker implements GowingPacker {
             );
 
         }
-
-        return entityCount;
-
     }
 
     /**
@@ -309,19 +380,187 @@ public class StdGowingPacker implements GowingPacker {
 
     }
 
-    private void actuallyPackEntity( final @NotNull GowingInstanceId instanceId ) {
+    private void maybeActuallyPackEntity( final @NotNull GowingInstanceId instanceId ) {
 
-        if ( isVerbose() ) Logger.logMsg( "@@@ actually packing " + instanceId );
-        EntityNames entityNames = _packingContext.getEntityNames( instanceId );
+        if ( !_previouslyPackedEntities.contains( instanceId ) ) {
+
+            EntityNames names = _packingContext.getEntityNames( instanceId );
+            vLog( "packing " + instanceId + " / " + names );
+            reallyPackEntity( instanceId );
+            _entityCount += 1;
+            _previouslyPackedEntities.add( instanceId );
+
+        }
+
+    }
+
+    private void reallyPackEntity( final @NotNull GowingInstanceId ourInstanceId ) {
+
+        vLog( "@@@ actually packing " + ourInstanceId );
+        EntityNames entityNames = _packingContext.getEntityNames( ourInstanceId );
         _packingContext.rememberTopTypeId( entityNames.getEntity().getInstanceId().getTypeId() );
 
         GowingUtil.verifyActuallyPackable(
-                "StdGowingPackerContext.actuallyPackEntity " + entityNames.getPrintableDescription(),
+                "StdGowingPackerContext.maybeActuallyPackEntity " + entityNames.getPrintableDescription(),
                 null,
                 entityNames.getEntity()
         );
 
+        // Get the bundle for the entity that we are about to pack.
+
         GowingPackedEntityBundle bundle = entityNames.getEntity().bundleThyself( false, this );
+        bundle.setOurInstanceId( ourInstanceId );
+
+        // If the bundle is for a GowingBackReferenceable then we need to pack what it depends on before packing it.
+
+        if ( GowingUtil.isActuallyBackReferenceable( entityNames.getEntity() ) ) {
+
+            emitOurBackReferences( bundle );
+
+        }
+
+        emitNewTypeIds();
+
+        if ( !_previouslyPackedEntities.contains( ourInstanceId ) ) {
+
+            emitEntityReference( ourInstanceId, bundle.getVersion(), entityNames.getEntityNames() );
+
+            _writer.print( " = " );
+
+            actuallyPackEntityBody( bundle );
+
+            _writer.println( ";" );
+
+        }
+
+    }
+
+//    private void emitBackReferencedDependencies( final @NotNull GowingInstanceId ourInstanceId, @NotNull final GowingPackedEntityBundle bundle ) {
+//
+//        Set<DirectedArc<GowingInstanceId>> dependentInstances = new HashSet<>();
+//        SortedMap<GowingInstanceId,Vertex<GowingInstanceId>> knownVertices = new TreeMap<>();
+//        collectBackReferencedDependencies( ourInstanceId, dependentInstances, knownVertices, bundle );
+//
+//        String comma = "";
+//        StringBuilder sb = new StringBuilder();
+//        List<String> things = new ArrayList<>();
+//        for ( EntityName en : bundle.keySet() ) {
+//
+//            Object ov = bundle.get( en )
+//                                       .getObjectValue();
+//
+//            if ( ov instanceof GowingPackable && !( ov instanceof GowingBackReferenceable ) ) {
+//
+//                throw new GowingPackingException(
+//                        "StdGowingPacker.maybeActuallyPackEntity:  " +
+//                        "bundle for a GowingBackReferenceable references a GowingPackable " +
+//                        "which is not GowingBackReferenceable",
+//                        bundle
+//                );
+//
+//            }
+//
+//            _previouslyPackedEntities.
+//
+//            sb.append( comma ).append( en ).append( "->" ).append( ov );
+//            comma = ", ";
+//            String ti = ov == null ? "<<unknown>>" : ov.getClass().getCanonicalName();
+//            //noinspection ConstantConditions
+//            things.add(
+//                    ObtuseUtil.rpad( "" + en + "->" + ov + " ti=" + ti + " ", 70 ) +
+//                    (
+//                            ov instanceof GowingPackable
+//                                    ?
+//                                    ( ov instanceof GowingBackReferenceable ? "!!!" : "???" )
+//                                    : "<<misc>>"
+//                    )
+//            );
+//
+//        }
+//        Logger.logMsg( "backref:  " + bundle.getTypeName() + " is a back referenceable thing - " + sb );
+//        for ( String t : things ) {
+//
+//            Logger.logMsg( "    " + t );
+//
+//        }
+//
+//        ObtuseUtil.doNothing();
+//
+//    }
+//
+//    private void collectBackReferencedDependencies(
+//            GowingInstanceId ourInstanceId,
+//            @NotNull Set<DirectedArc<GowingInstanceId>> obsoleteParameterDependencies,
+//            SortedMap<GowingInstanceId,Vertex<GowingInstanceId>> knownVertices,
+//            @NotNull final GowingPackedEntityBundle bundle
+//    ) {
+//
+////        Vertex<GowingInstanceId> src = knownVertices.computeIfAbsent(
+////                ourInstanceId,
+////                new Function<GowingInstanceId, Vertex<GowingInstanceId>>() {
+////                    @Override
+////                    public Vertex<GowingInstanceId> apply( final GowingInstanceId ourInstanceId ) {
+////
+////                        return new Vertex<>( ourInstanceId );
+////                    }
+////                }
+////        );
+//
+//    }
+
+    private void emitOurBackReferences( @NotNull final GowingPackedEntityBundle bundle ) {
+
+        for ( EntityName en : bundle.keySet() ) {
+
+            Object ov = bundle.get( en ).getObjectValue();
+
+            if (
+                    ov instanceof GowingPackable &&
+                    GowingUtil.isActuallyBackReferenceable( (GowingPackable)ov )
+            ) {
+
+                GowingBackReferenceable dependent = (GowingBackReferenceable)ov;
+                Optional<GowingInstanceId> ourOptInstanceId = bundle.getOptOurInstanceId();
+                if ( ourOptInstanceId.isPresent() ) {
+
+                    // If we depend on ourselves, don't spin into infinite recursion.
+                    // It is not clear to me that this is even possible but infinite recursion is pretty evil so . . .
+
+                    if ( !dependent.getInstanceId().equals( ourOptInstanceId.get() ) ) {
+
+                        maybeActuallyPackEntity( dependent.getInstanceId() );
+
+                    }
+
+                } else {
+
+                    throw new HowDidWeGetHereError( "StdGowingPacker.emitOurBackReferences:  I don't understand how this is possible" );
+                }
+
+            } else {
+
+                if ( ov instanceof GowingPackable ) {
+
+                    Optional<GowingInstanceId> optGII = bundle.getOptOurInstanceId();
+                    throw new GowingPackingException(
+                            "StdGowingPacker.maybeActuallyPackEntity(" +
+                            ( optGII.map( GowingInstanceId::getTypeName ).orElse( "<<unknown>>" ) ) +
+                            "):  " +
+                            "bundle's " + ObtuseUtil.enquoteJavaObject( en ) + " entity " +
+                            "references a GowingPackable instance of " + ov.getClass().getCanonicalName() + " " +
+                            "which is not GowingBackReferenceable",
+                            bundle
+                    );
+
+                }
+
+            }
+
+        }
+
+    }
+
+    private void emitNewTypeIds() {
 
         Collection<Integer> newTypeIds = _packingContext.getAndResetNewTypeIds();
         if ( !newTypeIds.isEmpty() ) {
@@ -330,7 +569,7 @@ public class StdGowingPacker implements GowingPacker {
 
                 String typeName = GowingInstanceId.lookupTypeName( newTypeId.intValue() );
 
-                if ( isVerbose() ) Logger.logMsg( "recording class " + typeName );
+                vLog( "recording class " + typeName );
 
                 _writer.print( newTypeId );
                 _writer.print( '@' );
@@ -340,15 +579,6 @@ public class StdGowingPacker implements GowingPacker {
             }
 
         }
-
-        emitEntityReference( instanceId, bundle.getVersion(), entityNames.getEntityNames() );
-
-        _writer.print( " = " );
-
-        actuallyPackEntityBody( bundle );
-
-        _writer.println( ";" );
-
     }
 
     private void actuallyPackEntityBody( final @NotNull GowingPackedEntityBundle bundle ) {
@@ -415,7 +645,11 @@ public class StdGowingPacker implements GowingPacker {
 
     }
 
-    private void emitEntityReference( final GowingInstanceId instanceId, final int version, @Nullable final Collection<EntityName> entityNames ) {
+    private void emitEntityReference(
+            final GowingInstanceId instanceId,
+            final int version,
+            @Nullable final Collection<EntityName> entityNames
+    ) {
 
         int typeId = instanceId.getTypeId();
         long entityId = instanceId.getEntityId();
@@ -430,7 +664,12 @@ public class StdGowingPacker implements GowingPacker {
 
     }
 
-    private void emitEntityReference( final int typeId, final long entityId, @Nullable final Integer version, @Nullable final Collection<EntityName> entityNames ) {
+    private void emitEntityReference(
+            final int typeId,
+            final long entityId,
+            @Nullable final Integer version,
+            @Nullable final Collection<EntityName> entityNames
+    ) {
 
         long mappedEntityId = getPackingContext().remapEntityId( typeId, entityId );
 
@@ -704,6 +943,44 @@ public class StdGowingPacker implements GowingPacker {
     }
 
     @Override
+    public void emit( final @NotNull File f ) {
+
+        _writer.print( GowingConstants.TAG_FILE );
+        _writer.print( ObtuseUtil.enquoteToJavaString( f.getPath() ) );
+
+    }
+
+    @Override
+    public void emit( final @Nullable File@NotNull [] v ) {
+
+        _writer.print( GowingConstants.TAG_CONTAINER_ARRAY );
+        _writer.print( v.length );
+        _writer.print( GowingConstants.TAG_FILE );
+        _writer.print( '[' );
+
+        String comma = "";
+        for ( File b : v ) {
+
+            _writer.print( comma );
+            if ( b == null ) {
+
+                _writer.print( GowingConstants.NULL_VALUE );
+
+            } else {
+
+                _writer.print( ObtuseUtil.enquoteToJavaString( b.getPath() ) );
+
+            }
+
+            comma = ",";
+
+        }
+
+        _writer.print( ']' );
+
+    }
+
+    @Override
     public void emit( final int i ) {
 
         _writer.print( GowingConstants.TAG_INTEGER );
@@ -831,7 +1108,10 @@ public class StdGowingPacker implements GowingPacker {
 
     }
 
-    private static final char[] HEX_CHARS = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' };
+    private static final char[] HEX_CHARS = {
+            '0', '1', '2', '3', '4', '5', '6', '7',
+            '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'
+    };
 
     @Override
     public void emit( final @NotNull byte[] v ) {
@@ -987,7 +1267,9 @@ public class StdGowingPacker implements GowingPacker {
                             :
                             (
                                     value.getClass().getCanonicalName() + " value " +
-                                    ObtuseUtil.enquoteToJavaString( String.valueOf( s_usedMetaDataKeywords.get( keyword ) ) )
+                                    ObtuseUtil.enquoteToJavaString(
+                                            String.valueOf( s_usedMetaDataKeywords.get( keyword ) )
+                                    )
                             )
                     )
             );
@@ -1029,7 +1311,10 @@ public class StdGowingPacker implements GowingPacker {
 
         checkOutboundMetaDataKeyword( name, value );
 
-        _writer.println( "" + GowingConstants.LINE_METADATA_CHAR + name + '=' + ObtuseUtil.enquoteToJavaString( value ) + ';' );
+        _writer.println(
+                "" + GowingConstants.LINE_METADATA_CHAR + name + '=' +
+                ObtuseUtil.enquoteToJavaString( value ) + ';'
+        );
 
     }
 
@@ -1069,9 +1354,19 @@ public class StdGowingPacker implements GowingPacker {
 
     public static void main( final String[] args ) {
 
-        BasicProgramConfigInfo.init( "Obtuse", "GowingPacker", "test", null );
+        BasicProgramConfigInfo.init(
+                "Obtuse",
+                "GowingPacker",
+                "test",
+                null
+        );
 
-        try ( StdGowingPacker p2a = new StdGowingPacker( new EntityName( "test group name" ), new File( "test1.p2a" ) ) ) {
+        try (
+                StdGowingPacker p2a = new StdGowingPacker(
+                        new EntityName( "test group name" ),
+                        new File( "test1.p2a" )
+                )
+        ) {
 
             p2a.emitMetaData( GowingConstants.METADATA_NEXT_ID, 12345654321L );
             p2a.emitMetaData( "TEST_DOUBLE", Math.PI );
@@ -1113,6 +1408,21 @@ public class StdGowingPacker implements GowingPacker {
             GowingPackableCollection<String> p2C2 = new GowingPackableCollection<>();
             p2C2.addAll( Arrays.asList( "Mercury", "Venus", "Mars", "Jupiter", "\b\n\r\t\\\'\"" ) );
             p2Collection.add( p2C2 );
+            p2a.queuePackableEntity( new EntityName( "file-s" ), new GowingFile( "/dev/string-thing" ) );
+            p2a.queuePackableEntity( new EntityName( "file-f-s" ), new GowingFile( new File( "/dev" ), "file-string-thing" ) );
+            p2a.queuePackableEntity( new EntityName( "file-s-s" ), new GowingFile( "/dev", "string-string-thing" ) );
+            try {
+
+                p2a.queuePackableEntity(
+                        new EntityName( "file-u" ),
+                        new GowingFile( new URI( "file:///dev/uri-thing" ) )
+                );
+
+            } catch ( URISyntaxException e ) {
+
+                Logger.logErr( "java.net.URISyntaxException caught", e );
+
+            }
             p2a.queuePackableEntity( new EntityName( "fred" ), p2Collection );
             p2a.queuePackableEntity( new EntityName( "barney" ), p2Collection );
             p2a.queuePackableEntity( new EntityName( "betty" ), p2Collection );
@@ -1120,6 +1430,7 @@ public class StdGowingPacker implements GowingPacker {
             p2a.queuePackableEntity( new EntityName( "betty" ), p2Collection );
             p2a.queuePackableEntity( ObtuseCalendarDate.parseCalendarDate( "1957-10-04" ) );
             p2a.queuePackableEntity( ObtuseApproximateCalendarDate.parseQuietly( "October 4, 1957" ) );
+            p2a.queuePackableEntity( new GowingFile( "/home/danny" ) );
 
             p2a.finish();
 

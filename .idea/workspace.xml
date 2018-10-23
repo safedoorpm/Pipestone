@@ -4,60 +4,51 @@
     <option name="SCOPE_TYPE" value="3" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" name="Default" comment="A couple of new date formats in DateUtils.&#10;Turning many of the Gowing methods that used to sometimes return null values into methods that return Optional instances. Lots and lots of minor changes elsewhere - some of which change the API slightly but (hopefully) in obvious ways. These Gowing changes impact a lot of the other Pipestone classes that support Gowing although not in ways which should be visible externally.&#10;A new MessageDigestInputStream that computes a message digest as data flows through it.&#10;Major work on the file selectors class (to the point where there's now a new FileSelectors2 class). This area still needs work as it is still harder to use than it needs to be.&#10;A FrameworkTableModel is now parameterized by any class that extends ThingInfo rather than any class that extends CheckBoxRowWrapper.RowData. Note that since RowData is already parameterized by classes that extend ThingInfo, this shouldn't break any existing usages of either class.&#10;Many methods scattered throughout Pipestone that used to sometimes return null values now return Optional instances. Also, many of these methods have getMandatory... counterparts for those cases where you KNOW that the return value will not be null.&#10;Lots and lots of cleanup all over the place.">
-      <change afterPath="$PROJECT_DIR$/src/com/obtuse/ui/FileSelectors2.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/obtuse/util/MessageDigestInputStream.java" afterDir="false" />
+    <list default="true" id="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" name="Default" comment="Implement some graph theory utilities like topological sort (see GraphTheoryUtilities for a starting point).&#10;Implement the notion of a back-referenceable entity in Gowing. During packing, a back-referenceable entity that is referenced by some other entity is guaranteed to be packed before the referencing entity (note: no loops allowed). Duringuring unpacking, a back-referenceable entity's finishUnpacking method is called IMMEDIATELY after the entity is constructed and this particular call to finishUnpacking is REQUIRED to return true. This allows subsequent entities which reference the back-referenceable entity to recover and use the entity during the invocation of the subsequent entity's constructor (amongst other potential simplifications, this allows back-referenceable fields to be marked final). Note that a back-referenceable entity is allowed to reference normal not-back-referenceable entities although if it does so, the back-referenceable entity's finishUnpacking method is still REQUIRED to return true on its first call (any 'finishing' which cannot be done during that first call will need to be handled in some other way - possibly when the entity is first used after the unpacking operation has completed). Consequently, a certain amount of care is required when using a back-referenced entity.&#10;Introduce the GowingFile class which can be used to pack and unpack File instances (in reality, this class is mostly an example of how one might write a back-referenceable Gowing-aware class).&#10;Introduce reasonably complete support for packing and unpacking File instances in ways which are very analogous to how Long and Integer instances are packed and unpacked. For example, there is now a GowingFileHolder class which is very similar to the GowingLongHolder and GowingIntegerHolder classes. One point to keep in mind is that the java.util.File class can be extended (for example, one might create a MySpecialFile class which extends the java.util.File class). An instance of such a class can be packed by passing it to a GowingFileHolder instance HOWEVER when the resulting packed data is unpacked, the unpacking operation of instances of classes like this hypothetical MySpecialFile class will be unpacked into java.util.File classes. If you want to be able to pack and later unpack instances of classes like this hypothetical MySpecialFile class then you are much better off building your scheme around the new GowingFile class. Note that a future version of Gowing might prohibit the passing of instances of classes derived from the java.util.File class into GowingFileHolder instances. If you are packing and unpacking instances of classes which are derived from the java.util.File class then, if feasible, you should at least consider extending the GowingFile rather than extending the File class.&#10;Move Gowing towards having methods that might return a null value instead return an Optional instance. Still a ways to go here but progress has been made.&#10;Various cleanup.&#10;Make the packing and unpacking of TreeSorter instances more robust.&#10;Various changes to accomodate and/or take advantage of the Gowing changes described above.">
+      <change afterPath="$PROJECT_DIR$/src/com/obtuse/graphs/DirectedArc.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/obtuse/graphs/Edge.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/obtuse/graphs/GraphTheoryUtilities.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/obtuse/graphs/UndirectedEdge.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/obtuse/graphs/Vertex.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/obtuse/util/ParsingLocation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingNotBackReferenceable.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingBackReferenceable.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingInstanceIdErrorException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingPackingException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/backref/GowingFile.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingBackReferenceHolder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingFileHolder.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/FileSelectors.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/FileSelectors.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/ObtuseImageFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/ObtuseImageFile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/OkPopupMessageWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/OkPopupMessageWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/selectors/Alternative.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/selectors/Alternative.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/selectors/Selector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/selectors/Selector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/tableutils/CheckBoxRowWrapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/tableutils/CheckBoxRowWrapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/tableutils/CheckBoxStyleSelectionTableModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/tableutils/CheckBoxStyleSelectionTableModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/tableutils/FrameworkTableModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/tableutils/FrameworkTableModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/BasicProgramConfigInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/BasicProgramConfigInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/CSVParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/CSVParser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/ContextualToString.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ContextualToString.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/DateUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/DateUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/GenericCsvParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/GenericCsvParser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/ObtuseImageUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/ObtuseImageUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/GridArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/GridArray.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/GenericTag.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/GenericTag.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/ImmutableDate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ImmutableDate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/ObtuseCollections.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ObtuseCollections.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/ObtuseApproximateCalendarDate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ObtuseApproximateCalendarDate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/ObtuseCalendarDate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ObtuseCalendarDate.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/ObtuseUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ObtuseUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/SimpleUniqueIntegerIdGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/SimpleUniqueIntegerIdGenerator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/SimpleUniqueLongIdGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/SimpleUniqueLongIdGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/ThreeDimensionalTreeMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ThreeDimensionalTreeMap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/ThreeDimensionalSortedMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ThreeDimensionalSortedMap.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/TreeSorter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/TreeSorter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/TwoDimensionalSortedMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/TwoDimensionalSortedMap.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/TwoDimensionalTreeMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/TwoDimensionalTreeMap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/UniqueIntegerIdGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/UniqueIntegerIdGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/UniqueLongIdGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/UniqueLongIdGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackableAttribute.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackableAttribute.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackable.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackableKeyValuePair.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackableKeyValuePair.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackedEntityBundle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackedEntityBundle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPacker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPacker.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingUnPacker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingUnPacker.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingUnPackerContext.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingUnPackerContext.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/StdGowingPackerContext.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/StdGowingPackerContext.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/StdGowingUnPackerContext.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/StdGowingUnPackerContext.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingTrace.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingTrace.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingUnPackedEntityGroup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingUnPackedEntityGroup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingUnpackingDeadlockedException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingUnpackingDeadlockedException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingConstants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingString.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingString.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingTokenizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingTokenizer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingUnpackingException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingUnpackingException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingUtil.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingPacker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingPacker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingTokenizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingTokenizer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingUnPacker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingUnPacker.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/examples/SortedSetExample.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/examples/SortedSetExample.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingBooleanHolder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingBooleanHolder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingByteHolder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingByteHolder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingDoubleHolder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingDoubleHolder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingFloatHolder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingFloatHolder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingIntegerHolder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingIntegerHolder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingLongHolder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingLongHolder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingPackableCollection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingPackableCollection.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingPackableMapping.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingPackableMapping.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingShortHolder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingShortHolder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/kv/ObtuseKeyword.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/kv/ObtuseKeyword.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/names/RelativePath.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/names/RelativePath.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/things/ThingInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/things/ThingInfo.java" afterDir="false" />
     </list>
     <ignored path="Pipestone.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -212,38 +203,41 @@
     <session id="3551665">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="15" />
+          <entry key="project.closed" value="16" />
           <entry key="project.open.time.0" value="2" />
-          <entry key="project.open.time.1" value="7" />
+          <entry key="project.open.time.1" value="9" />
           <entry key="project.open.time.12" value="3" />
           <entry key="project.open.time.13" value="2" />
           <entry key="project.open.time.4" value="1" />
           <entry key="project.open.time.6" value="1" />
-          <entry key="project.opened" value="16" />
+          <entry key="project.opened" value="18" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="568" />
-          <entry key="txt" value="3157" />
+          <entry key="dummy" value="10" />
+          <entry key="java" value="29035" />
+          <entry key="txt" value="6816" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="568" />
-          <entry key="PLAIN_TEXT" value="3157" />
+          <entry key="JAVA" value="29035" />
+          <entry key="PLAIN_TEXT" value="6826" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="form" value="1" />
-          <entry key="java" value="35" />
+          <entry key="java" value="142" />
+          <entry key="jjjj" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="GUI_DESIGNER_FORM" value="1" />
-          <entry key="JAVA" value="35" />
+          <entry key="JAVA" value="142" />
+          <entry key="PLAIN_TEXT" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.spring.boot.run.usages" />
@@ -258,10 +252,46 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingUnPacker.java">
+        <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/TreeSorter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="262">
-              <caret line="498" column="29" lean-forward="true" selection-start-line="498" selection-start-column="29" selection-end-line="498" selection-end-column="29" />
+            <state relative-caret-position="18">
+              <caret line="710" column="44" selection-start-line="710" selection-start-column="44" selection-end-line="710" selection-end-column="44" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingConstants.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="666">
+              <caret line="121" column="42" selection-start-line="121" selection-start-column="42" selection-end-line="121" selection-end-column="42" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/obtuse/graphs/Edge.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="450">
+              <caret line="25" column="4" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingUnPackerContext.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="287">
+              <caret line="33" column="29" selection-start-line="33" selection-start-column="29" selection-end-line="33" selection-end-column="29" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/Measure.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="281">
+              <caret line="502" column="63" selection-start-line="502" selection-start-column="63" selection-end-line="502" selection-end-column="63" />
             </state>
           </provider>
         </entry>
@@ -269,80 +299,57 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/TwoDimensionalTreeMap.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="275">
-              <caret line="387" column="28" selection-start-line="387" selection-start-column="28" selection-end-line="387" selection-end-column="28" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingUtil.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="275">
-              <caret line="274" column="58" selection-start-line="274" selection-start-column="58" selection-end-line="274" selection-end-column="58" />
+            <state relative-caret-position="591">
+              <caret line="610" column="85" selection-start-line="610" selection-start-column="85" selection-end-line="610" selection-end-column="85" />
+              <folding>
+                <element signature="e#14405#14435#1" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/CSVParser.java">
+        <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/ObtuseApproximateCalendarDate.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="293">
-              <caret line="515" column="26" selection-start-line="515" selection-start-column="26" selection-end-line="515" selection-end-column="26" />
+            <state relative-caret-position="593">
+              <caret line="690" column="7" selection-start-line="690" selection-start-column="7" selection-end-line="690" selection-end-column="7" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/GenericCsvParser.java">
+        <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingString.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="334">
-              <caret line="268" selection-start-line="268" selection-end-line="268" />
+            <state relative-caret-position="433">
+              <caret line="61" column="23" selection-start-line="61" selection-start-column="23" selection-end-line="61" selection-end-column="23" />
+              <folding>
+                <element signature="e#2156#2192#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/ThreeDimensionalTreeMap.java">
+        <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/StdGowingUnPackerContext.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="275">
-              <caret line="348" column="28" selection-start-line="348" selection-start-column="28" selection-end-line="348" selection-end-column="28" />
+            <state relative-caret-position="287">
+              <caret line="223" column="36" selection-start-line="223" selection-start-column="36" selection-end-line="223" selection-end-column="36" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="jar:///Library/Java/JavaVirtualMachines/jdk-10.0.2.jdk/Contents/Home/lib/src.zip!/java.base/java/lang/Iterable.java">
+        <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/backref/GowingFile.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="275">
-              <caret line="47" column="16" selection-start-line="47" selection-start-column="16" selection-end-line="47" selection-end-column="16" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/TreeSorter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="460">
-              <caret line="530" column="35" selection-start-line="530" selection-start-column="35" selection-end-line="530" selection-end-column="35" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingPacker.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-624">
-              <caret line="488" column="55" selection-start-line="488" selection-start-column="55" selection-end-line="488" selection-end-column="55" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPacker.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="275">
-              <caret line="43" column="9" selection-start-line="43" selection-start-column="9" selection-end-line="43" selection-end-column="9" />
+            <state relative-caret-position="287">
+              <caret line="81" column="60" selection-start-line="81" selection-start-column="60" selection-end-line="81" selection-end-column="60" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#2658#2695#1" expanded="true" />
+                <element signature="e#2727#2764#1" expanded="true" />
+                <element signature="e#2794#2831#1" expanded="true" />
+                <element signature="e#2863#2900#1" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -353,52 +360,45 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="package-info" />
-        <option value="Interface" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>paint(</find>
-      <find>paintcomponent(</find>
-      <find>modelt</find>
-      <find>slice(</find>
-      <find>setown</find>
-      <find>//</find>
-      <find>^//</find>
-      <find>orang</find>
-      <find>queuePackableEntity</find>
-      <find>main(</find>
-      <find>froz_botn</find>
-      <find>_entityN</find>
-      <find>remap</find>
+      <find>backref</find>
+      <find>GowingBackReferenceable</find>
+      <find>gowingnotpack</find>
+      <find>gowingbackref</find>
+      <find>bundle =</find>
       <find>finish</find>
-      <find>froz</find>
-      <find>copy</find>
-      <find>slider_</find>
-      <find>buttonown</find>
-      <find>imagebut</find>
-      <find>setbuttonst</find>
-      <find>setcurs</find>
-      <find>alternative(</find>
-      <find>constants.tag</find>
-      <find>abstract</find>
-      <find>abstractwiki</find>
-      <find>single</find>
-      <find>haso</find>
-      <find>hasone</find>
-      <find>getsi</find>
-      <find>howd</find>
+      <find>unfinishedentities</find>
+      <find>finished</find>
+      <find>finishun</find>
+      <find>new measure</find>
+      <find>unpackedg</find>
+      <find>topologicallySortArcs</find>
+      <find>logger</find>
+      <find>this could</find>
+      <find>run</find>
+      <find>.values</find>
+      <find>equals(</find>
+      <find>groupgra</find>
+      <find>group</find>
+      <find>&lt;V&gt;</find>
+      <find>ram &lt;</find>
+      <find>confusion</find>
+      <find>file(</find>
+      <find>s-s</find>
+      <find>string-</find>
+      <find>main(</find>
+      <find>constructor</find>
+      <find>'S'</find>
+      <find>'F'</find>
+      <find>s_requ</find>
     </findStrings>
     <replaceStrings>
-      <replace>int</replace>
-      <replace>long</replace>
-      <replace>Long</replace>
-      <replace>float</replace>
-      <replace>double</replace>
-      <replace>xxx</replace>
-      <replace>char</replace>
       <replace>character</replace>
       <replace>string</replace>
       <replace>boolean</replace>
@@ -422,16 +422,23 @@
       <replace>instance's</replace>
       <replace>slices</replace>
       <replace>logMaybe</replace>
+      <replace>vLog(</replace>
+      <replace>vLog</replace>
+      <replace>Vertex(V)</replace>
+      <replace>vName</replace>
+      <replace>V</replace>
+      <replace>Vertex&lt;V&gt;</replace>
+      <replace>Hash</replace>
     </replaceStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$</dir>
       <dir>$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders</dir>
-      <dir>$PROJECT_DIR$/src/com/obtuse/util/gowing</dir>
       <dir>$PROJECT_DIR$/src/com/obtuse/ui/layout/linear</dir>
       <dir>$PROJECT_DIR$/src/com/obtuse/ui</dir>
       <dir>$PROJECT_DIR$/src</dir>
       <dir>$PROJECT_DIR$/src/com/obtuse/ui/layout</dir>
       <dir>$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1</dir>
+      <dir>$PROJECT_DIR$/src/com/obtuse/util/gowing</dir>
     </dirStrings>
   </component>
   <component name="FindManager">
@@ -452,57 +459,57 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/model/FlexiGridModelSpecialSlice.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/util/FlexiGridConstraintsTable.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/util/FlexiGridConstraintCategory.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/util/FlexiGridConstraint.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/util/FlexiGridBasicConstraint.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/util/FlexiGridSimpleConstraint.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/model/SpecialSlice.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/model/FlexiGridModelSlice.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/FlexiGridCache1.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/FlexiGridLayoutManager.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/FlexiGridTesting.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/util/ObtuseCollections.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingEntityReferenceHolder.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPacker.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackerContext.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingInstanceId.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingAbstractPackableHolder.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackableThingHolder.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/StdGowingPackerContext.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingPacker.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/ui/EditValueAdvocate.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/ui/layout/layoutTracer/LayoutTracer.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/ui/layout/layoutTracer/TracingLayoutManager.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/ui/MultiPointSlider.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/util/ImageButtonOwner.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/ui/selectors/WrappedButtonSelectorPanel.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/ui/selectors/ComboBoxSelectorPanel.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/ui/selectors/Selector.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/util/ObtuseUtil.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/util/ImageButton.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/ui/selectors/WrappedComboBoxSelectorPanel.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/util/MacCustomization.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/Constants.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/ui/copier/BasicBurkeDataSource.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/ui/copier/BurkeCopierWidget.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/ui/copier/CopierDataSource.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/util/OSLevelCustomizations.java" />
         <option value="$PROJECT_DIR$/src/com/obtuse/ui/AboutBox.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingTokenizer.java" />
         <option value="$PROJECT_DIR$/src/com/obtuse/ui/copier/CopierWidget.java" />
         <option value="$PROJECT_DIR$/src/com/obtuse/ui/ObtuseImageUtils.java" />
         <option value="$PROJECT_DIR$/src/com/obtuse/ui/ObtuseImageFile.java" />
         <option value="$PROJECT_DIR$/src/com/obtuse/util/DateUtils.java" />
         <option value="$PROJECT_DIR$/src/com/obtuse/util/ContextualToString.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/util/TreeSorter.java" />
         <option value="$PROJECT_DIR$/src/com/obtuse/util/GenericCsvParser.java" />
         <option value="$PROJECT_DIR$/src/com/obtuse/util/ThreeDimensionalTreeMap.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingUnPacker.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/util/TwoDimensionalTreeMap.java" />
-        <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingUtil.java" />
         <option value="$PROJECT_DIR$/src/com/obtuse/util/CSVParser.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackableThingHolder.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingBackRefable.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingBackReferenceable.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingBackRefHolder.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingBackReferenceHolder.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingTokenizer.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/util/ObtuseUtil.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingBackReferenceAble.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingUnpackingException.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingPackingException.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/graphs/Graph.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/graphs/TopologicalSortx.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/graphs/TopologicalSortBackup.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/util/TreeSorter.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingInstanceIdErrorException.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackedEntityBundle.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingBooleanHolder.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/util/ImmutableDate.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/util/GenericTag.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/util/names/RelativePath.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingNotBackReferenceable.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingUtil.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingUnPacker.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingUnPackerContext.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/util/ObtuseCalendarDate.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingUnPacker.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/graphs/TopologicalSort.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/graphs/Vertex.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/graphs/Arc.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/graphs/UndirectedEdge.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/graphs/DirectedArc.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/graphs/GraphTheoryUtilities.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingFileHolder.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingPacker.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingConstants.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/graphs/Edge.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/StdGowingUnPackerContext.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingString.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/backref/GowingFile.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/util/Measure.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/util/TwoDimensionalTreeMap.java" />
+        <option value="$PROJECT_DIR$/src/com/obtuse/util/ObtuseApproximateCalendarDate.java" />
       </list>
     </option>
   </component>
@@ -512,27 +519,23 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="MavenImportPreferences">
-    <option name="generalSettings">
-      <MavenGeneralSettings>
-        <option name="mavenHome" value="Bundled (Maven 3)" />
-      </MavenGeneralSettings>
-    </option>
-  </component>
   <component name="MavenProjectNavigator">
     <treeState />
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="48" />
-    <option name="y" value="96" />
+    <option name="y" value="24" />
     <option name="width" value="2405" />
-    <option name="height" value="1337" />
+    <option name="height" value="1440" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
       <profile-state>
         <expanded-state>
           <State />
+          <State>
+            <id>Android</id>
+          </State>
           <State>
             <id>Bitwise operation issuesJava</id>
           </State>
@@ -567,6 +570,12 @@
             <id>Inheritance issuesJava</id>
           </State>
           <State>
+            <id>InternationalizationJava</id>
+          </State>
+          <State>
+            <id>InternationalizationLintAndroid</id>
+          </State>
+          <State>
             <id>Java</id>
           </State>
           <State>
@@ -576,7 +585,13 @@
             <id>Kotlin</id>
           </State>
           <State>
+            <id>LintAndroid</id>
+          </State>
+          <State>
             <id>Numeric issuesJava</id>
+          </State>
+          <State>
+            <id>PerformanceJava</id>
           </State>
           <State>
             <id>Plugin DevKit</id>
@@ -615,6 +630,15 @@
             <id>Threading issuesJava</id>
           </State>
           <State>
+            <id>TypographyUsabilityLintAndroid</id>
+          </State>
+          <State>
+            <id>UsabilityLintAndroid</id>
+          </State>
+          <State>
+            <id>Verbose or redundant code constructsJava</id>
+          </State>
+          <State>
             <id>toString() issuesJava</id>
           </State>
         </expanded-state>
@@ -634,7 +658,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -668,6 +691,14 @@
               <item name="com" type="462c0819:PsiDirectoryNode" />
               <item name="obtuse" type="462c0819:PsiDirectoryNode" />
               <item name="exceptions" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Pipestone" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Pipestone" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="obtuse" type="462c0819:PsiDirectoryNode" />
+              <item name="graphs" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Pipestone" type="b2602c69:ProjectViewProjectNode" />
@@ -871,6 +902,17 @@
               <item name="util" type="462c0819:PsiDirectoryNode" />
               <item name="gowing" type="462c0819:PsiDirectoryNode" />
               <item name="p2a" type="462c0819:PsiDirectoryNode" />
+              <item name="backref" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Pipestone" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Pipestone" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="obtuse" type="462c0819:PsiDirectoryNode" />
+              <item name="util" type="462c0819:PsiDirectoryNode" />
+              <item name="gowing" type="462c0819:PsiDirectoryNode" />
+              <item name="p2a" type="462c0819:PsiDirectoryNode" />
               <item name="examples" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -939,6 +981,14 @@
               <item name="&lt; 10 &gt;" type="70bed36:NamedLibraryElementNode" />
               <item name="java.base" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="io" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Pipestone" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="&lt; 10 &gt;" type="70bed36:NamedLibraryElementNode" />
+              <item name="java.base" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="lang" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -948,6 +998,14 @@
               <item name="java.base" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="security" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Pipestone" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="&lt; 10 &gt;" type="70bed36:NamedLibraryElementNode" />
+              <item name="java.base" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="util" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Pipestone" type="b2602c69:ProjectViewProjectNode" />
@@ -998,6 +1056,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1008,11 +1067,12 @@
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="MemberChooser.sorted" value="false" />
+    <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file:///Users/danny/IdeaProjects/Pipestone/src/com/obtuse/graphs/UndirectedEdge.java" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1539156234210" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1540319358450" />
     <property name="dynamic.classpath" value="false" />
-    <property name="extract.method.default.visibility" value="public" />
+    <property name="extract.method.default.visibility" value="private" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="options.lastSelected" value="preferences.general" />
     <property name="options.searchVisible" value="true" />
@@ -1023,7 +1083,7 @@
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="recentsLimit" value="5" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="settings.editor.selected.configurable" value="Debugger_Data_Views_Java" />
     <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/src/com/obtuse/util/TreeSorter2.java" />
   </component>
   <component name="RecentsManager">
@@ -1032,6 +1092,9 @@
       <recent name="com.obtuse.util.Measure" />
       <recent name="com.obtuse.util.ObtuseCalendarDate" />
       <recent name="com.obtuse.ui.PopupJTableEditor.PopupDialog" />
+    </key>
+    <key name="MoveInnerDialog.RECENTS_KEY">
+      <recent name="com.obtuse.graphs" />
     </key>
     <key name="MoveMembersDialog.RECENTS_KEY">
       <recent name="com.obtuse.util.ObtuseUtil" />
@@ -1055,24 +1118,25 @@
       <recent name="com.obtuse.ui.layout" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/com/obtuse/graphs" />
       <recent name="$PROJECT_DIR$/src/com/obtuse/ui/future" />
       <recent name="$PROJECT_DIR$/src/com/obtuse/ui" />
       <recent name="$PROJECT_DIR$/src/com/obtuse" />
       <recent name="$PROJECT_DIR$/src" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="com.obtuse.ui" />
       <recent name="com.obtuse.util.gowing" />
+      <recent name="com.obtuse.graphs" />
+      <recent name="com.obtuse.util.gowing.p2a" />
+      <recent name="com.obtuse.ui" />
       <recent name="com.obtuse.util.gowing.p2a.holders" />
-      <recent name="com.obtuse.ui.sortable" />
-      <recent name="com.obtuse.util.gowing.packer2.p2a.util" />
     </key>
     <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.obtuse.graphs" />
+      <recent name="com.obtuse.util.gowing.p2a" />
       <recent name="com.obtuse" />
       <recent name="com.obtuse.ui.layout.flexigrid1.model" />
-      <recent name="com.obtuse.util.gowing.p2a" />
       <recent name="com.obtuse.util" />
-      <recent name="com.apple.eawt" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -1087,7 +1151,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.StdGowingPacker">
+  <component name="RunManager" selected="Application.StdGowingUnPacker">
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
       <module name="" />
       <option name="TESTING_TYPE" value="0" />
@@ -1153,13 +1217,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="RandomCentral" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.obtuse.util.RandomCentral" />
+    <configuration name="GraphTheoryUtilities" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.obtuse.graphs.GraphTheoryUtilities" />
       <module name="Pipestone" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.obtuse.util.*" />
+          <option name="PATTERN" value="com.obtuse.graphs.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -1224,18 +1288,18 @@
     </configuration>
     <list>
       <item itemvalue="Application.FlexiGridTesting" />
-      <item itemvalue="Application.RandomCentral" />
       <item itemvalue="Application.FlexiGridModelTesting" />
       <item itemvalue="Application.StdGowingPacker" />
       <item itemvalue="Application.StdGowingUnPacker" />
+      <item itemvalue="Application.GraphTheoryUtilities" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.StdGowingPacker" />
         <item itemvalue="Application.StdGowingUnPacker" />
+        <item itemvalue="Application.StdGowingPacker" />
+        <item itemvalue="Application.GraphTheoryUtilities" />
         <item itemvalue="Application.FlexiGridTesting" />
         <item itemvalue="Application.FlexiGridModelTesting" />
-        <item itemvalue="Application.RandomCentral" />
       </list>
     </recent_temporary>
   </component>
@@ -1415,14 +1479,9 @@
       <workItem from="1537215574275" duration="2269000" />
       <workItem from="1538038150446" duration="7503000" />
       <workItem from="1539195209011" duration="1791000" />
-      <workItem from="1539415787181" duration="1211000" />
-    </task>
-    <task id="LOCAL-00027" summary="Reasonably robust sorted panels.&#10;Considerable cleanup, testing and even some bug fixing of ObtuseCalendarDate and ObtuseApproximateCalendarDate.">
-      <created>1470849628515</created>
-      <option name="number" value="00027" />
-      <option name="presentableId" value="LOCAL-00027" />
-      <option name="project" value="LOCAL" />
-      <updated>1470849628515</updated>
+      <workItem from="1539415787181" duration="54517000" />
+      <workItem from="1539760175649" duration="3905000" />
+      <workItem from="1540304368430" duration="4776000" />
     </task>
     <task id="LOCAL-00028" summary="Reasonably robust sorted panels.&#10;Considerable cleanup, testing and even some bug fixing of ObtuseCalendarDate and ObtuseApproximateCalendarDate.">
       <created>1470850308168</created>
@@ -1760,11 +1819,18 @@
       <option name="project" value="LOCAL" />
       <updated>1538038803149</updated>
     </task>
-    <option name="localTasksCounter" value="76" />
+    <task id="LOCAL-00076" summary="A couple of new date formats in DateUtils.&#10;Turning many of the Gowing methods that used to sometimes return null values into methods that return Optional instances. Lots and lots of minor changes elsewhere - some of which change the API slightly but (hopefully) in obvious ways. These Gowing changes impact a lot of the other Pipestone classes that support Gowing although not in ways which should be visible externally.&#10;A new MessageDigestInputStream that computes a message digest as data flows through it.&#10;Major work on the file selectors class (to the point where there's now a new FileSelectors2 class). This area still needs work as it is still harder to use than it needs to be.&#10;A FrameworkTableModel is now parameterized by any class that extends ThingInfo rather than any class that extends CheckBoxRowWrapper.RowData. Note that since RowData is already parameterized by classes that extend ThingInfo, this shouldn't break any existing usages of either class.&#10;Many methods scattered throughout Pipestone that used to sometimes return null values now return Optional instances. Also, many of these methods have getMandatory... counterparts for those cases where you KNOW that the return value will not be null.&#10;Lots and lots of cleanup all over the place.">
+      <created>1539417115472</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1539417115473</updated>
+    </task>
+    <option name="localTasksCounter" value="77" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="979144000" />
+    <option name="totallyTimeSpent" value="1041131000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1776,10 +1842,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="48" y="96" width="2405" height="1337" extended-state="0" />
+    <frame x="48" y="24" width="2405" height="1440" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.5269953" visible="true" weight="0.37663987" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.5269953" visible="true" weight="0.25414366" />
       <window_info id="Structure" order="1" sideWeight="0.43055555" side_tool="true" weight="0.17557251" />
       <window_info id="Image Layers" order="2" />
       <window_info id="UI Designer" order="3" sideWeight="0.67289025" weight="0.329475" />
@@ -1788,17 +1854,17 @@
       <window_info id="Favorites" order="6" sideWeight="0.4730047" side_tool="true" weight="0.17571372" />
       <window_info id="Designer" order="7" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info active="true" anchor="bottom" id="Find" order="1" sideWeight="0.4985938" visible="true" weight="0.30281124" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.3277126" />
-      <window_info anchor="bottom" x="2627" y="577" width="2425" height="492" id="Debug" order="3" sideWeight="0.9995866" weight="0.35421166" />
+      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.4985938" weight="0.30173063" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32731378" />
+      <window_info anchor="bottom" x="2627" y="577" width="2425" height="492" id="Debug" order="3" sideWeight="0.6624204" weight="0.35289693" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.39985272" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5082522" side_tool="true" weight="0.2811245" />
+      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.3375796" side_tool="true" weight="0.35333833" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.49174777" weight="0.2811245" />
+      <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.49174777" weight="0.28367195" />
       <window_info anchor="bottom" id="Changes" order="10" visible="true" weight="0.32457292" />
-      <window_info active="true" anchor="bottom" id="Messages" order="11" sideWeight="0.9753381" visible="true" weight="0.2987952" />
+      <window_info active="true" anchor="bottom" id="Messages" order="11" sideWeight="0.9753381" visible="true" weight="0.29646352" />
       <window_info anchor="bottom" id="IDEtalk Messages" order="12" />
       <window_info anchor="bottom" id="Application Servers" order="13" />
       <window_info anchor="bottom" id="Problems" order="14" />
@@ -1902,7 +1968,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Birth of the ObtuseCollections class (more to come later).&#10;Otherwise, mostly cleanup." />
     <MESSAGE value="Major cleanup in the wrapped selector panels stuff.&#10;Advent of the ContextualToString class which facilitates providing different toString results depending on the context.&#10;Provide some basic support for customized toString results from ObtuseKeyword instances (note that this is customized toString results like providing mixed case keyword names; it is not contextual customized toString - each ObtuseKeyword instance will produce the exact same toString result although the developer gets to decide what that result will be when the ObtuseKeyword instance is created)." />
     <MESSAGE value="Add fairly basic &quot;regular verbose&quot; and &quot;super verbose&quot; mechanism to make it a bit easier to figure out why the &quot;finish unpacking&quot; phase of a Gowing unpack operation is failing.&#10;&#10;Add an unchecked GowingUnpackingDeadlockedException which is thrown when the &quot;finish unpacking&quot; phase of a Gowing unpack operation reaches a point where a round of finishing doesn't reduce the number of unfinished unpackables. This is usually because two packables are waiting for each other to finish (generally if not always because one or both of the packables have a &quot;cannot finish until the other is finished&quot; dependency that doesn't really need to be there, or the finishing strategy being used is flawed - roughly speaking, if it was possible to build the data structure one step-at-a-time in the first place then there must be a way to unpack it while finishing it one-step-at-a-time).&#10;&#10;Cleanup of various aspects of the Gowing facility and elsewhere." />
     <MESSAGE value="Implement the ability to construct/initialize a WrappedButtonSelectorPanel with a particular button pre-selected and a WrappedComboBoxSelectorPanel with a particular choice pre-selected.&#10;&#10;Fix a subtle bugin GowingPackableKeyValuePair where its ability to finish an instance was incorrectly dependent upon its value field being finished. This created an unbreakable finish-dependency loop during an unpacking operation.&#10;&#10;Cleanup." />
@@ -1927,7 +1992,8 @@
     <MESSAGE value="Make it easier to work with TreeSorter keys that have exactly one value by implementing a getSingleValue( K key ) method to retrieve the single value (an IllegalArgumentException is thrown if the key has zero or more than one value associated with it) and a hasSingleValue( K key ) that can be used to easily determine if a key has exactly one value associated with it.&#10;&#10;Cleanup the event-driven style XMLParsingExample class." />
     <MESSAGE value="Make TreeSorter class GowingPackable (still needs some testing).&#10;Add support in GowingPackableKeyValuePair for maps containing values that are Collection classes (part of making TreeSorter GowingPackable).&#10;New MessageDigest class to make it easy to include checksums in GowingPackable classes.&#10;Provide a way to control the logging level the ObtuseImageFile and ObtuseImageUtils classes.&#10;Work on cleaning up and providing a bit more functionality in the Swing selectors in FileSelectors.&#10;Annotate the parameters to most of the doit methods in YesNoPopupMessageWindow (still at least one to go).&#10;Minor cleanup here and there." />
     <MESSAGE value="A couple of new date formats in DateUtils.&#10;Turning many of the Gowing methods that used to sometimes return null values into methods that return Optional instances. Lots and lots of minor changes elsewhere - some of which change the API slightly but (hopefully) in obvious ways. These Gowing changes impact a lot of the other Pipestone classes that support Gowing although not in ways which should be visible externally.&#10;A new MessageDigestInputStream that computes a message digest as data flows through it.&#10;Major work on the file selectors class (to the point where there's now a new FileSelectors2 class). This area still needs work as it is still harder to use than it needs to be.&#10;A FrameworkTableModel is now parameterized by any class that extends ThingInfo rather than any class that extends CheckBoxRowWrapper.RowData. Note that since RowData is already parameterized by classes that extend ThingInfo, this shouldn't break any existing usages of either class.&#10;Many methods scattered throughout Pipestone that used to sometimes return null values now return Optional instances. Also, many of these methods have getMandatory... counterparts for those cases where you KNOW that the return value will not be null.&#10;Lots and lots of cleanup all over the place." />
-    <option name="LAST_COMMIT_MESSAGE" value="A couple of new date formats in DateUtils.&#10;Turning many of the Gowing methods that used to sometimes return null values into methods that return Optional instances. Lots and lots of minor changes elsewhere - some of which change the API slightly but (hopefully) in obvious ways. These Gowing changes impact a lot of the other Pipestone classes that support Gowing although not in ways which should be visible externally.&#10;A new MessageDigestInputStream that computes a message digest as data flows through it.&#10;Major work on the file selectors class (to the point where there's now a new FileSelectors2 class). This area still needs work as it is still harder to use than it needs to be.&#10;A FrameworkTableModel is now parameterized by any class that extends ThingInfo rather than any class that extends CheckBoxRowWrapper.RowData. Note that since RowData is already parameterized by classes that extend ThingInfo, this shouldn't break any existing usages of either class.&#10;Many methods scattered throughout Pipestone that used to sometimes return null values now return Optional instances. Also, many of these methods have getMandatory... counterparts for those cases where you KNOW that the return value will not be null.&#10;Lots and lots of cleanup all over the place." />
+    <MESSAGE value="Implement some graph theory utilities like topological sort (see GraphTheoryUtilities for a starting point).&#10;Implement the notion of a back-referenceable entity in Gowing. During packing, a back-referenceable entity that is referenced by some other entity is guaranteed to be packed before the referencing entity (note: no loops allowed). Duringuring unpacking, a back-referenceable entity's finishUnpacking method is called IMMEDIATELY after the entity is constructed and this particular call to finishUnpacking is REQUIRED to return true. This allows subsequent entities which reference the back-referenceable entity to recover and use the entity during the invocation of the subsequent entity's constructor (amongst other potential simplifications, this allows back-referenceable fields to be marked final). Note that a back-referenceable entity is allowed to reference normal not-back-referenceable entities although if it does so, the back-referenceable entity's finishUnpacking method is still REQUIRED to return true on its first call (any 'finishing' which cannot be done during that first call will need to be handled in some other way - possibly when the entity is first used after the unpacking operation has completed). Consequently, a certain amount of care is required when using a back-referenced entity.&#10;Introduce the GowingFile class which can be used to pack and unpack File instances (in reality, this class is mostly an example of how one might write a back-referenceable Gowing-aware class).&#10;Introduce reasonably complete support for packing and unpacking File instances in ways which are very analogous to how Long and Integer instances are packed and unpacked. For example, there is now a GowingFileHolder class which is very similar to the GowingLongHolder and GowingIntegerHolder classes. One point to keep in mind is that the java.util.File class can be extended (for example, one might create a MySpecialFile class which extends the java.util.File class). An instance of such a class can be packed by passing it to a GowingFileHolder instance HOWEVER when the resulting packed data is unpacked, the unpacking operation of instances of classes like this hypothetical MySpecialFile class will be unpacked into java.util.File classes. If you want to be able to pack and later unpack instances of classes like this hypothetical MySpecialFile class then you are much better off building your scheme around the new GowingFile class. Note that a future version of Gowing might prohibit the passing of instances of classes derived from the java.util.File class into GowingFileHolder instances. If you are packing and unpacking instances of classes which are derived from the java.util.File class then, if feasible, you should at least consider extending the GowingFile rather than extending the File class.&#10;Move Gowing towards having methods that might return a null value instead return an Optional instance. Still a ways to go here but progress has been made.&#10;Various cleanup.&#10;Make the packing and unpacking of TreeSorter instances more robust.&#10;Various changes to accomodate and/or take advantage of the Gowing changes described above." />
+    <option name="LAST_COMMIT_MESSAGE" value="Implement some graph theory utilities like topological sort (see GraphTheoryUtilities for a starting point).&#10;Implement the notion of a back-referenceable entity in Gowing. During packing, a back-referenceable entity that is referenced by some other entity is guaranteed to be packed before the referencing entity (note: no loops allowed). Duringuring unpacking, a back-referenceable entity's finishUnpacking method is called IMMEDIATELY after the entity is constructed and this particular call to finishUnpacking is REQUIRED to return true. This allows subsequent entities which reference the back-referenceable entity to recover and use the entity during the invocation of the subsequent entity's constructor (amongst other potential simplifications, this allows back-referenceable fields to be marked final). Note that a back-referenceable entity is allowed to reference normal not-back-referenceable entities although if it does so, the back-referenceable entity's finishUnpacking method is still REQUIRED to return true on its first call (any 'finishing' which cannot be done during that first call will need to be handled in some other way - possibly when the entity is first used after the unpacking operation has completed). Consequently, a certain amount of care is required when using a back-referenced entity.&#10;Introduce the GowingFile class which can be used to pack and unpack File instances (in reality, this class is mostly an example of how one might write a back-referenceable Gowing-aware class).&#10;Introduce reasonably complete support for packing and unpacking File instances in ways which are very analogous to how Long and Integer instances are packed and unpacked. For example, there is now a GowingFileHolder class which is very similar to the GowingLongHolder and GowingIntegerHolder classes. One point to keep in mind is that the java.util.File class can be extended (for example, one might create a MySpecialFile class which extends the java.util.File class). An instance of such a class can be packed by passing it to a GowingFileHolder instance HOWEVER when the resulting packed data is unpacked, the unpacking operation of instances of classes like this hypothetical MySpecialFile class will be unpacked into java.util.File classes. If you want to be able to pack and later unpack instances of classes like this hypothetical MySpecialFile class then you are much better off building your scheme around the new GowingFile class. Note that a future version of Gowing might prohibit the passing of instances of classes derived from the java.util.File class into GowingFileHolder instances. If you are packing and unpacking instances of classes which are derived from the java.util.File class then, if feasible, you should at least consider extending the GowingFile rather than extending the File class.&#10;Move Gowing towards having methods that might return a null value instead return an Optional instance. Still a ways to go here but progress has been made.&#10;Various cleanup.&#10;Make the packing and unpacking of TreeSorter instances more robust.&#10;Various changes to accomodate and/or take advantage of the Gowing changes described above." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1955,12 +2021,6 @@
           <line>279</line>
           <properties />
           <option name="timeStamp" value="7" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackedEntityBundle.java</url>
-          <line>168</line>
-          <properties />
-          <option name="timeStamp" value="14" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/obtuse/util/gowing/EntityNames.java</url>
@@ -2108,43 +2168,31 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/obtuse/util/ObtuseApproximateCalendarDate.java</url>
-          <line>528</line>
+          <line>531</line>
           <properties />
           <option name="timeStamp" value="253" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/obtuse/util/ObtuseApproximateCalendarDate.java</url>
-          <line>1444</line>
+          <line>1349</line>
           <properties />
           <option name="timeStamp" value="259" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/obtuse/util/ObtuseApproximateCalendarDate.java</url>
-          <line>467</line>
+          <line>470</line>
           <properties />
           <option name="timeStamp" value="260" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/obtuse/util/ObtuseApproximateCalendarDate.java</url>
-          <line>1115</line>
-          <properties />
-          <option name="timeStamp" value="282" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/obtuse/util/ObtuseApproximateCalendarDate.java</url>
-          <line>1129</line>
-          <properties />
-          <option name="timeStamp" value="284" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingUnPacker.java</url>
-          <line>259</line>
+          <line>270</line>
           <properties />
           <option name="timeStamp" value="287" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingUnPacker.java</url>
-          <line>267</line>
+          <line>278</line>
           <properties />
           <option name="timeStamp" value="288" />
         </line-breakpoint>
@@ -2156,7 +2204,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/obtuse/util/ObtuseApproximateCalendarDate.java</url>
-          <line>1502</line>
+          <line>1407</line>
           <properties />
           <option name="timeStamp" value="307" />
         </line-breakpoint>
@@ -2174,7 +2222,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackedEntityBundle.java</url>
-          <line>348</line>
+          <line>389</line>
           <properties />
           <option name="timeStamp" value="357" />
         </line-breakpoint>
@@ -2210,13 +2258,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackedEntityBundle.java</url>
-          <line>84</line>
+          <line>87</line>
           <properties />
           <option name="timeStamp" value="383" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackedEntityBundle.java</url>
-          <line>117</line>
+          <line>120</line>
           <properties />
           <option name="timeStamp" value="384" />
         </line-breakpoint>
@@ -2347,12 +2395,6 @@
           <option name="timeStamp" value="471" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/obtuse/util/gowing/StdGowingPackerContext.java</url>
-          <line>270</line>
-          <properties />
-          <option name="timeStamp" value="477" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/obtuse/util/TreeSorter.java</url>
           <line>399</line>
           <properties />
@@ -2364,7 +2406,58 @@
           <properties />
           <option name="timeStamp" value="480" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingTokenizer.java</url>
+          <line>950</line>
+          <properties />
+          <option name="timeStamp" value="482" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingPacker.java</url>
+          <line>408</line>
+          <properties />
+          <option name="timeStamp" value="486" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingPacker.java</url>
+          <line>535</line>
+          <properties />
+          <option name="timeStamp" value="501" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingPacker.java</url>
+          <line>521</line>
+          <properties />
+          <option name="timeStamp" value="502" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingUnPacker.java</url>
+          <line>684</line>
+          <properties />
+          <option name="timeStamp" value="505" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingUnPacker.java</url>
+          <line>342</line>
+          <properties />
+          <option name="timeStamp" value="509" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/obtuse/graphs/GraphTheoryUtilities.java</url>
+          <line>474</line>
+          <properties />
+          <option name="timeStamp" value="518" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/obtuse/graphs/GraphTheoryUtilities.java</url>
+          <line>480</line>
+          <properties />
+          <option name="timeStamp" value="519" />
+        </line-breakpoint>
       </breakpoints>
+      <breakpoints-dialog>
+        <breakpoints-dialog />
+      </breakpoints-dialog>
     </breakpoint-manager>
   </component>
   <component name="antWorkspaceConfiguration">
@@ -2373,6 +2466,26 @@
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateExpression">
+      <expression>
+        <expression-string>_p1f</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>this</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>dependencies.get( node.getV() )</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>bundle</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
       <expression>
         <expression-string>jf.getRootPane().isOpaque()</expression-string>
         <language-id>JAVA</language-id>
@@ -2398,353 +2511,379 @@
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
-      <expression>
-        <expression-string>_grid.getRowSet()</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>_grid.getColumnSet()</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/FlexiGridContainer.java">
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/EntityName.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="6" column="41" selection-start-line="6" selection-start-column="41" selection-end-line="6" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/FlexiGridContainer1.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3477">
-          <caret line="193" selection-start-line="193" selection-end-line="193" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/resources/Go_back_20x20.png" />
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/layout/layoutTracer/TracingLayoutManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4921">
-          <caret line="265" column="33" selection-start-line="265" selection-start-column="33" selection-end-line="265" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/FlexiGridLayoutManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7087">
-          <caret line="389" selection-start-line="389" selection-end-line="389" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/LogsWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="9424">
-          <caret line="519" selection-start-line="519" selection-end-line="519" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///usr/lib/jvm/java-10-oracle/lib/src.zip!/java.desktop/javax/swing/JMenuItem.java" />
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/resources/slider_knob2_13x13.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/MultiPointSlider.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="885">
-          <caret line="78" column="34" selection-start-line="78" selection-start-column="34" selection-end-line="78" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/ImageButton.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2550">
-          <caret line="177" selection-start-line="177" selection-end-line="177" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/selectors/Selector.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="30" column="20" selection-start-line="30" selection-start-column="10" selection-end-line="30" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/selectors/WrappedComboBoxSelectorPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2565">
-          <caret line="185" selection-start-line="185" selection-end-line="185" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/MacCustomization.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="731">
-          <caret line="45" selection-start-line="45" selection-end-line="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk-10.0.2.jdk/Contents/Home/lib/src.zip!/java.desktop/java/awt/desktop/SystemEventListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="38" column="60" selection-start-line="38" selection-start-column="60" selection-end-line="38" selection-end-column="60" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk-10.0.2.jdk/Contents/Home/lib/src.zip!/java.desktop/java/awt/Desktop.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4352">
-          <caret line="304" column="39" selection-start-line="304" selection-start-column="39" selection-end-line="304" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/ObtuseUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51527">
-          <caret line="3059" column="22" selection-start-line="3059" selection-start-column="22" selection-end-line="3059" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/copier/BasicBurkeDataSource.java" />
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/ObtuseConstants.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" selection-start-line="9" selection-end-line="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/selectors/WrappedLabelPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="37" column="23" selection-start-line="37" selection-start-column="23" selection-end-line="37" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk-10.0.2.jdk/Contents/Home/lib/src.zip!/java.desktop/javax/swing/JPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
-          <caret line="65" column="1" selection-start-line="65" selection-start-column="1" selection-end-line="65" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/AboutBox.form">
-      <provider selected="true" editor-type-id="ui-designer" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/copier/CopierDataSource.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="27" column="19" selection-start-line="27" selection-start-column="19" selection-end-line="27" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/OSLevelCustomizations.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="901">
-          <caret line="60" column="24" selection-start-line="60" selection-start-column="24" selection-end-line="60" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/copier/CopierWidget.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6460">
-          <caret line="386" selection-start-line="386" selection-end-line="386" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/scrollable/IrregularScrollableImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2907">
-          <caret line="182" column="20" selection-start-line="182" selection-start-column="20" selection-end-line="182" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/scrollable/ScrollableEntitiesManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1530">
-          <caret line="102" column="36" selection-start-line="102" selection-start-column="36" selection-end-line="102" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/ObtuseImageFile.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="129">
-          <caret line="436" column="12" selection-start-line="436" selection-start-column="12" selection-end-line="436" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/ObtuseImageUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="794">
-          <caret line="266" selection-start-line="266" selection-end-line="266" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/ImageButtonOwner.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="27" column="9" selection-start-line="27" selection-start-column="9" selection-end-line="27" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/selectors/ComboBoxSelectorPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="794">
-          <caret line="81" column="42" selection-start-line="81" selection-start-column="42" selection-end-line="81" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/selectors/WrappedButtonSelectorPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="794">
-          <caret line="79" selection-start-line="79" selection-end-line="79" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingTokenizer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="794">
-          <caret line="1754" column="18" selection-start-line="1754" selection-start-column="18" selection-end-line="1754" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/scrollable/ScrollableEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3888">
-          <caret line="223" column="11" selection-start-line="223" selection-start-column="11" selection-end-line="223" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/AboutBox.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2808">
-          <caret line="167" column="16" selection-start-line="167" selection-start-column="16" selection-end-line="167" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/alpha/JListManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="27" column="50" selection-start-line="27" selection-start-column="50" selection-end-line="27" selection-end-column="50" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/DateUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="709" column="53" lean-forward="true" selection-start-line="709" selection-start-column="53" selection-end-line="709" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/tableutils/CheckBoxRowWrapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="29" column="32" lean-forward="true" selection-start-line="29" selection-start-column="32" selection-end-line="29" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk-10.0.2.jdk/Contents/Home/lib/src.zip!/java.base/java/security/MessageDigest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="290">
-          <caret line="104" column="22" selection-start-line="104" selection-start-column="22" selection-end-line="104" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/MessageDigestInputStream.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="11" column="52" lean-forward="true" selection-start-line="11" selection-start-column="52" selection-end-line="11" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/MessageDigestRecord.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/ContextualToString.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="46" column="8" selection-start-line="46" selection-start-column="8" selection-end-line="46" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/TreeSorter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="460">
-          <caret line="530" column="35" selection-start-line="530" selection-start-column="35" selection-end-line="530" selection-end-column="35" />
+        <state relative-caret-position="248">
+          <caret line="19" column="19" selection-start-line="19" selection-start-column="19" selection-end-line="19" selection-end-column="19" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPacker.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="43" column="9" selection-start-line="43" selection-start-column="9" selection-end-line="43" selection-end-column="9" />
+        <state relative-caret-position="252">
+          <caret line="37" column="9" selection-start-line="37" selection-start-column="9" selection-end-line="37" selection-end-column="9" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingPacker.java">
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingPackingException.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-624">
-          <caret line="488" column="55" selection-start-line="488" selection-start-column="55" selection-end-line="488" selection-end-column="55" />
+        <state relative-caret-position="252">
+          <caret line="14" column="118" selection-start-line="14" selection-start-column="118" selection-end-line="14" selection-end-column="118" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk-10.0.2.jdk/Contents/Home/lib/src.zip!/java.base/java/lang/Iterable.java">
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingInstanceIdErrorException.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="47" column="16" selection-start-line="47" selection-start-column="16" selection-end-line="47" selection-end-column="16" />
+        <state relative-caret-position="180">
+          <caret line="10" column="76" selection-start-line="10" selection-start-column="76" selection-end-line="10" selection-end-column="76" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/GenericCsvParser.java">
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/EntityNames.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="334">
-          <caret line="268" selection-start-line="268" selection-end-line="268" />
+        <state relative-caret-position="216">
+          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/ThreeDimensionalTreeMap.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="348" column="28" selection-start-line="348" selection-start-column="28" selection-end-line="348" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingUnPacker.java">
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackedEntityBundle.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="262">
-          <caret line="498" column="29" lean-forward="true" selection-start-line="498" selection-start-column="29" selection-end-line="498" selection-end-column="29" />
+          <caret line="264" column="43" selection-start-line="264" selection-start-column="43" selection-end-line="264" selection-end-column="43" />
+          <folding>
+            <element signature="e#710#737#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/TwoDimensionalTreeMap.java">
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingBooleanHolder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="387" column="28" selection-start-line="387" selection-start-column="28" selection-end-line="387" selection-end-column="28" />
+        <state relative-caret-position="106">
+          <caret line="16" column="69" lean-forward="true" selection-start-line="16" selection-start-column="69" selection-end-line="16" selection-end-column="69" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingScalar.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-634">
+          <caret line="116" column="21" selection-start-line="116" selection-start-column="21" selection-end-line="116" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/ImmutableDate.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-160">
+          <caret line="22" column="74" selection-start-line="22" selection-start-column="74" selection-end-line="22" selection-end-column="74" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/FormattingVector.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/FormattedImmutableDate.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/GenericTag.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="29" column="44" lean-forward="true" selection-start-line="29" selection-start-column="44" selection-end-line="29" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/FlexibleDateTransmogrifier.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="59" column="13" selection-start-line="59" selection-start-column="13" selection-end-line="59" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/names/AbsolutePath.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/names/RelativePath.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="30" column="23" selection-start-line="30" selection-start-column="23" selection-end-line="30" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingBackReferenceable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="15" column="54" lean-forward="true" selection-start-line="15" selection-start-column="54" selection-end-line="15" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingNotPackable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="14" column="25" selection-start-line="14" selection-start-column="25" selection-end-line="14" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingNotBackReferenceable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="15" column="45" lean-forward="true" selection-start-line="15" selection-start-column="45" selection-end-line="15" selection-end-column="45" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingUtil.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="274" column="58" selection-start-line="274" selection-start-column="58" selection-end-line="274" selection-end-column="58" />
+        <state relative-caret-position="479">
+          <caret line="180" column="42" selection-start-line="180" selection-start-column="42" selection-end-line="180" selection-end-column="42" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/CSVParser.java">
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingUnPacker.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="293">
-          <caret line="515" column="26" selection-start-line="515" selection-start-column="26" selection-end-line="515" selection-end-column="26" />
+        <state relative-caret-position="262">
+          <caret line="79" column="29" selection-start-line="79" selection-start-column="29" selection-end-line="79" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingInstanceId.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="26" column="19" selection-start-line="26" selection-start-column="19" selection-end-line="26" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingEntityReference.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingTokenizer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="580" column="21" selection-start-line="580" selection-start-column="21" selection-end-line="580" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Downloads/TopologicalSortOrig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="259">
+          <caret line="59" lean-forward="true" selection-start-line="59" selection-end-line="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingUnpackingException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="16" column="11" selection-start-line="16" selection-start-column="11" selection-end-line="16" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/graphs/TopologicalSortx.jjjj" />
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/graphs/GraphTheoryUtilities.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1219">
+          <caret line="542" selection-start-line="542" selection-end-line="542" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk-10.0.2.jdk/Contents/Home/lib/src.zip!/java.base/java/util/HashSet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2340">
+          <caret line="160" column="4" selection-start-line="160" selection-start-column="4" selection-end-line="160" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk-10.0.2.jdk/Contents/Home/lib/src.zip!/java.base/java/util/AbstractSet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1098">
+          <caret line="84" column="19" selection-start-line="84" selection-start-column="19" selection-end-line="84" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/graphs/DirectedArc.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="954">
+          <caret line="53" column="21" selection-start-line="53" selection-start-column="21" selection-end-line="53" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/graphs/UndirectedEdge.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="774">
+          <caret line="43" column="29" selection-start-line="43" selection-start-column="29" selection-end-line="43" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/graphs/Vertex.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1301">
+          <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingFileHolder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk-10.0.2.jdk/Contents/Home/lib/src.zip!/java.base/java/io/File.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="262">
+          <caret line="273" column="11" selection-start-line="273" selection-start-column="11" selection-end-line="273" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingAbstractPackableHolder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="45" selection-start-line="45" selection-end-line="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingStringHolder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="22" selection-start-line="22" selection-end-line="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingUnPacker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="284">
+          <caret line="1016" column="28" selection-start-line="1016" selection-start-column="28" selection-end-line="1016" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/ObtuseCalendarDate.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="568">
+          <caret line="143" selection-start-line="143" selection-end-line="143" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/StdGowingPackerContext.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4662">
+          <caret line="268" selection-start-line="268" selection-end-line="268" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingPacker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="256">
+          <caret line="318" selection-start-line="318" selection-end-line="318" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/TreeSorter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="710" column="44" selection-start-line="710" selection-start-column="44" selection-end-line="710" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingConstants.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="666">
+          <caret line="121" column="42" selection-start-line="121" selection-start-column="42" selection-end-line="121" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/graphs/Edge.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="25" column="4" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingString.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="433">
+          <caret line="61" column="23" selection-start-line="61" selection-start-column="23" selection-end-line="61" selection-end-column="23" />
+          <folding>
+            <element signature="e#2156#2192#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/backref/GowingFile.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="287">
+          <caret line="81" column="60" selection-start-line="81" selection-start-column="60" selection-end-line="81" selection-end-column="60" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2658#2695#1" expanded="true" />
+            <element signature="e#2727#2764#1" expanded="true" />
+            <element signature="e#2794#2831#1" expanded="true" />
+            <element signature="e#2863#2900#1" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/StdGowingUnPackerContext.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="287">
+          <caret line="223" column="36" selection-start-line="223" selection-start-column="36" selection-end-line="223" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingUnPackerContext.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="287">
+          <caret line="33" column="29" selection-start-line="33" selection-start-column="29" selection-end-line="33" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/Measure.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="281">
+          <caret line="502" column="63" selection-start-line="502" selection-start-column="63" selection-end-line="502" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/TwoDimensionalTreeMap.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="591">
+          <caret line="610" column="85" selection-start-line="610" selection-start-column="85" selection-end-line="610" selection-end-column="85" />
+          <folding>
+            <element signature="e#14405#14435#1" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/obtuse/util/ObtuseApproximateCalendarDate.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="593">
+          <caret line="690" column="7" selection-start-line="690" selection-start-column="7" selection-end-line="690" selection-end-column="7" />
         </state>
       </provider>
     </entry>

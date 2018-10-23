@@ -113,9 +113,7 @@ public class ObtuseImageUtils {
 
         if ( verbose ) Logger.logMsg( "loading primary image from " + imageLocation );
 
-        Measure m = new Measure( "OIU.loadImage" );
-
-        try {
+        try ( Measure ignored = new Measure( "OIU.loadImage" ) ) {
 
             @SuppressWarnings("UnnecessaryLocalVariable")
             BufferedImage image = ImageIO.read( imageLocation );
@@ -133,10 +131,6 @@ public class ObtuseImageUtils {
 //            }
 
             return image;
-
-        } finally {
-
-            m.done();
 
         }
 

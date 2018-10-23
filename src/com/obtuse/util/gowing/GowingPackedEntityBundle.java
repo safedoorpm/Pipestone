@@ -5,6 +5,7 @@ import com.obtuse.util.FormattingLinkedList;
 import com.obtuse.util.Logger;
 import com.obtuse.util.ObtuseUtil;
 import com.obtuse.util.gowing.p2a.GowingEntityReference;
+import com.obtuse.util.gowing.p2a.GowingInstanceIdErrorException;
 import com.obtuse.util.gowing.p2a.holders.GowingAbstractPackableHolder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -35,6 +36,8 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName, GowingPackable
     private final GowingPackedEntityBundle _superBundle;
 
     private final int _typeId;
+
+    private GowingInstanceId _ourInstanceId;
 
     public GowingPackedEntityBundle(
             final @NotNull EntityTypeName typeName,
@@ -157,13 +160,50 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName, GowingPackable
 
     }
 
+    public void setOurInstanceId( @NotNull final GowingInstanceId ourInstanceId ) {
+
+        if ( _superBundle != null ) {
+
+            _superBundle.setOurInstanceId( ourInstanceId );
+
+        }
+
+        if ( _ourInstanceId != null ) {
+
+            if ( _ourInstanceId.equals( ourInstanceId ) ) {
+
+                return;
+
+            }
+
+            throw new GowingInstanceIdErrorException( "GowingPackedEntityBundle.setOurInstanceId:  already set to " +
+                                                      _ourInstanceId + ", cannot change to " + ourInstanceId );
+
+        }
+
+        _ourInstanceId = ourInstanceId;
+
+    }
+
+    public Optional<GowingInstanceId> getOptOurInstanceId() {
+
+        return Optional.ofNullable( _ourInstanceId );
+
+    }
+
+    @NotNull
+    public GowingInstanceId getMandatoryOurInstanceId() {
+
+        return _ourInstanceId;
+
+    }
+
     public int getVersion() {
 
         return _version;
 
     }
 
-    @SuppressWarnings("WeakerAccess")
     public EntityTypeName getTypeName() {
 
         return _typeName;
@@ -328,7 +368,7 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName, GowingPackable
 
     }
 
-    public URI recoverURI( final EntityName tag ) {
+    public URI recoverURI( final EntityName tag ) throws URISyntaxException {
 
         String s = getNullableField( tag ).StringValue();
         if ( s == null ) {
@@ -337,21 +377,22 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName, GowingPackable
 
         } else {
 
-            try {
-
-                return new URI( s );
-
-            } catch ( URISyntaxException e ) {
-
-                throw new HowDidWeGetHereError( _typeName + ".recoverURI:  " + "syntax error parsing URI " + ObtuseUtil.enquoteToJavaString( s ), e );
-
-            }
+            return new URI( s );
+//            try {
+//
+//                return new URI( s );
+//
+//            } catch ( URISyntaxException e ) {
+//
+//                throw new HowDidWeGetHereError( _typeName + ".recoverURI:  " + "syntax error parsing URI " + ObtuseUtil.enquoteToJavaString( s ), e );
+//
+//            }
 
         }
 
     }
 
-    public URL recoverURL( final EntityName tag ) {
+    public URL recoverURL( final EntityName tag ) throws MalformedURLException {
 
         String s = getNullableField( tag ).StringValue();
         if ( s == null ) {
@@ -360,15 +401,16 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName, GowingPackable
 
         } else {
 
-            try {
-
-                return new URL( s );
-
-            } catch ( MalformedURLException e ) {
-
-                throw new HowDidWeGetHereError( _typeName + ".recoverURL:  " + "syntax error parsing URL " + ObtuseUtil.enquoteToJavaString( s ), e );
-
-            }
+            return new URL( s );
+//            try {
+//
+//                return new URL( s );
+//
+//            } catch ( MalformedURLException e ) {
+//
+//                throw new HowDidWeGetHereError( _typeName + ".recoverURL:  " + "syntax error parsing URL " + ObtuseUtil.enquoteToJavaString( s ), e );
+//
+//            }
 
         }
 

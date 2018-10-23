@@ -1,6 +1,7 @@
 package com.obtuse.util.gowing;
 
 import com.obtuse.util.gowing.p2a.GowingUnpackingException;
+import com.obtuse.util.gowing.p2a.holders.GowingStringHolder;
 import org.jetbrains.annotations.NotNull;
 
 /*
@@ -57,6 +58,82 @@ public interface GowingPackable {
 
     @NotNull
     GowingInstanceId getInstanceId();
+
+    /**
+     Ask a {@link GowingPackable} to pack itself.
+     <p>A typical {@code bundleThyself} method should look like this:</p>
+     <blockquote>
+     <pre>
+     &#64;NotNull
+     &#64;Override
+     public GowingPackedEntityBundle bundleThyself(
+            final boolean isPackingSuper,
+            final &#64;NotNull GowingPacker packer
+     ) {
+
+         // Create our bundle and ask our parent class to pack itself.
+         // This class is derived from GowingAbstractPackableEntity who's 'bundle me' method is called {@code bundleRoot}
+         // to ensure that any derivation of GowingAbstractPackableEntity is forced to implement its own
+         // bundleThyself method.
+         // If your class is derived from any other GowingPackable class then replace "bundleRoot" with "bundleThyself".
+
+         GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
+             ENTITY_TYPE_NAME,
+             VERSION,
+             super.bundleRoot( packer ),
+             packer.getPackingContext()
+         );
+
+         // Pack a mandatory string (see {@link GowingStringHolder} for more information).
+
+         bundle.addHolder(
+                 new GowingStringHolder(
+                 THING_NAME,
+                 _thingName,
+                 true           // indicate that the string is mandatory.
+                 )
+         );
+
+         // Pack an optional instance of a class that implements GowingPackable.
+
+         bundle.addHolder(
+                 new GowingPackableEntityHolder(
+                     G_FRED,
+                     _fred,
+                     packer,
+                     false      // indicate that _fred is optional.
+                 )
+         );
+
+         // Pack a mandatory collection.
+
+         bundle.addHolder(
+                 new GowingPackableEntityHolder(
+                         G_INBOUND_ITEMS,
+                         new GowingPackableCollection<>( _inboundItems ),
+                         packer,
+                         true
+                 )
+         );
+
+        return bundle;
+
+     }
+     </pre></blockquote>
+     @param isPackingSuper {@code true} if the call is being made by a derived class' {@code bundleThyself} method; {@code false} otherwise.
+     I, Danny, am not sure why this information might be useful. I do remember believing that it was very useful in
+     some context when I wrote the early versions of Gowing.
+     <p>Simple rule: if you are writing a {@code bundleThyself} method in user code, <b><u>ALWAYS</u></b>
+     set this parameter to {@code true} when you invoke your parent class' {@code bundleThyself} method.
+     Since the {@link GowingPacker} implementation(s) call a {@code GowingPackable} class's {@code bundleThyself}
+     method with this parameter set to {@code false}, this will allow your {@code bundleThyself} methods to know,
+     should they ever care, if they are being called by Gowing directly or
+     if they are being called by a descendent class' {@code bundleThyself} method.</p>
+     @param packer the {@link GowingPacker} running the packing operation.
+     @return the {@link GowingPackedEntityBundle} created by the {@code bundleThyself}.
+     Note that EVERY {@code bundleThyself} method in the class hierarchy needs to create and provide its own
+     {@code GowingPackedEntityBundle} instance.
+     */
 
     @NotNull
     GowingPackedEntityBundle bundleThyself( boolean isPackingSuper, @NotNull GowingPacker packer );

@@ -43,6 +43,10 @@ public interface GowingPacker extends Closeable {
 
     void emit( @Nullable String@NotNull[] v );
 
+    void emit( @NotNull File v );
+
+    void emit( @Nullable File@NotNull[] v );
+
     void emit( char c );
 
     void emit( long l );

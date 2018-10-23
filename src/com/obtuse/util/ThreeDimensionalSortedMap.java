@@ -4,15 +4,19 @@
 
 package com.obtuse.util;
 
+import com.obtuse.exceptions.HowDidWeGetHereError;
+import com.obtuse.util.gowing.EntityName;
+import com.obtuse.util.gowing.GowingEntityFactory;
 import com.obtuse.util.gowing.GowingPackable;
+import com.obtuse.util.gowing.p2a.GowingUnPackedEntityGroup;
+import com.obtuse.util.gowing.p2a.GowingUnpackingException;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Function;
 
 /**
@@ -226,5 +230,126 @@ public interface ThreeDimensionalSortedMap<T1,T2,T3,V> extends Iterable<V>, Seri
      */
 
     boolean isEmpty();
+
+    static void main( String[] args ) {
+
+        BasicProgramConfigInfo.init( "Kenosee", "ObtuseUtil", "testing", null );
+
+        ThreeDimensionalSortedMap<Integer,String,Boolean,String> originalMap = new ThreeDimensionalTreeMap<>();
+        originalMap.put( 1, "hello", true, "1-hello-t" );
+        originalMap.put( 2, "hello", false, "2-hello-f" );
+        originalMap.put( 3, "hello", true, "3-hello-t" );
+        originalMap.put( 1, "world", false, "1-world-f" );
+        originalMap.put( 2, "world", false, "2-world-f" );
+
+        displayMap( "originalMap", originalMap );
+
+        EntityName en = new EntityName( "eName" );
+        File testFile = new File( "2dsortedMap-test.packed" );
+        ObtuseUtil.quietGowingPack( en, originalMap, testFile, false );
+        try {
+            GowingUnPackedEntityGroup unpackedEntities = ObtuseUtil.gowingUnPack(
+                    testFile,
+                    new GowingEntityFactory[0]
+            );
+
+            for ( EntityName entityName : unpackedEntities.getNamedClasses().keySet() ) {
+
+                for ( GowingPackable packable : unpackedEntities.getNamedClasses().getValues( entityName ) ) {
+
+                    Logger.logMsg( "" + entityName + ":  " + packable.getClass() );
+
+                    ObtuseUtil.doNothing();
+
+                }
+
+                ObtuseUtil.doNothing();
+
+            }
+
+            if ( !unpackedEntities.getNamedClasses().containsKey( en ) ) {
+
+                Logger.logMsg(
+                        "2dsortedMap-test(unpack):  " +
+                        "did not find a " + en + " in " + unpackedEntities
+                );
+
+            } else {
+
+                @NotNull List<GowingPackable> interestingStuff =
+                        unpackedEntities.getNamedClasses()
+                                        .getValues( en );
+
+                if ( interestingStuff.size() == 1 ) {
+
+                    GowingPackable first = interestingStuff.get( 0 );
+                    if ( first instanceof ThreeDimensionalSortedMap ) {
+
+                        @SuppressWarnings("unchecked")
+                        ThreeDimensionalTreeMap<Integer,String,Boolean,String> recoveredMap =
+                                ( (ThreeDimensionalTreeMap<Integer,String,Boolean,String>)interestingStuff.get( 0 ) );
+
+                        displayMap( "recoveredMap", recoveredMap );
+
+                    } else {
+
+                        throw new HowDidWeGetHereError(
+                                "LancotMediaLibraryRoot.readImportBundle:  " +
+                                "read yielded a " +
+                                first.getClass()
+                                     .getCanonicalName() +
+                                " when we expected a " +
+                                ThreeDimensionalSortedMap.class.getCanonicalName()
+                        );
+
+                    }
+
+                } else {
+
+                    throw new HowDidWeGetHereError(
+                            "LancotMediaLibraryRoot.readImportBundle:  read yielded " +
+                            ObtuseUtil.pluralize( interestingStuff.size(), "element", "elements" ) +
+                            " when we expected one element"
+                    );
+
+                }
+
+            }
+
+//        } catch ( IOException e ) {
+//
+//            Logger.logErr( "java.io.IOException caught", e );
+
+        } catch ( GowingUnpackingException e ) {
+
+            Logger.logErr( "com.obtuse.util.gowing.p2a.GowingUnpackingException caught", e );
+
+        }
+
+    }
+
+    static void displayMap(
+            final String title,
+            final ThreeDimensionalSortedMap<Integer, String, Boolean, String> map
+    ) {
+
+        Logger.logMsg( title );
+        for ( int ix : map.outerKeys() ) {
+
+            TwoDimensionalSortedMap<String, Boolean, String> innerMap = map.getNotNullInnerMap( ix );
+
+            for ( String sx : innerMap.outerKeys() ) {
+
+                @NotNull SortedMap<Boolean, String> twoDmap = innerMap.getNotNullInnerMap( sx );
+                for ( Boolean bx : twoDmap.keySet() ) {
+                    Logger.logMsg( "    map(" + ix + "," + sx + "," + bx + ") = " + map.get( ix, sx, bx ) );
+
+                }
+
+            }
+
+        }
+
+    }
 
 }

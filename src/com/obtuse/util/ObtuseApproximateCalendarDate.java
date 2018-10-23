@@ -6,6 +6,7 @@ package com.obtuse.util;
 
 import com.obtuse.exceptions.HowDidWeGetHereError;
 import com.obtuse.util.gowing.*;
+import com.obtuse.util.gowing.p2a.GowingBackReferenceable;
 import com.obtuse.util.gowing.p2a.GowingEntityReference;
 import com.obtuse.util.gowing.p2a.GowingUnpackingException;
 import com.obtuse.util.gowing.p2a.holders.GowingStringHolder;
@@ -30,9 +31,11 @@ import static com.obtuse.util.ObtuseCalendarDate.parseCalendarDate;
  Instances of this class are sortable by their approximate calendar date.
  */
 
-public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity implements Comparable<ObtuseApproximateCalendarDate> {
+public class ObtuseApproximateCalendarDate
+        extends GowingAbstractPackableEntity
+        implements GowingBackReferenceable, Comparable<ObtuseApproximateCalendarDate> {
 
-    private static final boolean s_requireNewStyleDateRanges = true;
+//    private static final boolean s_requireNewStyleDateRanges = true;
 
     private final boolean _isUnknownApproximateDate;
 
@@ -365,7 +368,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
         } catch ( com.obtuse.util.exceptions.ParsingException e ) {
 
-            throw new GowingUnpackingException( e + " recovering date string", e );
+            throw new GowingUnpackingException( e + " recovering date string", new ParsingLocation( e.getErrorLineNumber(), e.getErrorOffset() ), e );
 
         }
 
@@ -379,7 +382,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
         } catch ( IllegalArgumentException e ) {
 
-            throw new GowingUnpackingException( e + " recovering precision", e );
+            throw new GowingUnpackingException( e + " recovering precision", ParsingLocation.UNKNOWN, e );
 
         }
 
@@ -648,61 +651,44 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
                 }
 
-                if ( s_requireNewStyleDateRanges ) {
-
-                    return getEarliestPossibleDate().getDateString() + ":" + getLatestPossibleDate().getDateString();
-
-                } else {
-
-                    return "(" + getEarliestPossibleDate().getDateString() + "," + getLatestPossibleDate().getDateString() + ")";
-
-                }
+                return getEarliestPossibleDate().getDateString() + ":" + getLatestPossibleDate().getDateString();
 
             default:
-                return getNominalCalendarDate().getDateString();
+
+                throw new IllegalArgumentException( "ObtuseApproximateCalendarDate.format:  unsupported date format " + _precision + " (should be impossible since we support all valid values)" );
 
         }
 
     }
 
-    public String formatDDMMMYYYY() {
-
-        switch ( _precision ) {
-
-            case DATE:
-                return getNominalCalendarDate().getDateString();
-
-            case MONTH:
-                return getNominalCalendarDate().getDateString().substring( 0, 7 );
-
-            case YEAR:
-                return getNominalCalendarDate().getDateString().substring( 0, 4 );
-
-            case DECADE:
-                return getNominalCalendarDate().getDateString().substring( 0, 3 ) + "0s";
-
-            case RANGE:
-                if ( isUnknownApproximateDate() ) {
-
-                    return FORMATTED_UNKNOWN_APPROXIMATE_DATE;
-
-                }
-
-                if ( s_requireNewStyleDateRanges ) {
-
-                    return getEarliestPossibleDate().getDateString() + ":" + getLatestPossibleDate().getDateString();
-
-                } else {
-
-                    return "(" + getEarliestPossibleDate().getDateString() + "," + getLatestPossibleDate().getDateString() + ")";
-
-                }
-
-            default:
-                return getNominalCalendarDate().getDateString();
-
-        }
-    }
+//    public String formatDDMMMYYYY() {
+//
+//        switch ( _precision ) {
+//
+//            case DATE:
+//                return getNominalCalendarDate().getDateString();
+//
+//            case MONTH:
+//                return getNominalCalendarDate().getDateString().substring( 0, 7 );
+//
+//            case YEAR:
+//                return getNominalCalendarDate().getDateString().substring( 0, 4 );
+//
+//            case DECADE:
+//                return getNominalCalendarDate().getDateString().substring( 0, 3 ) + "0s";
+//
+//            case RANGE:
+//                if ( isUnknownApproximateDate() ) {
+//
+//                    return FORMATTED_UNKNOWN_APPROXIMATE_DATE;
+//
+//                }
+//
+//                return getEarliestPossibleDate().getDateString() + ":" + getLatestPossibleDate().getDateString();
+//
+//        }
+//
+//    }
 
     /**
      Compare two instances primarily based on their earliest possible date, secondarily on their latest possible date, and tertiarily on the specified precisions.
@@ -889,15 +875,7 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
 
         // If it starts with an opening parentheses, ends with a closing parentheses, and has a comma somewhere then it could only be a date range "(yyyy-mm-dd,yyyy-mm-dd)").
 
-        if ( s_requireNewStyleDateRanges ) {
-
-            if ( trimmedCleanedDateString.indexOf( ':' ) >= 0 || trimmedCleanedDateString.indexOf( ';' ) >= 0 ) {
-
-                return parseDateRange( trimmedCleanedDateString );
-
-            }
-
-        } else if ( trimmedCleanedDateString.startsWith( "(" ) || trimmedCleanedDateString.indexOf( ',' ) >= 0 || trimmedCleanedDateString.endsWith( ")" ) ) {
+        if ( trimmedCleanedDateString.indexOf( ':' ) >= 0 || trimmedCleanedDateString.indexOf( ';' ) >= 0 ) {
 
             return parseDateRange( trimmedCleanedDateString );
 
@@ -1072,132 +1050,69 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
         boolean tooManySeparators = false;
         boolean noSeparators = false;
 
-        String mustBe;
+        String mustBe = "(must be \"YYYY-MM-DD:YYYY-MM-DD\" or \"YYYY-MM-DD;YYYY-MM-DD\")";
 
-        if ( s_requireNewStyleDateRanges ) {
+        if ( semiColonOffset >= 0 && colonOffset >= 0 ) {
 
-            mustBe = "(must be \"YYYY-MM-DD:YYYY-MM-DD\" or \"YYYY-MM-DD;YYYY-MM-DD\")";
+            throw new DateParsingException(
+                    Reason.RANGE_INVALID,
+                    "more than one separator in date range " + enquotedDateString +
+                    " (must be exactly one semi-colon or exactly one colon)"
+            );
 
-            if ( semiColonOffset >= 0 && colonOffset >= 0 ) {
+        }
 
-                throw new DateParsingException(
-                        Reason.RANGE_INVALID,
-                        "more than one separator in date range " + enquotedDateString +
-                        " (must be exactly one semi-colon or exactly one colon)"
-                );
+        if ( semiColonOffset >= 0 ) {
 
-            }
+            separatorOffset = semiColonOffset;
 
-            if ( semiColonOffset >= 0 ) {
+        } else if ( colonOffset >= 0 ) {
 
-                separatorOffset = semiColonOffset;
-
-            } else if ( colonOffset >= 0 ) {
-
-                separatorOffset = colonOffset;
-
-            } else {
-
-                noSeparators = true;
-
-            }
-
-            if ( separatorOffset >= 0 ) {
-
-                String tailPortion = trimmedDateString.substring( separatorOffset + 1 );
-                if ( tailPortion.indexOf( ';' ) >= 0 || tailPortion.indexOf( ':' ) >= 0 ) {
-
-                    tooManySeparators = true;
-
-                }
-
-            }
-
-            if ( tooManySeparators ) {
-
-                throw new DateParsingException(
-                        Reason.RANGE_INVALID,
-                        "too many colons or semicolons in date range " +
-                        enquotedDateString +
-                        " " +
-                        mustBe
-                );
-
-            }
-
-            if ( noSeparators ) {
-
-                throw new DateParsingException(
-                        Reason.RANGE_INVALID,
-                        "no colon or semicolon in date range " +
-                        enquotedDateString +
-                        " " +
-                        mustBe
-                );
-
-            }
-
-            firstDateString = trimmedDateString.substring( 0, separatorOffset ).trim();
-            secondDateString = trimmedDateString.substring( separatorOffset + 1 ).trim();
+            separatorOffset = colonOffset;
 
         } else {
 
-            mustBe = "(must be \"(YYYY-MM-DD,YYYY-MM-DD)\")";
-
-            if ( !trimmedDateString.startsWith( "(" ) || trimmedDateString.endsWith( ")" ) ) {
-
-                throw new DateParsingException(
-                        Reason.RANGE_INVALID,
-                        "more than one separator in date range " + enquotedDateString +
-                        " (must be exactly one semi-colon or exactly one colon)"
-                );
-
-            }
-
-            if ( commaOffset >= 0 ) {
-
-                separatorOffset = commaOffset;
-                String tailPortion = trimmedDateString.substring( separatorOffset + 1 );
-                if ( tailPortion.indexOf( ',' ) >= 0 ) {
-
-                    tooManySeparators = true;
-
-                }
-
-            } else {
-
-                noSeparators = true;
-
-            }
-
-            if ( tooManySeparators ) {
-
-                throw new DateParsingException(
-                        Reason.RANGE_INVALID,
-                        "too many commas in date range " +
-                        enquotedDateString +
-                        " " +
-                        mustBe
-                );
-
-            }
-
-            if ( noSeparators ) {
-
-                throw new DateParsingException(
-                        Reason.RANGE_INVALID,
-                        "comma in date range " +
-                        enquotedDateString +
-                        " " +
-                        mustBe
-                );
-
-            }
-
-            firstDateString = trimmedDateString.substring( 1, separatorOffset ).trim();
-            secondDateString = trimmedDateString.substring( separatorOffset + 1, trimmedDateString.length() - 1 ).trim();
+            noSeparators = true;
 
         }
+
+        if ( separatorOffset >= 0 ) {
+
+            String tailPortion = trimmedDateString.substring( separatorOffset + 1 );
+            if ( tailPortion.indexOf( ';' ) >= 0 || tailPortion.indexOf( ':' ) >= 0 ) {
+
+                tooManySeparators = true;
+
+            }
+
+        }
+
+        if ( tooManySeparators ) {
+
+            throw new DateParsingException(
+                    Reason.RANGE_INVALID,
+                    "too many colons or semicolons in date range " +
+                    enquotedDateString +
+                    " " +
+                    mustBe
+            );
+
+        }
+
+        if ( noSeparators ) {
+
+            throw new DateParsingException(
+                    Reason.RANGE_INVALID,
+                    "no colon or semicolon in date range " +
+                    enquotedDateString +
+                    " " +
+                    mustBe
+            );
+
+        }
+
+        firstDateString = trimmedDateString.substring( 0, separatorOffset ).trim();
+        secondDateString = trimmedDateString.substring( separatorOffset + 1 ).trim();
 
         Matcher firstDateMatcher = OACD_DATE_PATTERN.matcher( firstDateString );
         Matcher secondDateMatcher = OACD_DATE_PATTERN.matcher( secondDateString );
@@ -1341,26 +1256,16 @@ public class ObtuseApproximateCalendarDate extends GowingAbstractPackableEntity 
         checkParsing( "2000", new ObtuseApproximateCalendarDate( parseCalendarDate( "2000-01-01" ), DatePrecision.YEAR ) );
         checkParsing( "2000-10", new ObtuseApproximateCalendarDate( parseCalendarDate( "2000-10-01" ), DatePrecision.MONTH ) );
         checkParsing( "2000-10-20", new ObtuseApproximateCalendarDate( parseCalendarDate( "2000-10-20" ), DatePrecision.DATE ) );
-        if ( s_requireNewStyleDateRanges ) {
 
-            checkParsing(
-                    "2000-10-20;2015-10-20",
-                    new ObtuseApproximateCalendarDate( parseCalendarDate( "2000-10-20" ), parseCalendarDate( "2015-10-20" ) )
-            );
+        checkParsing(
+                "2000-10-20;2015-10-20",
+                new ObtuseApproximateCalendarDate( parseCalendarDate( "2000-10-20" ), parseCalendarDate( "2015-10-20" ) )
+        );
 
-            checkParsing(
-                    "2000-10-20:2015-10-20",
-                    new ObtuseApproximateCalendarDate( parseCalendarDate( "2000-10-20" ), parseCalendarDate( "2015-10-20" ) )
-            );
-
-        } else {
-
-            checkParsing(
-                    "(2000-10-20,2015-10-20)",
-                    new ObtuseApproximateCalendarDate( parseCalendarDate( "2000-10-20" ), parseCalendarDate( "2015-10-20" ) )
-            );
-
-        }
+        checkParsing(
+                "2000-10-20:2015-10-20",
+                new ObtuseApproximateCalendarDate( parseCalendarDate( "2000-10-20" ), parseCalendarDate( "2015-10-20" ) )
+        );
 
         Logger.logMsg( "new OACD(\"2016-08-03\",null) yields " +
                        new ObtuseApproximateCalendarDate( parseCalendarDate( "2016-08-03" ), (ObtuseCalendarDate)null ) );

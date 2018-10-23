@@ -2244,7 +2244,7 @@ public class ObtuseUtil {
 
     public static String enquoteJavaObject( @Nullable final Object obj ) {
 
-        return enquoteToJavaString( String.valueOf( obj ) );
+        return obj == null ? "null" : enquoteToJavaString( String.valueOf( obj ) );
 
     }
 
@@ -2292,7 +2292,7 @@ public class ObtuseUtil {
 
     public static String enquoteToJavaString( @Nullable final String string ) {
 
-        return enquoteToJavaStringBuilder( string ).toString();
+        return string == null ? "null" : enquoteToJavaStringBuilder( string ).toString();
 
     }
 
@@ -2577,7 +2577,7 @@ public class ObtuseUtil {
             fis = new BufferedInputStream( is );
 
             //noinspection MagicNumber
-            byte[] buffer = new byte[1024];
+            byte[] buffer = new byte[64*1024];
             while ( true ) {
 
                 int rLen = fis.read( buffer );
@@ -2590,8 +2590,6 @@ public class ObtuseUtil {
                 md5Algorithm.update( buffer, 0, rLen );
 
             }
-
-
 
         } finally {
 
@@ -3097,12 +3095,12 @@ public class ObtuseUtil {
     }
     */
 
-    public static Optional<GowingUnPackedEntityGroup> gowingUnPack(
+    public static GowingUnPackedEntityGroup gowingUnPack(
             final @NotNull File inputFile,
             final @NotNull GowingEntityFactory[] gowingEntityFactories
-    ) throws IOException, GowingUnpackingException {
+    ) throws GowingUnpackingException {
 
-        Optional<GowingUnPackedEntityGroup> maybeResult;
+        GowingUnPackedEntityGroup unPackResult;
         try (
                 GowingUnPacker unPacker = new StdGowingUnPacker(
                         new GowingTypeIndex( "test unpacker" ),
@@ -3112,25 +3110,23 @@ public class ObtuseUtil {
 
             unPacker.getUnPackerContext().registerFactories( gowingEntityFactories );
 
-            maybeResult = unPacker.unPack();
+            unPackResult = unPacker.unPack();
 
-            if ( maybeResult.isPresent() ) {
-
-                GowingUnPackedEntityGroup result = maybeResult.get();
-
-                for ( GowingPackable entity : result.getAllEntities() ) {
-
-                    Logger.logMsg( "got " + entity.getClass().getCanonicalName() + " " + entity );
-
-                }
-
-            }
+//                for ( GowingPackable entity : unPackResult.getAllEntities() ) {
+//
+//                    Logger.logMsg( "got " + entity.getClass().getCanonicalName() + " " + entity );
+//
+//                }
 
             ObtuseUtil.doNothing();
 
+        } catch ( IOException e ) {
+
+            throw new GowingUnpackingException( "java.io.IOException caught", ParsingLocation.VERY_EARLY, e );
+
         }
 
-        return maybeResult;
+        return unPackResult;
 
     }
 

@@ -9,6 +9,7 @@ import com.obtuse.util.BasicProgramConfigInfo;
 import com.obtuse.util.Logger;
 import com.obtuse.util.ObtuseUtil;
 import com.obtuse.util.gowing.*;
+import com.obtuse.util.gowing.p2a.GowingBackReferenceable;
 import com.obtuse.util.gowing.p2a.GowingEntityReference;
 import com.obtuse.util.gowing.p2a.holders.GowingPackableCollection;
 import com.obtuse.util.gowing.p2a.holders.GowingPackableEntityHolder;
@@ -25,7 +26,9 @@ import java.util.function.Supplier;
  */
 
 @SuppressWarnings("unused")
-public class RelativePath extends GowingAbstractPackableEntity implements Iterable<SegmentName>, Comparable<RelativePath> {
+public class RelativePath
+        extends GowingAbstractPackableEntity
+        implements GowingBackReferenceable, Iterable<SegmentName>, Comparable<RelativePath> {
 
     private static final EntityTypeName ENTITY_TYPE_NAME = new EntityTypeName( RelativePath.class );
 

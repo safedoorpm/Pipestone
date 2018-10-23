@@ -7,6 +7,7 @@ import com.obtuse.util.gowing.*;
 import com.obtuse.util.gowing.p2a.GowingEntityReference;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -149,7 +150,14 @@ public class GowingPackableMapping<K, V> implements GowingPackable {
 
     public void addMapping( final K key, final V value ) {
 
-        GowingPackableKeyValuePair<K, V> kvp = new GowingPackableKeyValuePair<>( key, value );
+        @SuppressWarnings("unchecked")
+        V value2 = ( value instanceof Collection && !( value instanceof GowingPackableCollection ) )
+                ?
+                (V)( new GowingPackableCollection( (Collection)value ) )
+                :
+                value;
+
+        GowingPackableKeyValuePair<K, V> kvp = new GowingPackableKeyValuePair<>( key, value2 );
 
         addMapping( kvp );
 

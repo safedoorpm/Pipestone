@@ -29,7 +29,7 @@ import org.jetbrains.annotations.NotNull;
  consistent with each other.</p>
  */
 
-public class GowingString implements GowingPackable, Comparable<GowingString> {
+public class GowingString implements GowingBackReferenceable, Comparable<GowingString> {
 
     private static final EntityTypeName ENTITY_TYPE_NAME = new EntityTypeName( GowingString.class );
 
@@ -51,6 +51,7 @@ public class GowingString implements GowingPackable, Comparable<GowingString> {
             return VERSION;
         }
 
+        @SuppressWarnings("RedundantThrows")
         @NotNull
         @Override
         public GowingPackable createEntity(

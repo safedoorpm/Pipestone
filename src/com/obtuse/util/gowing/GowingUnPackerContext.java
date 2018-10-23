@@ -30,7 +30,8 @@ public interface GowingUnPackerContext {
 
     boolean isEntityKnown( @NotNull GowingEntityReference er );
 
-    GowingPackable recallPackableEntity( @NotNull GowingEntityReference er );
+    @NotNull
+    Optional<GowingPackable> recallPackableEntity( @NotNull GowingEntityReference er );
 
     Collection<GowingEntityReference> getSeenEntityReferences();
 
@@ -55,6 +56,8 @@ public interface GowingUnPackerContext {
     SortedSet<GowingEntityReference> getUnfinishedEntityReferences();
 
     void markEntitiesUnfinished( Collection<GowingEntityReference> unFinishedEntityReferences );
+
+    void markEntitiesFinished( Collection<GowingEntityReference> finishedEntityReferences );
 
     boolean isEntityFinished( @Nullable GowingEntityReference er );
 

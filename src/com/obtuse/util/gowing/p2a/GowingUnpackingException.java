@@ -1,5 +1,7 @@
 package com.obtuse.util.gowing.p2a;
 
+import com.obtuse.util.ParsingLocation;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /*
@@ -7,40 +9,69 @@ import org.jetbrains.annotations.Nullable;
  */
 
 /**
- Something when wrong unpacking a packed 'lump'.
+ Something went wrong unpacking a packed 'lump'.
  */
 
 public class GowingUnpackingException extends Exception {
 
     private StdGowingTokenizer.GowingToken2 _causeToken;
 
-    public GowingUnpackingException( final String msg ) {
+    @NotNull
+    private ParsingLocation _location;
 
-        this( msg, null, null );
+    public GowingUnpackingException( final String msg, @NotNull ParsingLocation location ) {
+        this( msg, null, location, null );
 
     }
 
     public GowingUnpackingException( final String msg, @Nullable final StdGowingTokenizer.GowingToken2 causeToken ) {
 
-        this( msg, causeToken, null );
-
-    }
-
-    public GowingUnpackingException( final String msg, @Nullable final Throwable cause ) {
-
-        this( msg, null, cause );
+        this( msg, causeToken, ParsingLocation.UNKNOWN, null );
 
     }
 
     public GowingUnpackingException(
             final String msg,
+            @NotNull final ParsingLocation location,
+            @Nullable final Throwable cause
+    ) {
+
+        this( msg, null, location, cause );
+
+    }
+//
+//    public GowingUnpackingException(
+//            final String msg,
+//            @NotNull final ParsingLocation location,
+//
+//    )
+
+    public GowingUnpackingException(
+            final String msg,
             @Nullable final StdGowingTokenizer.GowingToken2 causeToken,
+            @NotNull final ParsingLocation parsingLocation,
             @Nullable final Throwable cause
     ) {
 
         super( msg, cause );
 
         _causeToken = causeToken;
+        if ( causeToken == null ) {
+
+            _location = parsingLocation;
+
+        } else {
+
+            _location = new ParsingLocation( causeToken.getLnum(), causeToken.getOffset() );
+
+        }
+
+    }
+
+    @NotNull
+    public ParsingLocation getLocation() {
+
+        return _location;
 
     }
 

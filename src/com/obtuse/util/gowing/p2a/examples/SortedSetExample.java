@@ -559,19 +559,19 @@ public class SortedSetExample extends GowingAbstractPackableEntity implements Go
 
             unPacker.getUnPackerContext().registerFactory( SortedSetExample.FACTORY );
 
-            Optional<GowingUnPackedEntityGroup> maybeResult = unPacker.unPack();
+            GowingUnPackedEntityGroup unPackResult = unPacker.unPack();
 
-            if ( maybeResult.isPresent() ) {
+//            if ( unPackResult.isPresent() ) {
 
-                GowingUnPackedEntityGroup result = maybeResult.get();
+//                GowingUnPackedEntityGroup result = unPackResult.get();
 
-                for ( GowingPackable entity : result.getAllEntities() ) {
+                for ( GowingPackable entity : unPackResult.getAllEntities() ) {
 
                     Logger.logMsg( "got " + entity.getClass().getCanonicalName() + " " + entity );
 
                 }
 
-            }
+//            }
 
             ObtuseUtil.doNothing();
 

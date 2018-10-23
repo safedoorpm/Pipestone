@@ -4,8 +4,10 @@ package com.obtuse.util.gowing.p2a;
  * Copyright © 2015 Obtuse Systems Corporation
  */
 
+import com.obtuse.util.ParsingLocation;
 import com.obtuse.util.gowing.GowingMetaDataHandler;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.Closeable;
 import java.io.IOException;
@@ -25,6 +27,9 @@ public interface GowingTokenizer extends Closeable {
     @NotNull
     StdGowingTokenizer.GowingToken2 getNextToken( boolean identifierAllowed )
 	    throws IOException, GowingUnpackingException;
+
+    @Nullable
+    ParsingLocation curLoc();
 
     /**
      Register a metadata handler.

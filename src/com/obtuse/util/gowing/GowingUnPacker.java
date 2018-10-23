@@ -1,8 +1,10 @@
 package com.obtuse.util.gowing;
 
+import com.obtuse.util.ParsingLocation;
 import com.obtuse.util.gowing.p2a.GowingEntityReference;
 import com.obtuse.util.gowing.p2a.GowingUnPackedEntityGroup;
 import com.obtuse.util.gowing.p2a.GowingUnpackingException;
+import com.obtuse.util.gowing.p2a.GowingUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -71,8 +73,7 @@ public interface GowingUnPacker extends Closeable {
 
     GowingEntityReference getCurrentEntityReference();
 
-    @NotNull
-    Optional<GowingUnPackedEntityGroup> unPack() throws GowingUnpackingException, IOException;
+    GowingUnPackedEntityGroup unPack() throws GowingUnpackingException, IOException;
 
     void registerMetaDataHandler( @NotNull GowingMetaDataHandler handler );
 
@@ -93,6 +94,10 @@ public interface GowingUnPacker extends Closeable {
         }
 
     }
+
+    ParsingLocation curLoc();
+
+    boolean isFinishingBackReference();
 
     GowingUnPackerContext getUnPackerContext();
 

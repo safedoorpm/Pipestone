@@ -1,16 +1,16 @@
 package com.obtuse.util.gowing;
 
 import com.obtuse.exceptions.HowDidWeGetHereError;
+import com.obtuse.util.Logger;
+import com.obtuse.util.ObtuseUtil;
 import com.obtuse.util.gowing.p2a.GowingEntityReference;
 import com.obtuse.util.gowing.p2a.GowingUtil;
 import com.obtuse.util.gowing.p2a.holders.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Collection;
-import java.util.Optional;
-import java.util.SortedMap;
-import java.util.TreeMap;
+import java.io.File;
+import java.util.*;
 
 /*
  * Copyright © 2015 Obtuse Systems Corporation
@@ -84,7 +84,7 @@ public class GowingPackableKeyValuePair<K, V> extends GowingAbstractPackableEnti
         }
         if ( !isObjectsClassSupported( value ) ) {
 
-            throw new IllegalArgumentException( "GowingPackableKeyValuePair:  value objects of class " + key.getClass() + " are not supported" );
+            throw new IllegalArgumentException( "GowingPackableKeyValuePair:  value objects of class " + value.getClass() + " are not supported" );
 
         }
 
@@ -201,6 +201,11 @@ public class GowingPackableKeyValuePair<K, V> extends GowingAbstractPackableEnti
         );
 
         s_factories.put(
+                File.class.getCanonicalName(),
+                ( name, obj, packer ) -> new GowingFileHolder( name, (File)obj, true )
+        );
+
+        s_factories.put(
                 Byte.class.getCanonicalName(),
                 ( name, obj, packer ) -> new GowingByteHolder( name, (Byte)obj, true )
         );
@@ -245,23 +250,83 @@ public class GowingPackableKeyValuePair<K, V> extends GowingAbstractPackableEnti
     @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     public static boolean isObjectsClassSupported( @Nullable final Object obj ) {
 
-        if ( obj == null || obj instanceof GowingPackable ) {
+        return isObjectsClassSupported( obj, new HashSet<>() );
+
+    }
+
+    private static boolean isObjectsClassSupported( Object obj, HashSet<Object> whatWeveSeen ) {
+
+        if ( obj instanceof String ) {
+
+            ObtuseUtil.doNothing();
+
+        }
+
+        if ( obj == null || whatWeveSeen.contains( obj ) ) {
 
             return true;
+
+        }
+
+        if ( obj instanceof File ) {
+
+            ObtuseUtil.doNothing();
+
+        }
+
+        whatWeveSeen.add( obj );
+
+        final boolean rval;
+
+        String className = obj.getClass().getCanonicalName();
+        if ( obj instanceof File ) {
+
+            className = File.class.getCanonicalName();
+
+        }
+        if ( s_factories.containsKey( className ) ) {
+
+            rval = true;
+
+        } else if ( obj instanceof GowingPackableCollection ) {
+
+            boolean thisCheck = true;
+            for ( Object element : (Collection)obj ) {
+
+                if ( !isObjectsClassSupported( element ) ) {
+
+                    thisCheck = false;
+                    break;
+
+                }
+
+            }
+
+            rval = thisCheck;
+
+        } else if ( obj instanceof GowingPackable ) {
+
+//            Logger.logMsg( "GII " + ((GowingPackable)obj).getInstanceId() + " passed vetting, class type is " + obj.getClass().getCanonicalName() );
+
+//            whatWeveSeen.put( obj, true );
+            rval = true;
 
         } else if ( obj instanceof EntityName ) {
 
-            return true;
-
-        } else if ( obj instanceof Collection ) {
-
-            return true;
+//            whatWeveSeen.put( obj, true );
+            rval = true;
 
         } else {
 
-            return isClassSupported( obj.getClass() );
+            if ( obj instanceof File ) {
+                ObtuseUtil.doNothing();
+            }
+
+            rval = isClassSupported( obj.getClass() );
 
         }
+
+        return rval;
 
     }
 
@@ -311,6 +376,12 @@ public class GowingPackableKeyValuePair<K, V> extends GowingAbstractPackableEnti
         } else {
 
             String className = obj.getClass().getCanonicalName();
+            if ( obj instanceof File ) {
+
+                className = File.class.getCanonicalName();
+
+            }
+
             HolderFactory factory = s_factories.get( className );
 
             if ( factory == null ) {

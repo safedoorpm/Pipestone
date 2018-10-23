@@ -104,10 +104,22 @@ public class GowingConstants {
     public static final char TAG_ENTITY_REFERENCE = 'r';
 
     /**
+     Reference to an entity defined EARLIER.
+     */
+
+    public static final char TAG_BACK_REFERENCE = 'R';
+
+    /**
      A string value.
      */
 
     public static final char TAG_STRING = 's';
+
+    /**
+     A {@link java.io.File} value.
+     */
+
+    public static final char TAG_FILE = 'F';
 
     /**
      An entity name clause marker.

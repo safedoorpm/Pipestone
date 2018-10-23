@@ -7,6 +7,7 @@ package com.obtuse.util;
 
 import com.obtuse.exceptions.HowDidWeGetHereError;
 import com.obtuse.util.gowing.*;
+import com.obtuse.util.gowing.p2a.GowingBackReferenceable;
 import com.obtuse.util.gowing.p2a.GowingEntityReference;
 import com.obtuse.util.gowing.p2a.GowingUnpackingException;
 import com.obtuse.util.gowing.p2a.holders.GowingStringHolder;
@@ -25,7 +26,9 @@ import java.util.regex.Pattern;
  that something's tag doesn't get confused with something's name or value.</p>
  */
 
-public class GenericTag extends GowingAbstractPackableEntity implements Comparable<GenericTag> {
+public class GenericTag
+        extends GowingAbstractPackableEntity
+        implements GowingBackReferenceable, Comparable<GenericTag> {
 
     private static final EntityTypeName ENTITY_TYPE_NAME = new EntityTypeName( GenericTag.class );
 

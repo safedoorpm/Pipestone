@@ -136,6 +136,17 @@ public class StdGowingUnPackerContext implements GowingUnPackerContext {
     }
 
     @Override
+    public void markEntitiesFinished( final Collection<GowingEntityReference> finishedEntities ) {
+
+        for ( GowingEntityReference er : finishedEntities ) {
+
+            markEntityFinished( er );
+
+        }
+
+    }
+
+    @Override
     public boolean isEntityFinished( @Nullable final GowingEntityReference er ) {
 
         return !( er != null && _unFinishedEntities.contains( er ) );
@@ -209,11 +220,12 @@ public class StdGowingUnPackerContext implements GowingUnPackerContext {
     }
 
     @Override
-    public GowingPackable recallPackableEntity( final @NotNull GowingEntityReference er ) {
+    @NotNull
+    public Optional<GowingPackable> recallPackableEntity( final @NotNull GowingEntityReference er ) {
 
         @SuppressWarnings("UnnecessaryLocalVariable") GowingPackable packable2 = _seenInstanceIds.get( er );
 
-        return packable2;
+        return Optional.ofNullable( packable2 );
 
     }
 

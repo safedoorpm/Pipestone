@@ -4,7 +4,6 @@
 
 package com.obtuse.util;
 
-import com.obtuse.exceptions.HowDidWeGetHereError;
 import com.obtuse.util.gowing.*;
 import com.obtuse.util.gowing.p2a.GowingEntityReference;
 import com.obtuse.util.gowing.p2a.GowingUnpackingException;
@@ -120,8 +119,9 @@ public class TreeSorter<K extends Comparable<? super K>, V>
 
     }
 
+    @SuppressWarnings("RedundantThrows")
     @Override
-    public boolean finishUnpacking( @NotNull final GowingUnPacker unPacker ) {
+    public boolean finishUnpacking( @NotNull final GowingUnPacker unPacker ) throws GowingUnpackingException {
 
         if ( !unPacker.isEntityFinished( _elementsMappingReference ) ) {
 
@@ -140,8 +140,13 @@ public class TreeSorter<K extends Comparable<? super K>, V>
 //            _map = tmap;
 
             @SuppressWarnings("unchecked")
-            TreeMap<K, List<V>> tmap = ( (GowingPackableMapping<K, List<V>>)packable ).rebuildMap( new TreeMap<>() );
-            _sortedData.putAll( tmap );
+            TreeMap<K, Collection<V>> tmap = ( (GowingPackableMapping<K, Collection<V>>)packable ).rebuildMap( new TreeMap<>() );
+            for ( K key : tmap.keySet() ) {
+
+                Collection<V> values = tmap.get( key );
+                _sortedData.put( key, new ArrayList<>( values ) );
+
+            }
 
         } else {
 
@@ -476,7 +481,7 @@ public class TreeSorter<K extends Comparable<? super K>, V>
 
         List<V> values = _sortedData.get( key );
 
-        return Collections.unmodifiableList( values == null ? new FormattingLinkedList<>() : values );
+        return Collections.unmodifiableList( values == null ? new ArrayList<>() : values );
 
     }
 
@@ -567,7 +572,7 @@ public class TreeSorter<K extends Comparable<? super K>, V>
     @NotNull
     public Collection<V> getAllValues() {
 
-        Collection<V> allValues = new FormattingLinkedList<>();
+        Collection<V> allValues = new ArrayList<>();
         for ( K key : _sortedData.keySet() ) {
 
             allValues.addAll( getValues( key ) );
@@ -646,7 +651,7 @@ public class TreeSorter<K extends Comparable<? super K>, V>
 
     public List<Integer> getAllFullValueIndices( final V targetValue ) {
 
-        List<Integer> indices = new FormattingLinkedList<>();
+        List<Integer> indices = new ArrayList<>();
         int index = 0;
         for ( V value : this ) {
 
@@ -756,7 +761,7 @@ public class TreeSorter<K extends Comparable<? super K>, V>
 
     public List<Integer> getAllFullValueIndices( final @NotNull K targetKey, final V targetValue ) {
 
-        List<Integer> indices = new FormattingLinkedList<>();
+        List<Integer> indices = new ArrayList<>();
         int currentIndex = 0;
         for ( K key : keySet() ) {
 
@@ -856,7 +861,7 @@ public class TreeSorter<K extends Comparable<? super K>, V>
 
         Collection<V> values;
         //noinspection UnusedAssignment
-        ( values = _sortedData.computeIfAbsent( key, k -> new FormattingLinkedList<>() ) ).add( value );
+        ( values = _sortedData.computeIfAbsent( key, k -> new ArrayList<>() ) ).add( value );
 
     }
 
@@ -1018,12 +1023,21 @@ public class TreeSorter<K extends Comparable<? super K>, V>
     @NotNull
     public Collection<V> removeKeyAndValues( final @NotNull K key ) {
 
-        Collection<V> rval = _sortedData.remove( key );
-        if ( rval == null ) {
+        Collection<V> c = _sortedData.remove( key );
 
-            rval = new FormattingLinkedList<>();
-
-        }
+        @SuppressWarnings("UnnecessaryLocalVariable")
+        ArrayList<V> rval =
+                c == null
+                        ?
+                        new ArrayList<>()
+                        :
+                        (
+                                c instanceof ArrayList
+                                        ?
+                                        (ArrayList<V>)c
+                                        :
+                                        new ArrayList<>( c )
+                        );
 
         return rval;
 
@@ -1032,7 +1046,7 @@ public class TreeSorter<K extends Comparable<? super K>, V>
     @NotNull
     public Collection<V> removeValue( final @NotNull K key, @Nullable final V value ) {
 
-        return removeValue( key, target -> value == target, new FormattingLinkedList<>() );
+        return removeValue( key, target -> value == target, new ArrayList<>() );
 
     }
 
@@ -1069,7 +1083,7 @@ public class TreeSorter<K extends Comparable<? super K>, V>
     @NotNull
     public Collection<V> removeValue( final @NotNull K key, final @NotNull ValueMatcher<V> matcher ) {
 
-        return removeValueCarefully( key, matcher, new FormattingLinkedList<>(), true );
+        return removeValueCarefully( key, matcher, new ArrayList<>(), true );
 
     }
 

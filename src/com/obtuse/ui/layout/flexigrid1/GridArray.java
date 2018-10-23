@@ -617,42 +617,55 @@ public class GridArray<T extends GridArray.ItemInfo> {
         Measure.setGloballyEnabled( true );
         for ( int trial = 0; trial < 1000000; trial += 1 ) {
 
-            Measure m = new Measure( "stress trial" );
-            int r = rg.nextInt( SIZE );
-            int c = rg.nextInt( SIZE );
-            String label = "[" + r + "," + c + "]";
-            JLabel jLabel = cache.computeIfAbsent( label, s -> new JLabel( label ) );
+            try ( Measure ignored = new Measure( "stress trial" ) ) {
 
-            if ( trial % 2 == 0 ) {
+                int r = rg.nextInt( SIZE );
+                int c = rg.nextInt( SIZE );
+                String label = "[" + r + "," + c + "]";
+                JLabel jLabel = cache.computeIfAbsent( label, s -> new JLabel( label ) );
 
-                if ( s_verbose ) Logger.logMsg( "put( " + r + ", " + c + " )" );
-                ga.put( new ItemInfo( r, c, jLabel ) );
+                if ( trial % 2 == 0 ) {
 
-            } else {
+                    if ( s_verbose ) Logger.logMsg( "put( " + r + ", " + c + " )" );
+                    ga.put( new ItemInfo( r, c, jLabel ) );
 
-                if ( s_verbose ) Logger.logMsg( "remove( " + r + ", " + c + " ) == " + ga.get( r, c ).orElse( null ) );
-                Optional<ItemInfo> optV = ga.remove( r, c );
-                String expected = "[" + r + "," + c + "]";
-                if ( optV.isPresent() ) {
+                } else {
 
-                    String found = ( (JLabel)optV.get().component() ).getText();
-                    if ( !found.equals( expected ) ) {
+                    if ( s_verbose ) Logger.logMsg( "remove( " +
+                                                    r +
+                                                    ", " +
+                                                    c +
+                                                    " ) == " +
+                                                    ga.get( r, c )
+                                                      .orElse( null ) );
+                    Optional<ItemInfo> optV = ga.remove( r, c );
+                    String expected = "[" + r + "," + c + "]";
+                    if ( optV.isPresent() ) {
 
-                        throw new HowDidWeGetHereError( "big grid test:  expected " + expected + " but got " + found );
+                        String found = (
+                                (JLabel)optV.get()
+                                            .component()
+                        ).getText();
+                        if ( !found.equals( expected ) ) {
+
+                            throw new HowDidWeGetHereError( "big grid test:  expected " +
+                                                            expected +
+                                                            " but got " +
+                                                            found );
+
+                        }
 
                     }
 
                 }
 
+                if ( trial % 10000 == 0 ) {
+
+                    Logger.logMsg( "done trial " + trial );
+
+                }
+
             }
-
-            if ( trial % 10000 == 0 ) {
-
-                Logger.logMsg( "done trial " + trial );
-
-            }
-
-            m.done();
 
         }
 

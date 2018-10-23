@@ -4,14 +4,12 @@ import com.obtuse.exceptions.HowDidWeGetHereError;
 import com.obtuse.util.BasicProgramConfigInfo;
 import com.obtuse.util.Logger;
 import com.obtuse.util.ObtuseUtil;
+import com.obtuse.util.ParsingLocation;
 import com.obtuse.util.gowing.*;
 import com.obtuse.util.gowing.p2a.holders.*;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.Closeable;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.LineNumberReader;
+import java.io.*;
 import java.lang.reflect.Array;
 import java.util.*;
 
@@ -133,6 +131,13 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
         },
         ENTITY_NAME_CLAUSE_MARKER,
         FORMAT_VERSION,
+        FILE {
+            public boolean isScalarType() {
+
+                return true;
+
+            }
+        },
         STRING {
             public boolean isScalarType() {
 
@@ -329,6 +334,12 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
 
         }
 
+        public File fileValue() {
+
+            return new File( (String)_value );
+
+        }
+
         public GowingEntityReference entityReference() {
 
             return (GowingEntityReference)_value;
@@ -443,6 +454,9 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
                     holder = new GowingNullHolder( entityName );
                     break;
 
+                case ERROR:
+                    throw new IllegalArgumentException( "caught an error (this is a good place for a breakpoint)" );
+
                 case BOOLEAN:
                     holder = new GowingBooleanHolder( entityName, valueToken.booleanValue(), true );
                     break;
@@ -472,6 +486,10 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
                     break;
 
                 case STRING:
+                    holder = new GowingStringHolder( entityName, valueToken.stringValue(), true );
+                    break;
+
+                case FILE:
                     holder = new GowingStringHolder( entityName, valueToken.stringValue(), true );
                     break;
 
@@ -559,6 +577,10 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
                                 holder = new GowingDoubleHolder( entityName, (Double[])valueToken.getObjectValue(), true );
                                 break;
 
+                            case FILE:
+                                holder = new GowingFileHolder( entityName, (String[])valueToken.getObjectValue(), true );
+                                break;
+
                             default:
                                 throw new HowDidWeGetHereError( "unsupported container array type " + elementType );
 
@@ -607,6 +629,12 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
         _recursiveDepth = 0;
         _lnum = 1;
         _offset = 0;
+
+    }
+
+    public ParsingLocation curLoc() {
+
+        return new ParsingLocation( _lnum, _offset );
 
     }
 
@@ -892,9 +920,9 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
 
                     putBackChar();
 
-                    GowingToken2 longToken = parseNumeric(
+                    @SuppressWarnings("UnnecessaryLocalVariable") GowingToken2 longToken = parseNumeric(
                             TokenType.LONG,
-                            strValue -> Long.parseLong( strValue )
+                            Long::parseLong
                     );
 
                     return longToken;
@@ -946,11 +974,11 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
 
                     GowingToken2 rval;
 
-                    if ( ch == 'e' ) {
-
-                        Logger.logMsg( "found an unexpected 'e'" );
-
-                    }
+//                    if ( ch == 'e' ) {
+//
+//                        Logger.logMsg( "found an unexpected 'e'" );
+//
+//                    }
 
                     switch ( ch ) {
 
@@ -967,42 +995,42 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
                         case GowingConstants.LINE_COMMENT_CHAR:
                         case GowingConstants.LINE_METADATA_CHAR:
 
-                        {
+                            {
 
-                            boolean isMetaData = ch == GowingConstants.LINE_METADATA_CHAR;
+                                boolean isMetaData = ch == GowingConstants.LINE_METADATA_CHAR;
 
-                            StringBuilder sb = new StringBuilder();
-                            while ( ch != '\n' && ch != -1 ) {
+                                StringBuilder sb = new StringBuilder();
+                                while ( ch != '\n' && ch != -1 ) {
 
-                                sb.append( (char)ch );
-                                ch = nextRawCh();
-
-                            }
-
-                            if ( isMetaData ) {
-
-                                String errmsg = notifyMetaDataHandlers( sb.toString() );
-                                if ( errmsg != null ) {
-
-                                    GowingToken2 errorToken =
-                                            new GowingToken2( errmsg,
-                                                              _lnum,
-                                                              _offset
-                                            );
-
-                                    Logger.logErr( "oops - " + errorToken );
-
-                                    return errorToken;
+                                    sb.append( (char)ch );
+                                    ch = nextRawCh();
 
                                 }
 
-                                ObtuseUtil.doNothing();
+                                if ( isMetaData ) {
+
+                                    String errmsg = notifyMetaDataHandlers( sb.toString() );
+                                    if ( errmsg != null ) {
+
+                                        GowingToken2 errorToken =
+                                                new GowingToken2( errmsg,
+                                                                  _lnum,
+                                                                  _offset
+                                                );
+
+                                        Logger.logErr( "oops - " + errorToken );
+
+                                        return errorToken;
+
+                                    }
+
+                                    ObtuseUtil.doNothing();
+
+                                }
 
                             }
 
-                        }
-
-                        break;
+                            break;
 
                         case -1:
 
@@ -1017,6 +1045,12 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
                             putBackChar();
 
                             rval = collectString( TokenType.STRING );
+
+                            return rval;
+
+                        case GowingConstants.TAG_FILE:
+
+                            rval = collectString( TokenType.FILE );
 
                             return rval;
 
@@ -1077,54 +1111,54 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
 
                         case GowingConstants.TAG_SHORT:
 
-                            GowingToken2 shortToken = parseNumeric(
+                            @SuppressWarnings("UnnecessaryLocalVariable") GowingToken2 shortToken = parseNumeric(
                                     TokenType.SHORT,
-                                    strValue -> Short.parseShort( strValue )
+                                    Short::parseShort
                             );
 
                             return shortToken;
 
                         case GowingConstants.TAG_INTEGER:
 
-                            GowingToken2 intToken = parseNumeric(
+                            @SuppressWarnings("UnnecessaryLocalVariable") GowingToken2 intToken = parseNumeric(
                                     TokenType.INTEGER,
-                                    strValue -> Integer.parseInt( strValue )
+                                    Integer::parseInt
                             );
 
                             return intToken;
 
                         case GowingConstants.TAG_LONG:
 
-                            GowingToken2 longToken = parseNumeric(
+                            @SuppressWarnings("UnnecessaryLocalVariable") GowingToken2 longToken = parseNumeric(
                                     TokenType.LONG,
-                                    strValue -> Long.parseLong( strValue )
+                                    Long::parseLong
                             );
 
                             return longToken;
 
                         case GowingConstants.TAG_DOUBLE:
 
-                            GowingToken2 doubleToken = parseNumeric(
+                            @SuppressWarnings("UnnecessaryLocalVariable") GowingToken2 doubleToken = parseNumeric(
                                     TokenType.DOUBLE,
-                                    strValue -> Double.parseDouble( strValue )
+                                    Double::parseDouble
                             );
 
                             return doubleToken;
 
                         case GowingConstants.TAG_FLOAT:
 
-                            GowingToken2 floatToken = parseNumeric(
+                            @SuppressWarnings("UnnecessaryLocalVariable") GowingToken2 floatToken = parseNumeric(
                                     TokenType.FLOAT,
-                                    strValue -> Float.parseFloat( strValue )
+                                    Float::parseFloat
                             );
 
                             return floatToken;
 
                         case GowingConstants.TAG_FORMAT_VERSION:
 
-                            GowingToken2 versionNumberToken = parseNumeric(
+                            @SuppressWarnings("UnnecessaryLocalVariable") GowingToken2 versionNumberToken = parseNumeric(
                                     TokenType.FORMAT_VERSION,
-                                    strValue -> Long.parseLong( strValue )
+                                    Long::parseLong
                             );
 
                             //			GowingToken2 colon = getNextToken( false );
@@ -1144,7 +1178,7 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
 
                             GowingToken2 typeIdToken = parseNumeric(
                                     TokenType.INTEGER,
-                                    strValue -> Integer.parseInt( strValue )
+                                    Integer::parseInt
                             );
 
                             if ( typeIdToken.isError() ) {
@@ -1478,6 +1512,7 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
 
                         }
 
+                        @SuppressWarnings("UnnecessaryLocalVariable")
                         byte value = parseHexByte( c1, c2 ); // Byte.parseByte( "" + (char) c1 + (char) c2, 16 );
 
                         return value;
@@ -1624,6 +1659,42 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
 
                 break;
 
+            case GowingConstants.TAG_FILE:
+
+                elementType = TokenType.FILE;
+                array = new String[length];
+                what = "File";
+                elementParser = new ElementParser() {
+                    @Override
+                    public Object parse( final int index ) throws IOException, NumberFormatException {
+
+                        GowingToken2 fileToken = collectString( TokenType.FILE );
+                        if ( fileToken.type() == TokenType.FILE ) {
+
+                            return fileToken.stringValue();
+
+                        } else {
+
+                            return new GowingToken2(
+                                    fileToken._value + " looking for user's File",
+                                    fileToken._lnum,
+                                    fileToken._offset
+                            );
+
+                        }
+
+                    }
+
+                    @Override
+                    public String toString() {
+
+                        return "String ElementParser";
+                    }
+
+                };
+
+                break;
+
             case GowingConstants.TAG_LONG:
 
                 elementType = TokenType.LONG;
@@ -1752,11 +1823,11 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
 
                     }
 
-                } else {
+                } // else {
 
                     // Just swallow the comma.
 
-                }
+                // }
 
             }
 
@@ -1848,7 +1919,7 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
 
         GowingToken2 entityIdToken = parseNumeric(
                 TokenType.LONG,
-                strValue -> Long.parseLong( strValue )
+                Long::parseLong
         );
 
         if ( entityIdToken.isError() ) {
@@ -1863,7 +1934,7 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
 
             GowingToken2 entityVersionToken = parseNumeric(
                     TokenType.INTEGER,
-                    strValue -> Integer.parseInt( strValue )
+                    Integer::parseInt
             );
 
             if ( entityVersionToken.isError() ) {

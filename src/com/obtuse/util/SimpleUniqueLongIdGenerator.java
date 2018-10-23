@@ -180,15 +180,19 @@ public class SimpleUniqueLongIdGenerator implements UniqueLongIdGenerator {
 
         }
 
-        Measure m = new Measure( "measure getUniqueId call rate" );
+        long delta;
         long maxCount = 1000L * 1000L * 1000L;
-        for ( long xx = 0; xx < maxCount; xx += 1 ) {
+        try ( Measure m = new Measure( "measure getUniqueId call rate" ) ) {
 
-            outerGenerator.getUniqueId();
+            for ( long xx = 0; xx < maxCount; xx += 1 ) {
+
+                outerGenerator.getUniqueId();
+
+            }
+
+            delta = m.deltaMillis();
 
         }
-
-        long delta = m.deltaMillis();
         double callRate = maxCount / ( delta / 1000.0 );
         System.out.println(
                 "" + maxCount + " calls took " + DateUtils.formatDuration( delta ) +

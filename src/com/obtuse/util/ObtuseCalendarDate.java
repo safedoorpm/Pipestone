@@ -7,6 +7,7 @@ package com.obtuse.util;
 import com.obtuse.exceptions.HowDidWeGetHereError;
 import com.obtuse.util.exceptions.ParsingException;
 import com.obtuse.util.gowing.*;
+import com.obtuse.util.gowing.p2a.GowingBackReferenceable;
 import com.obtuse.util.gowing.p2a.GowingEntityReference;
 import com.obtuse.util.gowing.p2a.GowingUnpackingException;
 import com.obtuse.util.gowing.p2a.holders.GowingStringHolder;
@@ -43,7 +44,7 @@ import java.util.regex.Pattern;
  */
 
 @SuppressWarnings("UnusedDeclaration")
-public class ObtuseCalendarDate extends GowingAbstractPackableEntity implements Comparable<ObtuseCalendarDate> {
+public class ObtuseCalendarDate extends GowingAbstractPackableEntity implements GowingBackReferenceable, Comparable<ObtuseCalendarDate> {
 
     private static final EntityTypeName ENTITY_TYPE_NAME = new EntityTypeName( ObtuseCalendarDate.class );
 
@@ -82,7 +83,7 @@ public class ObtuseCalendarDate extends GowingAbstractPackableEntity implements 
 
             } catch ( com.obtuse.util.exceptions.ParsingException e ) {
 
-                throw new GowingUnpackingException( e + " recovering date string", e );
+                throw new GowingUnpackingException( e + " recovering date string", unPacker.curLoc(), e );
 
             }
 
@@ -137,6 +138,8 @@ public class ObtuseCalendarDate extends GowingAbstractPackableEntity implements 
 
     @Override
     public boolean finishUnpacking( final @NotNull GowingUnPacker unPacker ) {
+
+        Logger.logMsg( "finishing OCD " + getInstanceId() );
 
         return true;
 

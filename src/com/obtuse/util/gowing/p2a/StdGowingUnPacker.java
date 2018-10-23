@@ -7,6 +7,7 @@ import com.obtuse.ui.layout.linear.LinearFlagNameValue;
 import com.obtuse.util.ContextualToString;
 import com.obtuse.util.*;
 import com.obtuse.util.gowing.*;
+import com.obtuse.util.gowing.p2a.backref.GowingFile;
 import com.obtuse.util.gowing.p2a.examples.SortedSetExample;
 import com.obtuse.util.gowing.p2a.holders.GowingPackableCollection;
 import com.obtuse.util.gowing.p2a.holders.GowingPackableMapping;
@@ -20,6 +21,8 @@ import org.jetbrains.annotations.Nullable;
 import java.io.*;
 import java.util.Collection;
 import java.util.Optional;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 /*
  * Copyright © 2015 Obtuse Systems Corporation
@@ -36,8 +39,7 @@ public class StdGowingUnPacker implements GowingUnPacker {
     private final GowingUnPackerContext _unPackerContext;
     private final File _inputFile;
 
-    @SuppressWarnings({ "OptionalUsedAsFieldOrParameterType", "OptionalAssignedToNull" })
-    private Optional<GowingUnPackedEntityGroup> _unpackedGroup = null;
+    private GowingUnPackedEntityGroup _unpackedGroup = null;
 
     private GowingEntityReference _currentEntityReference = null;
 
@@ -47,7 +49,28 @@ public class StdGowingUnPacker implements GowingUnPacker {
 
     private boolean _superVerbose = false;
 
+    private boolean _finishingBackReference = false;
+
     private final GowingTrace _t;
+
+    private static LineNumberReader makeLineNumberReader( @NotNull final File inputFile )
+            throws GowingUnpackingException {
+
+        try {
+
+            return new LineNumberReader( new FileReader( inputFile ) );
+
+        } catch ( FileNotFoundException e ) {
+
+            throw new GowingUnpackingException(
+                    "java.io.FileNotFoundException caught",
+                    new ParsingLocation( -1, 0 ),
+                    e
+            );
+
+        }
+
+    }
 
     /**
      Create a 'standard' text-oriented unpacker.
@@ -62,9 +85,7 @@ public class StdGowingUnPacker implements GowingUnPacker {
      @throws IOException if something bad happens in I/O-land.
      */
 
-    public StdGowingUnPacker( final GowingTypeIndex typeIndex, final @NotNull File inputFile )
-            throws IOException {
-
+    public StdGowingUnPacker( final GowingTypeIndex typeIndex, final @NotNull File inputFile ) throws IOException {
         this( inputFile, new LineNumberReader( new FileReader( inputFile ) ), new StdGowingUnPackerContext( typeIndex ) );
 
     }
@@ -138,6 +159,7 @@ public class StdGowingUnPacker implements GowingUnPacker {
         getUnPackerContext().registerFactory( GowingPackableMapping.FACTORY );
         getUnPackerContext().registerFactory( GowingPackableName.FACTORY );
         getUnPackerContext().registerFactory( GowingString.FACTORY );
+        getUnPackerContext().registerFactory( GowingFile.FACTORY );
 
         // Register a bunch of the GowingPackable classes in Pipestone.
         // The goal is to register all GowingPackable classes in Pipestone but . . ..
@@ -156,6 +178,19 @@ public class StdGowingUnPacker implements GowingUnPacker {
         getUnPackerContext().registerFactory( RelativePath.FACTORY );
         getUnPackerContext().registerFactory( ThreeDimensionalTreeMap.FACTORY );
         getUnPackerContext().registerFactory( TwoDimensionalTreeMap.FACTORY );
+        getUnPackerContext().registerFactory( TreeSorter.FACTORY );
+
+    }
+
+    public boolean isFinishingBackReference() {
+
+        return _finishingBackReference;
+
+    }
+
+    public ParsingLocation curLoc() {
+
+        return _tokenizer.curLoc();
 
     }
 
@@ -257,29 +292,25 @@ public class StdGowingUnPacker implements GowingUnPacker {
 
     @Override
     @NotNull
-    public Optional<GowingUnPackedEntityGroup> unPack() throws GowingUnpackingException, IOException {
+    public GowingUnPackedEntityGroup unPack() throws GowingUnpackingException, IOException {
 
         long unPackStartTime = System.currentTimeMillis();
 
         checkClosed( "unPack()" );
 
-        Optional<GowingUnPackedEntityGroup> rval = _unpackedGroup;
-        if ( rval.isPresent() ) {
+//        GowingUnPackedEntityGroup rval = _unpackedGroup;
+        if ( _unpackedGroup != null ) {
 
             if ( isVerbose() ) _t.verboseTrace( "returning result of previously completed unpack operation" );
 
-            return rval;
+            return _unpackedGroup;
 
         }
 
         if ( isVerbose() ) _t.verboseTrace( "starting unpack operation" );
 
-        _unpackedGroup = Optional.empty();
-
         Measure stageMeasure = null;
         try {
-
-            GowingUnPackedEntityGroup group;
 
             stageMeasure = new Measure( "StdGowingUnPacker - parse version" );
 
@@ -289,10 +320,11 @@ public class StdGowingUnPacker implements GowingUnPacker {
             @SuppressWarnings({ "UnusedAssignment", "unused" }) StdGowingTokenizer.GowingToken2 semiColon =
                     _tokenizer.getNextToken( false, StdGowingTokenizer.TokenType.SEMI_COLON );
 
-            group = new GowingUnPackedEntityGroup( version );
+            GowingUnPackedEntityGroup group = new GowingUnPackedEntityGroup( version );
 
             stageMeasure.done();
             stageMeasure = new Measure( "StdGowingUnPacker - unpacking" );
+            SortedSet<GowingEntityReference> finishedEarly = new TreeSet<>();
 
             while ( true ) {
 
@@ -315,9 +347,38 @@ public class StdGowingUnPacker implements GowingUnPacker {
                             _tokenizer.getNextToken( false, StdGowingTokenizer.TokenType.SEMI_COLON );
 
                     GowingPackable entity = constructEntity( token.entityReference(), token, bundle );
+                    bundle.setOurInstanceId( entity.getInstanceId() );
                     if ( _superVerbose ) {
 
                         _t.verboseTrace( "extracted ", token.entityReference() );
+
+                    }
+                    bundle.setOurInstanceId( entity.getInstanceId() );
+                    if ( GowingUtil.isActuallyBackReferenceable( entity ) ) {
+
+                        _finishingBackReference = true;
+
+                        try {
+
+                            boolean rval = entity.finishUnpacking( this );
+
+                            if ( !rval ) {
+
+                                throw new GowingUnpackingException(
+                                        "StdGowingUnPacker.unPack:  " +
+                                        "back-reference's finishUnpacking method did not return true " +
+                                        "(entity's GII=" + entity.getInstanceId() + ")",
+                                        curLoc()
+                                );
+
+                            }
+
+                        } finally {
+
+                            _finishingBackReference = false;
+                            finishedEarly.add( token.entityReference() );
+
+                        }
 
                     }
 
@@ -342,6 +403,7 @@ public class StdGowingUnPacker implements GowingUnPacker {
 
             _unPackerContext.clearUnFinishedEntities();
             _unPackerContext.markEntitiesUnfinished( _unPackerContext.getSeenEntityReferences() );
+            _unPackerContext.markEntitiesFinished( finishedEarly );
 
             if ( isVerbose() ) {
 
@@ -365,99 +427,107 @@ public class StdGowingUnPacker implements GowingUnPacker {
                     _t.verboseTrace( "starting finishing pass " + finishingPass + " with " + unFinishedEntities.size() + " items still to finish" );
                 }
 
-                Measure finishingPassMeasure = new Measure( "StdGowingUnPacker - finishing pass" );
+                try ( Measure finishingPassMeasure = new Measure( "StdGowingUnPacker - finishing pass" ) ) {
 
-                boolean finishedSomething = false;
-                for ( GowingEntityReference er : unFinishedEntities ) {
+                    boolean finishedSomething = false;
+                    for ( GowingEntityReference er : unFinishedEntities ) {
 
-                    if ( !_unPackerContext.isEntityFinished( er ) ) {
+                        if ( !_unPackerContext.isEntityFinished( er ) ) {
 
-                        Measure finishOne = new Measure( "StdGowingUnPacker - finish one" );
-                        try {
+                            try ( Measure finishOne = new Measure( "StdGowingUnPacker - finish one" ) ) {
 
-                            if ( finishingPass == 4 ) {
+                                if ( finishingPass == 4 ) {
 
-                                Logger.logMsg( "ON PASS 4" );
+                                    Logger.logMsg( "ON PASS 4" );
 
-                            }
+                                }
 
-                            GowingPackable entity = resolveMandatoryReference( er );
-                            _currentEntityReference = er;
-
-                            if ( isVerbose() ) {
-
-                                _t.verboseTrace( "trying to finish ", er );
-
-                            }
-
-                            Measure typeMeasure = new Measure( "StdGowingUnPacker - finish " + entity.getInstanceId().getTypeName() );
-                            if ( entity.finishUnpacking( this ) ) {
+                                GowingPackable entity = resolveMandatoryReference( er );
+                                _currentEntityReference = er;
 
                                 if ( isVerbose() ) {
 
-                                    // The spaces after 'finished' line up this GER reference with the one above.
-
-                                    _t.verboseTrace( "finished", er );
+                                    _t.verboseTrace( "trying to finish ", er );
 
                                 }
 
-                                _unPackerContext.markEntityFinished( er );
-                                finishedCount += 1;
-                                finishedSomething = true;
+                                try ( Measure typeMeasure = new Measure( "StdGowingUnPacker - finish " +
+                                                                         entity.getInstanceId()
+                                                                               .getTypeName() )
+                                ) {
 
-                            } else {
+                                    if ( entity.finishUnpacking( this ) ) {
 
-                                if ( _superVerbose || ( isVerbose() && finishingPass > 0 ) ) {
+                                        if ( isVerbose() ) {
 
-                                    _t.verboseTrace( "did not finish", er );
+                                            // The spaces after 'finished' line up this GER reference with the one above.
+
+                                            _t.verboseTrace( "finished", er );
+
+                                        }
+
+                                        _unPackerContext.markEntityFinished( er );
+                                        finishedCount += 1;
+                                        finishedSomething = true;
+
+                                    } else {
+
+                                        if ( _superVerbose || ( isVerbose() && finishingPass > 0 ) ) {
+
+                                            _t.verboseTrace( "did not finish", er );
+
+                                        }
+
+                                    }
 
                                 }
+
+                            } finally {
+
+                                _currentEntityReference = null;
 
                             }
 
-                            typeMeasure.done();
+                        }
 
-                        } finally {
+                    }
 
-                            _currentEntityReference = null;
+                    long finishingPassDuration = finishingPassMeasure.done();
+                    if ( isVerbose() || Measure.isGloballyEnabled() ) {
+
+                        _t.verboseTrace(
+                                "StdGowingUnPacker:  finishing pass " +
+                                finishingPass +
+                                " done (" +
+                                finishedCount +
+                                " items finished; " +
+                                ( unFinishedEntities.size() - finishedCount ) +
+                                " left to finish) " +
+                                DateUtils.formatDuration( finishingPassDuration )
+                        );
+                        _t.verboseTrace( "^v" );
+
+                    }
+
+                    if ( !finishedSomething ) {
+
+                        for ( GowingEntityReference er : unFinishedEntities ) {
+
+                            Logger.logMsg( "Gowing.unPack:  unable to finish " + _t.describeEntity( er ) );
 
                         }
 
-                        finishOne.done();
+                        throw new GowingUnpackingDeadlockedException(
+                                "nothing left that can be finished (" +
+                                unFinishedEntities.size() +
+                                " unfinished " +
+                                ( unFinishedEntities.size() == 1 ? "entity" : "entities" ) +
+                                " still unfinished)",
+                                null,
+                                this
+                        );
 
                     }
-
-                }
-
-                long finishingPassDuration = finishingPassMeasure.done();
-                if ( isVerbose() || Measure.isGloballyEnabled() ) {
-
-                    _t.verboseTrace(
-                            "StdGowingUnPacker:  finishing pass " + finishingPass +
-                            " done (" + finishedCount + " items finished; " + ( unFinishedEntities.size() - finishedCount ) + " left to finish) " +
-                            DateUtils.formatDuration( finishingPassDuration )
-                    );
-                    _t.verboseTrace( "^v" );
-
-                }
-
-                if ( !finishedSomething ) {
-
-                    for ( GowingEntityReference er : unFinishedEntities ) {
-
-                        Logger.logMsg( "Gowing.unPack:  unable to finish " + _t.describeEntity( er ) );
-
-                    }
-
-                    throw new GowingUnpackingDeadlockedException(
-                            "nothing left that can be finished (" +
-                            unFinishedEntities.size() +
-                            " unfinished " +
-                            ( unFinishedEntities.size() == 1 ? "entity" : "entities" ) +
-                            " still unfinished)",
-                            null,
-                            this
-                    );
 
                 }
 
@@ -468,7 +538,11 @@ public class StdGowingUnPacker implements GowingUnPacker {
                     " duration " + DateUtils.formatDuration( System.currentTimeMillis() - unPackStartTime )
             );
 
-            rval = Optional.of( group );
+            // If we get to here then we are certain that we have the results of a successful unpack to return to the caller.
+
+            _unpackedGroup = group;
+
+            return _unpackedGroup;
 
         } catch ( GowingUnpackingException e ) {
 
@@ -496,11 +570,7 @@ public class StdGowingUnPacker implements GowingUnPacker {
 
             }
 
-            _unpackedGroup = rval;
-
         }
-
-        return _unpackedGroup;
 
     }
 
@@ -630,7 +700,27 @@ public class StdGowingUnPacker implements GowingUnPacker {
 
         }
 
-        return Optional.ofNullable( _unPackerContext.recallPackableEntity( er ) );
+        Optional<GowingPackable> optPackable = _unPackerContext.recallPackableEntity( er );
+
+        if ( optPackable.isPresent() ) {
+
+            GowingPackable packable = optPackable.get();
+            if ( isFinishingBackReference() && !GowingUtil.isActuallyBackReferenceable( packable ) ) {
+
+                throw new IllegalStateException(
+                        "GowingUnPacker.resolveReference:  " +
+                        "can only fetch back-referenceable entities while finishing a back-reference"
+                );
+
+            }
+
+            return optPackable;
+
+        } else {
+
+            return Optional.empty();
+
+        }
 
     }
 
@@ -853,7 +943,9 @@ public class StdGowingUnPacker implements GowingUnPacker {
                                         "empty field display clause - should be impossible to get here with a null " +
                                         "version number" );
 
-                            }                            bundle = new GowingPackedEntityBundle(
+                            }
+
+                            bundle = new GowingPackedEntityBundle(
                                     entityTypeName,
                                     ourEntityReferenceToken.entityReference().getTypeId(),
                                     version.intValue()
@@ -941,19 +1033,19 @@ public class StdGowingUnPacker implements GowingUnPacker {
             unPacker.getUnPackerContext().registerFactory( StdGowingPackerContext.SimplePackableClass.FACTORY );
             unPacker.getUnPackerContext().registerFactory( SortedSetExample.FACTORY );
 
-            Optional<GowingUnPackedEntityGroup> optResult = unPacker.unPack();
+            GowingUnPackedEntityGroup unPackResult = unPacker.unPack();
 
-            if ( optResult.isPresent() ) {
+//            if ( unPackResult.isPresent() ) {
 
-                GowingUnPackedEntityGroup result = optResult.get();
+//                GowingUnPackedEntityGroup result = unPackResult.get();
 
-                for ( GowingPackable entity : result.getAllEntities() ) {
+                for ( GowingPackable entity : unPackResult.getAllEntities() ) {
 
                     Logger.logMsg( "got " + entity.getClass().getCanonicalName() + " " + entity );
 
                 }
 
-            }
+//            }
 
             ObtuseUtil.doNothing();
 
