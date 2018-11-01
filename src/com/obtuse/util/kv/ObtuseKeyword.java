@@ -66,7 +66,7 @@ public class ObtuseKeyword extends GowingAbstractPackableEntity implements Compa
      </ol>
      </p>
      */
-    public static Pattern VALID_KEYWORD_PATTERN = Pattern.compile( "[A-Z][A-Z0-9_]*[A-Z0-9]" );
+    public static final Pattern VALID_KEYWORD_PATTERN = Pattern.compile( "[A-Z][A-Z0-9_]*[A-Z0-9]" );
 
     private final String _keywordString;
 

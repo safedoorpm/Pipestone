@@ -81,6 +81,7 @@ public class FlexiGridContainer1 extends JPanel implements FlexiGridContainer {
 
     }
 
+    @SuppressWarnings("EmptyMethod")
     public void paint( Graphics g ) {
 
         super.paint( g );

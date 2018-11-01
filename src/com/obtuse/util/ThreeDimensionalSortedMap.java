@@ -10,11 +10,11 @@ import com.obtuse.util.gowing.GowingEntityFactory;
 import com.obtuse.util.gowing.GowingPackable;
 import com.obtuse.util.gowing.p2a.GowingUnPackedEntityGroup;
 import com.obtuse.util.gowing.p2a.GowingUnpackingException;
+import com.obtuse.util.gowing.p2a.GowingUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.*;
 import java.util.function.Function;
@@ -246,35 +246,18 @@ public interface ThreeDimensionalSortedMap<T1,T2,T3,V> extends Iterable<V>, Seri
 
         EntityName en = new EntityName( "eName" );
         File testFile = new File( "2dsortedMap-test.packed" );
-        ObtuseUtil.quietGowingPack( en, originalMap, testFile, false );
-        try {
-            GowingUnPackedEntityGroup unpackedEntities = ObtuseUtil.gowingUnPack(
+        ObtuseUtil.packQuietly( en, originalMap, testFile, false );
+        try ( Measure ignored = new Measure( "ThreeDimensionalSortedMap unpack main" ) ) {
+
+            GowingUnPackedEntityGroup unpackedEntities = ObtuseUtil.unpack(
                     testFile,
                     new GowingEntityFactory[0]
             );
 
-            for ( EntityName entityName : unpackedEntities.getNamedClasses().keySet() ) {
+            GowingUtil.logUnpackResults( "3D map", unpackedEntities );
 
-                for ( GowingPackable packable : unpackedEntities.getNamedClasses().getValues( entityName ) ) {
-
-                    Logger.logMsg( "" + entityName + ":  " + packable.getClass() );
-
-                    ObtuseUtil.doNothing();
-
-                }
-
-                ObtuseUtil.doNothing();
-
-            }
-
-            if ( !unpackedEntities.getNamedClasses().containsKey( en ) ) {
-
-                Logger.logMsg(
-                        "2dsortedMap-test(unpack):  " +
-                        "did not find a " + en + " in " + unpackedEntities
-                );
-
-            } else {
+            if ( unpackedEntities.getNamedClasses()
+                                 .containsKey( en ) ) {
 
                 @NotNull List<GowingPackable> interestingStuff =
                         unpackedEntities.getNamedClasses()
@@ -286,8 +269,8 @@ public interface ThreeDimensionalSortedMap<T1,T2,T3,V> extends Iterable<V>, Seri
                     if ( first instanceof ThreeDimensionalSortedMap ) {
 
                         @SuppressWarnings("unchecked")
-                        ThreeDimensionalTreeMap<Integer,String,Boolean,String> recoveredMap =
-                                ( (ThreeDimensionalTreeMap<Integer,String,Boolean,String>)interestingStuff.get( 0 ) );
+                        ThreeDimensionalTreeMap<Integer, String, Boolean, String> recoveredMap =
+                                ( (ThreeDimensionalTreeMap<Integer, String, Boolean, String>)interestingStuff.get( 0 ) );
 
                         displayMap( "recoveredMap", recoveredMap );
 
@@ -313,6 +296,13 @@ public interface ThreeDimensionalSortedMap<T1,T2,T3,V> extends Iterable<V>, Seri
                     );
 
                 }
+
+            } else {
+
+                Logger.logMsg(
+                        "2dsortedMap-test(unpack):  " +
+                        "did not find a " + en + " in " + unpackedEntities
+                );
 
             }
 

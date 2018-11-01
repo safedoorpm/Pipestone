@@ -136,6 +136,13 @@ public class StdGowingUnPackerContext implements GowingUnPackerContext {
     }
 
     @Override
+    public void markEntityUnfinished( final GowingEntityReference unFinishedEntity ) {
+
+        _unFinishedEntities.add( unFinishedEntity );
+
+    }
+
+    @Override
     public void markEntitiesFinished( final Collection<GowingEntityReference> finishedEntities ) {
 
         for ( GowingEntityReference er : finishedEntities ) {
@@ -241,7 +248,7 @@ public class StdGowingUnPackerContext implements GowingUnPackerContext {
 
         if ( isEntityKnown( er ) ) {
 
-            throw new IllegalArgumentException( "Entity with er " + er + " already existing within this unpacking session" );
+            throw new IllegalArgumentException( "Entity with er " + er + " already exists within this unpacking session" );
 
         }
 

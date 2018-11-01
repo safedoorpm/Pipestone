@@ -107,6 +107,7 @@ public class Logger {
     }
 
     private static int s_globalVetoCount = 0;
+    private String _mirrorName;
 
     public Logger( final File outputFile, final boolean append )
             throws
@@ -125,6 +126,17 @@ public class Logger {
 
         _outputFileName = outputFileName;
         _outputStream = outputStream;
+
+    }
+
+    /**
+     Get the full path of the file that we are 'archiving' this instance's logs into.
+     @return the full path of the file that we are 'archiving' this instance's logs into.
+     */
+
+    public Optional<String> getMirrorName() {
+
+        return Optional.ofNullable( _mirrorName );
 
     }
 
@@ -288,6 +300,8 @@ public class Logger {
      */
 
     private void internalSetMirror( final String mirrorName, final PrintStream mirror ) {
+
+        _mirrorName = mirrorName;
 
         // Make sure we don't accidentally close stdout or stderr.
         // Note:  use of != instead of equals() is deliberate!
@@ -933,7 +947,7 @@ public class Logger {
 
     public String toString() {
 
-        return "Logger()";
+        return "Logger( " + getOutputFileName() + " )";
 
     }
 

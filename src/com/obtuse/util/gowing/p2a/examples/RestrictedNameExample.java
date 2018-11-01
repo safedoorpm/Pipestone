@@ -255,6 +255,7 @@ public class RestrictedNameExample extends ObtuseKeyword {
      Demonstrate this class in action.
      */
 
+    @SuppressWarnings("EmptyMethod")
     public static void main( final String[] args ) {
 
     }

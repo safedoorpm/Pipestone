@@ -24,8 +24,7 @@ public interface GowingTokenizer extends Closeable {
     StdGowingTokenizer.GowingToken2 getNextToken( boolean identifierAllowed, @NotNull StdGowingTokenizer.TokenType requiredType )
 	    throws IOException, GowingUnpackingException;
 
-    @NotNull
-    StdGowingTokenizer.GowingToken2 getNextToken( boolean identifierAllowed )
+    StdGowingTokenizer.GowingToken2 getNextToken( boolean identifierAllowed, final String where )
 	    throws IOException, GowingUnpackingException;
 
     @Nullable

@@ -89,7 +89,7 @@ public interface GowingUnPacker extends Closeable {
 
         } else {
 
-            throw new NullPointerException( "GowingUnPacker.resolveMandatoryReference:  er refers to non-existent entity" );
+            throw new NullPointerException( "GowingUnPacker.resolveMandatoryReference:  referenc refers to non-existent entity" );
 
         }
 

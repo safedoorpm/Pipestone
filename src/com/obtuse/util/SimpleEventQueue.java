@@ -19,7 +19,7 @@ public class SimpleEventQueue<T extends SimpleEvent> {
     private FormattedImmutableDate _now;
     private FormattedImmutableDate _endTime = SimpleEventQueue.LAST_POSSIBLE_EVENT_TIME;
 
-    private boolean _traceMode = false;
+    private final boolean _traceMode = false;
 
     /**
      * A wrapper for a set of simultaneous clock events and the timestamp associated with all of them.

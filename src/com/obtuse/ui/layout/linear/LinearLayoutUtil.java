@@ -119,6 +119,7 @@ public class LinearLayoutUtil {
         @SuppressWarnings("UnnecessaryLocalVariable")
         LinearContainer rval = new LinearContainer3( name, orientation ) {
 
+            @SuppressWarnings("EmptyMethod")
             public void setBounds( final int x, final int y, final int w, final int h ) {
 
                 super.setBounds( x, y, w, h );
@@ -161,6 +162,7 @@ public class LinearLayoutUtil {
         @SuppressWarnings("UnnecessaryLocalVariable")
         LinearContainer rval = new LinearContainer3( name, orientation, containerConstraints, componentConstraints ) {
 
+            @SuppressWarnings("EmptyMethod")
             public void setBounds( final int x, final int y, final int w, final int h ) {
 
                 super.setBounds( x, y, w, h );
@@ -597,6 +599,7 @@ public class LinearLayoutUtil {
                 sb.append( comma )
                   .append( " icon=" )
                   .append( ObtuseUtil.enquoteJavaObject( icon ) );
+                //noinspection UnusedAssignment
                 comma = ",";
 
             }
@@ -787,9 +790,9 @@ public class LinearLayoutUtil {
 
         String formattedComponentName = fullName( component );
         String description;
-        if ( component instanceof Container && isShowable( (Container)component ) ) {
+        if ( component instanceof Container && isShowable( component ) ) {
 
-            description = showIt( (Container)component ); // "JLabel( " + ObtuseUtil.enquoteToJavaString( ((JLabel)component).getText() ) + " )";
+            description = showIt( component ); // "JLabel( " + ObtuseUtil.enquoteToJavaString( ((JLabel)component).getText() ) + " )";
 
         } else {
 

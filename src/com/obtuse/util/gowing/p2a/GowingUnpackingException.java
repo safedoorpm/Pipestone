@@ -17,7 +17,7 @@ public class GowingUnpackingException extends Exception {
     private StdGowingTokenizer.GowingToken2 _causeToken;
 
     @NotNull
-    private ParsingLocation _location;
+    private final ParsingLocation _location;
 
     public GowingUnpackingException( final String msg, @NotNull ParsingLocation location ) {
         this( msg, null, location, null );

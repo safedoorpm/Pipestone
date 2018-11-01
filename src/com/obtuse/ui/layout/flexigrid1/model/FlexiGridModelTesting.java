@@ -22,8 +22,8 @@ import java.awt.*;
 @SuppressWarnings("ClassHasNoToStringMethod")
 public class FlexiGridModelTesting extends JFrame {
 
-    private FlexiGridPanelModel<FlexiGridModelSlice> _model;
-    @SuppressWarnings("FieldCanBeLocal") private FlexiGridContainer1 _container;
+    private final FlexiGridPanelModel<FlexiGridModelSlice> _model;
+    @SuppressWarnings("FieldCanBeLocal") private final FlexiGridContainer1 _container;
     private int _nextIx;
     private FlexiGridModelSlice _target = null;
 

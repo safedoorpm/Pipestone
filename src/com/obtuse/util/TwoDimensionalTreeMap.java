@@ -511,9 +511,10 @@ public class TwoDimensionalTreeMap<T1,T2,V> extends GowingAbstractPackableEntity
 
         EntityName en = new EntityName( "eName" );
         File testFile = new File( "2dsortedMap-test.packed" );
-        ObtuseUtil.quietGowingPack( en, originalMap, testFile, false );
-        try {
-            GowingUnPackedEntityGroup unpackedEntities = ObtuseUtil.gowingUnPack(
+        ObtuseUtil.packQuietly( en, originalMap, testFile, false );
+        try ( Measure m = new Measure( "TwoDimensionalTreeMap unpack main" ) ){
+
+            GowingUnPackedEntityGroup unpackedEntities = ObtuseUtil.unpack(
                     testFile,
                     new GowingEntityFactory[0]
             );
@@ -532,14 +533,8 @@ public class TwoDimensionalTreeMap<T1,T2,V> extends GowingAbstractPackableEntity
 
             }
 
-            if ( !unpackedEntities.getNamedClasses().containsKey( en ) ) {
-
-                Logger.logMsg(
-                        "2dsortedMap-test(unpack):  " +
-                        "did not find a " + en + " in " + unpackedEntities
-                );
-
-            } else {
+            if ( unpackedEntities.getNamedClasses()
+                                 .containsKey( en ) ) {
 
                 @NotNull List<GowingPackable> interestingStuff =
                         unpackedEntities.getNamedClasses()
@@ -550,8 +545,8 @@ public class TwoDimensionalTreeMap<T1,T2,V> extends GowingAbstractPackableEntity
                     GowingPackable first = interestingStuff.get( 0 );
                     if ( first instanceof TwoDimensionalSortedMap ) {
 
-                        @SuppressWarnings("unchecked") TwoDimensionalTreeMap<Integer,String,String> recoveredMap =
-                                ( (TwoDimensionalTreeMap<Integer,String,String>)interestingStuff.get( 0 ) );
+                        @SuppressWarnings("unchecked") TwoDimensionalTreeMap<Integer, String, String> recoveredMap =
+                                ( (TwoDimensionalTreeMap<Integer, String, String>)interestingStuff.get( 0 ) );
 
                         displayMap( "recoveredMap", recoveredMap );
 
@@ -578,6 +573,13 @@ public class TwoDimensionalTreeMap<T1,T2,V> extends GowingAbstractPackableEntity
 
                 }
 
+            } else {
+
+                Logger.logMsg(
+                        "2dsortedMap-test(unpack):  " +
+                        "did not find a " + en + " in " + unpackedEntities
+                );
+
             }
 
 //        } catch ( IOException e ) {
@@ -602,8 +604,7 @@ public class TwoDimensionalTreeMap<T1,T2,V> extends GowingAbstractPackableEntity
 
             int ix = ((Integer)ixO).intValue();
 
-            //noinspection unchecked
-            SortedMap notNullInnerMap = map.getNotNullInnerMap( ix );
+            @SuppressWarnings("unchecked") SortedMap notNullInnerMap = map.getNotNullInnerMap( ix );
             for ( Object sx : notNullInnerMap.keySet() ) {
 
                 Logger.logMsg( "    map(" + ix + "," + sx + ") = " + notNullInnerMap.get( sx ) );

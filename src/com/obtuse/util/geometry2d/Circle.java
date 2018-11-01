@@ -1022,6 +1022,7 @@ public class Circle {
 
     }
 
+    @SuppressWarnings("SameParameterValue")
     private static void doTangentScaling( final Circle c, final MyPoint p ) {
 
         double[] scales = { 0.3, 1.0, 1.01, 7 };

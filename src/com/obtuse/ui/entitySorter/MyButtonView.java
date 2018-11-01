@@ -20,7 +20,7 @@ public class MyButtonView extends Box implements SortableEntityView<String,MyBut
 
     private final JLabel _ourLabel;
 
-    private MyButtonEntity _myEntity;
+    private final MyButtonEntity _myEntity;
 
     private String _key;
 

@@ -15,7 +15,7 @@ public class DirectedArc<V> implements Edge<V> {
     private final Vertex<V> _src;
     private final Vertex<V> _dst;
 
-    private String _toString;
+    private final String _toString;
 
     public DirectedArc( @NotNull final Vertex<V> src, @NotNull final Vertex<V> dst ) {
         super();

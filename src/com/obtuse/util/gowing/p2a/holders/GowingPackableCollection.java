@@ -69,7 +69,7 @@ public class GowingPackableCollection<E> extends ArrayList<E> implements GowingP
 
     private List _things;
 
-    public static GowingPackableCollection EMPTY = new GowingPackableCollection<>( Collections.EMPTY_LIST );
+    public static final GowingPackableCollection EMPTY = new GowingPackableCollection<>( Collections.EMPTY_LIST );
 
     public static final GowingEntityFactory FACTORY = new GowingEntityFactory( ENTITY_TYPE_NAME ) {
 

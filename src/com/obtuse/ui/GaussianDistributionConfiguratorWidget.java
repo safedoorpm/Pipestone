@@ -114,54 +114,42 @@ public class GaussianDistributionConfiguratorWidget extends JPanel {
         );
 
         _weightSlider.getModel().addChangeListener(
-                new ChangeListener() {
+                changeEvent -> {
 
-                    public void stateChanged( final ChangeEvent changeEvent ) {
+                    Logger.logMsg(
+                            "weight changed:  " +
+                            "value = " + _weightSlider.getModel().getValue() + ", " +
+                            "min = " + _weightSlider.getModel().getMinimum() + ", " +
+                            "max = " + _weightSlider.getModel().getMaximum()
+                    );
 
-                        Logger.logMsg(
-                                "weight changed:  " +
-                                "value = " + _weightSlider.getModel().getValue() + ", " +
-                                "min = " + _weightSlider.getModel().getMinimum() + ", " +
-                                "max = " + _weightSlider.getModel().getMaximum()
-                        );
-
-                        setDistribution();
-                        fireChangeListeners( changeEvent );
-
-                    }
+                    setDistribution();
+                    fireChangeListeners( changeEvent );
 
                 }
         );
 
         _centerSlider.getModel().addChangeListener(
-                new ChangeListener() {
+                changeEvent -> {
 
-                    public void stateChanged( final ChangeEvent changeEvent ) {
-
-                        setDistribution();
-                        fireChangeListeners( changeEvent );
-
-                    }
+                    setDistribution();
+                    fireChangeListeners( changeEvent );
 
                 }
         );
 
         _standardDeviationSlider.getModel().addChangeListener(
-                new ChangeListener() {
+                changeEvent -> {
 
-                    public void stateChanged( final ChangeEvent changeEvent ) {
+                    if ( _standardDeviationSlider.getValue() == 0 ) {
 
-                        if ( _standardDeviationSlider.getValue() == 0 ) {
+                        _standardDeviationSlider.setValue( 1 );
 
-                            _standardDeviationSlider.setValue( 1 );
+                    } else {
 
-                        } else {
-
-                            Logger.logMsg( "std dev is " + _standardDeviationSlider.getValue() );
-                            setDistribution();
-                            fireChangeListeners( changeEvent );
-
-                        }
+                        Logger.logMsg( "std dev is " + _standardDeviationSlider.getValue() );
+                        setDistribution();
+                        fireChangeListeners( changeEvent );
 
                     }
 
@@ -310,21 +298,14 @@ public class GaussianDistributionConfiguratorWidget extends JPanel {
         for ( GaussianDistributionConfiguratorWidget widget : widgets ) {
 
             widget.addChangeListener(
-                    new ChangeListener() {
-
-                        public void stateChanged( final ChangeEvent changeEvent ) {
-
-                            pgdd.setDistributions(
-                                    new WeightedGaussianDistribution[] {
-                                            widgets[0].getProportionalGaussianDistribution(),
-                                            widgets[1].getProportionalGaussianDistribution(),
-                                            widgets[2].getProportionalGaussianDistribution(),
-                                            widgets[3].getProportionalGaussianDistribution()
-                                    }
-                            );
-                        }
-
-                    }
+                    changeEvent -> pgdd.setDistributions(
+                            new WeightedGaussianDistribution[] {
+                                    widgets[0].getProportionalGaussianDistribution(),
+                                    widgets[1].getProportionalGaussianDistribution(),
+                                    widgets[2].getProportionalGaussianDistribution(),
+                                    widgets[3].getProportionalGaussianDistribution()
+                            }
+                    )
             );
             jp.add( widget );
 
@@ -335,6 +316,7 @@ public class GaussianDistributionConfiguratorWidget extends JPanel {
 
     }
 
+    @SuppressWarnings("EmptyMethod")
     @Override
     public String toString() {
 

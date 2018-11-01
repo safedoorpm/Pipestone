@@ -113,7 +113,7 @@ public class StdGowingPacker implements GowingPacker {
 
     private int _entityCount;
 
-    private SortedMap<String,Object> s_usedMetaDataKeywords = new TreeMap<>();
+    private final SortedMap<String,Object> s_usedMetaDataKeywords = new TreeMap<>();
 
     private boolean _verbose;
 
@@ -310,7 +310,7 @@ public class StdGowingPacker implements GowingPacker {
 
             if ( notYetPackedEntities.isEmpty() ) {
 
-                Logger.logMsg(
+                vLog(
                         "Gowing is done packing global group " + _groupName +
                         " (it took " + ObtuseUtil.pluralize( pass, "pass", "passes" ) + " to pack " +
                         ObtuseUtil.pluralize( _entityCount, "entity", "entities" ) + ")"
@@ -411,15 +411,16 @@ public class StdGowingPacker implements GowingPacker {
         GowingPackedEntityBundle bundle = entityNames.getEntity().bundleThyself( false, this );
         bundle.setOurInstanceId( ourInstanceId );
 
+        emitNewTypeIds();
+
         // If the bundle is for a GowingBackReferenceable then we need to pack what it depends on before packing it.
 
-        if ( GowingUtil.isActuallyBackReferenceable( entityNames.getEntity() ) ) {
+//        if ( GowingUtil.isActuallyBackReferenceable( entityNames.getEntity() ) ) {
 
-            emitOurBackReferences( bundle );
+        emitOurBackReferences( bundle );
 
-        }
+//        }
 
-        emitNewTypeIds();
 
         if ( !_previouslyPackedEntities.contains( ourInstanceId ) ) {
 
@@ -508,49 +509,71 @@ public class StdGowingPacker implements GowingPacker {
 //
 //    }
 
-    private void emitOurBackReferences( @NotNull final GowingPackedEntityBundle bundle ) {
+    private void emitOurBackReferences( @NotNull final GowingPackedEntityBundle topLevelBundle ) {
 
-        for ( EntityName en : bundle.keySet() ) {
+        if ( topLevelBundle.hasSuperBundle() ) {
 
-            Object ov = bundle.get( en ).getObjectValue();
+            emitOurBackReferences( topLevelBundle.getSuperBundle() );
 
-            if (
-                    ov instanceof GowingPackable &&
-                    GowingUtil.isActuallyBackReferenceable( (GowingPackable)ov )
-            ) {
+        }
 
-                GowingBackReferenceable dependent = (GowingBackReferenceable)ov;
-                Optional<GowingInstanceId> ourOptInstanceId = bundle.getOptOurInstanceId();
-                if ( ourOptInstanceId.isPresent() ) {
+//        Logger.logMsg( "emitting backreferences for " + topLevelBundle );
 
-                    // If we depend on ourselves, don't spin into infinite recursion.
-                    // It is not clear to me that this is even possible but infinite recursion is pretty evil so . . .
+        for (
+                GowingPackedEntityBundle bundle = topLevelBundle;
+                bundle != null;
+                bundle = bundle.hasSuperBundle() ? bundle.getSuperBundle() : null
+        ) {
 
-                    if ( !dependent.getInstanceId().equals( ourOptInstanceId.get() ) ) {
+            for ( EntityName en : bundle.keySet() ) {
 
-                        maybeActuallyPackEntity( dependent.getInstanceId() );
+                Object ov = bundle.get( en )
+                                  .getObjectValue();
 
+                if (
+                        ov instanceof GowingPackable &&
+                        GowingUtil.isActuallyBackReferenceable( (GowingPackable)ov )
+                ) {
+
+                    GowingBackReferenceable dependent = (GowingBackReferenceable)ov;
+                    Optional<GowingInstanceId> ourOptInstanceId = bundle.getOptOurInstanceId();
+                    if ( ourOptInstanceId.isPresent() ) {
+
+                        // If we depend on ourselves, don't spin into infinite recursion.
+                        // It is not clear to me that this is even possible but infinite recursion is pretty evil
+                        // so . . .
+
+                        if ( !dependent.getInstanceId()
+                                       .equals( ourOptInstanceId.get() ) ) {
+
+                            maybeActuallyPackEntity( dependent.getInstanceId() );
+
+                        }
+
+                    } else {
+
+                        throw new HowDidWeGetHereError(
+                                "StdGowingPacker.emitOurBackReferences:  I don't understand how this is possible" );
                     }
 
-                } else {
-
-                    throw new HowDidWeGetHereError( "StdGowingPacker.emitOurBackReferences:  I don't understand how this is possible" );
-                }
-
-            } else {
-
-                if ( ov instanceof GowingPackable ) {
-
-                    Optional<GowingInstanceId> optGII = bundle.getOptOurInstanceId();
-                    throw new GowingPackingException(
-                            "StdGowingPacker.maybeActuallyPackEntity(" +
-                            ( optGII.map( GowingInstanceId::getTypeName ).orElse( "<<unknown>>" ) ) +
-                            "):  " +
-                            "bundle's " + ObtuseUtil.enquoteJavaObject( en ) + " entity " +
-                            "references a GowingPackable instance of " + ov.getClass().getCanonicalName() + " " +
-                            "which is not GowingBackReferenceable",
-                            bundle
-                    );
+                    //            } else {
+                    //
+                    //                if ( ov instanceof GowingPackable ) {
+                    //
+                    //                    Optional<GowingInstanceId> optGII = bundle.getOptOurInstanceId();
+                    //                    throw new GowingPackingException(
+                    //                            "StdGowingPacker.maybeActuallyPackEntity(" +
+                    //                            ( optGII.map( GowingInstanceId::getTypeName ).orElse(
+                    // "<<unknown>>" ) ) +
+                    //                            "):  " +
+                    //                            "bundle's " + ObtuseUtil.enquoteJavaObject( en ) + " entity " +
+                    //                            "references a GowingPackable instance of " + ov.getClass()
+                    // .getCanonicalName() + " " +
+                    //                            "which is not GowingBackReferenceable",
+                    //                            bundle
+                    //                    );
+                    //
+                    //                }
 
                 }
 

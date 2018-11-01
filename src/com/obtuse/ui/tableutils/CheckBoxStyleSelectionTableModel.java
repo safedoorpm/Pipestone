@@ -47,6 +47,7 @@ public abstract class CheckBoxStyleSelectionTableModel<D extends ThingInfo> exte
      @param selectedRows which rows are currently selected.
      */
 
+    @SuppressWarnings("EmptyMethod")
     public void selectionChanged( final @NotNull Collection<Integer> selectedRows ) {
 
         // can be overridden by implementations that care.

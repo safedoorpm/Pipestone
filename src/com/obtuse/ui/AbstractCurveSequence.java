@@ -119,6 +119,7 @@ public abstract class AbstractCurveSequence implements GraphicsElement {
      * @return The curve as a {@link java.awt.geom.GeneralPath}.
      */
 
+    @SuppressWarnings("UnusedReturnValue")
     public GeneralPath getAutoCurvePath() {
 
         return getAutoCurveOrControlsPath( true );

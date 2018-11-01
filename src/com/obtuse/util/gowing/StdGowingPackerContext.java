@@ -24,7 +24,7 @@ public class StdGowingPackerContext implements GowingPackerContext {
     private final SortedSet<Integer> _seenTypeIds = new TreeSet<>();
     private final SortedSet<Integer> _newTypeIds = new TreeSet<>();
 
-    private SortedSet<Integer> _topTypeIds = new TreeSet<>();
+    private final SortedSet<Integer> _topTypeIds = new TreeSet<>();
 
     private final TreeMap<GowingInstanceId, EntityNames> _seenInstanceIds = new TreeMap<>();
 
@@ -120,11 +120,11 @@ public class StdGowingPackerContext implements GowingPackerContext {
 
     }
 
-    private TwoDimensionalSortedMap<Integer,Long,Long> _entityIdMap = new TwoDimensionalTreeMap<>();
+    private final TwoDimensionalSortedMap<Integer,Long,Long> _entityIdMap = new TwoDimensionalTreeMap<>();
     private final SimpleUniqueLongIdGenerator _entityIdRemapperGenerator =
             new SimpleUniqueLongIdGenerator( GowingInstanceId.class.getCanonicalName() + " - entity id remapper generator" );
 
-    private boolean _doRemap = true;
+    private final boolean _doRemap = true;
 
     @Override
     public long remapEntityId( final int typeId, final long entityId ) {

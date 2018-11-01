@@ -28,12 +28,12 @@ import java.util.List;
 public class AcceleratedPopupMenu1 extends JPopupMenu {
 
     @SuppressWarnings("FieldCanBeLocal")
-    private JFrame _frame = new JFrame( "my frame" );
-    private JPanel _panel = new JPanel();
+    private final JFrame _frame = new JFrame( "my frame" );
+    private final JPanel _panel = new JPanel();
     private StringBuilder _accelerator;
-    private JMenuItem _firstMenuItem;
-    private JMenuItem _secondMenuItem;
-    private List<JMenuItem> _wordMenuItems;
+    private final JMenuItem _firstMenuItem;
+    private final JMenuItem _secondMenuItem;
+    private final List<JMenuItem> _wordMenuItems;
 
     public AcceleratedPopupMenu1( final @NotNull String@NotNull [] words ) {
         super();

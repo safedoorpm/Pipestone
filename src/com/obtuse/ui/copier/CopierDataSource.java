@@ -29,7 +29,7 @@ public class CopierDataSource extends UniqueWidget {
 
     }
 
-    private Collection<CopierDataSource> _buddies = new ArrayList<>();
+    private final Collection<CopierDataSource> _buddies = new ArrayList<>();
 
     public class ListenerInfo extends UniqueWidget {
 
@@ -61,7 +61,7 @@ public class CopierDataSource extends UniqueWidget {
 
     private final ObtuseTextElement _currentValueElement;
 
-    private List<ListenerInfo> _listeners = new ArrayList<>();
+    private final List<ListenerInfo> _listeners = new ArrayList<>();
 
     private Owner _owner;
 

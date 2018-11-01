@@ -23,6 +23,7 @@ public interface Edge<V> {
 
     Vertex<V> getB();
 
+    @SuppressWarnings("unused")
     boolean isDirected();
 
 }

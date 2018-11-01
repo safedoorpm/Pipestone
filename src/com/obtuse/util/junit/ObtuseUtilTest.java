@@ -12,11 +12,12 @@ import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.nio.charset.StandardCharsets;
 
 /**
  * %%% Something clever goes here.
  */
-@SuppressWarnings("InstanceMethodNamingConvention")
+@SuppressWarnings({ "InstanceMethodNamingConvention", "EmptyMethod" })
 public class ObtuseUtilTest {
     @Before
     public void setUp() {
@@ -319,7 +320,7 @@ public class ObtuseUtilTest {
      * on a Mac running Mac OS X 10.8.2
      */
 
-    private static String s_expectedMd5Value = "5eb63bbbe01eeed093cb22bb8f5acdc3";
+    private static final String s_expectedMd5Value = "5eb63bbbe01eeed093cb22bb8f5acdc3";
     @Test
     public void testComputeMD5_File() throws Exception {
 
@@ -332,7 +333,7 @@ public class ObtuseUtilTest {
         File testFile = new File( "ObtuseUtilTest-MD5-testdata.txt" );
         if (
                 ObtuseUtil.writeBytesToFile(
-                        "hello world".getBytes( "UTF-8" ),
+                        "hello world".getBytes( StandardCharsets.UTF_8 ),
                         testFile,
                         false
                 )
@@ -355,7 +356,7 @@ public class ObtuseUtilTest {
         // any particular Java implementation of the MD5 algorithm.  Rather, we are testing that
         // the ObtuseUtil#computeMD5(java.io.InputStream) method correctly invokes the Java MD5 mechanism.
 
-        ByteArrayInputStream is = new ByteArrayInputStream( "hello world".getBytes( "UTF-8" ) );
+        ByteArrayInputStream is = new ByteArrayInputStream( "hello world".getBytes( StandardCharsets.UTF_8 ) );
         Assert.assertEquals( ObtuseUtilTest.s_expectedMd5Value, ObtuseUtil.computeMD5( is ) );
 
     }

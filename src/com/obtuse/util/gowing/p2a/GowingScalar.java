@@ -94,6 +94,7 @@ public class GowingScalar implements GowingPackable, Comparable<GowingScalar> {
             return VERSION;
         }
 
+        @SuppressWarnings("RedundantThrows")
         @NotNull
         @Override
         public GowingPackable createEntity(

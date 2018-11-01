@@ -276,8 +276,8 @@ public interface ObtuseTextElement {
         public static final String DEFAULT_PREFIX = "(";
         public static final String DEFAULT_SUFFIX = ")";
 
-        private String _prefix = DEFAULT_PREFIX;
-        private String _suffix = DEFAULT_SUFFIX;
+        private final String _prefix = DEFAULT_PREFIX;
+        private final String _suffix = DEFAULT_SUFFIX;
         private String _text = null;
 
         /**
@@ -338,14 +338,14 @@ public interface ObtuseTextElement {
         @Override
         public Optional<String> getOptionalPrefix() {
 
-            return Optional.ofNullable( _prefix );
+            return Optional.of( _prefix );
 
         }
 
         @Override
         public Optional<String> getOptionalSuffix() {
 
-            return Optional.ofNullable( _suffix );
+            return Optional.of( _suffix );
 
         }
 

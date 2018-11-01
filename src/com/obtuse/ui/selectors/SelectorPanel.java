@@ -53,7 +53,7 @@ public abstract class SelectorPanel<E,C extends Container> extends BorderLayoutP
 
     private final Function<E, C> _componentGetter;
 
-    private boolean _isZeroASelection;
+    private final boolean _isZeroASelection;
 
     private final JPanel _postSelectionPanel;
 

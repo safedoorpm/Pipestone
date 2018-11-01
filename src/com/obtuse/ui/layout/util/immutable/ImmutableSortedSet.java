@@ -5,6 +5,8 @@
 
 package com.obtuse.ui.layout.util.immutable;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.Serializable;
 import java.util.Comparator;
 import java.util.SortedSet;
@@ -26,12 +28,15 @@ public class ImmutableSortedSet<E>
 
     public Comparator<? super E> comparator() {return ss.comparator();}
 
+    @NotNull
     public SortedSet<E> subSet( final E fromElement, final E toElement) {
 	return new ImmutableSortedSet<>( ss.subSet( fromElement, toElement));
     }
+    @NotNull
     public SortedSet<E> headSet( final E toElement) {
 	return new ImmutableSortedSet<>( ss.headSet( toElement));
     }
+    @NotNull
     public SortedSet<E> tailSet( final E fromElement) {
 	return new ImmutableSortedSet<>( ss.tailSet( fromElement));
     }

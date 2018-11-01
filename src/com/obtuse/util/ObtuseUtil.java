@@ -2172,6 +2172,7 @@ public class ObtuseUtil {
      Useful as a statement upon which to set a breakpoint.
      */
 
+    @SuppressWarnings("EmptyMethod")
     public static void doNothing() {
 
     }
@@ -3015,7 +3016,7 @@ public class ObtuseUtil {
 
     }
 
-    public static boolean quietGowingPack(
+    public static boolean packQuietly(
             final @NotNull EntityName groupName,
             final @NotNull GowingPackable[] items,
             final @NotNull File outputFile,
@@ -3062,40 +3063,18 @@ public class ObtuseUtil {
 
     }
 
-    public static boolean quietGowingPack(
+    public static boolean packQuietly(
             final @NotNull EntityName groupName,
             final @NotNull GowingPackable item,
             final @NotNull File outputFile,
             boolean verbose
     ) {
 
-        return quietGowingPack( groupName, new GowingPackable[]{ item }, outputFile, verbose );
+        return packQuietly( groupName, new GowingPackable[]{ item }, outputFile, verbose );
 
     }
 
-    /*
-    public static Optional<GowingUnPackedEntityGroup> quietGowingUnPack(
-            final @NotNull File inputFile,
-            final @NotNull GowingEntityFactory[] gowingEntityFactories
-    ) {
-
-        Optional<GowingUnPackedEntityGroup> rval = Optional.empty();
-        try {
-
-            rval = gowingUnPack( inputFile, gowingEntityFactories );
-
-        } catch ( IOException | GowingUnpackingException e ) {
-
-            Logger.logErr( "ObtuseUtil.quietGowingPack( " + inputFile + " )", e );
-
-        }
-
-        return rval;
-
-    }
-    */
-
-    public static GowingUnPackedEntityGroup gowingUnPack(
+    public static GowingUnPackedEntityGroup unpack(
             final @NotNull File inputFile,
             final @NotNull GowingEntityFactory[] gowingEntityFactories
     ) throws GowingUnpackingException {
@@ -3111,12 +3090,6 @@ public class ObtuseUtil {
             unPacker.getUnPackerContext().registerFactories( gowingEntityFactories );
 
             unPackResult = unPacker.unPack();
-
-//                for ( GowingPackable entity : unPackResult.getAllEntities() ) {
-//
-//                    Logger.logMsg( "got " + entity.getClass().getCanonicalName() + " " + entity );
-//
-//                }
 
             ObtuseUtil.doNothing();
 

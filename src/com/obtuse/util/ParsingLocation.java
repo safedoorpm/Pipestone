@@ -79,7 +79,7 @@ public class ParsingLocation implements Comparable<ParsingLocation> {
 
     }
 
-    private ParsingLocation( final int lnum ) {
+    private ParsingLocation( @SuppressWarnings("SameParameterValue") final int lnum ) {
         super();
 
         if ( lnum != -1 ) {

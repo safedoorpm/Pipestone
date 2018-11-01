@@ -19,7 +19,7 @@ import java.util.*;
 
 public class SimpleObtuseListenerManager<E> implements ObtuseListenerProxy<E> {
 
-    private List<ListenerInfo<E>> _listeners = new ArrayList<>();
+    private final List<ListenerInfo<E>> _listeners = new ArrayList<>();
 
     public static class ListenerInfo<E> extends UniqueWidget {
 

@@ -5,9 +5,7 @@
 
 package com.obtuse.ui.layout.util.immutable;
 
-/**
- %%% Something clever goes here.
- */
+import org.jetbrains.annotations.NotNull;
 
 import java.io.Serializable;
 import java.util.Comparator;
@@ -25,10 +23,13 @@ public class ImmutableSortedMap<K,V>
 
     public ImmutableSortedMap( final SortedMap<K, ? extends V> m) {super( m); sm = m; }
     public Comparator<? super K> comparator()   { return sm.comparator(); }
+    @NotNull
     public SortedMap<K,V> subMap( final K fromKey, final K toKey)
     { return new ImmutableSortedMap<>( sm.subMap( fromKey, toKey)); }
+    @NotNull
     public SortedMap<K,V> headMap( final K toKey)
     { return new ImmutableSortedMap<>( sm.headMap( toKey)); }
+    @NotNull
     public SortedMap<K,V> tailMap( final K fromKey)
     { return new ImmutableSortedMap<>( sm.tailMap( fromKey)); }
     public K firstKey()                           { return sm.firstKey(); }

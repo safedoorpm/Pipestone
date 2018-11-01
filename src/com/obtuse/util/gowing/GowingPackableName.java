@@ -52,7 +52,7 @@ public class GowingPackableName implements GowingPackable, Comparable<GowingPack
     private static final EntityName NAME_NAME = new EntityName( "_ban" );
     private static SortedMap<String, GowingPackableName> s_knownAttributeNames = new TreeMap<>();
     private final GowingInstanceId _instanceId = new GowingInstanceId( getClass() );
-    private String _name;
+    private final String _name;
 
     public GowingPackableName( final @NotNull String name ) {
 

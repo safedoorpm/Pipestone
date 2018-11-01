@@ -29,6 +29,7 @@ public class RejectRangeException extends Exception {
 
     }
 
+    @SuppressWarnings("EmptyMethod")
     public String toString() {
 
         return super.toString();

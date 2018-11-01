@@ -17,7 +17,7 @@ public class SortableKeySpace implements Comparable<SortableKeySpace> {
 
     private final String _keyName;
 
-    private static SortedMap<String, SortableKeySpace> s_knownKeys = new TreeMap<>();
+    private static final SortedMap<String, SortableKeySpace> s_knownKeys = new TreeMap<>();
 
     private SortableKeySpace( final @NotNull String keyName ) {
 

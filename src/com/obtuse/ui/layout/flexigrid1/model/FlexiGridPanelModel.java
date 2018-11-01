@@ -50,7 +50,7 @@ public class FlexiGridPanelModel<SLICE extends FlexiGridModelSlice> {
     private FlexiGridLayoutManagerCache _cache = null;
     private long _lastCacheSerialNumber = -1;
 
-    private boolean _msgTraceMode;
+    private final boolean _msgTraceMode;
 
     private final List<SLICE> _slices = new LinkedList<>();
 

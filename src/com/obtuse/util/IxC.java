@@ -36,6 +36,7 @@ public class IxC<U extends Comparable<U>> extends Ix<U> implements Comparable<Ix
 
     }
 
+    @SuppressWarnings("EmptyMethod")
     public String toString() {
 
         return super.toString();

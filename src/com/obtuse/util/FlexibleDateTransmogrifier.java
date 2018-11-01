@@ -101,7 +101,7 @@ public class FlexibleDateTransmogrifier {
     }
 
     @SuppressWarnings("SpellCheckingInspection")
-    private static TestData[] s_testData = {
+    private static final TestData[] s_testData = {
             new TestData(
                     new String[] {
                             "32 may 1972",
@@ -297,29 +297,29 @@ public class FlexibleDateTransmogrifier {
 
     }
 
-    public static Pattern YYYY = Pattern.compile( "(\\d{4})" );
-    public static Pattern YYYY_MM_DD_DASHES = Pattern.compile( "(\\d{4}) *- *(\\d\\d?) *- *(\\d\\d?)" );
-    public static Pattern YYYY_MM_DD_PERIODS = Pattern.compile( "(\\d{4}) *\\. *(\\d\\d?) *\\. *(\\d\\d?)" );
-    public static Pattern YYYY_MM_DD_SLASHES = Pattern.compile( "(\\d{4}) */ *(\\d\\d?) */ *(\\d\\d?)" );
-    public static Pattern YYYY_MM_00_DASHES = Pattern.compile( "(\\d{4}) *- *(\\d\\d?) *- *00?" );
-    public static Pattern YYYY_MM_00_PERIODS = Pattern.compile( "(\\d{4}) *\\. *(\\d\\d?) *\\. *00?" );
-    public static Pattern YYYY_MM_00_SLASHES = Pattern.compile( "(\\d{4}) */ *(\\d\\d?) */ *00?" );
-    public static Pattern YYYY_00_00_DASHES = Pattern.compile( "(\\d{4}) *- *00? *- *00?" );
-    public static Pattern YYYY_00_00_PERIODS = Pattern.compile( "(\\d{4}) *\\. *00? *\\. *00?" );
-    public static Pattern YYYY_00_00_SLASHES = Pattern.compile( "(\\d{4}) */ *00? */ *00?" );
-    public static Pattern YYYY_MM_DASHES = Pattern.compile( "(\\d{4}) *- *(\\d\\d?)" );
-    public static Pattern YYYY_MM_PERIODS = Pattern.compile( "(\\d{4}) *\\. *(\\d\\d?)" );
-    public static Pattern YYYY_MM_SLASHES = Pattern.compile( "(\\d{4}) */ *(\\d\\d?)" );
-    public static Pattern DD_MMM_YYYY = Pattern.compile( "(\\d\\d?) +([A-Za-z]{3,}) +(\\d{4})" );
-    public static Pattern DD_MMM_YYYY_N = Pattern.compile( "(\\d\\d?) +(\\d\\d?) +(\\d{4})" );
-    public static Pattern YYYY_MMM_DD = Pattern.compile( "(\\d{4}) +([A-Za-z]{3,}) +(\\d\\d?)" );
-    public static Pattern YYYY_MMM_DD_N = Pattern.compile( "(\\d{4}) +(\\d\\d?) +(\\d\\d?)" );
-    public static Pattern MMM_YYYY = Pattern.compile( "([A-Za-z]{3,}) +(\\d{4})" );
-    public static Pattern MMM_DD_YYYY1 = Pattern.compile( "([A-Za-z]{3,}) +(\\d\\d?) *, *(\\d{4})" );
-    public static Pattern MMM_DD_YYYY2 = Pattern.compile( "([A-Za-z]{3,}) +(\\d\\d?) */ *(\\d{4})" );
-    public static Pattern MMM_DD_YYYY3 = Pattern.compile( "([A-Za-z]{3,}) +(\\d\\d?) +(\\d{4})" );
+    public static final Pattern YYYY = Pattern.compile( "(\\d{4})" );
+    public static final Pattern YYYY_MM_DD_DASHES = Pattern.compile( "(\\d{4}) *- *(\\d\\d?) *- *(\\d\\d?)" );
+    public static final Pattern YYYY_MM_DD_PERIODS = Pattern.compile( "(\\d{4}) *\\. *(\\d\\d?) *\\. *(\\d\\d?)" );
+    public static final Pattern YYYY_MM_DD_SLASHES = Pattern.compile( "(\\d{4}) */ *(\\d\\d?) */ *(\\d\\d?)" );
+    public static final Pattern YYYY_MM_00_DASHES = Pattern.compile( "(\\d{4}) *- *(\\d\\d?) *- *00?" );
+    public static final Pattern YYYY_MM_00_PERIODS = Pattern.compile( "(\\d{4}) *\\. *(\\d\\d?) *\\. *00?" );
+    public static final Pattern YYYY_MM_00_SLASHES = Pattern.compile( "(\\d{4}) */ *(\\d\\d?) */ *00?" );
+    public static final Pattern YYYY_00_00_DASHES = Pattern.compile( "(\\d{4}) *- *00? *- *00?" );
+    public static final Pattern YYYY_00_00_PERIODS = Pattern.compile( "(\\d{4}) *\\. *00? *\\. *00?" );
+    public static final Pattern YYYY_00_00_SLASHES = Pattern.compile( "(\\d{4}) */ *00? */ *00?" );
+    public static final Pattern YYYY_MM_DASHES = Pattern.compile( "(\\d{4}) *- *(\\d\\d?)" );
+    public static final Pattern YYYY_MM_PERIODS = Pattern.compile( "(\\d{4}) *\\. *(\\d\\d?)" );
+    public static final Pattern YYYY_MM_SLASHES = Pattern.compile( "(\\d{4}) */ *(\\d\\d?)" );
+    public static final Pattern DD_MMM_YYYY = Pattern.compile( "(\\d\\d?) +([A-Za-z]{3,}) +(\\d{4})" );
+    public static final Pattern DD_MMM_YYYY_N = Pattern.compile( "(\\d\\d?) +(\\d\\d?) +(\\d{4})" );
+    public static final Pattern YYYY_MMM_DD = Pattern.compile( "(\\d{4}) +([A-Za-z]{3,}) +(\\d\\d?)" );
+    public static final Pattern YYYY_MMM_DD_N = Pattern.compile( "(\\d{4}) +(\\d\\d?) +(\\d\\d?)" );
+    public static final Pattern MMM_YYYY = Pattern.compile( "([A-Za-z]{3,}) +(\\d{4})" );
+    public static final Pattern MMM_DD_YYYY1 = Pattern.compile( "([A-Za-z]{3,}) +(\\d\\d?) *, *(\\d{4})" );
+    public static final Pattern MMM_DD_YYYY2 = Pattern.compile( "([A-Za-z]{3,}) +(\\d\\d?) */ *(\\d{4})" );
+    public static final Pattern MMM_DD_YYYY3 = Pattern.compile( "([A-Za-z]{3,}) +(\\d\\d?) +(\\d{4})" );
 
-    private static PatternInfo[] s_patternInfos = {
+    private static final PatternInfo[] s_patternInfos = {
             new PatternInfo( YYYY, 1, -1, -1, true ),
             new PatternInfo( YYYY_MM_DD_DASHES, 1, 2, 3, true ),
             new PatternInfo( YYYY_MM_DD_PERIODS, 1, 2, 3, true ),

@@ -5,6 +5,8 @@
 
 package com.obtuse.ui.layout.util.immutable;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Iterator;
@@ -33,12 +35,15 @@ public class ImmutableCollection<E> implements Collection<E>, Serializable {
     public int size()                   {return c.size();}
     public boolean isEmpty()            {return c.isEmpty();}
     public boolean contains( final Object o)   {return c.contains( o);}
+    @NotNull
     public Object[] toArray()           {return c.toArray();}
-    public <T> T[] toArray( final T[] a)       {return c.toArray( a);}
+    @NotNull
+    public <T> T[] toArray( @NotNull final T[] a)       {return c.toArray( a);}
     public String toString()            {return c.toString();}
 
+    @NotNull
     public Iterator<E> iterator() {
-	return new Iterator<E>() {
+	return new Iterator<>() {
 	    private final Iterator<? extends E> i = c.iterator();
 
 	    public boolean hasNext() {return i.hasNext();}
@@ -61,16 +66,16 @@ public class ImmutableCollection<E> implements Collection<E>, Serializable {
 	throw new UnsupportedOperationException();
     }
 
-    public boolean containsAll( final Collection<?> coll) {
+    public boolean containsAll( @NotNull final Collection<?> coll) {
 	return c.containsAll(coll);
     }
-    public boolean addAll( final Collection<? extends E> coll) {
+    public boolean addAll( @NotNull final Collection<? extends E> coll) {
 	throw new UnsupportedOperationException();
     }
-    public boolean removeAll( final Collection<?> coll) {
+    public boolean removeAll( @NotNull final Collection<?> coll) {
 	throw new UnsupportedOperationException();
     }
-    public boolean retainAll( final Collection<?> coll) {
+    public boolean retainAll( @NotNull final Collection<?> coll) {
 	throw new UnsupportedOperationException();
     }
     public void clear() {

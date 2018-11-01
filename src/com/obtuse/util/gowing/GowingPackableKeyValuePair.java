@@ -191,7 +191,7 @@ public class GowingPackableKeyValuePair<K, V> extends GowingAbstractPackableEnti
 
     }
 
-    private static SortedMap<String, HolderFactory> s_factories = new TreeMap<>();
+    private static final SortedMap<String, HolderFactory> s_factories = new TreeMap<>();
 
     static {
 

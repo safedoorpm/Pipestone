@@ -1,10 +1,7 @@
 package com.obtuse.util.gowing.p2a;
 
 import com.obtuse.exceptions.HowDidWeGetHereError;
-import com.obtuse.util.BasicProgramConfigInfo;
-import com.obtuse.util.Logger;
-import com.obtuse.util.ObtuseUtil;
-import com.obtuse.util.ParsingLocation;
+import com.obtuse.util.*;
 import com.obtuse.util.gowing.*;
 import com.obtuse.util.gowing.p2a.holders.*;
 import org.jetbrains.annotations.NotNull;
@@ -815,11 +812,11 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
     public GowingToken2 getNextToken( final boolean identifierAllowed, final @NotNull TokenType requiredType )
             throws IOException, GowingUnpackingException {
 
-        try {
+        try ( Measure ignored = new Measure( "Gowing-getNextToken-" + _recursiveDepth ) ) {
 
             _recursiveDepth += 1;
 
-            GowingToken2 rval = getNextToken( identifierAllowed );
+            GowingToken2 rval = getNextToken( identifierAllowed, "gNT" );
             if ( rval.isError() ) {
 
                 return rval;
@@ -884,20 +881,23 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
     }
 
     @Override
-    @NotNull
-    public GowingToken2 getNextToken( final boolean identifierAllowed )
+    public GowingToken2 getNextToken( final boolean identifierAllowed, final String where )
             throws IOException, GowingUnpackingException {
 
         if ( _putBackToken != null ) {
 
-            GowingToken2 previousToken = _putBackToken;
-            _putBackToken = null;
+            try ( Measure ignored = new Measure( "Gowing-getNextToken-inner-quick-" + where + '-' + _recursiveDepth ) ) {
 
-            return previousToken;
+                GowingToken2 previousToken = _putBackToken;
+                _putBackToken = null;
+
+                return previousToken;
+
+            }
 
         }
 
-        try {
+        try ( Measure ignored = new Measure( "Gowing-getNextToken-inner-" + where + '-' + _recursiveDepth ) ) {
 
             _recursiveDepth += 1;
 
@@ -1258,7 +1258,7 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
 
     }
 
-    private List<GowingMetaDataHandler> s_metadataHandlers = new ArrayList<>();
+    private final List<GowingMetaDataHandler> s_metadataHandlers = new ArrayList<>();
 
     @Override
     public void registerMetaDataHandler( final @NotNull GowingMetaDataHandler handler ) {
@@ -2196,52 +2196,52 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
 
     }
 
-    public static void main( final String[] args ) {
-
-        BasicProgramConfigInfo.init( "Obtuse", "Util", "testing", null );
-
-        try {
-
-            GowingTokenizer tokenizer = new StdGowingTokenizer(
-                    new StdGowingUnPackerContext( new GowingTypeIndex( "test StdGowingTokenizer" ) ),
-                    new LineNumberReader( new FileReader( "test1.p2a" ) )
-            );
-            boolean identifierAllowed = false;
-            while ( true ) {
-
-                GowingToken2 token = tokenizer.getNextToken( identifierAllowed );
-                if ( token.isError() || token.type() == TokenType.EOF ) {
-
-                    Logger.logMsg( "last token is " + token.toString() );
-
-                    break;
-
-                } else {
-
-                    Logger.logMsg( "(" + token.getLnum() + "," + token.getOffset() + "):  " + token );
-
-                    //noinspection RedundantIfStatement
-                    if ( token.type() == TokenType.LEFT_PAREN || token.type() == TokenType.COMMA ) {
-
-                        identifierAllowed = true;
-
-                    } else {
-
-                        identifierAllowed = false;
-
-                    }
-
-                }
-
-            }
-
-        } catch ( IOException | GowingUnpackingException e ) {
-
-            e.printStackTrace();
-
-        }
-
-    }
+//    public static void main( final String[] args ) {
+//
+//        BasicProgramConfigInfo.init( "Obtuse", "Util", "testing", null );
+//
+//        try {
+//
+//            GowingTokenizer tokenizer = new StdGowingTokenizer(
+//                    new StdGowingUnPackerContext( new GowingTypeIndex( "test StdGowingTokenizer" ) ),
+//                    new LineNumberReader( new FileReader( "test1.p2a" ) )
+//            );
+//            boolean identifierAllowed = false;
+//            while ( true ) {
+//
+//                GowingToken2 token = tokenizer.getNextToken( identifierAllowed );
+//                if ( token.isError() || token.type() == TokenType.EOF ) {
+//
+//                    Logger.logMsg( "last token is " + token.toString() );
+//
+//                    break;
+//
+//                } else {
+//
+//                    Logger.logMsg( "(" + token.getLnum() + "," + token.getOffset() + "):  " + token );
+//
+//                    //noinspection RedundantIfStatement
+//                    if ( token.type() == TokenType.LEFT_PAREN || token.type() == TokenType.COMMA ) {
+//
+//                        identifierAllowed = true;
+//
+//                    } else {
+//
+//                        identifierAllowed = false;
+//
+//                    }
+//
+//                }
+//
+//            }
+//
+//        } catch ( IOException | GowingUnpackingException e ) {
+//
+//            e.printStackTrace();
+//
+//        }
+//
+//    }
 
     public String toString() {
 

@@ -53,6 +53,7 @@ public interface ObtuseListenerProxy<ITEM> {
 
         }
 
+        @SuppressWarnings("EmptyMethod")
         public abstract void myActionPerformed(
                 final @NotNull String who,
                 final @NotNull String why,

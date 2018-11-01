@@ -24,11 +24,11 @@ import java.awt.event.KeyEvent;
 
 public class PopupJTableEditor extends DefaultCellEditor {
 
-    private PopupDialog _popup;
+    private final PopupDialog _popup;
 
     private String _currentText = "";
 
-    private JTextField _editorComponent;
+    private final JTextField _editorComponent;
 
     public PopupJTableEditor( final @NotNull String popupWindowTitle ) {
 
@@ -85,7 +85,7 @@ public class PopupJTableEditor extends DefaultCellEditor {
 
         public static final String OK_BUTTON_LABEL = "OK";
 
-        private JTextArea textArea;
+        private final JTextArea textArea;
 
         public PopupDialog( final @NotNull String popupWindowTitle ) {
 

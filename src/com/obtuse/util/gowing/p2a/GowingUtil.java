@@ -5,12 +5,14 @@ package com.obtuse.util.gowing.p2a;
  */
 
 import com.obtuse.exceptions.HowDidWeGetHereError;
+import com.obtuse.util.Logger;
 import com.obtuse.util.ObtuseUtil;
 import com.obtuse.util.gowing.*;
 import com.obtuse.util.gowing.p2a.holders.GowingPackableEntityHolder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.IOException;
 import java.util.Optional;
 
 /**
@@ -42,6 +44,7 @@ public class GowingUtil {
 
     }
 
+    @SuppressWarnings("unused")
     public static boolean isActuallyPackable( final @NotNull GowingPackable entity ) {
 
         return !checkActuallyPackable( entity ).isPresent();
@@ -138,6 +141,7 @@ public class GowingUtil {
 
     }
 
+    @SuppressWarnings("unused")
     public static <T> T mustBe(
             final @NotNull String methodName,
             final @NotNull String entityColloquialName,
@@ -188,6 +192,7 @@ public class GowingUtil {
 
     }
 
+    @SuppressWarnings("unused")
     public static String describeClassInstance( final Object obj ) {
 
         if ( obj == null ) {
@@ -214,6 +219,7 @@ public class GowingUtil {
      @param <T> what the thing is.
      */
 
+    @SuppressWarnings("unused")
     public static <T> void packMaybeString(
             final @NotNull String who,
             final @NotNull String what,
@@ -304,6 +310,7 @@ public class GowingUtil {
      fashion.</p>
      */
 
+    @SuppressWarnings("unused")
     public static <T> T unpackMaybeString(
             final @NotNull String who,
             final @NotNull String what,
@@ -381,6 +388,361 @@ public class GowingUtil {
         } else {
 
             return value;
+
+        }
+
+    }
+
+    @SuppressWarnings("unused")
+    public static void logUnpackResults( @NotNull final GowingUtil.BasicUnpackingResult results ) {
+
+        if ( results.worked() ) {
+
+            GowingUnPackedEntityGroup unpackedEntities = results.getMandatoryUnpackedEntities();
+            logUnpackResults( results.getWhat(), unpackedEntities );
+
+        } else {
+
+            Exception e = results.getMandatoryException();
+            Logger.logErr( "failed unpack results for " + results.getWhat(), e );
+
+        }
+
+    }
+
+    public static void logUnpackResults( final String what, @NotNull final GowingUnPackedEntityGroup unpackedEntities ) {
+
+        Logger.logMsg( "unpack results for " + what );
+        for ( EntityName entityName : unpackedEntities.getNamedClasses().keySet() ) {
+
+            for ( GowingPackable packable : unpackedEntities.getNamedClasses().getValues( entityName ) ) {
+
+                Logger.logMsg( "" + entityName + ":  " + packable.getClass() );
+
+                ObtuseUtil.doNothing();
+
+            }
+
+            ObtuseUtil.doNothing();
+
+        }
+
+    }
+
+//    public interface ExceptionCatcher {
+//
+//        void catchRuntimeException( @NotNull RuntimeException e );
+//        void catchException( @NotNull Exception e );
+//
+//    }
+//
+//    /**
+//     No muss, no fuss method to unpack something.
+//     @param who who's calling (used in messages).
+//     @param file the {@link File} that contains what is to be unpacked.
+//     @param unPackedEntityName the {@link EntityName} of what is to be unpacked.
+//     @param typeIndex a type index that describes how to construct new instances of things encountered during the unpacking process.
+//     @param <T> type of thing being unpacked (you WILL get a {@link ClassCastException}
+//     if the type of the thing is not what you expect;
+//     used {@code Object} as the type if you don't know what to expect).
+//     @return an {@link Optional}{@code <T>} containing either the unpacked thing or {@code null} if something went wrong.
+//     */
+//
+//    public static <T extends GowingPackable> UnPackingResult<T> unPackSomething(
+//            @NotNull final String who,
+//            @NotNull final File file,
+//            @NotNull final EntityName unPackedEntityName,
+//            @NotNull final GowingTypeIndex typeIndex
+//    ) {
+//
+//        TypedGowingUnPacker<T> typedUnPacker = new TypedGowingUnPacker<T>(
+//
+//        );
+//        try ( Measure ignored = new Measure( "unPackPrimaryStatusBundle" ) ) {
+//
+//            Reader reader;
+//            reader = StdGowingUnPacker.openReader( file );
+//
+//            TypedGowingUnPacker<T> unPacker = new TypedGowingUnPacker<T>(
+//                    unPackedEntityName,
+//                    typeIndex,
+//                    file,
+//                    reader
+//            );
+//
+//            if ( unPacker.parse( who ) ) {
+//
+//                Optional<T> optMediaItem = unPacker.getOptSingleResult();
+//                return optMediaItem;
+//
+//            } else {
+//
+//                Logger.logErr(
+//                        "who:  parse of " +
+//                        ObtuseUtil.enquoteJavaObject( file ) + " failed",
+//                        unPacker.getMandatoryBasicUnPackingResult()
+//                                .getMandatoryException()
+//                );
+//
+//                return Optional.empty();
+//
+//            }
+//
+//        } catch ( FileNotFoundException e ) {
+//
+//            Logger.logErr( "java.io.FileNotFoundException caught", e );
+//
+//            @SuppressWarnings("UnnecessaryLocalVariable") UnPackingResult<T>
+//                    failedResult = new UnPackingResult<>(
+//                    new BasicUnpackingResult( who, e ),
+//                    null
+//
+//            );
+//
+//            return Optional.empty();
+//
+//        }
+//
+//    }
+
+    public static class BasicUnpackingResult {
+
+        @NotNull
+        private final String _what;
+        @Nullable
+        private final GowingUnPackedEntityGroup _unpackedEntities;
+        @Nullable
+        private final GowingUnpackingException _gowingUnpackingException;
+        @Nullable
+        private final IOException _ioException;
+
+        public BasicUnpackingResult(
+                @NotNull final String what,
+                @NotNull final GowingUnPackedEntityGroup unpackedEntities
+        ) {
+            super();
+
+            _what = what;
+            _unpackedEntities = unpackedEntities;
+            _gowingUnpackingException = null;
+            _ioException = null;
+
+        }
+
+        public BasicUnpackingResult(
+                @NotNull final String what,
+                @Nullable final GowingUnpackingException gowingUnpackingException
+        ) {
+            super();
+
+            _what = what;
+            _unpackedEntities = null;
+            _gowingUnpackingException = gowingUnpackingException;
+            _ioException = null;
+
+        }
+
+        public BasicUnpackingResult(
+                @NotNull final String what,
+                @Nullable final IOException ioException
+        ) {
+            super();
+
+            _what = what;
+            _unpackedEntities = null;
+            _gowingUnpackingException = null;
+            _ioException = ioException;
+
+        }
+
+        @NotNull
+        public String getWhat() {
+
+            return _what;
+
+        }
+
+        public boolean worked() {
+
+            return _unpackedEntities != null;
+
+        }
+
+        @SuppressWarnings("unused")
+        @NotNull
+        public Optional<GowingUnPackedEntityGroup> getOptUnpackedEntities() {
+
+            return Optional.ofNullable( _unpackedEntities );
+
+        }
+
+        @SuppressWarnings("unused")
+        @NotNull
+        public GowingUnPackedEntityGroup getMandatoryUnpackedEntities() {
+
+            if ( _unpackedEntities == null ) {
+
+                throw new NullPointerException( "LancotGowingUnPacker.getMandatoryUnpackedEntities:  nothing to return" );
+
+            }
+
+            return _unpackedEntities;
+
+        }
+
+        public boolean caughtUnpackingException() {
+
+            return _gowingUnpackingException != null;
+
+        }
+
+        @SuppressWarnings("unused")
+        @NotNull
+        public Optional<GowingUnpackingException> getOptGowingUnpackingException() {
+
+            return Optional.ofNullable( _gowingUnpackingException );
+
+        }
+
+        @SuppressWarnings("unused")
+        @NotNull
+        public GowingUnpackingException getMandatoryGowingUnpackingException() {
+
+            if ( _gowingUnpackingException == null ) {
+
+                throw new NullPointerException( "LancotGowingUnPacker.getMandatoryGowingUnpackingException:  nothing to return" );
+
+            }
+
+            return _gowingUnpackingException;
+
+        }
+
+        public boolean caughtIOException() {
+
+            return _ioException != null;
+
+        }
+
+        @SuppressWarnings("unused")
+        @NotNull
+        public Optional<IOException> getOptIOException() {
+
+            return Optional.ofNullable( _ioException );
+
+        }
+
+        @SuppressWarnings("unused")
+        @NotNull
+        public IOException getMandatoryIOException() {
+
+            if ( _ioException == null ) {
+
+                throw new NullPointerException( "LancotGowingUnPacker.getMandatoryIOException:  nothing to return" );
+
+            }
+
+            return _ioException;
+
+        }
+
+        @SuppressWarnings("unused")
+        public boolean caughtException() {
+
+            return caughtIOException() || caughtUnpackingException();
+
+        }
+
+        @SuppressWarnings("unused")
+        @NotNull
+        public Optional<Exception> getOptException() {
+
+            if ( _ioException != null ) {
+
+                return Optional.of( _ioException );
+
+            } else if ( _gowingUnpackingException != null ) {
+
+                return Optional.of( _gowingUnpackingException );
+
+            } else {
+
+                return Optional.empty();
+
+            }
+
+        }
+
+        @NotNull
+        public Exception getMandatoryException() {
+
+            if ( _ioException != null ) {
+
+                return _ioException;
+
+            } else if ( _gowingUnpackingException != null ) {
+
+                return _gowingUnpackingException;
+
+            } else {
+
+                throw new NullPointerException( "LancotGowingUnPacker.getMandatoryException:  nothing to return" );
+
+            }
+
+        }
+
+    }
+
+    @SuppressWarnings("unused")
+    public static class UnPackingResult<T extends GowingPackable> {
+
+        private final T _unpackedEntity;
+        private final BasicUnpackingResult _basicUnpackingResult;
+
+        public UnPackingResult(
+                @NotNull GowingUtil.BasicUnpackingResult basicUnpackingResult,
+                @Nullable T unpackedEntity
+        ) {
+
+            _basicUnpackingResult = basicUnpackingResult;
+            _unpackedEntity = unpackedEntity;
+
+        }
+
+        public boolean worked() {
+
+            return _unpackedEntity != null;
+
+        }
+
+        @NotNull
+        public Optional<T> getOptUnPackedValue() {
+
+            return Optional.ofNullable( _unpackedEntity );
+
+        }
+
+        @NotNull
+        public T getMandatoryUnPackedValue() {
+
+            if ( _unpackedEntity == null ) {
+
+                throw new NullPointerException(
+                        "GowingUtil.UnPackingResult.getMandatoryUnPackedValue:  parse failed - no unpacked value available" );
+
+            } else {
+
+                return _unpackedEntity;
+
+            }
+
+        }
+
+        @NotNull
+        public BasicUnpackingResult getBasicUnpackingResult() {
+
+            return _basicUnpackingResult;
 
         }
 

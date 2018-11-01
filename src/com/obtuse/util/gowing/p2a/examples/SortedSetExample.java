@@ -75,7 +75,7 @@ public class SortedSetExample extends GowingAbstractPackableEntity implements Go
     private GowingEntityReference _hashMapReference = null;
 
     private static final EntityName NAME_NAME = new EntityName( "_n" );
-    private String _name;
+    private final String _name;
 
     private ArrayList<String> _stringCollection;
     private SortedSet<String> _stringSortedSet;
@@ -91,7 +91,7 @@ public class SortedSetExample extends GowingAbstractPackableEntity implements Go
     private List<GowingPackableKeyValuePair<String,Integer>> _stringHashMapAsIs;
 
     private static final EntityName DESCRIPTION_NAME = new EntityName( "_d" );
-    private String _description;
+    private final String _description;
 
     public static final GowingEntityFactory FACTORY = new GowingEntityFactory( ENTITY_TYPE_NAME ) {
 

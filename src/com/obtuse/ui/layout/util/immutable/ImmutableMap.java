@@ -69,7 +69,7 @@ public class ImmutableMap<K, V> implements Map<K, V>, Serializable {
         throw new UnsupportedOperationException();
     }
 
-    public void putAll( final Map<? extends K, ? extends V> m ) {
+    public void putAll( @NotNull final Map<? extends K, ? extends V> m ) {
 
         throw new UnsupportedOperationException();
     }
@@ -83,6 +83,7 @@ public class ImmutableMap<K, V> implements Map<K, V>, Serializable {
     private transient Set<Map.Entry<K, V>> entrySet;
     private transient Collection<V> values;
 
+    @NotNull
     public Set<K> keySet() {
 
         if ( keySet == null ) {
@@ -91,6 +92,7 @@ public class ImmutableMap<K, V> implements Map<K, V>, Serializable {
         return keySet;
     }
 
+    @NotNull
     public Set<Map.Entry<K, V>> entrySet() {
 
         if ( entrySet == null ) {
@@ -99,6 +101,7 @@ public class ImmutableMap<K, V> implements Map<K, V>, Serializable {
         return entrySet;
     }
 
+    @NotNull
     public Collection<V> values() {
 
         if ( values == null ) {
@@ -326,7 +329,7 @@ public class ImmutableMap<K, V> implements Map<K, V>, Serializable {
         @NotNull
         public Iterator<Map.Entry<K, V>> iterator() {
 
-            return new Iterator<Map.Entry<K, V>>() {
+            return new Iterator<>() {
                 private final Iterator<? extends Map.Entry<? extends K, ? extends V>> i = c.iterator();
 
                 public boolean hasNext() {
@@ -346,6 +349,7 @@ public class ImmutableMap<K, V> implements Map<K, V>, Serializable {
             };
         }
 
+        @NotNull
         @SuppressWarnings("unchecked")
         public Object[] toArray() {
 
@@ -356,8 +360,9 @@ public class ImmutableMap<K, V> implements Map<K, V>, Serializable {
             return a;
         }
 
+        @NotNull
         @SuppressWarnings("unchecked")
-        public <T> T[] toArray( final T[] a ) {
+        public <T> T[] toArray( @NotNull final T[] a ) {
             // We don't pass a to c.toArray, to avoid window of
             // vulnerability wherein an unscrupulous multithreaded client
             // could get his hands on raw (unwrapped) Entries from c.
@@ -398,7 +403,7 @@ public class ImmutableMap<K, V> implements Map<K, V>, Serializable {
          an unscrupulous List whose contains(Object o) method senses
          when o is a Map.Entry, and calls o.setValue.
          */
-        public boolean containsAll( final Collection<?> coll ) {
+        public boolean containsAll( @NotNull final Collection<?> coll ) {
 
             for ( Object e : coll ) {
                 if ( !contains( e ) ) // Invokes safe contains() above

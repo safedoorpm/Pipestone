@@ -295,6 +295,7 @@ public class FrameworkTableModel<D extends ThingInfo> extends CheckBoxStyleSelec
      {@code true} if this column is to be treated as readonly regardless of what the column manager might believe,
      or {@code false} if this column is to be treated as not readonly regardless of what the column manager might believe.
      */
+    @SuppressWarnings("SameParameterValue")
     protected void addColumn( final CManager<D> cManager, final Boolean readOnlyOverride ) {
 
         if ( isFrozen() ) {
