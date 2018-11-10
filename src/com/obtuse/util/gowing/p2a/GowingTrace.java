@@ -165,7 +165,7 @@ public class GowingTrace {
     }
 
     @SuppressWarnings("unused")
-    public String describeType( final StdGowingTokenizer.GowingToken2 valueToken ) {
+    public String describeType( final GowingToken valueToken ) {
 
         if ( valueToken.type() == StdGowingTokenizer.TokenType.PRIMITIVE_ARRAY ) {
 

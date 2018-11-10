@@ -6,6 +6,7 @@
 package com.obtuse.util.gowing.p2a;
 
 import com.obtuse.util.gowing.*;
+import com.obtuse.util.gowing.p2a.exceptions.GowingUnpackingException;
 import com.obtuse.util.gowing.p2a.holders.GowingStringHolder;
 import org.jetbrains.annotations.NotNull;
 

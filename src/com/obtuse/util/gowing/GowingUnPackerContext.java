@@ -1,8 +1,8 @@
 package com.obtuse.util.gowing;
 
 import com.obtuse.util.gowing.p2a.GowingEntityReference;
-import com.obtuse.util.gowing.p2a.GowingUnpackingException;
-import com.obtuse.util.gowing.p2a.StdGowingTokenizer;
+import com.obtuse.util.gowing.p2a.GowingToken;
+import com.obtuse.util.gowing.p2a.exceptions.GowingUnpackingException;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -37,7 +37,7 @@ public interface GowingUnPackerContext {
 
     SortedMap<GowingEntityReference, GowingPackable> getSeenEntitiesMap();
 
-    void rememberPackableEntity( StdGowingTokenizer.GowingToken2 token, GowingEntityReference er, GowingPackable entity );
+    void rememberPackableEntity( GowingToken token, GowingEntityReference er, GowingPackable entity );
 
     @NotNull
     Collection<EntityTypeName> getNewTypeNames();
@@ -91,7 +91,7 @@ public interface GowingUnPackerContext {
     @SuppressWarnings("UnusedReturnValue")
     int registerFactories( GowingEntityFactory[] factories );
 
-    void saveTypeAlias( StdGowingTokenizer.GowingToken2 typeIdToken, StdGowingTokenizer.GowingToken2 typeNameToken )
+    void saveTypeAlias( GowingToken typeIdToken, GowingToken typeNameToken )
             throws GowingUnpackingException;
 
     void setInputFile( File inputFile );

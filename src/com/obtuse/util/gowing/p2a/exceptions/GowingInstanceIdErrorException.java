@@ -1,4 +1,4 @@
-package com.obtuse.util.gowing.p2a;
+package com.obtuse.util.gowing.p2a.exceptions;
 
 /*
  * Copyright © 2018 Obtuse Systems Corporation

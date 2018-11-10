@@ -3,6 +3,7 @@ package com.obtuse.util.gowing.p2a;
 import com.obtuse.exceptions.HowDidWeGetHereError;
 import com.obtuse.util.ObtuseUtil;
 import com.obtuse.util.gowing.EntityName;
+import com.obtuse.util.gowing.p2a.exceptions.GowingUnpackingException;
 import org.jetbrains.annotations.NotNull;
 
 /*
@@ -23,7 +24,7 @@ public class GowingFormatVersion {
 
     private final @NotNull EntityName _groupName;
 
-    public GowingFormatVersion( final StdGowingTokenizer.GowingToken2 fileFormatToken, final @NotNull EntityName groupName )
+    public GowingFormatVersion( final GowingToken fileFormatToken, final @NotNull EntityName groupName )
             throws GowingUnpackingException {
 
         super();

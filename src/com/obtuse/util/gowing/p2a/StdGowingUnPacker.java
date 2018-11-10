@@ -9,6 +9,8 @@ import com.obtuse.util.*;
 import com.obtuse.util.gowing.*;
 import com.obtuse.util.gowing.p2a.backref.GowingFile;
 import com.obtuse.util.gowing.p2a.examples.SortedSetExample;
+import com.obtuse.util.gowing.p2a.exceptions.GowingUnpackingDeadlockedException;
+import com.obtuse.util.gowing.p2a.exceptions.GowingUnpackingException;
 import com.obtuse.util.gowing.p2a.holders.GowingPackableCollection;
 import com.obtuse.util.gowing.p2a.holders.GowingPackableMapping;
 import com.obtuse.util.kv.ObtuseKeyword;
@@ -249,13 +251,13 @@ public class StdGowingUnPacker implements GowingUnPacker {
     private GowingFormatVersion parseVersion()
             throws IOException, GowingUnpackingException {
 
-        StdGowingTokenizer.GowingToken2 versionToken = _tokenizer.getNextToken(
+        GowingToken versionToken = _tokenizer.getNextToken(
                 false,
                 StdGowingTokenizer.TokenType.FORMAT_VERSION
         );
-        @SuppressWarnings({ "UnusedAssignment", "unused" }) StdGowingTokenizer.GowingToken2 colon =
+        @SuppressWarnings({ "UnusedAssignment", "unused" }) GowingToken colon =
                 _tokenizer.getNextToken( false, StdGowingTokenizer.TokenType.COLON );
-        StdGowingTokenizer.GowingToken2 groupName = _tokenizer.getNextToken( false, StdGowingTokenizer.TokenType.STRING );
+        GowingToken groupName = _tokenizer.getNextToken( false, StdGowingTokenizer.TokenType.STRING );
 
         // StdGowingPacker insists that its groupName parameter be non-null so it should be impossible to get a null group name.
         // We accept null group names somewhat gracefully because we are reading from an external file.
@@ -320,7 +322,7 @@ public class StdGowingUnPacker implements GowingUnPacker {
             GowingFormatVersion version = parseVersion();
             if ( isVerbose() ) _t.verboseTrace( "pack file version is " + version.getVersionAsString() );
 
-            @SuppressWarnings({ "UnusedAssignment", "unused" }) StdGowingTokenizer.GowingToken2 semiColon =
+            @SuppressWarnings({ "UnusedAssignment", "unused" }) GowingToken semiColon =
                     _tokenizer.getNextToken( false, StdGowingTokenizer.TokenType.SEMI_COLON );
 
             GowingUnPackedEntityGroup group = new GowingUnPackedEntityGroup( version );
@@ -333,7 +335,7 @@ public class StdGowingUnPacker implements GowingUnPacker {
 
                 Measure unpackOne = new Measure( "StdGowingUnPacker - unpack one" );
 
-                StdGowingTokenizer.GowingToken2 token = _tokenizer.getNextToken( false, "unpack one" );
+                GowingToken token = _tokenizer.getNextToken( false, "unpack one" );
 
                 if ( token.type() == StdGowingTokenizer.TokenType.LONG ) {
 
@@ -354,7 +356,7 @@ public class StdGowingUnPacker implements GowingUnPacker {
                                 bundle = collectEntityDefinitionClause( false );
                             }
                             @SuppressWarnings({ "UnusedAssignment", "unused" })
-                            StdGowingTokenizer.GowingToken2 semiColonToken =
+                            GowingToken semiColonToken =
                                     _tokenizer.getNextToken(
                                             false,
                                             StdGowingTokenizer.TokenType.SEMI_COLON
@@ -519,7 +521,7 @@ public class StdGowingUnPacker implements GowingUnPacker {
                     }
 
                     long finishingPassDuration = finishingPassMeasure.done();
-                    if ( isVerbose() || Measure.isGloballyEnabled() ) {
+                    if ( isVerbose() /*|| Measure.isGloballyEnabled()*/ ) {
 
                         _t.verboseTrace(
                                 "StdGowingUnPacker:  finishing pass " +
@@ -559,20 +561,29 @@ public class StdGowingUnPacker implements GowingUnPacker {
 
             }
 
-            _t.verboseTrace(
-                    "done unpacking, file-level group is " + ObtuseUtil.enquoteJavaObject( group.getGroupName() ) + "," +
-                    " duration " + DateUtils.formatDuration( System.currentTimeMillis() - unPackStartTime )
-            );
-            TreeCounter<String> counts = new TreeCounter<>();
-            for ( GowingPackable entity : group.getAllEntities() ) {
+            if ( isVerbose() ) {
 
-                counts.count( entity.getClass().getCanonicalName() );
+                _t.verboseTrace(
+                        "done unpacking, file-level group is " +
+                        ObtuseUtil.enquoteJavaObject( group.getGroupName() ) +
+                        "," +
+                        " duration " +
+                        DateUtils.formatDuration( System.currentTimeMillis() - unPackStartTime )
+                );
 
-            }
+                TreeCounter<String> counts = new TreeCounter<>();
+                for ( GowingPackable entity : group.getAllEntities() ) {
 
-            for ( String key : new TreeSet<>( counts.keySet() ) ) {
+                    counts.count( entity.getClass()
+                                        .getCanonicalName() );
 
-                Logger.logMsg( ObtuseUtil.lpad( counts.getCount( key ), 10 ) + " - " + key );
+                }
+
+                for ( String key : new TreeSet<>( counts.keySet() ) ) {
+
+                    Logger.logMsg( ObtuseUtil.lpad( counts.getCount( key ), 10 ) + " - " + key );
+
+                }
 
             }
 
@@ -615,7 +626,7 @@ public class StdGowingUnPacker implements GowingUnPacker {
     @NotNull
     private GowingPackable constructEntity(
             final @NotNull GowingEntityReference er,
-            final @NotNull StdGowingTokenizer.GowingToken2 token,
+            final @NotNull GowingToken token,
             final @NotNull GowingPackedEntityBundle bundle
     )
             throws GowingUnpackingException {
@@ -853,10 +864,10 @@ public class StdGowingUnPacker implements GowingUnPacker {
     private void collectTypeAlias()
             throws IOException, GowingUnpackingException {
 
-        StdGowingTokenizer.GowingToken2 typeIdToken = _tokenizer.getNextToken( false, StdGowingTokenizer.TokenType.LONG );
-        @SuppressWarnings({ "UnusedAssignment", "unused" }) StdGowingTokenizer.GowingToken2 atSignToken =
+        GowingToken typeIdToken = _tokenizer.getNextToken( false, StdGowingTokenizer.TokenType.LONG );
+        @SuppressWarnings({ "UnusedAssignment", "unused" }) GowingToken atSignToken =
                 _tokenizer.getNextToken( false, StdGowingTokenizer.TokenType.AT_SIGN );
-        StdGowingTokenizer.GowingToken2 typeNameToken = _tokenizer.getNextToken(
+        GowingToken typeNameToken = _tokenizer.getNextToken(
                 false,
                 StdGowingTokenizer.TokenType.STRING
         );
@@ -869,7 +880,7 @@ public class StdGowingUnPacker implements GowingUnPacker {
     private GowingPackedEntityBundle collectEntityDefinitionClause( final boolean parsingSuperClause )
             throws IOException, GowingUnpackingException {
 
-        StdGowingTokenizer.GowingToken2 ourEntityReferenceToken = _tokenizer.getNextToken(
+        GowingToken ourEntityReferenceToken = _tokenizer.getNextToken(
                 false,
                 StdGowingTokenizer.TokenType.ENTITY_REFERENCE
         );
@@ -882,9 +893,9 @@ public class StdGowingUnPacker implements GowingUnPacker {
 
         }
 
-        @SuppressWarnings({ "UnusedAssignment", "unused" }) StdGowingTokenizer.GowingToken2 equalSignToken =
+        @SuppressWarnings({ "UnusedAssignment", "unused" }) GowingToken equalSignToken =
                 _tokenizer.getNextToken( false, StdGowingTokenizer.TokenType.EQUAL_SIGN );
-        @SuppressWarnings({ "UnusedAssignment", "unused" }) StdGowingTokenizer.GowingToken2 leftParenToken =
+        @SuppressWarnings({ "UnusedAssignment", "unused" }) GowingToken leftParenToken =
                 _tokenizer.getNextToken( false, StdGowingTokenizer.TokenType.LEFT_PAREN );
 
         Optional<EntityTypeName> optEntityTypeName =
@@ -913,7 +924,7 @@ public class StdGowingUnPacker implements GowingUnPacker {
 
             while ( true ) {
 
-                StdGowingTokenizer.GowingToken2 token = _tokenizer.getNextToken( true, "collectED" );
+                GowingToken token = _tokenizer.getNextToken( true, "collectED" );
                 switch ( token.type() ) {
 
                     case ENTITY_REFERENCE:
@@ -1034,13 +1045,13 @@ public class StdGowingUnPacker implements GowingUnPacker {
     private void collectFieldDefinitionClause( final GowingPackedEntityBundle bundle )
             throws IOException, GowingUnpackingException {
 
-        StdGowingTokenizer.GowingToken2 identifierToken = _tokenizer.getNextToken(
+        GowingToken identifierToken = _tokenizer.getNextToken(
                 true,
                 StdGowingTokenizer.TokenType.IDENTIFIER
         );
-        @SuppressWarnings({ "UnusedAssignment", "unused" }) StdGowingTokenizer.GowingToken2 equalSignToken =
+        @SuppressWarnings({ "UnusedAssignment", "unused" }) GowingToken equalSignToken =
                 _tokenizer.getNextToken( false, StdGowingTokenizer.TokenType.EQUAL_SIGN );
-        StdGowingTokenizer.GowingToken2 valueToken = _tokenizer.getNextToken( false, "collectFD" );
+        GowingToken valueToken = _tokenizer.getNextToken( false, "collectFD" );
 
         if ( valueToken.type() == StdGowingTokenizer.TokenType.ENTITY_REFERENCE &&
              valueToken.entityReference().getVersion() != null ) {

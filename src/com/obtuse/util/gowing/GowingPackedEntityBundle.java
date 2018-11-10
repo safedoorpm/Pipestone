@@ -5,7 +5,7 @@ import com.obtuse.util.FormattingLinkedList;
 import com.obtuse.util.Logger;
 import com.obtuse.util.ObtuseUtil;
 import com.obtuse.util.gowing.p2a.GowingEntityReference;
-import com.obtuse.util.gowing.p2a.GowingInstanceIdErrorException;
+import com.obtuse.util.gowing.p2a.exceptions.GowingInstanceIdErrorException;
 import com.obtuse.util.gowing.p2a.holders.GowingAbstractPackableHolder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

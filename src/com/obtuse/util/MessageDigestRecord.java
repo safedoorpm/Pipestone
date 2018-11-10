@@ -2,12 +2,10 @@ package com.obtuse.util;
 
 import com.obtuse.util.gowing.*;
 import com.obtuse.util.gowing.p2a.GowingEntityReference;
-import com.obtuse.util.gowing.p2a.GowingUnpackingException;
+import com.obtuse.util.gowing.p2a.exceptions.GowingUnpackingException;
 import com.obtuse.util.gowing.p2a.holders.GowingByteHolder;
 import com.obtuse.util.gowing.p2a.holders.GowingStringHolder;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.Arrays;
 
 /**
  Provide a way to pack and unpack the result of a checksum operation.
@@ -136,6 +134,7 @@ public class MessageDigestRecord extends GowingAbstractPackableEntity {
 
     }
 
+    @SuppressWarnings("RedundantThrows")
     @Override
     public boolean finishUnpacking( @NotNull final GowingUnPacker unPacker ) throws GowingUnpackingException {
 

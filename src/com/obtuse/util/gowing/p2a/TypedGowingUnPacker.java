@@ -4,6 +4,7 @@ import com.obtuse.util.Logger;
 import com.obtuse.util.ObtuseUtil;
 import com.obtuse.util.TreeSorter;
 import com.obtuse.util.gowing.*;
+import com.obtuse.util.gowing.p2a.exceptions.GowingUnpackingException;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -147,7 +148,7 @@ public class TypedGowingUnPacker<T extends GowingPackable> extends StdGowingUnPa
 
             } catch ( GowingUnpackingException e ) {
 
-                Logger.logErr( "com.obtuse.util.gowing.p2a.GowingUnpackingException caught", e );
+                Logger.logErr( "com.obtuse.util.gowing.p2a.exceptions.GowingUnpackingException caught", e );
 
                 _basicUnPackingResult = new GowingUtil.BasicUnpackingResult( what, e );
 

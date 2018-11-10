@@ -3,10 +3,11 @@
  * All rights reserved.
  */
 
-package com.obtuse.util.gowing.p2a;
+package com.obtuse.util.gowing.p2a.exceptions;
 
 import com.obtuse.util.gowing.GowingPackable;
 import com.obtuse.util.gowing.GowingUnPacker;
+import com.obtuse.util.gowing.p2a.GowingEntityReference;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

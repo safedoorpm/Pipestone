@@ -1,6 +1,7 @@
-package com.obtuse.util.gowing.p2a;
+package com.obtuse.util.gowing.p2a.exceptions;
 
 import com.obtuse.util.ParsingLocation;
+import com.obtuse.util.gowing.p2a.GowingToken;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -14,7 +15,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class GowingUnpackingException extends Exception {
 
-    private StdGowingTokenizer.GowingToken2 _causeToken;
+    private GowingToken _causeToken;
 
     @NotNull
     private final ParsingLocation _location;
@@ -24,7 +25,7 @@ public class GowingUnpackingException extends Exception {
 
     }
 
-    public GowingUnpackingException( final String msg, @Nullable final StdGowingTokenizer.GowingToken2 causeToken ) {
+    public GowingUnpackingException( final String msg, @Nullable final GowingToken causeToken ) {
 
         this( msg, causeToken, ParsingLocation.UNKNOWN, null );
 
@@ -48,7 +49,7 @@ public class GowingUnpackingException extends Exception {
 
     public GowingUnpackingException(
             final String msg,
-            @Nullable final StdGowingTokenizer.GowingToken2 causeToken,
+            @Nullable final GowingToken causeToken,
             @NotNull final ParsingLocation parsingLocation,
             @Nullable final Throwable cause
     ) {
@@ -76,13 +77,13 @@ public class GowingUnpackingException extends Exception {
     }
 
     @Nullable
-    public StdGowingTokenizer.GowingToken2 getCauseToken() {
+    public GowingToken getCauseToken() {
 
         return _causeToken;
 
     }
 
-    public void setCauseToken( final StdGowingTokenizer.GowingToken2 token ) {
+    public void setCauseToken( final GowingToken token ) {
 
         if ( _causeToken == null ) {
 

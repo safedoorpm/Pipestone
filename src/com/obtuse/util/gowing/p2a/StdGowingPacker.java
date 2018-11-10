@@ -741,6 +741,13 @@ public class StdGowingPacker implements GowingPacker {
 
         } else {
 
+            // This statement is quite capable of emitting a string that contains 'characters' which are not
+            // defined Unicode code points. The unpacking code needs to be able to reverse the process.
+            // As of 2018-11-06, it does.
+            // -Danny
+            //
+            // Note that by "not defined Unicode code point", I mean {@code Character.isDefined( ch )} returns false.
+
             _writer.print( ObtuseUtil.enquoteToJavaString( s ) );
 
         }

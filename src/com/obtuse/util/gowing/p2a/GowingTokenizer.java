@@ -6,6 +6,7 @@ package com.obtuse.util.gowing.p2a;
 
 import com.obtuse.util.ParsingLocation;
 import com.obtuse.util.gowing.GowingMetaDataHandler;
+import com.obtuse.util.gowing.p2a.exceptions.GowingUnpackingException;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -18,13 +19,13 @@ import java.io.IOException;
 
 public interface GowingTokenizer extends Closeable {
 
-    void putBackToken( StdGowingTokenizer.GowingToken2 token );
+    void putBackToken( GowingToken token );
 
     @NotNull
-    StdGowingTokenizer.GowingToken2 getNextToken( boolean identifierAllowed, @NotNull StdGowingTokenizer.TokenType requiredType )
+    GowingToken getNextToken( boolean identifierAllowed, @NotNull StdGowingTokenizer.TokenType requiredType )
 	    throws IOException, GowingUnpackingException;
 
-    StdGowingTokenizer.GowingToken2 getNextToken( boolean identifierAllowed, final String where )
+    GowingToken getNextToken( boolean identifierAllowed, final String where )
 	    throws IOException, GowingUnpackingException;
 
     @Nullable

@@ -681,6 +681,7 @@ public class FrameworkTableModel<D extends ThingInfo> extends CheckBoxStyleSelec
     }
 
     @SuppressWarnings("UnusedReturnValue")
+    @NotNull
     public CheckBoxRowWrapper<D> addRowDatum( final D rowData ) {
 
         CheckBoxRowWrapper<D> newRowWrapper = new CheckBoxRowWrapper<>( this, rowData );

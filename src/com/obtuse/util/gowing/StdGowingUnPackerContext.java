@@ -2,8 +2,8 @@ package com.obtuse.util.gowing;
 
 import com.obtuse.exceptions.HowDidWeGetHereError;
 import com.obtuse.util.gowing.p2a.GowingEntityReference;
-import com.obtuse.util.gowing.p2a.GowingUnpackingException;
-import com.obtuse.util.gowing.p2a.StdGowingTokenizer;
+import com.obtuse.util.gowing.p2a.GowingToken;
+import com.obtuse.util.gowing.p2a.exceptions.GowingUnpackingException;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -47,7 +47,7 @@ public class StdGowingUnPackerContext implements GowingUnPackerContext {
     }
 
     @Override
-    public void saveTypeAlias( final StdGowingTokenizer.GowingToken2 typeIdToken, final StdGowingTokenizer.GowingToken2 typeNameToken )
+    public void saveTypeAlias( final GowingToken typeIdToken, final GowingToken typeNameToken )
             throws GowingUnpackingException {
 
         int typeReferenceId = typeIdToken.intValue();
@@ -244,7 +244,7 @@ public class StdGowingUnPackerContext implements GowingUnPackerContext {
     }
 
     @Override
-    public void rememberPackableEntity( @NotNull final StdGowingTokenizer.GowingToken2 token, @NotNull final GowingEntityReference er, @NotNull final GowingPackable entity ) {
+    public void rememberPackableEntity( @NotNull final GowingToken token, @NotNull final GowingEntityReference er, @NotNull final GowingPackable entity ) {
 
         if ( isEntityKnown( er ) ) {
 

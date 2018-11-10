@@ -6,7 +6,7 @@ package com.obtuse.util;
 
 import com.obtuse.util.gowing.*;
 import com.obtuse.util.gowing.p2a.GowingEntityReference;
-import com.obtuse.util.gowing.p2a.GowingUnpackingException;
+import com.obtuse.util.gowing.p2a.exceptions.GowingUnpackingException;
 import com.obtuse.util.gowing.p2a.holders.GowingLongHolder;
 import org.jetbrains.annotations.NotNull;
 
@@ -37,6 +37,7 @@ public class FormattedImmutableDate extends ImmutableDate implements GowingPacka
             return VERSION;
         }
 
+        @SuppressWarnings("RedundantThrows")
         @NotNull
         @Override
         public GowingPackable createEntity(
@@ -98,7 +99,6 @@ public class FormattedImmutableDate extends ImmutableDate implements GowingPacka
 
      @param unPacker the active Gowing unpacker.
      @param bundle   the bundle representing the instance to be recovered.
-     @throws GowingUnpackingException if something goes wrong.
      */
 
     public FormattedImmutableDate(

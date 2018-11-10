@@ -315,7 +315,7 @@ public class DateUtils {
 
     }
 
-    private static ImmutableDate dateParse( final SimpleDateFormat format, final String token, final int lineNumber )
+    public static ImmutableDate dateParse( final SimpleDateFormat format, final String token, final int lineNumber )
             throws ParsingException {
 
         try {

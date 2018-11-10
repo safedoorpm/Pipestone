@@ -1,4 +1,4 @@
-package com.obtuse.util.gowing.p2a;
+package com.obtuse.util.gowing.p2a.exceptions;
 
 import com.obtuse.util.gowing.GowingPackedEntityBundle;
 import org.jetbrains.annotations.Nullable;

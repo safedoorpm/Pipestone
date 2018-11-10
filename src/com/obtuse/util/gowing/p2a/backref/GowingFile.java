@@ -1,14 +1,10 @@
 package com.obtuse.util.gowing.p2a.backref;
 
-import com.obtuse.util.ObtuseCollections;
 import com.obtuse.util.ObtuseUtil;
 import com.obtuse.util.gowing.*;
 import com.obtuse.util.gowing.p2a.GowingBackReferenceable;
 import com.obtuse.util.gowing.p2a.GowingEntityReference;
-import com.obtuse.util.gowing.p2a.GowingString;
-import com.obtuse.util.gowing.p2a.GowingUnpackingException;
-import com.obtuse.util.gowing.p2a.holders.GowingPackableCollection;
-import com.obtuse.util.gowing.p2a.holders.GowingPackableEntityHolder;
+import com.obtuse.util.gowing.p2a.exceptions.GowingUnpackingException;
 import com.obtuse.util.gowing.p2a.holders.GowingStringHolder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -16,7 +12,6 @@ import org.jetbrains.annotations.Nullable;
 import java.io.File;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.Optional;
 
 /**
  Something to carry around a {@link File} instance.

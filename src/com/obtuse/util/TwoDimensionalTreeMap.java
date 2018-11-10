@@ -8,7 +8,7 @@ import com.obtuse.exceptions.HowDidWeGetHereError;
 import com.obtuse.util.gowing.*;
 import com.obtuse.util.gowing.p2a.GowingEntityReference;
 import com.obtuse.util.gowing.p2a.GowingUnPackedEntityGroup;
-import com.obtuse.util.gowing.p2a.GowingUnpackingException;
+import com.obtuse.util.gowing.p2a.exceptions.GowingUnpackingException;
 import com.obtuse.util.gowing.p2a.GowingUtil;
 import com.obtuse.util.gowing.p2a.holders.GowingBooleanHolder;
 import com.obtuse.util.gowing.p2a.holders.GowingPackableEntityHolder;
@@ -588,7 +588,7 @@ public class TwoDimensionalTreeMap<T1,T2,V> extends GowingAbstractPackableEntity
 
         } catch ( GowingUnpackingException e ) {
 
-            Logger.logErr( "com.obtuse.util.gowing.p2a.GowingUnpackingException caught", e );
+            Logger.logErr( "com.obtuse.util.gowing.p2a.exceptions.GowingUnpackingException caught", e );
 
         }
 

@@ -1,6 +1,6 @@
 package com.obtuse.util.gowing;
 
-import com.obtuse.util.gowing.p2a.StdGowingTokenizer;
+import com.obtuse.util.gowing.p2a.GowingToken;
 import org.jetbrains.annotations.NotNull;
 
 /*
@@ -52,10 +52,10 @@ public final class EntityTypeName implements Comparable<EntityTypeName> {
      Encapsulate the name of a {@link GowingPackable} type's {@link String} name.
      <p>This constructor is intended to be used internally by Gowing (specifically, Gowing unpackers).
      Using this constructor anywhere else is likely to lead to a somewhat painful "learning opportunity".</p>
-     @param typeNameToken a {@link StdGowingTokenizer.GowingToken2} instance containing the name of a {@link GowingPackable} type.
+     @param typeNameToken a {@link GowingToken} instance containing the name of a {@link GowingPackable} type.
      */
 
-    public EntityTypeName( final StdGowingTokenizer.GowingToken2 typeNameToken ) {
+    public EntityTypeName( final GowingToken typeNameToken ) {
         super();
 
         _name = typeNameToken.stringValue();

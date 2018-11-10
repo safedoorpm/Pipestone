@@ -8,7 +8,7 @@ import com.obtuse.db.PostgresConnection;
 import com.obtuse.exceptions.HowDidWeGetHereError;
 import com.obtuse.util.gowing.*;
 import com.obtuse.util.gowing.p2a.GowingUnPackedEntityGroup;
-import com.obtuse.util.gowing.p2a.GowingUnpackingException;
+import com.obtuse.util.gowing.p2a.exceptions.GowingUnpackingException;
 import com.obtuse.util.gowing.p2a.StdGowingPacker;
 import com.obtuse.util.gowing.p2a.StdGowingUnPacker;
 import org.jetbrains.annotations.Contract;
@@ -1245,6 +1245,113 @@ public class ObtuseUtil {
         }
 
         return null;
+
+    }
+
+    /**
+     Make a copy of an array.
+     <p>Not really much value to this method vs {@link Arrays#copyOf(Object[], int)} but I can remember where
+     to find this method whereas I always seem to fumble around a bit when trying to find where Java put
+     the array utility methods.</p>
+     @param array the array to be copied. If you pass {@code null} then you get {@code null}.
+     @param <T> the type of element in the array.
+     @return a copy of the array or null if {@code array} is {@code null}.
+     */
+
+    public static <T> T[] arrayCopy( @Nullable final T[] array ) {
+
+        return array == null ? null : Arrays.copyOf( array, array.length );
+
+    }
+
+    public static byte[] arrayCopy( @Nullable final byte[] array ) {
+
+        if ( array == null ) {
+
+            return null;
+
+        }
+        byte[] copy = new byte[array.length];
+        System.arraycopy(array, 0, copy, 0, array.length );
+        return copy;
+
+    }
+
+    public static short[] arrayCopy( @Nullable final short[] array ) {
+
+        if ( array == null ) {
+
+            return null;
+
+        }
+        short[] copy = new short[array.length];
+        System.arraycopy(array, 0, copy, 0, array.length );
+        return copy;
+
+    }
+
+    public static int[] arrayCopy( @Nullable final int[] array ) {
+
+        if ( array == null ) {
+
+            return null;
+
+        }
+        int[] copy = new int[array.length];
+        System.arraycopy(array, 0, copy, 0, array.length );
+        return copy;
+
+    }
+
+    public static long[] arrayCopy( @Nullable final long[] array ) {
+
+        if ( array == null ) {
+
+            return null;
+
+        }
+        long[] copy = new long[array.length];
+        System.arraycopy(array, 0, copy, 0, array.length );
+        return copy;
+
+    }
+
+    public static float[] arrayCopy( @Nullable final float[] array ) {
+
+        if ( array == null ) {
+
+            return null;
+
+        }
+        float[] copy = new float[array.length];
+        System.arraycopy(array, 0, copy, 0, array.length );
+        return copy;
+
+    }
+
+    public static double[] arrayCopy( @Nullable final double[] array ) {
+
+        if ( array == null ) {
+
+            return null;
+
+        }
+        double[] copy = new double[array.length];
+        System.arraycopy(array, 0, copy, 0, array.length );
+        return copy;
+
+    }
+
+    public static boolean[] arrayCopy( @Nullable final boolean[] array ) {
+
+        if ( array == null ) {
+
+            return null;
+
+        }
+        boolean[] copy = new boolean[array.length];
+        System.arraycopy(array, 0, copy, 0, array.length );
+        return copy;
 
     }
 
