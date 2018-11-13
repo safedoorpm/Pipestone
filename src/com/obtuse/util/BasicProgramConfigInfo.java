@@ -91,7 +91,11 @@ public class BasicProgramConfigInfo {
         String home = System.getProperty( "user.home" );
         if ( workingDirectory == null ) {
 
-            if ( home != null ) {
+            if ( home == null ) {
+
+                BasicProgramConfigInfo.s_workingDirectory = null;
+
+            } else {
 
                 // Mac OS has a convention as to where these sorts of things go.
                 // Follow the convention if we are running on the Mac OS.
@@ -110,19 +114,24 @@ public class BasicProgramConfigInfo {
 
                 } else {
 
-                    BasicProgramConfigInfo.s_workingDirectory = new File( new File( new File( new File(
-                            new File( home ),
-                            ".ObtuseUtil"
-                    ), getVendorName() ), getApplicationName() ), getComponentName() );
+                    BasicProgramConfigInfo.s_workingDirectory = new File(
+                            new File(
+                                    new File(
+                                            new File(
+                                                    new File( home ),
+                                                    ".ObtuseUtil"
+                                            ),
+                                            getVendorName()
+                                    ),
+                                    getApplicationName()
+                            ),
+                            getComponentName()
+                    );
 
                 }
 
                 //noinspection ResultOfMethodCallIgnored
                 BasicProgramConfigInfo.s_workingDirectory.mkdirs();
-
-            } else {
-
-                BasicProgramConfigInfo.s_workingDirectory = null;
 
             }
 

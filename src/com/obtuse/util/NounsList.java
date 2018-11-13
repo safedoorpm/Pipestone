@@ -7,9 +7,9 @@ package com.obtuse.util;
 import java.util.*;
 
 /**
- * A randomized verb picker.
+ * A randomized noun picker.
  * <p/>
- * This list of verbs 'borrowed' from http://www.momswhothink.com/reading/list-of-verbs.html
+ * This list of nouns 'borrowed' from http://www.momswhothink.com/reading/list-of-nouns.html
  */
 
 @SuppressWarnings("UnusedDeclaration")
@@ -1014,9 +1014,9 @@ public class NounsList {
 
         }
 
-        String verb = s_available.remove( s_rng.nextInt( s_available.size() ) );
+        String noun = s_available.remove( s_rng.nextInt( s_available.size() ) );
 
-        return verb + ( s_iteration == 0 ? "" : " " + s_iteration );
+        return noun + ( s_iteration == 0 ? "" : " " + s_iteration );
 
     }
 
