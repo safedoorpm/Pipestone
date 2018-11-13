@@ -7,10 +7,6 @@
   <component name="ChangeListManager">
     <list default="true" id="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" name="Default" comment="Rework image scaling to ensure that compatible image types are used at each step of a pipeline that is reading, scaling, possibly rotating, and writing images (in other words, probably making thumbnails).&#10;&#10;Implement a couple of utility methods which can be used to wait for images to load asynchronously or, alternatively, to ensure that images are loaded in a situation where it isn't clear if they are being loaded asynchronously.&#10;&#10;Some cleanup (more to come - hopefully, this is just a checkpoint commit).">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/ObtuseImageFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/ObtuseImageFile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/ObtuseImageUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/ObtuseImageUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/BasicProgramConfigInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/BasicProgramConfigInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/NounsList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/NounsList.java" afterDir="false" />
     </list>
     <ignored path="Pipestone.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -225,8 +221,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/ObtuseImageUtils.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1993">
-              <caret line="592" column="24" selection-start-line="592" selection-start-column="24" selection-end-line="592" selection-end-column="24" />
+            <state relative-caret-position="667">
+              <caret line="643" column="41" lean-forward="true" selection-start-line="643" selection-start-column="41" selection-end-line="643" selection-end-column="41" />
             </state>
           </provider>
         </entry>
@@ -1115,7 +1111,7 @@
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file:///Users/danny/IdeaProjects/Pipestone/src/com/obtuse/graphs/UndirectedEdge.java" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1542146183225" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1542147746640" />
     <property name="dynamic.classpath" value="false" />
     <property name="extract.method.default.visibility" value="private" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -1531,14 +1527,7 @@
       <workItem from="1540944092224" duration="3378000" />
       <workItem from="1541068308183" duration="939000" />
       <workItem from="1541807807132" duration="3122000" />
-      <workItem from="1541811240366" duration="2377000" />
-    </task>
-    <task id="LOCAL-00031" summary="Implement auto-indenting of logging messages in com.util.Logger.&#10;Add a method to ObtuseUtil to detect if the running JVM is under the control of the Java debugger.&#10;Add a couple of methods to ObtuseUtil to do centering of text (much like lpad and rpad but they add spaces on both sides to 'center' the text).&#10;Clarify who is responsible for what in class-level Javadoc comment in the UniquelyNamedEntity class.">
-      <created>1474901855535</created>
-      <option name="number" value="00031" />
-      <option name="presentableId" value="LOCAL-00031" />
-      <option name="project" value="LOCAL" />
-      <updated>1474901855535</updated>
+      <workItem from="1541811240366" duration="3127000" />
     </task>
     <task id="LOCAL-00032" summary="Mostly minor cleanup.">
       <created>1485977240169</created>
@@ -1876,11 +1865,18 @@
       <option name="project" value="LOCAL" />
       <updated>1541811867782</updated>
     </task>
-    <option name="localTasksCounter" value="80" />
+    <task id="LOCAL-00080" summary="Rework image scaling to ensure that compatible image types are used at each step of a pipeline that is reading, scaling, possibly rotating, and writing images (in other words, probably making thumbnails).&#10;&#10;Implement a couple of utility methods which can be used to wait for images to load asynchronously or, alternatively, to ensure that images are loaded in a situation where it isn't clear if they are being loaded asynchronously.&#10;&#10;Some cleanup (more to come - hopefully, this is just a checkpoint commit).">
+      <created>1542146204373</created>
+      <option name="number" value="00080" />
+      <option name="presentableId" value="LOCAL-00080" />
+      <option name="project" value="LOCAL" />
+      <updated>1542146204373</updated>
+    </task>
+    <option name="localTasksCounter" value="81" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1057614000" />
+    <option name="totallyTimeSpent" value="1058364000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -2937,8 +2933,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/ObtuseImageUtils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1993">
-          <caret line="592" column="24" selection-start-line="592" selection-start-column="24" selection-end-line="592" selection-end-column="24" />
+        <state relative-caret-position="667">
+          <caret line="643" column="41" lean-forward="true" selection-start-line="643" selection-start-column="41" selection-end-line="643" selection-end-column="41" />
         </state>
       </provider>
     </entry>
