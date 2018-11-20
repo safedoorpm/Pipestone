@@ -178,6 +178,7 @@ public class StdGowingUnPacker implements GowingUnPacker {
         getUnPackerContext().registerFactory( ThreeDimensionalTreeMap.FACTORY );
         getUnPackerContext().registerFactory( TwoDimensionalTreeMap.FACTORY );
         getUnPackerContext().registerFactory( TreeSorter.FACTORY );
+        getUnPackerContext().registerFactory( UniqueID.FACTORY );
 
     }
 

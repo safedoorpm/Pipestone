@@ -6,7 +6,6 @@ package com.obtuse.util;
 
 /**
  * An entity with an id number which is unique within some id-space.
- * >p/>
  * Instance's of this class are immutable.
  * Obviously, instances of derivations of this class might not be immutable!
  * <p/>
@@ -15,6 +14,8 @@ package com.obtuse.util;
  * This class also implements a {@link #equals} method which satisfies the equals contract as specified by
  * the {@link Object#equals} method.
  * Of course, derivations of this class could implement hashCode and/or equals methods in ways which violate these contracts.
+ * <p/>
+ * <p>Check out {@link UniqueID} for a different spin on the whole unique identifier notion.</p>
  */
 
 @SuppressWarnings("UnusedDeclaration")

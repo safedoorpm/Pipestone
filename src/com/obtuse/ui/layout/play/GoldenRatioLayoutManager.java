@@ -21,8 +21,10 @@ import java.awt.*;
  an appropriately sized square and placed on the spiral.
  <p/>A few notes are in order:
  <ul>
- <li>The components in the container will appear in the spiral in the same order as they were added to the container.</li>
- <li>This layout manager completely ignores any minimum, preferred or maximum size attributes which might have been specified
+ <li>The components in the container will appear in the spiral in the same order as they were added to the container
+ .</li>
+ <li>This layout manager completely ignores any minimum, preferred or maximum size attributes which might have been
+ specified
  for the components.</li>
  </ul>
  <h3>Golden Spirals, Ratios and Rectangles</h3>
@@ -34,7 +36,8 @@ import java.awt.*;
  <li>as a horizontal rectangle with the first square occupying the right end of the rectangle</li>
  <li>as a vertical rectangle with the first square occupying the bottom of the rectangle</li>
  </ol>
- The nature of <i>golden rectangles</i> is such that if a square of size <code>A x A</code> completely occupies one end of
+ The nature of <i>golden rectangles</i> is such that if a square of size <code>A x A</code> completely occupies one
+ end of
  <i>golden rectangle</i> of
  size <code>A x B</code> (<code>A</code> being the width of the rectangle and <code>B</code> being its length) then the
  rest of the rectangle will be a smaller <i>golden rectangle</i>
@@ -46,10 +49,12 @@ import java.awt.*;
  of rapidly decreasing size.
  This spiral is known as a <i>golden spiral</i>.
  <p/>What makes this (theoretically) infinite spiral possible is the fact that the length of the original rectangle
- is <code>(1+sqrt(5))/2</code> times the width of the original rectangle. This ratio is known as the <i>golden ratio</i>.
+ is <code>(1+sqrt(5))/2</code> times the width of the original rectangle. This ratio is known as the <i>golden
+ ratio</i>.
  <p/>See the Wikipedia Golden Ratio page at <a href="https://en.wikipedia.org/wiki/Golden_ratio">https://en.wikipedia
  .org/wiki/Golden_ratio</a> for more information
- (look for the section titled <i>Geometry</i> for quite respectable representation of the <i>golden spirals</i> that this
+ (look for the section titled <i>Geometry</i> for quite respectable representation of the <i>golden spirals</i> that
+ this
  layout manager produces).
  */
 
@@ -87,7 +92,8 @@ public class GoldenRatioLayoutManager implements LayoutManager {
 
     /**
      Construct a unnamed golden ratio layout manager with an optional {@link MessageProxy} instance.
-     <p/>See {@link com.obtuse.util.LoggingMessageProxy} for a simple yet reasonably useful message proxy implementation.
+     <p/>See {@link com.obtuse.util.LoggingMessageProxy} for a simple yet reasonably useful message proxy
+     implementation.
 
      @param mp the optional message proxy instance. If provided, this instance will generate log (debug) messages by
      sending them to the specified message proxy.
@@ -101,7 +107,8 @@ public class GoldenRatioLayoutManager implements LayoutManager {
 
     /**
      Construct a named golden ratio layout manage with an optional {@link MessageProxy} instance.
-     <p/>See {@link com.obtuse.util.LoggingMessageProxy} for a simple yet reasonably useful message proxy implementation.
+     <p/>See {@link com.obtuse.util.LoggingMessageProxy} for a simple yet reasonably useful message proxy
+     implementation.
 
      @param mp   the optional message proxy instance. If provided, this instance will generate log (debug) messages by
      sending them to the specified message proxy.
@@ -135,9 +142,11 @@ public class GoldenRatioLayoutManager implements LayoutManager {
     /**
      Determine if this instance is producing log messages.
 
-     @return <code>true</code> if this instance is producing log messages via a {@link MessageProxy} instance provided when
+     @return <code>true</code> if this instance is producing log messages via a {@link MessageProxy} instance
+     provided when
      this
-     instance was constructed; <code>false</code> if no such {@link MessageProxy} instance was provided when this instance
+     instance was constructed; <code>false</code> if no such {@link MessageProxy} instance was provided when this
+     instance
      was constructed.
      */
 
@@ -149,7 +158,8 @@ public class GoldenRatioLayoutManager implements LayoutManager {
 
     /**
      Does nothing of substance (required by {@link LayoutManager} interface).
-     <p/>This method is required by the {@link LayoutManager} interface. Calls to this method do nothing other than possibly
+     <p/>This method is required by the {@link LayoutManager} interface. Calls to this method do nothing other than
+     possibly
      sending log message to the {@link MessageProxy} instance if one was provided when this instance was constructed.
 
      @param name parameter required by the {@link LayoutManager} interface.
@@ -173,19 +183,22 @@ public class GoldenRatioLayoutManager implements LayoutManager {
      Utility method which returns a formatted string describing a {@link Component} instance.
 
      @param component the component instance.
-     @return a message along the lines of <code>JPanel (fred)</code> where <i>JPanel</i> would be the type of component and
+     @return a message along the lines of <code>JPanel (fred)</code> where <i>JPanel</i> would be the type of
+     component and
      <i>fred</i> would be the value returned by <code>component.getName()</code>.
      */
 
     public static String getComponentName( final Component component ) {
 
-        return component.getClass().getSimpleName() + "(" + component.getName() + ")";
+        return component.getClass()
+                        .getSimpleName() + "(" + component.getName() + ")";
 
     }
 
     /**
      Does nothing of substance (required by {@link LayoutManager} interface).
-     <p/>This method is required by the {@link LayoutManager} interface. Calls to this method do nothing other than possibly
+     <p/>This method is required by the {@link LayoutManager} interface. Calls to this method do nothing other than
+     possibly
      sending log message to the {@link MessageProxy} instance if one was provided when this instance was constructed.
 
      @param component parameter required by the {@link LayoutManager} interface.
@@ -261,7 +274,8 @@ public class GoldenRatioLayoutManager implements LayoutManager {
      <p/>
      This layout manager operates as follows:
      <ol>
-     <li>This method computes the largest <i>golden rectangle</i> which can fit entirely within the specified container's
+     <li>This method computes the largest <i>golden rectangle</i> which can fit entirely within the specified
+     container's
      usable width and height, as computed by {@link #computeSizeWithinInsets}.<br><br>
      </li>
      <li>If the largest <i>golden rectangle</i> (rectangle #1) that fits is horizontally oriented then it is centered
@@ -446,6 +460,7 @@ public class GoldenRatioLayoutManager implements LayoutManager {
                         setBounds( stage, components[i], ulx, uly, urx - ulx, newY - uly, nextHeight / nextWidth );
                         uly = newY;
                         ury = newY;
+                        //noinspection SuspiciousNameCombination
                         nextHeight -= nextWidth;
                         stage = 2;
                         break;
@@ -463,6 +478,7 @@ public class GoldenRatioLayoutManager implements LayoutManager {
                         setBounds( stage, components[i], newX, uly, urx - newX, lry - ury, nextWidth / nextHeight );
                         urx = newX;
                         lrx = newX;
+                        //noinspection SuspiciousNameCombination
                         nextWidth -= nextHeight;
                         stage = 3;
                         break;
@@ -480,6 +496,7 @@ public class GoldenRatioLayoutManager implements LayoutManager {
                         setBounds( stage, components[i], llx, newY, lrx - llx, lry - newY, nextHeight / nextHeight );
                         lly = newY;
                         lry = newY;
+                        //noinspection SuspiciousNameCombination
                         nextHeight -= nextWidth;
                         stage = 0;
                         break;

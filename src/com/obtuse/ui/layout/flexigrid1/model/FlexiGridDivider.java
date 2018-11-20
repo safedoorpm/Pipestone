@@ -7,7 +7,6 @@ package com.obtuse.ui.layout.flexigrid1.model;
 
 import com.obtuse.exceptions.HowDidWeGetHereError;
 import com.obtuse.ui.layout.flexigrid1.util.FlexiGridBasicConstraint;
-import com.obtuse.util.Logger;
 import com.obtuse.util.ObtuseUtil;
 import org.jetbrains.annotations.NotNull;
 

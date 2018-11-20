@@ -115,6 +115,7 @@ public class FlexiGridModelSlice implements Comparable<FlexiGridModelSlice> {
 
     }
 
+    @SuppressWarnings("unused")
     @NotNull
     public java.util.List<String> getComponentDescriptions() {
 
@@ -148,12 +149,15 @@ public class FlexiGridModelSlice implements Comparable<FlexiGridModelSlice> {
     public void verifySlice( final @NotNull String methodName, final @NotNull String why ) {
 
         @NotNull Optional<FlexiGridPanelModel> optOwner = getOptOwner();
-        optOwner.ifPresent( flexiGridPanelModel -> {
-                                flexiGridPanelModel.verify(
-                                        "FlexiGridModelSlice(" + ObtuseUtil.enquoteToJavaString( getName() ) + ")" + methodName,
-                                        why + "/slice"
-                                    );
-                            }
+        optOwner.ifPresent(
+                flexiGridPanelModel ->
+                        flexiGridPanelModel.verify(
+                                "FlexiGridModelSlice(" +
+                                ObtuseUtil.enquoteToJavaString( getName() ) +
+                                ")" +
+                                methodName,
+                                why + "/slice"
+                        )
         );
 
     }
@@ -173,7 +177,7 @@ public class FlexiGridModelSlice implements Comparable<FlexiGridModelSlice> {
 
         if ( component == null ) {
 
-            setComponent( ix, (FlexiGridItemInfo)null );
+            setComponent( ix, null );
 
             return;
 
@@ -247,6 +251,7 @@ public class FlexiGridModelSlice implements Comparable<FlexiGridModelSlice> {
      @throws IllegalArgumentException if this instance's marker tag is already crystallized.
      */
 
+    @SuppressWarnings("UnusedReturnValue")
     public FlexiGridModelSlice setMarkerTag( final @NotNull String markerTag ) {
 
         if ( _markerTagCrystallized ) {
@@ -283,6 +288,7 @@ public class FlexiGridModelSlice implements Comparable<FlexiGridModelSlice> {
      @return {@code true} if this instance's marker tag has crystallized (become impossible to change); {@code false} otherwise.
      */
 
+    @SuppressWarnings("unused")
     public boolean isMarkerTagCrystallized() {
 
         return _markerTagCrystallized;
@@ -334,7 +340,9 @@ public class FlexiGridModelSlice implements Comparable<FlexiGridModelSlice> {
 
     }
 
-    /* package private */ FlexiGridPanelModel replaceOwner( final @NotNull FlexiGridPanelModel<FlexiGridModelSlice> newOwner ) {
+    /* package private */
+    @SuppressWarnings("unused")
+    FlexiGridPanelModel replaceOwner( final @NotNull FlexiGridPanelModel<FlexiGridModelSlice> newOwner ) {
 
         FlexiGridPanelModel oldOwner = _owner;
         _owner = newOwner;
@@ -343,7 +351,9 @@ public class FlexiGridModelSlice implements Comparable<FlexiGridModelSlice> {
 
     }
 
-    /* package private */ FlexiGridPanelModel clearOwner() {
+    /* package private */
+    @SuppressWarnings("unused")
+    FlexiGridPanelModel clearOwner() {
 
         FlexiGridPanelModel oldOwner = _owner;
         _owner = null;

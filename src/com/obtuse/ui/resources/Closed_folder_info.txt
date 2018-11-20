@@ -1,0 +1,6 @@
+The "Closed_folder_coloured" icon is straight from the "Database Toolbar icons" collections' 20x20 png set.
+The "Closed_folder_grey" icon is the same image completely desaturated.
+The "Closed_folder_orange" icon is the "Closed_folder_coloured" icon with its Hue adjusted by -15.
+The "Leaf_document" icon is straight from the "Business Toolbar icons" collections' 20x20 png set.
+
+All adjustments done using The Gimp.
