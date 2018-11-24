@@ -5,21 +5,7 @@
     <option name="SHOW_STRUCTURE" value="true" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" name="Default" comment="Cleanup of the VirtualScrollablePanel facility along with a few fairly minor bug fixes and API changes.&#10;&#10;The biggest change is breaking up a couple .java files by moving inner classes and interfaces out into their own .java file.&#10; &#10;Minor cleanup in ObtuseUtils.&#10;&#10;Add a static method to the ImageIconUtils class that allows the caller to specify which class loader should be used to load ImageIcons from.&#10;&#10;Comment out a bunch of debug output here and there.">
-      <change afterPath="$PROJECT_DIR$/src/com/obtuse/ui/vsp/AbstractVirtualScrollablePanelModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/obtuse/ui/vsp/play/PlayElementPanelModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/tree/testing/TestTreeRowSlice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/tree/testing/TestTreeRowSlice.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/vsp/ElementView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/vsp/ElementView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/vsp/VirtualScrollableElementModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/vsp/VirtualScrollableElementModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/vsp/VirtualScrollablePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/vsp/VirtualScrollablePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/vsp/VirtualScrollablePanelModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/vsp/VirtualScrollablePanelModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/vsp/play/PlayElementData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/vsp/play/PlayElementData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/vsp/play/PlayElementModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/vsp/play/PlayElementModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/vsp/play/PlayElementView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/vsp/play/PlayElementView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/ImageIconUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ImageIconUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/ObtuseUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ObtuseUtil.java" afterDir="false" />
-    </list>
+    <list default="true" id="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" name="Default" comment="Cleanup of the VirtualScrollablePanel facility along with a few fairly minor bug fixes and API changes.&#10;&#10;The biggest change is breaking up a couple .java files by moving inner classes and interfaces out into their own .java file.&#10; &#10;Minor cleanup in ObtuseUtils.&#10;&#10;Add a static method to the ImageIconUtils class that allows the caller to specify which class loader should be used to load ImageIcons from.&#10;&#10;Comment out a bunch of debug output here and there." />
     <ignored path="Pipestone.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -228,7 +214,7 @@
         <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/vsp/VirtualScrollablePanel.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="287">
-              <caret line="570" column="4" selection-start-line="570" selection-start-column="4" selection-end-line="570" selection-end-column="4" />
+              <caret line="572" column="4" selection-start-line="572" selection-start-column="4" selection-end-line="572" selection-end-column="4" />
             </state>
           </provider>
         </entry>
@@ -1609,14 +1595,7 @@
       <workItem from="1541811240366" duration="4746000" />
       <workItem from="1542180413344" duration="2260000" />
       <workItem from="1542732169125" duration="2788000" />
-      <workItem from="1542964106599" duration="1659000" />
-    </task>
-    <task id="LOCAL-00033" summary="Fix the merge screwup where changes were make on Niepce and not pushed for about a year (sigh).">
-      <created>1488870799384</created>
-      <option name="number" value="00033" />
-      <option name="presentableId" value="LOCAL-00033" />
-      <option name="project" value="LOCAL" />
-      <updated>1488870799384</updated>
+      <workItem from="1542964106599" duration="2240000" />
     </task>
     <task id="LOCAL-00034" summary="Implementation of a relatively easy to use JPanel which can be the target of drag-and-drop operations.&#10;&#10;Gowing support for serializing and deserializing arrays of primitives and arrays of Java container classes (e.g. Integer, Double, String, etc). Still missing support for arrays of GowingPackable objects. Considerable cleanup.&#10;&#10;Start the process of turning the SortedSetExample.java class into a reasonable Gowing-aware example.">
       <created>1493668813003</created>
@@ -1954,11 +1933,18 @@
       <option name="project" value="LOCAL" />
       <updated>1542733749723</updated>
     </task>
-    <option name="localTasksCounter" value="82" />
+    <task id="LOCAL-00082" summary="Cleanup of the VirtualScrollablePanel facility along with a few fairly minor bug fixes and API changes.&#10;&#10;The biggest change is breaking up a couple .java files by moving inner classes and interfaces out into their own .java file.&#10; &#10;Minor cleanup in ObtuseUtils.&#10;&#10;Add a static method to the ImageIconUtils class that allows the caller to specify which class loader should be used to load ImageIcons from.&#10;&#10;Comment out a bunch of debug output here and there.">
+      <created>1543021404384</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1543021404385</updated>
+    </task>
+    <option name="localTasksCounter" value="83" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1066690000" />
+    <option name="totallyTimeSpent" value="1067271000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -2122,6 +2108,7 @@
     <MESSAGE value="Basic sanity for the VirtualScrollablePanel facility. It seems to work quite well with row-oriented elements (no support at all for anything else (yet?)).&#10;&#10;This commit contains a slightly earlier attempt to build a JTree-like facility (called FlexiGridTree) that handles more than just strings for each node. That attempt doesn't seem to be the right way to do this. I'm checking it in so that I can easily keep it around until I am sure that it is toast.&#10;&#10;Introduction of the ObtuseArrays class for hopefully useful array-related utility methods.&#10;&#10;Introduction of the UniqueID class which provides a Gowing-packable and fairly robust mechanism for handling unique ids. While one can achieve the same functionality by just using long or Long fields, I have found that having ids wrapped in a special class helps to find bugs where ids and non-ids get mixed up. Also, it is handly to have some utility methods that work with ids." />
     <MESSAGE value="Cleanup of the VirtualScrollablePanel facility along with a few fairly minor bug fixes and API changes.&#10;&#10;The biggest change is breaking up a couple .java files by moving inner classes and interfaces out into their own .java file.&#10; &#10;Minor cleanup in ObtuseUtils.&#10;&#10;Add a static method to the ImageIconUtils class that allows the caller to specify which class loader should be used to load ImageIcons from.&#10;&#10;Comment out a bunch of debug output here and there." />
     <option name="LAST_COMMIT_MESSAGE" value="Cleanup of the VirtualScrollablePanel facility along with a few fairly minor bug fixes and API changes.&#10;&#10;The biggest change is breaking up a couple .java files by moving inner classes and interfaces out into their own .java file.&#10; &#10;Minor cleanup in ObtuseUtils.&#10;&#10;Add a static method to the ImageIconUtils class that allows the caller to specify which class loader should be used to load ImageIcons from.&#10;&#10;Comment out a bunch of debug output here and there." />
+    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -2947,7 +2934,7 @@
     <entry file="file://$PROJECT_DIR$/src/com/obtuse/ui/vsp/VirtualScrollablePanel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="287">
-          <caret line="570" column="4" selection-start-line="570" selection-start-column="4" selection-end-line="570" selection-end-column="4" />
+          <caret line="572" column="4" selection-start-line="572" selection-start-column="4" selection-end-line="572" selection-end-column="4" />
         </state>
       </provider>
     </entry>
