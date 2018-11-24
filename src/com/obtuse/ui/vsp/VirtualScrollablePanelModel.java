@@ -5,11 +5,15 @@ import com.obtuse.util.UniqueID;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.SortedMap;
 
 /**
  Created by danny on 2018/11/19.
  */
+
 public interface VirtualScrollablePanelModel<E extends VirtualScrollableElement> {
 
     class CurrentGoals<EV extends VirtualScrollableElement> {
@@ -19,7 +23,7 @@ public interface VirtualScrollablePanelModel<E extends VirtualScrollableElement>
 
         public CurrentGoals(
                 final int elementIndexOfTopRow,
-                @NotNull final List<VirtualScrollableElementModel<EV>> visibleElements
+                @NotNull final List<? extends VirtualScrollableElementModel<EV>> visibleElements
         ) {
 
             super();
@@ -48,9 +52,15 @@ public interface VirtualScrollablePanelModel<E extends VirtualScrollableElement>
          This provides a guarantee that the cost of accessing an element is constant (and essentially zero).
          */
 
-        public ArrayList<VirtualScrollableElementModel<EV>> visibleElements() {
+        public ArrayList<VirtualScrollableElementModel<EV>> visibleElementModels() {
 
             return _visibleElements;
+
+        }
+
+        public int getVisibleElementCount() {
+
+            return _visibleElements.size();
 
         }
 
@@ -73,7 +83,7 @@ public interface VirtualScrollablePanelModel<E extends VirtualScrollableElement>
      */
 
     void allocateElementViews(
-            @NotNull Collection<VirtualScrollableElementModel<E>> dataElements,
+            @NotNull Collection<VirtualScrollableElementModel<E>> elementModels,
             @NotNull SortedMap<UniqueID, ElementView<E>> assignedElementViewMapping
     );
 
@@ -127,7 +137,7 @@ public interface VirtualScrollablePanelModel<E extends VirtualScrollableElement>
     /**
      Get the current goals.
 
-     @return the current goals (
+     @return the current goals.
      */
 
     @NotNull

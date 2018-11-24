@@ -4,6 +4,8 @@
 
 package com.obtuse.util;
 
+import org.jetbrains.annotations.NotNull;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -51,14 +53,39 @@ public class ImageIconUtils {
 
     }
 
-    public static ImageIcon fetchIconImage( final String fileName, final int size, final String resourceBaseDirectory ) {
+    public static ImageIcon fetchIconImage(
+            @NotNull final String fileName,
+            final int size,
+            @NotNull final String resourceBaseDirectory
+    ) {
+
+        return fetchIconImage(
+                fileName,
+                size,
+                ImageIconUtils.class.getClassLoader(),
+                resourceBaseDirectory
+        );
+
+    }
+
+    public static ImageIcon fetchIconImage(
+            @NotNull final String fileName,
+            final int size,
+            @NotNull ClassLoader classLoader,
+            @NotNull final String resourceBaseDirectory
+    ) {
 
         URL url = null;
+        String resourcePath = resourceBaseDirectory + '/' + fileName;
         try {
 
-            url = ImageIconUtils.class.getClassLoader().getResource( resourceBaseDirectory + '/' + fileName );
+            url = classLoader.getResource( resourcePath );
 
         } catch ( Throwable e ) {
+
+            Logger.logErr( "Unable to load resource from " + ObtuseUtil.enquoteToJavaString( resourcePath ), e );
+
+            ObtuseUtil.doNothing();
 
             // just ignore whatever went wrong
 

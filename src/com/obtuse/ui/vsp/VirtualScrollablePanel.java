@@ -2,19 +2,20 @@ package com.obtuse.ui.vsp;
 
 import com.obtuse.exceptions.HowDidWeGetHereError;
 import com.obtuse.ui.layout.PermissiveLayoutManager;
-import com.obtuse.util.*;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import com.obtuse.util.Logger;
+import com.obtuse.util.Measure;
+import com.obtuse.util.ObtuseUtil;
 import com.obtuse.util.UniqueID;
+import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.AdjustmentEvent;
-import java.awt.event.AdjustmentListener;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
-import java.util.*;
 import java.util.List;
+import java.util.Optional;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 /**
  A scrollable window that can be used to browse very large collections of things.
@@ -84,16 +85,7 @@ public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends 
 
                                 _vsb = (JScrollBar)comp;
                                 _vsb.addAdjustmentListener(
-                                        new AdjustmentListener() {
-
-                                            @Override
-                                            public void adjustmentValueChanged( final AdjustmentEvent e ) {
-
-                                                vsbChanged();
-
-                                            }
-
-                                        }
+                                        e -> vsbChanged()
                                 );
 
                             } else {
@@ -159,21 +151,21 @@ public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends 
 
         public void vsbChanged() {
 
-            Logger.logMsg(
-                    "the vertical scrollbar has changed:  " +
-                    "min=" + _vsb.getMinimum() + "," +
-                    "value=" + _vsb.getValue() + "," +
-                    "extent=" + _vsb.getModel().getExtent() + "," +
-                    "value+extent=" + ( _vsb.getValue() + _vsb.getModel().getExtent() ) + "," +
-                    "max=" + _vsb.getMaximum() + "," +
-                    "adjusting=" + _vsb.getModel().getValueIsAdjusting()
-            );
+//            Logger.logMsg(
+//                    "the vertical scrollbar has changed:  " +
+//                    "min=" + _vsb.getMinimum() + "," +
+//                    "value=" + _vsb.getValue() + "," +
+//                    "extent=" + _vsb.getModel().getExtent() + "," +
+//                    "value+extent=" + ( _vsb.getValue() + _vsb.getModel().getExtent() ) + "," +
+//                    "max=" + _vsb.getMaximum() + "," +
+//                    "adjusting=" + _vsb.getModel().getValueIsAdjusting()
+//            );
 
-            if ( !_vsb.getModel().getValueIsAdjusting() ) {
-
-                Logger.logMsg( "done adjusting" );
-
-            }
+//            if ( !_vsb.getModel().getValueIsAdjusting() ) {
+//
+//                Logger.logMsg( "done adjusting" );
+//
+//            }
 
         }
 
@@ -187,19 +179,9 @@ public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends 
         }
 
         @Override
-        public Dimension preferredLayoutSize( final Container parent ) {
-
-            Dimension dimension = parent.getPreferredSize();
-
-            if ( _verbose ) Logger.logMsg( "VirtualScrollableLayoutManager.preferredLayoutSize:  " + ObtuseUtil.fDim( dimension ) );
-
-            return null;
-        }
-
-        @Override
         public Dimension minimumLayoutSize( final Container parent ) {
 
-            Dimension dimension = new Dimension( 100, 100 );
+            Dimension dimension = new Dimension( 50, 100 );
 
             if ( _verbose ) Logger.logMsg( "VirtualScrollableLayoutManager.minimumLayoutSize:  " + ObtuseUtil.fDim( dimension ) );
 
@@ -207,13 +189,30 @@ public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends 
         }
 
         @Override
+        public Dimension preferredLayoutSize( final Container parent ) {
+
+            Dimension dimension = new Dimension( 300, 100 ); // parent.getPreferredSize();
+
+            if ( _verbose ) Logger.logMsg( "VirtualScrollableLayoutManager.preferredLayoutSize:  " + ObtuseUtil.fDim( dimension ) );
+
+            return dimension;
+        }
+
+        @Override
+        public Dimension maximumLayoutSize( final Container target ) {
+
+            Dimension dimension = new Dimension( 10000, 10000 ); // target.getMaximumSize();
+
+            if ( _verbose ) Logger.logMsg( "VirtualScrollableLayoutManager.maximumLayoutSize:  " + ObtuseUtil.fDim( dimension ) );
+
+            return dimension;
+
+        }
+
+        @Override
         public void layoutContainer( final Container parent ) {
 
-            Logger.pushNesting( ">>>" );
-
-            try {
-
-                Logger.logMsg( "VirtualScrollableLayoutManager.layoutContainer:  working" );
+            try ( Measure ignored = new Measure( "layout VSP" ) ) {
 
                 if ( parent != _ourTargetPanel ) {
 
@@ -257,8 +256,8 @@ public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends 
                 setBounds( HSB_NAME, _hsb, new Rectangle( 0, vPanelHeight, hsbWidth, hsbHeight ) );
 
                 VirtualScrollablePanelModel.CurrentGoals<E> currentGoals = _vModel.getCurrentGoals();
-                List<VirtualScrollableElementModel<E>> visibleElements = currentGoals.visibleElements();
-                int nVisibleElements = visibleElements.size();
+                List<VirtualScrollableElementModel<E>> visibleElementModels = currentGoals.visibleElementModels();
+                int nVisibleElements = visibleElementModels.size();
 
                 for ( Component c : _ourScrollableInnerPanel.getComponents() ) {
 
@@ -272,7 +271,7 @@ public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends 
                 Insets in = _ourScrollableInnerPanel.getInsets();
                 int widestRenderedElementView = 0;
 
-                if ( visibleElements.isEmpty() ) {
+                if ( visibleElementModels.isEmpty() ) {
 
                     // Nothing is visible regardless of where the human scrolls to - we're pretty much done here.
 
@@ -281,10 +280,10 @@ public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends 
                 } else {
 
                     SortedMap<UniqueID, ElementView<E>> assignedElementViewMapping = new TreeMap<>();
-                    _vModel.allocateElementViews( visibleElements, assignedElementViewMapping );
+                    _vModel.allocateElementViews( visibleElementModels, assignedElementViewMapping );
 
                     int y = in.top;
-                    Logger.logMsg( "starting at row " + _vsb.getValue() );
+//                    Logger.logMsg( "starting at row " + _vsb.getValue() );
 
     //                int count = 0;
                     for (
@@ -292,9 +291,9 @@ public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends 
                             int ix = _vsb.getValue();
                             ix < nVisibleElements && y < vPanelHeight - in.bottom;
                             ix += 1
-                    ) { // VirtualScrollableElementModel<E> elementModel : visibleElements ) {
+                    ) { // VirtualScrollableElementModel<E> elementModel : visibleElementModels ) {
 
-                        VirtualScrollableElementModel<E> elementModel = visibleElements.get( ix );
+                        VirtualScrollableElementModel<E> elementModel = visibleElementModels.get( ix );
 
 //                        if ( y >= vPanelHeight - in.bottom ) {
 //
@@ -351,7 +350,7 @@ public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends 
 
                         asComponent.setBounds( bounds );
 
-                        Logger.logMsg( "rendered row " + ix );
+//                        Logger.logMsg( "rendered row " + ix );
 
                         y += prefElementSize.height;
 
@@ -368,10 +367,10 @@ public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends 
                 // %%% the behaviour of the vertical scrollbar could probably be hard-wired
                 // to be strictly based on the number of visible elements.
 
-                Logger.logMsg( "." );
-                Logger.logMsg( "." );
-                Logger.logMsg( "." );
-                Logger.logMsg( "configuring vertical scroll bar" );
+//                Logger.logMsg( "." );
+//                Logger.logMsg( "." );
+//                Logger.logMsg( "." );
+//                Logger.logMsg( "configuring vertical scroll bar" );
 
                 _vModel.configureVerticalScrollBar(
                         _vsb,
@@ -379,16 +378,16 @@ public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends 
                         vPanelHeight - ( in.top + in.bottom )
                 );
 
-                Logger.logMsg( "configuring horizontal scroll bar" );
+//                Logger.logMsg( "configuring horizontal scroll bar" );
 
                 _vModel.configureHorizontalScrollBar(
                         _hsb, widestRenderedElementView,
                         vPanelWidth - ( in.left + in.right )
                 );
 
-                Logger.logMsg( "." );
-                Logger.logMsg( "." );
-                Logger.logMsg( "." );
+//                Logger.logMsg( "." );
+//                Logger.logMsg( "." );
+//                Logger.logMsg( "." );
 
                 _isValid = true;
 
@@ -397,10 +396,6 @@ public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends 
                     Logger.logMsg( "c " + c.getClass().getCanonicalName() + " @ " + ObtuseUtil.fBounds( c.getBounds() ) );
                 }
                 if ( _verbose ) Logger.logMsg( "done layout" );
-
-            } finally {
-
-                Logger.popNestingLevel( ">>>" );
 
             }
 
@@ -418,17 +413,6 @@ public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends 
 
             if ( _verbose ) Logger.logMsg( "VirtualScrollableLayoutManager.addLayoutComponent:  add( " + comp + ", " + ObtuseUtil.enquoteJavaObject( constraints ) + " )" );
             addLayoutComponent( (String)constraints, comp );
-
-        }
-
-        @Override
-        public Dimension maximumLayoutSize( final Container target ) {
-
-            Dimension dimension = target.getMaximumSize();
-
-            if ( _verbose ) Logger.logMsg( "VirtualScrollableLayoutManager.maximumLayoutSize:  " + ObtuseUtil.fDim( dimension ) );
-
-            return dimension;
 
         }
 
@@ -477,7 +461,7 @@ public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends 
 
     private final VirtualScrollablePanelModel _virtualScrollablePanelModel;
 
-    private boolean _ourLayoutManagerSet = false;
+    private boolean _ourLayoutManagerSet;
     private final VirtualScrollableLayoutManager _ourLayoutManager;
 
     public VirtualScrollablePanel( @NotNull final VirtualScrollablePanelModel<E> virtualScrollablePanelModel ) {
@@ -523,10 +507,10 @@ public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends 
                     @Override
                     public void componentResized( final ComponentEvent e ) {
 
-                        Logger.logMsg( "VirtualScrollablePanel:  we have been resized - we are now " +
-                                       ( isVisible() ? "visible" : "not visible" ) +
-                                       " at " +
-                                       ObtuseUtil.fBounds( getBounds() ) );
+//                        Logger.logMsg( "VirtualScrollablePanel:  we have been resized - we are now " +
+//                                       ( isVisible() ? "visible" : "not visible" ) +
+//                                       " at " +
+//                                       ObtuseUtil.fBounds( getBounds() ) );
 
                         ObtuseUtil.doNothing();
 
@@ -535,10 +519,10 @@ public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends 
                     @Override
                     public void componentMoved( final ComponentEvent e ) {
 
-                        Logger.logMsg( "VirtualScrollablePanel:  we have been moved - we are now " +
-                                       ( isVisible() ? "visible" : "not visible" ) +
-                                       " at " +
-                                       ObtuseUtil.fBounds( getBounds() ) );
+//                        Logger.logMsg( "VirtualScrollablePanel:  we have been moved - we are now " +
+//                                       ( isVisible() ? "visible" : "not visible" ) +
+//                                       " at " +
+//                                       ObtuseUtil.fBounds( getBounds() ) );
 
                         ObtuseUtil.doNothing();
 
@@ -586,340 +570,11 @@ public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends 
 
     }
 
-    public static class DefaultVirtualScrollablePanelModel<E extends VirtualScrollableElement>
-            implements VirtualScrollablePanelModel<E> {
+    public abstract static class AbstractElementView<EV extends VirtualScrollableElement> extends JPanel implements ElementView<EV> {
 
-        private SortedMap<UniqueID,ElementView<E>> _previouslyAssignedElementViews = new TreeMap<>();
-        private java.util.List<ElementView<E>> _emptyElementModels = new ArrayList<>();
+        private VirtualScrollableElementModel<EV> _elementModel;
 
-        private final java.util.List<VirtualScrollableElementModel<E>> _elementModelsList = new ArrayList<>();
-        private final SortedMap<UniqueID,VirtualScrollableElementModel<E>> _elementModelsMap = new TreeMap<>();
-        private final ElementView.ElementViewFactory<E> _elementViewFactory;
-
-        /**
-         The number of visible elements that the most recently obtained {@link CurrentGoals} instance reported.
-         */
-
-        private int _nVisibleElements = 0;
-
-        /**
-         The number of element views that were actually filled and rendered during the latest (re-)layout of the inner scrollable panel.
-         */
-
-        private int _nElementViewsFilledAndRendered = 0;
-
-        public DefaultVirtualScrollablePanelModel(
-                @NotNull Collection<VirtualScrollableElementModel<E>> elements,
-                @NotNull final ElementView.ElementViewFactory<E> elementViewFactory
-        ) {
-            super();
-            _elementViewFactory = elementViewFactory;
-
-            addElementModels( elements );
-
-        }
-
-        public void addElementModel( final VirtualScrollableElementModel<E> elementModel ) {
-
-            if ( !_elementModelsMap.containsKey( elementModel.getUniqueID() ) ) {
-
-                _elementModelsList.add( elementModel );
-                _elementModelsMap.put( elementModel.getUniqueID(), elementModel );
-
-            }
-
-        }
-
-        public void addElementModels( @NotNull final Collection<VirtualScrollableElementModel<E>> elementModels ) {
-
-            for ( VirtualScrollableElementModel<E> elementModel : elementModels ) {
-
-                elementModel.setPanelModel( this );
-                addElementModel( elementModel );
-
-            }
-
-        }
-
-        @Override
-        public void allocateElementViews(
-                @NotNull Collection<VirtualScrollableElementModel<E>> dataElements,
-                @NotNull SortedMap<UniqueID,ElementView<E>> assignedElementViewMapping
-        ) {
-
-            // We're starting a new round of deciding what to actually render.
-
-            _nElementViewsFilledAndRendered = 0;
-
-//            java.util.List<ElementView<E>> assignedElementViews = new ArrayList<>();
-
-            java.util.List<UniqueID> stillNeedViews = new ArrayList<>();
-
-            HashMap<UniqueID,VirtualScrollableElementModel<E>> idToElementModelMap = new HashMap<>();
-
-            // Nobody has a view officially assigned to them.
-
-            assignedElementViewMapping.clear();
-
-            // Need a set of the ids that were previously assigned element views.
-
-            HashSet<UniqueID> oldIdsSet = new HashSet<>( _previouslyAssignedElementViews.keySet() );
-
-            // Remember how many elements are in the _previouslyAssignedElementViews map.
-
-            int existingAssignmentCount = _previouslyAssignedElementViews.size();
-
-            // Reconfirm element views that were previously assigned to the ids we've been asked to get views for.
-
-            for ( VirtualScrollableElementModel<E> elementModel : dataElements ) {
-
-                UniqueID id = elementModel.getUniqueID();
-                idToElementModelMap.put( id, elementModel );
-                ElementView<E> previouslyAssigned = _previouslyAssignedElementViews.get( id );
-                if ( previouslyAssigned == null ) {
-
-                    stillNeedViews.add( id );
-
-                } else {
-
-                    assignedElementViewMapping.put( id, previouslyAssigned );
-//                    assignedElementViews.add( previouslyAssigned );
-                    oldIdsSet.remove( id );
-
-                }
-
-            }
-
-            ObtuseUtil.doNothing();
-
-            // If we already have them, assign completely empty views to ids that don't yet have views.
-
-            for ( UniqueID id : List.copyOf( stillNeedViews ) ) {
-
-                if ( _emptyElementModels.isEmpty() ) {
-
-                    break;
-
-                } else {
-
-                    ElementView<E> availableView = _emptyElementModels.remove( 0 );
-                    UniqueID firstId = stillNeedViews.remove( 0 );
-                    if ( firstId.equals( id ) ) {
-
-                        availableView.setUniqueID( id );
-                        assignedElementViewMapping.put( id, availableView );
-//                        assignedElementViews.add( availableView );
-
-                    } else {
-
-                        throw new HowDidWeGetHereError(
-                                "DefaultVirtualScrollablePanelModel.allocateElementViews:  " +
-                                "expected first id to be " + firstId.format() + " but it was " + id.format()
-                        );
-
-                    }
-
-                }
-
-            }
-
-            ObtuseUtil.doNothing();
-
-            // If there are any elements needing views,
-            // take them randomly from the previously assigned views that are not needed right now.
-
-            List<UniqueID> oldIdsList = new ArrayList<>( oldIdsSet );
-            while ( !stillNeedViews.isEmpty() && !oldIdsList.isEmpty() ) {
-
-                int ix = RandomCentral.nextInt( oldIdsList.size() );
-                UniqueID oldId = oldIdsList.remove( ix );
-                ElementView<E> availableView = _previouslyAssignedElementViews.remove( oldId );
-                UniqueID id = stillNeedViews.remove( 0 );
-                availableView.setUniqueID( id );
-                _previouslyAssignedElementViews.put( id, availableView );
-                assignedElementViewMapping.put( id, availableView );
-//                assignedElementViews.add( availableView );
-
-            }
-
-            // We should still have EXACTLY the same number of views in the _previouslyAssignedElementViews map.
-
-            if ( existingAssignmentCount != _previouslyAssignedElementViews.size() ) {
-
-                // Oops!!!
-
-                throw new HowDidWeGetHereError(
-                        "DefaultVirtualScrollablePanelModel.allocateElementViews:  " +
-                        "size of _previouslyAssignedElementViews changed from " + existingAssignmentCount +
-                        " to " + _previouslyAssignedElementViews.size()
-                );
-
-            }
-
-            ObtuseUtil.doNothing();
-
-            // If there are STILL ids needing views then give them bright and shiny new views.
-
-            while ( !stillNeedViews.isEmpty() ) {
-
-                UniqueID id = stillNeedViews.remove( 0 );
-                ElementView<E> newView = _elementViewFactory.createInstance( id, idToElementModelMap.get(id) );
-                newView.setUniqueID( id );
-                _previouslyAssignedElementViews.put( id, newView );
-                assignedElementViewMapping.put( id, newView );
-
-            }
-
-            // We are DONE!
-
-            ObtuseUtil.doNothing();
-
-        }
-
-        @Override
-        public void noteViewFilled( final ElementView<E> elementView ) {
-
-            _nElementViewsFilledAndRendered += 1;
-
-        }
-
-        @NotNull
-        public CurrentGoals<E> getCurrentGoals() {
-
-            java.util.List<VirtualScrollableElementModel<E>> rval = new ArrayList<>();
-            for ( VirtualScrollableElementModel<E> em : _elementModelsList ) {
-
-                if ( em.isVisible() ) {
-
-                    rval.add( em );
-
-                }
-
-            }
-
-            _nVisibleElements = rval.size();
-
-            VirtualScrollableElementModel<E> nullEm = null;
-
-            return new CurrentGoals<>( 0, rval );
-
-        }
-
-        @Override
-        public boolean configureVerticalScrollBar(
-                @NotNull final JScrollBar verticalScrollBar,
-                final int nRenderedElementViews,
-                final int innerScrollableWindowHeight
-        ) {
-
-            int min = 0;
-            @SuppressWarnings("UnnecessaryLocalVariable") int extent = nRenderedElementViews;
-            int max = _nVisibleElements;
-            boolean didSomething = false;
-            if ( verticalScrollBar.getMinimum() != min ) {
-
-//                verticalScrollBar.setMinimum( min );
-                didSomething = true;
-
-            }
-
-            if ( verticalScrollBar.getMaximum() != max ) {
-
-//                verticalScrollBar.setMaximum( max );
-                didSomething = true;
-
-            }
-
-            if ( verticalScrollBar.getBlockIncrement() != extent ) {
-
-//                verticalScrollBar.setBlockIncrement( extent );
-//                verticalScrollBar.getModel().setExtent( extent );
-                didSomething = true;
-
-            }
-
-            if ( didSomething ) {
-
-                verticalScrollBar.getModel().setRangeProperties(
-                        verticalScrollBar.getValue(),
-                        extent,
-                        min,
-                        max,
-                        false
-                );
-                verticalScrollBar.setBlockIncrement( nRenderedElementViews );
-                verticalScrollBar.setUnitIncrement( 1 );
-
-            }
-
-            Logger.logMsg( "model is now " + verticalScrollBar.getModel() );
-            return didSomething;
-
-        }
-
-        @Override
-        public boolean configureHorizontalScrollBar(
-                @NotNull final JScrollBar horizontalScrollBar,
-                final int widestRenderedElementView,
-                final int innerScrollableWindowWidth
-        ) {
-
-            int min = 0;
-            int extent = Math.min( widestRenderedElementView, innerScrollableWindowWidth );
-            int max = Math.max( widestRenderedElementView, innerScrollableWindowWidth );
-            boolean didSomething = false;
-            if ( horizontalScrollBar.getMinimum() != min ) {
-
-                horizontalScrollBar.setMinimum( min );
-                didSomething = true;
-
-            }
-
-            if ( horizontalScrollBar.getMaximum() != max ) {
-
-                horizontalScrollBar.setMaximum( max );
-                didSomething = true;
-
-            }
-
-            if ( horizontalScrollBar.getBlockIncrement() != extent ) {
-
-                horizontalScrollBar.setBlockIncrement( extent );
-                didSomething = true;
-
-            }
-
-            return didSomething;
-
-        }
-
-        @Override
-        public int getApproximateElementHeight() {
-
-            return 10;
-
-        }
-
-        @Override
-        public int getApproximateElementWidth() {
-
-            return 50;
-
-        }
-
-        public String toString() {
-
-            return "DefaultVirtualScrollablePanelModel( size=" + _elementModelsList.size() + " )";
-
-        }
-
-    }
-
-    public static abstract class AbstractElementView<EV extends VirtualScrollableElement> extends JPanel implements ElementView<EV> {
-
-        private final VirtualScrollableElementModel<EV> _elementModel;
-
-        private UniqueID _clientUniqueID;
+//        private UniqueID _clientUniqueID;
 
         protected AbstractElementView(
                 @NotNull final UniqueID id,
@@ -927,23 +582,34 @@ public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends 
         ) {
             super();
 
-            _clientUniqueID = id;
+//            _clientUniqueID = id;
             _elementModel = elementModel;
 
         }
 
         @Override
         @NotNull
-        public final Optional<UniqueID> getUniqueID() {
+        public final Optional<UniqueID> getModelUniqueID() {
 
-            return Optional.ofNullable( _clientUniqueID );
+            return Optional.ofNullable( _elementModel == null ? null : _elementModel.getUniqueID() );
 
         }
 
         @Override
-        public final void setUniqueID( @Nullable UniqueID id ) {
+        public final void setElementModel(
+                @NotNull final VirtualScrollableElementModel<EV> elementModel
+        ) {
 
-            _clientUniqueID = id;
+//            _clientUniqueID = id;
+            _elementModel = elementModel;
+
+        }
+
+        @Override
+        @NotNull
+        public VirtualScrollableElementModel<EV> getElementModel() {
+
+            return _elementModel;
 
         }
 

@@ -4,7 +4,7 @@ import com.obtuse.ui.MyActionListener;
 import com.obtuse.ui.vsp.VirtualScrollableElement;
 import com.obtuse.ui.vsp.VirtualScrollableElementModel;
 import com.obtuse.ui.vsp.VirtualScrollablePanel;
-import com.obtuse.util.UniqueID;
+import com.obtuse.util.ObtuseUtil;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
@@ -22,11 +22,11 @@ public class PlayElementView<EV extends VirtualScrollableElement>
 //        private boolean _recycled;
 
     public PlayElementView(
-            @NotNull final UniqueID id,
+//            @NotNull final UniqueID uniqueID,
             VirtualScrollableElementModel<PlayElementData> elementModel
     ) {
 
-        super( id, elementModel );
+        super( elementModel.getUniqueID(), elementModel );
 
         setBorder( BorderFactory.createEtchedBorder() );
 
@@ -58,7 +58,14 @@ public class PlayElementView<EV extends VirtualScrollableElement>
 //        }
 
     @Override
-    public void fill( final VirtualScrollableElementModel rawDataModel ) {
+    public void freshAssignment() {
+
+        ObtuseUtil.doNothing();
+
+    }
+
+    @Override
+    public void fill( @NotNull final VirtualScrollableElementModel rawDataModel ) {
 
         PlayElementModel dataModel = (PlayElementModel)rawDataModel;
 

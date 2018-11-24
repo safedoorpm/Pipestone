@@ -227,13 +227,13 @@ public class TestTreeRowSlice extends JPanel implements ImageButtonOwner {
 
     private void toggleOpened() {
 
-        Logger.logMsg( "doing " + this );
+//        Logger.logMsg( "doing " + this );
 
         boolean isOpened = isOpened();
         _box.getComponent( _greyToNormalButtonIx ).setVisible( isOpened );
         _box.getComponent( _normalToGreyButtonIx ).setVisible( !isOpened );
 
-        Logger.logMsg( "folder is " + ( isOpened() ? "opened" : "closed" ) );
+//        Logger.logMsg( "folder is " + ( isOpened() ? "opened" : "closed" ) );
 
     }
 

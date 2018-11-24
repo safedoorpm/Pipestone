@@ -5,12 +5,11 @@
 package com.obtuse.util;
 
 import com.obtuse.db.PostgresConnection;
-import com.obtuse.exceptions.HowDidWeGetHereError;
 import com.obtuse.util.gowing.*;
 import com.obtuse.util.gowing.p2a.GowingUnPackedEntityGroup;
-import com.obtuse.util.gowing.p2a.exceptions.GowingUnpackingException;
 import com.obtuse.util.gowing.p2a.StdGowingPacker;
 import com.obtuse.util.gowing.p2a.StdGowingUnPacker;
+import com.obtuse.util.gowing.p2a.exceptions.GowingUnpackingException;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -32,7 +31,7 @@ import java.util.regex.Pattern;
 import java.util.zip.ZipFile;
 
 /**
- A sometimes motley collectino of utility methods which I have found useful.
+ A sometimes motley collection of utility methods which I have found useful.
  */
 
 @SuppressWarnings({ "UnusedDeclaration", "SameParameterValue" })
@@ -336,13 +335,16 @@ public class ObtuseUtil {
      @param singular the phrase to postpend the count with if it is equal to 1.
      @param plural   the phrase to postpend the count with if it is not equal to 1.
      @return the formatted value.
+     @deprecated see {@link #pluralize(long,String,String)}
      */
 
     @Contract(pure = true)
     @NotNull
+    @Deprecated
     public static String formatCount(
-            final int count, final @NotNull String singular, final @NotNull String
-            plural
+            final int count,
+            final @NotNull String singular,
+            final @NotNull String plural
     ) {
 
         return "" + count + " " + ( count == 1 ? singular : plural );
@@ -355,13 +357,15 @@ public class ObtuseUtil {
 
      @param count the count/size.
      @return the formatted value.
+     @deprecated see {@link #pluralize(long,String,String)}
      */
 
     @Contract(pure = true)
     @NotNull
+    @Deprecated
     public static String formatCount( final int count ) {
 
-        return formatCount( count, "element", "elements" );
+        return pluralize( count, "element" );
 
     }
 
@@ -3006,6 +3010,12 @@ public class ObtuseUtil {
 
     }
 
+    public static String fDim( final Component c ) {
+
+        return fDim( c.getMinimumSize() ) + "/" + fDim( c.getPreferredSize() ) + "/" + fDim( c.getMaximumSize() );
+
+    }
+
     public static @NotNull String fBounds( final String name, final Rectangle r ) {
 
         return name + "=" + ( r == null ? "null" : ObtuseUtil.fBounds( r ) );
@@ -3076,28 +3086,14 @@ public class ObtuseUtil {
         int numberOfTrailingZeros = Integer.numberOfTrailingZeros( mask );
         int lowestOneBit = Integer.lowestOneBit( mask );
         int highestOneBit = Integer.highestOneBit( mask );
-        try {
 
-            if ( mask < 0 || highestOneBit != lowestOneBit || numberOfTrailingZeros >= 32 ) {
+        if ( mask < 0 || highestOneBit != lowestOneBit || numberOfTrailingZeros >= 32 ) {
 
-                return "<mask " + Integer.toBinaryString( mask ) + ">";
+            return "<mask " + Integer.toBinaryString( mask ) + ">";
 
-            } else {
+        } else {
 
-                return "<" + s_maskExBits[numberOfTrailingZeros] + ">";
-
-            }
-
-        } catch ( Exception e ) {
-
-            throw new HowDidWeGetHereError( "mask=" +
-                                            mask +
-                                            "= " +
-                                            Integer.toBinaryString( mask ) +
-                                            " lowestOneBit=" +
-                                            lowestOneBit +
-                                            ", highestOneBit=" +
-                                            highestOneBit );
+            return "<" + s_maskExBits[numberOfTrailingZeros] + ">";
 
         }
 
@@ -3226,7 +3222,12 @@ public class ObtuseUtil {
      @return the pluralized value and noun.
      */
 
-    public static String pluralize( final long value, final @NotNull String none, final @NotNull String one, final @NotNull String many ) {
+    public static String pluralize(
+            final long value,
+            final @NotNull String none,
+            final @NotNull String one,
+            final @NotNull String many
+    ) {
 
         return value + " " + ( value == 1 ? one : value == 0 ? none : many );
 
@@ -3247,7 +3248,11 @@ public class ObtuseUtil {
      @return the pluralized value and noun.
      */
 
-    public static String pluralize( final long value, final @NotNull String singular, final @NotNull String plural ) {
+    public static String pluralize(
+            final long value,
+            final @NotNull String singular,
+            final @NotNull String plural
+    ) {
 
         return value + " " + ( value == 1 ? singular : plural );
 
@@ -3264,7 +3269,8 @@ public class ObtuseUtil {
      </blockquote>
      @param value the value.
      @param noun the noun.
-     @return the pluralized value and noun (the noun will be suffixed by {@code "s"} if {@code value} is not {@code 1}).
+     @return the pluralized value and noun (the noun will be suffixed by {@code "s"}
+     if {@code value} is not {@code 1}).
      */
 
     public static String pluralize( final long value, final @NotNull String noun ) {
@@ -3285,12 +3291,34 @@ public class ObtuseUtil {
      <p>Note subtly different method name.</p>
      @param value the value.
      @param noun the noun.
-     @return the pluralized value and noun (the noun will be suffixed by {@code "es"} if {@code value} is not {@code 1}).
+     @return the pluralized value and noun (the noun will be suffixed by {@code "es"}
+     if {@code value} is not {@code 1}).
      */
 
     public static String pluralizes( final long value, final @NotNull String noun ) {
 
-        return pluralize( value, noun, noun + "es" ); // value + " " + what + ( value == 1 ? "" : "es" );
+        return pluralize( value, noun, noun + "es" );
+
+    }
+
+    /**
+     Pluralize a generic value.
+     <p>Exactly equivalent to {@code pluralize( value, "element" )}.</p>
+     <p>Examples:</p>
+     <blockquote>
+     {@code pluralize( 0 )} yields {@code "0 elements"}
+     <br>{@code pluralize( 1 )} yields {@code "1 element"}
+     <br>{@code pluralize( 2 )} yields {@code "2 elements"}
+     </pre>
+     </blockquote>
+     @param value the value.
+     @return the pluralized value with either " element" or "elements" appended as appropriate.
+     <p>See {@link #pluralize(long, String)}</p>
+     */
+
+    public static String pluralize( final long value ) {
+
+        return pluralize( value, "element" );
 
     }
 

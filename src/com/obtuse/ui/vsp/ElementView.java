@@ -13,6 +13,8 @@ import java.util.Optional;
 
 public interface ElementView<E extends VirtualScrollableElement> {
 
+    void freshAssignment();
+
     /**
      A factory for creating {@link ElementView}{@code <E>} instances.
      @param <E> the class which represents a 'thing' which might be
@@ -21,7 +23,7 @@ public interface ElementView<E extends VirtualScrollableElement> {
 
     interface ElementViewFactory<E extends VirtualScrollableElement> {
 
-        ElementView<E> createInstance( @NotNull UniqueID clientId, VirtualScrollableElementModel<E> elementModel );
+        ElementView<E> createInstance( VirtualScrollableElementModel<E> elementModel );
 
     }
 
@@ -34,7 +36,7 @@ public interface ElementView<E extends VirtualScrollableElement> {
      This might speed up the process of filling in the provided {@code ElementView}.
      */
 
-    void fill( VirtualScrollableElementModel<E> dataModel );
+    void fill( @NotNull VirtualScrollableElementModel<E> dataModel );
 
     /**
      Determine which {@link VirtualScrollableElementModel} this view last represented.
@@ -45,13 +47,13 @@ public interface ElementView<E extends VirtualScrollableElement> {
      */
 
     @NotNull
-    Optional<UniqueID> getUniqueID();
+    Optional<UniqueID> getModelUniqueID();
 
     /**
      Recycle this element view.
      */
 
-    void setUniqueID( UniqueID id );
+    void setElementModel( @NotNull final VirtualScrollableElementModel<E> elementModel );
 
 //        /**
 //         Determine if this view has ever been used before with a different id.
@@ -60,6 +62,13 @@ public interface ElementView<E extends VirtualScrollableElement> {
 //         */
 //
 //        boolean isRecycled();
+
+    /**
+     Get this view's model.
+     @return this view's model.
+     */
+
+    VirtualScrollableElementModel<E> getElementModel();
 
     /**
      Specify whether this element view should be visible or not right now.

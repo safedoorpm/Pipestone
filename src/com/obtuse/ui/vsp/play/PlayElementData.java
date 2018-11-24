@@ -1,5 +1,6 @@
 package com.obtuse.ui.vsp.play;
 
+import com.obtuse.ui.vsp.AbstractVirtualScrollablePanelModel;
 import com.obtuse.ui.vsp.VirtualScrollableElement;
 import com.obtuse.ui.vsp.VirtualScrollableElementModel;
 import com.obtuse.ui.vsp.VirtualScrollablePanel;
@@ -73,13 +74,10 @@ public class PlayElementData implements VirtualScrollableElement {
         elementDataModels.add( new PlayElementModel( new PlayElementData( "wonder woman" ) ) );
 
         @SuppressWarnings("Convert2MethodRef")
-        VirtualScrollablePanel.DefaultVirtualScrollablePanelModel<PlayElementData>
-                vsm = new VirtualScrollablePanel.DefaultVirtualScrollablePanelModel<>(
-                elementDataModels,
-                ( clientId, elementModel ) -> new PlayElementView<PlayElementData>( clientId, elementModel )
-        );
+        AbstractVirtualScrollablePanelModel<PlayElementData>
+                vspm = new PlayElementPanelModel( elementDataModels );
 
-        VirtualScrollablePanel<PlayElementData> vsPanel = new VirtualScrollablePanel<>( vsm );
+        VirtualScrollablePanel<PlayElementData> vsPanel = new VirtualScrollablePanel<>( vspm );
 
         JFrame jf = new JFrame( "Test VirtualScrollablePanel" );
         jf.setMinimumSize( new Dimension( 200, 200 ) );

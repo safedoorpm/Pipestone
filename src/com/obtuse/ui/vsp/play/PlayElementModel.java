@@ -15,7 +15,7 @@ public class PlayElementModel implements VirtualScrollableElementModel<PlayEleme
     private final PlayElementData _element;
     public static SimpleUniqueLongIdGenerator
             s_idGenerator = new SimpleUniqueLongIdGenerator( "PlayElementModel id generator" );
-    private UniqueID _uniqueID = new UniqueID( s_idGenerator.getUniqueId() );
+    private UniqueID _uniqueID = UniqueID.getJvmLocalUniqueID();
     private VirtualScrollablePanelModel<PlayElementData> _panelModel;
 
     public PlayElementModel( @NotNull final PlayElementData element ) {
