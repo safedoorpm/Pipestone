@@ -255,7 +255,7 @@ public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends 
                 setBounds( VSB_NAME, _vsb, new Rectangle( vPanelWidth, 0, vsbWidth, vsbHeight ) );
                 setBounds( HSB_NAME, _hsb, new Rectangle( 0, vPanelHeight, hsbWidth, hsbHeight ) );
 
-                VirtualScrollablePanelModel.CurrentGoals<E> currentGoals = _vModel.getCurrentGoals();
+                VirtualScrollablePanelModel.CurrentGoals<E> currentGoals = _vModel.getCurrentGoals( new Dimension( vPanelWidth, vPanelHeight ) );
                 List<VirtualScrollableElementModel<E>> visibleElementModels = currentGoals.visibleElementModels();
                 int nVisibleElements = visibleElementModels.size();
 
@@ -285,25 +285,13 @@ public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends 
                     int y = in.top;
 //                    Logger.logMsg( "starting at row " + _vsb.getValue() );
 
-    //                int count = 0;
                     for (
-//                            int ix = currentGoals.elementIndexOfTopRow();
                             int ix = _vsb.getValue();
                             ix < nVisibleElements && y < vPanelHeight - in.bottom;
                             ix += 1
-                    ) { // VirtualScrollableElementModel<E> elementModel : visibleElementModels ) {
+                    ) {
 
                         VirtualScrollableElementModel<E> elementModel = visibleElementModels.get( ix );
-
-//                        if ( y >= vPanelHeight - in.bottom ) {
-//
-//                            Logger.logMsg( "bailing after laying out " + ObtuseUtil.pluralize( nRendered, "element" ) );
-//
-//                            break;
-//
-//                        }
-
-    //                    count += 1;
 
                         ElementView<E> elementView = assignedElementViewMapping.get( elementModel.getUniqueID() );
                         if ( elementView == null ) {
@@ -346,11 +334,7 @@ public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends 
                         );
                         if ( _verbose ) Logger.logMsg( "setting bounds of element view to " + ObtuseUtil.fBounds( bounds ) );
 
-//                        nRendered += 1;
-
                         asComponent.setBounds( bounds );
-
-//                        Logger.logMsg( "rendered row " + ix );
 
                         y += prefElementSize.height;
 

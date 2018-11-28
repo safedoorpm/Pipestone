@@ -6,6 +6,7 @@ import com.obtuse.util.UniqueID;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.SortedMap;
@@ -299,9 +300,9 @@ public abstract class AbstractVirtualScrollablePanelModel<E extends VirtualScrol
     }
 
     @NotNull
-    public final CurrentGoals<E> getCurrentGoals() {
+    public final CurrentGoals<E> getCurrentGoals( @NotNull final Dimension viewportSize ) {
 
-        @NotNull CurrentGoals<E> rval = getActualCurrentGoals();
+        @NotNull CurrentGoals<E> rval = getActualCurrentGoals( viewportSize );
         _nVisibleElements = rval.getVisibleElementCount();
 
         return rval;
@@ -309,7 +310,7 @@ public abstract class AbstractVirtualScrollablePanelModel<E extends VirtualScrol
     }
 
     @NotNull
-    public abstract CurrentGoals<E> getActualCurrentGoals();
+    public abstract CurrentGoals<E> getActualCurrentGoals( @NotNull final Dimension viewportSize );
 
     @Override
     public boolean configureVerticalScrollBar(

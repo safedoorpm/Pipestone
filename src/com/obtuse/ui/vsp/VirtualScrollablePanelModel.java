@@ -5,6 +5,7 @@ import com.obtuse.util.UniqueID;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -141,7 +142,7 @@ public interface VirtualScrollablePanelModel<E extends VirtualScrollableElement>
      */
 
     @NotNull
-    CurrentGoals<E> getCurrentGoals();
+    CurrentGoals<E> getCurrentGoals( @NotNull Dimension viewportSize );
 
     /**
      Configure the vertical scrollbar.

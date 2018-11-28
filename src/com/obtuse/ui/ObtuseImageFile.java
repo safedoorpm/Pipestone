@@ -12,7 +12,10 @@ import com.obtuse.util.Logger;
 import com.obtuse.util.Measure;
 import com.obtuse.util.ObtuseUtil;
 import com.obtuse.util.gowing.*;
-import com.obtuse.util.gowing.p2a.*;
+import com.obtuse.util.gowing.p2a.GowingEntityReference;
+import com.obtuse.util.gowing.p2a.GowingUnPackedEntityGroup;
+import com.obtuse.util.gowing.p2a.StdGowingPacker;
+import com.obtuse.util.gowing.p2a.StdGowingUnPacker;
 import com.obtuse.util.gowing.p2a.exceptions.GowingUnpackingException;
 import com.obtuse.util.gowing.p2a.holders.GowingByteHolder;
 import com.obtuse.util.gowing.p2a.holders.GowingIntegerHolder;
@@ -373,7 +376,8 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
 
                 createImageInfoFile( null );
 
-            } else if ( imageIcon != null ) {
+            } else //noinspection ConstantConditions
+                if ( imageIcon != null ) {
 
                 _originalURI = null;
                 _originalURL = null;
@@ -385,8 +389,7 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
 
             } else {
 
-                //noinspection ConstantConditions
-                throw new HowDidWeGetHereError(
+                    throw new HowDidWeGetHereError(
                         who + ":  cannot get here from there (" +
                         "oURL=" + originalURL + ", " +
                         "oFile=" + originalFile + ", " +
@@ -1340,7 +1343,6 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
 
         try ( Measure ignored = new Measure( "load primary image" ) ) {
 
-            @SuppressWarnings("UnnecessaryLocalVariable")
             BufferedImage image = ImageIO.read( getCachedImageFileLocation() );
 
             if ( image == null ) {

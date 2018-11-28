@@ -589,84 +589,84 @@ public class ObtuseImageUtils {
 
     }
 
-    @NotNull
-    public static Image waitToFinishLoadingNew( @NotNull final Image img ) {
-
-        long maxDelay = 0L;
-        long deadline = System.currentTimeMillis() + maxDelay;
-        int spinCount = 0;
-        long start = System.currentTimeMillis();
-        MyImageObserver mio = new MyImageObserver();
-        while ( !mio.isDone() ) {
-
-//            System.out.println( "preparing image" );
-            if ( spinCount == 0 ) {
-                if ( s_mediaTrackerComponent.prepareImage( img, -1, -1, mio ) ) {
-
-//                Logger.logMsg( "waitToFinishLoading:  done after " + ( System.currentTimeMillis() - start ) + "ms and " + ObtuseUtil.pluralize( spinCount, "spin" ) );
-                    Logger.logMsg( "prepareImage says true" );
-
-                }
-
-            } else if ( mio.isDone() ) {
-
-                break;
-
-//                int infoflags = s_mediaTrackerComponent.checkImage( img, -1, -1, mio );
-
-            }
-
-            spinCount += 1;
-
-            long remainingDelay = deadline - System.currentTimeMillis();
-            if ( maxDelay == 0 ) {
-
-                remainingDelay = 0;
-
-            } else {
-
-                remainingDelay = deadline - System.currentTimeMillis();
-                if (remainingDelay <= 0) {
-
-                    Logger.logMsg( "waitToFinishLoading:  giving up waiting for image" );
-
-                    return img;
-
-                }
-
-            }
-
-//            Logger.logMsg( "waitToFinishLoading:  snoozing for " + remainingDelay + "ms" );
-
-//            // No point in us waiting since there's nobody who might wake us up.
-//            // wait(ms) is not static so we give it something, img, to wait on.
+//    @NotNull
+//    public static Image waitToFinishLoadingNew( @NotNull final Image img ) {
 //
-//            img.wait( remainingDelay );
-
-        }
-
-        if ( mio.hasFailed() ) {
-
-            Logger.logMsg( "waitToFinishLoading:  failed loading (spinCount=" + spinCount + ")" );
-
-        } else if ( mio.hasCompleted() ) {
-
-            Logger.logMsg ( "waitToFinishLoading:  completed loading (ok, spinCount=" + spinCount + ")" );
-
-        } else {
-
-            throw new HowDidWeGetHereError( "waitToFinishLoading:  weird MIO state (" + mio + ", spinCount=" + spinCount + ")" );
-
-        }
-
-//        MediaTracker mediaTracker = new MediaTracker( s_mediaTrackerComponent );
-//        mediaTracker.addImage(img, 0);
+//        long maxDelay = 0L;
+//        long deadline = System.currentTimeMillis() + maxDelay;
+//        int spinCount = 0;
+//        long start = System.currentTimeMillis();
+//        MyImageObserver mio = new MyImageObserver();
+//        while ( !mio.isDone() ) {
 //
-//        mediaTracker.waitForAll();
-
-        return img;
-
-    }
+////            System.out.println( "preparing image" );
+//            if ( spinCount == 0 ) {
+//                if ( s_mediaTrackerComponent.prepareImage( img, -1, -1, mio ) ) {
+//
+////                Logger.logMsg( "waitToFinishLoading:  done after " + ( System.currentTimeMillis() - start ) + "ms and " + ObtuseUtil.pluralize( spinCount, "spin" ) );
+//                    Logger.logMsg( "prepareImage says true" );
+//
+//                }
+//
+////            } else if ( mio.isDone() ) {
+////
+////                break;
+////
+//////                int infoflags = s_mediaTrackerComponent.checkImage( img, -1, -1, mio );
+//
+//            }
+//
+//            spinCount += 1;
+//
+//            long remainingDelay = deadline - System.currentTimeMillis();
+//            if ( maxDelay == 0 ) {
+//
+//                remainingDelay = 0;
+//
+//            } else {
+//
+//                remainingDelay = deadline - System.currentTimeMillis();
+//                if (remainingDelay <= 0) {
+//
+//                    Logger.logMsg( "waitToFinishLoading:  giving up waiting for image" );
+//
+//                    return img;
+//
+//                }
+//
+//            }
+//
+////            Logger.logMsg( "waitToFinishLoading:  snoozing for " + remainingDelay + "ms" );
+//
+////            // No point in us waiting since there's nobody who might wake us up.
+////            // wait(ms) is not static so we give it something, img, to wait on.
+////
+////            img.wait( remainingDelay );
+//
+//        }
+//
+//        if ( mio.hasFailed() ) {
+//
+//            Logger.logMsg( "waitToFinishLoading:  failed loading (spinCount=" + spinCount + ")" );
+//
+//        } else if ( mio.hasCompleted() ) {
+//
+//            Logger.logMsg ( "waitToFinishLoading:  completed loading (ok, spinCount=" + spinCount + ")" );
+//
+//        } else {
+//
+//            throw new HowDidWeGetHereError( "waitToFinishLoading:  weird MIO state (" + mio + ", spinCount=" + spinCount + ")" );
+//
+//        }
+//
+////        MediaTracker mediaTracker = new MediaTracker( s_mediaTrackerComponent );
+////        mediaTracker.addImage(img, 0);
+////
+////        mediaTracker.waitForAll();
+//
+//        return img;
+//
+//    }
 
     /**
      Wait for an image to finish asynchronous loading.
@@ -736,7 +736,6 @@ public class ObtuseImageUtils {
 
         try ( Measure ignored = new Measure( "OIU.loadImage" ) ) {
 
-            @SuppressWarnings("UnnecessaryLocalVariable")
             BufferedImage image = ImageIO.read( imageLocation );
 
             if ( image == null ) {
@@ -783,7 +782,17 @@ public class ObtuseImageUtils {
                 BufferedImage.TYPE_INT_RGB
         );
         Graphics g = newImage.createGraphics();
-        g.drawImage( inputImage, 0, 0, null );
+        try {
+
+            g.drawImage( inputImage, 0, 0, null );
+
+        } catch ( RuntimeException e ) {
+
+            Logger.logErr( "java.lang.Exception caught", e );
+            ObtuseUtil.doNothing();
+
+        }
+
         g.dispose();
 
         return newImage;

@@ -3,13 +3,12 @@ package com.obtuse.ui.copier;
 import com.obtuse.exceptions.HowDidWeGetHereError;
 import com.obtuse.ui.layout.linear.LinearLayoutUtil;
 import com.obtuse.util.Logger;
+import com.obtuse.util.ObtuseUtil;
 import com.obtuse.util.UniqueWidget;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.awt.*;
-
-import static com.obtuse.util.ObtuseUtil.doNothing;
 
 /*
  * Copyright © 2018 Obtuse Systems Corporation
@@ -118,7 +117,7 @@ public class WidgetPanel extends UniqueWidget {
 
         LinearLayoutUtil.describeFullyContainerContents( "just finished", getDisplayContainer() );
 
-        doNothing();
+        ObtuseUtil.doNothing();
 
     }
 

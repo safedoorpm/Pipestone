@@ -4,6 +4,7 @@ import com.obtuse.ui.vsp.AbstractVirtualScrollablePanelModel;
 import com.obtuse.ui.vsp.VirtualScrollableElementModel;
 import org.jetbrains.annotations.NotNull;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class PlayElementPanelModel extends AbstractVirtualScrollablePanelModel<P
     }
 
     @Override
-    public @NotNull CurrentGoals<PlayElementData> getActualCurrentGoals() {
+    public @NotNull CurrentGoals<PlayElementData> getActualCurrentGoals( @NotNull final Dimension viewportSize ) {
 
         List<VirtualScrollableElementModel<PlayElementData>> rval = new ArrayList<>();
         for ( VirtualScrollableElementModel<PlayElementData> em : _elementDataModels ) {
