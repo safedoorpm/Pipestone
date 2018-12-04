@@ -378,15 +378,6 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName, GowingPackable
         } else {
 
             return new URI( s );
-//            try {
-//
-//                return new URI( s );
-//
-//            } catch ( URISyntaxException e ) {
-//
-//                throw new HowDidWeGetHereError( _typeName + ".recoverURI:  " + "syntax error parsing URI " + ObtuseUtil.enquoteToJavaString( s ), e );
-//
-//            }
 
         }
 
@@ -402,15 +393,6 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName, GowingPackable
         } else {
 
             return new URL( s );
-//            try {
-//
-//                return new URL( s );
-//
-//            } catch ( MalformedURLException e ) {
-//
-//                throw new HowDidWeGetHereError( _typeName + ".recoverURL:  " + "syntax error parsing URL " + ObtuseUtil.enquoteToJavaString( s ), e );
-//
-//            }
 
         }
 
@@ -430,13 +412,6 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName, GowingPackable
         }
 
     }
-
-//    @Nullable
-//    public String StringValue( final EntityName gtag ) {
-//
-//        return getNullableField( gtag ).StringValue();
-//
-//    }
 
     @NotNull
     public Optional<String> optString( final EntityName gtag ) {

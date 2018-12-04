@@ -22,7 +22,6 @@ public class ImageButton {
     private final JLabel _button;
     private final ImageIcon _pressedIcon;
     private final ImageIcon _unpressedIcon;
-//    private final ImageIcon _disabledIcon;
     private final Runnable _action;
     private final String _purpose;
 
@@ -34,7 +33,6 @@ public class ImageButton {
             final @NotNull String purpose,
             final @NotNull ImageIcon pressedIcon,
             final @NotNull ImageIcon unpressedIcon,
-//            final @NotNull ImageIcon disabledIcon,
             final @NotNull Runnable action
     ) {
         super();
@@ -43,7 +41,6 @@ public class ImageButton {
         _purpose = purpose;
         _pressedIcon = pressedIcon;
         _unpressedIcon = unpressedIcon;
-//        _disabledIcon = disabledIcon;
         _action = action;
 
     }
@@ -80,13 +77,6 @@ public class ImageButton {
         return _unpressedIcon;
 
     }
-
-//    @NotNull
-//    public ImageIcon getDisabledIcon() {
-//
-//        return _disabledIcon;
-//
-//    }
 
     @NotNull
     public String getPurpose() {
@@ -156,13 +146,6 @@ public class ImageButton {
         ImageIcon pressedIcon = new ImageIcon(
                 ImageIconUtils.changeImageBrightness( unpressedIcon.getImage(), darkeningFactor )
         );
-
-//        // Create a somewhat brighter icon for the disabled version.
-//
-//
-//        ImageIcon disabledIcon = new ImageIcon(
-//                ImageIconUtils.changeImageBrightness( unpressedIcon.getImage(), 1F / darkeningFactor )
-//        );
 
         return ImageButton.makeImageButton( imageButtonOwner, purpose, button, action, unpressedIcon, pressedIcon );
 

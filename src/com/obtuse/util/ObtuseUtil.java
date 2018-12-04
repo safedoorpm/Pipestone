@@ -60,7 +60,6 @@ public class ObtuseUtil {
 
     public static boolean inJavaDebugger() {
 
-        @SuppressWarnings("UnnecessaryLocalVariable")
         boolean isDebug =
                 java.lang.management.ManagementFactory.getRuntimeMXBean().
                         getInputArguments().toString().indexOf( "-agentlib:jdwp" ) > 0;
@@ -830,7 +829,6 @@ public class ObtuseUtil {
         try {
 
             ois = new ObjectInputStream( is );
-            @SuppressWarnings("UnnecessaryLocalVariable")
             Serializable thing = (Serializable)ois.readObject();
 
             return thing;
@@ -902,7 +900,6 @@ public class ObtuseUtil {
 
             fs = new FileInputStream( file );
 
-            //noinspection UnnecessaryLocalVariable
             byte[] contents = ObtuseUtil.readEntireStream( fs, maxLength, printStackTraceOnError );
 
             return contents;
@@ -1016,9 +1013,6 @@ public class ObtuseUtil {
 
         try ( FileOutputStream fs = new FileOutputStream( file ) ) {
 
-//            fs = new FileOutputStream( file );
-
-            //noinspection UnnecessaryLocalVariable
             boolean rval = ObtuseUtil.writeBytesToStream( bytes, fs, printStackTraceOnError );
 
             return rval;
@@ -1052,7 +1046,6 @@ public class ObtuseUtil {
 
         try ( FileOutputStream fs = new FileOutputStream( file, true ) ) {
 
-            //noinspection UnnecessaryLocalVariable
             boolean rval = ObtuseUtil.writeBytesToStream( bytes, fs, printStackTraceOnError );
 
             return rval;
@@ -2646,7 +2639,7 @@ public class ObtuseUtil {
 
     }
 
-    public static @NotNull String computeMD5( final @NotNull byte data@NotNull[] ) {
+    public static @NotNull String computeMD5( final @NotNull byte[] data ) {
 
         byte[] digest = computeMD5bytes( data );
 
@@ -2762,6 +2755,18 @@ public class ObtuseUtil {
     public static double safeDivide( final double numerator, final double denominator, final double safeReturnValue ) {
 
         return denominator == 0.0 ? safeReturnValue : numerator / denominator;
+
+    }
+
+    public static float safeDivide( final float numerator, final float denominator ) {
+
+        return denominator == 0.0f ? 0.0f : numerator / denominator;
+
+    }
+
+    public static float safeDivide( final float numerator, final float denominator, final float safeReturnValue ) {
+
+        return denominator == 0.0f ? safeReturnValue : numerator / denominator;
 
     }
 

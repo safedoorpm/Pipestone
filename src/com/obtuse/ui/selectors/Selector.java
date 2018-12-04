@@ -24,8 +24,6 @@ import java.util.function.Consumer;
 
 public class Selector<K extends Alternative> implements Comparable<Selector>, Iterable<K> {
 
-//    private static final GenericTag SELECTOR_TAGS_CATEGORY = GenericTag.createNewTagCategory( Selector.class.getCanonicalName() );
-
     private static final SortedMap<String, ? super Selector> s_allKnownSelectors = new TreeMap<>();
 
     private final String _selectorsLabel;
@@ -62,7 +60,6 @@ public class Selector<K extends Alternative> implements Comparable<Selector>, It
         _selectorsTagCategory = GenericTag.maybeAllocTagCategory( thisSelectorsName );
 
         this._selectorsLabel = selectorsLabel;
-//        this._selectorsTagName = thisSelectorsName;
 
         s_allKnownSelectors.put( thisSelectorsName, this );
 
@@ -141,12 +138,6 @@ public class Selector<K extends Alternative> implements Comparable<Selector>, It
         return Alternative.findChoiceByKey( tag );
 
     }
-
-//    public Optional<Alternative> findChoiceByLabel( final @NotNull String label ) {
-//
-//        return Alternative.findChoiceByKey( Alternative.makeUniqueKey( this, label ) );
-//
-//    }
 
     public void addAlternative( final @NotNull K alternative ) {
 
@@ -323,14 +314,6 @@ public class Selector<K extends Alternative> implements Comparable<Selector>, It
         return optAlternative;
 
     }
-
-//    @NotNull
-//    public Optional<Alternative> findAlternativeByTag( final @NotNull GenericTag tag ) {
-//
-//        Optional<Alternative> optAlternative = Optional.ofNullable( _knownAlternativesByTagMap.get( tag ) );
-//        return optAlternative;
-//
-//    }
 
     /**
      Create a simple {@link JCheckBox}{@code <}{@link Alternative}{@code >} with its current selection

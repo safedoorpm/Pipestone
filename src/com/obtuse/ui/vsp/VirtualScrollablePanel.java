@@ -2,26 +2,125 @@ package com.obtuse.ui.vsp;
 
 import com.obtuse.exceptions.HowDidWeGetHereError;
 import com.obtuse.ui.layout.PermissiveLayoutManager;
-import com.obtuse.util.Logger;
-import com.obtuse.util.Measure;
-import com.obtuse.util.ObtuseUtil;
-import com.obtuse.util.UniqueID;
+import com.obtuse.util.*;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
-import java.util.List;
 import java.util.Optional;
-import java.util.SortedMap;
-import java.util.TreeMap;
 
 /**
  A scrollable window that can be used to browse very large collections of things.
  */
 
 public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends JPanel {
+
+    private final JPanel _virtualScrollablePanel;
+    private final JScrollBar _hScrollBar;
+    private final JScrollBar _vScrollBar;
+
+    private boolean _verbose;
+
+    //    private final VirtualScrollablePanelModel _virtualScrollablePanelModel;
+    private final VirtualScrollablePanelModel<E> _virtualScrollablePanelModel;
+
+    private boolean _ourLayoutManagerSet;
+    private final VirtualScrollableLayoutManager _ourLayoutManager;
+
+    public VirtualScrollablePanel( @NotNull final VirtualScrollablePanelModel<E> virtualScrollablePanelModel ) {
+        super();
+
+        // Make it impossible to change our layout manager once we've set it here.
+
+        VirtualScrollableLayoutManager ourLayoutManager = new VirtualScrollableLayoutManager( this );
+
+        setLayout( ourLayoutManager );
+
+        _ourLayoutManagerSet = true;
+        _ourLayoutManager = ourLayoutManager;
+
+        _virtualScrollablePanel = new JPanel();
+        _virtualScrollablePanel.setName( "vSP" );
+        _virtualScrollablePanel.setBorder( BorderFactory.createEtchedBorder() );
+        add( _virtualScrollablePanel, VPANEL_NAME );
+
+        _hScrollBar = new JScrollBar(
+                Adjustable.HORIZONTAL,
+                0,
+                25,
+                0,
+                1000
+        );
+        add( _hScrollBar, HSB_NAME );
+
+        _vScrollBar = new JScrollBar(
+                Adjustable.VERTICAL, 0,
+                40,
+                0,
+                1000
+        );
+        add( _vScrollBar, VSB_NAME );
+
+        _virtualScrollablePanelModel = virtualScrollablePanelModel;
+
+        addComponentListener(
+                new ComponentListener() {
+                    @Override
+                    public void componentResized( final ComponentEvent e ) {
+
+                        ObtuseUtil.doNothing();
+
+                    }
+
+                    @Override
+                    public void componentMoved( final ComponentEvent e ) {
+
+                        ObtuseUtil.doNothing();
+
+                    }
+
+                    @Override
+                    public void componentShown( final ComponentEvent e ) {
+
+                        Logger.logMsg( "VirtualScrollablePanel:  we have been shown - we are now " +
+                                       ( isVisible() ? "visible" : "not visible" ) +
+                                       " at " +
+                                       ObtuseUtil.fBounds( getBounds() ) );
+
+                        ObtuseUtil.doNothing();
+
+                    }
+
+                    @Override
+                    public void componentHidden( final ComponentEvent e ) {
+
+                        Logger.logMsg( "VirtualScrollablePanel:  we have been hidden - we are now " +
+                                       ( isVisible() ? "visible" : "not visible" ) +
+                                       " at " +
+                                       ObtuseUtil.fBounds( getBounds() ) );
+
+                        ObtuseUtil.doNothing();
+
+                    }
+
+                }
+        );
+
+    }
+
+    public void setInnerBackground( @NotNull Color color ) {
+
+        _virtualScrollablePanel.setBackground( color );
+
+    }
+
+    public void setInnerForeground( @NotNull Color color ) {
+
+        _virtualScrollablePanel.setForeground( color );
+
+    }
 
     @SuppressWarnings("unused")
     public VirtualScrollablePanelModel getVirtualScrollablePanelModel() {
@@ -45,18 +144,19 @@ public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends 
         private JScrollBar _hsb;
         private VirtualScrollablePanel<E> _ourTargetPanel;
         private JPanel _ourScrollableInnerPanel;
-        private final VirtualScrollablePanelModel<E> _vModel;
 
         @SuppressWarnings("unused") private boolean _isValid = false;
 
+        private Stats _elementViewHeightStats = new Stats();
+
         public VirtualScrollableLayoutManager(
-                final @NotNull VirtualScrollablePanel<E> ourTargetPanel,
-                @NotNull final VirtualScrollablePanelModel<E> vModel
+                final @NotNull VirtualScrollablePanel<E> ourTargetPanel
+                /*,
+                @NotNull final VirtualScrollablePanelModel<E> vModel*/
         ) {
             super();
 
             _ourTargetPanel = ourTargetPanel;
-            _vModel = vModel;
 
         }
 
@@ -151,22 +251,6 @@ public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends 
 
         public void vsbChanged() {
 
-//            Logger.logMsg(
-//                    "the vertical scrollbar has changed:  " +
-//                    "min=" + _vsb.getMinimum() + "," +
-//                    "value=" + _vsb.getValue() + "," +
-//                    "extent=" + _vsb.getModel().getExtent() + "," +
-//                    "value+extent=" + ( _vsb.getValue() + _vsb.getModel().getExtent() ) + "," +
-//                    "max=" + _vsb.getMaximum() + "," +
-//                    "adjusting=" + _vsb.getModel().getValueIsAdjusting()
-//            );
-
-//            if ( !_vsb.getModel().getValueIsAdjusting() ) {
-//
-//                Logger.logMsg( "done adjusting" );
-//
-//            }
-
         }
 
         @Override
@@ -251,13 +335,39 @@ public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends 
                 final int vPanelWidth = cWidth - vsbWidth;
                 final int vPanelHeight = cHeight - hsbHeight;
 
+                Logger.logMsg( "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" );
+
+                // Signal to the panel model that we're about to layout their panel and it would be a
+                // great time for the model's 'worldview' to be up-to-date and in sync with reality.
+
+                _virtualScrollablePanelModel.checkForUpdates();
+
                 setBounds( VPANEL_NAME, _ourScrollableInnerPanel, new Rectangle( 0, 0, vPanelWidth, vPanelHeight ) );
                 setBounds( VSB_NAME, _vsb, new Rectangle( vPanelWidth, 0, vsbWidth, vsbHeight ) );
                 setBounds( HSB_NAME, _hsb, new Rectangle( 0, vPanelHeight, hsbWidth, hsbHeight ) );
 
-                VirtualScrollablePanelModel.CurrentGoals<E> currentGoals = _vModel.getCurrentGoals( new Dimension( vPanelWidth, vPanelHeight ) );
-                List<VirtualScrollableElementModel<E>> visibleElementModels = currentGoals.visibleElementModels();
-                int nVisibleElements = visibleElementModels.size();
+                VirtualScrollablePanelModel.CurrentGoals<E> currentGoals = _virtualScrollablePanelModel.getCurrentGoals(
+                        _vsb.getValue(),
+                        new Dimension( vPanelWidth, vPanelHeight )
+                );
+
+                // If the current goals don't provide us with anything to show but there is something to see
+                // with a bit of scrolling, try again with the first visible row set to the last actual row.
+                // If there is simply nothing to see regardless of scrolling, continue and we'll handle that case below.
+
+                if ( !currentGoals.isAnythingVisible() && currentGoals.getScrollableElementsCount() > 0 ) {
+
+                    // If this still yields an "nothing to see" result then we're going to bail out
+                    // down below (i.e. leave the viewer with an empty panel).
+
+                    currentGoals = _virtualScrollablePanelModel.getCurrentGoals(
+                            currentGoals.getScrollableElementsCount() - 1,
+                            new Dimension( vPanelWidth, vPanelHeight )
+                    );
+
+                    ObtuseUtil.doNothing();
+
+                }
 
                 for ( Component c : _ourScrollableInnerPanel.getComponents() ) {
 
@@ -268,32 +378,45 @@ public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends 
                 _ourScrollableInnerPanel.removeAll();
 
                 int nRendered = 0;
+
                 Insets in = _ourScrollableInnerPanel.getInsets();
                 int widestRenderedElementView = 0;
 
-                if ( visibleElementModels.isEmpty() ) {
+                // If we bail now then nothing will be visible in the inner panel.
+                // Let's short circuit this game if we KNOW that there is nothing visible.
 
-                    // Nothing is visible regardless of where the human scrolls to - we're pretty much done here.
+                if ( currentGoals.isAnythingVisible() ) {
 
-                    ObtuseUtil.doNothing();
+                    // Tell _virtualScrollablePanelModel that we are starting a new round of allocating element views.
+                    // This allows the _virtualScrollablePanelModel to recycle old views if they so choose.
 
-                } else {
-
-                    SortedMap<UniqueID, ElementView<E>> assignedElementViewMapping = new TreeMap<>();
-                    _vModel.allocateElementViews( visibleElementModels, assignedElementViewMapping );
+                    _virtualScrollablePanelModel.startNewElementViewAllocationRound();
 
                     int y = in.top;
-//                    Logger.logMsg( "starting at row " + _vsb.getValue() );
+
+                    // The current goals simply MUST include the first visible element number.
+                    // If this requirement is not met then it's better to explode here with a
+                    // useful error message than to stumble into an NPE below.
+
+                    if ( currentGoals.getFirstProvidedElementNumber() > currentGoals.getFirstVisibleElementNumber() ) {
+
+                        throw new IllegalArgumentException(
+                                "VirtualScrollablePanel.layoutContainer:  " +
+                                "first provided element number is " + currentGoals.getFirstProvidedElementNumber() +
+                                " but the first element we need to display is " + currentGoals.getFirstVisibleElementNumber()
+                        );
+
+                    }
 
                     for (
-                            int ix = _vsb.getValue();
-                            ix < nVisibleElements && y < vPanelHeight - in.bottom;
+                            int ix = currentGoals.getFirstVisibleElementNumber();
+                            ix <= currentGoals.getLastProvidedElementNumber() && y < vPanelHeight - in.bottom;
                             ix += 1
                     ) {
 
-                        VirtualScrollableElementModel<E> elementModel = visibleElementModels.get( ix );
+                        VirtualScrollableElementModel<E> elementModel = currentGoals.getElementAt( ix ); // visibleElementModels.get( ix );
 
-                        ElementView<E> elementView = assignedElementViewMapping.get( elementModel.getUniqueID() );
+                        ElementView<E> elementView = _virtualScrollablePanelModel.createInstance( elementModel );
                         if ( elementView == null ) {
 
                             throw new HowDidWeGetHereError(
@@ -318,7 +441,7 @@ public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends 
                         asComponent.setVisible( true );
 
                         elementView.fill( elementModel );
-                        _vModel.noteViewFilled( elementView );
+                        _virtualScrollablePanelModel.noteViewFilled( elementView );
 
                         widestRenderedElementView = Math.max(
                                 widestRenderedElementView,
@@ -346,32 +469,20 @@ public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends 
 
                     }
 
+                    ObtuseUtil.doNothing();
+
                 }
 
-                // %%% the behaviour of the vertical scrollbar could probably be hard-wired
-                // to be strictly based on the number of visible elements.
-
-//                Logger.logMsg( "." );
-//                Logger.logMsg( "." );
-//                Logger.logMsg( "." );
-//                Logger.logMsg( "configuring vertical scroll bar" );
-
-                _vModel.configureVerticalScrollBar(
+                _virtualScrollablePanelModel.configureVerticalScrollBar(
                         _vsb,
                         nRendered,
-                        vPanelHeight - ( in.top + in.bottom )
+                        currentGoals.getScrollableElementsCount()
                 );
 
-//                Logger.logMsg( "configuring horizontal scroll bar" );
-
-                _vModel.configureHorizontalScrollBar(
+                _virtualScrollablePanelModel.configureHorizontalScrollBar(
                         _hsb, widestRenderedElementView,
                         vPanelWidth - ( in.left + in.right )
                 );
-
-//                Logger.logMsg( "." );
-//                Logger.logMsg( "." );
-//                Logger.logMsg( "." );
 
                 _isValid = true;
 
@@ -441,106 +552,6 @@ public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends 
 
     }
 
-    private boolean _verbose;
-
-    private final VirtualScrollablePanelModel _virtualScrollablePanelModel;
-
-    private boolean _ourLayoutManagerSet;
-    private final VirtualScrollableLayoutManager _ourLayoutManager;
-
-    public VirtualScrollablePanel( @NotNull final VirtualScrollablePanelModel<E> virtualScrollablePanelModel ) {
-        super();
-
-        // Make it impossible to change our layout manager once we've set it here.
-
-        VirtualScrollableLayoutManager ourLayoutManager = new VirtualScrollableLayoutManager( this,
-                                                                                              virtualScrollablePanelModel
-        );
-
-        setLayout( ourLayoutManager );
-
-        _ourLayoutManagerSet = true;
-        _ourLayoutManager = ourLayoutManager;
-
-        JPanel virtualScrollablePanel = new JPanel();
-        virtualScrollablePanel.setName( "vSP" );
-        virtualScrollablePanel.setBorder( BorderFactory.createEtchedBorder() );
-        add( virtualScrollablePanel, VPANEL_NAME );
-
-        JScrollBar hScrollBar = new JScrollBar(
-                Adjustable.HORIZONTAL,
-                0,
-                25,
-                0,
-                1000
-        );
-        add( hScrollBar, HSB_NAME );
-
-        JScrollBar vScrollBar = new JScrollBar(
-                Adjustable.VERTICAL, 0,
-                40,
-                0,
-                1000
-        );
-        add( vScrollBar, VSB_NAME );
-
-        _virtualScrollablePanelModel = virtualScrollablePanelModel;
-
-        addComponentListener(
-                new ComponentListener() {
-                    @Override
-                    public void componentResized( final ComponentEvent e ) {
-
-//                        Logger.logMsg( "VirtualScrollablePanel:  we have been resized - we are now " +
-//                                       ( isVisible() ? "visible" : "not visible" ) +
-//                                       " at " +
-//                                       ObtuseUtil.fBounds( getBounds() ) );
-
-                        ObtuseUtil.doNothing();
-
-                    }
-
-                    @Override
-                    public void componentMoved( final ComponentEvent e ) {
-
-//                        Logger.logMsg( "VirtualScrollablePanel:  we have been moved - we are now " +
-//                                       ( isVisible() ? "visible" : "not visible" ) +
-//                                       " at " +
-//                                       ObtuseUtil.fBounds( getBounds() ) );
-
-                        ObtuseUtil.doNothing();
-
-                    }
-
-                    @Override
-                    public void componentShown( final ComponentEvent e ) {
-
-                        Logger.logMsg( "VirtualScrollablePanel:  we have been shown - we are now " +
-                                       ( isVisible() ? "visible" : "not visible" ) +
-                                       " at " +
-                                       ObtuseUtil.fBounds( getBounds() ) );
-
-                        ObtuseUtil.doNothing();
-
-                    }
-
-                    @Override
-                    public void componentHidden( final ComponentEvent e ) {
-
-                        Logger.logMsg( "VirtualScrollablePanel:  we have been hidden - we are now " +
-                                       ( isVisible() ? "visible" : "not visible" ) +
-                                       " at " +
-                                       ObtuseUtil.fBounds( getBounds() ) );
-
-                        ObtuseUtil.doNothing();
-
-                    }
-
-                }
-        );
-
-    }
-
     public void setLayout( LayoutManager layout ) {
 
         if ( _ourLayoutManagerSet ) {
@@ -558,15 +569,11 @@ public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends 
 
         private VirtualScrollableElementModel<EV> _elementModel;
 
-//        private UniqueID _clientUniqueID;
-
         protected AbstractElementView(
-                @NotNull final UniqueID id,
                 final @NotNull VirtualScrollableElementModel<EV> elementModel
         ) {
             super();
 
-//            _clientUniqueID = id;
             _elementModel = elementModel;
 
         }
@@ -584,7 +591,6 @@ public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends 
                 @NotNull final VirtualScrollableElementModel<EV> elementModel
         ) {
 
-//            _clientUniqueID = id;
             _elementModel = elementModel;
 
         }

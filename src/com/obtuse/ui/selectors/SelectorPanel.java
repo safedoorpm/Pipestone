@@ -14,11 +14,8 @@ import org.jetbrains.annotations.Nullable;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.Function;
 
 /**
@@ -37,17 +34,6 @@ public abstract class SelectorPanel<E,C extends Container> extends BorderLayoutP
         );
 
     }
-
-//    public abstract static class VetSelectionListener<T> extends ObtuseListener<T> {
-//
-//        @Override
-//        public abstract void myActionPerformed(
-//                final @NotNull String who,
-//                final @NotNull String why,
-//                final @NotNull T dataSource
-//        );
-//
-//    }
 
     private final SimpleObtuseListenerManager<E> _listenerManager = new SimpleObtuseListenerManager<>();
 
@@ -206,14 +192,6 @@ public abstract class SelectorPanel<E,C extends Container> extends BorderLayoutP
 
     }
 
-//    protected void fireSelectionChange( final @NotNull String who, final @NotNull E choice ) {
-//
-//        Logger.logMsg( who + ":  selected " + ObtuseUtil.enquoteJavaObject( choice ) );
-//
-//        ObtuseUtil.doNothing();
-//
-//    }
-
     public abstract String toString();
 
     public void fireSelectionChangedListeners( final String who, final @NotNull String why, final @NotNull E item ) {
@@ -242,15 +220,6 @@ public abstract class SelectorPanel<E,C extends Container> extends BorderLayoutP
         return _listenerManager.removeByName( name );
 
     }
-
-//    public void addVetSelectionListener(
-//            @NotNull final String name, @NotNull final VetSelectionListener actionListener
-//    ) {
-//
-//        @SuppressWarnings("unchecked") ObtuseListener<E> listener = (ObtuseListener<E>)actionListener;
-//        _listenerManager.addObtuseListener( name, listener );
-//
-//    }
 
     public void addSelectionChangedListener(
             @NotNull final String name, @NotNull final SelectionChangedListener actionListener

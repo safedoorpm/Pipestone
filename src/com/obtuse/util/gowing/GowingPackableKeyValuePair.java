@@ -1,7 +1,6 @@
 package com.obtuse.util.gowing;
 
 import com.obtuse.exceptions.HowDidWeGetHereError;
-import com.obtuse.util.Logger;
 import com.obtuse.util.ObtuseUtil;
 import com.obtuse.util.gowing.p2a.GowingEntityReference;
 import com.obtuse.util.gowing.p2a.GowingUtil;
@@ -306,14 +305,10 @@ public class GowingPackableKeyValuePair<K, V> extends GowingAbstractPackableEnti
 
         } else if ( obj instanceof GowingPackable ) {
 
-//            Logger.logMsg( "GII " + ((GowingPackable)obj).getInstanceId() + " passed vetting, class type is " + obj.getClass().getCanonicalName() );
-
-//            whatWeveSeen.put( obj, true );
             rval = true;
 
         } else if ( obj instanceof EntityName ) {
 
-//            whatWeveSeen.put( obj, true );
             rval = true;
 
         } else {
@@ -332,7 +327,7 @@ public class GowingPackableKeyValuePair<K, V> extends GowingAbstractPackableEnti
 
     private static boolean isClassSupported( final @NotNull Class entityClass ) {
 
-        @SuppressWarnings("UnnecessaryLocalVariable") boolean rval = s_factories.containsKey( entityClass.getCanonicalName() );
+        boolean rval = s_factories.containsKey( entityClass.getCanonicalName() );
 
         return rval;
 

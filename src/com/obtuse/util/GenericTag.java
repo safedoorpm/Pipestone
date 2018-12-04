@@ -68,7 +68,7 @@ public class GenericTag
             GenericTagCategory categoryTag = optCategoryTag.orElseGet( () -> createNewTagCategory( categoryTagName ) );
 
             String tagName = bundle.MandatoryStringValue( G_TAG_NAME );
-            @SuppressWarnings("UnnecessaryLocalVariable") GenericTag rval = alloc( categoryTag, tagName );
+            GenericTag rval = alloc( categoryTag, tagName );
 
             return rval;
 
@@ -130,13 +130,6 @@ public class GenericTag
     @SuppressWarnings("StaticInitializerReferencesSubClass")
     public static final GenericTagCategory TAG_CATEGORY = new GenericTagCategory();
 
-//    /**
-//     All valid category tags including those defined using {@link #maybeAllocTagCategory()}.
-//     */
-//
-//    public static final Pattern VALID_CATEGORY_TAG = Pattern.compile( "~[a-zA-Z0-9][a-zA-Z0-9_]*[a-zA-Z0-9]" );
-
-//    private static final SortedMap<String,GenericTag> s_knownTags = new TreeMap<>( String::compareToIgnoreCase );
     private static final TwoDimensionalSortedMap<String,String,GenericTag> s_knownTags = new TwoDimensionalTreeMap<>();
 
     private final GenericTagCategory _categoryTag;
@@ -243,21 +236,6 @@ public class GenericTag
 
         return maybeAllocTagCategory( "getExistingTagCategory", categoryName, true, false );
 
-//        Optional<GenericTag> optTag = findTagCategory( categoryName );
-//        if ( optTag.isPresent() ) {
-//
-//            return optTag.get();
-//
-//        } else {
-//
-//            throw new IllegalArgumentException(
-//                    "GenericTag.getExistingTagCategory(" + ObtuseUtil.enquoteToJavaString( categoryName ) + "):  " +
-//                    "tag category named " +
-//                    ObtuseUtil.enquoteToJavaString( categoryName ) + " does not exist"
-//            );
-//
-//        }
-
     }
 
     /**
@@ -337,25 +315,6 @@ public class GenericTag
             );
 
         }
-
-//        String candidateName = categoryName;
-//        int augmentation = 0;
-//
-//        while ( s_knownTagCategories.containsKey( candidateName ) ) {
-//
-//            if ( !augmentIfNecessary ) {
-//
-//                throw new IllegalArgumentException(
-//                        "GenericTag.maybeAllocTagCategory(" + ObtuseUtil.enquoteToJavaString( categoryName ) + "):  " +
-//                        "category name already exists"
-//                );
-//
-//            }
-//
-//            augmentation += 1;
-//            candidateName = categoryName + "_" + augmentation;
-//
-//        }
 
         GenericTagCategory genericTag = s_knownTagCategories.get( categoryName );
         if ( genericTag == null ) {
@@ -484,28 +443,6 @@ public class GenericTag
 
         }
 
-//        if ( !s_knownTagCategories.containsKey( tagCategoryString ) ) {
-//
-//            throw new IllegalArgumentException(
-//                    "GenericTag.alloc( " +
-//                    ObtuseUtil.enquoteToJavaString( tagCategoryString ) + ", " +
-//                    ObtuseUtil.enquoteToJavaString( tagName ) + " ):  " +
-//                    "tag \"" + ObtuseUtil.enquoteToJavaString( tagCategoryString ) + " is reserved"
-//            );
-//
-//        }
-
-//        String tmpTag = tag;
-//
-//        while ( tmpTag.startsWith( TO_STRING_PREFIX ) ) {
-//
-//            tmpTag = tmpTag.substring( TO_STRING_PREFIX.length() );
-//
-//        }
-//
-//        final String cleanedTag = tmpTag;
-
-        @SuppressWarnings("UnnecessaryLocalVariable")
         GenericTag rval = s_knownTags.computeIfAbsent( tagCategoryString, tagName,
                                                        ( categoryString, nameString ) -> new GenericTag(
                                                                categoryString,
@@ -599,7 +536,7 @@ public class GenericTag
             final boolean isPackingSuper, @NotNull final GowingPacker packer
     ) {
 
-        @SuppressWarnings("UnnecessaryLocalVariable") GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
+        GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
                 ENTITY_TYPE_NAME,
                 VERSION,
                 super.bundleRoot( packer ),
@@ -619,20 +556,6 @@ public class GenericTag
 
         return true;
     }
-
-//    private static void doit( final @NotNull String what, final @NotNull GenericTag result, final @NotNull String oracle ) {
-//
-//        if ( result.getTagName().equals( oracle ) ) {
-//
-//            return;
-//
-//        }
-//
-//        Logger.logErr( what + ":  got " + ObtuseUtil.enquoteToJavaString( result.getTagName() ) + " but expected " + ObtuseUtil.enquoteToJavaString( oracle ) );
-//
-//        s_errCount += 1;
-//
-//    }
 
     private static int s_errCount = 0;
 
@@ -820,37 +743,6 @@ public class GenericTag
 
     }
 
-//    private static <K> void boomOk(
-//            final @NotNull Consumer<? super K> func,
-//            final K parameter,
-//            final @NotNull Class<? extends Throwable> expectedError
-//    ) {
-//
-//        try {
-//
-//            V rval = func.apply( parameter );
-//
-//            Logger.logErr( "should have caught an exception but got return value of " + rval );
-//
-//            ObtuseUtil.doNothing();
-//
-//        } catch ( Throwable e ) {
-//
-//            if ( expectedError.isAssignableFrom( e.getClass() ) ) {
-//
-//                Logger.logMsg( "caught expected exception " + e );
-//
-//            } else {
-//
-//                Logger.logErr( "caught unexpected exception ", e );
-//
-//                ObtuseUtil.doNothing();
-//
-//            }
-//
-//        }
-//    }
-
     public static void main( final String[] args ) {
 
         BasicProgramConfigInfo.init( "Obtuse", "Pipestone", "GenericTag", null );
@@ -871,10 +763,6 @@ public class GenericTag
                 () -> createNewTagCategory( "testing" ),
                 IllegalArgumentException.class
         );
-
-//                ( Object s ) -> {
-//            return maybeAllocTagCategory( "testing", false, NullPointerException.class );
-//        } );
 
         boomOk( "create bogus tag tag", () -> alloc( TAG_CATEGORY, "hello" ), IllegalArgumentException.class );
         doitNotNull( "create hello tag", () -> alloc( tagCategory, "hello" ), tagCategory );

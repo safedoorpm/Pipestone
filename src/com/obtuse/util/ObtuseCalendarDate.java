@@ -256,7 +256,6 @@ public class ObtuseCalendarDate extends GowingAbstractPackableEntity implements 
     public static ObtuseCalendarDate todayLocal() {
 
         Calendar cal = Calendar.getInstance();
-//        System.out.println( "current local time is " + cal.get( Calendar.HOUR ) + ":" + cal.get( Calendar.MINUTE ) + ":" + cal.get( Calendar.SECOND ) );
 
         int year = cal.get( Calendar.YEAR );
         int month = cal.get( Calendar.MONTH ) + 1;
@@ -277,7 +276,6 @@ public class ObtuseCalendarDate extends GowingAbstractPackableEntity implements 
     public static ObtuseCalendarDate todayUTC() {
 
         Calendar cal = Calendar.getInstance( TimeZone.getTimeZone( "UTC" ) );
-//        System.out.println( "current UTC time is " + cal.get( Calendar.HOUR ) + ":" + cal.get( Calendar.MINUTE ) + ":" + cal.get( Calendar.SECOND ) );
 
         int year = cal.get( Calendar.YEAR );
         int month = cal.get( Calendar.MONTH ) + 1;
@@ -442,7 +440,6 @@ public class ObtuseCalendarDate extends GowingAbstractPackableEntity implements 
         cal.add( Calendar.MONTH, 1 );
         cal.add( Calendar.DAY_OF_YEAR, -1 );
 
-        @SuppressWarnings("UnnecessaryLocalVariable")
         int rval = cal.get( Calendar.DAY_OF_MONTH );
 
         return rval;
@@ -504,7 +501,6 @@ public class ObtuseCalendarDate extends GowingAbstractPackableEntity implements 
 
         }
 
-        @SuppressWarnings("UnnecessaryLocalVariable")
         int durationDays = 1 + (int)( durationMs / Timer.ONE_DAY );
 
         return durationDays;

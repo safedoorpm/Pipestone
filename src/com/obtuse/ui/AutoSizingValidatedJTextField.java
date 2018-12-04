@@ -112,28 +112,6 @@ public abstract class AutoSizingValidatedJTextField extends ValidatedJTextField 
 
     }
 
-//    /**
-//     Configure an arbitrary existing {@link JTextField} to do the auto-size adjusting trick.
-//     <p>This variant of {@code configureAutoSizeAdjustingJTextField} uses the text field's
-//     minimum size's width and maximum size's width to determine the minimum and maximum width that the text field should be constrained to.</p>
-//     @param jtf the textfield to teach the auto-size adjusting trick to.
-//     */
-//
-//    @SuppressWarnings({"unused","UnusedReturnValue"})
-//    public static <T extends JTextField> T configureAutoSizeAdjustingJTextField( final @NotNull T jtf ) {
-//
-//        if ( s_interestingField == jtf ) {
-//
-//            ObtuseUtil.doNothing();
-//
-//        }
-//
-//        jtf.getDocument().addDocumentListener( new AutoAdjustingTextFieldWidthListener( jtf ) );
-//
-//        return jtf;
-//
-//    }
-
     public int getMinWidth() {
 
         return _minWidth;

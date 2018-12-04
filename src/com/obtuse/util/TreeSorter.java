@@ -6,8 +6,8 @@ package com.obtuse.util;
 
 import com.obtuse.util.gowing.*;
 import com.obtuse.util.gowing.p2a.GowingEntityReference;
-import com.obtuse.util.gowing.p2a.exceptions.GowingUnpackingException;
 import com.obtuse.util.gowing.p2a.GowingUtil;
+import com.obtuse.util.gowing.p2a.exceptions.GowingUnpackingException;
 import com.obtuse.util.gowing.p2a.holders.GowingPackableEntityHolder;
 import com.obtuse.util.gowing.p2a.holders.GowingPackableMapping;
 import org.jetbrains.annotations.NotNull;
@@ -134,10 +134,6 @@ public class TreeSorter<K extends Comparable<? super K>, V>
 
             // The temporary variable is required in order to make this assignment a declaration which allows
             // the @SuppressWarnings("unchecked") annotation (the annotation is not allowed on a simple assignment statement).
-//            @SuppressWarnings("unchecked")
-//            TreeMap<T1, TwoDimensionalSortedMap<T2, T3, V>> tmap =
-//                    ( (GowingPackableMapping<T1,TwoDimensionalSortedMap<T2,T3,V>>)packable ).rebuildMap( new TreeMap<>() );
-//            _map = tmap;
 
             @SuppressWarnings("unchecked")
             TreeMap<K, Collection<V>> tmap = ( (GowingPackableMapping<K, Collection<V>>)packable ).rebuildMap( new TreeMap<>() );
@@ -195,6 +191,7 @@ public class TreeSorter<K extends Comparable<? super K>, V>
 
             }
 
+            //noinspection ConstantConditions
             return _innerIterator.hasNext();
 
         }
@@ -1025,7 +1022,6 @@ public class TreeSorter<K extends Comparable<? super K>, V>
 
         Collection<V> c = _sortedData.remove( key );
 
-        @SuppressWarnings("UnnecessaryLocalVariable")
         ArrayList<V> rval =
                 c == null
                         ?
@@ -1146,7 +1142,6 @@ public class TreeSorter<K extends Comparable<? super K>, V>
     @NotNull
     public Iterator<V> iterator() {
 
-        @SuppressWarnings({ "UnnecessaryLocalVariable" })
         Iterator<V> iter = new TreeSorterIterator<>();
 
         return iter;

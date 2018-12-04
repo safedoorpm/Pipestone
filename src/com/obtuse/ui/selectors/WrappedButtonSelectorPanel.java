@@ -17,14 +17,13 @@ import java.awt.*;
 import java.util.List;
 import java.util.SortedMap;
 import java.util.TreeMap;
-import java.util.function.Function;
 
 /**
  A helper class that wraps either a {@link ButtonSelectorPanel}{@code <C>} or a JPanel.
  */
 
 @SuppressWarnings("unused")
-public class WrappedButtonSelectorPanel<CHOICE, PANEL extends JPanel> extends WrappedSelectorPanel<CHOICE> {
+public class WrappedButtonSelectorPanel<CHOICE extends Comparable<CHOICE>, PANEL extends JPanel> extends WrappedSelectorPanel<CHOICE> {
 
     public interface IController<ICCHOICE,ICPANEL extends JPanel> {
 
@@ -71,16 +70,13 @@ public class WrappedButtonSelectorPanel<CHOICE, PANEL extends JPanel> extends Wr
 
             super(
                     iController,
-//                    iController.getPanelName(),
                     buttonGroup,
                     buttonPanel,
                     buttonMap,
                     null,
                     choice -> {
 
-//                            @SuppressWarnings("unchecked") CHOICE choice =
-//                                    (CHOICE)ButtonSelectorPanel.lookupChoice( ab, buttonMap );
-                        @SuppressWarnings("UnnecessaryLocalVariable") PANEL panel = iController.getPanel( choice );
+                        PANEL panel = iController.getPanel( choice );
 
                         return panel;
 

@@ -50,13 +50,6 @@ public class PlayElementModel implements VirtualScrollableElementModel<PlayEleme
 
     }
 
-    @Override
-    public void setPanelModel( final VirtualScrollablePanelModel<PlayElementData> panelModel ) {
-
-        _panelModel = panelModel;
-
-    }
-
     public VirtualScrollablePanelModel<PlayElementData> getPanelModel() {
 
         return _panelModel;

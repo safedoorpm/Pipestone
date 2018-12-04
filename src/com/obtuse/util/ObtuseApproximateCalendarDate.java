@@ -35,8 +35,6 @@ public class ObtuseApproximateCalendarDate
         extends GowingAbstractPackableEntity
         implements GowingBackReferenceable, Comparable<ObtuseApproximateCalendarDate> {
 
-//    private static final boolean s_requireNewStyleDateRanges = true;
-
     private final boolean _isUnknownApproximateDate;
 
     /**
@@ -661,35 +659,6 @@ public class ObtuseApproximateCalendarDate
 
     }
 
-//    public String formatDDMMMYYYY() {
-//
-//        switch ( _precision ) {
-//
-//            case DATE:
-//                return getNominalCalendarDate().getDateString();
-//
-//            case MONTH:
-//                return getNominalCalendarDate().getDateString().substring( 0, 7 );
-//
-//            case YEAR:
-//                return getNominalCalendarDate().getDateString().substring( 0, 4 );
-//
-//            case DECADE:
-//                return getNominalCalendarDate().getDateString().substring( 0, 3 ) + "0s";
-//
-//            case RANGE:
-//                if ( isUnknownApproximateDate() ) {
-//
-//                    return FORMATTED_UNKNOWN_APPROXIMATE_DATE;
-//
-//                }
-//
-//                return getEarliestPossibleDate().getDateString() + ":" + getLatestPossibleDate().getDateString();
-//
-//        }
-//
-//    }
-
     /**
      Compare two instances primarily based on their earliest possible date, secondarily on their latest possible date, and tertiarily on the specified precisions.
 
@@ -829,7 +798,7 @@ public class ObtuseApproximateCalendarDate
 
         try {
 
-            @SuppressWarnings("UnnecessaryLocalVariable") ObtuseApproximateCalendarDate rval = internalParse( dateString, dateString );
+            ObtuseApproximateCalendarDate rval = internalParse( dateString, dateString );
 
             return rval;
 
@@ -838,7 +807,7 @@ public class ObtuseApproximateCalendarDate
             Optional<String> cleanedDate = FlexibleDateTransmogrifier.transmogrify( dateString );
             if ( cleanedDate.isPresent() ) {
 
-                @SuppressWarnings("UnnecessaryLocalVariable") ObtuseApproximateCalendarDate rval = internalParse( dateString, cleanedDate.get() );
+                ObtuseApproximateCalendarDate rval = internalParse( dateString, cleanedDate.get() );
 
                 return rval;
 

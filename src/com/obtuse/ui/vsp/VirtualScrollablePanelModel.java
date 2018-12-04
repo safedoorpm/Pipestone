@@ -1,15 +1,12 @@
 package com.obtuse.ui.vsp;
 
 import com.obtuse.util.ObtuseUtil;
-import com.obtuse.util.UniqueID;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.SortedMap;
 
 /**
  Created by danny on 2018/11/19.
@@ -19,121 +16,180 @@ public interface VirtualScrollablePanelModel<E extends VirtualScrollableElement>
 
     class CurrentGoals<EV extends VirtualScrollableElement> {
 
-        private final int _elementIndexOfTopRow;
-        private final ArrayList<VirtualScrollableElementModel<EV>> _visibleElements;
+        private final int _firstVisibleElementNumber;
+        private final int _firstProvidedElementNumber;
+        private final int _scrollableElementsCount;
+        private final ArrayList<VirtualScrollableElementModel<EV>> _providedElementModels;
 
         public CurrentGoals(
-                final int elementIndexOfTopRow,
-                @NotNull final List<? extends VirtualScrollableElementModel<EV>> visibleElements
+                final int firstVisibleElementNumber,
+                final int firstProvidedElementNumber,
+                final int scrollableElementsCount,
+                @NotNull final List<? extends VirtualScrollableElementModel<EV>> providedElementModels
         ) {
 
             super();
 
-            _elementIndexOfTopRow = elementIndexOfTopRow;
-            _visibleElements = new ArrayList<>( visibleElements );
+            _firstVisibleElementNumber = firstVisibleElementNumber;
+            _firstProvidedElementNumber = firstProvidedElementNumber;
+            _scrollableElementsCount = scrollableElementsCount;
+            _providedElementModels = new ArrayList<>( providedElementModels );
+
+        }
+
+        public boolean isAnythingVisible() {
+
+            //noinspection RedundantIfStatement
+            if ( _firstVisibleElementNumber < _scrollableElementsCount && !_providedElementModels.isEmpty() ) {
+
+                return true;
+
+            } else {
+
+                return false;
+
+            }
 
         }
 
         /**
-         Specify which visible element should appear at the top of the inner scrollable window.
+         Determine which actual element should appear at the top of the inner scrollable window.
          */
 
-        public int elementIndexOfTopRow() {
+        public int getFirstVisibleElementNumber() {
 
-            return _elementIndexOfTopRow;
+            return _firstVisibleElementNumber;
 
         }
 
         /**
-         Provide a list of potentially visible elements.
-         <p>An element is potentially visible if the 'right' scrolling operation could bring the element into view.
-         In other words, this is essentially 'elements that the human is allowed to see right now'.</p>
-         @return the list of potentially visible elements.
-         Note that return type is explicitly {@link ArrayList}.
-         This provides a guarantee that the cost of accessing an element is constant (and essentially zero).
+         Determine which element is the first one actually provided by this instance.
+         @return the index of the first element that the creator of this instance provided.
          */
 
-        public ArrayList<VirtualScrollableElementModel<EV>> visibleElementModels() {
+        public int getFirstProvidedElementNumber() {
 
-            return _visibleElements;
+            return _firstProvidedElementNumber;
+
+        }
+
+        /**
+         Determine which element is the last one actually provided by this instance.
+         @return the index of the last element that the creator of this instance provided.
+         */
+
+        public int getLastProvidedElementNumber() {
+
+            return _firstProvidedElementNumber + _providedElementModels.size() - 1;
+
+        }
+
+        /**
+         Determine how many elements are provided by this instance.
+         <p>Do NOT confuse this with the total number of elements which currently exist
+         and which the human might be able to see by scrolling
+         (see {@link #getScrollableElementsCount()} for that number).</p>
+         @return the number of elements provided by this instance.
+         */
+
+        public int getProvidedElementCount() {
+
+            return _providedElementModels.size();
+
+        }
+
+        /**
+         Determine how many elements the human can see (some of which might require scrolling to actually see).
+         @return the number of elements which the human can see by scrolling.
+         */
+
+        public int getScrollableElementsCount() {
+
+            return _scrollableElementsCount;
+
+        }
+
+        /**
+         Get the element model for a specified element in the list of all elements.
+         @param elementIx the index of the requested element.
+         @return the element model for the specified element.
+         */
+
+        public VirtualScrollableElementModel<EV> getElementAt( int elementIx ) {
+
+            int ixWithinProvidedElements = elementIx - _firstProvidedElementNumber;
+
+            if ( ixWithinProvidedElements < 0 ) {
+
+                throw new IllegalArgumentException(
+                        "CurrentGoals.getElementAt(" + elementIx + "):  " +
+                        "element less than first available element ix=" + _firstProvidedElementNumber );
+
+            }
+
+            if ( ixWithinProvidedElements >= _providedElementModels.size() ) {
+
+                throw new IllegalArgumentException(
+                        "CurrentGoals.getElementAt(" + elementIx + "):  " +
+                        "element greater than last provide element ix=" + ( _providedElementModels.size() - 1 ) );
+
+            }
+
+            return _providedElementModels.get( ixWithinProvidedElements );
 
         }
 
         public int getVisibleElementCount() {
 
-            return _visibleElements.size();
+            return _providedElementModels.size();
 
         }
 
         public String toString() {
 
             return "CurrentGoals( " +
-                   "elementIndexOfTopRow=" + _elementIndexOfTopRow + ", " +
-                   "from " + ObtuseUtil.pluralize( _visibleElements.size(), "visible elements"
+                   "elementIndexOfTopRow=" + _firstVisibleElementNumber + ", " +
+                   "from " + ObtuseUtil.pluralize( _providedElementModels.size(), "visible elements"
             );
 
         }
 
-
     }
 
     /**
-     Launch a new round allocating {@link ElementView} instances.
-     <p>Tell the data model that we are about to start asking for a fresh set of {@link ElementView} instances
-     and that any that it has provided to us in the past can be recycled if deemed appropriate by this model.</p>
+     Check if there's an update to the selection result.
+     <p>This is the only time that the selection result can change.</p>
+     @return {@code true} if the selection result has changed; {@code false} otherwise.
      */
 
-    void allocateElementViews(
-            @NotNull Collection<VirtualScrollableElementModel<E>> elementModels,
-            @NotNull SortedMap<UniqueID, ElementView<E>> assignedElementViewMapping
-    );
+    @SuppressWarnings("UnusedReturnValue")
+    boolean checkForUpdates();
+
+    ElementView.ElementViewFactory<E> getElementViewFactory();
 
     /**
-     Tell the view panel mdel that we have actually filled and will render a particular element view.
-     This is probably useful in computing the appropriate <em>extent</em> value for the vertical scrollbar
-     and could be useful in other ways.
-     @param elementView the {link ElementView}{@code <E>} that has just been filled.
+     Tell _vModel that we are starting a new round of allocating element views.
+     This allows the _vModel to recycle old views if they so choose.
      */
 
+    void startNewElementViewAllocationRound();
+
+    /**
+     Allocate an element view for an element model that the {@link VirtualScrollablePanel} intends to display.
+     @param elementModel the element model.
+     @return the element view.
+     */
+
+    ElementView<E> createInstance( VirtualScrollableElementModel<E> elementModel );
+
+        /**
+         Tell the view panel mdel that we have actually filled and will render a particular element view.
+         This is probably useful in computing the appropriate <em>extent</em> value for the vertical scrollbar
+         and could be useful in other ways.
+         @param elementView the {link ElementView}{@code <E>} that has just been filled.
+         */
+
     void noteViewFilled( ElementView<E> elementView );
-
-//        /**
-//         Get the number of {@link VirtualScrollableElementModel}s which are currently visible.
-//         @return the number of currently visible {@code Component}s.
-//         */
-//
-//        @Deprecated
-//        int getVisibleElementCount();
-//
-//        /**
-//         Get the index of the topmost currently visible element.
-//         @return the index of the topmost currently visible element.
-//         */
-//
-//        @Deprecated
-//        int getTopmostVisibleElementIx();
-//
-//        /**
-//         Get the {@link VirtualScrollableElementModel} for a particular currently visible element.
-//         @param ix the index of the desired element from within the set of currently visible elements.
-//         This value must/will be in the range {@code [0,n)} where {@code n} is the number of currently visible elements.
-//         @return the {@link VirtualScrollableElementModel} for a currently visible element.
-//         @throws IllegalArgumentException (should be thrown) if {@code ix} is not in the range {@code [0,n)}
-//         where {@code n} is the number of currently visible elements
-//         */
-//
-//        @Deprecated
-//        VirtualScrollableElementModel<EV> getElementAt( int ix );
-
-//        /**
-//         Get the currently visible elements.
-//         */
-//
-//        java.util.List<VirtualScrollableElementModel<E>> getVisibleElements();
-
-//        /**
-//         Get an element which really really should appear in the visible part of the scroll view.
-//         */
 
     /**
      Get the current goals.
@@ -142,7 +198,10 @@ public interface VirtualScrollablePanelModel<E extends VirtualScrollableElement>
      */
 
     @NotNull
-    CurrentGoals<E> getCurrentGoals( @NotNull Dimension viewportSize );
+    CurrentGoals<E> getCurrentGoals(
+            final int firstVisibleRowNumber,
+            @NotNull final Dimension viewportSize
+    );
 
     /**
      Configure the vertical scrollbar.
@@ -190,60 +249,5 @@ public interface VirtualScrollablePanelModel<E extends VirtualScrollableElement>
 
     @SuppressWarnings("unused")
     int getApproximateElementWidth();
-
-//        /**
-//         Create an empty element view.
-//         */
-//
-//        @SuppressWarnings("unused")
-//        ElementView<E> createEmptyElementView();
-
-//        /**
-//         Minimum value for vertical scrollbar.
-//         @return typically 0 but anything that satisfies {@code vMin <= vExtent <= vMax} and provides a reasonable
-//         amount of resolution works.
-//         */
-//
-//        int getVMin();
-
-//        /**
-//         Extent value for vertical scrollbar.
-//         @return typically 0 but anything that satisfies {@code vMin <= vExtent <= vMax} and provides a reasonable
-//         amount of resolution works.
-//         */
-//
-//        int getVExtent();
-
-//        /**
-//         Maximum value for vertical scrollbar.
-//         @return typically 0 but anything that satisfies {@code vMin <= vExtent <= vMax} and provides a reasonable
-//         amount of resolution works.
-//         */
-//
-//        int getVMax();
-
-//        /**
-//         Minimum value for horizontal scrollbar.
-//         @return typically 0 but anything that satisfies {@code vMin <= vExtent <= vMax} and provides a reasonable
-//         amount of resolution works.
-//         */
-//
-//        int getHMin();
-
-//        /**
-//         Minimum value for horizontal scrollbar.
-//         @return typically 0 but anything that satisfies {@code vMin <= vExtent <= vMax} and provides a reasonable
-//         amount of resolution works.
-//         */
-//
-//        int getHExtent();
-
-//        /**
-//         Minimum value for horizontal scrollbar.
-//         @return typically 0 but anything that satisfies {@code vMin <= vExtent <= vMax} and provides a reasonable
-//         amount of resolution works.
-//         */
-//
-//        int getHMax();
 
 }

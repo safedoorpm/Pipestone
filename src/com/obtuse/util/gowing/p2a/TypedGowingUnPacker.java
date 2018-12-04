@@ -8,7 +8,10 @@ import com.obtuse.util.gowing.p2a.exceptions.GowingUnpackingException;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.LineNumberReader;
+import java.io.Reader;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,35 +25,8 @@ public class TypedGowingUnPacker<T extends GowingPackable> extends StdGowingUnPa
     private boolean _parsed = false;
     private GowingUtil.BasicUnpackingResult _basicUnPackingResult;
 
-//    /**
-//     Create a 'standard' text-oriented unpacker.
-//
-//     @param typeIndex a table of the known [un]packable entity types.
-//     Every top-level entity type encountered by this unpacker must have an entry in this type index to allow this unpacker
-//     to know how to
-//     instantiate the entity.
-//     @param inputFile the file being read from.
-//     <p/>While presumably the norm, it seems unreasonable to assume that this parameter will always be non-null.
-//     For example, someone might want to unpack the contents of a byte array or some other in-memory object.
-//     */
-//
-//    @SuppressWarnings("unused")
-//    public TypedGowingUnPacker(
-//            final @NotNull EntityName expectedEntity,
-//            final GowingTypeIndex typeIndex,
-//            final @NotNull File inputFile
-//    ) throws FileNotFoundException {
-//        this(
-//                expectedEntity,
-//                inputFile,
-//                new LineNumberReader( new FileReader( inputFile ) ),
-//                new StdGowingUnPackerContext( typeIndex )
-//        );
-//
-//    }
-
     /**
-     Create a 'standard' text-oriented unpacker.
+     Create a 'standard' text-mode unpacker.
 
      @param typeIndex a table of the known [un]packable entity types.
      Every entity type encountered by this unpacker at the top level of the input stream (i.e. as an actual entity to be
@@ -92,7 +68,7 @@ public class TypedGowingUnPacker<T extends GowingPackable> extends StdGowingUnPa
      instantiate entities found in the input stream.
      */
 
-    @SuppressWarnings({ "WeakerAccess", "RedundantThrows" })
+    @SuppressWarnings({ "WeakerAccess" })
     public TypedGowingUnPacker(
             @NotNull final EntityName expectedEntity,
             @Nullable final File inputFile,

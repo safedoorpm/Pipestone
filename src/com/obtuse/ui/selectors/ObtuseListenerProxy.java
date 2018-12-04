@@ -22,16 +22,12 @@ import java.util.Optional;
 
 public interface ObtuseListenerProxy<ITEM> {
 
-//    void fireListeners( final String who, final ITEM item );
-
     @NotNull List<SimpleObtuseListenerManager.ListenerInfo> getAllListeners();
 
     @NotNull Optional<SimpleObtuseListenerManager.ListenerInfo> findListenerByName( @NotNull String name );
 
     @SuppressWarnings("unused")
     boolean removeByName( @NotNull String name );
-
-//    void addObtuseListener( @NotNull String name, @NotNull ObtuseListener<ITEM> actionListener );
 
     abstract class ObtuseListener<ITEM> {
 

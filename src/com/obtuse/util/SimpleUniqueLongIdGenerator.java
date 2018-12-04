@@ -213,8 +213,6 @@ public class SimpleUniqueLongIdGenerator implements UniqueLongIdGenerator {
                 " years to generate all possible long ids."
         );
 
-//        strange();
-
         ObtuseUtil.doNothing();
 
     }
@@ -224,20 +222,6 @@ public class SimpleUniqueLongIdGenerator implements UniqueLongIdGenerator {
         double durationSeconds = Long.MAX_VALUE / callRate;
         return durationSeconds / ( 365.25 * 86400 );
     }
-
-//    public static void strange() {
-//
-//        long maxCount = Integer.MAX_VALUE + 1L;
-//
-//        for ( long xx = 0; xx < maxCount; xx += 1 ) {
-//
-//            doSomethingQuick();
-//
-//        }
-//
-//    }
-//
-//    public static void doSomethingQuick() {}
 
     public String toString() {
 

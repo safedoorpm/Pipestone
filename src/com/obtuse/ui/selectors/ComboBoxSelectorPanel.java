@@ -16,7 +16,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.Optional;
-import java.util.function.Consumer;
 import java.util.function.Function;
 
 /*
@@ -52,8 +51,6 @@ public class ComboBoxSelectorPanel<E,C extends Container> extends SelectorPanel<
 
     public ComboBoxSelectorPanel(
             final @NotNull WrappedComboBoxSelectorPanel.CController<E,C> cController,
-//            final @NotNull String name,
-//            final @NotNull String selectorLabel,
             final @NotNull DefaultComboBoxModel<E> model,
             @Nullable final C firstSelection,
             final @NotNull Function<E,C> componentGetter,
@@ -83,12 +80,6 @@ public class ComboBoxSelectorPanel<E,C extends Container> extends SelectorPanel<
                                 c -> setPostSelectionPanelContents( "ComboBoxSelectorPanel.actionListener", c )
                         );
 
-//                        // Tell the controller that a choice has been made.
-//                        // This happens after the invocation of the accept function to allow the controller to
-//                        // assume that the choice selection has been completed.
-//
-//                        cController.reportChoice( key );
-
                         // Tell our listeners.
 
                         fireSelectionChangedListeners(
@@ -96,8 +87,6 @@ public class ComboBoxSelectorPanel<E,C extends Container> extends SelectorPanel<
                                 "selection changed to " + ObtuseUtil.enquoteJavaObject( key ),
                                 key
                         );
-
-//                        fireSelectionChange( "ComboBoxSelectorPanel", key );
 
                         revalidate();
 

@@ -1,7 +1,10 @@
 package com.obtuse.graphs;
 
 import com.obtuse.exceptions.HowDidWeGetHereError;
-import com.obtuse.util.*;
+import com.obtuse.util.BasicProgramConfigInfo;
+import com.obtuse.util.Logger;
+import com.obtuse.util.ObtuseCollections;
+import com.obtuse.util.ObtuseUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -196,7 +199,6 @@ public class GraphTheoryUtilities {
 
     }
 
-    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     private static <V extends Comparable<V>> boolean topologicalSortVisitNode(
             @NotNull Vertex<V> node,
             @NotNull Collection<V> temporarilyMarkedNodes,
@@ -287,8 +289,6 @@ public class GraphTheoryUtilities {
 
         }
 
-//        printDirectory( "directory starts off as", directory );
-
         // For each arc, if its vertices are in different clusters then merge the two clusters into one.
 
         for ( Edge<V> directedArc : directedArcs ) {
@@ -301,13 +301,7 @@ public class GraphTheoryUtilities {
             Set<Vertex<V>> c1 = directory.get( a );
             Set<Vertex<V>> c2 = directory.get( b );
 
-//            Logger.logMsg( "clusterizing:  a=" + a + ", b=" + b + ", c1=" + c1 + ", c2=" + c2 );
-
-//            Logger.logMsg( "directedArc " + directedArc + ":  src is in " + c1 + ", dst is in " + c2 );
-
             if ( directory.get(a) != directory.get(b) ) {
-
-//                Logger.logMsg( "directedArc " + directedArc + " connects c1=" + c1 + " and c2=" + c2 );
 
                 // Yes. Merge the smaller cluster into the larger one.
                 // We do this by ensuring that c1 is the small cluster if they are of different sizes.
@@ -331,8 +325,6 @@ public class GraphTheoryUtilities {
                     directory.put( v, c2 );
 
                 }
-
-//                printDirectory( "after update, directory is", directory );
 
             }
 
@@ -506,8 +498,6 @@ public class GraphTheoryUtilities {
                     @NotNull Optional<List<Vertex<V>>> loop = findLoop( arcsAsList, vertex );
                     if ( loop.isPresent() ) {
 
-//                        StringBuilder sb = formatLoop( loop.get() );
-
                         Logger.logMsg( "    one loop is " + formatLoop( loop.get() ) );
                         Logger.logMsg( "    this could be a different loop:  " + formatLoop( foundLoop ) );
 
@@ -533,13 +523,6 @@ public class GraphTheoryUtilities {
             ObtuseUtil.doNothing();
 
         }
-
-//        UndirectedEdge<Integer> x = new UndirectedEdge<Integer>( new Vertex<>( 5 ), new Vertex<>( 10 ) );
-//        UndirectedEdge<Integer> y = new UndirectedEdge<Integer>( new Vertex<>( 5 ), new Vertex<>( 10 ) );
-//        HashSet<UndirectedEdge<Integer>> sss = new HashSet<>();
-//        sss.add( x );
-////        sss.add( y );
-//        Logger.logMsg( "xxx clusterizes as " + clusterizeGraph( new ArrayList<>( sss ) ).values() );
 
         Logger.logMsg( "original graph is " + arcsAsList );
         @NotNull Map<Vertex<V>, Set<Vertex<V>>> directory = clusterizeGraph( arcsAsList );

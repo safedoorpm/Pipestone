@@ -4,7 +4,6 @@ import com.obtuse.exceptions.HowDidWeGetHereError;
 import com.obtuse.ui.ObtuseImageFile;
 import com.obtuse.ui.layout.linear.LinearFlagName;
 import com.obtuse.ui.layout.linear.LinearFlagNameValue;
-import com.obtuse.util.ContextualToString;
 import com.obtuse.util.*;
 import com.obtuse.util.gowing.*;
 import com.obtuse.util.gowing.p2a.backref.GowingFile;
@@ -135,7 +134,7 @@ public class StdGowingUnPacker implements GowingUnPacker {
      instantiate entities found in the input stream.
      */
 
-    @SuppressWarnings({ "WeakerAccess", "RedundantThrows" })
+    @SuppressWarnings({ "WeakerAccess" })
     public StdGowingUnPacker(
             @Nullable final File inputFile,
             final @NotNull LineNumberReader reader,
@@ -204,7 +203,6 @@ public class StdGowingUnPacker implements GowingUnPacker {
             throws IOException {
 
         _tokenizer.close();
-        //noinspection OptionalAssignedToNull
         _unpackedGroup = null;
         _closed = true;
 
@@ -256,7 +254,7 @@ public class StdGowingUnPacker implements GowingUnPacker {
                 false,
                 StdGowingTokenizer.TokenType.FORMAT_VERSION
         );
-        @SuppressWarnings({ "UnusedAssignment", "unused" }) GowingToken colon =
+        @SuppressWarnings({ "unused" }) GowingToken colon =
                 _tokenizer.getNextToken( false, StdGowingTokenizer.TokenType.COLON );
         GowingToken groupName = _tokenizer.getNextToken( false, StdGowingTokenizer.TokenType.STRING );
 
@@ -304,7 +302,6 @@ public class StdGowingUnPacker implements GowingUnPacker {
 
         checkClosed( "unPack()" );
 
-//        GowingUnPackedEntityGroup rval = _unpackedGroup;
         if ( _unpackedGroup != null ) {
 
             if ( isVerbose() ) _t.verboseTrace( "returning result of previously completed unpack operation" );
@@ -323,7 +320,7 @@ public class StdGowingUnPacker implements GowingUnPacker {
             GowingFormatVersion version = parseVersion();
             if ( isVerbose() ) _t.verboseTrace( "pack file version is " + version.getVersionAsString() );
 
-            @SuppressWarnings({ "UnusedAssignment", "unused" }) GowingToken semiColon =
+            @SuppressWarnings("unused") GowingToken semiColon =
                     _tokenizer.getNextToken( false, StdGowingTokenizer.TokenType.SEMI_COLON );
 
             GowingUnPackedEntityGroup group = new GowingUnPackedEntityGroup( version );
@@ -356,7 +353,7 @@ public class StdGowingUnPacker implements GowingUnPacker {
                             try ( Measure ignore1a = new Measure( "Gowing-constructEntity-collect" ) ) {
                                 bundle = collectEntityDefinitionClause( false );
                             }
-                            @SuppressWarnings({ "UnusedAssignment", "unused" })
+                            @SuppressWarnings({ "unused" })
                             GowingToken semiColonToken =
                                     _tokenizer.getNextToken(
                                             false,
@@ -759,14 +756,6 @@ public class StdGowingUnPacker implements GowingUnPacker {
         if ( optPackable.isPresent() ) {
 
             GowingPackable packable = optPackable.get();
-//            if ( isFinishingBackReference() && !GowingUtil.isActuallyBackReferenceable( packable ) ) {
-//
-//                throw new IllegalStateException(
-//                        "GowingUnPacker.resolveReference:  " +
-//                        "can only fetch back-referenceable entities while finishing a back-reference"
-//                );
-//
-//            }
             if ( stillUnPacking() && !GowingUtil.isActuallyBackReferenceable( packable ) ) {
 
                 throw new IllegalStateException(
@@ -866,7 +855,7 @@ public class StdGowingUnPacker implements GowingUnPacker {
             throws IOException, GowingUnpackingException {
 
         GowingToken typeIdToken = _tokenizer.getNextToken( false, StdGowingTokenizer.TokenType.LONG );
-        @SuppressWarnings({ "UnusedAssignment", "unused" }) GowingToken atSignToken =
+        @SuppressWarnings({ "unused" }) GowingToken atSignToken =
                 _tokenizer.getNextToken( false, StdGowingTokenizer.TokenType.AT_SIGN );
         GowingToken typeNameToken = _tokenizer.getNextToken(
                 false,
@@ -894,9 +883,9 @@ public class StdGowingUnPacker implements GowingUnPacker {
 
         }
 
-        @SuppressWarnings({ "UnusedAssignment", "unused" }) GowingToken equalSignToken =
+        @SuppressWarnings({ "unused" }) GowingToken equalSignToken =
                 _tokenizer.getNextToken( false, StdGowingTokenizer.TokenType.EQUAL_SIGN );
-        @SuppressWarnings({ "UnusedAssignment", "unused" }) GowingToken leftParenToken =
+        @SuppressWarnings({ "unused" }) GowingToken leftParenToken =
                 _tokenizer.getNextToken( false, StdGowingTokenizer.TokenType.LEFT_PAREN );
 
         Optional<EntityTypeName> optEntityTypeName =
@@ -1050,7 +1039,7 @@ public class StdGowingUnPacker implements GowingUnPacker {
                 true,
                 StdGowingTokenizer.TokenType.IDENTIFIER
         );
-        @SuppressWarnings({ "UnusedAssignment", "unused" }) GowingToken equalSignToken =
+        @SuppressWarnings({ "unused" }) GowingToken equalSignToken =
                 _tokenizer.getNextToken( false, StdGowingTokenizer.TokenType.EQUAL_SIGN );
         GowingToken valueToken = _tokenizer.getNextToken( false, "collectFD" );
 
@@ -1103,17 +1092,11 @@ public class StdGowingUnPacker implements GowingUnPacker {
 
             GowingUnPackedEntityGroup unPackResult = unPacker.unPack();
 
-//            if ( unPackResult.isPresent() ) {
+            for ( GowingPackable entity : unPackResult.getAllEntities() ) {
 
-//                GowingUnPackedEntityGroup result = unPackResult.get();
+                Logger.logMsg( "got " + entity.getClass().getCanonicalName() + " " + entity );
 
-                for ( GowingPackable entity : unPackResult.getAllEntities() ) {
-
-                    Logger.logMsg( "got " + entity.getClass().getCanonicalName() + " " + entity );
-
-                }
-
-//            }
+            }
 
             ObtuseUtil.doNothing();
 

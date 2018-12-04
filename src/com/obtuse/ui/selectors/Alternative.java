@@ -26,9 +26,6 @@ import java.util.TreeMap;
 
 public class Alternative implements Comparable<Alternative>, GowingPackable {
 
-//    public static final GenericTag.GenericTagCategory ALTERNATIVE_TAG_CATEGORY =
-//            GenericTag.createNewTagCategory( Alternative.class.getCanonicalName() );
-
     public interface AlternativeFactory<K extends Alternative> {
 
         K createInstance(
@@ -112,7 +109,6 @@ public class Alternative implements Comparable<Alternative>, GowingPackable {
     private final String _toString;
     @NotNull
     private final GenericTag _tag;
-//    private final String _uniqueKey;
 
     private boolean _unspecifiedChoice = false;
 
@@ -130,7 +126,6 @@ public class Alternative implements Comparable<Alternative>, GowingPackable {
         _selector = selector;
         _tag = tag;
         _toString = toString;
-//        _uniqueKey = makeUniqueKey( selector, tag );
 
         if ( findChoiceByKey( _tag ).isPresent() ) {
 
@@ -147,20 +142,6 @@ public class Alternative implements Comparable<Alternative>, GowingPackable {
         ObtuseUtil.doNothing();
 
     }
-
-//    /**
-//     ### bad idea - the toString() value of this instance is what will appear in comboBoxes, pick-lists
-//     ### and such. It HAS TO BE HUMAN READABLE which makes it a very poor choice for a tag.
-//     Create an instance which has a name which is equal to its {@link #toString()} value.
-//     @param selector the instance's {@link Selector}.
-//     @param tag the instance's tag and the value returned by its {@code toString()} method.
-//     @throws IllegalArgumentException if this JVM already has an instance of this class with
-//     a name and {@code toString()} value equal to the specified {@code name}.
-//     */
-//
-//    public Alternative( final @NotNull Selector selector, final @NotNull String tag ) {
-//        this( selector, tag, tag );
-//    }
 
     public static Optional<Alternative> findChoiceByKey( final @NotNull GenericTag tag ) {
 
@@ -248,7 +229,7 @@ public class Alternative implements Comparable<Alternative>, GowingPackable {
 
         } else {
 
-            @SuppressWarnings("UnnecessaryLocalVariable") K newInstance = factory.createInstance( selector, tag, toString );
+            K newInstance = factory.createInstance( selector, tag, toString );
             return newInstance;
 
         }
@@ -316,8 +297,6 @@ public class Alternative implements Comparable<Alternative>, GowingPackable {
 
     public String toString() {
 
-//        String toString = ( _toString == null ? "<<unknown Alternative toString>>" : _toString ) + " | tag=" + _tag;
-
         if ( _toString == null ) {
 
             throw new HowDidWeGetHereError( "Alternative.toString():  _toString is null" );
@@ -327,35 +306,6 @@ public class Alternative implements Comparable<Alternative>, GowingPackable {
         return _toString;
 
     }
-
-//    /**
-//     Get this instance's unique key.
-//     <p/>Each instance has a unique key which is equal to
-//     <blockquote>{@code "" + this.}{@link #getSelector()}{@code  + ":" + this.}{@link #getTag()}</blockquote>
-//     @return this instance's unique key.
-//     */
-//
-//    public String getUniqueKey() {
-//
-//        return _uniqueKey;
-//
-//    }
-
-//    /**
-//     Construct a unique key which sorts by a Selector tag and then by a String tag.
-//     @param selector the {@link Selector}.
-//     @param tag the {@link String tag}.
-//     @return the unique key resulting from
-//     <blockquote>
-//     {@code "" + selector.tag() + ":" + tag}
-//     </blockquote>
-//     */
-//
-//    public static String makeUniqueKey( final @NotNull Selector selector, final @NotNull GenericTag tag ) {
-//
-//        return selector.selectorsTagName + "(" + tag.getTagName() + ")";
-//
-//    }
 
     @Override
     public @NotNull GowingInstanceId getInstanceId() {

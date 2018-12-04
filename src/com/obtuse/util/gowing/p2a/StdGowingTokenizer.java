@@ -1,13 +1,20 @@
 package com.obtuse.util.gowing.p2a;
 
 import com.obtuse.exceptions.HowDidWeGetHereError;
-import com.obtuse.util.*;
-import com.obtuse.util.gowing.*;
+import com.obtuse.util.Logger;
+import com.obtuse.util.Measure;
+import com.obtuse.util.ObtuseUtil;
+import com.obtuse.util.ParsingLocation;
+import com.obtuse.util.gowing.EntityName;
+import com.obtuse.util.gowing.GowingMetaDataHandler;
+import com.obtuse.util.gowing.GowingUnPackerContext;
 import com.obtuse.util.gowing.p2a.exceptions.GowingUnexpectedEofException;
 import com.obtuse.util.gowing.p2a.exceptions.GowingUnpackingException;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.*;
+import java.io.Closeable;
+import java.io.IOException;
+import java.io.LineNumberReader;
 import java.lang.reflect.Array;
 import java.util.*;
 
@@ -494,7 +501,7 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
 
                     putBackChar();
 
-                    @SuppressWarnings("UnnecessaryLocalVariable") GowingToken longToken = parseNumeric(
+                    GowingToken longToken = parseNumeric(
                             TokenType.LONG,
                             Long::parseLong
                     );
@@ -547,12 +554,6 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
                 } else {
 
                     GowingToken rval;
-
-//                    if ( ch == 'e' ) {
-//
-//                        Logger.logMsg( "found an unexpected 'e'" );
-//
-//                    }
 
                     switch ( ch ) {
 
@@ -685,7 +686,7 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
 
                         case GowingConstants.TAG_SHORT:
 
-                            @SuppressWarnings("UnnecessaryLocalVariable") GowingToken shortToken = parseNumeric(
+                            GowingToken shortToken = parseNumeric(
                                     TokenType.SHORT,
                                     Short::parseShort
                             );
@@ -694,7 +695,7 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
 
                         case GowingConstants.TAG_INTEGER:
 
-                            @SuppressWarnings("UnnecessaryLocalVariable") GowingToken intToken = parseNumeric(
+                            GowingToken intToken = parseNumeric(
                                     TokenType.INTEGER,
                                     Integer::parseInt
                             );
@@ -703,7 +704,7 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
 
                         case GowingConstants.TAG_LONG:
 
-                            @SuppressWarnings("UnnecessaryLocalVariable") GowingToken longToken = parseNumeric(
+                            GowingToken longToken = parseNumeric(
                                     TokenType.LONG,
                                     Long::parseLong
                             );
@@ -712,7 +713,7 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
 
                         case GowingConstants.TAG_DOUBLE:
 
-                            @SuppressWarnings("UnnecessaryLocalVariable") GowingToken doubleToken = parseNumeric(
+                            GowingToken doubleToken = parseNumeric(
                                     TokenType.DOUBLE,
                                     Double::parseDouble
                             );
@@ -721,7 +722,7 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
 
                         case GowingConstants.TAG_FLOAT:
 
-                            @SuppressWarnings("UnnecessaryLocalVariable") GowingToken floatToken = parseNumeric(
+                            GowingToken floatToken = parseNumeric(
                                     TokenType.FLOAT,
                                     Float::parseFloat
                             );
@@ -730,22 +731,11 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
 
                         case GowingConstants.TAG_FORMAT_VERSION:
 
-                            @SuppressWarnings("UnnecessaryLocalVariable") GowingToken versionNumberToken = parseNumeric(
+                            GowingToken versionNumberToken = parseNumeric(
                                     TokenType.FORMAT_VERSION,
                                     Long::parseLong
                             );
 
-                            //			GowingToken colon = getNextToken( false );
-                            //			if ( colon.type() == TokenType.COLON ) {
-                            //
-                            //			    GowingToken groupName = getNextToken( false );
-                            //			    if ( groupName.type() == TokenType.STRING ) {
-                            //
-                            //				return new GowingToken(
-                            //					TokenType.FORMAT_VERSION,
-                            //				);
-                            //			    }
-                            //			}
                             return versionNumberToken;
 
                         case GowingConstants.TAG_ENTITY_REFERENCE:
@@ -772,47 +762,6 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
                                 return new GowingToken( "unexpected character " + cleanupChar( ch ), _lnum, _offset );
 
                             }
-
-                            //		    int c1 = nextCh();
-                            //		    if ( '0' <= c1 && c1 <= '9' ) {
-                            //
-                            //			c1 -= '0';
-                            //
-                            //		    } else if ( 'a' <= c1 && c1 <= 'f' ) {
-                            //
-                            //			c1 -= 'a';
-                            //
-                            //		    } else {
-                            //
-                            //			return new GowingToken( "expected hex digit [0-9a-f] but found " + cleanupChar( c1 ), _lnum, _offset );
-                            //
-                            //		    }
-                            //		    int c2 = nextCh();
-                            //		    if ( '0' <= c2 && c2 <= '9' ) {
-                            //
-                            //			c2 -= '0';
-                            //
-                            //		    } else if ( 'a' <= c2 && c2 <= 'f' ) {
-                            //
-                            //			c2 -= 'a';
-                            //
-                            //		    } else {
-                            //
-                            //			return new GowingToken( "expected hex digit [0-9a-f] but found " + cleanupChar( c2 ), _lnum, _offset );
-                            //
-                            //		    }
-                            //
-                            //		    int hexValue = ( c1 << 4 ) | c2;
-                            //
-                            //		    return new GowingToken( TokenType.BYTE, hexValue, _lnum, _offset );
-
-                            //		case GowingConstants.TAG_SHORT:
-                            //
-                            //		    GowingToken numericValue = getIntegralValue( TokenType.SHORT, new NumericStringParser);
-                            //		    if ( numericString == null ) {
-                            //
-                            //			return new GowingToken( "expected short value but" );
-                            //		    }
 
                         default:
 
@@ -1086,7 +1035,6 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
 
                         }
 
-                        @SuppressWarnings("UnnecessaryLocalVariable")
                         byte value = parseHexByte( c1, c2 ); // Byte.parseByte( "" + (char) c1 + (char) c2, 16 );
 
                         return value;
@@ -1378,7 +1326,6 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
                 // A comma is required here for all other kinds of arrays.
 
                 ch = nextCh();
-                //noinspection StatementWithEmptyBody
                 if ( ch != ',' ) {
 
                     if ( !primitive || !elementType.equals( TokenType.BYTE ) ) {
@@ -1617,17 +1564,7 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
             int ch = nextRawChNoEOF();
             char delimiter = (char)ch;
 
-//        while ( Character.isDefined( ch = nextRawChNoEOF() ) && ch != delimiter ) {
-
             while ( ( ch = nextRawChNoEOF() ) != delimiter ) {
-    //        while ( true ) {
-
-    //            ch = nextRawNoEOF();
-    //            if ( ch == delimiter ) {
-    //
-    //                break;
-    //
-    //            }
 
                 if ( !Character.isDefined( ch ) ) {
 
@@ -1712,7 +1649,6 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
 
             } else {
 
-                //noinspection ConstantConditions
                 if ( Character.isDefined( ch ) ) {
 
                     return new GowingToken( "unexpected " + cleanupChar( ch ), _lnum, _offset );
@@ -1801,53 +1737,6 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
         }
 
     }
-
-//    public static void main( final String[] args ) {
-//
-//        BasicProgramConfigInfo.init( "Obtuse", "Util", "testing", null );
-//
-//        try {
-//
-//            GowingTokenizer tokenizer = new StdGowingTokenizer(
-//                    new StdGowingUnPackerContext( new GowingTypeIndex( "test StdGowingTokenizer" ) ),
-//                    new LineNumberReader( new FileReader( "test1.p2a" ) )
-//            );
-//            boolean identifierAllowed = false;
-//            while ( true ) {
-//
-//                GowingToken token = tokenizer.getNextToken( identifierAllowed );
-//                if ( token.isError() || token.type() == TokenType.EOF ) {
-//
-//                    Logger.logMsg( "last token is " + token.toString() );
-//
-//                    break;
-//
-//                } else {
-//
-//                    Logger.logMsg( "(" + token.getLnum() + "," + token.getOffset() + "):  " + token );
-//
-//                    //noinspection RedundantIfStatement
-//                    if ( token.type() == TokenType.LEFT_PAREN || token.type() == TokenType.COMMA ) {
-//
-//                        identifierAllowed = true;
-//
-//                    } else {
-//
-//                        identifierAllowed = false;
-//
-//                    }
-//
-//                }
-//
-//            }
-//
-//        } catch ( IOException | GowingUnpackingException e ) {
-//
-//            e.printStackTrace();
-//
-//        }
-//
-//    }
 
     public String toString() {
 

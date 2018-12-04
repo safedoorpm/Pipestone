@@ -55,7 +55,7 @@ public class DateUtils {
     private static final SimpleDateFormat HH_MM_SS_24_EEE_MMM_DD = new SimpleDateFormat( "HH:mm:ss EEE MMM dd" );
     private static final SimpleDateFormat STANDARD = new SimpleDateFormat( "yyyy-MM-dd'T'HH:mm:ssZ" );
     private static final SimpleDateFormat STANDARD_MS = new SimpleDateFormat( "yyyy-MM-dd'T'HH:mm:ss.SSSZ" );
-    private static final SimpleDateFormat MARKER_FORMAT = new SimpleDateFormat( "yyyyMMdd_HHmmss.SSS'Z'" );
+    private static final SimpleDateFormat MARKER_FORMAT = new SimpleDateFormat( "yyyyMMdd_HHmmss_SSS'Z'" );
     private static final SimpleDateFormat DD_MMM_YYYY = new SimpleDateFormat( "d MMM, yyyy" );
 
     /**
@@ -703,12 +703,6 @@ public class DateUtils {
 
     }
 
-//    public static String formatYYYY_MM_DD_HH_MM( @NotNull final ImmutableDate dateTime ) {
-//
-//        return DateUtils.formatYYYY_MM_DD_HH_MM( (Date)dateTime );
-//
-//    }
-
     /**
      Format a date and time string in a specified timezone.
 
@@ -896,6 +890,28 @@ public class DateUtils {
     }
 
     /**
+     Parse an YYYY_MM_DD_HH_MM_SS_SSS format date and time string in a specified timezone.
+
+     @param timezone   the specified timezone.
+     @param token      the date and time string.
+     @param lineNumber where the date was found.
+     @return the result in UTC.
+     @throws ParsingException if the token does not contain a valid date and time string.
+     */
+
+    public static ImmutableDate parseYYYY_MM_DD_HH_MM_SS_SSS( @NotNull final TimeZone timezone, @NotNull final String token, final int lineNumber )
+            throws ParsingException {
+
+        synchronized ( DateUtils.YYYY_MM_DD_HH_MM_SS_SSS ) {
+
+            DateUtils.YYYY_MM_DD_HH_MM_SS_SSS.setTimeZone( timezone );
+            ImmutableDate date = DateUtils.dateParse( DateUtils.YYYY_MM_DD_HH_MM_SS_SSS, token, lineNumber );
+            return date;
+
+        }
+
+    }
+    /**
      Format a date and time string in a specified timezone with the timezone shown.
 
      @param dateTime the date and time to be formatted.
@@ -1009,12 +1025,6 @@ public class DateUtils {
         }
 
     }
-
-//    public static String formatYYYY_MM_DD( @NotNull final ImmutableDate dateTime ) {
-//
-//        return DateUtils.formatYYYY_MM_DD( (Date)dateTime );
-//
-//    }
 
     /**
      Format a date string in our local time.

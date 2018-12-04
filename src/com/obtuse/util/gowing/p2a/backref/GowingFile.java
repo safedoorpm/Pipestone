@@ -51,7 +51,6 @@ public class GowingFile extends File implements GowingBackReferenceable {
             return VERSION;
         }
 
-        @SuppressWarnings("RedundantThrows")
         @Override
         public @NotNull GowingPackable createEntity(
                 @NotNull final GowingUnPacker unPacker,
@@ -106,7 +105,6 @@ public class GowingFile extends File implements GowingBackReferenceable {
                     break;
 
                 case URI:
-//                    p1s = bundle.MandatoryStringValue( G_P1_URI );
                     try {
 
                         uri = bundle.recoverURI( G_P1_URI );
@@ -152,12 +150,6 @@ public class GowingFile extends File implements GowingBackReferenceable {
 
             return rval;
 
-//            Optional<String> optPath = bundle.optString( G_PATH_NAME );
-//
-//            String path = optPath.orElse( null );
-//
-//            return new GowingFile( path );
-
         }
 
     };
@@ -170,8 +162,6 @@ public class GowingFile extends File implements GowingBackReferenceable {
     private final File _p1f;
     private final URI _uri;
 
-//    private final File _file;
-
     public GowingFile( @NotNull final String path ) {
         super( path );
 
@@ -180,8 +170,6 @@ public class GowingFile extends File implements GowingBackReferenceable {
         _p1f = null;
         _p2s = null;
         _uri = null;
-
-//        _file = path == null ? null : new File( path );
 
     }
 
@@ -193,7 +181,6 @@ public class GowingFile extends File implements GowingBackReferenceable {
         _p1f = file;
         _p2s = null;
         _uri = null;
-//        _file = file;
 
     }
 
@@ -229,27 +216,6 @@ public class GowingFile extends File implements GowingBackReferenceable {
         _uri = uri;
 
     }
-
-//    @NotNull
-//    Optional<File> getOptFile() {
-//
-//        return Optional.ofNullable( _file );
-//
-//    }
-//
-//    @NotNull File getMandatoryFile() {
-//
-//        //noinspection ConstantConditions
-//        return _file;
-//
-//    }
-
-//    @Override
-//    public List<GowingBackReferenceable> getDependencies() {
-//
-//        return Collections.emptyList();
-//
-//    }
 
     @Override
     public @NotNull GowingInstanceId getInstanceId() {
@@ -294,11 +260,6 @@ public class GowingFile extends File implements GowingBackReferenceable {
                 break;
 
         }
-
-//        bundle.addHolder( new GowingStringHolder( G_PATH_NAME, _file == null ? null : _file.getPath(), false ) );
-//        bundle.addHolder( new GowingPackableEntityHolder( G_FAKE_STRING, new GowingString( "hello world" ), packer, true ) );
-//        bundle.addHolder( new GowingPackableEntityHolder( G_COLLECTION, new GowingPackableCollection<>(
-//                ObtuseCollections.sortedSet( "Hello", "There", "World" ) ), packer, true ) );
 
         return bundle;
 

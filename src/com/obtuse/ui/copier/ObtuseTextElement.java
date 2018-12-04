@@ -201,25 +201,6 @@ public interface ObtuseTextElement {
 
         }
 
-//        public void paint( final Graphics g ) {
-//
-//            if ( AutoSizingValidatedJTextField.getInterestingField() == this ) {
-//
-//                Logger.logMsg(
-//                        "ObtuseTextElement.paint:  " +
-//                        "minSize=" + ObtuseUtil.fDim( getMinimumSize() ) + ", " +
-//                        "prefSize=" + ObtuseUtil.fDim( getPreferredSize() ) + ", " +
-//                        "maxSize=" + ObtuseUtil.fDim( getMaximumSize() )
-//                );
-//
-//                ObtuseUtil.doNothing();
-//
-//            }
-//
-//            super.paint( g );
-//
-//        }
-
         public String toString() {
 
             return "ObtuseTextField( " + ObtuseUtil.enquoteToJavaString( getText() ) + " )";

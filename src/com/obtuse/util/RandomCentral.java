@@ -137,6 +137,16 @@ public class RandomCentral {
 
     }
 
+    public static boolean coinflip() {
+
+        synchronized ( RandomCentral.getInstance() ) {
+
+            return RandomCentral.getInstance()._generator.nextBoolean();
+
+        }
+
+    }
+
     public static int nextInt( final int n ) {
 
         synchronized ( RandomCentral.getInstance() ) {

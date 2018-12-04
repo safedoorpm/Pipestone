@@ -2,9 +2,7 @@ package com.obtuse.ui.layout;
 
 import com.obtuse.util.Logger;
 import com.obtuse.util.ObtuseUtil;
-import org.jetbrains.annotations.NotNull;
 
-import javax.swing.*;
 import java.awt.*;
 
 /**
@@ -71,7 +69,6 @@ public class PermissiveLayoutManager implements LayoutManager2 {
     public Dimension minimumLayoutSize( final Container parent ) {
 
         Dimension dimension = new Dimension( 100, 100 );
-//            Dimension dimension = parent.getMinimumSize();
 
         if ( isVerbose() ) Logger.logMsg( "PermissiveLayoutManager.minimumLayoutSize:  " + ObtuseUtil.fDim( dimension ) );
 

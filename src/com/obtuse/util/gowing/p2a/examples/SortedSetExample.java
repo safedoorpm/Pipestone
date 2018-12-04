@@ -562,17 +562,11 @@ public class SortedSetExample extends GowingAbstractPackableEntity implements Go
 
             GowingUnPackedEntityGroup unPackResult = unPacker.unPack();
 
-//            if ( unPackResult.isPresent() ) {
+            for ( GowingPackable entity : unPackResult.getAllEntities() ) {
 
-//                GowingUnPackedEntityGroup result = unPackResult.get();
+                Logger.logMsg( "got " + entity.getClass().getCanonicalName() + " " + entity );
 
-                for ( GowingPackable entity : unPackResult.getAllEntities() ) {
-
-                    Logger.logMsg( "got " + entity.getClass().getCanonicalName() + " " + entity );
-
-                }
-
-//            }
+            }
 
             ObtuseUtil.doNothing();
 

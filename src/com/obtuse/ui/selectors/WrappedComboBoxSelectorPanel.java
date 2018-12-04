@@ -16,7 +16,6 @@ import java.awt.*;
 import java.util.List;
 import java.util.Optional;
 import java.util.Vector;
-import java.util.function.Function;
 
 /**
  A wrapped {@link ComboBoxSelectorPanel} that provides various wrapped panels to deal with combo-box situations.
@@ -51,8 +50,6 @@ public class WrappedComboBoxSelectorPanel<CHOICE, PANEL extends JPanel>
         String getDegenerateCaseMessage( DegenerateCase degenerateCase );
 
         String getPickListPrompt();
-
-//        void reportChoice( CCCHOICE choice, int w );
 
         @Nullable
         CCCHOICE getInitialChoice();
@@ -190,8 +187,6 @@ public class WrappedComboBoxSelectorPanel<CHOICE, PANEL extends JPanel>
         ) {
 
             super(
-//                    _cController.getPanelName(),
-//                    _cController.getPickListPrompt(),
                     _cController,
                     comboBoxModel,
                     null,
@@ -273,17 +268,6 @@ public class WrappedComboBoxSelectorPanel<CHOICE, PANEL extends JPanel>
 
     }
 
-//    @Override
-//    public void fireListeners( final String who, final CHOICE item ) {
-//
-//        if ( _comboPanel != null ) {
-//
-//            _comboPanel.fireSelectionChangedListeners( who, item );
-//
-//        }
-//
-//    }
-
     @Override
     public @NotNull List<SimpleObtuseListenerManager.ListenerInfo> getAllListeners() {
 
@@ -314,19 +298,6 @@ public class WrappedComboBoxSelectorPanel<CHOICE, PANEL extends JPanel>
         }
 
     }
-
-//    public void addVetSelectionListener(
-//            @NotNull final String name,
-//            @NotNull final SelectorPanel.VetSelectionListener actionListener
-//    ) {
-//
-//        if ( _comboPanel != null ) {
-//
-//            _comboPanel.addVetSelectionListener( name, actionListener );
-//
-//        }
-//
-//    }
 
     public String toString() {
 

@@ -76,7 +76,6 @@ public interface GowingUnPacker extends Closeable {
 
     void registerMetaDataHandler( @NotNull GowingMetaDataHandler handler );
 
-//    GowingPackable resolveReference( GowingEntityReference er );
     Optional<GowingPackable> resolveReference( GowingEntityReference er );
 
     @NotNull default GowingPackable resolveMandatoryReference( GowingEntityReference er ) {

@@ -32,7 +32,6 @@ public class GowingUtil {
 
     }
 
-    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     public static Optional<String> checkActuallyPackable( final @NotNull GowingPackable entity ) {
 
         if ( entity instanceof GowingNotPackable ) {
@@ -52,7 +51,6 @@ public class GowingUtil {
 
     }
 
-    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     public static Optional<String> checkActuallyBackReferenceable( final @NotNull GowingPackable entity ) {
 
         Optional<String> optReason = checkActuallyPackable( entity );
@@ -429,82 +427,6 @@ public class GowingUtil {
         }
 
     }
-
-//    public interface ExceptionCatcher {
-//
-//        void catchRuntimeException( @NotNull RuntimeException e );
-//        void catchException( @NotNull Exception e );
-//
-//    }
-//
-//    /**
-//     No muss, no fuss method to unpack something.
-//     @param who who's calling (used in messages).
-//     @param file the {@link File} that contains what is to be unpacked.
-//     @param unPackedEntityName the {@link EntityName} of what is to be unpacked.
-//     @param typeIndex a type index that describes how to construct new instances of things encountered during the unpacking process.
-//     @param <T> type of thing being unpacked (you WILL get a {@link ClassCastException}
-//     if the type of the thing is not what you expect;
-//     used {@code Object} as the type if you don't know what to expect).
-//     @return an {@link Optional}{@code <T>} containing either the unpacked thing or {@code null} if something went wrong.
-//     */
-//
-//    public static <T extends GowingPackable> UnPackingResult<T> unPackSomething(
-//            @NotNull final String who,
-//            @NotNull final File file,
-//            @NotNull final EntityName unPackedEntityName,
-//            @NotNull final GowingTypeIndex typeIndex
-//    ) {
-//
-//        TypedGowingUnPacker<T> typedUnPacker = new TypedGowingUnPacker<T>(
-//
-//        );
-//        try ( Measure ignored = new Measure( "unPackPrimaryStatusBundle" ) ) {
-//
-//            Reader reader;
-//            reader = StdGowingUnPacker.openReader( file );
-//
-//            TypedGowingUnPacker<T> unPacker = new TypedGowingUnPacker<T>(
-//                    unPackedEntityName,
-//                    typeIndex,
-//                    file,
-//                    reader
-//            );
-//
-//            if ( unPacker.parse( who ) ) {
-//
-//                Optional<T> optMediaItem = unPacker.getOptSingleResult();
-//                return optMediaItem;
-//
-//            } else {
-//
-//                Logger.logErr(
-//                        "who:  parse of " +
-//                        ObtuseUtil.enquoteJavaObject( file ) + " failed",
-//                        unPacker.getMandatoryBasicUnPackingResult()
-//                                .getMandatoryException()
-//                );
-//
-//                return Optional.empty();
-//
-//            }
-//
-//        } catch ( FileNotFoundException e ) {
-//
-//            Logger.logErr( "java.io.FileNotFoundException caught", e );
-//
-//            @SuppressWarnings("UnnecessaryLocalVariable") UnPackingResult<T>
-//                    failedResult = new UnPackingResult<>(
-//                    new BasicUnpackingResult( who, e ),
-//                    null
-//
-//            );
-//
-//            return Optional.empty();
-//
-//        }
-//
-//    }
 
     public static class BasicUnpackingResult {
 

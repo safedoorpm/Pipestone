@@ -4,10 +4,6 @@
 
 package com.obtuse.util;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.WindowStateListener;
-
 /**
  * Windows-specific customizations.
  * <p>This class is obsolete.</p>
@@ -20,7 +16,7 @@ import java.awt.event.WindowStateListener;
  * <p/>
  */
 
-@SuppressWarnings({ "ClassWithoutToString", "deprecation", "UnusedDeclaration" })
+@SuppressWarnings({ "ClassWithoutToString", "UnusedDeclaration" })
 @Deprecated
 public class WindowsCustomization {
 
@@ -29,86 +25,5 @@ public class WindowsCustomization {
     private QuitCatcher _quitCatcher;
 
     private WindowsCustomization() { super(); }
-//    /**
-//     * Perform various Windows specific customizations.
-//     * <p/>
-//     * At the present time, this method sets the look and feel to
-//     * <p/>
-//     * Handles "Quit Application" events in a manner which
-//     * ensures that the application quits. Without this customization, the "Quit Application" event is effectively
-//     * rejected. One consequence of this rejection is that attempts to logoff or shutdown while the application is
-//     * running are aborted.  With this customization in place, a logoff or shutdown attempt is "approved" by the
-//     * application.
-//     */
-//
-//    public WindowsCustomization() {
-//        super();
-//
-//        Trace.event( "doing Windows-specific customizations" );
-//
-//        String laf = "com.sun.java.swing.plaf.windows.WindowsLookAndFeel";
-//
-//        if ( OSLevelCustomizations.s_forceLookAndFeel != null ) {
-//
-//            laf = OSLevelCustomizations.s_forceLookAndFeel;
-//
-//        }
-//
-//        Logger.logMsg( "Windows laf = " + laf );
-//
-//        try {
-//
-//            UIManager.setLookAndFeel( laf );
-//
-//        } catch ( IllegalAccessException | UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException e ) {
-//
-//            Trace.event( "unable to find " + laf + " look and feel - using system default", e );
-//
-//        }
-//
-//    }
-
-//    public void setDockBadge( final String msg ) {
-//
-//    }
-//
-//    public void setDockIconImage( final Image icon ) {
-//
-//    }
-//
-//    public void setQuitCatcher( final QuitCatcher quitCatcher ) {
-//
-//        _quitCatcher = quitCatcher;
-//
-//    }
-//
-//    public QuitCatcher getQuitCatcher() {
-//
-//        return _quitCatcher;
-//
-//    }
-//
-//    public void setAboutWindowHandler( final AboutWindowHandler aboutWindowHandler ) {
-//
-//        _aboutWindowHandler = aboutWindowHandler;
-//
-//    }
-//
-//    public AboutWindowHandler getAboutWindowHandler() {
-//
-//        return _aboutWindowHandler;
-//
-//    }
-//
-//    public void setPreferencesHandler( final PreferencesWindowHandler prefsHandler ) {
-//
-//    }
-//
-//    @SuppressWarnings("UnusedDeclaration")
-//    public static OSLevelCustomizations createInstance() {
-//
-//        return new WindowsCustomization();
-//
-//    }
 
 }

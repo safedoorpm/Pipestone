@@ -1,6 +1,5 @@
 package com.obtuse.ui;
 
-import com.obtuse.util.AboutWindowHandler;
 import com.obtuse.util.BasicProgramConfigInfo;
 import com.obtuse.util.Logger;
 import com.obtuse.util.OSLevelCustomizations;
@@ -83,7 +82,6 @@ public class AboutBox extends JDialog {
 
         return setCopyrightLabel(
                 "<html><small>Copyright " + AboutBox.COPYRIGHT_SYMBOL + " " + years + " " + copyrightOwner + "</small></html>"
-//                "<html><i>" + copyrightOwner + "</i></html>"
         );
 
     }
@@ -158,11 +156,7 @@ public class AboutBox extends JDialog {
         jf.pack();
         jf.setVisible( true );
 
-        @SuppressWarnings({ "UnusedDeclaration", "UnusedAssignment" })
         AboutBox dialog = new AboutBox( jf, false ).setApplicationName( "About Box Demo" ).setCopyrightOwner( "1867", "Example" ).setInterestingStuff( "Cool stuff!" );
-//        dialog.setUndecorated( true );
-
-//        dialog.setVisible( true );
 
         OSLevelCustomizations.getCustomizer().setAboutWindowHandler(
                 () -> dialog.setVisible( true )

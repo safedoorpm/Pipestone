@@ -40,12 +40,6 @@ public class GowingUnpackingException extends Exception {
         this( msg, null, location, cause );
 
     }
-//
-//    public GowingUnpackingException(
-//            final String msg,
-//            @NotNull final ParsingLocation location,
-//
-//    )
 
     public GowingUnpackingException(
             final String msg,

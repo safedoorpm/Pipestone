@@ -536,9 +536,6 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
             GowingUnPackedEntityGroup unPackResult = unPacker.unPack();
 
             ObtuseImageFile bif = null;
-//            if ( unPackResult.isPresent() ) {
-
-//                GowingUnPackedEntityGroup result = unPackResult.get();
 
                 for ( GowingPackable entity : unPackResult.getAllEntities() ) {
 
@@ -559,8 +556,6 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
                     }
 
                 }
-
-//            }
 
             ObtuseUtil.doNothing();
 

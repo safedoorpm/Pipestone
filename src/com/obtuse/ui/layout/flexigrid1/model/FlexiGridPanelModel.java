@@ -14,8 +14,8 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.*;
 import java.util.List;
+import java.util.*;
 
 /**
  Provide a high level model for manipulating a {@link com.obtuse.ui.layout.flexigrid1.FlexiGridContainer}.
@@ -94,10 +94,6 @@ public class FlexiGridPanelModel<SLICE extends FlexiGridModelSlice> {
         _fgLayoutManager.setFlexiGridPanelModel( this );
 
         _orientation = orientation;
-
-//        JLabel component = new JLabel( "This is a test of this thing" );
-//        _titleComponents.add( component );
-//        _fgContainer.add( component, new FlexiGridBasicConstraint( "chumbly", -1, 0 ), -1, _key );
 
     }
 

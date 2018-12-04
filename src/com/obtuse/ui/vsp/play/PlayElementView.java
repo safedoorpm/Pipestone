@@ -19,14 +19,11 @@ public class PlayElementView<EV extends VirtualScrollableElement>
     private final JCheckBox _visibleCheckBox = new JCheckBox();
     private final JLabel _jLabel = new JLabel();
 
-//        private boolean _recycled;
-
     public PlayElementView(
-//            @NotNull final UniqueID uniqueID,
             VirtualScrollableElementModel<PlayElementData> elementModel
     ) {
 
-        super( elementModel.getUniqueID(), elementModel );
+        super( elementModel );
 
         setBorder( BorderFactory.createEtchedBorder() );
 
@@ -51,12 +48,6 @@ public class PlayElementView<EV extends VirtualScrollableElement>
 
     }
 
-//        public PlayElementView getAsView() {
-//
-//            return this;
-//
-//        }
-
     @Override
     public void freshAssignment() {
 
@@ -74,10 +65,5 @@ public class PlayElementView<EV extends VirtualScrollableElement>
                                   .getValue() );
 
     }
-
-//        @Override
-//        public void fill( final VirtualScrollableElementModel dataModel ) {
-//
-//        }
 
 }

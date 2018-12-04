@@ -3,8 +3,6 @@ package com.obtuse.util.gowing.p2a;
 import com.obtuse.util.gowing.GowingPackable;
 import com.obtuse.util.gowing.GowingUnPacker;
 
-import java.util.List;
-
 /**
  Something that is back-referenceable immediately after creation.
  <p>Instances of classes that implement this interface have their
@@ -14,7 +12,5 @@ import java.util.List;
  */
 
 public interface GowingBackReferenceable extends GowingPackable {
-
-//    List<GowingBackReferenceable> getDependencies();
 
 }

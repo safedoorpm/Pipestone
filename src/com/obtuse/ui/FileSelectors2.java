@@ -155,80 +155,6 @@ public class FileSelectors2 {
                 fileFilter
         );
 
-//        JFileChooser chooser = new JFileChooser();
-//        chooser.setDialogTitle( title );
-//        chooser.setApproveButtonText( title );
-//        chooser.setMultiSelectionEnabled( multiSelectionEnabled );
-//
-//        if ( fileFilter != null ) {
-//
-//            chooser.setFileFilter( fileFilter );
-//
-//        }
-//
-//        chooser.setFileSelectionMode( JFileChooser.FILES_ONLY );
-//        int rval;
-//        switch ( dialogType ) {
-//
-//            case JFileChooser.OPEN_DIALOG:
-//                rval = chooser.showOpenDialog( parent );
-//                break;
-//
-//            case JFileChooser.SAVE_DIALOG:
-//                rval = chooser.showSaveDialog( parent );
-//                break;
-//
-//            case JFileChooser.CUSTOM_DIALOG:
-//                throw new IllegalArgumentException(
-//                        "FileSelectors.swingSelectFile:  " +
-//                        "this variant of swingSelectFile only supports OPEN and SAVE dialogs (not CUSTOM dialogs)"
-//                );
-//
-//            default:
-//                throw new IllegalArgumentException(
-//                        "FileSelectors.swingSelectFile:  " +
-//                        "unknown dialogType " + dialogType + " " +
-//                        "(must be JFileChooser.OPEN_DIALOG or " +
-//                        "JFileChooser.SAVE_DIALOG for this variant of swingSelectFile)"
-//                );
-//
-//        }
-//
-//        if ( rval == JFileChooser.APPROVE_OPTION ) {
-//
-//            @SuppressWarnings("UnnecessaryLocalVariable")
-//            FileSelectorResult result = new FileSelectorResult(
-//                    chooser.getCurrentDirectory(),
-//                    chooser.getSelectedFiles(),
-//                    JFileChooser.APPROVE_OPTION
-//            );
-//
-//            return result;
-//
-//        } else if ( rval == JFileChooser.CANCEL_OPTION ) {
-//
-//            @SuppressWarnings("UnnecessaryLocalVariable")
-//            FileSelectorResult result = new FileSelectorResult(
-//                    chooser.getCurrentDirectory(),
-//                    new File[0],
-//                    JFileChooser.CANCEL_OPTION
-//            );
-//
-//            return result;
-//
-//        } else {
-//
-//            @SuppressWarnings("UnnecessaryLocalVariable")
-//            FileSelectorResult result = new FileSelectorResult(
-//                    chooser.getCurrentDirectory(),
-//                    new File[0],
-//                    JFileChooser.ERROR_OPTION
-//            );
-//
-//            return result;
-//
-//        }
-
     }
 
     /**
@@ -313,25 +239,21 @@ public class FileSelectors2 {
 
         chooser.setFileSelectionMode( fileSelectionMode );
         int chooserRval;
-//        File[] ourRval;
         switch ( dialogType ) {
 
             case JFileChooser.OPEN_DIALOG:
 
                 chooserRval = chooser.showOpenDialog( parent );
-//                ourRval = chooser.getSelectedFiles();
                 break;
 
             case JFileChooser.SAVE_DIALOG:
 
                 chooserRval = chooser.showSaveDialog( parent );
-//                ourRval = chooser.getSelectedFiles();
                 break;
 
             case JFileChooser.CUSTOM_DIALOG:
 
                 chooserRval = chooser.showDialog( parent, customButtonLabel );
-//                ourRval = chooser.getSelectedFiles();
                 break;
 
             default:
@@ -397,7 +319,6 @@ public class FileSelectors2 {
 
             }
 
-            @SuppressWarnings("UnnecessaryLocalVariable")
             FileSelectorResult result = new FileSelectorResult(
                     chooser.getCurrentDirectory(),
                     selectedFiles,
@@ -408,7 +329,6 @@ public class FileSelectors2 {
 
         } else if ( chooserRval == JFileChooser.CANCEL_OPTION ) {
 
-            @SuppressWarnings("UnnecessaryLocalVariable")
             FileSelectorResult result = new FileSelectorResult(
                     chooser.getCurrentDirectory(),
                     new File[0],
@@ -419,7 +339,6 @@ public class FileSelectors2 {
 
         } else {
 
-            @SuppressWarnings("UnnecessaryLocalVariable")
             FileSelectorResult result = new FileSelectorResult(
                     chooser.getCurrentDirectory(),
                     new File[0],
@@ -479,53 +398,6 @@ public class FileSelectors2 {
         return ourRval;
 
     }
-
-//    /**
-//     * Use the Swing {@link JFileChooser} to select a file using a custom button label.
-//     * @param parent the component that is requesting this dialog (ignored if null).
-//     * @param title the title for the dialog window and the approve button text.
-//     * @param startingDirectory where the game should begin (defaults to the user's home directory if null).
-//     * @param customLabel the custom label for this JFileChooser's approve button.
-//     *                   Use {@link #swingSelectFile(Component, String, File, int, boolean, FileFilter)}
-//     * See {@link JFileChooser#setDialogType} for more info.
-//     * @param multiSelectionEnabled {@code true} if multiple files can be selected in one dialog; {@code false}.
-//     * @param fileFilter the optional file filter which selects which files should appear in the dialog.
-//     * @return the selected file if the "approve" button was clicked; null otherwise.
-//     */
-//
-//    public static @NotNull File@Nullable[] swingSelectFile(
-//            final Component parent,
-//            final String title,
-//            final File startingDirectory,
-//            final String customLabel,
-//            final boolean multiSelectionEnabled,
-//            final FileFilter fileFilter
-//    ) {
-//
-//        JFileChooser chooser = new JFileChooser();
-//        chooser.setDialogTitle( title );
-//        chooser.setApproveButtonText( customLabel );
-//        chooser.setMultiSelectionEnabled( multiSelectionEnabled );
-//
-//        if ( fileFilter != null ) {
-//
-//            chooser.setFileFilter( fileFilter );
-//
-//        }
-//
-//        chooser.setFileSelectionMode( JFileChooser.FILES_ONLY );
-//        int rval = chooser.showDialog( parent, customLabel );
-//        if ( rval == JFileChooser.APPROVE_OPTION ) {
-//
-//            return chooser.getSelectedFiles();
-//
-//        } else {
-//
-//            return null;
-//
-//        }
-//
-//    }
 
     /**
      * Use the AWT {@link FileDialog} to select a file.

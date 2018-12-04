@@ -116,7 +116,6 @@ public class LinearLayoutUtil {
     @NotNull
     public static LinearContainer createPanel3( final String name, final LinearOrientation orientation ) {
 
-        @SuppressWarnings("UnnecessaryLocalVariable")
         LinearContainer rval = new LinearContainer3( name, orientation ) {
 
             @SuppressWarnings("EmptyMethod")
@@ -159,7 +158,6 @@ public class LinearLayoutUtil {
             @SuppressWarnings("SameParameterValue") final ComponentConstraints componentConstraints
     ) {
 
-        @SuppressWarnings("UnnecessaryLocalVariable")
         LinearContainer rval = new LinearContainer3( name, orientation, containerConstraints, componentConstraints ) {
 
             @SuppressWarnings("EmptyMethod")
@@ -607,8 +605,6 @@ public class LinearLayoutUtil {
             sb.append( " )" );
 
             return sb.toString();
-
-//            return component.getClass().getCanonicalName() + "( " + ObtuseUtil.enquoteToJavaString( text ) + " )";
 
         } else if ( component instanceof AbstractButton ) {
 

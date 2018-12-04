@@ -5,7 +5,6 @@
 
 package com.obtuse.util.things;
 
-import com.obtuse.ui.tableutils.CheckBoxRowWrapper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -14,8 +13,6 @@ import org.jetbrains.annotations.Nullable;
  */
 
 public interface ThingInfo /*extends CheckBoxRowWrapper.RowData*/ {
-
-//    String getName();
 
     ThingName getThingName();
 

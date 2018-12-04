@@ -5,7 +5,10 @@
 package com.obtuse.util;
 
 @SuppressWarnings("UnusedDeclaration")
-public class TwoDimensionalTreeCounter<K1,K2> implements TwoDimensionalCounter<K1, K2> {
+public class TwoDimensionalTreeCounter<
+        K1 extends Comparable<K1>,
+        K2 extends Comparable<K2>
+        > implements TwoDimensionalCounter<K1, K2> {
 
     private final TwoDimensionalSortedMap<K1,K2,Integer> _counter = new TwoDimensionalTreeMap<>();
 

@@ -2,7 +2,6 @@ package com.obtuse.ui;
 
 import com.obtuse.exceptions.HowDidWeGetHereError;
 import com.obtuse.ui.exceptions.ObtuseImageLoadFailed;
-import com.obtuse.util.DateUtils;
 import com.obtuse.util.Logger;
 import com.obtuse.util.Measure;
 import com.obtuse.util.ObtuseUtil;
@@ -66,20 +65,6 @@ public class ObtuseImageUtils {
 
     public static BufferedImage rotateImage( BufferedImage srcImage, int orientation ) {
 
-//        BufferedImage imageAsBufferedImage;
-//        try ( Measure ignored = new Measure( "loadImage" ) ) {
-//
-//            imageAsBufferedImage = ObtuseImageUtils.loadImage( imageIcon, verbose );
-//
-//        }
-//
-//        ImageIcon imageAsIcon;
-//        try ( Measure ignored = new Measure( "make image icon" ) ) {
-//
-//            imageAsIcon = new ImageIcon( imageAsBufferedImage );
-//
-//        }
-
         if ( orientation != 1 ) {
 
             Logger.logMsg( "LancotMediaUtils.rotateImage: this one requires rotation" );
@@ -128,7 +113,6 @@ public class ObtuseImageUtils {
 
                 case 2:
                     rotated = flipHorizontally( srcImage );
-//                    rotated = new ImageIcon( img1 );
                     break;
 
                 case 3:
@@ -169,21 +153,7 @@ public class ObtuseImageUtils {
         return rotated;
 
     }
-//    private static final JFrame s_jf = new JFrame( "hello" );
-//    static {
-//
-//        s_jf.setContentPane( s_mediaTrackerComponent );
-//        s_mediaTrackerComponent.setBackground( Color.RED );
-//        s_mediaTrackerComponent.setForeground( Color.ORANGE );
-//        s_mediaTrackerComponent.setMinimumSize( new Dimension( 300, 300 ) );
-//        s_mediaTrackerComponent.setPreferredSize( new Dimension( 300, 300 ) );
-//        s_mediaTrackerComponent.setMaximumSize( new Dimension( 1000, 1000 ) );
-//        s_jf.pack();
-//        s_jf.setVisible( true );
-//
-//    }
-//    private static final ImageObserver s_observer;
-
+    @SuppressWarnings("unused")
     public static class MyImageObserver implements ImageObserver {
 
         private boolean _errored = false;
@@ -214,7 +184,6 @@ public class ObtuseImageUtils {
             _gotHeight = _gotHeight || ( ( infoflags & HEIGHT ) != 0 );
             _gotAllBits = _gotAllBits || ( ( infoflags & ALLBITS ) != 0 );
             _gotProperties = _gotProperties || ( ( infoflags & PROPERTIES ) != 0 );
-//            _complete = _complete || ( ( infoflags & ( ALLBITS | FRAMEBITS ) ) != 0 );
             _complete = _complete || ( _gotWidth && _gotHeight && _gotAllBits && _gotProperties );
             _isDone = hasCompleted() || hasFailed();
 
@@ -285,53 +254,6 @@ public class ObtuseImageUtils {
 
     }
 
-//    static {
-//        s_observer = new ImageObserver() {
-//            @Override
-//            public boolean imageUpdate(
-//                    final Image img,
-//                    final int infoflags,
-//                    final int x,
-//                    final int y,
-//                    final int width,
-//                    final int height
-//            ) {
-//
-//                SortedSet<String> flags = new TreeSet<>();
-//                if ( ( infoflags & WIDTH ) != 0 ) flags.add( "WIDTH" );
-//                if ( ( infoflags & HEIGHT ) != 0 ) flags.add( "HEIGHT" );
-//                if ( ( infoflags & PROPERTIES ) != 0 ) flags.add( "PROPERTIES" );
-//                if ( ( infoflags & SOMEBITS ) != 0 ) flags.add( "SOMEBITS" );
-//                if ( ( infoflags & FRAMEBITS ) != 0 ) flags.add( "FRAMEBITS" );
-//                if ( ( infoflags & ALLBITS ) != 0 ) flags.add( "ALLBITS" );
-//                if ( ( infoflags & ERROR ) != 0 ) flags.add( "ERROR" );
-//                if ( ( infoflags & ABORT ) != 0 ) flags.add( "ABORT" );
-//                Logger.logMsg( "imageUpdate( img=?, x=" +
-//                               x +
-//                               ", y=" +
-//                               y +
-//                               ", width=" +
-//                               width +
-//                               ", height=" +
-//                               height +
-//                               ", infoflags=" +
-//                               flags +
-//                               " )"
-//                );
-//
-//                if ( ( infoflags & ERROR ) != 0 ) {
-//
-//                    ObtuseUtil.doNothing();
-//
-//                }
-//
-//                return true;
-//            }
-//
-//        };
-//
-//    }
-
     @NotNull
     public static Optional<ImageIcon> maybeRegenerateThumbnail(
             @Nullable final String what,
@@ -377,61 +299,6 @@ public class ObtuseImageUtils {
 
     }
 
-//            rval = new ImageIcon();
-//            rval.setImageObserver(
-//                    new ImageObserver() {
-//                        @Override
-//                        public boolean imageUpdate(
-//                                final Image img,
-//                                final int infoflags,
-//                                final int x,
-//                                final int y,
-//                                final int width,
-//                                final int height
-//                        ) {
-//
-//                            SortedSet<String> flags = new TreeSet<>();
-//                            if ( ( infoflags & WIDTH ) != 0 ) flags.add( "WIDTH" );
-//                            if ( ( infoflags & HEIGHT ) != 0 ) flags.add( "HEIGHT" );
-//                            if ( ( infoflags & PROPERTIES ) != 0 ) flags.add( "PROPERTIES" );
-//                            if ( ( infoflags & SOMEBITS ) != 0 ) flags.add( "SOMEBITS" );
-//                            if ( ( infoflags & FRAMEBITS ) != 0 ) flags.add( "FRAMEBITS" );
-//                            if ( ( infoflags & ALLBITS ) != 0 ) flags.add( "ALLBITS" );
-//                            if ( ( infoflags & ERROR ) != 0 ) flags.add( "ERROR" );
-//                            if ( ( infoflags & ABORT ) != 0 ) flags.add( "ABORT" );
-//                            Logger.logMsg( "imageUpdate( img=?, x=" + x + ", y=" + y + ", width=" + width + ", height=" + height + ", infoflags=" + flags + " )" );
-//
-//                            return true;
-//                        }
-//
-//                    }
-//            );
-//            rval.setImage(
-//                    originalImageIcon.getImage().getScaledInstance(
-//                            newSize.width,
-//                            newSize.height,
-//                            Image.SCALE_SMOOTH
-//                    )
-//            );
-//            rval.setDescription( originalImageIcon.getDescription() );
-
-//            rval = new ImageIcon(
-//                    originalImageIcon.getImage().getScaledInstance(
-//                            newSize.width,
-//                            newSize.height,
-//                            Image.SCALE_SMOOTH
-//                    ),
-//                    originalImageIcon.getDescription()
-//            );
-
-//            ObtuseUtil.safeSleepMillis( 100L );
-//
-//        }
-//
-//        return Optional.ofNullable( rval );
-//
-//    }
-
     /**
      Scale an image.
      <p>This method scales an image and waits for the scaling to finish before returning.
@@ -451,7 +318,7 @@ public class ObtuseImageUtils {
      <p>Failures can occur if the wait for the scaled image to finish loading is interrupted.
      The JavaDocs for {@link Image#getScaledInstance(int, int, int)} do not make it clear if
      that method can return a {@code null} result. If it does then this method will return
-     a empty {@code Optional} instance.</p>
+     an empty {@code Optional} instance.</p>
      */
 
     public static Optional<Image> getScaledImage(
@@ -460,7 +327,12 @@ public class ObtuseImageUtils {
             @NotNull final Dimension newSize
     ) {
 
-        Image scaledInstance = originalImage.getScaledInstance( newSize.width, newSize.height, Image.SCALE_SMOOTH );
+        Image scaledInstance = originalImage.getScaledInstance(
+                newSize.width,
+                newSize.height,
+                Image.SCALE_SMOOTH
+        );
+
         if ( scaledInstance == null ) {
 
             if ( what != null ) {
@@ -476,9 +348,45 @@ public class ObtuseImageUtils {
 
         }
 
-        Image img = waitToFinishLoading( scaledInstance );
+        Image img = waitToFinishLoading( "getScaledImage", scaledInstance );
 
         return Optional.of( img );
+
+    }
+
+    public static Optional<BufferedImage> getOptScaledImage(
+            @Nullable final String what,
+            @NotNull final Image originalImage,
+            int targetSize
+    ) {
+
+        try ( Measure ignored = new Measure( "getOptScaledImage( " + ObtuseUtil.enquoteToJavaString( what ) + " )" ) ) {
+
+            BufferedImage convertedOriginalImage = ObtuseImageUtils.convertImageToBufferedImage( originalImage );
+
+            BufferedImage scaled;
+            if ( convertedOriginalImage.getHeight() > targetSize || convertedOriginalImage.getWidth() > targetSize ) {
+
+                Dimension newSize = ObtuseImageUtils.getMinimumScalingFactor(
+                        targetSize,
+                        targetSize,
+                        convertedOriginalImage.getWidth(),
+                        convertedOriginalImage.getHeight()
+                );
+                Optional<Image> optTmpImage = ObtuseImageUtils.getScaledImage( "thing", convertedOriginalImage, newSize );
+
+                scaled = optTmpImage.map( ObtuseImageUtils::convertImageToBufferedImage )
+                                    .orElse( null );
+
+            } else {
+
+                scaled = convertedOriginalImage;
+
+            }
+
+            return Optional.ofNullable( scaled );
+
+        }
 
     }
 
@@ -501,23 +409,28 @@ public class ObtuseImageUtils {
 
     /**
      Wait for an image to finish asynchronous loading.
-     @param img the image.
      @return the image (same value as {@code img}).
+     @param what what sort of operation we are waiting for (scaling, rotating, etc).
+     @param img the image.
      */
 
-    @NotNull
-    public static Image waitToFinishLoading( @NotNull final Image img ) {
+    public static Image waitToFinishLoading( final String what, @NotNull final Image img ) {
 
         long callStart = System.currentTimeMillis();
 
-        try {
+        try (
+                Measure entireWait =
+                        new Measure(
+                                "waitToFinishLoading( " + ObtuseUtil.enquoteToJavaString( what ) + " )"
+                        )
+        ) {
+
             MediaTracker mediaTracker = new MediaTracker( s_mediaTrackerComponent );
             mediaTracker.addImage(
                     img,
                     12321
             );
 
-            long start = System.currentTimeMillis();
             boolean load = true;
             boolean errored = false;
             boolean aborted = false;
@@ -527,31 +440,34 @@ public class ObtuseImageUtils {
 
             while ( true ) {
 
-                spinCount += 1;
+                try ( Measure ignored = new Measure( "waitToFinishLoading-spin" ) ) {
+                    spinCount += 1;
 
-                int status = mediaTracker.statusAll( load );
-                load = false;
-                if ( ( status & MediaTracker.ERRORED ) != 0 ) {
+                    int status = mediaTracker.statusAll( load );
+                    load = false;
+                    if ( ( status & MediaTracker.ERRORED ) != 0 ) {
 
-                    errored = true;
+                        errored = true;
 
-                }
+                    }
 
-                if ( ( status & MediaTracker.ABORTED ) != 0 ) {
+                    if ( ( status & MediaTracker.ABORTED ) != 0 ) {
 
-                    aborted = true;
+                        aborted = true;
 
-                }
+                    }
 
-                if ( ( status & MediaTracker.LOADING ) != 0 ) {
+                    if ( ( status & MediaTracker.LOADING ) != 0 ) {
 
-                    loading = true;
+                        loading = true;
 
-                }
+                    }
 
-                if ( ( status & MediaTracker.COMPLETE ) != 0 ) {
+                    if ( ( status & MediaTracker.COMPLETE ) != 0 ) {
 
-                    complete = true;
+                        complete = true;
+
+                    }
 
                 }
 
@@ -568,120 +484,9 @@ public class ObtuseImageUtils {
 
             Logger.logMsg( "ObtuseImageUtils:  spinCount=" + spinCount + ", errored=" + errored + ", aborted=" + aborted + ", complete=" + complete + ", loading=" + loading );
 
-//            mediaTracker.waitForAll();
-//            long done = System.currentTimeMillis();
-//            Logger.logMsg( "MediaTracker style waitToFinishLoading took " + DateUtils.formatDuration( done - start ));
-//            MyImageObserver mio = new MyImageObserver();
-//            int infoFlags = s_mediaTrackerComponent.checkImage(
-//                    img,
-//                    mio
-//            );
-//
-//            Logger.logMsg( "interpreted ImageObserver flags:  " + interpretImageUpdateFlags( infoFlags ) + " at " + DateUtils.formatDuration( System.currentTimeMillis() - start ) );
-
             return img;
 
-        } finally {
-
-            Logger.logMsg( "entire waitToFinishLoading call took " + DateUtils.formatDuration( System.currentTimeMillis() - callStart ) );
-
         }
-
-    }
-
-//    @NotNull
-//    public static Image waitToFinishLoadingNew( @NotNull final Image img ) {
-//
-//        long maxDelay = 0L;
-//        long deadline = System.currentTimeMillis() + maxDelay;
-//        int spinCount = 0;
-//        long start = System.currentTimeMillis();
-//        MyImageObserver mio = new MyImageObserver();
-//        while ( !mio.isDone() ) {
-//
-////            System.out.println( "preparing image" );
-//            if ( spinCount == 0 ) {
-//                if ( s_mediaTrackerComponent.prepareImage( img, -1, -1, mio ) ) {
-//
-////                Logger.logMsg( "waitToFinishLoading:  done after " + ( System.currentTimeMillis() - start ) + "ms and " + ObtuseUtil.pluralize( spinCount, "spin" ) );
-//                    Logger.logMsg( "prepareImage says true" );
-//
-//                }
-//
-////            } else if ( mio.isDone() ) {
-////
-////                break;
-////
-//////                int infoflags = s_mediaTrackerComponent.checkImage( img, -1, -1, mio );
-//
-//            }
-//
-//            spinCount += 1;
-//
-//            long remainingDelay = deadline - System.currentTimeMillis();
-//            if ( maxDelay == 0 ) {
-//
-//                remainingDelay = 0;
-//
-//            } else {
-//
-//                remainingDelay = deadline - System.currentTimeMillis();
-//                if (remainingDelay <= 0) {
-//
-//                    Logger.logMsg( "waitToFinishLoading:  giving up waiting for image" );
-//
-//                    return img;
-//
-//                }
-//
-//            }
-//
-////            Logger.logMsg( "waitToFinishLoading:  snoozing for " + remainingDelay + "ms" );
-//
-////            // No point in us waiting since there's nobody who might wake us up.
-////            // wait(ms) is not static so we give it something, img, to wait on.
-////
-////            img.wait( remainingDelay );
-//
-//        }
-//
-//        if ( mio.hasFailed() ) {
-//
-//            Logger.logMsg( "waitToFinishLoading:  failed loading (spinCount=" + spinCount + ")" );
-//
-//        } else if ( mio.hasCompleted() ) {
-//
-//            Logger.logMsg ( "waitToFinishLoading:  completed loading (ok, spinCount=" + spinCount + ")" );
-//
-//        } else {
-//
-//            throw new HowDidWeGetHereError( "waitToFinishLoading:  weird MIO state (" + mio + ", spinCount=" + spinCount + ")" );
-//
-//        }
-//
-////        MediaTracker mediaTracker = new MediaTracker( s_mediaTrackerComponent );
-////        mediaTracker.addImage(img, 0);
-////
-////        mediaTracker.waitForAll();
-//
-//        return img;
-//
-//    }
-
-    /**
-     Wait for an image to finish asynchronous loading.
-     <p>This method is equivalent to {@link #waitToFinishLoading(Image)} except it ignores any
-     {@link InterruptedException}).</p>
-     @param img the image.
-     @return the image (same value as {@code img}).
-     */
-
-    @NotNull
-    public static Image waitQuietlyToFinishLoading( @NotNull final Image img ) {
-
-        waitToFinishLoading( img );
-
-        return img;
 
     }
 
@@ -702,7 +507,6 @@ public class ObtuseImageUtils {
             rval = new Dimension( boxW, (int)( origH * sf1 ) );
             if ( rval.width != boxW && rval.height != boxH ) {
 
-//                setImageState( ImageState.BROKEN );
                 String msg = "orig " + origW + 'x' + origH + " yielded width-based sf " + sf1 + " which yields scaled " + rval.width + 'x' +
                              rval.height + " which is not exact for either width or height";
                 throw new HowDidWeGetHereError( msg );
@@ -714,7 +518,6 @@ public class ObtuseImageUtils {
             rval = new Dimension( (int)( origW * sf2 ), boxH );
             if ( rval.width != boxW && rval.height != boxH ) {
 
-//                setImageState( ImageState.BROKEN );
                 String msg =
                         "orig " + origW + 'x' + origH + " yielded height-based sf " + sf2 + " which yields scaled " + rval.width + 'x' +
                         rval.height + " which is not exact for either width or height";
@@ -728,6 +531,7 @@ public class ObtuseImageUtils {
 
     }
 
+    @SuppressWarnings("unused")
     @NotNull
     public static BufferedImage loadImage( final @NotNull File imageLocation, boolean verbose )
             throws IOException, ObtuseImageLoadFailed {
@@ -743,12 +547,6 @@ public class ObtuseImageUtils {
                 throw new ObtuseImageLoadFailed( "ObtuseImageFile.loadPrimaryImage:  image decoder returned null (no idea why - sorry)" );
 
             }
-//            else if ( _cachedImageWidth == -1 || _cachedImageHeight == -1 ) {
-//
-//                _cachedImageWidth = image.getWidth();
-//                _cachedImageHeight = image.getHeight();
-//
-//            }
 
             return image;
 
@@ -891,8 +689,7 @@ public class ObtuseImageUtils {
         int neww = (int)Math.floor( w * cos + h * sin );
         int newh = (int)Math.floor( h * cos + w * sin );
 
-        GraphicsConfiguration gc = getDefaultConfiguration();
-//        BufferedImage result = gc.createCompatibleImage( neww, newh, Transparency.TRANSLUCENT );
+        @SuppressWarnings("unused") GraphicsConfiguration gc = getDefaultConfiguration();
         BufferedImage result = new BufferedImage( neww, newh, bufferedInputImage.getType() );
         Graphics2D g = result.createGraphics();
 

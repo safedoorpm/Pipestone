@@ -193,15 +193,11 @@ public class CopierWidget
 
         setCurrentValue( updateValue );
 
-//        fireListeners();
-
     }
 
     public void setOwnerElsewhere( final @NotNull CopierDataSource.Owner owner ) {
 
         _source.setOwner( owner );
-
-//        Logger.logMsg( "Do I need this?" );
 
     }
 
@@ -281,9 +277,7 @@ public class CopierWidget
                 baseName + " rhs CopierActionListener",
                 makeMyActionListener(
                         lhsW,
-                        rhsWidgetAsFilteredSource,
                         rhsSource,
-                        rhsW,
                         businessLogic
                 )
 
@@ -302,9 +296,7 @@ public class CopierWidget
 
     public static CopierActionListener makeMyActionListener(
             final CopierWidget lhsWidget,
-            final CopierDataSource rhsWidgetAsFilteredSource,
             final @NotNull CopierDataSource rhsSource,
-            final @NotNull CopierWidget rhsWidget,
             final CopierBusinessLogic businessLogic
     ) {
 
@@ -313,11 +305,6 @@ public class CopierWidget
             @Override
             protected void myActionPerformed( final @NotNull CopierDataSource dataSource ) {
 
-//                try {
-
-                CopierDataSource rhsDataSource = rhsSource;
-                CopierDataSource rhsWidgetSource = rhsWidgetAsFilteredSource;
-                CopierWidget rhsCopierWidget = rhsWidget;
                 boolean worked = businessLogic.transmogrifyRhsValue( lhsWidget, rhsSource );
 
                 Logger.logMsg( "update for " + dataSource.getName() + " " + ( worked ? "worked" : "failed" ) );
@@ -326,45 +313,18 @@ public class CopierWidget
 
             }
 
-//                } catch ( IllegalArgumentException e ) {
-//
-//                    Logger.logErr( "WikiTreeDbWtid.innerMaybeCreateGuiField:  unable to get WTPP for " +
-//                                   ObtuseUtil.enquoteJavaObject( wtid ) );
-//
-//                    ObtuseUtil.doNothing();
-//
-//                }
-//
-//                ObtuseUtil.doNothing();
-//
-//            }
-
         };
+
     }
 
     public static CopierWidget createCopierWidget(
             final @NotNull String name,
             final @NotNull String ourInitialValue,
-//            final @NotNull ObtuseTextElement ourValue,
             final CopierDataSource dataSource,
             final boolean shouldCurrentValueBeVisible
     ) {
 
-//        Optional<String> optCopyInValue = getCopyInValue();
-//        String actualCopyInValue = optCopyInValue.orElse( "NO COPY IN VALUE!" );
-
-//        ObtuseTextElement rhsSourceTextElement = new ObtuseTextElement.ObtuseTextField(
-//                actualCopyInValue,
-//                25,
-//                200,
-//                100
-//        );
-
-//        CopierDataSource rhsSource = new CopierDataSource( "rhs", rhsSourceTextElement, false );
-
         ObtuseTextElement.ObtuseLabel ourValue = new ObtuseTextElement.ObtuseLabel( ourInitialValue );
-
-//        ObtuseTextElement.ObtuseLabel rhsUnfilteredValue = new ObtuseTextElement.ObtuseLabel( "<<hi there>>" );
 
         CopierWidget rval = new CopierWidget(
                 name,

@@ -8,8 +8,8 @@ import com.obtuse.exceptions.HowDidWeGetHereError;
 import com.obtuse.util.gowing.*;
 import com.obtuse.util.gowing.p2a.GowingEntityReference;
 import com.obtuse.util.gowing.p2a.GowingUnPackedEntityGroup;
-import com.obtuse.util.gowing.p2a.exceptions.GowingUnpackingException;
 import com.obtuse.util.gowing.p2a.GowingUtil;
+import com.obtuse.util.gowing.p2a.exceptions.GowingUnpackingException;
 import com.obtuse.util.gowing.p2a.holders.GowingBooleanHolder;
 import com.obtuse.util.gowing.p2a.holders.GowingPackableEntityHolder;
 import com.obtuse.util.gowing.p2a.holders.GowingPackableMapping;
@@ -20,7 +20,11 @@ import java.io.File;
 import java.io.Serializable;
 import java.util.*;
 
-public class TwoDimensionalTreeMap<T1,T2,V> extends GowingAbstractPackableEntity implements Serializable, TwoDimensionalSortedMap<T1,T2,V> {
+public class TwoDimensionalTreeMap<
+        T1 extends Comparable<T1>,
+        T2 extends Comparable<T2>,
+        V
+        > extends GowingAbstractPackableEntity implements Serializable, TwoDimensionalSortedMap<T1,T2,V> {
 
     private static final EntityTypeName ENTITY_TYPE_NAME = new EntityTypeName( TwoDimensionalTreeMap.class );
     private static final int VERSION = 1;
@@ -58,8 +62,60 @@ public class TwoDimensionalTreeMap<T1,T2,V> extends GowingAbstractPackableEntity
 
     };
 
-    @SuppressWarnings("unused") public static final TwoDimensionalSortedMap<?,?,?> EMPTY_MAP2D =
-            new TwoDimensionalTreeMap<>( new TwoDimensionalTreeMap<>(), true );
+    /**
+     A class that always yields an empty immutable {@link TwoDimensionalSortedMap}.
+     <p>Since that probably guarantees that some will find this useful, here it is.</p>
+     @param <A> the first dimension's key type.
+     @param <B> the second dimension's key type.
+     @param <V> the type of each element (none of which actually exist since the map is empty).
+     */
+
+    public static class Empty2DMap<A extends Comparable<A>,B extends Comparable<B>,V>
+            extends TwoDimensionalTreeMap<A,B,V> {
+
+        private Empty2DMap() {
+            super( true );
+        }
+
+    }
+
+    /**
+     An empty immutable {@link TwoDimensionalSortedMap}.
+     <p>Trying to use {@code EMPTY_2DMAP} in most contexts will yield a warning about unchecked operations.
+     I find it to be simpler to get a variable of the exact type that I need and to then use that variable
+     as needed.
+     For example, you can get a forever empty 2D sorted map which is indexed by {@code Short} and {@code Byte} values
+     and which contains no {@code Long} values as follows:
+     <blockquote>
+     {@code @SuppressWarnings("unchecked") TwoDimensionalSortedMap<Short,Byte,Long> foreverEmpty = EMPTY_2DMAP;}
+     </blockquote>
+     </p>
+      */
+
+    public static final TwoDimensionalSortedMap EMPTY_2DMAP = new TwoDimensionalTreeMap( true );
+
+    /**
+     Create an immutable empty 2D sorted map.
+     <p>The current implementation of this method always yields the same empty immutable sorted map.
+     In other words, {@code empty2DMap() == empty2DMap()} is currently always true.
+     This could change in future implementations. Therefore,
+     <u><b>do not assume that two different calls to this method each yield distinct empty immutable 2D sorted maps.
+     Also, do not assume that two different calls to this map each yield the same empty immutable 2D sorted map instance.</b></u></p>
+     @param <A> the first dimension's key type.
+     @param <B> the second dimension's key type.
+     @param <C> the type of each element.
+     @return an empty immutable 2D sorted map of the specified type.
+     */
+
+    @SuppressWarnings({ "unchecked", "unused" })
+    public static <A extends Comparable<A>,B extends Comparable<B>,C>
+    TwoDimensionalSortedMap<A,B,C> empty2DMap() {
+
+        return EMPTY_2DMAP;
+
+//        return new TwoDimensionalTreeMap<>(true );
+
+    }
 
     private GowingEntityReference _outerMapReference;
 
@@ -72,6 +128,10 @@ public class TwoDimensionalTreeMap<T1,T2,V> extends GowingAbstractPackableEntity
 
         _readonly = false;
 
+    }
+
+    public TwoDimensionalTreeMap( boolean makeReadonly ) {
+        this( new TwoDimensionalTreeMap<>(), makeReadonly );
     }
 
     public TwoDimensionalTreeMap( final @NotNull TwoDimensionalSortedMap<T1,T2,V> map, final boolean makeReadonly ) {
@@ -201,7 +261,6 @@ public class TwoDimensionalTreeMap<T1,T2,V> extends GowingAbstractPackableEntity
                     (GowingPackableMapping<T1, GowingPackableMapping<T2, V>>)packable;
             for ( GowingPackableKeyValuePair<T1, GowingPackableMapping<T2, V>> outer : packable1.getMappings() ) {
 
-//                Logger.logMsg( "mm = " + outer );
                 ObtuseUtil.doNothing();
 
                 for ( GowingPackableKeyValuePair<T2, V> inner : outer.getValue().getMappings() ) {
@@ -213,22 +272,6 @@ public class TwoDimensionalTreeMap<T1,T2,V> extends GowingAbstractPackableEntity
                 }
 
             }
-
-//            @SuppressWarnings("unchecked")
-//            TreeMap<T1, GowingPackableMapping<K,V>> tmap = packable1.rebuildMap( new TreeMap<>() );
-//            _map = tmap;
-//
-//            if ( _readonly ) {
-//
-//                for ( T1 t1 : _map.keySet() ) {
-//
-//                    _map.put( t1, Collections.unmodifiableSortedMap( _map.get( t1 ) ) );
-//
-//                }
-//
-//                _map = Collections.unmodifiableSortedMap( _map );
-//
-//            }
 
         } else {
 
@@ -252,7 +295,7 @@ public class TwoDimensionalTreeMap<T1,T2,V> extends GowingAbstractPackableEntity
 
         SortedMap<T2,V> innerMap = getNotNullInnerMap( key1 );
 
-        @SuppressWarnings("UnnecessaryLocalVariable") V rval = innerMap.put( key2, value );
+        V rval = innerMap.put( key2, value );
 
         return rval;
 
@@ -278,7 +321,7 @@ public class TwoDimensionalTreeMap<T1,T2,V> extends GowingAbstractPackableEntity
     @NotNull
     public SortedMap<T2,V> getNotNullInnerMap( final T1 key1 ) {
 
-        @SuppressWarnings("UnnecessaryLocalVariable") SortedMap<T2, V> innerMap = _map.computeIfAbsent( key1, k -> new TreeMap<>() );
+        SortedMap<T2, V> innerMap = _map.computeIfAbsent( key1, k -> new TreeMap<>() );
 
         return innerMap;
 
@@ -453,6 +496,7 @@ public class TwoDimensionalTreeMap<T1,T2,V> extends GowingAbstractPackableEntity
 
             }
 
+            @SuppressWarnings("Duplicates")
             public V next() {
 
                 if ( !hasNext() ) {
@@ -496,6 +540,7 @@ public class TwoDimensionalTreeMap<T1,T2,V> extends GowingAbstractPackableEntity
 
     }
 
+    @SuppressWarnings("Duplicates")
     public static void main( String[] args ) {
 
         BasicProgramConfigInfo.init( "Kenosee", "ObtuseUtil", "testing", null );
@@ -512,26 +557,14 @@ public class TwoDimensionalTreeMap<T1,T2,V> extends GowingAbstractPackableEntity
         EntityName en = new EntityName( "eName" );
         File testFile = new File( "2dsortedMap-test.packed" );
         ObtuseUtil.packQuietly( en, originalMap, testFile, false );
-        try ( Measure m = new Measure( "TwoDimensionalTreeMap unpack main" ) ){
+        try ( Measure ignored = new Measure( "TwoDimensionalTreeMap unpack main" ) ){
 
             GowingUnPackedEntityGroup unpackedEntities = ObtuseUtil.unpack(
                     testFile,
                     new GowingEntityFactory[0]
             );
 
-            for ( EntityName entityName : unpackedEntities.getNamedClasses().keySet() ) {
-
-                for ( GowingPackable packable : unpackedEntities.getNamedClasses().getValues( entityName ) ) {
-
-                    Logger.logMsg( "" + entityName + ":  " + packable.getClass() );
-
-                    ObtuseUtil.doNothing();
-
-                }
-
-                ObtuseUtil.doNothing();
-
-            }
+            GowingUtil.logUnpackResults( "TwoDimensionalTreeMap test", unpackedEntities );
 
             if ( unpackedEntities.getNamedClasses()
                                  .containsKey( en ) ) {
@@ -581,10 +614,6 @@ public class TwoDimensionalTreeMap<T1,T2,V> extends GowingAbstractPackableEntity
                 );
 
             }
-
-//        } catch ( IOException e ) {
-//
-//            Logger.logErr( "java.io.IOException caught", e );
 
         } catch ( GowingUnpackingException e ) {
 

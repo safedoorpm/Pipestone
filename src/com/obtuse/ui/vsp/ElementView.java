@@ -55,14 +55,6 @@ public interface ElementView<E extends VirtualScrollableElement> {
 
     void setElementModel( @NotNull final VirtualScrollableElementModel<E> elementModel );
 
-//        /**
-//         Determine if this view has ever been used before with a different id.
-//         <p>The idea is that knowing if the view that has been assigned is brand new or recycled could
-//         change how it gets prepared for use by the latest owner.</p>
-//         */
-//
-//        boolean isRecycled();
-
     /**
      Get this view's model.
      @return this view's model.

@@ -4,7 +4,11 @@
 
 package com.obtuse.util;
 
-public class ThreeDimensionalTreeCounter<K1,K2,K3> implements ThreeDimensionalCounter<K1, K2, K3> {
+public class ThreeDimensionalTreeCounter<
+        K1 extends Comparable<K1>,
+        K2 extends Comparable<K2>,
+        K3 extends Comparable<K3>
+        > implements ThreeDimensionalCounter<K1, K2, K3> {
 
     private final ThreeDimensionalSortedMap<K1,K2,K3,Integer> _counter = new ThreeDimensionalTreeMap<>();
 

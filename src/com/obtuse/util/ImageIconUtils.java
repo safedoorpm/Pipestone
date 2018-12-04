@@ -4,6 +4,7 @@
 
 package com.obtuse.util;
 
+import com.obtuse.exceptions.HowDidWeGetHereError;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
@@ -92,13 +93,13 @@ public class ImageIconUtils {
         }
 
         ImageIcon rval;
-        if ( url != null ) {
+        if ( url == null ) {
 
-            rval = new ImageIcon( url );
+            return null;
 
         } else {
 
-            rval = null;
+            rval = new ImageIcon( url );
 
         }
 
@@ -108,11 +109,25 @@ public class ImageIconUtils {
 
         } else {
 
-            //noinspection ConstantConditions
+            int rvalWidth = rval.getIconWidth();
+            int rvalHeight = rval.getIconHeight();
+
+            int scaledWidth = rvalWidth >= rvalHeight ? size : -1;
+            int scaledHeight = rvalWidth <= rvalHeight ? size : -1;
+            if ( scaledWidth == -1 && scaledHeight == -1 ) {
+
+                throw new HowDidWeGetHereError(
+                        "ImageIconUtils.fetchIconImage:  " +
+                        "rvW=" + rvalWidth + ", rvH=" + rvalHeight + ", s=" + size +
+                        " yielded both sW and sH equal to " + -1
+                );
+
+            }
+
             return new ImageIcon(
                     rval.getImage().getScaledInstance(
-                            size,
-                            -1,
+                            scaledWidth,
+                            scaledHeight,
                             Image.SCALE_SMOOTH
                     )
             );

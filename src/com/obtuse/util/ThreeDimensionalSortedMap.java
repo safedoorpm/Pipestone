@@ -9,8 +9,8 @@ import com.obtuse.util.gowing.EntityName;
 import com.obtuse.util.gowing.GowingEntityFactory;
 import com.obtuse.util.gowing.GowingPackable;
 import com.obtuse.util.gowing.p2a.GowingUnPackedEntityGroup;
-import com.obtuse.util.gowing.p2a.exceptions.GowingUnpackingException;
 import com.obtuse.util.gowing.p2a.GowingUtil;
+import com.obtuse.util.gowing.p2a.exceptions.GowingUnpackingException;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -305,10 +305,6 @@ public interface ThreeDimensionalSortedMap<T1,T2,T3,V> extends Iterable<V>, Seri
                 );
 
             }
-
-//        } catch ( IOException e ) {
-//
-//            Logger.logErr( "java.io.IOException caught", e );
 
         } catch ( GowingUnpackingException e ) {
 

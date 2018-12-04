@@ -27,12 +27,6 @@ public class CheckBoxRowWrapper<D extends ThingInfo> {
     private final int _serialNumber = s_snGenerator.getUniqueId();
     private boolean _traceMode = false;
 
-//    public interface RowData {
-//
-////        String getName();
-//
-//    }
-
     private final FrameworkTableModel<D> _tableModel;
 
     private final D _rowData;

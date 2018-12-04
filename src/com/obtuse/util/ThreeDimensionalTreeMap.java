@@ -16,7 +16,12 @@ import org.jetbrains.annotations.Nullable;
 import java.io.Serializable;
 import java.util.*;
 
-public class ThreeDimensionalTreeMap<T1,T2,T3,V> extends GowingAbstractPackableEntity implements Serializable, ThreeDimensionalSortedMap<T1,T2,T3,V> {
+public class ThreeDimensionalTreeMap<
+        T1 extends Comparable<T1>,
+        T2 extends Comparable<T2>,
+        T3 extends Comparable<T3>,
+        V
+        > extends GowingAbstractPackableEntity implements Serializable, ThreeDimensionalSortedMap<T1,T2,T3,V> {
 
     private static final EntityTypeName ENTITY_TYPE_NAME = new EntityTypeName( ThreeDimensionalTreeMap.class );
     private static final int VERSION = 1;
@@ -54,8 +59,63 @@ public class ThreeDimensionalTreeMap<T1,T2,T3,V> extends GowingAbstractPackableE
 
     };
 
-    @SuppressWarnings("unused") public static final ThreeDimensionalSortedMap<?,?,?,?> EMPTY_MAP3D =
-            new ThreeDimensionalTreeMap<>( new ThreeDimensionalTreeMap<>(), true );
+//    @SuppressWarnings("unused") public static final ThreeDimensionalSortedMap<?,?,?,?> EMPTY_MAP3D =
+//            new ThreeDimensionalTreeMap<>( new ThreeDimensionalTreeMap<>(), true );
+
+    /**
+     A class that always yields an empty immutable {@link ThreeDimensionalSortedMap}.
+     <p>Since that probably guarantees that some will find this useful, here it is.</p>
+     @param <A> the first dimension's key type.
+     @param <B> the second dimension's key type.
+     @param <V> the type of each element (none of which actually exist since the map is empty).
+     */
+
+    public static class Empty3DMap<A extends Comparable<A>,B extends Comparable<B>,C extends Comparable<C>,V>
+            extends ThreeDimensionalTreeMap<A,B,C,V> {
+
+        private Empty3DMap() {
+            super( true );
+        }
+
+    }
+
+    /**
+     An empty immutable {@link ThreeDimensionalSortedMap}.
+     <p>Trying to use {@code EMPTY_MAP3D} in most contexts will yield a warning about unchecked operations.
+     I find it to be simpler to get a variable of the exact type that I need and to then use that variable
+     as needed.
+     For example, you can get a forever empty 2D sorted map which is indexed by {@code Short} and {@code Byte} values
+     and which contains no {@code Long} values as follows:
+     <blockquote>
+     {@code @SuppressWarnings("unchecked") ThreeDimensionalSortedMap<Short,Byte,Long> foreverEmpty = EMPTY_MAP3D;}
+     </blockquote>
+     </p>
+     */
+
+    public static final ThreeDimensionalSortedMap EMPTY_MAP3D = new ThreeDimensionalTreeMap( true );
+
+    /**
+     Create an immutable empty 2D sorted map.
+     <p>The current implementation of this method always yields the same empty immutable sorted map.
+     In other words, {@code empty2DMap() == empty2DMap()} is currently always true.
+     This could change in future implementations. Therefore,
+     <u><b>do not assume that two different calls to this method each yield distinct empty immutable 2D sorted maps.
+     Also, do not assume that two different calls to this map each yield the same empty immutable 2D sorted map instance.</b></u></p>
+     @param <A> the first dimension's key type.
+     @param <B> the second dimension's key type.
+     @param <C> the type of each element.
+     @return an empty immutable 2D sorted map of the specified type.
+     */
+
+    @SuppressWarnings({ "unchecked", "unused" })
+    public static <A extends Comparable<A>,B extends Comparable<B>,C extends Comparable<C>,V>
+    ThreeDimensionalSortedMap<A,B,C,V> empty2DMap() {
+
+        return EMPTY_MAP3D;
+
+//        return new ThreeDimensionalTreeMap<>(true );
+
+    }
 
     private GowingEntityReference _outerMapReference;
 
@@ -101,6 +161,10 @@ public class ThreeDimensionalTreeMap<T1,T2,T3,V> extends GowingAbstractPackableE
 
     }
 
+    public ThreeDimensionalTreeMap( boolean makeReadonly ) {
+        this( new ThreeDimensionalTreeMap<>(), makeReadonly );
+    }
+
     @SuppressWarnings("unused")
     public ThreeDimensionalTreeMap( final @NotNull ThreeDimensionalSortedMap<T1,T2,T3,V> map ) {
         this( map, false );
@@ -121,7 +185,7 @@ public class ThreeDimensionalTreeMap<T1,T2,T3,V> extends GowingAbstractPackableE
             final boolean isPackingSuper, final @NotNull GowingPacker packer
     ) {
 
-        GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
+        @SuppressWarnings("Duplicates") GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
                 ENTITY_TYPE_NAME,
                 VERSION,
                 super.bundleRoot( packer ),
@@ -193,7 +257,7 @@ public class ThreeDimensionalTreeMap<T1,T2,T3,V> extends GowingAbstractPackableE
 
         TwoDimensionalSortedMap<T2,T3,V> innerMap = getNotNullInnerMap( key1 );
 
-        @SuppressWarnings("UnnecessaryLocalVariable") V rval = innerMap.put( key2, key3, value );
+        V rval = innerMap.put( key2, key3, value );
 
         return rval;
 
@@ -393,6 +457,7 @@ public class ThreeDimensionalTreeMap<T1,T2,T3,V> extends GowingAbstractPackableE
 
             }
 
+            @SuppressWarnings("Duplicates")
             public V next() {
 
                 if ( !hasNext() ) {

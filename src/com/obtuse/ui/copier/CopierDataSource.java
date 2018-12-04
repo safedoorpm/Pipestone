@@ -8,7 +8,6 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.util.*;
-import java.util.List;
 
 /*
  * Copyright © 2018 Obtuse Systems Corporation
@@ -90,12 +89,6 @@ public class CopierDataSource extends UniqueWidget {
 
     }
 
-//    public boolean isReadOnly() {
-//
-//        return _currentValueElement instanceof ObtuseTextElement.ObtuseLabel;
-//
-//    }
-
     public boolean isCompletelyReadOnly() {
 
         return _completelyReadOnly;
@@ -125,13 +118,6 @@ public class CopierDataSource extends UniqueWidget {
         }
 
     }
-
-//    @SuppressWarnings("unused")
-//    public final boolean supportsSetCurrentValue() {
-//
-//        return !isReadOnly();
-//
-//    }
 
     @NotNull
     public final String getCurrentValue() {

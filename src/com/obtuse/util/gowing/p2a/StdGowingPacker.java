@@ -330,15 +330,6 @@ public class StdGowingPacker implements GowingPacker {
             for ( GowingInstanceId instanceId : notYetPackedEntities ) {
 
                 maybeActuallyPackEntity( instanceId );
-//                if ( !_previouslyPackedEntities.contains( instanceId ) ) {
-//
-//                    EntityNames names = _packingContext.getEntityNames( instanceId );
-//                    vLog( "packing " + instanceId + " / " + names );
-//                    maybeActuallyPackEntity( instanceId );
-//                    _entityCount += 1;
-//                    _previouslyPackedEntities.add( instanceId );
-//
-//                }
 
             }
 
@@ -415,12 +406,7 @@ public class StdGowingPacker implements GowingPacker {
 
         // If the bundle is for a GowingBackReferenceable then we need to pack what it depends on before packing it.
 
-//        if ( GowingUtil.isActuallyBackReferenceable( entityNames.getEntity() ) ) {
-
         emitOurBackReferences( bundle );
-
-//        }
-
 
         if ( !_previouslyPackedEntities.contains( ourInstanceId ) ) {
 
@@ -436,79 +422,6 @@ public class StdGowingPacker implements GowingPacker {
 
     }
 
-//    private void emitBackReferencedDependencies( final @NotNull GowingInstanceId ourInstanceId, @NotNull final GowingPackedEntityBundle bundle ) {
-//
-//        Set<DirectedArc<GowingInstanceId>> dependentInstances = new HashSet<>();
-//        SortedMap<GowingInstanceId,Vertex<GowingInstanceId>> knownVertices = new TreeMap<>();
-//        collectBackReferencedDependencies( ourInstanceId, dependentInstances, knownVertices, bundle );
-//
-//        String comma = "";
-//        StringBuilder sb = new StringBuilder();
-//        List<String> things = new ArrayList<>();
-//        for ( EntityName en : bundle.keySet() ) {
-//
-//            Object ov = bundle.get( en )
-//                                       .getObjectValue();
-//
-//            if ( ov instanceof GowingPackable && !( ov instanceof GowingBackReferenceable ) ) {
-//
-//                throw new GowingPackingException(
-//                        "StdGowingPacker.maybeActuallyPackEntity:  " +
-//                        "bundle for a GowingBackReferenceable references a GowingPackable " +
-//                        "which is not GowingBackReferenceable",
-//                        bundle
-//                );
-//
-//            }
-//
-//            _previouslyPackedEntities.
-//
-//            sb.append( comma ).append( en ).append( "->" ).append( ov );
-//            comma = ", ";
-//            String ti = ov == null ? "<<unknown>>" : ov.getClass().getCanonicalName();
-//            //noinspection ConstantConditions
-//            things.add(
-//                    ObtuseUtil.rpad( "" + en + "->" + ov + " ti=" + ti + " ", 70 ) +
-//                    (
-//                            ov instanceof GowingPackable
-//                                    ?
-//                                    ( ov instanceof GowingBackReferenceable ? "!!!" : "???" )
-//                                    : "<<misc>>"
-//                    )
-//            );
-//
-//        }
-//        Logger.logMsg( "backref:  " + bundle.getTypeName() + " is a back referenceable thing - " + sb );
-//        for ( String t : things ) {
-//
-//            Logger.logMsg( "    " + t );
-//
-//        }
-//
-//        ObtuseUtil.doNothing();
-//
-//    }
-//
-//    private void collectBackReferencedDependencies(
-//            GowingInstanceId ourInstanceId,
-//            @NotNull Set<DirectedArc<GowingInstanceId>> obsoleteParameterDependencies,
-//            SortedMap<GowingInstanceId,Vertex<GowingInstanceId>> knownVertices,
-//            @NotNull final GowingPackedEntityBundle bundle
-//    ) {
-//
-////        Vertex<GowingInstanceId> src = knownVertices.computeIfAbsent(
-////                ourInstanceId,
-////                new Function<GowingInstanceId, Vertex<GowingInstanceId>>() {
-////                    @Override
-////                    public Vertex<GowingInstanceId> apply( final GowingInstanceId ourInstanceId ) {
-////
-////                        return new Vertex<>( ourInstanceId );
-////                    }
-////                }
-////        );
-//
-//    }
-
     private void emitOurBackReferences( @NotNull final GowingPackedEntityBundle topLevelBundle ) {
 
         if ( topLevelBundle.hasSuperBundle() ) {
@@ -516,8 +429,6 @@ public class StdGowingPacker implements GowingPacker {
             emitOurBackReferences( topLevelBundle.getSuperBundle() );
 
         }
-
-//        Logger.logMsg( "emitting backreferences for " + topLevelBundle );
 
         for (
                 GowingPackedEntityBundle bundle = topLevelBundle;
@@ -1041,7 +952,7 @@ public class StdGowingPacker implements GowingPacker {
     }
 
     @Override
-    public void emit( final Integer@NotNull[] v ) {
+    public void emit( @Nullable final Integer@NotNull[] v ) {
 
         _writer.print( GowingConstants.TAG_CONTAINER_ARRAY );
         _writer.print( v.length );
@@ -1101,7 +1012,7 @@ public class StdGowingPacker implements GowingPacker {
     }
 
     @Override
-    public void emit( final Short@NotNull[] v ) {
+    public void emit( @Nullable final Short@NotNull[] v ) {
 
         _writer.print( GowingConstants.TAG_CONTAINER_ARRAY );
         _writer.print( v.length );
@@ -1228,7 +1139,7 @@ public class StdGowingPacker implements GowingPacker {
     }
 
     @Override
-    public void emit( final Boolean@NotNull[] v ) {
+    public void emit( @Nullable final Boolean@NotNull[] v ) {
 
         _writer.print( GowingConstants.TAG_CONTAINER_ARRAY );
         _writer.print( v.length );
@@ -1353,7 +1264,7 @@ public class StdGowingPacker implements GowingPacker {
 
         checkOutboundMetaDataKeyword( name, value );
 
-        _writer.println( "" + GowingConstants.LINE_METADATA_CHAR + name + '=' + Long.toString( value ) + "L;" );
+        _writer.println( "" + GowingConstants.LINE_METADATA_CHAR + name + '=' + value + "L;" );
 
     }
 
@@ -1371,7 +1282,7 @@ public class StdGowingPacker implements GowingPacker {
 
         checkOutboundMetaDataKeyword( name, value );
 
-        _writer.println( "" + GowingConstants.LINE_METADATA_CHAR + name + '=' + Double.toString( value ) + "D;" );
+        _writer.println( "" + GowingConstants.LINE_METADATA_CHAR + name + '=' + value + "D;" );
 
     }
 

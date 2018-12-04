@@ -33,7 +33,6 @@ public class ButtonSelectorPanel<CHOICE,C extends JPanel> extends SelectorPanel<
     private final JPanel _buttonPanel;
 
     public ButtonSelectorPanel(
-//            final @NotNull String name,
             final WrappedButtonSelectorPanel.IController<CHOICE,C> iController,
             final @NotNull ButtonGroup buttonGroup,
             final @NotNull JPanel buttonPanel,
@@ -74,7 +73,6 @@ public class ButtonSelectorPanel<CHOICE,C extends JPanel> extends SelectorPanel<
                             clearPostSelectionPanelContents();
                             @SuppressWarnings("unchecked") CHOICE choice =
                                     (CHOICE)ButtonSelectorPanel.lookupChoice( ab, buttonMap );
-//                            iController.reportChoice( choice );
                             Optional<C> optComponent = getSelectedComponent( choice );
 
                             if ( optComponent.isPresent() ) {
