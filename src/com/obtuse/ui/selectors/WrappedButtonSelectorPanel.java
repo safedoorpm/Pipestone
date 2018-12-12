@@ -23,7 +23,8 @@ import java.util.TreeMap;
  */
 
 @SuppressWarnings("unused")
-public class WrappedButtonSelectorPanel<CHOICE extends Comparable<CHOICE>, PANEL extends JPanel> extends WrappedSelectorPanel<CHOICE> {
+public class WrappedButtonSelectorPanel<CHOICE extends Comparable, PANEL extends JPanel>
+        extends WrappedSelectorPanel<CHOICE> {
 
     public interface IController<ICCHOICE,ICPANEL extends JPanel> {
 
@@ -117,7 +118,10 @@ public class WrappedButtonSelectorPanel<CHOICE extends Comparable<CHOICE>, PANEL
             JRadioButton targetButton = _buttonMap.get( choice );
             if ( targetButton == null ) {
 
-                throw new IllegalArgumentException( "WrappedButtonSelectorPanel.setSelected:  no button labeled " + ObtuseUtil.enquoteJavaObject( choice ) );
+                throw new IllegalArgumentException(
+                        "WrappedButtonSelectorPanel.setSelected:  no button labeled " +
+                        ObtuseUtil.enquoteJavaObject( choice )
+                );
 
             }
 
@@ -145,7 +149,9 @@ public class WrappedButtonSelectorPanel<CHOICE extends Comparable<CHOICE>, PANEL
 
         public void configureDataAndRepositoryComboBoxes() {
 
-            Logger.logMsg( "InnerWrappedButtonSelectorPanel.configureDataAndRepositoryComboBoxes:  unimplemented" );
+            Logger.logMsg(
+                    "InnerWrappedButtonSelectorPanel.configureDataAndRepositoryComboBoxes:  unimplemented"
+            );
 
         }
 
@@ -153,8 +159,10 @@ public class WrappedButtonSelectorPanel<CHOICE extends Comparable<CHOICE>, PANEL
          Switch to a new button.
 
          @param oldChoice the old button's choice.
-         @param newChoice the new button's choice (guaranteed by our caller to be different than {@code oldChoice}).
-         @return {@code true} if this represents an actual change in which button is selected; {@code false} otherwise.
+         @param newChoice the new button's choice
+         (guaranteed by our caller to be different than {@code oldChoice}).
+         @return {@code true} if this represents an actual change in which button is selected;
+         {@code false} otherwise.
          */
 
         @SuppressWarnings("UnusedReturnValue")
@@ -166,9 +174,11 @@ public class WrappedButtonSelectorPanel<CHOICE extends Comparable<CHOICE>, PANEL
             JRadioButton newButton = getButtonMap().get( newChoice );
             if ( newButton == null ) {
 
-                throw new IllegalArgumentException( "InnerWrappedButtonSelectorPanel.notifyCurrentChildChange:  attempt to switch to non-existent button" +
-                                                    " " +
-                                                    newChoice );
+                throw new IllegalArgumentException(
+                        "InnerWrappedButtonSelectorPanel.notifyCurrentChildChange:  " +
+                        "attempt to switch to non-existent button" +
+                        " " + newChoice
+                );
 
             }
 
@@ -178,8 +188,8 @@ public class WrappedButtonSelectorPanel<CHOICE extends Comparable<CHOICE>, PANEL
                 // Let's just log it for now (and maybe forever).
 
                 Logger.logMsg(
-                        "InnerWrappedButtonSelectorPanel.notifyCurrentChildChange:  asked to change from " + oldChoice +
-                        " to " + newChoice + " when that's already our currently selected button"
+                        "InnerWrappedButtonSelectorPanel.notifyCurrentChildChange:  asked to change from " +
+                        oldChoice + " to " + newChoice + " when that's already our currently selected button"
                 );
 
                 ObtuseUtil.doNothing();
@@ -227,7 +237,10 @@ public class WrappedButtonSelectorPanel<CHOICE extends Comparable<CHOICE>, PANEL
         int v3 = nDCN % 3 == 0 ? 3 : nDCN % 3;
         int v4 = nDCN % 4 == 0 ? 4 : nDCN % 4;
         int winner = v4 >= v3 ? 4 : 3;
-        Logger.logMsg( "nDCN=" + nDCN + ", v4=" + v4 + ", v3=" + v3 + ", winner=" + ( v4 >= v3 ? "v4" : "v3" ) + "=" + winner );
+        Logger.logMsg(
+                "nDCN=" + nDCN + ", v4=" + v4 + ", v3=" + v3 + ", " +
+                "winner=" + ( v4 >= v3 ? "v4" : "v3" ) + "=" + winner
+        );
 
         buttonPanel.setLayout( new GridLayout( 0, winner ) );
 

@@ -50,7 +50,8 @@ public class PlayElementModel implements VirtualScrollableElementModel<PlayEleme
 
     }
 
-    public VirtualScrollablePanelModel<PlayElementData> getPanelModel() {
+    @NotNull
+    public VirtualScrollablePanelModel<PlayElementData> getMandatoryPanelModel() {
 
         return _panelModel;
 

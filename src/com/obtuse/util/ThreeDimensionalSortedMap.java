@@ -24,7 +24,12 @@ import java.util.function.Function;
  */
 
 @SuppressWarnings("unused")
-public interface ThreeDimensionalSortedMap<T1,T2,T3,V> extends Iterable<V>, Serializable, GowingPackable {
+public interface ThreeDimensionalSortedMap<
+        T1 extends Comparable,
+        T2 extends Comparable,
+        T3 extends Comparable,
+        V
+        > extends Iterable<V>, Serializable, GowingPackable {
 
     /**
      * Put a value into the map.
@@ -131,15 +136,15 @@ public interface ThreeDimensionalSortedMap<T1,T2,T3,V> extends Iterable<V>, Seri
 
     /**
      Determine if a value has ever been associated with the specified keys.
-     <p>Note that the return value of this method generally becomes meaningless if {@link #removeInnerMap(Object)}
+     <p>Note that the return value of this method generally becomes meaningless if {@link #removeInnerMap(Comparable)}
      has ever been invoked on this instance or if {@link TwoDimensionalSortedMap#removeInnerMap(Object)} has ever
-     been invoked on the return value of {@link #getInnerMap(Object, boolean)} or {@link #getNotNullInnerMap(Object)}.</p>
+     been invoked on the return value of {@link #getInnerMap(Comparable, boolean)} or {@link #getNotNullInnerMap(Comparable)}.</p>
      @param key1 the first key.
      @param key2 the second key.
      @param key3 the third key.
-     @return generally meaningless if {@link #removeInnerMap(Object)}
+     @return generally meaningless if {@link #removeInnerMap(Comparable)}
      has ever been invoked on this instance or if {@link TwoDimensionalSortedMap#removeInnerMap(Object)} has ever
-     been invoked on the return value of {@link #getInnerMap(Object, boolean)} or {@link #getNotNullInnerMap(Object)};
+     been invoked on the return value of {@link #getInnerMap(Comparable, boolean)} or {@link #getNotNullInnerMap(Comparable)};
      otherwise, {@code true} if a (possibly {@code null})
      value has ever been associated with the specified keys; otherwise, {@code false}.
      */

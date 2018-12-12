@@ -5,7 +5,11 @@
 package com.obtuse.util;
 
 @SuppressWarnings("UnusedDeclaration")
-public interface ThreeDimensionalCounter<K1,K2,K3> {
+public interface ThreeDimensionalCounter<
+        K1 extends Comparable,
+        K2 extends Comparable,
+        K3 extends Comparable
+        > {
 
     void count( K1 key1, K2 key2, K3 key3 );
 

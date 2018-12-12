@@ -20,7 +20,7 @@ import java.util.regex.Pattern;
  <p>Instances of this class are immutable.</p>
  */
 
-public class ObtuseKeyword extends GowingAbstractPackableEntity implements Comparable<ObtuseKeyword> {
+public class ObtuseKeyword extends GowingAbstractPackableEntity implements Comparable {
 
     private static final EntityTypeName ENTITY_TYPE_NAME = new EntityTypeName( ObtuseKeyword.class );
     private static final int VERSION = 1;
@@ -190,9 +190,9 @@ public class ObtuseKeyword extends GowingAbstractPackableEntity implements Compa
     }
 
     @Override
-    public int compareTo( final @NotNull ObtuseKeyword rhs ) {
+    public int compareTo( @NotNull final Object o ) {
 
-        return getKeywordName().compareTo( rhs.getKeywordName() );
+        return getKeywordName().compareTo( ((ObtuseKeyword)o).getKeywordName() );
 
     }
 
