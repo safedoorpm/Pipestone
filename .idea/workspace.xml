@@ -7,13 +7,6 @@
   <component name="ChangeListManager">
     <list default="true" id="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" name="Default" comment="Implement scrolling using the mouse wheel in VirtualScrollablePanel class.&#10;Cleanup the Java generics declarations in ObtuseKeyword, ThreeDimensionalCounter and ThreeDimensionalSortedMap.&#10;Minor cleanup (mostly reformatting) elsewhere.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/selectors/WrappedButtonSelectorPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/selectors/WrappedButtonSelectorPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/vsp/VirtualScrollableElementModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/vsp/VirtualScrollableElementModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/vsp/VirtualScrollablePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/vsp/VirtualScrollablePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/vsp/play/PlayElementModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/vsp/play/PlayElementModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/ThreeDimensionalCounter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ThreeDimensionalCounter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/ThreeDimensionalSortedMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ThreeDimensionalSortedMap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/kv/ObtuseKeyword.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/kv/ObtuseKeyword.java" afterDir="false" />
     </list>
     <ignored path="Pipestone.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -1079,7 +1072,7 @@
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file:///Users/danny/IdeaProjects/Pipestone/src/com/obtuse/graphs/UndirectedEdge.java" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544573373222" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544574636048" />
     <property name="dynamic.classpath" value="false" />
     <property name="extract.method.default.visibility" value="private" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -1501,14 +1494,7 @@
       <workItem from="1542964106599" duration="3547000" />
       <workItem from="1543313208732" duration="2900000" />
       <workItem from="1543942941817" duration="11365000" />
-      <workItem from="1544572165975" duration="1439000" />
-    </task>
-    <task id="LOCAL-00036" summary="Implement a mechanism for filtering out certain log lines in the Logger facility.&#10;&#10;Implement a method in ObtuseUtil which returns the name of a specified InputEvent modifier key mask bit.&#10;&#10;Fix a typo in the TreeSorter class's Javadocs and use the new computeIfAbsent mechanism when adding a new value.">
-      <created>1495134559511</created>
-      <option name="number" value="00036" />
-      <option name="presentableId" value="LOCAL-00036" />
-      <option name="project" value="LOCAL" />
-      <updated>1495134559511</updated>
+      <workItem from="1544572165975" duration="2405000" />
     </task>
     <task id="LOCAL-00037" summary="Lots of cleanup based on code analysis.">
       <created>1495137098703</created>
@@ -1846,11 +1832,18 @@
       <option name="project" value="LOCAL" />
       <updated>1543954533433</updated>
     </task>
-    <option name="localTasksCounter" value="85" />
+    <task id="LOCAL-00085" summary="Implement scrolling using the mouse wheel in VirtualScrollablePanel class.&#10;Cleanup the Java generics declarations in ObtuseKeyword, ThreeDimensionalCounter and ThreeDimensionalSortedMap.&#10;Minor cleanup (mostly reformatting) elsewhere.">
+      <created>1544573616009</created>
+      <option name="number" value="00085" />
+      <option name="presentableId" value="LOCAL-00085" />
+      <option name="project" value="LOCAL" />
+      <updated>1544573616009</updated>
+    </task>
+    <option name="localTasksCounter" value="86" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1084282000" />
+    <option name="totallyTimeSpent" value="1085248000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -2002,7 +1995,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Stop using various APIs that were deprecated in Java 9 (mostly AWT APIs).&#10;&#10;Implement the FlexiGridDivider class which provides a way to include &quot;divider lines&quot; in components being managed by the FlexiGridLayoutManager (strictly speaking, this is intended for use with the FlexiGridPanelModel although the actual support for it is in the layout manager part of the flexi-grid facility).&#10;&#10;Various cleanup including a bit of reorganizing of classes and methods." />
     <MESSAGE value="Rework the ObtuseCollections class.&#10;&#10;Update FlexiGridPanelModel and LevenshteinDistanceUtil to work with the updated ObtuseCollections class." />
     <MESSAGE value="A tiny bit of minor cleanup.&#10;Committing to keep in sync with Burke." />
     <MESSAGE value="In Gowing, fix totally broken support for EntityNames and implement and cleanup support for String and EntityName arrays.&#10;&#10;Make the Selector and Alternative classes a more complete 'model' of a combo-box.&#10;&#10;Comment out a bunch of Logger.log{Msg,Err} calls." />
@@ -2027,7 +2019,8 @@
     <MESSAGE value="Major cleanup in DateUtils class.&#10;Various minor cleanup elsewhere.&#10;&#10;This is a checkpoint commit prior to changing the VirtualScrollablePanel class to allocate views one at a time on a strictly as-needed basis instead of allocating one for each model which might be visible." />
     <MESSAGE value="Delete lots and lots of commented out lines.&#10;Throw away the old (failed) FlexiGridTree stuff." />
     <MESSAGE value="Delete lots and lots of commented out lines.&#10;Throw away the old (failed) FlexiGridTree stuff.&#10;Rework the way that TwoDimensionalTreeMap.java and ThreeDimensionalTreeMap.java create empty immutable instances.&#10;Some cleanup and minor bug fixes in the VirtualScrollablePanel facility." />
-    <option name="LAST_COMMIT_MESSAGE" value="Delete lots and lots of commented out lines.&#10;Throw away the old (failed) FlexiGridTree stuff.&#10;Rework the way that TwoDimensionalTreeMap.java and ThreeDimensionalTreeMap.java create empty immutable instances.&#10;Some cleanup and minor bug fixes in the VirtualScrollablePanel facility." />
+    <MESSAGE value="Implement scrolling using the mouse wheel in VirtualScrollablePanel class.&#10;Cleanup the Java generics declarations in ObtuseKeyword, ThreeDimensionalCounter and ThreeDimensionalSortedMap.&#10;Minor cleanup (mostly reformatting) elsewhere." />
+    <option name="LAST_COMMIT_MESSAGE" value="Implement scrolling using the mouse wheel in VirtualScrollablePanel class.&#10;Cleanup the Java generics declarations in ObtuseKeyword, ThreeDimensionalCounter and ThreeDimensionalSortedMap.&#10;Minor cleanup (mostly reformatting) elsewhere." />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
