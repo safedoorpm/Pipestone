@@ -1,6 +1,6 @@
 package com.obtuse.ui.vsp;
 
-import com.obtuse.util.UniqueID;
+import com.obtuse.util.UniqueId;
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
@@ -41,13 +41,13 @@ public interface ElementView<E extends VirtualScrollableElement> {
     /**
      Determine which {@link VirtualScrollableElementModel} this view last represented.
 
-     @return an {@link Optional} containing the {@link UniqueID} of the
+     @return an {@link Optional} containing the {@link UniqueId} of the
      {@link VirtualScrollableElementModel} that
      this view last represented or and empty {@link Optional} if this view has never actually represented anything yet.
      */
 
     @NotNull
-    Optional<UniqueID> getModelUniqueID();
+    Optional<UniqueId> getModelUniqueId();
 
     /**
      Recycle this element view.

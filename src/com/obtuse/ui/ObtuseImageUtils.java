@@ -20,21 +20,124 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 /**
- Created by danny on 2018/09/04.
+ Image manipulation utilities.
+ <p>Here's a quite good explanation of the EXIF orientation tag:
+ <a href="https://magnushoff.com/jpeg-orientation.html">https://magnushoff.com/jpeg-orientation.html</a></p>
+ <p>This looks like it could be really useful - a one .h file and one .cc file basic EXIF parser:
+ <a href="https://github.com/mayanklahiri/easyexif">https://github.com/mayanklahiri/easyexif</a></p>
+ <p>This one looks truly amazing. It's a Perl EXIF extractor written (owned?) by Phil Harvey and named ExifTool:
+ <a href="http://owl.phy.queensu.ca/~phil/exiftool/">http://owl.phy.queensu.ca/~phil/exiftool/</a>
+ Not only does ExifTool appear to be very powerful, it provides MacOS, Windows and Unix versions.</p>
  */
 
 public class ObtuseImageUtils {
 
     private static final JPanel s_mediaTrackerComponent = new JPanel();
 
+    // How to transform an image in one orientation into another . . .
+
+    // Doing a single right rotation on an image in each orientation:
+
+    private static final int[] SINGLE_LEFT_ROTATION = { 8, 5, 6, 7, 4, 1, 2, 3 };
+
+    // Doing a single left rotation on an image in each orientation:
+
+    private static final int[] SINGLE_RIGHT_ROTATION = { 6, 7, 8, 5, 2, 3, 4, 1 };
+
+    // Horizontal flip of an image in each orientation:
+
+    private static final int[] HORIZONTAL_FLIP = { 2, 1, 4, 3, 6, 5, 8, 7 };
+
+    // Vertical flip of an image in each rotation:
+
+    private static final int[] VERTICAL_FLIP = { 4, 3, 2, 1, 8, 7, 6, 5 };
+
+    public static int rotateOrientationRight( int orientation ) {
+
+        int rval = SINGLE_RIGHT_ROTATION[ orientation - 1 ];
+
+        Logger.logMsg( "ObtuseImageUtils.rotateOrientationRight( " + orientation + " ) yielded " + rval );
+
+        return rval;
+
+    }
+
+    public static int rotateOrientationLeft( int orientation ) {
+
+        int rval = SINGLE_LEFT_ROTATION[ orientation - 1 ];
+
+        Logger.logMsg( "ObtuseImageUtils.rotateOrientationLeft( " + orientation + " ) yielded " + rval );
+
+        return rval;
+
+    }
+
+    public static int flipOrientationHorizontally( int orientation ) {
+
+        int rval = HORIZONTAL_FLIP[ orientation - 1 ];
+
+        Logger.logMsg( "ObtuseImageUtils.flipOrientationHorizontally( " + orientation + " ) yielded " + rval );
+
+        return rval;
+
+    }
+
+    public static int flipOrientationVertically( int orientation ) {
+
+        int rval = VERTICAL_FLIP[ orientation - 1 ];
+
+        Logger.logMsg( "ObtuseImageUtils.flipOrientationVertically( " + orientation + " ) yielded " + rval );
+
+        return rval;
+
+    }
+
+    public static Dimension maybeRotateDimension( @NotNull final Dimension d, int orientation ) {
+
+        if ( orientation < 5 ) {
+
+            return d;
+
+        } else {
+
+            //noinspection SuspiciousNameCombination
+            return new Dimension( d.height, d.width );
+
+        }
+
+    }
+
+    public static final int ORIENTATION_NORMAL = 1;
+    public static final int ORIENTATION_FLIPPED_HORIZONTALLY = 2;
+    public static final int ORIENTATION_ROTATED_180 = 3;
+    public static final int ORIENTATION_FLIPPED_VERTICALLY = 4;
+    public static final int ORIENTATION_RIGHT90_THEN_FLIPPED_HORIZONTALLY = 5;
+    public static final int ORIENTATION_LEFT90 = 6;
+    public static final int ORIENTATION_LEFT90_THEN_FLIPPED_HORIZONTALLY = 7;
+    public static final int ORIENTATION_RIGHT90 = 8;
+
+//    @NotNull
+//    public static ImageIcon rotateImage( @NotNull final ImageIcon srcImageIcon, final int orientation ) {
+//
+//        Image rotatedImage = ObtuseImageUtils.rotateImage( srcImageIcon.getImage(), orientation );
+//        ImageIcon rotatedImageIcon = new ImageIcon( rotatedImage );
+//
+//        return rotatedImageIcon;
+//
+//    }
+
     /**
      Rotate an image according to its EXIF-style orientation tag.
-     @param srcImage the image to be rotated.
+     @param srcImage the {@link Image} to be rotated.
      @param orientation the EXIF-style orientation tag (see below).
-     @return the possibly rotated image (if the image is already correctly
-     oriented then this will be the original image).
+     @return the possibly rotated {@code Image}.
+     If the {@code Image} is already correctly oriented then this could be the original {@code Image}.
+     It might not be since this method takes an
+     {@link Image} and returns a {@link BufferedImage} which means that the provided {@code Image} might need to
+     be converted to a {@code BufferedImage} to satisfy the requirement that this method returns a {@link BufferedImage}.
      <p>
-     Here's what a letter F would look like prior to being rotated according to
+     Assuming that the goal of the exercise is to get a correctly oriented letter F,
+     here is what a letter F would need to look like prior to being rotated according to each of
      the eight possible orientations:</p>
      <pre>
      1        2       3      4         5            6           7          8<br>
@@ -44,6 +147,23 @@ public class ObtuseImageUtils {
      8888      8888    8888  8888    88          8888888888  8888888888          88<br>
      88          88      88  88<br>
      88          88  888888  888888<br>
+     </pre>
+     <p>This guides the next section of software. For example, an image with orientation 3
+     needs to be rotated 180 degrees to be correct for the viewer. Similarly, an image
+     with orientation 7 needs to be either rotated left 90 degrees* and then flipped
+     horizontally OR flipped horizontally and then rotated right 90 degrees.</p>
+     <p>This next table shows an alternative way of thinking about this method where one considers what happens
+     if an already correctly oriented letter F is rotated according to each of the orientations:</p>
+     <pre>
+     1        2       3      4         5            6           7          8<br>
+     <br>
+     NA       FH      R180    FV      R90 FH      R90         L90 FH      L90<br>
+     <br>
+     888888   888888      88  88      8888888888  8888888888          88  88<br>
+     88           88      88  88      88  88          88  88      88  88  88  88<br>
+     8888       8888    8888  8888    88                  88  8888888888  8888888888<br>
+     88           88      88  88<br>
+     88           88  888888  888888<br>
      </pre>
      <p>This guides the next section of software. For example, an image with orientation 3
      needs to be rotated 180 degrees to be correct for the viewer. Similarly, an image
@@ -61,84 +181,74 @@ public class ObtuseImageUtils {
 
      <p>* a left rotation could also be called a counterclockwise rotation. Similarly, a right
      rotation could also be called a clockwise rotation.</p>
+
+     It might be worth noting that what this method accomplishes can be described by the following pseudo-code:
+
+     <ol>
+     <li>if {@code ( ( orientation - 1 ) & 100B ) != 0} then flip the image diagonally</li>
+     <li>if {@code ( ( orientation - 1 ) & 010B ) != 0} then rotate the image 180°</li>
+     <li>if {@code ( ( orientation - 1 ) & 001B ) != 0} then flip the horizontally</li>
+     </ol>
+     Notes:
+     <ol>
+     <li>the three image manipulations applied in the above pseudo-code are not commutative
+     (in other words, if you perform the last three statements in a different order then you will
+     often get an incorrect result).</li>
+     </ol>
+     Note: do not confuse "what this method accomplishes" with "the algorithm this method uses".
+     <p>See <a href="https://magnushoff.com/jpeg-orientation.html">https://magnushoff.com/jpeg-orientation.html</a>
+     for a quite good explanation of what this method accomplishes and what can go wrong if how it
+     does its magic isn't quite correct.
+     The linked page above is where I found the pseudo-code that appears a little further above.</p>
      */
 
-    public static BufferedImage rotateImage( BufferedImage srcImage, int orientation ) {
+    public static BufferedImage rotateImage( @NotNull final Image srcImage, final int orientation ) {
 
-        if ( orientation != 1 ) {
-
-            Logger.logMsg( "LancotMediaUtils.rotateImage: this one requires rotation" );
-
-            ObtuseUtil.doNothing();
-
-        }
+        BufferedImage bufferedImage =
+                srcImage instanceof BufferedImage
+                        ?
+                        (BufferedImage)srcImage
+                        :
+                        convertImageToBufferedImage( srcImage );
 
         BufferedImage rotated;
         try ( Measure ignored = new Measure( "maybe rotate" ) ) {
-
-            // Here's what a letter F would look like prior to being rotated according to
-            // the eight possible orientations:
-            //
-            //    1        2       3      4         5            6           7          8
-            //
-            //  888888  888888      88  88      8888888888  88                  88  8888888888
-            //  88          88      88  88      88  88      88  88          88  88      88  88
-            //  8888      8888    8888  8888    88          8888888888  8888888888          88
-            //  88          88      88  88
-            //  88          88  888888  888888
-            //
-            // This guides the next section of software. For example, an image with orientation 3
-            // needs to be rotated 180 degrees to be correct for the viewer. Similarly, an image
-            // with orientation 7 needs to be either rotated left 90 degrees* and then flipped
-            // horizontally OR flipped horizontally and then rotated right 90 degrees.
-            //
-            // 1 - no action required.
-            // 2 - flip horizontally.
-            // 3 - rotate 180 degrees.
-            // 4 - flip vertically.
-            // 5 - rotate right 90 degrees and then flip horizontally (amongst other possibilities).
-            // 6 - rotate right 90 degrees.
-            // 7 - rotate left 90 degrees and then flip horizontally (amongst other possibilities).
-            // 8 - rotate left 90 degrees.
-            //
-            // * a left rotation could also be called a counterclockwise rotation. Similarly, a right
-            //   rotation could also be called a clockwise rotation.
 
             BufferedImage tmpImage;
             switch ( orientation ) {
 
                 case 1:
-                    rotated = srcImage;
+                    rotated = bufferedImage;
                     break;
 
                 case 2:
-                    rotated = flipHorizontally( srcImage );
+                    rotated = flipHorizontally( bufferedImage );
                     break;
 
                 case 3:
-                    rotated = rotateDegrees( srcImage, 180 /*, new BufferedImage( srcImage.getWidth(), srcImage.getHeight(), srcImage.getType() )*/ );
+                    rotated = rotateDegrees( bufferedImage, 180 );
                     break;
 
                 case 4:
-                    rotated = flipVertically( srcImage );
+                    rotated = flipVertically( bufferedImage );
                     break;
 
                 case 5:
-                    tmpImage = rotateDegrees( srcImage, 90 );
+                    tmpImage = rotateDegrees( bufferedImage, 90 );
                     rotated = flipHorizontally( tmpImage );
                     break;
 
                 case 6:
-                    rotated = rotateDegrees( srcImage, 90 );
+                    rotated = rotateDegrees( bufferedImage, 90 );
                     break;
 
                 case 7:
-                    tmpImage = rotateDegrees( srcImage, -90 );
+                    tmpImage = rotateDegrees( bufferedImage, -90 );
                     rotated = flipHorizontally( tmpImage );
                     break;
 
                 case 8:
-                    rotated = rotateDegrees( srcImage, -90 );
+                    rotated = rotateDegrees( bufferedImage, -90 );
                     break;
 
                 default:
@@ -153,6 +263,118 @@ public class ObtuseImageUtils {
         return rotated;
 
     }
+
+    /**
+     Rotate an {@link ImageIcon} according to its EXIF-style orientation tag.
+     @param srcImageIcon the {@link ImageIcon} to be rotated.
+     @param orientation the EXIF-style orientation tag (see below).
+     @return the possibly rotated {@code ImageIcon} (if the {@code ImageIcon} is already correctly
+     oriented then the return value will be the original {@code ImageIcon}).
+     <p>IMPORTANT: While the {@link ImageIcon} class provides at least one way to create an instance
+     which contains a {@code null} {@code Image} reference, the commonly used {@link ImageIcon#ImageIcon(Image)}
+     constructor throws an {@link NullPointerException} if provided with a {@code null} {@code Image} reference.
+     I chose to take this to mean that supporting {@link ImageIcon} instances which contain {@code null}
+     {@code Image} references is not worth any serious effort (read "not worth any effort at all").
+     In other words, do not be surprised if an exception is thrown if the {@code ImageIcon} passed to this method
+     contains a {@code null} {@code Image} reference (you'll probably get a {@link NullPointerException}
+     but other exceptions or even no exception at all are possible as the implementation of this class evolves).</p>
+     */
+
+    @NotNull
+    public static ImageIcon rotateImage( @NotNull final ImageIcon srcImageIcon, final int orientation ) {
+
+        if ( orientation == ORIENTATION_NORMAL ) {
+
+            return srcImageIcon;
+
+        }
+
+        Image rotatedImage = ObtuseImageUtils.rotateImage( srcImageIcon.getImage(), orientation );
+        ImageIcon rotatedImageIcon = new ImageIcon( rotatedImage );
+
+        return rotatedImageIcon;
+
+    }
+
+    /**
+     * Draw a semi-transparent area.
+     * <p>From <a href="https://www.programcreek.com/java-api-examples/?class=java.awt.Graphics2D&method=setComposite">
+     *     https://www.programcreek.com/java-api-examples/?class=java.awt.Graphics2D&method=setComposite</a></p>
+     * @param g The graphic object
+     * @param dragPoint The first point
+     * @param beginPoint The second point
+     * @param c The color of the area
+     */
+
+    public static void drawDragArea(Graphics2D g, Point dragPoint, Point beginPoint, Color c) {
+
+        g.setColor(c);
+
+        Polygon poly = new Polygon();
+
+        poly.addPoint((int) beginPoint.getX(), (int) beginPoint.getY());
+        poly.addPoint((int) beginPoint.getX(), (int) dragPoint.getY());
+        poly.addPoint((int) dragPoint.getX(), (int) dragPoint.getY());
+        poly.addPoint((int) dragPoint.getX(), (int) beginPoint.getY());
+
+        //Set the widths of the shape's outline
+        Stroke oldStro = g.getStroke();
+        Stroke stroke = new BasicStroke(2.0f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND);
+        g.setStroke(stroke);
+        g.drawPolygon(poly);
+        g.setStroke(oldStro);
+
+        //Set the trasparency of the iside of the rectangle
+        Composite oldComp = g.getComposite();
+        Composite alphaComp = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f);
+        g.setComposite(alphaComp);
+        g.fillPolygon(poly);
+        g.setComposite(oldComp);
+
+    }
+
+    /**
+     Make an image partially or entirely transparent (not much point to the latter).
+     @param sourceImage the original/source image.
+     @param alpha the alpha value to be applied to every pixel in the image.
+     An alpha value is a {@code float} value between 0F (completely transparent) and 1F (completely opaque).
+     @return a newly created {@link BufferedImage#TYPE_INT_ARGB} image with the specified alpha value applied.
+     Note that a new image is returned even if the call does not actually change the appearance of the original image.
+     */
+
+    public static BufferedImage makeTransparent( BufferedImage sourceImage, float alpha ) {
+
+//        BufferedImage sourceImage;
+////        if ( original.getType() == BufferedImage.TYPE_INT_ARGB ) {
+//
+//            Logger.logMsg( "already has alpha channel" );
+//
+//            sourceImage = original;
+//
+////        } else {
+////
+////            Logger.logMsg( "need to convert to have alpha channel" );
+////
+////            sourceImage = new BufferedImage(original.getWidth(), original.getHeight(), BufferedImage.TYPE_INT_ARGB );
+////            Graphics2D gt = sourceImage.createGraphics();
+////            gt.setComposite( AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha) );
+////            gt.drawImage(original, 0, 0, original.getWidth(), original.getHeight(), null);
+////            gt.dispose();
+////
+////            return alpha;
+////
+////        }
+
+        BufferedImage newImage = new BufferedImage(sourceImage.getWidth(), sourceImage.getHeight(), BufferedImage.TYPE_INT_ARGB );
+        Graphics2D g = newImage.createGraphics();
+        g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha));
+        g.drawImage(sourceImage, 0, 0, sourceImage.getWidth(), sourceImage.getHeight(), null);
+        g.dispose();
+
+        return newImage;
+
+    }
+
     @SuppressWarnings("unused")
     public static class MyImageObserver implements ImageObserver {
 

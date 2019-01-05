@@ -1,6 +1,6 @@
 package com.obtuse.ui.vsp;
 
-import com.obtuse.util.UniqueID;
+import com.obtuse.util.UniqueId;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -9,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
 
 public interface VirtualScrollableElementModel<E extends VirtualScrollableElement> {
 
-    UniqueID getUniqueID();
+    UniqueId getUniqueId();
 
     boolean isVisible();
 

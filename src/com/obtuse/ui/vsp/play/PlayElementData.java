@@ -6,7 +6,7 @@ import com.obtuse.ui.vsp.VirtualScrollableElementModel;
 import com.obtuse.ui.vsp.VirtualScrollablePanel;
 import com.obtuse.util.BasicProgramConfigInfo;
 import com.obtuse.util.ObtuseUtil;
-import com.obtuse.util.UniqueID;
+import com.obtuse.util.UniqueId;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
@@ -20,7 +20,7 @@ import java.util.Collection;
 
 public class PlayElementData implements VirtualScrollableElement {
 
-    private final UniqueID _uniqueID = UniqueID.getJvmLocalUniqueID();
+    private final UniqueId _UniqueId = UniqueId.getJvmLocalUniqueId();
     private final String _value;
 
     private boolean _isVisible = true;
@@ -90,9 +90,9 @@ public class PlayElementData implements VirtualScrollableElement {
     }
 
     @Override
-    public UniqueID getUniqueID() {
+    public UniqueId getUniqueId() {
 
-        return _uniqueID;
+        return _UniqueId;
 
     }
 
@@ -118,7 +118,7 @@ public class PlayElementData implements VirtualScrollableElement {
     public String toString() {
 
         return "PlayElementData(" +
-               " uid=" + _uniqueID.format() + "," +
+               " uid=" + _UniqueId.format() + "," +
                " visibility=" + _isVisible + "," +
                " value=" + ObtuseUtil.enquoteToJavaString( _value ) + "" +
                " )";

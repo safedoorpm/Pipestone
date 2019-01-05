@@ -577,7 +577,7 @@ public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends 
 
                             throw new HowDidWeGetHereError(
                                     "VirtualScrollableLayoutManager.layoutContainer:  " +
-                                    "id " + elementModel.getUniqueID().format() +
+                                    "id " + elementModel.getUniqueId().format() +
                                     " did not get an element view assigned to it"
                             );
 
@@ -768,9 +768,9 @@ public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends 
 
         @Override
         @NotNull
-        public final Optional<UniqueID> getModelUniqueID() {
+        public final Optional<UniqueId> getModelUniqueId() {
 
-            return Optional.ofNullable( _elementModel == null ? null : _elementModel.getUniqueID() );
+            return Optional.ofNullable( _elementModel == null ? null : _elementModel.getUniqueId() );
 
         }
 

@@ -15,7 +15,7 @@ package com.obtuse.util;
  * the {@link Object#equals} method.
  * Of course, derivations of this class could implement hashCode and/or equals methods in ways which violate these contracts.
  * <p/>
- * <p>Check out {@link UniqueID} for a different spin on the whole unique identifier notion.</p>
+ * <p>Check out {@link UniqueId} for a different spin on the whole unique identifier notion.</p>
  */
 
 @SuppressWarnings("UnusedDeclaration")

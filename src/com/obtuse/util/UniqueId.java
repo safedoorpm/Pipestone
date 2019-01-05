@@ -7,6 +7,8 @@ import com.obtuse.util.gowing.p2a.exceptions.GowingUnpackingException;
 import com.obtuse.util.gowing.p2a.holders.GowingLongHolder;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.Serializable;
+
 /**
  A reasonably robust {@link GowingPackable} unique id facility.
  <p/>
@@ -14,24 +16,24 @@ import org.jetbrains.annotations.NotNull;
  <p/>
  Instances of this class are {@link GowingPackable} and {@link GowingBackReferenceable}.
  <p/>
- This class implement the {@link Comparable}{@code <UniqueID>} interface.
+ This class implement the {@link Comparable}{@code <UniqueId>} interface.
  <p/>
  <p>Check out {@link UniqueEntity} for a different spin on the whole unique identifier notion.</p>
  */
 
-public class UniqueID implements GowingPackable, GowingBackReferenceable, Comparable<UniqueID> {
+public class UniqueId implements GowingPackable, GowingBackReferenceable, Comparable<UniqueId>, Serializable {
 
     /**
-     The smallest id value that will ever be found in a {@code UniqueID} instance returned by {@link #getJvmLocalUniqueID()}.
-     Each call to {@code getJvmLocalUniqueID()} after the first will return a {@code UniqueID} instance with an id value one
-     greater than the id value in the {@code UniqueID} instance returned by the immediately preceding call.
+     The smallest id value that will ever be found in a {@code UniqueId} instance returned by {@link #getJvmLocalUniqueId()}.
+     Each call to {@code getJvmLocalUniqueId()} after the first will return a {@code UniqueId} instance with an id value one
+     greater than the id value in the {@code UniqueId} instance returned by the immediately preceding call.
      <p/>Note that {@code 1L << 40} is equal to 1,099,511,627,776L (this is still a very very long ways from the maximum
      {@code long} value of 9,223,372,036,854,775,807L).
      */
 
     public static final long MINIMUM_JVM_UNIQUE_ID = 1L << 40;
 
-    private static final EntityTypeName ENTITY_TYPE_NAME = new EntityTypeName( UniqueID.class );
+    private static final EntityTypeName ENTITY_TYPE_NAME = new EntityTypeName( UniqueId.class );
     private static final int VERSION = 1;
 
     private static final EntityName G_UNIQUE_ID = new EntityName( "_uid" );
@@ -62,28 +64,28 @@ public class UniqueID implements GowingPackable, GowingBackReferenceable, Compar
                 @NotNull final GowingEntityReference er
         ) {
 
-            return new UniqueID( bundle.longValue( G_UNIQUE_ID ) );
+            return new UniqueId( bundle.longValue( G_UNIQUE_ID ) );
 
         }
 
     };
 
-    private static long s_nextJvmLocalUniqueID = MINIMUM_JVM_UNIQUE_ID + 1;
+    private static long s_nextJvmLocalUniqueId = MINIMUM_JVM_UNIQUE_ID + 1;
 
-    private final GowingInstanceId _instanceId = new GowingInstanceId( getClass() );
+    private final transient GowingInstanceId _instanceId = new GowingInstanceId( getClass() );
 
     private final long _id;
 
     /**
      Create an instance containing a specified {@code long} value.
      <p/>
-     Whether or not the {@code UniqueID} instances you create are actually as unique as you need them to be
-     depends on how carefully you construct your {@code UniqueID} instances ((arguably) more accurately, how carefully you
-     are when selecting id values for the {@code UniqueID} instances that you create).
+     Whether or not the {@code UniqueId} instances you create are actually as unique as you need them to be
+     depends on how carefully you construct your {@code UniqueId} instances ((arguably) more accurately, how carefully you
+     are when selecting id values for the {@code UniqueId} instances that you create).
      @param id the specified {@code long} value.
      */
 
-    public UniqueID( final long id ) {
+    public UniqueId( final long id ) {
         super();
 
         _id = id;
@@ -91,49 +93,49 @@ public class UniqueID implements GowingPackable, GowingBackReferenceable, Compar
     }
 
     /**
-     A static method that creates a {@code UniqueID} instance.
-     @param id the {@code long} id value that is to be encapsulated within the newly created {@code UniqueID} instance.
-     @return the newly created {@code UniqueID} instance.
+     A static method that creates a {@code UniqueId} instance.
+     @param id the {@code long} id value that is to be encapsulated within the newly created {@code UniqueId} instance.
+     @return the newly created {@code UniqueId} instance.
      */
 
-    public static UniqueID get( final long id ) {
+    public static UniqueId get( final long id ) {
 
-        return new UniqueID( id );
+        return new UniqueId( id );
 
     }
 
     /**
-     Intended to be used to get a JVM-unique {@link UniqueID} instance.
+     Intended to be used to get a JVM-unique {@link UniqueId} instance.
      <p/>
      <u>IMPORTANT: if you do not 100% understand the following information, do everybody (including yourself)
-     a favour and find yourself a different way to create your {@code UniqueID} instances.</u>
+     a favour and find yourself a different way to create your {@code UniqueId} instances.</u>
      <p/>
-     Each call to this method returns a {@link UniqueID} instance which is
-     different than any other {@code UniqueID} instance returned by previous or subsequent calls (from
+     Each call to this method returns a {@link UniqueId} instance which is
+     different than any other {@code UniqueId} instance returned by previous or subsequent calls (from
      within the same JVM) to this method.
-     <p/>Consequently, if you <b>ALWAYS</b> use this method to create {@code UniqueID} instances
-     then all the {@code UniqueID} instances you create within a given JVM instance will be unique.
-     <u>Of course, if you fail to <b>ALWAYS</b> use this method to create {@code UniqueID} instances then
-     at least some if not many of the {@code UniqueID} instances returned by this method might be equal to
-     {@code UniqueID} instances created within the same JVM by other means.</u>
+     <p/>Consequently, if you <b>ALWAYS</b> use this method to create {@code UniqueId} instances
+     then all the {@code UniqueId} instances you create within a given JVM instance will be unique.
+     <u>Of course, if you fail to <b>ALWAYS</b> use this method to create {@code UniqueId} instances then
+     at least some if not many of the {@code UniqueId} instances returned by this method might be equal to
+     {@code UniqueId} instances created within the same JVM by other means.</u>
 
-     @return this method returns a {@link UniqueID} instance with a different <em>id</em> than any other {@code UniqueID}
+     @return this method returns a {@link UniqueId} instance with a different <em>id</em> than any other {@code UniqueId}
      instance returned by any previous or subsequent call (from within the same JVM instance) to this method.
      <p/>Note that if you have two or more JVM instances that use this method then calls to this method from within one
-     the various different JVM instances can and very very likely will return {@code UniqueID} instances that are
-     equal to the {@code UniqueID} instances returned by this method in the other other JVM instances.
+     the various different JVM instances can and very very likely will return {@code UniqueId} instances that are
+     equal to the {@code UniqueId} instances returned by this method in the other other JVM instances.
      */
 
-    public static UniqueID getJvmLocalUniqueID() {
+    public static UniqueId getJvmLocalUniqueId() {
 
-        return new UniqueID( s_nextJvmLocalUniqueID++ );
+        return new UniqueId( s_nextJvmLocalUniqueId++ );
 
     }
 
     /**
      Format this instance's {@code long} id value as a hex string.
      @return a 16 character long string of hex digits (0-9, a-f)
-     which represents the value of this {@code UniqueID} instance.
+     which represents the value of this {@code UniqueId} instance.
      */
 
     public String format() {
@@ -182,7 +184,7 @@ public class UniqueID implements GowingPackable, GowingBackReferenceable, Compar
     }
 
     /**
-     Compare this instance to an arbitrary {@code UniqueID} instance.
+     Compare this instance to an arbitrary {@code UniqueId} instance.
      @param other the other instance.
      @return the value 0 if {@code this.getLongID() == other.getLongID()} ;
      a value less than 0 if {@code this.getLongID() < other.getLongID()} ;
@@ -190,7 +192,7 @@ public class UniqueID implements GowingPackable, GowingBackReferenceable, Compar
      */
 
     @Override
-    public int compareTo( @NotNull final UniqueID other ) {
+    public int compareTo( @NotNull final UniqueId other ) {
 
         return Long.compare( _id, other._id );
 
@@ -206,7 +208,7 @@ public class UniqueID implements GowingPackable, GowingBackReferenceable, Compar
     @Override
     public boolean equals( Object rhs ) {
 
-        return rhs instanceof UniqueID && compareTo( (UniqueID)rhs ) == 0;
+        return rhs instanceof UniqueId && compareTo( (UniqueId)rhs ) == 0;
 
     }
 

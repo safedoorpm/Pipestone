@@ -15,7 +15,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
-import java.awt.event.InputEvent;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -45,8 +44,8 @@ public class ObtuseUtil {
      */
 
     private ObtuseUtil() {
-
         super();
+
     }
 
     /**
@@ -3066,61 +3065,6 @@ public class ObtuseUtil {
     public static boolean never() {
 
         return false;
-
-    }
-
-    private static final String[] s_maskExBits = new String[32];
-
-    static {
-
-        rememberBitName( InputEvent.SHIFT_DOWN_MASK, "ShiftDown" );
-        rememberBitName( InputEvent.CTRL_DOWN_MASK, "CtrlDown" );
-        rememberBitName( InputEvent.META_DOWN_MASK, "MetaDown" );
-        rememberBitName( InputEvent.ALT_DOWN_MASK, "AltDown" );
-        rememberBitName( InputEvent.BUTTON1_DOWN_MASK, "Button_1_Down" );
-        rememberBitName( InputEvent.BUTTON2_DOWN_MASK, "Button_2_Down" );
-        rememberBitName( InputEvent.BUTTON3_DOWN_MASK, "Button_3_Down" );
-        rememberBitName( InputEvent.ALT_GRAPH_DOWN_MASK, "AltGraphDown" );
-
-        ObtuseUtil.doNothing();
-
-    }
-
-    public static String getBitMaskName( final int mask ) {
-
-        int numberOfTrailingZeros = Integer.numberOfTrailingZeros( mask );
-        int lowestOneBit = Integer.lowestOneBit( mask );
-        int highestOneBit = Integer.highestOneBit( mask );
-
-        if ( mask < 0 || highestOneBit != lowestOneBit || numberOfTrailingZeros >= 32 ) {
-
-            return "<mask " + Integer.toBinaryString( mask ) + ">";
-
-        } else {
-
-            return "<" + s_maskExBits[numberOfTrailingZeros] + ">";
-
-        }
-
-    }
-
-    private static void rememberBitName( final int maskValue, final String name ) {
-
-        if ( maskValue != 0 ) {
-
-            if ( Integer.highestOneBit( maskValue ) == Integer.lowestOneBit( maskValue ) ) {
-
-                int bitIx = Integer.numberOfTrailingZeros( maskValue );
-
-                if ( s_maskExBits[bitIx] == null ) {
-
-                    s_maskExBits[bitIx] = name;
-
-                }
-
-            }
-
-        }
 
     }
 

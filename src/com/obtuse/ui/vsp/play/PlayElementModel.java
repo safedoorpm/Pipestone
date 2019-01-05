@@ -3,7 +3,7 @@ package com.obtuse.ui.vsp.play;
 import com.obtuse.ui.vsp.VirtualScrollableElementModel;
 import com.obtuse.ui.vsp.VirtualScrollablePanelModel;
 import com.obtuse.util.SimpleUniqueLongIdGenerator;
-import com.obtuse.util.UniqueID;
+import com.obtuse.util.UniqueId;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -15,7 +15,7 @@ public class PlayElementModel implements VirtualScrollableElementModel<PlayEleme
     private final PlayElementData _element;
     public static SimpleUniqueLongIdGenerator
             s_idGenerator = new SimpleUniqueLongIdGenerator( "PlayElementModel id generator" );
-    private UniqueID _uniqueID = UniqueID.getJvmLocalUniqueID();
+    private UniqueId _UniqueId = UniqueId.getJvmLocalUniqueId();
     private VirtualScrollablePanelModel<PlayElementData> _panelModel;
 
     public PlayElementModel( @NotNull final PlayElementData element ) {
@@ -31,9 +31,9 @@ public class PlayElementModel implements VirtualScrollableElementModel<PlayEleme
     }
 
     @Override
-    public UniqueID getUniqueID() {
+    public UniqueId getUniqueId() {
 
-        return _uniqueID;
+        return _UniqueId;
 
     }
 

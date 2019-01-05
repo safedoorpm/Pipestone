@@ -1,11 +1,10 @@
 package com.obtuse.ui.vsp;
 
-import com.obtuse.util.UniqueID;
+import com.obtuse.util.UniqueId;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
@@ -16,9 +15,9 @@ import java.util.TreeMap;
 public abstract class AbstractVirtualScrollablePanelModel<E extends VirtualScrollableElement>
         implements VirtualScrollablePanelModel<E> {
 
-    private SortedMap<UniqueID, ElementView<E>> _currentlyAssignedElementViewsMap = new TreeMap<>();
+    private SortedMap<UniqueId, ElementView<E>> _currentlyAssignedElementViewsMap = new TreeMap<>();
 
-    private java.util.List<ElementView<E>> _unusedElementViews = new ArrayList<>();
+//    private java.util.List<ElementView<E>> _unusedElementViews = new ArrayList<>();
 
     private ElementView.ElementViewFactory<E> _elementViewFactory;
 
@@ -51,7 +50,7 @@ public abstract class AbstractVirtualScrollablePanelModel<E extends VirtualScrol
     }
 
     @Override
-    public ElementView<E> createInstance( VirtualScrollableElementModel<E> elementModel ) {
+    public final ElementView<E> createInstance( VirtualScrollableElementModel<E> elementModel ) {
 
         return getElementViewFactory().createInstance( elementModel );
 
