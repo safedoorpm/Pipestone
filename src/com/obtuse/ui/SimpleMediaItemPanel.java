@@ -103,7 +103,7 @@ public class SimpleMediaItemPanel<IID extends SimpleMediaItemPanel.ImageIdentifi
 
     private final int _scaleGranularity;
     private final Dimension _naturalSize;
-    private Dimension _currentSize;
+    @NotNull private Dimension _currentSize;
     @Nullable private ImageIcon _currentSizeImage;
 
     public SimpleMediaItemPanel(
@@ -172,14 +172,25 @@ public class SimpleMediaItemPanel<IID extends SimpleMediaItemPanel.ImageIdentifi
 
     }
 
-    public void setZoomFactor( double zoomFactor ) {
+    public Dimension setZoomFactor( double zoomFactor ) {
 
-        _currentSize = new Dimension(
-                (int)Math.round( _naturalSize.width * zoomFactor ),
-                (int)Math.round(_naturalSize.height * zoomFactor )
+        Dimension naturalSize = ObtuseImageUtils.maybeRotateDimension( getNaturalSize(), getOrientation() );
+        Dimension newCurrentSize = new Dimension(
+                (int)Math.round( naturalSize.width * zoomFactor ),
+                (int)Math.round( naturalSize.height * zoomFactor )
         );
 
-        repaint();
+        if ( _currentSize.width != newCurrentSize.width || _currentSize.height != newCurrentSize.height ) {
+
+//            Logger.logMsg( "resizing from " + ObtuseUtil.fDim( _currentSize ) + " to " + newCurrentSize );
+
+            _currentSize = newCurrentSize;
+
+            repaint();
+
+        }
+
+        return _currentSize;
 
     }
 
