@@ -17,10 +17,6 @@ import com.obtuse.util.gowing.p2a.GowingUnPackedEntityGroup;
 import com.obtuse.util.gowing.p2a.StdGowingPacker;
 import com.obtuse.util.gowing.p2a.StdGowingUnPacker;
 import com.obtuse.util.gowing.p2a.exceptions.GowingUnpackingException;
-import com.obtuse.util.gowing.p2a.holders.GowingByteHolder;
-import com.obtuse.util.gowing.p2a.holders.GowingIntegerHolder;
-import com.obtuse.util.gowing.p2a.holders.GowingLongHolder;
-import com.obtuse.util.gowing.p2a.holders.GowingStringHolder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -200,16 +196,22 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
      Where the image came from (assuming that we know).
      <p/>There are three cases of interest:
      <ol>
-     <li>the image's location on a locally accessible filesystem was somehow provided to us (probably the result of a drag-and-drop or a
-     copy-and-paste from the OS's "Finder", or via a file selection dialog box launched by ourselves).</li>
+     <li>the image's location on a locally accessible filesystem was somehow provided to us
+     (probably the result of a drag-and-drop or a copy-and-paste from the OS's "Finder",
+     or via a file selection dialog box launched by ourselves).</li>
      <li>the image's location was provided to us via a network accessible URL.</li>
-     <li>the image was provided to us as an in-memory resource (probably the result of a drag-and-drop or a copy-and-paste of an image
+     <li>the image was provided to us as an in-memory resource
+     (probably the result of a drag-and-drop or a copy-and-paste of an image
      from some other application running on our local box).</li>
      </ol>
-     The first two alternatives are actually equivalent in the sense that we have immediate access to the image and we know where we got it from.
-     The third alternative isn't quite as good in that we have immediate access to the image but don't really know its provenance.
-     Fortunately, while generally useful in a genealogy application, the immediate source of the image isn't exactly mission critical knowledge.
-     <p/>The {@code _originalURL} attribute covers the first two cases. It will be null for the third case.
+     The first two alternatives are actually equivalent in the sense that we
+     have immediate access to the image and we know where we got it from.
+     The third alternative isn't quite as good in that we have immediate
+     access to the image but don't really know its provenance.
+     Fortunately, while generally useful in a genealogy application,
+     the immediate source of the image isn't exactly mission critical knowledge.
+     <p/>The {@code _originalURL} attribute covers the first two cases.
+     It will be {@code null} for the third case.
      */
 
     private final URL _originalURL;
@@ -251,31 +253,36 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
     /*
     %%% this is no longer correct.
 
-     Where we have decided to cache the image's info file (the serialization of this instance).
-     <p/>The first time that we are asked to save ourselves to disk, this attribute will be {@code null}.
-     Consequently, we pick a place for our info file and then serialize ourselves to that location.
-     Our info file will have a suffix as specified by {@link OBTUSE_IMAGE_INFO_FILENAME_SUFFIX}.
-     We then convert our info file name into our cached image file's name by replacing the suffix of our info file with
-     whatever suffix is appropriate for the format of our image file (if the image arrived at our door as an in-memory image then we'll
-     save it as a ".jpg").
-     <p/>
-     VERY IMPORTANT: we create our info file first using a mechanism which ensures that we do not accidentally overwrite
-     any previously existing info file. This prior existence of our info file on disk when we write our image file to disk
-     and the mechanism that we use to name our image file together ensure that we cannot accidentally overwrite some other
-     image file.
-     <p/>This isn't strictly quite true as there could be an image file in our image repository that has somehow lost its info file.
-     We protect against this possibility by not picking an image file name which can be 'transformed' into an existant file name
-     in our image repository by the replacement of the existant file's suffix with our standard info file suffix.
+    Where we have decided to cache the image's info file (the serialization of this instance).
+    <p/>The first time that we are asked to save ourselves to disk, this attribute will be {@code null}.
+    Consequently, we pick a place for our info file and then serialize ourselves to that location.
+    Our info file will have a suffix as specified by {@link OBTUSE_IMAGE_INFO_FILENAME_SUFFIX}.
+    We then convert our info file name into our cached image file's name by replacing the suffix
+    of our info file with whatever suffix is appropriate for the format of our image file
+    (if the image arrived at our door as an in-memory image then we'll
+    save it as a ".jpg").
+    <p/>
+    VERY IMPORTANT: we create our info file first using a mechanism which ensures that we do not
+    accidentally overwrite any previously existing info file. This prior existence of our info file
+    on disk when we write our image file to disk and the mechanism that we use to name our image
+    file together ensure that we cannot accidentally overwrite some other image file.
+    <p/>This isn't strictly quite true as there could be an image file in our image repository
+    that has somehow lost its info file.
+    We protect against this possibility by not picking an image file name which can be 'transformed'
+    into an existant file name in our image repository by the replacement of the existant file's
+    suffix with our standard info file suffix.
      */
 
     /**
-     The basename of where we have decided to cache our info file, our temporary image file and our permanent image file.
-     This is here for diagnostic and debugging purposes. Do not use this for other purposes.
+     The basename of where we have decided to cache our info file, our temporary image file
+     and our permanent image file. This is here for diagnostic and debugging purposes.
+     Do not use this for other purposes.
      */
 
     private final File _diagnosticCachedFilesBasename;
 
     private static final EntityName CACHED_IMAGE_FILE_BASENAME_GTAG = new EntityName( "_cifb" );
+
     /**
      Our serial number.
      <p/>Used to derive any and all filenames associated with our image.
@@ -333,8 +340,12 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
 
     }
 
-    private ObtuseImageFile( final String who, final URL originalURL, final File originalFile, final ImageIcon imageIcon )
-            throws ObtuseImageFileInstanceCreationFailed {
+    private ObtuseImageFile(
+            final String who,
+            final URL originalURL,
+            final File originalFile,
+            final ImageIcon imageIcon
+    ) throws ObtuseImageFileInstanceCreationFailed {
 
         super( new GowingNameMarkerThing() );
 
@@ -432,7 +443,9 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
 
         } else {
 
-            throw new IllegalArgumentException( "ObtuseImageFile.setImageRepositoryFile:  image repository file may only be set once" );
+            throw new IllegalArgumentException(
+                    "ObtuseImageFile.setImageRepositoryFile:  image repository file may only be set once"
+            );
 
         }
 
@@ -490,7 +503,9 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
         } else {
 
             throw new HowDidWeGetHereError(
-                    "ObtuseImageFile.getImageRepositoryFile:  request for image repository file before setImageRepositoryFile has been called" );
+                    "ObtuseImageFile.getImageRepositoryFile:  " +
+                    "request for image repository file before setImageRepositoryFile has been called"
+            );
 
         }
 
@@ -512,7 +527,9 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
     /**
      Get the size of the image (as specified by the binfo file).
 
-     @return size of the image (could be width and height of -1 if size is not known; load the cached image to for these values to be set although keep in mind that loading the cached image is fairly expensive).
+     @return size of the image (could be width and height of -1 if size is not known;
+     load the cached image to for these values to be set although keep in mind that
+     loading the cached image is fairly expensive).
      */
 
     @NotNull
@@ -571,15 +588,19 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
 
     /**
      Recover ObtuseImageFile instances in bulk.
-     This method attempts to recover {@link ObtuseImageFile} instances for each of a specified array of {@link File} references to their {@code .binfo} files.
+     This method attempts to recover {@link ObtuseImageFile} instances for each of a specified array
+     of {@link File} references to their {@code .binfo} files.
 
-     @param binfoFiles a {@link SortedMap}{@code <Integer,ObtuseImageFile>} containing what was recoverable from the provided array of {@code .binfo} files.
+     @param binfoFiles a {@link SortedMap}{@code <Integer,ObtuseImageFile>} containing what was recoverable
+     from the provided array of {@code .binfo} files.
      @return an array of the ObtuseImageFiles which were recoverable from the provided {@code .binfo} files.
      @throws ObtuseMessageLabel.AugmentedIllegalArgumentException if {@code dir} is not actually a directory.
      */
 
     @NotNull
-    public static SortedMap<Integer, ObtuseImageFile> getSpecifiedObtuseInfoFiles(final @NotNull File@NotNull[] binfoFiles ) {
+    public static SortedMap<Integer, ObtuseImageFile> getSpecifiedObtuseInfoFiles(
+            final @NotNull File@NotNull[] binfoFiles
+    ) {
 
         SortedMap<Integer, ObtuseImageFile> rval = new TreeMap<>();
         for ( File f : binfoFiles ) {
@@ -615,7 +636,8 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
      Find all of the {@code .binfo} files in our image repository.
 
      @return a {@link SortedMap}{@code <Integer,File>} of the {@code .binfo} files in our image repository
-     (the key is the {@code .binfo} file's serial number and the value is a {@link File} instance referencing the corresponding {@code .binfo}.
+     (the key is the {@code .binfo} file's serial number and the value is a {@link File} instance referencing
+     the corresponding {@code .binfo}.
      {@code null} if there is no image repository or if an I/O error occurs.
      An empty array if there are no {@code .binfo} files in our image repository.
      */
@@ -655,7 +677,8 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
                 } catch ( NumberFormatException e ) {
 
                     throw new HowDidWeGetHereError(
-                            "our info file filename pattern did not properly parse a filename that matches the pattern " +
+                            "our info file filename pattern did not properly parse " +
+                            "a filename that matches the pattern " +
                             "(classic software developer cowardice of blaming it on the pattern)"
                     );
 
@@ -767,9 +790,10 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
 
     /**
      Determine if this image file is broken (unusable).
-     <p/>If this method returns {@code false} then calling any of the other methods in this instance could fail in ugly and undocumented ways.
-
-     @return {@code true} if this image file is broken. {@code false} if this image file might not be ready to use but it is not (yet) broken.
+     <p/>If this method returns {@code false} then calling any of the other methods
+     in this instance could fail in ugly and undocumented ways.
+     @return {@code true} if this image file is broken. {@code false} if this image
+     file might not be ready to use but it is not (yet) broken.
      */
 
     @SuppressWarnings("unused")
@@ -894,7 +918,11 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
 
         } else {
 
-            try ( Measure ignored = new Measure( "caching from " + ( _originalFile == null ? "net?" : "local file" ) + " URL" ) ) {
+            try (
+                    Measure ignored = new Measure(
+                            "caching from " +
+                            ( _originalFile == null ? "net?" : "local file" ) + " URL" )
+            ) {
 
                 // First step is to copy the image into our cache.
 
@@ -925,7 +953,8 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
 
                                 setImageState( ImageState.BROKEN );
                                 throw new ObtuseMessageLabel.AugmentedIllegalArgumentException(
-                                        "ObtuseImageFile#copyImageFileToCache:  didn't get an image from the URL handling path",
+                                        "ObtuseImageFile#copyImageFileToCache:  " +
+                                        "didn't get an image from the URL handling path",
                                         "Tell Danny."
                                 );
 
@@ -958,7 +987,7 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
                                                _originalImageFormat +
                                                "\" worked with \"" +
                                                _originalURL +
-                                               "\"", "OK" );
+                                               "\"", OkPopupMessageWindow.OK_BUTTON_LABEL );
 
                 }
 
@@ -1060,7 +1089,8 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
     }
 
     /**
-     Do a rather simplistic bakeoff between the cost of loading our image via the ImageIcon facility and via the ImageIO facility.
+     Do a rather simplistic bakeoff between the cost of loading our image
+     via the ImageIcon facility and via the ImageIO facility.
      */
 
     @SuppressWarnings("unused")
@@ -1068,7 +1098,10 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
 
         if ( _originalFile == null ) {
 
-            Logger.logMsg( "this bakeoff assumes that the image file is local and is accessible via our _originalFile instance" );
+            Logger.logMsg(
+                    "this bakeoff assumes that the image file is local and is accessible " +
+                    "via our _originalFile instance"
+            );
             Logger.logMsg( "no cookies for you!" );
 
             return;
@@ -1091,7 +1124,10 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
         } catch ( IOException e ) {
 
             setImageState( ImageState.BROKEN );
-            throw new HowDidWeGetHereError( "ObtuseImageFile:  unable to load image from \"" + _originalURL + "\" via ImageIO", e );
+            throw new HowDidWeGetHereError(
+                    "ObtuseImageFile:  unable to load image from \"" + _originalURL + "\" via ImageIO",
+                    e
+            );
 
         }
 
@@ -1159,7 +1195,8 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
 
         copyImageFileToCache( originalImage );
 
-        // Re-write our image info file to memorialize the image's file format and thus precisely where our image file landed.
+        // Re-write our image info file to memorialize the image's file format
+        // and thus precisely where our image file landed.
 
         actuallyWriteImageInfoFile();
 
@@ -1210,7 +1247,8 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
 
                         setImageState( ImageState.BROKEN );
                         throw new HowDidWeGetHereError(
-                                "our info file filename pattern did not properly parse a filename that matches the pattern " +
+                                "our info file filename pattern did not properly parse " +
+                                "a filename that matches the pattern " +
                                 "(classic software developer cowardice of blaming it on the pattern)"
                         );
 
@@ -1229,7 +1267,10 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
     @NotNull
     public File getCachedImageInfoFileLocation() {
 
-        return constructCachedImagRepositoryFileObject( _ourSerialNumber, ObtuseImageFile.OBTUSE_IMAGE_INFO_FILENAME_SUFFIX);
+        return constructCachedImagRepositoryFileObject(
+                _ourSerialNumber,
+                ObtuseImageFile.OBTUSE_IMAGE_INFO_FILENAME_SUFFIX
+        );
 
     }
 
@@ -1250,7 +1291,10 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
     @NotNull
     public static File constructCachedImagRepositoryFileObject( final int sn, final String suffix ) {
 
-        return new File( ObtuseImageFile.getImageRepositoryFile(), constructCachedImageRepositorySimpleBasename( sn ) + suffix );
+        return new File(
+                ObtuseImageFile.getImageRepositoryFile(),
+                constructCachedImageRepositorySimpleBasename( sn ) + suffix
+        );
 
     }
 
@@ -1292,7 +1336,12 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
 
             }
 
-            try ( StdGowingPacker packer = new StdGowingPacker( new EntityName( "info file save" ), getCachedImageInfoFileLocation() ) ) {
+            try (
+                    StdGowingPacker packer = new StdGowingPacker(
+                            new EntityName( "info file save" ),
+                            getCachedImageInfoFileLocation()
+                    )
+            ) {
 
                 packer.queuePackableEntity( this );
 
@@ -1312,22 +1361,27 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
 
         }
 
-        Logger.logMsg( "wrote " + entityCount + " entities while saving image to " + getCachedImageInfoFileLocation() );
+        Logger.logMsg(
+                "wrote " + entityCount + " entities while saving image to " + getCachedImageInfoFileLocation()
+        );
 
     }
 
     /**
      Get the full size image into memory by loading it from our image cache/repository.
-     <p/>This method is fairly paranoid. You will either the image returned to you or a checked exception thrown at you (see below for which checked exceptions you'll need to deal with).
+     <p/>This method is fairly paranoid. You will either the image returned to you or a checked exception
+     thrown at you (see below for which checked exceptions you'll need to deal with).
 
      @return the full size image.
-     @throws IOException                         if an error occurs reading the cached image file.
-     @throws ObtuseImageLoadFailed if ImageIO.read returns {@code null} (documentation for ImageIO.read says that the method can
-     return {@code null} but doesn't specify the circumstances under which it actually does return {@code null}). Sigh.
-     <p/>The 'good news' is that the constructors for this class are designed to fail (by throwing an exception) if they are
-     unable to create a thumbnail for the image and write/copy the image to our image cache/repository. Since creating the thumbnail
-     requires that the image be loaded, it is almost certainly impossible for this method to be unable to load the image
-     (famous last words).
+     @throws IOException if an error occurs reading the cached image file.
+     @throws ObtuseImageLoadFailed if {@link ImageIO#read} returns {@code null}
+     (documentation for {@code ImageIO.read} says that the method can return {@code null}
+     but doesn't specify the circumstances under which it actually does return {@code null}). Sigh.
+     <p/>The 'good news' is that the constructors for this class are designed to fail
+     (by throwing an exception) if they are unable to create a thumbnail for the image
+     and write/copy the image to our image cache/repository. Since creating the thumbnail
+     requires that the image be loaded, it is almost certainly impossible for this method
+     to be unable to load the image (famous last words).
      */
 
     @NotNull
@@ -1342,7 +1396,10 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
 
             if ( image == null ) {
 
-                throw new ObtuseImageLoadFailed( "ObtuseImageFile.loadPrimaryImage:  image decoder returned null (no idea why - sorry)" );
+                throw new ObtuseImageLoadFailed(
+                        "ObtuseImageFile.loadPrimaryImage:  " +
+                        "image decoder returned null (no idea why - sorry)"
+                );
 
             } else if ( _cachedImageWidth == -1 || _cachedImageHeight == -1 ) {
 
@@ -1358,7 +1415,11 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
     }
 
     @NotNull
-    public static Optional<byte[]> captureImageAsFile( final Image image, @SuppressWarnings("SameParameterValue") final String formatName, final String what ) {
+    public static Optional<byte[]> captureImageAsFile(
+            final Image image,
+            @SuppressWarnings("SameParameterValue") final String formatName,
+            final String what
+    ) {
 
         ByteArrayOutputStream baos = null;
 
@@ -1446,7 +1507,8 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
     @SuppressWarnings("unused")
     private double getGeometricScalingFactor( final int boxW, final int boxH, final int origW, final int origH ) {
 
-        // The scaling factor (sf) to convert the original image into the thumbnail image must satisfy at least one of a or b:
+        // The scaling factor (sf) to convert the original image into
+        // the thumbnail image must satisfy at least one of a or b:
         // a: origW * sf == boxW and origH * sf <= boxH
         // b: origW * sf <= boxW and origH * sf == boxH
 
@@ -1472,8 +1534,10 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
 
                 setImageState( ImageState.BROKEN );
                 String msg =
-                        "cannot compute scaling factor (original is " + origW + "x" + origH + ", box is " + boxW + "x" + boxH + ", sf1=" +
-                        sf1 + ", sf2=" + sf2 + ")";
+                        "cannot compute scaling factor " +
+                        "(original is " + origW + "x" + origH + ", box is " + boxW + "x" + boxH + ", " +
+                        "sf1=" + sf1 + ", sf2=" + sf2 + ")";
+
                 throw new HowDidWeGetHereError( msg );
 
             }
@@ -1484,7 +1548,11 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
 
     public String toString() {
 
-        return "ObtuseImageFile( sn = " + getSerialNumber() + ", state = " + getImageState() + ", original URI = " + getOriginalURL() + " )";
+        return "ObtuseImageFile( " +
+               "sn = " + getSerialNumber() + ", " +
+               "state = " + getImageState() + ", " +
+               "original URI = " + getOriginalURL() + " " +
+               ")";
 
     }
 
@@ -1499,24 +1567,24 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
                 packer.getPackingContext()
         );
 
-        bundle.addHolder( new GowingStringHolder( IMAGE_STATE_NAME, _imageState.name(), true ) );
-        bundle.addHolder( new GowingStringHolder( ORIGINAL_URI_GTAG, _originalURI == null ? null : _originalURI.toString(), false ) );
-        bundle.addHolder( new GowingStringHolder( ORIGINAL_URL_GTAG, _originalURL == null ? null : _originalURL.toString(), false ) );
-        bundle.addHolder( new GowingStringHolder( ORIGINAL_FILE_GTAG, _originalFile == null ? null : _originalFile.getPath(), false ) );
-        bundle.addHolder( new GowingStringHolder( ORIGINAL_IMAGE_FORMAT_GTAG, _originalImageFormat, false ) );
-        bundle.addHolder( new GowingStringHolder( CACHED_IMAGE_FORMAT_GTAG, _cachedImageFormat, false ) );
-        bundle.addHolder( new GowingIntegerHolder( CACHED_IMAGE_WIDTH_GTAG, _cachedImageWidth, false ) );
-        bundle.addHolder( new GowingIntegerHolder( CACHED_IMAGE_HEIGHT_GTAG, _cachedImageHeight, false ) );
-        bundle.addHolder( new GowingIntegerHolder( OUR_SERIAL_NUMBER_NAME, _ourSerialNumber, false ) );
-        bundle.addHolder( new GowingStringHolder(
-                CACHED_IMAGE_FILE_BASENAME_GTAG,
-                _diagnosticCachedFilesBasename == null ? null : _diagnosticCachedFilesBasename.toString(),
-                false
-        ) );
-        bundle.addHolder( new GowingStringHolder( IMAGE_MD5_GTAG, _imageFileMD5, false ) );
-        bundle.addHolder( new GowingStringHolder( TITLE_GTAG, _title, false ) );
-        bundle.addHolder( new GowingLongHolder( CACHED_IMAGE_FILE_SIZE_GTAG, _cachedImageFileSize, false ) );
-        bundle.addHolder( new GowingByteHolder( THUMBNAIL_IMAGE_BYTES_NAME, _thumbnailImageBytes, false ) );
+        bundle.addStringHolder( IMAGE_STATE_NAME, _imageState.name(), true );
+        bundle.addStringHolder( ORIGINAL_URI_GTAG, _originalURI == null ? null : _originalURI.toString(), false );
+        bundle.addStringHolder( ORIGINAL_URL_GTAG, _originalURL == null ? null : _originalURL.toString(), false );
+        bundle.addStringHolder( ORIGINAL_FILE_GTAG, _originalFile == null ? null : _originalFile.getPath(), false );
+        bundle.addStringHolder( ORIGINAL_IMAGE_FORMAT_GTAG, _originalImageFormat, false );
+        bundle.addStringHolder( CACHED_IMAGE_FORMAT_GTAG, _cachedImageFormat, true );
+        bundle.addIntegerHolder( CACHED_IMAGE_WIDTH_GTAG, _cachedImageWidth, false );
+        bundle.addIntegerHolder( CACHED_IMAGE_HEIGHT_GTAG, _cachedImageHeight, false );
+        bundle.addIntegerHolder( OUR_SERIAL_NUMBER_NAME, _ourSerialNumber, false );
+        bundle.addStringHolder(
+                        CACHED_IMAGE_FILE_BASENAME_GTAG,
+                        _diagnosticCachedFilesBasename == null ? null : _diagnosticCachedFilesBasename.toString(),
+                        false
+        );
+        bundle.addStringHolder( IMAGE_MD5_GTAG, _imageFileMD5, false );
+        bundle.addStringHolder( TITLE_GTAG, _title, false );
+        bundle.addLongHolder( CACHED_IMAGE_FILE_SIZE_GTAG, _cachedImageFileSize, false );
+        bundle.addByteHolder( THUMBNAIL_IMAGE_BYTES_NAME, _thumbnailImageBytes, false );
 
         return bundle;
 

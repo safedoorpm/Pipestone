@@ -6,7 +6,7 @@ import com.obtuse.util.Logger;
 import com.obtuse.util.ObtuseUtil;
 import com.obtuse.util.gowing.p2a.GowingEntityReference;
 import com.obtuse.util.gowing.p2a.exceptions.GowingInstanceIdErrorException;
-import com.obtuse.util.gowing.p2a.holders.GowingAbstractPackableHolder;
+import com.obtuse.util.gowing.p2a.holders.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -242,6 +242,384 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName, GowingPackable
         put( holder.getName(), holder );
 
         return this;
+
+    }
+
+    public void addPackableEntityHolder( @NotNull final EntityName name, @Nullable final GowingPackable v, @NotNull GowingPacker packer, final boolean mandatory ) {
+
+        addHolder(
+                new GowingPackableEntityHolder(
+                        name,
+                        v,
+                        packer,
+                        mandatory
+                )
+        );
+
+    }
+
+    public void addEntityNameHolder( @NotNull final EntityName name, @Nullable final EntityName v, final boolean mandatory ) {
+
+        addHolder(
+                new GowingEntityNameHolder(
+                        name,
+                        v,
+                        mandatory
+                )
+        );
+
+    }
+
+    public void addStringHolder( @NotNull final EntityName name, @Nullable final String v, final boolean mandatory ) {
+
+        addHolder(
+                new GowingStringHolder(
+                        name,
+                        v,
+                        mandatory
+                )
+        );
+
+    }
+
+    public void addStringHolder( @NotNull final EntityName name, @Nullable final String@NotNull[] v, final boolean mandatory ) {
+
+        addHolder(
+                new GowingStringHolder(
+                        name,
+                        v,
+                        mandatory
+                )
+        );
+
+    }
+
+    public void addLongHolder( @NotNull final EntityName name, @Nullable final Long v, final boolean mandatory ) {
+
+        addHolder(
+                new GowingLongHolder(
+                        name,
+                        v,
+                        mandatory
+                )
+        );
+
+    }
+
+    public void addLongHolder( @NotNull final EntityName name, final long v ) {
+
+        addHolder(
+                new GowingLongHolder(
+                        name,
+                        v
+                )
+        );
+
+    }
+
+    public void addLongHolder( @NotNull final EntityName name, @Nullable final Long@NotNull[] v, final boolean mandatory ) {
+
+        addHolder(
+                new GowingLongHolder(
+                        name,
+                        v,
+                        mandatory
+                )
+        );
+
+    }
+
+    public void addLongHolder( @NotNull final EntityName name, @Nullable final long@NotNull[] v, final boolean mandatory ) {
+
+        addHolder(
+                new GowingLongHolder(
+                        name,
+                        v,
+                        mandatory
+                )
+        );
+
+    }
+
+    public void addIntegerHolder( @NotNull final EntityName name, final int v ) {
+
+        addHolder(
+                new GowingIntegerHolder(
+                        name,
+                        v
+                )
+        );
+
+    }
+
+    public void addIntegerHolder( @NotNull final EntityName name, @Nullable final Integer v, final boolean mandatory ) {
+
+        addHolder(
+                new GowingIntegerHolder(
+                        name,
+                        v,
+                        mandatory
+                )
+        );
+
+    }
+
+    public void addIntegerHolder( @NotNull final EntityName name, @Nullable final Integer@NotNull[] v, final boolean mandatory ) {
+
+        addHolder(
+                new GowingIntegerHolder(
+                        name,
+                        v,
+                        mandatory
+                )
+        );
+
+    }
+
+    public void addIntegerHolder( @NotNull final EntityName name, @Nullable final int@NotNull[] v, final boolean mandatory ) {
+
+        addHolder(
+                new GowingIntegerHolder(
+                        name,
+                        v,
+                        mandatory
+                )
+        );
+
+    }
+
+    public void addShortHolder( @NotNull final EntityName name, final short v ) {
+
+        addHolder(
+                new GowingShortHolder(
+                        name,
+                        v
+                )
+        );
+
+    }
+
+    public void addShortHolder( @NotNull final EntityName name, @Nullable final Short v, final boolean mandatory ) {
+
+        addHolder(
+                new GowingShortHolder(
+                        name,
+                        v,
+                        mandatory
+                )
+        );
+
+    }
+
+    public void addShortHolder( @NotNull final EntityName name, @Nullable final Short@NotNull[] v, final boolean mandatory ) {
+
+        addHolder(
+                new GowingShortHolder(
+                        name,
+                        v,
+                        mandatory
+                )
+        );
+
+    }
+
+    public void addShortHolder( @NotNull final EntityName name, @Nullable final short@NotNull[] v, final boolean mandatory ) {
+
+        addHolder(
+                new GowingShortHolder(
+                        name,
+                        v,
+                        mandatory
+                )
+        );
+
+    }
+
+    public void addByteHolder( @NotNull final EntityName name, @Nullable final Byte v, final boolean mandatory ) {
+
+        addHolder(
+                new GowingByteHolder(
+                        name,
+                        v,
+                        mandatory
+                )
+        );
+
+    }
+
+    public void addByteHolder( @NotNull final EntityName name, final byte v ) {
+
+        addHolder(
+                new GowingByteHolder(
+                        name,
+                        v
+                )
+        );
+
+    }
+
+    public void addByteHolder( @NotNull final EntityName name, @Nullable final Byte@NotNull[] v, final boolean mandatory ) {
+
+        addHolder(
+                new GowingByteHolder(
+                        name,
+                        v,
+                        mandatory
+                )
+        );
+
+    }
+
+    public void addByteHolder( @NotNull final EntityName name, @Nullable final byte@NotNull[] v, final boolean mandatory ) {
+
+        addHolder(
+                new GowingByteHolder(
+                        name,
+                        v,
+                        mandatory
+                )
+        );
+
+    }
+
+    public void addDoubleHolder( @NotNull final EntityName name, @Nullable final Double v, final boolean mandatory ) {
+
+        addHolder(
+                new GowingDoubleHolder(
+                        name,
+                        v,
+                        mandatory
+                )
+        );
+
+    }
+
+    public void addDoubleHolder( @NotNull final EntityName name, final double v ) {
+
+        addHolder(
+                new GowingDoubleHolder(
+                        name,
+                        v
+                )
+        );
+
+    }
+
+    public void addDoubleHolder( @NotNull final EntityName name, @Nullable final Double@NotNull[] v, final boolean mandatory ) {
+
+        addHolder(
+                new GowingDoubleHolder(
+                        name,
+                        v,
+                        mandatory
+                )
+        );
+
+    }
+
+    public void addDoubleHolder( @NotNull final EntityName name, @Nullable final double@NotNull[] v, final boolean mandatory ) {
+
+        addHolder(
+                new GowingDoubleHolder(
+                        name,
+                        v,
+                        mandatory
+                )
+        );
+
+    }
+
+    public void addFloatHolder( @NotNull final EntityName name, @Nullable final Float v, final boolean mandatory ) {
+
+        addHolder(
+                new GowingFloatHolder(
+                        name,
+                        v,
+                        mandatory
+                )
+        );
+
+    }
+
+    public void addFloatHolder( @NotNull final EntityName name, final float v ) {
+
+        addHolder(
+                new GowingFloatHolder(
+                        name,
+                        v
+                )
+        );
+
+    }
+
+    public void addFloatHolder( @NotNull final EntityName name, @Nullable final Float@NotNull[] v, final boolean mandatory ) {
+
+        addHolder(
+                new GowingFloatHolder(
+                        name,
+                        v,
+                        mandatory
+                )
+        );
+
+    }
+
+    public void addFloatHolder( @NotNull final EntityName name, @Nullable final float@NotNull[] v, final boolean mandatory ) {
+
+        addHolder(
+                new GowingFloatHolder(
+                        name,
+                        v,
+                        mandatory
+                )
+        );
+
+    }
+
+    public void addBooleanHolder( @NotNull final EntityName name, @Nullable final Boolean v, final boolean mandatory ) {
+
+        addHolder(
+                new GowingBooleanHolder(
+                        name,
+                        v,
+                        mandatory
+                )
+        );
+
+    }
+
+    public void addBooleanHolder( @NotNull final EntityName name, final boolean v ) {
+
+        addHolder(
+                new GowingBooleanHolder(
+                        name,
+                        v
+                )
+        );
+
+    }
+
+    public void addBooleanHolder( @NotNull final EntityName name, @Nullable final Boolean@NotNull[] v, final boolean mandatory ) {
+
+        addHolder(
+                new GowingBooleanHolder(
+                        name,
+                        v,
+                        mandatory
+                )
+        );
+
+    }
+
+    public void addBooleanHolder( @NotNull final EntityName name, @Nullable final boolean@NotNull[] v, final boolean mandatory ) {
+
+        addHolder(
+                new GowingBooleanHolder(
+                        name,
+                        v,
+                        mandatory
+                )
+        );
 
     }
 

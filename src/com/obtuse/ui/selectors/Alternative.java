@@ -7,7 +7,6 @@ import com.obtuse.util.ObtuseUtil;
 import com.obtuse.util.gowing.*;
 import com.obtuse.util.gowing.p2a.GowingEntityReference;
 import com.obtuse.util.gowing.p2a.exceptions.GowingUnpackingException;
-import com.obtuse.util.gowing.p2a.holders.GowingStringHolder;
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.event.ActionEvent;
@@ -340,9 +339,9 @@ public class Alternative implements Comparable<Alternative>, GowingPackable {
                 packer.getPackingContext()
         );
 
-        bundle.addHolder( new GowingStringHolder( G_SELECTOR_TAG, _selector.getSelectorsTagCategory().getTagName(), true ) );
-        bundle.addHolder( new GowingStringHolder( G_TO_STRING, _toString, true ) );
-        bundle.addHolder( new GowingStringHolder( G_CHOICE_TAG_STRING, _tag.getTagName(), true ) );
+        bundle.addStringHolder( G_SELECTOR_TAG, _selector.getSelectorsTagCategory().getTagName(), true );
+        bundle.addStringHolder( G_TO_STRING, _toString, true );
+        bundle.addStringHolder( G_CHOICE_TAG_STRING, _tag.getTagName(), true );
 
         return bundle;
 

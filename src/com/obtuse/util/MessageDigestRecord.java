@@ -3,8 +3,6 @@ package com.obtuse.util;
 import com.obtuse.util.gowing.*;
 import com.obtuse.util.gowing.p2a.GowingEntityReference;
 import com.obtuse.util.gowing.p2a.exceptions.GowingUnpackingException;
-import com.obtuse.util.gowing.p2a.holders.GowingByteHolder;
-import com.obtuse.util.gowing.p2a.holders.GowingStringHolder;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -126,9 +124,9 @@ public class MessageDigestRecord extends GowingAbstractPackableEntity {
                 packer.getPackingContext()
         );
 
-        bundle.addHolder( new GowingStringHolder( SOURCE_NAME, _sourceName, true ) );
-        bundle.addHolder( new GowingStringHolder( ALGORITHM_NAME, _algorithm, true ) );
-        bundle.addHolder( new GowingByteHolder( DIGEST_NAME, _digest, true ) );
+        bundle.addStringHolder( SOURCE_NAME, _sourceName, true );
+        bundle.addStringHolder( ALGORITHM_NAME, _algorithm, true );
+        bundle.addByteHolder( DIGEST_NAME, _digest, true );
 
         return bundle;
 

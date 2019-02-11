@@ -6,8 +6,6 @@ import com.obtuse.util.ObtuseCalendarDate;
 import com.obtuse.util.ObtuseUtil;
 import com.obtuse.util.exceptions.ParsingException;
 import com.obtuse.util.gowing.p2a.GowingEntityReference;
-import com.obtuse.util.gowing.p2a.holders.GowingBooleanHolder;
-import com.obtuse.util.gowing.p2a.holders.GowingStringHolder;
 import org.jetbrains.annotations.NotNull;
 
 /*
@@ -196,13 +194,13 @@ public class GowingPackableAttribute implements GowingPackable {
                 packer.getPackingContext()
         );
 
-        bundle.addHolder( new GowingStringHolder( GowingPackableAttribute.N_NAME, _name.getName(), true ) );
-        bundle.addHolder( new GowingStringHolder(
+        bundle.addStringHolder( GowingPackableAttribute.N_NAME, _name.getName(), true );
+        bundle.addStringHolder(
                 GowingPackableAttribute.ATTRIBUTE_TYPE_NAME,
                 _attributeType.name(),
                 true
-        ) );
-        bundle.addHolder( new GowingBooleanHolder( GowingPackableAttribute.COMPUTED_NAME, _computed, true ) );
+        );
+        bundle.addBooleanHolder( GowingPackableAttribute.COMPUTED_NAME, _computed, true );
         GowingPackableKeyValuePair.packObj( bundle, GowingPackableAttribute.VALUE_NAME, _value, packer );
 
         return bundle;

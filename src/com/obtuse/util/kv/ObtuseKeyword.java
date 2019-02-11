@@ -8,7 +8,6 @@ package com.obtuse.util.kv;
 import com.obtuse.util.gowing.*;
 import com.obtuse.util.gowing.p2a.GowingEntityReference;
 import com.obtuse.util.gowing.p2a.exceptions.GowingUnpackingException;
-import com.obtuse.util.gowing.p2a.holders.GowingStringHolder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -144,8 +143,8 @@ public class ObtuseKeyword extends GowingAbstractPackableEntity implements Compa
                 packer.getPackingContext()
         );
 
-        bundle.addHolder( new GowingStringHolder( TO_STRING, _toString, true ) );
-        bundle.addHolder( new GowingStringHolder( KEYWORD_STRING, _keywordString, true ) );
+        bundle.addStringHolder( TO_STRING, _toString, true );
+        bundle.addStringHolder( KEYWORD_STRING, _keywordString, true );
 
         return bundle;
 

@@ -10,7 +10,6 @@ import com.obtuse.util.gowing.*;
 import com.obtuse.util.gowing.p2a.GowingBackReferenceable;
 import com.obtuse.util.gowing.p2a.GowingEntityReference;
 import com.obtuse.util.gowing.p2a.exceptions.GowingUnpackingException;
-import com.obtuse.util.gowing.p2a.holders.GowingStringHolder;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
@@ -543,8 +542,8 @@ public class GenericTag
                 packer.getPackingContext()
         );
 
-        bundle.addHolder( new GowingStringHolder( G_CATEGORY_TAG_NAME, _categoryTag.getTagName(), true ) );
-        bundle.addHolder( new GowingStringHolder( G_TAG_NAME, _tagName, true ) );
+        bundle.addStringHolder( G_CATEGORY_TAG_NAME, _categoryTag.getTagName(), true );
+        bundle.addStringHolder( G_TAG_NAME, _tagName, true );
 
         return bundle;
 

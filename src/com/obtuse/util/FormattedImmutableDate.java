@@ -7,7 +7,6 @@ package com.obtuse.util;
 import com.obtuse.util.gowing.*;
 import com.obtuse.util.gowing.p2a.GowingEntityReference;
 import com.obtuse.util.gowing.p2a.exceptions.GowingUnpackingException;
-import com.obtuse.util.gowing.p2a.holders.GowingLongHolder;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Date;
@@ -122,7 +121,7 @@ public class FormattedImmutableDate extends ImmutableDate implements GowingPacka
                 packer.getPackingContext()
         );
 
-        bundle.addHolder( new GowingLongHolder( ImmutableDate.TIME_MS_NAME, getTime(), true ) );
+        bundle.addLongHolder( ImmutableDate.TIME_MS_NAME, getTime(), true );
 
         return bundle;
 

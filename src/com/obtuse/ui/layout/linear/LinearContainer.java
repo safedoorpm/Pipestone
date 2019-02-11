@@ -166,6 +166,18 @@ public interface LinearContainer {
     }
 
     /**
+     Return this instance as a {@link JPanel}.
+
+     @return this instance cast as a {@link JPanel}.
+     */
+
+    default JPanel getAsJPanel() {
+
+        return (JPanel)this;
+
+    }
+
+    /**
      Return this instance as a {@link JComponent}.
 
      @return this instance cast as a {@link JComponent}.
@@ -297,7 +309,6 @@ public interface LinearContainer {
 
         } else {
 
-            @SuppressWarnings("UnnecessaryLocalVariable")
             int newValue = Math.min( Math.max( doublet.minimum, v ), doublet.maximum );
 
             return newValue;

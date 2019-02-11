@@ -5,6 +5,7 @@
 package com.obtuse.util;
 
 import com.obtuse.db.PostgresConnection;
+import com.obtuse.exceptions.HowDidWeGetHereError;
 import com.obtuse.util.gowing.*;
 import com.obtuse.util.gowing.p2a.GowingUnPackedEntityGroup;
 import com.obtuse.util.gowing.p2a.StdGowingPacker;
@@ -2497,13 +2498,14 @@ public class ObtuseUtil {
 
     }
 
-    private static StringCharMapping[] reverseJavaMappings = {
+    private static final StringCharMapping[] s_reverseJavaMappings = {
             new StringCharMapping( "\\b", '\b' ),
             new StringCharMapping( "\\n", '\n' ),
             new StringCharMapping( "\\r", '\r' ),
             new StringCharMapping( "\\t", '\t' ),
             new StringCharMapping( "\\\\", '\\' ),
-            new StringCharMapping( "\\\'", '\'' )
+            new StringCharMapping( "\\\'", '\'' ),
+            new StringCharMapping( "\\\"", '"' )
     };
 
     /**
@@ -2571,22 +2573,57 @@ public class ObtuseUtil {
     }
 
     @NotNull
-    public static String parseNakedJavaString( final @NotNull String nakedJavaString ) {
+    public static String parseNonNullJavaString( final @NotNull String inputString ) {
+
+        if ( "null".equals( inputString ) ) {
+
+            throw new IllegalArgumentException(
+                    "ObtuseUtil.parseNonNullJavaString:  input string describes a null string (inputString.equals(\"null\") == true)" );
+
+        }
+
+        String rval = parseJavaString( inputString );
+
+        if ( rval == null ) {
+
+            throw new HowDidWeGetHereError(
+                    "ObtuseUtil.parseNonNullJavaString:  " +
+                    "got a null string after we (should have) verified that we wouldn't - " +
+                    "(enquoted) input string was " + enquoteToJavaString( inputString )
+            );
+
+        }
+
+        return rval;
+
+    }
+
+    @NotNull
+    public static String parseNakedJavaString( final @NotNull String nakedInputString ) {
 
         StringBuilder sb = new StringBuilder();
-        int totalLength = nakedJavaString.length();
+        int totalLength = nakedInputString.length();
         int off = 0;
-        while ( off < nakedJavaString.length() ) {
+        while ( off < nakedInputString.length() ) {
 
-            char mapped = nakedJavaString.charAt( off );
+            char mapped = nakedInputString.charAt( off );
             String original = String.valueOf( mapped );
 
-            for ( StringCharMapping scm : reverseJavaMappings ) {
+            for ( StringCharMapping scm : s_reverseJavaMappings ) {
 
-                if ( nakedJavaString.startsWith( scm.from, off ) ) {
+                if ( nakedInputString.startsWith( scm.from, off ) ) {
+
+                    if ( scm.from.equals( "\\\"" ) ) {
+
+                        Logger.logErr( "ObtuseUtil.parseNakedJavaString:  DANGER Will Robinson!!!" );
+
+                        doNothing();
+
+                    }
 
                     original = scm.from;
                     mapped = scm.to;
+
                     break;
 
                 }

@@ -6,7 +6,9 @@ import com.obtuse.util.ObtuseUtil;
 import com.obtuse.util.gowing.*;
 import com.obtuse.util.gowing.p2a.*;
 import com.obtuse.util.gowing.p2a.exceptions.GowingUnpackingException;
-import com.obtuse.util.gowing.p2a.holders.*;
+import com.obtuse.util.gowing.p2a.holders.GowingPackableCollection;
+import com.obtuse.util.gowing.p2a.holders.GowingPackableEntityHolder;
+import com.obtuse.util.gowing.p2a.holders.GowingPackableMapping;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -251,50 +253,50 @@ public class SortedSetExample extends GowingAbstractPackableEntity implements Go
                 packer.getPackingContext()
         );
 
-        bundle.addHolder( new GowingStringHolder( NAME_NAME, _name, true ) );
-        bundle.addHolder( new GowingStringHolder( DESCRIPTION_NAME, _description, false ) );
-        bundle.addHolder( new GowingStringHolder( STRING_ARRAY, new String[] {"alpha", "beta", "gamma" }, true ) );
+        bundle.addStringHolder( NAME_NAME, _name, true );
+        bundle.addStringHolder( DESCRIPTION_NAME, _description, false );
+        bundle.addStringHolder( STRING_ARRAY, new String[] {"alpha", "beta", "gamma" }, true );
 
-        bundle.addHolder( new GowingBooleanHolder( PRIMITIVE_BOOLEAN_ARRAY, new boolean[]{ true, false, true, false }, true ) );
-        bundle.addHolder( new GowingBooleanHolder( BOOLEAN_ARRAY, new Boolean[]{ true, false, null, false }, true ) );
-        bundle.addHolder( new GowingBooleanHolder( PRIMITIVE_BOOLEAN, true ) );
-        bundle.addHolder( new GowingBooleanHolder( BOOLEAN, Boolean.TRUE, true ) );
+        bundle.addBooleanHolder( PRIMITIVE_BOOLEAN_ARRAY, new boolean[]{ true, false, true, false }, true );
+        bundle.addBooleanHolder( BOOLEAN_ARRAY, new Boolean[]{ true, false, null, false }, true );
+        bundle.addBooleanHolder( PRIMITIVE_BOOLEAN, true );
+        bundle.addBooleanHolder( BOOLEAN, Boolean.TRUE, true );
 
-        bundle.addHolder( new GowingByteHolder( PRIMITIVE_BYTE_ARRAY, new byte[]{ 1, 2, 3, 4 }, true ) );
-        bundle.addHolder( new GowingByteHolder( BYTE_ARRAY, new Byte[]{ 1, 2, null, 4 }, true ) );
-        bundle.addHolder( new GowingByteHolder( PRIMITIVE_BYTE, (byte)1 ) );
+        bundle.addByteHolder( PRIMITIVE_BYTE_ARRAY, new byte[]{ 1, 2, 3, 4 }, true );
+        bundle.addByteHolder( BYTE_ARRAY, new Byte[]{ 1, 2, null, 4 }, true );
+        bundle.addByteHolder( PRIMITIVE_BYTE, (byte)1 );
         //noinspection UnnecessaryBoxing
-        bundle.addHolder( new GowingByteHolder( BYTE, Byte.valueOf( (byte)1 ), true ) );
+        bundle.addByteHolder( BYTE, Byte.valueOf( (byte)1 ), true );
 
-        bundle.addHolder( new GowingShortHolder( PRIMITIVE_SHORT_ARRAY, new short[]{ 1, 2, 3, 4 }, true ) );
-        bundle.addHolder( new GowingShortHolder( SHORT_ARRAY, new Short[]{ 1, 2, null, 4 }, true ) );
-        bundle.addHolder( new GowingShortHolder( PRIMITIVE_SHORT, (short)10 ) );
+        bundle.addShortHolder( PRIMITIVE_SHORT_ARRAY, new short[]{ 1, 2, 3, 4 }, true );
+        bundle.addShortHolder( SHORT_ARRAY, new Short[]{ 1, 2, null, 4 }, true );
+        bundle.addShortHolder( PRIMITIVE_SHORT, (short)10 );
         //noinspection UnnecessaryBoxing
-        bundle.addHolder( new GowingShortHolder( SHORT, Short.valueOf( (short)20 ), true ) );
+        bundle.addShortHolder( SHORT, Short.valueOf( (short)20 ), true );
 
-        bundle.addHolder( new GowingIntegerHolder( PRIMITIVE_INT_ARRAY, new int[]{ 1234567, 2, 3, 4 }, true ) );
-        bundle.addHolder( new GowingIntegerHolder( INTEGER_ARRAY, new Integer[]{ 1234567, 2, null, 4 }, true ) );
-        bundle.addHolder( new GowingIntegerHolder( PRIMITIVE_INT, 100 ) );
+        bundle.addIntegerHolder( PRIMITIVE_INT_ARRAY, new int[]{ 1234567, 2, 3, 4 }, true );
+        bundle.addIntegerHolder( INTEGER_ARRAY, new Integer[]{ 1234567, 2, null, 4 }, true );
+        bundle.addIntegerHolder( PRIMITIVE_INT, 100 );
         //noinspection UnnecessaryBoxing
-        bundle.addHolder( new GowingIntegerHolder( INTEGER, Integer.valueOf( 200 ), true ) );
+        bundle.addIntegerHolder( INTEGER, Integer.valueOf( 200 ), true );
 
-        bundle.addHolder( new GowingLongHolder( PRIMITIVE_LONG_ARRAY, new long[]{ 1234567898765L, 2L, 3L, 4L }, true ) );
-        bundle.addHolder( new GowingLongHolder( LONG_ARRAY, new Long[]{ 1234567898765L, 2L, null, 4L }, true ) );
-        bundle.addHolder( new GowingLongHolder( PRIMITIVE_LONG, 1000L ) );
+        bundle.addLongHolder( PRIMITIVE_LONG_ARRAY, new long[]{ 1234567898765L, 2L, 3L, 4L }, true );
+        bundle.addLongHolder( LONG_ARRAY, new Long[]{ 1234567898765L, 2L, null, 4L }, true );
+        bundle.addLongHolder( PRIMITIVE_LONG, 1000L );
         //noinspection UnnecessaryBoxing
-        bundle.addHolder( new GowingLongHolder( LONG, Long.valueOf( 2000L ), true ) );
+        bundle.addLongHolder( LONG, Long.valueOf( 2000L ), true );
 
-        bundle.addHolder( new GowingFloatHolder( PRIMITIVE_FLOAT_ARRAY, new float[]{ 1.23456789f, 2f, 3f, 4f }, true ) );
-        bundle.addHolder( new GowingFloatHolder( FLOAT_ARRAY, new Float[]{ 1.23456789f, 2f, null, 4f }, true ) );
-        bundle.addHolder( new GowingFloatHolder( PRIMITIVE_FLOAT, (float)Math.PI ) );
+        bundle.addFloatHolder( PRIMITIVE_FLOAT_ARRAY, new float[]{ 1.23456789f, 2f, 3f, 4f }, true );
+        bundle.addFloatHolder( FLOAT_ARRAY, new Float[]{ 1.23456789f, 2f, null, 4f }, true );
+        bundle.addFloatHolder( PRIMITIVE_FLOAT, (float)Math.PI );
         //noinspection UnnecessaryBoxing
-        bundle.addHolder( new GowingFloatHolder( FLOAT, Float.valueOf( (float)Math.E ), true ) );
+        bundle.addFloatHolder( FLOAT, Float.valueOf( (float)Math.E ), true );
 
-        bundle.addHolder( new GowingDoubleHolder( PRIMITIVE_DOUBLE_ARRAY, new double[]{ 1.23456789098765d, 2d, 3d, 4d }, true ) );
-        bundle.addHolder( new GowingDoubleHolder( DOUBLE_ARRAY, new Double[]{ 1.23456789098765d, 2d, null, 4d }, true ) );
-        bundle.addHolder( new GowingDoubleHolder( PRIMITIVE_DOUBLE, Math.PI ) );
+        bundle.addDoubleHolder( PRIMITIVE_DOUBLE_ARRAY, new double[]{ 1.23456789098765d, 2d, 3d, 4d }, true );
+        bundle.addDoubleHolder( DOUBLE_ARRAY, new Double[]{ 1.23456789098765d, 2d, null, 4d }, true );
+        bundle.addDoubleHolder( PRIMITIVE_DOUBLE, Math.PI );
         //noinspection UnnecessaryBoxing
-        bundle.addHolder( new GowingDoubleHolder( DOUBLE, Double.valueOf( Math.E ), true ) );
+        bundle.addDoubleHolder( DOUBLE, Double.valueOf( Math.E ), true );
 
         // Pack the collection as-is.
 

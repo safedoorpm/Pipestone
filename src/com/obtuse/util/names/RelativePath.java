@@ -12,8 +12,6 @@ import com.obtuse.util.gowing.*;
 import com.obtuse.util.gowing.p2a.GowingBackReferenceable;
 import com.obtuse.util.gowing.p2a.GowingEntityReference;
 import com.obtuse.util.gowing.p2a.holders.GowingPackableCollection;
-import com.obtuse.util.gowing.p2a.holders.GowingPackableEntityHolder;
-import com.obtuse.util.gowing.p2a.holders.GowingStringHolder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -1086,8 +1084,8 @@ public class RelativePath
         Collections.addAll( segments, getStringPathArray() );
 
         Logger.logMsg( "RelativePath:  bundling " + SEGMENTS + "=" + segments );
-        bundle.addHolder( new GowingPackableEntityHolder( SEGMENTS, segments, packer, true ) );
-        bundle.addHolder( new GowingStringHolder( COMPARE_VALUE, _compareValue, true ) );
+        bundle.addPackableEntityHolder( SEGMENTS, segments, packer, true );
+        bundle.addStringHolder( COMPARE_VALUE, _compareValue, true );
 
         return bundle;
 

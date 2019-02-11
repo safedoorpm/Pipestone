@@ -7,7 +7,6 @@ package com.obtuse.util.gowing.p2a;
 
 import com.obtuse.util.gowing.*;
 import com.obtuse.util.gowing.p2a.exceptions.GowingUnpackingException;
-import com.obtuse.util.gowing.p2a.holders.GowingStringHolder;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -106,7 +105,7 @@ public class GowingString implements GowingBackReferenceable, Comparable<GowingS
                 packer.getPackingContext()
         );
 
-        bundle.addHolder( new GowingStringHolder( G_STRING, string, true ) );
+        bundle.addStringHolder( G_STRING, string, true );
 
         return bundle;
     }

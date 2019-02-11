@@ -9,7 +9,6 @@ import com.obtuse.util.gowing.*;
 import com.obtuse.util.gowing.p2a.GowingBackReferenceable;
 import com.obtuse.util.gowing.p2a.GowingEntityReference;
 import com.obtuse.util.gowing.p2a.exceptions.GowingUnpackingException;
-import com.obtuse.util.gowing.p2a.holders.GowingStringHolder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -401,28 +400,28 @@ public class ObtuseApproximateCalendarDate
 
         if ( _precision == DatePrecision.RANGE ) {
 
-            bundle.addHolder( new GowingStringHolder(
+            bundle.addStringHolder(
                     ObtuseApproximateCalendarDate.EARLIEST_DATE_NAME,
                     getEarliestPossibleDate().getDateString(),
                     true
-            ) );
-            bundle.addHolder( new GowingStringHolder(
+            );
+            bundle.addStringHolder(
                     ObtuseApproximateCalendarDate.LATEST_DATE_NAME,
                     getLatestPossibleDate().getDateString(),
                     true
-            ) );
+            );
 
         } else {
 
-            bundle.addHolder( new GowingStringHolder(
+            bundle.addStringHolder(
                     ObtuseApproximateCalendarDate.NOMINAL_DATE_NAME,
                     getNominalCalendarDate().getDateString(),
                     true
-            ) );
+            );
 
         }
 
-        bundle.addHolder( new GowingStringHolder( ObtuseApproximateCalendarDate.PRECISION_NAME, getPrecision().name(), true ) );
+        bundle.addStringHolder( ObtuseApproximateCalendarDate.PRECISION_NAME, getPrecision().name(), true );
 
         return bundle;
 

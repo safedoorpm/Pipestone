@@ -95,10 +95,10 @@ public class SimpleMediaItemPanel<IID extends SimpleMediaItemPanel.ImageIdentifi
 
     }
 
-    private final LruCache<ScaledImageId, ImageIcon> _imageIconCache;
+    private final LruCache<ScaledImageId<IID>, ImageIcon> _imageIconCache;
 
     private @Nullable final ImageIcon _fullSizeImage;
-    private final ImageIdentifier _imageIdentifier;
+    private final IID _imageIdentifier;
     private int _orientation;
 
     private final int _scaleGranularity;
@@ -108,8 +108,8 @@ public class SimpleMediaItemPanel<IID extends SimpleMediaItemPanel.ImageIdentifi
 
     public SimpleMediaItemPanel(
             @Nullable final ImageIcon fullSizeImage,
-            @NotNull final ImageIdentifier imageIdentifier,
-            @NotNull final LruCache<ScaledImageId, ImageIcon> scaledImageIconCache,
+            @NotNull final IID imageIdentifier,
+            @NotNull final LruCache<ScaledImageId<IID>, ImageIcon> scaledImageIconCache,
             int scaleGranularity,
             int initialOrientation
     ) {
@@ -144,10 +144,11 @@ public class SimpleMediaItemPanel<IID extends SimpleMediaItemPanel.ImageIdentifi
 
     }
 
+    @SuppressWarnings("unused")
     public SimpleMediaItemPanel(
             @Nullable final Image fullSizeImage,
-            @NotNull final ImageIdentifier imageIdentifier,
-            @NotNull final LruCache<ScaledImageId, ImageIcon> scaledImageIconCache,
+            @NotNull final IID imageIdentifier,
+            @NotNull final LruCache<ScaledImageId<IID>, ImageIcon> scaledImageIconCache,
             int scaleGranularity,
             int initialOrientation
     ) {
@@ -169,6 +170,13 @@ public class SimpleMediaItemPanel<IID extends SimpleMediaItemPanel.ImageIdentifi
             repaint();
 
         }
+
+    }
+
+    @SuppressWarnings("unused")
+    public int getScaleGranularity() {
+
+        return _scaleGranularity;
 
     }
 
@@ -207,6 +215,7 @@ public class SimpleMediaItemPanel<IID extends SimpleMediaItemPanel.ImageIdentifi
 
     }
 
+    @SuppressWarnings("unused")
     @NotNull
     public Dimension getCurrentSize() {
 
@@ -214,12 +223,14 @@ public class SimpleMediaItemPanel<IID extends SimpleMediaItemPanel.ImageIdentifi
 
     }
 
+    @SuppressWarnings("unused")
     public boolean hasActualImage() {
 
         return _fullSizeImage != null;
 
     }
 
+    @SuppressWarnings("unused")
     @NotNull
     public Optional<ImageIcon> getOptFullSizeImage() {
 
@@ -227,6 +238,7 @@ public class SimpleMediaItemPanel<IID extends SimpleMediaItemPanel.ImageIdentifi
 
     }
 
+    @SuppressWarnings("unused")
     @NotNull Optional<ImageIcon> getOptCurrentSizeImage() {
 
         return Optional.ofNullable( _currentSizeImage );
@@ -243,7 +255,7 @@ public class SimpleMediaItemPanel<IID extends SimpleMediaItemPanel.ImageIdentifi
 
         }
 
-        Optional<CachedThing<ScaledImageId, ImageIcon>> optScaledImage = _imageIconCache.getOptional(
+        Optional<CachedThing<ScaledImageId<IID>, ImageIcon>> optScaledImage = _imageIconCache.getOptional(
                 new ScaledImageId<>(
                         _imageIdentifier,
                         _orientation,

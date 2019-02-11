@@ -2,8 +2,6 @@ package com.obtuse.util;
 
 import com.obtuse.util.gowing.*;
 import com.obtuse.util.gowing.p2a.GowingEntityReference;
-import com.obtuse.util.gowing.p2a.holders.GowingPackableEntityHolder;
-import com.obtuse.util.gowing.p2a.holders.GowingStringHolder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -143,8 +141,8 @@ public class ContextualToString<T extends Comparable<T>> implements Comparable<C
                 packer.getPackingContext()
         );
 
-        bundle.addHolder( new GowingPackableEntityHolder( G_ITEM, (GowingPackable)_item, packer, true ) );
-        bundle.addHolder( new GowingStringHolder( G_TO_STRING, _toString, true ) );
+        bundle.addPackableEntityHolder( G_ITEM, (GowingPackable)_item, packer, true );
+        bundle.addStringHolder( G_TO_STRING, _toString, true );
 
         return bundle;
     }

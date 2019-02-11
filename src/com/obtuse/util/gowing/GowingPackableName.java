@@ -1,7 +1,6 @@
 package com.obtuse.util.gowing;
 
 import com.obtuse.util.gowing.p2a.GowingEntityReference;
-import com.obtuse.util.gowing.p2a.holders.GowingStringHolder;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.SortedMap;
@@ -114,7 +113,7 @@ public class GowingPackableName implements GowingPackable, Comparable<GowingPack
                 packer.getPackingContext()
         );
 
-        bundle.addHolder( new GowingStringHolder( NAME_NAME, getName(), true ) );
+        bundle.addStringHolder( NAME_NAME, getName(), true );
 
         return bundle;
 

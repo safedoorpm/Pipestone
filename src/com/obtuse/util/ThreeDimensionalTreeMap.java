@@ -7,8 +7,6 @@ package com.obtuse.util;
 import com.obtuse.util.gowing.*;
 import com.obtuse.util.gowing.p2a.GowingEntityReference;
 import com.obtuse.util.gowing.p2a.GowingUtil;
-import com.obtuse.util.gowing.p2a.holders.GowingBooleanHolder;
-import com.obtuse.util.gowing.p2a.holders.GowingPackableEntityHolder;
 import com.obtuse.util.gowing.p2a.holders.GowingPackableMapping;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -194,8 +192,8 @@ public class ThreeDimensionalTreeMap<
 
         GowingPackableMapping<T1,TwoDimensionalSortedMap<T2,T3,V>> packedMapping = new GowingPackableMapping<>( _map );
 
-        bundle.addHolder( new GowingPackableEntityHolder( OUTER_MAP, packedMapping, packer, true ) );
-        bundle.addHolder( new GowingBooleanHolder( READONLY, _readonly ) );
+        bundle.addPackableEntityHolder( OUTER_MAP, packedMapping, packer, true );
+        bundle.addBooleanHolder( READONLY, _readonly );
 
         return bundle;
 

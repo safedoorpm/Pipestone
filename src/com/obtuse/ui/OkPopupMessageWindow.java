@@ -320,7 +320,7 @@ public class OkPopupMessageWindow extends JDialog {
         OkPopupMessageWindow dialog = new OkPopupMessageWindow(
                 "123456789.123456789.123456789.123456789.12345<br>123456789.123456789.123456789.123456789.12345",
                 "123456789.123456789.123456789.123456789.12345",
-                "OK"
+                OkPopupMessageWindow.OK_BUTTON_LABEL
         );
 
         Logger.logMsg( "size is " + dialog.getSize() );

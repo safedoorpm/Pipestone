@@ -509,7 +509,7 @@ public class ObtuseImageUtils {
                     " (" + newSize.width + 'x' + newSize.height + ")"
             );
 
-            Optional<Image> scaledImage = getScaledImage( what, originalImageIcon.getImage(), newSize );
+            Optional<BufferedImage> scaledImage = getOptArbitrarilyScaledImage( what, originalImageIcon.getImage(), newSize );
 
             return scaledImage.map( ImageIcon::new );
 
@@ -543,7 +543,7 @@ public class ObtuseImageUtils {
      an empty {@code Optional} instance.</p>
      */
 
-    public static Optional<Image> getScaledImage(
+    public static Optional<BufferedImage> getOptArbitrarilyScaledImage(
             @Nullable final String what,
             @NotNull final Image originalImage,
             @NotNull final Dimension newSize
@@ -572,7 +572,53 @@ public class ObtuseImageUtils {
 
         Image img = waitToFinishLoading( "getScaledImage", scaledInstance );
 
-        return Optional.of( img );
+        BufferedImage bufferedImage = convertImageToBufferedImage( img );
+
+        return Optional.of( bufferedImage );
+
+    }
+
+    public static Optional<ImageIcon> getOptArbitrarilyScaledImageIcon(
+            @Nullable final String what,
+            @NotNull ImageIcon originalImageIcon,
+            @NotNull Dimension newSize
+    ) {
+
+        Optional<BufferedImage> scaledImage = ObtuseImageUtils.getOptArbitrarilyScaledImage(
+                what,
+                originalImageIcon.getImage(),
+                newSize
+        );
+
+        ImageIcon rval = scaledImage.map( ImageIcon::new )
+                                    .orElse( null );
+
+        return Optional.ofNullable( rval );
+
+    }
+
+    public static Optional<ImageIcon> getScaledImageIcon(
+            @Nullable final String what,
+            @NotNull ImageIcon originalImageIcon,
+            int newSize
+    ) {
+
+        Optional<BufferedImage> scaledImage = ObtuseImageUtils.getOptScaledImage(
+                what,
+                originalImageIcon.getImage(),
+                newSize
+//                ObtuseImageUtils.getMinimumScalingFactor(
+//                        newSize,
+//                        newSize,
+//                        originalImageIcon.getIconWidth(),
+//                        originalImageIcon.getIconHeight()
+//                )
+        );
+
+        ImageIcon rval = scaledImage.map( ImageIcon::new )
+                                    .orElse( null );
+
+        return Optional.ofNullable( rval );
 
     }
 
@@ -582,33 +628,52 @@ public class ObtuseImageUtils {
             int targetSize
     ) {
 
-        try ( Measure ignored = new Measure( "getOptScaledImage( " + ObtuseUtil.enquoteToJavaString( what ) + " )" ) ) {
+        BufferedImage convertedOriginalImage = ObtuseImageUtils.convertImageToBufferedImage( originalImage );
 
-            BufferedImage convertedOriginalImage = ObtuseImageUtils.convertImageToBufferedImage( originalImage );
-
-            BufferedImage scaled;
-            if ( convertedOriginalImage.getHeight() > targetSize || convertedOriginalImage.getWidth() > targetSize ) {
-
-                Dimension newSize = ObtuseImageUtils.getMinimumScalingFactor(
+        Optional<BufferedImage> scaledImage = ObtuseImageUtils.getOptArbitrarilyScaledImage(
+                what,
+                convertedOriginalImage,
+                ObtuseImageUtils.getMinimumScalingFactor(
                         targetSize,
                         targetSize,
                         convertedOriginalImage.getWidth(),
                         convertedOriginalImage.getHeight()
-                );
-                Optional<Image> optTmpImage = ObtuseImageUtils.getScaledImage( "thing", convertedOriginalImage, newSize );
+                )
+        );
 
-                scaled = optTmpImage.map( ObtuseImageUtils::convertImageToBufferedImage )
-                                    .orElse( null );
+        return scaledImage;
 
-            } else {
-
-                scaled = convertedOriginalImage;
-
-            }
-
-            return Optional.ofNullable( scaled );
-
-        }
+//        ImageIcon rval = scaledImage.map( ImageIcon::new )
+//                                    .orElse( null );
+//
+//        return Optional.ofNullable( rval );
+//        try ( Measure ignored = new Measure( "getOptScaledImage( " + ObtuseUtil.enquoteToJavaString( what ) + " )" ) ) {
+//
+//            BufferedImage convertedOriginalImage = ObtuseImageUtils.convertImageToBufferedImage( originalImage );
+//
+//            BufferedImage scaled;
+//            if ( convertedOriginalImage.getHeight() > targetSize || convertedOriginalImage.getWidth() > targetSize ) {
+//
+//                Dimension newSize = ObtuseImageUtils.getMinimumScalingFactor(
+//                        targetSize,
+//                        targetSize,
+//                        convertedOriginalImage.getWidth(),
+//                        convertedOriginalImage.getHeight()
+//                );
+//                Optional<Image> optTmpImage = ObtuseImageUtils.getScaledImage( "thing", convertedOriginalImage, newSize );
+//
+//                scaled = optTmpImage.map( ObtuseImageUtils::convertImageToBufferedImage )
+//                                    .orElse( null );
+//
+//            } else {
+//
+//                scaled = convertedOriginalImage;
+//
+//            }
+//
+//            return Optional.ofNullable( scaled );
+//
+//        }
 
     }
 

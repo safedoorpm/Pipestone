@@ -10,7 +10,6 @@ import com.obtuse.util.gowing.*;
 import com.obtuse.util.gowing.p2a.GowingBackReferenceable;
 import com.obtuse.util.gowing.p2a.GowingEntityReference;
 import com.obtuse.util.gowing.p2a.exceptions.GowingUnpackingException;
-import com.obtuse.util.gowing.p2a.holders.GowingStringHolder;
 import org.jetbrains.annotations.NotNull;
 
 import javax.management.timer.Timer;
@@ -130,7 +129,7 @@ public class ObtuseCalendarDate extends GowingAbstractPackableEntity implements 
                 packer.getPackingContext()
         );
 
-        bundle.addHolder( new GowingStringHolder( DATE_STRING, _dateString, true ) );
+        bundle.addStringHolder( DATE_STRING, _dateString, true );
 
         return bundle;
 

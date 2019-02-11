@@ -83,8 +83,6 @@ public class PopupJTableEditor extends DefaultCellEditor {
 
     class PopupDialog extends JDialog implements ActionListener {
 
-        public static final String OK_BUTTON_LABEL = "OK";
-
         private final JTextArea textArea;
 
         public PopupDialog( final @NotNull String popupWindowTitle ) {
@@ -104,7 +102,7 @@ public class PopupJTableEditor extends DefaultCellEditor {
 
             JButton cancel = new JButton( "Cancel" );
             cancel.addActionListener( this );
-            JButton ok = new JButton( OK_BUTTON_LABEL );
+            JButton ok = new JButton( OkPopupMessageWindow.OK_BUTTON_LABEL );
             ok.setPreferredSize( cancel.getPreferredSize() );
             ok.addActionListener( this );
 
@@ -147,7 +145,7 @@ public class PopupJTableEditor extends DefaultCellEditor {
         public void actionPerformed( final ActionEvent e ) {
 
             String actionCommand = e.getActionCommand();
-            if ( OK_BUTTON_LABEL.equals( actionCommand ) ) {
+            if ( OkPopupMessageWindow.OK_BUTTON_LABEL.equals( actionCommand ) ) {
 
                 _currentText = textArea.getText();
 

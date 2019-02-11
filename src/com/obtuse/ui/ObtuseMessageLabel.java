@@ -16,7 +16,8 @@ import java.util.Optional;
  */
 
 /**
- A JLabel which might provide more information when it is clicked (depends on whether or not more information is actually available).
+ A JLabel which might provide more information when it is clicked
+ (depends on whether or not more information is actually available).
  */
 
 @SuppressWarnings("unused")
@@ -24,7 +25,7 @@ public class ObtuseMessageLabel extends JLabel implements MessageLabelInterface 
 
     @NotNull
     public Container getAsContainer() {
-        return (Container)this;
+        return this;
 
     }
 
@@ -32,7 +33,11 @@ public class ObtuseMessageLabel extends JLabel implements MessageLabelInterface 
 
         private final String _extraInfo;
 
-        public AugmentedIllegalArgumentException( final String message, final String extraInfo, final Throwable cause ) {
+        public AugmentedIllegalArgumentException(
+                final String message,
+                final String extraInfo,
+                final Throwable cause
+        ) {
 
             super( message, cause );
 
@@ -43,11 +48,13 @@ public class ObtuseMessageLabel extends JLabel implements MessageLabelInterface 
         public AugmentedIllegalArgumentException( final AugmentedMessage augmentedMessage ) {
 
             this( augmentedMessage.getMessage(), augmentedMessage.getExtraInfo() );
+
         }
 
         public AugmentedIllegalArgumentException( final String message, final String extraInfo ) {
 
             this( message, extraInfo, null );
+
         }
 
         public AugmentedIllegalArgumentException( final String message ) {
@@ -118,7 +125,10 @@ public class ObtuseMessageLabel extends JLabel implements MessageLabelInterface 
 
         public String toString() {
 
-            return "AugmentedMessage( " + ObtuseUtil.enquoteToJavaString( _message ) + ", " + ObtuseUtil.enquoteToJavaString( _extraInfo ) + " )";
+            return "AugmentedMessage( " +
+                   ObtuseUtil.enquoteToJavaString( _message ) + ", " +
+                   ObtuseUtil.enquoteToJavaString( _extraInfo ) +
+                   " )";
 
         }
 
@@ -146,7 +156,7 @@ public class ObtuseMessageLabel extends JLabel implements MessageLabelInterface 
 
                             Logger.logMsg( "have extra info:  " + _extraInfo );
 
-                            OkPopupMessageWindow.doit( _extraInfo, "OK" );
+                            OkPopupMessageWindow.doit( _extraInfo, OkPopupMessageWindow.OK_BUTTON_LABEL );
 
                         }
 
@@ -207,8 +217,10 @@ public class ObtuseMessageLabel extends JLabel implements MessageLabelInterface 
 
     /**
      Set this instance's message and extra info based on a provided exception's information.
-     @param e the exception. The exception's message ({@code e.getMessage()}) becomes this {@link ObtuseMessageLabel} instance's message.
-     If the exception is a {@link AugmentedIllegalArgumentException} then the exception's extra info ({@code ((ObtuseMessageLabel.AugmentedIllegalArgumentException)e).getExtraInfo()})
+     @param e the exception. The exception's message ({@code e.getMessage()})
+     becomes this {@link ObtuseMessageLabel} instance's message.
+     If the exception is a {@link AugmentedIllegalArgumentException} then
+     the exception's extra info ({@code ((ObtuseMessageLabel.AugmentedIllegalArgumentException)e).getExtraInfo()})
      become's this {@link ObtuseMessageLabel} instance's extra info.
      */
 
@@ -217,7 +229,8 @@ public class ObtuseMessageLabel extends JLabel implements MessageLabelInterface 
 
         if ( e instanceof AugmentedIllegalArgumentException ) {
 
-            ObtuseMessageLabel.AugmentedIllegalArgumentException ae = (ObtuseMessageLabel.AugmentedIllegalArgumentException)e;
+            ObtuseMessageLabel.AugmentedIllegalArgumentException ae =
+                    (ObtuseMessageLabel.AugmentedIllegalArgumentException)e;
 
             setMessage( ae.getMessage(), ae.getExtraInfo() );
 
@@ -232,14 +245,26 @@ public class ObtuseMessageLabel extends JLabel implements MessageLabelInterface 
     /**
      Set this instance's message and extra info.
      @param message the message that will appear in our {@link JLabel}.
-     If the message is {@code null} then the message will be {@code "<html>null</html>} so choose wisely (we're a {@link JLabel} so we pretty much have to have a message).
-     @param extraInfo what is to become this instance's extra info (saved as {@code ""} if {@code null}. Otherwise, saved as-is.
+     If the message is {@code null} then the message will be {@code "<html>null</html>}
+     so choose wisely (we're a {@link JLabel} so we pretty much have to have a message).
+     @param extraInfo what is to become this instance's extra info (saved as {@code ""} if {@code null}.
+     Otherwise, saved as-is.
      */
 
     @Override
     public void setMessage( @Nullable final String message, @Nullable final String extraInfo ) {
 
-        setText( message == null ? "null" : message.startsWith( "<html>" ) ? message : "<html>" + message + "</html>" );
+        setText(
+                message == null
+                        ?
+                        "null"
+                        :
+                        message.startsWith( "<html>" )
+                                ?
+                                message
+                                :
+                                "<html>" + message + "</html>"
+        );
 
         setExtraInfo( extraInfo );
 
@@ -247,7 +272,8 @@ public class ObtuseMessageLabel extends JLabel implements MessageLabelInterface 
 
     /**
      Set this instance's extra info.
-     @param extraInfo what is to become this instance's extra info (saved as {@code ""} if {@code null}. Otherwise, saved as-is.
+     @param extraInfo what is to become this instance's extra info (saved as {@code ""} if {@code null}.
+     Otherwise, saved as-is.
      */
 
     @Override

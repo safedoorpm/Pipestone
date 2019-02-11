@@ -1,7 +1,6 @@
 package com.obtuse.util.gowing;
 
 import com.obtuse.util.ObtuseUtil;
-import com.obtuse.util.gowing.p2a.holders.GowingStringHolder;
 import org.jetbrains.annotations.NotNull;
 
 /*
@@ -123,7 +122,7 @@ public abstract class GowingAbstractPackableEntity implements GowingPackable {
                 packer.getPackingContext()
         );
 
-        bundle.addHolder( new GowingStringHolder( GOWING_NAME, _gowingThing.getGowingStringName(), true ) );
+        bundle.addStringHolder( GOWING_NAME, _gowingThing.getGowingStringName(), true );
 
         return bundle;
 

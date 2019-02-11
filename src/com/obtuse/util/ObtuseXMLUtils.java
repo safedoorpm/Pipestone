@@ -4,6 +4,7 @@
 
 package com.obtuse.util;
 
+import com.obtuse.ui.OkPopupMessageWindow;
 import com.obtuse.util.exceptions.ObtuseXmlNodeException;
 import com.obtuse.util.exceptions.ParsingException;
 import org.jetbrains.annotations.NotNull;
@@ -406,8 +407,7 @@ public class ObtuseXMLUtils {
 
         try {
 
-            @SuppressWarnings("UnnecessaryLocalVariable")
-	    ObtuseCalendarDate rval = new ObtuseCalendarDate( attributeValue );
+            ObtuseCalendarDate rval = new ObtuseCalendarDate( attributeValue );
             return rval;
 
         } catch ( ParsingException e ) {
@@ -442,7 +442,6 @@ public class ObtuseXMLUtils {
 
         try {
 
-            @SuppressWarnings("UnnecessaryLocalVariable")
             ImmutableDate rval = DateUtils.parseYYYY_MM_DD_HH_MM( attributeValue, 0 );
             return new FormattedImmutableDate( rval );
 
@@ -477,7 +476,6 @@ public class ObtuseXMLUtils {
 
         }
 
-        @SuppressWarnings("UnnecessaryLocalVariable")
         String attributeValue = attributeNode.getNodeValue();
         return attributeValue;
 
@@ -625,7 +623,7 @@ public class ObtuseXMLUtils {
             messageProxy.error(
                     "Unknown/unsupported " + name + ":  " + targetNodeName,
                     msg.toString(),
-                    "OK"
+                    OkPopupMessageWindow.OK_BUTTON_LABEL
             );
 
             return null;

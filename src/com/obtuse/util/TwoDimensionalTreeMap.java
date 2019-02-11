@@ -10,8 +10,6 @@ import com.obtuse.util.gowing.p2a.GowingEntityReference;
 import com.obtuse.util.gowing.p2a.GowingUnPackedEntityGroup;
 import com.obtuse.util.gowing.p2a.GowingUtil;
 import com.obtuse.util.gowing.p2a.exceptions.GowingUnpackingException;
-import com.obtuse.util.gowing.p2a.holders.GowingBooleanHolder;
-import com.obtuse.util.gowing.p2a.holders.GowingPackableEntityHolder;
 import com.obtuse.util.gowing.p2a.holders.GowingPackableMapping;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -232,8 +230,8 @@ public class TwoDimensionalTreeMap<
 
         GowingPackableMapping<T1,GowingPackableMapping<T2,V>> packedMapping = new GowingPackableMapping<>( fullMapping );
 
-        bundle.addHolder( new GowingPackableEntityHolder( OUTER_MAP, packedMapping, packer, true ) );
-        bundle.addHolder( new GowingBooleanHolder( READONLY, _readonly, true ) );
+        bundle.addPackableEntityHolder( OUTER_MAP, packedMapping, packer, true );
+        bundle.addBooleanHolder( READONLY, _readonly, true );
 
         return bundle;
 

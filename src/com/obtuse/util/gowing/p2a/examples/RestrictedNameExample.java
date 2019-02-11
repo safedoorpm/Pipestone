@@ -7,7 +7,6 @@ package com.obtuse.util.gowing.p2a.examples;
 
 import com.obtuse.util.gowing.*;
 import com.obtuse.util.gowing.p2a.GowingEntityReference;
-import com.obtuse.util.gowing.p2a.holders.GowingStringHolder;
 import com.obtuse.util.kv.ObtuseKeyword;
 import org.jetbrains.annotations.NotNull;
 
@@ -158,7 +157,7 @@ public class RestrictedNameExample extends ObtuseKeyword {
                 packer.getPackingContext()
         );
 
-        bundle.addHolder( new GowingStringHolder( NAME, getKeywordName(), true ) );
+        bundle.addStringHolder( NAME, getKeywordName(), true );
 
         return bundle;
 

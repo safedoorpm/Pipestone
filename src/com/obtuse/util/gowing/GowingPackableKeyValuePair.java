@@ -353,7 +353,7 @@ public class GowingPackableKeyValuePair<K, V> extends GowingAbstractPackableEnti
 
         } else if ( obj instanceof GowingPackable ) {
 
-            bundle.addHolder( new GowingPackableEntityHolder( entityName, (GowingPackable)obj, packer, true ) );
+            bundle.addPackableEntityHolder( entityName, (GowingPackable)obj, packer, true );
 
         } else if ( obj instanceof Collection ) {
 

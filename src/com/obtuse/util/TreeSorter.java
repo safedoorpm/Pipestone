@@ -8,7 +8,6 @@ import com.obtuse.util.gowing.*;
 import com.obtuse.util.gowing.p2a.GowingEntityReference;
 import com.obtuse.util.gowing.p2a.GowingUtil;
 import com.obtuse.util.gowing.p2a.exceptions.GowingUnpackingException;
-import com.obtuse.util.gowing.p2a.holders.GowingPackableEntityHolder;
 import com.obtuse.util.gowing.p2a.holders.GowingPackableMapping;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -113,7 +112,7 @@ public class TreeSorter<K extends Comparable<? super K>, V>
 
         GowingPackableMapping<K,Collection<V>> elementsMapping = new GowingPackableMapping<>( _sortedData );
 
-        bundle.addHolder( new GowingPackableEntityHolder( ELEMENTS_MAPPING_NAME, elementsMapping, packer, true ) );
+        bundle.addPackableEntityHolder( ELEMENTS_MAPPING_NAME, elementsMapping, packer, true );
 
         return bundle;
 
@@ -245,7 +244,6 @@ public class TreeSorter<K extends Comparable<? super K>, V>
      */
 
     public TreeSorter( final Comparator<? super K> comparator ) {
-
         super( new GowingNameMarkerThing() );
 
         _sortedData = new TreeMap<>( comparator );
@@ -254,17 +252,23 @@ public class TreeSorter<K extends Comparable<? super K>, V>
 
     /**
      Constructs a new tree sorter containing the same mappings as the specified map.
-     The keys will be the natural sorted order of <code>K</code>.
+     <p>If the specified map is a {@link SortedMap} then the new tree sorter will use the same comparator
+     as the specified map.
+     Otherwise, the new tree sorter will use the natural sorting order of {@code K}.</p>
 
      @param map the map whose mappings are to be used to create the new tree sorter.
      @throws IllegalArgumentException if <code>map</code> is <code>null</code>.
      */
 
     public TreeSorter( final Map<K, V> map ) {
-
         super( new GowingNameMarkerThing() );
 
-        _sortedData = new TreeMap<>();
+        _sortedData = map instanceof SortedMap
+                ?
+                new TreeMap<>( ((SortedMap<K,V>)map).comparator() )
+                :
+                new TreeMap<>();
+
         for ( K key : map.keySet() ) {
 
             add( key, map.get( key ) );
@@ -273,26 +277,25 @@ public class TreeSorter<K extends Comparable<? super K>, V>
 
     }
 
-    /**
-     Constructs a new tree sorter containing the same mappings as the specified sorted map.
-     The new tree sorter will use the same comparator as the specified sorted map.
-
-     @param map the map whose mappings are to be used to create the new tree sorter.
-     @throws IllegalArgumentException if <code>map</code> is <code>null</code>.
-     */
-
-    public TreeSorter( final SortedMap<K, V> map ) {
-
-        super( new GowingNameMarkerThing() );
-
-        _sortedData = new TreeMap<>( map.comparator() );
-        for ( K key : map.keySet() ) {
-
-            add( key, map.get( key ) );
-
-        }
-
-    }
+//    /**
+//     Constructs a new tree sorter containing the same mappings as the specified sorted map.
+//     The new tree sorter will use the same comparator as the specified sorted map.
+//
+//     @param map the map whose mappings are to be used to create the new tree sorter.
+//     @throws IllegalArgumentException if <code>map</code> is <code>null</code>.
+//     */
+//
+//    public TreeSorter( final SortedMap<K, V> map ) {
+//        super( new GowingNameMarkerThing() );
+//
+//        _sortedData = new TreeMap<>( map.comparator() );
+//        for ( K key : map.keySet() ) {
+//
+//            add( key, map.get( key ) );
+//
+//        }
+//
+//    }
 
     /**
      Construct a new tree sorter which is a copy of an existing tree sorter.

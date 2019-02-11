@@ -4,7 +4,6 @@ import com.obtuse.util.gowing.*;
 import com.obtuse.util.gowing.p2a.GowingBackReferenceable;
 import com.obtuse.util.gowing.p2a.GowingEntityReference;
 import com.obtuse.util.gowing.p2a.exceptions.GowingUnpackingException;
-import com.obtuse.util.gowing.p2a.holders.GowingLongHolder;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.Serializable;
@@ -255,7 +254,7 @@ public class UniqueId implements GowingPackable, GowingBackReferenceable, Compar
                 packer.getPackingContext()
         );
 
-        bundle.addHolder( new GowingLongHolder( G_UNIQUE_ID, _id ) );
+        bundle.addLongHolder( G_UNIQUE_ID, _id );
 
         return bundle;
 

@@ -78,6 +78,7 @@ public class DateUtils {
      @throws ParsingException if the token does not contain a valid date and time string.
      */
 
+    @NotNull
     public static ImmutableDate parseMMDDYYYY_HHMM( @NotNull final TimeZone timezone, @NotNull final String token, final int lineNumber )
             throws ParsingException {
 
@@ -100,6 +101,7 @@ public class DateUtils {
      @throws ParsingException if the token does not contain a valid date and time string.
      */
 
+    @NotNull
     public static ImmutableDate parseYYYY_MM_DD_HH_MM( @NotNull final String token, final int lineNumber )
             throws ParsingException {
 
@@ -122,6 +124,7 @@ public class DateUtils {
      @throws ParsingException if the token does not contain a valid date and time string.
      */
 
+    @NotNull
     public static ImmutableDate parseYYYY_MM_DD_HH_MM_SS( @NotNull final String token, final int lineNumber )
             throws ParsingException {
 
@@ -145,6 +148,7 @@ public class DateUtils {
      @throws ParsingException if the token does not contain a valid date and time string.
      */
 
+    @NotNull
     public static ImmutableDate parseYYYY_MM_DD_HH_MM_SS_COLONS( @NotNull final String token, final int lineNumber )
             throws ParsingException {
 
@@ -167,6 +171,7 @@ public class DateUtils {
      @throws ParsingException if the token does not contain a valid date string.
      */
 
+    @NotNull
     public static ImmutableDate parseMMDDYYYY( @NotNull final String token, final int lineNumber )
             throws ParsingException {
 
@@ -187,6 +192,7 @@ public class DateUtils {
      @return the formatted date and time string.
      */
 
+    @NotNull
     public static String formatMMDDYYYY_HHMM( @NotNull final Date dateTime ) {
 
         synchronized ( DateUtils.MMDDYYYY_HHMM ) {
@@ -206,6 +212,7 @@ public class DateUtils {
      @return the formatted date string.
      */
 
+    @NotNull
     public static String formatMMDDYYYY( @NotNull final Date dateTime ) {
 
         synchronized ( DateUtils.MMDDYYYY ) {
@@ -226,6 +233,7 @@ public class DateUtils {
      <blockquote><tt>2001-07-04T12:08:56-0700</tt></blockquote>
      */
 
+    @NotNull
     public static String formatStandard( @NotNull final Date dateTime ) {
 
         synchronized ( DateUtils.STANDARD ) {
@@ -250,6 +258,7 @@ public class DateUtils {
      <blockquote><tt>new SimpleDateFormat( "yyyy-MM-dd'T'HH:mm:ss.SSSZ" ).format( dateTime );</tt></blockquote>
      */
 
+    @NotNull
     public static String formatStandardMs( @NotNull final Date dateTime ) {
 
         synchronized ( DateUtils.STANDARD_MS ) {
@@ -278,6 +287,7 @@ public class DateUtils {
      where the {@code SimpleDateFormat} is set to UTC.
      */
 
+    @NotNull
     public static String formatMarkerUTC( @NotNull final Date dateTime ) {
 
         synchronized ( DateUtils.MARKER_FORMAT ) {
@@ -299,6 +309,7 @@ public class DateUtils {
      @return an {@link ImmutableDate} equivalent to the value in {@code token}.
      */
 
+    @NotNull
     public static ImmutableDate parseMarkerUTC( @NotNull String token, int lineNumber ) throws ParsingException {
 
         synchronized (  ( DateUtils.MARKER_FORMAT ) ) {
@@ -321,6 +332,7 @@ public class DateUtils {
      @throws ParsingException if the token does not contain a valid date string.
      */
 
+    @NotNull
     public static ImmutableDate parseLongDateTime( @NotNull final TimeZone timezone, @NotNull final String token, final int lineNumber )
             throws ParsingException {
 
@@ -334,6 +346,7 @@ public class DateUtils {
 
     }
 
+    @NotNull
     public static ImmutableDate dateParse( @NotNull final SimpleDateFormat format, @NotNull final String token, final int lineNumber )
             throws ParsingException {
 
@@ -361,6 +374,7 @@ public class DateUtils {
      @throws ParsingException if the token does not contain a valid time string.
      */
 
+    @NotNull
     public static ImmutableDate parseHHMM( @NotNull final TimeZone timezone, @NotNull final String token, final int lineNumber )
             throws ParsingException {
 
@@ -384,6 +398,7 @@ public class DateUtils {
      @throws ParsingException if the token does not contain a valid time string.
      */
 
+    @NotNull
     public static ImmutableDate parseHH_MM_SS( @NotNull final TimeZone timezone, @NotNull final String token, final int lineNumber )
             throws ParsingException {
 
@@ -407,6 +422,7 @@ public class DateUtils {
      @throws ParsingException if the token does not contain a valid date and time string.
      */
 
+    @NotNull
     public static ImmutableDate parseMM_DD_YYYY_HH_MM(
             @NotNull final TimeZone timezone,
             @NotNull final String token,
@@ -433,6 +449,7 @@ public class DateUtils {
      @throws ParsingException if the token does not contain a valid date string.
      */
 
+    @NotNull
     public static ImmutableDate parseMM_DD_YYYY( @NotNull final String token, final int lineNumber )
             throws ParsingException {
 
@@ -456,6 +473,7 @@ public class DateUtils {
      @throws ParsingException if the token does not contain a valid date string.
      */
 
+    @NotNull
     public static ImmutableDate parseYYYY_MM_DD( @NotNull final String token, final int lineNumber )
             throws ParsingException {
 
@@ -481,6 +499,7 @@ public class DateUtils {
      @throws ParsingException if the token does not contain a valid date string.
      */
 
+    @NotNull
     public static ImmutableDate parseYYYY_MM_DD_utc(
             @NotNull final String token,
             final int lineNumber,
@@ -522,6 +541,7 @@ public class DateUtils {
      @throws ParsingException if the token does not contain a valid date string.
      */
 
+    @NotNull
     public static ImmutableDate parseYYYY_MM_DD_utc( @NotNull final String token, final int lineNumber )
             throws ParsingException {
 
@@ -539,6 +559,7 @@ public class DateUtils {
      @throws ParsingException if the token does not contain a valid date string.
      */
 
+    @NotNull
     public static ImmutableDate parseYYYYMMDD( @NotNull final String token, final int lineNumber )
             throws ParsingException {
 
@@ -563,6 +584,7 @@ public class DateUtils {
      @throws ParsingException if the token does not contain a valid date string.
      */
 
+    @NotNull
     public static ImmutableDate parseYYYYMMDD( @NotNull final String token, @NotNull final TimeZone timeZone, final int lineNumber )
             throws ParsingException {
 
@@ -583,6 +605,7 @@ public class DateUtils {
      @return the formatted time string.
      */
 
+    @NotNull
     public static String formatHH_MM( @NotNull final Date dateTime ) {
 
         synchronized ( DateUtils.HH_MM ) {
@@ -602,6 +625,7 @@ public class DateUtils {
      @return the formatted time string.
      */
 
+    @NotNull
     public static String formatHH_MM_SS_12( @NotNull final Date dateTime ) {
 
         synchronized ( DateUtils.HH_MM_SS_12 ) {
@@ -621,6 +645,7 @@ public class DateUtils {
      @return the formatted time string.
      */
 
+    @NotNull
     public static String formatHH_MM_SS_24( @NotNull final Date dateTime ) {
 
         synchronized ( DateUtils.HH_MM_SS_24 ) {
@@ -640,6 +665,7 @@ public class DateUtils {
      @return the formatted time string.
      */
 
+    @NotNull
     public static String formatHH_MM_SS_24_UTC( @NotNull final Date dateTime ) {
 
         synchronized ( DateUtils.HH_MM_SS_24 ) {
@@ -659,6 +685,7 @@ public class DateUtils {
      @return the formatted time string.
      */
 
+    @NotNull
     public static String formatHH_MM_SS_12_UTC( @NotNull final Date dateTime ) {
 
         synchronized ( DateUtils.HH_MM_SS_12 ) {
@@ -678,6 +705,7 @@ public class DateUtils {
      @return the formatted date and time string.
      */
 
+    @NotNull
     public static String formatMM_DD_YYYY_HH_MM( @NotNull final Date dateTime ) {
 
         synchronized ( DateUtils.MM_DD_YYYY_HH_MM ) {
@@ -697,6 +725,7 @@ public class DateUtils {
      @return the formatted date and time string.
      */
 
+    @NotNull
     public static String formatYYYY_MM_DD_HH_MM( @NotNull final Date dateTime ) {
 
         return DateUtils.formatYYYY_MM_DD_HH_MM( dateTime, TimeZone.getDefault() );
@@ -711,6 +740,7 @@ public class DateUtils {
      @return the formatted date and time string.
      */
 
+    @NotNull
     public static String formatYYYY_MM_DD_HH_MM( @NotNull final Date dateTime, @NotNull final TimeZone timeZone ) {
 
         synchronized ( DateUtils.YYYY_MM_DD_HH_MM ) {
@@ -730,6 +760,7 @@ public class DateUtils {
      @return the formatted date and time string.
      */
 
+    @NotNull
     public static String formatYYYY_MM_DD_HH_MM_SS( @NotNull final Date dateTime ) {
 
         return DateUtils.formatYYYY_MM_DD_HH_MM_SS( dateTime, TimeZone.getDefault() );
@@ -744,6 +775,7 @@ public class DateUtils {
      @return the formatted date and time string.
      */
 
+    @NotNull
     public static String formatYYYY_MM_DD_HH_MM_SS( @NotNull final Date dateTime, @NotNull final TimeZone timeZone ) {
 
         synchronized ( DateUtils.YYYY_MM_DD_HH_MM_SS ) {
@@ -763,6 +795,7 @@ public class DateUtils {
      @return the formatted date and time string.
      */
 
+    @NotNull
     public static String formatYYYY_MM_DD_HH_MM_SS_COLONS( @NotNull final Date dateTime ) {
 
         return DateUtils.formatYYYY_MM_DD_HH_MM_SS_COLONS( dateTime, TimeZone.getDefault() );
@@ -778,6 +811,7 @@ public class DateUtils {
      @return the formatted date and time string.
      */
 
+    @NotNull
     public static String formatYYYY_MM_DD_HH_MM_SS_COLONS( @NotNull final Date dateTime, @NotNull final TimeZone timeZone ) {
 
         synchronized ( DateUtils.YYYY_MM_DD_HH_MM_SS_COLONS ) {
@@ -797,6 +831,7 @@ public class DateUtils {
      @return the formatted date and time string.
      */
 
+    @NotNull
     public static String formatHH_MM_SS_12_EEE_MMM_DD( @NotNull final Date dateTime ) {
 
         return DateUtils.formatHH_MM_SS_12_EEE_MMM_DD( dateTime, TimeZone.getDefault() );
@@ -811,6 +846,7 @@ public class DateUtils {
      @return the formatted date and time string.
      */
 
+    @NotNull
     public static String formatHH_MM_SS_12_EEE_MMM_DD( @NotNull final Date dateTime, @NotNull final TimeZone timeZone ) {
 
         synchronized ( DateUtils.HH_MM_SS_12_EEE_MMM_DD ) {
@@ -830,6 +866,7 @@ public class DateUtils {
      @return the formatted date and time string.
      */
 
+    @NotNull
     public static String formatHH_MM_SS_24_EEE_MMM_DD( @NotNull final Date dateTime ) {
 
         return DateUtils.formatHH_MM_SS_24_EEE_MMM_DD( dateTime, TimeZone.getDefault() );
@@ -844,6 +881,7 @@ public class DateUtils {
      @return the formatted date and time string.
      */
 
+    @NotNull
     public static String formatHH_MM_SS_24_EEE_MMM_DD( @NotNull final Date dateTime, @NotNull final TimeZone timeZone ) {
 
         synchronized ( DateUtils.HH_MM_SS_24_EEE_MMM_DD ) {
@@ -863,6 +901,7 @@ public class DateUtils {
      @return the formatted date and time string.
      */
 
+    @NotNull
     public static String formatYYYY_MM_DD_HH_MM_SS_SSS( @NotNull final Date dateTime ) {
 
         return DateUtils.formatYYYY_MM_DD_HH_MM_SS_SSS( dateTime, TimeZone.getDefault() );
@@ -877,6 +916,7 @@ public class DateUtils {
      @return the formatted date and time string.
      */
 
+    @NotNull
     public static String formatYYYY_MM_DD_HH_MM_SS_SSS( @NotNull final Date dateTime, @NotNull final TimeZone timeZone ) {
 
         synchronized ( DateUtils.YYYY_MM_DD_HH_MM_SS_SSS ) {
@@ -899,6 +939,7 @@ public class DateUtils {
      @throws ParsingException if the token does not contain a valid date and time string.
      */
 
+    @NotNull
     public static ImmutableDate parseYYYY_MM_DD_HH_MM_SS_SSS( @NotNull final TimeZone timezone, @NotNull final String token, final int lineNumber )
             throws ParsingException {
 
@@ -906,11 +947,13 @@ public class DateUtils {
 
             DateUtils.YYYY_MM_DD_HH_MM_SS_SSS.setTimeZone( timezone );
             ImmutableDate date = DateUtils.dateParse( DateUtils.YYYY_MM_DD_HH_MM_SS_SSS, token, lineNumber );
+
             return date;
 
         }
 
     }
+
     /**
      Format a date and time string in a specified timezone with the timezone shown.
 
@@ -919,12 +962,14 @@ public class DateUtils {
      @return the formatted date and time string.
      */
 
+    @NotNull
     public static String formatYYYY_MM_DD_HH_MM_ZZZ( @NotNull final Date dateTime, @NotNull final TimeZone timeZone ) {
 
         synchronized ( DateUtils.YYYY_MM_DD_HH_MM_ZZZ ) {
 
             DateUtils.YYYY_MM_DD_HH_MM_ZZZ.setTimeZone( timeZone );
             String s = DateUtils.YYYY_MM_DD_HH_MM_ZZZ.format( dateTime );
+
             return s;
 
         }
@@ -938,12 +983,14 @@ public class DateUtils {
      @return the formatted date string.
      */
 
+    @NotNull
     public static String formatMM_DD_YYYY( @NotNull final Date dateTime ) {
 
         synchronized ( DateUtils.MM_DD_YYYY ) {
 
             DateUtils.MM_DD_YYYY.setTimeZone( TimeZone.getDefault() );
             String s = DateUtils.MM_DD_YYYY.format( dateTime );
+
             return s;
 
         }
@@ -957,6 +1004,7 @@ public class DateUtils {
      @return the formatted date string.
      */
 
+    @NotNull
     public static String formatYYYY_MM_DD( @NotNull final Date dateTime ) {
 
         synchronized ( DateUtils.YYYY_MM_DD ) {
@@ -976,6 +1024,7 @@ public class DateUtils {
      @return the formatted date string.
      */
 
+    @NotNull
     public static String formatYYYY_MM_DD( @NotNull final Date dateTime, @NotNull final TimeZone timeZone ) {
 
         synchronized ( DateUtils.YYYY_MM_DD ) {
@@ -995,6 +1044,7 @@ public class DateUtils {
      @return the formatted date string.
      */
 
+    @NotNull
     public static String formatYYYYMMDD( @NotNull final Date dateTime ) {
 
         synchronized ( DateUtils.YYYYMMDD ) {
@@ -1014,6 +1064,7 @@ public class DateUtils {
      @return the formatted date string.
      */
 
+    @NotNull
     public static String formatYYYYMMDD( @NotNull final Date dateTime, @NotNull final TimeZone timeZone ) {
 
         synchronized ( DateUtils.YYYYMMDD ) {
@@ -1033,6 +1084,7 @@ public class DateUtils {
      @return the formatted date string (e.g. {@code "Monday, July 1, 1867"}.
      */
 
+    @NotNull
     public static String formatWWWW_MMMM_D_YYYY( @NotNull final Date dateTime ) {
 
         synchronized ( DateUtils.WWWW_MMMM_D_YYYY ) {
@@ -1052,6 +1104,7 @@ public class DateUtils {
      @return the formatted date string (e.g. {@code "July 1, 1867"}.
      */
 
+    @NotNull
     public static String formatMMMM_D_YYYY( @NotNull final Date dateTime ) {
 
         synchronized ( DateUtils.MMMM_D_YYYY ) {
@@ -1071,6 +1124,7 @@ public class DateUtils {
      @return the formatted date string (e.g. {@code "1, July, 1867"}.
      */
 
+    @NotNull
     public static String formatD_MMM_YYYY( @NotNull final Date dateTime ) {
 
         synchronized ( DateUtils.DD_MMM_YYYY ) {
@@ -1090,6 +1144,7 @@ public class DateUtils {
      @return the formatted date string.
      */
 
+    @NotNull
     public static String formatYYMMDD( @NotNull final Date dateTime ) {
 
         synchronized ( DateUtils.YYMMDD ) {
@@ -1102,17 +1157,20 @@ public class DateUtils {
 
     }
 
+    @NotNull
     public static String formatDuration( final long millis, final boolean shortForm ) {
 
         return DateUtils.formatDuration( millis, 3, shortForm );
     }
 
+    @NotNull
     public static String formatDuration( final long millis ) {
 
         return DateUtils.formatDuration( millis, 3 );
 
     }
 
+    @NotNull
     public static String formatDuration( final long millis, final int digits ) {
 
         return DateUtils.formatDuration( millis, digits, false );
@@ -1120,6 +1178,7 @@ public class DateUtils {
     }
 
     @SuppressWarnings({ "UnnecessaryParentheses", "NestedConditionalExpression" })
+    @NotNull
     public static String formatDuration( final long xmillis, final int digits, final boolean shortForm ) {
 
         long millis = xmillis;
@@ -1210,6 +1269,7 @@ public class DateUtils {
 
     }
 
+    @NotNull
     public static Date addDays( @NotNull final Date date, final int delta ) {
 
         Calendar cal = Calendar.getInstance();

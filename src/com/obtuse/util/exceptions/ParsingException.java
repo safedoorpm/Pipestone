@@ -15,7 +15,8 @@ public class ParsingException extends Exception {
         JUNK_AT_END_OF_LINE,
         UNKNOWN_RECORD_TYPE,
         TIME_FORMAT_ERROR,
-        MISC_ERROR_TYPE
+        MISC_ERROR_TYPE,
+        NAME_FORMAT_ERROR
     }
 
     private final int _lineNumber;

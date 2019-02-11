@@ -5,7 +5,6 @@ import com.obtuse.util.gowing.*;
 import com.obtuse.util.gowing.p2a.GowingBackReferenceable;
 import com.obtuse.util.gowing.p2a.GowingEntityReference;
 import com.obtuse.util.gowing.p2a.exceptions.GowingUnpackingException;
-import com.obtuse.util.gowing.p2a.holders.GowingStringHolder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -234,29 +233,29 @@ public class GowingFile extends File implements GowingBackReferenceable {
                 packer.getPackingContext()
         );
 
-        bundle.addHolder( new GowingStringHolder( G_VARIANT, _constructorVariant.name(), true ) );
+        bundle.addStringHolder( G_VARIANT, _constructorVariant.name(), true );
         switch ( _constructorVariant ) {
 
             case STRING:
-                bundle.addHolder( new GowingStringHolder( G_P1_STRING, _p1s, true ) );
+                bundle.addStringHolder( G_P1_STRING, _p1s, true );
                 break;
 
             case FILE:
-                bundle.addHolder( new GowingStringHolder( G_P1_FILE, _p1f.getPath(), true ) );
+                bundle.addStringHolder( G_P1_FILE, _p1f.getPath(), true );
                 break;
 
             case FILE_STRING:
-                bundle.addHolder( new GowingStringHolder( G_P1_FILE, _p1f.getPath(), true ) );
-                bundle.addHolder( new GowingStringHolder( G_P2_STRING, _p2s, true ) );
+                bundle.addStringHolder( G_P1_FILE, _p1f.getPath(), true );
+                bundle.addStringHolder( G_P2_STRING, _p2s, true );
                 break;
 
             case STRING_STRING:
-                bundle.addHolder( new GowingStringHolder( G_P1_STRING, _p1s, true ) );
-                bundle.addHolder( new GowingStringHolder( G_P2_STRING, _p2s, true ) );
+                bundle.addStringHolder( G_P1_STRING, _p1s, true );
+                bundle.addStringHolder( G_P2_STRING, _p2s, true );
                 break;
 
             case URI:
-                bundle.addHolder( new GowingStringHolder( G_P1_URI, _p1s, true ) );
+                bundle.addStringHolder( G_P1_URI, _p1s, true );
                 break;
 
         }

@@ -302,7 +302,7 @@ public class GowingPackableMapping<K, V> implements GowingPackable {
 
         for ( Ix<GowingPackableKeyValuePair<K, V>> kvp : Ix.arrayList( _keyValuePairs ) ) {
 
-            bundle.addHolder( new GowingPackableEntityHolder( new EntityName( "_" + kvp.ix ), kvp.item, packer, true ) );
+            bundle.addPackableEntityHolder( new EntityName( "_" + kvp.ix ), kvp.item, packer, true );
 
         }
 

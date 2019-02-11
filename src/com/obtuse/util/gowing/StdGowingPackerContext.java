@@ -4,12 +4,10 @@ import com.obtuse.exceptions.HowDidWeGetHereError;
 import com.obtuse.util.*;
 import com.obtuse.util.gowing.p2a.GowingEntityReference;
 import com.obtuse.util.gowing.p2a.GowingUtil;
-import com.obtuse.util.gowing.p2a.holders.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
-import java.util.function.BiFunction;
 
 /*
  * Copyright © 2015 Obtuse Systems Corporation
@@ -65,7 +63,6 @@ public class StdGowingPackerContext implements GowingPackerContext {
 
         GowingUtil.verifyActuallyPackable( "StdGowingPackerContext.rememberPackableEntity", entityName, entity );
 
-        @SuppressWarnings("UnusedAssignment")
         int typeReferenceId = GowingInstanceId.allocateTypeId( entity.getInstanceId().getTypeName() );
 
         if ( !_seenInstanceIds.containsKey( entity.getInstanceId() ) ) {
@@ -281,16 +278,16 @@ public class StdGowingPackerContext implements GowingPackerContext {
                     packer.getPackingContext()
             );
 
-            bundle.addHolder( new GowingPackableEntityHolder( new EntityName( "_simple" ), _simple, packer, false ) );
-            bundle.addHolder( new GowingPackableEntityHolder( new EntityName( "_inner" ), _inner, packer, false ) );
-            bundle.addHolder( new GowingStringHolder( new EntityName( "_payload" ), _payload, true ) );
-            bundle.addHolder( new GowingIntegerHolder( new EntityName( "_iValue" ), _iValue, false ) );
-            bundle.addHolder( new GowingBooleanHolder( new EntityName( "_booleanValue" ), true ) );
-            bundle.addHolder( new GowingDoubleHolder( new EntityName( "_doubleValue" ), Math.PI ) );
-            bundle.addHolder( new GowingFloatHolder( new EntityName( "_floatValue" ), 1.1f ) );
-            bundle.addHolder( new GowingShortHolder( new EntityName( "_shortValue" ), (short)15 ) );
-            bundle.addHolder( new GowingLongHolder( new EntityName( "_longValue" ), 123L ) );
-            bundle.addHolder( new GowingEntityNameHolder( new EntityName( "_entityName" ), new EntityName( "froz_botnick" ), true ) );
+            bundle.addPackableEntityHolder( new EntityName( "_simple" ), _simple, packer, false );
+            bundle.addPackableEntityHolder( new EntityName( "_inner" ), _inner, packer, false );
+            bundle.addStringHolder( new EntityName( "_payload" ), _payload, true );
+            bundle.addIntegerHolder( new EntityName( "_iValue" ), _iValue, false );
+            bundle.addBooleanHolder( new EntityName( "_booleanValue" ), true );
+            bundle.addDoubleHolder( new EntityName( "_doubleValue" ), Math.PI );
+            bundle.addFloatHolder( new EntityName( "_floatValue" ), 1.1f );
+            bundle.addShortHolder( new EntityName( "_shortValue" ), (short)15 );
+            bundle.addLongHolder( new EntityName( "_longValue" ), 123L );
+            bundle.addEntityNameHolder( new EntityName( "_entityName" ), new EntityName( "froz_botnick" ), true );
 
             return bundle;
 
@@ -389,7 +386,7 @@ public class StdGowingPackerContext implements GowingPackerContext {
                     packer.getPackingContext()
             );
 
-            bundle.addHolder( new GowingStringHolder( new EntityName( "_thing" ), _payload, true ) );
+            bundle.addStringHolder( new EntityName( "_thing" ), _payload, true );
 
             return bundle;
 
