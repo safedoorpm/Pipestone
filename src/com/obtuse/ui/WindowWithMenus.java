@@ -4,9 +4,7 @@
 
 package com.obtuse.ui;
 
-import com.obtuse.util.OSLevelCustomizations;
-import com.obtuse.util.PreferencesWindowHandler;
-import com.obtuse.util.Trace;
+import com.obtuse.util.*;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
@@ -234,6 +232,12 @@ public class WindowWithMenus extends TrackedWindow {
 
     }
 
+    public JMenuBar getMainMenuBar() {
+
+        return _menuBar;
+
+    }
+
     private void handlePreferences() {
 
         if ( s_preferencesWindowHandler != null ) {
@@ -369,6 +373,33 @@ public class WindowWithMenus extends TrackedWindow {
     public String toString() {
 
         return "WindowWithMenus()";
+
+    }
+
+    public static void main( String[] args ) {
+
+        BasicProgramConfigInfo.init( "Obtuse", "WindowWithMenus", "testing", null );
+
+        WindowWithMenus wwm = new WindowWithMenus( "testWindowWithMenus", false );
+        JButton jb = new JButton( "Hi There" );
+        wwm.setContentPane( jb );
+        jb.addActionListener(
+                new MyActionListener() {
+
+                    @Override
+                    protected void myActionPerformed( final ActionEvent actionEvent ) {
+
+                        Logger.logMsg( "WindowWithMenus \"Hi There\" button pressed" );
+
+                        ObtuseUtil.doNothing();
+
+                    }
+
+                }
+        );
+
+        wwm.pack();
+        wwm.setVisible( true );
 
     }
 

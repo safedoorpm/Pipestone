@@ -1,5 +1,6 @@
 package com.obtuse.ui;
 
+import com.obtuse.util.Logger;
 import com.obtuse.util.lrucache.CachedThing;
 import com.obtuse.util.lrucache.LruCache;
 import org.jetbrains.annotations.NotNull;
@@ -278,28 +279,30 @@ public class SimpleMediaItemPanel<IID extends SimpleMediaItemPanel.ImageIdentifi
         @NotNull Optional<ImageIcon> optImage = getScaledImage();
 
         gx.setColor( getBackground() );
+//        gx.setColor( Color.GRAY );
         int regionWidth = getWidth();
         int regionHeight = getHeight();
         gx.fillRect( 0, 0, regionWidth, regionHeight );
 //        gx.setColor( isSelected() ? Color.BLUE : Color.WHITE );
-        gx.drawRect( 0, 0, regionWidth - 1, regionHeight - 1 );
+//        gx.drawRect( 0, 0, regionWidth - 1, regionHeight - 1 );
         if ( optImage.isPresent() ) {
 
             ImageIcon imageIcon = optImage.get();
             int imageWidth = imageIcon.getIconWidth();
             int imageHeight = imageIcon.getIconHeight();
-            gx.setColor( Color.BLACK );
-
-            gx.drawRect(
-                    0,
-                    0,
-                    imageWidth,
-                    imageHeight
-            );
+            Logger.logMsg( "SimpleMediaItemPanel.paint:  jp=(" + getWidth() + "," + getHeight() + "), ii=(" + imageWidth + "," + imageHeight + ")" );
+//            gx.setColor( Color.ORANGE );
+//
+//            gx.drawRect(
+//                    0,
+//                    0,
+//                    imageWidth,
+//                    imageHeight
+//            );
             gx.drawImage(
                     imageIcon.getImage(),
-                    1,
-                    1,
+                    0,
+                    0,
                     this
             );
 

@@ -513,6 +513,7 @@ public class StdGowingPacker implements GowingPacker {
             }
 
         }
+
     }
 
     private void actuallyPackEntityBody( final @NotNull GowingPackedEntityBundle bundle ) {

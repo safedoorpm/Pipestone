@@ -623,6 +623,18 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName, GowingPackable
 
     }
 
+    public void addFileHolder( @NotNull final EntityName name, @Nullable final File v, final boolean mandatory ) {
+
+        addHolder(
+                new GowingFileHolder(
+                        name,
+                        v,
+                        mandatory
+                )
+        );
+
+    }
+
     @Nullable
     public GowingPackableThingHolder removeHolderByName( final @NotNull EntityName holderName ) {
 

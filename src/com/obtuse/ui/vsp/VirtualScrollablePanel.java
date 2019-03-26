@@ -69,7 +69,18 @@ public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends 
         _ourLayoutManagerSet = true;
         _ourLayoutManager = ourLayoutManager;
 
-        _virtualScrollablePanel = new JPanel();
+        _virtualScrollablePanel = new JPanel() {
+            public void paint( Graphics g ) {
+
+                super.paint( g );
+
+//                g.setColor( Color.BLACK );
+//                g.drawLine( 0, 0, getWidth() - 1, getHeight() - 1 );
+
+            }
+
+        };
+
         _virtualScrollablePanel.setName( "vSP" );
         _virtualScrollablePanel.setBorder( BorderFactory.createEtchedBorder() );
         add( _virtualScrollablePanel, VPANEL_NAME );
@@ -215,8 +226,8 @@ public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends 
 
     public class VirtualScrollableLayoutManager implements LayoutManager2 {
 
-        private JScrollBar _vsb;
-        private JScrollBar _hsb;
+        private JScrollBar _vScrollBar;
+        private JScrollBar _hScrollBar;
         private VirtualScrollablePanel<E> _ourTargetPanel;
         private JPanel _ourScrollableInnerPanel;
 
@@ -265,10 +276,10 @@ public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends 
 
                         if ( ((JScrollBar)comp).getOrientation() == Adjustable.VERTICAL ) {
 
-                            if ( _vsb == null ) {
+                            if ( _vScrollBar == null ) {
 
-                                _vsb = (JScrollBar)comp;
-                                _vsb.addAdjustmentListener(
+                                _vScrollBar = (JScrollBar)comp;
+                                _vScrollBar.addAdjustmentListener(
                                         e -> vsbChanged()
                                 );
 
@@ -292,9 +303,9 @@ public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends 
 
                         if ( ((JScrollBar)comp).getOrientation() == Adjustable.HORIZONTAL ) {
 
-                            if ( _hsb == null ) {
+                            if ( _hScrollBar == null ) {
 
-                                _hsb = (JScrollBar)comp;
+                                _hScrollBar = (JScrollBar)comp;
 
                             } else {
 
@@ -426,21 +437,21 @@ public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends 
 
                 }
 
-                if ( _vsb == null || _hsb == null || _ourScrollableInnerPanel == null ) {
+                if ( _vScrollBar == null || _hScrollBar == null || _ourScrollableInnerPanel == null ) {
 
                     throw new IllegalArgumentException(
                             "VirtualScrollableLayoutManager.addLayoutComponent:  " +
                             "not all components have reported in (" +
-                            "vsb is " + ( _vsb == null ? "absent" : "present" ) + ", " +
-                            "hsb is " + ( _hsb == null ? "absent" : "present" ) + ", " +
+                            "vsb is " + ( _vScrollBar == null ? "absent" : "present" ) + ", " +
+                            "hsb is " + ( _hScrollBar == null ? "absent" : "present" ) + ", " +
                             "vPanel is " + ( _ourScrollableInnerPanel == null ? "absent" : "present" ) +
                             ")"
                     );
 
                 }
 
-                Dimension hsbPrefSize = _hsb.getPreferredSize();
-                Dimension vsbPrefSize = _vsb.getPreferredSize();
+                Dimension hsbPrefSize = _hScrollBar.getPreferredSize();
+                Dimension vsbPrefSize = _vScrollBar.getPreferredSize();
                 Dimension vPanelPrefSize = _ourScrollableInnerPanel.getPreferredSize();
 
                 if ( _verbose ) {
@@ -450,18 +461,18 @@ public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends 
                             ", pref=" + ObtuseUtil.fDim( vPanelPrefSize )
                     );
                     Logger.logMsg(
-                            "VSB is " + ObtuseUtil.fDim( _vsb.getSize() ) +
+                            "VSB is " + ObtuseUtil.fDim( _vScrollBar.getSize() ) +
                             ", pref=" + ObtuseUtil.fDim( vsbPrefSize )
                     );
                     Logger.logMsg(
-                            "HSB is " + ObtuseUtil.fDim( _hsb.getSize() ) +
+                            "HSB is " + ObtuseUtil.fDim( _hScrollBar.getSize() ) +
                             ", pref=" + ObtuseUtil.fDim( hsbPrefSize )
                     );
 
                 }
 
-                final int vsbWidth = vsbPrefSize.width; // _vsb.getWidth();
-                final int hsbHeight = hsbPrefSize.height; // _hsb.getHeight();
+                final int vsbWidth = vsbPrefSize.width; // _vScrollBar.getWidth();
+                final int hsbHeight = hsbPrefSize.height; // _hScrollBar.getHeight();
                 final int cWidth = parent.getWidth();
                 final int cHeight = parent.getHeight();
 
@@ -471,10 +482,10 @@ public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends 
                 final int vPanelWidth = cWidth - vsbWidth;
                 final int vPanelHeight = cHeight - hsbHeight;
 
-                Logger.logMsg(
-                        "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" +
-                        "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-                );
+//                Logger.logMsg(
+//                        "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" +
+//                        "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+//                );
 
                 // Signal to the panel model that we're about to layout their panel and it would be a
                 // great time for the model's 'worldview' to be up-to-date and in sync with reality.
@@ -488,18 +499,18 @@ public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends 
                 );
                 setBounds(
                         VSB_NAME,
-                        _vsb,
+                        _vScrollBar,
                         new Rectangle( vPanelWidth, 0, vsbWidth, vsbHeight )
                 );
                 setBounds(
                         HSB_NAME,
-                        _hsb,
+                        _hScrollBar,
                         new Rectangle( 0, vPanelHeight, hsbWidth, hsbHeight )
                 );
 
                 VirtualScrollablePanelModel.CurrentGoals<E> currentGoals =
                         _virtualScrollablePanelModel.getCurrentGoals(
-                                _vsb.getValue(),
+                                _vScrollBar.getValue(),
                                 new Dimension( vPanelWidth, vPanelHeight )
                         );
 
@@ -634,13 +645,13 @@ public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends 
                 }
 
                 _virtualScrollablePanelModel.configureVerticalScrollBar(
-                        _vsb,
+                        _vScrollBar,
                         nRendered,
                         currentGoals.getScrollableElementsCount()
                 );
 
                 _virtualScrollablePanelModel.configureHorizontalScrollBar(
-                        _hsb, widestRenderedElementView,
+                        _hScrollBar, widestRenderedElementView,
                         vPanelWidth - ( in.left + in.right )
                 );
 

@@ -4,6 +4,7 @@
 
 package com.obtuse.util;
 
+import com.obtuse.exceptions.HowDidWeGetHereError;
 import com.obtuse.util.gowing.*;
 import com.obtuse.util.gowing.p2a.GowingEntityReference;
 import com.obtuse.util.gowing.p2a.GowingUtil;
@@ -84,6 +85,14 @@ public class TreeSorter<K extends Comparable<? super K>, V>
         }
 
     };
+
+    /**
+     The {@link SortedMap}{@code <K,List<V>>} that implements this tree sorter.
+     <p>The values in this map must be of a particular collection type because the behaviour of the values in the
+     sorted map that we construct in our {@link #finishUnpacking(GowingUnPacker)} method must have 'unsurprising' behaviour.</p>
+     <p>In other words, much as it would be sometimes useful to have a tree sorter that uses a {@code SortedMap<K,SortedSet<V>>},
+     the behaviour of sorted sets is distinctly different than the behaviour of lists.</p>
+     */
 
     private final SortedMap<K, List<V>> _sortedData;
 
@@ -960,9 +969,21 @@ public class TreeSorter<K extends Comparable<? super K>, V>
      */
 
     @NotNull
-    public Set<K> keySet() {
+    public SortedSet<K> keySet() {
 
-        return _sortedData.keySet();
+        Set<K> keySet = _sortedData.keySet();
+        if ( keySet instanceof SortedSet ) {
+
+            return (SortedSet<K>)keySet;
+
+        } else {
+
+            throw new HowDidWeGetHereError(
+                    "TreeMap.keySet returned " + keySet.getClass().getCanonicalName() +
+                    ", expected a " + SortedSet.class.getCanonicalName()
+            );
+
+        }
 
     }
 

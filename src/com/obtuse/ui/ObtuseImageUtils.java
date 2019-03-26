@@ -2,6 +2,7 @@ package com.obtuse.ui;
 
 import com.obtuse.exceptions.HowDidWeGetHereError;
 import com.obtuse.ui.exceptions.ObtuseImageLoadFailed;
+import com.obtuse.util.DateUtils;
 import com.obtuse.util.Logger;
 import com.obtuse.util.Measure;
 import com.obtuse.util.ObtuseUtil;
@@ -570,11 +571,34 @@ public class ObtuseImageUtils {
 
         }
 
-        Image img = waitToFinishLoading( "getScaledImage", scaledInstance );
+        Image img = waitToFinishLoading(
+                false,
+                "getScaledImage",
+                "getScaledImage( " + what + " )",
+                scaledInstance
+        );
 
-        BufferedImage bufferedImage = convertImageToBufferedImage( img );
+//        try {
 
-        return Optional.of( bufferedImage );
+            Optional<BufferedImage> optBufferedImage = optConvertImageToBufferedImage( img );
+
+            return optBufferedImage;
+
+//            if ( optBufferedImage.isPresent() ) {
+//
+//                return optBufferedImage;
+//
+//            }
+//
+//
+
+//        } catch ( RuntimeException e ) {
+//
+//            // Inspect the image. Why can't we turn it into a BufferedImage?
+//
+//            throw e;
+//
+//        }
 
     }
 
@@ -697,11 +721,20 @@ public class ObtuseImageUtils {
     /**
      Wait for an image to finish asynchronous loading.
      @return the image (same value as {@code img}).
+     @param verbose should status messages be printed.
      @param what what sort of operation we are waiting for (scaling, rotating, etc).
+     This is used to name {@link Measure} events. Care should be taken to use the same
+     {@code what} string for requests that are to be put into the same {@code Measure} bucket.
+     @param fullWhat a possibly longer {@code what} variant.
      @param img the image.
      */
 
-    public static Image waitToFinishLoading( final String what, @NotNull final Image img ) {
+    public static Image waitToFinishLoading(
+            boolean verbose,
+            final String what,
+            final String fullWhat,
+            @NotNull final Image img
+    ) {
 
         long callStart = System.currentTimeMillis();
 
@@ -727,6 +760,7 @@ public class ObtuseImageUtils {
 
             while ( true ) {
 
+                long startTime = System.currentTimeMillis();
                 try ( Measure ignored = new Measure( "waitToFinishLoading-spin" ) ) {
                     spinCount += 1;
 
@@ -758,7 +792,21 @@ public class ObtuseImageUtils {
 
                 }
 
-                Logger.logMsg( "ObtuseImageUtils:  checkStatus says " + mediaTracker.checkAll() );
+                long endTime = System.currentTimeMillis();
+                if ( endTime - startTime > 1000L ) {
+
+                    Logger.logMsg( "wait took " + DateUtils.formatDuration( endTime - startTime ) + " for " + fullWhat );
+
+                    ObtuseUtil.doNothing();
+
+                }
+
+                if ( verbose ) {
+
+                    Logger.logMsg( "ObtuseImageUtils:  checkStatus says " + mediaTracker.checkAll() + " for " + fullWhat );
+
+                }
+
                 if ( errored || aborted || complete ) {
 
                     break;
@@ -769,7 +817,19 @@ public class ObtuseImageUtils {
 
             }
 
-            Logger.logMsg( "ObtuseImageUtils:  spinCount=" + spinCount + ", errored=" + errored + ", aborted=" + aborted + ", complete=" + complete + ", loading=" + loading );
+            if ( verbose ) {
+
+                Logger.logMsg(
+                        "ObtuseImageUtils:  " +
+                        "spinCount=" + spinCount + ", " +
+                        "errored=" + errored + ", " +
+                        "aborted=" + aborted + ", " +
+                        "complete=" + complete + ", " +
+                        "loading=" + loading +
+                        " for " + what
+                );
+
+            }
 
             return img;
 
@@ -855,9 +915,37 @@ public class ObtuseImageUtils {
     @NotNull
     public static BufferedImage convertImageToBufferedImage( Image inputImage ) {
 
+        @NotNull Optional<BufferedImage> rval = optConvertImageToBufferedImage( inputImage );
+        if ( rval.isPresent() ) {
+
+            return rval.get();
+
+        } else {
+
+            throw new IllegalArgumentException(
+                    "ObtuseImageUtils.convertImageToBufferedImage:  " +
+                    "unable to convert " + ObtuseUtil.enquoteJavaObject( inputImage ) + " to a buffered image"
+            );
+
+        }
+
+    }
+
+    /**
+     Try to convert an {@link Image} into a {@link BufferedImage}.
+     @param inputImage the {@link Image} to be converted.
+     @return an {@link Optional}{@code <BufferedImage>} containing the image if the conversion worked;
+     an {@code Optional.empty()} otherwise.
+     <p>For reasons which are not at all clear, some images cannot be converted into {@code BufferedImage} instances
+     in any obvious way. See the catching of a {@link RuntimeException} below for a tiny bit more elucidation.</p>
+     */
+
+    @NotNull
+    public static Optional<BufferedImage> optConvertImageToBufferedImage( Image inputImage ) {
+
         if ( inputImage instanceof BufferedImage ) {
 
-            return (BufferedImage)inputImage;
+            return Optional.of( (BufferedImage)inputImage );
 
         }
 
@@ -876,11 +964,13 @@ public class ObtuseImageUtils {
             Logger.logErr( "java.lang.Exception caught", e );
             ObtuseUtil.doNothing();
 
+            return Optional.empty();
+
         }
 
         g.dispose();
 
-        return newImage;
+        return Optional.of( newImage );
 
     }
 
