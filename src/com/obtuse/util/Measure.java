@@ -6,9 +6,9 @@ package com.obtuse.util;
 
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.Closeable;
-import java.io.IOException;
 import java.io.PrintStream;
 import java.util.*;
 
@@ -41,6 +41,7 @@ public class Measure implements Closeable {
 
     private static SortedMap<String, Stats> s_stats = new TreeMap<>();
 
+    @SuppressWarnings("ConstantConditions")
     private static int s_maxCategoryNameLength = Math.max( OUTER_DONE_STATS.length(), INNER_DONE_STATS.length() );
 
     private static long s_measuringSinceMillis = System.currentTimeMillis();
@@ -298,6 +299,7 @@ public class Measure implements Closeable {
 
     }
 
+    @NotNull
     public String getCategoryName() {
 
         return _categoryName;
@@ -318,7 +320,7 @@ public class Measure implements Closeable {
 
     public long done() {
 
-        return done( _categoryName );
+        return done( _categoryName, null );
 
     }
 
@@ -330,10 +332,17 @@ public class Measure implements Closeable {
      the stack accounting scheme cannot handle changing event names).
      </p>
      @param categoryName the category under which this event should be 'filed'.
+     @param categoryNameAugmentation an optional name 'appendage' that changes which
+     bucket this instance contributes to. Effectively, this allows the category name
+     of an instance to be changed after the instance is created. This can be useful
+     if something happens during the lifetime of the instance that makes what the instance
+     is measuring sufficiently atypical to warrant being handled separately.
+     For example, an instance measuring something that has failed unexpectedly might
+     end with a call to
      @return the duration of the event in milliseconds.
      */
 
-    public long done( final @NotNull String categoryName ) {
+    public long done( @NotNull final String categoryName, @Nullable final String categoryNameAugmentation ) {
 
         if ( !_initialized ) {
 
@@ -350,22 +359,28 @@ public class Measure implements Closeable {
         long now = System.currentTimeMillis();
         long delta = now - _startTimeMillis;
 
+        if ( categoryNameAugmentation != null ) {
+
+            ObtuseUtil.doNothing();
+
+        }
+
         synchronized ( Measure.LOCK ) {
 
             long innerNow = System.currentTimeMillis();
 
-            recordData( categoryName, Measure.s_stats, delta );
+            recordData( categoryName, categoryNameAugmentation, Measure.s_stats, delta );
 
             long threadId = Thread.currentThread().getId();
             Stack<StackLevelInfo> ourStack = Measure.s_threadStacks.get( threadId );
             if ( ourStack == null || ourStack != _ourStack ) {
 
-                recordData( _categoryName, Measure.s_crossThreadStats, delta );
+                recordData( _categoryName, null, Measure.s_crossThreadStats, delta );
 
             } else if ( ourStack.isEmpty() || !ourStack.peek().getLevelName().equals( _categoryName ) ) {
 
                 ourStack.clear();
-                recordData( _categoryName, Measure.s_stackErrorStats, delta );
+                recordData( _categoryName, null, Measure.s_stackErrorStats, delta );
 
             } else {
 
@@ -459,7 +474,23 @@ public class Measure implements Closeable {
 
     }
 
-    private void recordData( final String overrideCategoryName, final SortedMap<String, Stats> map, final long delta ) {
+    private void recordData(
+            @NotNull final String categoryName,
+            @Nullable final String categoryNameAugmentation,
+            @NotNull final SortedMap<String, Stats> map, final long delta
+    ) {
+
+        String overrideCategoryName;
+
+        if ( categoryNameAugmentation == null ) {
+
+            overrideCategoryName = categoryName;
+
+        } else {
+
+            overrideCategoryName = categoryName + ":" + categoryNameAugmentation;
+
+        }
 
         Measure.recordData( map, overrideCategoryName, delta );
 
@@ -491,6 +522,14 @@ public class Measure implements Closeable {
     public static void showStats( final PrintStream where, final boolean showTitle ) {
 
         if ( !Measure.s_globallyEnabled ) {
+
+            Logger.logMsg( "```````````````````````````" );
+            Logger.logMsg( "```````````````````````````" );
+            Logger.logMsg( "```````````````````````````" );
+            Logger.logMsg( "``````````````````````````` Measure facility is currently globally disabled" );
+            Logger.logMsg( "```````````````````````````" );
+            Logger.logMsg( "```````````````````````````" );
+            Logger.logMsg( "```````````````````````````" );
 
             return;
 

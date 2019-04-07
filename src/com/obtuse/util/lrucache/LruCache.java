@@ -5,6 +5,7 @@ import com.obtuse.util.Logger;
 import com.obtuse.util.ObtuseUtil;
 import org.jetbrains.annotations.NotNull;
 
+import javax.swing.*;
 import java.util.*;
 import java.util.function.Consumer;
 
@@ -34,10 +35,33 @@ public class LruCache<K,R> implements Iterable<CachedThing<K,R>> {
     private int _nonNullRvalCount = 0;
     private String _activeMethod = null;
 
+    private boolean _thingsRequireCleanup = false;
+
+    private static Thread s_mainThread;
+
+    public static void identifyMainThread( final Thread currentThread ) {
+
+        s_mainThread = currentThread;
+
+    }
+
+    @NotNull
+    public static Thread getMainThread() {
+
+        return s_mainThread;
+
+    }
+
     public interface Fetcher<K,R> {
 
         @NotNull
         Optional<CachedThing<K,R>> fetch( @NotNull final K key, final boolean nullOk );
+
+    }
+
+    public interface ThingRequiringCleanup<KK> {
+
+        void doCleanupPriorToCacheDeletion( KK key );
 
     }
 
@@ -97,8 +121,59 @@ public class LruCache<K,R> implements Iterable<CachedThing<K,R>> {
         this( cacheName, DEFAULT_MAXIMUM_CACHE_SIZE, fetcher );
     }
 
+    private void checkOnEventThread( @NotNull final String who ) {
+
+        if ( !SwingUtilities.isEventDispatchThread() && !Thread.currentThread().equals( s_mainThread ) ) {
+
+            throw new HowDidWeGetHereError( "LruCache:  call to " + who + " is NOT on the event thread or main thread" );
+
+        }
+
+    }
+
+    public void setThingsRequireCleanup( boolean thingsRequireCleanup ) {
+
+        checkOnEventThread( "setThingsRequireCleanup" );
+
+        _thingsRequireCleanup = thingsRequireCleanup;
+
+    }
+
+    public boolean doThingsRequireCleanup() {
+
+        checkOnEventThread( "doThingsRequireCleanup" );
+
+        return _thingsRequireCleanup;
+
+    }
+
+    public void forceThingsCleanup() {
+
+        checkOnEventThread( "forceThingsCleanup" );
+
+        if ( doThingsRequireCleanup() ) {
+
+            for ( K key : _cache.keySet() ) {
+
+                CachedThing<K, R> cachedThing = _cache.get( key );
+                R thing = cachedThing.getThing();
+                if ( thing instanceof ThingRequiringCleanup ) {
+
+                    @SuppressWarnings("unchecked") ThingRequiringCleanup<K> th = (ThingRequiringCleanup<K>)thing;
+                    th.doCleanupPriorToCacheDeletion( cachedThing.getKey() );
+
+                }
+
+            }
+
+        }
+
+    }
+
     @NotNull
     public String getCacheName() {
+
+        checkOnEventThread( "getCacheName" );
 
         return _cacheName;
 
@@ -108,12 +183,16 @@ public class LruCache<K,R> implements Iterable<CachedThing<K,R>> {
     @Override
     public Iterator<CachedThing<K, R>> iterator() {
 
+        checkOnEventThread( "iterator" );
+
         return _cache.values().iterator();
 
     }
 
     @Override
     public void forEach( final Consumer<? super CachedThing<K, R>> action ) {
+
+        checkOnEventThread( "foreach" );
 
         _cache.values().forEach( action );
 
@@ -122,6 +201,8 @@ public class LruCache<K,R> implements Iterable<CachedThing<K,R>> {
 
     @Override
     public Spliterator<CachedThing<K, R>> spliterator() {
+
+        checkOnEventThread( "spliterator" );
 
         return _cache.values().spliterator();
 
@@ -134,6 +215,8 @@ public class LruCache<K,R> implements Iterable<CachedThing<K,R>> {
 
     @SuppressWarnings("unused")
     public synchronized void clear() {
+
+        checkOnEventThread( "clear" );
 
         _activeMethod = checkForRecursion( "clear()" );
         try {
@@ -150,7 +233,9 @@ public class LruCache<K,R> implements Iterable<CachedThing<K,R>> {
     }
 
     @NotNull
-    private String checkForRecursion( @NotNull final String who ) {
+    private synchronized String checkForRecursion( @NotNull final String who ) {
+
+        checkOnEventThread( "checkForRecursion" );
 
         if ( _activeMethod != null ) {
 
@@ -171,6 +256,7 @@ public class LruCache<K,R> implements Iterable<CachedThing<K,R>> {
     @SuppressWarnings("unused")
     public synchronized void clearStats() {
 
+        checkOnEventThread( "clearStats" );
         _nonNullRvalCount = 0;
         _nullRvalCount = 0;
 
@@ -183,6 +269,7 @@ public class LruCache<K,R> implements Iterable<CachedThing<K,R>> {
 
     public synchronized int size() {
 
+        checkOnEventThread( "size" );
         return _cache.size();
 
     }
@@ -198,6 +285,8 @@ public class LruCache<K,R> implements Iterable<CachedThing<K,R>> {
 
     @SuppressWarnings("unused")
     public synchronized int setMaximumCacheSize( int maximumCacheSize ) {
+
+        checkOnEventThread( "setMaximumCacheSize" );
 
         _activeMethod = checkForRecursion( "setMaximumCacheSize( " + maximumCacheSize + ")" );
         try {
@@ -225,6 +314,7 @@ public class LruCache<K,R> implements Iterable<CachedThing<K,R>> {
     @SuppressWarnings("unused")
     public synchronized int getMaximumCacheSize() {
 
+        checkOnEventThread( "getMaximumCacheSize" );
         return _maximumCacheSize;
 
     }
@@ -240,6 +330,8 @@ public class LruCache<K,R> implements Iterable<CachedThing<K,R>> {
      */
 
     public synchronized Optional<CachedThing<K,R>> getNoFetch( @NotNull final K key ) {
+
+        checkOnEventThread( "getNoFetch" );
 
         _activeMethod = checkForRecursion( "getNoFetch()" );
         try {
@@ -264,6 +356,8 @@ public class LruCache<K,R> implements Iterable<CachedThing<K,R>> {
      */
 
     public boolean isElementAlreadyCached( @NotNull final K key ) {
+
+        checkOnEventThread( "isElementAlreadyCached" );
 
         return getNoFetch( key ).isPresent();
 
@@ -296,6 +390,8 @@ public class LruCache<K,R> implements Iterable<CachedThing<K,R>> {
      */
 
     private synchronized CachedThing<K, R> innerGet( @NotNull final K key, final boolean nullOk ) {
+
+        checkOnEventThread( "innerGet" );
 
         _totalFetchCount += 1;
 
@@ -366,6 +462,8 @@ public class LruCache<K,R> implements Iterable<CachedThing<K,R>> {
 
     @SuppressWarnings("UnusedReturnValue")
     public CachedThing<K, R> insertElementIntoCache( @NotNull final CachedThing<K,R> cachedThing, boolean replaceOk ) {
+
+        checkOnEventThread( "insertElementIntoCache" );
 
         if ( _lru.size() != _cache.size() ) {
 
@@ -438,6 +536,7 @@ public class LruCache<K,R> implements Iterable<CachedThing<K,R>> {
     @SuppressWarnings("unused")
     public CachedThing<K, R> getMandatory( @NotNull final K key ) {
 
+        checkOnEventThread( "getMandatory" );
         _activeMethod = checkForRecursion( "getMandatory()" );
         try {
 
@@ -466,6 +565,7 @@ public class LruCache<K,R> implements Iterable<CachedThing<K,R>> {
     @SuppressWarnings("unused")
     public Optional<CachedThing<K, R>> getOptional( @NotNull final K key ) {
 
+        checkOnEventThread( "getOptional" );
         _activeMethod = checkForRecursion( "getOptional()" );
         try {
 
@@ -507,6 +607,8 @@ public class LruCache<K,R> implements Iterable<CachedThing<K,R>> {
 
     private synchronized void noteReference( @NotNull final CachedThing<K,R> element ) {
 
+        checkOnEventThread( "noteReference" );
+
         _lru.remove( element.getVirtualLastReferenceTime() );
 //        _lru.remove( element );
         _lru.put( element.noteNewReference(), element );
@@ -514,6 +616,8 @@ public class LruCache<K,R> implements Iterable<CachedThing<K,R>> {
     }
 
     private synchronized void replaceReference( @NotNull final CachedThing<K,R> oldElement, @NotNull final CachedThing<K,R> newElement ) {
+
+        checkOnEventThread( "replaceReference" );
 
         if ( _lru.containsKey( newElement.getVirtualLastReferenceTime() ) ) {
 
@@ -545,11 +649,15 @@ public class LruCache<K,R> implements Iterable<CachedThing<K,R>> {
 
     public void setCrashWhenFull( boolean crashWhenFull ) {
 
+//        checkOnEventThread( "setCrashWhenFull" );
+
         _crashWhenFull = crashWhenFull;
 
     }
 
     public boolean crashWhenFull() {
+
+        checkOnEventThread( "crashWhenFull" );
 
         return _crashWhenFull;
 
@@ -570,6 +678,8 @@ public class LruCache<K,R> implements Iterable<CachedThing<K,R>> {
 
         ObtuseUtil.doNothing();
 
+        checkOnEventThread( "makeRoom" );
+
         while ( _cache.size() > _maximumCacheSize ) {
 
             if ( crashWhenFull() ) {
@@ -580,6 +690,17 @@ public class LruCache<K,R> implements Iterable<CachedThing<K,R>> {
 
             long oldestVirtualTime = _lru.firstKey();
             CachedThing<K,R> oldest = _lru.remove( oldestVirtualTime );
+
+            Logger.logMsg( "LruCache(" + _cacheName + "):  removing " + oldest.getKey() );
+
+            R thing = oldest.getThing();
+            if ( _thingsRequireCleanup && thing instanceof ThingRequiringCleanup ) {
+
+                @SuppressWarnings("unchecked") ThingRequiringCleanup<K> th = (ThingRequiringCleanup<K>)thing;
+                th.doCleanupPriorToCacheDeletion( oldest.getKey() );
+
+            }
+
             _cache.remove( oldest.getKey() );
 
             oldest.uncached();
@@ -601,6 +722,8 @@ public class LruCache<K,R> implements Iterable<CachedThing<K,R>> {
     @SuppressWarnings("unused")
     public int getNullRvalCount() {
 
+        checkOnEventThread( "getNullRvalCount" );
+
         return _nullRvalCount;
 
     }
@@ -616,6 +739,8 @@ public class LruCache<K,R> implements Iterable<CachedThing<K,R>> {
     @SuppressWarnings("unused")
     public int getNonNullRvalCount() {
 
+        checkOnEventThread( "getNonNullRvalCount" );
+
         return _nonNullRvalCount;
 
     }
@@ -628,25 +753,33 @@ public class LruCache<K,R> implements Iterable<CachedThing<K,R>> {
 
     public String toString() {
 
-        return "" +
-               _totalFetchCount + " fetches, " +
-               ( _totalFetchCount - _actualFetchCount ) + " already in memory, " +
-               _actualFetchCount + " fetched from disk, " +
-               ObtuseUtil.lpad(
-                       Math.round(
-                               Math.round(
-                                       100 * (
-                                               1.0 - ObtuseUtil.safeDivide(
-                                                       _actualFetchCount,
-                                                       (double)_totalFetchCount
-                                               )
-                                       )
-                               )
-                       ),
-                       0
-               ) +
-               "% efficient, " +
-               "maximumSize=" + getMaximumCacheSize();
+        if ( SwingUtilities.isEventDispatchThread() ) {
+
+            return "" +
+                   _totalFetchCount + " fetches, " +
+                   ( _totalFetchCount - _actualFetchCount ) + " already in memory, " +
+                   _actualFetchCount + " fetched from disk, " +
+                   ObtuseUtil.lpad(
+                           Math.round(
+                                   Math.round(
+                                           100 * (
+                                                   1.0 - ObtuseUtil.safeDivide(
+                                                           _actualFetchCount,
+                                                           (double)_totalFetchCount
+                                                   )
+                                           )
+                                   )
+                           ),
+                           0
+                   ) +
+                   "% efficient, " +
+                   "maximumSize=" + getMaximumCacheSize();
+
+        } else {
+
+            return "LruCache.toString called NOT called from event thread";
+
+        }
 
     }
 

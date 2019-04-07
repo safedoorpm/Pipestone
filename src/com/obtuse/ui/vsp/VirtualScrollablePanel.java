@@ -37,9 +37,10 @@ public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends 
             final int unitsToScroll
     ) {
 
+        //noinspection StatementWithEmptyBody
         if ( scrollBar.getValueIsAdjusting() ) {
 
-            Logger.logMsg( name + " scroll bar's value is adjusting!" );
+//            Logger.logMsg( name + " scroll bar's value is adjusting!" );
 
         } else {
 
@@ -49,7 +50,7 @@ public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends 
 
             scrollBar.setValue( newValue );
 
-            Logger.logMsg( name + " scroll bar's value is now " + scrollBar.getValue() );
+//            Logger.logMsg( name + " scroll bar's value is now " + scrollBar.getValue() );
 
             ObtuseUtil.doNothing();
 
@@ -91,7 +92,7 @@ public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends 
                     @Override
                     public void mouseWheelMoved( final MouseWheelEvent e ) {
 
-                        Logger.logMsg( "mouseWheelMoved:  " + e );
+//                        Logger.logMsg( "mouseWheelMoved:  " + e );
 
                         ObtuseUtil.doNothing();
 
@@ -104,10 +105,10 @@ public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends 
                         } else {
 
                             boolean isVerticalScroll = !e.isShiftDown();
-                            Logger.logMsg(
-                                    "got a unit scroll, unitsToScroll=" + e.getUnitsToScroll() +
-                                    ", isVerticalScroll=" + isVerticalScroll
-                            );
+//                            Logger.logMsg(
+//                                    "got a unit scroll, unitsToScroll=" + e.getUnitsToScroll() +
+//                                    ", isVerticalScroll=" + isVerticalScroll
+//                            );
 
                             if ( isVerticalScroll ) {
 
