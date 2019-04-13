@@ -227,6 +227,10 @@ public interface VirtualScrollablePanelModel<E extends VirtualScrollableElement>
             final int innerScrollableWindowWidth
     );
 
+    int getVerticalScrollBarValue();
+
+    void setVerticalScrollBarValue( int newValue );
+
     /**
      Get the approximate height in pixels of an element.
      <p>This only needs to be a reasonable estimate. The actual height of an element will be

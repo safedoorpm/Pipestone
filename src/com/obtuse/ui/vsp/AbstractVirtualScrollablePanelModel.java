@@ -34,6 +34,10 @@ public abstract class AbstractVirtualScrollablePanelModel<E extends VirtualScrol
 
     private int _nElementViewsFilledAndRendered = 0;
 
+    private JScrollBar _verticalScrollBar;
+
+    private JScrollBar _horizontalScrollBar;
+
     public AbstractVirtualScrollablePanelModel(
             @NotNull final ElementView.ElementViewFactory<E> elementViewFactory
     ) {
@@ -89,6 +93,8 @@ public abstract class AbstractVirtualScrollablePanelModel<E extends VirtualScrol
             final int actualScrollableElements
     ) {
 
+        _verticalScrollBar = verticalScrollBar;
+
         int min = 0;
         @SuppressWarnings("UnnecessaryLocalVariable") int extent = nRenderedElementViews;
         @SuppressWarnings("UnnecessaryLocalVariable") int max = actualScrollableElements;
@@ -137,6 +143,8 @@ public abstract class AbstractVirtualScrollablePanelModel<E extends VirtualScrol
             final int innerScrollableWindowWidth
     ) {
 
+        _horizontalScrollBar = horizontalScrollBar;
+
         int min = 0;
         int extent = Math.min( widestRenderedElementView, innerScrollableWindowWidth );
         int max = Math.max( widestRenderedElementView, innerScrollableWindowWidth );
@@ -163,6 +171,20 @@ public abstract class AbstractVirtualScrollablePanelModel<E extends VirtualScrol
         }
 
         return didSomething;
+
+    }
+
+    @Override
+    public int getVerticalScrollBarValue() {
+
+        return _verticalScrollBar.getValue();
+
+    }
+
+    @Override
+    public void setVerticalScrollBarValue( final int newValue ) {
+
+        _verticalScrollBar.setValue( newValue );
 
     }
 

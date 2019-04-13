@@ -360,6 +360,8 @@ public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends 
 
         public void vsbChanged() {
 
+            ObtuseUtil.doNothing();
+
         }
 
         @Override
@@ -763,6 +765,20 @@ public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends 
         super.setLayout( layout );
 
     }
+
+    public int getVerticalScrollBarValue() {
+
+        return _virtualScrollablePanelModel.getVerticalScrollBarValue();
+
+    }
+
+    public void setVerticalScrollBarValue( final int newValue ) {
+
+        _virtualScrollablePanelModel.setVerticalScrollBarValue( newValue );
+
+    }
+
+
 
     public abstract static class AbstractElementView<EV extends VirtualScrollableElement>
             extends JPanel implements ElementView<EV> {

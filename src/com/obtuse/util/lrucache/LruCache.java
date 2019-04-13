@@ -2,6 +2,7 @@ package com.obtuse.util.lrucache;
 
 import com.obtuse.exceptions.HowDidWeGetHereError;
 import com.obtuse.util.Logger;
+import com.obtuse.util.Measure;
 import com.obtuse.util.ObtuseUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -401,19 +402,24 @@ public class LruCache<K,R> implements Iterable<CachedThing<K,R>> {
 
         }
 
-        CachedThing<K, R> rval = (
-                _cache.computeIfAbsent(
-                        key,
-                        keyx -> {
+        CachedThing<K, R> rval;
+        try ( Measure ignored = new Measure( "LruCache.innerGet(invoke fetcher)" ) ) {
 
-                            _actualFetchCount += 1;
+            rval = (
+                    _cache.computeIfAbsent(
+                            key,
+                            keyx -> {
 
-                            Optional<CachedThing<K, R>> rv = _fetcher.fetch( keyx, nullOk );
-                            return rv.orElse( null );
+                                _actualFetchCount += 1;
 
-                        }
-                )
-        );
+                                Optional<CachedThing<K, R>> rv = _fetcher.fetch( keyx, nullOk );
+                                return rv.orElse( null );
+
+                            }
+                    )
+            );
+
+        }
 
         if ( rval == null ) {
 
@@ -435,9 +441,17 @@ public class LruCache<K,R> implements Iterable<CachedThing<K,R>> {
             // that separating the noting of references from the making of room is a
             // risky game to play.
 
-            noteReference( rval );
+            try ( Measure ignored = new Measure( "LruCache.innerGet(noteReference)" ) ) {
 
-            makeRoom();
+                noteReference( rval );
+
+            }
+
+            try ( Measure ignored = new Measure( "LruCache.innerGet(makeRoom)" ) ) {
+
+                makeRoom();
+
+            }
 
             if ( _lru.size() != _cache.size() ) {
 
@@ -691,7 +705,7 @@ public class LruCache<K,R> implements Iterable<CachedThing<K,R>> {
             long oldestVirtualTime = _lru.firstKey();
             CachedThing<K,R> oldest = _lru.remove( oldestVirtualTime );
 
-            Logger.logMsg( "LruCache(" + _cacheName + "):  removing " + oldest.getKey() );
+//            Logger.logMsg( "LruCache(" + _cacheName + "):  removing " + oldest.getKey() );
 
             R thing = oldest.getThing();
             if ( _thingsRequireCleanup && thing instanceof ThingRequiringCleanup ) {
