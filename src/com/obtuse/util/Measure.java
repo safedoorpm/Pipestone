@@ -629,20 +629,27 @@ public class Measure implements Closeable {
      @param categoryName the name of the category being measured.
      @param runnable the code to be measured.
      @return the delta for this invocation.
-     @deprecated Switch to the at least arguably cleaner and definitely more flexible
+     <p>While there may still be situations in which this {@link Runnable}-based approach makes sense,
+     it is probably best to switch to the at least arguably cleaner and definitely more flexible
      <blockquote>
-     <code>try ( Measure m = new Measure( __category_name__ ) ) {
+     <code>try ( Measure ignored = new Measure( "category name" ) ) {
      <blockquote>... the code to be measured ...</blockquote>
      }</code>
-     </blockquote>
+     </blockquote></p>
+     <p>P.S. the above try block based approach is exactly how this method is implemented.</p>
+
      */
 
     @Deprecated
-    public static long measure( final String categoryName, final Runnable runnable ) {
+    public static long measure( final String categoryName, @NotNull final Runnable runnable ) {
 
-        Measure measure = new Measure( categoryName );
-        runnable.run();
-        return measure.done();
+        try ( Measure m = new Measure( categoryName ) ) {
+
+            runnable.run();
+
+            return m.deltaMillis();
+
+        }
 
     }
 

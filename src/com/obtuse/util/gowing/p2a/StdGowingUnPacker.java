@@ -331,94 +331,95 @@ public class StdGowingUnPacker implements GowingUnPacker {
 
             while ( true ) {
 
-                Measure unpackOne = new Measure( "StdGowingUnPacker - unpack one" );
+                try ( Measure ignored = new Measure( "StdGowingUnPacker - unpack one" ) ) {
 
-                GowingToken token = _tokenizer.getNextToken( false, "unpack one" );
+                    GowingToken token = _tokenizer.getNextToken( false, "unpack one" );
 
-                if ( token.type() == StdGowingTokenizer.TokenType.LONG ) {
+                    if ( token.type() == StdGowingTokenizer.TokenType.LONG ) {
 
-                    _tokenizer.putBackToken( token );
-                    collectTypeAlias();
-                    //noinspection UnusedAssignment
-                    semiColon = _tokenizer.getNextToken( false, StdGowingTokenizer.TokenType.SEMI_COLON );
+                        _tokenizer.putBackToken( token );
+                        collectTypeAlias();
+                        //noinspection UnusedAssignment
+                        semiColon = _tokenizer.getNextToken( false, StdGowingTokenizer.TokenType.SEMI_COLON );
 
-                } else if ( token.type() == StdGowingTokenizer.TokenType.ENTITY_REFERENCE ) {
+                    } else if ( token.type() == StdGowingTokenizer.TokenType.ENTITY_REFERENCE ) {
 
-                    try ( Measure ignored = new Measure( "Gowing-constructEntity" ) ) {
+                        try ( Measure ignored1 = new Measure( "Gowing-constructEntity" ) ) {
 
-                        GowingPackedEntityBundle bundle;
-                        try ( Measure ignored1 = new Measure( "Gowing-constructEntity-parse" ) ) {
+                            GowingPackedEntityBundle bundle;
+                            try ( Measure ignored2 = new Measure( "Gowing-constructEntity-parse" ) ) {
 
-                            _tokenizer.putBackToken( token );
-                            try ( Measure ignore1a = new Measure( "Gowing-constructEntity-collect" ) ) {
-                                bundle = collectEntityDefinitionClause( false );
+                                _tokenizer.putBackToken( token );
+                                try ( Measure ignored3 = new Measure( "Gowing-constructEntity-collect" ) ) {
+                                    bundle = collectEntityDefinitionClause( false );
+                                }
+                                @SuppressWarnings({ "unused" })
+                                GowingToken semiColonToken =
+                                        _tokenizer.getNextToken(
+                                                false,
+                                                StdGowingTokenizer.TokenType.SEMI_COLON
+                                        );
+
                             }
-                            @SuppressWarnings({ "unused" })
-                            GowingToken semiColonToken =
-                                    _tokenizer.getNextToken(
-                                            false,
-                                            StdGowingTokenizer.TokenType.SEMI_COLON
-                                    );
 
-                        }
+                            GowingPackable entity;
+                            try ( Measure ignored2 = new Measure( "Gowing-constructEntity-construct" ) ) {
 
-                        GowingPackable entity;
-                        try ( Measure ignored2 = new Measure( "Gowing-constructEntity-construct" ) ) {
+                                entity = constructEntity( token.entityReference(), token, bundle );
+                                bundle.setOurInstanceId( entity.getInstanceId() );
 
-                            entity = constructEntity( token.entityReference(), token, bundle );
+                            }
+
+                            if ( _superVerbose ) {
+
+                                _t.verboseTrace( "extracted ", token.entityReference() );
+
+                            }
                             bundle.setOurInstanceId( entity.getInstanceId() );
+                            if ( GowingUtil.isActuallyBackReferenceable( entity ) ) {
 
-                        }
+                                _finishingBackReference = true;
 
-                        if ( _superVerbose ) {
+                                try {
 
-                            _t.verboseTrace( "extracted ", token.entityReference() );
+                                    boolean rval = entity.finishUnpacking( this );
 
-                        }
-                        bundle.setOurInstanceId( entity.getInstanceId() );
-                        if ( GowingUtil.isActuallyBackReferenceable( entity ) ) {
+                                    if ( !rval ) {
 
-                            _finishingBackReference = true;
+                                        throw new GowingUnpackingException(
+                                                "StdGowingUnPacker.unPack:  " +
+                                                "back-reference's finishUnpacking method did not return true " +
+                                                "(entity's GII=" + entity.getInstanceId() + ")",
+                                                curLoc()
+                                        );
 
-                            try {
+                                    }
 
-                                boolean rval = entity.finishUnpacking( this );
+                                } finally {
 
-                                if ( !rval ) {
-
-                                    throw new GowingUnpackingException(
-                                            "StdGowingUnPacker.unPack:  " +
-                                            "back-reference's finishUnpacking method did not return true " +
-                                            "(entity's GII=" + entity.getInstanceId() + ")",
-                                            curLoc()
-                                    );
+                                    _finishingBackReference = false;
+                                    finishedEarly.add( token.entityReference() );
 
                                 }
 
-                            } finally {
-
-                                _finishingBackReference = false;
-                                finishedEarly.add( token.entityReference() );
-
                             }
+
+                            group.add( token.entityReference()
+                                            .getEntityReferenceNames(), entity );
 
                         }
 
-                        group.add( token.entityReference().getEntityReferenceNames(), entity );
+                    } else if ( token.type() == StdGowingTokenizer.TokenType.EOF ) {
+
+                        break;
+
+                    } else {
+
+                        throw new GowingUnpackingException( "unexpected token " + token, token );
 
                     }
 
-                } else if ( token.type() == StdGowingTokenizer.TokenType.EOF ) {
-
-                    break;
-
-                } else {
-
-                    throw new GowingUnpackingException( "unexpected token " + token, token );
-
                 }
-
-                unpackOne.done();
 
             }
 
@@ -460,7 +461,7 @@ public class StdGowingUnPacker implements GowingUnPacker {
 
                         if ( !_unPackerContext.isEntityFinished( er ) ) {
 
-                            try ( Measure finishOne = new Measure( "StdGowingUnPacker - finish one" ) ) {
+                            try ( Measure ignored = new Measure( "StdGowingUnPacker - finish one" ) ) {
 
                                 if ( finishingPass == 4 ) {
 
@@ -477,7 +478,7 @@ public class StdGowingUnPacker implements GowingUnPacker {
 
                                 }
 
-                                try ( Measure typeMeasure = new Measure( "StdGowingUnPacker - finish " +
+                                try ( Measure ignored1 = new Measure( "StdGowingUnPacker - finish " +
                                                                          entity.getInstanceId()
                                                                                .getTypeName() )
                                 ) {

@@ -39,7 +39,7 @@ public class XMLParsingExample {
     @SuppressWarnings("SameParameterValue")
     private static void parseOnTheFly( final String inputFilename ) {
 
-        try ( Measure m = new Measure( "entire on-the-fly" ) ) {
+        try ( Measure ignored = new Measure( "entire on-the-fly" ) ) {
 
             SAXParserFactory spf = SAXParserFactory.newInstance();
             @SuppressWarnings("TooBroadScope")
@@ -104,7 +104,7 @@ public class XMLParsingExample {
     private static void loadEntireDocument( final String inputFilename ) {
 
         Document doc;
-        try ( Measure m = new Measure( "load-entire-document" ) ) {
+        try ( Measure ignored = new Measure( "load-entire-document" ) ) {
 
             try {
 
@@ -134,7 +134,7 @@ public class XMLParsingExample {
 
         }
 
-        try ( Measure m = new Measure( "clean things up" ) ) {
+        try ( Measure ignored = new Measure( "clean things up" ) ) {
 
             // Clean things up.
 
