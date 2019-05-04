@@ -1216,7 +1216,7 @@ public class ObtuseApproximateCalendarDate
 
     public static void main( final String[] args ) {
 
-        BasicProgramConfigInfo.init( "Obtuse", "Util", "Testing", null );
+        BasicProgramConfigInfo.init( "Obtuse", "Util", "Testing" );
 
         Logger.logMsg( "unknown date is " + UNKNOWN_APPROXIMATE_DATE );
 

@@ -588,7 +588,7 @@ public class GridArray<T extends GridArray.ItemInfo> {
 
     public static void main( String[] args ) {
 
-        BasicProgramConfigInfo.init( "Kenosee", "FlexiGrid", "testing", null );
+        BasicProgramConfigInfo.init( "Kenosee", "FlexiGrid", "testing" );
 
         GridArray<ItemInfo<?>> ga = new GridArray<>( "GridArray.main" );
 

@@ -117,7 +117,7 @@ public class MyExploreSSL {
 
     static {
 
-        BasicProgramConfigInfo.init( "Obtuse", "McLuhan", "Test", null );
+        BasicProgramConfigInfo.init( "Obtuse", "McLuhan", "Test" );
 
         SSLContext sslContext = null;
         try {

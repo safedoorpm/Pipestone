@@ -226,7 +226,7 @@ public class SelectableImage extends JPanel
 
     public static void main( final String[] args ) {
 
-        BasicProgramConfigInfo.init( "Obtuse", "SelectableImage", "testing", null );
+        BasicProgramConfigInfo.init( "Obtuse", "SelectableImage", "testing" );
 
         JFrame jf = new JFrame();
         JPanel jp = new JPanel();

@@ -637,7 +637,7 @@ public class FlexibleDateTransmogrifier {
 
     public static void main( final String[] args ) {
 
-        BasicProgramConfigInfo.init( "Obtuse", "Pipestone", "testing", null );
+        BasicProgramConfigInfo.init( "Obtuse", "Pipestone", "testing" );
 
         boolean failed = false;
         long startTime = 0;

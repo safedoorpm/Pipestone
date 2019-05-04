@@ -77,11 +77,6 @@ public class BasicProgramConfigInfo {
 
         HowDidWeGetHereError.setStackTracePrintStream( System.err );
 
-        BasicProgramConfigInfo.s_vendorName = vendorName.replace( ' ', '_' );
-        BasicProgramConfigInfo.s_applicationName = applicationName.replace( ' ', '_' );
-        BasicProgramConfigInfo.s_componentName = componentName.replace( ' ', '_' );
-        BasicProgramConfigInfo.s_preferences = preferences;
-
         if ( BasicProgramConfigInfo.s_initialized ) {
 
             throw new IllegalArgumentException( "BasicProgramConfigInfo already initialized" );
@@ -89,6 +84,11 @@ public class BasicProgramConfigInfo {
         }
 
         String home = System.getProperty( "user.home" );
+        BasicProgramConfigInfo.s_vendorName = vendorName.replace( ' ', '_' );
+        BasicProgramConfigInfo.s_applicationName = applicationName.replace( ' ', '_' );
+        BasicProgramConfigInfo.s_componentName = componentName.replace( ' ', '_' );
+        BasicProgramConfigInfo.s_preferences = preferences;
+
         if ( workingDirectory == null ) {
 
             if ( home == null ) {
@@ -156,21 +156,48 @@ public class BasicProgramConfigInfo {
      @param vendorName      the program's vendor's name (must not be null).
      @param applicationName the application's name (must not be null).
      @param componentName   this component's name within the larger application (must not be null).
-     @param preferences     this application's preferences object (may be null if application has no use for
-     preferences).
-     This value may be <tt>null</tt> in which case the application name will generally be used.
+
+     */
+
+    public static void init(
+            @SuppressWarnings("SameParameterValue") final @NotNull String vendorName,
+            @SuppressWarnings("SameParameterValue") final @NotNull String applicationName,
+            @SuppressWarnings("SameParameterValue") final @NotNull String componentName
+    ) {
+
+        initIncludingWorkingDirectory( vendorName, applicationName, componentName, null, null );
+
+    }
+
+    /**
+     Initialize and provide the base of the running application's preferences in (presumably) the user root
+     of the global preferences tree.
+     @param vendorName      the program's vendor's name (must not be null).
+     @param applicationName the application's name (must not be null).
+     @param componentName   this component's name within the larger application (must not be null).
+     @param preferences     the base of the running applications preferences (NEW 2019-05-03:  must not be null).
      */
 
     public static void init(
             @SuppressWarnings("SameParameterValue") final @NotNull String vendorName,
             @SuppressWarnings("SameParameterValue") final @NotNull String applicationName,
             @SuppressWarnings("SameParameterValue") final @NotNull String componentName,
-            @SuppressWarnings("SameParameterValue") @Nullable final Preferences preferences
+            @SuppressWarnings("SameParameterValue") final @NotNull Preferences preferences
     ) {
 
-        initIncludingWorkingDirectory( vendorName, applicationName, componentName, null, null );
+        initIncludingWorkingDirectory( vendorName, applicationName, componentName, null, preferences );
 
     }
+
+//    public static void init(
+//            @SuppressWarnings("SameParameterValue") final @NotNull String vendorName,
+//            @SuppressWarnings("SameParameterValue") final @NotNull String applicationName,
+//            @SuppressWarnings("SameParameterValue") final @NotNull String componentName
+//    ) {
+//
+//        init( vendorName, applicationName, componentName, null );
+//
+//    }
 
     @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     public static boolean isInitialized() {
@@ -292,7 +319,7 @@ public class BasicProgramConfigInfo {
         // customizer class names must be given as strings rather than, for example,
         // invoking CustomizerClass.class.getCanonicalName().
 
-        @SuppressWarnings({ "UnusedDeclaration", "UnusedAssignment" })
+        @SuppressWarnings({ "UnusedDeclaration" })
         OSLevelCustomizations customizer = OSLevelCustomizations.getCustomizer();
 
     }

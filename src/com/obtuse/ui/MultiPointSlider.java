@@ -54,7 +54,7 @@ public class MultiPointSlider extends JComponent {
     private boolean _paintTicks;
     private boolean _paintLabels;
     private MpsKnob _knob;
-    private ChangeListener _myChangeListener = new ChangeListener() {
+    @SuppressWarnings("Convert2Lambda") private ChangeListener _myChangeListener = new ChangeListener() {
 
         public void stateChanged( final ChangeEvent changeEvent ) {
 
@@ -158,7 +158,6 @@ public class MultiPointSlider extends JComponent {
 
                     public void mouseReleased( final MouseEvent mouseEvent ) {
 
-                        //noinspection StatementWithEmptyBody
                         if ( _isSelected ) {
 
                             adjustValue( mouseEvent.getPoint() );
@@ -191,7 +190,6 @@ public class MultiPointSlider extends JComponent {
 
                     public void mouseDragged( final MouseEvent mouseEvent ) {
 
-                        //noinspection StatementWithEmptyBody
                         if ( _isSelected ) {
 
                             adjustValue( mouseEvent.getPoint() );
@@ -482,7 +480,6 @@ public class MultiPointSlider extends JComponent {
 
     }
 
-    @SuppressWarnings("ConstantConditions")
     public Dimension computeMinimumSize() {
 
         OrientedImage orientedImage = _knob.getOrientedImage( _knobSize, _positionOnLine, _isSelected );
@@ -902,7 +899,6 @@ public class MultiPointSlider extends JComponent {
 
         }
 
-        //noinspection ConstantConditions
         g.setColor( MultiPointSlider.FORCE_TEST_BACKGROUND_COLOR ? Color.WHITE : getBackground() );
         g.fillRect( 0, 0, getWidth(), getHeight() );
 
@@ -1140,7 +1136,7 @@ public class MultiPointSlider extends JComponent {
         labels.put( 2, new MpsLabel( "two" ) );
         labels.put( 20, new MpsLabel( "twenty" ) );
 
-        BasicProgramConfigInfo.init( "Obtuse", "Pipestone", "test MultiPointSlider", null );
+        BasicProgramConfigInfo.init( "Obtuse", "Pipestone", "test MultiPointSlider" );
         JFrame frame = new JFrame( "Hello" );
         frame.setTitle( "Hi there" );
         JPanel bluePanel = new JPanel();
@@ -1198,6 +1194,7 @@ public class MultiPointSlider extends JComponent {
         slider.setPositionOnLine( PositionOnLine.LEFT );
         slider.getModel().setValue( slider.getModel().getMaximum() );
         final MultiPointSlider leftSlider = slider;
+        //noinspection Convert2Lambda
         slider.addChangeListener(
                 new ChangeListener() {
 

@@ -70,7 +70,6 @@ public class GenericCsvParser extends CSVParser implements Iterable<SortedMap<St
 
         try {
 
-            @SuppressWarnings("UnnecessaryLocalVariable")
             GenericCsvParser gcp = new GenericCsvParser( fileName );
 
             return gcp;
@@ -85,7 +84,7 @@ public class GenericCsvParser extends CSVParser implements Iterable<SortedMap<St
 
     public static void main( final String[] args ) {
 
-        BasicProgramConfigInfo.init( "Obtuse", "Utils", "GenericCsvParser", null );
+        BasicProgramConfigInfo.init( "Obtuse", "Utils", "GenericCsvParser" );
 
         GenericCsvParser gcp;
 

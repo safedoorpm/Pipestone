@@ -275,7 +275,6 @@ public class LinearLayoutManager3 implements LayoutManager2 {
         checkContainer( "minimumLayoutSize", target );
         preLoadCacheIfNecessary();
 
-        @SuppressWarnings("UnnecessaryLocalVariable")
         Dimension size = _cache.getMinimumSize();
 
         return size;
@@ -288,7 +287,6 @@ public class LinearLayoutManager3 implements LayoutManager2 {
         checkContainer( "maximumLayoutSize", target );
         preLoadCacheIfNecessary();
 
-        @SuppressWarnings("UnnecessaryLocalVariable")
         Dimension size = _cache.getMaximumSize();
 
         return size;
@@ -403,7 +401,7 @@ public class LinearLayoutManager3 implements LayoutManager2 {
 
     public static void main( final String[] args ) {
 
-        BasicProgramConfigInfo.init( "Obtuse", "LinearLayoutManager3", "testing", null );
+        BasicProgramConfigInfo.init( "Obtuse", "LinearLayoutManager3", "testing" );
 
         JFrame frame = new JFrame( "test simple linear layouts" );
         LinearContainer inner = LinearLayoutUtil.getLinearContainer3( "inner", LinearOrientation.VERTICAL, true );
@@ -479,7 +477,7 @@ public class LinearLayoutManager3 implements LayoutManager2 {
 
     public static void mainX( final String[] args ) {
 
-        BasicProgramConfigInfo.init( "Obtuse", "Pipestone", "Testing", null );
+        BasicProgramConfigInfo.init( "Obtuse", "Pipestone", "Testing" );
 
         JFrame frame = new JFrame( "LinearLayoutManager3" );
         JPanel inner = makeMainContainer(

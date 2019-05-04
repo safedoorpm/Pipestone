@@ -54,7 +54,6 @@ public class StackedGaussianDistributionsDrawing extends JPanel {
 
     }
 
-    @SuppressWarnings("ConstantConditions")
     public void paint( final Graphics g ) {
 
         ( (Graphics2D)g ).setRenderingHint(
@@ -125,7 +124,7 @@ public class StackedGaussianDistributionsDrawing extends JPanel {
 
     public static void main( final String[] args ) {
 
-        BasicProgramConfigInfo.init( "Obtuse", "Shared", "GDD", null );
+        BasicProgramConfigInfo.init( "Obtuse", "Shared", "GDD" );
 
         JFrame xx = new JFrame();
         StackedGaussianDistributionsDrawing gdd = new StackedGaussianDistributionsDrawing();

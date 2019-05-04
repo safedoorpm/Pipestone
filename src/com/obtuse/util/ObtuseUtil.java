@@ -2913,7 +2913,7 @@ public class ObtuseUtil {
 
     public static void main( final String[] args ) {
 
-        BasicProgramConfigInfo.init( "Obtuse", "ObtuseUtil", "testing", null );
+        BasicProgramConfigInfo.init( "Obtuse", "ObtuseUtil", "testing" );
 
         doString( null );
         doString( "null" );

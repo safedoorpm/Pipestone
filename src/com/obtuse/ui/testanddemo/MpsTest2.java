@@ -91,7 +91,7 @@ public class MpsTest2 extends JFrame {
 
     private void createUIComponents() {
 
-        BasicProgramConfigInfo.init( "Obtuse", "MultiPointSlider", "MpsTest2", null );
+        BasicProgramConfigInfo.init( "Obtuse", "MultiPointSlider", "MpsTest2" );
 
         _multiPointSlider1 = new MultiPointSlider( "hello", 1, 10 );
         _multiPointSlider1.setMinimumSize( _multiPointSlider1.computeMinimumSize() );

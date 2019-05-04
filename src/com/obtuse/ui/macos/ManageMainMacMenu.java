@@ -83,7 +83,7 @@ public class ManageMainMacMenu {
 
     public static void main( String[] args ) {
 
-        BasicProgramConfigInfo.init( "Obtuse", "MacOS Utilities", "testing", null );
+        BasicProgramConfigInfo.init( "Obtuse", "MacOS Utilities", "testing" );
 
         JFrame jFrame = new JFrame( "My JFrame" );
 
@@ -130,6 +130,7 @@ public class ManageMainMacMenu {
         }
 
         Desktop desktop = Desktop.getDesktop();
+        //noinspection Convert2Lambda,Anonymous2MethodRef
         desktop.setAboutHandler(
                 new AboutHandler() {
 
@@ -145,6 +146,7 @@ public class ManageMainMacMenu {
                 }
         );
 
+        //noinspection Convert2Lambda,Anonymous2MethodRef
         desktop.setPreferencesHandler(
                 new PreferencesHandler() {
 
@@ -160,6 +162,7 @@ public class ManageMainMacMenu {
                 }
         );
 
+        //noinspection Convert2Lambda
         desktop.setQuitHandler(
                 new QuitHandler() {
 

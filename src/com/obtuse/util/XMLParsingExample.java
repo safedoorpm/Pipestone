@@ -24,7 +24,7 @@ public class XMLParsingExample {
 
     public static void main( final String[] args ) {
 
-        BasicProgramConfigInfo.init( "Obtuse", "XML", "ParsingExample", null );
+        BasicProgramConfigInfo.init( "Obtuse", "XML", "ParsingExample" );
 
         Measure.setGloballyEnabled( true );
 

@@ -103,6 +103,7 @@ public class Ranges<T extends Comparable<T>> implements Iterable<Range<T>>, Seri
 
     }
 
+    @SuppressWarnings("RedundantThrows")
     public boolean hasOverlappedRanges( final Range<T> range )
             throws RejectRangeException {
 
@@ -136,7 +137,6 @@ public class Ranges<T extends Comparable<T>> implements Iterable<Range<T>>, Seri
             // It is wrong. The _ranges map uses T instances as keys which means that a tail map of a
             // _ranges map uses T instances as keys which means that this call to keySet can only return T instances.
 
-            //noinspection unchecked
             for ( T key : _ranges.tailMap( range.getStartValue() )
                                  .keySet() ) {
 
@@ -211,7 +211,7 @@ public class Ranges<T extends Comparable<T>> implements Iterable<Range<T>>, Seri
 
     }
 
-    @SuppressWarnings("UnusedReturnValue")
+    @SuppressWarnings({ "UnusedReturnValue", "RedundantThrows" })
     private Ranges<T> myAdd( final Range<T> newRange ) throws RejectRangeException {
 
         if ( _ranges.isEmpty() ) {
@@ -294,13 +294,18 @@ public class Ranges<T extends Comparable<T>> implements Iterable<Range<T>>, Seri
     @SuppressWarnings({ "MagicNumber", "UseOfSystemOutOrSystemErr" })
     public static void main( final String[] args ) {
 
-        BasicProgramConfigInfo.init( "Obtuse", "Ranges", "testing", null );
+        BasicProgramConfigInfo.init( "Obtuse", "Ranges", "testing" );
         @SuppressWarnings({ "ClassWithoutToString" })
-        RangeFactory<Integer> rangeFactory = new RangeFactory<Integer>() {
+        RangeFactory<Integer> rangeFactory = new RangeFactory<>() {
 
             public Range<Integer> createRange( final Range<Integer> before, final Range<Integer> after ) {
 
-                return new Range<>( before.getStartValue(), after.getEndValue(), before.getLongStartValue(), after.getLongEndValue() );
+                return new Range<>(
+                        before.getStartValue(),
+                        after.getEndValue(),
+                        before.getLongStartValue(),
+                        after.getLongEndValue()
+                );
 
             }
 
@@ -309,7 +314,10 @@ public class Ranges<T extends Comparable<T>> implements Iterable<Range<T>>, Seri
                     final SortedMap<Integer, Range<Integer>> sortedByEndValue
             ) {
 
-                return createRange( sortedByStartValue.get( sortedByStartValue.firstKey() ), sortedByEndValue.get( sortedByEndValue.lastKey() ) );
+                return createRange(
+                        sortedByStartValue.get( sortedByStartValue.firstKey() ),
+                        sortedByEndValue.get( sortedByEndValue.lastKey() )
+                );
 
             }
 

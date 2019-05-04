@@ -30,7 +30,7 @@ public class TwoDimensionalTreeMapTest {
 
         if ( !BasicProgramConfigInfo.isInitialized() ) {
 
-            BasicProgramConfigInfo.init( "Obtuse", "Utils", "Test", null );
+            BasicProgramConfigInfo.init( "Obtuse", "Utils", "Test" );
 
         }
 

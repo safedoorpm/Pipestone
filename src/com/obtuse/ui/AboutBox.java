@@ -145,7 +145,7 @@ public class AboutBox extends JDialog {
 
     public static void launch() {
 
-        BasicProgramConfigInfo.init( "Obtuse", "Pipestone","AboutBox", null );
+        BasicProgramConfigInfo.init( "Obtuse", "Pipestone","AboutBox" );
 
         JFrame jf = new JFrame( "test JFrame" );
         JPanel jp = new JPanel();

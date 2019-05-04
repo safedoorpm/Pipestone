@@ -146,7 +146,7 @@ public class MyIntSet implements Iterable<Long>, Serializable {
 
                     final int nextI = i;
                     final int nextJ = j;
-                    return new Iterator<Long>() {
+                    return new Iterator<>() {
 
                         private int _nextI = nextI;
                         private int _nextJ = nextJ;
@@ -212,7 +212,7 @@ public class MyIntSet implements Iterable<Long>, Serializable {
             }
         }
 
-        return new Iterator<Long>() {
+        return new Iterator<>() {
 
             public boolean hasNext() {
 
@@ -256,7 +256,7 @@ public class MyIntSet implements Iterable<Long>, Serializable {
     @SuppressWarnings("MagicNumber")
     public static void main( final String[] args ) {
 
-        BasicProgramConfigInfo.init( "Obtuse", "Pipestone", "MyIntSet", null );
+        BasicProgramConfigInfo.init( "Obtuse", "Pipestone", "MyIntSet" );
         LoggingMessageProxy mp = new LoggingMessageProxy();
 
         MyIntSet set = new MyIntSet();

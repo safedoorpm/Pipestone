@@ -744,7 +744,7 @@ public class GenericTag
 
     public static void main( final String[] args ) {
 
-        BasicProgramConfigInfo.init( "Obtuse", "Pipestone", "GenericTag", null );
+        BasicProgramConfigInfo.init( "Obtuse", "Pipestone", "GenericTag" );
 
         @NotNull GenericTagCategory tagCategory = doitNotNull(
                 "create testing category",

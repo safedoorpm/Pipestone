@@ -25,7 +25,7 @@ public class PlayPanel extends JFrame {
 
     public static void main( String[] args ) {
 
-        BasicProgramConfigInfo.init( "Kenosee", "Pipestone", "testing", null );
+        BasicProgramConfigInfo.init( "Kenosee", "Pipestone", "testing" );
         PlayPanel pp = new PlayPanel();
 
     }

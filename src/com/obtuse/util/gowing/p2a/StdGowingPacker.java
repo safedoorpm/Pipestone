@@ -667,7 +667,15 @@ public class StdGowingPacker implements GowingPacker {
     }
 
     @Override
-    public void emit( @Nullable final String@NotNull[] v ) {
+    public void emit( @Nullable final String[] v ) {
+
+        if ( v == null ) {
+
+            emitNull();
+
+            return;
+
+        }
 
         _writer.print( GowingConstants.TAG_CONTAINER_ARRAY );
         _writer.print( v.length );
@@ -1299,8 +1307,7 @@ public class StdGowingPacker implements GowingPacker {
         BasicProgramConfigInfo.init(
                 "Obtuse",
                 "GowingPacker",
-                "test",
-                null
+                "test"
         );
 
         try (

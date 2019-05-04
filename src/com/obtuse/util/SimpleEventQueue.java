@@ -444,7 +444,7 @@ public class SimpleEventQueue<T extends SimpleEvent> {
 
     public static void main( final String[] args ) {
 
-        BasicProgramConfigInfo.init( "Obtuse", "SimpleEventQueue", "Test", null );
+        BasicProgramConfigInfo.init( "Obtuse", "SimpleEventQueue", "Test" );
 
         final SimpleEventQueue<SimpleEvent> eventQueue = new SimpleEventQueue<>();
 

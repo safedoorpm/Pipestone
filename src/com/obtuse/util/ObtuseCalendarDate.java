@@ -729,7 +729,7 @@ public class ObtuseCalendarDate extends GowingAbstractPackableEntity implements 
 
     public static void main( final String[] args ) {
 
-        BasicProgramConfigInfo.init( "Obtuse", "Shared", "ObtuseCalendarDate", null );
+        BasicProgramConfigInfo.init( "Obtuse", "Shared", "ObtuseCalendarDate" );
 
         try {
 

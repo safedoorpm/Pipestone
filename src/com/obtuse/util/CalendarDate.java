@@ -15,7 +15,6 @@ import java.util.Date;
  and methods have the same signature).
  */
 
-@SuppressWarnings("deprecation")
 @Deprecated
 public class CalendarDate extends ObtuseCalendarDate {
 
@@ -50,7 +49,7 @@ public class CalendarDate extends ObtuseCalendarDate {
 
     public static void main( final String[] args ) {
 
-	BasicProgramConfigInfo.init( "Obtuse", "Shared", "ObtuseCalendarDate", null );
+	BasicProgramConfigInfo.init( "Obtuse", "Shared", "ObtuseCalendarDate" );
 
 	try {
 

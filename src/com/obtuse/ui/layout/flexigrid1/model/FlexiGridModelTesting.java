@@ -106,7 +106,7 @@ public class FlexiGridModelTesting extends JFrame {
 
     public static void main( final String[] args ) {
 
-        BasicProgramConfigInfo.init( "Kenosee", "Pipestone", "FlexiGridPanelModel - testing", null );
+        BasicProgramConfigInfo.init( "Kenosee", "Pipestone", "FlexiGridPanelModel - testing" );
 
         FlexiGridModelTesting fg1 = new FlexiGridModelTesting();
         fg1.pack();

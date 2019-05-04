@@ -98,7 +98,7 @@ public class DraggableJPanelTester extends JFrame {
 
     public static void main( final String[] args ) {
 
-        BasicProgramConfigInfo.init( "Obtuse", "Pipestone", "Testing", null );
+        BasicProgramConfigInfo.init( "Obtuse", "Pipestone", "Testing" );
 
         DraggableJPanelTester tester = new DraggableJPanelTester();
 

@@ -204,6 +204,8 @@ public abstract class AutoSizingValidatedJTextField extends ValidatedJTextField 
 
             // nothing to be done here.
 
+            ObtuseUtil.doNothing();
+
         }
 
         public String toString() {

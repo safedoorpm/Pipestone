@@ -820,7 +820,7 @@ public class RelativePath
 
     public static void main( final String[] args ) {
 
-        BasicProgramConfigInfo.init( "Kenosee", "Obtuse", "testing", null );
+        BasicProgramConfigInfo.init( "Kenosee", "Obtuse", "testing" );
 
         Logger.logMsg( "our pid is " + ObtuseUtil.getPid() );
 

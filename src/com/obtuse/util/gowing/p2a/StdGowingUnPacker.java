@@ -1074,7 +1074,7 @@ public class StdGowingUnPacker implements GowingUnPacker {
 
     public static void main( final String[] args ) {
 
-        BasicProgramConfigInfo.init( "Obtuse", "Packer", "testing", null );
+        BasicProgramConfigInfo.init( "Obtuse", "Packer", "testing" );
 
         try (
                 GowingUnPacker unPacker = new StdGowingUnPacker(

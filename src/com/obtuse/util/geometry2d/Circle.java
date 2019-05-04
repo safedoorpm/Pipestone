@@ -532,7 +532,6 @@ public class Circle {
 
         // Determine the absolute intersection points.
 
-        @SuppressWarnings("UnnecessaryLocalVariable")
         IntersectionInfo rval = new IntersectionInfo(
                 new MyPoint[]{
                         new MyPoint( x2 + rx, y2 + ry ),
@@ -981,7 +980,7 @@ public class Circle {
 
     public static void main( final String[] args ) {
 
-        BasicProgramConfigInfo.init( "Obtuse", "Pipestone", "geometry2d-Circle", null );
+        BasicProgramConfigInfo.init( "Obtuse", "Pipestone", "geometry2d-Circle" );
 
         testIntersection1();
 

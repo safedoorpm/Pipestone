@@ -172,7 +172,7 @@ public class LevenshteinDistanceUtil {
 
     public static void main( String[] args ) {
 
-        BasicProgramConfigInfo.init( "Obtuse", "Pipestone", "LevenshteinDistanceUtil", null );
+        BasicProgramConfigInfo.init( "Obtuse", "Pipestone", "LevenshteinDistanceUtil" );
         JFrame jf = new JFrame();
         jf.setMinimumSize( new Dimension( 200, 100 ) );
         JPanel jp = new JPanel();

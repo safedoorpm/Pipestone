@@ -61,7 +61,7 @@ public class ThreeDimensionalTreeCounter<
 
     public static void main( final String[] args ) {
 
-        BasicProgramConfigInfo.init( "Obtuse", "Shared", "3Dcounter", null );
+        BasicProgramConfigInfo.init( "Obtuse", "Shared", "3Dcounter" );
 
         ThreeDimensionalTreeCounter<Integer,String,Boolean> counter = new ThreeDimensionalTreeCounter<>();
         counter.count( 1, "x", true );

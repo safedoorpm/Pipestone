@@ -541,7 +541,7 @@ public class TwoDimensionalTreeMap<
     @SuppressWarnings("Duplicates")
     public static void main( String[] args ) {
 
-        BasicProgramConfigInfo.init( "Kenosee", "ObtuseUtil", "testing", null );
+        BasicProgramConfigInfo.init( "Kenosee", "ObtuseUtil", "testing" );
 
         TwoDimensionalSortedMap<Integer,String,String> originalMap = new TwoDimensionalTreeMap<>();
         originalMap.put( 1, "hello", "1-hello" );

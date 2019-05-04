@@ -153,7 +153,7 @@ public class GowingPackableAttribute implements GowingPackable {
 
     public static void main( final String[] args ) {
 
-        BasicProgramConfigInfo.init( "Obtuse", "Pipestone", "testing", null );
+        BasicProgramConfigInfo.init( "Obtuse", "Pipestone", "testing" );
 
         GowingPackableAttribute.doit(
                 new GowingPackableAttribute(

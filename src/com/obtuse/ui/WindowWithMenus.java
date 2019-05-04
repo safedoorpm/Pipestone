@@ -279,7 +279,7 @@ public class WindowWithMenus extends TrackedWindow {
 
     public static void main( String[] args ) {
 
-        BasicProgramConfigInfo.init( "Obtuse", "WindowWithMenus", "testing", null );
+        BasicProgramConfigInfo.init( "Obtuse", "WindowWithMenus", "testing" );
 
         WindowWithMenus wwm = new WindowWithMenus( "testWindowWithMenus", false );
         JButton jb = new JButton( "Hi There" );

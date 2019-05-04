@@ -72,7 +72,7 @@ public class TraceDebugConnectionHandler extends AbstractDebugConnectionHandler 
 
     public static void main( final String[] args ) {
 
-        BasicProgramConfigInfo.init( "Obtuse", "TraceDebugConnectionHandler", "Test", null );
+        BasicProgramConfigInfo.init( "Obtuse", "TraceDebugConnectionHandler", "Test" );
 
         TraceDebugConnectionHandler.launch( null, null );
 

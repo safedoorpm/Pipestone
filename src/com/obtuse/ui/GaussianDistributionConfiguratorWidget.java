@@ -37,7 +37,7 @@ public class GaussianDistributionConfiguratorWidget extends JPanel {
     private JPanel _standardDeviationInnerPanel;
     private JPanel _outerPanel;
 
-    @SuppressWarnings({ "UnusedDeclaration", "MismatchedReadAndWriteOfArray", "ConstantConditions" })
+    @SuppressWarnings({ "UnusedDeclaration" })
     private JPanel[] _horizontalPanels = {
             _panel1,
             _outerPanel,
@@ -46,7 +46,7 @@ public class GaussianDistributionConfiguratorWidget extends JPanel {
             _standardDeviationInnerPanel
     };
 
-    @SuppressWarnings({ "UnusedDeclaration", "MismatchedReadAndWriteOfArray", "ConstantConditions" })
+    @SuppressWarnings({ "UnusedDeclaration" })
     private JPanel[] _verticalPanels = {
             _weightPanel,
             _centerPanel,
@@ -268,7 +268,7 @@ public class GaussianDistributionConfiguratorWidget extends JPanel {
 
     public static void main( final String[] args ) {
 
-        BasicProgramConfigInfo.init( "Obtuse", "Shared", "StandardDeviationConfigurationWidget", null );
+        BasicProgramConfigInfo.init( "Obtuse", "Shared", "StandardDeviationConfigurationWidget" );
 
         JFrame xx = new JFrame();
         JPanel jp = new JPanel();

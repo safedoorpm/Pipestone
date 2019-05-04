@@ -73,7 +73,7 @@ public class HaltDebugConnectionHandler extends AbstractDebugConnectionHandler {
 
     public static void main( final String[] args ) {
 
-        BasicProgramConfigInfo.init( "Obtuse", "HaltDebugConnectionHandler", "Test", null );
+        BasicProgramConfigInfo.init( "Obtuse", "HaltDebugConnectionHandler", "Test" );
 
         HaltDebugConnectionHandler.launch( null, null );
 

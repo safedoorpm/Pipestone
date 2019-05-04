@@ -7,8 +7,6 @@ package org.apache.commons.text.similarity;
 
 import com.obtuse.util.*;
 
-import java.util.Comparator;
-
 /**
  Created by danny on 2017/09/14.
  */
@@ -17,7 +15,7 @@ public class TestDriveLevenshteinDistance {
 
     public static void main( final String[] args ) {
 
-        BasicProgramConfigInfo.init( "Obtuse", "ObtuseUtil", "testing", null );
+        BasicProgramConfigInfo.init( "Obtuse", "ObtuseUtil", "testing" );
 
         String[] words = { "boulet", "boutin", "boulay", "boule", "cat", "caatct" };
         LevenshteinDistance ld = new LevenshteinDistance();

@@ -49,7 +49,7 @@ public class DragAndDropEndpoints extends JFrame {
 
     public static void main( final String[] args ) {
 
-        BasicProgramConfigInfo.init( "Obtuse", "FirstFridays", "testing", null );
+        BasicProgramConfigInfo.init( "Obtuse", "FirstFridays", "testing" );
 
         DragAndDropEndpoints dade = new DragAndDropEndpoints();
         dade.setVisible( true );

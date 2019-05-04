@@ -238,7 +238,7 @@ public interface ThreeDimensionalSortedMap<
 
     static void main( String[] args ) {
 
-        BasicProgramConfigInfo.init( "Kenosee", "ObtuseUtil", "testing", null );
+        BasicProgramConfigInfo.init( "Kenosee", "ObtuseUtil", "testing" );
 
         ThreeDimensionalSortedMap<Integer,String,Boolean,String> originalMap = new ThreeDimensionalTreeMap<>();
         originalMap.put( 1, "hello", true, "1-hello-t" );

@@ -516,7 +516,7 @@ public class SortedSetExample extends GowingAbstractPackableEntity implements Go
 
     public static void main( final String[] args ) {
 
-        BasicProgramConfigInfo.init( "Obtuse", "Experimenting", "Misc", null );
+        BasicProgramConfigInfo.init( "Obtuse", "Experimenting", "Misc" );
 
         SortedSetExample sse = new SortedSetExample(
                 "testSortedSet",

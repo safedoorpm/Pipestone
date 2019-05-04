@@ -42,7 +42,7 @@ public class MpsTest extends JFrame {
 
     public static void main( final String[] args ) {
 
-        BasicProgramConfigInfo.init( "Obtuse", "MpsTest", "testing", null );
+        BasicProgramConfigInfo.init( "Obtuse", "MpsTest", "testing" );
 
         MpsTest test = new MpsTest();
         test.setVisible( true );
@@ -119,6 +119,7 @@ public class MpsTest extends JFrame {
         slider.setPositionOnLine( MultiPointSlider.PositionOnLine.LEFT );
         slider.getModel().setValue( slider.getModel().getMaximum() );
         final MultiPointSlider leftSlider = slider;
+        //noinspection Convert2Lambda
         slider.addChangeListener(
                 new ChangeListener() {
 

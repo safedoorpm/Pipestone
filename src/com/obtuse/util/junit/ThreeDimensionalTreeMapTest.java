@@ -30,7 +30,7 @@ public class ThreeDimensionalTreeMapTest {
 
         if ( !BasicProgramConfigInfo.isInitialized() ) {
 
-            BasicProgramConfigInfo.init( "Obtuse", "Utils", "Test", null );
+            BasicProgramConfigInfo.init( "Obtuse", "Utils", "Test" );
 
         }
 

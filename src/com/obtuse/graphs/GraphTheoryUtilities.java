@@ -564,7 +564,7 @@ public class GraphTheoryUtilities {
     @SuppressWarnings("unchecked")
     public static void main( String[] args ) {
 
-        BasicProgramConfigInfo.init( "Kenosee", "TopoSort", "testing", null );
+        BasicProgramConfigInfo.init( "Kenosee", "TopoSort", "testing" );
 
         Vertex<String> a = new Vertex<>( "a" );
         Vertex<String> b = new Vertex<>( "b" );

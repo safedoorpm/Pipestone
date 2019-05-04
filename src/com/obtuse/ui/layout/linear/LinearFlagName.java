@@ -101,7 +101,6 @@ public class LinearFlagName extends GowingPackableName {
     @NotNull
     public GowingPackedEntityBundle bundleThyself( final boolean isPackingSuper, final @NotNull GowingPacker packer ) {
 
-        @SuppressWarnings("UnnecessaryLocalVariable")
         GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
                 LinearFlagName.ENTITY_TYPE_NAME,
                 LinearFlagName.VERSION,
@@ -150,7 +149,7 @@ public class LinearFlagName extends GowingPackableName {
 
     public static void main( final String[] args ) {
 
-        BasicProgramConfigInfo.init( "Obtuse", "Pipestone", "testing", null );
+        BasicProgramConfigInfo.init( "Obtuse", "Pipestone", "testing" );
 
         if ( s_knownFlags.isEmpty() ) {
 

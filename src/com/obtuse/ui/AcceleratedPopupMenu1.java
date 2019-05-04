@@ -181,7 +181,7 @@ public class AcceleratedPopupMenu1 extends JPopupMenu {
 
     public static void main( final String[] args ) {
 
-        BasicProgramConfigInfo.init( "Obtuse", "Pipestone", "Test", null );
+        BasicProgramConfigInfo.init( "Obtuse", "Pipestone", "Test" );
 
         List<String> words = new LinkedList<>();
         for ( int i = 0; i < 100; i += 1 ) {

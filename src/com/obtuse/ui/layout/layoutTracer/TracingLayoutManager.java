@@ -261,7 +261,7 @@ public class TracingLayoutManager implements LayoutManager2 {
 
     public static void main( String[] args ) {
 
-        BasicProgramConfigInfo.init( "Kenosee", "TracingLayoutManager", "testing", null );
+        BasicProgramConfigInfo.init( "Kenosee", "TracingLayoutManager", "testing" );
 
         JFrame jf = new JFrame( "TracingLayoutManager tester" );
         JPanel jp = new JPanel();

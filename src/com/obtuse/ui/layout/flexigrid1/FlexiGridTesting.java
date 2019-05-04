@@ -31,7 +31,7 @@ public class FlexiGridTesting {
 
     public static void main( final String[] args ) {
 
-        BasicProgramConfigInfo.init( "Kenosee", "BiSheng", "FlexiGridLayoutManager", null );
+        BasicProgramConfigInfo.init( "Kenosee", "BiSheng", "FlexiGridLayoutManager" );
 
         launchSimpleTestFrame( false, true );
 

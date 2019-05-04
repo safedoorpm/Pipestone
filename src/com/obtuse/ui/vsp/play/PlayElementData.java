@@ -34,7 +34,7 @@ public class PlayElementData implements VirtualScrollableElement {
 
     public static void main( String[] args ) {
 
-        BasicProgramConfigInfo.init( "Kenosee", "Lancot", "Testing", null );
+        BasicProgramConfigInfo.init( "Kenosee", "Lancot", "Testing" );
 
         @NotNull Collection<PlayElementData> elementData = new ArrayList<>();
         ArrayList<VirtualScrollableElementModel<PlayElementData>> elementDataModels = new ArrayList<>();

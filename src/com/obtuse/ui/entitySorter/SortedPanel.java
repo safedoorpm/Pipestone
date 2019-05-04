@@ -138,7 +138,6 @@ public class SortedPanel<K extends Comparable<K>,E extends SortableEntity> exten
 
     public SortableEntityView getEntityView( final int ix ) {
 
-        //noinspection unchecked
         return (SortableEntityView)getComponent( ix );
 
     }
@@ -146,11 +145,9 @@ public class SortedPanel<K extends Comparable<K>,E extends SortableEntity> exten
     public SortableEntityView[] getEntityViews() {
 
         Component[] rval = getComponents();
-        @SuppressWarnings("unchecked")
         SortableEntityView[] castRval = new SortableEntityView[rval.length];
         for ( int i = 0; i < rval.length; i += 1 ) {
 
-            //noinspection unchecked
             castRval[i] = (SortableEntityView)rval[i];
 
         }
@@ -213,7 +210,7 @@ public class SortedPanel<K extends Comparable<K>,E extends SortableEntity> exten
 
     public static void main( final String[] args ) {
 
-        BasicProgramConfigInfo.init( "Obtuse", "Pipestone", "entitySorter", null );
+        BasicProgramConfigInfo.init( "Obtuse", "Pipestone", "entitySorter" );
 
         SortableKeySpace sks = SortableKeySpace.getKey( "sks" );
 
@@ -340,7 +337,7 @@ public class SortedPanel<K extends Comparable<K>,E extends SortableEntity> exten
 
     }
 
-    public <K extends Comparable<K>> void verifyConsistency( final @NotNull TreeSorter<K, ?> treeSorter ) {
+    public /*<K extends Comparable<K>>*/ void verifyConsistency( final @NotNull TreeSorter<K, ?> treeSorter ) {
 
         if ( treeSorter.size() == getComponentCount() ) {
 
