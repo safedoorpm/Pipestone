@@ -298,7 +298,7 @@ public class Ranges<T extends Comparable<T>> implements Iterable<Range<T>>, Seri
         @SuppressWarnings({ "ClassWithoutToString" })
         RangeFactory<Integer> rangeFactory = new RangeFactory<>() {
 
-            public Range<Integer> createRange( final Range<Integer> before, final Range<Integer> after ) {
+            private Range<Integer> createRange( final Range<Integer> before, final Range<Integer> after ) {
 
                 return new Range<>(
                         before.getStartValue(),

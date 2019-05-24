@@ -24,7 +24,7 @@ import java.util.function.Supplier;
  the invocation of this class's static initializer(s).  Experience seems to indicate that it is sufficient to call
  {@link BasicProgramConfigInfo#init} before invoking any method defined by this class (your mileage may vary).
 
- @noinspection ClassWithoutToString, ForLoopReplaceableByForEach, RawUseOfParameterizedType,
+ @noinspection ClassWithoutToString, RawUseOfParameterizedType,
  UseOfSystemOutOrSystemErr, UnusedDeclaration */
 
 public class Logger {
@@ -158,7 +158,13 @@ public class Logger {
 
     public static void maybeLogMsg( final @NotNull Supplier<String> composeLoggingMsg ) {
 
-        if ( Logger.s_loggingEnabled ) {
+        maybeLogMsg( composeLoggingMsg, Logger.s_loggingEnabled );
+
+    }
+
+    public static void maybeLogMsg( final @NotNull Supplier<String> composeLoggingMsg, final boolean log ) {
+
+        if ( log ) {
 
             String loggingMessage = composeLoggingMsg.get();
             Logger.logMsg( loggingMessage );
@@ -169,6 +175,12 @@ public class Logger {
 
     public static void maybeLogErr( final @NotNull Supplier<String> composeLoggingMsg ) {
 
+        maybeLogErr( composeLoggingMsg, Logger.s_loggingEnabled );
+
+    }
+
+    public static void maybeLogErr( final @NotNull Supplier<String> composeLoggingMsg, final boolean log ) {
+
         if ( Logger.s_loggingEnabled ) {
 
             String loggingMessage = composeLoggingMsg.get();
@@ -178,6 +190,7 @@ public class Logger {
 
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public static int pushNesting( final @NotNull String levelName ) {
 
         Logger.logMsg( "{ " + levelName );
@@ -202,6 +215,7 @@ public class Logger {
 
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public static int popNestingLevel( final @NotNull String levelName ) {
 
         synchronized ( _nestingLevelLock ) {
@@ -286,7 +300,6 @@ public class Logger {
 
         }
 
-        //noinspection NullableProblems
         internalSetMirror( null, null );
     }
 

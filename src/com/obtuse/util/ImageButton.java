@@ -135,11 +135,42 @@ public class ImageButton {
             final float darkeningFactor
     ) {
 
+        return ImageButton.makeImageButton(
+                imageButtonOwner,
+                purpose,
+                button,
+                action,
+                buttonFileName,
+                resourceBaseDirectory,
+                ImageButton.class,
+                darkeningFactor
+        );
+
+    }
+
+    public static ImageButton makeImageButton(
+            final @NotNull ImageButtonOwner imageButtonOwner,
+            final @NotNull String purpose,
+            final @NotNull JLabel button,
+            final @NotNull Runnable action,
+            final @NotNull String buttonFileName,
+            final @NotNull String resourceBaseDirectory,
+            final @NotNull Class representativeClass,
+            final float darkeningFactor
+    ) {
+
         ImageIcon unpressedIcon = ImageIconUtils.fetchIconImage(
                 "button-" + buttonFileName + ".png",
                 0,
+                representativeClass.getClassLoader(),
                 resourceBaseDirectory
         );
+
+        if ( unpressedIcon == null ) {
+
+            throw new IllegalArgumentException( "ImageButton.makeImageButton:  unable to fetch unpressed icon" );
+
+        }
 
         // Create a somewhat darker icon for the pressed version.
 
@@ -152,10 +183,10 @@ public class ImageButton {
     }
 
     public static ImageButton makeImageButton(
-            final ImageButtonOwner imageButtonOwner,
-            final String purpose,
-            final JLabel button,
-            final Runnable action,
+            final @NotNull ImageButtonOwner imageButtonOwner,
+            final @NotNull String purpose,
+            final @NotNull JLabel button,
+            final @NotNull Runnable action,
             final @NotNull ImageIcon unpressedIcon,
             final @NotNull ImageIcon pressedIcon
     ) {

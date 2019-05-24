@@ -669,6 +669,9 @@ public class StdGowingPacker implements GowingPacker {
     @Override
     public void emit( @Nullable final String[] v ) {
 
+        // I'm not entire sure that the v parameter should be @Nullable.
+        // For alternatives to ponder, see the {@link #emit(double[])} and the {@link #emit(Double[])} methods below.
+
         if ( v == null ) {
 
             emitNull();

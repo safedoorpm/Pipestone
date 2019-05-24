@@ -411,7 +411,7 @@ public class FlexiGridPanelModel<SLICE extends FlexiGridModelSlice> {
 
             }
 
-            logMaybe( who + ":  slice made visible - " + slice );
+//            logMaybe( who + ":  slice made visible - " + slice );
 
         } else {
 
@@ -423,7 +423,7 @@ public class FlexiGridPanelModel<SLICE extends FlexiGridModelSlice> {
 
             }
 
-            logMaybe( who + ":  slice made invisible - " + slice );
+//            logMaybe( who + ":  slice made invisible - " + slice );
 
         }
 
@@ -571,7 +571,7 @@ public class FlexiGridPanelModel<SLICE extends FlexiGridModelSlice> {
 
         if ( errCount == 0 ) {
 
-            logMaybe( who + ":  no errors found in model " + getName() );
+//            logMaybe( who + ":  no errors found in model " + getName() );
 
             ObtuseUtil.doNothing();
 
@@ -796,11 +796,16 @@ public class FlexiGridPanelModel<SLICE extends FlexiGridModelSlice> {
 
             if ( slice.isVisible() ) {
 
+//                Logger.logMsg( "NEW SLICE" );
                 slice.setCurrentIndex( newIx );
                 for ( int ix : slice.getDataMap().keySet() ) {
 
                     FlexiGridItemInfo element = slice.getDataMap().get( ix );
-                    logMaybe( LinearLayoutUtil.describeComponent( element.component() ) + " set to index " + newIx );
+//                    Logger.logMsg(
+//                            LinearLayoutUtil.describeComponent( element.component() ) +
+//                            " at ix=" + ix + " set to " +
+//                            ( rowOrientation ? "row" : "column" ) + " index " + newIx
+//                    );
                     FlexiGridBasicConstraint constraint = _fgLayoutManager.getMandatoryBasicConstraint( element.component() );
                     if ( rowOrientation ) {
 

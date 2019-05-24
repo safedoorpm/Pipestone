@@ -7,17 +7,19 @@ package com.obtuse.ui.layout.flexigrid1.util;
 import org.jetbrains.annotations.NotNull;
 
 /**
- A simple FlexiGrid constraint.
+ A minimalist test FlexiGrid constraint.
+ <p>Intended for experimental and testing purposes.
+ Do not use this in anything even remotely resembling production software.</p>
  */
 
-public class FlexiGridSimpleConstraint implements FlexiGridConstraint {
+public class FlexiGridMinimalistTestConstraint implements FlexiGridConstraint {
 
     private final String _name;
 
     private final boolean _enabled;
     private final FlexiGridConstraintCategory _constraintCategory;
 
-    public FlexiGridSimpleConstraint(
+    public FlexiGridMinimalistTestConstraint(
             @SuppressWarnings("SameParameterValue") final @NotNull String name,
             final boolean enabled,
             FlexiGridConstraintCategory constraintCategory
@@ -73,7 +75,7 @@ public class FlexiGridSimpleConstraint implements FlexiGridConstraint {
 
     public String toString() {
 
-        return "FlexiGridSimpleConstraint( \"" + getName() + "\", " + isEnabled() + " )";
+        return "FlexiGridMinimalistTestConstraint( \"" + getName() + "\", " + isEnabled() + " )";
 
     }
 

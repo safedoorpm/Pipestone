@@ -7,7 +7,7 @@ import org.jetbrains.annotations.NotNull;
  <p>Used by the {@link CreateSomethingDialog} facility.</p>
  */
 
-public interface CreateSomethingNotifier<T> {
+public interface CreateSomethingNotifier<T,N> {
 
     /**
      Report on the creation of something.
@@ -24,6 +24,6 @@ public interface CreateSomethingNotifier<T> {
      {@code false} if the human should be given the opportunity to try a new name.
      */
 
-    boolean creationFailed( @NotNull final String somethingName, @NotNull CreateSomethingHelper<T> createSomethingHelper );
+    boolean creationFailed( @NotNull final N somethingName, @NotNull CreateSomethingHelper<T,N> createSomethingHelper );
 
 }

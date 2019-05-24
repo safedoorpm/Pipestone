@@ -15,6 +15,7 @@ import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.*;
+import java.util.Optional;
 
 /**
  Create a {@link ValidatedJTextField} whose width is automagically adjusted by an instance of {@link AutoAdjustingTextFieldWidthListener}.
@@ -25,7 +26,10 @@ import java.awt.*;
 
 public abstract class AutoSizingValidatedJTextField extends ValidatedJTextField {
 
-    public static final int ABSOLUTE_MINIMUM_WIDTH = 25;
+    public static boolean s_globalTraceMode = true;
+
+    public static final int ABSOLUTE_MINIMUM_WIDTH = 50;
+    public static final int TEXT_WIDTH_CHANGE_DELTA = 1;
 
     private static JTextField s_interestingField = null;
 
@@ -102,13 +106,27 @@ public abstract class AutoSizingValidatedJTextField extends ValidatedJTextField 
 
     }
 
-    public static void maybeCacheLikelyFontMetrics( final FontMetrics fontMetrics ) {
+//    public static void maybeCacheLikelyFontMetrics( final FontMetrics fontMetrics ) {
+//
+//        if ( s_likelyFontMetrics == null ) {
+//
+//            s_likelyFontMetrics = fontMetrics;
+//
+//        }
+//
+//    }
 
-        if ( s_likelyFontMetrics == null ) {
+    @SuppressWarnings("unused")
+    public static void setGlobalTraceMode( final boolean globalTraceMode ) {
 
-            s_likelyFontMetrics = fontMetrics;
+        s_globalTraceMode = globalTraceMode;
 
-        }
+    }
+
+    @SuppressWarnings("unused")
+    public static boolean isGlobalTraceMode() {
+
+        return s_globalTraceMode;
 
     }
 
@@ -169,6 +187,8 @@ public abstract class AutoSizingValidatedJTextField extends ValidatedJTextField 
 
         private final JTextField _textField;
 
+        private boolean _traceMode = false;
+
         /**
          Create a document listener which manages the width of a {@link JTextField} to keep it about 25 pixels wider than the text that it contains.
          This width adjustment is performed by changing the text field's preferred size's width while respecting the text field's
@@ -181,21 +201,35 @@ public abstract class AutoSizingValidatedJTextField extends ValidatedJTextField 
 
             _textField = textField;
             _textField.setPreferredSize( new Dimension( _textField.getMinimumSize().width, _textField.getPreferredSize().height ) );
-            maybeGrowTextField( _textField );
+            maybeAdjustTextField( _textField, s_globalTraceMode || _traceMode );
+
+        }
+
+        @SuppressWarnings("unused")
+        public void setTraceMode( final boolean traceMode ) {
+
+            _traceMode = traceMode;
+
+        }
+
+        @SuppressWarnings("unused")
+        public boolean isTraceMode() {
+
+            return _traceMode;
 
         }
 
         @Override
         public void insertUpdate( final DocumentEvent e ) {
 
-            maybeGrowTextField( _textField );
+            maybeAdjustTextField( _textField, s_globalTraceMode || _traceMode );
 
         }
 
         @Override
         public void removeUpdate( final DocumentEvent e ) {
 
-            maybeShrinkTextField( _textField );
+            maybeAdjustTextField( _textField, s_globalTraceMode || _traceMode );
 
         }
 
@@ -229,12 +263,12 @@ public abstract class AutoSizingValidatedJTextField extends ValidatedJTextField 
         if ( graphics == null ) {
 
             fontMetrics = s_likelyFontMetrics;
-            Logger.logMsg( "likely font metrics are " + fontMetrics );
+//            Logger.logMsg( "likely font metrics are " + fontMetrics );
 
         } else {
 
             fontMetrics = graphics.getFontMetrics();
-            Logger.logMsg( "actual font metrics are " + fontMetrics );
+//            Logger.logMsg( "actual font metrics are " + fontMetrics );
 
         }
 
@@ -242,7 +276,8 @@ public abstract class AutoSizingValidatedJTextField extends ValidatedJTextField 
 
     }
 
-    public static void maybeGrowTextField( final @NotNull JTextField tf ) {
+    @SuppressWarnings("Duplicates")
+    public static void maybeAdjustTextField( final @NotNull JTextField tf, final boolean traceMode ) {
 
         if ( s_interestingField == tf ) {
 
@@ -264,35 +299,194 @@ public abstract class AutoSizingValidatedJTextField extends ValidatedJTextField 
 
         }
 
-        int textWidth = fontMetrics.stringWidth( tf.getText() );
+        int textWidth = fontMetrics.stringWidth( tf.getText() ) + tf.getInsets().left + tf.getInsets().right;
 
         Dimension curPreferredSize = new Dimension( tf.getPreferredSize() );
+        Dimension minSize = tf.getMinimumSize();
         Dimension maxSize = tf.getMaximumSize();
-        boolean changed = false;
-        while ( textWidth > curPreferredSize.width - 25 && curPreferredSize.width <= maxSize.width ) {
 
-            curPreferredSize.width += 25;
-            changed = true;
+        boolean changed = false;
+//        boolean grown = false;
+        boolean growing = true;
+//        boolean ifExpr;
+
+        while ( true ) {
+
+            if ( growing ) {
+
+                int curPrefWidth = curPreferredSize.width;
+
+                // Is the width of the text within TEXT_WIDTH_CHANGE_DELTA pixels of the current preferred size of the JTextField?
+
+                boolean ifExprLeft = textWidth >= curPrefWidth - TEXT_WIDTH_CHANGE_DELTA;
+
+                // Is there still room to make the field wider?
+
+                boolean ifExprRight = curPrefWidth < maxSize.width;
+
+                // If both of the above conditions are true then it is time to make the field wider.
+
+                boolean growIt = ifExprLeft && ifExprRight;
+
+                Logger.maybeLogMsg(
+                        () -> "maybeGrowingNow:  DELTA=" + TEXT_WIDTH_CHANGE_DELTA + ", " +
+                              "textWidth=" + textWidth + ", " +
+                              "cPrefWidth=" + curPrefWidth + ", " +
+                              "cPrefWidth-DELTA=" + ( curPrefWidth - TEXT_WIDTH_CHANGE_DELTA ) + ", " +
+                              "maxWidth=" + maxSize.width + ", " +
+                              "ifExprLeft=" + ifExprLeft + ", " +
+                              "ifExprRight=" + ifExprRight + ", " +
+                              "ifExpr=" + growIt,
+                        traceMode
+                );
+
+                if ( growIt ) {
+
+//                    ifExpr = true;
+//                    grown = true;
+
+                    ObtuseUtil.doNothing();
+
+                } else {
+
+                    growing = false;
+                    continue;
+
+                }
+
+//            } else if ( grown ) {
+//
+//                return;
+
+            } else {
+
+                int curPrefWidth = curPreferredSize.width;
+
+                // Is the width of the text at least double TEXT_WIDTH_CHANGE_DELTA pixels narrower than the current preferred size of the JTextField?
+
+                boolean ifExprLeft = textWidth < curPrefWidth - 2 * TEXT_WIDTH_CHANGE_DELTA;
+
+                // Is there still room to make the field narrower?
+
+                boolean ifExprRight = curPrefWidth >= minSize.width + TEXT_WIDTH_CHANGE_DELTA;
+
+                // If both of the above conditions are true then it is time to make the field narrower.
+
+                boolean shrinkIt = ifExprLeft && ifExprRight;
+
+                Logger.maybeLogMsg(
+                        () -> "maybeShrinkingNow:  DELTA=" + TEXT_WIDTH_CHANGE_DELTA + ", " +
+                              "textWidth=" + textWidth + ", " +
+                              "cPrefWidth=" + curPrefWidth + ", " +
+                              "cPrefWidth-2*DELTA=" + ( curPrefWidth - 2 * TEXT_WIDTH_CHANGE_DELTA ) + ", " +
+                              "minWidth=" + minSize.width + ", " +
+                              "ifExprLeft=" + ifExprLeft + ", " +
+                              "ifExprRight=" + ifExprRight + ", " +
+                              "ifExpr=" + shrinkIt,
+                        traceMode
+                );
+
+                if ( shrinkIt ) {
+
+                    ObtuseUtil.doNothing();
+
+                } else {
+
+                    break;
+
+//                    ifExpr = true;
+//
+//                } else {
+//
+//                    break;
+                }
+
+            }
+
+//            if ( ifExpr ) {
+
+                curPreferredSize.width += ( growing ? 1 : -1 ) * TEXT_WIDTH_CHANGE_DELTA;
+                changed = true;
+
+//            } else {
+//
+//                break;
+//
+//            }
+
 
         }
 
         if ( changed ) {
 
-            Logger.logMsg( "grew to " + ObtuseUtil.fDim( curPreferredSize ) );
+            Logger.maybeLogMsg( () -> "grew to " + ObtuseUtil.fDim( curPreferredSize ), traceMode );
+
+//            tf.setForeground( Color.RED );
+
+            if ( curPreferredSize.width < tf.getWidth() ) {
+
+                ObtuseUtil.doNothing();
+
+            }
 
             tf.setPreferredSize( curPreferredSize );
+//            tf.setMinimumSize( new Dimension( Math.min( curPreferredSize.width, maxSize.width ), minSize.height ) );
+
+            Logger.maybeLogMsg(
+                    () -> "tf:  " +
+                          "min=" + ObtuseUtil.fDim( tf.getMinimumSize() ) + ", " +
+                          "pref=" + ObtuseUtil.fDim( tf.getPreferredSize() ) + ", " +
+                          "max=" + ObtuseUtil.fDim( tf.getMaximumSize() ) + ", " +
+                          "size=" + ObtuseUtil.fBounds( tf.getBounds() ),
+                    traceMode
+            );
 
             if ( tf.getParent() != null ) {
 
-                tf.getParent().revalidate();
+                Logger.maybeLogMsg(
+                        () -> "pr:  " +
+                              "min=" + ObtuseUtil.fDim( tf.getParent().getMinimumSize() ) + ", " +
+                              "pref=" + ObtuseUtil.fDim( tf.getParent().getPreferredSize() ) + ", " +
+                              "max=" + ObtuseUtil.fDim( tf.getParent().getMaximumSize() ) + ", " +
+                              "size=" + ObtuseUtil.fBounds( tf.getParent().getBounds() ),
+                        traceMode
+                );
+
+                tf.revalidate();
+
+//                tf.getParent().validate();
 
             }
+
+//            tf.revalidate();
+
+            Optional<Window> win = ObtuseGuiEventUtils.findOurTopWindow( tf );
+            if ( win.isPresent() ) {
+
+                Logger.maybeLogMsg( () -> "got the window!", traceMode );
+
+                win.get().pack();
+
+            }
+            ObtuseUtil.doNothing();
+
+//        } else {
+
+//            tf.setForeground( Color.BLACK );
 
         }
 
     }
 
-    public static void maybeShrinkTextField( final @NotNull JTextField tf ) {
+    /**
+     Old gold - will be deleted soon.
+     @param tf the textfield of interest.
+     @param traceMode whether or not this call should generate debug/trace output.
+     @deprecated
+     */
+
+    @SuppressWarnings({ "Duplicates", "unused" })
+    private static void obsoleteButWorkingMaybeGrowTextField( final @NotNull JTextField tf, final boolean traceMode ) {
 
         if ( s_interestingField == tf ) {
 
@@ -314,21 +508,197 @@ public abstract class AutoSizingValidatedJTextField extends ValidatedJTextField 
 
         }
 
-        int textWidth = fontMetrics.stringWidth( tf.getText() );
+        int textWidth = fontMetrics.stringWidth( tf.getText() ) + tf.getInsets().left + tf.getInsets().right;
 
         Dimension curPreferredSize = new Dimension( tf.getPreferredSize() );
         Dimension minSize = tf.getMinimumSize();
-        boolean changed = false;
-        while ( textWidth <= curPreferredSize.width - 25 && curPreferredSize.width - 25 >= minSize.width ) {
+        Dimension maxSize = tf.getMaximumSize();
 
-            curPreferredSize.width -= 25;
-            changed = true;
+        boolean changed = false;
+        while ( true ) {
+
+            int curPrefWidth = curPreferredSize.width;
+
+            // Is the width of the text within TEXT_WIDTH_CHANGE_DELTA pixels of the current preferred size of the JTextField?
+
+            boolean ifExprLeft = textWidth >= curPrefWidth - TEXT_WIDTH_CHANGE_DELTA;
+
+            // Is there still room to make the field wider?
+
+            boolean ifExprRight = curPrefWidth < maxSize.width;
+
+            // If both of the above conditions are true then it is time to make the field wider.
+
+            boolean ifExpr = ifExprLeft && ifExprRight;
+
+            Logger.maybeLogMsg(
+                    () -> "maybeGrowingNow:  DELTA=" + TEXT_WIDTH_CHANGE_DELTA + ", " +
+                          "textWidth=" + textWidth + ", " +
+                          "cPrefWidth=" + curPrefWidth + ", " +
+                          "cPrefWidth-DELTA=" + ( curPrefWidth - TEXT_WIDTH_CHANGE_DELTA ) + ", " +
+                          "maxWidth=" + maxSize.width + ", " +
+                          "ifExprLeft=" + ifExprLeft + ", " +
+                          "ifExprRight=" + ifExprRight + ", " +
+                          "ifExpr=" + ifExpr,
+                    traceMode
+            );
+
+            if ( ifExpr ) {
+
+                curPreferredSize.width += TEXT_WIDTH_CHANGE_DELTA;
+                changed = true;
+
+            } else {
+
+                break;
+
+            }
 
         }
 
         if ( changed ) {
 
-            Logger.logMsg( "shrank to " + ObtuseUtil.fDim( curPreferredSize ) );
+            Logger.maybeLogMsg( () -> "grew to " + ObtuseUtil.fDim( curPreferredSize ), traceMode );
+
+//            tf.setForeground( Color.RED );
+
+            if ( curPreferredSize.width < tf.getWidth() ) {
+
+                ObtuseUtil.doNothing();
+
+            }
+
+            tf.setPreferredSize( curPreferredSize );
+//            tf.setMinimumSize( new Dimension( Math.min( curPreferredSize.width, maxSize.width ), minSize.height ) );
+
+            Logger.maybeLogMsg(
+                    () -> "tf:  " +
+                          "min=" + ObtuseUtil.fDim( tf.getMinimumSize() ) + ", " +
+                          "pref=" + ObtuseUtil.fDim( tf.getPreferredSize() ) + ", " +
+                          "max=" + ObtuseUtil.fDim( tf.getMaximumSize() ) + ", " +
+                          "size=" + ObtuseUtil.fBounds( tf.getBounds() ),
+                    traceMode
+            );
+
+            if ( tf.getParent() != null ) {
+
+                Logger.maybeLogMsg(
+                        () -> "pr:  " +
+                              "min=" + ObtuseUtil.fDim( tf.getParent().getMinimumSize() ) + ", " +
+                              "pref=" + ObtuseUtil.fDim( tf.getParent().getPreferredSize() ) + ", " +
+                              "max=" + ObtuseUtil.fDim( tf.getParent().getMaximumSize() ) + ", " +
+                              "size=" + ObtuseUtil.fBounds( tf.getParent().getBounds() ),
+                        traceMode
+                );
+
+                tf.revalidate();
+
+//                tf.getParent().validate();
+
+            }
+
+//            tf.revalidate();
+
+            Optional<Window> win = ObtuseGuiEventUtils.findOurTopWindow( tf );
+            if ( win.isPresent() ) {
+
+                Logger.maybeLogMsg( () -> "got the window!", traceMode );
+
+                win.get().pack();
+
+            }
+            ObtuseUtil.doNothing();
+
+//        } else {
+
+//            tf.setForeground( Color.BLACK );
+
+        }
+
+    }
+
+    /**
+     Old gold - will be deleted soon.
+     @param tf the textfield of interest.
+     @param traceMode whether or not this call should generate debug/trace output.
+     @deprecated
+     */
+
+    @SuppressWarnings({ "Duplicates", "unused" })
+    @Deprecated
+    private static void obsoleteButWorkingMaybeShrinkTextField( final @NotNull JTextField tf, final boolean traceMode ) {
+
+        if ( s_interestingField == tf ) {
+
+            ObtuseUtil.doNothing();
+
+        }
+
+        FontMetrics fontMetrics = getLikelyFontMetrics( tf );
+
+        if ( fontMetrics == null ) {
+
+            return;
+
+        }
+
+        if ( s_interestingField == tf ) {
+
+            ObtuseUtil.doNothing();
+
+        }
+
+        int textWidth = fontMetrics.stringWidth( tf.getText() ) + tf.getInsets().left + tf.getInsets().right;
+
+        Dimension curPreferredSize = new Dimension( tf.getPreferredSize() );
+        Dimension minSize = tf.getMinimumSize();
+        Dimension maxSize = tf.getMaximumSize();
+        boolean changed = false;
+        while ( true ) {
+
+            int curPrefWidth = curPreferredSize.width;
+
+            // Is the width of the text at least double TEXT_WIDTH_CHANGE_DELTA pixels narrower than the current preferred size of the JTextField?
+
+            boolean ifExprLeft = textWidth < curPrefWidth - 2 * TEXT_WIDTH_CHANGE_DELTA;
+
+            // Is there still room to make the field narrower?
+
+            boolean ifExprRight = curPrefWidth >= minSize.width + TEXT_WIDTH_CHANGE_DELTA;
+
+            // If both of the above conditions are true then it is time to make the field narrower.
+
+            boolean ifExpr = ifExprLeft && ifExprRight;
+
+            Logger.maybeLogMsg(
+                    () -> "maybeShrinkingNow:  DELTA=" + TEXT_WIDTH_CHANGE_DELTA + ", " +
+                          "textWidth=" + textWidth + ", " +
+                          "cPrefWidth=" + curPrefWidth + ", " +
+                          "cPrefWidth-2*DELTA=" + ( curPrefWidth - 2 * TEXT_WIDTH_CHANGE_DELTA ) + ", " +
+                          "minWidth=" + minSize.width + ", " +
+                          "ifExprLeft=" + ifExprLeft + ", " +
+                          "ifExprRight=" + ifExprRight + ", " +
+                          "ifExpr=" + ifExpr,
+                    traceMode
+            );
+
+            if ( ifExpr ) {
+
+                curPreferredSize.width -= TEXT_WIDTH_CHANGE_DELTA;
+                changed = true;
+
+            } else {
+
+                break;
+
+            }
+
+        }
+
+        if ( changed ) {
+
+            Logger.maybeLogMsg( () -> "shrank to " + ObtuseUtil.fDim( curPreferredSize ), traceMode );
+//            tf.setForeground( Color.GREEN );
 
             tf.setPreferredSize( curPreferredSize );
 
@@ -337,6 +707,12 @@ public abstract class AutoSizingValidatedJTextField extends ValidatedJTextField 
                 tf.getParent().revalidate();
 
             }
+
+            ObtuseUtil.doNothing();
+
+//        } else {
+
+//            tf.setForeground( Color.BLACK );
 
         }
 

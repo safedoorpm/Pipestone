@@ -6,7 +6,7 @@ import org.jetbrains.annotations.NotNull;
  Created by danny on 2019/05/03.
  */
 
-public interface CreateSomethingHelper<T> {
+public interface CreateSomethingHelper<T,N> {
 
     /**
      The singular name for the type/kind of thing being created.
@@ -17,12 +17,19 @@ public interface CreateSomethingHelper<T> {
     String getSingularTypeName();
 
     /**
+     Create a name object for some something.
+     @param name the name of the something.
+     */
+
+    N createName( @NotNull final String name );
+
+    /**
      Determine if something by a specified name already exists.
      @param name the name of the something to be checked.
      @return {@code true} if something by that name already exists; {@code false} otherwise.
      */
 
-    boolean doesSomethingExist( @NotNull final String name );
+    boolean doesSomethingExist( @NotNull final N name );
 
     /**
      Actually create the something.
@@ -30,6 +37,6 @@ public interface CreateSomethingHelper<T> {
      @return the new something.
      */
 
-    T createSomething( @NotNull final String name );
+    T createSomething( @NotNull final N name );
 
 }

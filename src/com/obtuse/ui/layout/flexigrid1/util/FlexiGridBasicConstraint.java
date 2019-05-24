@@ -21,7 +21,8 @@ public class FlexiGridBasicConstraint implements FlexiGridConstraint {
     public enum HJustification {
         LEFT,
         CENTER,
-        RIGHT
+        RIGHT,
+        FILL
     }
 
     public enum VJustification {
@@ -34,8 +35,14 @@ public class FlexiGridBasicConstraint implements FlexiGridConstraint {
     private int _row;
     private int _col;
 
+    private boolean _isHorizontalFiller = false;
+    private boolean _isVerticalFiller = false;
+
     private HJustification _horizontalJustification = null;
     private VJustification _verticalJustification = null;
+
+    private int _minWidth = 0;
+    private int _maxWidth = Integer.MAX_VALUE;
 
     private Insets _margins = null;
 
@@ -113,6 +120,34 @@ public class FlexiGridBasicConstraint implements FlexiGridConstraint {
     public int getCol() {
 
         return _col;
+
+    }
+
+    public int getMinWidth() {
+
+        return _minWidth;
+
+    }
+
+    public FlexiGridBasicConstraint setMinWidth( final int minWidth ) {
+
+        _minWidth = minWidth;
+
+        return this;
+
+    }
+
+    public int getMaxWidth() {
+
+        return _maxWidth;
+
+    }
+
+    public FlexiGridBasicConstraint setMaxWidth( final int maxWidth ) {
+
+        _maxWidth = maxWidth;
+
+        return this;
 
     }
 
@@ -209,6 +244,36 @@ public class FlexiGridBasicConstraint implements FlexiGridConstraint {
     public FlexiGridBasicConstraint.VJustification getVerticalJustification() {
 
         return _verticalJustification == null ? VJustification.CENTER : _verticalJustification;
+
+    }
+
+    @NotNull
+    public FlexiGridBasicConstraint setIsHorizontalFiller( final boolean isHorizontalFiller ) {
+
+        _isHorizontalFiller = isHorizontalFiller;
+
+        return this;
+
+    }
+
+    public boolean isHorizontalFiller() {
+
+        return _isHorizontalFiller;
+
+    }
+
+    @NotNull
+    public FlexiGridBasicConstraint setIsVerticalFiller( final boolean isVerticalFiller ) {
+
+        _isVerticalFiller = isVerticalFiller;
+
+        return this;
+
+    }
+
+    public boolean isVerticalFiller() {
+
+        return _isVerticalFiller;
 
     }
 

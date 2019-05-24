@@ -19,7 +19,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.LinkedList;
-import java.util.Optional;
 
 /*
  * Copyright © 2015 Obtuse Systems Corporation
@@ -1008,26 +1007,6 @@ public class LinearLayoutUtil {
             c = c.getParent();
 
         }
-
-    }
-
-    @NotNull
-    public static Optional<Window> findOurWindow( final Component component ) {
-
-        Component c = component;
-        for ( int i = 0; i < 1000; i += 1 ) {
-
-            if ( c instanceof Window ) {
-
-                return Optional.of((Window)c);
-
-            }
-
-            c = c.getParent();
-
-        }
-
-        return Optional.empty();
 
     }
 

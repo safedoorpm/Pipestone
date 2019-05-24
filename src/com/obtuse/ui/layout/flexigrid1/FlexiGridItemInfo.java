@@ -41,8 +41,7 @@ public class FlexiGridItemInfo extends GridArray.ItemInfo<FlexiGridConstraintsTa
     public FlexiGridItemInfo(
             final int row,
             final int col,
-            final @NotNull Component component,
-            final FlexiGridConstraintsTable info
+            final @NotNull Component component, final FlexiGridConstraintsTable info
     ) {
 
         super( row, col, component, info );

@@ -15,7 +15,7 @@ public abstract class MyActionListener implements ActionListener {
 
         try {
 
-            EventUtils.event( "actionPerformed (" + getClass() + "):  ", actionEvent );
+            ObtuseGuiEventUtils.event( "actionPerformed (" + getClass() + "):  ", actionEvent );
             myActionPerformed( actionEvent );
 
         } catch ( HowDidWeGetHereError e ) {

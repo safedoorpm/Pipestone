@@ -124,7 +124,7 @@ public class GridArray<T extends GridArray.ItemInfo> {
 
         if ( rMajorPresent != cMajorPresent ) {
 
-            IllegalArgumentException e = new IllegalArgumentException(
+            HowDidWeGetHereError e = new HowDidWeGetHereError(
                     who + ":  [" + row + "," + col + "]  gridRow status (" +
                     rMajorPresent +
                     ") does not agree with gridColumn status status (" +
@@ -230,7 +230,9 @@ public class GridArray<T extends GridArray.ItemInfo> {
      {@link Dimension#height} will contain the number of rows and
      {@link Dimension#width} will contain the number of columns.
      <p>Note that an array with 5 rows will have indices {@code 0}, {@code 1}, {@code 2}, {@code 3}, and {@code 4}.
-     Put another way, an array with n columns where n is greater than {@code 0} has a column {@code 0} and does NOT have a column {@code n}.
+     Put another way, an array with n columns where n is greater than {@code 0} has a column {@code 0} and does NOT have a column {@code n}.</p>
+     <p>Note also that column and row indices are zero-origin.
+     Consequently, if a call to this method reveals that this instance has a width of 10 then the index of the last column is 9.
      */
 
     public Dimension getDimension() {
@@ -262,6 +264,7 @@ public class GridArray<T extends GridArray.ItemInfo> {
         Logger.logMsg( "dimension of GridArray is " + ObtuseUtil.fDim( dim ) );
 
         return dim;
+
     }
 
     public ItemInfo put( T ii, boolean replaceOk ) {

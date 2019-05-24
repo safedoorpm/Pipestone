@@ -20,7 +20,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-public class CreateSomethingDialog<T> extends JDialog {
+public class CreateSomethingDialog<T,N> extends JDialog {
 
     private JPanel contentPane;
 
@@ -35,48 +35,15 @@ public class CreateSomethingDialog<T> extends JDialog {
 
     private ObtuseMessageLabel _errorMessageLabel;
 
-    private final CreateSomethingHelper<T> _createSomethingHelper;
+    private final CreateSomethingHelper<T,N> _createSomethingHelper;
 
-    private final CreateSomethingNotifier<T> _createSomethingNotifier;
-
-    // The Frame class is derived from the Window class - this should not be needed!
-
-//    @SuppressWarnings("unused")
-//    public CreateSomethingDialog(
-//            final Frame owner,
-//            @NotNull final CreateSomethingHelper<T> createSomethingHelper,
-//            @Nullable final CreateSomethingNotifier<T> createSomethingNotifier
-//    ) {
-//        super( owner );
-//
-//        _createSomethingHelper = createSomethingHelper;
-//        _createSomethingNotifier = createSomethingNotifier;
-//
-//        configDialog();
-//
-//    }
-
-//    @SuppressWarnings("unused")
-//    public CreateSomethingDialog(
-//            @Nullable final Window owner,
-//            @NotNull final CreateSomethingHelper<T> createSomethingHelper,
-//            @Nullable final CreateSomethingNotifier<T> createSomethingNotifier
-//    ) {
-//
-//        super( owner );
-//
-//        _createSomethingHelper = createSomethingHelper;
-//        _createSomethingNotifier = createSomethingNotifier;
-//
-//        configDialog();
-//
-//    }
+    private final CreateSomethingNotifier<T,N> _createSomethingNotifier;
 
     @SuppressWarnings("unused")
     public CreateSomethingDialog(
             @Nullable final Component owner,
-            @NotNull final CreateSomethingHelper<T> createSomethingHelper,
-            @Nullable final CreateSomethingNotifier<T> createSomethingNotifier
+            @NotNull final CreateSomethingHelper<T,N> createSomethingHelper,
+            @Nullable final CreateSomethingNotifier<T,N> createSomethingNotifier
     ) {
 
         super( findOurWindow( owner ) );
@@ -127,6 +94,8 @@ public class CreateSomethingDialog<T> extends JDialog {
         setContentPane( contentPane );
         setModalityType( Dialog.DEFAULT_MODALITY_TYPE );
         getRootPane().setDefaultButton( _createSomethingButton );
+
+        _createSomethingButton.setText( "Create New " + _createSomethingHelper.getSingularTypeName() );
 
         _promptLabel.setText( "Name of new " + _createSomethingHelper.getSingularTypeName() );
 
@@ -236,7 +205,8 @@ public class CreateSomethingDialog<T> extends JDialog {
 
             }
 
-            if ( _createSomethingHelper.doesSomethingExist( trimmedSomethingString ) ) {
+            N name = _createSomethingHelper.createName( trimmedSomethingString );
+            if ( _createSomethingHelper.doesSomethingExist( name ) ) {
 //            if ( LancotLibraryRoot.doesMediaLibraryExist( trimmedSomethingString ) ) {
 
                 _errorMessageLabel.setMessage( "That " + _createSomethingHelper.getSingularTypeName() + " already exists" );
@@ -245,11 +215,11 @@ public class CreateSomethingDialog<T> extends JDialog {
 
             }
 
-            T newSomething = _createSomethingHelper.createSomething( trimmedSomethingString );
+            T newSomething = _createSomethingHelper.createSomething( name );
 
             if ( newSomething == null ) {
 
-                if ( _createSomethingNotifier.creationFailed( trimmedSomethingString, _createSomethingHelper ) ) {
+                if ( _createSomethingNotifier.creationFailed( name, _createSomethingHelper ) ) {
 
                     _errorMessageLabel.setMessage( "Creation failed (no idea why - sorry)" );
 

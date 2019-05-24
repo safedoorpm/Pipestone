@@ -6,18 +6,20 @@ package com.obtuse.ui;
 
 import com.obtuse.util.Logger;
 import com.obtuse.util.Trace;
+import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import javax.swing.event.PopupMenuEvent;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
+import java.util.Optional;
 
 /**
  Utility methods to log and report UI events.
  */
 
-public class EventUtils {
+public class ObtuseGuiEventUtils {
 
     private static boolean _logEvents;
 
@@ -25,9 +27,10 @@ public class EventUtils {
      Make it clear that this is a utilities class.
      */
 
-    private EventUtils() {
+    private ObtuseGuiEventUtils() {
 
         super();
+
     }
 
     public static void event( final String where, final MouseEvent event ) {
@@ -38,30 +41,40 @@ public class EventUtils {
             case MouseEvent.MOUSE_CLICKED:
                 eventType = "clicked";
                 break;
+
             case MouseEvent.MOUSE_PRESSED:
                 eventType = "pressed";
                 break;
+
             case MouseEvent.MOUSE_RELEASED:
                 eventType = "released";
                 break;
+
             case MouseEvent.MOUSE_MOVED:
                 eventType = "moved";
                 break;
+
             case MouseEvent.MOUSE_ENTERED:
                 eventType = "entered";
                 break;
+
             case MouseEvent.MOUSE_EXITED:
                 eventType = "exited";
                 break;
+
             case MouseEvent.MOUSE_DRAGGED:
                 eventType = "dragged";
                 break;
+
             case MouseEvent.MOUSE_WHEEL:
                 eventType = "wheel";
                 break;
+
             default:
                 eventType = "id=" + event.getID();
+
         }
+
         String msg = where +
                      ":  " +
                      "mouse event:  " +
@@ -79,14 +92,15 @@ public class EventUtils {
                      event.getPoint().y +
                      ")" +
                      ", " +
-                     getTopParent( (Component)event.getSource() );
+                     describeTopParent( (Component)event.getSource() );
+
         Trace.event( msg );
 
     }
 
     public static void event( final String why, final PopupMenuEvent event ) {
 
-        String msg = "popup menu event:  " + why + " in " + getTopParent( (Component)event.getSource() );
+        String msg = "popup menu event:  " + why + " in " + describeTopParent( (Component)event.getSource() );
         maybeLog( msg );
 
     }
@@ -97,14 +111,14 @@ public class EventUtils {
         if ( source instanceof JMenuItem ) {
 
             JMenuItem menuItem = (JMenuItem)source;
-            String msg = why + ":  menu item \"" + menuItem.getText() + "\" clicked in " + getTopParent( menuItem );
+            String msg = why + ":  menu item \"" + menuItem.getText() + "\" clicked in " + describeTopParent( menuItem );
 
             maybeLog( msg );
 
         } else if ( source instanceof JButton ) {
 
             JButton button = (JButton)source;
-            String msg = why + ":  button \"" + button.getText() + "\" clicked in " + getTopParent( button );
+            String msg = why + ":  button \"" + button.getText() + "\" clicked in " + describeTopParent( button );
 
             maybeLog( msg );
 
@@ -113,6 +127,13 @@ public class EventUtils {
             maybeLog( why + ":  EventObject:  " + event );
 
         }
+
+    }
+
+    @SuppressWarnings("unused")
+    public static void setLogEvents( final boolean logEvents ) {
+
+        _logEvents = logEvents;
 
     }
 
@@ -130,7 +151,47 @@ public class EventUtils {
 
     }
 
-    public static Object getTopParent( final Component xComponent ) {
+//    @NotNull
+//    public static Optional<Window> getTopParent( final Component component ) {
+//
+//        Component c = component;
+//        while ( c != null ) {
+//
+//            if ( c instanceof JFrame || c instanceof JDialog ) {
+//
+//                return Optional.of( (Window)c );
+//
+//            }
+//
+//            c = c.getParent();
+//
+//        }
+//
+//        return Optional.empty();
+//
+//    }
+
+    @NotNull
+    public static Optional<Window> findOurTopWindow( final Component component ) {
+
+        Component c = component;
+        for ( int i = 0; i < 1000; i += 1 ) {
+
+            if ( c instanceof Window ) {
+
+                return Optional.of((Window)c);
+
+            }
+
+            c = c.getParent();
+
+        }
+
+        return Optional.empty();
+
+    }
+
+    public static String describeTopParent( final Component xComponent ) {
 
         String in = "";
 
@@ -173,5 +234,4 @@ public class EventUtils {
         return in + "Component " + xComponent;
 
     }
-
 }

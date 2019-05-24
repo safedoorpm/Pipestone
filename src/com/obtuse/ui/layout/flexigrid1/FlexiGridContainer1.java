@@ -6,6 +6,7 @@ package com.obtuse.ui.layout.flexigrid1;
 
 import com.obtuse.exceptions.HowDidWeGetHereError;
 import com.obtuse.ui.layout.layoutTracer.TracingLayoutManager;
+import com.obtuse.util.Logger;
 import com.obtuse.util.ObtuseUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -71,12 +72,29 @@ public class FlexiGridContainer1 extends JPanel implements FlexiGridContainer {
         FlexiGridLayoutManager mgr = new FlexiGridLayoutManager(
                 name,
                 this,
-                ( row, col, component, constraintsTable ) -> new FlexiGridItemInfo( row, col, component, constraintsTable )
+                FlexiGridItemInfo::new
         );
 
         super.setLayout( useLayoutTracer() ? new TracingLayoutManager( mgr ) : mgr );
 
         _initialized = true;
+
+    }
+
+    public void setBounds( Rectangle r ) {
+
+        super.setBounds( r );
+
+    }
+
+    public void setBounds( int x, int y, int width, int height ) {
+
+        String oldBounds = ObtuseUtil.fBounds( getBounds() );
+
+        super.setBounds( x, y, width, height );
+        Logger.logMsg( "bounds of FlexiGridContainer1 " + getName() + " changed from " + oldBounds + " to " + ObtuseUtil.fBounds( x, y, width, height ) );
+
+        ObtuseUtil.doNothing();
 
     }
 

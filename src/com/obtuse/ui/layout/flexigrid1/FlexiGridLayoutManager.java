@@ -136,8 +136,13 @@ public class FlexiGridLayoutManager implements LayoutManager2 {
 
     }
 
-    @NotNull
-    public synchronized FlexiGridLayoutManagerCache preLoadCacheIfNecessary() {
+    public synchronized void preLoadCacheIfNecessary() {
+
+        if ( _target.getComponentCount() == 0 ) {
+
+            return;
+
+        }
 
         if ( _cache == null ) {
 
@@ -150,8 +155,6 @@ public class FlexiGridLayoutManager implements LayoutManager2 {
             );
 
         }
-
-        return _cache;
 
     }
 
@@ -218,6 +221,12 @@ public class FlexiGridLayoutManager implements LayoutManager2 {
         checkContainer( "getLayoutAlignmentX", target );
         preLoadCacheIfNecessary();
 
+        if ( _cache == null ) {
+
+            return 0.5f;
+
+        }
+
         return _cache.getLayoutAlignmentX();
 
     }
@@ -227,6 +236,12 @@ public class FlexiGridLayoutManager implements LayoutManager2 {
 
         checkContainer( "getLayoutAlignmentY", target );
         preLoadCacheIfNecessary();
+
+        if ( _cache == null ) {
+
+            return 0.5f;
+
+        }
 
         return _cache.getLayoutAlignmentY();
 
@@ -283,7 +298,7 @@ public class FlexiGridLayoutManager implements LayoutManager2 {
         checkContainer( "preferredLayoutSize", target );
         preLoadCacheIfNecessary();
 
-        Dimension size = _cache.getPreferredSize();
+        Dimension size = _cache == null ? _target.getPreferredSize() : _cache.getPreferredSize();
         logMaybe( "FlexiGridLayoutManager.preferredLayoutSize:  " + size );
 
         if ( "outer".equals( getTarget().getName() ) ) {
@@ -302,8 +317,7 @@ public class FlexiGridLayoutManager implements LayoutManager2 {
         checkContainer( "minimumLayoutSize", target );
         preLoadCacheIfNecessary();
 
-        @SuppressWarnings("UnnecessaryLocalVariable")
-        Dimension size = _cache.getMinimumSize();
+        Dimension size = _cache == null ? _target.getMinimumSize() : _cache.getMinimumSize();
         logMaybe( "FlexiGridLayoutManager.minimumLayoutSize:  " + size );
 
         return size;
@@ -316,8 +330,7 @@ public class FlexiGridLayoutManager implements LayoutManager2 {
         checkContainer( "maximumLayoutSize", target );
         preLoadCacheIfNecessary();
 
-        @SuppressWarnings("UnnecessaryLocalVariable")
-        Dimension size = _cache.getMaximumSize();
+        Dimension size = _cache == null ? _target.getMaximumSize() : _cache.getMaximumSize();
         logMaybe( "FlexiGridLayoutManager.maximumLayoutSize:  " + size );
 
         return size;
@@ -374,23 +387,31 @@ public class FlexiGridLayoutManager implements LayoutManager2 {
 
         }
 
-        logMaybe( "FlexiGridLayoutManager.layoutContainer( " + LinearLayoutUtil.describeComponent( parent ) + " ):  it begins" );
+        logMaybe( "laying out container currently sized at " + ObtuseUtil.fBounds( _target.getBounds() ) );
+
+        logMaybe( "FlexiGridLayoutManager.layoutContainer( " + LinearLayoutUtil.describeComponent( _target ) + " ):  it begins" );
 
         FlexiGridCache1 cache;
 
         synchronized ( this ) {
 
-            if ( LinearLayoutUtil.isContainerOnWatchlist( parent ) ) {
+            if ( LinearLayoutUtil.isContainerOnWatchlist( _target ) ) {
 
                 ObtuseUtil.doNothing();
 
             }
 
-            checkContainer( "layoutContainer", parent );
+            checkContainer( "layoutContainer", _target );
 
             preLoadCacheIfNecessary();
 
             cache = _cache;
+
+        }
+
+        if ( cache == null ) {
+
+            return;
 
         }
 

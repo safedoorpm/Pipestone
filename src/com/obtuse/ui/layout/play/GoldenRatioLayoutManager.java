@@ -158,9 +158,9 @@ public class GoldenRatioLayoutManager implements LayoutManager {
 
     /**
      Does nothing of substance (required by {@link LayoutManager} interface).
-     <p/>This method is required by the {@link LayoutManager} interface. Calls to this method do nothing other than
-     possibly
-     sending log message to the {@link MessageProxy} instance if one was provided when this instance was constructed.
+     <p/>This method is required by the {@link LayoutManager} interface.
+     Calls to this method do nothing other than possibly sending log message to the {@link MessageProxy}
+     instance if one was provided when this instance was constructed.
 
      @param name parameter required by the {@link LayoutManager} interface.
      @param comp parameter required by the {@link LayoutManager} interface.

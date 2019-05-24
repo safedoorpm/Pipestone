@@ -8,9 +8,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
-import java.util.Collection;
 import java.util.SortedMap;
-import java.util.SortedSet;
 import java.util.TreeMap;
 
 /**
@@ -87,6 +85,18 @@ public class FlexiGridConstraintsTable extends TreeMap<FlexiGridConstraintCatego
     public FlexiGridBasicConstraint.VJustification getVerticalJustification() {
 
         return getBasicConstraint().getVerticalJustification();
+
+    }
+
+    public int getMinWidth() {
+
+        return getBasicConstraint().getMinWidth();
+
+    }
+
+    public int getMaxWidth() {
+
+        return getBasicConstraint().getMaxWidth();
 
     }
 
