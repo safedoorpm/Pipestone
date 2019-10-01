@@ -5,37 +5,7 @@
     <option name="SHOW_STRUCTURE" value="true" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" name="Default" comment="Implement the GenericPanelManager set of classes which provides a relatively easy-to-use scrollable (eventually) JPanel of FlexiGridModelSlice(s).&#10;&#10;Use the Optional facility across a wider range of classes.&#10;&#10;Cleanup the FlexiGridLayoutManager class.&#10;&#10;Implement the AwtEventToEventCategoryNameMap class to make handling of AWT events somewhat easier.&#10;&#10;Minor and not-so-Minor cleanup here and there.">
-      <change afterPath="$PROJECT_DIR$/src/com/obtuse/ui/AwtEventToEventCategoryNameMap.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/obtuse/ui/gpe/GenericPanelManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/obtuse/ui/gpe/GenericPanelManagerTester.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/obtuse/ui/gpe/GenericPanelManagerTester2.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/obtuse/ui/gpe/GenericPanelRowModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/obtuse/ui/gpe/GenericPanelSlice.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/obtuse/ui/gpe/GenericPanelSliceFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/graphs/GraphTheoryUtilities.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/graphs/GraphTheoryUtilities.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/AutoSizingValidatedJTextField.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/AutoSizingValidatedJTextField.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/DefaultMpsKnob.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/DefaultMpsKnob.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/MultiPointSlider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/MultiPointSlider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/ObtuseImageFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/ObtuseImageFile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/copier/CopierWidget.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/copier/CopierWidget.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/FlexiGridLayoutManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/FlexiGridLayoutManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/GridArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/GridArray.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/selectors/Alternative.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/selectors/Alternative.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/vsp/play/PlayElementPanelModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/vsp/play/PlayElementPanelModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/GenericTag.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/GenericTag.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/ImageButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ImageButton.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/ImageIconUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ImageIconUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/ThreeDimensionalSortedMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ThreeDimensionalSortedMap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/TwoDimensionalSortedMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/TwoDimensionalSortedMap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/TwoDimensionalTreeMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/TwoDimensionalTreeMap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/UniqueId.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/UniqueId.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingPacker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingPacker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingUnPacker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingUnPacker.java" afterDir="false" />
-    </list>
+    <list default="true" id="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" name="Default" comment="Implement the GenericPanelManager set of classes which provides a relatively easy-to-use scrollable (eventually) JPanel of FlexiGridModelSlice(s).&#10;&#10;Use the Optional facility across a wider range of classes.&#10;&#10;Cleanup the FlexiGridLayoutManager class.&#10;&#10;Implement the AwtEventToEventCategoryNameMap class to make handling of AWT events somewhat easier.&#10;&#10;Minor and not-so-Minor cleanup here and there." />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -755,14 +725,7 @@
       <workItem from="1568216642396" duration="1268000" />
       <workItem from="1569096657050" duration="31000" />
       <workItem from="1569096714581" duration="662000" />
-      <workItem from="1569916888595" duration="662000" />
-    </task>
-    <task id="LOCAL-00049" summary="Make more classes Gowing-compatible.&#10;Fix a defect in Gowing where empty objects would get a version number of -1 during restoration instead of their actual version number.&#10;Specify the nullability of arrays separately from their contents in all sorts of places.&#10;Ensure that RelativePath instances appear to have an empty list of path instances during construction (this ensures that RelativePath.toString doesn't explode if used during construction).&#10;Lots of cleanup in a wide array of classes.">
-      <created>1515052042170</created>
-      <option name="number" value="00049" />
-      <option name="presentableId" value="LOCAL-00049" />
-      <option name="project" value="LOCAL" />
-      <updated>1515052042170</updated>
+      <workItem from="1569916888595" duration="1140000" />
     </task>
     <task id="LOCAL-00050" summary="Add lots and lots of final, @NotNull, and @Nullable attributes.&#10;&#10;Implement reasonably easy to use button and combo-box based selector panels.&#10;&#10;The usual mountain of cleanup.">
       <created>1518684983904</created>
@@ -1100,7 +1063,14 @@
       <option name="project" value="LOCAL" />
       <updated>1558680518566</updated>
     </task>
-    <option name="localTasksCounter" value="98" />
+    <task id="LOCAL-00098" summary="Implement the GenericPanelManager set of classes which provides a relatively easy-to-use scrollable (eventually) JPanel of FlexiGridModelSlice(s).&#10;&#10;Use the Optional facility across a wider range of classes.&#10;&#10;Cleanup the FlexiGridLayoutManager class.&#10;&#10;Implement the AwtEventToEventCategoryNameMap class to make handling of AWT events somewhat easier.&#10;&#10;Minor and not-so-Minor cleanup here and there.">
+      <created>1569917604321</created>
+      <option name="number" value="00098" />
+      <option name="presentableId" value="LOCAL-00098" />
+      <option name="project" value="LOCAL" />
+      <updated>1569917604321</updated>
+    </task>
+    <option name="localTasksCounter" value="99" />
     <servers />
   </component>
   <component name="TodoView">
