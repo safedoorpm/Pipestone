@@ -375,7 +375,7 @@ public class GraphTheoryUtilities {
 
             allVertices.put( a.getSrc().getV(), a.getSrc() );
             allVertices.put( a.getDst().getV(), a.getDst() );
-            if ( !dependencies.keySet().contains( a.getSrc().getV() ) ) {
+            if ( !dependencies.containsKey( a.getSrc().getV() ) ) {
 
                 dependencies.put( a.getSrc().getV(), new HashSet<>() );
 
@@ -448,7 +448,7 @@ public class GraphTheoryUtilities {
 
         Optional<List<Vertex<V>>> optSortedNodes = topologicalSort( directedArcs );
 
-        return !optSortedNodes.isPresent();
+        return optSortedNodes.isEmpty();
 
     }
 
@@ -466,7 +466,7 @@ public class GraphTheoryUtilities {
 
             ObtuseUtil.doNothing();
 
-        } else if ( !optResult.isPresent() && !isGraphAcyclic( arcsAsList ) ) {
+        } else if ( optResult.isEmpty() && !isGraphAcyclic( arcsAsList ) ) {
 
             Logger.logMsg( "did NOT find a loop but isGraphAcyclic claims that the graph is NOT acyclic" );
 

@@ -161,14 +161,30 @@ public interface ThreeDimensionalSortedMap<
     Iterator<V> iterator();
 
     /**
-     If the specified keys are not already associated with a non-null value, associate the specified keys with the specified {@code newValue}.
+     If the specified keys are not already associated with a non-null value,
+     associate the specified keys with the specified {@code newValue}.
      <p>See {@link java.util.Map#putIfAbsent(Object, Object)} for more information
      (obviously, {@link java.util.Map#putIfAbsent(Object, Object)} deals with only one key and this method
-     deals with three keys but this and the {@link java.util.Map#putIfAbsent(Object, Object)} methods accomplish conceptually the same thing).</p>
+     deals with three keys but this and the {@link java.util.Map#putIfAbsent(Object, Object)} methods
+     accomplish conceptually the same thing).</p>
+     <p>
+     Note that if {@code mapping} is an instance of this class then
+     <blockquote>
+     <pre>V rval = mapping.putIfAbsent( k1, k2, k3, nValue );</pre>
+     </blockquote>
+     is exactly equivalent to
+     <blockquote>
+     <pre>V rval = computeIfAbsent( k1, k2, k3, ( key1, key2, key3 ) -> newValue );</pre>
+     </blockquote>
+     </p>
      @param key1 the first key (where {@code T1} is the first 'type' parameter to this class).
      @param key2 the second key (where {@code T2} is the second 'type' parameter to this class).
-     @param newValue the new value to be associated with the keys if they are not already associated with a non-null value.
-     @return the value associated with the three keys prior to this method 'doing its thing'.
+     @param key3 the third key (where {@code T3} is the third 'type' parameter to this class).
+     @param newValue the new value to be associated with the keys if they are not already associated
+     with a non-null value.
+     Note that if there is no non-null value already associated with the three keys and {@code newValue} is {@code null}
+     then a {@code null} value is associated with the three keys and the return value of this method is {@code null}.
+     @return the value associated with the two keys prior to this method 'doing its thing'.
      If the keys were already associated with a non-null value then this return value will be that non-null value.
      Otherwise, this return value will be {@code null}.
      */
@@ -177,7 +193,9 @@ public interface ThreeDimensionalSortedMap<
 
         V previousValue = get( key1, key2, key3 );
         if ( previousValue == null ) {
+
             previousValue = put( key1, key2, key3, newValue );
+
         }
 
         return previousValue;
@@ -190,12 +208,25 @@ public interface ThreeDimensionalSortedMap<
      <p>See {@link java.util.Map#computeIfAbsent(Object, Function)} for more information
      (obviously, {@link java.util.Map#computeIfAbsent(Object, Function)} deals with only one key and this method
      deals with three keys but the two accomplish essentially the same thing).</p>
+     <p>This method description specifies how the default implementation of this method operates.
+     If the default implementation is overridden then care should be taken to ensure that the overridden
+     implementation conforms to this description.
+     <u>Pay particular attention to when the specified mapping function is invoked,
+     what happens when it return a null value, and what happens when it returns a non-null value.</u>
+     </p>
      @param key1 the first key (where {@code T1} is the first 'type' parameter to this class).
      @param key2 the second key (where {@code T2} is the second 'type' parameter to this class).
      @param key3 the third key (where {@code T3} is the third 'type' parameter to this class).
      @param mappingFunction the mapping function.
-     @return the non-null value associated with the three keys (either the non-null value that was 'there' before this
-     method was called or the non-null value that invoking the specified mapping function yielded and is now 'there').
+     This mapping function is invoked if there is not already a non-null value associated with the three specified keys.
+     If the mapping function is invoked and it returns a non-null value then
+     that <u>non-null</u> value is associated with the three specified keys.
+     Note that if the mapping function is invoked and it returns a <u>null</u> value then
+     this {@link ThreeDimensionalSortedMap} instance is not changed and {@code null} is returned by this method.
+     @return the value associated with the three keys (either the non-null value that was 'there' before this
+     method was called or the value that invoking the specified mapping function yielded).
+     <p>See the discussion of the {@code mappingFunction} parameter above for an explanation of
+     precisely what happens if the specified mapping function is invoked.</p>
      */
 
     default V computeIfAbsent(
@@ -206,16 +237,18 @@ public interface ThreeDimensionalSortedMap<
     ) {
 
         Objects.requireNonNull( mappingFunction );
-        V v;
-        if ( ( v = get( key1, key2, key3 ) ) == null ) {
-            V newValue;
-            if ( ( newValue = mappingFunction.apply( key1, key2, key3 ) ) != null ) {
-                put( key1, key2, key3, newValue );
-                return newValue;
-            }
+        V value = get( key1, key2, key3 );
+
+        if ( value == null ) {
+
+            value = mappingFunction.apply( key1, key2, key3 );
+
+            value = put( key1, key2, key3, value );
+
         }
 
-        return v;
+        return value;
+
     }
 
     /**

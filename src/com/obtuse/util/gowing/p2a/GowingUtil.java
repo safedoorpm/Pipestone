@@ -46,7 +46,7 @@ public class GowingUtil {
     @SuppressWarnings("unused")
     public static boolean isActuallyPackable( final @NotNull GowingPackable entity ) {
 
-        return !checkActuallyPackable( entity ).isPresent();
+        return checkActuallyPackable( entity ).isEmpty();
 
     }
 
@@ -73,7 +73,7 @@ public class GowingUtil {
 
     public static boolean isActuallyBackReferenceable( final @NotNull GowingPackable entity ) {
 
-        return !checkActuallyBackReferenceable( entity ).isPresent();
+        return checkActuallyBackReferenceable( entity ).isEmpty();
 
     }
 

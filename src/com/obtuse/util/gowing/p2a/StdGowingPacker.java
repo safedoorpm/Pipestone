@@ -117,7 +117,7 @@ public class StdGowingPacker implements GowingPacker {
 
     private boolean _verbose;
 
-    private final TreeSorter<GowingInstanceId,GowingInstanceId> _backReferenceDependencies = new TreeSorter<>();
+//    private final TreeSorter<GowingInstanceId,GowingInstanceId> _backReferenceDependencies = new TreeSorter<>();
 
     @SuppressWarnings("unused")
     public StdGowingPacker(

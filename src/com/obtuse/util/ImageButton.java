@@ -10,6 +10,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Optional;
 
 /**
  * Manage the pressed and unpressed versions of an icon/image used as a button.
@@ -125,6 +126,7 @@ public class ImageButton {
 
     }
 
+    @NotNull
     public static ImageButton makeImageButton(
             final @NotNull ImageButtonOwner imageButtonOwner,
             final @NotNull String purpose,
@@ -148,6 +150,7 @@ public class ImageButton {
 
     }
 
+    @NotNull
     public static ImageButton makeImageButton(
             final @NotNull ImageButtonOwner imageButtonOwner,
             final @NotNull String purpose,
@@ -159,29 +162,52 @@ public class ImageButton {
             final float darkeningFactor
     ) {
 
-        ImageIcon unpressedIcon = ImageIconUtils.fetchIconImage(
+        Optional<ImageIcon> optUnpressedIcon = ImageIconUtils.fetchIconImage(
                 "button-" + buttonFileName + ".png",
                 0,
                 representativeClass.getClassLoader(),
                 resourceBaseDirectory
         );
 
-        if ( unpressedIcon == null ) {
+        if ( optUnpressedIcon.isEmpty() ) {
 
             throw new IllegalArgumentException( "ImageButton.makeImageButton:  unable to fetch unpressed icon" );
 
         }
 
+        ImageIcon unpressedIcon = optUnpressedIcon.get();
+
         // Create a somewhat darker icon for the pressed version.
 
         ImageIcon pressedIcon = new ImageIcon(
-                ImageIconUtils.changeImageBrightness( unpressedIcon.getImage(), darkeningFactor )
+                ImageIconUtils.changeImageBrightness( unpressedIcon.getImage(), darkeningFactor, 0f )
         );
 
         return ImageButton.makeImageButton( imageButtonOwner, purpose, button, action, unpressedIcon, pressedIcon );
 
     }
 
+    @NotNull
+    public static ImageButton makeImageButton(
+            final @NotNull ImageButtonOwner imageButtonOwner,
+            final @NotNull String purpose,
+            final @NotNull JLabel button,
+            final @NotNull Runnable action,
+            final @NotNull ImageIcon unpressedIcon,
+            final float darkeningFactor
+    ) {
+
+        // Create a somewhat darker icon for the pressed version.
+
+        ImageIcon pressedIcon = new ImageIcon(
+                ImageIconUtils.changeImageBrightness( unpressedIcon.getImage(), darkeningFactor, 0f )
+        );
+
+        return ImageButton.makeImageButton( imageButtonOwner, purpose, button, action, unpressedIcon, pressedIcon );
+
+    }
+
+    @NotNull
     public static ImageButton makeImageButton(
             final @NotNull ImageButtonOwner imageButtonOwner,
             final @NotNull String purpose,

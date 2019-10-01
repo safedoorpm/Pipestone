@@ -146,6 +146,8 @@ public class FlexiGridLayoutManager implements LayoutManager2 {
 
         if ( _cache == null ) {
 
+            Logger.logMsg( "FlexiGridLayoutManager:  creating cache for " + _name + " containing " + _target.getComponentCount() + " components" );
+
             _cache = new FlexiGridCache1(
                     _name,
                     this,
@@ -298,7 +300,11 @@ public class FlexiGridLayoutManager implements LayoutManager2 {
         checkContainer( "preferredLayoutSize", target );
         preLoadCacheIfNecessary();
 
-        Dimension size = _cache == null ? _target.getPreferredSize() : _cache.getPreferredSize();
+        // preLoadCacheIfNecessary will leave _cache null if-and-only-if the target container is empty.
+        // If that's the case then we've no idea how small the target container might become.
+        // Let's say [0,0] and see what happens.
+
+        Dimension size = _cache == null ? new Dimension( 0, 0 ) : _cache.getPreferredSize();
         logMaybe( "FlexiGridLayoutManager.preferredLayoutSize:  " + size );
 
         if ( "outer".equals( getTarget().getName() ) ) {
@@ -317,7 +323,11 @@ public class FlexiGridLayoutManager implements LayoutManager2 {
         checkContainer( "minimumLayoutSize", target );
         preLoadCacheIfNecessary();
 
-        Dimension size = _cache == null ? _target.getMinimumSize() : _cache.getMinimumSize();
+        // preLoadCacheIfNecessary will leave _cache null if-and-only-if the target container is empty.
+        // If that's the case then we've no idea how small the target container might become.
+        // Let's say [0,0] and see what happens.
+
+        Dimension size = _cache == null ? new Dimension( 0, 0 ) : _cache.getMinimumSize();
         logMaybe( "FlexiGridLayoutManager.minimumLayoutSize:  " + size );
 
         return size;
@@ -330,7 +340,11 @@ public class FlexiGridLayoutManager implements LayoutManager2 {
         checkContainer( "maximumLayoutSize", target );
         preLoadCacheIfNecessary();
 
-        Dimension size = _cache == null ? _target.getMaximumSize() : _cache.getMaximumSize();
+        // preLoadCacheIfNecessary will leave _cache null if-and-only-if the target container is empty.
+        // If that's the case then we've no idea how small the target container might become.
+        // Let's say [0,0] and see what happens.
+
+        Dimension size = _cache == null ? new Dimension( 0, 0 ) : _cache.getMaximumSize();
         logMaybe( "FlexiGridLayoutManager.maximumLayoutSize:  " + size );
 
         return size;

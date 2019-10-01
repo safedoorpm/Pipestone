@@ -18,10 +18,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
-import java.util.Collection;
-import java.util.Dictionary;
-import java.util.Hashtable;
-import java.util.LinkedList;
+import java.util.*;
 
 /**
  * Along the lines of {@link javax.swing.JSlider} but capable of being configured to use
@@ -81,13 +78,14 @@ public class MultiPointSlider extends JComponent {
 
     static {
 
-        ImageIcon imageIcon = ImageIconUtils.fetchIconImage(
+        Optional<ImageIcon> optImageIcon = ImageIconUtils.fetchIconImage(
                 "slider_knob_13x13.png",
                 0,
                 "com/obtuse/ui/resources"
         );
 
-        DEFAULT_KNOB = new DefaultMpsKnob( imageIcon.getImage() );
+        DEFAULT_KNOB = optImageIcon.map( imageIcon -> new DefaultMpsKnob( imageIcon.getImage() ) )
+                                   .orElse( null );
 
     }
 

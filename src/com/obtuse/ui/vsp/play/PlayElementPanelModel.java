@@ -12,6 +12,7 @@ import java.util.List;
 /**
  Created by danny on 2018/11/21.
  */
+
 public class PlayElementPanelModel extends AbstractVirtualScrollablePanelModel<PlayElementData> {
 
     private final ArrayList<VirtualScrollableElementModel<PlayElementData>> _elementDataModels;

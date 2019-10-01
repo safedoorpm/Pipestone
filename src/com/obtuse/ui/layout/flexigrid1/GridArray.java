@@ -396,7 +396,7 @@ public class GridArray<T extends GridArray.ItemInfo> {
 
             Optional<ItemInfo> optV = get( r, c );
 
-            if ( !optV.isPresent() ) {
+            if ( optV.isEmpty() ) {
 
                 throw new HowDidWeGetHereError( "GridArray.remove:  isSomething( " + r + ", " + c + " ) said yes but there's nothing there" );
 

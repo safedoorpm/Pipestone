@@ -139,11 +139,7 @@ public class TwoDimensionalTreeMap<
 
         if ( makeReadonly ) {
 
-            for ( T1 t1 : _map.keySet() ) {
-
-                _map.put( t1, Collections.unmodifiableSortedMap( _map.get( t1 ) ) );
-
-            }
+            _map.replaceAll( ( t, v ) -> Collections.unmodifiableSortedMap( _map.get( t ) ) );
 
             _map = Collections.unmodifiableSortedMap( _map );
 
@@ -555,7 +551,7 @@ public class TwoDimensionalTreeMap<
         EntityName en = new EntityName( "eName" );
         File testFile = new File( "2dsortedMap-test.packed" );
         ObtuseUtil.packQuietly( en, originalMap, testFile, false );
-        try ( Measure ignored = new Measure( "TwoDimensionalTreeMap unpack main" ) ){
+        try ( Measure ignored = new Measure( "TwoDimensionalTreeMap unpack main" ) ) {
 
             GowingUnPackedEntityGroup unpackedEntities = ObtuseUtil.unpack(
                     testFile,

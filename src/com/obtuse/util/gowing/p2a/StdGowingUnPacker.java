@@ -160,7 +160,7 @@ public class StdGowingUnPacker implements GowingUnPacker {
         getUnPackerContext().registerFactory( GowingFile.FACTORY );
 
         // Register a bunch of the GowingPackable classes in Pipestone.
-        // The goal is to register all GowingPackable classes in Pipestone but . . . .
+        // The goal is to register all GowingPackable classes in Pipestone but that is likely to always be a work-in-progress.
 
         getUnPackerContext().registerFactory( AbsolutePath.FACTORY );
         getUnPackerContext().registerFactory( FormattedImmutableDate.FACTORY );

@@ -47,7 +47,7 @@ public abstract class AutoSizingValidatedJTextField extends ValidatedJTextField 
     public AutoSizingValidatedJTextField( final int minWidth, final int maxWidth ) {
         super();
 
-        _minWidth = minWidth < ABSOLUTE_MINIMUM_WIDTH ? ABSOLUTE_MINIMUM_WIDTH : minWidth;
+        _minWidth = Math.max( minWidth, ABSOLUTE_MINIMUM_WIDTH );
         _maxWidth = maxWidth;
 
         configureAutoSizeAdjustingJTextField( this, minWidth, maxWidth );
@@ -486,6 +486,7 @@ public abstract class AutoSizingValidatedJTextField extends ValidatedJTextField 
      */
 
     @SuppressWarnings({ "Duplicates", "unused" })
+    @Deprecated
     private static void obsoleteButWorkingMaybeGrowTextField( final @NotNull JTextField tf, final boolean traceMode ) {
 
         if ( s_interestingField == tf ) {

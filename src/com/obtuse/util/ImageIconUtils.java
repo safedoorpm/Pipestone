@@ -9,11 +9,9 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.awt.image.ColorModel;
-import java.awt.image.PixelGrabber;
-import java.awt.image.RescaleOp;
+import java.awt.image.*;
 import java.net.URL;
+import java.util.Optional;
 
 /**
  * Utility methods for creating icons from images stored in our resources package.
@@ -30,7 +28,7 @@ public class ImageIconUtils {
 
     }
 
-    public static ImageIcon fetchIconImage( final String fileName ) {
+    public static Optional<ImageIcon> fetchIconImage( final String fileName ) {
 
         return ImageIconUtils.fetchIconImage( fileName, 0 );
 
@@ -42,19 +40,21 @@ public class ImageIconUtils {
 
     }
 
+    @NotNull
     public static String getDefaultResourceBaseDirectory() {
 
         return ImageIconUtils.s_resourcesBaseDirectory;
 
     }
 
-    public static ImageIcon fetchIconImage( final String fileName, final int size ) {
+    public static Optional<ImageIcon> fetchIconImage( final String fileName, final int size ) {
 
         return ImageIconUtils.fetchIconImage( fileName, size, ImageIconUtils.s_resourcesBaseDirectory );
 
     }
 
-    public static ImageIcon fetchIconImage(
+    @NotNull
+    public static Optional<ImageIcon> fetchIconImage(
             @NotNull final String fileName,
             final int size,
             @NotNull final String resourceBaseDirectory
@@ -69,7 +69,8 @@ public class ImageIconUtils {
 
     }
 
-    public static ImageIcon fetchIconImage(
+    @NotNull
+    public static Optional<ImageIcon> fetchIconImage(
             @NotNull final String fileName,
             final int size,
             @NotNull ClassLoader classLoader,
@@ -95,7 +96,7 @@ public class ImageIconUtils {
         ImageIcon rval;
         if ( url == null ) {
 
-            return null;
+            return Optional.empty();
 
         } else {
 
@@ -105,7 +106,7 @@ public class ImageIconUtils {
 
         if ( size == 0 ) {
 
-            return rval;
+            return Optional.of( rval );
 
         } else {
 
@@ -124,13 +125,16 @@ public class ImageIconUtils {
 
             }
 
-            return new ImageIcon(
-                    rval.getImage().getScaledInstance(
-                            scaledWidth,
-                            scaledHeight,
-                            Image.SCALE_SMOOTH
-                    )
+            ImageIcon scaledRval = new ImageIcon(
+                    rval.getImage()
+                        .getScaledInstance(
+                                scaledWidth,
+                                scaledHeight,
+                                Image.SCALE_SMOOTH
+                        )
             );
+
+            return Optional.of( scaledRval );
 
         }
 
@@ -153,7 +157,8 @@ public class ImageIconUtils {
      * .image.BufferedImage}.
      */
 
-    public static BufferedImage toBufferedImage( final Image xImage ) {
+    @NotNull
+    public static BufferedImage toBufferedImage( @NotNull final Image xImage ) {
 
         if ( xImage instanceof BufferedImage ) {
 
@@ -180,6 +185,7 @@ public class ImageIconUtils {
      * @return a copy of the original image.
      */
 
+    @NotNull
     public static BufferedImage copyToBufferedImage( final Image xImage ) {
 
         // This code ensures that all the pixels in the image are loaded
@@ -288,20 +294,83 @@ public class ImageIconUtils {
 
     }
 
+    public static int getMaxColorComponentValue( @NotNull final BufferedImage bufferedImage ) {
+
+        ColorModel colorModel = bufferedImage.getColorModel();
+
+        if ( colorModel instanceof DirectColorModel ) {
+
+            DirectColorModel dcm = (DirectColorModel)colorModel;
+
+            int componentSize = dcm.getComponentSize( 0 );
+            int maxValue = ( 1 << componentSize ) - 1;
+
+            return maxValue;
+
+        } else {
+
+            throw new IllegalArgumentException(
+                    "ImageIconUtils.getMaxColorComponentValue:  " +
+                    "image uses unsupported color model (" + colorModel.getClass().getCanonicalName() + ")" +
+                    " - it must use the DirectColorModel"
+            );
+
+        }
+
+    }
+
+    public static float getScaledOffsetValue( @NotNull final BufferedImage bufferedImage, float unscaledOffset ) {
+
+        return getMaxColorComponentValue( bufferedImage ) * unscaledOffset;
+
+    }
+
     /**
      * Create a new {@link java.awt.image.BufferedImage} which is brighter or darker than the specified {@link java.awt.Image}.
      *
      * @param image  the image to be brightened or darkened.
      * @param factor how much the image is to be brightened (if greater than 1) or darkened (if less than 1).
-     *               For example, 1.2 makes the image 20% brighter whereas 0.8 makes the image 20% darker.
+     *               For example, {@code 1.2} makes the image 20% brighter whereas {@code 0.8} makes the image 20% darker.
+     * @param offset an amount added to each pixel after it is multiplied by {@code scaleFactor}.
+     *               This can be used in combination with a {@code scaleFactor} of 1.0f to yield a brighter or darker
+     *               image in which the value of each pixel is adjusted by a constant delta.
+     *               <p>Note #1: Precisely what you see/get with this approach can be difficult to describe in advance.</p>
+     *               <p>Note #2: If you have the offset represented as a {@code float} value in the range {@code [0,1]}
+     *               then run it through {@link #getScaledOffsetValue(BufferedImage, float)} to turn it into a colour
+     *               component offset value and pass that value as the {@code offset} parameter to this method.
+     *               Put another way, if the image uses 8 bits for each colour component
+     *               then you need an offset value of 128f if you want to offset each value by 50% since 128f is
+     *               0.5f * 255 (close enough).
+     *               <blockquote>
+     *               {@code ImageIconUtils.getScaledOffsetValue( offset )}
+     </blockquote></p>
      * @return the brighter or darker image (always a new image even if the scaling factor is 1.0).
      */
 
-    public static BufferedImage changeImageBrightness( final Image image, final float factor ) {
+    @NotNull
+    public static BufferedImage changeImageBrightness( final Image image, final float factor, final float offset ) {
 
         BufferedImage bufferedVersion = ImageIconUtils.copyToBufferedImage( image );
 
-        RescaleOp op = new RescaleOp( factor, 0, null );
+        RescaleOp op = new RescaleOp( factor, offset, null );
+//        ColorModel colorModel = bufferedVersion.getColorModel();
+//        RescaleOp op;
+//        if ( colorModel instanceof DirectColorModel ) {
+//
+//            DirectColorModel dcm = (DirectColorModel)colorModel;
+//
+//            int componentSize = dcm.getComponentSize( 0 );
+//            int maxValue = ( 1 << componentSize ) - 1;
+//            op = new RescaleOp( factor, offset * maxValue, null );
+//
+//            ObtuseUtil.doNothing();
+//
+//        } else {
+//
+//            op = new RescaleOp( factor, 0f, null );
+//
+//        }
+
         op.filter( bufferedVersion, bufferedVersion );
 
         return bufferedVersion;
@@ -317,9 +386,30 @@ public class ImageIconUtils {
      * @return the brighter or darker image (always a new {@link javax.swing.ImageIcon} even if the scaling factor is 1.0).
      */
 
+    @NotNull
     public static ImageIcon changeImageIconBrightness( final ImageIcon imageIcon, final float scaleFactor ) {
 
-        return new ImageIcon( ImageIconUtils.changeImageBrightness( imageIcon.getImage(), scaleFactor ) );
+        return changeImageIconBrightness( imageIcon, scaleFactor, 0f );
+
+    }
+
+    /**
+     * Create a new {@link javax.swing.ImageIcon} which is brighter or darker than the specified {@link javax.swing.ImageIcon}.
+     *
+     * @param imageIcon   the {@link javax.swing.ImageIcon} to be brightened or darkened.
+     * @param scaleFactor how much the {@link javax.swing.ImageIcon} is to be brightened (if greater than 1) or darkened (if less than 1).
+     *                    For example, 1.2f makes the image 20% brighter whereas 0.8 makes the image 20% darker.
+     * @param offset      an amount added to each pixel after it is multiplied by {@code scaleFactor}. This can be used in
+     *                    combination with a {@code scaleFactor} of 1.0f to yield a brighter or darker image in which
+     *                    the value of each pixel is adjusted by a constant delta as opposed to a multiplicative scaling.
+     *                    Precisely what you see/get with this approach can be difficult to describe in advance.
+     * @return the brighter or darker image (always a new {@link javax.swing.ImageIcon} even if the scaling factor is 1.0).
+     */
+
+    @NotNull
+    public static ImageIcon changeImageIconBrightness( final ImageIcon imageIcon, final float scaleFactor, final float offset ) {
+
+        return new ImageIcon( ImageIconUtils.changeImageBrightness( imageIcon.getImage(), scaleFactor, offset ) );
 
     }
 

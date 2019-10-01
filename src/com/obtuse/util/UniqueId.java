@@ -22,6 +22,12 @@ import java.io.Serializable;
 
 public class UniqueId implements GowingPackable, GowingBackReferenceable, Comparable<UniqueId>, Serializable {
 
+//    public enum Scope {
+//        UNKNOWN,
+//        JVM_LOCAL,
+//        SYSTEM_LOCAL
+//    }
+
     /**
      The smallest id value that will ever be found in a {@code UniqueId} instance returned by {@link #getJvmLocalUniqueId()}.
      Each call to {@code getJvmLocalUniqueId()} after the first will return a {@code UniqueId} instance with an id value one
@@ -79,8 +85,8 @@ public class UniqueId implements GowingPackable, GowingBackReferenceable, Compar
      Create an instance containing a specified {@code long} value.
      <p/>
      Whether or not the {@code UniqueId} instances you create are actually as unique as you need them to be
-     depends on how carefully you construct your {@code UniqueId} instances ((arguably) more accurately, how carefully you
-     are when selecting id values for the {@code UniqueId} instances that you create).
+     depends on how carefully you construct your {@code UniqueId} instances ((arguably) more accurately,
+     how carefully you are when selecting id values for the {@code UniqueId} instances that you create).
      @param id the specified {@code long} value.
      */
 

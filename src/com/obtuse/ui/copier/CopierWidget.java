@@ -7,6 +7,7 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Optional;
 
 /*
  * Copyright © 2018 Obtuse Systems Corporation
@@ -38,18 +39,28 @@ public class CopierWidget
 
     static {
 
-        ImageIcon imageIcon = ImageIconUtils.fetchIconImage(
-                "button-Go_back_20x20.png",
-                0, ObtuseConstants.OBTUSE_RESOURCES_DIRECTORY
-        );
-        LEFT_ARROW_ICON_20x20 = imageIcon;
-
-        imageIcon = ImageIconUtils.fetchIconImage(
+        Optional<ImageIcon> optImageIcon = ImageIconUtils.fetchIconImage(
                 "button-Go_back_16x16.png",
                 0,
                 ObtuseConstants.OBTUSE_RESOURCES_DIRECTORY
         );
-        LEFT_ARROW_ICON_16x16 = imageIcon;
+        LEFT_ARROW_ICON_16x16 = optImageIcon.orElse( null );
+
+        optImageIcon = ImageIconUtils.fetchIconImage(
+                "button-Go_back_20x20.png",
+                0, ObtuseConstants.OBTUSE_RESOURCES_DIRECTORY
+        );
+        LEFT_ARROW_ICON_20x20 = optImageIcon.orElse( null );
+
+        if ( LEFT_ARROW_ICON_20x20 == null || LEFT_ARROW_ICON_16x16 == null ) {
+
+            throw new HowDidWeGetHereError(
+                    "CopierWidget:  " +
+                    "unable to load one or both left arrow icons " +
+                    "(left@16=" + LEFT_ARROW_ICON_16x16 + ", left@20=" + LEFT_ARROW_ICON_20x20 + ")"
+            );
+
+        }
 
     }
 

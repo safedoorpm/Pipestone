@@ -443,10 +443,7 @@ public class GenericTag
         }
 
         GenericTag rval = s_knownTags.computeIfAbsent( tagCategoryString, tagName,
-                                                       ( categoryString, nameString ) -> new GenericTag(
-                                                               categoryString,
-                                                               nameString
-                                                       )
+                                                       GenericTag::new
         );
 
         return rval;

@@ -72,7 +72,7 @@ public class Alternative implements Comparable<Alternative>, GowingPackable {
 
             String selectorTag = bundle.MandatoryStringValue( G_SELECTOR_TAG );
             Optional<Selector<Alternative>> optSelector = Selector.findSelector( selectorTag );
-            if ( !optSelector.isPresent() ) {
+            if ( optSelector.isEmpty() ) {
 
                 throw new IllegalArgumentException(
                         "Alternative.factory.createEntity:  unknown selector " + ObtuseUtil.enquoteToJavaString( selectorTag )
@@ -148,7 +148,7 @@ public class Alternative implements Comparable<Alternative>, GowingPackable {
 
         Optional<Alternative> rval = Optional.ofNullable( choice );
 
-        if ( !rval.isPresent() ) {
+        if ( rval.isEmpty() ) {
 
           ObtuseUtil.doNothing();
 

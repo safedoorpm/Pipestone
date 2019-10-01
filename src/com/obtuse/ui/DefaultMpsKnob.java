@@ -113,7 +113,8 @@ public class DefaultMpsKnob extends MpsKnob {
             );
             BufferedImage selectedScaledImage = ImageIconUtils.changeImageBrightness(
                     scaledImage,
-                    DefaultMpsKnob.ORIENTED_IMAGE_BRIGHTNESS_FACTOR
+                    DefaultMpsKnob.ORIENTED_IMAGE_BRIGHTNESS_FACTOR,
+                    0f
             );
             BufferedImage rotatedImage;
             BufferedImage sourceImage = isSelected ? selectedScaledImage : scaledImage;

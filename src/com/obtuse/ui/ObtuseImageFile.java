@@ -139,7 +139,7 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
 
         s_gowingTypeIndex = new GowingTypeIndex( "obtuse type index" );
         Optional<EntityTypeInfo> rval = s_gowingTypeIndex.findTypeInfo( ObtuseImageFile.FACTORY.getTypeName() );
-        if ( !rval.isPresent() ) {
+        if ( rval.isEmpty() ) {
 
             s_gowingTypeIndex.addFactory( ObtuseImageFile.FACTORY );
 
