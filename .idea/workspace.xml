@@ -5,7 +5,14 @@
     <option name="SHOW_STRUCTURE" value="true" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" name="Default" comment="Implement the GenericPanelManager set of classes which provides a relatively easy-to-use scrollable (eventually) JPanel of FlexiGridModelSlice(s).&#10;&#10;Use the Optional facility across a wider range of classes.&#10;&#10;Cleanup the FlexiGridLayoutManager class.&#10;&#10;Implement the AwtEventToEventCategoryNameMap class to make handling of AWT events somewhat easier.&#10;&#10;Minor and not-so-Minor cleanup here and there." />
+    <list default="true" id="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" name="Default" comment="A start on making the Gowing facility thread safe.&#10;&#10;Minor cleanup elsewhere.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pipestone.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Pipestone.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/ObtuseUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ObtuseUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/EntityTypeName.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/EntityTypeName.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackableKeyValuePair.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackableKeyValuePair.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/lrucache/LruCache.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/lrucache/LruCache.java" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -388,7 +395,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.GenericPanelManagerTester">
+  <component name="RunManager" selected="Application.ObtuseUtil">
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
       <Port>5050</Port>
@@ -441,13 +448,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="StdGowingPacker" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.obtuse.util.gowing.p2a.StdGowingPacker" />
+    <configuration name="ObtuseUtil" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.obtuse.util.ObtuseUtil" />
       <module name="Pipestone" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.obtuse.util.gowing.p2a.exceptions.*" />
+          <option name="PATTERN" value="com.obtuse.util.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -499,19 +506,19 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.StdGowingPacker" />
       <item itemvalue="Application.StdGowingUnPacker" />
       <item itemvalue="Application.FlexiGridTree" />
       <item itemvalue="Application.DateUtils" />
       <item itemvalue="Application.GenericPanelManagerTester" />
+      <item itemvalue="Application.ObtuseUtil" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.ObtuseUtil" />
         <item itemvalue="Application.GenericPanelManagerTester" />
         <item itemvalue="Application.DateUtils" />
         <item itemvalue="Application.FlexiGridTree" />
         <item itemvalue="Application.StdGowingUnPacker" />
-        <item itemvalue="Application.StdGowingPacker" />
       </list>
     </recent_temporary>
   </component>
@@ -725,7 +732,11 @@
       <workItem from="1568216642396" duration="1268000" />
       <workItem from="1569096657050" duration="31000" />
       <workItem from="1569096714581" duration="662000" />
-      <workItem from="1569916888595" duration="1140000" />
+      <workItem from="1569916888595" duration="1324000" />
+      <workItem from="1570528591745" duration="2838000" />
+      <workItem from="1572280711091" duration="2120000" />
+      <workItem from="1573371101350" duration="2364000" />
+      <workItem from="1573742757933" duration="1291000" />
     </task>
     <task id="LOCAL-00050" summary="Add lots and lots of final, @NotNull, and @Nullable attributes.&#10;&#10;Implement reasonably easy to use button and combo-box based selector panels.&#10;&#10;The usual mountain of cleanup.">
       <created>1518684983904</created>
@@ -1121,7 +1132,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Implement some graph theory utilities like topological sort (see GraphTheoryUtilities for a starting point).&#10;Implement the notion of a back-referenceable entity in Gowing. During packing, a back-referenceable entity that is referenced by some other entity is guaranteed to be packed before the referencing entity (note: no loops allowed). Duringuring unpacking, a back-referenceable entity's finishUnpacking method is called IMMEDIATELY after the entity is constructed and this particular call to finishUnpacking is REQUIRED to return true. This allows subsequent entities which reference the back-referenceable entity to recover and use the entity during the invocation of the subsequent entity's constructor (amongst other potential simplifications, this allows back-referenceable fields to be marked final). Note that a back-referenceable entity is allowed to reference normal not-back-referenceable entities although if it does so, the back-referenceable entity's finishUnpacking method is still REQUIRED to return true on its first call (any 'finishing' which cannot be done during that first call will need to be handled in some other way - possibly when the entity is first used after the unpacking operation has completed). Consequently, a certain amount of care is required when using a back-referenced entity.&#10;Introduce the GowingFile class which can be used to pack and unpack File instances (in reality, this class is mostly an example of how one might write a back-referenceable Gowing-aware class).&#10;Introduce reasonably complete support for packing and unpacking File instances in ways which are very analogous to how Long and Integer instances are packed and unpacked. For example, there is now a GowingFileHolder class which is very similar to the GowingLongHolder and GowingIntegerHolder classes. One point to keep in mind is that the java.util.File class can be extended (for example, one might create a MySpecialFile class which extends the java.util.File class). An instance of such a class can be packed by passing it to a GowingFileHolder instance HOWEVER when the resulting packed data is unpacked, the unpacking operation of instances of classes like this hypothetical MySpecialFile class will be unpacked into java.util.File classes. If you want to be able to pack and later unpack instances of classes like this hypothetical MySpecialFile class then you are much better off building your scheme around the new GowingFile class. Note that a future version of Gowing might prohibit the passing of instances of classes derived from the java.util.File class into GowingFileHolder instances. If you are packing and unpacking instances of classes which are derived from the java.util.File class then, if feasible, you should at least consider extending the GowingFile rather than extending the File class.&#10;Move Gowing towards having methods that might return a null value instead return an Optional instance. Still a ways to go here but progress has been made.&#10;Various cleanup.&#10;Make the packing and unpacking of TreeSorter instances more robust.&#10;Various changes to accomodate and/or take advantage of the Gowing changes described above." />
     <MESSAGE value="Cleanup and attempts to increase the speed of Gowing (especially on the unPacking side of things). It turns out that Gowing itself is actually fairly fast. The bottleneck seems to be in the user classes which sometimes have to do a bit of a dance to get things done. I'm looking at some ideas like a better approach to handling collections. Something for the future.&#10;&#10;Implemented TypedGowingUnPacker which is a somewhat simplified API. I'm still not happy with the amount of boilerplate code that needs to be written in userland. Another work in progress.&#10;&#10;MonikerOwner is just a simple interface that marks classes which have a {@code String getMoniker()} method. The intent is to provide a way to clearly mark classes which can provide a possibly less than formal but still useful name for each instance. Not sure how useful it is but it's part of the Pipestone family now.&#10;&#10;Minor change to the Logger class to make it possible to get the name of the file where a particular Logger instance is archiving what it writes. See getMirrorName() for (not much) more info." />
     <MESSAGE value="Cleanup and attempts to increase the speed of Gowing (especially on the unPacking side of things). It turns out that Gowing itself is actually fairly fast. The bottleneck seems to be in the user classes which sometimes have to do a bit of a dance to get things done. I'm looking at some ideas like a better approach to handling collections. Something for the future.&#10;&#10;Implemented TypedGowingUnPacker which is a somewhat simplified API. I'm still not happy with the amount of boilerplate code that needs to be written in userland. Another work in progress.&#10;&#10;MonikerOwner is just a simple interface that marks classes which have a {@code String getMoniker()} method. The intent is to provide a way to clearly mark classes which can provide a possibly less than formal but still useful name for each instance. Not sure how useful it is but it's part of the Pipestone family now.&#10;&#10;Minor change to the Logger class to make it possible to get the name of the file where a particular Logger instance is archiving what it writes. See getMirrorName() for (not much) more info.&#10;&#10;Lots of minor cleanup in a vain attempt to reduce the noise that comes out of IntelliJ's automated code analysis." />
     <MESSAGE value="Lots of cleanup (mostly in Gowing; other classes affected mostly be the move of Gowing exception classes into their own package)." />
@@ -1146,7 +1156,8 @@
     <MESSAGE value="Considerably reworked AutoSizingValidatedJTextField class (required to get it to work in more than just the simplest of cases).&#10;&#10;Considerably reworked FlexiGridCache1 class (also required to get it to work in more than just the simplest of cases). This version has the notion of a filler column which is where excess whitespace is placed. This still needs more thought (not to mention that if there are filler columns then there should probably be filler rows).&#10;&#10;Various relatively minor cleanup." />
     <MESSAGE value="Add the WrapLayout class which is basically an extended version of the FlowLayout class that actually works." />
     <MESSAGE value="Implement the GenericPanelManager set of classes which provides a relatively easy-to-use scrollable (eventually) JPanel of FlexiGridModelSlice(s).&#10;&#10;Use the Optional facility across a wider range of classes.&#10;&#10;Cleanup the FlexiGridLayoutManager class.&#10;&#10;Implement the AwtEventToEventCategoryNameMap class to make handling of AWT events somewhat easier.&#10;&#10;Minor and not-so-Minor cleanup here and there." />
-    <option name="LAST_COMMIT_MESSAGE" value="Implement the GenericPanelManager set of classes which provides a relatively easy-to-use scrollable (eventually) JPanel of FlexiGridModelSlice(s).&#10;&#10;Use the Optional facility across a wider range of classes.&#10;&#10;Cleanup the FlexiGridLayoutManager class.&#10;&#10;Implement the AwtEventToEventCategoryNameMap class to make handling of AWT events somewhat easier.&#10;&#10;Minor and not-so-Minor cleanup here and there." />
+    <MESSAGE value="A start on making the Gowing facility thread safe.&#10;&#10;Minor cleanup elsewhere." />
+    <option name="LAST_COMMIT_MESSAGE" value="A start on making the Gowing facility thread safe.&#10;&#10;Minor cleanup elsewhere." />
     <option name="PRESELECT_EXISTING_CHANGELIST" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -1360,7 +1371,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/obtuse/util/ObtuseUtil.java</url>
-          <line>2640</line>
+          <line>2648</line>
           <option name="timeStamp" value="370" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -1510,7 +1521,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/obtuse/util/ObtuseUtil.java</url>
-          <line>2619</line>
+          <line>2627</line>
           <option name="timeStamp" value="520" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -1522,11 +1533,6 @@
           <url>file://$PROJECT_DIR$/src/com/obtuse/ui/gpe/GenericPanelManager.java</url>
           <line>153</line>
           <option name="timeStamp" value="532" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/obtuse/ui/gpe/GenericPanelManagerTester.java</url>
-          <line>193</line>
-          <option name="timeStamp" value="533" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/obtuse/ui/gpe/GenericPanelManager.java</url>
@@ -1588,93 +1594,5 @@
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
     </expressions>
-  </component>
-  <component name="masterDetails">
-    <states>
-      <state key="ArtifactsStructureConfigurable.UI">
-        <settings>
-          <artifact-editor />
-          <last-edited>Pipestone:jar</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="Copyright.UI">
-        <settings>
-          <last-edited>Obtuse</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="FacetStructureConfigurable.UI">
-        <settings>
-          <last-edited>No facets are configured</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="GlobalLibrariesConfigurable.UI">
-        <settings>
-          <last-edited>WikiTree-Java-API</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="JdkListConfigurable.UI">
-        <settings>
-          <last-edited>10</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ModuleStructureConfigurable.UI">
-        <settings>
-          <last-edited>Pipestone</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ProjectLibrariesConfigurable.UI">
-        <settings>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-    </states>
   </component>
 </project>

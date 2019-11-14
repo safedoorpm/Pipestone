@@ -40,12 +40,14 @@ public class LruCache<K,R> implements Iterable<CachedThing<K,R>> {
 
     private static Thread s_mainThread;
 
+    @SuppressWarnings("unused")
     public static void identifyMainThread( final Thread currentThread ) {
 
         s_mainThread = currentThread;
 
     }
 
+    @SuppressWarnings("unused")
     @NotNull
     public static Thread getMainThread() {
 
@@ -118,20 +120,26 @@ public class LruCache<K,R> implements Iterable<CachedThing<K,R>> {
 
     }
 
+    @SuppressWarnings("unused")
     public LruCache( @NotNull final String cacheName, @NotNull final Fetcher<K,R> fetcher ) {
         this( cacheName, DEFAULT_MAXIMUM_CACHE_SIZE, fetcher );
     }
 
-    private void checkOnEventThread( @NotNull final String who ) {
+    private void checkOnEventThread( @SuppressWarnings("unused") @NotNull final String who ) {
 
         if ( !SwingUtilities.isEventDispatchThread() && !Thread.currentThread().equals( s_mainThread ) ) {
 
-            throw new HowDidWeGetHereError( "LruCache:  call to " + who + " is NOT on the event thread or main thread" );
+//            throw new HowDidWeGetHereError( "LruCache:  call to " + who + " is NOT on the event thread or main thread" );
+
+//            Logger.logMsg( "call to " + who + " when NOT on the event thread or main thread" );
+
+            ObtuseUtil.doNothing();
 
         }
 
     }
 
+    @SuppressWarnings("unused")
     public void setThingsRequireCleanup( boolean thingsRequireCleanup ) {
 
         checkOnEventThread( "setThingsRequireCleanup" );
@@ -148,6 +156,7 @@ public class LruCache<K,R> implements Iterable<CachedThing<K,R>> {
 
     }
 
+    @SuppressWarnings("unused")
     public void forceThingsCleanup() {
 
         checkOnEventThread( "forceThingsCleanup" );
@@ -191,12 +200,11 @@ public class LruCache<K,R> implements Iterable<CachedThing<K,R>> {
     }
 
     @Override
-    public void forEach( final Consumer<? super CachedThing<K, R>> action ) {
+    public synchronized void forEach( final Consumer<? super CachedThing<K, R>> action ) {
 
         checkOnEventThread( "foreach" );
 
         _cache.values().forEach( action );
-
 
     }
 
@@ -356,6 +364,7 @@ public class LruCache<K,R> implements Iterable<CachedThing<K,R>> {
      @return {@code true} if the specified element is already in the cache; {@code false} otherwise.
      */
 
+    @SuppressWarnings("unused")
     public boolean isElementAlreadyCached( @NotNull final K key ) {
 
         checkOnEventThread( "isElementAlreadyCached" );
@@ -474,7 +483,7 @@ public class LruCache<K,R> implements Iterable<CachedThing<K,R>> {
      </p>
      */
 
-    @SuppressWarnings("UnusedReturnValue")
+    @SuppressWarnings({ "UnusedReturnValue", "unused" })
     public CachedThing<K, R> insertElementIntoCache( @NotNull final CachedThing<K,R> cachedThing, boolean replaceOk ) {
 
         checkOnEventThread( "insertElementIntoCache" );
@@ -548,7 +557,7 @@ public class LruCache<K,R> implements Iterable<CachedThing<K,R>> {
      */
 
     @SuppressWarnings("unused")
-    public CachedThing<K, R> getMandatory( @NotNull final K key ) {
+    public synchronized CachedThing<K, R> getMandatory( @NotNull final K key ) {
 
         checkOnEventThread( "getMandatory" );
         _activeMethod = checkForRecursion( "getMandatory()" );
@@ -577,7 +586,7 @@ public class LruCache<K,R> implements Iterable<CachedThing<K,R>> {
      */
 
     @SuppressWarnings("unused")
-    public Optional<CachedThing<K, R>> getOptional( @NotNull final K key ) {
+    public synchronized Optional<CachedThing<K, R>> getOptional( @NotNull final K key ) {
 
         checkOnEventThread( "getOptional" );
         _activeMethod = checkForRecursion( "getOptional()" );
@@ -661,6 +670,7 @@ public class LruCache<K,R> implements Iterable<CachedThing<K,R>> {
 
     }
 
+    @SuppressWarnings("unused")
     public void setCrashWhenFull( boolean crashWhenFull ) {
 
 //        checkOnEventThread( "setCrashWhenFull" );

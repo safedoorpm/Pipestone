@@ -405,6 +405,32 @@ public class ObtuseUtil {
     }
 
     /**
+     Determine if a specified {@link Rectangle} contains a specified {@link Point}.
+     @param what marks {@link Logger#logMsg(String)} output if non-null; ignored otherwise.
+     @param r the specified rectangle.
+     @param p the specified point.
+     @return {@code true} if the {@link Point} {@code p} is inside the {@link Rectangle} {@code r}; {@code false} otherwise.
+     */
+
+    public static boolean containsPoint(
+            @Nullable final String what,
+            @NotNull final Rectangle r,
+            @NotNull final Point p
+    ) {
+
+        if ( what != null ) {
+            Logger.logMsg( what + " checking if " + p + " is inside " + r );
+        }
+
+        double rx = r.getX();
+        double ry = r.getY();
+        double w = r.getWidth();
+        double h = r.getHeight();
+        return ( p.x >= rx && p.y >= ry && p.x <= rx + w && p.y <= ry + h );
+
+    }
+
+    /**
      A derivative of the {@link Hashtable} whose instances start out mutable but can be made immutable upon request (there
      is no
      mechanism provided to make an immutable instance mutable again).
@@ -1484,14 +1510,7 @@ public class ObtuseUtil {
 
         if ( ObtuseUtil.s_cachedFormats[v] == null ) {
 
-            StringBuilder formatBuilder = new StringBuilder( "0." );
-            for ( int i = 0; i < v; i += 1 ) {
-
-                formatBuilder.append( '#' );
-
-            }
-
-            String format = formatBuilder.toString();
+            String format = "0." + "#".repeat( v );
             ObtuseUtil.s_cachedFormats[v] = new DecimalFormat( format );
 
         }
@@ -1520,14 +1539,7 @@ public class ObtuseUtil {
 
         if ( ObtuseUtil.s_cachedZeroFormats[v] == null ) {
 
-            StringBuilder formatBuilder = new StringBuilder( "0." );
-            for ( int i = 0; i < v; i += 1 ) {
-
-                formatBuilder.append( "0" );
-
-            }
-
-            String format = formatBuilder.toString();
+            String format = "0." + "0".repeat( v );
             ObtuseUtil.s_cachedZeroFormats[v] = new DecimalFormat( format );
 
         }
@@ -1767,7 +1779,8 @@ public class ObtuseUtil {
 
     /**
      Replicate a string a specified number of times.
-     For example, <tt>replicate( "hello", 3 )</tt> yields <tt>"hellohellohello"</tt>.
+     <p>Exactly equivalent to {@link String#repeat(int)}.</p>
+     <p>For example, <tt>replicate( "hello", 3 )</tt> yields <tt>"hellohellohello"</tt>.</p>
 
      @param str   the string to replicate.
      @param count the number of copies to be made.
@@ -1776,14 +1789,9 @@ public class ObtuseUtil {
 
     public static String replicate( final String str, final int count ) {
 
-        StringBuilder rval = new StringBuilder();
-        for ( int i = 0; i < count; i += 1 ) {
-
-            rval.append( str );
-
-        }
-
-        return rval.toString();
+//        String rval = str.repeat( Math.max( 0, count ) );
+        String rval = str.repeat( count );
+        return rval;
 
     }
 
@@ -2094,8 +2102,8 @@ public class ObtuseUtil {
         StringBuilder rvalBuilder = new StringBuilder();
         while ( true ) {
 
-            int ix1 = s.indexOf( (int)'&' );
-            int ix2 = s.indexOf( (int)'<' );
+            int ix1 = s.indexOf( '&' );
+            int ix2 = s.indexOf( '<' );
             if ( ix1 < 0 && ix2 < 0 ) {
 
                 break;
@@ -2113,7 +2121,7 @@ public class ObtuseUtil {
 
             } else {
 
-                ix = ix1 < ix2 ? ix1 : ix2;
+                ix = Math.min( ix1, ix2 );
 
             }
 
@@ -2854,23 +2862,22 @@ public class ObtuseUtil {
 
     }
 
-    private static void doString( @Nullable final String input ) {
+    /**
+     Explain a string.
+     <p>Note: this is testing code.</p>
+     @param input a string to examine and explain.
+     */
+    private static void explainString( @Nullable final String input ) {
 
         Logger.logMsg( "input string is " + ( input == null ? "null" : ( "<<<" + input + ">>>" ) ) );
 
-        String nakedOutput = enquoteToNakedJavaString( input );
+        String naked = enquoteToNakedJavaString( input );
         String output = enquoteToJavaString( input );
         String parsed = parseJavaString( output );
         StringBuilder nsb = enquoteJavaStringToNakedStringBuilder( input );
         StringBuilder sb = enquoteToJavaStringBuilder( input );
 
-        if (
-                input == null
-                        ?
-                        parsed != null
-                        :
-                        !input.equals( parsed )
-                ) {
+        if ( !Objects.equals( input, parsed ) ) {
 
             Logger.logErr( "got unexpected output=" + output + ", parsed=" + parsed + " from input=<<<" + input + ">>>" );
 
@@ -2878,32 +2885,33 @@ public class ObtuseUtil {
 
         }
 
+        String is = input == null ? "null " : ( "" + input.length() + " char " );
         Logger.logMsg( "" +
-                       ( input == null ? "null " : ( "" + input.length() + " char " ) ) +
+                       is +
                        "input string becomes " +
-                       nakedOutput.length() +
+                       naked.length() +
                        " char naked output string " +
-                       nakedOutput );
+                       naked );
         Logger.logMsg( "" +
-                       ( input == null ? "null " : ( "" + input.length() + " char " ) ) +
+                       is +
                        "input string becomes " +
                        output.length() +
                        " char output string " +
                        output );
         Logger.logMsg( "" +
-                       ( input == null ? "null " : ( "" + input.length() + " char " ) ) +
+                       is +
                        "input string becomes " +
                        ( parsed == null ? "null " : ( "" + parsed.length() + " char " ) ) +
                        "parsed string" +
                        ( parsed == null ? "" : parsed ) );
         Logger.logMsg( "" +
-                       ( input == null ? "null " : ( "" + input.length() + " char " ) ) +
+                       is +
                        "input string becomes " +
                        nsb.length() +
                        " char naked output StringBuilder " +
                        nsb );
         Logger.logMsg( "" +
-                       ( input == null ? "null " : ( "" + input.length() + " char " ) ) +
+                       is +
                        "input string becomes " +
                        sb.length() +
                        " char output StringBuilder " +
@@ -2915,10 +2923,10 @@ public class ObtuseUtil {
 
         BasicProgramConfigInfo.init( "Obtuse", "ObtuseUtil", "testing" );
 
-        doString( null );
-        doString( "null" );
-        doString( "hello\tthere\nworld" );
-        doString( "dq=\", sq=\', bs=\b, nl=\n, rt=\r, t=\t, bs=\\" );
+        explainString( null );
+        explainString( "null" );
+        explainString( "hello\tthere\nworld" );
+        explainString( "dq=\", sq=\', bs=\b, nl=\n, rt=\r, t=\t, bs=\\" );
 
         Logger.logMsg( "input char \n becomes naked char string {" + enquoteToNakedJavaCharacter( '\n' ) + "}" );
         Logger.logMsg( "input char \n becomes char string {" + enquoteToJavaCharacter( '\n' ) + "}" );
@@ -3152,6 +3160,7 @@ public class ObtuseUtil {
 
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public static boolean packQuietly(
             final @NotNull EntityName groupName,
             final @NotNull GowingPackable item,

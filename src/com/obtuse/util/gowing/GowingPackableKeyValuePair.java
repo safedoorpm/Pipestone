@@ -92,7 +92,7 @@ public class GowingPackableKeyValuePair<K, V> extends GowingAbstractPackableEnti
     public GowingPackableKeyValuePair(
             final GowingUnPacker unPacker,
             final @NotNull GowingPackedEntityBundle bundle,
-            final GowingEntityReference er
+            @SuppressWarnings("unused") final GowingEntityReference er
     ) {
 
         super( unPacker, bundle.getSuperBundle() );
@@ -190,59 +190,67 @@ public class GowingPackableKeyValuePair<K, V> extends GowingAbstractPackableEnti
 
     }
 
-    private static final SortedMap<String, HolderFactory> s_factories = new TreeMap<>();
+    /**
+     The holder factories for the standard Java classes and a few of the built-in Gowing classes.
+     <p>This mapping is unmodifiable once created.</p>
+     */
+
+    private static final SortedMap<String, HolderFactory> STANDARD_JAVA_CLASS_HOLDER_FACTORIES;
 
     static {
 
-        s_factories.put(
+        SortedMap<String,HolderFactory> factories = new TreeMap<>();
+        factories.put(
                 String.class.getCanonicalName(),
                 ( name, obj, packer ) -> new GowingStringHolder( name, (String)obj, true )
         );
 
-        s_factories.put(
+        factories.put(
                 File.class.getCanonicalName(),
                 ( name, obj, packer ) -> new GowingFileHolder( name, (File)obj, true )
         );
 
-        s_factories.put(
+        factories.put(
                 Byte.class.getCanonicalName(),
                 ( name, obj, packer ) -> new GowingByteHolder( name, (Byte)obj, true )
         );
 
-        s_factories.put(
+        factories.put(
                 Short.class.getCanonicalName(),
                 ( name, obj, packer ) -> new GowingShortHolder( name, (Short)obj, true )
         );
 
-        s_factories.put(
+        factories.put(
                 Integer.class.getCanonicalName(),
                 ( name, obj, packer ) -> new GowingIntegerHolder( name, (Integer)obj, true )
         );
 
-        s_factories.put(
+        factories.put(
                 Long.class.getCanonicalName(),
                 ( name, obj, packer ) -> new GowingLongHolder( name, (Long)obj, true )
         );
 
-        s_factories.put(
+        factories.put(
                 Float.class.getCanonicalName(),
                 ( name, obj, packer ) -> new GowingFloatHolder( name, (Float)obj, true )
         );
 
-        s_factories.put(
+        factories.put(
                 Double.class.getCanonicalName(),
                 ( name, obj, packer ) -> new GowingDoubleHolder( name, (Double)obj, true )
         );
 
-        s_factories.put(
+        factories.put(
                 Boolean.class.getCanonicalName(),
                 ( name, obj, packer ) -> new GowingBooleanHolder( name, (Boolean)obj, true )
         );
 
-        s_factories.put(
+        factories.put(
                 EntityName.class.getCanonicalName(),
                 ( name, obj, packer ) -> new GowingEntityNameHolder( name, (EntityName)obj, true )
         );
+
+        STANDARD_JAVA_CLASS_HOLDER_FACTORIES = Collections.unmodifiableSortedMap( factories );
 
     }
 
@@ -283,7 +291,7 @@ public class GowingPackableKeyValuePair<K, V> extends GowingAbstractPackableEnti
             className = File.class.getCanonicalName();
 
         }
-        if ( s_factories.containsKey( className ) ) {
+        if ( STANDARD_JAVA_CLASS_HOLDER_FACTORIES.containsKey( className ) ) {
 
             rval = true;
 
@@ -325,9 +333,9 @@ public class GowingPackableKeyValuePair<K, V> extends GowingAbstractPackableEnti
 
     }
 
-    private static boolean isClassSupported( final @NotNull Class entityClass ) {
+    private static synchronized boolean isClassSupported( final @NotNull Class entityClass ) {
 
-        boolean rval = s_factories.containsKey( entityClass.getCanonicalName() );
+        boolean rval = STANDARD_JAVA_CLASS_HOLDER_FACTORIES.containsKey( entityClass.getCanonicalName() );
 
         return rval;
 
@@ -377,7 +385,7 @@ public class GowingPackableKeyValuePair<K, V> extends GowingAbstractPackableEnti
 
             }
 
-            HolderFactory factory = s_factories.get( className );
+            HolderFactory factory = STANDARD_JAVA_CLASS_HOLDER_FACTORIES.get( className );
 
             if ( factory == null ) {
 
