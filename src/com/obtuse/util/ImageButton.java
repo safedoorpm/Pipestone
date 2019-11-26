@@ -5,11 +5,14 @@
 package com.obtuse.util;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
 import java.util.Optional;
 
 /**
@@ -285,6 +288,55 @@ public class ImageButton {
         button.setMaximumSize( new Dimension( width, height ) );
 
         return bi;
+
+    }
+
+    /**
+     Create an {@link ImageIcon} which displays a line of text.
+     @param text the text to be displayed.
+     @param textColor the colour of the text.
+     @param bgColor the colour of the background.
+     @return the resulting {@link ImageIcon}.
+     */
+
+    public static ImageIcon makeTextImageIcon(
+            @NotNull final String text,
+            @Nullable final Color textColor,
+            @Nullable final Color bgColor
+    ) {
+
+        BufferedImage image = new BufferedImage( 10, 10, BufferedImage.TYPE_INT_RGB );
+        Graphics2D g = image.createGraphics();
+        g.setFont( g.getFont().deriveFont( 10f ) );
+        FontMetrics fm = g.getFontMetrics();
+        Rectangle2D textBounds = fm.getStringBounds( text, g );
+        image = new BufferedImage( (int)Math.ceil( textBounds.getWidth() ) + 4, (int)Math.ceil( textBounds.getHeight() ) + 4, BufferedImage.TYPE_INT_RGB );
+        g = image.createGraphics();
+        g.setColor( bgColor );
+        g.fillRect( 0, 0, image.getWidth(), image.getHeight() );
+        g.setColor( textColor );
+//        g.setComposite( AlphaComposite.SrcAtop );
+        RenderingHints rh = new RenderingHints(
+                RenderingHints.KEY_TEXT_ANTIALIASING,
+                RenderingHints.VALUE_TEXT_ANTIALIAS_ON
+        );
+        g.setRenderingHints(rh);
+        g.setFont( g.getFont().deriveFont( 10f ) );
+//        g.setColor( bgColor );
+//        g.drawRect( 0, 0, image.getWidth(), image.getHeight() );
+        g.drawString( text, 2, image.getHeight() - ( 2 + fm.getDescent() ) );
+
+        return new ImageIcon( image );
+
+    }
+
+    public static void main( String[] args ) {
+
+        BasicProgramConfigInfo.init( "Kenosee", "ImageButton", "testing" );
+        ImageIcon ii = makeTextImageIcon( "Hello", Color.GREEN, Color.WHITE );
+        Logger.logMsg( "image icon = " + ii );
+
+        ObtuseUtil.doNothing();
 
     }
 

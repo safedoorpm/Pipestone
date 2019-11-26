@@ -880,6 +880,74 @@ public class ObtuseUtil {
     }
 
     /**
+     Read the contents of a file into a byte array without needing to know how big the file might be
+     or having to worry about exceptions (mostly - see below).
+
+     <p>I am NOT convinced that this utility method is a good idea as it risks causing out of memory
+     conditions if a file is unexpectedly large. It seems much wiser for the caller to use
+     {@link File#length()} to determine the size of their file and to then decide if reading the whole
+     file via {@link #readEntireFile(File, int, boolean)} or {@link #readEntireFile(String, int, boolean)}
+     is a sensible thing to do.</p>
+
+     @param fname the name of the file to be read.
+     @param printStackTraceOnError specifies whether or not a stack trace is to be printed if an i/o error occurs.
+     @return a byte array containing the data read from the file or null if the file could not be read for any reason.
+     A zero-length byte array is returned if the file exists and is readable but contains no data.
+     @throws IllegalArgumentException if the file is larger than Integer.MAX_VALUE.
+     @deprecated probably a bad idea
+     */
+
+    @Deprecated
+    public static byte[] readEntireFile( final String fname, final boolean printStackTraceOnError ) throws IllegalArgumentException {
+
+        if ( fname == null ) {
+
+            return null;
+
+        }
+
+        return ObtuseUtil.readEntireFile( new File( fname ), printStackTraceOnError );
+
+    }
+
+    /**
+     Read the contents of a file into a byte array without needing to know how big the file might be
+     or having to worry about exceptions (mostly - see below).
+
+     <p>I am NOT convinced that this utility method is a good idea as it risks causing out of memory
+     conditions if a file is unexpectedly large. It seems much wiser for the caller to use
+     {@link File#length()} to determine the size of their file and to then decide if reading the whole
+     file via {@link #readEntireFile(File, int, boolean)} is a sensible thing to do.</p>
+
+     @param file the file to be read.
+     @param printStackTraceOnError specifies whether or not a stack trace is to be printed if an i/o error occurs.
+     @return a byte array containing the data read from the file or null if the file could not be read for any reason.
+     A zero-length byte array is returned if the file exists and is readable but contains no data.
+     @throws IllegalArgumentException if the file is larger than Integer.MAX_VALUE.
+     @deprecated probably a bad idea
+     */
+
+    @Deprecated
+    public static byte[] readEntireFile( final File file, final boolean printStackTraceOnError ) throws IllegalArgumentException {
+
+        if ( file == null ) {
+
+            return null;
+
+        }
+
+        long longMaxLength = file.length();
+        if ( longMaxLength < 0 || longMaxLength > Integer.MAX_VALUE ) {
+
+            throw new IllegalArgumentException( "ObtuseUtil.readEntireFile:  unsupported file size (must be 0 <= file size <= Integer.MAX_Value)" );
+
+        }
+
+        return ObtuseUtil.readEntireFile( file, (int)longMaxLength, printStackTraceOnError );
+
+    }
+
+    /**
      Read the contents of a file into a byte array without needing to worry about exceptions.
 
      @param fname                  the name of the file to be read.
@@ -1018,7 +1086,7 @@ public class ObtuseUtil {
      @return true if the operation succeeded and false otherwise.
      */
 
-    @SuppressWarnings({ "BooleanMethodNameMustStartWithQuestion" })
+    @SuppressWarnings({ "BooleanMethodNameMustStartWithQuestion", "UnusedReturnValue" })
     public static boolean writeBytesToFile( final byte@NotNull[] bytes, final String fname, final boolean printStackTraceOnError ) {
 
         return ObtuseUtil.writeBytesToFile( bytes, new File( fname ), printStackTraceOnError );
@@ -2623,6 +2691,8 @@ public class ObtuseUtil {
 
                     if ( scm.from.equals( "\\\"" ) ) {
 
+                        // This was a tricky case during development so we've got a place to hang a breakpoint.
+
                         Logger.logErr( "ObtuseUtil.parseNakedJavaString:  DANGER Will Robinson!!!" );
 
                         doNothing();
@@ -2987,6 +3057,15 @@ public class ObtuseUtil {
                 Logger.logMsg( "unable to serialize test.ser" );
 
             }
+
+        }
+
+        // Make sure that none of the even remotely legitimate exit status values cause explainExitStatus to explode.
+
+        for ( int exitStatus = 0; exitStatus < 0xffff; exitStatus += 1 ) {
+
+            UnixSignals.explainExitStatus( exitStatus );
+
         }
 
     }

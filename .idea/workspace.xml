@@ -5,13 +5,14 @@
     <option name="SHOW_STRUCTURE" value="true" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" name="Default" comment="A start on making the Gowing facility thread safe.&#10;&#10;Minor cleanup elsewhere.">
+    <list default="true" id="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" name="Default" comment="Create the ObtuseVideoUtils class (hopefully, the start of something big).&#10;&#10;Implement the AsyncStreamCaptor class which asynchronously captures the contents of an {@link InputStream}.&#10;&#10;Implement a makeTextImageIcon method in the ImageButton class that creates an {@link ImageIcon} containing a single row of text.&#10;&#10;Implement two more readEntireFile methods that will read the contents of an arbitrarily large file (i.e. the caller does not need to provide an upper bounds on the file system). This is probably a bad idea considering that it does not provide any way to avoid an out-of-memory condition if the file is absurdly large. Already marked as deprecated.&#10;&#10;Implement the UnixSignals class which provides various useful constants for dealing with Unix signals. Also, provides methods that make it easy to tear apart the 'wait' value of {@link Process.waitFor()}">
+      <change afterPath="$PROJECT_DIR$/src/com/obtuse/ui/ObtuseVideoUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/obtuse/util/AsyncStreamCaptor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/obtuse/util/UnixSignals.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pipestone.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Pipestone.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/ImageButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ImageButton.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/ObtuseUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ObtuseUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/EntityTypeName.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/EntityTypeName.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackableKeyValuePair.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackableKeyValuePair.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/lrucache/LruCache.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/lrucache/LruCache.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -321,7 +322,7 @@
     <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.splitter.main.proportions" value="0.3" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Problems" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="recentsLimit" value="5" />
@@ -330,11 +331,19 @@
     <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/src/com/obtuse/util/TreeSorter2.java" />
   </component>
   <component name="RecentsManager">
-    <key name="IntroduceConstantDialog.RECENTS_KEY">
-      <recent name="com.obtuse.ui.layout.flexigrid1.FlexiGridTesting" />
-      <recent name="com.obtuse.util.Measure" />
-      <recent name="com.obtuse.util.ObtuseCalendarDate" />
-      <recent name="com.obtuse.ui.PopupJTableEditor.PopupDialog" />
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.obtuse.ui" />
+      <recent name="com.obtuse.util.gowing.p2a" />
+      <recent name="com.obtuse.graphs" />
+      <recent name="com.obtuse" />
+      <recent name="com.obtuse.ui.layout.flexigrid1.model" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/com/obtuse/ui/dnd" />
+      <recent name="$PROJECT_DIR$/src/com/obtuse/ui" />
+      <recent name="$PROJECT_DIR$/src/com/obtuse/ui/old" />
+      <recent name="$PROJECT_DIR$/src/com/obtuse/ui.old" />
+      <recent name="$PROJECT_DIR$/src/com/obtuse/ui/testanddemo" />
     </key>
     <key name="MoveInnerDialog.RECENTS_KEY">
       <recent name="com.obtuse.util.gowing.p2a" />
@@ -346,13 +355,6 @@
       <recent name="com.obtuse.ui.EventUtils" />
       <recent name="com.obtuse.util.packers.packer2.p2a.Constants" />
       <recent name="com.obtuse.util.packers.packer2.StdPackingContext2" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/com/obtuse/ui/dnd" />
-      <recent name="$PROJECT_DIR$/src/com/obtuse/ui" />
-      <recent name="$PROJECT_DIR$/src/com/obtuse/ui/old" />
-      <recent name="$PROJECT_DIR$/src/com/obtuse/ui.old" />
-      <recent name="$PROJECT_DIR$/src/com/obtuse/ui/testanddemo" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.obtuse.util.gowing.p2a.exceptions" />
@@ -375,12 +377,11 @@
       <recent name="com.obtuse.graphs" />
       <recent name="com.obtuse.util.gowing.p2a" />
     </key>
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="com.obtuse.util.gowing.p2a" />
-      <recent name="com.obtuse.graphs" />
-      <recent name="com.obtuse" />
-      <recent name="com.obtuse.ui.layout.flexigrid1.model" />
-      <recent name="com.obtuse.util" />
+    <key name="IntroduceConstantDialog.RECENTS_KEY">
+      <recent name="com.obtuse.ui.layout.flexigrid1.FlexiGridTesting" />
+      <recent name="com.obtuse.util.Measure" />
+      <recent name="com.obtuse.util.ObtuseCalendarDate" />
+      <recent name="com.obtuse.ui.PopupJTableEditor.PopupDialog" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -736,14 +737,8 @@
       <workItem from="1570528591745" duration="2838000" />
       <workItem from="1572280711091" duration="2120000" />
       <workItem from="1573371101350" duration="2364000" />
-      <workItem from="1573742757933" duration="1291000" />
-    </task>
-    <task id="LOCAL-00050" summary="Add lots and lots of final, @NotNull, and @Nullable attributes.&#10;&#10;Implement reasonably easy to use button and combo-box based selector panels.&#10;&#10;The usual mountain of cleanup.">
-      <created>1518684983904</created>
-      <option name="number" value="00050" />
-      <option name="presentableId" value="LOCAL-00050" />
-      <option name="project" value="LOCAL" />
-      <updated>1518684983905</updated>
+      <workItem from="1573742757933" duration="5477000" />
+      <workItem from="1574354158075" duration="2474000" />
     </task>
     <task id="LOCAL-00051" summary="Basic sanity returns in my button and combo-box wrapping classes.&#10;&#10;The ButtonSelectorPanel class and the ComboBoxSelectorPanel class both derive from the SelectorPanel class which itself derives from the JPanel class. I had the SelectorPanel constructor setting its layout manager to a BorderLayout instance and then add a couple of things to its super-class (i.e. to the JPanel). I had also at some point recently, had the ButtonSelectorPanel constructor set its layout manager to a different BorderLayout instance and then add a couple of things to the JPanel (i.e. its super-super-class).&#10;&#10;The result was that when the JPanel was rendered, the things that the SelectorPanel class added to the JPanel did not appear. When I listed out the contents of the JPanel and found that the now invisible things were actually in the JPanel, things got just a bit mysterious.&#10;&#10;Well . . . it turns out that the BorderLayout manager keeps track of what it is supposed to layout as things are added to the Container instance that it is responsible for. This means that when you assign a BorderLayout instance as the layout manager for a Container, anything already in the Container before said assignment is ignored by the BorderLayout instance. The result is that things which are actually in the Container don't get laid out and thus don't get rendered.&#10;&#10;Sigh.&#10;&#10;Moral of this story is that one should assign the BorderLayout manager to a Container BEFORE one puts anything in the Container (unless one is looking for an roughly three day long &quot;learning opportunity&quot; like the one that I just went through).&#10;&#10;P.S. This commit also adds some not all that well thought out &quot;tell me about this container and its contents&quot; utility methods to the LinearLayoutManager class. These will (hopefully) get cleaned up soon to the point where they are actually useful.">
       <created>1518806819940</created>
@@ -1081,7 +1076,14 @@
       <option name="project" value="LOCAL" />
       <updated>1569917604321</updated>
     </task>
-    <option name="localTasksCounter" value="99" />
+    <task id="LOCAL-00099" summary="A start on making the Gowing facility thread safe.&#10;&#10;Minor cleanup elsewhere.">
+      <created>1573744102677</created>
+      <option name="number" value="00099" />
+      <option name="presentableId" value="LOCAL-00099" />
+      <option name="project" value="LOCAL" />
+      <updated>1573744102677</updated>
+    </task>
+    <option name="localTasksCounter" value="100" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1371,7 +1373,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/obtuse/util/ObtuseUtil.java</url>
-          <line>2648</line>
+          <line>2718</line>
           <option name="timeStamp" value="370" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -1521,7 +1523,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/obtuse/util/ObtuseUtil.java</url>
-          <line>2627</line>
+          <line>2697</line>
           <option name="timeStamp" value="520" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
