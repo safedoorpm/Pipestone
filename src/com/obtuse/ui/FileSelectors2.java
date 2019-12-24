@@ -268,7 +268,7 @@ public class FileSelectors2 {
         if ( chooserRval == JFileChooser.APPROVE_OPTION ) {
 
             // Danny 2018-10-01 after well over an hour of trying to figure out why I didn't always
-            // get back the file or files I had selected. It turns out that everything worked as
+            // get back the file or files I had selected, it turns out that everything worked as
             // expected if I had more than one file selected but I would sometimes get the selected
             // file and sometimes get an empty array of files when I only had one file selected.
             // It turns out that the times that I was getting the one file was when I had multi-selection

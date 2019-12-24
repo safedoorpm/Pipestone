@@ -6,7 +6,7 @@
 package com.obtuse.ui.scrollable;
 
 import com.obtuse.exceptions.HowDidWeGetHereError;
-import com.obtuse.ui.layout.linear.LinearLayoutUtil;
+import com.obtuse.ui.ObtuseSwingUtils;
 import com.obtuse.util.ObtuseUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -128,15 +128,7 @@ public class IrregularScrollableImpl implements Scrollable {
             int notYetVisibleAmountOfFirstVisibleEntity = lineAfterFirstVisibleEntity - lastLineInWindow;
             if ( notYetVisibleAmountOfFirstVisibleEntity > 0 ) {
 
-                if ( notYetVisibleAmountOfFirstVisibleEntity > sem.getWindowLength() ) {
-
-                    return sem.getWindowLength();
-
-                } else {
-
-                    return notYetVisibleAmountOfFirstVisibleEntity;
-
-                }
+                return Math.min( notYetVisibleAmountOfFirstVisibleEntity, sem.getWindowLength() );
 
             }
 
@@ -234,7 +226,7 @@ public class IrregularScrollableImpl implements Scrollable {
 
         if ( sem.getWindowStart() > ( isContainerVertical() ? _container.getHeight() : _container.getWidth() ) ) {
 
-            LinearLayoutUtil.showStructure( this.getContainer() );
+            ObtuseSwingUtils.showStructure( this.getContainer() );
 
             throw new HowDidWeGetHereError( "getScrollableBlockIncrement:  huh?" );
 

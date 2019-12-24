@@ -6,11 +6,11 @@
 package com.obtuse.ui.layout.flexigrid1.model;
 
 import com.obtuse.exceptions.HowDidWeGetHereError;
+import com.obtuse.ui.ObtuseSwingUtils;
 import com.obtuse.ui.layout.flexigrid1.FlexiGridCache1;
 import com.obtuse.ui.layout.flexigrid1.FlexiGridItemInfo;
 import com.obtuse.ui.layout.flexigrid1.util.FlexiGridBasicConstraint;
 import com.obtuse.ui.layout.flexigrid1.util.FlexiGridConstraintsTable;
-import com.obtuse.ui.layout.linear.LinearLayoutUtil;
 import com.obtuse.util.FormattingVector;
 import com.obtuse.util.ObtuseUtil;
 import com.obtuse.util.SimpleUniqueIntegerIdGenerator;
@@ -122,7 +122,7 @@ public class FlexiGridModelSlice implements Comparable<FlexiGridModelSlice> {
         java.util.List<String> unseenComponentDescriptions = new FormattingVector<>();
         for ( FlexiGridItemInfo info : _dataMap.values() ) {
 
-            unseenComponentDescriptions.add( LinearLayoutUtil.describeComponent( info.component() ) + "@" + getWhere( info ) );
+            unseenComponentDescriptions.add( ObtuseSwingUtils.describeComponent( info.component() ) + "@" + getWhere( info ) );
 
         }
 

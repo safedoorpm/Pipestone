@@ -8,6 +8,7 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import javax.swing.*;
 import java.io.Closeable;
 import java.io.PrintStream;
 import java.util.*;
@@ -19,11 +20,28 @@ import java.util.*;
 @SuppressWarnings("UnusedDeclaration")
 public class Measure implements Closeable {
 
+    public enum SortedBy {
+
+        ADJUSTED_TOTAL_COST { @NotNull public String readableName() { return "Adjusted Cost"; } },
+        MEAN { @NotNull public String readableName() { return "Mean"; } },
+        COUNT { @NotNull public String readableName() { return "Count"; } },
+        RATE { @NotNull public String readableName() { return "Rate"; } },
+        TOTAL { @NotNull public String readableName() { return "Total Cost"; } },
+        ALPHABETICAL { @NotNull public String readableName() { return "Alphabetical"; } };
+
+        @NotNull public abstract String readableName();
+
+    }
+
     private static final String OUTER_DONE_STATS = "<outerDoneStats>";
 
     private static final String INNER_DONE_STATS = "<innerDoneStats>";
 
     private static boolean s_globallyEnabled = false;
+
+    private static boolean s_onlyEventThreadWork = true;
+
+    private final boolean _onEventThread;
 
     private final String _categoryName;
 
@@ -225,7 +243,7 @@ public class Measure implements Closeable {
             }
 
             where.println(
-                    ObtuseUtil.lpad( (long)_ourStats.n(), 10 )
+                    ObtuseUtil.lpad( _ourStats.n(), 10 )
                     + " : " +
                     String.format( "%14.9f", _ourStats.n() == 0 ? 0 : _ourStats.mean() )
                     + " : " +
@@ -272,10 +290,21 @@ public class Measure implements Closeable {
 
         super();
 
+        _onEventThread = SwingUtilities.isEventDispatchThread();
+
         _categoryName = categoryName;
         _startTimeMillis = System.currentTimeMillis();
 
         if ( !Measure.s_globallyEnabled ) {
+
+            _ourStack = null;
+            _initialized = false;
+
+            return;
+
+        }
+
+        if ( s_onlyEventThreadWork && !_onEventThread ) {
 
             _ourStack = null;
             _initialized = false;
@@ -508,18 +537,24 @@ public class Measure implements Closeable {
 
     public static void showStats() {
 
-        Measure.showStats( System.out, true );
+        showStats( SortedBy.ADJUSTED_TOTAL_COST );
 
     }
 
-    public static void showStats( final PrintStream where ) {
+    public static void showStats( @NotNull final SortedBy sortedBy ) {
 
-        Measure.showStats( where, true );
+        Measure.showStats( sortedBy, System.out, true );
+
+    }
+
+    public static void showStats( @NotNull SortedBy sortedBy, final PrintStream where ) {
+
+        Measure.showStats( sortedBy, where, true );
 
     }
 
     @SuppressWarnings({ "SameParameterValue" })
-    public static void showStats( final PrintStream where, final boolean showTitle ) {
+    public static void showStats( @NotNull final SortedBy sortedBy, final PrintStream where, final boolean showTitle ) {
 
         if ( !Measure.s_globallyEnabled ) {
 
@@ -539,15 +574,59 @@ public class Measure implements Closeable {
 
             Measure.s_stackStats.showStats( where, showTitle );
 
-            TreeSorter<Double, String> sorted = new TreeSorter<>( Comparator.reverseOrder() );
+            TreeSorter<Double,String> sorter = new TreeSorter<>( Comparator.reverseOrder() );
+//                if ( sortedBy == SortedBy.ALPHABETICAL ) {
+//
+//                    sorter = null;
+//
+//                } else {
+//
+//                    sorter = new TreeSorter<>( Comparator.reverseOrder() );
+//
+//                }
 
+            double ix = 0.0;
             for ( String categoryName : Measure.s_stats.keySet() ) {
 
                 Stats stats = Measure.s_stats.get( categoryName );
 
-                double value = Measure.adjustSum( categoryName, stats.sum(), stats.n() );
+                switch ( sortedBy ) {
 
-                sorted.add( value, categoryName );
+                    case ADJUSTED_TOTAL_COST:
+                        double adjustedTotalCost = Measure.adjustSum( categoryName, stats.sum(), stats.n() );
+                        sorter.add( adjustedTotalCost, categoryName );
+                        break;
+
+                    case COUNT:
+                        sorter.add( (double)stats.n(), categoryName );
+                        break;
+
+                    case MEAN:
+                        sorter.add( stats.mean(), categoryName );
+                        break;
+
+                    case RATE:
+                        double rate = stats.mean() == 0 ? Double.POSITIVE_INFINITY : 1 / stats.mean();
+                        if ( rate > 0 && rate < 1e9 ) {
+
+                            sorter.add(
+                                    rate,
+                                    categoryName
+                            );
+
+                        }
+
+                        break;
+
+                    case TOTAL:
+                        sorter.add( stats.sum(), categoryName );
+                        break;
+
+                    case ALPHABETICAL:
+                        sorter.add( ix, categoryName );
+                        ix += 1;
+
+                }
 
             }
 
@@ -569,14 +648,14 @@ public class Measure implements Closeable {
 
             }
 
-            for ( String categoryName : sorted.getAllValues() ) {
+            for ( String categoryName : sorter.getAllValues() ) {
 
                 Stats stats = Measure.s_stats.get( categoryName );
 
                 where.println(
                         ObtuseUtil.rpad( categoryName, Measure.s_maxCategoryNameLength + 2 )
                         + " : " +
-                        ObtuseUtil.lpad( (long)stats.n(), 10 )
+                        ObtuseUtil.lpad( stats.n(), 10 )
                         + " : " +
                         String.format( "%14.9f", stats.mean() )
                         + " : " +
@@ -624,34 +703,34 @@ public class Measure implements Closeable {
 
     }
 
-    /**
-     A (relatively) easy way to measure a block of code.
-     @param categoryName the name of the category being measured.
-     @param runnable the code to be measured.
-     @return the delta for this invocation.
-     <p>While there may still be situations in which this {@link Runnable}-based approach makes sense,
-     it is probably best to switch to the at least arguably cleaner and definitely more flexible
-     <blockquote>
-     <code>try ( Measure ignored = new Measure( "category name" ) ) {
-     <blockquote>... the code to be measured ...</blockquote>
-     }</code>
-     </blockquote></p>
-     <p>P.S. the above try block based approach is exactly how this method is implemented.</p>
-
-     */
-
-    @Deprecated
-    public static long measure( final String categoryName, @NotNull final Runnable runnable ) {
-
-        try ( Measure m = new Measure( categoryName ) ) {
-
-            runnable.run();
-
-            return m.deltaMillis();
-
-        }
-
-    }
+//    /**
+//     A (relatively) easy way to measure a block of code.
+//     @param categoryName the name of the category being measured.
+//     @param runnable the code to be measured.
+//     @return the delta for this invocation.
+//     <p>While there may still be situations in which this {@link Runnable}-based approach makes sense,
+//     it is probably best to switch to the at least arguably cleaner and definitely more flexible
+//     <blockquote>
+//     <code>try ( Measure ignored = new Measure( "category name" ) ) {
+//     <blockquote>... the code to be measured ...</blockquote>
+//     }</code>
+//     </blockquote></p>
+//     <p>P.S. the above try block based approach is exactly how this method is implemented.</p>
+//
+//     */
+//
+//    @Deprecated
+//    public static long measure( final String categoryName, @NotNull final Runnable runnable ) {
+//
+//        try ( Measure m = new Measure( categoryName ) ) {
+//
+//            runnable.run();
+//
+//            return m.deltaMillis();
+//
+//        }
+//
+//    }
 
     public String toString() {
 

@@ -5,6 +5,7 @@
 
 package com.obtuse.ui.layout.linear;
 
+import com.obtuse.ui.ObtuseSwingUtils;
 import com.obtuse.ui.layout.ComponentSizeRequirements;
 import com.obtuse.ui.layout.LinearOrientation;
 import com.obtuse.util.Logger;
@@ -66,7 +67,6 @@ public class LinearCache3 implements LinearLayoutManagerCache {
 
         }
 
-        //noinspection EmptyFinallyBlock
         try {
 
             Vector<Component> visibleComponents = new Vector<>();
@@ -77,7 +77,7 @@ public class LinearCache3 implements LinearLayoutManagerCache {
 
                               if ( LinearLayoutUtil.isContainerOnWatchlist( target ) ) {
 
-                                  LinearLayoutUtil.describeGuiEntity( 0, component, false, false );
+                                  ObtuseSwingUtils.describeGuiEntity( 0, component, false, false );
 
                               }
 
@@ -444,7 +444,6 @@ public class LinearCache3 implements LinearLayoutManagerCache {
 
     public float getLayoutAlignmentX() {
 
-        @SuppressWarnings("UnnecessaryLocalVariable")
         float alignmentX = isVertical() ? _breadthTotal.alignment : _lengthTotal.alignment;
 
         return alignmentX;
@@ -453,7 +452,6 @@ public class LinearCache3 implements LinearLayoutManagerCache {
 
     public float getLayoutAlignmentY() {
 
-        @SuppressWarnings("UnnecessaryLocalVariable")
         float alignmentY = isVertical() ? _lengthTotal.alignment : _breadthTotal.alignment;
 
         return alignmentY;
@@ -571,7 +569,7 @@ public class LinearCache3 implements LinearLayoutManagerCache {
                           totalAscent +
                           ", totalDescent=" +
                           totalDescent + " " +
-                          LinearLayoutUtil.describeContainer( _target )
+                          ObtuseSwingUtils.describeContainer( _target )
             );
 
             ObtuseUtil.doNothing();

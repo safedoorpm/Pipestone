@@ -227,6 +227,8 @@ public interface VirtualScrollablePanelModel<E extends VirtualScrollableElement>
             final int innerScrollableWindowWidth
     );
 
+    int getVisibleElementCount();
+
     int getVerticalScrollBarValue();
 
     void setVerticalScrollBarValue( int newValue );

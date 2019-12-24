@@ -36,7 +36,9 @@ public class MessageDigestRecord extends GowingAbstractPackableEntity {
         @NotNull
         @Override
         public GowingPackable createEntity(
-                final @NotNull GowingUnPacker unPacker, final @NotNull GowingPackedEntityBundle bundle, final @NotNull GowingEntityReference er
+                final @NotNull GowingUnPacker unPacker,
+                final @NotNull GowingPackedEntityBundle bundle,
+                final @NotNull GowingEntityReference er
         ) {
 
             byte[] digest = bundle.MandatoryPrimitiveByteArrayValue( DIGEST_NAME );
@@ -55,7 +57,11 @@ public class MessageDigestRecord extends GowingAbstractPackableEntity {
     private String _toString;
     private String _digestString;
 
-    public MessageDigestRecord( @NotNull final String sourceName, @NotNull final byte[] digest, @NotNull final String algorithm ) {
+    public MessageDigestRecord(
+            @NotNull final String sourceName,
+            @NotNull final byte[] digest,
+            @NotNull final String algorithm
+    ) {
         super( new GowingNameMarkerThing() );
 
         _sourceName = sourceName;
@@ -114,7 +120,8 @@ public class MessageDigestRecord extends GowingAbstractPackableEntity {
 
     @Override
     public @NotNull GowingPackedEntityBundle bundleThyself(
-            final boolean isPackingSuper, @NotNull final GowingPacker packer
+            final boolean isPackingSuper,
+            @NotNull final GowingPacker packer
     ) {
 
         GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(

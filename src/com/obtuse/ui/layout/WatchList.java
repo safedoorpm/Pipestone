@@ -5,7 +5,7 @@
 
 package com.obtuse.ui.layout;
 
-import com.obtuse.ui.layout.linear.LinearLayoutUtil;
+import com.obtuse.ui.ObtuseSwingUtils;
 import com.obtuse.util.Logger;
 import com.obtuse.util.NamedEntity;
 import org.jetbrains.annotations.NotNull;
@@ -32,7 +32,7 @@ public class WatchList<T extends Component> implements NamedEntity {
 
     public synchronized int addEntityToWatchList( final @NotNull T c ) {
 
-	Logger.logMsg( "adding " + LinearLayoutUtil.fullName( c ) + " to watchlist" );
+	Logger.logMsg( "adding " + ObtuseSwingUtils.fullName( c ) + " to watchlist" );
 
 	Integer count = _watchList.get( c );
 	if ( count == null ) {

@@ -1,6 +1,8 @@
 package com.obtuse.ui.vsp;
 
 import com.obtuse.exceptions.HowDidWeGetHereError;
+import com.obtuse.ui.ObtuseGuiEventUtils;
+import com.obtuse.ui.ObtuseSwingUtils;
 import com.obtuse.ui.layout.PermissiveLayoutManager;
 import com.obtuse.util.*;
 import org.jetbrains.annotations.NotNull;
@@ -19,17 +21,53 @@ import java.util.Optional;
 
 public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends JPanel {
 
-    private final JPanel _virtualScrollablePanel;
+    private final JPanel _actualScrollablePanel;
     private final JScrollBar _hScrollBar;
     private final JScrollBar _vScrollBar;
 
     private boolean _verbose;
 
-    //    private final VirtualScrollablePanelModel _virtualScrollablePanelModel;
     private final VirtualScrollablePanelModel<E> _virtualScrollablePanelModel;
 
     private boolean _ourLayoutManagerSet;
     private final VirtualScrollableLayoutManager _ourLayoutManager;
+
+    public static void setFocusedProxy( @NotNull JComponent component, final String who, final int row, final int column ) {
+
+        setFocusedProxy( component, who, row, column, false );
+
+    }
+
+    public static void setFocusedProxy( @NotNull JComponent component, final String who, final int row, final int column, boolean verbose ) {
+
+        boolean ownFocus = component.isFocusOwner();
+        boolean requestFocusInWindow = component.requestFocusInWindow();
+
+        if ( verbose ) {
+
+            Logger.logMsg(
+                    who + ":  requesting focus in (" + row + "x" + column + ") " +
+                    (
+                            requestFocusInWindow
+                                    ?
+                                    "probably worked"
+                                    :
+                                    (
+                                            "failed" +
+                                            (
+                                                    ownFocus
+                                                            ?
+                                                            " probably because we already have it"
+                                                            :
+                                                            " for unknown reason"
+                                            )
+                                    )
+                    )
+            );
+
+        }
+
+    }
 
     private void handleMouseWheel(
             @NotNull final String name,
@@ -70,7 +108,7 @@ public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends 
         _ourLayoutManagerSet = true;
         _ourLayoutManager = ourLayoutManager;
 
-        _virtualScrollablePanel = new JPanel() {
+        _actualScrollablePanel = new JPanel() {
             public void paint( Graphics g ) {
 
                 super.paint( g );
@@ -82,17 +120,47 @@ public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends 
 
         };
 
-        _virtualScrollablePanel.setName( "vSP" );
-        _virtualScrollablePanel.setBorder( BorderFactory.createEtchedBorder() );
-        add( _virtualScrollablePanel, VPANEL_NAME );
+        _actualScrollablePanel.setName( "vSP" );
+        _actualScrollablePanel.setBorder( BorderFactory.createEtchedBorder() );
+        add( _actualScrollablePanel, VPANEL_NAME );
 
-        _virtualScrollablePanel.addMouseWheelListener(
+        _actualScrollablePanel.setFocusable( true );
+//        _actualScrollablePanel.setBackground( Color.RED );
+
+        setFocusable( true );
+        requestFocusInWindow();
+//        setBackground( Color.GREEN );
+
+        _actualScrollablePanel.addMouseWheelListener(
                 new MouseWheelListener() {
 
                     @Override
                     public void mouseWheelMoved( final MouseWheelEvent e ) {
 
 //                        Logger.logMsg( "mouseWheelMoved:  " + e );
+
+                        @NotNull Optional<Window> optTopWindow = ObtuseGuiEventUtils.findOurTopWindow(
+                                _actualScrollablePanel
+                        );
+                        if ( optTopWindow.isPresent() ) {
+
+                            Logger.logMsg( "" );
+
+                            Window topWindow = optTopWindow.get();
+                            Logger.logMsg( "top window is " + optTopWindow );
+
+                            Component currentFocusOwner = topWindow.getFocusOwner();
+                            Component mostRecentFocusOwner = topWindow.getMostRecentFocusOwner();
+
+                            Logger.logMsg(
+                                    "currentFocusOwner is " + ObtuseSwingUtils.describeComponent( currentFocusOwner ) +
+                                    ", mostRecentFocusOwner is " +
+                                    ObtuseSwingUtils.describeComponent( mostRecentFocusOwner )
+                            );
+
+                            Logger.logMsg( "" );
+
+                        }
 
                         ObtuseUtil.doNothing();
 
@@ -199,13 +267,19 @@ public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends 
 
     public void setInnerBackground( @NotNull Color color ) {
 
-        _virtualScrollablePanel.setBackground( color );
+        _actualScrollablePanel.setBackground( color );
 
     }
 
     public void setInnerForeground( @NotNull Color color ) {
 
-        _virtualScrollablePanel.setForeground( color );
+        _actualScrollablePanel.setForeground( color );
+
+    }
+
+    public JPanel getActualScrollablePanel() {
+
+        return _actualScrollablePanel;
 
     }
 
@@ -213,12 +287,33 @@ public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends 
     public VirtualScrollablePanelModel getVirtualScrollablePanelModel() {
 
         return _virtualScrollablePanelModel;
+
     }
 
     @SuppressWarnings("unused")
     public VirtualScrollableLayoutManager getOurLayoutManager() {
 
         return _ourLayoutManager;
+
+    }
+
+    public void resetScrollBars() {
+
+        _vScrollBar.setValue( 0 );
+        _hScrollBar.setValue( 0 );
+
+    }
+
+    public JScrollBar getVerticalScrollBar() {
+
+        return _vScrollBar;
+
+    }
+
+    public JScrollBar getHorizontalScrollBar() {
+
+        return _hScrollBar;
+
     }
 
     public static final String VPANEL_NAME = "vSpPanel";
@@ -511,11 +606,16 @@ public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends 
                         new Rectangle( 0, vPanelHeight, hsbWidth, hsbHeight )
                 );
 
-                VirtualScrollablePanelModel.CurrentGoals<E> currentGoals =
-                        _virtualScrollablePanelModel.getCurrentGoals(
-                                _vScrollBar.getValue(),
-                                new Dimension( vPanelWidth, vPanelHeight )
-                        );
+                VirtualScrollablePanelModel.CurrentGoals<E> currentGoals;
+
+                try ( Measure m1 = new Measure( "VSP get current goals" ) ) {
+
+                    currentGoals = _virtualScrollablePanelModel.getCurrentGoals(
+                            _vScrollBar.getValue(),
+                            new Dimension( vPanelWidth, vPanelHeight )
+                    );
+
+                }
 
                 // If the current goals don't provide us with anything to show but there is something to see
                 // with a bit of scrolling, try again with the first visible row set to the last actual row.
@@ -524,15 +624,19 @@ public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends 
 
                 if ( !currentGoals.isAnythingVisible() && currentGoals.getScrollableElementsCount() > 0 ) {
 
-                    // If this still yields an "nothing to see" result then we're going to bail out
+                    // If this still yields a "nothing to see" result then we're going to bail out
                     // down below (i.e. leave the viewer with an empty panel).
 
-                    currentGoals = _virtualScrollablePanelModel.getCurrentGoals(
-                            currentGoals.getScrollableElementsCount() - 1,
-                            new Dimension( vPanelWidth, vPanelHeight )
-                    );
+                    try (Measure m2 = new Measure( "VSP get current goals after minor scroll" ) ) {
 
-                    ObtuseUtil.doNothing();
+                        currentGoals = _virtualScrollablePanelModel.getCurrentGoals(
+                                currentGoals.getScrollableElementsCount() - 1,
+                                new Dimension( vPanelWidth, vPanelHeight )
+                        );
+
+                        ObtuseUtil.doNothing();
+
+                    }
 
                 }
 
@@ -549,101 +653,117 @@ public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends 
                 Insets in = _ourScrollableInnerPanel.getInsets();
                 int widestRenderedElementView = 0;
 
+                ElementView<E> firstVisibleElementView = null;
+
                 // If we bail now then nothing will be visible in the inner panel.
                 // Let's short circuit this game if we KNOW that there is nothing visible.
 
                 if ( currentGoals.isAnythingVisible() ) {
 
-                    // Tell _virtualScrollablePanelModel that we are starting a new round of allocating element views.
-                    // This allows the _virtualScrollablePanelModel to recycle old views if they so choose.
+                    try ( Measure m3 = new Measure( "VSP allocate/create instances" ) ) {
 
-                    _virtualScrollablePanelModel.startNewElementViewAllocationRound();
+                        // Tell _virtualScrollablePanelModel that we are starting a new round of allocating element views.
+                        // This allows the _virtualScrollablePanelModel to recycle old views if they so choose.
 
-                    int y = in.top;
+                        _virtualScrollablePanelModel.startNewElementViewAllocationRound();
 
-                    // The current goals simply MUST include the first visible element number.
-                    // If this requirement is not met then it's better to explode here with a
-                    // useful error message than to stumble into an NPE below.
+                        int y = in.top;
 
-                    if (
-                            currentGoals.getFirstProvidedElementNumber() > currentGoals.getFirstVisibleElementNumber()
-                    ) {
+                        // The current goals simply MUST include the first visible element number.
+                        // If this requirement is not met then it's better to explode here with a
+                        // useful error message than to stumble into an NPE below.
 
-                        throw new IllegalArgumentException(
-                                "VirtualScrollablePanel.layoutContainer:  " +
-                                "first provided element number is " + currentGoals.getFirstProvidedElementNumber() +
-                                " but the first element we need to display is " +
-                                currentGoals.getFirstVisibleElementNumber()
-                        );
+                        if (
+                                currentGoals.getFirstProvidedElementNumber() > currentGoals.getFirstVisibleElementNumber()
+                        ) {
 
-                    }
-
-                    for (
-                            int ix = currentGoals.getFirstVisibleElementNumber();
-                            ix <= currentGoals.getLastProvidedElementNumber() && y < vPanelHeight - in.bottom;
-                            ix += 1
-                    ) {
-
-                        VirtualScrollableElementModel<E> elementModel = currentGoals.getElementAt( ix );
-
-                        ElementView<E> elementView = _virtualScrollablePanelModel.createInstance( elementModel );
-                        if ( elementView == null ) {
-
-                            throw new HowDidWeGetHereError(
-                                    "VirtualScrollableLayoutManager.layoutContainer:  " +
-                                    "id " + elementModel.getUniqueId().format() +
-                                    " did not get an element view assigned to it"
+                            throw new IllegalArgumentException(
+                                    "VirtualScrollablePanel.layoutContainer:  " +
+                                    "first provided element number is " + currentGoals.getFirstProvidedElementNumber() +
+                                    " but the first element we need to display is " +
+                                    currentGoals.getFirstVisibleElementNumber()
                             );
 
                         }
 
-                        Component asComponent = elementView.asComponent();
+                        for (
+                                int ix = currentGoals.getFirstVisibleElementNumber();
+                                ix <= currentGoals.getLastProvidedElementNumber() && y < vPanelHeight - in.bottom;
+                                ix += 1
+                        ) {
 
-                        // This is always true since we start by emptying the inner scrollable panel.
-                        // This might prove useful in the future and is cheap to do so . . .
+                            try ( Measure m4 = new Measure( "allocate view instance" ) ) {
 
-                        if ( asComponent.getParent() != _ourScrollableInnerPanel ) {
+                                VirtualScrollableElementModel<E> elementModel = currentGoals.getElementAt( ix );
 
-                            _ourScrollableInnerPanel.add( asComponent );
+                                ElementView<E> elementView = _virtualScrollablePanelModel.createInstance( elementModel );
+                                if ( elementView == null ) {
+
+                                    throw new HowDidWeGetHereError(
+                                            "VirtualScrollableLayoutManager.layoutContainer:  " +
+                                            "id " + elementModel.getUniqueId().format() +
+                                            " did not get an element view assigned to it"
+                                    );
+
+                                }
+
+                                if ( firstVisibleElementView == null ) {
+
+                                    firstVisibleElementView = elementView;
+
+                                }
+
+                                Component asComponent = elementView.asComponent();
+
+                                // This is always true since we start by emptying the inner scrollable panel.
+                                // This might prove useful in the future and is cheap to do so . . .
+
+                                if ( asComponent.getParent() != _ourScrollableInnerPanel ) {
+
+                                    _ourScrollableInnerPanel.add( asComponent );
+
+                                }
+
+                                asComponent.setVisible( true );
+
+                                elementView.fill( elementModel );
+                                _virtualScrollablePanelModel.noteViewFilled( elementView );
+
+                                widestRenderedElementView = Math.max(
+                                        widestRenderedElementView,
+                                        elementView.asComponent().getWidth()
+                                );
+
+                                Dimension prefElementSize = asComponent.getPreferredSize();
+                                Rectangle bounds = new Rectangle(
+                                        in.left,
+                                        y,
+                                        vPanelWidth - ( in.left + in.right ),
+                                        prefElementSize.height
+                                );
+                                if ( _verbose ) {
+
+                                    Logger.logMsg( "setting bounds of element view to " + ObtuseUtil.fBounds( bounds ) );
+
+                                }
+
+                                asComponent.setBounds( bounds );
+
+                                y += prefElementSize.height;
+
+                                if ( y <= vPanelHeight - in.bottom ) {
+
+                                    nRendered += 1;
+
+                                }
+
+                            }
 
                         }
 
-                        asComponent.setVisible( true );
-
-                        elementView.fill( elementModel );
-                        _virtualScrollablePanelModel.noteViewFilled( elementView );
-
-                        widestRenderedElementView = Math.max(
-                                widestRenderedElementView,
-                                elementView.asComponent().getWidth()
-                        );
-
-                        Dimension prefElementSize = asComponent.getPreferredSize();
-                        Rectangle bounds = new Rectangle(
-                                in.left,
-                                y,
-                                vPanelWidth - ( in.left + in.right ),
-                                prefElementSize.height
-                        );
-                        if ( _verbose ) {
-
-                            Logger.logMsg( "setting bounds of element view to " + ObtuseUtil.fBounds( bounds ) );
-
-                        }
-
-                        asComponent.setBounds( bounds );
-
-                        y += prefElementSize.height;
-
-                        if ( y <= vPanelHeight - in.bottom ) {
-
-                            nRendered += 1;
-
-                        }
+                        ObtuseUtil.doNothing();
 
                     }
-
-                    ObtuseUtil.doNothing();
 
                 }
 
@@ -660,6 +780,25 @@ public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends 
 
                 _isValid = true;
 
+                if ( firstVisibleElementView != null ) {
+
+                    if ( firstVisibleElementView.asComponent() instanceof JComponent ) {
+
+                        setFocusedProxy(
+                                (JComponent)firstVisibleElementView.asComponent(),
+                                "LancotMediaProxy.mouseClicked",
+                                -1,
+                                -1
+                        );
+
+                    } else {
+
+                        ObtuseUtil.doNothing();
+
+                    }
+
+                }
+
                 if ( _verbose ) {
 
                     Logger.logMsg( "components are" );
@@ -672,8 +811,8 @@ public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends 
                     }
 
                     Logger.logMsg( "done layout" );
-                }
 
+                }
 
             }
 

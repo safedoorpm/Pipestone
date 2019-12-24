@@ -5,6 +5,7 @@
 
 package com.obtuse.ui.layout.linear;
 
+import com.obtuse.ui.ObtuseSwingUtils;
 import com.obtuse.ui.layout.ConstraintTuple;
 import com.obtuse.ui.layout.LinearOrientation;
 import com.obtuse.util.ObtuseUtil;
@@ -209,7 +210,7 @@ public class LinearContainer3 extends JPanel implements LinearContainer {
                " alignment=(" + getAlignmentX() + "," + getAlignmentY() + ")," +
                " containerConstraints=" + _containerConstraints + "," +
                " componentConstraints=" + _componentConstraints + "," +
-               " border=" + LinearLayoutUtil.describeBorder( getBorder() ) +
+               " border=" + ObtuseSwingUtils.describeBorder( getBorder() ) +
                " )";
 
     }

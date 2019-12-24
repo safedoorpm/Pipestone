@@ -25,7 +25,7 @@ public abstract class AbstractVirtualScrollablePanelModel<E extends VirtualScrol
      The number of visible elements that the most recently obtained {@link CurrentGoals} instance reported.
      */
 
-    private int _nVisibleElements = 0;
+    private int _visibleElementCount = 0;
 
     /**
      The number of element views that were actually filled and rendered during the latest (re-)layout of the inner
@@ -74,7 +74,7 @@ public abstract class AbstractVirtualScrollablePanelModel<E extends VirtualScrol
     ) {
 
         @NotNull CurrentGoals<E> rval = getActualCurrentGoals( firstVisibleRowNumber, viewportSize );
-        _nVisibleElements = rval.getVisibleElementCount();
+        _visibleElementCount = rval.getVisibleElementCount();
 
         return rval;
 
@@ -171,6 +171,12 @@ public abstract class AbstractVirtualScrollablePanelModel<E extends VirtualScrol
         }
 
         return didSomething;
+
+    }
+
+    public int getVisibleElementCount() {
+
+        return _visibleElementCount;
 
     }
 

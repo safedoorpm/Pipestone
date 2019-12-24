@@ -2106,10 +2106,24 @@ public class ObtuseUtil {
      @param data the byte array to be formatted and printed onto {@link System#out}.
      */
 
-    @SuppressWarnings({ "MagicNumber" })
     public static void dump( final byte@NotNull[] data ) {
 
-        for ( int offset = 0; offset < data.length; offset += 16 ) {
+        dump( data, data.length );
+
+    }
+
+    /**
+     Dump a byte array in hex - prints the contents of a byte array onto {@link System#out} in geek-readable form.
+
+     @param data the byte array to be formatted and printed onto {@link System#out}.
+     @param maxBytes the maximum number of bytes to dump (protection against REALLY big arrays).
+     */
+
+    @SuppressWarnings({ "MagicNumber" })
+    public static void dump( final byte@NotNull[] data, int maxBytes ) {
+
+        int nBytes = Math.min( maxBytes, data.length );
+        for ( int offset = 0; offset < nBytes; offset += 16 ) {
 
             StringBuilder rval = new StringBuilder( ObtuseUtil.hexvalue( offset ) ).append( " " );
             for ( int j = 0; j < 16; j += 1 ) {
@@ -2120,7 +2134,7 @@ public class ObtuseUtil {
 
                 }
 
-                if ( offset + j < data.length ) {
+                if ( offset + j < nBytes ) {
 
                     rval.append( ObtuseUtil.hexvalue( data[offset + j] ) );
 
@@ -2134,7 +2148,7 @@ public class ObtuseUtil {
 
             rval.append( " *" );
 
-            for ( int j = 0; j < 16 && offset + j < data.length; j += 1 ) {
+            for ( int j = 0; j < 16 && offset + j < nBytes; j += 1 ) {
 
                 byte b = data[offset + j];
                 //noinspection ImplicitNumericConversion
@@ -2580,7 +2594,7 @@ public class ObtuseUtil {
             new StringCharMapping( "\\r", '\r' ),
             new StringCharMapping( "\\t", '\t' ),
             new StringCharMapping( "\\\\", '\\' ),
-            new StringCharMapping( "\\\'", '\'' ),
+            new StringCharMapping( "\\'", '\'' ),
             new StringCharMapping( "\\\"", '"' )
     };
 
@@ -2613,7 +2627,7 @@ public class ObtuseUtil {
                 return "\\\\";
 
             case '\'':
-                return "\\\'";
+                return "\\'";
 
             case '"':
                 return "\\\"";
@@ -2996,7 +3010,7 @@ public class ObtuseUtil {
         explainString( null );
         explainString( "null" );
         explainString( "hello\tthere\nworld" );
-        explainString( "dq=\", sq=\', bs=\b, nl=\n, rt=\r, t=\t, bs=\\" );
+        explainString( "dq=\", sq=', bs=\b, nl=\n, rt=\r, t=\t, bs=\\" );
 
         Logger.logMsg( "input char \n becomes naked char string {" + enquoteToNakedJavaCharacter( '\n' ) + "}" );
         Logger.logMsg( "input char \n becomes char string {" + enquoteToJavaCharacter( '\n' ) + "}" );

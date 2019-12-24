@@ -85,11 +85,11 @@ public class AsyncStreamCaptor extends Thread {
 
     public void run() {
 
-        Logger.logMsg( "AsyncStreamCaptor:  " + _idString + " launched" );
+//        Logger.logMsg( "AsyncStreamCaptor:  " + _idString + " launched" );
 
         readAggressively();
 
-        Logger.logMsg( "AsyncStreamCaptor:  " + _idString + " finished" );
+//        Logger.logMsg( "AsyncStreamCaptor:  " + _idString + " finished" );
 
         ObtuseUtil.doNothing();
 
@@ -126,7 +126,12 @@ public class AsyncStreamCaptor extends Thread {
 
                         while ( true ) {
 
+                            Logger.logMsg( getIdString() + ":  reading " + buffer.length + " bytes" );
+
                             int readLength = _inputStream.read( buffer );
+
+                            Logger.logMsg( getIdString() + ":  read returned " + readLength );
+
                             if ( readLength < 0 ) {
 
                                 _dataReadUntilEOF = true;
@@ -195,11 +200,13 @@ public class AsyncStreamCaptor extends Thread {
 
         _done = true; // If someone polls us, they'll see that we're done now.
 
-        Logger.logMsg( "we're done, doing notify:  " + toString() );
+//        Logger.logMsg( "we're done, doing notify:  " + toString() );
 
         // Wakeup anyone actually waiting for us to be done.
 
         synchronized ( this ) {
+
+//            Logger.logMsg( getIdString() + ":  sending notifyAll" );
 
             notifyAll();
 
@@ -424,7 +431,7 @@ public class AsyncStreamCaptor extends Thread {
 
         }
 
-        Logger.logMsg( "we're done:  " + toString() );
+//        Logger.logMsg( "we're done:  " + toString() );
 
     }
 

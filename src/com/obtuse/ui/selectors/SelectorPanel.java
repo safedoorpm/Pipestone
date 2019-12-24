@@ -5,7 +5,7 @@
 
 package com.obtuse.ui.selectors;
 
-import com.obtuse.ui.layout.linear.LinearLayoutUtil;
+import com.obtuse.ui.ObtuseSwingUtils;
 import com.obtuse.util.Logger;
 import com.obtuse.util.ObtuseUtil;
 import org.jetbrains.annotations.NotNull;
@@ -118,7 +118,7 @@ public abstract class SelectorPanel<E,C extends Container> extends BorderLayoutP
             _postSelectionPanel.setVisible( true );
             c.revalidate();
 
-            LinearLayoutUtil.describeFullyContainerContents( who, _postSelectionPanel );
+            ObtuseSwingUtils.describeFullyContainerContents( who, _postSelectionPanel );
 
             ObtuseUtil.doNothing();
 

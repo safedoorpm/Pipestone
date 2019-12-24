@@ -5,6 +5,7 @@
 package com.obtuse.ui.layout.flexigrid1;
 
 import com.obtuse.exceptions.HowDidWeGetHereError;
+import com.obtuse.ui.ObtuseSwingUtils;
 import com.obtuse.ui.layout.flexigrid1.model.FlexiGridPanelModel;
 import com.obtuse.ui.layout.flexigrid1.util.FlexiGridBasicConstraint;
 import com.obtuse.ui.layout.flexigrid1.util.FlexiGridConstraint;
@@ -168,11 +169,11 @@ public class FlexiGridLayoutManager implements LayoutManager2 {
 
             for ( Component cc : _constraints.keySet() ) {
 
-                logMaybe( "cc=" + LinearLayoutUtil.describeComponent( cc ) + " = " + _constraints.get( cc ) );
+                logMaybe( "cc=" + ObtuseSwingUtils.describeComponent( cc ) + " = " + _constraints.get( cc ) );
 
             }
 
-            throw new HowDidWeGetHereError( "FlexiGridConstraintsTable.getMandatoryConstraints:  component " + LinearLayoutUtil.describeComponent( component ) + " not found" );
+            throw new HowDidWeGetHereError( "FlexiGridConstraintsTable.getMandatoryConstraints:  component " + ObtuseSwingUtils.describeComponent( component ) + " not found" );
 
         }
 
@@ -394,16 +395,16 @@ public class FlexiGridLayoutManager implements LayoutManager2 {
 
             throw new IllegalArgumentException(
                     "FlexiGridLayoutManager.layoutContainer:  " +
-                    "parent(" + LinearLayoutUtil.describeComponent( parent ) + ") " +
+                    "parent(" + ObtuseSwingUtils.describeComponent( parent ) + ") " +
                     "is not our target container " +
-                    "(" + LinearLayoutUtil.describeComponent( _target ) + ")"
+                    "(" + ObtuseSwingUtils.describeComponent( _target ) + ")"
             );
 
         }
 
         logMaybe( "laying out container currently sized at " + ObtuseUtil.fBounds( _target.getBounds() ) );
 
-        logMaybe( "FlexiGridLayoutManager.layoutContainer( " + LinearLayoutUtil.describeComponent( _target ) + " ):  it begins" );
+        logMaybe( "FlexiGridLayoutManager.layoutContainer( " + ObtuseSwingUtils.describeComponent( _target ) + " ):  it begins" );
 
         FlexiGridCache1 cache;
 

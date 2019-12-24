@@ -316,6 +316,7 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
         s_supportedImageFormatSuffixes.put( "png", "png" );
         s_supportedImageFormatSuffixes.put( "tif", "tif" );
         s_supportedImageFormatSuffixes.put( "tiff", "tif" );
+        s_supportedImageFormatSuffixes.put( "heic", "heic" );
 
     }
 

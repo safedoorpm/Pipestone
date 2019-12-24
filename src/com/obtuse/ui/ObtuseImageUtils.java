@@ -2,7 +2,6 @@ package com.obtuse.ui;
 
 import com.obtuse.exceptions.HowDidWeGetHereError;
 import com.obtuse.ui.exceptions.ObtuseImageLoadFailed;
-import com.obtuse.util.DateUtils;
 import com.obtuse.util.Logger;
 import com.obtuse.util.Measure;
 import com.obtuse.util.ObtuseUtil;
@@ -53,11 +52,25 @@ public class ObtuseImageUtils {
 
     private static final int[] VERTICAL_FLIP = { 4, 3, 2, 1, 8, 7, 6, 5 };
 
+    private static boolean _verbose;
+
+    public static void setVerbose( final boolean verbose ) {
+
+        _verbose = verbose;
+
+    }
+
+    public static boolean isVerbose() {
+
+        return _verbose;
+
+    }
+
     public static int rotateOrientationRight( int orientation ) {
 
         int rval = SINGLE_RIGHT_ROTATION[ orientation - 1 ];
 
-        Logger.logMsg( "ObtuseImageUtils.rotateOrientationRight( " + orientation + " ) yielded " + rval );
+        if ( _verbose ) Logger.logMsg( "ObtuseImageUtils.rotateOrientationRight( " + orientation + " ) yielded " + rval );
 
         return rval;
 
@@ -67,7 +80,7 @@ public class ObtuseImageUtils {
 
         int rval = SINGLE_LEFT_ROTATION[ orientation - 1 ];
 
-        Logger.logMsg( "ObtuseImageUtils.rotateOrientationLeft( " + orientation + " ) yielded " + rval );
+        if ( _verbose ) Logger.logMsg( "ObtuseImageUtils.rotateOrientationLeft( " + orientation + " ) yielded " + rval );
 
         return rval;
 
@@ -77,7 +90,7 @@ public class ObtuseImageUtils {
 
         int rval = HORIZONTAL_FLIP[ orientation - 1 ];
 
-        Logger.logMsg( "ObtuseImageUtils.flipOrientationHorizontally( " + orientation + " ) yielded " + rval );
+        if ( _verbose ) Logger.logMsg( "ObtuseImageUtils.flipOrientationHorizontally( " + orientation + " ) yielded " + rval );
 
         return rval;
 
@@ -87,11 +100,34 @@ public class ObtuseImageUtils {
 
         int rval = VERTICAL_FLIP[ orientation - 1 ];
 
-        Logger.logMsg( "ObtuseImageUtils.flipOrientationVertically( " + orientation + " ) yielded " + rval );
+        if ( _verbose ) Logger.logMsg( "ObtuseImageUtils.flipOrientationVertically( " + orientation + " ) yielded " + rval );
 
         return rval;
 
     }
+
+    /**
+     Rotate a {@link Dimension} value if a planned change in its orientation will
+     include some sort of 90° rotation.
+     <p>Put another way, this method
+     <ul>
+     <li>returns the unchanged provided dimensions if the orientation is
+     <ul>
+     <li>null change (1)</li><li>flip horizontally (2)</li><li>rotate 180° (3)</li><li> or flip vertically (4)</li>
+     </ul>
+     <li>returns the 90° rotation of the provided dimensions if the orientation is
+     <ul>
+     <li>rotate right 90° and then flip horizontally (5)
+     </li><li>rotate left 90° (6)
+     </li><li>rotate left 90° and then flip horizontally (7)
+     </li><li>or rotate right 90°</li>
+     </ul>
+     </ul>
+     </p>
+     @param d the initial {@link Dimension} value
+     @param orientation the planned orientation change
+     @return the possibly rotated initial dimensions.
+     */
 
     public static Dimension maybeRotateDimension( @NotNull final Dimension d, int orientation ) {
 
@@ -113,9 +149,9 @@ public class ObtuseImageUtils {
     public static final int ORIENTATION_ROTATED_180 = 3;
     public static final int ORIENTATION_FLIPPED_VERTICALLY = 4;
     public static final int ORIENTATION_RIGHT90_THEN_FLIPPED_HORIZONTALLY = 5;
-    public static final int ORIENTATION_LEFT90 = 6;
+    public static final int ORIENTATION_RIGHT90 = 6;
     public static final int ORIENTATION_LEFT90_THEN_FLIPPED_HORIZONTALLY = 7;
-    public static final int ORIENTATION_RIGHT90 = 8;
+    public static final int ORIENTATION_LEFT90 = 8;
 
 //    @NotNull
 //    public static ImageIcon rotateImage( @NotNull final ImageIcon srcImageIcon, final int orientation ) {
@@ -218,37 +254,37 @@ public class ObtuseImageUtils {
             BufferedImage tmpImage;
             switch ( orientation ) {
 
-                case 1:
+                case ORIENTATION_NORMAL:    // 1
                     rotated = bufferedImage;
                     break;
 
-                case 2:
+                case ORIENTATION_FLIPPED_HORIZONTALLY:  // 2
                     rotated = flipHorizontally( bufferedImage );
                     break;
 
-                case 3:
+                case ORIENTATION_ROTATED_180:   // 3
                     rotated = rotateDegrees( bufferedImage, 180 );
                     break;
 
-                case 4:
+                case ORIENTATION_FLIPPED_VERTICALLY:    // 4
                     rotated = flipVertically( bufferedImage );
                     break;
 
-                case 5:
+                case ORIENTATION_RIGHT90_THEN_FLIPPED_HORIZONTALLY: // 5
                     tmpImage = rotateDegrees( bufferedImage, 90 );
                     rotated = flipHorizontally( tmpImage );
                     break;
 
-                case 6:
+                case ORIENTATION_RIGHT90:   // 6
                     rotated = rotateDegrees( bufferedImage, 90 );
                     break;
 
-                case 7:
+                case ORIENTATION_LEFT90_THEN_FLIPPED_HORIZONTALLY: // 7
                     tmpImage = rotateDegrees( bufferedImage, -90 );
                     rotated = flipHorizontally( tmpImage );
                     break;
 
-                case 8:
+                case ORIENTATION_LEFT90: // 8
                     rotated = rotateDegrees( bufferedImage, -90 );
                     break;
 
@@ -348,13 +384,13 @@ public class ObtuseImageUtils {
 //        BufferedImage sourceImage;
 ////        if ( original.getType() == BufferedImage.TYPE_INT_ARGB ) {
 //
-//            Logger.logMsg( "already has alpha channel" );
+//            if ( _verbose ) Logger.logMsg( "already has alpha channel" );
 //
 //            sourceImage = original;
 //
 ////        } else {
 ////
-////            Logger.logMsg( "need to convert to have alpha channel" );
+////            if ( _verbose ) Logger.logMsg( "need to convert to have alpha channel" );
 ////
 ////            sourceImage = new BufferedImage(original.getWidth(), original.getHeight(), BufferedImage.TYPE_INT_ARGB );
 ////            Graphics2D gt = sourceImage.createGraphics();
@@ -410,7 +446,7 @@ public class ObtuseImageUtils {
             _complete = _complete || ( _gotWidth && _gotHeight && _gotAllBits && _gotProperties );
             _isDone = hasCompleted() || hasFailed();
 
-            Logger.logMsg( "imageUpdate( img=?, x=" +
+            if ( _verbose ) Logger.logMsg( "imageUpdate( img=?, x=" +
                            x +
                            ", y=" +
                            y +
@@ -504,7 +540,7 @@ public class ObtuseImageUtils {
                 newSize.height != scaledImageIcon.getIconHeight()
         ) {
 
-            if ( what != null ) Logger.logMsg(
+            if ( what != null && _verbose ) Logger.logMsg(
                     ( scaledImageIcon == null ? "" : "re" ) + "scaling " + what +
                     " (" + origW + 'x' + origH + ") to" +
                     " (" + newSize.width + 'x' + newSize.height + ")"
@@ -795,7 +831,7 @@ public class ObtuseImageUtils {
                 long endTime = System.currentTimeMillis();
                 if ( endTime - startTime > 1000L ) {
 
-                    Logger.logMsg( "wait took " + DateUtils.formatDuration( endTime - startTime ) + " for " + fullWhat );
+//                    if ( _verbose ) Logger.logMsg( "wait took " + DateUtils.formatDuration( endTime - startTime ) + " for " + fullWhat );
 
                     ObtuseUtil.doNothing();
 
@@ -943,34 +979,45 @@ public class ObtuseImageUtils {
     @NotNull
     public static Optional<BufferedImage> optConvertImageToBufferedImage( Image inputImage ) {
 
-        if ( inputImage instanceof BufferedImage ) {
-
-            return Optional.of( (BufferedImage)inputImage );
-
-        }
-
-        BufferedImage newImage = new BufferedImage(
-                inputImage.getWidth( null ),
-                inputImage.getHeight( null ),
-                BufferedImage.TYPE_INT_RGB
-        );
-        Graphics g = newImage.createGraphics();
         try {
+            if ( inputImage instanceof BufferedImage ) {
 
-            g.drawImage( inputImage, 0, 0, null );
+                return Optional.of( (BufferedImage)inputImage );
 
-        } catch ( RuntimeException e ) {
+            }
 
-            Logger.logErr( "java.lang.Exception caught", e );
+            BufferedImage newImage = new BufferedImage(
+                    inputImage.getWidth( null ),
+                    inputImage.getHeight( null ),
+                    BufferedImage.TYPE_INT_RGB
+            );
+            Graphics g = newImage.createGraphics();
+            try {
+
+                g.drawImage( inputImage, 0, 0, null );
+
+            } catch ( RuntimeException e ) {
+
+                Logger.logErr( "java.lang.Exception caught", e );
+                ObtuseUtil.doNothing();
+
+                return Optional.empty();
+
+            }
+
+            g.dispose();
+
+            return Optional.of( newImage );
+
+        } catch ( IllegalArgumentException e ) {
+
+            Logger.logErr( "ObtuseImageUtils.optConvertImageToBufferedImage:  " + e, e );
+
             ObtuseUtil.doNothing();
 
-            return Optional.empty();
+            throw e;
 
         }
-
-        g.dispose();
-
-        return Optional.of( newImage );
 
     }
 
@@ -999,7 +1046,9 @@ public class ObtuseImageUtils {
                 inputImageHeight,
                 null
         );
-        Logger.logMsg( "flipHorizontally:  drawImage said " + allDone );
+
+        if ( _verbose ) Logger.logMsg( "flipHorizontally:  drawImage said " + allDone );
+
         gg.dispose();
 
         return newImage;
@@ -1030,7 +1079,9 @@ public class ObtuseImageUtils {
                 -inputImageHeight,
                 null
         );
-        Logger.logMsg( "flipVertically:  drawImage said " + allDone );
+
+        if ( _verbose ) Logger.logMsg( "flipVertically:  drawImage said " + allDone );
+
         gg.dispose();
 
         return newImage;

@@ -260,10 +260,10 @@ public class StdGowingPacker implements GowingPacker {
 
         }
 
-        vLog(
-                "queuing " + entity.getInstanceId() + " / " + entity.getInstanceId().getTypeName() +
-                " == " + entityName
-        );
+//        vLog(
+//                "queueing " + entity.getInstanceId() + " / " + entity.getInstanceId().getTypeName() +
+//                " == " + entityName
+//        );
 
         _packingContext.rememberPackableEntity( entityName, entity );
 
@@ -1358,7 +1358,7 @@ public class StdGowingPacker implements GowingPacker {
             p2Collection.add( "Hello" );
             p2Collection.add( "There" );
             GowingPackableCollection<String> p2C2 = new GowingPackableCollection<>();
-            p2C2.addAll( Arrays.asList( "Mercury", "Venus", "Mars", "Jupiter", "\b\n\r\t\\\'\"" ) );
+            p2C2.addAll( Arrays.asList( "Mercury", "Venus", "Mars", "Jupiter", "\b\n\r\t\\'\"" ) );
             p2Collection.add( p2C2 );
             p2a.queuePackableEntity( new EntityName( "file-s" ), new GowingFile( "/dev/string-thing" ) );
             p2a.queuePackableEntity( new EntityName( "file-f-s" ), new GowingFile( new File( "/dev" ), "file-string-thing" ) );

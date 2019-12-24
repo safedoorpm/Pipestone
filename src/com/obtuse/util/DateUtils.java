@@ -47,6 +47,11 @@ public class DateUtils {
     private static final SimpleDateFormat HH_MM_SS_12 = new SimpleDateFormat( "hh:mm:ssaa" );
     private static final SimpleDateFormat HH_MM_SS_24 = new SimpleDateFormat( "HH:mm:ss" );
     private static final SimpleDateFormat WWW_MMM_DD_HHMMSS_YYYY = new SimpleDateFormat( "EEE MMM dd HH:mm:ss yyyy" );
+    private static final SimpleDateFormat MMM_DD_HHMMSS_YYYY = new SimpleDateFormat( "MMM dd HH:mm:ss yyyy" );
+
+    // new SimpleDateFormat( "MMM dd HH:mm:ss yyyy").parse( selectedDateString.substring( 4, 20 ) + selectedDateString.substring( 24 ) )
+
+//    private static final SimpleDateFormat WWW_MMM_DD_HHMMSS_ZZZ_YYYY = new SimpleDateFormat( "EEE MMM dd HH:mm:ss zzz yyyy" );
     private static final SimpleDateFormat WWWW_MMMM_D_YYYY = new SimpleDateFormat( "EEEE, MMMM d, yyyy" );
     private static final SimpleDateFormat YYYY_MM_DD = new SimpleDateFormat( "yyyy-MM-dd" );
     private static final SimpleDateFormat YYYYMMDD = new SimpleDateFormat( "yyyyMMdd" );
@@ -406,6 +411,34 @@ public class DateUtils {
 
             DateUtils.HH_MM_SS_12.setTimeZone( timezone );
             ImmutableDate date = DateUtils.dateParse( DateUtils.HH_MM, token, lineNumber );
+            return date;
+
+        }
+
+    }
+
+    /**
+     Parse an MMM_DD_HHMMSS_YYYY format date and time string in the default timezone.
+
+     @param timezone   the specified timezone.
+     @param token      the date and time string.
+     @param lineNumber where the date was found.
+     @return the result in UTC.
+     @throws ParsingException if the token does not contain a valid date and time string.
+     */
+
+    @NotNull
+    public static ImmutableDate parseMMM_DD_HHMMSS_YYYY(
+            @NotNull TimeZone timezone,
+            @NotNull final String token,
+            final int lineNumber
+    )
+            throws ParsingException {
+
+        synchronized ( DateUtils.MMM_DD_HHMMSS_YYYY ) {
+
+            DateUtils.MMM_DD_HHMMSS_YYYY.setTimeZone( timezone );
+            ImmutableDate date = DateUtils.dateParse( DateUtils.MMM_DD_HHMMSS_YYYY, token, lineNumber );
             return date;
 
         }

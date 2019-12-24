@@ -14,15 +14,16 @@ import java.util.Optional;
  A customized {@link JPanel} for displaying images.
  */
 
-public class SimpleMediaItemPanel<IID extends SimpleMediaItemPanel.ImageIdentifier> extends JPanel {
+public class SimpleMediaItemPanel<IID extends ObtuseImageIdentifier> extends JLabel {
 
-    public interface ImageIdentifier extends Comparable<ImageIdentifier> {
+//    public interface ImageIdentifier extends Comparable<ImageIdentifier> {
+//
+//        String format();
+//
+//    }
 
-        String format();
-
-    }
-
-    public static class ScaledImageId<IID extends ImageIdentifier> implements Comparable {
+    @SuppressWarnings("rawtypes")
+    public static class ScaledImageId<IID extends ObtuseImageIdentifier> implements Comparable {
 
         private final int _scaleGranularity;
         private final IID _imageID;
@@ -38,6 +39,7 @@ public class SimpleMediaItemPanel<IID extends SimpleMediaItemPanel.ImageIdentifi
 
         }
 
+        @SuppressWarnings("unused")
         @NotNull
         public IID getImageIdentifier() {
 
@@ -98,7 +100,7 @@ public class SimpleMediaItemPanel<IID extends SimpleMediaItemPanel.ImageIdentifi
 
     private final LruCache<ScaledImageId<IID>, ImageIcon> _imageIconCache;
 
-    private @Nullable final ImageIcon _fullSizeImage;
+    private final @Nullable ImageIcon _fullSizeImage;
     private final IID _imageIdentifier;
     private int _orientation;
 
@@ -120,6 +122,11 @@ public class SimpleMediaItemPanel<IID extends SimpleMediaItemPanel.ImageIdentifi
         _imageIdentifier = imageIdentifier;
         _imageIconCache = scaledImageIconCache;
         _orientation = initialOrientation;
+
+        Logger.logMsg( "initial orientation is " + _orientation );
+
+        setHorizontalAlignment( SwingConstants.LEFT );
+        setVerticalAlignment( SwingConstants.TOP );
 
         if ( scaleGranularity <= 0 ) {
 
@@ -162,13 +169,13 @@ public class SimpleMediaItemPanel<IID extends SimpleMediaItemPanel.ImageIdentifi
         );
     }
 
-    public void setOrientation( int orientation ) {
+    public void setOrientation( int orientation, final double zoomFactor ) {
 
         if ( _orientation != orientation ) {
 
             _orientation = orientation;
 
-            repaint();
+//            refresh( zoomFactor );
 
         }
 
@@ -181,23 +188,29 @@ public class SimpleMediaItemPanel<IID extends SimpleMediaItemPanel.ImageIdentifi
 
     }
 
-    public Dimension setZoomFactor( double zoomFactor ) {
+    public Dimension refresh( double zoomFactor ) {
 
         Dimension naturalSize = ObtuseImageUtils.maybeRotateDimension( getNaturalSize(), getOrientation() );
-        Dimension newCurrentSize = new Dimension(
+        @SuppressWarnings("UnnecessaryLocalVariable") Dimension newCurrentSize = new Dimension(
                 (int)Math.round( naturalSize.width * zoomFactor ),
                 (int)Math.round( naturalSize.height * zoomFactor )
         );
 
-        if ( _currentSize.width != newCurrentSize.width || _currentSize.height != newCurrentSize.height ) {
+//        if ( _currentSize.width != newCurrentSize.width || _currentSize.height != newCurrentSize.height ) {
 
 //            Logger.logMsg( "resizing from " + ObtuseUtil.fDim( _currentSize ) + " to " + newCurrentSize );
 
-            _currentSize = newCurrentSize;
+        _currentSize = newCurrentSize;
 
-            repaint();
+        Optional<ImageIcon> ii = getScaledImage();
+        ii.ifPresent( this::setIcon );
 
-        }
+//            setSize( _currentSize );
+
+        revalidate();
+        repaint();
+
+//        }
 
         return _currentSize;
 
@@ -268,54 +281,76 @@ public class SimpleMediaItemPanel<IID extends SimpleMediaItemPanel.ImageIdentifi
 
     }
 
-    public void paint( Graphics g ) {
-
-//        Logger.logMsg( "painting " + getLmiId().format() );
-
-        Graphics gx = g.create();
-//        Graphics2D g2d = gx instanceof Graphics2D ? (Graphics2D)gx : null;
-
-//        Logger.logMsg( "redrawing image" );
-        @NotNull Optional<ImageIcon> optImage = getScaledImage();
-
-        gx.setColor( getBackground() );
-//        gx.setColor( Color.GRAY );
-        int regionWidth = getWidth();
-        int regionHeight = getHeight();
-        gx.fillRect( 0, 0, regionWidth, regionHeight );
-//        gx.setColor( isSelected() ? Color.BLUE : Color.WHITE );
-//        gx.drawRect( 0, 0, regionWidth - 1, regionHeight - 1 );
-        if ( optImage.isPresent() ) {
-
-            ImageIcon imageIcon = optImage.get();
-            int imageWidth = imageIcon.getIconWidth();
-            int imageHeight = imageIcon.getIconHeight();
-            Logger.logMsg( "SimpleMediaItemPanel.paint:  jp=(" + getWidth() + "," + getHeight() + "), ii=(" + imageWidth + "," + imageHeight + ")" );
-//            gx.setColor( Color.ORANGE );
+//    public void paint( Graphics g ) {
 //
-//            gx.drawRect(
+//        ObtuseSwingUtils.showStructure( this );
+//
+//        Logger.logMsg( "drawing SimpleMediaItemPanel for " + _imageIdentifier );
+//        int w = getWidth();
+//        int h = getHeight();
+//        Logger.logMsg( "SimpleMediaItemPanel size is " + getSize() + " == (" + w + "," + h + ")" );
+//        Color c = g.getColor();
+//        g.setColor( Color.GREEN );
+//        g.drawLine( 0, 0, w, h );
+//        g.setColor( c );
+//
+//        super.paint( g );
+//
+//        c = g.getColor();
+//        g.setColor( Color.RED );
+//        g.drawLine( 0, h, w, 0 );
+//        g.setColor( c );
+//
+//    }
+
+//    public void paint( Graphics g ) {
+//
+////        Logger.logMsg( "painting " + getLmiId().format() );
+//
+//        Graphics gx = g.create();
+////        Graphics2D g2d = gx instanceof Graphics2D ? (Graphics2D)gx : null;
+//
+////        Logger.logMsg( "redrawing image" );
+//        @NotNull Optional<ImageIcon> optImage = getScaledImage();
+//
+//        gx.setColor( getBackground() );
+////        gx.setColor( Color.GRAY );
+//        int regionWidth = getWidth();
+//        int regionHeight = getHeight();
+//        gx.fillRect( 0, 0, regionWidth, regionHeight );
+////        gx.setColor( isSelected() ? Color.BLUE : Color.WHITE );
+////        gx.drawRect( 0, 0, regionWidth - 1, regionHeight - 1 );
+//        if ( optImage.isPresent() ) {
+//
+//            ImageIcon imageIcon = optImage.get();
+//            int imageWidth = imageIcon.getIconWidth();
+//            int imageHeight = imageIcon.getIconHeight();
+//            Logger.logMsg( "SimpleMediaItemPanel.paint:  jp=(" + getWidth() + "," + getHeight() + "), ii=(" + imageWidth + "," + imageHeight + ")" );
+////            gx.setColor( Color.ORANGE );
+////
+////            gx.drawRect(
+////                    0,
+////                    0,
+////                    imageWidth,
+////                    imageHeight
+////            );
+//            gx.drawImage(
+//                    imageIcon.getImage(),
 //                    0,
 //                    0,
-//                    imageWidth,
-//                    imageHeight
+//                    this
 //            );
-            gx.drawImage(
-                    imageIcon.getImage(),
-                    0,
-                    0,
-                    this
-            );
-
-        } else {
-
-            gx.setColor( Color.WHITE );
-            gx.drawLine( 1, 1, regionWidth - 1, regionHeight - 1 );
-            gx.drawLine( 1, regionHeight - 1, regionWidth - 1, 1 );
-
-        }
-
-        gx.dispose();
-
-    }
+//
+//        } else {
+//
+//            gx.setColor( Color.WHITE );
+//            gx.drawLine( 1, 1, regionWidth - 1, regionHeight - 1 );
+//            gx.drawLine( 1, regionHeight - 1, regionWidth - 1, 1 );
+//
+//        }
+//
+//        gx.dispose();
+//
+//    }
 
 }

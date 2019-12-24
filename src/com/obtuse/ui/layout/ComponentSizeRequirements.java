@@ -5,7 +5,7 @@
 
 package com.obtuse.ui.layout;
 
-import com.obtuse.ui.layout.linear.LinearLayoutUtil;
+import com.obtuse.ui.ObtuseSwingUtils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -72,10 +72,9 @@ public class ComponentSizeRequirements extends SizeRequirements {
         float alignment = 0.0f;
         if ( min > 0 ) {
             alignment = (float)totalAscent.minimum / min;
-            alignment = alignment > 1.0f ? 1.0f : alignment < 0.0f ? 0.0f : alignment;
+            alignment = alignment > 1.0f ? 1.0f : Math.max( alignment, 0.0f );
         }
 
-        @SuppressWarnings("UnnecessaryLocalVariable")
         SizeRequirements rval = new SizeRequirements( min, pref, max, alignment );
 
         return rval;
@@ -84,7 +83,7 @@ public class ComponentSizeRequirements extends SizeRequirements {
 
     public String toString() {
 
-        return "ComponentSizeRequirements( " + LinearLayoutUtil.fullName( component.getParent(), component ) + ":  " + super.toString() + " )";
+        return "ComponentSizeRequirements( " + ObtuseSwingUtils.fullName( component.getParent(), component ) + ":  " + super.toString() + " )";
 
     }
 

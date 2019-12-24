@@ -5,16 +5,40 @@
     <option name="SHOW_STRUCTURE" value="true" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" name="Default" comment="Create the ObtuseVideoUtils class (hopefully, the start of something big).&#10;&#10;Implement the AsyncStreamCaptor class which asynchronously captures the contents of an {@link InputStream}.&#10;&#10;Implement a makeTextImageIcon method in the ImageButton class that creates an {@link ImageIcon} containing a single row of text.&#10;&#10;Implement two more readEntireFile methods that will read the contents of an arbitrarily large file (i.e. the caller does not need to provide an upper bounds on the file system). This is probably a bad idea considering that it does not provide any way to avoid an out-of-memory condition if the file is absurdly large. Already marked as deprecated.&#10;&#10;Implement the UnixSignals class which provides various useful constants for dealing with Unix signals. Also, provides methods that make it easy to tear apart the 'wait' value of {@link Process.waitFor()}">
-      <change afterPath="$PROJECT_DIR$/src/com/obtuse/ui/ObtuseVideoUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/obtuse/util/AsyncStreamCaptor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/obtuse/util/UnixSignals.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+    <list default="true" id="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" name="Default" comment="Add a new date format in DateUtils (MMM_DD_HHMMSS_YYYY) to handle dates like .Mar 15, 12:15:00 2012&quot;.&#10;&#10;Move many of the &quot;describe this GUI thing&quot; from LinearLayoutUtil to the new ObtuseGuiUtils utility class.&#10;&#10;Implement a simple interface to allow the measurements produced by the Measure class to be sorted in various ways.&#10;&#10;Implement the QuickLogger class which provides a much simpler logging facility that the existing Logger class.&#10;&#10;Implement Page-Up and Page-Down key support in the VirtualScrollablePanel facility. It's still a bit clunky but it's a lot better than having to scroll or mouse one's way through long scrollable panels.">
+      <change afterPath="$PROJECT_DIR$/src/com/obtuse/ui/ObtuseGuiUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/obtuse/ui/ObtuseImageIdentifier.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/obtuse/ui/ObtuseSwingUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/obtuse/ui/resources/Leaf_document.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/obtuse/util/NamedThing.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/obtuse/util/QuickLogger.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/ImageButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ImageButton.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/FileSelectors2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/FileSelectors2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/ObtuseImageFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/ObtuseImageFile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/ObtuseImageUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/ObtuseImageUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/SimpleMediaItemPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/SimpleMediaItemPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/copier/WidgetPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/copier/WidgetPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/layout/ComponentSizeRequirements.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/layout/ComponentSizeRequirements.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/layout/WatchList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/layout/WatchList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/FlexiGridLayoutManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/FlexiGridLayoutManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/model/FlexiGridModelSlice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/model/FlexiGridModelSlice.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/model/FlexiGridPanelModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/layout/flexigrid1/model/FlexiGridPanelModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/layout/linear/LinearCache3.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/layout/linear/LinearCache3.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/layout/linear/LinearContainer3.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/layout/linear/LinearContainer3.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/layout/linear/LinearLayoutUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/layout/linear/LinearLayoutUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/scrollable/IrregularScrollableImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/scrollable/IrregularScrollableImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/selectors/SelectorPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/selectors/SelectorPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/vsp/AbstractVirtualScrollablePanelModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/vsp/AbstractVirtualScrollablePanelModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/vsp/VirtualScrollablePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/vsp/VirtualScrollablePanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/vsp/VirtualScrollablePanelModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/vsp/VirtualScrollablePanelModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/AsyncStreamCaptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/AsyncStreamCaptor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/DateUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/DateUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/Measure.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/Measure.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/MessageDigestRecord.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/MessageDigestRecord.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/ObtuseUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ObtuseUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingPacker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingPacker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/lrucache/LruCache.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/lrucache/LruCache.java" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -295,6 +319,13 @@
     </entry>
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
+    <option name="autoscrollToSource" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
     <property name="GoToClass.includeLibraries" value="false" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
@@ -331,19 +362,11 @@
     <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/src/com/obtuse/util/TreeSorter2.java" />
   </component>
   <component name="RecentsManager">
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="com.obtuse.ui" />
-      <recent name="com.obtuse.util.gowing.p2a" />
-      <recent name="com.obtuse.graphs" />
-      <recent name="com.obtuse" />
-      <recent name="com.obtuse.ui.layout.flexigrid1.model" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/com/obtuse/ui/dnd" />
-      <recent name="$PROJECT_DIR$/src/com/obtuse/ui" />
-      <recent name="$PROJECT_DIR$/src/com/obtuse/ui/old" />
-      <recent name="$PROJECT_DIR$/src/com/obtuse/ui.old" />
-      <recent name="$PROJECT_DIR$/src/com/obtuse/ui/testanddemo" />
+    <key name="IntroduceConstantDialog.RECENTS_KEY">
+      <recent name="com.obtuse.ui.layout.flexigrid1.FlexiGridTesting" />
+      <recent name="com.obtuse.util.Measure" />
+      <recent name="com.obtuse.util.ObtuseCalendarDate" />
+      <recent name="com.obtuse.ui.PopupJTableEditor.PopupDialog" />
     </key>
     <key name="MoveInnerDialog.RECENTS_KEY">
       <recent name="com.obtuse.util.gowing.p2a" />
@@ -355,6 +378,13 @@
       <recent name="com.obtuse.ui.EventUtils" />
       <recent name="com.obtuse.util.packers.packer2.p2a.Constants" />
       <recent name="com.obtuse.util.packers.packer2.StdPackingContext2" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/com/obtuse/ui/dnd" />
+      <recent name="$PROJECT_DIR$/src/com/obtuse/ui" />
+      <recent name="$PROJECT_DIR$/src/com/obtuse/ui/old" />
+      <recent name="$PROJECT_DIR$/src/com/obtuse/ui.old" />
+      <recent name="$PROJECT_DIR$/src/com/obtuse/ui/testanddemo" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.obtuse.util.gowing.p2a.exceptions" />
@@ -377,35 +407,24 @@
       <recent name="com.obtuse.graphs" />
       <recent name="com.obtuse.util.gowing.p2a" />
     </key>
-    <key name="IntroduceConstantDialog.RECENTS_KEY">
-      <recent name="com.obtuse.ui.layout.flexigrid1.FlexiGridTesting" />
-      <recent name="com.obtuse.util.Measure" />
-      <recent name="com.obtuse.util.ObtuseCalendarDate" />
-      <recent name="com.obtuse.ui.PopupJTableEditor.PopupDialog" />
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.obtuse.ui" />
+      <recent name="com.obtuse.util.gowing.p2a" />
+      <recent name="com.obtuse.graphs" />
+      <recent name="com.obtuse" />
+      <recent name="com.obtuse.ui.layout.flexigrid1.model" />
     </key>
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
-  </component>
-  <component name="RunManager" selected="Application.ObtuseUtil">
-    <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
-      <Host>localhost</Host>
-      <Port>5050</Port>
-    </configuration>
+  <component name="RunManager" selected="Application.QuickLogger">
     <configuration default="true" type="Applet">
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
+    </configuration>
+    <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
+      <Host>localhost</Host>
+      <Port>5050</Port>
     </configuration>
     <configuration name="DateUtils" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.obtuse.util.DateUtils" />
@@ -463,13 +482,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="StdGowingUnPacker" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.obtuse.util.gowing.p2a.StdGowingUnPacker" />
+    <configuration name="QuickLogger" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.obtuse.util.QuickLogger" />
       <module name="Pipestone" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.obtuse.util.gowing.p2a.exceptions.*" />
+          <option name="PATTERN" value="com.obtuse.util.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -507,21 +526,33 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.StdGowingUnPacker" />
       <item itemvalue="Application.FlexiGridTree" />
       <item itemvalue="Application.DateUtils" />
       <item itemvalue="Application.GenericPanelManagerTester" />
       <item itemvalue="Application.ObtuseUtil" />
+      <item itemvalue="Application.QuickLogger" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.QuickLogger" />
         <item itemvalue="Application.ObtuseUtil" />
         <item itemvalue="Application.GenericPanelManagerTester" />
         <item itemvalue="Application.DateUtils" />
         <item itemvalue="Application.FlexiGridTree" />
-        <item itemvalue="Application.StdGowingUnPacker" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -738,14 +769,9 @@
       <workItem from="1572280711091" duration="2120000" />
       <workItem from="1573371101350" duration="2364000" />
       <workItem from="1573742757933" duration="5477000" />
-      <workItem from="1574354158075" duration="2474000" />
-    </task>
-    <task id="LOCAL-00051" summary="Basic sanity returns in my button and combo-box wrapping classes.&#10;&#10;The ButtonSelectorPanel class and the ComboBoxSelectorPanel class both derive from the SelectorPanel class which itself derives from the JPanel class. I had the SelectorPanel constructor setting its layout manager to a BorderLayout instance and then add a couple of things to its super-class (i.e. to the JPanel). I had also at some point recently, had the ButtonSelectorPanel constructor set its layout manager to a different BorderLayout instance and then add a couple of things to the JPanel (i.e. its super-super-class).&#10;&#10;The result was that when the JPanel was rendered, the things that the SelectorPanel class added to the JPanel did not appear. When I listed out the contents of the JPanel and found that the now invisible things were actually in the JPanel, things got just a bit mysterious.&#10;&#10;Well . . . it turns out that the BorderLayout manager keeps track of what it is supposed to layout as things are added to the Container instance that it is responsible for. This means that when you assign a BorderLayout instance as the layout manager for a Container, anything already in the Container before said assignment is ignored by the BorderLayout instance. The result is that things which are actually in the Container don't get laid out and thus don't get rendered.&#10;&#10;Sigh.&#10;&#10;Moral of this story is that one should assign the BorderLayout manager to a Container BEFORE one puts anything in the Container (unless one is looking for an roughly three day long &quot;learning opportunity&quot; like the one that I just went through).&#10;&#10;P.S. This commit also adds some not all that well thought out &quot;tell me about this container and its contents&quot; utility methods to the LinearLayoutManager class. These will (hopefully) get cleaned up soon to the point where they are actually useful.">
-      <created>1518806819940</created>
-      <option name="number" value="00051" />
-      <option name="presentableId" value="LOCAL-00051" />
-      <option name="project" value="LOCAL" />
-      <updated>1518806819941</updated>
+      <workItem from="1574354158075" duration="3063000" />
+      <workItem from="1575568771902" duration="5931000" />
+      <workItem from="1577062776606" duration="4435000" />
     </task>
     <task id="LOCAL-00052" summary="Lots of cleanup of the selector panels.&#10;Implement a new BorderLayoutPanel class that assigns itself a BorderLayout instance and then refuses to let anyone change its layout manager. This avoids some very strange behaviour that can result if one is not careful about when BorderLayout instances are assigned to a panel that is intended to use that layout manager. See the new BorderLayoutPanel class' Javadocs for more info.">
       <created>1518855320668</created>
@@ -1083,7 +1109,14 @@
       <option name="project" value="LOCAL" />
       <updated>1573744102677</updated>
     </task>
-    <option name="localTasksCounter" value="100" />
+    <task id="LOCAL-00100" summary="Create the ObtuseVideoUtils class (hopefully, the start of something big).&#10;&#10;Implement the AsyncStreamCaptor class which asynchronously captures the contents of an {@link InputStream}.&#10;&#10;Implement a makeTextImageIcon method in the ImageButton class that creates an {@link ImageIcon} containing a single row of text.&#10;&#10;Implement two more readEntireFile methods in the ObtuseUtil class that will read the contents of an arbitrarily large file (i.e. the caller does not need to provide an upper bounds on the file system). This is probably a bad idea considering that it does not provide any way to avoid an out-of-memory condition if the file is absurdly large. Already marked as deprecated.&#10;&#10;Implement the UnixSignals class which provides various useful constants for dealing with Unix signals. Also, provides methods that make it easy to tear apart the 'exit status' of a Unix process.">
+      <created>1574746975254</created>
+      <option name="number" value="00100" />
+      <option name="presentableId" value="LOCAL-00100" />
+      <option name="project" value="LOCAL" />
+      <updated>1574746975254</updated>
+    </task>
+    <option name="localTasksCounter" value="101" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1134,8 +1167,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Cleanup and attempts to increase the speed of Gowing (especially on the unPacking side of things). It turns out that Gowing itself is actually fairly fast. The bottleneck seems to be in the user classes which sometimes have to do a bit of a dance to get things done. I'm looking at some ideas like a better approach to handling collections. Something for the future.&#10;&#10;Implemented TypedGowingUnPacker which is a somewhat simplified API. I'm still not happy with the amount of boilerplate code that needs to be written in userland. Another work in progress.&#10;&#10;MonikerOwner is just a simple interface that marks classes which have a {@code String getMoniker()} method. The intent is to provide a way to clearly mark classes which can provide a possibly less than formal but still useful name for each instance. Not sure how useful it is but it's part of the Pipestone family now.&#10;&#10;Minor change to the Logger class to make it possible to get the name of the file where a particular Logger instance is archiving what it writes. See getMirrorName() for (not much) more info." />
-    <MESSAGE value="Cleanup and attempts to increase the speed of Gowing (especially on the unPacking side of things). It turns out that Gowing itself is actually fairly fast. The bottleneck seems to be in the user classes which sometimes have to do a bit of a dance to get things done. I'm looking at some ideas like a better approach to handling collections. Something for the future.&#10;&#10;Implemented TypedGowingUnPacker which is a somewhat simplified API. I'm still not happy with the amount of boilerplate code that needs to be written in userland. Another work in progress.&#10;&#10;MonikerOwner is just a simple interface that marks classes which have a {@code String getMoniker()} method. The intent is to provide a way to clearly mark classes which can provide a possibly less than formal but still useful name for each instance. Not sure how useful it is but it's part of the Pipestone family now.&#10;&#10;Minor change to the Logger class to make it possible to get the name of the file where a particular Logger instance is archiving what it writes. See getMirrorName() for (not much) more info.&#10;&#10;Lots of minor cleanup in a vain attempt to reduce the noise that comes out of IntelliJ's automated code analysis." />
     <MESSAGE value="Lots of cleanup (mostly in Gowing; other classes affected mostly be the move of Gowing exception classes into their own package)." />
     <MESSAGE value="Rework image scaling to ensure that compatible image types are used at each step of a pipeline that is reading, scaling, possibly rotating, and writing images (in other words, probably making thumbnails).&#10;&#10;Implement a couple of utility methods which can be used to wait for images to load asynchronously or, alternatively, to ensure that images are loaded in a situation where it isn't clear if they are being loaded asynchronously.&#10;&#10;Some cleanup (more to come - hopefully, this is just a checkpoint commit)." />
     <MESSAGE value="Basic sanity for the VirtualScrollablePanel facility. It seems to work quite well with row-oriented elements (no support at all for anything else (yet?)).&#10;&#10;This commit contains a slightly earlier attempt to build a JTree-like facility (called FlexiGridTree) that handles more than just strings for each node. That attempt doesn't seem to be the right way to do this. I'm checking it in so that I can easily keep it around until I am sure that it is toast.&#10;&#10;Introduction of the ObtuseArrays class for hopefully useful array-related utility methods.&#10;&#10;Introduction of the UniqueID class which provides a Gowing-packable and fairly robust mechanism for handling unique ids. While one can achieve the same functionality by just using long or Long fields, I have found that having ids wrapped in a special class helps to find bugs where ids and non-ids get mixed up. Also, it is handly to have some utility methods that work with ids." />
@@ -1159,9 +1190,81 @@
     <MESSAGE value="Add the WrapLayout class which is basically an extended version of the FlowLayout class that actually works." />
     <MESSAGE value="Implement the GenericPanelManager set of classes which provides a relatively easy-to-use scrollable (eventually) JPanel of FlexiGridModelSlice(s).&#10;&#10;Use the Optional facility across a wider range of classes.&#10;&#10;Cleanup the FlexiGridLayoutManager class.&#10;&#10;Implement the AwtEventToEventCategoryNameMap class to make handling of AWT events somewhat easier.&#10;&#10;Minor and not-so-Minor cleanup here and there." />
     <MESSAGE value="A start on making the Gowing facility thread safe.&#10;&#10;Minor cleanup elsewhere." />
-    <option name="LAST_COMMIT_MESSAGE" value="A start on making the Gowing facility thread safe.&#10;&#10;Minor cleanup elsewhere." />
+    <MESSAGE value="Create the ObtuseVideoUtils class (hopefully, the start of something big).&#10;&#10;Implement the AsyncStreamCaptor class which asynchronously captures the contents of an {@link InputStream}.&#10;&#10;Implement a makeTextImageIcon method in the ImageButton class that creates an {@link ImageIcon} containing a single row of text.&#10;&#10;Implement two more readEntireFile methods in the ObtuseUtil class that will read the contents of an arbitrarily large file (i.e. the caller does not need to provide an upper bounds on the file system). This is probably a bad idea considering that it does not provide any way to avoid an out-of-memory condition if the file is absurdly large. Already marked as deprecated.&#10;&#10;Implement the UnixSignals class which provides various useful constants for dealing with Unix signals. Also, provides methods that make it easy to tear apart the 'exit status' of a Unix process." />
+    <MESSAGE value="Add a new date format in DateUtils (MMM_DD_HHMMSS_YYYY) to handle dates like .Mar 15, 12:15:00 2012&quot;.&#10;&#10;Move many of the &quot;describe this GUI thing&quot; from LinearLayoutUtil to the new ObtuseGuiUtils utility class.&#10;&#10;Implement a simple interface to allow the measurements produced by the Measure class to be sorted in various ways.&#10;&#10;Implement the QuickLogger class which provides a much simpler logging facility that the existing Logger class.&#10;&#10;Implement Page-Up and Page-Down key support in the VirtualScrollablePanel facility. It's still a bit clunky but it's a lot better than having to scroll or mouse one's way through long scrollable panels." />
+    <option name="LAST_COMMIT_MESSAGE" value="Add a new date format in DateUtils (MMM_DD_HHMMSS_YYYY) to handle dates like .Mar 15, 12:15:00 2012&quot;.&#10;&#10;Move many of the &quot;describe this GUI thing&quot; from LinearLayoutUtil to the new ObtuseGuiUtils utility class.&#10;&#10;Implement a simple interface to allow the measurements produced by the Measure class to be sorted in various ways.&#10;&#10;Implement the QuickLogger class which provides a much simpler logging facility that the existing Logger class.&#10;&#10;Implement Page-Up and Page-Down key support in the VirtualScrollablePanel facility. It's still a bit clunky but it's a lot better than having to scroll or mouse one's way through long scrollable panels." />
     <option name="PRESELECT_EXISTING_CHANGELIST" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="524" y="208" width="1241" height="827" key="#Notifications" timestamp="1577036525104">
+      <screen x="0" y="23" width="2048" height="1210" />
+    </state>
+    <state x="524" y="208" width="1241" height="827" key="#Notifications/-2048.0.2048.1152/0.23.2048.1210@0.23.2048.1210" timestamp="1577036525104" />
+    <state x="868" y="269" width="988" height="705" key="#xdebugger.evaluate" timestamp="1577036953780">
+      <screen x="0" y="23" width="2048" height="1210" />
+    </state>
+    <state x="868" y="269" width="988" height="705" key="#xdebugger.evaluate/-2048.0.2048.1152/0.23.2048.1210@0.23.2048.1210" timestamp="1577036953780" />
+    <state x="0" y="114" key="CommitChangelistDialog2" timestamp="1577166689823">
+      <screen x="0" y="23" width="2048" height="1209" />
+    </state>
+    <state x="0" y="114" key="CommitChangelistDialog2/-2048.0.2048.1152/0.23.2048.1209@0.23.2048.1209" timestamp="1577166689823" />
+    <state x="-1902" y="34" width="3801" height="1009" key="DiffContextDialog" timestamp="1577166562626">
+      <screen x="-2048" y="0" width="2048" height="1152" />
+    </state>
+    <state x="-1902" y="34" width="3801" height="1009" key="DiffContextDialog/-2048.0.2048.1152/0.23.2048.1209@0.23.2048.1209" timestamp="1577166562626" />
+    <state width="1996" height="346" key="GridCell.Tab.0.bottom" timestamp="1577037035435">
+      <screen x="0" y="23" width="2048" height="1210" />
+    </state>
+    <state width="1996" height="346" key="GridCell.Tab.0.bottom/-2048.0.2048.1152/0.23.2048.1210@0.23.2048.1210" timestamp="1577037035435" />
+    <state width="1996" height="346" key="GridCell.Tab.0.center" timestamp="1577037035434">
+      <screen x="0" y="23" width="2048" height="1210" />
+    </state>
+    <state width="1996" height="346" key="GridCell.Tab.0.center/-2048.0.2048.1152/0.23.2048.1210@0.23.2048.1210" timestamp="1577037035434" />
+    <state width="1996" height="346" key="GridCell.Tab.0.left" timestamp="1577037035434">
+      <screen x="0" y="23" width="2048" height="1210" />
+    </state>
+    <state width="1996" height="346" key="GridCell.Tab.0.left/-2048.0.2048.1152/0.23.2048.1210@0.23.2048.1210" timestamp="1577037035434" />
+    <state width="1996" height="346" key="GridCell.Tab.0.right" timestamp="1577037035435">
+      <screen x="0" y="23" width="2048" height="1210" />
+    </state>
+    <state width="1996" height="346" key="GridCell.Tab.0.right/-2048.0.2048.1152/0.23.2048.1210@0.23.2048.1210" timestamp="1577037035435" />
+    <state width="1996" height="346" key="GridCell.Tab.1.bottom" timestamp="1577037035579">
+      <screen x="0" y="23" width="2048" height="1210" />
+    </state>
+    <state width="1996" height="346" key="GridCell.Tab.1.bottom/-2048.0.2048.1152/0.23.2048.1210@0.23.2048.1210" timestamp="1577037035579" />
+    <state width="1996" height="346" key="GridCell.Tab.1.center" timestamp="1577037035578">
+      <screen x="0" y="23" width="2048" height="1210" />
+    </state>
+    <state width="1996" height="346" key="GridCell.Tab.1.center/-2048.0.2048.1152/0.23.2048.1210@0.23.2048.1210" timestamp="1577037035578" />
+    <state width="1996" height="346" key="GridCell.Tab.1.left" timestamp="1577037035578">
+      <screen x="0" y="23" width="2048" height="1210" />
+    </state>
+    <state width="1996" height="346" key="GridCell.Tab.1.left/-2048.0.2048.1152/0.23.2048.1210@0.23.2048.1210" timestamp="1577037035578" />
+    <state width="1996" height="346" key="GridCell.Tab.1.right" timestamp="1577037035578">
+      <screen x="0" y="23" width="2048" height="1210" />
+    </state>
+    <state width="1996" height="346" key="GridCell.Tab.1.right/-2048.0.2048.1152/0.23.2048.1210@0.23.2048.1210" timestamp="1577037035578" />
+    <state x="579" y="258" key="NewModule_or_Project.wizard" timestamp="1575666071716">
+      <screen x="0" y="23" width="2048" height="1210" />
+    </state>
+    <state x="579" y="258" key="NewModule_or_Project.wizard/-2048.0.2048.1152/0.23.2048.1210@0.23.2048.1210" timestamp="1575666071716" />
+    <state width="994" height="598" key="XDebugger.FullValuePopup" timestamp="1577036651411">
+      <screen x="0" y="23" width="2048" height="1210" />
+    </state>
+    <state width="994" height="598" key="XDebugger.FullValuePopup/-2048.0.2048.1152/0.23.2048.1210@0.23.2048.1210" timestamp="1577036651411" />
+    <state x="602" y="333" width="844" height="588" key="find.popup" timestamp="1577083625598">
+      <screen x="0" y="23" width="2048" height="1210" />
+    </state>
+    <state x="602" y="333" width="844" height="588" key="find.popup/-2048.0.2048.1152/0.23.2048.1210@0.23.2048.1210" timestamp="1577083625598" />
+    <state width="742" height="384" key="javadoc.popup.new" timestamp="1577036827841">
+      <screen x="0" y="23" width="2048" height="1210" />
+    </state>
+    <state width="742" height="384" key="javadoc.popup.new/-2048.0.2048.1152/0.23.2048.1210@0.23.2048.1210" timestamp="1577036827841" />
+    <state x="616" y="201" width="838" height="1032" key="search.everywhere.popup" timestamp="1577123315296">
+      <screen x="0" y="23" width="2048" height="1210" />
+    </state>
+    <state x="616" y="201" width="838" height="1032" key="search.everywhere.popup/-2048.0.2048.1152/0.23.2048.1210@0.23.2048.1210" timestamp="1577123315296" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1373,7 +1476,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/obtuse/util/ObtuseUtil.java</url>
-          <line>2718</line>
+          <line>2732</line>
           <option name="timeStamp" value="370" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -1523,7 +1626,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/obtuse/util/ObtuseUtil.java</url>
-          <line>2697</line>
+          <line>2711</line>
           <option name="timeStamp" value="520" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -1541,60 +1644,26 @@
           <line>84</line>
           <option name="timeStamp" value="534" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/obtuse/util/QuickLogger.java</url>
+          <line>66</line>
+          <option name="timeStamp" value="536" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/obtuse/util/QuickLogger.java</url>
+          <line>87</line>
+          <option name="timeStamp" value="537" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/obtuse/util/QuickLogger.java</url>
+          <line>34</line>
+          <option name="timeStamp" value="539" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
     <option name="FILTER_TARGETS" value="false" />
-  </component>
-  <component name="debuggerHistoryManager">
-    <expressions id="evaluateExpression">
-      <expression>
-        <expression-string>_container.getComponents()</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>_container.getComponentCount()</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>_models.size()</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>_p1f</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>this</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>dependencies.get( node.getV() )</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>bundle</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>jf.getRootPane().isOpaque()</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>target.getComponents()</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-    </expressions>
   </component>
 </project>

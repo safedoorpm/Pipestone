@@ -421,8 +421,12 @@ public class LruCache<K,R> implements Iterable<CachedThing<K,R>> {
 
                                 _actualFetchCount += 1;
 
-                                Optional<CachedThing<K, R>> rv = _fetcher.fetch( keyx, nullOk );
-                                return rv.orElse( null );
+                                try ( Measure m1 = new Measure( "LruCache - invoke fetcher" ) ) {
+
+                                    Optional<CachedThing<K, R>> rv = _fetcher.fetch( keyx, nullOk );
+                                    return rv.orElse( null );
+
+                                }
 
                             }
                     )

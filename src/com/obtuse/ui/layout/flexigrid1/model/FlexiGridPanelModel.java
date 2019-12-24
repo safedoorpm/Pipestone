@@ -6,9 +6,9 @@
 package com.obtuse.ui.layout.flexigrid1.model;
 
 import com.obtuse.exceptions.HowDidWeGetHereError;
+import com.obtuse.ui.ObtuseSwingUtils;
 import com.obtuse.ui.layout.flexigrid1.*;
 import com.obtuse.ui.layout.flexigrid1.util.FlexiGridBasicConstraint;
-import com.obtuse.ui.layout.linear.LinearLayoutUtil;
 import com.obtuse.util.*;
 import org.jetbrains.annotations.NotNull;
 
@@ -512,7 +512,7 @@ public class FlexiGridPanelModel<SLICE extends FlexiGridModelSlice> {
 
                     if ( !allComponentsSet.contains( component ) ) {
 
-                        Logger.logErr( who + ":  ERROR encountered component not actually in container - " + LinearLayoutUtil.describeComponent( component ) );
+                        Logger.logErr( who + ":  ERROR encountered component not actually in container - " + ObtuseSwingUtils.describeComponent( component ) );
                         errCount += 1;
 
                     }
@@ -523,7 +523,7 @@ public class FlexiGridPanelModel<SLICE extends FlexiGridModelSlice> {
 
                     } else {
 
-                        Logger.logErr( who + ":  ERROR encountered component more than once - " + LinearLayoutUtil.describeComponent( component ) );
+                        Logger.logErr( who + ":  ERROR encountered component more than once - " + ObtuseSwingUtils.describeComponent( component ) );
                         errCount += 1;
 
                     }
@@ -542,7 +542,7 @@ public class FlexiGridPanelModel<SLICE extends FlexiGridModelSlice> {
 
                     if ( allComponentsSet.contains( component ) ) {
 
-                        Logger.logErr( who + "/invisible:  ERROR encountered component is in container - " + LinearLayoutUtil.describeComponent( component ) );
+                        Logger.logErr( who + "/invisible:  ERROR encountered component is in container - " + ObtuseSwingUtils.describeComponent( component ) );
                         errCount += 1;
 
                     }
@@ -591,7 +591,7 @@ public class FlexiGridPanelModel<SLICE extends FlexiGridModelSlice> {
         List<String> unseenComponentDescriptions = new FormattingVector<>();
         for ( Component component : unseenComponentsSet ) {
 
-            unseenComponentDescriptions.add( LinearLayoutUtil.describeComponent( component ) );
+            unseenComponentDescriptions.add( ObtuseSwingUtils.describeComponent( component ) );
 
         }
         return unseenComponentDescriptions;

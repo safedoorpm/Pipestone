@@ -1,7 +1,7 @@
 package com.obtuse.ui.copier;
 
 import com.obtuse.exceptions.HowDidWeGetHereError;
-import com.obtuse.ui.layout.linear.LinearLayoutUtil;
+import com.obtuse.ui.ObtuseSwingUtils;
 import com.obtuse.util.Logger;
 import com.obtuse.util.ObtuseUtil;
 import com.obtuse.util.UniqueWidget;
@@ -115,7 +115,7 @@ public class WidgetPanel extends UniqueWidget {
 
         Logger.logMsg( getName() + ":" );
 
-        LinearLayoutUtil.describeFullyContainerContents( "just finished", getDisplayContainer() );
+        ObtuseSwingUtils.describeFullyContainerContents( "just finished", getDisplayContainer() );
 
         ObtuseUtil.doNothing();
 
