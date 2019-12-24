@@ -740,14 +740,7 @@
       <workItem from="1573742757933" duration="5477000" />
       <workItem from="1574354158075" duration="3063000" />
       <workItem from="1575568771902" duration="5931000" />
-      <workItem from="1577062776606" duration="5172000" />
-    </task>
-    <task id="LOCAL-00053" summary="Birth of the ObtuseCollections class (more to come later).&#10;Otherwise, mostly cleanup.">
-      <created>1519659809654</created>
-      <option name="number" value="00053" />
-      <option name="presentableId" value="LOCAL-00053" />
-      <option name="project" value="LOCAL" />
-      <updated>1519659809654</updated>
+      <workItem from="1577062776606" duration="6025000" />
     </task>
     <task id="LOCAL-00054" summary="Major cleanup in the wrapped selector panels stuff.&#10;Advent of the ContextualToString class which facilitates providing different toString results depending on the context.&#10;Provide some basic support for customized toString results from ObtuseKeyword instances (note that this is customized toString results like providing mixed case keyword names; it is not contextual customized toString - each ObtuseKeyword instance will produce the exact same toString result although the developer gets to decide what that result will be when the ObtuseKeyword instance is created).">
       <created>1519802350643</created>
@@ -1085,7 +1078,14 @@
       <option name="project" value="LOCAL" />
       <updated>1577166915184</updated>
     </task>
-    <option name="localTasksCounter" value="102" />
+    <task id="LOCAL-00102" summary="Add a new date format in DateUtils (MMM_DD_HHMMSS_YYYY) to handle dates like .Mar 15, 12:15:00 2012&quot;.&#10;&#10;Move many of the &quot;describe this GUI thing&quot; from LinearLayoutUtil to the new ObtuseGuiUtils utility class.&#10;&#10;Implement a simple interface to allow the measurements produced by the Measure class to be sorted in various ways.&#10;&#10;Implement the QuickLogger class which provides a much simpler logging facility that the existing Logger class.&#10;&#10;Implement Page-Up and Page-Down key support in the VirtualScrollablePanel facility. It's still a bit clunky but it's a lot better than having to scroll or mouse one's way through long scrollable panels.&#10;&#10;Plenty of minor cleanup.">
+      <created>1577173725180</created>
+      <option name="number" value="00102" />
+      <option name="presentableId" value="LOCAL-00102" />
+      <option name="project" value="LOCAL" />
+      <updated>1577173725180</updated>
+    </task>
+    <option name="localTasksCounter" value="103" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1174,10 +1174,10 @@
       <screen x="0" y="23" width="2048" height="1210" />
     </state>
     <state x="868" y="269" width="988" height="705" key="#xdebugger.evaluate/-2048.0.2048.1152/0.23.2048.1210@0.23.2048.1210" timestamp="1577036953780" />
-    <state x="0" y="114" key="CommitChangelistDialog2" timestamp="1577166914576">
+    <state x="0" y="114" key="CommitChangelistDialog2" timestamp="1577173725074">
       <screen x="0" y="23" width="2048" height="1209" />
     </state>
-    <state x="0" y="114" key="CommitChangelistDialog2/-2048.0.2048.1152/0.23.2048.1209@0.23.2048.1209" timestamp="1577166914576" />
+    <state x="0" y="114" key="CommitChangelistDialog2/-2048.0.2048.1152/0.23.2048.1209@0.23.2048.1209" timestamp="1577173725074" />
     <state x="-1902" y="34" width="3801" height="1009" key="DiffContextDialog" timestamp="1577166562626">
       <screen x="-2048" y="0" width="2048" height="1152" />
     </state>
@@ -1218,6 +1218,10 @@
       <screen x="0" y="23" width="2048" height="1210" />
     </state>
     <state x="579" y="258" key="NewModule_or_Project.wizard/-2048.0.2048.1152/0.23.2048.1210@0.23.2048.1210" timestamp="1575666071716" />
+    <state x="536" y="306" key="Vcs.Push.Dialog.v2" timestamp="1577173734972">
+      <screen x="0" y="23" width="2048" height="1209" />
+    </state>
+    <state x="536" y="306" key="Vcs.Push.Dialog.v2/-2048.0.2048.1152/0.23.2048.1209@0.23.2048.1209" timestamp="1577173734972" />
     <state width="994" height="598" key="XDebugger.FullValuePopup" timestamp="1577036651411">
       <screen x="0" y="23" width="2048" height="1210" />
     </state>
