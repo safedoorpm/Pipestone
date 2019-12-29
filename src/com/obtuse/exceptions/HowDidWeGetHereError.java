@@ -33,7 +33,7 @@ public class HowDidWeGetHereError
      but you'll (hopefully) get used to it.
      */
 
-    private static PrintStream s_stackTracePrintStream = null;
+    private static PrintStream s_stackTracePrintStream = System.err;
 
     /**
      Describe how an oops catcher is informed that a {@link HowDidWeGetHereError} instance has been created and is, presumably, about to be thrown.

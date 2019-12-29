@@ -10,6 +10,8 @@ import java.awt.event.MouseEvent;
  */
 public class Clicks {
 
+    public enum MouseButton { ANY, LEFT, MIDDLE, RIGHT }
+
     private static final String[] s_maskExBits = new String[32];
 
     static {
@@ -96,13 +98,14 @@ public class Clicks {
      <blockquote>{@code ( mask & interestingBits ) != 0}</blockquote>
      */
 
+    @SuppressWarnings( "unused" )
     public static boolean doesMaskInclude( int mask, int interestingBits ) {
 
         return ( mask & interestingBits ) != 0;
 
     }
 
-    public static boolean isJustClick( final MouseButton mouseButton, @NotNull final MouseEvent e ) {
+    public static boolean isJustClick( @NotNull final MouseButton mouseButton, @NotNull final MouseEvent e ) {
 
         return ( mouseButton.ordinal() == 0 || e.getButton() == mouseButton.ordinal() )
                &&
@@ -110,7 +113,7 @@ public class Clicks {
 
     }
 
-    public static boolean isCtrlClick( final MouseButton mouseButton, @NotNull final MouseEvent e ) {
+    public static boolean isCtrlClick( @NotNull final MouseButton mouseButton, @NotNull final MouseEvent e ) {
 
         return ( mouseButton.ordinal() == 0 || e.getButton() == mouseButton.ordinal() )
                &&
@@ -125,12 +128,33 @@ public class Clicks {
     public static boolean isLeftClick( @NotNull final MouseEvent e ) {
 
         return ( e.getButton() == MouseButton.LEFT.ordinal() )
-               &&
-               e.getModifiersEx() == 0;
+                &&
+                e.getModifiersEx() == 0;
 
     }
 
-    public static boolean isShiftClick( final MouseButton mouseButton, @NotNull final MouseEvent e ) {
+    public static boolean isRightClick( @NotNull final MouseEvent e ) {
+
+        if ( ( e.getButton() == MouseButton.RIGHT.ordinal() )
+                &&
+                e.getModifiersEx() == 0
+        ) {
+
+            return true;
+
+        } else if ( isCtrlLeftClick( e ) ) {
+
+            return true;
+
+        } else {
+
+            return false;
+
+        }
+
+    }
+
+    public static boolean isShiftClick( @NotNull final MouseButton mouseButton, @NotNull final MouseEvent e ) {
 
         return ( mouseButton.ordinal() == 0 || e.getButton() == mouseButton.ordinal() )
                &&
@@ -142,7 +166,7 @@ public class Clicks {
 
     }
 
-    public static boolean isOptClick( final MouseButton mouseButton, @NotNull final MouseEvent e ) {
+    public static boolean isOptClick( @NotNull final MouseButton mouseButton, @NotNull final MouseEvent e ) {
 
         return ( mouseButton.ordinal() == 0 || e.getButton() == mouseButton.ordinal() )
                &&
@@ -154,7 +178,7 @@ public class Clicks {
 
     }
 
-    public static boolean isCmdClick( final MouseButton mouseButton, @NotNull final MouseEvent e ) {
+    public static boolean isCmdClick( @NotNull final MouseButton mouseButton, @NotNull final MouseEvent e ) {
 
         return ( mouseButton.ordinal() == 0 || e.getButton() == mouseButton.ordinal() )
                &&
@@ -186,6 +210,7 @@ public class Clicks {
         return isShiftClick( MouseButton.LEFT, e );
     }
 
+    @SuppressWarnings( "unused" )
     public static String getInputBitName( final int mask ) {
 
         int numberOfTrailingZeros = Integer.numberOfTrailingZeros( mask );
@@ -258,8 +283,6 @@ public class Clicks {
         }
 
     }
-
-    public enum MouseButton { ANY, LEFT, MIDDLE, RIGHT }
 
 //    /**
 //     Determine if the bits in the input mask are EXACTLY as specified.

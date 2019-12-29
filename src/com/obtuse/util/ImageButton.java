@@ -20,7 +20,7 @@ import java.util.Optional;
  * <p/>
  */
 
-@SuppressWarnings( { "UnusedDeclaration" } )
+@SuppressWarnings( {"UnusedDeclaration"} )
 public class ImageButton {
 
     private final JLabel _button;
@@ -28,6 +28,8 @@ public class ImageButton {
     private final ImageIcon _unpressedIcon;
     private final Runnable _action;
     private final String _purpose;
+
+    private JPopupMenu _popupMenu = null;
 
     private static final float DEFAULT_DARKENING_FACTOR = 0.8f;
     private static float s_defaultDarkeningFactor = ImageButton.DEFAULT_DARKENING_FACTOR;
@@ -39,6 +41,7 @@ public class ImageButton {
             final @NotNull ImageIcon unpressedIcon,
             final @NotNull Runnable action
     ) {
+
         super();
 
         _button = button;
@@ -229,10 +232,28 @@ public class ImageButton {
                 new MouseListener() {
                     public void mouseClicked( final MouseEvent mouseEvent ) {
 
-                        if ( bi.getButton().isEnabled() ) {
+                        if ( bi.getButton()
+                                .isEnabled() ) {
 
-                            bi.getAction().run();
-                            imageButtonOwner.setButtonStates();
+                            if ( Clicks.isLeftClick( mouseEvent ) ) {
+
+                                bi.getAction()
+                                        .run();
+                                imageButtonOwner.setButtonStates();
+
+//                            } else if ( Clicks.isRightClick( mouseEvent ) ) {
+//
+//                                Logger.logMsg( "it's a right-click " + Clicks.describeInputBitMask( mouseEvent.getModifiersEx() ) );
+//
+//                                ObtuseUtil.doNothing();
+
+                            } else {
+
+                                Logger.logMsg( "it's " + Clicks.describeInputBitMask( mouseEvent.getModifiersEx() ) );
+
+                                ObtuseUtil.doNothing();
+
+                            }
 
                         }
 
@@ -240,9 +261,11 @@ public class ImageButton {
 
                     public void mousePressed( final MouseEvent mouseEvent ) {
 
-                        if ( bi.getButton().isEnabled() ) {
+                        if ( bi.getButton()
+                                .isEnabled() ) {
 
-                            bi.getButton().setIcon( bi.getPressedIcon() );
+                            bi.getButton()
+                                    .setIcon( bi.getPressedIcon() );
 
                         }
 
@@ -250,9 +273,11 @@ public class ImageButton {
 
                     public void mouseReleased( final MouseEvent mouseEvent ) {
 
-                        if ( bi.getButton().isEnabled() ) {
+                        if ( bi.getButton()
+                                .isEnabled() ) {
 
-                            bi.getButton().setIcon( bi.getUnpressedIcon() );
+                            bi.getButton()
+                                    .setIcon( bi.getUnpressedIcon() );
 
                         }
 
@@ -260,7 +285,8 @@ public class ImageButton {
 
                     public void mouseEntered( final MouseEvent mouseEvent ) {
 
-                        if ( bi.getButton().isEnabled() ) {
+                        if ( bi.getButton()
+                                .isEnabled() ) {
 
                             imageButtonOwner.setCursor( Cursor.getPredefinedCursor( Cursor.HAND_CURSOR ) );
 
@@ -270,9 +296,11 @@ public class ImageButton {
 
                     public void mouseExited( final MouseEvent mouseEvent ) {
 
-                        if ( bi.getButton().isEnabled() ) {
+                        if ( bi.getButton()
+                                .isEnabled() ) {
 
-                            bi.getButton().setIcon( bi.getUnpressedIcon() );
+                            bi.getButton()
+                                    .setIcon( bi.getUnpressedIcon() );
                             imageButtonOwner.setCursor( Cursor.getDefaultCursor() );
 
                         }
@@ -291,12 +319,23 @@ public class ImageButton {
 
     }
 
+    @NotNull
+    public ImageButton setComponentPopupMenu( JPopupMenu popupMenu ) {
+
+        _popupMenu = popupMenu;
+        _button.setComponentPopupMenu( _popupMenu );
+
+        return this;
+
+    }
+
     /**
-     Create an {@link ImageIcon} which displays a line of text.
-     @param text the text to be displayed.
-     @param textColor the colour of the text.
-     @param bgColor the colour of the background.
-     @return the resulting {@link ImageIcon}.
+     * Create an {@link ImageIcon} which displays a line of text.
+     *
+     * @param text      the text to be displayed.
+     * @param textColor the colour of the text.
+     * @param bgColor   the colour of the background.
+     * @return the resulting {@link ImageIcon}.
      */
 
     public static ImageIcon makeTextImageIcon(
@@ -307,7 +346,8 @@ public class ImageButton {
 
         BufferedImage image = new BufferedImage( 10, 10, BufferedImage.TYPE_INT_RGB );
         Graphics2D g = image.createGraphics();
-        g.setFont( g.getFont().deriveFont( 10f ) );
+        g.setFont( g.getFont()
+                .deriveFont( 10f ) );
         FontMetrics fm = g.getFontMetrics();
         Rectangle2D textBounds = fm.getStringBounds( text, g );
         image = new BufferedImage( (int)Math.ceil( textBounds.getWidth() ) + 4, (int)Math.ceil( textBounds.getHeight() ) + 4, BufferedImage.TYPE_INT_RGB );
@@ -320,8 +360,9 @@ public class ImageButton {
                 RenderingHints.KEY_TEXT_ANTIALIASING,
                 RenderingHints.VALUE_TEXT_ANTIALIAS_ON
         );
-        g.setRenderingHints(rh);
-        g.setFont( g.getFont().deriveFont( 10f ) );
+        g.setRenderingHints( rh );
+        g.setFont( g.getFont()
+                .deriveFont( 10f ) );
 //        g.setColor( bgColor );
 //        g.drawRect( 0, 0, image.getWidth(), image.getHeight() );
         g.drawString( text, 2, image.getHeight() - ( 2 + fm.getDescent() ) );
