@@ -150,6 +150,20 @@ public class LinearCache3 implements LinearLayoutManagerCache {
                 Dimension pref = c.getPreferredSize();
                 Dimension max = c.getMaximumSize();
 
+//                if ( "upButtons".equals( c.getName() ) ) {
+//
+//                    Logger.logMsg( "doing upButtons, its bounds are " + ObtuseUtil.fBounds( c.getBounds() ) );
+//                    for ( Component cc : ((Container)c).getComponents() ) {
+////                        Logger.logMsg( "    " + ObtuseUtil.fBounds( cc.getBounds() ) );
+//                        Logger.logMsg( "    " +
+//                                       "min =" + ObtuseUtil.fDim( cc.getMinimumSize() ) + ", " +
+//                                       "pref=" + ObtuseUtil.fDim( cc.getPreferredSize() ) + ", " +
+//                                       "max =" + ObtuseUtil.fDim( cc.getMaximumSize() ) + " / " + cc.getBounds()
+//                        );
+//                    }
+//
+//                }
+
                 if ( c instanceof LinearContainer ) {
 
                     LinearContainer lc = (LinearContainer)c;
@@ -829,6 +843,19 @@ public class LinearCache3 implements LinearLayoutManagerCache {
             try {
 
                 c.setBounds( r );
+
+//                if ( "upButtons".equals( c.getName() ) ) {
+//
+//                    Logger.logMsg( "positioning upButtons, its bounds are " + ObtuseUtil.fBounds( c.getBounds() ) );
+//                    for ( Component cc : ((Container)c).getComponents() ) {
+//                        Logger.logMsg( "    " +
+//                                       "min =" + ObtuseUtil.fDim( cc.getMinimumSize() ) + ", " +
+//                                       "pref=" + ObtuseUtil.fDim( cc.getPreferredSize() ) + ", " +
+//                                       "max =" + ObtuseUtil.fDim( cc.getMaximumSize() ) + " / " + cc.getBounds()
+//                        );
+//                    }
+//
+//                }
 
             } finally {
 

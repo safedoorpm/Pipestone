@@ -9,6 +9,7 @@ import com.obtuse.util.ObtuseUtil;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
@@ -35,6 +36,7 @@ public class OkPopupMessageWindow extends JDialog {
     private JLabel _secondMessageField;
 
     protected OkPopupMessageWindow(
+            @Nullable final Window parent,
             final String firstMessage,
             @Nullable final String secondMessage,
             final String buttonLabel
@@ -42,7 +44,7 @@ public class OkPopupMessageWindow extends JDialog {
         super();
 
         setContentPane( _contentPane );
-        setModal( true );
+        setModalityType( ModalityType.DOCUMENT_MODAL );
 
         getRootPane().setDefaultButton( _okButton );
 
@@ -107,8 +109,12 @@ public class OkPopupMessageWindow extends JDialog {
     }
 
     @SuppressWarnings({ "SameParameterValue" })
-    protected OkPopupMessageWindow( final String firstMessage, final String buttonLabel ) {
-        this( firstMessage, null, buttonLabel );
+    protected OkPopupMessageWindow(
+            @Nullable final Window parent,
+            final String firstMessage,
+            final String buttonLabel
+    ) {
+        this( parent, firstMessage, null, buttonLabel );
 
     }
 
@@ -188,10 +194,24 @@ public class OkPopupMessageWindow extends JDialog {
     }
 
     @SuppressWarnings({ "SameParameterValue" })
-    public static void doit( final String line1,
-                             @Nullable final String line2,
-                             final String button,
-                             @Nullable final Runnable runnable
+    public static void doit(
+            final String line1,
+            @Nullable final String line2,
+            final String button,
+            @Nullable final Runnable runnable
+    ) {
+
+        doit( null, line1, line2, button, runnable );
+
+    }
+
+    @SuppressWarnings({ "SameParameterValue" })
+    public static void doit(
+            @Nullable Window parent,
+            final String line1,
+            @Nullable final String line2,
+            final String button,
+            @Nullable final Runnable runnable
     ) {
 
         SwingUtilities.invokeLater(
@@ -199,6 +219,7 @@ public class OkPopupMessageWindow extends JDialog {
 
                     //noinspection ClassWithoutToString
                     OkPopupMessageWindow ok = new OkPopupMessageWindow(
+                            parent,
                             line1,
                             line2,
                             button
@@ -224,16 +245,41 @@ public class OkPopupMessageWindow extends JDialog {
     }
 
     @SuppressWarnings({ "SameParameterValue" })
+    public static void doit( @Nullable final Window parent, final String line1, final String button ) {
+
+        OkPopupMessageWindow.doit(
+                parent,
+                line1,
+                null,
+                button,
+                null
+        );
+
+    }
+
+    @SuppressWarnings({ "SameParameterValue" })
     public static void doit( final String line1, final String button ) {
 
-        OkPopupMessageWindow.doit( line1, null, button, null );
+        OkPopupMessageWindow.doit( null, line1, null, button, null );
+
+    }
+
+    @SuppressWarnings({ "SameParameterValue" })
+    public static void doit(
+            @Nullable final Window parent,
+            final String line1,
+            final String line2,
+            final String button
+    ) {
+
+        OkPopupMessageWindow.doit( parent, line1, line2, button, null );
 
     }
 
     @SuppressWarnings({ "SameParameterValue" })
     public static void doit( final String line1, final String line2, final String button ) {
 
-        OkPopupMessageWindow.doit( line1, line2, button, null );
+        OkPopupMessageWindow.doit( null, line1, line2, button, null );
 
     }
 
@@ -260,6 +306,7 @@ public class OkPopupMessageWindow extends JDialog {
 
             //noinspection ClassWithoutToString
             OkPopupMessageWindow ok = new OkPopupMessageWindow(
+                    null,
                     line1,
                     line2 == null
                             ?
@@ -318,6 +365,7 @@ public class OkPopupMessageWindow extends JDialog {
     public static void testIt() {
 
         OkPopupMessageWindow dialog = new OkPopupMessageWindow(
+                null,
                 "123456789.123456789.123456789.123456789.12345<br>123456789.123456789.123456789.123456789.12345",
                 "123456789.123456789.123456789.123456789.12345",
                 OkPopupMessageWindow.OK_BUTTON_LABEL
@@ -327,11 +375,12 @@ public class OkPopupMessageWindow extends JDialog {
         dialog.go();
 
         dialog = new OkPopupMessageWindow(
+                null,
                 "Looks like a nice day today", "Although I suppose it could rain", "Sigh"
         );
         dialog.go();
 
-        dialog = new OkPopupMessageWindow( "How are you today?", "Fine Thanks" );
+        dialog = new OkPopupMessageWindow( null, "How are you today?", "Fine Thanks" );
         dialog.go();
 
         System.exit( 0 );

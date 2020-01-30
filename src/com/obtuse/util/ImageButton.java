@@ -164,7 +164,7 @@ public class ImageButton {
             final @NotNull Runnable action,
             final @NotNull String buttonFileName,
             final @NotNull String resourceBaseDirectory,
-            final @NotNull Class representativeClass,
+            final @NotNull Class<?> representativeClass,
             final float darkeningFactor
     ) {
 
@@ -344,28 +344,50 @@ public class ImageButton {
             @Nullable final Color bgColor
     ) {
 
+        return makeTextImageIcon( text, textColor, bgColor, 10F, 4 );
+    }
+
+    /**
+     * Create an {@link ImageIcon} which displays a line of text.
+     *
+     * @param text      the text to be displayed.
+     * @param textColor the colour of the text.
+     * @param bgColor   the colour of the background.
+     * @param fontSize  font size.
+     * @return the resulting {@link ImageIcon}.
+     */
+
+    public static ImageIcon makeTextImageIcon(
+            @NotNull final String text,
+            @Nullable final Color textColor,
+            @Nullable final Color bgColor,
+            float fontSize,
+            int borderSize
+    ) {
+
         BufferedImage image = new BufferedImage( 10, 10, BufferedImage.TYPE_INT_RGB );
         Graphics2D g = image.createGraphics();
         g.setFont( g.getFont()
-                .deriveFont( 10f ) );
+                .deriveFont( fontSize ) );
         FontMetrics fm = g.getFontMetrics();
         Rectangle2D textBounds = fm.getStringBounds( text, g );
-        image = new BufferedImage( (int)Math.ceil( textBounds.getWidth() ) + 4, (int)Math.ceil( textBounds.getHeight() ) + 4, BufferedImage.TYPE_INT_RGB );
+        image = new BufferedImage(
+                (int)Math.ceil( textBounds.getWidth() ) + borderSize,
+                (int)Math.ceil( textBounds.getHeight() ) + borderSize,
+                BufferedImage.TYPE_INT_RGB
+        );
         g = image.createGraphics();
         g.setColor( bgColor );
         g.fillRect( 0, 0, image.getWidth(), image.getHeight() );
         g.setColor( textColor );
-//        g.setComposite( AlphaComposite.SrcAtop );
         RenderingHints rh = new RenderingHints(
                 RenderingHints.KEY_TEXT_ANTIALIASING,
                 RenderingHints.VALUE_TEXT_ANTIALIAS_ON
         );
         g.setRenderingHints( rh );
         g.setFont( g.getFont()
-                .deriveFont( 10f ) );
-//        g.setColor( bgColor );
-//        g.drawRect( 0, 0, image.getWidth(), image.getHeight() );
-        g.drawString( text, 2, image.getHeight() - ( 2 + fm.getDescent() ) );
+                .deriveFont( fontSize ) );
+        g.drawString( text, 0, image.getHeight() - ( 2 + fm.getDescent() ) );
 
         return new ImageIcon( image );
 

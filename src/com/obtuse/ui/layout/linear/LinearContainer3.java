@@ -126,9 +126,11 @@ public class LinearContainer3 extends JPanel implements LinearContainer {
 
         } else {
 
-            throw new IllegalArgumentException( "LinearContainer3:  we need to be managed by a LinearLayoutManager3 (we are being managed by a " +
-                                                lm.getClass().getName() +
-                                                ")" );
+            throw new IllegalArgumentException(
+                    "LinearContainer3:  we need to be managed by a LinearLayoutManager3 (we are being managed by a " +
+                    lm.getClass().getName() +
+                    ")"
+            );
 
         }
 

@@ -34,7 +34,6 @@ public class DateUtils {
     private static final SimpleDateFormat HHMMSSS = new SimpleDateFormat( "hh:mm.SSS" );
     private static final SimpleDateFormat MMDDYYYY = new SimpleDateFormat( "MM/dd/yyyy" );
     private static final SimpleDateFormat MMDDYYYY_HHMM = new SimpleDateFormat( "MM/dd/yyyy hh:mmaa" );
-    //    private static final SimpleDateFormat HHMM                    = new SimpleDateFormat( "hh:mmaa" );
     private static final SimpleDateFormat MM_DD_YYYY = new SimpleDateFormat( "MM/dd/yyyy" );
     private static final SimpleDateFormat MMMM_D_YYYY = new SimpleDateFormat( "MMMM d, YYYY" );
     private static final SimpleDateFormat MM_DD_YYYY_HH_MM = new SimpleDateFormat( "MM/dd/yyyy hh:mmaa" );
@@ -48,10 +47,6 @@ public class DateUtils {
     private static final SimpleDateFormat HH_MM_SS_24 = new SimpleDateFormat( "HH:mm:ss" );
     private static final SimpleDateFormat WWW_MMM_DD_HHMMSS_YYYY = new SimpleDateFormat( "EEE MMM dd HH:mm:ss yyyy" );
     private static final SimpleDateFormat MMM_DD_HHMMSS_YYYY = new SimpleDateFormat( "MMM dd HH:mm:ss yyyy" );
-
-    // new SimpleDateFormat( "MMM dd HH:mm:ss yyyy").parse( selectedDateString.substring( 4, 20 ) + selectedDateString.substring( 24 ) )
-
-//    private static final SimpleDateFormat WWW_MMM_DD_HHMMSS_ZZZ_YYYY = new SimpleDateFormat( "EEE MMM dd HH:mm:ss zzz yyyy" );
     private static final SimpleDateFormat WWWW_MMMM_D_YYYY = new SimpleDateFormat( "EEEE, MMMM d, yyyy" );
     private static final SimpleDateFormat YYYY_MM_DD = new SimpleDateFormat( "yyyy-MM-dd" );
     private static final SimpleDateFormat YYYYMMDD = new SimpleDateFormat( "yyyyMMdd" );
@@ -60,8 +55,9 @@ public class DateUtils {
     private static final SimpleDateFormat HH_MM_SS_24_EEE_MMM_DD = new SimpleDateFormat( "HH:mm:ss EEE MMM dd" );
     private static final SimpleDateFormat STANDARD = new SimpleDateFormat( "yyyy-MM-dd'T'HH:mm:ssZ" );
     private static final SimpleDateFormat STANDARD_MS = new SimpleDateFormat( "yyyy-MM-dd'T'HH:mm:ss.SSSZ" );
-    private static final SimpleDateFormat MARKER_FORMAT = new SimpleDateFormat( "yyyyMMdd_HHmmss_SSS'Z'" );
     private static final SimpleDateFormat DD_MMM_YYYY = new SimpleDateFormat( "d MMM, yyyy" );
+    private static final SimpleDateFormat MARKER_FORMAT = new SimpleDateFormat( "yyyyMMdd_HHmmss_SSS'Z'" );
+    private static final SimpleDateFormat MARKER2_FORMAT = new SimpleDateFormat( "yyyy-MM-dd_HH-mm-ss.SSS'Z'" );
 
     /**
      Make it impossible to instantiate this class.
@@ -233,9 +229,9 @@ public class DateUtils {
     /**
      Format a date string in a 'standard' format which excludes milliseconds.
      <p/>The 'standard' format is
-     <blockquote><tt>yyyy-MM-dd'T'HH:mm:ssZ</tt></blockquote>
+     <blockquote>{@code yyyy-MM-dd'T'HH:mm:ssZ}</blockquote>
      or
-     <blockquote><tt>2001-07-04T12:08:56-0700</tt></blockquote>
+     <blockquote>{@code 2001-07-04T12:08:56-0700}</blockquote>
      */
 
     @NotNull
@@ -253,14 +249,14 @@ public class DateUtils {
     /**
      Format a date string in a 'standard' format which includes milliseconds.
      <p>The 'standard' format is</p>
-     <blockquote><tt>yyyy-MM-dd'T'HH:mm:ss.SSSZ</tt></blockquote>
+     <blockquote>{@code yyyy-MM-dd'T'HH:mm:ss.SSSZ}</blockquote>
      For example, the date and time 2001-07-04 12:08:56.235 Canadian Mountain Standard time would be
      formatted as
-     <blockquote><tt>2001-07-04T12:08:56.235-0700</tt></blockquote>
+     <blockquote>{@code 2001-07-04T12:08:56.235-0700}</blockquote>
 
      @param dateTime the date and time to be formatted.
      @return the specified date and time formatted using code which is equivalent to
-     <blockquote><tt>new SimpleDateFormat( "yyyy-MM-dd'T'HH:mm:ss.SSSZ" ).format( dateTime );</tt></blockquote>
+     <blockquote>{@code new SimpleDateFormat( "yyyy-MM-dd'T'HH:mm:ss.SSSZ" ).format( dateTime );}</blockquote>
      */
 
     @NotNull
@@ -281,14 +277,14 @@ public class DateUtils {
     /**
      Format a date string in a 'marker' format that could be used to create filenames and such.
      <p>The 'marker' format is</p>
-     <blockquote><code>yyyy-MM-dd_HH-mm-ss-SSS</code></blockquote>
+     <blockquote>{@code yyyyMMdd_HHmmss_SSS'Z'}</blockquote>
      For example, the date and time 2001-07-04 12:08:56.235 UTC would be
      formatted as
-     <blockquote><tt>2001-07-04_12-08-56-235</tt></blockquote>
+     <blockquote>{@code 2001-07-04_12-08-56-235}</blockquote>
 
      @param dateTime the date and time to be formatted.
      @return the specified date and time formatted using code which is equivalent to
-     <blockquote><tt>new SimpleDateFormat( "yyyyMMdd_HHmmssSSS'Z'" ).format( dateTime );</tt></blockquote>
+     <blockquote>{@code new SimpleDateFormat( "yyyyMMdd_HHmmssSSS'Z'" ).format( dateTime );}</blockquote>
      where the {@code SimpleDateFormat} is set to UTC.
      */
 
@@ -308,7 +304,7 @@ public class DateUtils {
     }
 
     /**
-     Parse a date string in a 'marker' format.
+     Parse a date string in a 'marker' format ({@code yyyyMMdd_HHmmss_SSS'Z'}).
      <p>See {@link #formatMarkerUTC(Date)} for details.</p>
      @param token a string in the 'marker' format produced by {@link #formatMarkerUTC(Date)}.
      @return an {@link ImmutableDate} equivalent to the value in {@code token}.
@@ -321,6 +317,55 @@ public class DateUtils {
 
             DateUtils.MARKER_FORMAT.setTimeZone( UTC );
             ImmutableDate date = DateUtils.dateParse( DateUtils.MARKER_FORMAT, token, lineNumber );
+            return date;
+
+        }
+
+    }
+
+    /**
+     Format a date string in a 'marker' format that could be used to create filenames and such.
+     <p>The 'marker' format is</p>
+     <blockquote>{@code yyyy-MM-dd_HH-mm-ss-SSS}</blockquote>
+     For example, the date and time 2001-07-04 12:08:56.235 UTC would be
+     formatted as
+     <blockquote>{@code 2001-07-04_12-08-56-235}</blockquote>
+
+     @param dateTime the date and time to be formatted.
+     @return the specified date and time formatted using code which is equivalent to
+     <blockquote>{@code new SimpleDateFormat( "yyyyMMdd_HHmmssSSS'Z'" ).format( dateTime );}</blockquote>
+     where the {@code SimpleDateFormat} is set to UTC.
+     */
+
+    @NotNull
+    public static String formatMarker2UTC( @NotNull final Date dateTime ) {
+
+        synchronized ( DateUtils.MARKER2_FORMAT ) {
+
+            DateUtils.MARKER2_FORMAT.setTimeZone( UTC );
+
+            String s = DateUtils.MARKER2_FORMAT.format( dateTime );
+
+            return s;
+
+        }
+
+    }
+
+    /**
+     Parse a date string in a 'marker' format.
+     <p>See {@link #formatMarkerUTC(Date)} for details.</p>
+     @param token a string in the 'marker' format produced by {@link #formatMarkerUTC(Date)}.
+     @return an {@link ImmutableDate} equivalent to the value in {@code token}.
+     */
+
+    @NotNull
+    public static ImmutableDate parseMarker2UTC( @NotNull String token, int lineNumber ) throws ParsingException {
+
+        synchronized (  ( DateUtils.MARKER2_FORMAT ) ) {
+
+            DateUtils.MARKER2_FORMAT.setTimeZone( UTC );
+            ImmutableDate date = DateUtils.dateParse( DateUtils.MARKER2_FORMAT, token, lineNumber );
             return date;
 
         }
@@ -565,7 +610,7 @@ public class DateUtils {
     /**
      Parse a "yyyy-MM-dd" format date string and return an {@link ImmutableDate} value
      that is midnight UTC at the start of the specified date.
-     <p/>Equivalent to a call to <tt>DateUtils.parseYYYY_MM_DD_utc( token, lineNumber, true )</tt>.
+     <p/>Equivalent to a call to {@code DateUtils.parseYYYY_MM_DD_utc( token, lineNumber, true )}.
      See {@link #parseYYYY_MM_DD_utc(String, int, boolean)} for more info.
 
      @param token      the date string.
@@ -1302,6 +1347,77 @@ public class DateUtils {
 
     }
 
+    private static final String[] LONG_MONTH_NAMES = {
+            "January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
+    };
+    private static final String[] SHORT_MONTH_NAMES = {
+            "Jan", "Feb", "Mar",
+            "Apr", "May", "Jun",
+            "Jul", "Aug", "Sep",
+            "Oct", "Nov", "Dec"
+    };
+
+    /**
+     Return the long form of a month as returned by {@link Calendar#get}{@code ( Calendar.MONTH )} method.
+     @param monthName the month (0=January, 1=February, 2=March, ..., 11=December).
+     @return the long form of the specified month
+     (January, February, March, April, May, June, July, August, September, October, November, December).
+     @throws ArrayIndexOutOfBoundsException if the specified day of week is not in the range 1-7.
+     */
+
+    public static String longMonthName( final int monthName ) {
+
+        return LONG_MONTH_NAMES[ monthName ];
+
+    }
+
+    /**
+     Return the short (3-letter) form of a month as returned by {@link Calendar#get}{@code ( Calendar.MONTH )} method.
+     @param monthName the day of the week (0=Jan, 1=Feb, 2=Mar, 11=Dec).
+     @return the short form of the specified month (Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec).
+     @throws ArrayIndexOutOfBoundsException if the specified month is not in the range 0-11.
+     */
+
+    public static String shortMonthName( final int monthName ) {
+
+        return SHORT_MONTH_NAMES[ monthName ];
+
+    }
+
+    private static final String[] LONG_DAY_OF_WEEK_NAMES = {
+            "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
+    };
+    private static final String[] SHORT_DAY_OF_WEEK_NAMES = {
+            "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"
+    };
+
+    /**
+     Return the long form of a day of week as returned by {@link Calendar#get}{@code ( Calendar.DAY_OF_WEEK )} method.
+     @param dayOfWeek the one-origin day of the week (1==Sunday, 2==Monday, ..., 7==Saturday).
+     @return the long form of the specified day of the week (Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, or Saturday).
+     @throws ArrayIndexOutOfBoundsException if the specified day of week is not in the range 1-7.
+     */
+
+    public static String longDayOfWeek( final int dayOfWeek ) {
+
+        return LONG_DAY_OF_WEEK_NAMES[dayOfWeek - 1 ];
+
+    }
+
+    /**
+     Return the short (3-letter) form of a day of week as returned by {@link Calendar#get}{@code ( Calendar.DAY_OF_WEEK )} method.
+     @param dayOfWeek the one-origin day of the week (1==Sun, 2==Mon, ..., 7==Sat).
+     @return the short form of the specified day of the week (Sun, Mon, Tue, Wed, Thur, Fri, or Sat).
+     @throws ArrayIndexOutOfBoundsException if the specified day of week is not in the range 1-7.
+     */
+
+    public static String shortDayOfWeek( final int dayOfWeek ) {
+
+        return SHORT_DAY_OF_WEEK_NAMES[dayOfWeek - 1 ];
+
+    }
+
     @NotNull
     public static Date addDays( @NotNull final Date date, final int delta ) {
 
@@ -1315,6 +1431,8 @@ public class DateUtils {
 
     public static void main( final String[] args ) {
 
+        BasicProgramConfigInfo.init( "Obtuse", "Utils", "testing" );
+
         Date testDateTime = new Date();
         System.out.println( formatWWWW_MMMM_D_YYYY( testDateTime ) );
         System.out.println( formatMMMM_D_YYYY( testDateTime ) );
@@ -1323,6 +1441,31 @@ public class DateUtils {
                                                                                 .getDateStartTimeMs() ) ) );
         System.out.println( formatWWWW_MMMM_D_YYYY( new Date( ObtuseCalendarDate.parseCalendarDate( "1900-01-01" )
                                                                                 .getDateStartTimeMs() ) ) );
+
+        for ( int i = 1; i <= 7; i += 1 ) {
+
+            System.out.println( i + " = " + shortDayOfWeek( i ) + " == " + longDayOfWeek( i ) );
+
+        }
+
+        for ( int i = 0; i < 12; i += 1 ) {
+
+            System.out.println( i + " = " + shortMonthName( i ) + " == " + longMonthName( i ) );
+
+        }
+
+        try {
+
+            System.out.println( formatMarkerUTC( testDateTime ) + " should equal " + formatMarkerUTC( parseMarkerUTC( formatMarkerUTC( testDateTime ), 1 ) ) );
+            System.out.println( formatMarker2UTC( testDateTime ) + " should equal " + formatMarker2UTC( parseMarker2UTC( formatMarker2UTC( testDateTime ), 1 ) ) );
+
+        } catch ( ParsingException e ) {
+
+            Logger.logErr( "com.obtuse.util.exceptions.ParsingException caught", e );
+
+            ObtuseUtil.doNothing();
+
+        }
 
     }
 

@@ -229,17 +229,9 @@ public class MpsLabel {
 
             } else {
 
-                // Need to use the image variant
+                // Need to use the image variant (which needs to be a BufferedImage).
 
-                if ( _imageLabel instanceof BufferedImage ) {
-
-                    _generatedImage = (BufferedImage)_imageLabel;
-
-                } else {
-
-                    _generatedImage = ImageIconUtils.toBufferedImage( _imageLabel );
-
-                }
+                _generatedImage = ImageIconUtils.getAsBufferedImage( _imageLabel );
 
                 _generatedImageFont = null;
 

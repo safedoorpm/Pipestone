@@ -11,6 +11,7 @@ import java.util.*;
  Some useful set operations.
  */
 
+@SuppressWarnings("unused")
 public class ObtuseSets {
 
     /**
@@ -22,7 +23,7 @@ public class ObtuseSets {
      */
 
     @SafeVarargs
-    public static <T extends Comparable> TreeSet<T> intersection(
+    public static <T extends Comparable<?>> TreeSet<T> intersection(
             final SortedSet<T> set,
             final Collection<T>... collections
     ) {
@@ -72,7 +73,7 @@ public class ObtuseSets {
      */
 
     @SafeVarargs
-    public static <T extends Comparable> TreeSet<T> union(
+    public static <T extends Comparable<?>> TreeSet<T> union(
             final SortedSet<T> set,
             final Collection<T>... collections
     ) {
@@ -122,7 +123,7 @@ public class ObtuseSets {
      @return the set difference of a {@code SortedSet} of things and a {@code Collection} of things.
      */
 
-    public static <T extends Comparable> TreeSet<T> setDifference(
+    public static <T extends Comparable<?>> TreeSet<T> setDifference(
             final SortedSet<T> set,
             final Collection<T> collection
     ) {
@@ -164,12 +165,12 @@ public class ObtuseSets {
      @return the set symmetric difference of a {@code SortedSet} of things and a {@code Collection} of things.
      */
 
-    public static <T extends Comparable> TreeSet<T> symmetricSetDifference(
+    public static <T extends Comparable<?>> TreeSet<T> symmetricSetDifference(
             final SortedSet<T> set,
             final Collection<T> collection
     ) {
 
-        SortedSet<T> setS = set;
+        @SuppressWarnings("UnnecessaryLocalVariable") SortedSet<T> setS = set;
         TreeSet<T> setT = new TreeSet<>( collection );
 
         TreeSet<T> rval = union( setDifference( setS, setT ), setDifference( setT, setS ) );
@@ -192,7 +193,7 @@ public class ObtuseSets {
             final Collection<T> collection
     ) {
 
-        Set<T> setS = set;
+        @SuppressWarnings("UnnecessaryLocalVariable") Set<T> setS = set;
         HashSet<T> setT = new HashSet<>( collection );
 
         HashSet<T> rval = union( setDifference( setS, setT ), setDifference( setT, setS ) );

@@ -13,6 +13,7 @@ public interface VirtualScrollableElementModel<E extends VirtualScrollableElemen
 
     boolean isVisible();
 
+    @SuppressWarnings("unused")
     @NotNull
     VirtualScrollablePanelModel<E> getMandatoryPanelModel();
 

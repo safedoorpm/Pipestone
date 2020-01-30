@@ -10,8 +10,11 @@ import org.jetbrains.annotations.NotNull;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.*;
+import java.io.File;
 import java.net.URL;
 import java.util.Optional;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 /**
  * Utility methods for creating icons from images stored in our resources package.
@@ -21,6 +24,7 @@ import java.util.Optional;
 public class ImageIconUtils {
 
     private static String s_resourcesBaseDirectory = ".";
+    private static ClassLoader s_ourClassLoader = ImageIconUtils.class.getClassLoader();
 
     private ImageIconUtils() {
 
@@ -47,9 +51,61 @@ public class ImageIconUtils {
 
     }
 
+    private static final SortedMap<String,ImageIcon> s_imageIconCache = new TreeMap<>();
+
+    private static String makeFnameKey(
+            @NotNull final String fileName,
+            final int size,
+            @NotNull final ClassLoader classLoader,
+            @NotNull final String resourcesBaseDirectory
+    ) {
+
+        return "" +
+               "cl=" + classLoader.getName() + ";" +
+               "fn=" + fileName + ";" +
+               "rbd=" + resourcesBaseDirectory + ";" +
+               "s=" + size;
+
+    }
+
+    public static Optional<ImageIcon> fetchCacheableIconImage( final String fileName, final int size ) {
+
+        return ImageIconUtils.fetchIconImage(
+                fileName,
+                true,
+                size,
+                s_ourClassLoader,
+                getDefaultResourceBaseDirectory()
+        );
+
+    }
+
     public static Optional<ImageIcon> fetchIconImage( final String fileName, final int size ) {
 
-        return ImageIconUtils.fetchIconImage( fileName, size, ImageIconUtils.s_resourcesBaseDirectory );
+        return ImageIconUtils.fetchIconImage(
+                fileName,
+                false,
+                size,
+                s_ourClassLoader,
+                getDefaultResourceBaseDirectory()
+        );
+
+    }
+
+    @NotNull
+    public static Optional<ImageIcon> fetchCacheableIconImage(
+            @NotNull final String fileName,
+            final int size,
+            @NotNull final String resourceBaseDirectory
+    ) {
+
+        return fetchIconImage(
+                fileName,
+                true,
+                size,
+                s_ourClassLoader,
+                resourceBaseDirectory
+        );
 
     }
 
@@ -62,8 +118,27 @@ public class ImageIconUtils {
 
         return fetchIconImage(
                 fileName,
+                false,
                 size,
-                ImageIconUtils.class.getClassLoader(),
+                s_ourClassLoader,
+                resourceBaseDirectory
+        );
+
+    }
+
+    @NotNull
+    private static Optional<ImageIcon> fetchCacheableIconImage(
+            @NotNull final String fileName,
+            final int size,
+            @NotNull ClassLoader classLoader,
+            @NotNull final String resourceBaseDirectory
+    ) {
+
+        return fetchIconImage(
+                fileName,
+                true,
+                size,
+                classLoader,
                 resourceBaseDirectory
         );
 
@@ -77,11 +152,166 @@ public class ImageIconUtils {
             @NotNull final String resourceBaseDirectory
     ) {
 
+        return fetchIconImage(
+                fileName,
+                false,
+                size,
+                classLoader,
+                resourceBaseDirectory
+        );
+
+    }
+
+    @NotNull
+    public static Optional<ImageIcon> fetchCacheableIconImage(
+            @NotNull final String fileName,
+            final int size,
+            @NotNull ClassLoader classLoader,
+            @NotNull final String[] resourceBaseDirectories
+    ) {
+
+        return fetchIconImage(
+                fileName,
+                true,
+                size,
+                classLoader,
+                resourceBaseDirectories
+        );
+
+    }
+
+    @NotNull
+    public static Optional<ImageIcon> fetchIconImage(
+            @NotNull final String fileName,
+            final int size,
+            @NotNull ClassLoader classLoader,
+            @NotNull final String[] resourceBaseDirectories
+    ) {
+
+        return fetchIconImage(
+                fileName,
+                false,
+                size,
+                classLoader,
+                resourceBaseDirectories
+        );
+
+    }
+
+    @NotNull
+    public static Optional<ImageIcon> fetchIconImage(
+            @NotNull final String fileName,
+            final boolean cacheable,
+            final int size,
+            @NotNull ClassLoader classLoader,
+            @NotNull final String... resourceBaseDirectories
+    ) {
+
+        Optional<ImageIcon> rval;
+        for ( String resourceBaseDirectory : resourceBaseDirectories ) {
+
+            rval = imageIconFetcher(
+                    fileName,
+                    cacheable,
+                    size,
+                    classLoader,
+                    resourceBaseDirectory
+            );
+
+            if ( rval.isPresent() ) {
+
+                return rval;
+
+            }
+
+        }
+
+        return Optional.empty();
+
+    }
+
+    private static Optional<ImageIcon> imageIconFetcher(
+            @NotNull final String fileName,
+            final boolean cacheable,
+            final int size,
+            @NotNull ClassLoader classLoader,
+            @NotNull final String resourceBaseDirectory
+    ) {
+
+        // If this request is cacheable then do the entire operation with the cache locked.
+
+        if ( cacheable ) {
+
+            synchronized ( s_imageIconCache ) {
+
+                String fnameKey = makeFnameKey(
+                        fileName,
+                        size,
+                        classLoader,
+                        resourceBaseDirectory
+                );
+
+                Optional<ImageIcon> optImageIcon = Optional.ofNullable( s_imageIconCache.get( fnameKey ) );
+
+                if ( optImageIcon.isEmpty() ) {
+
+                    optImageIcon = actuallyAttemptToFetchIcon(
+                            fileName,
+                            cacheable,
+                            size,
+                            classLoader,
+                            resourceBaseDirectory
+                    );
+
+                    optImageIcon.ifPresent(
+                            imageIcon -> {
+
+                                s_imageIconCache.put( fnameKey, imageIcon );
+
+                                ObtuseUtil.doNothing();
+
+                            }
+                    );
+
+                }
+
+                return optImageIcon;
+
+            }
+
+        }
+
+        // The request is NOT cacheable so we can proceed without worry about what other threads might be up to.
+
+        return actuallyAttemptToFetchIcon(
+                fileName,
+                cacheable,
+                size,
+                classLoader,
+                resourceBaseDirectory
+        );
+
+    }
+
+    private static Optional<ImageIcon> actuallyAttemptToFetchIcon(
+            @NotNull final String fileName,
+            final boolean cacheable,
+            final int size,
+            @NotNull ClassLoader classLoader,
+            @NotNull final String resourceBaseDirectory
+    ) {
+
         URL url = null;
         String resourcePath = resourceBaseDirectory + '/' + fileName;
         try {
 
             url = classLoader.getResource( resourcePath );
+
+            if ( url == null ) {
+
+                return Optional.empty();
+
+            }
 
         } catch ( Throwable e ) {
 
@@ -104,11 +334,15 @@ public class ImageIconUtils {
 
         }
 
-        if ( size == 0 ) {
+        // If there is no valid ImageIcon in the file then don't return anything.
 
-            return Optional.of( rval );
+        if ( rval.getIconHeight() < 0 || rval.getIconWidth() < 0 ) {
 
-        } else {
+            return Optional.empty();
+
+        }
+
+        if ( size != 0 ) {
 
             int rvalWidth = rval.getIconWidth();
             int rvalHeight = rval.getIconHeight();
@@ -125,7 +359,7 @@ public class ImageIconUtils {
 
             }
 
-            ImageIcon scaledRval = new ImageIcon(
+            @SuppressWarnings("UnnecessaryLocalVariable") ImageIcon scaledRval = new ImageIcon(
                     rval.getImage()
                         .getScaledInstance(
                                 scaledWidth,
@@ -134,9 +368,11 @@ public class ImageIconUtils {
                         )
             );
 
-            return Optional.of( scaledRval );
+            rval = scaledRval;
 
         }
+
+        return Optional.of( rval );
 
     }
 
@@ -158,7 +394,7 @@ public class ImageIconUtils {
      */
 
     @NotNull
-    public static BufferedImage toBufferedImage( @NotNull final Image xImage ) {
+    public static BufferedImage getAsBufferedImage( @NotNull final Image xImage ) {
 
         if ( xImage instanceof BufferedImage ) {
 
@@ -171,7 +407,7 @@ public class ImageIconUtils {
 
     /**
      * Make a {@link java.awt.image.BufferedImage} copy of an {@link java.awt.Image}.
-     * Identical to {@link #toBufferedImage(java.awt.Image)} except that a new image is returned even if the original image is a {@link java.awt
+     * Identical to {@link #getAsBufferedImage(java.awt.Image)} except that a new image is returned even if the original image is a {@link java.awt
      * .image.BufferedImage}.
      * <p/>
      * This method came from
@@ -212,6 +448,7 @@ public class ImageIconUtils {
             }
 
             // Create the buffered image
+
             GraphicsDevice gs = ge.getDefaultScreenDevice();
             GraphicsConfiguration gc = gs.getDefaultConfiguration();
             bImage = gc.createCompatibleImage(
@@ -410,6 +647,194 @@ public class ImageIconUtils {
     public static ImageIcon changeImageIconBrightness( final ImageIcon imageIcon, final float scaleFactor, final float offset ) {
 
         return new ImageIcon( ImageIconUtils.changeImageBrightness( imageIcon.getImage(), scaleFactor, offset ) );
+
+    }
+
+    /**
+     Fetch an {@link ImageIcon} from a specified filename.
+     <p>
+     A call to this method is equivalent to calling
+     <blockquote>
+     <pre>fetchMandatoryIcon( iconFileName, 0 );</pre>
+     </blockquote>
+     </p>@param iconFileName the name of the file.
+     @return the requested {@link ImageIcon}.
+     <ul>
+     <li>the file is assumed to exist in the directory specified by the most recent call to
+     {@link #setDefaultResourcesDirectory(String)}.
+     </li>
+     <li>
+     no scaling, brightening, darkening or any other transformations are applied to the
+     {@code ImageIcon} before it is returned
+     </li>
+     </ul>
+     @throws IllegalArgumentException if there is no file with the specified name or if the file does not contain a
+     valid {@code ImageIcon}.
+     */
+
+    @NotNull
+    public static ImageIcon fetchMandatoryIcon(
+            @NotNull final String iconFileName
+    ) {
+
+        return fetchMandatoryIcon( iconFileName, 0 );
+
+    }
+
+    /**
+     Fetch an {@link ImageIcon} from a specified filename.
+     <p>
+     A call to this method is equivalent to calling
+     <blockquote>
+     <pre>fetchMandatoryIcon(
+         iconFileName,
+         size,
+         ImageIconUtils.class.getClassLoader(),
+         ImageIconUtils.getDefaultResourceBaseDirectory()
+     );
+     </pre>
+     </blockquote>
+     </p>
+     See {@link #fetchMandatoryIcon(String, int, ClassLoader, String)} for more information.
+     @param iconFileName the name of the file.
+     @param size the size of a square that the icon must fit within.
+     The icon will be scaled (larger or smaller) to make its longest dimension equal to the specified size.
+     @return the requested {@link ImageIcon}.
+     <ul>
+     <li>the file is assumed to exist in the directory specified by the most recent call to
+     {@link #setDefaultResourcesDirectory(String)}.
+     </li>
+     <li>
+     no scaling, brightening, darkening or any other transformations are applied to the
+     {@code ImageIcon} before it is returned
+     </li>
+     </ul>
+     @throws IllegalArgumentException if there is no file with the specified name or if the file does not contain a
+     valid {@code ImageIcon}.
+     */
+
+    @NotNull
+    public static ImageIcon fetchMandatoryIcon(
+            @NotNull final String iconFileName,
+            final int size
+    ) {
+
+        return fetchMandatoryIcon( iconFileName, size, ImageIconUtils.class.getClassLoader(), s_resourcesBaseDirectory );
+
+    }
+
+    /**
+     Fetch an {@link ImageIcon} from a specified filename.
+     <p>
+     A call to this method is equivalent to calling
+     <blockquote>
+     <pre>fetchMandatoryIcon(
+         iconFileName,
+         size,
+         ImageIconUtils.class.getClassLoader(),
+         resourcesDirectory
+     );
+     </pre>
+     </blockquote>
+     </p>
+     See {@link #fetchMandatoryIcon(String, int, ClassLoader, String)} for more information.
+     @param iconFileName the name of the file.
+     @param size the size of a square that the {@code ImageIcon} must fit within.
+     The {@code ImageIcon} will be scaled (larger or smaller) to make its longest dimension equal to the specified size.
+     @param resourcesDirectory the path of the resource directory that the {@code ImageIcon} should be fetched from.
+     @return the requested {@link ImageIcon}.
+     <ul>
+     <li>the file is assumed to exist in the directory specified by the most recent call to
+     {@link #setDefaultResourcesDirectory(String)}.
+     </li>
+     <li>
+     no scaling, brightening, darkening or any other transformations are applied to the
+     {@code ImageIcon} before it is returned
+     </li>
+     </ul>
+     @throws IllegalArgumentException if there is no file with the specified name or if the file does not contain a
+     valid {@code ImageIcon}.
+     */
+
+    @NotNull
+    public static ImageIcon fetchMandatoryIcon(
+            @NotNull final String iconFileName,
+            final int size,
+            final String resourcesDirectory
+    ) {
+
+        return fetchMandatoryIcon(
+                iconFileName,
+                size,
+                ImageIconUtils.class.getClassLoader(),
+                resourcesDirectory
+        );
+
+    }
+
+    /**
+     Fetch an {@link ImageIcon} from a specified filename.
+     @param iconFileName the name of the file.
+     @param size the size of a square that the {@code ImageIcon} must fit within.
+     The {@code ImageIcon} will be scaled (larger or smaller) to make its longest dimension equal to the specified size.
+     @param classLoader the class loader via which the {@code ImageIcon} is to be loaded.
+     @param resourcesDirectory the path of the resource directory that the {@code ImageIcon} should be fetched from.
+     <p>The path to the file containing the icon is constructed as follows:
+     <blockquote>
+     {@code String resourceFilePath = resourcesDirectory + "/" + iconFileName;}
+     </blockquote>
+     This path is then turned into a {@link URL} as follows:
+     <blockquote>
+     {@code URL url = classLoader.getResource( resourceFilePath );}
+     </blockquote>
+     The resulting URL is then used to fetch the {@code ImageIcon}.</p>
+     @return the requested {@link ImageIcon}.
+     <ul>
+     <li>the file is assumed to exist in the directory specified by the most recent call to
+     {@link #setDefaultResourcesDirectory(String)}.
+     </li>
+     <li>
+     no scaling, brightening, darkening or any other transformations are applied to the
+     {@code ImageIcon} before it is returned
+     </li>
+     </ul>
+     @throws IllegalArgumentException if there is no file with the specified name or if the file does not contain a
+     valid {@code ImageIcon}.
+     */
+
+    @NotNull
+    public static ImageIcon fetchMandatoryIcon(
+            @NotNull final String iconFileName,
+            final int size,
+            @NotNull final ClassLoader classLoader,
+            final String resourcesDirectory
+    ) {
+
+        File iconFile = new File(
+//                               ObtuseConstants.OBTUSE_RESOURCES_DIRECTORY
+                s_resourcesBaseDirectory,
+                iconFileName
+        );
+
+        Logger.logMsg( "fetching icon from " + iconFile.getAbsolutePath() );
+
+        Optional<ImageIcon> optIcon = fetchCacheableIconImage(
+                iconFileName,
+                size,
+                classLoader,
+                resourcesDirectory
+        );
+
+        if ( optIcon.isPresent() ) {
+
+            return optIcon.get();
+
+        }
+
+        throw new IllegalArgumentException(
+                "ImageIconUtils.fetchIcon:  cannot fetch icon from " +
+                                            ObtuseUtil.enquoteJavaObject( iconFile.getAbsolutePath() )
+        );
 
     }
 

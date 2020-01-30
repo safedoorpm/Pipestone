@@ -2,6 +2,7 @@ package com.obtuse.ui;
 
 import com.obtuse.exceptions.HowDidWeGetHereError;
 import com.obtuse.ui.exceptions.ObtuseImageLoadFailed;
+import com.obtuse.util.ImageIconUtils;
 import com.obtuse.util.Logger;
 import com.obtuse.util.Measure;
 import com.obtuse.util.ObtuseUtil;
@@ -168,7 +169,7 @@ public class ObtuseImageUtils {
      @param srcImage the {@link Image} to be rotated.
      @param orientation the EXIF-style orientation tag (see below).
      @return the possibly rotated {@code Image}.
-     If the {@code Image} is already correctly oriented then this could be the original {@code Image}.
+     If the {@code Image} is already correctly oriented then the returned image could be the original {@code Image}.
      It might not be since this method takes an
      {@link Image} and returns a {@link BufferedImage} which means that the provided {@code Image} might need to
      be converted to a {@code BufferedImage} to satisfy the requirement that this method returns a {@link BufferedImage}.
@@ -241,12 +242,7 @@ public class ObtuseImageUtils {
 
     public static BufferedImage rotateImage( @NotNull final Image srcImage, final int orientation ) {
 
-        BufferedImage bufferedImage =
-                srcImage instanceof BufferedImage
-                        ?
-                        (BufferedImage)srcImage
-                        :
-                        convertImageToBufferedImage( srcImage );
+        BufferedImage bufferedImage = ImageIconUtils.getAsBufferedImage( srcImage );
 
         BufferedImage rotated;
         try ( Measure ignored = new Measure( "maybe rotate" ) ) {
@@ -972,52 +968,63 @@ public class ObtuseImageUtils {
      @param inputImage the {@link Image} to be converted.
      @return an {@link Optional}{@code <BufferedImage>} containing the image if the conversion worked;
      an {@code Optional.empty()} otherwise.
+     <p>Note that if the input image is already a {@code BufferedImage} then the original image will be
+     returned.</p>
      <p>For reasons which are not at all clear, some images cannot be converted into {@code BufferedImage} instances
      in any obvious way. See the catching of a {@link RuntimeException} below for a tiny bit more elucidation.</p>
      */
 
     @NotNull
-    public static Optional<BufferedImage> optConvertImageToBufferedImage( Image inputImage ) {
+    public static Optional<BufferedImage> optConvertImageToBufferedImage( @NotNull Image inputImage ) {
 
-        try {
-            if ( inputImage instanceof BufferedImage ) {
+        // Switch over to using the Image->BufferedImage converter in ImageIconUtils because I (danny)
+        // believe it to be more robust than what happens in the commented out code below.
+        // Time will tell if I'm right so I'm keeping the old code around for now (read: "maybe quite a while").
 
-                return Optional.of( (BufferedImage)inputImage );
+        @NotNull BufferedImage outputImage = ImageIconUtils.getAsBufferedImage( inputImage );
 
-            }
+        return Optional.of( outputImage );
 
-            BufferedImage newImage = new BufferedImage(
-                    inputImage.getWidth( null ),
-                    inputImage.getHeight( null ),
-                    BufferedImage.TYPE_INT_RGB
-            );
-            Graphics g = newImage.createGraphics();
-            try {
-
-                g.drawImage( inputImage, 0, 0, null );
-
-            } catch ( RuntimeException e ) {
-
-                Logger.logErr( "java.lang.Exception caught", e );
-                ObtuseUtil.doNothing();
-
-                return Optional.empty();
-
-            }
-
-            g.dispose();
-
-            return Optional.of( newImage );
-
-        } catch ( IllegalArgumentException e ) {
-
-            Logger.logErr( "ObtuseImageUtils.optConvertImageToBufferedImage:  " + e, e );
-
-            ObtuseUtil.doNothing();
-
-            throw e;
-
-        }
+//        try {
+//
+//            if ( inputImage instanceof BufferedImage ) {
+//
+//                return Optional.of( (BufferedImage)inputImage );
+//
+//            }
+//
+//            BufferedImage newImage = new BufferedImage(
+//                    inputImage.getWidth( null ),
+//                    inputImage.getHeight( null ),
+//                    BufferedImage.TYPE_INT_RGB
+//            );
+//            Graphics g = newImage.createGraphics();
+//            try {
+//
+//                g.drawImage( inputImage, 0, 0, null );
+//
+//            } catch ( RuntimeException e ) {
+//
+//                Logger.logErr( "java.lang.Exception caught", e );
+//                ObtuseUtil.doNothing();
+//
+//                return Optional.empty();
+//
+//            }
+//
+//            g.dispose();
+//
+//            return Optional.of( newImage );
+//
+//        } catch ( IllegalArgumentException e ) {
+//
+//            Logger.logErr( "ObtuseImageUtils.optConvertImageToBufferedImage:  " + e, e );
+//
+//            ObtuseUtil.doNothing();
+//
+//            throw e;
+//
+//        }
 
     }
 

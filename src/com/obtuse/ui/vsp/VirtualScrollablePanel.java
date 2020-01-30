@@ -6,6 +6,7 @@ import com.obtuse.ui.ObtuseSwingUtils;
 import com.obtuse.ui.layout.PermissiveLayoutManager;
 import com.obtuse.util.*;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
@@ -32,6 +33,13 @@ public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends 
     private boolean _ourLayoutManagerSet;
     private final VirtualScrollableLayoutManager _ourLayoutManager;
 
+    @SuppressWarnings("unused")
+    public static void setFocusedProxy( @NotNull JComponent component, final String who ) {
+
+        setFocusedProxy( component, who, -1, -1 );
+
+    }
+
     public static void setFocusedProxy( @NotNull JComponent component, final String who, final int row, final int column ) {
 
         setFocusedProxy( component, who, row, column, false );
@@ -46,7 +54,17 @@ public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends 
         if ( verbose ) {
 
             Logger.logMsg(
-                    who + ":  requesting focus in (" + row + "x" + column + ") " +
+                    who + ":  requesting focus " +
+                    ( row >= 0 || column >= 0
+                              ?
+                              "at (" +
+                              ( row >= 0 ? "" + row : "" ) +
+                              ( row >= 0 && column >= 0 ? "x" : "" ) +
+                              ( column >= 0 ? "" + row : "" ) +
+                              ") "
+                              :
+                              ""
+                    ) +
                     (
                             requestFocusInWindow
                                     ?
@@ -917,21 +935,95 @@ public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends 
 
     }
 
+    public interface VirtualScrollablePanelSelectionManager {
 
+        boolean isSelected( UniqueId uniqueId );
+
+        void setSelected( UniqueId uniqueId, boolean selected );
+
+        void clearAllSelected();
+
+        boolean extendSelection( UniqueId uniqueId );
+
+    }
 
     public abstract static class AbstractElementView<EV extends VirtualScrollableElement>
             extends JPanel implements ElementView<EV> {
 
+        private final UniqueId _uniqueId;
+
+        private final String _where;
+        private VirtualScrollablePanelSelectionManager _selectionManager;
+        private boolean _manageElementSelections;
+
         private VirtualScrollableElementModel<EV> _elementModel;
 
         protected AbstractElementView(
-                final @NotNull VirtualScrollableElementModel<EV> elementModel
+                final @NotNull VirtualScrollableElementModel<EV> elementModel,
+                @Nullable final UniqueId uniqueId,
+                @NotNull final String where
         ) {
             super();
+
+            _uniqueId = uniqueId == null ? UniqueId.getJvmLocalUniqueId() : uniqueId;
+
+            _where = where;
 
             _elementModel = elementModel;
 
         }
+
+        @NotNull
+        public UniqueId getUniqueId() {
+
+            return _uniqueId;
+
+        }
+
+//        protected void doAddMouseListener() {
+//
+//            addMouseListener(
+//                    new MouseListener() {
+//
+//                        @Override
+//                        public void mouseClicked( final MouseEvent e ) {
+//
+//                            myMouseClicked( e );
+//
+//                        }
+//
+//                        @Override
+//                        public void mousePressed( final MouseEvent e ) {
+//
+//                            myMousePressed( e );
+//
+//                        }
+//
+//                        @Override
+//                        public void mouseReleased( final MouseEvent e ) {
+//
+//                            myMouseReleased( e );
+//
+//                        }
+//
+//                        @Override
+//                        public void mouseEntered( final MouseEvent e ) {
+//
+//                            myMouseEntered( e );
+//
+//                        }
+//
+//                        @Override
+//                        public void mouseExited( final MouseEvent e ) {
+//
+//                            myMouseExited( e );
+//
+//                        }
+//
+//                    }
+//            );
+//
+//        }
 
         @Override
         @NotNull
@@ -964,6 +1056,247 @@ public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends 
             return this;
 
         }
+
+//        public boolean manageElementSelections() {
+//
+//            return _manageElementSelections;
+////            return _elementModel. != null;
+//
+//        }
+//
+//        private void myMouseClicked( final MouseEvent e ) {
+//
+//            //        Logger.logMsg(
+//            //                "LancotMediaProxy: " +
+//            //                ( e.isShiftDown() ? " shift" : "" ) +
+//            //                ( e.isAltDown() ? " alt" : "" ) +
+//            //                ( e.isAltGraphDown() ? " altgr" : "" ) +
+//            //                ( e.isControlDown() ? " ctrl" : "" ) +
+//            //                ( e.isMetaDown() ? " meta" : "" ) +
+//            //                ( " button" + e.getButton() ) +
+//            //                " click" +
+//            //                " " + e.getClickCount() + " clicks"
+//            //        );
+//
+//            Logger.logMsg( "<.<.<.<.<." );
+//            Logger.logMsg( "LancotMediaProxy:  mouse clicked:  " + Clicks.describeInputBitMask( e.getModifiersEx() ) + " or " + InputEvent.getModifiersExText( e.getModifiersEx() ) );
+//
+//            Logger.logMsg( "getButton reports " + e.getButton() );
+//            Logger.logMsg( "" );
+//            Logger.logMsg( "just-left-click reports " + Clicks.isJustClick( Clicks.MouseButton.LEFT, e ) );
+//            Logger.logMsg( "shift-left-click reports " + Clicks.isShiftLeftClick( e ) );
+//            Logger.logMsg( "ctrl-left-click reports " + Clicks.isCtrlLeftClick( e ) );
+//            Logger.logMsg( "opt-left-click reports " + Clicks.isOptLeftClick( e ) );
+//            Logger.logMsg( "cmd-left-click reports " + Clicks.isCmdLeftClick( e ) );
+//            Logger.logMsg( "cmd-any-click reports " + Clicks.isCmdClick( Clicks.MouseButton.ANY, e ) );
+//
+//            if (
+//                    Clicks.doesMaskDescribe(
+//                            e.getModifiersEx(),
+//                            InputEvent.SHIFT_DOWN_MASK,
+//                            0
+//                    )
+//            ) {
+//
+//                Logger.logMsg( "LancotMediaProxy.mouseClicked:  shift click" );
+//
+//            } else if (
+//                    Clicks.doesMaskDescribe(
+//                            e.getModifiersEx(),
+//                            InputEvent.META_DOWN_MASK,
+//                            0
+//                    )
+//            ) {
+//
+//                Logger.logMsg( "LancotMediaProxy.mouseClicked:  meta down mask" );
+//
+//            } else if (
+//                    Clicks.doesMaskDescribe(
+//                            e.getModifiersEx(),
+//                            InputEvent.CTRL_DOWN_MASK,
+//                            0
+//                    )
+//            ) {
+//
+//                Logger.logMsg( "LancotMediaProxy.mouseClicked:  ctrl down mask" );
+//
+//            } else {
+//
+//                ObtuseUtil.doNothing();
+//
+//            }
+//
+//            Logger.logMsg( ".>.>.>.>.>" );
+//
+//            if ( Clicks.isLeftClick( e ) ) {
+//
+//                VirtualScrollablePanel.setFocusedProxy( this, "LancotMediaProxy.mouseClicked " + _where );
+//
+//                if ( e.getClickCount() == 1 ) {
+//
+//                    // Single-click de-selects everything that might already be selected and then selects this item.
+//
+//                    selectThisElementView();
+//
+////                } else if ( e.getClickCount() == 2 ) {
+////
+////                    // Double-click launches an ImageViewerWindow for this item.
+////
+////                    setSelected( true );
+////                    repaint();
+////
+////                    openImageViewer();
+//
+//                }
+//
+//            } else if ( Clicks.isCtrlLeftClick( e ) ) {
+//
+//                VirtualScrollablePanel.setFocusedProxy( this, "LancotMediaProxy.mouseClicked " + _where );
+//
+////                if ( e.getClickCount() == 1 ) {
+////
+////                    ObtuseUtil.doNothing();
+//////                // Single-click de-selects everything that might already be selected and then selects this item.
+//////
+//////                selectThisMediaProxy();
+////
+////                } else if ( e.getClickCount() == 2 ) {
+////
+////                    // Ctrl-double-click launches the OS media viewer for this item.
+////
+////                    setSelected( true );
+////                    repaint();
+////
+////                    LancotScrollableImagesPanelModel.openWithOsViewers( java.util.List.of( getLmiId() ) );
+////
+////                }
+//
+//            } else if ( Clicks.isCmdLeftClick( e ) ) {
+//
+//                boolean prevSelectionValue = isSelected();
+//                Logger.logMsg( "=== cmd-click is setting " + _where + " to " + !prevSelectionValue );
+//                setSelected( !prevSelectionValue );
+//
+//            } else if ( Clicks.isShiftLeftClick( e ) ) {
+//
+//                if ( extendSelection() ) {
+//
+//                    ObtuseUtil.doNothing();
+//
+//                }
+//
+//            } else {
+//
+//                ObtuseUtil.doNothing();
+//
+//            }
+//
+//        }
+//
+//        private void myMousePressed( MouseEvent e ) {
+//
+////            _dragStartEvent = e;
+////            _actualDragEvent = false;
+////
+////            e.consume();
+//
+//        }
+//
+//        private void myMouseReleased( final MouseEvent e ) {
+//
+////            _dragStartEvent = null;
+//
+//        }
+//
+//        private void myMouseEntered( final MouseEvent e ) {
+//
+//        }
+//
+//        private void myMouseExited( final MouseEvent e ) {
+//
+//        }
+//
+//        public void setSelected( final boolean selected ) {
+//
+//            if ( manageElementSelections() ) {
+//
+//                if ( _selectionManager.isSelected( _uniqueId ) != selected ) {
+//
+//                    repaint();
+//
+//                    _selectionManager.setSelected( _uniqueId, selected );
+//
+//                }
+//            }
+//
+//        }
+//
+////        public abstract boolean markSelected( @NotNull UniqueId uniqueId, boolean isSelected );
+////
+////        public boolean isSelected() {
+////
+////            if ( manageElementSelections() ) {
+////
+////                boolean rval = _selectionManager.isSelected( _uniqueId );
+////
+////                return rval;
+////
+////            } else {
+////
+////                return false;
+////
+////            }
+////
+////        }
+//
+//        public void clearAllSelected() {
+//
+//            if ( manageElementSelections() ) {
+//
+//                _selectionManager.clearAllSelected();
+//
+//            }
+//
+//        }
+//
+//        public boolean extendSelection() {
+//
+//            if ( manageElementSelections() ) {
+//
+//                boolean rval = _selectionManager.extendSelection( _uniqueId );
+//
+//                return rval;
+//
+//            } else {
+//
+//                return false;
+//
+//            }
+//
+//        }
+//
+//        public void selectThisElementView() {
+//
+//            clearAllSelected();
+//
+//            setSelected( true );
+//
+////            LancotClockWatcher.doLater(
+////                    System.currentTimeMillis() + 100,
+////                    new LancotBackgroundTask( "revalidate media proxy after 100ms" ) {
+////
+////                        @Override
+////                        public void doit() {
+////
+////                            Logger.logMsg( "revalidating after 100ms" );
+////                            repaint();
+////
+////                        }
+////
+////                    }
+////            );
+//
+//        }
 
     }
 

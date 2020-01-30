@@ -16,6 +16,7 @@ import javax.swing.filechooser.FileFilter;
 import java.awt.*;
 import java.io.File;
 import java.io.FilenameFilter;
+import java.util.Arrays;
 import java.util.Optional;
 import java.util.Set;
 
@@ -111,6 +112,19 @@ public class FileSelectors2 {
         public int getReturnState() {
 
             return _returnState;
+
+        }
+
+        public String toString() {
+
+            return "FileSelectorResult( " +
+                   ( worked() ?
+                             ( approved() ? "approved" : "" )
+                             :
+                             ( failed() ? "failed" : "" )
+                   ) + ", " +
+                   Arrays.toString( getSelection() ) +
+                   " )";
 
         }
 
@@ -276,7 +290,7 @@ public class FileSelectors2 {
             // multi-selection mode turned off is because getSelectedFiles (note the 's' at the end
             // of that method name) ALWAYS returns an empty array regardless of what is selected
             // UNLESS multi-selection mode is turned on.
-            // The technical term for this setting a trap for the developer.
+            // The technical term for this is setting a trap for the developer.
             // Yes, the behaviour is documented but this sure doesn't seem to respect the principle
             // of least surprise.
             //

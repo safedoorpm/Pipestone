@@ -431,6 +431,59 @@ public class ObtuseUtil {
     }
 
     /**
+     Extract the suffix from a name.
+     @param name the name that the suffix is to be extracted from.
+     @return after ignoring the first character in the name if that first character is a period,
+     the name's suffix (the part of the name starting at the last period in the name).
+     Returns a zero-length {@link String} if the name doesn't contain any periods.
+     <p>Notes:</p>
+     <ul>
+     <li>the wonky looking rule about ignoring the first character in the name if the first character
+     is a period is intended to avoid treating a dot-filename like {@code ".bashrc"} as a filename with a {@code ".bashrc"} suffix.</li>
+     <li>the suffix starts <b><u>WITH</u></b> the last period, not <b><u>AFTER</u></b> the last period.</li>
+     </ul>
+     <p>Examples:
+     <blockquote>
+     {@code "abc.xyz"} yields {@code ".xyz"}
+     <br>{@code "abc"} yields {@code ""}
+     <br>{@code ".abc"} yields {@code ""}
+     <br>{@code "abc.xyz.123"} yields {@code ".123"}
+     <br>{@code "abc...xyz"} yields {@code ".xyz"}
+     </blockquote>
+     </p>
+     */
+
+    public static String extractSuffix( @NotNull final String name ) {
+
+        int lastDotOffset = name.lastIndexOf( '.' );
+        if ( lastDotOffset > 0 ) {
+
+            return name.substring( lastDotOffset );
+
+        } else {
+
+            return "";
+
+        }
+
+    }
+
+    /**
+     Extract the suffix from a {@link File}.
+     @param file the {@link File} that the suffix is to be extracted from.
+     @return this method is exactly equivalent to invoking
+     <blockquote>
+     {@link #extractSuffix(String) ObtuseUtil.extractSuffix}{@code ( file.}{@link File#getName() getName() }<code>&nbsp;)</code>
+     </blockquote>
+     */
+
+    public static String extractSuffix( @NotNull final File file ) {
+
+        return extractSuffix( file.getName() );
+
+    }
+
+    /**
      A derivative of the {@link Hashtable} whose instances start out mutable but can be made immutable upon request (there
      is no
      mechanism provided to make an immutable instance mutable again).

@@ -88,7 +88,7 @@ public class LinearLayoutUtil {
 
             public String toString() {
 
-                return "SSLM.createdPanel3( name=\"" +
+                return "LLU.createdPanel3( name=\"" +
                        getName() +
                        "\", cc=" +
                        getComponentCount() +
@@ -130,7 +130,7 @@ public class LinearLayoutUtil {
 
             public String toString() {
 
-                return "SSLM.createdPanel3( name=\"" +
+                return "LLU.createdPanel3( name=\"" +
                        getName() +
                        "\", cc=" +
                        getComponentCount() +

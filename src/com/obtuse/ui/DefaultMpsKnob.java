@@ -104,7 +104,7 @@ public class DefaultMpsKnob extends MpsKnob {
                 _rotatedSelectedScaledImages.get( knobSize, positionOnLine, isSelected );
         if ( orientedImage == null ) {
 
-            BufferedImage scaledImage = ImageIconUtils.toBufferedImage(
+            BufferedImage scaledImage = ImageIconUtils.getAsBufferedImage(
                     getImage().getScaledInstance(
                             knobSize.integerSize(),
                             -1,

@@ -22,14 +22,14 @@ public abstract class MpsKnob {
 
         super();
 
-        _image = ImageIconUtils.toBufferedImage( image );
+        _image = ImageIconUtils.getAsBufferedImage( image );
 
     }
 
     @SuppressWarnings("UnusedDeclaration")
     protected void setImage( final Image image ) {
 
-        _image = ImageIconUtils.toBufferedImage( image );
+        _image = ImageIconUtils.getAsBufferedImage( image );
 
     }
 

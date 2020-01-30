@@ -13,6 +13,7 @@ import java.awt.event.ActionEvent;
 /**
  Created by danny on 2018/11/19.
  */
+
 public class PlayElementView<EV extends VirtualScrollableElement>
         extends VirtualScrollablePanel.AbstractElementView<PlayElementData> {
 
@@ -23,7 +24,7 @@ public class PlayElementView<EV extends VirtualScrollableElement>
             VirtualScrollableElementModel<PlayElementData> elementModel
     ) {
 
-        super( elementModel );
+        super( elementModel, elementModel.getUniqueId(), "" + elementModel.getUniqueId() );
 
         setBorder( BorderFactory.createEtchedBorder() );
 
@@ -56,7 +57,7 @@ public class PlayElementView<EV extends VirtualScrollableElement>
     }
 
     @Override
-    public void fill( @NotNull final VirtualScrollableElementModel rawDataModel ) {
+    public void fill( @SuppressWarnings("rawtypes") @NotNull final VirtualScrollableElementModel rawDataModel ) {
 
         PlayElementModel dataModel = (PlayElementModel)rawDataModel;
 

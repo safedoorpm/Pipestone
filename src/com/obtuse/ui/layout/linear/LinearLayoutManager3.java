@@ -139,11 +139,17 @@ public class LinearLayoutManager3 implements LayoutManager2 {
     @Override
     public synchronized void addLayoutComponent( final Component comp, final Object xConstraints ) {
 
-        implicitInvalidateLayout( "addLayoutComponent", _target );
+        implicitInvalidateLayout(
+                ( comp == null ? "unknown" : comp.getClass().getCanonicalName() ) + " component added",
+                "addLayoutComponent(Component,Object)",
+                _target
+        );
 
         if ( comp == null ) {
 
-            throw new IllegalArgumentException( "LinearLayoutManager3.addLayoutComponent( Component, Object ):  component is null" );
+            throw new IllegalArgumentException(
+                    "LinearLayoutManager3.addLayoutComponent( Component, Object ):  component is null"
+            );
 
         }
 
@@ -238,11 +244,19 @@ public class LinearLayoutManager3 implements LayoutManager2 {
 
     }
 
-    private synchronized void implicitInvalidateLayout( final String requester, final LinearContainer3 target ) {
+    private synchronized void implicitInvalidateLayout(
+            @NotNull String why,
+            @NotNull final String requester,
+            @NotNull final LinearContainer3 target
+    ) {
 
         if ( _cache != null && LinearLayoutUtil.isContainerOnWatchlist( _target ) ) {
 
-            Logger.logMsg( "layout invalidated by " + requester + " (target is " + target + ")" );
+            Logger.logMsg(
+                    "layout invalidated by " + requester +
+                    " (target is " + target + "," +
+                    " why is " + ObtuseUtil.enquoteToJavaString( why ) + ")"
+            );
 
         }
 
@@ -298,7 +312,11 @@ public class LinearLayoutManager3 implements LayoutManager2 {
 
         checkContainer( "invalidateLayout", target );
 
-        implicitInvalidateLayout( "invalidateLayout", (LinearContainer3)target );
+        implicitInvalidateLayout(
+                "somebody asked nicely",
+                "invalidateLayout",
+                (LinearContainer3)target
+        );
 
     }
 
@@ -307,14 +325,22 @@ public class LinearLayoutManager3 implements LayoutManager2 {
 
         Logger.logMsg( "addLayoutComponent( " + ObtuseUtil.enquoteToJavaString( name ) + ", " + comp + " )" );
 
-        implicitInvalidateLayout( "addLayoutComponent", _target );
+        implicitInvalidateLayout(
+                ( comp == null ? "unknown" : comp.getClass().getCanonicalName() ) + " component added",
+                "addLayoutComponent(String,Component)",
+                _target
+        );
 
     }
 
     @Override
     public synchronized void removeLayoutComponent( final Component comp ) {
 
-        implicitInvalidateLayout( "removeLayoutComponent", _target );
+        implicitInvalidateLayout(
+                ( comp == null ? "unknown" : comp.getClass().getCanonicalName() ) + " component removed",
+                "removeLayoutComponent",
+                _target
+        );
 
         if ( comp == null ) {
 
@@ -331,6 +357,13 @@ public class LinearLayoutManager3 implements LayoutManager2 {
     @SuppressWarnings("Duplicates")
     @Override
     public void layoutContainer( final Container parent ) {
+
+        _cache = null;
+        implicitInvalidateLayout(
+                "just because",
+                "layoutContainer",
+                _target
+        );
 
         LinearLayoutManagerCache cache;
 

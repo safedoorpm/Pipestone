@@ -251,7 +251,7 @@ public interface LinearContainer {
     void setBreadthConstraints( int minBreadth, int maxBreadth );
 
     /**
-     Provide a way to constrain the length of a component within a linear container.
+     Provide a way to constrain the breadth of a component within a linear container.
 
      @param breadthConstraints the breadth constraints for this instance.
      A {@code null} value removes this instance's breadth constraints.
