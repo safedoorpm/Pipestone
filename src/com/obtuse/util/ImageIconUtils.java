@@ -332,6 +332,8 @@ public class ImageIconUtils {
 
             rval = new ImageIcon( url );
 
+            ObtuseUtil.doNothing();
+
         }
 
         // If there is no valid ImageIcon in the file then don't return anything.
@@ -342,25 +344,38 @@ public class ImageIconUtils {
 
         }
 
-        if ( size != 0 ) {
+        rval = getScaledImageIcon( size, rval );
 
-            int rvalWidth = rval.getIconWidth();
-            int rvalHeight = rval.getIconHeight();
+        return Optional.of( rval );
+
+    }
+
+    @NotNull
+    public static ImageIcon getScaledImageIcon( final int size, @NotNull final ImageIcon imageIcon ) {
+
+        if ( size == 0 ) {
+
+            return imageIcon;
+
+        } else {
+
+            int rvalWidth = imageIcon.getIconWidth();
+            int rvalHeight = imageIcon.getIconHeight();
 
             int scaledWidth = rvalWidth >= rvalHeight ? size : -1;
             int scaledHeight = rvalWidth <= rvalHeight ? size : -1;
             if ( scaledWidth == -1 && scaledHeight == -1 ) {
 
                 throw new HowDidWeGetHereError(
-                        "ImageIconUtils.fetchIconImage:  " +
+                        "ImageIconUtils.getScaledImageIcon:  " +
                         "rvW=" + rvalWidth + ", rvH=" + rvalHeight + ", s=" + size +
                         " yielded both sW and sH equal to " + -1
                 );
 
             }
 
-            @SuppressWarnings("UnnecessaryLocalVariable") ImageIcon scaledRval = new ImageIcon(
-                    rval.getImage()
+            ImageIcon scaledRval = new ImageIcon(
+                    imageIcon.getImage()
                         .getScaledInstance(
                                 scaledWidth,
                                 scaledHeight,
@@ -368,11 +383,9 @@ public class ImageIconUtils {
                         )
             );
 
-            rval = scaledRval;
+            return scaledRval;
 
         }
-
-        return Optional.of( rval );
 
     }
 
@@ -414,8 +427,9 @@ public class ImageIconUtils {
      * <blockquote>
      * http://www.exampledepot.com/egs/java.awt.image/Image2Buf.html
      * </blockquote>
-     * I (danny) don't know the terms of use as their "Terms of Use" link didn't do anything in either Safari or Firefox on my Mac OS X Snow
-     * Leopard system.
+     * (note that the above site is now gone - 2020-02-21)
+     * I (danny) don't know the terms of use as their "Terms of Use" link didn't do anything in either
+     * Safari or Firefox on my Mac OS X Snow Leopard system.
      *
      * @param xImage the image to be converted.
      * @return a copy of the original image.
@@ -433,48 +447,67 @@ public class ImageIconUtils {
 
         boolean hasAlpha = ImageIconUtils.hasAlpha( image );
 
-        // Create a buffered image with a format that's compatible with the screen
 
-        BufferedImage bImage = null;
-        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-        try {
+        // This first approach commented out 2020-02-21 because it sometimes produces a type=0 BufferedImage
+        // which other library methods cannot cope with.
 
-            // Determine the type of transparency of the new buffered image
-            int transparency = Transparency.OPAQUE;
-            if ( hasAlpha ) {
+//        BufferedImage bImage = null;
+//        // Create a buffered image with a format that's compatible with the screen
+//
+//        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+//        try {
+//
+//            // Determine the type of transparency of the new buffered image
+//            int transparency = Transparency.OPAQUE;
+//            if ( hasAlpha ) {
+//
+//                transparency = Transparency.BITMASK;
+//
+//            }
+//
+//            // Create the buffered image
+//
+//            GraphicsDevice gs = ge.getDefaultScreenDevice();
+//            GraphicsConfiguration gc = gs.getDefaultConfiguration();
+//            bImage = gc.createCompatibleImage(
+//                    image.getWidth( null ), image.getHeight( null ), transparency
+//            );
+//
+//        } catch ( HeadlessException e ) {
+//
+//            // The system does not have a screen
+//
+//            ObtuseUtil.doNothing();
+//
+//        }
+//
+//        if ( bImage == null ) {
+//
+//            // Create a buffered image using the default color model
+//
+//            int type = BufferedImage.TYPE_INT_RGB;
+//            if ( hasAlpha ) {
+//
+//                type = BufferedImage.TYPE_INT_ARGB;
+//
+//            }
+//
+//            bImage = new BufferedImage( image.getWidth( null ), image.getHeight( null ), type );
+//
+//        }
 
-                transparency = Transparency.BITMASK;
+        // End of what was commented out 2020-02-21 (see above for more info)
 
-            }
+        // Create a buffered image using the default color model
 
-            // Create the buffered image
+        int type = BufferedImage.TYPE_INT_RGB;
+        if ( hasAlpha ) {
 
-            GraphicsDevice gs = ge.getDefaultScreenDevice();
-            GraphicsConfiguration gc = gs.getDefaultConfiguration();
-            bImage = gc.createCompatibleImage(
-                    image.getWidth( null ), image.getHeight( null ), transparency
-            );
-
-        } catch ( HeadlessException e ) {
-
-            // The system does not have a screen
+            type = BufferedImage.TYPE_INT_ARGB;
 
         }
 
-        if ( bImage == null ) {
-
-            // Create a buffered image using the default color model
-
-            int type = BufferedImage.TYPE_INT_RGB;
-            if ( hasAlpha ) {
-
-                type = BufferedImage.TYPE_INT_ARGB;
-
-            }
-
-            bImage = new BufferedImage( image.getWidth( null ), image.getHeight( null ), type );
-
-        }
+        BufferedImage bImage = new BufferedImage( image.getWidth( null ), image.getHeight( null ), type );
 
         // Copy image to buffered image
 

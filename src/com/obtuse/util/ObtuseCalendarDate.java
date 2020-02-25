@@ -30,13 +30,20 @@ import java.util.regex.Pattern;
  <p/>
  A few words to the wise are in order:
  <ol>
- <li>The earliest date that this class supports is March 1, 4 AD. This is the date that the Julian calendar rules came into effect in Rome.
+ <li>The earliest date that this class supports is March 1, 4 AD.
+ This is the date that the Julian calendar rules came into effect in Rome.
  This class supports all dates through to December 31, 9999 because I'm an optimist at heart.</li>
- <li>The Julian calendar considered March 25 to be New Year's Day (first day of the new year). To avoid confusion and to allow us to simply
- use the underlying Java date management classes, this class treats January 1 as New Year's Day regardless of whether the date is in the Julian or the Gregorian era.</li>
- <li>Be careful with dates during the year in which your locale changed from the Julian to the Gregorian calendar system as there will be dates during that year which seem 'normal'
- but which will result in parsing errors when used with this class. For example, parsing dates in the range <tt>1582-10-05</tt> through <tt>1582-10-14</tt> will fail in many countries
- because those dates did not occur in those countries. This was when many switched from the Julian system to the Gregorian system and dropped the appropriate number of days as part of the switch.</li>
+ <li>The Julian calendar considered March 25 to be New Year's Day (first day of the new year).
+ To avoid confusion and to allow us to simply use the underlying Java date management classes,
+ this class treats January 1 as New Year's Day regardless of whether the date is in the Julian or the Gregorian era.
+ </li>
+ <li>Be careful with dates during the year in which your locale changed from the Julian
+ to the Gregorian calendar system as there will be dates during that year which seem 'normal'
+ but which will result in parsing errors when used with this class.
+ For example, parsing dates in the range <tt>1582-10-05</tt> through <tt>1582-10-14</tt> will fail in many countries
+ because those dates did not occur in those countries.
+ This was when many switched from the Julian system to the Gregorian system and
+ dropped the appropriate number of days as part of the switch.</li>
  </ol>
  <p/>
  Instances of this class are immutable.
@@ -177,13 +184,19 @@ public class ObtuseCalendarDate extends GowingAbstractPackableEntity implements 
     }
 
     /**
-     Create an instance from a date string of the format <code>YYYY-MM-DD</code>.
-     <p/>This method supports dates in the range 0001-01-01 through 9999-12-31 although you need to know a lot about historical dating to properly deal with dates much before about 1000AD.
-     You also need to know about the distinction between Julian dates and Gregorian dates in order to properly deal with Julian dates (this method interprets dates as Julian or Gregorian
-     depending on their year, month and day as well as the locale that the method is operating within (still more stuff that you need to know - sorry but dates are just plain hard if you go back very far).
+     Create an instance from a date string of the format {@code YYYY-MM-DD}.
+     <p/>This method supports dates in the range 0001-01-01 through 9999-12-31
+     although you need to know a lot about historical dating to properly deal with dates much before about 1000AD.
+     You also need to know about the distinction between Julian dates and Gregorian dates in order to properly
+     deal with Julian dates (this method interprets dates as Julian or Gregorian depending on their year,
+     month and day as well as the locale that the method is operating within
+     (still more stuff that you need to know - sorry but dates are just plain hard if you go back very far).
 
-     @param xdateString a date in the format <code>YYYY-MM-DD</code> (note that the year portion really must be exactly 4 digits long, the month portion really must be exactly 2 digits long,
-     and the day of month portion really must be exactly 2 digits long; this also means that dates prior to 1000AD must have enough 0's prepended to the year to make it 4 digits long).
+     @param xdateString a date in the format {@code YYYY-MM-DD}
+     (note that the year portion really must be exactly four digits long,
+     the month portion can be one or two digits long but not longer,
+     and the day of month portion can be one or two digits long but not longer;
+     this also means that dates prior to 1000AD must have enough 0's prepended to the year to make it four digits long).
      @throws ParsingException if the date string cannot be parsed.
      */
 
@@ -210,8 +223,9 @@ public class ObtuseCalendarDate extends GowingAbstractPackableEntity implements 
 
         _midnightUtcMs = DateUtils.parseYYYY_MM_DD_utc( _dateString, 0, false ).getTime();
 
-        // Make sure nobody tries to slip a date that is to early for us to support properly.
-        // Don't check if we are parsing the earliest date that we support or we'll spin off into infinite recursion land.
+        // Make sure nobody tries to slip a date that is too early for us to support properly.
+        // Don't check if we are parsing the earliest date that we support or we'll spin off
+        // into infinite recursion land.
 
         if ( !EARLIEST_SUPPORTED_DATE_STRING.equals( _dateString ) ) {
 
@@ -471,18 +485,19 @@ public class ObtuseCalendarDate extends GowingAbstractPackableEntity implements 
     /**
      Compute the number of days between two dates.
      <p/>The distance between two dates includes the endpoints.
-     In other words, if <code>today</code> contains today's date and <code>tomorrow</code> contains tomorrow's date then
-     <blockquote><code>ObtuseCalendarDate.computeDurationDays( abc, abc )</code></blockquote> returns <code>2</code>.
-     Also, increasing the distance between any pair of {@link ObtuseCalendarDate} values <code>abc</code> and <code>xyz</code>
-     by <code>1</code> increases the return value of
-     <blockquote><code>ObtuseCalendarDate.computeDurationDays( abc, abc )</code></blockquote> by <code>1</code>.
+     In other words, if {@code today} contains today's date and {@code tomorrow} contains tomorrow's date then
+     <blockquote><code>ObtuseCalendarDate.computeDurationDays( abc, abc )</code></blockquote> returns {@code 2}.
+     Also, increasing the distance between any pair of {@link ObtuseCalendarDate} values {@code abc} and {@code xyz}
+     by {@code 1} increases the return value of
+     <blockquote><code>ObtuseCalendarDate.computeDurationDays( abc, abc )</code></blockquote> by {@code 1}.
      <p/>Strange things start to happen if the two dates are more than about 292,271,023 years apart (roughly the maximum date
-     value that can be represented as a 64-bit count of milliseconds).
+     value that can be represented as a 64-bit count of milliseconds). Since the range of dates which are supported by
+     this class is only slightly less than 10,000 years, this particular issue is more apparent than real.
 
      @param from the starting date.
      @param to   the ending date.
      @return the distance between the two dates including the endpoint dates.
-     @throws IllegalArgumentException if <code>from</code> is greater than <code>to</code>.
+     @throws IllegalArgumentException if {@code from} is greater than {@code to}.
      */
 
     public static int computeDurationDays( final ObtuseCalendarDate from, final ObtuseCalendarDate to ) {
@@ -508,11 +523,11 @@ public class ObtuseCalendarDate extends GowingAbstractPackableEntity implements 
 
     /**
      Get a new calendar date which is some number of days prior to or after a specified calendar date.
-     <p/>This method is conceptually equivalent to adding <code>delta * 1000L * 24L * 60L * 60L</code>
+     <p/>This method is conceptually equivalent to adding {@code delta * 1000L * 24L * 60L * 60L}
 
      @param date  the specified calendar date.
-     @param delta the number of days to add to the specified calendar date. Negative <code>delta</code> values work as one would expect.
-     For example, a <code>delta</code> of <code>-1</code> yields the date immediately before <code>date</code>.
+     @param delta the number of days to add to the specified calendar date. Negative {@code delta} values work as one would expect.
+     For example, a {@code delta} of {@code -1} yields the date immediately before {@code date}.
      @return the resulting calendar date.
      */
 
@@ -527,9 +542,9 @@ public class ObtuseCalendarDate extends GowingAbstractPackableEntity implements 
     }
 
     /**
-     Get this instance's date as a string in the format <code>"YYYY-MM-DD"</code>.
+     Get this instance's date as a string in the format {@code "YYYY-MM-DD"}.
 
-     @return this instance's date as a string in the format <code>"YYYY-MM-DD"</code>.
+     @return this instance's date as a string in the format {@code "YYYY-MM-DD"}.
      */
 
     public String getDateString() {
@@ -540,17 +555,17 @@ public class ObtuseCalendarDate extends GowingAbstractPackableEntity implements 
 
     /**
      Get the time in milliseconds since the Java epoch when this instance's date starts in the local timezone.
-     <p/>If <code>date</code> is any valid {@link ObtuseCalendarDate} instance then
+     <p/>If {@code date} is any valid {@link ObtuseCalendarDate} instance then
      <blockquote><code>new Date( date.getDateStartTimeMs() - 1 ) )</code></blockquote>
-     yields a {@link Date} instance whose time is the very last millisecond (in the local timezone) of the day before <code>date</code>.
-     In other words, if <code>date</code> is <code>2009-03-03</code> then
+     yields a {@link Date} instance whose time is the very last millisecond (in the local timezone) of the day before {@code date}.
+     In other words, if {@code date} is {@code 2009-03-03} then
      <blockquote><code>System.out.println( "" + new Date( end.getDateStartTimeMs() - 1 );</code></blockquote>
      prints out
-     <blockquote><code>Mon Mar 02 23:59:59 MDT 2009</code></blockquote>
+     <blockquote>{@code Mon Mar 02 23:59:59 MDT 2009}</blockquote>
      if the program is running in the MDT timezone.
      <p/>If the same {@link Date} instance were to be printed using an appropriate
      date format which also formats the instance's milliseconds, the output would be
-     <blockquote><code>Mon Mar 02 23:59:59.999 MDT 2009</code></blockquote> if the program is running in the MDT timezone.
+     <blockquote>{@code Mon Mar 02 23:59:59.999 MDT 2009}</blockquote> if the program is running in the MDT timezone.
 
      @return the time in milliseconds since the Java epoch when this instance's date starts.
      */
@@ -571,9 +586,12 @@ public class ObtuseCalendarDate extends GowingAbstractPackableEntity implements 
 
             } catch ( ParsingException e ) {
 
-                throw new HowDidWeGetHereError( "ObtuseCalendarDate.getEarliestSupportedDate: unable to parse earliest supported date \"" +
-                                                EARLIEST_SUPPORTED_DATE_STRING +
-                                                "\"" );
+                throw new HowDidWeGetHereError(
+                        "ObtuseCalendarDate.getEarliestSupportedDate:  " +
+                        "unable to parse earliest supported date \"" +
+                        EARLIEST_SUPPORTED_DATE_STRING +
+                        "\""
+                );
 
             }
 
@@ -593,9 +611,11 @@ public class ObtuseCalendarDate extends GowingAbstractPackableEntity implements 
 
             } catch ( ParsingException e ) {
 
-                throw new HowDidWeGetHereError( "ObtuseCalendarDate.getLatestSupportedDate: unable to parse latest supported date \"" +
-                                                LATEST_SUPPORTED_DATE_STRING +
-                                                "\"" );
+                throw new HowDidWeGetHereError(
+                        "ObtuseCalendarDate.getLatestSupportedDate: unable to parse latest supported date \"" +
+                        LATEST_SUPPORTED_DATE_STRING +
+                        "\""
+                );
 
             }
 
@@ -608,17 +628,19 @@ public class ObtuseCalendarDate extends GowingAbstractPackableEntity implements 
     /**
      Get the time in milliseconds since the Java epoch when this instance's date ends in the local timezone.
      This is the value which is one millisecond before the start of the next date in the same local timezone.
-     <p/>If <code>date</code> is any valid {@link ObtuseCalendarDate} instance then
+     <p/>If {@code date} is any valid {@link ObtuseCalendarDate} instance then
      <blockquote><code>new Date( date.getDateEndTimeMs() + 1 ) )</code></blockquote>
-     yields a {@link Date} instance whose time is the very first millisecond (in the local timezone) of the day after <code>date</code>.
-     In other words, if <code>date</code> is <code>2009-03-03</code> then
+     yields a {@link Date} instance whose time is the very first millisecond
+     (in the local timezone) of the day after {@code date}.
+     In other words, if {@code date} is {@code 2009-03-03} then
      <blockquote><code>System.out.println( "" + new Date( end.getDateEndTimeMs() + 1 );</code></blockquote>
      prints out
-     <blockquote><code>Wed Mar 04 00:00:00 MDT 2009</code></blockquote>
+     <blockquote>{@code Wed Mar 04 00:00:00 MDT 2009}</blockquote>
      if the program is running in the MDT timezone.
      <p/>If the same {@link Date} instance were to be printed using the appropriate
      date format which also formats the instance's milliseconds, the output would be
-     <blockquote><code>Wed Mar 04 00:00:00.000 MDT 2009</code></blockquote> if the program is running in the MDT timezone.
+     <blockquote>{@code Wed Mar 04 00:00:00.000 MDT 2009}</blockquote>
+     if the program is running in the MDT timezone.
 
      @return the time in milliseconds since the Java epoch when this instance's date starts.
      */
@@ -634,15 +656,16 @@ public class ObtuseCalendarDate extends GowingAbstractPackableEntity implements 
      <p/>
      There are a few cases of interest:
      <ol>
-     <li>if <code>rhs</code> is an {@link ObtuseCalendarDate} instance representing the same calendar date as this instance
-     then this method returns <code>true</code>.</li>
-     <li>if <code>rhs</code> is a {@link Date} instance representing any time in the local timezone on the same calendar date as this instance
-     then this method returns <code>true</code>.</li>
-     <li>in all other cases, this method returns <code>false</code>.</li>
+     <li>if {@code rhs} is an {@link ObtuseCalendarDate} instance
+     representing the same calendar date as this instance then this method returns {@code true}.</li>
+     <li>if {@code rhs} is a {@link Date} instance representing any time in the local timezone
+     on the same calendar date as this instance then this method returns {@code true}.</li>
+     <li>in all other cases, this method returns {@code false}.</li>
      </ol>
 
-     @param rhs any valid value including <code>null</code>.
-     @return <code>true</code> if <code>rhs</code> is an {@link ObtuseCalendarDate} instance representing the same calendar date as this instance represents.
+     @param rhs any valid value including {@code null}.
+     @return {@code true} if {@code rhs} is an {@link ObtuseCalendarDate} instance
+     representing the same calendar date as this instance represents.
      */
 
     public boolean equals( final Object rhs ) {
@@ -687,9 +710,9 @@ public class ObtuseCalendarDate extends GowingAbstractPackableEntity implements 
      See the {@link String#compareTo} method's documentation for more information.
 
      @param rhs the instance that this instance is to be compared to.
-     @return the value 0 if the <code>rhs</code> instance's calendar date is the same as this instance's calendar date;
-     a value less than 0 if this instance's calendar date is prior to the <code>rhs</code> instance's calendar date;
-     a value greater than 0 if this instance's calendar date is after the <code>rhs</code> instance's calendar date.
+     @return the value 0 if the {@code rhs} instance's calendar date is the same as this instance's calendar date;
+     a value less than 0 if this instance's calendar date is prior to the {@code rhs} instance's calendar date;
+     a value greater than 0 if this instance's calendar date is after the {@code rhs} instance's calendar date.
      */
 
     public int compareTo( final @NotNull ObtuseCalendarDate rhs ) {
@@ -699,13 +722,17 @@ public class ObtuseCalendarDate extends GowingAbstractPackableEntity implements 
     }
 
     /**
-     Determine if the time (in the local timezone) described by a specified {@link Date} instance is on the same calendar date as this instance's calendar date.
+     Determine if the time (in the local timezone) described by a specified {@link Date} instance
+     is on the same calendar date as this instance's calendar date.
      <p/>
      This method is exactly equivalent to
-     <blockquote><code>{@link #getDateStartTimeMs()} <= rhs.getTime() && rhs.getTime() <= {@link #getDateEndTimeMs()}</code></blockquote>
+     <blockquote>
+     <code>{@link #getDateStartTimeMs()} <= rhs.getTime() && rhs.getTime() <= {@link #getDateEndTimeMs()}</code>
+     </blockquote>
 
      @param rhs the {@link Date} instance of interest.
-     @return true if the <code>rhs</code> {@link Date} instance specifies a time in the local timezone which is on the same calendar date as this instance's calendar date.
+     @return true if the {@code rhs} {@link Date} instance specifies a time in the local timezone
+     which is on the same calendar date as this instance's calendar date.
      */
 
     public boolean containsDate( final Date rhs ) {
@@ -736,8 +763,14 @@ public class ObtuseCalendarDate extends GowingAbstractPackableEntity implements 
             Logger.logMsg( "today (local timezone) is " + todayLocal() );
             Logger.logMsg( "today (UTC) is " + todayUTC() + " and " + todayUCT() + " and " + todayGMT() );
 
-            String[] testDateStrings =
-                    { "1993-04-15", "0814-01-28", "0999-12-31", "1000-01-01", EARLIEST_SUPPORTED_DATE_STRING, LATEST_SUPPORTED_DATE_STRING };
+            String[] testDateStrings = {
+                    "1993-04-15",
+                    "0814-01-28",
+                    "0999-12-31",
+                    "1000-01-01",
+                    EARLIEST_SUPPORTED_DATE_STRING,
+                    LATEST_SUPPORTED_DATE_STRING
+            };
             for ( String dateString : testDateStrings ) {
 
                 Logger.logMsg( "checking \"" + dateString + "\"" );

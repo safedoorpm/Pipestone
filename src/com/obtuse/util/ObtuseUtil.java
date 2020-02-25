@@ -532,6 +532,7 @@ public class ObtuseUtil {
 
             if ( _readonly ) {
 
+                //noinspection rawtypes
                 return (Set)Collections.unmodifiableSet( _ht.entrySet() );
 
             } else {
@@ -2508,7 +2509,7 @@ public class ObtuseUtil {
      That two different input values yield the same result is pretty ugly. This is why this method is private.
      */
 
-    private static StringBuilder enquoteJavaStringToNakedStringBuilder( @Nullable final String string ) {
+    public static StringBuilder enquoteJavaStringToNakedStringBuilder( @Nullable final String string ) {
 
         if ( string == null ) {
 

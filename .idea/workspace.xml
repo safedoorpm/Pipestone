@@ -5,37 +5,15 @@
     <option name="SHOW_STRUCTURE" value="true" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" name="Default" comment="Implemented a file selection dialog which is intended to be more customizable and less confusing to use than either JFileChooser or FileDialog.&#10;&#10;Implement the DiagonalLayout manager which is intended as a test bed for future layout managers and a demonstration of a very basic layout manager.&#10;&#10;Implement the ObtuseFlowLayoutManager which is intended as a substitute for the Java FlowLayout manager. It is hopefully more stable and predictable than FlowLayout.&#10;&#10;Add more filesystem-related 16x16 icons (used by the new ObtuseFileSelector class).&#10;&#10;Implement the VspSelectionUtils class. Not sure if it has an actual purpose in the long term.&#10;&#10;Implement the BasicVirtualScrollablePanelSelectionManager class which is intended to be used with the VirtualScrollablePanel facility.&#10;&#10;Minor cleanup all over the place.">
-      <change afterPath="$PROJECT_DIR$/src/com/obtuse/ui/ObtuseFileSelector.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/obtuse/ui/layout/play/DiagonalLayout.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/obtuse/ui/layout/play/ObtuseFlowLayoutManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/obtuse/ui/resources/document_16x16.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/obtuse/ui/resources/folder_bright_16x16.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/obtuse/ui/resources/folder_closed_16x16.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/obtuse/ui/resources/folder_open_16x16.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/obtuse/ui/vsp/BasicVirtualScrollablePanelSelectionManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/obtuse/ui/vsp/future/VspSelectionUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/copyright/Obtuse.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/copyright/Obtuse.xml" afterDir="false" />
+    <list default="true" id="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" name="Default" comment="In various places:  switch to using @code rather than the html code tag in JavaDocs.&#10;&#10;Major revamping of the AboutBox class.&#10;&#10;In ImageIconUtils.copyToBufferedImage:&#10;    eliminate the old first choice of using GraphicsConfiguration.createCompatibleImage to create a compatible new BufferedImage as this sometimes created a BufferedImage that other Java library methods could not cope with. Now, we just create a BufferedImage of type TYPE_INT_ARGB or TYPE_INT_RGB depending on whether the input Image has an alpha channel or not;&#10;    extract the actual scaling of images into a new getScaledImageIcon method so that this operation can be requested directly rather than only as part of fetching an ImageIcon.&#10;&#10;Add an ObtuseFunction5 class to allow helper methods to use five arguments.&#10;&#10;Make ObtuseUtil.enquoteJavaStringToNakedStringBuilder public so that it can be used elsewhere.&#10;&#10;Cleanup ObtuseCalendarDate (mostly JavaDocs).&#10;&#10;Add a bunch of new images (used mostly if not entirely by test code) to com.obtuse.ui.resources package.">
+      <change afterPath="$PROJECT_DIR$/src/com/obtuse/ui/resources/kodak_No_2_folding_autographic_brownie_transparent_background_400x400.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/obtuse/util/ObtuseFunction5.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pipestone.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Pipestone.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/DefaultMpsKnob.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/DefaultMpsKnob.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/FileSelectors2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/FileSelectors2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/MpsKnob.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/MpsKnob.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/MpsLabel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/MpsLabel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/ObtuseImageUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/ObtuseImageUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/OkPopupMessageWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/OkPopupMessageWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/layout/linear/LinearCache3.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/layout/linear/LinearCache3.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/layout/linear/LinearContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/layout/linear/LinearContainer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/layout/linear/LinearContainer3.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/layout/linear/LinearContainer3.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/layout/linear/LinearLayoutManager3.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/layout/linear/LinearLayoutManager3.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/layout/linear/LinearLayoutUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/layout/linear/LinearLayoutUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/vsp/VirtualScrollableElementModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/vsp/VirtualScrollableElementModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/vsp/VirtualScrollablePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/vsp/VirtualScrollablePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/vsp/play/PlayElementView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/vsp/play/PlayElementView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/DateUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/DateUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/ImageButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ImageButton.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/AboutBox.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/AboutBox.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/AboutBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/AboutBox.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/ObtuseFileSelector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/ObtuseFileSelector.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/ImageIconUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ImageIconUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/ObtuseSets.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ObtuseSets.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/ObtuseCalendarDate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ObtuseCalendarDate.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/ObtuseUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ObtuseUtil.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -341,7 +319,7 @@
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1546750356049" />
     <property name="dynamic.classpath" value="false" />
     <property name="extract.method.default.visibility" value="private" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/com/obtuse/ui/resources" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -353,7 +331,7 @@
     <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.splitter.main.proportions" value="0.3" />
-    <property name="project.structure.last.edited" value="Problems" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="recentsLimit" value="5" />
@@ -362,11 +340,19 @@
     <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/src/com/obtuse/util/TreeSorter2.java" />
   </component>
   <component name="RecentsManager">
-    <key name="IntroduceConstantDialog.RECENTS_KEY">
-      <recent name="com.obtuse.ui.layout.flexigrid1.FlexiGridTesting" />
-      <recent name="com.obtuse.util.Measure" />
-      <recent name="com.obtuse.util.ObtuseCalendarDate" />
-      <recent name="com.obtuse.ui.PopupJTableEditor.PopupDialog" />
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.obtuse.ui" />
+      <recent name="com.obtuse.util.gowing.p2a" />
+      <recent name="com.obtuse.graphs" />
+      <recent name="com.obtuse" />
+      <recent name="com.obtuse.ui.layout.flexigrid1.model" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/com/obtuse/ui/dnd" />
+      <recent name="$PROJECT_DIR$/src/com/obtuse/ui" />
+      <recent name="$PROJECT_DIR$/src/com/obtuse/ui/old" />
+      <recent name="$PROJECT_DIR$/src/com/obtuse/ui.old" />
+      <recent name="$PROJECT_DIR$/src/com/obtuse/ui/testanddemo" />
     </key>
     <key name="MoveInnerDialog.RECENTS_KEY">
       <recent name="com.obtuse.util.gowing.p2a" />
@@ -379,13 +365,6 @@
       <recent name="com.obtuse.ui.EventUtils" />
       <recent name="com.obtuse.util.packers.packer2.p2a.Constants" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/com/obtuse/ui/dnd" />
-      <recent name="$PROJECT_DIR$/src/com/obtuse/ui" />
-      <recent name="$PROJECT_DIR$/src/com/obtuse/ui/old" />
-      <recent name="$PROJECT_DIR$/src/com/obtuse/ui.old" />
-      <recent name="$PROJECT_DIR$/src/com/obtuse/ui/testanddemo" />
-    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.obtuse.ui" />
       <recent name="com.obtuse.util.gowing.p2a.exceptions" />
@@ -394,11 +373,11 @@
       <recent name="com.apple" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/com/obtuse/ui/resources" />
       <recent name="$PROJECT_DIR$/src/com/obtuse/graphs" />
       <recent name="$PROJECT_DIR$/src/com/obtuse/ui/future" />
       <recent name="$PROJECT_DIR$/src/com/obtuse/ui" />
       <recent name="$PROJECT_DIR$/src/com/obtuse" />
-      <recent name="$PROJECT_DIR$/src" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.obtuse.ui.gpe" />
@@ -407,15 +386,14 @@
       <recent name="com.obtuse.graphs" />
       <recent name="com.obtuse.util.gowing.p2a" />
     </key>
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="com.obtuse.ui" />
-      <recent name="com.obtuse.util.gowing.p2a" />
-      <recent name="com.obtuse.graphs" />
-      <recent name="com.obtuse" />
-      <recent name="com.obtuse.ui.layout.flexigrid1.model" />
+    <key name="IntroduceConstantDialog.RECENTS_KEY">
+      <recent name="com.obtuse.ui.layout.flexigrid1.FlexiGridTesting" />
+      <recent name="com.obtuse.util.Measure" />
+      <recent name="com.obtuse.util.ObtuseCalendarDate" />
+      <recent name="com.obtuse.ui.PopupJTableEditor.PopupDialog" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.ObtuseFileSelector">
+  <component name="RunManager" selected="Application.AboutBox">
     <configuration default="true" type="Applet">
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
       <method v="2">
@@ -426,13 +404,13 @@
       <Host>localhost</Host>
       <Port>5050</Port>
     </configuration>
-    <configuration name="DateUtils" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.obtuse.util.DateUtils" />
+    <configuration name="AboutBox" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.obtuse.ui.AboutBox" />
       <module name="Pipestone" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.obtuse.util.*" />
+          <option name="PATTERN" value="com.obtuse.ui.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -525,19 +503,19 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.DateUtils" />
       <item itemvalue="Application.GenericPanelManagerTester" />
       <item itemvalue="Application.ObtuseUtil" />
       <item itemvalue="Application.QuickLogger" />
       <item itemvalue="Application.ObtuseFileSelector" />
+      <item itemvalue="Application.AboutBox" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.AboutBox" />
         <item itemvalue="Application.ObtuseFileSelector" />
         <item itemvalue="Application.QuickLogger" />
         <item itemvalue="Application.ObtuseUtil" />
         <item itemvalue="Application.GenericPanelManagerTester" />
-        <item itemvalue="Application.DateUtils" />
       </list>
     </recent_temporary>
   </component>
@@ -773,14 +751,9 @@
       <workItem from="1577062776606" duration="6243000" />
       <workItem from="1577595436534" duration="2737000" />
       <workItem from="1578176259767" duration="15797000" />
-      <workItem from="1580341722933" duration="2122000" />
-    </task>
-    <task id="LOCAL-00054" summary="Major cleanup in the wrapped selector panels stuff.&#10;Advent of the ContextualToString class which facilitates providing different toString results depending on the context.&#10;Provide some basic support for customized toString results from ObtuseKeyword instances (note that this is customized toString results like providing mixed case keyword names; it is not contextual customized toString - each ObtuseKeyword instance will produce the exact same toString result although the developer gets to decide what that result will be when the ObtuseKeyword instance is created).">
-      <created>1519802350643</created>
-      <option name="number" value="00054" />
-      <option name="presentableId" value="LOCAL-00054" />
-      <option name="project" value="LOCAL" />
-      <updated>1519802350644</updated>
+      <workItem from="1580341722933" duration="3220000" />
+      <workItem from="1582278726366" duration="5814000" />
+      <workItem from="1582663371055" duration="458000" />
     </task>
     <task id="LOCAL-00055" summary="Add fairly basic &quot;regular verbose&quot; and &quot;super verbose&quot; mechanism to make it a bit easier to figure out why the &quot;finish unpacking&quot; phase of a Gowing unpack operation is failing.&#10;&#10;Add an unchecked GowingUnpackingDeadlockedException which is thrown when the &quot;finish unpacking&quot; phase of a Gowing unpack operation reaches a point where a round of finishing doesn't reduce the number of unfinished unpackables. This is usually because two packables are waiting for each other to finish (generally if not always because one or both of the packables have a &quot;cannot finish until the other is finished&quot; dependency that doesn't really need to be there, or the finishing strategy being used is flawed - roughly speaking, if it was possible to build the data structure one step-at-a-time in the first place then there must be a way to unpack it while finishing it one-step-at-a-time).&#10;&#10;Cleanup of various aspects of the Gowing facility and elsewhere.">
       <created>1520351414404</created>
@@ -1118,7 +1091,14 @@
       <option name="project" value="LOCAL" />
       <updated>1577173725180</updated>
     </task>
-    <option name="localTasksCounter" value="103" />
+    <task id="LOCAL-00103" summary="Implemented a file selection dialog which is intended to be more customizable and less confusing to use than either JFileChooser or FileDialog.&#10;&#10;Implement the DiagonalLayout manager which is intended as a test bed for future layout managers and a demonstration of a very basic layout manager.&#10;&#10;Implement the ObtuseFlowLayoutManager which is intended as a substitute for the Java FlowLayout manager. It is hopefully more stable and predictable than FlowLayout.&#10;&#10;Add more filesystem-related 16x16 icons (used by the new ObtuseFileSelector class).&#10;&#10;Implement the VspSelectionUtils class. Not sure if it has an actual purpose in the long term.&#10;&#10;Implement the BasicVirtualScrollablePanelSelectionManager class which is intended to be used with the VirtualScrollablePanel facility.&#10;&#10;Minor cleanup all over the place.">
+      <created>1580343871663</created>
+      <option name="number" value="00103" />
+      <option name="presentableId" value="LOCAL-00103" />
+      <option name="project" value="LOCAL" />
+      <updated>1580343871664</updated>
+    </task>
+    <option name="localTasksCounter" value="104" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1169,7 +1149,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Basic sanity for the VirtualScrollablePanel facility. It seems to work quite well with row-oriented elements (no support at all for anything else (yet?)).&#10;&#10;This commit contains a slightly earlier attempt to build a JTree-like facility (called FlexiGridTree) that handles more than just strings for each node. That attempt doesn't seem to be the right way to do this. I'm checking it in so that I can easily keep it around until I am sure that it is toast.&#10;&#10;Introduction of the ObtuseArrays class for hopefully useful array-related utility methods.&#10;&#10;Introduction of the UniqueID class which provides a Gowing-packable and fairly robust mechanism for handling unique ids. While one can achieve the same functionality by just using long or Long fields, I have found that having ids wrapped in a special class helps to find bugs where ids and non-ids get mixed up. Also, it is handly to have some utility methods that work with ids." />
     <MESSAGE value="Cleanup of the VirtualScrollablePanel facility along with a few fairly minor bug fixes and API changes.&#10;&#10;The biggest change is breaking up a couple .java files by moving inner classes and interfaces out into their own .java file.&#10; &#10;Minor cleanup in ObtuseUtils.&#10;&#10;Add a static method to the ImageIconUtils class that allows the caller to specify which class loader should be used to load ImageIcons from.&#10;&#10;Comment out a bunch of debug output here and there." />
     <MESSAGE value="Major cleanup in DateUtils class.&#10;Various minor cleanup elsewhere.&#10;&#10;This is a checkpoint commit prior to changing the VirtualScrollablePanel class to allocate views one at a time on a strictly as-needed basis instead of allocating one for each model which might be visible." />
     <MESSAGE value="Delete lots and lots of commented out lines.&#10;Throw away the old (failed) FlexiGridTree stuff." />
@@ -1194,7 +1173,8 @@
     <MESSAGE value="Add a new date format in DateUtils (MMM_DD_HHMMSS_YYYY) to handle dates like .Mar 15, 12:15:00 2012&quot;.&#10;&#10;Move many of the &quot;describe this GUI thing&quot; from LinearLayoutUtil to the new ObtuseGuiUtils utility class.&#10;&#10;Implement a simple interface to allow the measurements produced by the Measure class to be sorted in various ways.&#10;&#10;Implement the QuickLogger class which provides a much simpler logging facility that the existing Logger class.&#10;&#10;Implement Page-Up and Page-Down key support in the VirtualScrollablePanel facility. It's still a bit clunky but it's a lot better than having to scroll or mouse one's way through long scrollable panels." />
     <MESSAGE value="Add a new date format in DateUtils (MMM_DD_HHMMSS_YYYY) to handle dates like .Mar 15, 12:15:00 2012&quot;.&#10;&#10;Move many of the &quot;describe this GUI thing&quot; from LinearLayoutUtil to the new ObtuseGuiUtils utility class.&#10;&#10;Implement a simple interface to allow the measurements produced by the Measure class to be sorted in various ways.&#10;&#10;Implement the QuickLogger class which provides a much simpler logging facility that the existing Logger class.&#10;&#10;Implement Page-Up and Page-Down key support in the VirtualScrollablePanel facility. It's still a bit clunky but it's a lot better than having to scroll or mouse one's way through long scrollable panels.&#10;&#10;Plenty of minor cleanup." />
     <MESSAGE value="Implemented a file selection dialog which is intended to be more customizable and less confusing to use than either JFileChooser or FileDialog.&#10;&#10;Implement the DiagonalLayout manager which is intended as a test bed for future layout managers and a demonstration of a very basic layout manager.&#10;&#10;Implement the ObtuseFlowLayoutManager which is intended as a substitute for the Java FlowLayout manager. It is hopefully more stable and predictable than FlowLayout.&#10;&#10;Add more filesystem-related 16x16 icons (used by the new ObtuseFileSelector class).&#10;&#10;Implement the VspSelectionUtils class. Not sure if it has an actual purpose in the long term.&#10;&#10;Implement the BasicVirtualScrollablePanelSelectionManager class which is intended to be used with the VirtualScrollablePanel facility.&#10;&#10;Minor cleanup all over the place." />
-    <option name="LAST_COMMIT_MESSAGE" value="Implemented a file selection dialog which is intended to be more customizable and less confusing to use than either JFileChooser or FileDialog.&#10;&#10;Implement the DiagonalLayout manager which is intended as a test bed for future layout managers and a demonstration of a very basic layout manager.&#10;&#10;Implement the ObtuseFlowLayoutManager which is intended as a substitute for the Java FlowLayout manager. It is hopefully more stable and predictable than FlowLayout.&#10;&#10;Add more filesystem-related 16x16 icons (used by the new ObtuseFileSelector class).&#10;&#10;Implement the VspSelectionUtils class. Not sure if it has an actual purpose in the long term.&#10;&#10;Implement the BasicVirtualScrollablePanelSelectionManager class which is intended to be used with the VirtualScrollablePanel facility.&#10;&#10;Minor cleanup all over the place." />
+    <MESSAGE value="In various places:  switch to using @code rather than the html code tag in JavaDocs.&#10;&#10;Major revamping of the AboutBox class.&#10;&#10;In ImageIconUtils.copyToBufferedImage:&#10;    eliminate the old first choice of using GraphicsConfiguration.createCompatibleImage to create a compatible new BufferedImage as this sometimes created a BufferedImage that other Java library methods could not cope with. Now, we just create a BufferedImage of type TYPE_INT_ARGB or TYPE_INT_RGB depending on whether the input Image has an alpha channel or not;&#10;    extract the actual scaling of images into a new getScaledImageIcon method so that this operation can be requested directly rather than only as part of fetching an ImageIcon.&#10;&#10;Add an ObtuseFunction5 class to allow helper methods to use five arguments.&#10;&#10;Make ObtuseUtil.enquoteJavaStringToNakedStringBuilder public so that it can be used elsewhere.&#10;&#10;Cleanup ObtuseCalendarDate (mostly JavaDocs).&#10;&#10;Add a bunch of new images (used mostly if not entirely by test code) to com.obtuse.ui.resources package." />
+    <option name="LAST_COMMIT_MESSAGE" value="In various places:  switch to using @code rather than the html code tag in JavaDocs.&#10;&#10;Major revamping of the AboutBox class.&#10;&#10;In ImageIconUtils.copyToBufferedImage:&#10;    eliminate the old first choice of using GraphicsConfiguration.createCompatibleImage to create a compatible new BufferedImage as this sometimes created a BufferedImage that other Java library methods could not cope with. Now, we just create a BufferedImage of type TYPE_INT_ARGB or TYPE_INT_RGB depending on whether the input Image has an alpha channel or not;&#10;    extract the actual scaling of images into a new getScaledImageIcon method so that this operation can be requested directly rather than only as part of fetching an ImageIcon.&#10;&#10;Add an ObtuseFunction5 class to allow helper methods to use five arguments.&#10;&#10;Make ObtuseUtil.enquoteJavaStringToNakedStringBuilder public so that it can be used elsewhere.&#10;&#10;Cleanup ObtuseCalendarDate (mostly JavaDocs).&#10;&#10;Add a bunch of new images (used mostly if not entirely by test code) to com.obtuse.ui.resources package." />
     <option name="PRESELECT_EXISTING_CHANGELIST" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -1237,68 +1217,88 @@
       <screen x="0" y="23" width="2048" height="1211" />
     </state>
     <state x="416" y="23" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/-2048.0.2048.1152/0.23.2048.1211@0.23.2048.1211" timestamp="1578177593589" />
-    <state x="868" y="269" width="988" height="705" key="#xdebugger.evaluate" timestamp="1577036953780">
-      <screen x="0" y="23" width="2048" height="1210" />
+    <state x="-1059" y="405" width="990" height="705" key="#xdebugger.evaluate" timestamp="1582282912634">
+      <screen x="-2048" y="0" width="2048" height="1152" />
     </state>
     <state x="868" y="269" width="988" height="705" key="#xdebugger.evaluate/-2048.0.2048.1152/0.23.2048.1210@0.23.2048.1210" timestamp="1577036953780" />
-    <state x="0" y="114" key="CommitChangelistDialog2" timestamp="1580343627170">
-      <screen x="0" y="23" width="2048" height="1210" />
+    <state x="-1059" y="405" width="990" height="705" key="#xdebugger.evaluate/-2048.0.2048.1152/0.23.2048.1212@-2048.0.2048.1152" timestamp="1582282912634" />
+    <state x="176" y="23" width="1600" height="1208" key="CommitChangelistDialog2" timestamp="1582663666630">
+      <screen x="0" y="23" width="2048" height="1211" />
     </state>
+    <state x="176" y="23" width="1600" height="1208" key="CommitChangelistDialog2/-1600.0.1600.900/0.23.2048.1211@0.23.2048.1211" timestamp="1582663666630" />
     <state x="0" y="114" key="CommitChangelistDialog2/-2048.0.2048.1152/0.23.2048.1209@0.23.2048.1209" timestamp="1577173725074" />
-    <state x="0" y="114" key="CommitChangelistDialog2/-2048.0.2048.1152/0.23.2048.1210@0.23.2048.1210" timestamp="1580343627170" />
-    <state x="0" y="59" width="2048" height="1060" key="DiffContextDialog" timestamp="1580343180047">
+    <state x="69" y="23" key="CommitChangelistDialog2/-2048.0.2048.1152/0.23.2048.1210@0.23.2048.1210" timestamp="1582472980248" />
+    <state x="-1818" y="23" key="CommitChangelistDialog2/0.0.2560.1440/0.23.0.-70@0.23.0.-70" timestamp="1582474211065" />
+    <state x="158" y="37" width="1788" height="1048" key="DiffContextDialog" timestamp="1582474041253">
       <screen x="0" y="23" width="2048" height="1210" />
     </state>
     <state x="-1902" y="34" width="3801" height="1009" key="DiffContextDialog/-2048.0.2048.1152/0.23.2048.1209@0.23.2048.1209" timestamp="1577166562626" />
-    <state x="0" y="59" width="2048" height="1060" key="DiffContextDialog/-2048.0.2048.1152/0.23.2048.1210@0.23.2048.1210" timestamp="1580343180047" />
-    <state width="1904" height="330" key="GridCell.Tab.0.bottom" timestamp="1578385813886">
-      <screen x="0" y="23" width="2048" height="1211" />
+    <state x="158" y="37" width="1788" height="1048" key="DiffContextDialog/-2048.0.2048.1152/0.23.2048.1210@0.23.2048.1210" timestamp="1582474041253" />
+    <state width="1904" height="330" key="GridCell.Tab.0.bottom" timestamp="1582474238579">
+      <screen x="0" y="23" width="2560" height="1357" />
     </state>
     <state width="1904" height="330" key="GridCell.Tab.0.bottom/-2048.0.2048.1152/0.23.2048.1210@0.23.2048.1210" timestamp="1578205197697" />
+    <state width="1904" height="330" key="GridCell.Tab.0.bottom/-2048.0.2048.1152/0.23.2048.1211@-2048.0.2048.1152" timestamp="1582281607724" />
     <state width="1904" height="330" key="GridCell.Tab.0.bottom/-2048.0.2048.1152/0.23.2048.1211@0.23.2048.1211" timestamp="1578385813886" />
-    <state width="1904" height="330" key="GridCell.Tab.0.center" timestamp="1578385813885">
-      <screen x="0" y="23" width="2048" height="1211" />
+    <state width="1904" height="330" key="GridCell.Tab.0.bottom/0.23.2560.1357@0.23.2560.1357" timestamp="1582474238579" />
+    <state width="1904" height="330" key="GridCell.Tab.0.center" timestamp="1582474238578">
+      <screen x="0" y="23" width="2560" height="1357" />
     </state>
     <state width="1904" height="330" key="GridCell.Tab.0.center/-2048.0.2048.1152/0.23.2048.1210@0.23.2048.1210" timestamp="1578205197694" />
+    <state width="1904" height="330" key="GridCell.Tab.0.center/-2048.0.2048.1152/0.23.2048.1211@-2048.0.2048.1152" timestamp="1582281607723" />
     <state width="1904" height="330" key="GridCell.Tab.0.center/-2048.0.2048.1152/0.23.2048.1211@0.23.2048.1211" timestamp="1578385813885" />
-    <state width="1904" height="330" key="GridCell.Tab.0.left" timestamp="1578385813884">
-      <screen x="0" y="23" width="2048" height="1211" />
+    <state width="1904" height="330" key="GridCell.Tab.0.center/0.23.2560.1357@0.23.2560.1357" timestamp="1582474238578" />
+    <state width="1904" height="330" key="GridCell.Tab.0.left" timestamp="1582474238578">
+      <screen x="0" y="23" width="2560" height="1357" />
     </state>
     <state width="1904" height="330" key="GridCell.Tab.0.left/-2048.0.2048.1152/0.23.2048.1210@0.23.2048.1210" timestamp="1578205197690" />
+    <state width="1904" height="330" key="GridCell.Tab.0.left/-2048.0.2048.1152/0.23.2048.1211@-2048.0.2048.1152" timestamp="1582281607723" />
     <state width="1904" height="330" key="GridCell.Tab.0.left/-2048.0.2048.1152/0.23.2048.1211@0.23.2048.1211" timestamp="1578385813884" />
-    <state width="1904" height="330" key="GridCell.Tab.0.right" timestamp="1578385813885">
-      <screen x="0" y="23" width="2048" height="1211" />
+    <state width="1904" height="330" key="GridCell.Tab.0.left/0.23.2560.1357@0.23.2560.1357" timestamp="1582474238578" />
+    <state width="1904" height="330" key="GridCell.Tab.0.right" timestamp="1582474238579">
+      <screen x="0" y="23" width="2560" height="1357" />
     </state>
     <state width="1904" height="330" key="GridCell.Tab.0.right/-2048.0.2048.1152/0.23.2048.1210@0.23.2048.1210" timestamp="1578205197696" />
+    <state width="1904" height="330" key="GridCell.Tab.0.right/-2048.0.2048.1152/0.23.2048.1211@-2048.0.2048.1152" timestamp="1582281607723" />
     <state width="1904" height="330" key="GridCell.Tab.0.right/-2048.0.2048.1152/0.23.2048.1211@0.23.2048.1211" timestamp="1578385813885" />
-    <state width="1904" height="330" key="GridCell.Tab.1.bottom" timestamp="1578385813887">
-      <screen x="0" y="23" width="2048" height="1211" />
+    <state width="1904" height="330" key="GridCell.Tab.0.right/0.23.2560.1357@0.23.2560.1357" timestamp="1582474238579" />
+    <state width="1904" height="330" key="GridCell.Tab.1.bottom" timestamp="1582474238580">
+      <screen x="0" y="23" width="2560" height="1357" />
     </state>
     <state width="1904" height="330" key="GridCell.Tab.1.bottom/-2048.0.2048.1152/0.23.2048.1210@0.23.2048.1210" timestamp="1578205197562" />
     <state width="1904" height="330" key="GridCell.Tab.1.bottom/-2048.0.2048.1152/0.23.2048.1211@0.23.2048.1211" timestamp="1578385813887" />
-    <state width="1904" height="330" key="GridCell.Tab.1.center" timestamp="1578385813886">
-      <screen x="0" y="23" width="2048" height="1211" />
+    <state width="1904" height="330" key="GridCell.Tab.1.bottom/-2048.0.2048.1152/0.23.2048.1212@-2048.0.2048.1152" timestamp="1582281610119" />
+    <state width="1904" height="330" key="GridCell.Tab.1.bottom/0.23.2560.1357@0.23.2560.1357" timestamp="1582474238580" />
+    <state width="1904" height="330" key="GridCell.Tab.1.center" timestamp="1582474238579">
+      <screen x="0" y="23" width="2560" height="1357" />
     </state>
     <state width="1904" height="330" key="GridCell.Tab.1.center/-2048.0.2048.1152/0.23.2048.1210@0.23.2048.1210" timestamp="1578205197561" />
     <state width="1904" height="330" key="GridCell.Tab.1.center/-2048.0.2048.1152/0.23.2048.1211@0.23.2048.1211" timestamp="1578385813886" />
-    <state width="1904" height="330" key="GridCell.Tab.1.left" timestamp="1578385813886">
-      <screen x="0" y="23" width="2048" height="1211" />
+    <state width="1904" height="330" key="GridCell.Tab.1.center/-2048.0.2048.1152/0.23.2048.1212@-2048.0.2048.1152" timestamp="1582281610119" />
+    <state width="1904" height="330" key="GridCell.Tab.1.center/0.23.2560.1357@0.23.2560.1357" timestamp="1582474238579" />
+    <state width="1904" height="330" key="GridCell.Tab.1.left" timestamp="1582474238579">
+      <screen x="0" y="23" width="2560" height="1357" />
     </state>
     <state width="1904" height="330" key="GridCell.Tab.1.left/-2048.0.2048.1152/0.23.2048.1210@0.23.2048.1210" timestamp="1578205197561" />
     <state width="1904" height="330" key="GridCell.Tab.1.left/-2048.0.2048.1152/0.23.2048.1211@0.23.2048.1211" timestamp="1578385813886" />
-    <state width="1904" height="330" key="GridCell.Tab.1.right" timestamp="1578385813887">
-      <screen x="0" y="23" width="2048" height="1211" />
+    <state width="1904" height="330" key="GridCell.Tab.1.left/-2048.0.2048.1152/0.23.2048.1212@-2048.0.2048.1152" timestamp="1582281610118" />
+    <state width="1904" height="330" key="GridCell.Tab.1.left/0.23.2560.1357@0.23.2560.1357" timestamp="1582474238579" />
+    <state width="1904" height="330" key="GridCell.Tab.1.right" timestamp="1582474238580">
+      <screen x="0" y="23" width="2560" height="1357" />
     </state>
     <state width="1904" height="330" key="GridCell.Tab.1.right/-2048.0.2048.1152/0.23.2048.1210@0.23.2048.1210" timestamp="1578205197562" />
     <state width="1904" height="330" key="GridCell.Tab.1.right/-2048.0.2048.1152/0.23.2048.1211@0.23.2048.1211" timestamp="1578385813887" />
+    <state width="1904" height="330" key="GridCell.Tab.1.right/-2048.0.2048.1152/0.23.2048.1212@-2048.0.2048.1152" timestamp="1582281610119" />
+    <state width="1904" height="330" key="GridCell.Tab.1.right/0.23.2560.1357@0.23.2560.1357" timestamp="1582474238580" />
     <state x="579" y="258" key="NewModule_or_Project.wizard" timestamp="1575666071716">
       <screen x="0" y="23" width="2048" height="1210" />
     </state>
     <state x="579" y="258" key="NewModule_or_Project.wizard/-2048.0.2048.1152/0.23.2048.1210@0.23.2048.1210" timestamp="1575666071716" />
-    <state x="392" y="150" key="SettingsEditor" timestamp="1578356983357">
-      <screen x="0" y="23" width="2048" height="1211" />
+    <state x="-1656" y="115" key="SettingsEditor" timestamp="1582283013406">
+      <screen x="-2048" y="0" width="2048" height="1152" />
     </state>
     <state x="392" y="150" key="SettingsEditor/-2048.0.2048.1152/0.23.2048.1211@0.23.2048.1211" timestamp="1578356983357" />
+    <state x="-1656" y="115" key="SettingsEditor/-2048.0.2048.1152/0.23.2048.1212@-2048.0.2048.1152" timestamp="1582283013406" />
     <state x="536" y="306" key="Vcs.Push.Dialog.v2" timestamp="1577173734972">
       <screen x="0" y="23" width="2048" height="1209" />
     </state>
@@ -1311,9 +1311,10 @@
       <screen x="0" y="23" width="2048" height="1209" />
     </state>
     <state x="778" y="534" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/-2048.0.2048.1152/0.23.2048.1209@0.23.2048.1209" timestamp="1577595443922" />
-    <state x="602" y="333" width="844" height="588" key="find.popup" timestamp="1580342060685">
-      <screen x="0" y="23" width="2048" height="1210" />
+    <state x="602" y="333" width="844" height="589" key="find.popup" timestamp="1582663691857">
+      <screen x="0" y="23" width="2048" height="1211" />
     </state>
+    <state x="602" y="333" width="844" height="589" key="find.popup/-1600.0.1600.900/0.23.2048.1211@0.23.2048.1211" timestamp="1582663691857" />
     <state x="602" y="333" width="844" height="588" key="find.popup/-2048.0.2048.1152/0.23.2048.1210@0.23.2048.1210" timestamp="1580342060685" />
     <state x="602" y="333" width="844" height="589" key="find.popup/-2048.0.2048.1152/0.23.2048.1211@0.23.2048.1211" timestamp="1578357882394" />
     <state width="1017" height="385" key="javadoc.popup.new" timestamp="1578357306466">
@@ -1326,11 +1327,12 @@
       <screen x="0" y="23" width="2048" height="1211" />
     </state>
     <state x="698" y="141" key="refactoring.ChangeSignatureDialog/-2048.0.2048.1152/0.23.2048.1211@0.23.2048.1211" timestamp="1578205070708" />
-    <state x="616" y="201" width="838" height="1032" key="search.everywhere.popup" timestamp="1580343306233">
-      <screen x="0" y="23" width="2048" height="1210" />
+    <state x="-1432" y="169" width="838" height="983" key="search.everywhere.popup" timestamp="1582281597839">
+      <screen x="-2048" y="0" width="2048" height="1152" />
     </state>
     <state x="616" y="201" width="838" height="1032" key="search.everywhere.popup/-2048.0.2048.1152/0.23.2048.1209@0.23.2048.1209" timestamp="1577607404721" />
     <state x="616" y="201" width="838" height="1032" key="search.everywhere.popup/-2048.0.2048.1152/0.23.2048.1210@0.23.2048.1210" timestamp="1580343306233" />
+    <state x="-1432" y="169" width="838" height="983" key="search.everywhere.popup/-2048.0.2048.1152/0.23.2048.1211@-2048.0.2048.1152" timestamp="1582281597839" />
     <state x="616" y="201" width="838" height="1033" key="search.everywhere.popup/-2048.0.2048.1152/0.23.2048.1211@0.23.2048.1211" timestamp="1578177283228" />
   </component>
   <component name="XDebuggerManager">
@@ -1543,7 +1545,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/obtuse/util/ObtuseUtil.java</url>
-          <line>2732</line>
+          <line>2733</line>
           <option name="timeStamp" value="370" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -1693,7 +1695,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/obtuse/util/ObtuseUtil.java</url>
-          <line>2711</line>
+          <line>2712</line>
           <option name="timeStamp" value="520" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -1730,6 +1732,21 @@
           <url>file://$PROJECT_DIR$/src/com/obtuse/ui/vsp/BasicVirtualScrollablePanelSelectionManager.java</url>
           <line>44</line>
           <option name="timeStamp" value="540" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/obtuse/util/ImageIconUtils.java</url>
+          <line>311</line>
+          <option name="timeStamp" value="541" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/obtuse/util/ImageIconUtils.java</url>
+          <line>328</line>
+          <option name="timeStamp" value="542" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/obtuse/util/ImageIconUtils.java</url>
+          <line>319</line>
+          <option name="timeStamp" value="543" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

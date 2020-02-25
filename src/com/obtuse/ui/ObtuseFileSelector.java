@@ -934,6 +934,10 @@ public class ObtuseFileSelector extends JDialog {
 
     public ObtuseFileSelector setDirectory( @NotNull File dir ) {
 
+        // Someone has at least tried.
+
+        _directoryHasBeenSet = true;
+
         setErrMsg( "~" );
         Logger.logMsg( "we've been asked to set directory to " +
                        ObtuseUtil.enquoteJavaObject( dir.getAbsoluteFile() ) );
@@ -1046,7 +1050,6 @@ public class ObtuseFileSelector extends JDialog {
         }
 
         _currentDirectory = newCurrentDirectory;
-        _directoryHasBeenSet = true;
 
         _upButtons.removeAll();
 
