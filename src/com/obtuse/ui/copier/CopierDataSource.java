@@ -30,7 +30,7 @@ public class CopierDataSource extends UniqueWidget {
 
     private final Collection<CopierDataSource> _buddies = new ArrayList<>();
 
-    public class ListenerInfo extends UniqueWidget {
+    public static class ListenerInfo extends UniqueWidget {
 
         private final CopierActionListener _listener;
 

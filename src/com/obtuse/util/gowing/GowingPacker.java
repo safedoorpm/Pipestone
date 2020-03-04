@@ -1,6 +1,5 @@
 package com.obtuse.util.gowing;
 
-import com.obtuse.util.gowing.p2a.GowingEntityReference;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

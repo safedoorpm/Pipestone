@@ -117,7 +117,7 @@ public class ImmutableMap<K, V> implements Map<K, V>, Serializable {
      */
     static boolean eq( final Object o1, final Object o2 ) {
 
-        return o1 == null ? o2 == null : o1.equals( o2 );
+        return Objects.equals( o1, o2 );
     }
 
     @SuppressWarnings("EqualsWhichDoesntCheckParameterClass")
@@ -366,7 +366,7 @@ public class ImmutableMap<K, V> implements Map<K, V>, Serializable {
             // We don't pass a to c.toArray, to avoid window of
             // vulnerability wherein an unscrupulous multithreaded client
             // could get his hands on raw (unwrapped) Entries from c.
-            Object[] arr = c.toArray( a.length == 0 ? a : Arrays.copyOf( a, 0 ) );
+            @SuppressWarnings("SuspiciousToArrayCall") Object[] arr = c.toArray( a.length == 0 ? a : Arrays.copyOf( a, 0 ) );
 
             for ( int i = 0; i < arr.length; i++ ) {
                 arr[i] = new ImmutableMap.UnmodifiableEntrySet.UnmodifiableEntry<>( (Map.Entry<? extends K, ? extends V>)arr[i] );
@@ -376,11 +376,17 @@ public class ImmutableMap<K, V> implements Map<K, V>, Serializable {
                 return (T[])arr;
             }
 
+            //noinspection SuspiciousSystemArraycopy
             System.arraycopy( arr, 0, a, 0, arr.length );
             if ( a.length > arr.length ) {
+
+                //noinspection ConstantConditions
                 a[arr.length] = null;
+
             }
+
             return a;
+
         }
 
         /**

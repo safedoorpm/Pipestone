@@ -313,6 +313,7 @@ public class FileSelectors2 {
             } else {
 
                 File selectedFile = chooser.getSelectedFile();
+                //noinspection IfStatementWithIdenticalBranches
                 if ( selectedFile == null ) {
 
                     Logger.logErr(

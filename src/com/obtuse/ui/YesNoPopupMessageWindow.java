@@ -295,16 +295,7 @@ public abstract class YesNoPopupMessageWindow
             }
         };
 
-        Runnable doitRunnable = new Runnable() {
-
-            @Override
-            public void run() {
-
-                maybe.go();
-
-            }
-
-        };
+        Runnable doitRunnable = () -> maybe.go();
 
         if ( SwingUtilities.isEventDispatchThread() ) {
 
@@ -349,7 +340,7 @@ public abstract class YesNoPopupMessageWindow
             @Nullable final Runnable alternativeRunnable
     ) {
 
-        @SuppressWarnings("UnnecessaryLocalVariable") boolean answer =
+        boolean answer =
                 YesNoPopupMessageWindow.doit(
                         line1,
                         null,

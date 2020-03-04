@@ -99,10 +99,4 @@ public class DirectedGraph {
 
     }
 
-    /**
-     * Tarjan's strongly connected components algorithm.
-     * <p/>
-     * This algorithm finds all
-     */
-
 }

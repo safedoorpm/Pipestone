@@ -281,7 +281,6 @@ public class CSVParser implements Closeable {
 
             }
 
-            @SuppressWarnings({ "UnnecessaryLocalVariable" })
             int rval = Integer.parseInt( s );
 
             return rval;
@@ -316,8 +315,8 @@ public class CSVParser implements Closeable {
 
             }
 
-            @SuppressWarnings({ "UnnecessaryLocalVariable" })
             double rval = Double.parseDouble( s );
+
             return rval;
 
         } catch ( NumberFormatException e ) {
@@ -342,7 +341,6 @@ public class CSVParser implements Closeable {
      * @throws SyntaxErrorException if a backslash-escaped character other than the basic C-style set is encountered.
      */
 
-    @SuppressWarnings({ "ConstantConditions" })
     protected String getString( int lnum )
             throws SyntaxErrorException {
 
@@ -507,7 +505,7 @@ public class CSVParser implements Closeable {
 
         } else {
 
-            long lval = (long)val;
+            long lval = val;
             StringBuilder rval = new StringBuilder();
             while ( lval != 0L ) {
 

@@ -72,7 +72,8 @@ public class Range<T extends Comparable<T>> implements Serializable {
      * derived classes' implementations of this method to detect who knows what sort of inconsistencies.
      */
 
-    public boolean completelyContains( final Range<T> rhs ) {
+    @SuppressWarnings("RedundantThrows")
+    public boolean completelyContains( final Range<T> rhs ) throws RejectRangeException {
 
         //noinspection RedundantIfStatement
         if ( _startValue.compareTo( rhs.getStartValue() ) <= 0 && rhs.getEndValue().compareTo( _endValue ) <= 0 ) {
@@ -92,7 +93,7 @@ public class Range<T extends Comparable<T>> implements Serializable {
      * <tt>a.completelyInside( b )</tt> is equivalent to <tt>b.completelyContains( a )</tt>.
      * @param rhs the specified range.
      * @return true if this range is completely inside the specified range.
-     * @throws com.obtuse.util.exceptions.RejectRangeException if this range is somehow incompatible with the specified range.
+     * @throws RejectRangeException if this range is somehow incompatible with the specified range.
      * Note that the default implementation of this class never throws this exception.  It could be used by
      * derived classes' implementations of this method to detect who knows what sort of inconsistencies.
      */
@@ -108,12 +109,14 @@ public class Range<T extends Comparable<T>> implements Serializable {
      * Determines if this range overlaps the specified range.
      * @param rhs the specified range.
      * @return true if this range overlaps with the specified range; false otherwise.
-     * @throws com.obtuse.util.exceptions.RejectRangeException if this range is somehow incompatible with the specified range.
+     * @throws RejectRangeException if this range is somehow incompatible with the specified range.
      * Note that the default implementation of this class never throws this exception.  It could be used by
      * derived classes' implementations of this method to detect who knows what sort of inconsistencies.
      */
 
-    public boolean overlaps( final Range rhs ) {
+    @SuppressWarnings("RedundantThrows")
+    public boolean overlaps( final Range<T> rhs )
+            throws RejectRangeException {
 
         if ( getLongStartValue() <= rhs.getLongStartValue() ) {
 
@@ -131,12 +134,13 @@ public class Range<T extends Comparable<T>> implements Serializable {
      * Determine if two ranges are right next to each other (no gap between them).
      * @param rhs the other range.
      * @return true if they touch; false otherwise.
-     * @throws com.obtuse.util.exceptions.RejectRangeException if this range is somehow incompatible with the specified range.
+     * @throws RejectRangeException if this range is somehow incompatible with the specified range.
      * Note that the default implementation of this class never throws this exception.  It could be used by
      * derived classes' implementations of this method to detect who knows what sort of inconsistencies.
      */
 
-    public boolean touches( final Range rhs ) {
+    @SuppressWarnings("RedundantThrows")
+    public boolean touches( final Range<T> rhs ) throws RejectRangeException {
 
         return _longEndValue + 1L == rhs.getLongStartValue() || _longStartValue - 1L == rhs.getLongEndValue();
 

@@ -37,7 +37,7 @@ public class MyExploreSSL {
 
         private X509Certificate[] _certChain = null;
 
-        @SuppressWarnings("UnusedDeclaration")
+        @SuppressWarnings({ "UnusedDeclaration", "FieldCanBeLocal" })
         private String _authType = null;
 
         private MyTrustManager( final X509TrustManager realTrustManager ) {

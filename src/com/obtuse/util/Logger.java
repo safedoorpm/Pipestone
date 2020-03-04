@@ -432,7 +432,7 @@ public class Logger {
 
         while ( true ) {
 
-            int ix = s.indexOf( (int)'\n', last );
+            int ix = s.indexOf( '\n', last );
             if ( ix < last ) {
 
                 break;

@@ -36,7 +36,7 @@ public abstract class PostgresConnection {
 
     }
 
-    @SuppressWarnings( { "UnusedDeclaration", "unchecked", "UnusedAssignment" } )
+    @SuppressWarnings( { "UnusedDeclaration", "unchecked" } )
     public void connect( final Properties props )
             throws
             ObtuseJDBCDriverLoadFailedException,
@@ -88,6 +88,7 @@ public abstract class PostgresConnection {
         try {
 
             Statement stmt = _jdbcConnection.createStatement();
+            //noinspection SqlNoDataSourceInspection
             stmt.execute( "set time zone 'UTC'" );
 
             _jdbcConnection.commit();

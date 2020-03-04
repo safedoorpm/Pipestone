@@ -138,10 +138,12 @@ public class GowingPackableAttribute implements GowingPackable {
                 break;
 
             case PLAIN_TEXT:
+                //noinspection DuplicateBranchesInSwitch
                 Logger.logMsg( "" + ba.getAttributeType().getDescriptiveName() + ":  " + ba.getString() );
                 break;
 
             case HTML_TEXT:
+                //noinspection DuplicateBranchesInSwitch
                 Logger.logMsg( "" + ba.getAttributeType().getDescriptiveName() + ":  " + ba.getString() );
                 break;
 

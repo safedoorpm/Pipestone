@@ -313,8 +313,7 @@ public class Trace {
         Map<Integer, TraceHook> hooks;
         synchronized ( Trace.TRACE_HOOKS_LOCK ) {
 
-            events = new LinkedList<>();
-            events.addAll( Trace.s_traceEvents );
+            events = new LinkedList<>( Trace.s_traceEvents );
 
             hooks = new TreeMap<>();
             for ( int hookId : Trace.s_traceHooks.keySet() ) {

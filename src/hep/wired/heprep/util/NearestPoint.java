@@ -28,9 +28,8 @@ import java.awt.geom.Point2D;
         "ImplicitNumericConversion",
         "StandardVariableNames",
         "UnusedAssignment",
-        "UseOfSystemOutOrSystemErr"
-        , "JavaDoc"
-        , "MagicNumber"
+        "UseOfSystemOutOrSystemErr",
+        "MagicNumber"
         , "TooBroadScope"
         , "ManualArrayCopy"
         , "ConstantNamingConvention"
@@ -301,9 +300,11 @@ public class NearestPoint {
             // Compute distance from each of the points to that line
             distance[i] = a * v[i].getX() + b * v[i].getY() + c;
             if (distance[i] > 0.0) {
+                //noinspection DuplicateExpressions
                 distance[i] = (distance[i] * distance[i]) / abSquared;
             }
             if (distance[i] < 0.0) {
+                //noinspection DuplicateExpressions
                 distance[i] = -((distance[i] * distance[i]) / abSquared);
             }
         }

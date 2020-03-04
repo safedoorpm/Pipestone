@@ -38,7 +38,8 @@ public class ImmutableCollection<E> implements Collection<E>, Serializable {
     @NotNull
     public Object[] toArray()           {return c.toArray();}
     @NotNull
-    public <T> T[] toArray( @NotNull final T[] a)       {return c.toArray( a);}
+    public <T> T[] toArray( @NotNull final T[] a)       {//noinspection SuspiciousToArrayCall
+        return c.toArray(a);}
     public String toString()            {return c.toString();}
 
     @NotNull

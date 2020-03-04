@@ -103,7 +103,6 @@ public class Ranges<T extends Comparable<T>> implements Iterable<Range<T>>, Seri
 
     }
 
-    @SuppressWarnings("RedundantThrows")
     public boolean hasOverlappedRanges( final Range<T> range )
             throws RejectRangeException {
 
@@ -211,7 +210,7 @@ public class Ranges<T extends Comparable<T>> implements Iterable<Range<T>>, Seri
 
     }
 
-    @SuppressWarnings({ "UnusedReturnValue", "RedundantThrows" })
+    @SuppressWarnings({ "UnusedReturnValue" })
     private Ranges<T> myAdd( final Range<T> newRange ) throws RejectRangeException {
 
         if ( _ranges.isEmpty() ) {
@@ -355,7 +354,7 @@ public class Ranges<T extends Comparable<T>> implements Iterable<Range<T>>, Seri
 
     private static void doit( final Ranges<Integer> ranges, final int start, final int end ) {
 
-        Ranges.doit( ranges, new Range<>( start, end, (long)start, (long)end ) );
+        Ranges.doit( ranges, new Range<>( start, end, start, end ) );
 
     }
 

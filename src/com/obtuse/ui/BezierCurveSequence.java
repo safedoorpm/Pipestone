@@ -26,9 +26,9 @@ public class BezierCurveSequence extends AbstractCurveSequence {
 
     private double _cachedStrength = -1.0;
 
-    public class PointOnCurve implements PointOnGraphicsElement {
+    public static class PointOnCurve implements PointOnGraphicsElement {
 
-        private int _curveIndex;
+        @SuppressWarnings("FieldCanBeLocal") private int _curveIndex;
         private CubicBezierCurve _cubicBezierCurve;
         private Point2D _point;
 
@@ -415,10 +415,8 @@ public class BezierCurveSequence extends AbstractCurveSequence {
             float unscaledNextControlSlopeY = (float)nextPoint.getY() - (float)previousPoint.getY();
 
             float unscaledLength = (float)Math.sqrt(
-                    (double)(
-                            unscaledNextControlSlopeX * unscaledNextControlSlopeX +
-                            unscaledNextControlSlopeY * unscaledNextControlSlopeY
-                    )
+                    unscaledNextControlSlopeX * unscaledNextControlSlopeX +
+                    unscaledNextControlSlopeY * unscaledNextControlSlopeY
             );
 
             float nextControlSlopeX = unscaledNextControlSlopeX * ( offset / unscaledLength );
@@ -469,6 +467,7 @@ public class BezierCurveSequence extends AbstractCurveSequence {
 
     private static Point2D rotatePoint90( final float x, final float y ) {
 
+        //noinspection SuspiciousNameCombination
         return new Point2D.Float( -y, x );
 
     }

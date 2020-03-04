@@ -48,8 +48,6 @@ public class ObtuseFileSelector extends JDialog {
 
     static {
 
-        long start = System.currentTimeMillis();
-
         Random rng = new Random( System.currentTimeMillis() );
 
         // Start with a mixed case name to ensure that we don't accidentaly create a single case name.
@@ -100,15 +98,21 @@ public class ObtuseFileSelector extends JDialog {
                             // If the file also exists via both the lower and upper case names
                             // then we are on a mixed-case filesystem.
 
+                            //noinspection RedundantIfStatement
                             if ( lcName.exists() && ucName.exists() ) {
 
                                 isMixedCaseFileSystem = true;
 
-                                haveAnswer = true;
+                            } else {
 
-                                break;
+                                //noinspection ConstantConditions
+                                isMixedCaseFileSystem = false;
 
                             }
+
+                            haveAnswer = true;
+
+                            break;
 
                         }
 
@@ -141,34 +145,24 @@ public class ObtuseFileSelector extends JDialog {
         }
 
         MIXED_CASE_FILESYSTEM = isMixedCaseFileSystem;
-//        File abc = new File( new File( "." ), "abc" );
-//        File abC = new File( new File( "." ),"abC" );
-//        String lcPath = abc.getAbsolutePath();
-//        String mcPath = abC.getAbsolutePath();
-//        if ( abc.compareTo( abC ) == 0 ) {
-//
-//            MIXED_CASE_FILESYSTEM = true;
-//
-//        } else {
-//
-//            MIXED_CASE_FILESYSTEM = false;
-//
-//        }
 
-        long done = System.currentTimeMillis();
-        Logger.logMsg( "test took " + DateUtils.formatDuration( done - start ) );
         ObtuseUtil.doNothing();
 
     }
 
-    private static final ImageIcon s_testing = ImageIconUtils.fetchMandatoryIcon( "folder_closed_16x16.png", 100 );
-    private static final ImageIcon s_folderClosedIcon = ImageIconUtils.fetchMandatoryIcon( "folder_closed_16x16.png", 0, ObtuseConstants.OBTUSE_RESOURCES_DIRECTORY );
-//    private static final ImageIcon s_folderOpenIcon = fetchIcon( "folder_open_16x16.png" );
-//    private static final ImageIcon s_folderBrightIcon = fetchIcon( "folder_bright_16x16.png" );
-    private static final ImageIcon s_documentIcon = ImageIconUtils.fetchMandatoryIcon( "document_16x16.png", 0, ObtuseConstants.OBTUSE_RESOURCES_DIRECTORY );
+    private static final ImageIcon s_folderClosedIcon =
+            ImageIconUtils.fetchMandatoryIcon(
+                    "folder_closed_16x16.png",
+                    0,
+                    ObtuseConstants.OBTUSE_RESOURCES_DIRECTORY
+            );
+    private static final ImageIcon s_documentIcon =
+            ImageIconUtils.fetchMandatoryIcon(
+                    "document_16x16.png",
+                    0,
+                    ObtuseConstants.OBTUSE_RESOURCES_DIRECTORY
+            );
 
-//    private static final String LEFT_GUILLEMET = "\u00ab";
-//    private static final String RIGHT_GUILLEMET = "\u00bb";
     private static final Color DISABLED_BG_COLOUR = new Color( 240, 240, 240 );
     private static final Color DISABLED_FG_COLOUR = new Color( 128, 128, 128 );
 
@@ -199,12 +193,9 @@ public class ObtuseFileSelector extends JDialog {
 
             if ( "..".equals( f.getName() ) ) {
 
-//                setText( ".. " + LEFT_GUILLEMET + "actual parent directory" + RIGHT_GUILLEMET );
                 setText(
                         "<html>.. " +
-//                        "<font color=\"#505050\">" +
                         "&laquo;<i>actual parent directory&raquo;</i>" +
-//                        "</font>" +
                         "</html>"
                 );
 
@@ -212,9 +203,7 @@ public class ObtuseFileSelector extends JDialog {
 
                 setText(
                         "<html>. " +
-//                        "<font color=\"#505050\">" +
                         "&laquo;<i>this directory&raquo;</i>" +
-//                        "</font>" +
                         "</html>"
                 );
 
@@ -231,6 +220,12 @@ public class ObtuseFileSelector extends JDialog {
             } else {
 
                 setIcon( s_documentIcon );
+
+            }
+
+            if ( f.getName().endsWith( "png" ) ) {
+
+                ObtuseUtil.doNothing();
 
             }
 
@@ -255,6 +250,8 @@ public class ObtuseFileSelector extends JDialog {
                 setBackground( DISABLED_BG_COLOUR );
                 setForeground( DISABLED_FG_COLOUR );
 
+                setEnabled( false );
+
             }
 
             setFont( list.getFont() );
@@ -263,7 +260,7 @@ public class ObtuseFileSelector extends JDialog {
             if ( getPreferredSize().width > _maxWidth ) {
 
                 _maxWidth = getPreferredSize().width;
-                Logger.logMsg( "maximum element width is now " + _maxWidth );
+//                Logger.logMsg( "maximum element width is now " + _maxWidth );
 
             }
 
@@ -311,6 +308,7 @@ public class ObtuseFileSelector extends JDialog {
 
     private boolean _createDirectoryEnabled;
     private boolean _directoryHasBeenSet = false;
+    private boolean _readyForUse = false;
 
     private File[] _currentDirectoryContents;
 
@@ -334,60 +332,11 @@ public class ObtuseFileSelector extends JDialog {
         _contentPane = _linearContentContainer.getAsJPanel();
 
         _currentDirectoryNameLabel = new JLabel();
-//        _contentPane.add( _currentDirectoryNameLabel );
-//        JPanel xxx = new JPanel();
-//        xxx.setLayout( new BorderLayout() );
-        _upButtons = new JPanel() {
-            public void paint( Graphics g ) {
-//                Logger.logMsg( "UPBUTTONS - call to _upButtons.paint()" );
-                Logger.pushNesting( "UPBUTTONS.paint" );
-                super.paint( g );
-                Logger.popNestingLevel( "UPBUTTONS.paint" );
-            }
-
-            public void paintComponents( Graphics g ) {
-//                Logger.logMsg( "UPBUTTONS - call to _upButtons.paintComponents()" );
-                Logger.pushNesting( "UPBUTTONS.paintComponents" );
-                super.paintComponents( g );
-                Logger.popNestingLevel( "UPBUTTONS.paintComponents" );
-            }
-
-            public void paintComponent( Graphics g ) {
-//                Logger.logMsg( "UPBUTTONS - call to _upButtons.paintComponent()" );
-                Logger.pushNesting( "UPBUTTONS.paintComponent" );
-                super.paintComponent( g );
-                Logger.popNestingLevel( "UPBUTTONS.paintComponent" );
-            }
-
-            public void paintChildren( Graphics g ) {
-//                Logger.logMsg( "UPBUTTONS - call to _upButtons.paintChildren()" );
-                Logger.pushNesting( "UPBUTTONS.paintChildren" );
-                super.paintChildren( g );
-                Logger.popNestingLevel( "UPBUTTONS.paintChildren" );
-            }
-
-//            public void setBounds( int x, int y, int width, int height ) {
-//                Logger.logMsg( "_upBounds bounds set to " + ObtuseUtil.fBounds( x, y, width, height ) );
-//                super.setBounds( x, y, width, height );
-//            }
-
-//            public void setBounds( Rectangle r ) {
-//                super.setBounds( r );
-//            }
-
-//            public String toString() {
-//
-//                return "_upButtons()";
-//
-//            }
-        };
-//        _upButtons.setBorder( BorderFactory.createLineBorder( _upButtons.getForeground() ) );
+        _upButtons = new JPanel();
         _upButtons.setBorder( BorderFactory.createEtchedBorder() );
         _upButtons.setName( "upButtons" );
         _upButtons.setLayout( new ObtuseFlowLayoutManager( 5, 0 ) );
         _contentPane.add( _upButtons );
-//        xxx.add( _upButtons, BorderLayout.CENTER );
-//        _contentPane.add( xxx );
 
         _spaceSponge = new LinearLayoutUtil.SpaceSponge();
         _spaceSponge.setLayout( new BorderLayout() );
@@ -589,58 +538,6 @@ public class ObtuseFileSelector extends JDialog {
                 }
         );
 
-//        InputMap im = _newDirectoryNameField.getInputMap( JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT );
-//        ActionMap am = _createDirectoryButton.getActionMap();
-//
-//        im.put( KeyStroke.getKeyStroke( KeyEvent.VK_ENTER, 0 ), "createDirectory" );
-//        am.put( "createDirectory", new AbstractAction() {
-//                    @Override
-//                    public void actionPerformed( ActionEvent e ) {
-//
-//                        doCreateDirectory( e );
-//
-//                    }
-//
-//                }
-//        );
-
-//        This interferes with making the "Select" button the default button.
-
-//        _newDirectoryNameField.addKeyListener(
-//                new KeyAdapter() {
-//
-//                    @Override
-//                    public void keyPressed( final KeyEvent e ) {
-//
-//                        super.keyPressed( e );
-//
-//                        int key = e.getKeyCode();
-//                        if ( key == KeyEvent.VK_ENTER ) {
-//
-//                            Logger.logMsg( "ENTER key pressed" );
-//
-//                            doCreateDirectory();
-//
-//                        } else if ( key == KeyEvent.VK_COMMA ) {
-//
-//                            Logger.logMsg( "COMMA pressed" );
-//
-//                        } else {
-//
-//                            Logger.logMsg(
-//                                    "" +
-//                                    ObtuseUtil.hexvalue( key ) + " == " + key +
-//                                    ( key >= ' ' && key <= '~' ? ( " == " + (char)key) : "" ) +
-//                            " pressed"
-//                        );
-//
-//                        }
-//
-//                    }
-//
-//                }
-//        );
-
         checkNewDirectoryNameField();
 
         setErrMsg( "~" );
@@ -770,7 +667,10 @@ public class ObtuseFileSelector extends JDialog {
 
     }
 
-    private void makeEntryVisible( final File entryName, final boolean makeEntrySelected ) {
+    private void makeEntryVisible(
+            final File entryName,
+            @SuppressWarnings("SameParameterValue") final boolean makeEntrySelected
+    ) {
 
         Comparator<String> c = MIXED_CASE_FILESYSTEM ? String::compareToIgnoreCase : String::compareTo;
 
@@ -806,7 +706,13 @@ public class ObtuseFileSelector extends JDialog {
     @NotNull
     public ObtuseFileSelector setFileFilter( @Nullable FileFilter fileFilter ) {
 
-        _fileFilter = fileFilter;
+        if ( _fileFilter != fileFilter ) {
+
+            _fileFilter = fileFilter;
+
+            setDirectory( _currentDirectory );
+
+        }
 
         return this;
 
@@ -822,6 +728,7 @@ public class ObtuseFileSelector extends JDialog {
 
     }
 
+    @SuppressWarnings("unused")
     public boolean isCreateDirectoryEnabled() {
 
         return _createDirectoryEnabled;
@@ -836,15 +743,8 @@ public class ObtuseFileSelector extends JDialog {
 
     }
 
-//    @NotNull
-//    public ObtuseFileSelector run( @NotNull File startingDirectory ) {
-//
-//        return run( null, startingDirectory );
-//
-//    }
-
     @NotNull
-    public ObtuseFileSelector run( @Nullable final FileFilter fileFilter /*, @NotNull final File startingDirectory*/ ) {
+    public ObtuseFileSelector run() {
 
         if ( !_directoryHasBeenSet ) {
 
@@ -854,14 +754,8 @@ public class ObtuseFileSelector extends JDialog {
 
         }
 
-        setFileFilter( fileFilter );
-
-//        setDirectory( startingDirectory );
-
         setMinimumSize( new Dimension( 300, 400 ) );
         setMaximumSize( new Dimension( 32767, 32767 ) );
-
-        //        setMaximumSize( new Dimension( 300, 400 ) );
 
         _errmsgLabel.setText( "~" );
         pack();
@@ -869,13 +763,34 @@ public class ObtuseFileSelector extends JDialog {
         _errmsgLabel.setPreferredSize( new Dimension( 0, _errmsgLabel.getHeight() ) );
         _errmsgLabel.setText( "" );
 
-//        setDirectory( _currentDirectory );
-//        setMaximumSize( new Dimension( 32767, 32767 ) );
+        _readyForUse = true;
 
-        setVisible( true );
-//        _errmsgLabel.setText( "" );
+        return resume();
 
-        return this;
+////        setDirectory( _currentDirectory );
+////        setMaximumSize( new Dimension( 32767, 32767 ) );
+//
+//        setVisible( true );
+////        _errmsgLabel.setText( "" );
+//
+//        return this;
+
+    }
+
+    @NotNull
+    public ObtuseFileSelector resume() {
+
+        if ( _readyForUse ) {
+
+            setVisible( true );
+
+            return this;
+
+        } else {
+
+            return run();
+
+        }
 
     }
 
@@ -910,7 +825,7 @@ public class ObtuseFileSelector extends JDialog {
 
                         Logger.logErr(
                                 "ObtuseFileSelector.narrowSelection:  " +
-                                "IOException caught get canonical file for " +
+                                "IOException caught getting canonical file for " +
                                 ObtuseUtil.enquoteJavaObject( selection ) +
                                 " - using non-canonical version",
                                 e
@@ -997,7 +912,7 @@ public class ObtuseFileSelector extends JDialog {
 
         }
 
-        Logger.logMsg( "We're committed to moving to " + ObtuseUtil.enquoteJavaObject( newCurrentDirectory ) );
+//        Logger.logMsg( "We're committed to moving to " + ObtuseUtil.enquoteJavaObject( newCurrentDirectory ) );
 
         _fileJListModel.clear();
 
@@ -1039,11 +954,18 @@ public class ObtuseFileSelector extends JDialog {
 
                 _listElementSelectable[ix] = true;
 
-            } else if ( _fileFilter.accept( f ) ) {
+            } else //noinspection RedundantIfStatement
+                if ( _fileFilter.accept( f ) ) {
 
                 _listElementSelectable[ix] = true;
 
+            } else {
+
+                _listElementSelectable[ix] = false;
+
             }
+
+//            Logger.logMsg( "setup [" + ObtuseUtil.lpad( ix, 3 ) + "] is " + _listElementSelectable[ix] );
 
             ix += 1;
 
@@ -1053,58 +975,20 @@ public class ObtuseFileSelector extends JDialog {
 
         _upButtons.removeAll();
 
-        File cd = _currentDirectory;
-        Logger.logMsg( "building upButtons . . ." );
-        for ( int i = 0; true; i += 1 ) {
+        for ( File cd = _currentDirectory; cd != null; cd = cd.getParentFile() ) {
 
             String nakedName = cd.getName() + "/";
             String quotedName = ObtuseUtil.enquoteJavaObject( nakedName );
-            Logger.logMsg( "    cd[" + i + "]=" + ObtuseUtil.enquoteJavaObject( cd ) + ", n=" + quotedName );
-            final int ii = i;
             JLabel upButton = new JLabel( quotedName ) {
-                public void paint( Graphics g ) {
-                    Logger.pushNesting( "paint" );
-                    Logger.logMsg( "upbutton  - call to  upButton .paint(" + quotedName + ") #" + ii );
-                    super.paint( g );
-                    Logger.popNestingLevel( "paint" );
-                }
-
-                public void paintComponents( Graphics g ) {
-                    Logger.pushNesting( "paintComponents" );
-                    Logger.logMsg( "upbutton  - call to  upButton .paintComponents(" + quotedName + ") #" + ii );
-                    super.paintComponents( g );
-                    Logger.popNestingLevel( "paintComponents" );
-                }
-
-                public void paintComponent( Graphics g ) {
-                    Logger.pushNesting( "paintComponent" );
-                    Logger.logMsg( "upbutton  - call to  upButton .paintComponent(" + quotedName + ") #"  + ii );
-                    super.paintComponent( g );
-                    Logger.popNestingLevel( "paintComponent" );
-                }
-
-                public void paintChildren( Graphics g ) {
-                    Logger.pushNesting( "paintChildren" );
-                    Logger.logMsg( "upbutton  - call to  upButton .paintChildren(" + quotedName + ") #" + ii );
-                    super.paintChildren( g );
-                    Logger.popNestingLevel( "paintChildren" );
-                }
-
-//                public void setBounds( int x, int y, int width, int height ) {
-//                    Logger.logMsg( this + " bounds set to " + ObtuseUtil.fBounds( x, y, width, height ) );
-//                    super.setBounds( x, y, width, height );
-//                }
-
-//                public void setBounds( Rectangle r ) {
-//                    super.setBounds( r );
-//                }
 
                 public String toString() {
 
                     return "upButton(" + quotedName + ")";
 
                 }
+
             };
+
             upButton.setIconTextGap( 0 );
             upButton.setHorizontalTextPosition( SwingConstants.LEFT );
             File constantCd = cd;
@@ -1140,14 +1024,6 @@ public class ObtuseFileSelector extends JDialog {
             );
 
             _upButtons.add( upButton, 0 );
-
-            cd = cd.getParentFile();
-            if ( cd == null ) {
-
-                Logger.logMsg( "cd is now null - bailing out of loop" );
-                break;
-
-            }
 
         }
 
@@ -1342,47 +1218,45 @@ public class ObtuseFileSelector extends JDialog {
 
             dialog.enableCreateDirectory( true )
                   .setDirectory( new File( System.getProperty( "user.home" ) ) )
-                  .run(
-                    new FileFilter() {
-                        private Set<String> _suffixes = Set.of(
-                                ".png",
-                                ".jpg"
-                        );
+                  .setFileFilter(
+                          new FileFilter() {
+                              private Set<String> _suffixes = Set.of(
+                                      ".png",
+                                      ".jpg"
+                              );
 
-                        @Override
-                        public boolean accept( final File pathName ) {
+                              @Override
+                              public boolean accept( final File pathName ) {
 
-                            if ( pathName.isDirectory() ) {
+                                  if ( pathName.isDirectory() ) {
 
-                                return true;
+                                      return true;
 
-                            } else {
+                                  } else {
 
-                                String suffix = ObtuseUtil.extractSuffix( pathName.getName() );
-                                //noinspection RedundantIfStatement
-                                if ( _suffixes.contains( suffix ) ) {
+                                      String suffix = ObtuseUtil.extractSuffix( pathName.getName() );
+                                      //noinspection RedundantIfStatement
+                                      if ( _suffixes.contains( suffix ) ) {
 
-                                    return true;
+                                          return true;
 
-                                }
+                                      }
 
-                                return false;
+                                      return false;
 
-                            }
+                                  }
 
-                        }
+                              }
 
-                        @Override
-                        public String getDescription() {
+                              @Override
+                              public String getDescription() {
 
-                            return "thing";
+                                  return "thing";
 
-                        }
+                              }
 
-                    }
-//                    ,
-//                    new File( "/Users/danny/Junket" )
-            );
+                          }
+                  ).run();
 
             Optional<List<File>> optSelection = dialog.getOptMultiSelection();
 

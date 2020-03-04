@@ -243,10 +243,13 @@ public class DiagonalLayout implements LayoutManager2 {
                 }
 
                 // If y is too large,
-                if ((y + d.height)
-                    > (parent.getHeight() - insets.bottom)) {
+                if ( ( y + d.height ) > ( parent.getHeight() - insets.bottom ) ) {
+
                     // do nothing.
                     // Another choice would be to do what we do to x.
+
+                    ObtuseUtil.doNothing();
+
                 }
 
                 // Set the component's size and position.

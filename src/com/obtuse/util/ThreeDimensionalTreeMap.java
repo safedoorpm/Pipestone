@@ -90,6 +90,7 @@ public class ThreeDimensionalTreeMap<
      </p>
      */
 
+    @SuppressWarnings("rawtypes")
     public static final ThreeDimensionalSortedMap EMPTY_MAP3D = new ThreeDimensionalTreeMap( true );
 
     /**
@@ -145,11 +146,7 @@ public class ThreeDimensionalTreeMap<
 
         if ( makeReadonly ) {
 
-            for ( T1 t1 : _map.keySet() ) {
-
-                _map.put( t1, new TwoDimensionalTreeMap<>( _map.get( t1 ), true ) );
-
-            }
+            _map.replaceAll( ( t, v ) -> new TwoDimensionalTreeMap<>( _map.get( t ), true ) );
 
             _map = Collections.unmodifiableSortedMap( _map );
 
@@ -224,11 +221,7 @@ public class ThreeDimensionalTreeMap<
 
             if ( _readonly ) {
 
-                for ( T1 t1 : _map.keySet() ) {
-
-                    _map.put( t1, new TwoDimensionalTreeMap<>( _map.get( t1 ), true ) );
-
-                }
+                _map.replaceAll( ( t, v ) -> new TwoDimensionalTreeMap<>( _map.get( t ), true ) );
 
                 _map = Collections.unmodifiableSortedMap( _map );
 

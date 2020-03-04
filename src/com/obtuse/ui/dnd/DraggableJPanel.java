@@ -116,7 +116,7 @@ public class DraggableJPanel extends SelectableImage implements MouseListener, F
      This transfer handler does not support export.
      */
 
-    private class OurTransferHandler extends TransferHandler {
+    private static class OurTransferHandler extends TransferHandler {
 
         final int _supportedActions;
 

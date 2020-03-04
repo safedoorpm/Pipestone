@@ -7,7 +7,6 @@ import com.obtuse.util.gowing.GowingPackable;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
-import java.util.Optional;
 
 /*
  * Copyright © 2015 Obtuse Systems Corporation

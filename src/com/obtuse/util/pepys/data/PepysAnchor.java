@@ -26,6 +26,7 @@ public class PepysAnchor<T extends PepysEventListener> {
 
     public synchronized T castOff( final T listener ) {
 
+        //noinspection RedundantCollectionOperation
         if ( _listeners.contains( listener ) ) {
 
             _listeners.remove( listener );

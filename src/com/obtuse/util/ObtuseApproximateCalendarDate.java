@@ -1471,6 +1471,7 @@ public class ObtuseApproximateCalendarDate
         boolean equivalentResult = lhs.equivalent( rhs );
         if ( equalsOracle == equalsResult && equivalentOracle == equivalentResult ) {
 
+            //noinspection DuplicateExpressions
             Logger.logMsg(
                     "" + lhs + " vs " + rhs + ( equalsOracle ? " are" : " are not" ) + " equals and" +
                     ( equivalentOracle ? " are" : " are not" ) + " equivalent"
@@ -1478,6 +1479,7 @@ public class ObtuseApproximateCalendarDate
 
         } else if ( equalsOracle == equalsResult ) {
 
+            //noinspection DuplicateExpressions
             Logger.logErr(
                     "" + lhs + " vs " + rhs + ( equalsOracle ? " are" : " are not" ) + " equals and" +
                     ( equivalentOracle ? " are" : " are not" ) + " equivalent",
@@ -1486,6 +1488,7 @@ public class ObtuseApproximateCalendarDate
 
         } else if ( equivalentOracle == equivalentResult ) {
 
+            //noinspection DuplicateExpressions
             Logger.logErr(
                     "" + lhs + " vs " + rhs + ( equalsOracle ? " are" : " are not" ) + " equals and" +
                     ( equivalentOracle ? " are" : " are not" ) + " equivalent",
@@ -1494,6 +1497,7 @@ public class ObtuseApproximateCalendarDate
 
         } else {
 
+            //noinspection DuplicateExpressions
             Logger.logErr(
                     "" + lhs + " vs " + rhs + ( equalsOracle ? " are" : " are not" ) + " equals and" +
                     ( equivalentOracle ? " are" : " are not" ) + " equivalent",

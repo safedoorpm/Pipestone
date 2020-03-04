@@ -23,7 +23,7 @@ import java.util.ArrayList;
 
 public class ObtuseFlowLayoutManager implements LayoutManager2 {
 
-    private class ComponentPlan {
+    private static class ComponentPlan {
 
         @NotNull final Component _component;
         @NotNull final Rectangle _bounds;

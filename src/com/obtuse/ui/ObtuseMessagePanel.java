@@ -131,7 +131,9 @@ public class ObtuseMessagePanel extends JPanel implements MessageLabelInterface 
 
     @NotNull
     public Container getAsContainer() {
-        return (Container)this;
+
+        return this;
 
     }
+
 }

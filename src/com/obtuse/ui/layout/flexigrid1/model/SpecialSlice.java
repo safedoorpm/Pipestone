@@ -5,11 +5,8 @@
 
 package com.obtuse.ui.layout.flexigrid1.model;
 
-import com.obtuse.ui.layout.flexigrid1.FlexiGridItemInfo;
-import com.obtuse.ui.layout.flexigrid1.util.FlexiGridBasicConstraint;
 import com.obtuse.ui.layout.flexigrid1.util.FlexiGridConstraint;
 import com.obtuse.ui.layout.flexigrid1.util.FlexiGridConstraintCategory;
-import com.obtuse.ui.layout.flexigrid1.util.FlexiGridConstraintsTable;
 import com.obtuse.util.ObtuseUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

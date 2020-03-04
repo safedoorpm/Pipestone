@@ -482,6 +482,7 @@ public class GenericTag
 
         if ( getInstanceId().equals( rhs.getInstanceId() ) ) {
 
+            //noinspection DuplicateExpressions
             if ( !toString().equals( rhs.toString() ) ) {
 
                 String msg = "GenericTag.compareTo( this=" + this + ", rhs=" + rhs + "):  " +
@@ -495,7 +496,8 @@ public class GenericTag
 
             }
 
-        } else if ( toString().equals( rhs.toString() ) ) {
+        } else //noinspection DuplicateExpressions
+            if ( toString().equals( rhs.toString() ) ) {
 
             Logger.logMsg( "checking again:  " + getCategoryTag().equals( rhs.getCategoryTag() ) );
 
@@ -576,7 +578,7 @@ public class GenericTag
     @SuppressWarnings("unused")
     private static void doitVoid(
             final @NotNull String what,
-            final @NotNull DoitObject func
+            @SuppressWarnings("rawtypes") final @NotNull DoitObject func
     ) {
 
         try {
@@ -663,7 +665,7 @@ public class GenericTag
 
     private static void boomOk(
             final @NotNull String what,
-            final @NotNull DoitObject func,
+            @SuppressWarnings("rawtypes") final @NotNull DoitObject func,
             @SuppressWarnings("SameParameterValue") final @NotNull Class<? extends Throwable> expectedError
     ) {
 

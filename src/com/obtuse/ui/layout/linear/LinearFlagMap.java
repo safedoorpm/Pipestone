@@ -77,7 +77,7 @@ public class LinearFlagMap extends ImmutableSortedMap<LinearFlagName,LinearFlagN
     }
 
     /**
-     A utility method that creates a <b><u>mutable</u> {@link SortedMap<LinearFlagName,LinearFlagNameValue>} containing the specified flags.
+     A utility method that creates a <b><u>mutable</u> {@link SortedMap}{@code <}{@link LinearFlagName}{@code ,}{@link LinearFlagNameValue}{@code >} containing the specified flags.
      @param flags a {@link LinearFlagNameValue} array containing the 'specified flags'. {@code null} values are silently stripped out.
      @return the resulting {@link LinearFlagMap} instance.
      */

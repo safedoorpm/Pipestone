@@ -27,7 +27,7 @@ public class GowingToken {
 
     private final int _offset;
 
-    private final Throwable _exception;
+    @SuppressWarnings("unused") private final Throwable _exception;
 
     /**
      Encapsulate any non-array token.
@@ -421,6 +421,7 @@ public class GowingToken {
                 break;
 
             case FILE:
+                //noinspection DuplicateBranchesInSwitch
                 holder = new GowingStringHolder( entityName, valueToken.stringValue(), true );
                 break;
 

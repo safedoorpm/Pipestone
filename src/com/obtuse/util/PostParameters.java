@@ -88,23 +88,27 @@ public class PostParameters implements Serializable {
      * @throws InterruptedException if the operation needs to be aborted due to an error.
      */
 
-    public static void decodeParms( final String parms, final PostParameters p ) {
+    @SuppressWarnings("RedundantThrows")
+    public static void decodeParms( final String parms, final PostParameters p )
+            throws InterruptedException {
 
         if ( parms == null ) {
+
             return;
+
         }
 
         StringTokenizer st = new StringTokenizer( parms, "&" );
         while ( st.hasMoreTokens() ) {
 
             String e = st.nextToken();
-            int sep = e.indexOf( (int)'=' );
+            int sep = e.indexOf( '=' );
 
             if ( sep >= 0 ) {
 
                 p.setParameter(
-			ObtuseUtil.decodePercent( e.substring( 0, sep ) ).trim(),
-			ObtuseUtil.decodePercent( e.substring( sep + 1 ) )
+                        ObtuseUtil.decodePercent( e.substring( 0, sep ) ).trim(),
+                        ObtuseUtil.decodePercent( e.substring( sep + 1 ) )
                 );
 
             }
@@ -148,7 +152,6 @@ public class PostParameters implements Serializable {
 
     }
 
-    @SuppressWarnings( { "UnnecessaryLocalVariable" } )
     public static PostParameters makeProperties( final String encodedProperties ) {
 
         try {
