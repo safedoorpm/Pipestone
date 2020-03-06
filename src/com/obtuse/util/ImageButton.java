@@ -241,12 +241,6 @@ public class ImageButton {
                                         .run();
                                 imageButtonOwner.setButtonStates();
 
-//                            } else if ( Clicks.isRightClick( mouseEvent ) ) {
-//
-//                                Logger.logMsg( "it's a right-click " + Clicks.describeInputBitMask( mouseEvent.getModifiersEx() ) );
-//
-//                                ObtuseUtil.doNothing();
-
                             } else {
 
                                 Logger.logMsg( "it's " + Clicks.describeInputBitMask( mouseEvent.getModifiersEx() ) );

@@ -54,7 +54,8 @@ public class TwoDimensionalTreeMap<
                 final @NotNull GowingEntityReference er
         ) {
 
-            return new TwoDimensionalTreeMap( unPacker, bundle );
+            //noinspection DiamondCanBeReplacedWithExplicitTypeArguments
+            return new TwoDimensionalTreeMap<>( unPacker, bundle );
 
         }
 
@@ -90,6 +91,7 @@ public class TwoDimensionalTreeMap<
      </p>
       */
 
+    @SuppressWarnings("rawtypes")
     public static final TwoDimensionalSortedMap EMPTY_2DMAP = new TwoDimensionalTreeMap( true );
 
     /**
@@ -110,8 +112,6 @@ public class TwoDimensionalTreeMap<
     TwoDimensionalSortedMap<A,B,C> empty2DMap() {
 
         return EMPTY_2DMAP;
-
-//        return new TwoDimensionalTreeMap<>(true );
 
     }
 
@@ -580,7 +580,7 @@ public class TwoDimensionalTreeMap<
                     } else {
 
                         throw new HowDidWeGetHereError(
-                                "LancotMediaLibraryRoot.readImportBundle:  " +
+                                "TwoDimensionalTreeMap:  " +
                                 "read yielded a " +
                                 first.getClass()
                                      .getCanonicalName() +
@@ -593,7 +593,7 @@ public class TwoDimensionalTreeMap<
                 } else {
 
                     throw new HowDidWeGetHereError(
-                            "LancotMediaLibraryRoot.readImportBundle:  read yielded " +
+                            "TwoDimensionalTreeMap:  read yielded " +
                             ObtuseUtil.pluralize( interestingStuff.size(), "element", "elements" ) +
                             " when we expected one element"
                     );
@@ -619,7 +619,7 @@ public class TwoDimensionalTreeMap<
 
     private static void displayMap(
             final String title,
-            final TwoDimensionalSortedMap map
+            @SuppressWarnings("rawtypes") final TwoDimensionalSortedMap map
     ) {
 
         Logger.logMsg( title );
@@ -627,7 +627,7 @@ public class TwoDimensionalTreeMap<
 
             int ix = ((Integer)ixO).intValue();
 
-            @SuppressWarnings("unchecked") SortedMap notNullInnerMap = map.getNotNullInnerMap( ix );
+            @SuppressWarnings({ "unchecked", "rawtypes" }) SortedMap notNullInnerMap = map.getNotNullInnerMap( ix );
             for ( Object sx : notNullInnerMap.keySet() ) {
 
                 Logger.logMsg( "    map(" + ix + "," + sx + ") = " + notNullInnerMap.get( sx ) );

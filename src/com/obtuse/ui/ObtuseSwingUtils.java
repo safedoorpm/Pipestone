@@ -502,7 +502,6 @@ public class ObtuseSwingUtils {
                ObtuseUtil.pluralize(
                container.getComponentCount(),
                "component" ) +
-//               + ( container.getComponentCount() == 1 ? "" : "s" ) +
                ", " +
                sb +
                " )";

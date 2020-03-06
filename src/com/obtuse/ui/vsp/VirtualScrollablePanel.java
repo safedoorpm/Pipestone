@@ -96,8 +96,6 @@ public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends 
         //noinspection StatementWithEmptyBody
         if ( scrollBar.getValueIsAdjusting() ) {
 
-//            Logger.logMsg( name + " scroll bar's value is adjusting!" );
-
         } else {
 
             ObtuseUtil.doNothing();
@@ -105,8 +103,6 @@ public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends 
             int newValue = scrollBar.getValue() - unitsToScroll;
 
             scrollBar.setValue( newValue );
-
-//            Logger.logMsg( name + " scroll bar's value is now " + scrollBar.getValue() );
 
             ObtuseUtil.doNothing();
 
@@ -131,9 +127,6 @@ public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends 
 
                 super.paint( g );
 
-//                g.setColor( Color.BLACK );
-//                g.drawLine( 0, 0, getWidth() - 1, getHeight() - 1 );
-
             }
 
         };
@@ -143,19 +136,15 @@ public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends 
         add( _actualScrollablePanel, VPANEL_NAME );
 
         _actualScrollablePanel.setFocusable( true );
-//        _actualScrollablePanel.setBackground( Color.RED );
 
         setFocusable( true );
         requestFocusInWindow();
-//        setBackground( Color.GREEN );
 
         _actualScrollablePanel.addMouseWheelListener(
                 new MouseWheelListener() {
 
                     @Override
                     public void mouseWheelMoved( final MouseWheelEvent e ) {
-
-//                        Logger.logMsg( "mouseWheelMoved:  " + e );
 
                         @NotNull Optional<Window> optTopWindow = ObtuseGuiEventUtils.findOurTopWindow(
                                 _actualScrollablePanel
@@ -191,10 +180,6 @@ public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends 
                         } else {
 
                             boolean isVerticalScroll = !e.isShiftDown();
-//                            Logger.logMsg(
-//                                    "got a unit scroll, unitsToScroll=" + e.getUnitsToScroll() +
-//                                    ", isVerticalScroll=" + isVerticalScroll
-//                            );
 
                             if ( isVerticalScroll ) {
 
@@ -302,7 +287,7 @@ public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends 
     }
 
     @SuppressWarnings("unused")
-    public VirtualScrollablePanelModel getVirtualScrollablePanelModel() {
+    public VirtualScrollablePanelModel<E> getVirtualScrollablePanelModel() {
 
         return _virtualScrollablePanelModel;
 
@@ -598,11 +583,6 @@ public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends 
                 final int vPanelWidth = cWidth - vsbWidth;
                 final int vPanelHeight = cHeight - hsbHeight;
 
-//                Logger.logMsg(
-//                        "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" +
-//                        "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-//                );
-
                 // Signal to the panel model that we're about to layout their panel and it would be a
                 // great time for the model's 'worldview' to be up-to-date and in sync with reality.
 
@@ -804,7 +784,7 @@ public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends 
 
                         setFocusedProxy(
                                 (JComponent)firstVisibleElementView.asComponent(),
-                                "LancotMediaProxy.mouseClicked",
+                                "VirtualScrollablePanel.mouseClicked",
                                 -1,
                                 -1
                         );
@@ -980,51 +960,6 @@ public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends 
 
         }
 
-//        protected void doAddMouseListener() {
-//
-//            addMouseListener(
-//                    new MouseListener() {
-//
-//                        @Override
-//                        public void mouseClicked( final MouseEvent e ) {
-//
-//                            myMouseClicked( e );
-//
-//                        }
-//
-//                        @Override
-//                        public void mousePressed( final MouseEvent e ) {
-//
-//                            myMousePressed( e );
-//
-//                        }
-//
-//                        @Override
-//                        public void mouseReleased( final MouseEvent e ) {
-//
-//                            myMouseReleased( e );
-//
-//                        }
-//
-//                        @Override
-//                        public void mouseEntered( final MouseEvent e ) {
-//
-//                            myMouseEntered( e );
-//
-//                        }
-//
-//                        @Override
-//                        public void mouseExited( final MouseEvent e ) {
-//
-//                            myMouseExited( e );
-//
-//                        }
-//
-//                    }
-//            );
-//
-//        }
-
         @Override
         @NotNull
         public final Optional<UniqueId> getModelUniqueId() {
@@ -1056,247 +991,6 @@ public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends 
             return this;
 
         }
-
-//        public boolean manageElementSelections() {
-//
-//            return _manageElementSelections;
-////            return _elementModel. != null;
-//
-//        }
-//
-//        private void myMouseClicked( final MouseEvent e ) {
-//
-//            //        Logger.logMsg(
-//            //                "LancotMediaProxy: " +
-//            //                ( e.isShiftDown() ? " shift" : "" ) +
-//            //                ( e.isAltDown() ? " alt" : "" ) +
-//            //                ( e.isAltGraphDown() ? " altgr" : "" ) +
-//            //                ( e.isControlDown() ? " ctrl" : "" ) +
-//            //                ( e.isMetaDown() ? " meta" : "" ) +
-//            //                ( " button" + e.getButton() ) +
-//            //                " click" +
-//            //                " " + e.getClickCount() + " clicks"
-//            //        );
-//
-//            Logger.logMsg( "<.<.<.<.<." );
-//            Logger.logMsg( "LancotMediaProxy:  mouse clicked:  " + Clicks.describeInputBitMask( e.getModifiersEx() ) + " or " + InputEvent.getModifiersExText( e.getModifiersEx() ) );
-//
-//            Logger.logMsg( "getButton reports " + e.getButton() );
-//            Logger.logMsg( "" );
-//            Logger.logMsg( "just-left-click reports " + Clicks.isJustClick( Clicks.MouseButton.LEFT, e ) );
-//            Logger.logMsg( "shift-left-click reports " + Clicks.isShiftLeftClick( e ) );
-//            Logger.logMsg( "ctrl-left-click reports " + Clicks.isCtrlLeftClick( e ) );
-//            Logger.logMsg( "opt-left-click reports " + Clicks.isOptLeftClick( e ) );
-//            Logger.logMsg( "cmd-left-click reports " + Clicks.isCmdLeftClick( e ) );
-//            Logger.logMsg( "cmd-any-click reports " + Clicks.isCmdClick( Clicks.MouseButton.ANY, e ) );
-//
-//            if (
-//                    Clicks.doesMaskDescribe(
-//                            e.getModifiersEx(),
-//                            InputEvent.SHIFT_DOWN_MASK,
-//                            0
-//                    )
-//            ) {
-//
-//                Logger.logMsg( "LancotMediaProxy.mouseClicked:  shift click" );
-//
-//            } else if (
-//                    Clicks.doesMaskDescribe(
-//                            e.getModifiersEx(),
-//                            InputEvent.META_DOWN_MASK,
-//                            0
-//                    )
-//            ) {
-//
-//                Logger.logMsg( "LancotMediaProxy.mouseClicked:  meta down mask" );
-//
-//            } else if (
-//                    Clicks.doesMaskDescribe(
-//                            e.getModifiersEx(),
-//                            InputEvent.CTRL_DOWN_MASK,
-//                            0
-//                    )
-//            ) {
-//
-//                Logger.logMsg( "LancotMediaProxy.mouseClicked:  ctrl down mask" );
-//
-//            } else {
-//
-//                ObtuseUtil.doNothing();
-//
-//            }
-//
-//            Logger.logMsg( ".>.>.>.>.>" );
-//
-//            if ( Clicks.isLeftClick( e ) ) {
-//
-//                VirtualScrollablePanel.setFocusedProxy( this, "LancotMediaProxy.mouseClicked " + _where );
-//
-//                if ( e.getClickCount() == 1 ) {
-//
-//                    // Single-click de-selects everything that might already be selected and then selects this item.
-//
-//                    selectThisElementView();
-//
-////                } else if ( e.getClickCount() == 2 ) {
-////
-////                    // Double-click launches an ImageViewerWindow for this item.
-////
-////                    setSelected( true );
-////                    repaint();
-////
-////                    openImageViewer();
-//
-//                }
-//
-//            } else if ( Clicks.isCtrlLeftClick( e ) ) {
-//
-//                VirtualScrollablePanel.setFocusedProxy( this, "LancotMediaProxy.mouseClicked " + _where );
-//
-////                if ( e.getClickCount() == 1 ) {
-////
-////                    ObtuseUtil.doNothing();
-//////                // Single-click de-selects everything that might already be selected and then selects this item.
-//////
-//////                selectThisMediaProxy();
-////
-////                } else if ( e.getClickCount() == 2 ) {
-////
-////                    // Ctrl-double-click launches the OS media viewer for this item.
-////
-////                    setSelected( true );
-////                    repaint();
-////
-////                    LancotScrollableImagesPanelModel.openWithOsViewers( java.util.List.of( getLmiId() ) );
-////
-////                }
-//
-//            } else if ( Clicks.isCmdLeftClick( e ) ) {
-//
-//                boolean prevSelectionValue = isSelected();
-//                Logger.logMsg( "=== cmd-click is setting " + _where + " to " + !prevSelectionValue );
-//                setSelected( !prevSelectionValue );
-//
-//            } else if ( Clicks.isShiftLeftClick( e ) ) {
-//
-//                if ( extendSelection() ) {
-//
-//                    ObtuseUtil.doNothing();
-//
-//                }
-//
-//            } else {
-//
-//                ObtuseUtil.doNothing();
-//
-//            }
-//
-//        }
-//
-//        private void myMousePressed( MouseEvent e ) {
-//
-////            _dragStartEvent = e;
-////            _actualDragEvent = false;
-////
-////            e.consume();
-//
-//        }
-//
-//        private void myMouseReleased( final MouseEvent e ) {
-//
-////            _dragStartEvent = null;
-//
-//        }
-//
-//        private void myMouseEntered( final MouseEvent e ) {
-//
-//        }
-//
-//        private void myMouseExited( final MouseEvent e ) {
-//
-//        }
-//
-//        public void setSelected( final boolean selected ) {
-//
-//            if ( manageElementSelections() ) {
-//
-//                if ( _selectionManager.isSelected( _uniqueId ) != selected ) {
-//
-//                    repaint();
-//
-//                    _selectionManager.setSelected( _uniqueId, selected );
-//
-//                }
-//            }
-//
-//        }
-//
-////        public abstract boolean markSelected( @NotNull UniqueId uniqueId, boolean isSelected );
-////
-////        public boolean isSelected() {
-////
-////            if ( manageElementSelections() ) {
-////
-////                boolean rval = _selectionManager.isSelected( _uniqueId );
-////
-////                return rval;
-////
-////            } else {
-////
-////                return false;
-////
-////            }
-////
-////        }
-//
-//        public void clearAllSelected() {
-//
-//            if ( manageElementSelections() ) {
-//
-//                _selectionManager.clearAllSelected();
-//
-//            }
-//
-//        }
-//
-//        public boolean extendSelection() {
-//
-//            if ( manageElementSelections() ) {
-//
-//                boolean rval = _selectionManager.extendSelection( _uniqueId );
-//
-//                return rval;
-//
-//            } else {
-//
-//                return false;
-//
-//            }
-//
-//        }
-//
-//        public void selectThisElementView() {
-//
-//            clearAllSelected();
-//
-//            setSelected( true );
-//
-////            LancotClockWatcher.doLater(
-////                    System.currentTimeMillis() + 100,
-////                    new LancotBackgroundTask( "revalidate media proxy after 100ms" ) {
-////
-////                        @Override
-////                        public void doit() {
-////
-////                            Logger.logMsg( "revalidating after 100ms" );
-////                            repaint();
-////
-////                        }
-////
-////                    }
-////            );
-//
-//        }
 
     }
 

@@ -108,10 +108,7 @@ public class UnixSignals {
         signal2name.put( SIGILL, "SIGILL"); /* illegal instruction (not reset when caught) */
         signal2name.put( SIGTRAP, "SIGTRAP"); /* trace trap (not reset when caught) */
         signal2name.put( SIGIOT, "SIGIOT"); /* abort() */
-        // #if __BSD_VISIBLE
-//        signals.put(SIGIOT, "SIGIOT]" = SIGABRT; /* compatibility */
         signal2name.put( SIGEMT, "SIGEMT"); /* EMT instruction */
-        // #endif
         signal2name.put( SIGFPE, "SIGFPE"); /* floating point exception */
         signal2name.put( SIGKILL, "SIGKILL"); /* kill (cannot be caught or ignored) */
         signal2name.put( SIGBUS, "SIGBUS"); /* bus error */
@@ -127,22 +124,16 @@ public class UnixSignals {
         signal2name.put( SIGCHLD, "SIGCHLD"); /* to parent on child stop or exit */
         signal2name.put( SIGTTIN, "SIGTTIN"); /* to readers pgrp upon background tty read */
         signal2name.put( SIGTTOU, "SIGTTOU"); /* like TTIN for output if (tp->t_local&LTOSTOP) */
-//    #if __BSD_VISIBLE
         signal2name.put( SIGIO, "SIGIO"); /* input/output possible signal */
-//    #endif
         signal2name.put( SIGXCPU, "SIGXCPU"); /* exceeded CPU time limit */
         signal2name.put( SIGXFSZ, "SIGXFSZ"); /* exceeded file size limit */
         signal2name.put( SIGVTALRM, "SIGVTALRM"); /* virtual time alarm */
         signal2name.put( SIGPROF, "SIGPROF"); /* profiling time alarm */
-//    #if __BSD_VISIBLE
         signal2name.put( SIGWINCH, "SIGWINCH"); /* window size changes */
         signal2name.put( SIGINFO, "SIGINFO"); /* information request */
-//    #endif
         signal2name.put( SIGUSR1, "SIGUSR1"); /* user defined signal 1 */
         signal2name.put( SIGUSR2, "SIGUSR2"); /* user defined signal 2 */
-//    #if __BSD_VISIBLE
         signal2name.put( SIGTHR, "SIGTHR");     /* thread library AST */
-//    #endif
 
         SortedMap<String,Integer> name2signal = new TreeMap<>();
         signal2name.forEach(
@@ -252,15 +243,6 @@ public class UnixSignals {
 
         return explanation;
 
-//        // IntelliJ IDEA believes that this is unreachable code.
-//        // Call me skeptical but if we get here then something is really really wrong!
-//
-//        byte[] hv = new byte[2];
-//        hv[0] = (byte)( ( exitStatus >> 8 ) & 0xff );
-//        hv[1] = (byte)( exitStatus & 0xff );
-//        throw new HowDidWeGetHereError( "explainExitStatus:  how did we get here (exitStatus=0x" + ObtuseUtil.hexvalue( hv ) + ")" );
-
     }
-
 
 }

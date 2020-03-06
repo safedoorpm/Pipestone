@@ -337,7 +337,6 @@ public class DiagonalLayout implements LayoutManager2 {
         JFrame jf = new JFrame( "Testing DiagonalLayout" );
 
         JPanel jpd = new JPanel();
-//        jpd.setLayout( new FlowLayout() );
         jpd.setLayout( new DiagonalLayout( 0 ) );
 
         JButton add = new JButton( "Add A Button" );

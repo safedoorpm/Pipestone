@@ -504,7 +504,7 @@ public class GowingUtil {
 
             if ( _unpackedEntities == null ) {
 
-                throw new NullPointerException( "LancotGowingUnPacker.getMandatoryUnpackedEntities:  nothing to return" );
+                throw new NullPointerException( "GowingUtil.getMandatoryUnpackedEntities:  nothing to return" );
 
             }
 
@@ -532,7 +532,7 @@ public class GowingUtil {
 
             if ( _gowingUnpackingException == null ) {
 
-                throw new NullPointerException( "LancotGowingUnPacker.getMandatoryGowingUnpackingException:  nothing to return" );
+                throw new NullPointerException( "GowingUtil.getMandatoryGowingUnpackingException:  nothing to return" );
 
             }
 
@@ -560,7 +560,7 @@ public class GowingUtil {
 
             if ( _ioException == null ) {
 
-                throw new NullPointerException( "LancotGowingUnPacker.getMandatoryIOException:  nothing to return" );
+                throw new NullPointerException( "GowingUtil.getMandatoryIOException:  nothing to return" );
 
             }
 
@@ -608,7 +608,7 @@ public class GowingUtil {
 
             } else {
 
-                throw new NullPointerException( "LancotGowingUnPacker.getMandatoryException:  nothing to return" );
+                throw new NullPointerException( "GowingUtil.getMandatoryException:  nothing to return" );
 
             }
 

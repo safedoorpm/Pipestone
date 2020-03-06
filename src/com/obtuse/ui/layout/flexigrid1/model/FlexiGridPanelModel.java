@@ -411,8 +411,6 @@ public class FlexiGridPanelModel<SLICE extends FlexiGridModelSlice> {
 
             }
 
-//            logMaybe( who + ":  slice made visible - " + slice );
-
         } else {
 
             SortedMap<Integer, FlexiGridItemInfo> dataMap = slice.getDataMap();
@@ -422,8 +420,6 @@ public class FlexiGridPanelModel<SLICE extends FlexiGridModelSlice> {
                 _fgContainer.remove( dataMap.get( ix ).component(), _key );
 
             }
-
-//            logMaybe( who + ":  slice made invisible - " + slice );
 
         }
 
@@ -571,8 +567,6 @@ public class FlexiGridPanelModel<SLICE extends FlexiGridModelSlice> {
 
         if ( errCount == 0 ) {
 
-//            logMaybe( who + ":  no errors found in model " + getName() );
-
             ObtuseUtil.doNothing();
 
         } else {
@@ -620,11 +614,11 @@ public class FlexiGridPanelModel<SLICE extends FlexiGridModelSlice> {
         List<SLICE> bogusSlices = null;
         for ( SLICE slice : slices ) {
 
-            @NotNull Optional<FlexiGridPanelModel> optOwner = slice.getOptOwner();
+            @SuppressWarnings("rawtypes") @NotNull Optional<FlexiGridPanelModel> optOwner = slice.getOptOwner();
             String msg = null;
             if ( optOwner.isPresent() ) {
 
-                FlexiGridPanelModel owner = optOwner.get();
+                @SuppressWarnings("rawtypes") FlexiGridPanelModel owner = optOwner.get();
                 switch ( ownershipExpectation ) {
 
                     case OWNED_BY_THIS_MODEL:
@@ -796,16 +790,10 @@ public class FlexiGridPanelModel<SLICE extends FlexiGridModelSlice> {
 
             if ( slice.isVisible() ) {
 
-//                Logger.logMsg( "NEW SLICE" );
                 slice.setCurrentIndex( newIx );
                 for ( int ix : slice.getDataMap().keySet() ) {
 
                     FlexiGridItemInfo element = slice.getDataMap().get( ix );
-//                    Logger.logMsg(
-//                            LinearLayoutUtil.describeComponent( element.component() ) +
-//                            " at ix=" + ix + " set to " +
-//                            ( rowOrientation ? "row" : "column" ) + " index " + newIx
-//                    );
                     FlexiGridBasicConstraint constraint = _fgLayoutManager.getMandatoryBasicConstraint( element.component() );
                     if ( rowOrientation ) {
 

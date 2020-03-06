@@ -451,50 +451,50 @@ public class ImageIconUtils {
         // This first approach commented out 2020-02-21 because it sometimes produces a type=0 BufferedImage
         // which other library methods cannot cope with.
 
-//        BufferedImage bImage = null;
-//        // Create a buffered image with a format that's compatible with the screen
-//
-//        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-//        try {
-//
-//            // Determine the type of transparency of the new buffered image
-//            int transparency = Transparency.OPAQUE;
-//            if ( hasAlpha ) {
-//
-//                transparency = Transparency.BITMASK;
-//
-//            }
-//
-//            // Create the buffered image
-//
-//            GraphicsDevice gs = ge.getDefaultScreenDevice();
-//            GraphicsConfiguration gc = gs.getDefaultConfiguration();
-//            bImage = gc.createCompatibleImage(
-//                    image.getWidth( null ), image.getHeight( null ), transparency
-//            );
-//
-//        } catch ( HeadlessException e ) {
-//
-//            // The system does not have a screen
-//
-//            ObtuseUtil.doNothing();
-//
-//        }
-//
-//        if ( bImage == null ) {
-//
-//            // Create a buffered image using the default color model
-//
-//            int type = BufferedImage.TYPE_INT_RGB;
-//            if ( hasAlpha ) {
-//
-//                type = BufferedImage.TYPE_INT_ARGB;
-//
-//            }
-//
-//            bImage = new BufferedImage( image.getWidth( null ), image.getHeight( null ), type );
-//
-//        }
+    //        BufferedImage bImage = null;
+    //        // Create a buffered image with a format that's compatible with the screen
+    //
+    //        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+    //        try {
+    //
+    //            // Determine the type of transparency of the new buffered image
+    //            int transparency = Transparency.OPAQUE;
+    //            if ( hasAlpha ) {
+    //
+    //                transparency = Transparency.BITMASK;
+    //
+    //            }
+    //
+    //            // Create the buffered image
+    //
+    //            GraphicsDevice gs = ge.getDefaultScreenDevice();
+    //            GraphicsConfiguration gc = gs.getDefaultConfiguration();
+    //            bImage = gc.createCompatibleImage(
+    //                    image.getWidth( null ), image.getHeight( null ), transparency
+    //            );
+    //
+    //        } catch ( HeadlessException e ) {
+    //
+    //            // The system does not have a screen
+    //
+    //            ObtuseUtil.doNothing();
+    //
+    //        }
+    //
+    //        if ( bImage == null ) {
+    //
+    //            // Create a buffered image using the default color model
+    //
+    //            int type = BufferedImage.TYPE_INT_RGB;
+    //            if ( hasAlpha ) {
+    //
+    //                type = BufferedImage.TYPE_INT_ARGB;
+    //
+    //            }
+    //
+    //            bImage = new BufferedImage( image.getWidth( null ), image.getHeight( null ), type );
+    //
+    //        }
 
         // End of what was commented out 2020-02-21 (see above for more info)
 
@@ -623,23 +623,6 @@ public class ImageIconUtils {
         BufferedImage bufferedVersion = ImageIconUtils.copyToBufferedImage( image );
 
         RescaleOp op = new RescaleOp( factor, offset, null );
-//        ColorModel colorModel = bufferedVersion.getColorModel();
-//        RescaleOp op;
-//        if ( colorModel instanceof DirectColorModel ) {
-//
-//            DirectColorModel dcm = (DirectColorModel)colorModel;
-//
-//            int componentSize = dcm.getComponentSize( 0 );
-//            int maxValue = ( 1 << componentSize ) - 1;
-//            op = new RescaleOp( factor, offset * maxValue, null );
-//
-//            ObtuseUtil.doNothing();
-//
-//        } else {
-//
-//            op = new RescaleOp( factor, 0f, null );
-//
-//        }
 
         op.filter( bufferedVersion, bufferedVersion );
 
@@ -844,7 +827,6 @@ public class ImageIconUtils {
     ) {
 
         File iconFile = new File(
-//                               ObtuseConstants.OBTUSE_RESOURCES_DIRECTORY
                 s_resourcesBaseDirectory,
                 iconFileName
         );

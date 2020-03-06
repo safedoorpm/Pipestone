@@ -53,13 +53,13 @@ public class AwtEventToEventCategoryNameMap {
         // Input method events
         s_maskToEventCategoryNameMap.put( AWTEvent.INPUT_METHOD_EVENT_MASK, "INPUT_METHOD_EVENT_MASK" );
 
-// This one is package-private so we don't get to see them unless we do dumb things.
-//        /*
-//         * The pseudo event mask for enabling input methods.
-//         * We're using one bit in the eventMask so we don't need
-//         * a separate field inputMethodsEnabled.
-//         */
-//        s_maskToEventCategoryNameMap.put( AWTEvent.INPUT_METHODS_ENABLED_MASK, "x" );
+    // This one is package-private so we don't get to see them unless we do dumb things.
+    //        /*
+    //         * The pseudo event mask for enabling input methods.
+    //         * We're using one bit in the eventMask so we don't need
+    //         * a separate field inputMethodsEnabled.
+    //         */
+    //        s_maskToEventCategoryNameMap.put( AWTEvent.INPUT_METHODS_ENABLED_MASK, "x" );
 
         // Paint events
         s_maskToEventCategoryNameMap.put( AWTEvent.PAINT_EVENT_MASK, "PAINT_EVENT_MASK" );

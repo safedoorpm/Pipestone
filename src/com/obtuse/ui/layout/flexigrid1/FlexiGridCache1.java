@@ -118,7 +118,7 @@ public class FlexiGridCache1 implements FlexiGridLayoutManagerCache {
 
             for ( int column : rowElements.keySet() ) {
 
-                Optional<GridArray.ItemInfo> element = _grid.get( row, column );
+                @SuppressWarnings("rawtypes") Optional<GridArray.ItemInfo> element = _grid.get( row, column );
                 if ( element.isPresent() ) {
 
                     FlexiGridSliceConstraints columnConstraints = _sizesByColumn.get( column );
@@ -129,15 +129,6 @@ public class FlexiGridCache1 implements FlexiGridLayoutManagerCache {
                     );
 
                 } else {
-//                if ( element.isPresent() ) {
-//
-//                    FlexiGridSliceConstraints columnConstraints = _sizesByColumn.get( column );
-//                    System.out.print(
-//                            " | " +
-//                            ObtuseUtil.center( "" + columnConstraints.min() + '/' + columnConstraints.pref() + '/' + columnConstraints.max(), 25 )
-//                    );
-//
-//                } else {
 
                     System.out.print( " | " + ObtuseUtil.replicate( " ", 25 ) );
 
@@ -247,17 +238,6 @@ public class FlexiGridCache1 implements FlexiGridLayoutManagerCache {
 
                     FlexiGridSliceConstraints sliceConstraints = constraints.computeIfAbsent( i2, integer -> new FlexiGridSliceConstraints() );
 
-//                    logMaybe(
-//                            "component @(" + i1 + "," + i2 + ")" +
-//                            ( comp instanceof JLabel
-//                                      ?
-//                                      ( "JLabel( " + ObtuseUtil.enquoteToJavaString( ((JLabel)comp).getText() ) + ")" )
-//                                      :
-//
-//
-//                                    )
-//                            " is a " + comp
-//                    );
                     ObtuseUtil.doNothing();
 
                     Dimension minDim = comp.getMinimumSize();
@@ -333,7 +313,7 @@ public class FlexiGridCache1 implements FlexiGridLayoutManagerCache {
             final FlexiGridItemInfo.FlexiItemInfoFactory itemInfoFactory
     ) {
 
-        @NotNull Optional<FlexiGridPanelModel> optModel = _flexiGridLayoutManager.getFlexiGridPanelModel();
+        @SuppressWarnings("rawtypes") @NotNull Optional<FlexiGridPanelModel> optModel = _flexiGridLayoutManager.getFlexiGridPanelModel();
         optModel.ifPresent( flexiGridPanelModel -> flexiGridPanelModel.renumber( "FlexiGridCache1.loadGrid", false ) );
 
         _fillerColumns = new TreeSet<>();
@@ -525,30 +505,6 @@ public class FlexiGridCache1 implements FlexiGridLayoutManagerCache {
 
                     }
 
-//                    if ( passOneWidth + delta >= fillerColumnMinimum ) {
-//
-//                        // we're just fine
-//
-//                    } else {
-//
-//                        delta += fillerColumn -
-//                    }
-//                    int newPrefWidth = passOneWidth + delta;
-//                    if ( newPrefWidth < fillerColumnMinimum ) {
-//
-//                        newPrefWidth = fillerColumnMinimum;
-//                        delta = newPrefWidth - passOneWidth;
-//
-//                    }
-//
-//                    if ( newPrefWidth == passOneWidth ) {
-//
-//                        break;
-//
-//                    }
-//
-//                    fillerPadding = delta;
-
                     ObtuseUtil.doNothing();
 
                 } else {
@@ -727,11 +683,6 @@ public class FlexiGridCache1 implements FlexiGridLayoutManagerCache {
 
                 }
 
-//                %%% this is way too late to do this
-//                int nominalWidth = Math.max(
-//                        Math.min( xNominalWidth.intValue(), constraintsTable.getMaxWidth() ),
-//                        constraintsTable.getMinWidth()
-//                );
                 int nominalWidth = xNominalWidth.intValue();
 
                 int nominalX = _xLocs.get( col ).intValue();

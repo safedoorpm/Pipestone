@@ -83,7 +83,11 @@ public class ManageMainMacMenu {
 
     public static void main( String[] args ) {
 
-        BasicProgramConfigInfo.init( "Obtuse", "MacOS Utilities", "testing" );
+        BasicProgramConfigInfo.init(
+                "Obtuse",
+                "MacOS Utilities",
+                "testing"
+        );
 
         JFrame jFrame = new JFrame( "My JFrame" );
 
@@ -96,11 +100,15 @@ public class ManageMainMacMenu {
 
                         Logger.logMsg( "\"Click Here\" button clicked" );
 
-//                        File userHome = new File( System.getProperty( "user.home" ) + "/xxx" );
-//                        Desktop.getDesktop().browseFileDirectory( userHome );
-
                         _startTime = System.currentTimeMillis();
-                        Logger.logMsg( "total of " + ObtuseUtil.readable( countBytesRecursively( new File( "/Users/danny/Baddeck" ), 0 ) ) + " found" );
+                        Logger.logMsg(
+                                "total of " +
+                                ObtuseUtil.readable(
+                                        countBytesRecursively(
+                                                new File( "/Users/danny/Baddeck" ), 0
+                                        )
+                                ) + " found"
+                        );
 
                     }
 
@@ -139,8 +147,6 @@ public class ManageMainMacMenu {
 
                         handleAboutRequest( e );
 
-//                        JOptionPane.showMessageDialog( null, "About dialog" );
-
                     }
 
                 }
@@ -154,8 +160,6 @@ public class ManageMainMacMenu {
                     public void handlePreferences( final PreferencesEvent e ) {
 
                         handlePreferencesRequest( e );
-
-//                        JOptionPane.showMessageDialog( null, "Preferences dialog" );
 
                     }
 
@@ -186,8 +190,6 @@ public class ManageMainMacMenu {
                             response.cancelQuit();
 
                         }
-
-//                        JOptionPane.showMessageDialog( null, "Quit dialog" );
 
                     }
 

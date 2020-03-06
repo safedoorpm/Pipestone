@@ -63,46 +63,6 @@ public class VspSelectionUtils {
             _jLabel = new JLabel( elementModel.getSelectableFile().getFile().getName() );
             add( _jLabel, BorderLayout.WEST );
 
-//            addMouseListener(
-//                    new MouseListener() {
-//
-//                        @Override
-//                        public void mouseClicked( final MouseEvent e ) {
-//
-//                            myMouseClicked( e );
-//
-//                        }
-//
-//                        @Override
-//                        public void mousePressed( final MouseEvent e ) {
-//
-//                            myMousePressed( e );
-//
-//                        }
-//
-//                        @Override
-//                        public void mouseReleased( final MouseEvent e ) {
-//
-//                            myMouseReleased( e );
-//
-//                        }
-//
-//                        @Override
-//                        public void mouseEntered( final MouseEvent e ) {
-//
-//                            myMouseEntered( e );
-//
-//                        }
-//
-//                        @Override
-//                        public void mouseExited( final MouseEvent e ) {
-//
-//                            myMouseExited( e );
-//
-//                        }
-//
-//                    }
-//            );
         }
 
         @Override

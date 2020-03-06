@@ -189,16 +189,6 @@ public class BasicProgramConfigInfo {
 
     }
 
-//    public static void init(
-//            @SuppressWarnings("SameParameterValue") final @NotNull String vendorName,
-//            @SuppressWarnings("SameParameterValue") final @NotNull String applicationName,
-//            @SuppressWarnings("SameParameterValue") final @NotNull String componentName
-//    ) {
-//
-//        init( vendorName, applicationName, componentName, null );
-//
-//    }
-
     @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     public static boolean isInitialized() {
 

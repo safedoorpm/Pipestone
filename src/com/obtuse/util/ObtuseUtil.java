@@ -1911,7 +1911,6 @@ public class ObtuseUtil {
 
     public static String replicate( final String str, final int count ) {
 
-//        String rval = str.repeat( Math.max( 0, count ) );
         String rval = str.repeat( count );
         return rval;
 

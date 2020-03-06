@@ -57,9 +57,6 @@ public class ThreeDimensionalTreeMap<
 
     };
 
-//    @SuppressWarnings("unused") public static final ThreeDimensionalSortedMap<?,?,?,?> EMPTY_MAP3D =
-//            new ThreeDimensionalTreeMap<>( new ThreeDimensionalTreeMap<>(), true );
-
     /**
      A class that always yields an empty immutable {@link ThreeDimensionalSortedMap}.
      <p>Since that probably guarantees that some will find this useful, here it is.</p>
@@ -111,8 +108,6 @@ public class ThreeDimensionalTreeMap<
     ThreeDimensionalSortedMap<A,B,C,V> empty2DMap() {
 
         return EMPTY_MAP3D;
-
-//        return new ThreeDimensionalTreeMap<>(true );
 
     }
 

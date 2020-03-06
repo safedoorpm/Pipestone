@@ -35,7 +35,6 @@ public class GenericPanelManagerTester2 {
     public static class TestModel1 extends GenericPanelRowModel<TestSlice1> {
 
         private final TestManager1 _gpm;
-//        private TestSlice1 _ourSlice = null;
 
         private String _name;
 
@@ -54,21 +53,6 @@ public class GenericPanelManagerTester2 {
             return _gpm;
 
         }
-
-//        @Override
-//        public TestSlice1 getRowSlice(
-//                final @NotNull GenericPanelSliceFactory<TestSlice1> sliceFactory
-//        ) {
-//
-//            if ( _ourSlice == null ) {
-//
-//                _ourSlice = sliceFactory.createSlice( this ); // new TestSlice( getName() );
-//
-//            }
-//
-//            return _ourSlice;
-//
-//        }
 
         @NotNull
         public String getName() {
@@ -92,7 +76,6 @@ public class GenericPanelManagerTester2 {
     public static class TestModel2 extends GenericPanelRowModel<TestSlice2> {
 
         private final TestManager2 _gpm;
-//        private TestSlice2 _ourSlice = null;
 
         private String _name;
 
@@ -111,21 +94,6 @@ public class GenericPanelManagerTester2 {
             return _gpm;
 
         }
-
-//        @Override
-//        public TestSlice2 getRowSlice(
-//                final @NotNull GenericPanelSliceFactory<TestSlice2> sliceFactory
-//        ) {
-//
-//            if ( _ourSlice == null ) {
-//
-//                _ourSlice = sliceFactory.createSlice( this ); // new TestSlice( getName() );
-//
-//            }
-//
-//            return _ourSlice;
-//
-//        }
 
         @NotNull
         public String getName() {
@@ -339,7 +307,6 @@ public class GenericPanelManagerTester2 {
             TestModel1 testModel = new TestModel1( s_gpm1 );
             s_gpm1.addRow( testModel );
 
-//            TestModel extractedModel =
             GenericPanelRowModel<TestSlice1> extractedModel = s_gpm1.getModel( row );
 
         }

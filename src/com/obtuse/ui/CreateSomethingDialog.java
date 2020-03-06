@@ -192,12 +192,6 @@ public class CreateSomethingDialog<T,N> extends JDialog {
         String rawSomethingName = _newSomethingNameTextField.getText();
         try {
 
-//            if ( rawSomethingName == null ) {
-//
-//                throw new HowDidWeGetHereError( "What can a text field possibly be null???" );
-//
-//            }
-
             String trimmedSomethingString = rawSomethingName.trim();
             if ( trimmedSomethingString.isEmpty() ) {
 
@@ -207,7 +201,6 @@ public class CreateSomethingDialog<T,N> extends JDialog {
 
             N name = _createSomethingHelper.createName( trimmedSomethingString );
             if ( _createSomethingHelper.doesSomethingExist( name ) ) {
-//            if ( LancotLibraryRoot.doesMediaLibraryExist( trimmedSomethingString ) ) {
 
                 _errorMessageLabel.setMessage( "That " + _createSomethingHelper.getSingularTypeName() + " already exists" );
 

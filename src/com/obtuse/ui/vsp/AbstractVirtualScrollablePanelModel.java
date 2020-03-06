@@ -17,8 +17,6 @@ public abstract class AbstractVirtualScrollablePanelModel<E extends VirtualScrol
 
     private SortedMap<UniqueId, ElementView<E>> _currentlyAssignedElementViewsMap = new TreeMap<>();
 
-//    private java.util.List<ElementView<E>> _unusedElementViews = new ArrayList<>();
-
     private ElementView.ElementViewFactory<E> _elementViewFactory;
 
     /**

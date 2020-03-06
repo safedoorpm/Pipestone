@@ -78,12 +78,6 @@ public class Clicks {
 
         }
 
-//        Logger.logMsg(
-//                "mask=" + Integer.toBinaryString( mask ) + ", " +
-//                "oneBits=" + Integer.toBinaryString( oneBits ) + ", " +
-//                "zeroBits=" + Integer.toBinaryString( zeroBits )
-//        );
-
         return ( mask & oneBits ) == oneBits && ( mask & zeroBits ) == 0;
 
     }
@@ -142,7 +136,8 @@ public class Clicks {
 
             return true;
 
-        } else if ( isCtrlLeftClick( e ) ) {
+        } else //noinspection RedundantIfStatement
+            if ( isCtrlLeftClick( e ) ) {
 
             return true;
 
@@ -283,33 +278,5 @@ public class Clicks {
         }
 
     }
-
-//    /**
-//     Determine if the bits in the input mask are EXACTLY as specified.
-//     @param mask the input mask.
-//     @param requiredBits a mask of the bits which MUST be on.
-//     @param ignoredBits a mask of the bits which MUST be ignored
-//     (this parameter takes precedence over our {@code requiredBits} parameter -
-//     bits which must be on and must be ignored are ignored).
-//     @return {@code true} if {@code mask} has all of the {@code requiredBits}
-//     set after ignoring any bits in {@code mask} or in {@code ignoredBits}; {@code false} otherwise.
-//     This value is computed using
-//     <blockquote>{@code ( ( mask & ~ignoredBits ) & requiredBits ) == ( requiredBits & ~ignoredBits )}</blockquote>
-//     */
-//
-//    public static boolean areBitsAsSpecified( int mask, int requiredBits, int ignoredBits ) {
-//
-//        return ( ( mask & ~ignoredBits ) & requiredBits ) == ( requiredBits & ~ignoredBits );
-//
-//    }
-
-
-//    public static boolean isRightClick( @NotNull final MouseEvent e ) {
-//
-//        return ( e.getButton() == 3 )
-//               &&
-//               e.getModifiersEx() == 0;
-//
-//    }
 
 }

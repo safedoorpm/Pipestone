@@ -154,16 +154,6 @@ public class ObtuseImageUtils {
     public static final int ORIENTATION_LEFT90_THEN_FLIPPED_HORIZONTALLY = 7;
     public static final int ORIENTATION_LEFT90 = 8;
 
-//    @NotNull
-//    public static ImageIcon rotateImage( @NotNull final ImageIcon srcImageIcon, final int orientation ) {
-//
-//        Image rotatedImage = ObtuseImageUtils.rotateImage( srcImageIcon.getImage(), orientation );
-//        ImageIcon rotatedImageIcon = new ImageIcon( rotatedImage );
-//
-//        return rotatedImageIcon;
-//
-//    }
-
     /**
      Rotate an image according to its EXIF-style orientation tag.
      @param srcImage the {@link Image} to be rotated.
@@ -286,7 +276,7 @@ public class ObtuseImageUtils {
 
                 default:
                     throw new IllegalArgumentException(
-                            "LancotFiles.rotatedImage:  invalid orientation value " + orientation
+                            "ObtuseImageUtils.rotatedImage:  invalid orientation value " + orientation
                     );
 
             }
@@ -376,27 +366,6 @@ public class ObtuseImageUtils {
      */
 
     public static BufferedImage makeTransparent( BufferedImage sourceImage, float alpha ) {
-
-//        BufferedImage sourceImage;
-////        if ( original.getType() == BufferedImage.TYPE_INT_ARGB ) {
-//
-//            if ( _verbose ) Logger.logMsg( "already has alpha channel" );
-//
-//            sourceImage = original;
-//
-////        } else {
-////
-////            if ( _verbose ) Logger.logMsg( "need to convert to have alpha channel" );
-////
-////            sourceImage = new BufferedImage(original.getWidth(), original.getHeight(), BufferedImage.TYPE_INT_ARGB );
-////            Graphics2D gt = sourceImage.createGraphics();
-////            gt.setComposite( AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha) );
-////            gt.drawImage(original, 0, 0, original.getWidth(), original.getHeight(), null);
-////            gt.dispose();
-////
-////            return alpha;
-////
-////        }
 
         BufferedImage newImage = new BufferedImage(sourceImage.getWidth(), sourceImage.getHeight(), BufferedImage.TYPE_INT_ARGB );
         Graphics2D g = newImage.createGraphics();
@@ -610,27 +579,9 @@ public class ObtuseImageUtils {
                 scaledInstance
         );
 
-//        try {
+        Optional<BufferedImage> optBufferedImage = optConvertImageToBufferedImage( img );
 
-            Optional<BufferedImage> optBufferedImage = optConvertImageToBufferedImage( img );
-
-            return optBufferedImage;
-
-//            if ( optBufferedImage.isPresent() ) {
-//
-//                return optBufferedImage;
-//
-//            }
-//
-//
-
-//        } catch ( RuntimeException e ) {
-//
-//            // Inspect the image. Why can't we turn it into a BufferedImage?
-//
-//            throw e;
-//
-//        }
+        return optBufferedImage;
 
     }
 
@@ -663,12 +614,6 @@ public class ObtuseImageUtils {
                 what,
                 originalImageIcon.getImage(),
                 newSize
-//                ObtuseImageUtils.getMinimumScalingFactor(
-//                        newSize,
-//                        newSize,
-//                        originalImageIcon.getIconWidth(),
-//                        originalImageIcon.getIconHeight()
-//                )
         );
 
         ImageIcon rval = scaledImage.map( ImageIcon::new )
@@ -698,38 +643,6 @@ public class ObtuseImageUtils {
         );
 
         return scaledImage;
-
-//        ImageIcon rval = scaledImage.map( ImageIcon::new )
-//                                    .orElse( null );
-//
-//        return Optional.ofNullable( rval );
-//        try ( Measure ignored = new Measure( "getOptScaledImage( " + ObtuseUtil.enquoteToJavaString( what ) + " )" ) ) {
-//
-//            BufferedImage convertedOriginalImage = ObtuseImageUtils.convertImageToBufferedImage( originalImage );
-//
-//            BufferedImage scaled;
-//            if ( convertedOriginalImage.getHeight() > targetSize || convertedOriginalImage.getWidth() > targetSize ) {
-//
-//                Dimension newSize = ObtuseImageUtils.getMinimumScalingFactor(
-//                        targetSize,
-//                        targetSize,
-//                        convertedOriginalImage.getWidth(),
-//                        convertedOriginalImage.getHeight()
-//                );
-//                Optional<Image> optTmpImage = ObtuseImageUtils.getScaledImage( "thing", convertedOriginalImage, newSize );
-//
-//                scaled = optTmpImage.map( ObtuseImageUtils::convertImageToBufferedImage )
-//                                    .orElse( null );
-//
-//            } else {
-//
-//                scaled = convertedOriginalImage;
-//
-//            }
-//
-//            return Optional.ofNullable( scaled );
-//
-//        }
 
     }
 
@@ -826,8 +739,6 @@ public class ObtuseImageUtils {
 
                 long endTime = System.currentTimeMillis();
                 if ( endTime - startTime > 1000L ) {
-
-//                    if ( _verbose ) Logger.logMsg( "wait took " + DateUtils.formatDuration( endTime - startTime ) + " for " + fullWhat );
 
                     ObtuseUtil.doNothing();
 
@@ -984,47 +895,6 @@ public class ObtuseImageUtils {
         @NotNull BufferedImage outputImage = ImageIconUtils.getAsBufferedImage( inputImage );
 
         return Optional.of( outputImage );
-
-//        try {
-//
-//            if ( inputImage instanceof BufferedImage ) {
-//
-//                return Optional.of( (BufferedImage)inputImage );
-//
-//            }
-//
-//            BufferedImage newImage = new BufferedImage(
-//                    inputImage.getWidth( null ),
-//                    inputImage.getHeight( null ),
-//                    BufferedImage.TYPE_INT_RGB
-//            );
-//            Graphics g = newImage.createGraphics();
-//            try {
-//
-//                g.drawImage( inputImage, 0, 0, null );
-//
-//            } catch ( RuntimeException e ) {
-//
-//                Logger.logErr( "java.lang.Exception caught", e );
-//                ObtuseUtil.doNothing();
-//
-//                return Optional.empty();
-//
-//            }
-//
-//            g.dispose();
-//
-//            return Optional.of( newImage );
-//
-//        } catch ( IllegalArgumentException e ) {
-//
-//            Logger.logErr( "ObtuseImageUtils.optConvertImageToBufferedImage:  " + e, e );
-//
-//            ObtuseUtil.doNothing();
-//
-//            throw e;
-//
-//        }
 
     }
 

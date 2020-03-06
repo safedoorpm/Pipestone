@@ -106,7 +106,6 @@ public class ObtuseFlowLayoutManager implements LayoutManager2 {
     private void planLayout( Container parent, int assumedWidth ) {
 
         int componentCount = parent.getComponentCount();
-//        Dimension cPrefSize = null;
         int parentWidth = parent.getWidth();
         int pHeight = parent.getHeight();
 
@@ -126,8 +125,6 @@ public class ObtuseFlowLayoutManager implements LayoutManager2 {
 
         int rowHeight = 0;
         int nRows = 0;
-
-//        boolean rowStarted = false;
 
         _preferredWidth = rowStart;
         vLog( "starting layout:  insets=" + ObtuseUtil.fInsets( insets ) + ", rowStart=" + rowStart + ", rowEnd=" + rowEnd + ", colStart=" + colStart );
@@ -190,21 +187,6 @@ public class ObtuseFlowLayoutManager implements LayoutManager2 {
 
                 vLog( "rowHeight=" + rowHeight + ", newX=" + newX + ", _pCB[" + i + "]=" + ObtuseUtil.fBounds( componentPlan.getBounds() ) + ", x=" + x + ", _pW=" + _preferredWidth + ", _pH=" + _preferredHeight );
 
-//                rowStarted = true;
-//
-//                if ( i > 0 ) {
-//                    _preferredWidth += cPrefSize.width / 2;
-//                    _preferredHeight += _vGap;
-//                } else {
-//                    _preferredWidth = cPrefSize.width;
-//                }
-//                _preferredHeight += cPrefSize.height;
-//
-//                _minWidth = Math.max(
-//                        c.getMinimumSize().width,
-//                        _minWidth
-//                );
-//                _minHeight = _preferredHeight;
             }
 
         }
@@ -232,26 +214,10 @@ public class ObtuseFlowLayoutManager implements LayoutManager2 {
 
         Dimension dim = new Dimension( _preferredWidth, _preferredHeight );
 
-//        Dimension dim = new Dimension( 50, 50 );
         vLog( "preferredLayoutSize=" + ObtuseUtil.fDim( dim ) );
 
         return dim;
 
-//        Dimension dim = new Dimension( 0, 0 );
-//        int nComps = parent.getComponentCount();
-//
-//        planLayout( parent );
-//
-//        //Always add the container's insets!
-//        Insets insets = parent.getInsets();
-//        dim.width = _preferredWidth
-//                    + insets.left + insets.right;
-//        dim.height = _preferredHeight
-//                     + insets.top + insets.bottom;
-//
-//        _sizeUnknown = false;
-//
-//        return dim;
     }
 
     /* Required by LayoutManager. */
@@ -269,25 +235,10 @@ public class ObtuseFlowLayoutManager implements LayoutManager2 {
 
         Dimension dim = new Dimension( _preferredWidth, _preferredHeight );
 
-//        Dimension dim = new Dimension( 25, 25 );
-
         vLog( "minimumLayoutSize=" + ObtuseUtil.fDim( dim ) );
 
         return dim;
 
-//        Dimension dim = new Dimension( 0, 0 );
-//        int nComps = parent.getComponentCount();
-//
-//        //Always add the container's insets!
-//        Insets insets = parent.getInsets();
-//        dim.width = _minWidth
-//                    + insets.left + insets.right;
-//        dim.height = _minHeight
-//                     + insets.top + insets.bottom;
-//
-//        _sizeUnknown = false;
-//
-//        return dim;
     }
 
     /* Required by LayoutManager. */
@@ -298,6 +249,7 @@ public class ObtuseFlowLayoutManager implements LayoutManager2 {
      * minimumLayoutSize will be called -- in the case
      * of applets, at least, they probably won't be.
      */
+
     public void layoutContainer( Container parent ) {
 
         vLog(
@@ -323,73 +275,6 @@ public class ObtuseFlowLayoutManager implements LayoutManager2 {
 
         }
 
-//        Insets insets = parent.getInsets();
-//        int maxWidth = parent.getWidth()
-//                       - ( insets.left + insets.right );
-//        int maxHeight = parent.getHeight()
-//                        - ( insets.top + insets.bottom );
-//        int nComps = parent.getComponentCount();
-//        int previousWidth = 0, previousHeight = 0;
-//        int x = 0, y = insets.top;
-//        int rowh = 0, start = 0;
-//        int xFudge = 0, yFudge = 0;
-//        boolean oneColumn = false;
-//
-//        // Go through the components' sizes, if neither
-//        // preferredLayoutSize nor minimumLayoutSize has
-//        // been called.
-//        if ( _sizeUnknown ) {
-//            planLayout( parent );
-//        }
-//
-//        if ( maxWidth <= _minWidth ) {
-//            oneColumn = true;
-//        }
-//
-//        if ( maxWidth != _preferredWidth ) {
-//            xFudge = ( maxWidth - _preferredWidth ) / ( nComps - 1 );
-//        }
-//
-//        if ( maxHeight > _preferredHeight ) {
-//            yFudge = ( maxHeight - _preferredHeight ) / ( nComps - 1 );
-//        }
-//
-//        for ( int i = 0; i < nComps; i++ ) {
-//            Component c = parent.getComponent( i );
-//            if ( c.isVisible() ) {
-//                Dimension d = c.getPreferredSize();
-//
-//                // increase x and y, if appropriate
-//                if ( i > 0 ) {
-//                    if ( !oneColumn ) {
-//                        x += previousWidth / 2 + xFudge;
-//                    }
-//                    y += previousHeight + _vGap + yFudge;
-//                }
-//
-//                // If x is too large,
-//                if ( ( !oneColumn ) &&
-//                     ( x + d.width ) >
-//                     ( parent.getWidth() - insets.right ) ) {
-//                    // reduce x to a reasonable number.
-//                    x = parent.getWidth()
-//                        - insets.bottom - d.width;
-//                }
-//
-//                // If y is too large,
-//                if ( ( y + d.height )
-//                     > ( parent.getHeight() - insets.bottom ) ) {
-//                    // do nothing.
-//                    // Another choice would be to do what we do to x.
-//                }
-//
-//                // Set the component's size and position.
-//                c.setBounds( x, y, d.width, d.height );
-//
-//                previousWidth = d.width;
-//                previousHeight = d.height;
-//            }
-//        }
     }
 
     public String toString() {
@@ -418,11 +303,7 @@ public class ObtuseFlowLayoutManager implements LayoutManager2 {
                 " )"
         );
 
-//        planLayout( target );
-
         Dimension dim = new Dimension( 32767, 32767 );
-
-//        Dimension dim = new Dimension( 100, 100 );
 
         vLog( "maximumLayoutSize=" + ObtuseUtil.fDim( dim ) );
 
@@ -493,7 +374,6 @@ public class ObtuseFlowLayoutManager implements LayoutManager2 {
         JFrame jf = new JFrame( "Testing ObtuseFlowLayoutManager" );
 
         JPanel jpd = new JPanel();
-//        jpd.setLayout( new FlowLayout() );
         jpd.setLayout( new ObtuseFlowLayoutManager( 0, 30 ) );
 
         JButton add = new JButton( "Add A Button" );

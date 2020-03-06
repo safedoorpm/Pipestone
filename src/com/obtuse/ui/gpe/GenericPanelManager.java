@@ -28,36 +28,6 @@ public abstract class GenericPanelManager<SLICE extends GenericPanelSlice> imple
 
     private static final EntityName G_DESCRIPTION = new EntityName( "_desc" );
 
-//    public static final GowingEntityFactory FACTORY = new GowingEntityFactory( ENTITY_TYPE_NAME ) {
-//
-//        @Override
-//        public int getOldestSupportedVersion() {
-//
-//            return VERSION;
-//
-//        }
-//
-//        @Override
-//        public int getNewestSupportedVersion() {
-//
-//            return VERSION;
-//
-//        }
-//
-//        @SuppressWarnings("RedundantThrows")
-//        @Override
-//        public @NotNull GowingPackable createEntity(
-//                @NotNull final GowingUnPacker unPacker,
-//                @NotNull final GowingPackedEntityBundle bundle,
-//                @NotNull final GowingEntityReference er
-//        ) throws GowingUnpackingException {
-//
-//            return new GenericPanelManager( unPacker, bundle );
-//
-//        }
-//
-//    };
-
     private final List<GenericPanelRowModel<SLICE>> _models = new ArrayList<>();
     private final Set<GenericPanelRowModel<SLICE>> _modelsSet = new HashSet<>();
     private final GenericPanelSliceFactory<SLICE> _sliceFactory;
@@ -110,26 +80,11 @@ public abstract class GenericPanelManager<SLICE extends GenericPanelSlice> imple
                 packer.getPackingContext()
         );
 
-//        // If this is not the base class and we're not derived from GowingAbstractPackableEntity
-//        GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
-//                ENTITY_TYPE_NAME,
-//                VERSION,
-//                super.bundleThyself( true, packer ),
-//                packer.getPackingContext()
-//        );
-//
-//        // If this is not the base class and we ARE derived from GowingAbstractPackableEntity
-//        GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(
-//                ENTITY_TYPE_NAME,
-//                VERSION,
-//                super.bundleRoot( packer ),
-//                packer.getPackingContext()
-//        );
-
         return bundle;
 
     }
 
+    @SuppressWarnings("RedundantThrows")
     @Override
     public boolean finishUnpacking( @NotNull final GowingUnPacker unPacker ) throws GowingUnpackingException {
 
@@ -139,11 +94,6 @@ public abstract class GenericPanelManager<SLICE extends GenericPanelSlice> imple
 
     @Override
     public abstract String toString();
-//    {
-//
-//        return "GenericPanelManager( " + "GenericPanelManager" + " )";
-//
-//    }
 
     public <T extends GenericPanelRowModel<SLICE>> void addRow( T model ) {
 
@@ -181,79 +131,12 @@ public abstract class GenericPanelManager<SLICE extends GenericPanelSlice> imple
 
     public Component getRootPane() {
 
-//        if ( _container == null ) {
-//
-//            throw new HowDidWeGetHereError( "GenericPanelManager.getRootPane:  too early" );
-//
-//        }
-
         return _container.getRootPane();
 
     }
 
-//    public void resyncIfNecessary() {
-//
-////        if ( _container == null ) {
-////
-////            _container = new JPanel();
-////
-////        }
-//
-//        boolean syncNeeded = false;
-//
-//        if ( _models.size() == _container.getComponentCount() ) {
-//
-//            ArrayList<FlexiGridModelSlice> modelSlices = new ArrayList<>( _model.getSlicesInOrder() );
-//
-//            for ( int ix = 0; ix < _models.size(); ix += 1 ) {
-//
-//                MODEL currentModel = _models.get( ix );
-//                GenericPanelSlice currentSlice = currentModel.getRowSlice( _sliceFactory );
-//                if ( currentSlice == null ) {
-//
-//                    throw new HowDidWeGetHereError( "GenericPanelManager.resyncIfNecessary:  our model #" +
-//                                                    ix +
-//                                                    " has a null slice" );
-//
-//                }
-//
-//                FlexiGridModelSlice slice = modelSlices.get( ix );
-//
-////                Component ourPanelComponent = _container.getComponent( ix );
-//                if ( slice == null ) {
-//
-//                    throw new HowDidWeGetHereError( "GenericPanelManager.resyncIfNecessary:  JPanel slice #" +
-//                                                    ix +
-//                                                    " is null" );
-//
-//                }
-//
-//                if ( currentSlice != slice ) {
-//
-//
-//                    syncNeeded = true;
-//
-//                    throw new HowDidWeGetHereError( "GenericPanelManager.resyncIfNecessary:  how can the model be wrong? (#1)" );
-//
-////                    break;
-//
-//                }
-//
-//            }
-//
-//        } else {
-//
-//            syncNeeded = true;
-//            throw new HowDidWeGetHereError( "GenericPanelManager.resyncIfNecessary:  how can the model be wrong? (#2)" );
-//
-//        }
-//
-//    }
-
     @NotNull
     public JPanel getJPanel() {
-
-//        resyncIfNecessary();
 
         return _container;
 

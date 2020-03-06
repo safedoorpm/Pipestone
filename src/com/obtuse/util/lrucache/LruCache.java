@@ -129,10 +129,6 @@ public class LruCache<K,R> implements Iterable<CachedThing<K,R>> {
 
         if ( !SwingUtilities.isEventDispatchThread() && !Thread.currentThread().equals( s_mainThread ) ) {
 
-//            throw new HowDidWeGetHereError( "LruCache:  call to " + who + " is NOT on the event thread or main thread" );
-
-//            Logger.logMsg( "call to " + who + " when NOT on the event thread or main thread" );
-
             ObtuseUtil.doNothing();
 
         }
@@ -637,7 +633,6 @@ public class LruCache<K,R> implements Iterable<CachedThing<K,R>> {
         checkOnEventThread( "noteReference" );
 
         _lru.remove( element.getVirtualLastReferenceTime() );
-//        _lru.remove( element );
         _lru.put( element.noteNewReference(), element );
 
     }
@@ -676,8 +671,6 @@ public class LruCache<K,R> implements Iterable<CachedThing<K,R>> {
 
     @SuppressWarnings("unused")
     public void setCrashWhenFull( boolean crashWhenFull ) {
-
-//        checkOnEventThread( "setCrashWhenFull" );
 
         _crashWhenFull = crashWhenFull;
 
@@ -718,8 +711,6 @@ public class LruCache<K,R> implements Iterable<CachedThing<K,R>> {
 
             long oldestVirtualTime = _lru.firstKey();
             CachedThing<K,R> oldest = _lru.remove( oldestVirtualTime );
-
-//            Logger.logMsg( "LruCache(" + _cacheName + "):  removing " + oldest.getKey() );
 
             R thing = oldest.getThing();
             if ( _thingsRequireCleanup && thing instanceof ThingRequiringCleanup ) {

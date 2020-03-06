@@ -53,7 +53,7 @@ public class ObtuseFileSelector extends JDialog {
         // Start with a mixed case name to ensure that we don't accidentaly create a single case name.
         // It is statistically impossible for us to do so but let's be paranoid.
 
-        StringBuilder checkFnameBuilder = new StringBuilder( "LancotTestFile-" );
+        StringBuilder checkFnameBuilder = new StringBuilder( "OfsTestFile-" );
         String fileChars =
                 "abcdefghijklmnopqrxsuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
@@ -260,7 +260,6 @@ public class ObtuseFileSelector extends JDialog {
             if ( getPreferredSize().width > _maxWidth ) {
 
                 _maxWidth = getPreferredSize().width;
-//                Logger.logMsg( "maximum element width is now " + _maxWidth );
 
             }
 
@@ -357,7 +356,6 @@ public class ObtuseFileSelector extends JDialog {
         _createDirectoryPanelContainer = LinearLayoutUtil.createPanel3( "obtuseFileSelector", LinearOrientation.HORIZONTAL );
         _createDirectoryPanel = _createDirectoryPanelContainer.getAsJPanel();
         JLabel createDirectoryPromptJLabel = new JLabel( "Directory name:" );
-//        createDirectoryPromptJLabel.setAlignmentY( 1f );
         _createDirectoryPanel.add( createDirectoryPromptJLabel, LinearLayoutManager3.TRACK_PARENTS_BREADTH_CONSTRAINT );
         _newDirectoryNameField = new JTextField();
         LinearLayoutUtil.SpaceSponge newDirectoryNameSponge = new LinearLayoutUtil.SpaceSponge();
@@ -423,7 +421,6 @@ public class ObtuseFileSelector extends JDialog {
 
         bottomButtonsPanel.add( blorkButton );
 
-//        JPanel bottomButtonsPanel = new JPanel();
         bottomButtonsPanel.setLayout( new FlowLayout( FlowLayout.RIGHT ) );
         _packButton = new JButton( "Pack" );
         _packButton.addActionListener(
@@ -454,7 +451,6 @@ public class ObtuseFileSelector extends JDialog {
         JPanel intermediary = new JPanel();
         intermediary.setBorder( BorderFactory.createEmptyBorder( 10, 10, 0, 10 ) );
         intermediary.setLayout( new BorderLayout() );
-//        intermediary.setBackground( Color.RED );
         intermediary.add( _contentPane, BorderLayout.CENTER );
         setContentPane( intermediary );
         setModal( modal );
@@ -767,14 +763,6 @@ public class ObtuseFileSelector extends JDialog {
 
         return resume();
 
-////        setDirectory( _currentDirectory );
-////        setMaximumSize( new Dimension( 32767, 32767 ) );
-//
-//        setVisible( true );
-////        _errmsgLabel.setText( "" );
-//
-//        return this;
-
     }
 
     @NotNull
@@ -912,8 +900,6 @@ public class ObtuseFileSelector extends JDialog {
 
         }
 
-//        Logger.logMsg( "We're committed to moving to " + ObtuseUtil.enquoteJavaObject( newCurrentDirectory ) );
-
         _fileJListModel.clear();
 
         _selectButton.setEnabled( false );
@@ -964,8 +950,6 @@ public class ObtuseFileSelector extends JDialog {
                 _listElementSelectable[ix] = false;
 
             }
-
-//            Logger.logMsg( "setup [" + ObtuseUtil.lpad( ix, 3 ) + "] is " + _listElementSelectable[ix] );
 
             ix += 1;
 
@@ -1036,7 +1020,6 @@ public class ObtuseFileSelector extends JDialog {
 
         ObtuseUtil.doNothing();
 
-//        _currentDirectoryNameLabel.setText( _currentDirectory.getAbsolutePath() );
         _currentDirectoryNameLabel.setText( "Hello " /*+ System.currentTimeMillis()*/ );
 
         _fileJList.ensureIndexIsVisible( 0 );

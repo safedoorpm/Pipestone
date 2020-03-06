@@ -151,26 +151,6 @@ public class ObtuseGuiEventUtils {
 
     }
 
-//    @NotNull
-//    public static Optional<Window> getTopParent( final Component component ) {
-//
-//        Component c = component;
-//        while ( c != null ) {
-//
-//            if ( c instanceof JFrame || c instanceof JDialog ) {
-//
-//                return Optional.of( (Window)c );
-//
-//            }
-//
-//            c = c.getParent();
-//
-//        }
-//
-//        return Optional.empty();
-//
-//    }
-
     @NotNull
     public static Optional<Window> findOurTopWindow( final Component component ) {
 

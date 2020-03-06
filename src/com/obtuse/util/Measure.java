@@ -575,15 +575,6 @@ public class Measure implements Closeable {
             Measure.s_stackStats.showStats( where, showTitle );
 
             TreeSorter<Double,String> sorter = new TreeSorter<>( Comparator.reverseOrder() );
-//                if ( sortedBy == SortedBy.ALPHABETICAL ) {
-//
-//                    sorter = null;
-//
-//                } else {
-//
-//                    sorter = new TreeSorter<>( Comparator.reverseOrder() );
-//
-//                }
 
             double ix = 0.0;
             for ( String categoryName : Measure.s_stats.keySet() ) {
@@ -703,34 +694,34 @@ public class Measure implements Closeable {
 
     }
 
-//    /**
-//     A (relatively) easy way to measure a block of code.
-//     @param categoryName the name of the category being measured.
-//     @param runnable the code to be measured.
-//     @return the delta for this invocation.
-//     <p>While there may still be situations in which this {@link Runnable}-based approach makes sense,
-//     it is probably best to switch to the at least arguably cleaner and definitely more flexible
-//     <blockquote>
-//     <code>try ( Measure ignored = new Measure( "category name" ) ) {
-//     <blockquote>... the code to be measured ...</blockquote>
-//     }</code>
-//     </blockquote></p>
-//     <p>P.S. the above try block based approach is exactly how this method is implemented.</p>
-//
-//     */
-//
-//    @Deprecated
-//    public static long measure( final String categoryName, @NotNull final Runnable runnable ) {
-//
-//        try ( Measure m = new Measure( categoryName ) ) {
-//
-//            runnable.run();
-//
-//            return m.deltaMillis();
-//
-//        }
-//
-//    }
+    //    /**
+    //     A (relatively) easy way to measure a block of code.
+    //     @param categoryName the name of the category being measured.
+    //     @param runnable the code to be measured.
+    //     @return the delta for this invocation.
+    //     <p>While there may still be situations in which this {@link Runnable}-based approach makes sense,
+    //     it is probably best to switch to the at least arguably cleaner and definitely more flexible
+    //     <blockquote>
+    //     <code>try ( Measure ignored = new Measure( "category name" ) ) {
+    //     <blockquote>... the code to be measured ...</blockquote>
+    //     }</code>
+    //     </blockquote></p>
+    //     <p>P.S. the above try block based approach is exactly how this method is implemented.</p>
+    //
+    //     */
+    //
+    //    @Deprecated
+    //    public static long measure( final String categoryName, @NotNull final Runnable runnable ) {
+    //
+    //        try ( Measure m = new Measure( categoryName ) ) {
+    //
+    //            runnable.run();
+    //
+    //            return m.deltaMillis();
+    //
+    //        }
+    //
+    //    }
 
     public String toString() {
 

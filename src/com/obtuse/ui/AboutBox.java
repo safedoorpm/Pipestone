@@ -201,21 +201,8 @@ public class AboutBox extends JDialog {
         int iconWidth = imageIcon.getIconWidth();
         int iconHeight = imageIcon.getIconHeight();
         if ( iconWidth > 300 || iconHeight > 300 ) {
-//        if ( iconWidth > iconHeight ) {
-//
-//            if ( iconWidth > 300 ) {
 
                 scaledImageIcon = ImageIconUtils.getScaledImageIcon( 300, imageIcon );
-
-//            }
-//
-//        } else {
-//
-//            if ( iconHeight > 300 ) {
-//
-//                scaledImageIcon = ImageIconUtils.getScaledImageIcon( 300, imageIcon );
-//
-//            }
 
         }
 
@@ -336,9 +323,7 @@ public class AboutBox extends JDialog {
         jf.setVisible( true );
 
         ImageIcon imageIcon = ImageIconUtils.fetchIconImage(
-//                "kodak_No_2_folding_autographic_brownie_transparent_background_400x400.png",
                 "kodak_No_2_folding_autographic_brownie_transparent_background_400x400.png",
-//                "kodak_No_3A_autographic_junior_1923_catalog_greyscale_600dpi.png",
                 0,
                 AboutBox.class.getClassLoader(),
                 s_resourcesDirectories
@@ -349,7 +334,6 @@ public class AboutBox extends JDialog {
                 .setCopyrightOwner( "1867", "Example" )
                 .setInterestingStuff( "Cool stuff!" )
                 .setImage( imageIcon )
-//                .setImageBorder( BorderFactory.createLineBorder( Color.GREEN ) )
                 .setImageBorder( BorderFactory.createEtchedBorder() )
                 ;
 

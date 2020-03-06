@@ -55,8 +55,6 @@ public class FlexiGridSliceConstraints {
 
         }
 
-//        Logger.logMsg( "consume:  before:  " + before + ", latest=" + latest + ", after=" + after );
-
         _gotValues = true;
 
     }

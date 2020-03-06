@@ -23,7 +23,6 @@ public class GenericPanelManagerTester {
     public static class TestModel extends GenericPanelRowModel<TestSlice> {
 
         private final TestManager _gpm;
-//        private TestSlice _ourSlice = null;
 
         private String _name;
 
@@ -42,21 +41,6 @@ public class GenericPanelManagerTester {
             return _gpm;
 
         }
-
-//        @Override
-//        public TestSlice getRowSlice(
-//                final @NotNull GenericPanelSliceFactory<TestSlice> sliceFactory
-//        ) {
-//
-//            if ( _ourSlice == null ) {
-//
-//                _ourSlice = sliceFactory.createSlice( this ); // new TestSlice( getName() );
-//
-//            }
-//
-//            return _ourSlice;
-//
-//        }
 
         @NotNull
         public String getName() {
@@ -180,7 +164,6 @@ public class GenericPanelManagerTester {
             TestModel testModel = new TestModel( s_gpm );
             s_gpm.addRow( testModel );
 
-//            TestModel extractedModel =
             GenericPanelRowModel<TestSlice> extractedModel = s_gpm.getModel( row );
 
         }

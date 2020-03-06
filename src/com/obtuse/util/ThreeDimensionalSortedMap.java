@@ -25,9 +25,9 @@ import java.util.function.Function;
 
 @SuppressWarnings("unused")
 public interface ThreeDimensionalSortedMap<
-        T1 extends Comparable,
-        T2 extends Comparable,
-        T3 extends Comparable,
+        T1 extends Comparable<T1>,
+        T2 extends Comparable<T2>,
+        T3 extends Comparable<T3>,
         V
         > extends Iterable<V>, Serializable, GowingPackable {
 
@@ -315,7 +315,7 @@ public interface ThreeDimensionalSortedMap<
                     } else {
 
                         throw new HowDidWeGetHereError(
-                                "LancotMediaLibraryRoot.readImportBundle:  " +
+                                "ThreeDimensionalSortedMap:  " +
                                 "read yielded a " +
                                 first.getClass()
                                      .getCanonicalName() +
@@ -328,7 +328,7 @@ public interface ThreeDimensionalSortedMap<
                 } else {
 
                     throw new HowDidWeGetHereError(
-                            "LancotMediaLibraryRoot.readImportBundle:  read yielded " +
+                            "ThreeDimensionalSortedMap:  read yielded " +
                             ObtuseUtil.pluralize( interestingStuff.size(), "element", "elements" ) +
                             " when we expected one element"
                     );

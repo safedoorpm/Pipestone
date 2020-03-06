@@ -117,8 +117,6 @@ public class StdGowingPacker implements GowingPacker {
 
     private boolean _verbose;
 
-//    private final TreeSorter<GowingInstanceId,GowingInstanceId> _backReferenceDependencies = new TreeSorter<>();
-
     @SuppressWarnings("unused")
     public StdGowingPacker(
             final @NotNull EntityName groupName,
@@ -259,11 +257,6 @@ public class StdGowingPacker implements GowingPacker {
             return null;
 
         }
-
-//        vLog(
-//                "queueing " + entity.getInstanceId() + " / " + entity.getInstanceId().getTypeName() +
-//                " == " + entityName
-//        );
 
         _packingContext.rememberPackableEntity( entityName, entity );
 
@@ -1351,7 +1344,7 @@ public class StdGowingPacker implements GowingPacker {
             testMap.put( "hello", new EntityName( "HELLO" ) );
             testMap.put( "there", new EntityName( "THERE" ) );
             testMap.put( "world", new EntityName( "WORLD" ) );
-            GowingPackableMapping testMapMapping = new GowingPackableMapping<>( testMap );
+            @SuppressWarnings("rawtypes") GowingPackableMapping testMapMapping = new GowingPackableMapping<>( testMap );
             p2a.queuePackableEntity( new EntityName( "fred" ), testMapMapping );
 
             GowingPackableCollection<Object> p2Collection = new GowingPackableCollection<>();

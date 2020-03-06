@@ -44,12 +44,6 @@ import java.util.regex.Pattern;
 
 public class ObtuseImageFile extends GowingAbstractPackableEntity {
 
-//    static {
-//
-//        Measure.setGloballyEnabled( true );
-//
-//    }
-
     public static final String OBTUSE_IMAGE_INFO_FILENAME_SUFFIX = ".binfo";
 
     public static final String GENERATED_IMAGE_FILE_PREFIX = "image_";

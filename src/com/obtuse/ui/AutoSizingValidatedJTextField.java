@@ -106,16 +106,6 @@ public abstract class AutoSizingValidatedJTextField extends ValidatedJTextField 
 
     }
 
-//    public static void maybeCacheLikelyFontMetrics( final FontMetrics fontMetrics ) {
-//
-//        if ( s_likelyFontMetrics == null ) {
-//
-//            s_likelyFontMetrics = fontMetrics;
-//
-//        }
-//
-//    }
-
     @SuppressWarnings("unused")
     public static void setGlobalTraceMode( final boolean globalTraceMode ) {
 
@@ -263,12 +253,10 @@ public abstract class AutoSizingValidatedJTextField extends ValidatedJTextField 
         if ( graphics == null ) {
 
             fontMetrics = s_likelyFontMetrics;
-//            Logger.logMsg( "likely font metrics are " + fontMetrics );
 
         } else {
 
             fontMetrics = graphics.getFontMetrics();
-//            Logger.logMsg( "actual font metrics are " + fontMetrics );
 
         }
 
@@ -306,9 +294,7 @@ public abstract class AutoSizingValidatedJTextField extends ValidatedJTextField 
         Dimension maxSize = tf.getMaximumSize();
 
         boolean changed = false;
-//        boolean grown = false;
         boolean growing = true;
-//        boolean ifExpr;
 
         while ( true ) {
 
@@ -342,9 +328,6 @@ public abstract class AutoSizingValidatedJTextField extends ValidatedJTextField 
 
                 if ( growIt ) {
 
-//                    ifExpr = true;
-//                    grown = true;
-
                     ObtuseUtil.doNothing();
 
                 } else {
@@ -353,10 +336,6 @@ public abstract class AutoSizingValidatedJTextField extends ValidatedJTextField 
                     continue;
 
                 }
-
-//            } else if ( grown ) {
-//
-//                return;
 
             } else {
 
@@ -394,34 +373,18 @@ public abstract class AutoSizingValidatedJTextField extends ValidatedJTextField 
 
                     break;
 
-//                    ifExpr = true;
-//
-//                } else {
-//
-//                    break;
                 }
 
             }
 
-//            if ( ifExpr ) {
-
-                curPreferredSize.width += ( growing ? 1 : -1 ) * TEXT_WIDTH_CHANGE_DELTA;
-                changed = true;
-
-//            } else {
-//
-//                break;
-//
-//            }
-
+            curPreferredSize.width += ( growing ? 1 : -1 ) * TEXT_WIDTH_CHANGE_DELTA;
+            changed = true;
 
         }
 
         if ( changed ) {
 
             Logger.maybeLogMsg( () -> "grew to " + ObtuseUtil.fDim( curPreferredSize ), traceMode );
-
-//            tf.setForeground( Color.RED );
 
             if ( curPreferredSize.width < tf.getWidth() ) {
 
@@ -430,7 +393,6 @@ public abstract class AutoSizingValidatedJTextField extends ValidatedJTextField 
             }
 
             tf.setPreferredSize( curPreferredSize );
-//            tf.setMinimumSize( new Dimension( Math.min( curPreferredSize.width, maxSize.width ), minSize.height ) );
 
             Logger.maybeLogMsg(
                     () -> "tf:  " +
@@ -454,11 +416,7 @@ public abstract class AutoSizingValidatedJTextField extends ValidatedJTextField 
 
                 tf.revalidate();
 
-//                tf.getParent().validate();
-
             }
-
-//            tf.revalidate();
 
             Optional<Window> win = ObtuseGuiEventUtils.findOurTopWindow( tf );
             if ( win.isPresent() ) {
@@ -469,10 +427,6 @@ public abstract class AutoSizingValidatedJTextField extends ValidatedJTextField 
 
             }
             ObtuseUtil.doNothing();
-
-//        } else {
-
-//            tf.setForeground( Color.BLACK );
 
         }
 
@@ -561,8 +515,6 @@ public abstract class AutoSizingValidatedJTextField extends ValidatedJTextField 
 
             Logger.maybeLogMsg( () -> "grew to " + ObtuseUtil.fDim( curPreferredSize ), traceMode );
 
-//            tf.setForeground( Color.RED );
-
             if ( curPreferredSize.width < tf.getWidth() ) {
 
                 ObtuseUtil.doNothing();
@@ -570,7 +522,6 @@ public abstract class AutoSizingValidatedJTextField extends ValidatedJTextField 
             }
 
             tf.setPreferredSize( curPreferredSize );
-//            tf.setMinimumSize( new Dimension( Math.min( curPreferredSize.width, maxSize.width ), minSize.height ) );
 
             Logger.maybeLogMsg(
                     () -> "tf:  " +
@@ -594,11 +545,7 @@ public abstract class AutoSizingValidatedJTextField extends ValidatedJTextField 
 
                 tf.revalidate();
 
-//                tf.getParent().validate();
-
             }
-
-//            tf.revalidate();
 
             Optional<Window> win = ObtuseGuiEventUtils.findOurTopWindow( tf );
             if ( win.isPresent() ) {
@@ -609,10 +556,6 @@ public abstract class AutoSizingValidatedJTextField extends ValidatedJTextField 
 
             }
             ObtuseUtil.doNothing();
-
-//        } else {
-
-//            tf.setForeground( Color.BLACK );
 
         }
 
@@ -699,7 +642,6 @@ public abstract class AutoSizingValidatedJTextField extends ValidatedJTextField 
         if ( changed ) {
 
             Logger.maybeLogMsg( () -> "shrank to " + ObtuseUtil.fDim( curPreferredSize ), traceMode );
-//            tf.setForeground( Color.GREEN );
 
             tf.setPreferredSize( curPreferredSize );
 
@@ -710,10 +652,6 @@ public abstract class AutoSizingValidatedJTextField extends ValidatedJTextField 
             }
 
             ObtuseUtil.doNothing();
-
-//        } else {
-
-//            tf.setForeground( Color.BLACK );
 
         }
 

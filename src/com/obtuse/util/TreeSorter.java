@@ -80,6 +80,7 @@ public class TreeSorter<K extends Comparable<? super K>, V>
                 final @NotNull GowingEntityReference er
         ) {
 
+            //noinspection rawtypes
             return new TreeSorter( unPacker, bundle );
 
         }
@@ -285,26 +286,6 @@ public class TreeSorter<K extends Comparable<? super K>, V>
         }
 
     }
-
-//    /**
-//     Constructs a new tree sorter containing the same mappings as the specified sorted map.
-//     The new tree sorter will use the same comparator as the specified sorted map.
-//
-//     @param map the map whose mappings are to be used to create the new tree sorter.
-//     @throws IllegalArgumentException if <code>map</code> is <code>null</code>.
-//     */
-//
-//    public TreeSorter( final SortedMap<K, V> map ) {
-//        super( new GowingNameMarkerThing() );
-//
-//        _sortedData = new TreeMap<>( map.comparator() );
-//        for ( K key : map.keySet() ) {
-//
-//            add( key, map.get( key ) );
-//
-//        }
-//
-//    }
 
     /**
      Construct a new tree sorter which is a copy of an existing tree sorter.

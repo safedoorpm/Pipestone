@@ -22,12 +22,6 @@ import java.io.Serializable;
 
 public class UniqueId implements GowingPackable, GowingBackReferenceable, Comparable<UniqueId>, Serializable {
 
-//    public enum Scope {
-//        UNKNOWN,
-//        JVM_LOCAL,
-//        SYSTEM_LOCAL
-//    }
-
     /**
      The smallest id value that will ever be found in a {@code UniqueId} instance returned by {@link #getJvmLocalUniqueId()}.
      Each call to {@code getJvmLocalUniqueId()} after the first will return a {@code UniqueId} instance with an id value one
