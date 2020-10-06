@@ -594,7 +594,13 @@ public class LruCache<K,R> implements Iterable<CachedThing<K,R>> {
 
             CachedThing<K, R> rval = innerGet( key, true );
 
-            return Optional.ofNullable( rval );
+            if ( rval == null ) {
+
+                return Optional.empty();
+
+            }
+
+            return Optional.of( rval );
 
         } finally {
 

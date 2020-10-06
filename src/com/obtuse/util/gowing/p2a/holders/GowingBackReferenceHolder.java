@@ -1,9 +1,9 @@
 package com.obtuse.util.gowing.p2a.holders;
 
 import com.obtuse.util.gowing.EntityName;
+import com.obtuse.util.gowing.GowingBackReferenceable;
 import com.obtuse.util.gowing.GowingInstanceId;
 import com.obtuse.util.gowing.GowingPacker;
-import com.obtuse.util.gowing.p2a.GowingBackReferenceable;
 import com.obtuse.util.gowing.p2a.GowingConstants;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

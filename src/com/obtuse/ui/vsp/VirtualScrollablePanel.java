@@ -33,83 +33,6 @@ public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends 
     private boolean _ourLayoutManagerSet;
     private final VirtualScrollableLayoutManager _ourLayoutManager;
 
-    @SuppressWarnings("unused")
-    public static void setFocusedProxy( @NotNull JComponent component, final String who ) {
-
-        setFocusedProxy( component, who, -1, -1 );
-
-    }
-
-    public static void setFocusedProxy( @NotNull JComponent component, final String who, final int row, final int column ) {
-
-        setFocusedProxy( component, who, row, column, false );
-
-    }
-
-    public static void setFocusedProxy( @NotNull JComponent component, final String who, final int row, final int column, boolean verbose ) {
-
-        boolean ownFocus = component.isFocusOwner();
-        boolean requestFocusInWindow = component.requestFocusInWindow();
-
-        if ( verbose ) {
-
-            Logger.logMsg(
-                    who + ":  requesting focus " +
-                    ( row >= 0 || column >= 0
-                              ?
-                              "at (" +
-                              ( row >= 0 ? "" + row : "" ) +
-                              ( row >= 0 && column >= 0 ? "x" : "" ) +
-                              ( column >= 0 ? "" + row : "" ) +
-                              ") "
-                              :
-                              ""
-                    ) +
-                    (
-                            requestFocusInWindow
-                                    ?
-                                    "probably worked"
-                                    :
-                                    (
-                                            "failed" +
-                                            (
-                                                    ownFocus
-                                                            ?
-                                                            " probably because we already have it"
-                                                            :
-                                                            " for unknown reason"
-                                            )
-                                    )
-                    )
-            );
-
-        }
-
-    }
-
-    private void handleMouseWheel(
-            @NotNull final String name,
-            @NotNull final JScrollBar scrollBar,
-            final int unitsToScroll
-    ) {
-
-        //noinspection StatementWithEmptyBody
-        if ( scrollBar.getValueIsAdjusting() ) {
-
-        } else {
-
-            ObtuseUtil.doNothing();
-
-            int newValue = scrollBar.getValue() - unitsToScroll;
-
-            scrollBar.setValue( newValue );
-
-            ObtuseUtil.doNothing();
-
-        }
-
-    }
-
     public VirtualScrollablePanel( @NotNull final VirtualScrollablePanelModel<E> virtualScrollablePanelModel ) {
         super();
 
@@ -265,6 +188,84 @@ public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends 
 
                 }
         );
+
+    }
+
+
+    @SuppressWarnings("unused")
+    public static void setFocusedProxy( @NotNull JComponent component, final String who ) {
+
+        setFocusedProxy( component, who, -1, -1 );
+
+    }
+
+    public static void setFocusedProxy( @NotNull JComponent component, final String who, final int row, final int column ) {
+
+        setFocusedProxy( component, who, row, column, false );
+
+    }
+
+    public static void setFocusedProxy( @NotNull JComponent component, final String who, final int row, final int column, boolean verbose ) {
+
+        boolean ownFocus = component.isFocusOwner();
+        boolean requestFocusInWindow = component.requestFocusInWindow();
+
+        if ( verbose ) {
+
+            Logger.logMsg(
+                    who + ":  requesting focus " +
+                    ( row >= 0 || column >= 0
+                              ?
+                              "at (" +
+                              ( row >= 0 ? "" + row : "" ) +
+                              ( row >= 0 && column >= 0 ? "x" : "" ) +
+                              ( column >= 0 ? "" + row : "" ) +
+                              ") "
+                              :
+                              ""
+                    ) +
+                    (
+                            requestFocusInWindow
+                                    ?
+                                    "probably worked"
+                                    :
+                                    (
+                                            "failed" +
+                                            (
+                                                    ownFocus
+                                                            ?
+                                                            " probably because we already have it"
+                                                            :
+                                                            " for unknown reason"
+                                            )
+                                    )
+                    )
+            );
+
+        }
+
+    }
+
+    private void handleMouseWheel(
+            @NotNull final String name,
+            @NotNull final JScrollBar scrollBar,
+            final int unitsToScroll
+    ) {
+
+        //noinspection StatementWithEmptyBody
+        if ( scrollBar.getValueIsAdjusting() ) {
+
+        } else {
+
+            ObtuseUtil.doNothing();
+
+            int newValue = scrollBar.getValue() - unitsToScroll;
+
+            scrollBar.setValue( newValue );
+
+            ObtuseUtil.doNothing();
+
+        }
 
     }
 
@@ -527,6 +528,8 @@ public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends 
         @Override
         public void layoutContainer( final Container parent ) {
 
+            VirtualScrollablePanelModel.CurrentGoals<E> currentGoals = null;
+
             try ( Measure ignored = new Measure( "layout VSP" ) ) {
 
                 if ( parent != _ourTargetPanel ) {
@@ -603,8 +606,6 @@ public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends 
                         _hScrollBar,
                         new Rectangle( 0, vPanelHeight, hsbWidth, hsbHeight )
                 );
-
-                VirtualScrollablePanelModel.CurrentGoals<E> currentGoals;
 
                 try ( Measure m1 = new Measure( "VSP get current goals" ) ) {
 
@@ -811,6 +812,10 @@ public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends 
                     Logger.logMsg( "done layout" );
 
                 }
+
+            } finally {
+
+                _virtualScrollablePanelModel.layoutHasChanged( _ourTargetPanel, currentGoals );
 
             }
 

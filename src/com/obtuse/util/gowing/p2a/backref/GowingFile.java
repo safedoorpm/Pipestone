@@ -2,7 +2,6 @@ package com.obtuse.util.gowing.p2a.backref;
 
 import com.obtuse.util.ObtuseUtil;
 import com.obtuse.util.gowing.*;
-import com.obtuse.util.gowing.p2a.GowingBackReferenceable;
 import com.obtuse.util.gowing.p2a.GowingEntityReference;
 import com.obtuse.util.gowing.p2a.exceptions.GowingUnpackingException;
 import org.jetbrains.annotations.NotNull;
@@ -16,7 +15,6 @@ import java.net.URISyntaxException;
  Something to carry around a {@link File} instance.
  */
 
-@SuppressWarnings("unused")
 public class GowingFile extends File implements GowingBackReferenceable {
 
     private enum ConstructorVariant {

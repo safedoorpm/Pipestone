@@ -300,7 +300,9 @@ public class FrameworkTableModel<D extends ThingInfo> extends CheckBoxStyleSelec
 
         if ( isFrozen() ) {
 
-            throw new IllegalArgumentException( "FrameworkTableModel.addColumn:  cannot add more columns once model definition is frozen" );
+            throw new IllegalArgumentException(
+                    "FrameworkTableModel.addColumn:  cannot add more columns once model definition is frozen"
+            );
 
         }
 
@@ -308,8 +310,9 @@ public class FrameworkTableModel<D extends ThingInfo> extends CheckBoxStyleSelec
         TCName columnName = cManager.getColumnName();
         if ( _fieldNameIndex.containsKey( columnName ) ) {
 
-            throw new IllegalArgumentException( "field name \"" +
-                                                columnName + "\" appears more than once in table" );
+            throw new IllegalArgumentException(
+                    "field name \"" + columnName + "\" appears more than once in table"
+            );
 
         }
 
@@ -317,11 +320,10 @@ public class FrameworkTableModel<D extends ThingInfo> extends CheckBoxStyleSelec
 
             if ( _selectionColumnNumber >= 0 ) {
 
-                throw new IllegalArgumentException( "columns " +
-                                                    _selectionColumnNumber +
-                                                    " and " +
-                                                    nextColumnNumber +
-                                                    " both claim to be the selection column" );
+                throw new IllegalArgumentException(
+                        "columns " + _selectionColumnNumber + " and " + nextColumnNumber +
+                        " both claim to be the selection column"
+                );
 
             }
 

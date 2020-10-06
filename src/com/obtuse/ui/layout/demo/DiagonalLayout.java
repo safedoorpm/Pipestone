@@ -1,4 +1,4 @@
-package com.obtuse.ui.layout.play;
+package com.obtuse.ui.layout.demo;
 
 import com.obtuse.ui.MyActionListener;
 import com.obtuse.ui.layout.LinearOrientation;

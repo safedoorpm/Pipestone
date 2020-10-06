@@ -3,7 +3,7 @@
  * All rights reserved.
  */
 
-package com.obtuse.ui.layout.play;
+package com.obtuse.ui.layout.demo;
 
 import com.obtuse.exceptions.HowDidWeGetHereError;
 import com.obtuse.util.MessageProxy;
@@ -15,8 +15,10 @@ import java.awt.*;
 
 /**
  A layout manager that lays components out in a <i>golden spiral</i>.
- <p/>This layout manager lays out all the components in the container that it is assigned to into a <i>golden spiral</i>
- (see below for more information on <i>golden spirals</i>).
+ <p>Note: this is demo software.
+ Please let me (danny@matilda.com) know if you find an actual genuine production use for this class.</p>
+ <p/>This layout manager lays out all the components in the container that it is assigned to into a
+ <i>golden spiral</i> (see below for more information on <i>golden spirals</i>).
  Each component is forced into the shape of
  an appropriately sized square and placed on the spiral.
  <p/>A few notes are in order:
@@ -24,8 +26,7 @@ import java.awt.*;
  <li>The components in the container will appear in the spiral in the same order as they were added to the container
  .</li>
  <li>This layout manager completely ignores any minimum, preferred or maximum size attributes which might have been
- specified
- for the components.</li>
+ specified for the components.</li>
  </ul>
  <h3>Golden Spirals, Ratios and Rectangles</h3>
  A <i>golden spiral</i> is essentially a rectangle with squares spiralling in towards a somewhat central point.
@@ -36,26 +37,23 @@ import java.awt.*;
  <li>as a horizontal rectangle with the first square occupying the right end of the rectangle</li>
  <li>as a vertical rectangle with the first square occupying the bottom of the rectangle</li>
  </ol>
- The nature of <i>golden rectangles</i> is such that if a square of size <code>A x A</code> completely occupies one
- end of
- <i>golden rectangle</i> of
- size <code>A x B</code> (<code>A</code> being the width of the rectangle and <code>B</code> being its length) then the
- rest of the rectangle will be a smaller <i>golden rectangle</i>
- of size <code>( B - A ) x A</code> (this smaller rectangle will have a width of <code>B - A</code> and a length of
- <code>A</code>).
- This smaller rectangle can itself be divided into a square which fully occupies one end and a yet smaller <i>golden
- rectangle</i> occupying the rest.
- If one is consistent about which end of each rectangle is used for the square then one ends up with a spiral of squares
- of rapidly decreasing size.
+ The nature of <i>golden rectangles</i> is such that if a square of size <code>A x A</code> completely
+ occupies one end of <i>golden rectangle</i> of size <code>A x B</code> (<code>A</code> being the width
+ of the rectangle and <code>B</code> being its length) then the rest of the rectangle will be a smaller
+ <i>golden rectangle</i> of size <code>( B - A ) x A</code> (this smaller rectangle will have a width of
+ <code>B - A</code> and a length of <code>A</code>).
+ This smaller rectangle can itself be divided into a square which fully occupies one end and a yet smaller
+ <i>golden rectangle</i> occupying the rest.
+ If one is consistent about which end of each rectangle is used for the square then one ends up with a
+ spiral of squares of rapidly decreasing size.
  This spiral is known as a <i>golden spiral</i>.
- <p/>What makes this (theoretically) infinite spiral possible is the fact that the length of the original rectangle
- is <code>(1+sqrt(5))/2</code> times the width of the original rectangle. This ratio is known as the <i>golden
- ratio</i>.
+ <p/>What makes this (theoretically) infinite spiral possible is the fact that the length of the original
+ rectangle is <code>(1+sqrt(5))/2</code> times the width of the original rectangle. This ratio is often called
+ the <i>golden ratio</i>.
  <p/>See the Wikipedia Golden Ratio page at <a href="https://en.wikipedia.org/wiki/Golden_ratio">https://en.wikipedia
  .org/wiki/Golden_ratio</a> for more information
- (look for the section titled <i>Geometry</i> for quite respectable representation of the <i>golden spirals</i> that
- this
- layout manager produces).
+ (look for the section titled <i>Geometry</i> for a quite respectable representation of the <i>golden spirals</i>
+ that this layout manager produces).
  */
 
 public class GoldenRatioLayoutManager implements LayoutManager {
@@ -150,6 +148,7 @@ public class GoldenRatioLayoutManager implements LayoutManager {
      was constructed.
      */
 
+    @SuppressWarnings("unused")
     public boolean isTracing() {
 
         return _mp != null;
@@ -261,6 +260,7 @@ public class GoldenRatioLayoutManager implements LayoutManager {
      @return the usable size of the specified container once its insets have been taken into account.
      */
 
+    @SuppressWarnings("unused")
     @NotNull
     private Dimension computeSizeWithinInsets( final Container container ) {
 
@@ -385,8 +385,8 @@ public class GoldenRatioLayoutManager implements LayoutManager {
 
         }
 
-        int maxWidth = availableWidth;
-        int maxHeight = availableHeight;
+        @SuppressWarnings("unused") int maxWidth = availableWidth;
+        @SuppressWarnings("unused") int maxHeight = availableHeight;
         Component[] components = container.getComponents();
         int i = 0;
         double nextHeight = stage == 0 ? availableWidth / GOLDEN_RATIO : availableHeight;
@@ -424,8 +424,6 @@ public class GoldenRatioLayoutManager implements LayoutManager {
             }
 
             if ( components[i].isVisible() ) {
-
-                int delta;
 
                 switch ( stage ) {
 
@@ -542,6 +540,7 @@ public class GoldenRatioLayoutManager implements LayoutManager {
 
     }
 
+    @SuppressWarnings("unused")
     private static int adj( final double d ) {
 
         return round( d );
@@ -554,6 +553,7 @@ public class GoldenRatioLayoutManager implements LayoutManager {
 
     }
 
+    @SuppressWarnings("unused")
     private boolean fuzzyEquals( final Dimension lhs, final Dimension rhs ) {
 
         return Math.abs( lhs.width - rhs.width ) <= 1 && Math.abs( lhs.height - rhs.height ) <= 1;
@@ -616,6 +616,7 @@ public class GoldenRatioLayoutManager implements LayoutManager {
 
     }
 
+    @SuppressWarnings("unused")
     private int adjustWidth(
             final String why,
             final int availableWidth,
@@ -695,6 +696,7 @@ public class GoldenRatioLayoutManager implements LayoutManager {
 
     }
 
+    @SuppressWarnings("unused")
     private int adjustHeight(
             final String why,
             final int availableWidth,

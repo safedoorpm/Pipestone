@@ -15,6 +15,14 @@ import java.util.TreeMap;
 public abstract class AbstractVirtualScrollablePanelModel<E extends VirtualScrollableElement>
         implements VirtualScrollablePanelModel<E> {
 
+    public interface ScrollablePanelChangeListener {
+
+        void itemCountChanged( int newItemCount );
+//        void rowCountChanged( int newRowCount );
+//        void columnCountChanged( int newColumnCount );
+
+    }
+
     private SortedMap<UniqueId, ElementView<E>> _currentlyAssignedElementViewsMap = new TreeMap<>();
 
     private ElementView.ElementViewFactory<E> _elementViewFactory;
@@ -203,6 +211,10 @@ public abstract class AbstractVirtualScrollablePanelModel<E extends VirtualScrol
     public int getApproximateElementWidth() {
 
         return 50;
+
+    }
+
+    public void layoutHasChanged( final CurrentGoals<E> currentGoals ) {
 
     }
 

@@ -9,7 +9,6 @@ import com.obtuse.util.BasicProgramConfigInfo;
 import com.obtuse.util.Logger;
 import com.obtuse.util.ObtuseUtil;
 import com.obtuse.util.gowing.*;
-import com.obtuse.util.gowing.p2a.GowingBackReferenceable;
 import com.obtuse.util.gowing.p2a.GowingEntityReference;
 import com.obtuse.util.gowing.p2a.holders.GowingPackableCollection;
 import org.jetbrains.annotations.NotNull;
@@ -23,7 +22,6 @@ import java.util.function.Supplier;
  <p/>Instances of this class are immutable.
  */
 
-@SuppressWarnings("unused")
 public class RelativePath
         extends GowingAbstractPackableEntity
         implements GowingBackReferenceable, Iterable<SegmentName>, Comparable<RelativePath> {

@@ -25,7 +25,11 @@ public class RandomCentral {
     private RandomCentral() {
         super();
 
-        _generator = s_beSecure ? new SecureRandom() : new Random();
+        // Get a random number generator that is likely to be seeded by a different initial seed than any
+        // other instance of this class (including other instances in this JVM and other instances in other JVMs).
+
+        long nanoTime = System.nanoTime();
+        _generator = s_beSecure ? new SecureRandom() : new Random( nanoTime );
 
     }
 

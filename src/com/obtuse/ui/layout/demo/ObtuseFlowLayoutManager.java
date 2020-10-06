@@ -1,4 +1,4 @@
-package com.obtuse.ui.layout.play;
+package com.obtuse.ui.layout.demo;
 
 import com.obtuse.ui.MyActionListener;
 import com.obtuse.ui.layout.LinearOrientation;
@@ -15,8 +15,8 @@ import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
 /**
- An alternative to {@link FlowLayout} that (hopefully) works better.
- <p>By "works better", I primarily mean that this (from scratch) implementation
+ A somewhat basic alternative to {@link FlowLayout} that (hopefully) works better.
+ <p>By "works better", I primarily mean that this (from scratch) layout manager
  handles the resizing of the container as the required space to display the
  contents of the container changes.</p>
  */
@@ -62,14 +62,13 @@ public class ObtuseFlowLayoutManager implements LayoutManager2 {
 
     private int _vGap;
     private int _hGap;
-    private int _minWidth = 0, _minHeight = 0;
+    @SuppressWarnings({ "FieldCanBeLocal", "unused" }) private int _minWidth = 0, _minHeight = 0;
     private int _preferredWidth = 0, _preferredHeight = 0;
-    private boolean _sizeUnknown = true;
     private java.util.List<ComponentPlan> _plannedComponentBounds;
 
+    @SuppressWarnings("unused")
     public ObtuseFlowLayoutManager() {
-
-        this( 3, 0 );
+        this( 0, 0 );
     }
 
     public ObtuseFlowLayoutManager( int vGap, int hGap ) {
@@ -80,7 +79,7 @@ public class ObtuseFlowLayoutManager implements LayoutManager2 {
 
     }
 
-    /* Required by LayoutManager. */
+    @Override
     public void addLayoutComponent( String name, Component comp ) {
 
         vLog(
@@ -92,7 +91,7 @@ public class ObtuseFlowLayoutManager implements LayoutManager2 {
 
     }
 
-    /* Required by LayoutManager. */
+    @Override
     public void removeLayoutComponent( Component comp ) {
 
         vLog(
@@ -103,11 +102,11 @@ public class ObtuseFlowLayoutManager implements LayoutManager2 {
 
     }
 
-    private void planLayout( Container parent, int assumedWidth ) {
+    private void planLayout( Container parent ) {
 
         int componentCount = parent.getComponentCount();
         int parentWidth = parent.getWidth();
-        int pHeight = parent.getHeight();
+        @SuppressWarnings("unused") int parentHeight = parent.getHeight();
 
         _preferredWidth = 0;
         _preferredHeight = 0;
@@ -199,7 +198,7 @@ public class ObtuseFlowLayoutManager implements LayoutManager2 {
     }
 
 
-    /* Required by LayoutManager. */
+    @Override
     public Dimension preferredLayoutSize( Container parent ) {
 
         vLog(
@@ -210,7 +209,7 @@ public class ObtuseFlowLayoutManager implements LayoutManager2 {
                 " )"
         );
 
-        planLayout( parent, 100000 );
+        planLayout( parent );
 
         Dimension dim = new Dimension( _preferredWidth, _preferredHeight );
 
@@ -220,7 +219,7 @@ public class ObtuseFlowLayoutManager implements LayoutManager2 {
 
     }
 
-    /* Required by LayoutManager. */
+    @Override
     public Dimension minimumLayoutSize( Container parent ) {
 
         vLog(
@@ -231,7 +230,7 @@ public class ObtuseFlowLayoutManager implements LayoutManager2 {
                 " )"
         );
 
-        planLayout( parent, 100000 );
+        planLayout( parent );
 
         Dimension dim = new Dimension( _preferredWidth, _preferredHeight );
 
@@ -241,15 +240,15 @@ public class ObtuseFlowLayoutManager implements LayoutManager2 {
 
     }
 
-    /* Required by LayoutManager. */
     /*
      * This is called when the panel is first displayed,
      * and every time its size changes.
-     * Note: You CAN'T assume preferredLayoutSize or
+     * Note: You CANNOT assume preferredLayoutSize or
      * minimumLayoutSize will be called -- in the case
      * of applets, at least, they probably won't be.
      */
 
+    @Override
     public void layoutContainer( Container parent ) {
 
         vLog(
@@ -258,8 +257,8 @@ public class ObtuseFlowLayoutManager implements LayoutManager2 {
                 " )"
         );
 
-        Dimension pPrefSize = parent.getPreferredSize();
-        planLayout( parent, pPrefSize.width );
+        @SuppressWarnings("unused") Dimension parentPrefSize = parent.getPreferredSize();
+        planLayout( parent );
 
         int ix = 0;
         for ( ComponentPlan componentPlan : _plannedComponentBounds ) {
@@ -279,7 +278,8 @@ public class ObtuseFlowLayoutManager implements LayoutManager2 {
 
     public String toString() {
 
-        return getClass().getName() + "( vgap=" + _vGap + " )";
+        return getClass().getName() + "( vGap=" + _vGap + ", hGap=" + _hGap + " )";
+
     }
 
     @Override
@@ -347,6 +347,7 @@ public class ObtuseFlowLayoutManager implements LayoutManager2 {
 
     }
 
+    @SuppressWarnings("unused")
     public static void setVlog( boolean vLog ) {
 
         s_vLog = vLog;
@@ -363,6 +364,7 @@ public class ObtuseFlowLayoutManager implements LayoutManager2 {
 
     }
 
+    @SuppressWarnings("DuplicatedCode")
     public static void main( String[] args ) {
 
         BasicProgramConfigInfo.init(
@@ -402,10 +404,13 @@ public class ObtuseFlowLayoutManager implements LayoutManager2 {
                 LinearOrientation.VERTICAL
         );
         lc.add( jpd );
+
         LinearLayoutUtil.SpaceSponge sponge = new LinearLayoutUtil.SpaceSponge();
         sponge.setBackground( Color.GRAY );
         lc.add( sponge );
+
         jf.setContentPane( lc.getAsJPanel() );
+
         jf.pack();
         jf.setVisible( true );
 

@@ -5,7 +5,6 @@
 package com.obtuse.util;
 
 import com.obtuse.util.gowing.*;
-import com.obtuse.util.gowing.p2a.GowingBackReferenceable;
 import com.obtuse.util.gowing.p2a.GowingEntityReference;
 import org.jetbrains.annotations.NotNull;
 

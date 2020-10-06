@@ -2890,14 +2890,9 @@ public class ObtuseUtil {
     public static @NotNull String computeMD5( final File file )
             throws IOException {
 
-        FileInputStream fis = new FileInputStream( file );
-        try {
+        try ( FileInputStream fis = new FileInputStream( file ) ) {
 
             return ObtuseUtil.computeMD5( fis );
-
-        } finally {
-
-            ObtuseUtil.closeQuietly( fis );
 
         }
 

@@ -15,9 +15,9 @@ public class MessageDigestRecord extends GowingAbstractPackableEntity {
 
     private static final int VERSION = 1;
 
-    private static final EntityName SOURCE_NAME = new EntityName( "_s" );
-    private static final EntityName DIGEST_NAME = new EntityName( "_d" );
-    private static final EntityName ALGORITHM_NAME = new EntityName( "_a" );
+    private static final EntityName G_SOURCE = new EntityName( "_s" );
+    private static final EntityName G_DIGEST = new EntityName( "_d" );
+    private static final EntityName G_ALGORITHM = new EntityName( "_a" );
 
     public static final GowingEntityFactory FACTORY = new GowingEntityFactory( ENTITY_TYPE_NAME ) {
 
@@ -41,9 +41,9 @@ public class MessageDigestRecord extends GowingAbstractPackableEntity {
                 final @NotNull GowingEntityReference er
         ) {
 
-            byte[] digest = bundle.MandatoryPrimitiveByteArrayValue( DIGEST_NAME );
-            String algorithm = bundle.MandatoryStringValue( ALGORITHM_NAME );
-            String sourceName = bundle.MandatoryStringValue( SOURCE_NAME );
+            byte[] digest = bundle.MandatoryPrimitiveByteArrayValue( G_DIGEST );
+            String algorithm = bundle.MandatoryStringValue( G_ALGORITHM );
+            String sourceName = bundle.MandatoryStringValue( G_SOURCE );
 
             return new MessageDigestRecord( sourceName, digest, algorithm );
 
@@ -91,11 +91,18 @@ public class MessageDigestRecord extends GowingAbstractPackableEntity {
 
         if ( _digestString == null ) {
 
-            _digestString = ObtuseUtil.hexvalue( _digest );
+            _digestString = convertDigestToString( _digest );
 
         }
 
         return _digestString;
+
+    }
+
+    @NotNull
+    public static String convertDigestToString( final byte[] digest ) {
+
+        return ObtuseUtil.hexvalue( digest );
 
     }
 
@@ -110,7 +117,7 @@ public class MessageDigestRecord extends GowingAbstractPackableEntity {
 
         if ( _toString == null ) {
 
-            _toString = _algorithm + "/" + ObtuseUtil.hexvalue( _digest );
+            _toString = _algorithm + "/" + convertDigestToString( _digest );
 
         }
 
@@ -131,9 +138,9 @@ public class MessageDigestRecord extends GowingAbstractPackableEntity {
                 packer.getPackingContext()
         );
 
-        bundle.addStringHolder( SOURCE_NAME, _sourceName, true );
-        bundle.addStringHolder( ALGORITHM_NAME, _algorithm, true );
-        bundle.addByteHolder( DIGEST_NAME, _digest, true );
+        bundle.addStringHolder( G_SOURCE, _sourceName, true );
+        bundle.addStringHolder( G_ALGORITHM, _algorithm, true );
+        bundle.addByteHolder( G_DIGEST, _digest, true );
 
         return bundle;
 

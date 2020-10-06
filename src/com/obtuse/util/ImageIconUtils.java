@@ -391,7 +391,7 @@ public class ImageIconUtils {
 
     /**
      * Get a {@link java.awt.image.BufferedImage} version of an {@link java.awt.Image}.
-     * Identical to {@link #copyToBufferedImage(java.awt.Image)} except that the original image is returned if it is a {@link java.awt.image
+     * Identical to {@link #forceCopyToBufferedImage(java.awt.Image)} except that the original image is returned if it is a {@link java.awt.image
      * .BufferedImage}.
      * <p/>
      * This method came from
@@ -414,7 +414,7 @@ public class ImageIconUtils {
             return (BufferedImage)xImage;
 
         }
-        return ImageIconUtils.copyToBufferedImage( xImage );
+        return ImageIconUtils.forceCopyToBufferedImage( xImage );
 
     }
 
@@ -436,7 +436,7 @@ public class ImageIconUtils {
      */
 
     @NotNull
-    public static BufferedImage copyToBufferedImage( final Image xImage ) {
+    public static BufferedImage forceCopyToBufferedImage( final Image xImage ) {
 
         // This code ensures that all the pixels in the image are loaded
 
@@ -620,7 +620,7 @@ public class ImageIconUtils {
     @NotNull
     public static BufferedImage changeImageBrightness( final Image image, final float factor, final float offset ) {
 
-        BufferedImage bufferedVersion = ImageIconUtils.copyToBufferedImage( image );
+        BufferedImage bufferedVersion = ImageIconUtils.forceCopyToBufferedImage( image );
 
         RescaleOp op = new RescaleOp( factor, offset, null );
 

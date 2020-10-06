@@ -126,34 +126,34 @@ public class CreateSomethingDialog<T,N> extends JDialog {
 
         _newSomethingNameTextField.setText( null );
         _newSomethingNameTextField.enableInputMethods( false );
-        Document newMediaLibraryTextFieldDoc = _newSomethingNameTextField.getDocument();
-        newMediaLibraryTextFieldDoc.addDocumentListener(
+        Document newLibraryTextFieldDoc = _newSomethingNameTextField.getDocument();
+        newLibraryTextFieldDoc.addDocumentListener(
                 new DocumentListener() {
                     @Override
                     public void insertUpdate( final DocumentEvent e ) {
 
-                        _createSomethingButton.setEnabled( newMediaLibraryTextFieldDoc.getLength() > 0 );
+                        _createSomethingButton.setEnabled( newLibraryTextFieldDoc.getLength() > 0 );
 
                     }
 
                     @Override
                     public void removeUpdate( final DocumentEvent e ) {
 
-                        _createSomethingButton.setEnabled( newMediaLibraryTextFieldDoc.getLength() > 0 );
+                        _createSomethingButton.setEnabled( newLibraryTextFieldDoc.getLength() > 0 );
 
                     }
 
                     @Override
                     public void changedUpdate( final DocumentEvent e ) {
 
-                        _createSomethingButton.setEnabled( newMediaLibraryTextFieldDoc.getLength() > 0 );
+                        _createSomethingButton.setEnabled( newLibraryTextFieldDoc.getLength() > 0 );
 
                     }
 
                 }
         );
 
-        _createSomethingButton.setEnabled( newMediaLibraryTextFieldDoc.getLength() > 0 );
+        _createSomethingButton.setEnabled( newLibraryTextFieldDoc.getLength() > 0 );
 
         // call onCancelCreate() when cross is clicked
         setDefaultCloseOperation( DO_NOTHING_ON_CLOSE );

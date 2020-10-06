@@ -55,6 +55,22 @@ public class ObtuseImageUtils {
 
     private static boolean _verbose;
 
+    /**
+     Something to trigger the static initializers.
+     <p>We need to ensure that the s_mediaTrackerComponent JPanel is created on
+     the Swing event thread before we start loading media asynchronously within this class.</p>
+     */
+
+    public static void initIfNecessary( final boolean verbose ) {
+
+        if ( verbose ) {
+
+            Logger.logMsg( "ObtuseImageUtils:  static initializers have been processed" );
+
+        }
+
+    }
+
     public static void setVerbose( final boolean verbose ) {
 
         _verbose = verbose;

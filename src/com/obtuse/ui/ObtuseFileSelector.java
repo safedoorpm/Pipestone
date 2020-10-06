@@ -3,10 +3,10 @@ package com.obtuse.ui;
 import com.obtuse.ObtuseConstants;
 import com.obtuse.exceptions.HowDidWeGetHereError;
 import com.obtuse.ui.layout.LinearOrientation;
+import com.obtuse.ui.layout.demo.ObtuseFlowLayoutManager;
 import com.obtuse.ui.layout.linear.LinearContainer;
 import com.obtuse.ui.layout.linear.LinearLayoutManager3;
 import com.obtuse.ui.layout.linear.LinearLayoutUtil;
-import com.obtuse.ui.layout.play.ObtuseFlowLayoutManager;
 import com.obtuse.util.*;
 import org.intellij.lang.annotations.MagicConstant;
 import org.jetbrains.annotations.NotNull;
@@ -474,6 +474,7 @@ public class ObtuseFileSelector extends JDialog {
 
                     @NotNull List<File> narrowedSelection = narrowSelection();
 
+                    //noinspection RedundantIfStatement
                     if ( narrowedSelection.isEmpty() ) {
 
                         _selectButton.setEnabled( false );
@@ -623,6 +624,7 @@ public class ObtuseFileSelector extends JDialog {
 
     private void checkNewDirectoryNameField() {
 
+        //noinspection RedundantIfStatement
         if ( _newDirectoryNameField.getText().isEmpty() ) {
 
             _createDirectoryButton.setEnabled( false );

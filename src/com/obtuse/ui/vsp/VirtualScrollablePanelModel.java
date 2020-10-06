@@ -149,8 +149,7 @@ public interface VirtualScrollablePanelModel<E extends VirtualScrollableElement>
 
             return "CurrentGoals( " +
                    "elementIndexOfTopRow=" + _firstVisibleElementNumber + ", " +
-                   "from " + ObtuseUtil.pluralize( _providedElementModels.size(), "visible elements"
-            );
+                   "from " + ObtuseUtil.pluralize( _providedElementModels.size(), "visible element" );
 
         }
 
@@ -255,5 +254,25 @@ public interface VirtualScrollablePanelModel<E extends VirtualScrollableElement>
 
     @SuppressWarnings("unused")
     int getApproximateElementWidth();
+
+    /**
+     Notify a possible derivation of this model that our panel has just been laid out by our layout manager.
+     <p>The purpose of this method is to allow the owner of our panel to track changes in the panel.
+     For example, the owner may wish to have a label on the same window that our panel resides in that
+     states how many elements are currently in our panel.</p>
+     <p>This method is called just as the layout of our panel completes.
+     Any override of this method should avoid doing ANYTHING that might trigger another layout as there
+     is at least a theoretical possibility that doing that could result in an endless storm of layout attempts.</p>
+     @param ourTargetPanel the panel that was just laid out.
+     @param currentGoals the goals used to guide the layout.
+     */
+
+    default void layoutHasChanged( VirtualScrollablePanel<E> ourTargetPanel, CurrentGoals<E> currentGoals ) {
+
+        ObtuseUtil.doNothing();
+
+    }
+
+//    void layoutHasChanged( VirtualScrollablePanelModel.CurrentGoals<E> currentGoals );
 
 }
