@@ -29,7 +29,18 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" name="Default" comment="Cleanup. Lots of cleanup." />
+    <list default="true" id="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" name="Default" comment="Cleanup. Lots of cleanup.">
+      <change afterPath="$PROJECT_DIR$/src/com/obtuse/util/ObtuseTraceFacility.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/YesNoPopupMessageWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/YesNoPopupMessageWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/macos/ManageMainMacMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/macos/ManageMainMacMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/vsp/VirtualScrollablePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/vsp/VirtualScrollablePanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/vsp/VirtualScrollablePanelModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/vsp/VirtualScrollablePanelModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/AsyncStreamCaptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/AsyncStreamCaptor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/ObtuseUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ObtuseUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/TwoDimensionalTreeMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/TwoDimensionalTreeMap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/clockwatcher/ObtuseClockWatcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/clockwatcher/ObtuseClockWatcher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/lrucache/LruCache.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/lrucache/LruCache.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -350,13 +361,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -627,6 +640,7 @@
       <workItem from="1582663371055" duration="8662000" />
       <workItem from="1583456489310" duration="7594000" />
       <workItem from="1601965108561" duration="934000" />
+      <workItem from="1606211042076" duration="589000" />
     </task>
     <task id="LOCAL-00059" summary="Move away from providing a sized array to the Collection.toArray() methods (no longer faster than just providing a zero-length array of the correct type).&#10;&#10;Add a makeRelative method to the AbsolutePath class that returns a RelativePath containing all the segments in the AbsolutePath minus the first root node segment.&#10;&#10;Major cleanup in the RelativePath class:&#10;&#10;    - cleanup the various concat methods to provide better orthogonality&#10;    - implement a segment-by-segment compareTo method (eliminates the need for a string&#10;      representation of the path although we're going to keep that representation at least&#10;      for now)&#10;    - add tests for the new compareTo method and a few previously missed unrelated cases">
       <created>1522477312223</created>
@@ -1068,9 +1082,10 @@
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="115" y="123" width="2335" height="1303" key="DiffContextDialog" timestamp="1601965652144">
-      <screen x="0" y="23" width="2560" height="1527" />
+    <state x="66" y="141" width="2335" height="1303" key="DiffContextDialog" timestamp="1606211631385">
+      <screen x="0" y="23" width="2560" height="1526" />
     </state>
+    <state x="66" y="141" width="2335" height="1303" key="DiffContextDialog/-2560.0.2560.1440/0.23.2560.1526@0.23.2560.1526" timestamp="1606211631385" />
     <state x="115" y="123" width="2335" height="1303" key="DiffContextDialog/-2560.0.2560.1440/0.23.2560.1527@0.23.2560.1527" timestamp="1601965652144" />
     <state x="682" y="389" key="Vcs.Push.Dialog.v2" timestamp="1601965891230">
       <screen x="0" y="23" width="2560" height="1527" />
@@ -1080,9 +1095,10 @@
       <screen x="0" y="23" width="2560" height="1527" />
     </state>
     <state x="480" y="342" width="1756" height="952" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/-2560.0.2560.1440/0.23.2560.1527@0.23.2560.1527" timestamp="1601965652145" />
-    <state x="855" y="84" width="1005" height="1466" key="search.everywhere.popup" timestamp="1601965299065">
-      <screen x="0" y="23" width="2560" height="1527" />
+    <state x="855" y="84" width="1005" height="1466" key="search.everywhere.popup" timestamp="1606211322557">
+      <screen x="0" y="23" width="2560" height="1526" />
     </state>
+    <state x="855" y="84" width="1005" height="1466" key="search.everywhere.popup/-2560.0.2560.1440/0.23.2560.1526@0.23.2560.1526" timestamp="1606211322557" />
     <state x="855" y="84" width="1005" height="1466" key="search.everywhere.popup/-2560.0.2560.1440/0.23.2560.1527@0.23.2560.1527" timestamp="1601965299065" />
   </component>
   <component name="XDebuggerManager">

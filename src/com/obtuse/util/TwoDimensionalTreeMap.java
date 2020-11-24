@@ -19,8 +19,8 @@ import java.io.Serializable;
 import java.util.*;
 
 public class TwoDimensionalTreeMap<
-        T1 extends Comparable<T1>,
-        T2 extends Comparable<T2>,
+        T1 extends Comparable<? super T1>,
+        T2 extends Comparable<? super T2>,
         V
         > extends GowingAbstractPackableEntity implements Serializable, TwoDimensionalSortedMap<T1,T2,V> {
 

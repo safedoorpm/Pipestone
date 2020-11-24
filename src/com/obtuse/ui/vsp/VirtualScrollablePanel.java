@@ -1,8 +1,6 @@
 package com.obtuse.ui.vsp;
 
 import com.obtuse.exceptions.HowDidWeGetHereError;
-import com.obtuse.ui.ObtuseGuiEventUtils;
-import com.obtuse.ui.ObtuseSwingUtils;
 import com.obtuse.ui.layout.PermissiveLayoutManager;
 import com.obtuse.util.*;
 import org.jetbrains.annotations.NotNull;
@@ -12,8 +10,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
-import java.awt.event.MouseWheelEvent;
-import java.awt.event.MouseWheelListener;
 import java.util.Optional;
 
 /**
@@ -63,69 +59,69 @@ public class VirtualScrollablePanel<E extends VirtualScrollableElement> extends 
         setFocusable( true );
         requestFocusInWindow();
 
-        _actualScrollablePanel.addMouseWheelListener(
-                new MouseWheelListener() {
-
-                    @Override
-                    public void mouseWheelMoved( final MouseWheelEvent e ) {
-
-                        @NotNull Optional<Window> optTopWindow = ObtuseGuiEventUtils.findOurTopWindow(
-                                _actualScrollablePanel
-                        );
-                        if ( optTopWindow.isPresent() ) {
-
-                            Logger.logMsg( "" );
-
-                            Window topWindow = optTopWindow.get();
-                            Logger.logMsg( "top window is " + optTopWindow );
-
-                            Component currentFocusOwner = topWindow.getFocusOwner();
-                            Component mostRecentFocusOwner = topWindow.getMostRecentFocusOwner();
-
-                            Logger.logMsg(
-                                    "currentFocusOwner is " + ObtuseSwingUtils.describeComponent( currentFocusOwner ) +
-                                    ", mostRecentFocusOwner is " +
-                                    ObtuseSwingUtils.describeComponent( mostRecentFocusOwner )
-                            );
-
-                            Logger.logMsg( "" );
-
-                        }
-
-                        ObtuseUtil.doNothing();
-
-                        if ( e.getScrollType() == MouseWheelEvent.WHEEL_BLOCK_SCROLL ) {
-
-                            Logger.logMsg( "got a block scroll!" );
-
-                            ObtuseUtil.doNothing();
-
-                        } else {
-
-                            boolean isVerticalScroll = !e.isShiftDown();
-
-                            if ( isVerticalScroll ) {
-
-                                handleMouseWheel( "vertical", _vScrollBar, e.getUnitsToScroll() );
-
-                                ObtuseUtil.doNothing();
-
-                            } else {
-
-                                handleMouseWheel( "horizontal", _hScrollBar, e.getUnitsToScroll() );
-
-                                ObtuseUtil.doNothing();
-
-                            }
-
-                            ObtuseUtil.doNothing();
-
-                        }
-
-                    }
-
-                }
-        );
+//        _actualScrollablePanel.addMouseWheelListener(
+//                new MouseWheelListener() {
+//
+//                    @Override
+//                    public void mouseWheelMoved( final MouseWheelEvent e ) {
+//
+////                        @NotNull Optional<Window> optTopWindow = ObtuseGuiEventUtils.findOurTopWindow(
+////                                _actualScrollablePanel
+////                        );
+////                        if ( optTopWindow.isPresent() ) {
+////
+////                            Logger.logMsg( "" );
+////
+////                            Window topWindow = optTopWindow.get();
+////                            Logger.logMsg( "top window is " + optTopWindow );
+////
+////                            Component currentFocusOwner = topWindow.getFocusOwner();
+////                            Component mostRecentFocusOwner = topWindow.getMostRecentFocusOwner();
+////
+////                            Logger.logMsg(
+////                                    "currentFocusOwner is " + ObtuseSwingUtils.describeComponent( currentFocusOwner ) +
+////                                    ", mostRecentFocusOwner is " +
+////                                    ObtuseSwingUtils.describeComponent( mostRecentFocusOwner )
+////                            );
+////
+////                            Logger.logMsg( "" );
+////
+////                        }
+////
+////                        ObtuseUtil.doNothing();
+////
+////                        if ( e.getScrollType() == MouseWheelEvent.WHEEL_BLOCK_SCROLL ) {
+////
+////                            Logger.logMsg( "got a block scroll!" );
+////
+////                            ObtuseUtil.doNothing();
+////
+////                        } else {
+////
+////                            boolean isVerticalScroll = !e.isShiftDown();
+////
+////                            if ( isVerticalScroll ) {
+////
+////                                handleMouseWheel( "vertical", _vScrollBar, e.getUnitsToScroll() );
+////
+////                                ObtuseUtil.doNothing();
+////
+////                            } else {
+////
+////                                handleMouseWheel( "horizontal", _hScrollBar, e.getUnitsToScroll() );
+////
+////                                ObtuseUtil.doNothing();
+////
+////                            }
+////
+////                            ObtuseUtil.doNothing();
+////
+////                        }
+//
+//                    }
+//
+//                }
+//        );
 
         _hScrollBar = new JScrollBar(
                 Adjustable.HORIZONTAL,

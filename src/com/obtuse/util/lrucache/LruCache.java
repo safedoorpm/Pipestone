@@ -407,8 +407,14 @@ public class LruCache<K,R> implements Iterable<CachedThing<K,R>> {
 
         }
 
+        String name = _cacheName + "/'" + key.getClass();
+
         CachedThing<K, R> rval;
-        try ( Measure ignored = new Measure( "LruCache.innerGet(invoke fetcher)" ) ) {
+        try (
+                Measure ignored = new Measure(
+                        "LruCache.innerGet(invoke fetcher) for " + name
+                )
+        ) {
 
             rval = (
                     _cache.computeIfAbsent(
@@ -417,7 +423,11 @@ public class LruCache<K,R> implements Iterable<CachedThing<K,R>> {
 
                                 _actualFetchCount += 1;
 
-                                try ( Measure m1 = new Measure( "LruCache - invoke fetcher" ) ) {
+                                try (
+                                        Measure m1 = new Measure(
+                                                "LruCache - invoke fetcher for " + name
+                                        )
+                                ) {
 
                                     Optional<CachedThing<K, R>> rv = _fetcher.fetch( keyx, nullOk );
                                     return rv.orElse( null );
@@ -802,7 +812,7 @@ public class LruCache<K,R> implements Iterable<CachedThing<K,R>> {
 
         } else {
 
-            return "LruCache.toString called NOT called from event thread";
+            return "LruCache.toString called from thread other than the event thread";
 
         }
 

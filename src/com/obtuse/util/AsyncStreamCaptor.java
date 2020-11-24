@@ -411,11 +411,19 @@ public class AsyncStreamCaptor extends Thread {
 
             try {
 
+                ObtuseUtil.doNothing();
+
                 wait();
+
+                ObtuseUtil.doNothing();
 
             } catch ( InterruptedException e ) {
 
                 Logger.logErr( "java.lang.InterruptedException caught", e );
+
+                ObtuseUtil.doNothing();
+
+            } finally {
 
                 ObtuseUtil.doNothing();
 

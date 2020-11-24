@@ -10,48 +10,51 @@ import javax.swing.*;
 import java.util.*;
 
 /**
- Created by danny on 2018/10/22.
+ A simple asynchronous event scheduling facility.
  */
 
+@SuppressWarnings("unused")
 public class ObtuseClockWatcher {
 
-    private static WorkStepState.WorkProgressWatcher s_workProgressWatcher = new WorkStepState.WorkProgressWatcher() {
+    private static final WorkStepState.WorkProgressWatcher s_workProgressWatcher =
+            new WorkStepState.WorkProgressWatcher() {
 
-        private long _lastReportTime = 0L;
+                private long _lastReportTime = 0L;
 
-        @Override
-        public void progress(
-                final @NotNull WorkStepState workStepState, @NotNull final WorkStepState.ProgressType progressType
-        ) {
+                @Override
+                public void progress(
+                        final @NotNull WorkStepState workStepState,
+                        @NotNull final WorkStepState.ProgressType progressType
+                ) {
 
-            if ( System.currentTimeMillis() - _lastReportTime > 1000L ) {
+                    if ( System.currentTimeMillis() - _lastReportTime > 1000L ) {
 
-                Logger.logMsg(
-                        "pt=" + progressType + ", " +
-                        workStepState.getCountToDate() +
-                        " of " + (
-                                workStepState.isDone()
-                                        ?
-                                        workStepState.getActualTotalCount()
-                                        :
+                        Logger.logMsg(
+                                "pt=" + progressType + ", " +
+                                workStepState.getCountToDate() +
+                                " of " + (
+                                        workStepState.isDone()
+                                                ?
+                                                workStepState.getActualTotalCount()
+                                                :
+                                                workStepState.getExpectedCount()
+                                ) +
+                                " done (" + ObtuseUtil.safeDivide(
+                                        workStepState.getCountToDate() * 100,
                                         workStepState.getExpectedCount()
-                        ) +
-                        " done (" + ObtuseUtil.safeDivide(
-                                workStepState.getCountToDate() * 100,
-                                workStepState.getExpectedCount()
-                        ) + "%)"
+                                ) + "%)"
 
-                );
+                        );
 
-                ObtuseUtil.doNothing();
+                        ObtuseUtil.doNothing();
 
-            }
+                    }
 
-            _lastReportTime = System.currentTimeMillis();
+                    _lastReportTime = System.currentTimeMillis();
 
-        }
+                }
 
-    };
+            };
 
     public static WorkStepState.WorkProgressWatcher getProgressWatcher() {
 
@@ -65,7 +68,7 @@ public class ObtuseClockWatcher {
 
         private boolean _alarmTime = false;
 
-        private long _startTime;
+        @SuppressWarnings("FieldCanBeLocal") private long _startTime;
 
         public void run() {
 
@@ -73,7 +76,10 @@ public class ObtuseClockWatcher {
 
             synchronized ( s_backgroundTaskQueue ) {
 
-                vLog( "sb:  snoozing for " + SNOOZE_TIME_MS + "ms until " + new Date( System.currentTimeMillis() + SNOOZE_TIME_MS ) );
+                vLog(
+                        "sb:  snoozing for " + SNOOZE_TIME_MS + "ms until " +
+                        new Date( System.currentTimeMillis() + SNOOZE_TIME_MS )
+                );
 
                 for ( int resumeCount = 0; resumeCount < 100; resumeCount += 1 ) {
 
@@ -84,7 +90,19 @@ public class ObtuseClockWatcher {
 
                         try {
 
-                            s_backgroundTaskQueue.wait( waitTimeLeft );
+                            try {
+
+                                ObtuseUtil.doNothing();
+
+                                s_backgroundTaskQueue.wait( waitTimeLeft );
+
+                                ObtuseUtil.doNothing();
+
+                            } finally {
+
+                                ObtuseUtil.doNothing();
+
+                            }
 
                             vLog( "sb:  wakeup at " + new Date() + " GOODBYE!" );
 
@@ -131,7 +149,7 @@ public class ObtuseClockWatcher {
     private static final Queue<ObtuseBackgroundTask> s_backgroundTaskQueue = new LinkedList<>();
     private static final SortedMap<Long, List<ObtuseBackgroundTask>> s_timeOrderedTaskQueue = new TreeMap<>();
 
-    public static final Thread BACKGROUND_TASK_RUNNER = new Thread( "Lancot BG thread runner" ) {
+    public static final Thread BACKGROUND_TASK_RUNNER = new Thread( "OCW BG thread runner" ) {
 
         private boolean _backgroundTaskRunning = false;
 
@@ -152,7 +170,19 @@ public class ObtuseClockWatcher {
 
                             while ( true ) {
 
-                                s_backgroundTaskQueue.wait( napDuration );
+                                try {
+
+                                    ObtuseUtil.doNothing();
+
+                                    s_backgroundTaskQueue.wait( napDuration );
+
+                                    ObtuseUtil.doNothing();
+
+                                } finally {
+
+                                    ObtuseUtil.doNothing();
+
+                                }
 
                                 if ( s_backgroundTaskQueue.isEmpty() || _backgroundTaskRunning ) {
 
@@ -200,7 +230,7 @@ public class ObtuseClockWatcher {
                                     } else {
 
                                         throw new HowDidWeGetHereError(
-                                                "LancotClockWatcher:  trying to launch " +
+                                                "ObtuseClockWatcher:  trying to launch " +
                                                 ObtuseUtil.enquoteToJavaString( nextTask.purpose ) +
                                                 " when we are NOT on the event dispatch thread"
                                         );
@@ -220,66 +250,105 @@ public class ObtuseClockWatcher {
 
     };
 
-    public static final Thread CLOCK_WATCHER = new Thread( "Lancot clock watcher" ) {
+    public static final Thread CLOCK_WATCHER = new Thread( "Obtuse clock watcher" ) {
 
         @Override
         public void run() {
 
-            //noinspection InfiniteLoopStatement
-            while ( true ) {
+            try {
+                //noinspection InfiniteLoopStatement
+                while ( true ) {
 
-                vLog( "cw:  looking for work" );
+                    vLog( "cw:  looking for work" );
 
-                synchronized ( s_timeOrderedTaskQueue ) {
+                    synchronized ( s_timeOrderedTaskQueue ) {
 
-                    if ( s_timeOrderedTaskQueue.isEmpty() ) {
+                        if ( s_timeOrderedTaskQueue.isEmpty() ) {
 
-                        vLog( "cw:  queue is empty - wait (indefinitely) for the next event to appear" );
-
-                        try {
-
-                            s_timeOrderedTaskQueue.wait();
-
-                            vLog( "cw:  we've been poked while waiting indefinitely" );
-
-                        } catch ( InterruptedException e ) {
-
-                            Logger.logErr( "LancotClockWatcher:  java.lang.InterruptedException caught", e );
-
-                        }
-
-                    } else {
-
-                        Long scheduledTimeMs = s_timeOrderedTaskQueue.firstKey();
-                        vLog( "||| next task scheduled for " + new Date( scheduledTimeMs ) );
-                        long msUntilNextEventTime = scheduledTimeMs - System.currentTimeMillis();
-                        if ( msUntilNextEventTime <= 0 ) {
-
-                            vLog( "||| run task scheduled at " + new Date( scheduledTimeMs ) );
-
-                            List<ObtuseBackgroundTask> readyTasks = s_timeOrderedTaskQueue.get( scheduledTimeMs );
-                            ObtuseBackgroundTask nextTask = readyTasks.remove( 0 );
-                            if ( readyTasks.isEmpty() ) {
-
-                                s_timeOrderedTaskQueue.remove( scheduledTimeMs );
-
-                            }
-
-                            SwingUtilities.invokeLater( nextTask::doit );
-
-                        } else {
+                            vLog(
+                                    "cw:  queue is empty - wait (indefinitely) for the next event to appear"
+                            );
 
                             try {
 
-                                vLog( "cw:  waiting for next task at " + new Date( System.currentTimeMillis() + msUntilNextEventTime ) );
+                                ObtuseUtil.doNothing();
 
-                                s_timeOrderedTaskQueue.wait( msUntilNextEventTime );
+                                s_timeOrderedTaskQueue.wait();
 
-                                vLog( "cw:  timeout or we've been poked (while waiting for known next event time)" );
+                                ObtuseUtil.doNothing();
+
+                                vLog( "cw:  we've been poked while waiting indefinitely" );
 
                             } catch ( InterruptedException e ) {
 
-                                vLog( "cw:  interrupted while waiting for next event time on non-empty queue" );
+                                Logger.logErr(
+                                        "ObtuseClockWatcher:  java.lang.InterruptedException caught",
+                                        e
+                                );
+
+                                ObtuseUtil.doNothing();
+
+                            } finally {
+
+                                ObtuseUtil.doNothing();
+
+                            }
+
+                        } else {
+
+                            Long scheduledTimeMs = s_timeOrderedTaskQueue.firstKey();
+                            vLog( "||| next task scheduled for " + new Date( scheduledTimeMs ) );
+                            long msUntilNextEventTime = scheduledTimeMs - System.currentTimeMillis();
+                            if ( msUntilNextEventTime <= 0 ) {
+
+                                vLog( "||| run task scheduled at " + new Date( scheduledTimeMs ) );
+
+                                List<ObtuseBackgroundTask> readyTasks = s_timeOrderedTaskQueue.get( scheduledTimeMs );
+                                ObtuseBackgroundTask nextTask = readyTasks.remove( 0 );
+                                if ( readyTasks.isEmpty() ) {
+
+                                    s_timeOrderedTaskQueue.remove( scheduledTimeMs );
+
+                                }
+
+                                SwingUtilities.invokeLater( nextTask::doit );
+
+                            } else {
+
+                                try {
+
+                                    vLog(
+                                            "cw:  waiting for next task at " +
+                                            new Date( System.currentTimeMillis() + msUntilNextEventTime )
+                                    );
+
+                                    try {
+
+                                        ObtuseUtil.doNothing();
+
+                                        s_timeOrderedTaskQueue.wait( msUntilNextEventTime );
+
+                                        ObtuseUtil.doNothing();
+
+                                    } finally {
+
+                                        ObtuseUtil.doNothing();
+
+                                    }
+
+                                    vLog(
+                                            "cw:  timeout or we've been poked " +
+                                            "(while waiting for known next event time)"
+                                    );
+
+                                } catch ( InterruptedException e ) {
+
+                                    vLog(
+                                            "cw:  interrupted while waiting for " +
+                                            "next event time on non-empty queue"
+                                    );
+
+                                }
 
                             }
 
@@ -289,7 +358,11 @@ public class ObtuseClockWatcher {
 
                 }
 
+            } catch ( Throwable e ) {
 
+                Logger.logErr( "ObtuseClockWatcher:  caught an unexpected exception/error", e );
+
+                ObtuseUtil.doNothing();
 
             }
 

@@ -331,9 +331,14 @@ public class ObtuseUtil {
      whereas any other count value yields a result using the {@code plural} term.
 
      @param count    the count/size value.
-     @param singular the phrase to postpend the count with if it is equal to 1.
-     @param plural   the phrase to postpend the count with if it is not equal to 1.
-     @return the formatted value.
+     @param singular the phrase to append to the count if it is equal to 1.
+     @param plural   the phrase to append to the count if it is not equal to 1.
+     @return the formatted value resulting from the Java expression
+     <blockquote>
+     {@code "" + count + " " + ( count == 1 ? singular : plural )}
+     </blockquote>
+     Note that any whitespace which happens to surround the selected singular
+     or plural phrase is left intact.
      @deprecated see {@link #pluralize(long,String,String)}
      */
 
@@ -480,6 +485,74 @@ public class ObtuseUtil {
     public static String extractSuffix( @NotNull final File file ) {
 
         return extractSuffix( file.getName() );
+
+    }
+
+    /**
+     Issue a wait call with lots of places to put breakpoints.
+     @param syncObject the object that the wait should apply to.
+     @throws InterruptedException if the wait is interrupted.
+     */
+
+    public static void doWait( @NotNull final Object syncObject ) throws InterruptedException {
+
+        // DO NOT SINGLE STEP THROUGH A WAIT CALL IN INTELLIJ AS THE DEBUG SESSION MIGHT HANG PERMANENTLY.
+        // This is behaviour first noticed by me (Daniel Boulet) in November of 2020.
+        // I'm pretty sure that it used to be possible to step through wait called but one never knows . . .
+
+        doNothing();
+
+        try {
+
+            syncObject.wait();
+
+            doNothing();
+
+        } catch ( InterruptedException e ) {
+
+            doNothing();
+
+            throw e;
+
+        } finally {
+
+            doNothing();
+
+        }
+
+    }
+
+    /**
+     Issue a timed wait call with lots of places to put breakpoints.
+     @param syncObject the object that the wait should apply to.
+     @throws InterruptedException if the wait is interrupted.
+     */
+
+    public static void doWait( @NotNull final Object syncObject, long timeoutMillis ) throws InterruptedException {
+
+        // DO NOT SINGLE STEP THROUGH A WAIT CALL IN IntelliJ AS THE DEBUG SESSION MIGHT HANG PERMANENTLY.
+        // This is behaviour first noticed by me (Daniel Boulet) in November of 2020.
+        // I'm pretty sure that it used to be possible to step through wait called but one never knows . . .
+
+        doNothing();
+
+        try {
+
+            syncObject.wait( timeoutMillis );
+
+            doNothing();
+
+        } catch ( InterruptedException e ) {
+
+            doNothing();
+
+            throw e;
+
+        } finally {
+
+            doNothing();
+
+        }
 
     }
 
@@ -1909,7 +1982,8 @@ public class ObtuseUtil {
      @return the replicated string.
      */
 
-    public static String replicate( final String str, final int count ) {
+    @NotNull
+    public static String replicate( @NotNull final String str, final int count ) {
 
         String rval = str.repeat( count );
         return rval;
@@ -1925,6 +1999,7 @@ public class ObtuseUtil {
      */
 
     @SuppressWarnings({ "MagicNumber" })
+    @NotNull
     public static String hexvalue( final long v ) {
 
         //noinspection UnnecessaryParentheses
@@ -1944,6 +2019,7 @@ public class ObtuseUtil {
      */
 
     @SuppressWarnings({ "UnnecessaryParentheses", "MagicNumber" })
+    @NotNull
     public static String hexvalue( final int v ) {
 
         return ""
@@ -1962,7 +2038,7 @@ public class ObtuseUtil {
      @return the hex representation of <tt>v</tt>.
      */
 
-    @SuppressWarnings({ "UnnecessaryParentheses", "MagicNumber" })
+    @NotNull
     public static String hexvalue( final byte v ) {
 
         int high = ( v >> 4 ) & 0xf;
@@ -1982,7 +2058,7 @@ public class ObtuseUtil {
      @return the hex representation of <tt>v</tt>.
      */
 
-    @SuppressWarnings({ "UnnecessaryParentheses", "MagicNumber" })
+    @NotNull
     public static String hexvalue( final char v ) {
 
         return ObtuseUtil.hexvalue( Character.toString( v ).getBytes() );
@@ -2001,6 +2077,7 @@ public class ObtuseUtil {
      @return the hex representation of <tt>v</tt>.
      */
 
+    @NotNull
     public static String hexvalue( final byte@Nullable[] bv ) {
 
         if ( bv == null ) {
@@ -2034,6 +2111,7 @@ public class ObtuseUtil {
      @return the hex representation of <tt>v</tt>.
      */
 
+    @NotNull
     public static String hexvalue( final byte@Nullable[] bv, final int off, final int len ) {
 
         if ( bv == null ) {
@@ -2414,6 +2492,12 @@ public class ObtuseUtil {
         }
     }
 
+    private static final Long _doNothingLock = 0L;
+    private static int _doNothingCallCount = 0;
+    public static final int DO_NOTHING_TRACE_FREQUENCY = 10000;
+
+    private static boolean s_traceDoNothingCalls = false;
+
     /**
      A method which deliberately does nothing.
      Useful as a statement upon which to set a breakpoint.
@@ -2421,6 +2505,27 @@ public class ObtuseUtil {
 
     @SuppressWarnings("EmptyMethod")
     public static void doNothing() {
+
+        if ( s_traceDoNothingCalls ) {
+
+            synchronized ( _doNothingLock ) {
+
+                _doNothingCallCount += 1;
+                if ( _doNothingCallCount % DO_NOTHING_TRACE_FREQUENCY == 0 ) {
+
+                    Logger.logMsg( "" + _doNothingCallCount + " doNothing calls so far" );
+
+                }
+
+            }
+
+        }
+
+    }
+
+    public static void setTraceDoNothingCalls( final boolean traceDoNothingCalls ) {
+
+        s_traceDoNothingCalls = traceDoNothingCalls;
 
     }
 
@@ -2756,7 +2861,7 @@ public class ObtuseUtil {
 
                 if ( nakedInputString.startsWith( scm.from, off ) ) {
 
-                    if ( scm.from.equals( "\\\"" ) ) {
+                    if ( "\\\"".equals( scm.from ) ) {
 
                         // This was a tricky case during development so we've got a place to hang a breakpoint.
 
@@ -3132,7 +3237,7 @@ public class ObtuseUtil {
 
     }
 
-    private static Integer s_pid = null;
+//    private static Integer s_pid = null;
 
     /**
      Get our process id (not guaranteed to work on all platforms).

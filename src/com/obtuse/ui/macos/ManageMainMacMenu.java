@@ -30,13 +30,16 @@ public class ManageMainMacMenu {
 
     /**
      Add a {@link ObtuseQuitHandler} to the quit event queue.
-     <p>When a quit event occurs, quit handlers are handled in oldest (longest on the queue) to newest (most recently added to the queue) order.</p>
+     <p>When a quit event occurs, quit handlers are handled in oldest (longest on the queue) to newest
+     (most recently added to the queue) order.</p>
      <p>Calls to this method are synchronized and may occur from any thread.</p>
      @param quitHandler the {@link ObtuseQuitHandler} to add to the quit event queue.
      <p>
-     If the specified quit handler is already on the quit event queue then it is removed from the queue before being added.
+     If the specified quit handler is already on the quit event queue then it is removed
+     from the queue before being added.
      Note that this makes what might have been a rather old quit handler into the newest quit handler.
-     <u>This can cause a change to program behaviour if quit handlers make assumptions about the order that they are invoked in.</u></p>
+     <u>This can cause a change to program behaviour if quit handlers make assumptions about the order
+     that they are invoked in.</u></p>
      */
 
     public static synchronized void addQuitHandler( @NotNull final ObtuseQuitHandler quitHandler ) {
@@ -51,7 +54,8 @@ public class ManageMainMacMenu {
      Remove a {@link ObtuseQuitHandler} from the quit event queue.
      <p>Calls to this method are synchronized and may occur from any thread.</p>
      @param quitHandler the {@link ObtuseQuitHandler} to be removed.
-     @return {@code true} if the specified handler was actually on the quit event queue at the moment this method was called;
+     @return {@code true} if the specified handler was actually
+     on the quit event queue at the moment this method was called;
      {@code false} otherwise.
      */
     @SuppressWarnings("UnusedReturnValue")
@@ -173,7 +177,12 @@ public class ManageMainMacMenu {
                     @Override
                     public void handleQuitRequestWith( final QuitEvent e, final QuitResponse response ) {
 
-                        Logger.logMsg( "ManageMainMacMenu.quitHandler:  got a quit request, calling ObtuseQuitHandler's" );
+                        Logger.logMsg(
+                                "ManageMainMacMenu.quitHandler:  " +
+                                "got a quit request (" + ( SwingUtilities.isEventDispatchThread() ? "" : "not " ) +
+                                "on the event thread)" +
+                                ", calling ObtuseQuitHandler's"
+                        );
 
                         boolean quitWhenDone = handleQuitRequest( e );
 
@@ -185,7 +194,10 @@ public class ManageMainMacMenu {
 
                         } else {
 
-                            Logger.logMsg( "ManageMainMacMenu.quitHandler:  someone vetoed the quit event - life goes on . . ." );
+                            Logger.logMsg(
+                                    "ManageMainMacMenu.quitHandler:  " +
+                                    "someone vetoed the quit event - life goes on . . ."
+                            );
 
                             response.cancelQuit();
 
@@ -264,17 +276,28 @@ public class ManageMainMacMenu {
                         }
 
                         allBytesCount += fileByteCount;
-                        Logger.logMsg( /*ObtuseUtil.replicate( "   ", depth + 1 ) +*/ ObtuseUtil.lpadReadable( fileByteCount, 15 ) + " bytes in " + ObtuseUtil.enquoteJavaObject( f ) );
+                        Logger.logMsg(
+                                ObtuseUtil.lpadReadable( fileByteCount, 15 ) + " bytes in " +
+                                ObtuseUtil.enquoteJavaObject( f )
+                        );
 
                         ObtuseUtil.doNothing();
 
                     } catch ( FileNotFoundException e ) {
 
-                        Logger.logErr( "java.io.FileNotFoundException caught opening " + ObtuseUtil.enquoteJavaObject( f ), e );
+                        Logger.logErr(
+                                "ManageMainMacMenu.countBytesRecursively:  " +
+                                "FileNotFoundException caught opening " + ObtuseUtil.enquoteJavaObject( f ),
+                                e
+                        );
 
                     } catch ( IOException e ) {
 
-                        Logger.logErr( "java.io.IOException caught reading " + ObtuseUtil.enquoteJavaObject( f ), e );
+                        Logger.logErr(
+                                "ManageMainMacMenu.countBytesRecursively:  " +
+                                "java.io.IOException caught reading " + ObtuseUtil.enquoteJavaObject( f ),
+                                e
+                        );
 
                     }
 
@@ -282,7 +305,10 @@ public class ManageMainMacMenu {
 
             }
 
-            Logger.logMsg( /*ObtuseUtil.replicate( "   ", depth ) +*/ ObtuseUtil.lpadReadable( allBytesCount, 15 ) + " bytes in " + ObtuseUtil.enquoteJavaObject( where ) );
+            Logger.logMsg(
+                    ObtuseUtil.lpadReadable( allBytesCount, 15 ) +
+                    " bytes in " + ObtuseUtil.enquoteJavaObject( where )
+            );
 
             ObtuseUtil.doNothing();
 

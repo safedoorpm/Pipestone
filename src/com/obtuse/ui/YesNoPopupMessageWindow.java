@@ -145,6 +145,8 @@ public abstract class YesNoPopupMessageWindow
 
             while ( !_gotAnswer ) {
 
+                ObtuseUtil.doNothing();
+
                 try {
 
                     wait();
@@ -152,6 +154,12 @@ public abstract class YesNoPopupMessageWindow
                 } catch ( InterruptedException e ) {
 
                     // just ignore it.
+
+                    ObtuseUtil.doNothing();
+
+                } finally {
+
+                    ObtuseUtil.doNothing();
 
                 }
 

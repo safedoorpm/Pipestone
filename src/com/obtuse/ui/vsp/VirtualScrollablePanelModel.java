@@ -27,7 +27,6 @@ public interface VirtualScrollablePanelModel<E extends VirtualScrollableElement>
                 final int scrollableElementsCount,
                 @NotNull final List<? extends VirtualScrollableElementModel<EV>> providedElementModels
         ) {
-
             super();
 
             _firstVisibleElementNumber = firstVisibleElementNumber;
