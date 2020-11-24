@@ -29,18 +29,7 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" name="Default" comment="Cleanup. Lots of cleanup.">
-      <change afterPath="$PROJECT_DIR$/src/com/obtuse/util/ObtuseTraceFacility.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/YesNoPopupMessageWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/YesNoPopupMessageWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/macos/ManageMainMacMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/macos/ManageMainMacMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/vsp/VirtualScrollablePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/vsp/VirtualScrollablePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/vsp/VirtualScrollablePanelModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/vsp/VirtualScrollablePanelModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/AsyncStreamCaptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/AsyncStreamCaptor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/ObtuseUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/ObtuseUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/TwoDimensionalTreeMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/TwoDimensionalTreeMap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/clockwatcher/ObtuseClockWatcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/clockwatcher/ObtuseClockWatcher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/lrucache/LruCache.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/lrucache/LruCache.java" afterDir="false" />
-    </list>
+    <list default="true" id="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" name="Default" comment="Cleanup. Lots of cleanup." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -640,14 +629,7 @@
       <workItem from="1582663371055" duration="8662000" />
       <workItem from="1583456489310" duration="7594000" />
       <workItem from="1601965108561" duration="934000" />
-      <workItem from="1606211042076" duration="589000" />
-    </task>
-    <task id="LOCAL-00059" summary="Move away from providing a sized array to the Collection.toArray() methods (no longer faster than just providing a zero-length array of the correct type).&#10;&#10;Add a makeRelative method to the AbsolutePath class that returns a RelativePath containing all the segments in the AbsolutePath minus the first root node segment.&#10;&#10;Major cleanup in the RelativePath class:&#10;&#10;    - cleanup the various concat methods to provide better orthogonality&#10;    - implement a segment-by-segment compareTo method (eliminates the need for a string&#10;      representation of the path although we're going to keep that representation at least&#10;      for now)&#10;    - add tests for the new compareTo method and a few previously missed unrelated cases">
-      <created>1522477312223</created>
-      <option name="number" value="00059" />
-      <option name="presentableId" value="LOCAL-00059" />
-      <option name="project" value="LOCAL" />
-      <updated>1522477312224</updated>
+      <workItem from="1606211042076" duration="996000" />
     </task>
     <task id="LOCAL-00060" summary="Implement the FlexiGridLayoutManager which lays out components in a grid where the width and column of each grid cell is sized based on the space actually required by the components in that cell's row and column (in contrast, the GridLayout manager forces each cell's width to be the same and each cell's height to be the same). Each component is added to the underlying FlexiGridContainer with a constraint object which specifies the component's row and column within the grid as well as how the component should be justified within its cell should it's size be smaller than the space available (top, center, bottom and left, center, right).&#10;&#10;Also implement the FlexiGridPanelModel which provides a somewhat high level interface to the FlexiGridLayoutManager. In particular, the FlexiGridPanelModel allows the easy insertion of new rows or new columns, depending on the FlexiGridPanelModel instance's orientation, either before or after specific rows or columns.&#10;&#10;Taken together, these classes provide a relatively easy way to manage a rectangular grid of components.&#10;&#10;The current version of the FlexiGridLayoutManager only takes each component's preferred width and height into account. This results in the width of each column being the maximum of the preferred widths of the elements in the column and the height of each column being the maximum of the preferred heights of the elements in each row. A future version with also take each component's minimum and maximum width and heights into account.&#10;&#10;Minor changes to the Measure class to improve the formatting of its output.&#10;&#10;Provide a way to specify if the default instance of the RandomCentral class should be a SecureRandom instance or 'merely' a Random instance. The default is to use a SecureRandom instance.">
       <created>1523892278544</created>
@@ -985,7 +967,14 @@
       <option name="project" value="LOCAL" />
       <updated>1601965877214</updated>
     </task>
-    <option name="localTasksCounter" value="108" />
+    <task id="LOCAL-00108" summary="Other than adding a few methods to ObtuseUtil, this commit is mostly minor cleanup.">
+      <created>1606211997018</created>
+      <option name="number" value="00108" />
+      <option name="presentableId" value="LOCAL-00108" />
+      <option name="project" value="LOCAL" />
+      <updated>1606211997018</updated>
+    </task>
+    <option name="localTasksCounter" value="109" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1052,7 +1041,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Delete lots and lots of commented out lines.&#10;Throw away the old (failed) FlexiGridTree stuff." />
     <MESSAGE value="Delete lots and lots of commented out lines.&#10;Throw away the old (failed) FlexiGridTree stuff.&#10;Rework the way that TwoDimensionalTreeMap.java and ThreeDimensionalTreeMap.java create empty immutable instances.&#10;Some cleanup and minor bug fixes in the VirtualScrollablePanel facility." />
     <MESSAGE value="Implement scrolling using the mouse wheel in VirtualScrollablePanel class.&#10;Cleanup the Java generics declarations in ObtuseKeyword, ThreeDimensionalCounter and ThreeDimensionalSortedMap.&#10;Minor cleanup (mostly reformatting) elsewhere." />
     <MESSAGE value="Move the LruCache and associated classes into Pipestone.&#10;&#10;Rename the UniqueID class as UniqueId (this causes quite a cascade of edits to other classes).&#10;&#10;Move the getBitMaskName and rememberBitName methods and the associated s_maskExBits array to the new Clicks class.&#10;&#10;Major cleanup of the image rotation facility in ObtuseImageUtils. Not much if anything that affects the behaviour of this facility has changed.&#10;&#10;Add named constants in ObtuseImageUtils for each of the EXIF orientation values.&#10;&#10;Add rotateOrientationRight, rotateOrientationLeft, flipOrientationHorizontally and flipOrientationVertically methods in ObtuseImageUtils that return the EXIF orientation value that results from the rotation or flip implied by the method name to a specified EXIF orientation value. For example, rotateOrientationLeft( ORIENTATION_LEFT ) yields ORIENTATION_ROTATED_180 since a left rotation applied to a left rotation results in a 180° rotation." />
@@ -1077,15 +1065,16 @@
     <MESSAGE value="In various places:  switch to using @code rather than the html code tag in JavaDocs.&#10;&#10;Major revamping of the AboutBox class.&#10;&#10;In ImageIconUtils.copyToBufferedImage:&#10;    eliminate the old first choice of using GraphicsConfiguration.createCompatibleImage to create a compatible new BufferedImage as this sometimes created a BufferedImage that other Java library methods could not cope with. Now, we just create a BufferedImage of type TYPE_INT_ARGB or TYPE_INT_RGB depending on whether the input Image has an alpha channel or not;&#10;    extract the actual scaling of images into a new getScaledImageIcon method so that this operation can be requested directly rather than only as part of fetching an ImageIcon.&#10;&#10;Add an ObtuseFunction5 class to allow helper methods to use five arguments.&#10;&#10;Make ObtuseUtil.enquoteJavaStringToNakedStringBuilder public so that it can be used elsewhere.&#10;&#10;Cleanup ObtuseCalendarDate (mostly JavaDocs).&#10;&#10;Add a bunch of new images (used mostly if not entirely by test code) to com.obtuse.ui.resources package." />
     <MESSAGE value="Lots of cleanup resulting from a code style analysis run." />
     <MESSAGE value="Cleanup. Lots of cleanup." />
-    <option name="LAST_COMMIT_MESSAGE" value="Cleanup. Lots of cleanup." />
+    <MESSAGE value="Other than adding a few methods to ObtuseUtil, this commit is mostly minor cleanup." />
+    <option name="LAST_COMMIT_MESSAGE" value="Other than adding a few methods to ObtuseUtil, this commit is mostly minor cleanup." />
     <option name="PRESELECT_EXISTING_CHANGELIST" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="66" y="141" width="2335" height="1303" key="DiffContextDialog" timestamp="1606211631385">
+    <state x="66" y="141" width="2335" height="1303" key="DiffContextDialog" timestamp="1606212038388">
       <screen x="0" y="23" width="2560" height="1526" />
     </state>
-    <state x="66" y="141" width="2335" height="1303" key="DiffContextDialog/-2560.0.2560.1440/0.23.2560.1526@0.23.2560.1526" timestamp="1606211631385" />
+    <state x="66" y="141" width="2335" height="1303" key="DiffContextDialog/-2560.0.2560.1440/0.23.2560.1526@0.23.2560.1526" timestamp="1606212038388" />
     <state x="115" y="123" width="2335" height="1303" key="DiffContextDialog/-2560.0.2560.1440/0.23.2560.1527@0.23.2560.1527" timestamp="1601965652144" />
     <state x="682" y="389" key="Vcs.Push.Dialog.v2" timestamp="1601965891230">
       <screen x="0" y="23" width="2560" height="1527" />
@@ -1311,7 +1300,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/obtuse/util/ObtuseUtil.java</url>
-          <line>2733</line>
+          <line>2732</line>
           <option name="timeStamp" value="370" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -1461,7 +1450,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/obtuse/util/ObtuseUtil.java</url>
-          <line>2712</line>
+          <line>2711</line>
           <option name="timeStamp" value="520" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
