@@ -28,13 +28,13 @@ public class GowingDoubleHolder extends GowingAbstractPackableHolder {
 
     }
 
-    public GowingDoubleHolder( final @NotNull EntityName name, final double@NotNull[] v, @SuppressWarnings("SameParameterValue") final boolean mandatory ) {
+    public GowingDoubleHolder( final @NotNull EntityName name, final double@Nullable[] v, @SuppressWarnings("SameParameterValue") final boolean mandatory ) {
 
         super( name, GowingConstants.TAG_DOUBLE, v, mandatory, true );
 
     }
 
-    public GowingDoubleHolder( final @NotNull EntityName name, @Nullable final Double@NotNull[] v, @SuppressWarnings("SameParameterValue") final boolean mandatory ) {
+    public GowingDoubleHolder( final @NotNull EntityName name, @Nullable final Double@Nullable[] v, @SuppressWarnings("SameParameterValue") final boolean mandatory ) {
 
         super( name, GowingConstants.TAG_DOUBLE, v, mandatory, false );
 

@@ -483,15 +483,16 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
 
     }
 
-    public static synchronized boolean isImageRepositoryFileSet() {
+    public static boolean isImageRepositoryFileSet() {
 
-        return s_imageRepositoryFile != null;
+        return getOptImageRepositoryFile().isPresent();
 
     }
 
-    public static synchronized File getImageRepositoryFile() {
+    public static synchronized File getMandatoryImageFileRepositoryDirectory() {
 
-        if ( isImageRepositoryFileSet() ) {
+        Optional<File> optRval = getOptImageRepositoryFile();
+        if ( optRval.isPresent() ) {
 
             return s_imageRepositoryFile;
 
@@ -503,6 +504,12 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
             );
 
         }
+
+    }
+
+    public static Optional<File> getOptImageRepositoryFile() {
+
+        return Optional.ofNullable( s_imageRepositoryFile );
 
     }
 
@@ -640,7 +647,7 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
     @Nullable
     public static SortedMap<Integer, File> getAllBinfoFiles() {
 
-        File[] binfoFiles = ObtuseImageFile.getImageRepositoryFile().listFiles(
+        File[] binfoFiles = ObtuseImageFile.getMandatoryImageFileRepositoryDirectory().listFiles(
                 ( dir, name ) -> {
 
                     Matcher m = ObtuseImageFile.GENERATED_IMAGE_INFO_FILENAME_PATTERN.matcher( name );
@@ -1213,7 +1220,7 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
 
     private int findMaximumSerialNumber() {
 
-        File[] existingNames = ObtuseImageFile.getImageRepositoryFile().listFiles(
+        File[] existingNames = ObtuseImageFile.getMandatoryImageFileRepositoryDirectory().listFiles(
                 ( dir, name ) -> {
 
                     Matcher m = ObtuseImageFile.GENERATED_IMAGE_INFO_FILENAME_PATTERN.matcher( name );
@@ -1287,7 +1294,7 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
     public static File constructCachedImagRepositoryFileObject( final int sn, final String suffix ) {
 
         return new File(
-                ObtuseImageFile.getImageRepositoryFile(),
+                ObtuseImageFile.getMandatoryImageFileRepositoryDirectory(),
                 constructCachedImageRepositorySimpleBasename( sn ) + suffix
         );
 
@@ -1297,7 +1304,7 @@ public class ObtuseImageFile extends GowingAbstractPackableEntity {
     public static File constructCachedImageRepositoryBasename( final int sn ) {
 
         return new File(
-                ObtuseImageFile.getImageRepositoryFile(),
+                ObtuseImageFile.getMandatoryImageFileRepositoryDirectory(),
                 constructCachedImageRepositorySimpleBasename( sn )
         );
 

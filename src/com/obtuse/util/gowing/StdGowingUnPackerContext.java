@@ -129,7 +129,7 @@ public class StdGowingUnPackerContext implements GowingUnPackerContext {
     }
 
     @Override
-    public void markEntitiesUnfinished( final Collection<GowingEntityReference> unFinishedEntities ) {
+    public void markEntitiesUnfinished( final Collection<? extends GowingEntityReference> unFinishedEntities ) {
 
         _unFinishedEntities.addAll( unFinishedEntities );
 
@@ -143,7 +143,7 @@ public class StdGowingUnPackerContext implements GowingUnPackerContext {
     }
 
     @Override
-    public void markEntitiesFinished( final Collection<GowingEntityReference> finishedEntities ) {
+    public void markEntitiesFinished( final Collection<? extends GowingEntityReference> finishedEntities ) {
 
         for ( GowingEntityReference er : finishedEntities ) {
 
@@ -152,6 +152,19 @@ public class StdGowingUnPackerContext implements GowingUnPackerContext {
         }
 
     }
+
+    /**
+     Determine if an entity is 'finished'.
+     <p>
+     An entity is 'finished' if and only if the provided {@link GowingEntityReference} is {@code null}
+     or if the entity it refers to is <b>NOT</b> in our set of unfinished entities.
+     </p>
+     <p>Note that {@code null} entity references are considered to be finished because
+     it makes it easier in {@link GowingPackable#finishUnpacking(GowingUnPacker)} methods to
+     deal with entities that do not always exist.</p>
+     @param er a possibly {@code null} entity reference.
+     @return {@code true} if the entity is 'finished'; {@code false} otherwise.
+     */
 
     @Override
     public boolean isEntityFinished( @Nullable final GowingEntityReference er ) {
@@ -230,7 +243,7 @@ public class StdGowingUnPackerContext implements GowingUnPackerContext {
     @NotNull
     public Optional<GowingPackable> recallPackableEntity( final @NotNull GowingEntityReference er ) {
 
-        @SuppressWarnings("UnnecessaryLocalVariable") GowingPackable packable2 = _seenInstanceIds.get( er );
+        GowingPackable packable2 = _seenInstanceIds.get( er );
 
         return Optional.ofNullable( packable2 );
 

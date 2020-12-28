@@ -36,6 +36,7 @@ public class GowingEntityReference implements Comparable<GowingEntityReference> 
             @Nullable final Integer version,
             @Nullable final Collection<EntityName> entityReferenceNames
     ) {
+        super();
 
         if ( typeId <= 0 ) {
 
@@ -61,7 +62,13 @@ public class GowingEntityReference implements Comparable<GowingEntityReference> 
 
         _version = version;
 
-        _entityReferenceNames = Collections.unmodifiableSortedSet( entityReferenceNames == null ? new TreeSet<>() : new TreeSet<>( entityReferenceNames ) );
+        _entityReferenceNames = Collections.unmodifiableSortedSet(
+                entityReferenceNames == null
+                        ?
+                        new TreeSet<>()
+                        :
+                        new TreeSet<>( entityReferenceNames )
+        );
 
     }
 

@@ -118,7 +118,11 @@ public class GowingPackableMapping<K, V> implements GowingPackable {
 
         @Override
         @NotNull
-        public GowingPackable createEntity( final @NotNull GowingUnPacker unPacker, final @NotNull GowingPackedEntityBundle bundle, final @NotNull GowingEntityReference er ) {
+        public GowingPackable createEntity(
+                final @NotNull GowingUnPacker unPacker,
+                final @NotNull GowingPackedEntityBundle bundle,
+                final @NotNull GowingEntityReference er
+        ) {
 
             return new GowingPackableMapping( unPacker, bundle, er );
 
@@ -213,9 +217,10 @@ public class GowingPackableMapping<K, V> implements GowingPackable {
 
     /**
      Finish unpacking.
-     <p>VERY IMPORTANT POINT: we're not finished until every single {@link GowingPackableKeyValuePair} instance that we refer to is finished.
-     Violating this rule will result in all sorts of chaos because those who reference this instance will need to be able to
-     use our {@link GowingPackableKeyValuePair} instances to rebuild their maps.</p>
+     <p>VERY IMPORTANT POINT: we're not finished until every single {@link GowingPackableKeyValuePair} instance
+     that we refer to is finished.
+     Violating this rule will result in all sorts of chaos because those who reference this instance
+     will need to be able to use our {@link GowingPackableKeyValuePair} instances to rebuild their maps.</p>
      @param unPacker the {@link GowingUnPacker} that running this circus.
      @return {@code true} if we are finished; {@code false} otherwise.
      */

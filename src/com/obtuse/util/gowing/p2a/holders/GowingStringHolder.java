@@ -1,7 +1,5 @@
 package com.obtuse.util.gowing.p2a.holders;
 
-import com.obtuse.util.Logger;
-import com.obtuse.util.ObtuseUtil;
 import com.obtuse.util.gowing.EntityName;
 import com.obtuse.util.gowing.GowingPacker;
 import com.obtuse.util.gowing.p2a.GowingConstants;
@@ -24,7 +22,7 @@ public class GowingStringHolder extends GowingAbstractPackableHolder {
 
     }
 
-    public GowingStringHolder( final @NotNull EntityName name, @Nullable final String@NotNull[] v, @SuppressWarnings("SameParameterValue") final boolean mandatory ) {
+    public GowingStringHolder( final @NotNull EntityName name, @Nullable final String@Nullable[] v, @SuppressWarnings("SameParameterValue") final boolean mandatory ) {
 
         super( name, GowingConstants.TAG_STRING, v, mandatory, false );
 

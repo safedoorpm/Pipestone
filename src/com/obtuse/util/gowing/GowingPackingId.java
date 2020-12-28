@@ -25,65 +25,69 @@ public class GowingPackingId implements Comparable<GowingPackingId> {
 
     private final Long _entityId;
 
-    public GowingPackingId( final @NotNull EntityTypeName entityTypeName, final int typeReferenceId, final long entityId ) {
+    public GowingPackingId(
+            final @NotNull EntityTypeName entityTypeName,
+            final int typeReferenceId, final long entityId
+    ) {
+        super();
 
-	_entityTypeName = entityTypeName;
-	_typeReferenceId = typeReferenceId;
-	_entityId = entityId;
+        _entityTypeName = entityTypeName;
+        _typeReferenceId = typeReferenceId;
+        _entityId = entityId;
 
     }
 
     public EntityTypeName getEntityTypeName() {
 
-	return _entityTypeName;
+        return _entityTypeName;
 
     }
 
     public long getEntityId() {
 
-	return _entityId.longValue();
+	    return _entityId.longValue();
 
     }
 
     public int getTypeReferenceId() {
 
-	return _typeReferenceId;
+	    return _typeReferenceId;
 
     }
 
     public String toString() {
 
-	return "GowingPackingId( \"" + _entityTypeName + "\", " + _typeReferenceId + ", " + _entityId + " )";
+	    return "GowingPackingId( \"" + _entityTypeName + "\", " + _typeReferenceId + ", " + _entityId + " )";
 
     }
 
     @Override
     public int compareTo( final @NotNull GowingPackingId rhs ) {
 
-	int rval = _entityTypeName.compareTo( rhs._entityTypeName );
-	if ( rval == 0 ) {
+        int rval = _entityTypeName.compareTo( rhs._entityTypeName );
+        if ( rval == 0 ) {
 
-	    return _entityId.compareTo( rhs._entityId );
+            return _entityId.compareTo( rhs._entityId );
 
-	} else {
+        } else {
 
-	    return rval;
+            return rval;
 
-	}
+        }
 
     }
 
     @Override
     public boolean equals( final Object rhs ) {
 
-	return rhs instanceof GowingPackingId && compareTo( (GowingPackingId)rhs ) == 0;
+	    return rhs instanceof GowingPackingId && compareTo( (GowingPackingId)rhs ) == 0;
 
     }
 
     @Override
     public int hashCode() {
 
-	return _entityTypeName.hashCode() ^ _entityId.hashCode();
+	    return _entityTypeName.hashCode() ^ _entityId.hashCode();
 
     }
 

@@ -4,6 +4,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.ByteArrayOutputStream;
+import java.io.Closeable;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.function.Consumer;
@@ -14,7 +15,7 @@ import java.util.function.Consumer;
  {@link Process} instance.</p>
  */
 
-public class AsyncStreamCaptor extends Thread {
+public class AsyncStreamCaptor extends Thread implements Closeable {
 
     @NotNull private final String _what;
     @NotNull private final InputStream _inputStream;
@@ -23,6 +24,8 @@ public class AsyncStreamCaptor extends Thread {
     @NotNull private final ByteArrayOutputStream _capturedStream;
     private final long _maxCaptureLength;
     private final boolean _discardAfterMaxCaptureLength;
+    private final boolean _closeWhenDone;
+    private boolean _inputStreamStillOpen;
     private int _discardedByteCount;
     private boolean _dataReadUntilEOF = false;
     private boolean _done = false;
@@ -62,7 +65,8 @@ public class AsyncStreamCaptor extends Thread {
             @NotNull String threadName,
             long maxCaptureLength,
             final boolean discardAfterMaxCaptureLength,
-            final boolean immediateStart
+            final boolean immediateStart,
+            final boolean closeWhenDone
     ) {
         super( threadName );
 
@@ -72,8 +76,11 @@ public class AsyncStreamCaptor extends Thread {
         _idString = idString;
         _maxCaptureLength = maxCaptureLength;
         _discardAfterMaxCaptureLength = discardAfterMaxCaptureLength;
+        _closeWhenDone = closeWhenDone;
 
         _capturedStream = new ByteArrayOutputStream( 1024 * 1024 );
+
+        _inputStreamStillOpen = true;
 
         if ( immediateStart ) {
 
@@ -97,8 +104,8 @@ public class AsyncStreamCaptor extends Thread {
 
     private void readAggressively() {
 
-        ObtuseUtil.safeSleepMillis( 1000L );
-        ObtuseUtil.doNothing();
+//        ObtuseUtil.safeSleepMillis( 1000L );
+//        ObtuseUtil.doNothing();
 
         try {
 
@@ -431,11 +438,77 @@ public class AsyncStreamCaptor extends Thread {
 
         }
 
+        if ( _closeWhenDone && _inputStreamStillOpen ) {
+
+            try {
+
+                close();
+
+            } catch ( IOException e ) {
+
+                Logger.logErr( "AsyncStreamCaptor.waitUntilDone(" + _what + "):  IOException closing input stream", e );
+
+                ObtuseUtil.doNothing();
+
+            } finally {
+
+                // This assignment statement isn't really necessary as our {@link #close()} method sets
+                // _inputStreamStillOpen to false for us. We do it again here to avoid this code sequence looking like
+                // it is missing this assignment statement.
+
+                _inputStreamStillOpen = false;
+
+            }
+
+        }
+
     }
 
     public String toString() {
 
         return "AsyncStreamCaptor( " + ObtuseUtil.enquoteToJavaString( _idString ) + ", bytesCapturedToDate=" + _bytesCapturedToDate + ", done=" + _done + " )";
+
+    }
+
+    /**
+     Close the input stream if it is still open.
+     <p>Calling this method while the thread is still reading from the input stream
+     is almost guaranteed to cause IOExceptions to be thrown in the loop reading the input stream.</p>
+     <p>Note that this method is not and cannot be synchronized as that would make it difficult to
+     impossible to use since our {@link #waitUntilDone()} method is synchronized.
+     </p>
+     @throws IOException if the attempt to close the input stream throws an exception.
+     <p>Note that any exceptions that get thrown in the loop reading the input stream are handled by that
+     loop. The ONLY exceptions that this method closes are those that are directly caused by
+     this method trying to close the input stream.</p>
+     @throws IllegalStateException if this method is called after the input stream has already been closed.
+     <p>Note that {@link IllegalStateException} is a runtime exception which does not require that you have
+     a catch clause for it. Needless to say, if you don't have a catch clause for it then things are likely
+     to get unpleasant for you if it is thrown.</p>
+     */
+
+    @Override
+    public void close() throws IOException {
+
+        if ( _inputStreamStillOpen ) {
+
+            try {
+
+                _inputStream.close();
+
+            }  finally {
+
+                _inputStreamStillOpen = false;
+
+            }
+
+        } else {
+
+            throw new IllegalStateException(
+                    "AsyncStreamCaptor.close(" + _what + "):  input stream has already been closed"
+            );
+
+        }
 
     }
 

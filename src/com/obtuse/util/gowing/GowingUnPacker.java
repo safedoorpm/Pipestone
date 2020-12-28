@@ -26,14 +26,18 @@ public interface GowingUnPacker extends Closeable {
      Enable or disable super verbose mode.
      @param superVerbose if {@code true} then both regular verbose mode and super verbose mode are enabled.
      If {@code false} then super verbose mode is turned off but regular verbose mode is left unaffected.
-     While super verbose mode is enabled, at least one message will be logged as each unpacked entity is extracted from the
-     pack file) and at least one message will be logged each time an attempt is made to finish an entity (this message will report whether or not the
-     attempt to finish the entity actually did finish the entity).
-     <p>super verbose mode is intended to be quite comprehensive. Consequently, it can be a lot like drinking from a fire-hose in that you get
-     very wet but remain thirsty. If you are using this for diagnostic purposes then you might want to try using {@link #setVerbose(boolean)}
-     to enable just the regular verbose mode first. If that doesn't yield enough information, try the unpack again with super verbose mode enabled.</p>
+     While super verbose mode is enabled, at least one message will be logged as each unpacked entity is
+     extracted from the pack file) and at least one message will be logged each time an attempt is made
+     to finish an entity (this message will report whether or not the attempt to finish the entity actually
+     did finish the entity).
+     <p>super verbose mode is intended to be quite comprehensive. Consequently, it can be a lot like drinking
+     from a fire-hose in that you get very wet but remain thirsty. If you are using this for diagnostic
+     purposes then you might want to try using {@link #setVerbose(boolean)} to enable just the regular
+     verbose mode first. If that doesn't yield enough information, try the unpack again with super
+     verbose mode enabled.</p>
      */
 
+    @SuppressWarnings("unused")
     void setSuperVerbose( boolean superVerbose );
 
     /*
@@ -42,6 +46,7 @@ public interface GowingUnPacker extends Closeable {
     Note that super verbose mode being enabled implies that regular verbose mode is also enabled.
      */
 
+    @SuppressWarnings("unused")
     boolean isSuperVerbose();
 
     /**
@@ -70,6 +75,7 @@ public interface GowingUnPacker extends Closeable {
      {@link GowingPackable#finishUnpacking(GowingUnPacker)}.
      */
 
+    @SuppressWarnings("unused")
     GowingEntityReference getCurrentEntityReference();
 
     GowingUnPackedEntityGroup unPack() throws GowingUnpackingException, IOException;
@@ -87,7 +93,9 @@ public interface GowingUnPacker extends Closeable {
 
         } else {
 
-            throw new NullPointerException( "GowingUnPacker.resolveMandatoryReference:  referenc refers to non-existent entity" );
+            throw new NullPointerException(
+                    "GowingUnPacker.resolveMandatoryReference:  reference refers to non-existent entity"
+            );
 
         }
 
@@ -95,6 +103,7 @@ public interface GowingUnPacker extends Closeable {
 
     ParsingLocation curLoc();
 
+    @SuppressWarnings("unused")
     boolean isFinishingBackReference();
 
     GowingUnPackerContext getUnPackerContext();
@@ -109,6 +118,7 @@ public interface GowingUnPacker extends Closeable {
     boolean isEntityFinished( @Nullable GowingEntityReference entityReference );
 
     boolean areEntitiesAllFinished( GowingEntityReference... entityReferences );
-    boolean areEntitiesAllFinished( @NotNull Collection<GowingEntityReference> entityReferences );
+    @SuppressWarnings("unused")
+    boolean areEntitiesAllFinished( Collection<? extends GowingEntityReference> entityReferences );
 
 }

@@ -31,10 +31,12 @@ public class DateUtils {
     // IMPORTANT:  keep these date formats private as we fiddle with their embedded timezone in methods within this
     // class.
 
+    @SuppressWarnings("SuspiciousDateFormat")
     private static final SimpleDateFormat HHMMSSS = new SimpleDateFormat( "hh:mm.SSS" );
     private static final SimpleDateFormat MMDDYYYY = new SimpleDateFormat( "MM/dd/yyyy" );
     private static final SimpleDateFormat MMDDYYYY_HHMM = new SimpleDateFormat( "MM/dd/yyyy hh:mmaa" );
     private static final SimpleDateFormat MM_DD_YYYY = new SimpleDateFormat( "MM/dd/yyyy" );
+    @SuppressWarnings("SuspiciousDateFormat")
     private static final SimpleDateFormat MMMM_D_YYYY = new SimpleDateFormat( "MMMM d, YYYY" );
     private static final SimpleDateFormat MM_DD_YYYY_HH_MM = new SimpleDateFormat( "MM/dd/yyyy hh:mmaa" );
     private static final SimpleDateFormat YYYY_MM_DD_HH_MM = new SimpleDateFormat( "yyyy-MM-dd HH:mm" );
@@ -281,6 +283,7 @@ public class DateUtils {
      For example, the date and time 2001-07-04 12:08:56.235 UTC would be
      formatted as
      <blockquote>{@code 2001-07-04_12-08-56-235}</blockquote>
+     This format results in date strings which are trivially sorted in date and time order.
 
      @param dateTime the date and time to be formatted.
      @return the specified date and time formatted using code which is equivalent to

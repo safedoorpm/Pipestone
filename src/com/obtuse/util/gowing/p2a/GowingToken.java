@@ -173,6 +173,7 @@ public class GowingToken {
             final int offset,
             final Throwable exception
     ) {
+        super();
 
         _tokenType = StdGowingTokenizer.TokenType.ERROR;
         _elementType = null;

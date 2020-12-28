@@ -282,7 +282,7 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName, GowingPackable
 
     }
 
-    public void addStringHolder( @NotNull final EntityName name, @Nullable final String@NotNull[] v, final boolean mandatory ) {
+    public void addStringHolder( @NotNull final EntityName name, @Nullable final String@Nullable[] v, final boolean mandatory ) {
 
         addHolder(
                 new GowingStringHolder(
@@ -317,7 +317,7 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName, GowingPackable
 
     }
 
-    public void addLongHolder( @NotNull final EntityName name, @Nullable final Long@NotNull[] v, final boolean mandatory ) {
+    public void addLongHolder( @NotNull final EntityName name, @Nullable final Long@Nullable[] v, final boolean mandatory ) {
 
         addHolder(
                 new GowingLongHolder(
@@ -329,7 +329,7 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName, GowingPackable
 
     }
 
-    public void addLongHolder( @NotNull final EntityName name, @Nullable final long@NotNull[] v, final boolean mandatory ) {
+    public void addLongHolder( @NotNull final EntityName name, final long@Nullable[] v, final boolean mandatory ) {
 
         addHolder(
                 new GowingLongHolder(
@@ -364,7 +364,7 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName, GowingPackable
 
     }
 
-    public void addIntegerHolder( @NotNull final EntityName name, @Nullable final Integer@NotNull[] v, final boolean mandatory ) {
+    public void addIntegerHolder( @NotNull final EntityName name, @Nullable final Integer@Nullable[] v, final boolean mandatory ) {
 
         addHolder(
                 new GowingIntegerHolder(
@@ -376,7 +376,7 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName, GowingPackable
 
     }
 
-    public void addIntegerHolder( @NotNull final EntityName name, @Nullable final int@NotNull[] v, final boolean mandatory ) {
+    public void addIntegerHolder( @NotNull final EntityName name, final int@Nullable[] v, final boolean mandatory ) {
 
         addHolder(
                 new GowingIntegerHolder(
@@ -423,7 +423,7 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName, GowingPackable
 
     }
 
-    public void addShortHolder( @NotNull final EntityName name, @Nullable final short@NotNull[] v, final boolean mandatory ) {
+    public void addShortHolder( @NotNull final EntityName name, final short@Nullable[] v, final boolean mandatory ) {
 
         addHolder(
                 new GowingShortHolder(
@@ -470,7 +470,7 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName, GowingPackable
 
     }
 
-    public void addByteHolder( @NotNull final EntityName name, @Nullable final byte@NotNull[] v, final boolean mandatory ) {
+    public void addByteHolder( @NotNull final EntityName name, final byte@Nullable[] v, final boolean mandatory ) {
 
         addHolder(
                 new GowingByteHolder(
@@ -517,7 +517,7 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName, GowingPackable
 
     }
 
-    public void addDoubleHolder( @NotNull final EntityName name, @Nullable final double@NotNull[] v, final boolean mandatory ) {
+    public void addDoubleHolder( @NotNull final EntityName name, final double@Nullable[] v, final boolean mandatory ) {
 
         addHolder(
                 new GowingDoubleHolder(
@@ -564,7 +564,7 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName, GowingPackable
 
     }
 
-    public void addFloatHolder( @NotNull final EntityName name, @Nullable final float@NotNull[] v, final boolean mandatory ) {
+    public void addFloatHolder( @NotNull final EntityName name, final float@Nullable[] v, final boolean mandatory ) {
 
         addHolder(
                 new GowingFloatHolder(
@@ -611,7 +611,7 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName, GowingPackable
 
     }
 
-    public void addBooleanHolder( @NotNull final EntityName name, @Nullable final boolean@NotNull[] v, final boolean mandatory ) {
+    public void addBooleanHolder( @NotNull final EntityName name, final boolean@Nullable[] v, final boolean mandatory ) {
 
         addHolder(
                 new GowingBooleanHolder(
@@ -873,15 +873,13 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName, GowingPackable
 
     }
 
-    @Nullable
-    public byte[] byteArrayValue( final EntityName gtag ) {
+    public byte@Nullable[] byteArrayValue( final EntityName gtag ) {
 
         return getNullableField( gtag ).PrimitiveByteArrayValue();
 
     }
 
-    @NotNull
-    public byte[] MandatoryPrimitiveByteArrayValue( final EntityName gtag ) {
+    public byte@NotNull[] MandatoryPrimitiveByteArrayValue( final EntityName gtag ) {
 
         return getNotNullField( gtag ).PrimitiveByteArrayValue();
 
@@ -914,15 +912,13 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName, GowingPackable
 
     }
 
-    @Nullable
-    public short[] shortArrayValue( final EntityName gtag ) {
+    public short@Nullable[] shortArrayValue( final EntityName gtag ) {
 
         return getNullableField( gtag ).PrimitiveShortArrayValue();
 
     }
 
-    @NotNull
-    public short[] MandatoryPrimitiveShortArrayValue( final EntityName gtag ) {
+    public short@Nullable[] MandatoryPrimitiveShortArrayValue( final EntityName gtag ) {
 
         return getNotNullField( gtag ).PrimitiveShortArrayValue();
 
@@ -955,15 +951,13 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName, GowingPackable
 
     }
 
-    @Nullable
-    public int[] intArrayValue( final EntityName gtag ) {
+    public int@Nullable[] intArrayValue( final EntityName gtag ) {
 
         return getNullableField( gtag ).PrimitiveIntArrayValue();
 
     }
 
-    @NotNull
-    public int[] MandatoryPrimitiveIntArrayValue( final EntityName gtag ) {
+    public int@Nullable[] MandatoryPrimitiveIntArrayValue( final EntityName gtag ) {
 
         return getNotNullField( gtag ).PrimitiveIntArrayValue();
 
@@ -996,15 +990,13 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName, GowingPackable
 
     }
 
-    @Nullable
-    public long[] longArrayValue( final EntityName gtag ) {
+    public long@Nullable[] longArrayValue( final EntityName gtag ) {
 
         return getNullableField( gtag ).PrimitiveLongArrayValue();
 
     }
 
-    @NotNull
-    public long[] MandatoryPrimitiveLongArrayValue( final EntityName gtag ) {
+    public long@NotNull[] MandatoryPrimitiveLongArrayValue( final EntityName gtag ) {
 
         return getNotNullField( gtag ).PrimitiveLongArrayValue();
 
@@ -1037,15 +1029,13 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName, GowingPackable
 
     }
 
-    @Nullable
-    public float[] floatArrayValue( final EntityName gtag ) {
+    public float@Nullable[] floatArrayValue( final EntityName gtag ) {
 
         return getNullableField( gtag ).PrimitiveFloatArrayValue();
 
     }
 
-    @NotNull
-    public float[] MandatoryPrimitiveFloatArrayValue( final EntityName gtag ) {
+    public float@NotNull[] MandatoryPrimitiveFloatArrayValue( final EntityName gtag ) {
 
         return getNotNullField( gtag ).PrimitiveFloatArrayValue();
 
@@ -1078,15 +1068,13 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName, GowingPackable
 
     }
 
-    @Nullable
-    public double[] doubleArrayValue( final EntityName gtag ) {
+    public double@NotNull[] doubleArrayValue( final EntityName gtag ) {
 
         return getNullableField( gtag ).PrimitiveDoubleArrayValue();
 
     }
 
-    @NotNull
-    public double[] MandatoryPrimitiveDoubleArrayValue( final EntityName gtag ) {
+    public double@NotNull[] MandatoryPrimitiveDoubleArrayValue( final EntityName gtag ) {
 
         return getNotNullField( gtag ).PrimitiveDoubleArrayValue();
 
@@ -1107,7 +1095,7 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName, GowingPackable
     }
 
     @NotNull
-    public Double[] MandatoryDoubleArrayValue( final EntityName gtag ) {
+    public Double@NotNull[] MandatoryDoubleArrayValue( final EntityName gtag ) {
 
         return getNotNullField( gtag ).ContainerDoubleArrayValue();
 
@@ -1119,15 +1107,13 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName, GowingPackable
 
     }
 
-    @Nullable
-    public char[] charArrayValue( final EntityName gtag ) {
+    public char@Nullable[] charArrayValue( final EntityName gtag ) {
 
         return getNullableField( gtag ).PrimitiveCharArrayValue();
 
     }
 
-    @NotNull
-    public char[] MandatoryPrimitiveCharArrayValue( final EntityName gtag ) {
+    public char@NotNull[] MandatoryPrimitiveCharArrayValue( final EntityName gtag ) {
 
         return getNotNullField( gtag ).PrimitiveCharArrayValue();
 
@@ -1141,14 +1127,14 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName, GowingPackable
     }
 
     @Nullable
-    public Character[] CharacterArrayValue( final EntityName gtag ) {
+    public Character@Nullable[] CharacterArrayValue( final EntityName gtag ) {
 
         return getNullableField( gtag ).ContainerCharacterArrayValue();
 
     }
 
     @NotNull
-    public Character[] MandatoryCharacterArrayValue( final EntityName gtag ) {
+    public Character@NotNull[] MandatoryCharacterArrayValue( final EntityName gtag ) {
 
         return getNotNullField( gtag ).ContainerCharacterArrayValue();
 
@@ -1160,15 +1146,13 @@ public class GowingPackedEntityBundle extends TreeMap<EntityName, GowingPackable
 
     }
 
-    @Nullable
-    public boolean[] booleanArrayValue( final EntityName gtag ) {
+    public boolean@Nullable[] booleanArrayValue( final EntityName gtag ) {
 
         return getNullableField( gtag ).PrimitiveBooleanArrayValue();
 
     }
 
-    @NotNull
-    public boolean[] MandatoryPrimitiveBooleanArrayValue( final EntityName gtag ) {
+    public boolean@Nullable[] MandatoryPrimitiveBooleanArrayValue( final EntityName gtag ) {
 
         return getNotNullField( gtag ).PrimitiveBooleanArrayValue();
 

@@ -28,13 +28,13 @@ public class GowingFloatHolder extends GowingAbstractPackableHolder {
 
     }
 
-    public GowingFloatHolder( final @NotNull EntityName name, final float@NotNull[] v, @SuppressWarnings("SameParameterValue") final boolean mandatory ) {
+    public GowingFloatHolder( final @NotNull EntityName name, final float@Nullable[] v, @SuppressWarnings("SameParameterValue") final boolean mandatory ) {
 
         super( name, GowingConstants.TAG_FLOAT, v, mandatory, true );
 
     }
 
-    public GowingFloatHolder( final @NotNull EntityName name, @Nullable final Float@NotNull[] v, @SuppressWarnings("SameParameterValue") final boolean mandatory ) {
+    public GowingFloatHolder( final @NotNull EntityName name, @Nullable final Float@Nullable[] v, @SuppressWarnings("SameParameterValue") final boolean mandatory ) {
 
         super( name, GowingConstants.TAG_FLOAT, v, mandatory, false );
 

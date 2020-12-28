@@ -26,8 +26,6 @@ public class StdGowingPackerContext implements GowingPackerContext {
 
     private final TreeMap<GowingInstanceId, EntityNames> _seenInstanceIds = new TreeMap<>();
 
-    private int _nextTypeReferenceId = 1;
-
     private final Accumulator<EntityTypeName> _highestPackingIdByType = new TreeAccumulator<>();
 
     private GowingRequestorContext _requestorContext;
@@ -183,7 +181,7 @@ public class StdGowingPackerContext implements GowingPackerContext {
 
     }
 
-    public static class TestPackableClass extends GowingAbstractPackableEntity implements GowingPackable {
+    public static class TestPackableClass extends GowingAbstractPackableEntity {
 
         private static final EntityTypeName ENTITY_TYPE_NAME = new EntityTypeName( StdGowingPackerContext.TestPackableClass.class );
 
@@ -311,7 +309,7 @@ public class StdGowingPackerContext implements GowingPackerContext {
 
     }
 
-    public static class SimplePackableClass extends GowingAbstractPackableEntity implements GowingPackable {
+    public static class SimplePackableClass extends GowingAbstractPackableEntity {
 
         private static final EntityTypeName ENTITY_TYPE_NAME = new EntityTypeName( StdGowingPackerContext.SimplePackableClass.class );
 

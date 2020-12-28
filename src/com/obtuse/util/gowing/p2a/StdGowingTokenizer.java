@@ -12,7 +12,6 @@ import com.obtuse.util.gowing.p2a.exceptions.GowingUnexpectedEofException;
 import com.obtuse.util.gowing.p2a.exceptions.GowingUnpackingException;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.Closeable;
 import java.io.IOException;
 import java.io.LineNumberReader;
 import java.lang.reflect.Array;
@@ -26,7 +25,7 @@ import java.util.*;
  A simple tokenizer.
  */
 
-public class StdGowingTokenizer implements GowingTokenizer, Closeable {
+public class StdGowingTokenizer implements GowingTokenizer {
 
     private final GowingUnPackerContext _unPackerContext;
 
@@ -1328,7 +1327,7 @@ public class StdGowingTokenizer implements GowingTokenizer, Closeable {
                 ch = nextCh();
                 if ( ch != ',' ) {
 
-                    if ( !primitive || !elementType.equals( TokenType.BYTE ) ) {
+                    if ( !primitive || elementType != TokenType.BYTE ) {
 
                         return new GowingToken(
                                 "expected comma in array after element " + ( ix - 1 ) + " but found " + cleanupChar( ch ),

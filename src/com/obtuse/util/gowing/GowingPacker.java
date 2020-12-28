@@ -50,37 +50,37 @@ public interface GowingPacker extends Closeable {
 
     void emit( long l );
 
-    void emit( @NotNull long[] lv );
+    void emit( long@NotNull[] lv );
 
     void emit( @Nullable Long@NotNull[] v );
 
     void emit( double d );
 
-    void emit( @NotNull double[] v );
+    void emit( double@NotNull[] v );
 
     void emit( @Nullable Double@NotNull[] v );
 
     void emit( float f );
 
-    void emit( @NotNull float[] v );
+    void emit( float@NotNull[] v );
 
     void emit( @Nullable Float@NotNull[] v );
 
     void emit( int i );
 
-    void emit( @NotNull int[] v );
+    void emit( int@NotNull [] v );
 
     void emit( @Nullable Integer@NotNull[] v );
 
     void emit( short s );
 
-    void emit( @NotNull short[] v );
+    void emit( short@NotNull[] v );
 
     void emit( @Nullable Short@NotNull[] v );
 
     void emit( byte b );
 
-    void emit( @NotNull byte[] v );
+    void emit( byte@NotNull[] v );
 
     void emit( @Nullable Byte@NotNull[] v );
 
@@ -121,7 +121,7 @@ public interface GowingPacker extends Closeable {
     /**
      Emit a metadata comment with a double value.
      @param name the name of the comment (some non-empty combination of uppercase letters and underscores).
-     @param value the value any double value including NaN and the infinities.
+     @param value the value (any double value including NaN and the infinities).
      */
 
     void emitMetaData( @NotNull String name, double value );

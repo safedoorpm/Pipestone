@@ -214,6 +214,7 @@ public class RestrictedNameExample extends ObtuseKeyword {
      @return the instance with the specified name.
      */
 
+    @SuppressWarnings("unused")
     public static RestrictedNameExample getInstanceByName( final @NotNull String name ) {
 
         synchronized ( s_knownDataInstanceNames ) {

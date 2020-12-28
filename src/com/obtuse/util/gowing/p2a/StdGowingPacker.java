@@ -153,7 +153,7 @@ public class StdGowingPacker implements GowingPacker {
 
     }
 
-    @SuppressWarnings("RedundantThrows")
+    @SuppressWarnings({ "RedundantThrows", "unused" })
     public StdGowingPacker(
             final @NotNull EntityName groupName,
             final @NotNull File outputFile,
@@ -358,6 +358,7 @@ public class StdGowingPacker implements GowingPacker {
      An empty set is returned if this method is called before {@link #finish()} has been called.
      */
 
+    @SuppressWarnings("unused")
     public SortedSet<GowingInstanceId> getPackedEntities() {
 
         return Collections.unmodifiableSortedSet( _previouslyPackedEntities );
@@ -515,7 +516,11 @@ public class StdGowingPacker implements GowingPacker {
         String comma = " ";
 
         GowingPackedEntityBundle superBundle = bundle.hasSuperBundle() ? bundle.getSuperBundle() : null;
-        if ( superBundle != null ) {
+        if ( superBundle == null ) {
+
+            ObtuseUtil.doNothing();
+
+        } else {
 
             _writer.print( comma );
 
@@ -524,10 +529,6 @@ public class StdGowingPacker implements GowingPacker {
             actuallyPackEntityBody( superBundle );
 
             comma = ", ";
-
-        } else {
-
-            ObtuseUtil.doNothing();
 
         }
 
@@ -660,7 +661,7 @@ public class StdGowingPacker implements GowingPacker {
     }
 
     @Override
-    public void emit( @Nullable final String[] v ) {
+    public void emit( @Nullable final String@NotNull[] v ) {
 
         // I'm not entire sure that the v parameter should be @Nullable.
         // For alternatives to ponder, see the {@link #emit(double[])} and the {@link #emit(Double[])} methods below.
@@ -717,7 +718,7 @@ public class StdGowingPacker implements GowingPacker {
     }
 
     @Override
-    public void emit( final @NotNull double[] v ) {
+    public void emit( final double@NotNull[] v ) {
 
         _writer.print( GowingConstants.TAG_PRIMITIVE_ARRAY );
         _writer.print( v.length );
@@ -777,7 +778,7 @@ public class StdGowingPacker implements GowingPacker {
     }
 
     @Override
-    public void emit( final @NotNull float[] v ) {
+    public void emit( final float@NotNull[] v ) {
 
         _writer.print( GowingConstants.TAG_PRIMITIVE_ARRAY );
         _writer.print( v.length );
@@ -837,7 +838,7 @@ public class StdGowingPacker implements GowingPacker {
     }
 
     @Override
-    public void emit( final @NotNull long[] v ) {
+    public void emit( final long@NotNull[] v ) {
 
         _writer.print( GowingConstants.TAG_PRIMITIVE_ARRAY );
         _writer.print( v.length );
@@ -935,7 +936,7 @@ public class StdGowingPacker implements GowingPacker {
     }
 
     @Override
-    public void emit( final @NotNull int[] v ) {
+    public void emit( final int@NotNull[] v ) {
 
         _writer.print( GowingConstants.TAG_PRIMITIVE_ARRAY );
         _writer.print( v.length );
@@ -995,7 +996,7 @@ public class StdGowingPacker implements GowingPacker {
     }
 
     @Override
-    public void emit( final @NotNull short[] v ) {
+    public void emit( final short@NotNull[] v ) {
 
         _writer.print( GowingConstants.TAG_PRIMITIVE_ARRAY );
         _writer.print( v.length );
@@ -1060,7 +1061,7 @@ public class StdGowingPacker implements GowingPacker {
     };
 
     @Override
-    public void emit( final @NotNull byte[] v ) {
+    public void emit( final byte@NotNull[] v ) {
 
         _writer.print( GowingConstants.TAG_PRIMITIVE_ARRAY );
         _writer.print( v.length );

@@ -26,6 +26,7 @@ public interface GowingUnPackerContext {
     @NotNull
     Optional<Integer> findTypeReferenceId( EntityTypeName typeName );
 
+    @SuppressWarnings("unused")
     int getTypeReferenceId( EntityTypeName typeName );
 
     boolean isEntityKnown( @NotNull GowingEntityReference er );
@@ -39,9 +40,11 @@ public interface GowingUnPackerContext {
 
     void rememberPackableEntity( GowingToken token, GowingEntityReference er, GowingPackable entity );
 
+    @SuppressWarnings("unused")
     @NotNull
     Collection<EntityTypeName> getNewTypeNames();
 
+    @SuppressWarnings("unused")
     @NotNull
     GowingTypeIndex getTypeIndex();
 
@@ -55,11 +58,12 @@ public interface GowingUnPackerContext {
 
     SortedSet<GowingEntityReference> getUnfinishedEntityReferences();
 
-    void markEntitiesUnfinished( Collection<GowingEntityReference> unFinishedEntityReferences );
+    void markEntitiesUnfinished( Collection<? extends GowingEntityReference> unFinishedEntityReferences );
 
+    @SuppressWarnings("unused")
     void markEntityUnfinished( GowingEntityReference unFinishedEntityReference );
 
-    void markEntitiesFinished( Collection<GowingEntityReference> finishedEntityReferences );
+    void markEntitiesFinished( Collection<? extends GowingEntityReference> finishedEntityReferences );
 
     boolean isEntityFinished( @Nullable GowingEntityReference er );
 
@@ -74,12 +78,14 @@ public interface GowingUnPackerContext {
     @NotNull
     Optional<EntityTypeInfo> findTypeInfo( int typeReferenceId );
 
+    @SuppressWarnings("unused")
     @NotNull
     EntityTypeInfo getTypeInfo( int typeReferenceId );
 
     @NotNull
     Optional<EntityTypeInfo> findTypeInfo( @NotNull EntityTypeName typeName );
 
+    @SuppressWarnings("unused")
     @NotNull
     EntityTypeInfo getTypeInfo( @NotNull EntityTypeName typeName );
 
@@ -96,10 +102,12 @@ public interface GowingUnPackerContext {
 
     void setInputFile( File inputFile );
 
+    @SuppressWarnings("unused")
     File getInputFile();
 
     void setRequestorContext( GowingRequestorContext requestorContext );
 
+    @SuppressWarnings("unused")
     GowingRequestorContext getRequestorContext();
 
 }

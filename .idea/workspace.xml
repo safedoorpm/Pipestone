@@ -5,31 +5,45 @@
     <option name="SHOW_STRUCTURE" value="true" />
   </component>
   <component name="BranchesTreeState">
-    <expand>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-    </expand>
-    <select>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="BRANCH:master" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-    </select>
+    <expand />
+    <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" name="Default" comment="Cleanup. Lots of cleanup." />
+    <list default="true" id="2bcbf1ce-ea42-47ef-9379-1c07e7848b5c" name="Default" comment="Cleanup. Lots of cleanup (almost entirely in Gowing).">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/MyActionListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/MyActionListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/ui/ObtuseImageFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/ui/ObtuseImageFile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/AsyncStreamCaptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/AsyncStreamCaptor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/DateUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/DateUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingAbstractPackableEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingAbstractPackableEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackableName.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackableName.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackableThingHolder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackableThingHolder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackedEntityBundle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackedEntityBundle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPacker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPacker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackingId.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingPackingId.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingTypeIndex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingTypeIndex.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingUnPacker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingUnPacker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingUnPackerContext.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/GowingUnPackerContext.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/StdGowingPackerContext.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/StdGowingPackerContext.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/StdGowingUnPackerContext.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/StdGowingUnPackerContext.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingEntityReference.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingEntityReference.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingToken.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingToken.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/GowingUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingPacker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingPacker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingTokenizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingTokenizer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingUnPacker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/StdGowingUnPacker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/examples/RestrictedNameExample.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/examples/RestrictedNameExample.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/examples/SortedSetExample.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/examples/SortedSetExample.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingBooleanHolder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingBooleanHolder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingDoubleHolder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingDoubleHolder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingFloatHolder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingFloatHolder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingIntegerHolder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingIntegerHolder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingLongHolder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingLongHolder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingPackableMapping.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingPackableMapping.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingShortHolder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingShortHolder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingStringHolder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/p2a/holders/GowingStringHolder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obtuse/util/gowing/package-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obtuse/util/gowing/package-info.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -350,15 +364,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -629,7 +641,8 @@
       <workItem from="1582663371055" duration="8662000" />
       <workItem from="1583456489310" duration="7594000" />
       <workItem from="1601965108561" duration="934000" />
-      <workItem from="1606211042076" duration="996000" />
+      <workItem from="1606211042076" duration="1932000" />
+      <workItem from="1609128330978" duration="780000" />
     </task>
     <task id="LOCAL-00060" summary="Implement the FlexiGridLayoutManager which lays out components in a grid where the width and column of each grid cell is sized based on the space actually required by the components in that cell's row and column (in contrast, the GridLayout manager forces each cell's width to be the same and each cell's height to be the same). Each component is added to the underlying FlexiGridContainer with a constraint object which specifies the component's row and column within the grid as well as how the component should be justified within its cell should it's size be smaller than the space available (top, center, bottom and left, center, right).&#10;&#10;Also implement the FlexiGridPanelModel which provides a somewhat high level interface to the FlexiGridLayoutManager. In particular, the FlexiGridPanelModel allows the easy insertion of new rows or new columns, depending on the FlexiGridPanelModel instance's orientation, either before or after specific rows or columns.&#10;&#10;Taken together, these classes provide a relatively easy way to manage a rectangular grid of components.&#10;&#10;The current version of the FlexiGridLayoutManager only takes each component's preferred width and height into account. This results in the width of each column being the maximum of the preferred widths of the elements in the column and the height of each column being the maximum of the preferred heights of the elements in each row. A future version with also take each component's minimum and maximum width and heights into account.&#10;&#10;Minor changes to the Measure class to improve the formatting of its output.&#10;&#10;Provide a way to specify if the default instance of the RandomCentral class should be a SecureRandom instance or 'merely' a Random instance. The default is to use a SecureRandom instance.">
       <created>1523892278544</created>
@@ -1041,7 +1054,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Delete lots and lots of commented out lines.&#10;Throw away the old (failed) FlexiGridTree stuff.&#10;Rework the way that TwoDimensionalTreeMap.java and ThreeDimensionalTreeMap.java create empty immutable instances.&#10;Some cleanup and minor bug fixes in the VirtualScrollablePanel facility." />
     <MESSAGE value="Implement scrolling using the mouse wheel in VirtualScrollablePanel class.&#10;Cleanup the Java generics declarations in ObtuseKeyword, ThreeDimensionalCounter and ThreeDimensionalSortedMap.&#10;Minor cleanup (mostly reformatting) elsewhere." />
     <MESSAGE value="Move the LruCache and associated classes into Pipestone.&#10;&#10;Rename the UniqueID class as UniqueId (this causes quite a cascade of edits to other classes).&#10;&#10;Move the getBitMaskName and rememberBitName methods and the associated s_maskExBits array to the new Clicks class.&#10;&#10;Major cleanup of the image rotation facility in ObtuseImageUtils. Not much if anything that affects the behaviour of this facility has changed.&#10;&#10;Add named constants in ObtuseImageUtils for each of the EXIF orientation values.&#10;&#10;Add rotateOrientationRight, rotateOrientationLeft, flipOrientationHorizontally and flipOrientationVertically methods in ObtuseImageUtils that return the EXIF orientation value that results from the rotation or flip implied by the method name to a specified EXIF orientation value. For example, rotateOrientationLeft( ORIENTATION_LEFT ) yields ORIENTATION_ROTATED_180 since a left rotation applied to a left rotation results in a 180° rotation." />
     <MESSAGE value="Move the LruCache and associated classes into Pipestone.&#10;&#10;Rename the UniqueID class as UniqueId (this causes quite a cascade of edits to other classes).&#10;&#10;Move the getBitMaskName and rememberBitName methods and the associated s_maskExBits array to the new Clicks class.&#10;&#10;Various changes to ObtuseImageUtils:&#10;&#10;- Major cleanup of the image rotation facility. Not much if anything that affects the behaviour of this facility has changed.&#10;&#10;- Add named constants for each of the EXIF orientation values.&#10;&#10;- Add rotateOrientationRight, rotateOrientationLeft, flipOrientationHorizontally and flipOrientationVertically methods that return the EXIF orientation value that results from the rotation or flip implied by the method name to a specified EXIF orientation value. For example, rotateOrientationLeft( ORIENTATION_LEFT ) yields ORIENTATION_ROTATED_180 since a left rotation applied to a left rotation results in a 180° rotation.&#10;&#10;- Add a maybeRotateDimension that takes an image's dimensions, as represented by a Dimension instance, and returns a new Dimension instance with swapped width and height values if the specified orientation involves a 90 degree rotation (and possibly a flip) of the described image's dimensions. For example, maybeRotateDimension( new Dimension( 10, 20 ), orientation ) yields the original Dimension( 10, 20 ) instance for the normal (don't rotate), flip horizontally, rotate 180 and flip vertically orientations and yields a new Dimension( 20, 10 ) instance for the other orientations." />
@@ -1066,29 +1078,10 @@
     <MESSAGE value="Lots of cleanup resulting from a code style analysis run." />
     <MESSAGE value="Cleanup. Lots of cleanup." />
     <MESSAGE value="Other than adding a few methods to ObtuseUtil, this commit is mostly minor cleanup." />
-    <option name="LAST_COMMIT_MESSAGE" value="Other than adding a few methods to ObtuseUtil, this commit is mostly minor cleanup." />
+    <MESSAGE value="Cleanup. Lots of cleanup (almost entirely in Gowing)." />
+    <option name="LAST_COMMIT_MESSAGE" value="Cleanup. Lots of cleanup (almost entirely in Gowing)." />
     <option name="PRESELECT_EXISTING_CHANGELIST" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="66" y="141" width="2335" height="1303" key="DiffContextDialog" timestamp="1606212038388">
-      <screen x="0" y="23" width="2560" height="1526" />
-    </state>
-    <state x="66" y="141" width="2335" height="1303" key="DiffContextDialog/-2560.0.2560.1440/0.23.2560.1526@0.23.2560.1526" timestamp="1606212038388" />
-    <state x="115" y="123" width="2335" height="1303" key="DiffContextDialog/-2560.0.2560.1440/0.23.2560.1527@0.23.2560.1527" timestamp="1601965652144" />
-    <state x="682" y="389" key="Vcs.Push.Dialog.v2" timestamp="1601965891230">
-      <screen x="0" y="23" width="2560" height="1527" />
-    </state>
-    <state x="682" y="389" key="Vcs.Push.Dialog.v2/-2560.0.2560.1440/0.23.2560.1527@0.23.2560.1527" timestamp="1601965891230" />
-    <state x="480" y="342" width="1756" height="952" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1601965652145">
-      <screen x="0" y="23" width="2560" height="1527" />
-    </state>
-    <state x="480" y="342" width="1756" height="952" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/-2560.0.2560.1440/0.23.2560.1527@0.23.2560.1527" timestamp="1601965652145" />
-    <state x="855" y="84" width="1005" height="1466" key="search.everywhere.popup" timestamp="1606211322557">
-      <screen x="0" y="23" width="2560" height="1526" />
-    </state>
-    <state x="855" y="84" width="1005" height="1466" key="search.everywhere.popup/-2560.0.2560.1440/0.23.2560.1526@0.23.2560.1526" timestamp="1606211322557" />
-    <state x="855" y="84" width="1005" height="1466" key="search.everywhere.popup/-2560.0.2560.1440/0.23.2560.1527@0.23.2560.1527" timestamp="1601965299065" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

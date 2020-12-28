@@ -55,6 +55,7 @@ public class StdGowingUnPacker implements GowingUnPacker {
 
     private final GowingTrace _t;
 
+    @SuppressWarnings("unused")
     private static LineNumberReader makeLineNumberReader( @NotNull final File inputFile )
             throws GowingUnpackingException {
 
@@ -761,7 +762,8 @@ public class StdGowingUnPacker implements GowingUnPacker {
 
                 throw new IllegalStateException(
                         "GowingUnPacker.resolveReference:  " +
-                        "you must wait until your finishUnpacking method to fetch entites which are not back-referenceable"
+                        "you must wait until your finishUnpacking method to fetch entities " +
+                        "which are not back-referenceable"
                 );
 
             }
@@ -835,7 +837,7 @@ public class StdGowingUnPacker implements GowingUnPacker {
 
     }
 
-    public boolean areEntitiesAllFinished( final @NotNull Collection<GowingEntityReference> entityReferences ) {
+    public boolean areEntitiesAllFinished( final Collection<? extends GowingEntityReference> entityReferences ) {
 
         int ix = 0;
         for ( GowingEntityReference er : entityReferences ) {
@@ -1124,6 +1126,7 @@ public class StdGowingUnPacker implements GowingUnPacker {
 
     }
 
+    @SuppressWarnings("unused")
     @NotNull
     public File getMandatoryInputFile() {
 

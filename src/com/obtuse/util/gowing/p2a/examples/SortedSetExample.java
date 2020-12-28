@@ -26,7 +26,7 @@ import java.util.*;
  */
 
 @SuppressWarnings("FieldCanBeLocal")
-public class SortedSetExample extends GowingAbstractPackableEntity implements GowingPackable {
+public class SortedSetExample extends GowingAbstractPackableEntity {
 
     private static final EntityTypeName ENTITY_TYPE_NAME = new EntityTypeName( SortedSetExample.class );
 
@@ -385,13 +385,13 @@ public class SortedSetExample extends GowingAbstractPackableEntity implements Go
     @Override
     public boolean finishUnpacking( final @NotNull GowingUnPacker unPacker ) {
 
-        List<GowingEntityReference> entityReferences = new ArrayList<>();
-        entityReferences.add( _dataCollectionReference );
-        entityReferences.add( _sortedSetReference );
-        entityReferences.add( _hashSetReference );
-        entityReferences.add( _listReference );
-        entityReferences.add( _sortedMapReference );
-        entityReferences.add( _hashMapReference );
+//        List<GowingEntityReference> entityReferences = new ArrayList<>();
+//        entityReferences.add( _dataCollectionReference );
+//        entityReferences.add( _sortedSetReference );
+//        entityReferences.add( _hashSetReference );
+//        entityReferences.add( _listReference );
+//        entityReferences.add( _sortedMapReference );
+//        entityReferences.add( _hashMapReference );
 
         if (
                 !unPacker.areEntitiesAllFinished(

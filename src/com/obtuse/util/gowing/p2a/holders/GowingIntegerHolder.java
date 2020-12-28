@@ -28,13 +28,13 @@ public class GowingIntegerHolder extends GowingAbstractPackableHolder {
 
     }
 
-    public GowingIntegerHolder( final @NotNull EntityName name, final int@NotNull[] v, @SuppressWarnings("SameParameterValue") final boolean mandatory ) {
+    public GowingIntegerHolder( final @NotNull EntityName name, final int@Nullable[] v, @SuppressWarnings("SameParameterValue") final boolean mandatory ) {
 
         super( name, GowingConstants.TAG_INTEGER, v, mandatory, true );
 
     }
 
-    public GowingIntegerHolder( final @NotNull EntityName name, @Nullable final Integer@NotNull[] v, @SuppressWarnings("SameParameterValue") final boolean mandatory ) {
+    public GowingIntegerHolder( final @NotNull EntityName name, @Nullable final Integer@Nullable[] v, @SuppressWarnings("SameParameterValue") final boolean mandatory ) {
 
         super( name, GowingConstants.TAG_INTEGER, v, mandatory, false );
 

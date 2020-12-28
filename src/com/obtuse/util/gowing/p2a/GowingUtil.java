@@ -102,7 +102,7 @@ public class GowingUtil {
 
     public static void main( final String[] args ) {
 
-        Byte[] a = new Byte[]{ (byte)1, null, (byte)3, (byte)4 };
+        Byte[] a = { (byte)1, null, (byte)3, (byte)4 };
 
         doit( a );
 
@@ -626,6 +626,7 @@ public class GowingUtil {
                 @NotNull GowingUtil.BasicUnpackingResult basicUnpackingResult,
                 @Nullable T unpackedEntity
         ) {
+            super();
 
             _basicUnpackingResult = basicUnpackingResult;
             _unpackedEntity = unpackedEntity;

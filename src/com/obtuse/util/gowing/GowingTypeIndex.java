@@ -68,6 +68,7 @@ public class GowingTypeIndex {
      @return this index's name.
      */
 
+    @SuppressWarnings("unused")
     public String getTypeIndexName() {
 
 	return _typeIndexName;
@@ -106,6 +107,7 @@ public class GowingTypeIndex {
      @throws IllegalArgumentException if the specified type is not known to this type index.
      */
 
+    @SuppressWarnings("unused")
     @NotNull
     public EntityTypeInfo getTypeInfo( final @NotNull EntityTypeName typeName ) {
 

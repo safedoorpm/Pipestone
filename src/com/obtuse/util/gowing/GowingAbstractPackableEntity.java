@@ -114,6 +114,7 @@ public abstract class GowingAbstractPackableEntity implements GowingPackable {
      method won't get a "but you forgot to implement the abstract {@code bundleThyself} compile-time error).
      */
 
+    @NotNull
     protected final GowingPackedEntityBundle bundleRoot( final GowingPacker packer ) {
 
         GowingPackedEntityBundle bundle = new GowingPackedEntityBundle(

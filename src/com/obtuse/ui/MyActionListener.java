@@ -6,7 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- An action listener that turns all thrown exceptions into {@link HowDidWeGetHereError} errors.
+ An action listener that turns all thrown exceptions,
+ whether runtime or  into {@link HowDidWeGetHereError} errors.
  */
 
 public abstract class MyActionListener implements ActionListener {

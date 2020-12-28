@@ -13,6 +13,7 @@ import org.jetbrains.annotations.Nullable;
 
 public interface GowingPackableThingHolder extends Comparable<GowingPackableThingHolder> {
 
+    @SuppressWarnings({ "UnusedReturnValue", "SameReturnValue" })
     boolean pack( GowingPacker packer2 );
 
     char[] PrimitiveCharArrayValue();
