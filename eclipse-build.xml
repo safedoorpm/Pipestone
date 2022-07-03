@@ -7,10 +7,10 @@
     <property environment="env"/>
     <property name="SafedoorPM-JavaAPI.location" value="../SafedoorPM-JavaAPI"/>
     <property name="SafedoorPM-Web.location" value="../SafedoorPM-Web"/>
-    <property name="ECLIPSE_HOME" value="C:/devtools/eclipse"/>
+    <property name="ECLIPSE_HOME" value="../../eclipse/java-2020-12/eclipse/"/>
     <property name="debuglevel" value="source,lines,vars"/>
-    <property name="target" value="1.7"/>
-    <property name="source" value="1.7"/>
+    <property name="target" value="1.8"/>
+    <property name="source" value="1.8"/>
     <path id="Pipestone.classpath">
         <pathelement location="bin1"/>
         <pathelement location="annotations.jar"/>
@@ -20,7 +20,6 @@
         <mkdir dir="bin1"/>
         <copy includeemptydirs="false" todir="bin1">
             <fileset dir="src">
-                <exclude name="**/*.launch"/>
                 <exclude name="**/*.java"/>
                 <exclude name="com/obtuse/util/MacCustomization.java"/>
             </fileset>
